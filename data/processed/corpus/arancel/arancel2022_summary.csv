@@ -1,0 +1,10 @@
+metric,value
+records_total,104
+rgi_rules_extracted,8
+notas_records,96
+count_rgi,8
+count_nota_seccion,9
+count_nota_capitulo,87
+unique_sections_in_notas,21
+unique_chapters_in_notas,87
+notas_short_records_sample,0
