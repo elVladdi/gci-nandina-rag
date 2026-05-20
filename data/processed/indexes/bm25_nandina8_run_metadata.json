@@ -1,0 +1,49 @@
+{
+  "notebook_name": "04_BM25_Indexacion_NANDINA.ipynb",
+  "timestamp_unix": 1768674608,
+  "environment": {
+    "python_version": "3.11.7",
+    "system": "Windows",
+    "release": "10",
+    "machine": "AMD64"
+  },
+  "input": {
+    "corpus_path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\corpus_rag_v1_index.jsonl",
+    "corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "schema": {
+      "type_field": "tipo",
+      "code_field": "codigo",
+      "title_field": "titulo",
+      "text_field": "texto_index",
+      "fallback_text_field": "texto"
+    },
+    "filter": {
+      "target_type": "nandina_8",
+      "enforce_8_digits": true
+    }
+  },
+  "bm25_params": {
+    "k1": 1.5,
+    "b": 0.75,
+    "use_stopwords": true,
+    "stopwords_count": 51
+  },
+  "index_stats": {
+    "docs_before_filter": 7748,
+    "docs_after_filter": 7644,
+    "docs_indexed": 7644,
+    "avg_doc_len_tokens": 5.793302059173584,
+    "vocab_size": 5646,
+    "skipped": {
+      "skipped_type": 104,
+      "skipped_missing_code": 0,
+      "skipped_non_8_digits": 0,
+      "skipped_empty_text": 0
+    }
+  },
+  "output": {
+    "bm25_index_path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\bm25_nandina8.pkl",
+    "metadata_path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\bm25_nandina8_run_metadata.json",
+    "elapsed_seconds": 0.2128605842590332
+  }
+}
