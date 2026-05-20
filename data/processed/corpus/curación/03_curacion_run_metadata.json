@@ -1,0 +1,93 @@
+{
+  "notebook": "03_Curación_de_corpus",
+  "environment": {
+    "timestamp_utc": "2026-01-17T02:47:48.387665Z",
+    "python_version": "3.11.7",
+    "platform": "Windows-10-10.0.22631-SP0"
+  },
+  "inputs": {
+    "nandina_jsonl": {
+      "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\nandina_corpus.jsonl",
+      "sha256": "4f5f2d33e864ee2d5992e76e68b7a7fa1163f98564b79d2533f5131acb5ace58",
+      "records": 9785
+    },
+    "rgi_jsonl": {
+      "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\arancel2022_rgi.jsonl",
+      "sha256": "6eea1225426284bdd6688cada05841513d14caae1bba92810783941ffcddcdfa",
+      "records": 8
+    },
+    "notas_jsonl": {
+      "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\arancel2022_notas.jsonl",
+      "sha256": "98d1be585b3db9ce2b7c32801bb52240a1b30dd637b3a7fcbc256e872c8e7a9c",
+      "records": 96
+    }
+  },
+  "outputs": {
+    "corpus_jsonl": {
+      "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\corpus_rag_v1.jsonl",
+      "sha256": "14b6de5438d4e7058f8bcc9a744858e46d65c51a9ae014215374e6cb37a033fc",
+      "records": 7748
+    },
+    "qa_csv": {
+      "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\03_curacion_summary.csv"
+    }
+  },
+  "curation_parameters": {
+    "nandina_keep_level": "nandina_8d",
+    "nandina_dedup_key": "code_digits",
+    "nandina_noise_filters": [
+      "desc startswith ',' (cross-reference)",
+      "line startswith '<code_raw>,' (cross-reference)",
+      "contains 'Código Designación' (header contamination)"
+    ],
+    "rgi_keep_context": true,
+    "rgi_rule_detection": [
+      "text startswith '1. Los títulos' OR '2. a)' OR '3.'..'6.'"
+    ]
+  },
+  "qa": {
+    "nandina": {
+      "nandina_input_total": 9785,
+      "nandina_input_8d": 7648,
+      "nandina_output_unique_8d": 7644,
+      "nandina_noise_selected_count": 0,
+      "nandina_output_doc_id_duplicates": 0
+    },
+    "rgi": {
+      "rgi_input_total": 8,
+      "rgi_output_total": 8,
+      "rgi_rules_kept": 6,
+      "rgi_context_kept": 2,
+      "rgi_output_doc_id_duplicates": 0,
+      "rgi_doc_id_duplicates": []
+    },
+    "notas": {
+      "notas_input_total": 96,
+      "notas_output_total": 96,
+      "notas_output_doc_id_duplicates": 0,
+      "counts_by_tipo": {
+        "nota_seccion": 9,
+        "nota_capitulo": 87
+      }
+    },
+    "global": {
+      "records_total": 7748,
+      "counts_by_tipo": {
+        "nandina_8": 7644,
+        "rgi_contexto": 2,
+        "rgi": 6,
+        "nota_seccion": 9,
+        "nota_capitulo": 87
+      },
+      "doc_id_duplicates_count": 0,
+      "doc_id_duplicates_sample": [],
+      "texto_length_stats": {
+        "n": 7748,
+        "min": 40,
+        "max": 17022,
+        "mean": 104.11,
+        "median": 59.0
+      }
+    }
+  }
+}

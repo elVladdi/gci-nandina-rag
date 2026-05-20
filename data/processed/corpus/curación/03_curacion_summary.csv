@@ -1,0 +1,12 @@
+metric,value
+records_total,7748
+count_nandina_8,7644
+count_nota_capitulo,87
+count_nota_seccion,9
+count_rgi,6
+count_rgi_contexto,2
+doc_id_duplicates_count,0
+texto_len_min,40
+texto_len_max,17022
+texto_len_mean,104.11
+texto_len_median,59.0

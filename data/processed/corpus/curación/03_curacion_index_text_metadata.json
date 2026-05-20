@@ -1,0 +1,19 @@
+{
+  "timestamp_unix": 1768618100,
+  "input": {
+    "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\corpus_rag_v1.jsonl",
+    "sha256": "14b6de5438d4e7058f8bcc9a744858e46d65c51a9ae014215374e6cb37a033fc"
+  },
+  "output": {
+    "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\corpus_rag_v1_index.jsonl",
+    "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0"
+  },
+  "transform": {
+    "strategy": "add_field_texto_index",
+    "rule": "remove substring from 'Contexto:' to end-of-text; normalize whitespace"
+  },
+  "counts": {
+    "rows_processed": 7748,
+    "rows_where_context_was_removed_estimate": 7644
+  }
+}
