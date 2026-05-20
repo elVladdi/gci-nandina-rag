@@ -1,0 +1,37 @@
+{
+  "input_pdf": {
+    "path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\raw\\CAN Desición 885 - Nanadina Gaceta 4359.pdf",
+    "name": "CAN Desición 885 - Nanadina Gaceta 4359.pdf",
+    "sha256": "8c4a30fb0328f151089ac4c7857ac447d3dd353de97122a11bde4550d594f0c6"
+  },
+  "environment": {
+    "timestamp_utc": "2026-01-13T16:31:28.440333Z",
+    "python_version": "3.11.7",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "libraries": {
+      "pdfplumber": "0.11.9",
+      "pdfminer.six": "20251230"
+    }
+  },
+  "parameters": {
+    "max_pages": null,
+    "input_pdf": "CAN Desición 885 - Nanadina Gaceta 4359.pdf",
+    "output_dir": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed",
+    "outputs": {
+      "jsonl": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\nandina_corpus.jsonl",
+      "hierarchy_json": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\nandina_hierarchy.json",
+      "metadata": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\run_metadata.json",
+      "summary": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\summary.csv"
+    },
+    "parser": {
+      "engine": "pdfplumber",
+      "strategy": "regex-based row detection + multiline join for description/unit",
+      "code_patterns": [
+        "NN.NN",
+        "NNNN.NN",
+        "NNNN.NN.NN"
+      ],
+      "unit_detection": "last-token or standalone-line (U.F.)"
+    }
+  }
+}
