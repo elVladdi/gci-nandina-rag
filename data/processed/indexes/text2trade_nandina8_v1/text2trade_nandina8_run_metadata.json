@@ -1,0 +1,58 @@
+{
+  "notebook": "05_Text2Trade_Indexacion_NANDINA.ipynb",
+  "timestamp_unix": 1768834157,
+  "input": {
+    "config_path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\src\\configs\\experiment_config.json",
+    "config_sha256": "afd7f11d6efe66776f1041b73a80b7fbcf62199413fc6ae8ec99a75b24119036",
+    "corpus_path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\corpus_rag_v1_index.jsonl",
+    "corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "corpus_file": "corpus_rag_v1_index.jsonl",
+    "filter": {
+      "target_type": "nandina_8",
+      "type_field": "tipo",
+      "code_field": "codigo",
+      "require_8_digits": true
+    },
+    "text_fields_candidates": [
+      "texto_index",
+      "texto",
+      "text",
+      "content",
+      "descripcion"
+    ]
+  },
+  "counts": {
+    "corpus_rows": 7748,
+    "filtered_rows": 7644,
+    "invalid_codes": 0,
+    "indexed_docs": 7644
+  },
+  "model": {
+    "base_biencoder": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "saved_model_dir": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\text2trade_nandina8_v1\\model",
+    "embedding_dim": 384
+  },
+  "artifacts": {
+    "out_dir": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\text2trade_nandina8_v1",
+    "docstore": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\text2trade_nandina8_v1\\store\\nandina8_docstore.jsonl",
+    "vectors": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\text2trade_nandina8_v1\\index\\vectors.npy",
+    "index": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\text2trade_nandina8_v1\\index\\hnsw.index",
+    "id_map": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\text2trade_nandina8_v1\\index\\id_map.json",
+    "retrieval_config": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\text2trade_nandina8_v1\\retrieval_config.json"
+  },
+  "environment": {
+    "python_version": "3.11.14",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "numpy_version": "2.4.1",
+    "torch_version": "2.5.1",
+    "sentence_transformers_version": "5.2.0",
+    "hnswlib_available": true
+  },
+  "policy": {
+    "params_fixed": true,
+    "notes": "Configuración fija definida ex ante; no se ajusta según resultados. Cualquier cambio implica crear un nuevo archivo de configuración versionado."
+  },
+  "version": "1.0"
+}

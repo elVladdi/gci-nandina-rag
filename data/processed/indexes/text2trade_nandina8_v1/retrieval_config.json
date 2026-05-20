@@ -1,0 +1,29 @@
+{
+  "artifact_name": "text2trade_nandina8_v1",
+  "target_type": "nandina_8",
+  "retriever": {
+    "family": "dense_retrieval",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "embedding_normalize": true,
+    "batch_size": 32
+  },
+  "index": {
+    "backend": "hnswlib",
+    "space": "cosine",
+    "hnsw": {
+      "M": 64,
+      "ef_construction": 200,
+      "ef_search": 200
+    }
+  },
+  "mcd": {
+    "enabled": true,
+    "passes": 50,
+    "topk": 50,
+    "aggregation": {
+      "mean_sim_weight": 0.8,
+      "top3_freq_weight": 0.2
+    },
+    "base_seed": 123
+  }
+}
