@@ -81,6 +81,14 @@ src/configs/experiment_config.json
 
 Las rutas son relativas a la raíz del repositorio por defecto. Esto evita depender de rutas absolutas locales.
 
+El snapshot metodológico oficial de la Fase 2A queda congelado en:
+
+```text
+src/configs/experiment_v0.1.json
+```
+
+Su protocolo corto asociado está en `docs/protocolo_experimental_v0.1.md`. El archivo `experiment_config.json` se mantiene como configuración operativa.
+
 ## Reconstruir o usar el corpus
 
 Si ya existe `data/processed/corpus_rag_v1_index.jsonl`, puede usarse directamente para BM25.

@@ -1,0 +1,129 @@
+{
+  "version": "v0.1",
+  "snapshot_type": "protocolo_experimental_oficial",
+  "objective": "Congelar la configuracion experimental inicial del piloto offline LLM+RAG NANDINA para evaluar recuperacion documental y variantes preliminares sin declarar validacion final.",
+  "status": "snapshot_metodologico_no_evaluacion_final",
+  "paths_policy": {
+    "base_dir": ".",
+    "use_relative_paths": true,
+    "notes": "Todas las rutas se interpretan relativas a la raiz del repositorio salvo indicacion explicita."
+  },
+  "official_corpus": {
+    "name": "corpus_rag_v1_index",
+    "path": "data/processed/corpus_rag_v1_index.jsonl",
+    "metadata_source": "data/processed/indexes/bm25_nandina8_run_metadata.json",
+    "sha256_recorded_in_bm25_metadata": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "schema": {
+      "type_field": "tipo",
+      "code_field": "codigo",
+      "title_field": "titulo",
+      "text_field": "texto_index",
+      "fallback_text_field": "texto"
+    },
+    "filter": {
+      "target_type": "nandina_8",
+      "enforce_8_digits": true
+    },
+    "indexed_docs": 7644,
+    "scope_note": "Corpus documental curado e indexable usado como insumo oficial del piloto v0.1."
+  },
+  "evaluation_dataset": {
+    "name": "devset_validacion_intermedia",
+    "path": "data/processed/devset_validacion_intermedia.csv",
+    "columns": [
+      "descripcion",
+      "nandina"
+    ],
+    "cases": 13,
+    "role": "Devset piloto para validacion intermedia y pruebas de recuperacion; no constituye evaluacion final."
+  },
+  "baseline": {
+    "component": "BM25",
+    "role": "Baseline oficial de recuperacion documental para v0.1.",
+    "index_path": "data/processed/indexes/bm25_nandina8.pkl",
+    "metadata_path": "data/processed/indexes/bm25_nandina8_run_metadata.json",
+    "params": {
+      "k1": 1.5,
+      "b": 0.75,
+      "use_stopwords": true,
+      "stopwords_count": 51
+    },
+    "retrieval_operational_params": {
+      "top_n": 100,
+      "top_m": 2000,
+      "allowed_k": 800,
+      "max_query_terms": 12
+    },
+    "evaluable_top_k": [
+      1,
+      3,
+      5,
+      10
+    ]
+  },
+  "experimental_variants": {
+    "bm25_llm_rewrite": {
+      "status": "experimental_preliminar",
+      "role": "Variante de dos pasadas con reescritura local mediante LLM antes de recuperacion BM25.",
+      "evidence": "Existen corridas en data/processed/runs/bm25_2pass_llm_* con archivos llm_rewrites.jsonl.",
+      "interpretation_policy": "Puede compararse exploratoriamente contra BM25, pero sus resultados no deben interpretarse como validacion final."
+    },
+    "text2trade_dense_retrieval": {
+      "status": "artefacto_exploratorio_candidato",
+      "artifact_dir": "data/processed/indexes/text2trade_nandina8_v1",
+      "config_path": "data/processed/indexes/text2trade_nandina8_v1/retrieval_config.json",
+      "metadata_path": "data/processed/indexes/text2trade_nandina8_v1/text2trade_nandina8_run_metadata.json",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "interpretation_policy": "No se declara componente formal de v0.1 hasta contar con criterio metodologico y comparacion reproducible suficientes."
+    }
+  },
+  "llm_local_planned": {
+    "role": "Reescritura de consulta, reordenamiento preliminar o explicacion auditable en configuraciones LLM+RAG locales.",
+    "base_url": "http://127.0.0.1:11434/api/chat",
+    "model": "llama3.1:8b",
+    "temperature": 0.0,
+    "structured_output": true,
+    "timeout_seconds": 600,
+    "max_retries": 1,
+    "offline_policy": "Uso local previsto; no enviar datos a servicios externos durante el piloto offline."
+  },
+  "metrics": {
+    "retrieval": [
+      "top_1_accuracy",
+      "top_3_accuracy",
+      "top_5_accuracy",
+      "top_10_accuracy",
+      "mrr",
+      "ndcg"
+    ],
+    "qualitative": [
+      "verificabilidad",
+      "trazabilidad",
+      "pertinencia_documental",
+      "concordancia_evidencia_justificacion",
+      "claridad_para_auditoria"
+    ],
+    "note": "Las metricas se definen como previstas para evaluacion; este snapshot no reporta resultados."
+  },
+  "fixed_params_policy": {
+    "params_fixed": true,
+    "notes": "Configuracion fija definida ex ante; no se ajusta segun resultados. Cualquier cambio metodologico debe crear una nueva version de configuracion."
+  },
+  "scope": {
+    "included": [
+      "Piloto offline",
+      "Corpus NANDINA-8 indexado",
+      "Devset piloto actual",
+      "Baseline BM25",
+      "Variante preliminar BM25 + LLM rewrite si se analiza sobre corridas existentes"
+    ],
+    "excluded": [
+      "Clasificacion oficial de mercancias",
+      "Uso productivo",
+      "Evaluacion final de hipotesis",
+      "Ampliacion de dataset",
+      "Entrenamiento o movimiento de modelos pesados",
+      "Declarar Text2Trade como componente formal sin validacion comparativa"
+    ]
+  }
+}
