@@ -16,6 +16,23 @@ El experimento evalúa un pipeline offline de recuperación documental para reco
 
 La columna `descripcion` contiene el texto comercial consolidado de la mercancía. En escenarios basados en DAM, esta descripción puede construirse mediante la concatenación de los cinco campos descriptivos de cada serie. La columna `nandina` contiene el código esperado, normalizado al formato NANDINA-8, y se utiliza únicamente como referencia de validación.
 
+### Construcción del set de validación desde DAM
+
+El set de validación se construye a partir de series declaradas en DAM correspondientes a canal rojo. Para la fase experimental, la extracción de datos se realiza de forma manual mediante la descarga del reporte DUA en formato Excel, considerando DAM del mes de enero de 2026 hasta reunir, como mínimo, 300 instancias de validación.
+
+Cada instancia corresponde a una serie de la DAM. En el archivo Excel fuente, la información de la mercancía se encuentra distribuida en un bloque por serie, donde se identifica el código NANDINA y cinco campos descriptivos de mercancía. Estos cinco campos se concatenan para formar una única descripción comercial consolidada, que será usada como consulta textual del experimento.
+
+A partir del Excel fuente se genera un archivo CSV con dos columnas:
+
+```csv
+descripcion,nandina
+```
+
+- `descripcion`: concatenación limpia de los cinco campos descriptivos de la serie.
+- `nandina`: código NANDINA esperado, normalizado al formato de ocho dígitos cuando corresponda.
+
+Para asegurar reproducibilidad, esta transformación se implementará mediante un script Python que leerá el Excel de entrada, identificará las series, extraerá la NANDINA y las cinco líneas descriptivas, aplicará las reglas de limpieza y exportará el CSV final utilizado por el pipeline experimental.
+
 El flujo experimental es el siguiente:
 
 1. **Set de validación**: se carga un archivo CSV con descripciones comerciales y códigos NANDINA esperados.
