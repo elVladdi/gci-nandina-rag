@@ -10,6 +10,28 @@ El proyecto organiza corpus normativo, recuperación documental y experimentos o
 
 Esta fase deja una base ejecutable y mínimamente reproducible. Los notebooks siguen disponibles como bitácora experimental, pero la lógica básica de corpus, BM25, recuperación y prueba mínima ya vive en `src/`.
 
+## Metodología experimental
+
+El experimento evalúa un pipeline offline de recuperación documental para recomendación auditable de subpartidas NANDINA a ocho dígitos. A partir de un set de validación con dos columnas (`descripcion`, `nandina`), el sistema verifica si la subpartida esperada puede recuperarse desde la descripción comercial de la mercancía dentro de un ranking de candidatos.
+
+La columna `descripcion` contiene el texto comercial consolidado de la mercancía. En escenarios basados en DAM, esta descripción puede construirse mediante la concatenación de los cinco campos descriptivos de cada serie. La columna `nandina` contiene el código esperado, normalizado al formato NANDINA-8, y se utiliza únicamente como referencia de validación.
+
+El flujo experimental es el siguiente:
+
+1. **Set de validación**: se carga un archivo CSV con descripciones comerciales y códigos NANDINA esperados.
+2. **Preprocesamiento**: se limpian y normalizan las descripciones; los códigos se validan en formato de ocho dígitos.
+3. **Corpus NANDINA**: se utiliza un corpus documental curado con registros tipo `nandina_8`, asociados a texto normativo o descriptivo.
+4. **Índice BM25**: se construye o carga un índice léxico BM25 (`bm25_nandina8.pkl`) sobre los documentos NANDINA-8.
+5. **Recuperación de candidatos**: para cada descripción, BM25 recupera candidatos ordenados por puntaje, generando un ranking TOP-N con código, score y texto sustentatorio.
+6. **Reescritura controlada con LLM**: opcionalmente, un LLM local vía Ollama (`llama3.1:8b`) reescribe la consulta para una segunda pasada BM25. El LLM no clasifica la mercancía ni decide la subpartida final; solo apoya la reformulación de la consulta bajo reglas anti-deriva.
+7. **Validación y auditoría**: la NANDINA esperada se compara contra el ranking recuperado mediante métricas como Acc@1, Acc@3, Acc@5, Acc@10 y MRR. La corrida registra resultados, consultas, candidatos, scores, parámetros y hashes para trazabilidad.
+
+La salida del experimento permite responder si la NANDINA esperada aparece dentro de los primeros candidatos recuperados y con qué evidencia textual fue sustentada. El sistema recomienda candidatos NANDINA y documenta el sustento; no produce clasificación oficial ni reemplaza la revisión experta.
+
+### Pipeline general
+
+![Pipeline experimental para recomendación auditable de subpartidas NANDINA](docs/imagenes/pipeline_experimental_nandina.png)
+
 ## Estructura
 
 ```text
