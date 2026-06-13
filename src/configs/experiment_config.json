@@ -1,11 +1,14 @@
 {
   "paths": {
-    "base_dir": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código",
-    "bm25_index_path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\indexes\\bm25_nandina8.pkl",
-    "dataset_path": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\devset_validacion_intermedia.csv",
-    "runs_dir": "C:\\Users\\VLADIMIR\\OneDrive\\Documentos\\Tesis UPEU\\Código\\data\\processed\\runs"
+    "base_dir": ".",
+    "corpus_path": "data/processed/corpus_rag_v1_index.jsonl",
+    "bm25_index_path": "data/processed/indexes/bm25_nandina8.pkl",
+    "dataset_path": "data/processed/devset_validacion_intermedia.csv",
+    "runs_dir": "data/processed/runs"
   },
   "bm25": {
+    "k1": 1.5,
+    "b": 0.75,
     "top_n": 100,
     "top_m": 2000,
     "allowed_k": 800,
@@ -17,17 +20,17 @@
       10
     ]
   },
- "llm": {
-  "base_url": "http://127.0.0.1:11434/api/chat",
-  "model": "llama3.1:8b",
-  "temperature": 0.0,
-  "structured_output": true,
-  "timeout_seconds": 600,
-  "max_retries": 1
-},
+  "llm": {
+    "base_url": "http://127.0.0.1:11434/api/chat",
+    "model": "llama3.1:8b",
+    "temperature": 0.0,
+    "structured_output": true,
+    "timeout_seconds": 600,
+    "max_retries": 1
+  },
   "policy": {
     "params_fixed": true,
-    "notes": "Configuración fija definida ex ante; no se ajusta según resultados. Cualquier cambio implica crear un nuevo archivo de configuración versionado."
+    "notes": "Configuracion fija definida ex ante; no se ajusta segun resultados. Cualquier cambio implica crear un nuevo archivo de configuracion versionado."
   },
   "version": "1.0"
 }

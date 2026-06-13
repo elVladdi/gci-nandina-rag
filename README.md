@@ -1,58 +1,128 @@
-# Gestión de información documental para la recomendación auditable de subpartidas NANDINA mediante recuperación documental y LLM+RAG
+# Gestión de información documental para recomendación auditable de subpartidas NANDINA con LLM+RAG
 
-Repositorio del proyecto de investigación de maestría en Gestión del Conocimiento e Información.
+Repositorio del piloto experimental offline de la investigación de maestría:
 
-**Título del proyecto:** Gestión de información documental para la recomendación auditable de subpartidas NANDINA mediante recuperación documental y LLM+RAG: piloto experimental offline.
+**Gestión de información documental para la recomendación auditable de subpartidas NANDINA mediante recuperación documental y LLM+RAG: piloto experimental offline.**
 
-## Descripción
+El proyecto organiza corpus normativo, recuperación documental y experimentos offline para apoyar la recomendación auditable de subpartidas NANDINA. No produce clasificación oficial ni reemplaza revisión experta.
 
-Este repositorio contiene la estructura inicial, documentación técnica y artefactos reproducibles del piloto experimental offline orientado a evaluar un enfoque de gestión de información documental para la recomendación auditable de subpartidas NANDINA.
+## Estado de la Fase 1
 
-El proyecto busca organizar, recuperar, reordenar y explicar evidencia documental normativa para apoyar la recomendación de subpartidas NANDINA a partir de descripciones textuales de mercancías. El piloto no sustituye la revisión experta ni produce clasificación oficial de mercancías; sus salidas tienen finalidad estrictamente experimental y académica.
+Esta fase deja una base ejecutable y mínimamente reproducible. Los notebooks siguen disponibles como bitácora experimental, pero la lógica básica de corpus, BM25, recuperación y prueba mínima ya vive en `src/`.
 
-## Enfoque general
-
-El pipeline experimental contempla cinco componentes principales:
-
-1. Curación y documentación del corpus normativo.
-2. Preparación de casos de evaluación con descripción textual y subpartida de referencia.
-3. Recuperación documental base para generar candidatos Top-N.
-4. Reordenamiento y explicación mediante LLM+RAG.
-5. Evaluación cuantitativa y cualitativa del desempeño y de la explicación auditable.
-
-## Alcance
-
-El estudio se delimita a una evaluación offline. No se contempla despliegue productivo, integración con sistemas institucionales, clasificación oficial ni reemplazo de especialistas. La investigación se concentra en subpartidas NANDINA de ocho dígitos y en la evaluación de desempeño Top-k/ranking, trazabilidad documental y calidad de explicación basada en evidencia.
-
-## Estructura del repositorio
+## Estructura
 
 ```text
 .
-├── data/              # Datos locales o referencias a datos; no subir información sensible
-├── docs/              # Documentación metodológica, fichas y notas del proyecto
-├── notebooks/         # Cuadernos de exploración, validación y experimentación
-├── outputs/           # Resultados generados por corridas experimentales
-├── src/               # Código fuente del pipeline experimental
-├── .gitignore         # Reglas para excluir archivos locales, temporales o sensibles
-└── README.md          # Descripción general del repositorio
+├── data/
+│   ├── raw/                  # PDFs fuente locales
+│   └── processed/            # corpus, índices y artefactos regenerables
+├── docs/                     # documentación metodológica
+├── notebooks/                # exploración y experimentos originales
+├── outputs/                  # salidas generadas
+├── src/
+│   ├── bm25_index.py         # índice BM25 compatible con notebooks y pickles previos
+│   ├── corpus/               # preparación de campos de corpus para recuperación
+│   ├── retrieval/            # carga y consulta de índices
+│   ├── experiments/          # scripts ejecutables
+│   ├── evaluation/           # métricas mínimas
+│   └── utils/                # rutas y configuración
+├── requirements.txt
+└── README.md
 ```
 
-## Principios de trabajo
+## Instalación
 
-- Mantener trazabilidad de corpus, configuraciones y resultados.
-- Registrar versiones de documentos, parámetros, prompts y salidas.
-- Evitar subir datos sensibles, confidenciales o no anonimizados.
-- Separar datos fuente, datos procesados, código y resultados.
-- Priorizar reproducibilidad, auditabilidad y documentación.
+Desde la raíz del repositorio:
 
-## Métricas previstas
+```powershell
+cd "C:\Users\Vladimir\OneDrive\Documentos\Maestría UNMSM\LLM_RGA_NANDINA"
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
-El desempeño de recomendación se evaluará mediante métricas como Top-1, Top-3, Top-5, Mean Reciprocal Rank (MRR) y Normalized Discounted Cumulative Gain (nDCG). La calidad de explicación se evaluará mediante criterios de verificabilidad, trazabilidad, pertinencia documental y concordancia evidencia-justificación.
+Si el proyecto se ejecuta desde otra ruta, puede fijarse la raíz con:
 
-## Estado del repositorio
+```powershell
+$env:NANDINA_PROJECT_ROOT = "C:\ruta\al\repo"
+```
 
-Estructura inicial creada para organizar el desarrollo del proyecto. La implementación técnica, los experimentos y la documentación metodológica se incorporarán progresivamente.
+## Configuración
 
-## Nota de confidencialidad
+La configuración principal está en:
 
-No deben subirse al repositorio registros sensibles, datos personales, documentos no autorizados o información institucional restringida. Los datos de evaluación deben documentarse y anonimizarse según corresponda antes de cualquier uso compartido.
+```text
+src/configs/experiment_config.json
+```
+
+Las rutas son relativas a la raíz del repositorio por defecto. Esto evita depender de rutas absolutas locales.
+
+## Reconstruir o usar el corpus
+
+Si ya existe `data/processed/corpus_rag_v1_index.jsonl`, puede usarse directamente para BM25.
+
+Para regenerar el campo `texto_index` a partir del corpus curado:
+
+```powershell
+python -m src.corpus.text_index
+```
+
+Entrada por defecto:
+
+```text
+data/processed/corpus_rag_v1.jsonl
+```
+
+Salida por defecto:
+
+```text
+data/processed/corpus_rag_v1_index.jsonl
+```
+
+## Construir índice BM25
+
+Para reconstruir el índice NANDINA-8:
+
+```powershell
+python -m src.experiments.build_bm25_index
+```
+
+Salida por defecto:
+
+```text
+data/processed/indexes/bm25_nandina8.pkl
+data/processed/indexes/bm25_nandina8_run_metadata.json
+```
+
+El índice conserva compatibilidad con los notebooks que importan `bm25_index.BM25Index`.
+
+## Cargar índice y ejecutar una prueba mínima
+
+Con el índice existente o reconstruido:
+
+```powershell
+python -m src.experiments.smoke_test --query "computadora portátil con procesador y memoria" --top-n 5
+```
+
+El comando imprime los códigos NANDINA recuperados, puntajes BM25 y fragmentos de texto.
+
+## Notebooks de referencia
+
+Los notebooks existentes documentan el desarrollo original:
+
+- `01_Construccion_Corpus_NANDINA.ipynb`
+- `02_Construccion_Corpus_Arancel2022_RGI_Notas.ipynb`
+- `03_Curacion_Corpus_RAG.ipynb`
+- `04_BM25_Indexacion_NANDINA.ipynb`
+- `05_BM25_2Pasadas_LLM_Rewrite_Evaluacion.ipynb`
+- `05_Text2Trade_Indexacion_NANDINA.ipynb`
+
+## Política de artefactos
+
+No subir modelos pesados, PDFs grandes ni artefactos regenerables nuevos sin decisión explícita. Algunos artefactos ya estaban versionados al iniciar esta fase; no se movieron ni eliminaron.
+
+## Alcance
+
+La Fase 1 no ejecuta evaluación final ni amplía dataset. El objetivo es reproducibilidad mínima: preparar corpus indexable, construir/cargar BM25 y ejecutar una consulta de humo.
