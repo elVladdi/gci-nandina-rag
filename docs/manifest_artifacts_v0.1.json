@@ -62,11 +62,157 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 5790,
-      "sha256": "1a7c5474b597c4ff8caa7ad2a13f0036b36614d2546ff898f18e8917276cfff7",
+      "size_bytes": 6993,
+      "sha256": "3b77d0b8e0000889d5b50c6ddb37660561d8274ceec35e4e0992dc0393ed2d72",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
+    },
+    {
+      "path": "docs/evaluacion_bm25_baseline_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Documento de cierre metodologico de la evaluacion BM25 baseline v0.1 sobre el evalset final.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 5563,
+      "sha256": "d940cdd25c40128009dc9e33e0ce77fbe2e6eea0d1e103e5446a0f4c778238d0",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Resume insumos, comandos reproducibles, metricas globales, metricas jerarquicas, diagnostico de cobertura, limitaciones y siguiente comparacion sugerida."
+    },
+    {
+      "path": "src/experiments/evaluate_bm25.py",
+      "type": "script",
+      "role_in_v0_1": "Script reproducible para evaluar BM25 puro sobre evalset_v0.1.csv y generar resultados por caso y metricas agregadas.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 16513,
+      "sha256": "b83b2594e27d9ef4396f45f1556757535c24d14379b19b096c2246494d0481be",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "No ejecuta LLM; usa el indice BM25 local y guarda rutas relativas cuando es posible."
+    },
+    {
+      "path": "src/analysis/__init__.py",
+      "type": "script",
+      "role_in_v0_1": "Inicializador del paquete de scripts de analisis.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 64,
+      "sha256": "a3c6f6a092d467e2ad58c2bc86968cfcef649ad3620fbdf4b889a536c7ce3a16",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Permite ejecutar diagnosticos con python -m src.analysis..."
+    },
+    {
+      "path": "src/analysis/diagnose_bm25_baseline.py",
+      "type": "script",
+      "role_in_v0_1": "Script diagnostico para analizar cobertura, fallos y desempeno jerarquico NANDINA8/HS4/HS2 del baseline BM25.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 20996,
+      "sha256": "d08c90b0c995cc51cab2db547e82ddb6177afca59ca2ba95733a723b214ca084",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Solo lee evalset, indice y outputs BM25; no ejecuta LLM, red ni servicios externos."
+    },
+    {
+      "path": "outputs/evaluation/bm25_eval_v0.1/results.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resultados por caso de la evaluacion BM25 baseline v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 719412,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25; no se fuerza su versionado."
+    },
+    {
+      "path": "outputs/evaluation/bm25_eval_v0.1/metrics.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Metricas agregadas de la evaluacion BM25 baseline v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 15283,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; contiene rutas relativas al proyecto cuando es posible."
+    },
+    {
+      "path": "outputs/evaluation/bm25_eval_v0.1/summary.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible de la evaluacion BM25 baseline v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1509,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no sustituye el documento metodologico versionado."
+    },
+    {
+      "path": "outputs/evaluation/bm25_eval_v0.1/diagnostics.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Diagnostico machine-readable de cobertura, fallos y desempeno jerarquico del baseline BM25.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 69185,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.analysis.diagnose_bm25_baseline."
+    },
+    {
+      "path": "outputs/evaluation/bm25_eval_v0.1/diagnostics.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible del diagnostico BM25 baseline v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1489,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; el cierre versionado esta en docs/evaluacion_bm25_baseline_v0.1.md."
+    },
+    {
+      "path": "outputs/evaluation/bm25_eval_v0.1/failure_sample.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Muestra cualitativa de fallos con candidatos Top-5 y motivo diagnostico.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 39705,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable usado para inspeccion cualitativa; no se fuerza su versionado."
     },
     {
       "path": "data/raw/Arancel 2022.pdf",

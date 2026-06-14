@@ -155,6 +155,31 @@ python -m src.experiments.smoke_test --query "computadora portátil con procesad
 
 El comando imprime los códigos NANDINA recuperados, puntajes BM25 y fragmentos de texto.
 
+## Evaluacion BM25 baseline v0.1
+
+La Fase 4 agrega una evaluacion reproducible del baseline BM25 puro sobre el evalset final v0.1. El script principal es `src/experiments/evaluate_bm25.py` y el diagnostico complementario esta en `src/analysis/diagnose_bm25_baseline.py`.
+
+Para regenerar la evaluacion:
+
+```powershell
+python -m src.experiments.evaluate_bm25 `
+  --evalset data\processed\evalset_v0.1.csv `
+  --k-list 1,3,5,10 `
+  --output-dir outputs\evaluation\bm25_eval_v0.1
+```
+
+Para regenerar el diagnostico:
+
+```powershell
+python -m src.analysis.diagnose_bm25_baseline `
+  --evalset data\processed\evalset_v0.1.csv `
+  --index data\processed\indexes\bm25_nandina8.pkl `
+  --results outputs\evaluation\bm25_eval_v0.1\results.csv `
+  --output-dir outputs\evaluation\bm25_eval_v0.1
+```
+
+El cierre metodologico esta en `docs/evaluacion_bm25_baseline_v0.1.md`. Los outputs se generan bajo `outputs/evaluation/bm25_eval_v0.1/` y son regenerables; no se versionan por defecto.
+
 ## Notebooks de referencia
 
 Los notebooks existentes documentan el desarrollo original:

@@ -57,6 +57,28 @@ Se documentan como artefactos locales o regenerables:
 
 Estos ultimos no deben subirse a Git por peso, regenerabilidad o dependencia de modelos locales.
 
+## Evaluacion BM25 baseline v0.1
+
+La Fase 4 formaliza la evaluacion reproducible del baseline BM25 puro sobre `data/processed/evalset_v0.1.csv`.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_bm25.py`: ejecuta BM25 puro sobre el evalset final y genera resultados por caso y metricas agregadas.
+- `src/analysis/diagnose_bm25_baseline.py`: analiza cobertura, fallos y desempeno jerarquico NANDINA8/HS4/HS2 a partir del evalset, indice y resultados BM25.
+- `src/analysis/__init__.py`: declara el paquete de scripts de analisis.
+- `docs/evaluacion_bm25_baseline_v0.1.md`: cierre metodologico de la evaluacion BM25 baseline v0.1.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/bm25_eval_v0.1/results.csv`.
+- `outputs/evaluation/bm25_eval_v0.1/metrics.json`.
+- `outputs/evaluation/bm25_eval_v0.1/summary.md`.
+- `outputs/evaluation/bm25_eval_v0.1/diagnostics.json`.
+- `outputs/evaluation/bm25_eval_v0.1/diagnostics.md`.
+- `outputs/evaluation/bm25_eval_v0.1/failure_sample.csv`.
+
+Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde los scripts versionados, el evalset final, el indice BM25 y la configuracion operativa.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:
