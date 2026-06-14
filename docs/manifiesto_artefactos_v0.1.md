@@ -17,6 +17,13 @@ Los insumos oficiales son los archivos necesarios para sostener el piloto offlin
 
 El indice `data/processed/indexes/bm25_nandina8.pkl` se considera artefacto de aceleracion. Esta disponible localmente y ya esta versionado, pero metodologicamente puede regenerarse desde el corpus indexable y los parametros BM25 congelados.
 
+
+## Evalset final v0.1
+
+El evalset final v0.1 fue generado desde el Excel SUNAT real en modo `sunat-block` y congelado en `data/processed/evalset_v0.1.csv` con 600 casos unicos validos. Antes de congelarlo se auditaron 647 casos extraidos, 31 grupos duplicados exactos y 47 filas excedentes por la llave `descripcion + nandina_ref + regimen`.
+
+La metadata asociada queda en `data/processed/evalset_v0.1_metadata.json` y registra fuente, fecha de consulta, formato de extraccion, regla de deduplicacion, conteos de calidad y checksums. Estos artefactos sostienen la evaluacion final posterior, pero no constituyen por si mismos resultados experimentales ni validacion de hipotesis. El alcance empirico queda concentrado en regimen `10` (importacion para el consumo), por lo que los resultados no deben generalizarse a otros regimenes aduaneros.
+
 ## Resultados preliminares
 
 Las corridas `data/processed/runs/bm25_2pass_llm_*` con archivos existentes son resultados preliminares de BM25 + LLM rewrite. Sirven para inspeccion o comparacion exploratoria, pero no son validacion final.

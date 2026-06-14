@@ -62,8 +62,8 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 4842,
-      "sha256": "bc6f0f73e4a8a793c4ac0dace21dd0610e22965547f7e7abcc2db3a781dabe14",
+      "size_bytes": 5790,
+      "sha256": "1a7c5474b597c4ff8caa7ad2a13f0036b36614d2546ff898f18e8917276cfff7",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
@@ -85,7 +85,7 @@
       "methodological_notes": "No debe subirse a Git por politica de datos raw; conservar localmente o documentar fuente externa oficial."
     },
     {
-      "path": "data/raw/CAN Desici\u00f3n 885 - Nanadina Gaceta 4359.pdf",
+      "path": "data/raw/CAN Desición 885 - Nanadina Gaceta 4359.pdf",
       "type": "source_doc",
       "role_in_v0_1": "Documento fuente local relacionado con NANDINA/CAN usado como insumo de corpus.",
       "git_status_expected": [
@@ -141,6 +141,34 @@
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
       "methodological_notes": "Contiene 13 casos. No constituye evaluacion final ni debe ampliarse dentro de v0.1."
+    },
+    {
+      "path": "data/processed/evalset_v0.1.csv",
+      "type": "dataset",
+      "role_in_v0_1": "Evalset final v0.1 deduplicado para evaluacion final posterior del piloto offline.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 271555,
+      "sha256": "efa50624a29009f51b77ffc2d7610bcf827f54d8f7b4837dca739881b536fbc5",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Generado desde Excel SUNAT real en modo sunat-block; 647 casos extraidos, deduplicacion exacta por descripcion + nandina_ref + regimen, 600 casos unicos validos finales. Aunque data/processed esta ignorado por defecto, este artefacto final requiere versionado explicito si se congela en Git. Alcance empirico concentrado en regimen 10/importacion para el consumo; no generalizar automaticamente a otros regimenes."
+    },
+    {
+      "path": "data/processed/evalset_v0.1_metadata.json",
+      "type": "metadata",
+      "role_in_v0_1": "Metadata de generacion, fuente, deduplicacion, validacion y checksums del evalset final v0.1.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 2539,
+      "sha256": "68b2db22f04ebafe74df18ea24134e2fe5b9264330084587dba9a5370aa0eb85",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Registra input SUNAT, fecha de consulta 2026-06-13, formato sunat-block, regla --dedupe exact, 47 filas excluidas, 31 grupos duplicados y validacion final sin errores criticos. La documentacion metodologica explicita la concentracion en regimen 10/importacion para el consumo."
     },
     {
       "path": "data/processed/indexes/bm25_nandina8.pkl",

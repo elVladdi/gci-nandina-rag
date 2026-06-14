@@ -1,0 +1,54 @@
+{
+  "input_path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\Cuarto ciclo\\Tesis\\data.xlsx",
+  "output_path": "data\\processed\\evalset_v0.1.csv",
+  "metadata_path": "data\\processed\\evalset_v0.1_metadata.json",
+  "source_url": "http://www.aduanet.gob.pe/aduanas/informgest/sgdespa.htm#REGIMENES_DEFINITIVOS",
+  "fecha_consulta": "2026-06-13",
+  "input_format_requested": "sunat-block",
+  "detected_format": "sunat-block",
+  "rows_input": 7787,
+  "rows_extracted_before_dedupe": 647,
+  "rows_output": 600,
+  "sha256_input": "bf0643bd2aee5cce081e6725148a8ec3646134b895e709d229730a8ead5991da",
+  "sha256_output": "efa50624a29009f51b77ffc2d7610bcf827f54d8f7b4837dca739881b536fbc5",
+  "generated_at_utc": "2026-06-13T23:51:58+00:00",
+  "columnas_entrada": [],
+  "columnas_detectadas": {
+    "serie": "primera columna de la fila de inicio",
+    "regimen": "ultima columna no vacia de la fila de inicio",
+    "nandina": "codigo punteado dentro del bloque",
+    "descripcion": "filas posteriores al codigo NANDINA dentro del bloque"
+  },
+  "reglas_aplicadas": [
+    "lectura de hoja sin encabezados",
+    "deteccion de inicio de serie en primera columna numerica",
+    "regimen tomado de la ultima columna no vacia de la fila de inicio",
+    "deteccion de codigo NANDINA punteado dentro del bloque",
+    "conversion de codigo SUNAT punteado a NANDINA-8 usando los primeros 8 digitos",
+    "descripcion de partida tomada de la misma fila del codigo cuando existe",
+    "descripcion de mercancia unida desde filas posteriores hasta antes de la siguiente serie",
+    "capitulo derivado de los dos primeros digitos de nandina_ref",
+    "partida derivada de los cuatro primeros digitos de nandina_ref",
+    "case_id estable con patron SUNAT-0001",
+    "observaciones con hoja, serie, fila_inicio, fila_fin y descripcion_partida",
+    "deduplicacion exacta antes de evaluacion",
+    "validacion final con src.evaluation.validate_dataset.validate_evalset"
+  ],
+  "deduplicacion": {
+    "method": "exact",
+    "key": "descripcion normalizada + nandina_ref + regimen",
+    "rows_before": 647,
+    "rows_after": 600,
+    "duplicate_groups": 31,
+    "excluded_rows": 47,
+    "policy": "conservar primera aparicion estable del extractor"
+  },
+  "audit_report_dir": "outputs\\audits\\evalset_v0.1_duplicates",
+  "conteos_calidad": {
+    "nandina_valida_8": 600,
+    "descripcion_no_vacia": 600,
+    "regimen_no_vacio": 600
+  },
+  "validation_warnings": [],
+  "validation_errors": []
+}

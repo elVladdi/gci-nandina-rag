@@ -6,3 +6,4 @@ tqdm
 sentence-transformers
 hnswlib
 torch
+openpyxl

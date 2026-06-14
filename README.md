@@ -156,3 +156,11 @@ No subir modelos pesados, PDFs grandes ni artefactos regenerables nuevos sin dec
 ## Alcance
 
 La Fase 1 no ejecuta evaluación final ni amplía dataset. El objetivo es reproducibilidad mínima: preparar corpus indexable, construir/cargar BM25 y ejecutar una consulta de humo.
+
+## Dataset de evaluación final
+
+El archivo `data/processed/devset_validacion_intermedia.csv` queda como devset preliminar de 13 casos para desarrollo, validación intermedia y smoke tests; no debe ampliarse ni mezclarse con la evaluación final.
+
+El evalset final se construirá por separado como `data/processed/evalset_v0.1.csv`, con tamaño objetivo aproximado de 300 instancias y trazabilidad mínima por caso. El protocolo, la ficha y la plantilla están en `docs/protocolo_dataset_evaluacion_v0.1.md`, `docs/ficha_dataset_evaluacion_v0.1.md` y `docs/templates/evalset_v0.1_template.csv`.
+
+La ingesta desde un Excel o CSV preparado por el usuario se realiza con `python -m src.evaluation.build_evalset_from_sunat_excel`; la guia de preparacion esta en `docs/guia_preparacion_excel_sunat_v0.1.md`.
