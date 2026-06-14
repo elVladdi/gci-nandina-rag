@@ -16,6 +16,23 @@ El experimento evalúa un pipeline offline de recuperación documental para reco
 
 La columna `descripcion` contiene el texto comercial consolidado de la mercancía. En escenarios basados en DAM, esta descripción puede construirse mediante la concatenación de los cinco campos descriptivos de cada serie. La columna `nandina` contiene el código esperado, normalizado al formato NANDINA-8, y se utiliza únicamente como referencia de validación.
 
+### Construcción del set de validación desde DAM
+
+El set de validación se construye a partir de series declaradas en DAM correspondientes a canal rojo. Para la fase experimental, la extracción de datos se realiza de forma manual mediante la descarga del reporte DUA en formato Excel, considerando DAM del mes de enero de 2026 hasta reunir, como mínimo, 300 instancias de validación.
+
+Cada instancia corresponde a una serie de la DAM. En el archivo Excel fuente, la información de la mercancía se encuentra distribuida en un bloque por serie, donde se identifica el código NANDINA y cinco campos descriptivos de mercancía. Estos cinco campos se concatenan para formar una única descripción comercial consolidada, que será usada como consulta textual del experimento.
+
+A partir del Excel fuente se genera un archivo CSV con dos columnas:
+
+```csv
+descripcion,nandina
+```
+
+- `descripcion`: concatenación limpia de los cinco campos descriptivos de la serie.
+- `nandina`: código NANDINA esperado, normalizado al formato de ocho dígitos cuando corresponda.
+
+Para asegurar reproducibilidad, esta transformación se implementará mediante un script Python que leerá el Excel de entrada, identificará las series, extraerá la NANDINA y las cinco líneas descriptivas, aplicará las reglas de limpieza y exportará el CSV final utilizado por el pipeline experimental.
+
 El flujo experimental es el siguiente:
 
 1. **Set de validación**: se carga un archivo CSV con descripciones comerciales y códigos NANDINA esperados.
@@ -155,12 +172,12 @@ No subir modelos pesados, PDFs grandes ni artefactos regenerables nuevos sin dec
 
 ## Alcance
 
-La Fase 1 no ejecuta evaluación final ni amplía dataset. El objetivo es reproducibilidad mínima: preparar corpus indexable, construir/cargar BM25 y ejecutar una consulta de humo.
+La Fase 1 no ejecuta evaluaci?n final ni ampl?a dataset. El objetivo es reproducibilidad m?nima: preparar corpus indexable, construir/cargar BM25 y ejecutar una consulta de humo.
 
-## Dataset de evaluación final
+## Dataset de evaluaci?n final
 
-El archivo `data/processed/devset_validacion_intermedia.csv` queda como devset preliminar de 13 casos para desarrollo, validación intermedia y smoke tests; no debe ampliarse ni mezclarse con la evaluación final.
+El archivo `data/processed/devset_validacion_intermedia.csv` queda como devset preliminar de 13 casos para desarrollo, validaci?n intermedia y smoke tests; no debe ampliarse ni mezclarse con la evaluaci?n final.
 
-El evalset final se construirá por separado como `data/processed/evalset_v0.1.csv`, con tamaño objetivo aproximado de 300 instancias y trazabilidad mínima por caso. El protocolo, la ficha y la plantilla están en `docs/protocolo_dataset_evaluacion_v0.1.md`, `docs/ficha_dataset_evaluacion_v0.1.md` y `docs/templates/evalset_v0.1_template.csv`.
+El evalset final v0.1 est? congelado en `data/processed/evalset_v0.1.csv`, con 600 casos ?nicos v?lidos generados desde el Excel SUNAT en formato por bloques y deduplicados por `descripcion + nandina_ref + regimen`. El protocolo, la ficha y la plantilla est?n en `docs/protocolo_dataset_evaluacion_v0.1.md`, `docs/ficha_dataset_evaluacion_v0.1.md` y `docs/templates/evalset_v0.1_template.csv`.
 
-La ingesta desde un Excel o CSV preparado por el usuario se realiza con `python -m src.evaluation.build_evalset_from_sunat_excel`; la guia de preparacion esta en `docs/guia_preparacion_excel_sunat_v0.1.md`.
+La ingesta desde un Excel o CSV preparado por el usuario se realiza con `python -m src.evaluation.build_evalset_from_sunat_excel`; la gu?a de preparaci?n est? en `docs/guia_preparacion_excel_sunat_v0.1.md`. El alcance emp?rico del evalset queda concentrado en el r?gimen 10, importaci?n para el consumo, por lo que los resultados no deben generalizarse a otros reg?menes aduaneros.
