@@ -52,8 +52,10 @@ Se documentan como trazabilidad:
 Se documentan como artefactos locales o regenerables:
 
 - `data/processed/indexes/text2trade_nandina8_v1/index/vectors.npy`.
+- `data/processed/indexes/text2trade_nandina8_v1/index/id_map.json`.
 - `data/processed/indexes/text2trade_nandina8_v1/store/nandina8_docstore.jsonl`.
 - `data/processed/indexes/text2trade_nandina8_v1/model/model.safetensors`.
+- `data/processed/indexes/text2trade_nandina8_v1/eval/smoke_test_results.json`.
 
 Estos ultimos no deben subirse a Git por peso, regenerabilidad o dependencia de modelos locales.
 
@@ -78,6 +80,27 @@ Se documentan como outputs regenerables e ignorados por Git:
 - `outputs/evaluation/bm25_eval_v0.1/failure_sample.csv`.
 
 Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde los scripts versionados, el evalset final, el indice BM25 y la configuracion operativa.
+
+## Evaluacion Text2Trade dense v0.1
+
+La Fase 5 formaliza una evaluacion reproducible del artefacto Text2Trade por fuerza bruta sobre `data/processed/evalset_v0.1.csv`, comparable contra el baseline BM25. No se usa HNSW porque `data/processed/indexes/text2trade_nandina8_v1/index/hnsw.index` esta ausente, no se reconstruye indice y no se ejecuta LLM.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/retrieval/dense_text2trade.py`: carga vectores, mapa de ids, docstore y modelo local para recuperar candidatos por similitud densa.
+- `src/experiments/evaluate_dense_text2trade.py`: evalua recuperacion dense por fuerza bruta sobre el evalset final y genera resultados por caso y metricas agregadas.
+- `src/analysis/compare_bm25_dense.py`: compara BM25 baseline contra Text2Trade dense en Top-k NANDINA8, HS4, HS2, MRR y familias.
+- `docs/evaluacion_text2trade_dense_v0.1.md`: cierre metodologico de la evaluacion dense y comparacion contra BM25.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/text2trade_dense_eval_v0.1/results.csv`.
+- `outputs/evaluation/text2trade_dense_eval_v0.1/metrics.json`.
+- `outputs/evaluation/text2trade_dense_eval_v0.1/summary.md`.
+- `outputs/evaluation/text2trade_dense_eval_v0.1/comparison_bm25_dense.json`.
+- `outputs/evaluation/text2trade_dense_eval_v0.1/comparison_bm25_dense.md`.
+
+Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde los scripts versionados, el evalset final y los artefactos Text2Trade locales congelados.
 
 ## Politica Git/no Git
 

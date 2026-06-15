@@ -62,8 +62,8 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 6993,
-      "sha256": "3b77d0b8e0000889d5b50c6ddb37660561d8274ceec35e4e0992dc0393ed2d72",
+      "size_bytes": 8671,
+      "sha256": "6732c55ced84a3465c4a0280faa05849bb40509347d8a2d27ae6c8d29cd037c4",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
@@ -795,6 +795,169 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "No subir a Git por peso. El modelo base declarado es sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2."
+    },
+    {
+      "path": "src/retrieval/dense_text2trade.py",
+      "type": "script",
+      "role_in_v0_1": "Modulo reutilizable para cargar artefactos Text2Trade y recuperar candidatos por fuerza bruta sobre vectores densos.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "No usa HNSW, red ni LLM; carga modelo local, vectors.npy, id_map.json y docstore.",
+      "sha256": "b116b7458b6d13a1f5c8a2d6e442a73ec7c995f9aa98d025cd42c744d93161b4",
+      "exists": true,
+      "size_bytes": 6624
+    },
+    {
+      "path": "src/experiments/evaluate_dense_text2trade.py",
+      "type": "script",
+      "role_in_v0_1": "Script reproducible para evaluar Text2Trade dense por fuerza bruta sobre evalset_v0.1.csv.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Genera resultados por caso y metricas comparables a BM25; registra uses_hnsw=false y uses_llm=false.",
+      "sha256": "ed822b24dd8a18417888e9d74f9f5d341b93c31047d2b2f0887b0e912e0fc2b7",
+      "exists": true,
+      "size_bytes": 16975
+    },
+    {
+      "path": "src/analysis/compare_bm25_dense.py",
+      "type": "script",
+      "role_in_v0_1": "Script comparativo entre BM25 baseline y Text2Trade dense.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Compara Top-k NANDINA8, HS4, HS2, MRR, casos ganados/perdidos y familias.",
+      "sha256": "43dcc1a6d1f1e7e7ffc47f6aaaefdcd32670fc57da94bfcc04de9ac3b7dce198",
+      "exists": true,
+      "size_bytes": 11832
+    },
+    {
+      "path": "docs/evaluacion_text2trade_dense_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Documento de cierre metodologico de la evaluacion Text2Trade dense por fuerza bruta y comparacion contra BM25.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Resume artefactos, comandos reproducibles, metricas, comparacion, interpretacion y limitaciones.",
+      "sha256": "e60ea9a488d4cddb758e43ceaf14c1f8e5d34fbcf0c06cf3339f74652af727ac",
+      "exists": true,
+      "size_bytes": 4928
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_eval_v0.1/results.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resultados por caso de la evaluacion Text2Trade dense v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
+      "exists": true,
+      "size_bytes": 642428
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_eval_v0.1/metrics.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Metricas agregadas de la evaluacion Text2Trade dense v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
+      "exists": true,
+      "size_bytes": 18303
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_eval_v0.1/summary.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible de la evaluacion Text2Trade dense v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
+      "exists": true,
+      "size_bytes": 1222
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_eval_v0.1/comparison_bm25_dense.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Comparacion machine-readable BM25 baseline vs Text2Trade dense.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
+      "exists": true,
+      "size_bytes": 8189
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_eval_v0.1/comparison_bm25_dense.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible de la comparacion BM25 baseline vs Text2Trade dense.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
+      "exists": true,
+      "size_bytes": 778
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/index/id_map.json",
+      "type": "model_artifact",
+      "role_in_v0_1": "Mapa local de ids del artefacto Text2Trade, necesario para convertir filas vectoriales en codigos NANDINA.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Detectado en Fase 5A; no subir a Git, pero documentar por trazabilidad de evaluacion dense.",
+      "sha256": "b9d526c66a61a3fc5aeb5209a9431ac74566eb1971418ea67b43fbd6e877e976",
+      "exists": true,
+      "size_bytes": 610413
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/eval/smoke_test_results.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Smoke test historico del artefacto exploratorio Text2Trade.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Detectado en Fase 5A; evidencia exploratoria previa, no resultado formal del evalset final.",
+      "sha256": "a5feda6ab1ff0e0ebcfb24319f3b7bd548321903290ae0b766dca2f638315ab2",
+      "exists": true,
+      "size_bytes": 3454
     }
   ],
   "known_absent_or_omitted_paths": [

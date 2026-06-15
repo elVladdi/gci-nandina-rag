@@ -180,6 +180,40 @@ python -m src.analysis.diagnose_bm25_baseline `
 
 El cierre metodologico esta en `docs/evaluacion_bm25_baseline_v0.1.md`. Los outputs se generan bajo `outputs/evaluation/bm25_eval_v0.1/` y son regenerables; no se versionan por defecto.
 
+## Evaluacion Text2Trade dense v0.1
+
+La Fase 5 agrega una evaluacion reproducible del artefacto denso Text2Trade por fuerza bruta sobre el evalset final v0.1. No usa HNSW porque `data/processed/indexes/text2trade_nandina8_v1/index/hnsw.index` no existe fisicamente, y no ejecuta LLM.
+
+Scripts principales:
+
+- `src/retrieval/dense_text2trade.py`: carga `vectors.npy`, `id_map.json`, docstore y modelo local para recuperar candidatos por similitud densa.
+- `src/experiments/evaluate_dense_text2trade.py`: evalua Text2Trade dense sobre el evalset final y genera metricas comparables a BM25.
+- `src/analysis/compare_bm25_dense.py`: compara resultados BM25 contra resultados dense.
+
+Para regenerar la evaluacion densa:
+
+```powershell
+python -m src.experiments.evaluate_dense_text2trade `
+  --evalset data\processed\evalset_v0.1.csv `
+  --artifact-dir data\processed\indexes\text2trade_nandina8_v1 `
+  --output-dir outputs\evaluation\text2trade_dense_eval_v0.1 `
+  --k-list 1,3,5,10 `
+  --retrieval-depth 10
+```
+
+Para regenerar la comparacion contra BM25:
+
+```powershell
+python -m src.analysis.compare_bm25_dense `
+  --bm25-metrics outputs\evaluation\bm25_eval_v0.1\metrics.json `
+  --bm25-results outputs\evaluation\bm25_eval_v0.1\results.csv `
+  --dense-metrics outputs\evaluation\text2trade_dense_eval_v0.1\metrics.json `
+  --dense-results outputs\evaluation\text2trade_dense_eval_v0.1\results.csv `
+  --output-dir outputs\evaluation\text2trade_dense_eval_v0.1
+```
+
+El cierre metodologico esta en `docs/evaluacion_text2trade_dense_v0.1.md`. Los outputs se generan bajo `outputs/evaluation/text2trade_dense_eval_v0.1/`, son regenerables y permanecen ignorados por Git.
+
 ## Notebooks de referencia
 
 Los notebooks existentes documentan el desarrollo original:
