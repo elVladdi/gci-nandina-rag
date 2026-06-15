@@ -4,50 +4,62 @@ Repositorio del piloto experimental offline de la investigación de maestría:
 
 **Gestión de información documental para la recomendación auditable de subpartidas NANDINA mediante recuperación documental y LLM+RAG: piloto experimental offline.**
 
-El proyecto organiza corpus normativo, recuperación documental y experimentos offline para apoyar la recomendación auditable de subpartidas NANDINA. No produce clasificación oficial ni reemplaza revisión experta.
+El proyecto organiza corpus normativo, conjuntos de evaluación, recuperación documental y experimentos offline para apoyar la recomendación auditable de subpartidas NANDINA. No produce clasificación oficial, no reemplaza revisión experta y no está diseñado como sistema operativo institucional.
 
-## Estado de la Fase 1
+## Estado Actual
 
-Esta fase deja una base ejecutable y mínimamente reproducible. Los notebooks siguen disponibles como bitácora experimental, pero la lógica básica de corpus, BM25, recuperación y prueba mínima ya vive en `src/`.
+El repositorio contiene las fases cerradas y versionadas hasta la comparación BM25 vs Text2Trade dense:
 
-## Metodología experimental
+- **Fase 1:** base reproducible BM25, corpus indexable y smoke test.
+- **Fase 2:** protocolo experimental v0.1 y manifiesto de artefactos.
+- **Fase 3:** evalset final v0.1 construido, deduplicado, validado y versionado.
+- **Fase 4:** evaluación formal del baseline BM25 sobre el evalset final.
+- **Fase 5:** evaluación Text2Trade dense por fuerza bruta y comparación contra BM25.
 
-El experimento evalúa un pipeline offline de recuperación documental para recomendación auditable de subpartidas NANDINA a ocho dígitos. A partir de un set de validación con dos columnas (`descripcion`, `nandina`), el sistema verifica si la subpartida esperada puede recuperarse desde la descripción comercial de la mercancía dentro de un ranking de candidatos.
+El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
-La columna `descripcion` contiene el texto comercial consolidado de la mercancía. En escenarios basados en DAM, esta descripción puede construirse mediante la concatenación de los cinco campos descriptivos de cada serie. La columna `nandina` contiene el código esperado, normalizado al formato NANDINA-8, y se utiliza únicamente como referencia de validación.
+## Alcance Metodológico
 
-### Construcción del set de validación desde DAM
+El experimento evalúa recuperación documental para recomendación de candidatos NANDINA-8 a partir de descripciones comerciales. La evaluación se realiza offline y se limita al corpus, configuraciones y evalset documentados en este repositorio.
 
-El set de validación se construye a partir de series declaradas en DAM correspondientes a canal rojo. Para la fase experimental, la extracción de datos se realiza de forma manual mediante la descarga del reporte DUA en formato Excel, considerando DAM del mes de enero de 2026 hasta reunir, como mínimo, 300 instancias de validación.
+El alcance empírico está concentrado en registros del régimen 10, importación para el consumo. El evalset actual conserva 599 casos con `regimen=10` y 1 caso con `regimen=12`; este caso se reporta como alerta metodológica y no debe usarse para generalizar resultados a otros regímenes aduaneros.
 
-Cada instancia corresponde a una serie de la DAM. En el archivo Excel fuente, la información de la mercancía se encuentra distribuida en un bloque por serie, donde se identifica el código NANDINA y cinco campos descriptivos de mercancía. Estos cinco campos se concatenan para formar una única descripción comercial consolidada, que será usada como consulta textual del experimento.
+Las métricas reportadas miden recuperación de candidatos y ranking. No equivalen a clasificación oficial ni a validación jurídica de subpartidas.
 
-A partir del Excel fuente se genera un archivo CSV con dos columnas:
+## Dataset de Evaluación
 
-```csv
-descripcion,nandina
+El devset preliminar queda en:
+
+```text
+data/processed/devset_validacion_intermedia.csv
 ```
 
-- `descripcion`: concatenación limpia de los cinco campos descriptivos de la serie.
-- `nandina`: código NANDINA esperado, normalizado al formato de ocho dígitos cuando corresponda.
+Ese archivo se mantiene como conjunto pequeño para desarrollo, validación intermedia y pruebas de humo. No debe mezclarse con la evaluación final.
 
-Para asegurar reproducibilidad, esta transformación se implementará mediante un script Python que leerá el Excel de entrada, identificará las series, extraerá la NANDINA y las cinco líneas descriptivas, aplicará las reglas de limpieza y exportará el CSV final utilizado por el pipeline experimental.
+El evalset final v0.1 queda congelado en:
 
-El flujo experimental es el siguiente:
+```text
+data/processed/evalset_v0.1.csv
+data/processed/evalset_v0.1_metadata.json
+```
 
-1. **Set de validación**: se carga un archivo CSV con descripciones comerciales y códigos NANDINA esperados.
-2. **Preprocesamiento**: se limpian y normalizan las descripciones; los códigos se validan en formato de ocho dígitos.
-3. **Corpus NANDINA**: se utiliza un corpus documental curado con registros tipo `nandina_8`, asociados a texto normativo o descriptivo.
-4. **Índice BM25**: se construye o carga un índice léxico BM25 (`bm25_nandina8.pkl`) sobre los documentos NANDINA-8.
-5. **Recuperación de candidatos**: para cada descripción, BM25 recupera candidatos ordenados por puntaje, generando un ranking TOP-N con código, score y texto sustentatorio.
-6. **Reescritura controlada con LLM**: opcionalmente, un LLM local vía Ollama (`llama3.1:8b`) reescribe la consulta para una segunda pasada BM25. El LLM no clasifica la mercancía ni decide la subpartida final; solo apoya la reformulación de la consulta bajo reglas anti-deriva.
-7. **Validación y auditoría**: la NANDINA esperada se compara contra el ranking recuperado mediante métricas como Acc@1, Acc@3, Acc@5, Acc@10 y MRR. La corrida registra resultados, consultas, candidatos, scores, parámetros y hashes para trazabilidad.
+Características principales:
 
-La salida del experimento permite responder si la NANDINA esperada aparece dentro de los primeros candidatos recuperados y con qué evidencia textual fue sustentada. El sistema recomienda candidatos NANDINA y documenta el sustento; no produce clasificación oficial ni reemplaza la revisión experta.
+- 600 casos finales.
+- Fuente: Excel SUNAT en formato por bloques.
+- Deduplicación exacta por `descripcion + nandina_ref + regimen`.
+- Columnas principales: `case_id`, `descripcion`, `nandina_ref`, `regimen`, `fuente_url`, `fecha_consulta`, `capitulo`, `partida`, `origen_caso`, `observaciones`.
+- Documentación asociada:
+  - `docs/protocolo_dataset_evaluacion_v0.1.md`
+  - `docs/ficha_dataset_evaluacion_v0.1.md`
+  - `docs/politica_curacion_evalset_v0.1.md`
+  - `docs/guia_preparacion_excel_sunat_v0.1.md`
 
-### Pipeline general
+La ingesta desde Excel o CSV preparado por el usuario se realiza con:
 
-![Pipeline experimental para recomendación auditable de subpartidas NANDINA](docs/imagenes/pipeline_experimental_nandina.png)
+```powershell
+python -m src.evaluation.build_evalset_from_sunat_excel
+```
 
 ## Estructura
 
@@ -55,17 +67,19 @@ La salida del experimento permite responder si la NANDINA esperada aparece dentr
 .
 ├── data/
 │   ├── raw/                  # PDFs fuente locales
-│   └── processed/            # corpus, índices y artefactos regenerables
+│   ├── external/             # referencias externas locales
+│   └── processed/            # corpus, índices, evalset y artefactos procesados
 ├── docs/                     # documentación metodológica
 ├── notebooks/                # exploración y experimentos originales
-├── outputs/                  # salidas generadas
+├── outputs/                  # salidas regenerables ignoradas por Git
 ├── src/
-│   ├── bm25_index.py         # índice BM25 compatible con notebooks y pickles previos
-│   ├── corpus/               # preparación de campos de corpus para recuperación
-│   ├── retrieval/            # carga y consulta de índices
-│   ├── experiments/          # scripts ejecutables
-│   ├── evaluation/           # métricas mínimas
-│   └── utils/                # rutas y configuración
+│   ├── analysis/             # diagnósticos y comparaciones
+│   ├── corpus/               # preparación de corpus
+│   ├── evaluation/           # validación de datasets y métricas
+│   ├── experiments/          # scripts ejecutables de evaluación/indexación
+│   ├── retrieval/            # recuperación BM25 y dense
+│   ├── utils/                # rutas y configuración
+│   └── bm25_index.py         # índice BM25 compatible con pickles previos
 ├── requirements.txt
 └── README.md
 ```
@@ -76,10 +90,16 @@ Desde la raíz del repositorio:
 
 ```powershell
 cd "C:\Users\Vladimir\OneDrive\Documentos\Maestría UNMSM\LLM_RGA_NANDINA"
-py -m venv .venv
+C:\Users\Vladimir\AppData\Local\Programs\Python\Python310\python.exe -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+```
+
+Nota: en Windows, `hnswlib` puede requerir Microsoft C++ Build Tools. Para la evaluación dense por fuerza bruta de Fase 5 no se necesita `hnswlib`; si la instalación completa falla solo por esa dependencia, puede instalarse el conjunto mínimo:
+
+```powershell
+python -m pip install numpy pandas torch sentence-transformers scikit-learn openpyxl
 ```
 
 Si el proyecto se ejecuta desde otra ruta, puede fijarse la raíz con:
@@ -90,23 +110,27 @@ $env:NANDINA_PROJECT_ROOT = "C:\ruta\al\repo"
 
 ## Configuración
 
-La configuración principal está en:
+La configuración operativa principal está en:
 
 ```text
 src/configs/experiment_config.json
 ```
 
-Las rutas son relativas a la raíz del repositorio por defecto. Esto evita depender de rutas absolutas locales.
-
-El snapshot metodológico oficial de la Fase 2A queda congelado en:
+El snapshot metodológico oficial v0.1 está congelado en:
 
 ```text
 src/configs/experiment_v0.1.json
 ```
 
-Su protocolo corto asociado está en `docs/protocolo_experimental_v0.1.md`. El archivo `experiment_config.json` se mantiene como configuración operativa.
+Su protocolo asociado está en:
 
-## Reconstruir o usar el corpus
+```text
+docs/protocolo_experimental_v0.1.md
+```
+
+Las rutas se resuelven de forma relativa a la raíz del repositorio cuando es posible, para reducir dependencia de rutas absolutas locales.
+
+## Corpus e Índice BM25
 
 Si ya existe `data/processed/corpus_rag_v1_index.jsonl`, puede usarse directamente para BM25.
 
@@ -116,50 +140,35 @@ Para regenerar el campo `texto_index` a partir del corpus curado:
 python -m src.corpus.text_index
 ```
 
-Entrada por defecto:
-
-```text
-data/processed/corpus_rag_v1.jsonl
-```
-
-Salida por defecto:
-
-```text
-data/processed/corpus_rag_v1_index.jsonl
-```
-
-## Construir índice BM25
-
-Para reconstruir el índice NANDINA-8:
+Para reconstruir el índice BM25 NANDINA-8:
 
 ```powershell
 python -m src.experiments.build_bm25_index
 ```
 
-Salida por defecto:
+Salidas por defecto:
 
 ```text
 data/processed/indexes/bm25_nandina8.pkl
 data/processed/indexes/bm25_nandina8_run_metadata.json
 ```
 
-El índice conserva compatibilidad con los notebooks que importan `bm25_index.BM25Index`.
-
-## Cargar índice y ejecutar una prueba mínima
-
-Con el índice existente o reconstruido:
+Para ejecutar una prueba mínima:
 
 ```powershell
 python -m src.experiments.smoke_test --query "computadora portátil con procesador y memoria" --top-n 5
 ```
 
-El comando imprime los códigos NANDINA recuperados, puntajes BM25 y fragmentos de texto.
+## Evaluación BM25 Baseline v0.1
 
-## Evaluacion BM25 baseline v0.1
+La Fase 4 evalúa el baseline BM25 puro sobre el evalset final v0.1.
 
-La Fase 4 agrega una evaluacion reproducible del baseline BM25 puro sobre el evalset final v0.1. El script principal es `src/experiments/evaluate_bm25.py` y el diagnostico complementario esta en `src/analysis/diagnose_bm25_baseline.py`.
+Scripts principales:
 
-Para regenerar la evaluacion:
+- `src/experiments/evaluate_bm25.py`
+- `src/analysis/diagnose_bm25_baseline.py`
+
+Para regenerar la evaluación:
 
 ```powershell
 python -m src.experiments.evaluate_bm25 `
@@ -168,7 +177,7 @@ python -m src.experiments.evaluate_bm25 `
   --output-dir outputs\evaluation\bm25_eval_v0.1
 ```
 
-Para regenerar el diagnostico:
+Para regenerar el diagnóstico:
 
 ```powershell
 python -m src.analysis.diagnose_bm25_baseline `
@@ -178,19 +187,53 @@ python -m src.analysis.diagnose_bm25_baseline `
   --output-dir outputs\evaluation\bm25_eval_v0.1
 ```
 
-El cierre metodologico esta en `docs/evaluacion_bm25_baseline_v0.1.md`. Los outputs se generan bajo `outputs/evaluation/bm25_eval_v0.1/` y son regenerables; no se versionan por defecto.
+Resultados principales:
 
-## Evaluacion Text2Trade dense v0.1
+| Métrica | Valor |
+| --- | ---: |
+| Casos evaluados | 600 |
+| Casos con recuperación | 584 |
+| Top-1 NANDINA8 | 0.0050 |
+| Top-3 NANDINA8 | 0.0433 |
+| Top-5 NANDINA8 | 0.0483 |
+| Top-10 NANDINA8 | 0.0517 |
+| MRR | 0.0290 |
+| Top-10 HS4 | 0.1933 |
+| Top-10 HS2 | 0.3800 |
 
-La Fase 5 agrega una evaluacion reproducible del artefacto denso Text2Trade por fuerza bruta sobre el evalset final v0.1. No usa HNSW porque `data/processed/indexes/text2trade_nandina8_v1/index/hnsw.index` no existe fisicamente, y no ejecuta LLM.
+Documento de cierre:
+
+```text
+docs/evaluacion_bm25_baseline_v0.1.md
+```
+
+Outputs regenerables:
+
+```text
+outputs/evaluation/bm25_eval_v0.1/
+```
+
+## Evaluación Text2Trade Dense v0.1
+
+La Fase 5 evalúa el artefacto denso Text2Trade por fuerza bruta sobre el mismo evalset final v0.1. No usa HNSW porque `data/processed/indexes/text2trade_nandina8_v1/index/hnsw.index` no existe físicamente, y no ejecuta LLM.
 
 Scripts principales:
 
-- `src/retrieval/dense_text2trade.py`: carga `vectors.npy`, `id_map.json`, docstore y modelo local para recuperar candidatos por similitud densa.
-- `src/experiments/evaluate_dense_text2trade.py`: evalua Text2Trade dense sobre el evalset final y genera metricas comparables a BM25.
-- `src/analysis/compare_bm25_dense.py`: compara resultados BM25 contra resultados dense.
+- `src/retrieval/dense_text2trade.py`
+- `src/experiments/evaluate_dense_text2trade.py`
+- `src/analysis/compare_bm25_dense.py`
 
-Para regenerar la evaluacion densa:
+Artefactos densos usados:
+
+```text
+data/processed/indexes/text2trade_nandina8_v1/index/vectors.npy
+data/processed/indexes/text2trade_nandina8_v1/index/id_map.json
+data/processed/indexes/text2trade_nandina8_v1/store/nandina8_docstore.jsonl
+data/processed/indexes/text2trade_nandina8_v1/model/
+data/processed/indexes/text2trade_nandina8_v1/retrieval_config.json
+```
+
+Para regenerar la evaluación dense:
 
 ```powershell
 python -m src.experiments.evaluate_dense_text2trade `
@@ -201,7 +244,7 @@ python -m src.experiments.evaluate_dense_text2trade `
   --retrieval-depth 10
 ```
 
-Para regenerar la comparacion contra BM25:
+Para regenerar la comparación contra BM25:
 
 ```powershell
 python -m src.analysis.compare_bm25_dense `
@@ -212,9 +255,53 @@ python -m src.analysis.compare_bm25_dense `
   --output-dir outputs\evaluation\text2trade_dense_eval_v0.1
 ```
 
-El cierre metodologico esta en `docs/evaluacion_text2trade_dense_v0.1.md`. Los outputs se generan bajo `outputs/evaluation/text2trade_dense_eval_v0.1/`, son regenerables y permanecen ignorados por Git.
+Resultados dense principales:
 
-## Notebooks de referencia
+| Métrica | Valor |
+| --- | ---: |
+| Top-1 NANDINA8 | 0.0000 |
+| Top-3 NANDINA8 | 0.0000 |
+| Top-5 NANDINA8 | 0.0033 |
+| Top-10 NANDINA8 | 0.0050 |
+| MRR | 0.0010 |
+| Top-10 HS4 | 0.0117 |
+| Top-10 HS2 | 0.0467 |
+
+Comparación contra BM25:
+
+| Métrica | BM25 | Text2Trade dense |
+| --- | ---: | ---: |
+| Top-10 NANDINA8 | 0.0517 | 0.0050 |
+| MRR | 0.0290 | 0.0010 |
+| Top-10 HS4 | 0.1933 | 0.0117 |
+| Top-10 HS2 | 0.3800 | 0.0467 |
+
+En este evalset, Text2Trade dense por fuerza bruta no mejora el baseline BM25.
+
+Documento de cierre:
+
+```text
+docs/evaluacion_text2trade_dense_v0.1.md
+```
+
+Outputs regenerables:
+
+```text
+outputs/evaluation/text2trade_dense_eval_v0.1/
+```
+
+## Manifiesto de Artefactos
+
+El manifiesto versionado de artefactos está en:
+
+```text
+docs/manifest_artifacts_v0.1.json
+docs/manifiesto_artefactos_v0.1.md
+```
+
+El manifiesto distingue artefactos versionados, ignorados, locales, referencias externas y salidas regenerables.
+
+## Notebooks de Referencia
 
 Los notebooks existentes documentan el desarrollo original:
 
@@ -225,18 +312,8 @@ Los notebooks existentes documentan el desarrollo original:
 - `05_BM25_2Pasadas_LLM_Rewrite_Evaluacion.ipynb`
 - `05_Text2Trade_Indexacion_NANDINA.ipynb`
 
-## Política de artefactos
+## Política de Artefactos
 
-No subir modelos pesados, PDFs grandes ni artefactos regenerables nuevos sin decisión explícita. Algunos artefactos ya estaban versionados al iniciar esta fase; no se movieron ni eliminaron.
+No subir modelos pesados, PDFs grandes ni artefactos regenerables nuevos sin decisión explícita. Algunos artefactos pesados ya existían al iniciar la consolidación del proyecto; no se movieron ni eliminaron.
 
-## Alcance
-
-La Fase 1 no ejecuta evaluaci?n final ni ampl?a dataset. El objetivo es reproducibilidad m?nima: preparar corpus indexable, construir/cargar BM25 y ejecutar una consulta de humo.
-
-## Dataset de evaluaci?n final
-
-El archivo `data/processed/devset_validacion_intermedia.csv` queda como devset preliminar de 13 casos para desarrollo, validaci?n intermedia y smoke tests; no debe ampliarse ni mezclarse con la evaluaci?n final.
-
-El evalset final v0.1 est? congelado en `data/processed/evalset_v0.1.csv`, con 600 casos ?nicos v?lidos generados desde el Excel SUNAT en formato por bloques y deduplicados por `descripcion + nandina_ref + regimen`. El protocolo, la ficha y la plantilla est?n en `docs/protocolo_dataset_evaluacion_v0.1.md`, `docs/ficha_dataset_evaluacion_v0.1.md` y `docs/templates/evalset_v0.1_template.csv`.
-
-La ingesta desde un Excel o CSV preparado por el usuario se realiza con `python -m src.evaluation.build_evalset_from_sunat_excel`; la gu?a de preparaci?n est? en `docs/guia_preparacion_excel_sunat_v0.1.md`. El alcance emp?rico del evalset queda concentrado en el r?gimen 10, importaci?n para el consumo, por lo que los resultados no deben generalizarse a otros reg?menes aduaneros.
+Los outputs bajo `outputs/` y el entorno `.venv/` están ignorados por Git. Deben regenerarse con los comandos documentados cuando se requiera reproducir una corrida.
