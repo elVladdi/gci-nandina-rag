@@ -8,13 +8,18 @@ El proyecto organiza corpus normativo, conjuntos de evaluación, recuperación d
 
 ## Estado Actual
 
-El repositorio contiene las fases cerradas y versionadas hasta la comparación BM25 vs Text2Trade dense:
+El repositorio contiene fases cerradas y versionadas hasta la Fase 6C:
 
 - **Fase 1:** base reproducible BM25, corpus indexable y smoke test.
 - **Fase 2:** protocolo experimental v0.1 y manifiesto de artefactos.
 - **Fase 3:** evalset final v0.1 construido, deduplicado, validado y versionado.
 - **Fase 4:** evaluación formal del baseline BM25 sobre el evalset final.
 - **Fase 5:** evaluación Text2Trade dense por fuerza bruta y comparación contra BM25.
+- **Fase 6A:** pruebas con LLM para query rewrite y multiquery sobre devset.
+- **Fase 6B:** diagnóstico del corpus NANDINA plano, construcción jerárquica y recuperación dual hasta 6B-3.
+- **Fase 6C:** validación controlada en evalset del BM25 dual `protected_top_5_backfill`, cerrada sin ajuste posterior de reglas.
+
+Decisión metodológica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. La etapa LLM de re-ranking y justificación queda pendiente y deberá operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -25,6 +30,8 @@ El experimento evalúa recuperación documental para recomendación de candidato
 El alcance empírico está concentrado en registros del régimen 10, importación para el consumo. El evalset actual conserva 599 casos con `regimen=10` y 1 caso con `regimen=12`; este caso se reporta como alerta metodológica y no debe usarse para generalizar resultados a otros regímenes aduaneros.
 
 Las métricas reportadas miden recuperación de candidatos y ranking. No equivalen a clasificación oficial ni a validación jurídica de subpartidas.
+
+El devset preliminar se usa para desarrollo, diagnóstico y selección experimental preliminar. El evalset final v0.1 se reserva para validaciones controladas; la estrategia `protected_top_5_backfill` fue seleccionada como candidata desde devset, no desde resultados de evalset. La etapa LLM para re-ranking o justificación todavía no está evaluada como resultado final.
 
 ## Dataset de Evaluación
 
@@ -289,6 +296,58 @@ Outputs regenerables:
 ```text
 outputs/evaluation/text2trade_dense_eval_v0.1/
 ```
+
+## Fase 6: Recuperación Jerárquica y Ranking Inicial Candidato
+
+La primera hipótesis operativa de Fase 6 fue mejorar las consultas con LLM antes de BM25. Las pruebas de query rewrite y multiquery sobre el devset mostraron mejoras cualitativas puntuales, pero no mejoraron de forma suficiente ni estable el ranking inicial frente a BM25 Q0.
+
+El diagnóstico posterior ubicó el problema principal en el corpus NANDINA plano: muchos documentos eran demasiado cortos o no autocontenidos para recuperar bien por BM25. Por ello se construyó un corpus jerárquico que incorpora contexto de partida 4D, HS6 cuando existe y NANDINA8. La ablation mostró una tensión clara: `C_hs6_leaf` protege precisión y MRR, mientras que las variantes con 4D amplían recall, pero pueden introducir ruido.
+
+La Fase 6B-3 implementó recuperación dual: un índice de precisión `C_hs6_leaf`, un índice jerárquico de recall 4D/HS6/NANDINA8 y fusión `protected_top_5_backfill`. Esta estrategia fue seleccionada en devset como candidato experimental para validación controlada posterior en evalset.
+
+Métricas principales sobre devset de 13 casos:
+
+| Método | Top-1 | Top-10 | MRR | Recall@100 | Top-10 HS4/HS2 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| BM25 plano | 0.3846 | 0.5385 | 0.4370 | 0.6154 | 0.8462 |
+| C_hs6_leaf | 0.4615 | 0.5385 | 0.4754 | 0.6154 | 0.7692 |
+| Jerárquico v0.1 | 0.3846 | 0.6154 | 0.4701 | 0.6923 | 0.7692 |
+| protected_top_5_backfill | 0.4615 | 0.6923 | 0.4991 | 0.7692 | 0.9231 |
+
+Estas métricas son de desarrollo sobre devset y explican la selección del candidato experimental; no deben leerse como resultados finales del evalset.
+
+### Validación controlada en evalset Fase 6C
+
+La Fase 6C ejecutó una sola vez el evalset final v0.1 para la variante congelada `BM25_dual_protected_top_5_backfill`. No se ejecutó LLM, no se ejecutó Text2Trade y no se ajustaron reglas después de observar resultados del evalset.
+
+| Método | Top-1 | Top-10 | MRR | Recall@100 |
+| --- | ---: | ---: | ---: | ---: |
+| BM25_flat_current | 0.0050 | 0.0517 | 0.0290 | 0.1633 |
+| C_hs6_leaf | 0.0233 | 0.0400 | 0.0331 | 0.1650 |
+| BM25_hierarchical_v0.1 | 0.0283 | 0.1067 | 0.0524 | 0.2500 |
+| BM25_dual_protected_top_5_backfill | 0.0233 | 0.0850 | 0.0406 | 0.2700 |
+
+Decisión de cierre: `BM25_hierarchical_v0.1` queda como ranking inicial documental principal porque supera al dual protegido en Top-10 y MRR. El dual protegido obtiene el mejor Recall@100 y por ello se conserva como fuente auxiliar para ampliar el pool de candidatos, idealmente combinando candidatos de `BM25_hierarchical_v0.1` + `BM25_dual_protected_top_5_backfill` a profundidad 50 o 100. La etapa LLM posterior debe reordenar y justificar sobre ese pool recuperado con evidencia documental.
+
+Scripts y rutas principales:
+
+- Query rewrite devset: `src/experiments/run_llm_query_rewrite_devset.py`, `src/experiments/evaluate_bm25_rewrite_devset.py`.
+- Multiquery devset: `src/experiments/run_llm_multiquery_devset.py`, `src/experiments/evaluate_multiquery_rrf_devset.py`, `src/experiments/evaluate_weighted_bm25_multiquery_devset.py`.
+- Corpus jerárquico: `src/corpus/audit_nandina_hierarchy.py`, `src/corpus/build_hierarchical_nandina_corpus.py`, `src/experiments/build_bm25_hierarchical_index.py`, `src/experiments/evaluate_bm25_hierarchical_devset.py`.
+- Ablation jerárquica: `src/corpus/build_hierarchical_nandina_ablation_variants.py`, `src/experiments/evaluate_bm25_hierarchy_ablation_devset.py`.
+- Dual backfill devset: `src/experiments/evaluate_bm25_dual_backfill_devset.py`.
+- Dual backfill evalset: `src/experiments/evaluate_bm25_dual_backfill_evalset.py`.
+
+Documentos de cierre y referencia:
+
+- `docs/evaluacion_llm_query_rewrite_devset_v0.2.md`
+- `docs/evaluacion_multiquery_rrf_devset_v0.1.md`
+- `docs/evaluacion_weighted_bm25_multiquery_devset_v0.1.md`
+- `docs/auditoria_corpus_nandina_jerarquico_v0.1.md`
+- `docs/evaluacion_bm25_corpus_jerarquico_devset_v0.1.md`
+- `docs/evaluacion_bm25_hierarchy_ablation_devset_v0.1.md`
+- `docs/evaluacion_bm25_dual_backfill_devset_v0.1.md`
+- `docs/evaluacion_bm25_dual_backfill_evalset_v0.1.md`
 
 ## Manifiesto de Artefactos
 

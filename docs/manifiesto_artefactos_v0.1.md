@@ -102,6 +102,35 @@ Se documentan como outputs regenerables e ignorados por Git:
 
 Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde los scripts versionados, el evalset final y los artefactos Text2Trade locales congelados.
 
+## Evaluacion BM25 dual backfill evalset v0.1
+
+La Fase 6C formaliza una validacion controlada sobre el evalset final de la variante `BM25_dual_protected_top_5_backfill`, seleccionada previamente en devset. La corrida no ejecuta LLM ni Text2Trade y no ajusta reglas mirando el evalset.
+
+Decision metodologica de cierre: `BM25_hierarchical_v0.1` queda como ranking documental principal porque supera al dual protegido en Top-10 y MRR; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. La siguiente fase debe disenar un pool combinado y un re-ranking LLM auditable sobre candidatos recuperados, no busqueda libre de NANDINAS desde cero.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_bm25_dual_backfill_evalset.py`: evalua BM25 plano, `C_hs6_leaf`, BM25 jerarquico v0.1 y el dual protegido sobre `data/processed/evalset_v0.1.csv`.
+- `docs/evaluacion_bm25_dual_backfill_evalset_v0.1.md`: cierre metodologico de la validacion controlada en evalset.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_results.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_metrics.json`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_summary.md`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_comparison_vs_flat.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_comparison_vs_c_hs6.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_comparison_vs_hierarchical.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_family_analysis_hs2.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_family_analysis_hs4.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_family_analysis_regimen.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_top_rescues.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_top_deteriorations.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_all_methods_fail.csv`.
+- `outputs/evaluation/bm25_dual_backfill_evalset_v0.1/dual_evalset_failure_sample.csv`.
+
+Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde el script versionado, el evalset final y los indices BM25 locales congelados.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:

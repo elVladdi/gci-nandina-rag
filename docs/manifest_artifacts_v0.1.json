@@ -958,6 +958,49 @@
       "sha256": "a5feda6ab1ff0e0ebcfb24319f3b7bd548321903290ae0b766dca2f638315ab2",
       "exists": true,
       "size_bytes": 3454
+    },
+    {
+      "path": "src/experiments/evaluate_bm25_dual_backfill_evalset.py",
+      "type": "script",
+      "role_in_v0_1": "Script reproducible para evaluar BM25 plano, C_hs6_leaf, BM25 jerarquico v0.1 y BM25 dual protected_top_5_backfill sobre evalset_v0.1.csv.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Fase 6C; ejecuta una validacion controlada de la variante seleccionada en devset. No ejecuta LLM ni Text2Trade y no ajusta reglas mirando el evalset. La decision de cierre conserva BM25_hierarchical_v0.1 como ranking documental principal y usa el dual protegido como fuente auxiliar de pool por Recall@100.",
+      "sha256": "f7bc723f7d5c1fcd825ec8377d80604619b9af7958b68da87e0fedde702e9390",
+      "exists": true,
+      "size_bytes": 25363
+    },
+    {
+      "path": "docs/evaluacion_bm25_dual_backfill_evalset_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Documento de cierre metodologico de la validacion controlada BM25 dual protected_top_5_backfill sobre evalset final.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Resume arquitectura congelada, metodos comparados, metricas globales, comparaciones contra baselines, analisis por familias, rescates, deterioros, decision metodologica y limitaciones. Documenta que BM25_hierarchical_v0.1 queda como ranking documental principal y el dual protegido como pool auxiliar por Recall@100.",
+      "sha256": "7933c61bc1e12555159d73519146f4c23fdf670541b843404fbdd8c66b5aba5d",
+      "exists": true,
+      "size_bytes": 6247
+    },
+    {
+      "path": "outputs/evaluation/bm25_dual_backfill_evalset_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio de outputs regenerables de la evaluacion BM25 dual protected_top_5_backfill sobre evalset final.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Contiene resultados por caso, metricas JSON, resumen, comparaciones contra baselines, analisis por familias y muestras de rescates/deterioros/fallos. No se fuerza su versionado en Git.",
+      "sha256": null,
+      "exists": true,
+      "size_bytes": null
     }
   ],
   "known_absent_or_omitted_paths": [
