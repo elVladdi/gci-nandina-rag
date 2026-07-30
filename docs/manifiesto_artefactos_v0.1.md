@@ -131,6 +131,39 @@ Se documentan como outputs regenerables e ignorados por Git:
 
 Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde el script versionado, el evalset final y los indices BM25 locales congelados.
 
+## Evaluacion candidate pool v0.1
+
+La Fase 7A construye y evalua un pool combinado de candidatos NANDINA usando `BM25_hierarchical_v0.1` como ranking documental principal y `BM25_dual_protected_top_5_backfill` como fuente auxiliar de expansion. La evaluacion corregida separa recall jerarquico, recall dual, union disponible (`union_oracle`) y pool final recortado (`final_pool`). La corrida no ejecuta LLM ni Text2Trade, no modifica devset/evalset/Excel fuente y no ajusta reglas mirando resultados del evalset.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/build_candidate_pool.py`: construye el pool combinado para devset o evalset y genera metricas de cobertura exacta, HS4, HS2, union disponible y estrategias de pool final.
+- `docs/evaluacion_candidate_pool_v0.1.md`: cierre metodologico de Fase 7A, correccion de `union_oracle` vs `final_pool`, metricas devset/evalset, aporte del dual, decision y limitaciones.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/candidate_pool_devset_v0.1/`.
+- `outputs/evaluation/candidate_pool_evalset_v0.1/`.
+
+Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde el script versionado, devset/evalset y los indices BM25 locales congelados.
+
+## Evaluacion LLM rerank pool v0.1
+
+La Fase 7B evalua de forma diagnostica preliminar el re-ranking cerrado con `qwen2.5:7b-instruct` mediante Ollama local sobre devset. Usa `hierarchical_80_dual_backfill_20`, temperatura 0 y `candidate_limit=20`; no usa APIs pagadas/remotas ni Text2Trade.
+
+Se versionan:
+
+- `src/llm/rerank_nandina_prompt_v0.1.md`: prompt JSON cerrado al pool enviado.
+- `src/experiments/run_llm_rerank_pool_devset.py`: runner Ollama local con JSON Schema dinamico, validacion de pool y normalizacion auditable de duplicados.
+- `src/experiments/evaluate_llm_rerank_pool.py`: metricas globales y condicionadas al pool efectivamente enviado.
+- `docs/evaluacion_llm_rerank_pool_v0.1.md`: cierre metodologico y decision de no ejecutar evalset.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/llm_rerank_pool_devset_v0.1/`.
+
+`sent_pool_at_candidate_limit` fue 0.6154. El LLM obtuvo Top-1 global 0.0769 y Top-1 condicionado 0.1250, por debajo del ranking original enviado (0.3846 global y 0.6250 condicionado). Gano 0 casos, perdio 7 y conservo 1. No se compara directamente contra `final_pool@100` porque el LLM recibio 20 candidatos. No se ejecuto evalset. La corrida queda como diagnostico preliminar con limitaciones: no fija `num_ctx`, el esquema no exige exactamente 10 candidatos y todavia requiere una iteracion mas estricta antes de cualquier evaluacion final LLM.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:

@@ -21,7 +21,7 @@
       ],
       "exists": true,
       "size_bytes": 4861,
-      "sha256": "8745490c45fafb5d7bca45da7e1389ea236d5cdb8dbd2baebfd4aedba8bedc31",
+      "sha256": "c9a78c0267b00e1faa34e58a3955559345efa706469de61d6a543d2c9b39d496",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
       "methodological_notes": "Define corpus, dataset, baseline BM25, variante preliminar BM25+LLM rewrite, artefacto exploratorio Text2Trade y politica de parametros fijos."
@@ -49,7 +49,7 @@
       ],
       "exists": true,
       "size_bytes": 3196,
-      "sha256": "7c4c591dbb13020cfc14049f03a86f7becd7dbaec50cb4fdbdc0952c0774d6b7",
+      "sha256": "29106243ed1d9e491fee1904ae5f8d4edae9deb3d9d2fc8089de71bb6bdd5766",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Necesario para auditoria metodologica; no ejecuta codigo ni contiene resultados finales."
@@ -63,7 +63,7 @@
       ],
       "exists": true,
       "size_bytes": 8671,
-      "sha256": "6732c55ced84a3465c4a0280faa05849bb40509347d8a2d27ae6c8d29cd037c4",
+      "sha256": "6919a0ce7a00394ab674f6ccf892b1afd0a5369bdd5e3c8a60e5d3d631a4534e",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
@@ -134,7 +134,7 @@
       ],
       "exists": true,
       "size_bytes": 719412,
-      "sha256": null,
+      "sha256": "fbfc1c7e756517fb59daefa35dc0d5228afd93445e40f4c7e4a06614bd979ccb",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25; no se fuerza su versionado."
@@ -149,7 +149,7 @@
       ],
       "exists": true,
       "size_bytes": 15283,
-      "sha256": null,
+      "sha256": "c7bed2e5b36fbdfb16b9a7f48aa8c36f3cd8696e8ed53d5c5b372b11fa2c99dc",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; contiene rutas relativas al proyecto cuando es posible."
@@ -164,7 +164,7 @@
       ],
       "exists": true,
       "size_bytes": 1509,
-      "sha256": null,
+      "sha256": "117233d37b79967590a6484d00c521e02bef1b9df8fddadf5d76965b8345902e",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no sustituye el documento metodologico versionado."
@@ -179,7 +179,7 @@
       ],
       "exists": true,
       "size_bytes": 69185,
-      "sha256": null,
+      "sha256": "c511f4d8cbdc8ded105666290589e7c7dbc3b39a232ec8738572915c84245caa",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable con src.analysis.diagnose_bm25_baseline."
@@ -194,7 +194,7 @@
       ],
       "exists": true,
       "size_bytes": 1489,
-      "sha256": null,
+      "sha256": "d79e015bcffce368e625598038ded2c58f1c47248fe9b488cdc005df87e714d5",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; el cierre versionado esta en docs/evaluacion_bm25_baseline_v0.1.md."
@@ -209,7 +209,7 @@
       ],
       "exists": true,
       "size_bytes": 39705,
-      "sha256": null,
+      "sha256": "2128d9acbf2e035f440f7f33903cdcc1c3225746c1bb3c4666c8c03c7d7d4583",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable usado para inspeccion cualitativa; no se fuerza su versionado."
@@ -860,7 +860,7 @@
         "ignored",
         "regenerable"
       ],
-      "sha256": null,
+      "sha256": "63a3f0d767e479fef2ed65aee0d74cd4391dc44c32448bac03e11346203f0f93",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
@@ -875,7 +875,7 @@
         "ignored",
         "regenerable"
       ],
-      "sha256": null,
+      "sha256": "81cc5f5aa0acc5020dcb044df5607dfef5c2b31eddf505b2269f2bcc2947f008",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
@@ -890,7 +890,7 @@
         "ignored",
         "regenerable"
       ],
-      "sha256": null,
+      "sha256": "abc50717e9c9909c05f2631926a855bcf9a2c051c5dc59c38a22b9fe1246a8e7",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
@@ -905,7 +905,7 @@
         "ignored",
         "regenerable"
       ],
-      "sha256": null,
+      "sha256": "bc7634c65256368f38be1b2b50fd9dbfa35a2540c914a580f5b597fc21b56ad0",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
@@ -920,7 +920,7 @@
         "ignored",
         "regenerable"
       ],
-      "sha256": null,
+      "sha256": "617d5c725fc5d4592130342d3211f808ea29f101feda86a49ed5ca35e184f01b",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
@@ -998,6 +998,135 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Contiene resultados por caso, metricas JSON, resumen, comparaciones contra baselines, analisis por familias y muestras de rescates/deterioros/fallos. No se fuerza su versionado en Git.",
+      "sha256": null,
+      "exists": true,
+      "size_bytes": null
+    },
+    {
+      "path": "src/experiments/build_candidate_pool.py",
+      "type": "script",
+      "role_in_v0_1": "Script reproducible para construir y evaluar el pool combinado de candidatos NANDINA de Fase 7A.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Usa BM25_hierarchical_v0.1 como ranking principal y BM25_dual_protected_top_5_backfill como fuente auxiliar de expansion. Separa metricas hierarchical, dual, union_oracle y final_pool por estrategia. No ejecuta LLM ni Text2Trade y no modifica devset, evalset ni Excel fuente.",
+      "sha256": "05601d0e7c5890f7d78934ee0bd52347e2ebc78a7fc7bf377a7ec4983d4eca07",
+      "exists": true,
+      "size_bytes": 28017
+    },
+    {
+      "path": "docs/evaluacion_candidate_pool_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Documento de cierre metodologico de Fase 7A candidate pool.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Resume objetivo, arquitectura, correccion de union_oracle vs final_pool, parametros, metricas devset/evalset, aporte del dual, decision para Fase 7B y limitaciones.",
+      "sha256": "e8c76184428d932d8531883b9e602593121ad856ce7f4355e920d51c708da588",
+      "exists": true,
+      "size_bytes": 8020
+    },
+    {
+      "path": "outputs/evaluation/candidate_pool_devset_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio de outputs regenerables de candidate pool sobre devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Contiene candidate_pool.csv, metricas JSON, resumen, resumen por caso y solapamiento de fuentes. No se fuerza su versionado en Git.",
+      "sha256": null,
+      "exists": true,
+      "size_bytes": null
+    },
+    {
+      "path": "outputs/evaluation/candidate_pool_evalset_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio de outputs regenerables de candidate pool sobre evalset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Contiene candidate_pool.csv, metricas JSON, resumen, resumen por caso y solapamiento de fuentes. No se fuerza su versionado en Git.",
+      "sha256": null,
+      "exists": true,
+      "size_bytes": null
+    },
+    {
+      "path": "src/llm/rerank_nandina_prompt_v0.1.md",
+      "type": "prompt",
+      "role_in_v0_1": "Prompt cerrado para re-ranking LLM de candidatos NANDINA ya recuperados.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Exige JSON estricto, seleccion solo dentro del pool enviado, justificacion breve, evidencia y nivel de confianza.",
+      "sha256": "001391a3fd9c9ec4d682400584871098f2f6f21fff0a44ec9bbf332078da9885",
+      "exists": true,
+      "size_bytes": 1667
+    },
+    {
+      "path": "src/experiments/run_llm_rerank_pool_devset.py",
+      "type": "script",
+      "role_in_v0_1": "Runner de re-ranking LLM local sobre candidate pool devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Usa Ollama local, qwen2.5:7b-instruct, JSON Schema dinamico cerrado al pool, candidate_limit y normalizacion auditable. No usa APIs remotas ni Text2Trade. En v0.1 no fija num_ctx y el schema permite entre 1 y 10 candidatos, por lo que se documenta como diagnostico preliminar.",
+      "sha256": "f714408e8e320b6055782539677d7a9f0ea5f4924deddc8da4b19085d38cc082",
+      "exists": true,
+      "size_bytes": 22634
+    },
+    {
+      "path": "src/experiments/evaluate_llm_rerank_pool.py",
+      "type": "script",
+      "role_in_v0_1": "Evaluador de re-ranking LLM cerrado al pool enviado.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Reporta sent_pool_at_candidate_limit y calcula metricas condicionadas solo sobre casos donde la NANDINA correcta estaba dentro de los candidatos enviados.",
+      "sha256": "38d400fbbb25265cf5dede6c8ee074f1891d833effef861aad42e949bee81eb1",
+      "exists": true,
+      "size_bytes": 16384
+    },
+    {
+      "path": "docs/evaluacion_llm_rerank_pool_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 7B diagnostica sobre devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta modelo, prompt, candidate_limit, metricas globales/condicionadas, controles de pool, deterioros, decision de no ejecutar evalset y limitaciones metodologicas de la corrida preliminar.",
+      "sha256": "20b213e0581e1b719070ca31f2dd1548857e741e3c09fe7c5df20f9a8a81c685",
+      "exists": true,
+      "size_bytes": 4651
+    },
+    {
+      "path": "outputs/evaluation/llm_rerank_pool_devset_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Outputs regenerables de re-ranking LLM diagnostico sobre devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Outputs regenerables de la corrida diagnostica preliminar 7B. No se fuerzan a Git; deben interpretarse con las limitaciones documentadas en docs/evaluacion_llm_rerank_pool_v0.1.md.",
       "sha256": null,
       "exists": true,
       "size_bytes": null

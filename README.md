@@ -8,7 +8,7 @@ El proyecto organiza corpus normativo, conjuntos de evaluación, recuperación d
 
 ## Estado Actual
 
-El repositorio contiene fases cerradas y versionadas hasta la Fase 6C:
+El repositorio contiene fases cerradas y versionadas hasta la Fase 7B diagnostica preliminar:
 
 - **Fase 1:** base reproducible BM25, corpus indexable y smoke test.
 - **Fase 2:** protocolo experimental v0.1 y manifiesto de artefactos.
@@ -18,8 +18,10 @@ El repositorio contiene fases cerradas y versionadas hasta la Fase 6C:
 - **Fase 6A:** pruebas con LLM para query rewrite y multiquery sobre devset.
 - **Fase 6B:** diagnóstico del corpus NANDINA plano, construcción jerárquica y recuperación dual hasta 6B-3.
 - **Fase 6C:** validación controlada en evalset del BM25 dual `protected_top_5_backfill`, cerrada sin ajuste posterior de reglas.
+- **Fase 7A:** construcción y evaluación del pool combinado `BM25_hierarchical_v0.1` + `BM25_dual_protected_top_5_backfill` sin LLM ni Text2Trade.
+- **Fase 7B:** re-ranking diagnostico preliminar con `qwen2.5:7b-instruct` sobre devset; no mejora el ranking original, presenta limitaciones de diseno experimental y no pasa a evalset.
 
-Decisión metodológica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. La etapa LLM de re-ranking y justificación queda pendiente y deberá operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
+Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -327,7 +329,7 @@ La Fase 6C ejecutó una sola vez el evalset final v0.1 para la variante congelad
 | BM25_hierarchical_v0.1 | 0.0283 | 0.1067 | 0.0524 | 0.2500 |
 | BM25_dual_protected_top_5_backfill | 0.0233 | 0.0850 | 0.0406 | 0.2700 |
 
-Decisión de cierre: `BM25_hierarchical_v0.1` queda como ranking inicial documental principal porque supera al dual protegido en Top-10 y MRR. El dual protegido obtiene el mejor Recall@100 y por ello se conserva como fuente auxiliar para ampliar el pool de candidatos, idealmente combinando candidatos de `BM25_hierarchical_v0.1` + `BM25_dual_protected_top_5_backfill` a profundidad 50 o 100. La etapa LLM posterior debe reordenar y justificar sobre ese pool recuperado con evidencia documental.
+Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
 
 Scripts y rutas principales:
 
@@ -348,6 +350,51 @@ Documentos de cierre y referencia:
 - `docs/evaluacion_bm25_hierarchy_ablation_devset_v0.1.md`
 - `docs/evaluacion_bm25_dual_backfill_devset_v0.1.md`
 - `docs/evaluacion_bm25_dual_backfill_evalset_v0.1.md`
+
+## Fase 7A: Candidate Pool NANDINA
+
+La Fase 7A construye un pool combinado preservando `BM25_hierarchical_v0.1` como ranking principal y usando `BM25_dual_protected_top_5_backfill` como expansion auxiliar. No ejecuta LLM, no ejecuta Text2Trade y no ajusta reglas mirando resultados del evalset. La evaluacion corregida distingue cobertura de cada recuperador, union disponible (`union_oracle`) y pool final recortado (`final_pool`) que recibiria el LLM.
+
+Script principal:
+
+- `src/experiments/build_candidate_pool.py`
+
+Documento de cierre:
+
+- `docs/evaluacion_candidate_pool_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/candidate_pool_devset_v0.1/`
+- `outputs/evaluation/candidate_pool_evalset_v0.1/`
+
+Resultado de cierre: en evalset, la union real a Top-100 recupera `166/600 = 0.2767`, pero el pool entregable depende del ordenamiento y recorte. `hierarchical_first` queda en `final_pool@100 = 0.2500`; reservar espacio para dual con `hierarchical_80_dual_backfill_20` sube a `0.2667`. El pool puede alimentar una Fase 7B acotada y auditable, pero no es suficiente por si solo para una Fase 7B plena sin mejorar antes la recuperacion documental.
+
+## Fase 7B: Re-ranking LLM Diagnostico
+
+La Fase 7B ejecuto `qwen2.5:7b-instruct` mediante Ollama local sobre los 13 casos del devset, con temperatura 0, estrategia `hierarchical_80_dual_backfill_20` y `candidate_limit=20`. No uso APIs pagadas/remotas ni Text2Trade.
+
+Como el LLM recibio solo 20 candidatos, se reporta `sent_pool_at_candidate_limit = 8/13 = 0.6154`; las metricas condicionadas usan exclusivamente esos 8 casos y no se comparan directamente contra `final_pool@100`.
+
+Resultados principales:
+
+| Metrica | LLM | Ranking original enviado |
+| --- | ---: | ---: |
+| Top-1 global | 0.0769 | 0.3846 |
+| MRR global | 0.0769 | 0.4679 |
+| Top-1 condicionado | 0.1250 | 0.6250 |
+| MRR condicionado | 0.1250 | 0.7604 |
+
+El LLM gano 0 casos, perdio 7 y conservo 1 entre los 8 casos condicionados. La adherencia cruda al esquema fue 76.9%; tras normalizacion determinista de duplicados, JSON valido fue 100% y codigos fuera del pool 0. No se ejecuto evalset. Esta corrida queda como diagnostico preliminar: no usa `num_ctx` explicito, el esquema permitia devolver menos de 10 candidatos y la comparacion solo cubre los 20 candidatos enviados.
+
+Artefactos versionables:
+
+- `src/llm/rerank_nandina_prompt_v0.1.md`
+- `src/experiments/run_llm_rerank_pool_devset.py`
+- `src/experiments/evaluate_llm_rerank_pool.py`
+- `docs/evaluacion_llm_rerank_pool_v0.1.md`
+
+Outputs regenerables: `outputs/evaluation/llm_rerank_pool_devset_v0.1/`. Una siguiente iteracion deberia validar primero en devset con `candidate_limit` menor o evidencia compacta, `num_ctx` explicito, salida exactamente comparable y restricciones de idioma/formato mas estrictas.
 
 ## Manifiesto de Artefactos
 
