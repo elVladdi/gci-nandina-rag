@@ -1661,62 +1661,6 @@
       "methodological_notes": "Output regenerable; no se fuerza a Git."
     },
     {
-      "path": "src/corpus/build_hierarchical_level_corpora.py",
-      "type": "script",
-      "role_in_v0_1": "Fase 8A: constructor inicial de corpus por niveles HS2/HS4/HS6/NANDINA8.",
-      "git_status_expected": [
-        "tracked"
-      ],
-      "exists": true,
-      "size_bytes": 15178,
-      "sha256": "b20d0b1a70b424c6ea9e42de65c6200332786a638df2bea61c5498603288e51d",
-      "required_to_reproduce": true,
-      "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Preparacion versionada; evaluacion completa de Fase 8A pendiente."
-    },
-    {
-      "path": "src/experiments/build_bm25_level_indexes.py",
-      "type": "script",
-      "role_in_v0_1": "Fase 8A: constructor inicial de indices BM25 por nivel arancelario.",
-      "git_status_expected": [
-        "tracked"
-      ],
-      "exists": true,
-      "size_bytes": 4980,
-      "sha256": "d3f0c8fa9b93806017820a46271e7a79f2f412b93f1b6d897e91b77107b3bd39",
-      "required_to_reproduce": true,
-      "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Preparacion versionada; outputs de indices quedan pendientes/regenerables."
-    },
-    {
-      "path": "src/experiments/evaluate_hierarchical_bm25_devset.py",
-      "type": "script",
-      "role_in_v0_1": "Fase 8A: evaluador inicial de recuperacion jerarquica sobre devset.",
-      "git_status_expected": [
-        "tracked"
-      ],
-      "exists": true,
-      "size_bytes": 21752,
-      "sha256": "489a5dcb27e22e5413dad579e15d38e140027e9a0fe04df84f6ba688ef9f53d0",
-      "required_to_reproduce": true,
-      "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Preparacion versionada; documento de cierre de resultados pendiente."
-    },
-    {
-      "path": "src/analysis/diagnose_hierarchical_retrieval_ceiling.py",
-      "type": "script",
-      "role_in_v0_1": "Fase 8A: diagnostico inicial de techo jerarquico de recuperacion.",
-      "git_status_expected": [
-        "tracked"
-      ],
-      "exists": true,
-      "size_bytes": 16575,
-      "sha256": "7d1e391cc6352c9dc0b7524081a9f93e1c18af0ae7f16c23e856ee52b56ff4c5",
-      "required_to_reproduce": true,
-      "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Usa recuperadores existentes para medir cobertura HS2/HS4/HS6/NANDINA8; outputs regenerables."
-    },
-    {
       "path": "outputs/analysis/hierarchical_retrieval_ceiling_v0.1/devset_ceiling.json",
       "type": "output",
       "role_in_v0_1": "Diagnostico de techo jerarquico sobre devset.",
@@ -1790,20 +1734,6 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza a Git."
-    },
-    {
-      "path": "docs/evaluacion_recuperacion_jerarquica_bm25_devset_v0.1.md",
-      "type": "documentation",
-      "role_in_v0_1": "Fase 8A: cierre metodologico de recuperacion jerarquica BM25 sobre devset.",
-      "git_status_expected": [
-        "tracked"
-      ],
-      "exists": true,
-      "size_bytes": 3847,
-      "sha256": "4b8d6b710c93e4fe67eda65b01bc1ee99deac955790ec8ad6cc7c4ee96ee2159",
-      "required_to_reproduce": false,
-      "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documenta que no se selecciona estrategia jerarquica restrictiva para evalset."
     },
     {
       "path": "data/processed/corpus_levels/hs2_corpus_v0.1.jsonl",
@@ -2014,6 +1944,136 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "src/analysis/diagnose_hierarchical_retrieval_ceiling.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: diagnostico de techo de cobertura HS2/HS4/HS6/NANDINA8 sobre devset y evalset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 16575,
+      "sha256": "7d1e391cc6352c9dc0b7524081a9f93e1c18af0ae7f16c23e856ee52b56ff4c5",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "No ejecuta LLM, Ollama, OpenAI, Text2Trade ni APIs remotas; evalset solo diagnostico, no seleccion."
+    },
+    {
+      "path": "src/corpus/build_hierarchical_level_corpora.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: constructor de corpus por niveles HS2/HS4/HS6/NANDINA8.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 15178,
+      "sha256": "b20d0b1a70b424c6ea9e42de65c6200332786a638df2bea61c5498603288e51d",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Mantiene codigos como metadata; texto_index usa descripciones y contexto padre."
+    },
+    {
+      "path": "src/experiments/build_bm25_level_indexes.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: constructor de indices BM25 por nivel arancelario.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 4980,
+      "sha256": "d3f0c8fa9b93806017820a46271e7a79f2f412b93f1b6d897e91b77107b3bd39",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Genera indices locales regenerables bajo data/processed/indexes/bm25_levels."
+    },
+    {
+      "path": "src/experiments/evaluate_hierarchical_bm25_devset.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: evaluador devset de estrategias HS2/HS4/HS6 -> NANDINA8.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 21752,
+      "sha256": "489a5dcb27e22e5413dad579e15d38e140027e9a0fe04df84f6ba688ef9f53d0",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Evalua 102 configuraciones y selecciona solo con devset; no usa evalset para seleccion."
+    },
+    {
+      "path": "docs/evaluacion_recuperacion_jerarquica_bm25_devset_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 8A recuperacion jerarquica BM25 devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3847,
+      "sha256": "4b8d6b710c93e4fe67eda65b01bc1ee99deac955790ec8ad6cc7c4ee96ee2159",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta diagnostico de techo, resultados devset y decision de no pasar a Fase 8B con el prototipo restrictivo."
+    },
+    {
+      "path": "data/processed/corpus_levels",
+      "type": "processed_data_output",
+      "role_in_v0_1": "Directorio regenerable de corpus por niveles Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Regenerable con src.corpus.build_hierarchical_level_corpora; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_levels",
+      "type": "index_output",
+      "role_in_v0_1": "Directorio regenerable de indices BM25 por nivel Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Regenerable con src.experiments.build_bm25_level_indexes; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/analysis/hierarchical_retrieval_ceiling_v0.1",
+      "type": "analysis_output",
+      "role_in_v0_1": "Directorio regenerable del diagnostico de techo jerarquico Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Regenerable con src.analysis.diagnose_hierarchical_retrieval_ceiling; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/hierarchical_bm25_devset_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion devset Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Regenerable con src.experiments.evaluate_hierarchical_bm25_devset; no se fuerza a Git."
     }
   ],
   "known_absent_or_omitted_paths": [
