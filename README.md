@@ -19,9 +19,13 @@ El repositorio contiene fases cerradas y versionadas hasta la Fase 7B diagnostic
 - **Fase 6B:** diagnóstico del corpus NANDINA plano, construcción jerárquica y recuperación dual hasta 6B-3.
 - **Fase 6C:** validación controlada en evalset del BM25 dual `protected_top_5_backfill`, cerrada sin ajuste posterior de reglas.
 - **Fase 7A:** construcción y evaluación del pool combinado `BM25_hierarchical_v0.1` + `BM25_dual_protected_top_5_backfill` sin LLM ni Text2Trade.
+- **Fase 7A-2:** extraccion LLM de atributos previa a recuperacion sobre devset; no mejora recall y queda descartada como componente del pipeline.
+- **Fase 7A-3:** BM25 por campos y expansion lexica controlada sobre devset; mejora fuerte en desarrollo, pero requiere validacion externa por riesgo de sobreajuste.
+- **Fase 7A-3B:** validacion en evalset de `BM25_fielded_weighted_expanded_v0.1`, congelada desde devset; mejora levemente Recall@100, pero degrada Top-10/MRR frente a `BM25_hierarchical_v0.1`.
 - **Fase 7B:** re-ranking diagnostico preliminar con `qwen2.5:7b-instruct` sobre devset; no mejora el ranking original, presenta limitaciones de diseno experimental y no pasa a evalset.
+- **Fase 8A:** diagnostico y primer prototipo BM25 jerarquico HS2/HS4/HS6 -> NANDINA8; no mejora Recall@100 frente al directo ni al pool Fase 7A, por lo que no pasa a evalset como Fase 8B en esta forma.
 
-Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
+Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. Las pruebas LLM pre-retrieval no mejoran la recuperacion base. `BM25_fielded_weighted_expanded_v0.1` queda como experimento de cobertura amplia o posible fuente auxiliar, no como sustituto del ranking base. La Fase 8A confirma techo familiar parcial, pero no selecciona un filtro jerarquico HS2/HS4/HS6 como estrategia candidata. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -329,7 +333,7 @@ La Fase 6C ejecutó una sola vez el evalset final v0.1 para la variante congelad
 | BM25_hierarchical_v0.1 | 0.0283 | 0.1067 | 0.0524 | 0.2500 |
 | BM25_dual_protected_top_5_backfill | 0.0233 | 0.0850 | 0.0406 | 0.2700 |
 
-Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
+Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. Las pruebas LLM pre-retrieval no mejoran la recuperacion base. `BM25_fielded_weighted_expanded_v0.1` queda como experimento de cobertura amplia o posible fuente auxiliar, no como sustituto del ranking base. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
 
 Scripts y rutas principales:
 
@@ -370,6 +374,65 @@ Outputs regenerables e ignorados por Git:
 
 Resultado de cierre: en evalset, la union real a Top-100 recupera `166/600 = 0.2767`, pero el pool entregable depende del ordenamiento y recorte. `hierarchical_first` queda en `final_pool@100 = 0.2500`; reservar espacio para dual con `hierarchical_80_dual_backfill_20` sube a `0.2667`. El pool puede alimentar una Fase 7B acotada y auditable, pero no es suficiente por si solo para una Fase 7B plena sin mejorar antes la recuperacion documental.
 
+## Fase 7A-2: Extraccion LLM de Atributos Pre-Retrieval
+
+La Fase 7A-2 evalua si `qwen2.5:7b-instruct` puede extraer atributos estructurados de la descripcion comercial y mejorar la consulta BM25 jerarquica sobre el devset. No se ejecuta sobre evalset.
+
+Resultado de cierre: la extraccion de atributos no mejora Recall@50 ni Recall@100 frente a `BM25_hierarchical_Q0`; Top-10 se mantiene en `0.6154` y MRR cambia solo de `0.4701` a `0.4709`. Se observaron advertencias de control en algunas salidas LLM, por lo que esta via queda como diagnostico negativo y no como componente activo del pipeline.
+
+Artefactos versionables:
+
+- `src/llm/attribute_extraction_prompt_v0.1.md`
+- `src/experiments/run_llm_attribute_extraction_devset.py`
+- `src/experiments/evaluate_llm_attribute_retrieval_devset.py`
+- `docs/evaluacion_llm_attribute_retrieval_devset_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/llm_attribute_retrieval_devset_v0.1/`
+
+## Fase 7A-3: BM25 por Campos y Expansion Controlada en Devset
+
+La Fase 7A-3 vuelve al cuello de botella de recuperacion documental y construye un corpus NANDINA ponderado por campos. La ponderacion se simula repitiendo texto de `descripcion_8d`, `descripcion_hs6`, `descripcion_4d` y expansion lexica controlada. No usa LLM, Text2Trade ni APIs remotas.
+
+En devset, `BM25_fielded_weighted_expanded_v0.1` mejora fuertemente frente a `BM25_hierarchical_Q0`: Top-10 pasa de `0.6154` a `1.0000`, MRR de `0.4701` a `0.8654` y Recall@100 de `0.6923` a `1.0000`. Como el diccionario de expansion fue informado por casos del devset, esta mejora se trata como senal exploratoria con riesgo de sobreajuste y exige validacion unica en evalset sin ajustar reglas.
+
+Artefactos versionables:
+
+- `src/corpus/build_fielded_nandina_corpus.py`
+- `src/corpus/controlled_lexical_expansions_v0.1.json`
+- `src/experiments/build_bm25_fielded_index.py`
+- `src/experiments/evaluate_bm25_fielded_devset.py`
+- `docs/evaluacion_bm25_fielded_devset_v0.1.md`
+
+Artefactos regenerables e ignorados por Git:
+
+- `data/processed/corpus_nandina_fielded_v0.1.jsonl`
+- `data/processed/corpus_nandina_fielded_expanded_v0.1.jsonl`
+- `data/processed/corpus_nandina_fielded_v0.1_metadata.json`
+- `data/processed/indexes/bm25_nandina8_fielded_v0.1.pkl`
+- `data/processed/indexes/bm25_nandina8_fielded_expanded_v0.1.pkl`
+- `data/processed/indexes/bm25_nandina8_fielded_v0.1_run_metadata.json`
+- `outputs/evaluation/bm25_fielded_devset_v0.1/`
+
+## Fase 7A-3B: BM25 Fielded Expanded Evalset
+
+La Fase 7A-3B valida en evalset final la variante `BM25_fielded_weighted_expanded_v0.1`, seleccionada previamente en devset y congelada antes de mirar el evalset. No modifica el diccionario de expansion, no cambia pesos, no usa LLM, no usa Text2Trade y no usa APIs remotas.
+
+Resultado de cierre: la variante fielded/expanded mejora cobertura amplia frente a `BM25_hierarchical_v0.1` (`Recall@100` de `0.2500` a `0.2617`), pero degrada ranking temprano (`Top-10` de `0.1067` a `0.0683`; `MRR` de `0.0524` a `0.0416`). En evalset, `BM25_fielded_weighted_v0.1` y `BM25_fielded_weighted_expanded_v0.1` coinciden en metricas exactas; la expansion solo mejora HS4/HS2 frente al fielded sin expansion. No queda como nuevo ranking base; puede considerarse como experimento de cobertura o posible fuente auxiliar para pool.
+
+Script principal:
+
+- `src/experiments/evaluate_bm25_fielded_evalset.py`
+
+Documento de cierre:
+
+- `docs/evaluacion_bm25_fielded_evalset_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/bm25_fielded_evalset_v0.1/`
+
 ## Fase 7B: Re-ranking LLM Diagnostico
 
 La Fase 7B ejecuto `qwen2.5:7b-instruct` mediante Ollama local sobre los 13 casos del devset, con temperatura 0, estrategia `hierarchical_80_dual_backfill_20` y `candidate_limit=20`. No uso APIs pagadas/remotas ni Text2Trade.
@@ -395,6 +458,29 @@ Artefactos versionables:
 - `docs/evaluacion_llm_rerank_pool_v0.1.md`
 
 Outputs regenerables: `outputs/evaluation/llm_rerank_pool_devset_v0.1/`. Una siguiente iteracion deberia validar primero en devset con `candidate_limit` menor o evidencia compacta, `num_ctx` explicito, salida exactamente comparable y restricciones de idioma/formato mas estrictas.
+
+## Fase 8A: Recuperacion Jerarquica por Niveles
+
+La Fase 8A construye corpus e indices BM25 separados por nivel arancelario (`HS2`, `HS4`, `HS6` y `NANDINA8`) y evalua si filtrar NANDINA8 por familias recuperadas mejora el pool de candidatos. No usa LLM, Ollama, OpenAI, Text2Trade ni APIs remotas.
+
+Diagnostico de techo: en evalset, `BM25_hierarchical_v0.1` logra `NANDINA8@100 = 0.2500`, `HS4@100 = 0.2850` y `HS2@100 = 0.4983`; el pool Fase 7A `hierarchical_80_dual_backfill_20` logra `final_pool@100 = 0.2667`, `HS4@100 = 0.2983` y `HS2@100 = 0.5283`. La brecha HS2 indica techo familiar, pero no se usa evalset para seleccionar estrategia.
+
+Resultado devset: se probaron 102 configuraciones. El mejor resultado por `Recall@100` fue `direct_nandina8` (`Recall@100 = 0.6923`, `Top-10 = 0.6154`, `MRR = 0.4698`). Las mejores estrategias jerarquicas probadas quedaron en `Recall@100 = 0.6154`, por debajo del directo y del pool Fase 7A (`0.7692` en devset). No se recomienda Fase 8B sobre evalset con este prototipo restrictivo.
+
+Artefactos versionables:
+
+- `src/analysis/diagnose_hierarchical_retrieval_ceiling.py`
+- `src/corpus/build_hierarchical_level_corpora.py`
+- `src/experiments/build_bm25_level_indexes.py`
+- `src/experiments/evaluate_hierarchical_bm25_devset.py`
+- `docs/evaluacion_recuperacion_jerarquica_bm25_devset_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `data/processed/corpus_levels/`
+- `data/processed/indexes/bm25_levels/`
+- `outputs/analysis/hierarchical_retrieval_ceiling_v0.1/`
+- `outputs/evaluation/hierarchical_bm25_devset_v0.1/`
 
 ## Manifiesto de Artefactos
 

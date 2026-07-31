@@ -1,0 +1,70 @@
+{
+  "version": "controlled_lexical_expansions_v0.1",
+  "policy": {
+    "generated_with_llm": false,
+    "remote_apis_used": false,
+    "scope": "Manual, conservative lexical additions applied to NANDINA corpus documents only.",
+    "rules": [
+      "Do not include NANDINA codes as searchable terms.",
+      "Do not add doubtful synonyms.",
+      "Do not replace the original corpus descriptions.",
+      "Keep each expansion traceable to an explicit target code and rationale."
+    ]
+  },
+  "entries": [
+    {
+      "id": "sodium_hydroxide_caustic_soda",
+      "target_codes": ["28151100", "28151200"],
+      "terms": ["soda caustica", "sosa caustica", "hidroxido de sodio", "caustic soda"],
+      "rationale": "Equivalent commercial names present in the 28.15 heading and common Spanish technical usage."
+    },
+    {
+      "id": "portable_computer_laptop",
+      "target_codes": ["84713000"],
+      "terms": ["computadora portatil", "ordenador portatil", "laptop", "notebook", "equipo portatil de procesamiento de datos"],
+      "rationale": "Controlled equivalents for portable automatic data processing machines."
+    },
+    {
+      "id": "solid_state_drive_storage",
+      "target_codes": ["84717000"],
+      "terms": ["unidad de estado solido", "disco solido", "ssd", "unidad de almacenamiento de datos", "memoria externa"],
+      "rationale": "Commercial names for solid-state storage units mapped to memory/storage units."
+    },
+    {
+      "id": "high_density_polyethylene",
+      "target_codes": ["39012000"],
+      "terms": ["polietileno alta densidad", "polietileno de alta densidad", "hdpe", "pead", "granulos", "pellets"],
+      "rationale": "Controlled abbreviations and presentation terms for high-density polyethylene in primary forms."
+    },
+    {
+      "id": "light_emitting_diode",
+      "target_codes": ["85414100"],
+      "terms": ["led", "diodo emisor de luz", "diodos emisores de luz", "smd", "montaje superficial"],
+      "rationale": "Controlled equivalents and package/mounting terms for LED diodes."
+    },
+    {
+      "id": "malt_beer",
+      "target_codes": ["22030000"],
+      "terms": ["cerveza de malta", "bebida de malta", "bebida alcoholica de malta"],
+      "rationale": "Direct commercial equivalents for malt beer."
+    },
+    {
+      "id": "inflatable_mattress_camping",
+      "target_codes": ["63064000"],
+      "terms": ["colchon inflable", "colchon neumatico", "articulo de acampar", "camping"],
+      "rationale": "Direct equivalents for pneumatic camping mattresses."
+    },
+    {
+      "id": "polyvinyl_chloride",
+      "target_codes": ["39041010", "39041020", "39042100", "39042200"],
+      "terms": ["pvc", "policloruro de vinilo"],
+      "rationale": "Controlled abbreviation for polyvinyl chloride documents."
+    },
+    {
+      "id": "scooter_toy_with_wheels",
+      "target_codes": ["95030010"],
+      "terms": ["patinete", "scooter", "juguete con ruedas", "triciclo", "coches de pedal"],
+      "rationale": "Controlled equivalents present in or directly aligned with the toy heading."
+    }
+  ]
+}

@@ -164,6 +164,89 @@ Se documenta como output regenerable e ignorado por Git:
 
 `sent_pool_at_candidate_limit` fue 0.6154. El LLM obtuvo Top-1 global 0.0769 y Top-1 condicionado 0.1250, por debajo del ranking original enviado (0.3846 global y 0.6250 condicionado). Gano 0 casos, perdio 7 y conservo 1. No se compara directamente contra `final_pool@100` porque el LLM recibio 20 candidatos. No se ejecuto evalset. La corrida queda como diagnostico preliminar con limitaciones: no fija `num_ctx`, el esquema no exige exactamente 10 candidatos y todavia requiere una iteracion mas estricta antes de cualquier evaluacion final LLM.
 
+## Evaluacion LLM attribute retrieval devset v0.1
+
+La Fase 7A-2 evalua una capa LLM pre-retrieval para extraer atributos estructurados desde descripciones comerciales y construir consultas BM25 jerarquicas protegidas. La corrida usa solo devset y `qwen2.5:7b-instruct` local mediante Ollama; no se ejecuta evalset ni Text2Trade.
+
+Resultado de cierre: Top-10 se mantiene en 0.6154 y Recall@100 se mantiene en 0.6923 frente a `BM25_hierarchical_Q0`; MRR cambia marginalmente de 0.4701 a 0.4709. La via queda descartada como componente activo porque no aumenta cobertura y agrega riesgos de control de salida LLM.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/llm/attribute_extraction_prompt_v0.1.md`: prompt para extraer atributos sin clasificar ni sugerir codigos.
+- `src/experiments/run_llm_attribute_extraction_devset.py`: runner local Ollama sobre devset.
+- `src/experiments/evaluate_llm_attribute_retrieval_devset.py`: evaluador BM25 jerarquico usando consultas derivadas de atributos.
+- `docs/evaluacion_llm_attribute_retrieval_devset_v0.1.md`: cierre metodologico y decision de descarte.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/llm_attribute_retrieval_devset_v0.1/`.
+
+## Evaluacion BM25 fielded devset v0.1
+
+La Fase 7A-3 construye un corpus NANDINA por campos con pesos simulados por repeticion textual y una expansion lexica controlada aplicada al corpus, no a la consulta. La corrida usa solo devset, no ejecuta LLM, no usa Text2Trade ni APIs remotas.
+
+Resultado de cierre en devset: `BM25_fielded_weighted_expanded_v0.1` sube Top-10 de 0.6154 a 1.0000, MRR de 0.4701 a 0.8654 y Recall@100 de 0.6923 a 1.0000 frente a `BM25_hierarchical_Q0`. Como el diccionario de expansion fue informado por casos del devset, se documenta como variante exploratoria con riesgo de sobreajuste y se congela antes de la validacion en evalset.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/corpus/build_fielded_nandina_corpus.py`: genera corpus fielded y fielded-expanded desde el corpus jerarquico.
+- `src/corpus/controlled_lexical_expansions_v0.1.json`: diccionario manual congelado de expansion lexica controlada.
+- `src/experiments/build_bm25_fielded_index.py`: construye indices BM25 fielded y fielded-expanded.
+- `src/experiments/evaluate_bm25_fielded_devset.py`: evalua variantes fielded sobre devset.
+- `docs/evaluacion_bm25_fielded_devset_v0.1.md`: cierre metodologico de seleccion en devset.
+
+Se documentan como artefactos regenerables e ignorados por Git:
+
+- `data/processed/corpus_nandina_fielded_v0.1.jsonl`.
+- `data/processed/corpus_nandina_fielded_expanded_v0.1.jsonl`.
+- `data/processed/corpus_nandina_fielded_v0.1_metadata.json`.
+- `data/processed/indexes/bm25_nandina8_fielded_v0.1.pkl`.
+- `data/processed/indexes/bm25_nandina8_fielded_expanded_v0.1.pkl`.
+- `data/processed/indexes/bm25_nandina8_fielded_v0.1_run_metadata.json`.
+- `outputs/evaluation/bm25_fielded_devset_v0.1/`.
+
+## Evaluacion BM25 fielded expanded evalset v0.1
+
+La Fase 7A-3B valida en el evalset final la variante `BM25_fielded_weighted_expanded_v0.1`, seleccionada previamente usando devset en Fase 7A-3. El diccionario `src/corpus/controlled_lexical_expansions_v0.1.json` y los pesos del corpus fielded quedaron congelados antes de mirar evalset; no se ajustaron reglas despues de observar resultados.
+
+La evaluacion no usa LLM, Text2Trade ni APIs remotas. La expansion controlada se aplica al corpus y no usa codigos como terminos buscables. El pool `phase7a_pool_hierarchical_80_dual_backfill_20` se reporta como pool auxiliar, no como ranking BM25 puro.
+
+Resultado de cierre: la variante fielded/expanded mejora levemente cobertura amplia frente a `BM25_hierarchical_v0.1` (`Recall@100` 0.2617 contra 0.2500), pero degrada ranking temprano (`Top-10` 0.0683 contra 0.1067; `MRR` 0.0416 contra 0.0524). En evalset, `BM25_fielded_weighted_v0.1` y `BM25_fielded_weighted_expanded_v0.1` coinciden en metricas exactas; la expansion solo mejora HS4/HS2 frente al fielded sin expansion. No queda como nuevo ranking base; queda como experimento de cobertura amplia o posible fuente auxiliar de pool.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_bm25_fielded_evalset.py`: evalua `BM25_flat_current`, `BM25_hierarchical_v0.1`, `BM25_fielded_weighted_v0.1`, `BM25_fielded_weighted_expanded_v0.1` y el pool auxiliar Fase 7A sobre `data/processed/evalset_v0.1.csv`.
+- `docs/evaluacion_bm25_fielded_evalset_v0.1.md`: cierre metodologico de la validacion externa preliminar en evalset.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_results.csv`.
+- `outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_metrics.json`.
+- `outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_summary.md`.
+- `outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_case_comparison.csv`.
+- `outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_critical_cases.csv`.
+
+## Evaluacion recuperacion jerarquica BM25 devset v0.1
+
+La Fase 8A construye corpus e indices BM25 separados por niveles `HS2`, `HS4`, `HS6` y `NANDINA8`, diagnostica techo jerarquico y evalua estrategias restrictivas HS2/HS4/HS6 -> NANDINA8 sobre devset. No usa LLM, Ollama, OpenAI, Text2Trade ni APIs remotas. El evalset se usa solo para diagnostico de techo, no para seleccionar estrategia.
+
+Resultado de cierre: ninguna estrategia jerarquica restrictiva supera a la recuperacion directa NANDINA8 ni al pool Fase 7A sobre devset. La mejor opcion directa conserva `Recall@100 = 0.6923`; las estrategias jerarquicas probadas quedan en `0.6154`, mientras el pool Fase 7A alcanza `0.7692`. No se selecciona una estrategia jerarquica para Fase 8B en esta forma.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/analysis/diagnose_hierarchical_retrieval_ceiling.py`: diagnostica techo jerarquico HS2/HS4/HS6/NANDINA8 sobre devset y evalset usando recuperadores existentes.
+- `src/corpus/build_hierarchical_level_corpora.py`: genera corpus por nivel desde el corpus fuente NANDINA.
+- `src/experiments/build_bm25_level_indexes.py`: construye indices BM25 por nivel.
+- `src/experiments/evaluate_hierarchical_bm25_devset.py`: evalua estrategias jerarquicas HS2/HS4/HS6 -> NANDINA8 sobre devset.
+- `docs/evaluacion_recuperacion_jerarquica_bm25_devset_v0.1.md`: cierre metodologico de Fase 8A.
+
+Se documentan como artefactos regenerables e ignorados por Git:
+
+- `data/processed/corpus_levels/`.
+- `data/processed/indexes/bm25_levels/`.
+- `outputs/analysis/hierarchical_retrieval_ceiling_v0.1/`.
+- `outputs/evaluation/hierarchical_bm25_devset_v0.1/`.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:

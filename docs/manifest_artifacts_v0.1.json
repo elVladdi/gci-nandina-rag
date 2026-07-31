@@ -20,7 +20,7 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 4861,
+      "size_bytes": 4990,
       "sha256": "c9a78c0267b00e1faa34e58a3955559345efa706469de61d6a543d2c9b39d496",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
@@ -48,7 +48,7 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 3196,
+      "size_bytes": 3270,
       "sha256": "29106243ed1d9e491fee1904ae5f8d4edae9deb3d9d2fc8089de71bb6bdd5766",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -62,8 +62,8 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 8671,
-      "sha256": "6919a0ce7a00394ab674f6ccf892b1afd0a5369bdd5e3c8a60e5d3d631a4534e",
+      "size_bytes": 20667,
+      "sha256": "0a15790e21154b338309437e0acc655a300763f37389c573832561e2e5294c2f",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
@@ -880,7 +880,7 @@
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable; no se fuerza su versionado en Git.",
       "exists": true,
-      "size_bytes": 18303
+      "size_bytes": 17533
     },
     {
       "path": "outputs/evaluation/text2trade_dense_eval_v0.1/summary.md",
@@ -1114,7 +1114,7 @@
       "methodological_notes": "Documenta modelo, prompt, candidate_limit, metricas globales/condicionadas, controles de pool, deterioros, decision de no ejecutar evalset y limitaciones metodologicas de la corrida preliminar.",
       "sha256": "20b213e0581e1b719070ca31f2dd1548857e741e3c09fe7c5df20f9a8a81c685",
       "exists": true,
-      "size_bytes": 4651
+      "size_bytes": 5641
     },
     {
       "path": "outputs/evaluation/llm_rerank_pool_devset_v0.1",
@@ -1130,6 +1130,890 @@
       "sha256": null,
       "exists": true,
       "size_bytes": null
+    },
+    {
+      "path": "src/experiments/evaluate_bm25_fielded_evalset.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 7A-3B: evaluador congelado de BM25 fielded sobre evalset final.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 24293,
+      "sha256": "0e67e2082f4610b421da2bd66cfc131a6cfcdbf264e2f38749317c9d7c6b347e",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Evalua flat, jerarquico, fielded, fielded-expanded y pool auxiliar; no ajusta reglas mirando evalset."
+    },
+    {
+      "path": "docs/evaluacion_bm25_fielded_evalset_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 7A-3B sobre evalset final.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 4284,
+      "sha256": "6d823cee7b922c87ace2dd8a976097597cc3aae3e145b33208399cd8a9e87945",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta que la variante fue seleccionada por devset, el diccionario quedo congelado y el efecto en evalset es cobertura amplia marginal con degradacion de ranking temprano."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_results.csv",
+      "type": "output",
+      "role_in_v0_1": "Resultados por caso de Fase 7A-3B evalset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 13718168,
+      "sha256": "17bb508e0e67f930d1154ff0b50c0d67047a579fff43e283f5c09d4cf82b0b8a",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; 600 filas esperadas, una por caso evalset."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_metrics.json",
+      "type": "output",
+      "role_in_v0_1": "Metricas agregadas de Fase 7A-3B evalset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 6667,
+      "sha256": "94738192c7c8fba9c78808148ea1b8a9f8735817b1c54d8baa0647afde0fa070",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con Top-k, MRR, Recall@50/100, HS4/HS2 y comparaciones contra jerarquico."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_summary.md",
+      "type": "output",
+      "role_in_v0_1": "Resumen regenerable de Fase 7A-3B evalset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1335,
+      "sha256": "a9eaacb1532ee36eb494afd5267198efc1faef1c6ec6e86668c1db3cd9a23d51",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; la documentacion versionable esta en docs/evaluacion_bm25_fielded_evalset_v0.1.md."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_case_comparison.csv",
+      "type": "output",
+      "role_in_v0_1": "Comparacion por caso contra BM25 jerarquico en Fase 7A-3B.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 177897,
+      "sha256": "0987e15873a01d629bdb8e736c003930b301735cce1e2b033e2ae052340855d7",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; 600 filas esperadas."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_evalset_v0.1/fielded_evalset_critical_cases.csv",
+      "type": "output",
+      "role_in_v0_1": "Subconjunto de casos criticos lexicales de Fase 7A-3B.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 707935,
+      "sha256": "688ed8c92e7aceb5dba5eef04ddb59cc7bceeb9b8c94e7e69f63d09d9aff8a9d",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable para inspeccion de familias como LED, polietileno, laptop, soda caustica y almacenamiento."
+    },
+    {
+      "path": "src/llm/attribute_extraction_prompt_v0.1.md",
+      "type": "prompt",
+      "role_in_v0_1": "Fase 7A-2: prompt LLM para extraccion de atributos pre-retrieval en devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 1308,
+      "sha256": "d2b43c10669d9482372eb5876de57dff87febacdd30dced5699a5add2f175404",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "No clasifica ni sugiere codigos; usado solo en diagnostico devset."
+    },
+    {
+      "path": "src/experiments/run_llm_attribute_extraction_devset.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 7A-2: runner Ollama local para extraccion de atributos en devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 18690,
+      "sha256": "86b1af2d8bfc62c1e630b437e7e9c4201dd54fb8c1506a36269671bdf2c3c66a",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Ejecuta qwen2.5:7b-instruct local; no evalset."
+    },
+    {
+      "path": "src/experiments/evaluate_llm_attribute_retrieval_devset.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 7A-2: evaluador de recuperacion BM25 con consultas derivadas de atributos LLM.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 39040,
+      "sha256": "182cced3d27770f94069ed54614a667578142993cb7d06a207ed8e6018667045",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Compara contra BM25 jerarquico Q0; resultado no mejora recall."
+    },
+    {
+      "path": "docs/evaluacion_llm_attribute_retrieval_devset_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Fase 7A-2: cierre metodologico del diagnostico LLM attribute retrieval devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 10971,
+      "sha256": "a90991638190f8f0f825aa25d3a7fc660cb6ca6fcc5b0d9ab4d5ba7f77941728",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta descarte como componente activo por no mejorar recuperacion base."
+    },
+    {
+      "path": "src/corpus/build_fielded_nandina_corpus.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 7A-3: construye corpus NANDINA fielded y fielded-expanded desde corpus jerarquico.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 11790,
+      "sha256": "f4ec9317513f30665f5f97d184f01c853562b069cb9abcdcf9c78c4cc4def434",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Aplica pesos por repeticion y expansion lexica controlada; no usa codigos como terminos buscables."
+    },
+    {
+      "path": "src/corpus/controlled_lexical_expansions_v0.1.json",
+      "type": "config",
+      "role_in_v0_1": "Fase 7A-3: diccionario manual congelado de expansion lexica controlada.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3052,
+      "sha256": "07402b8f7a934f7399494de22d7a74e60fdbf02d00407fbc46e3ed4802bc4b71",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Seleccionado en devset; no debe ajustarse despues de mirar evalset."
+    },
+    {
+      "path": "src/experiments/build_bm25_fielded_index.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 7A-3: construye indices BM25 para corpus fielded y fielded-expanded.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 6123,
+      "sha256": "6da1bf54683c9a8f113f22ffd00cd06a663f67669376dfce2c01b151803d9052",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Genera indices regenerables ignorados por Git."
+    },
+    {
+      "path": "src/experiments/evaluate_bm25_fielded_devset.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 7A-3: evalua variantes BM25 fielded sobre devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 26401,
+      "sha256": "6964aa0d4adf7dd2e4edb61434f4c4d01791fa2d17f530be181cb1e68c60d772",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Selecciona variante exploratoria antes de validacion en evalset."
+    },
+    {
+      "path": "docs/evaluacion_bm25_fielded_devset_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Fase 7A-3: cierre metodologico de BM25 fielded/expanded en devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 7597,
+      "sha256": "2cd768d9f683605d9a943059678897dbf0d935e4e0d3f6b54f8ab3eda10626c2",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta mejora fuerte en devset y riesgo de sobreajuste por diccionario informado por devset."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_extractions.jsonl",
+      "type": "output",
+      "role_in_v0_1": "Extracciones LLM JSONL de atributos sobre devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 27738,
+      "sha256": "fd1613d7090e929e5fad1a33e31319d0486e284a7b4d3a24cf9cad61108b4e5a",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_extractions.csv",
+      "type": "output",
+      "role_in_v0_1": "Extracciones LLM tabulares sobre devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 13045,
+      "sha256": "8ac89cf756e28ccf4c09241e70b659cd06e761eb992105201dd128b29d4d351f",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_queries.csv",
+      "type": "output",
+      "role_in_v0_1": "Consultas derivadas de atributos para recuperacion BM25.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 8092,
+      "sha256": "1fb2ddc0b2a6dfdb9fce5fc0c76f6415fc85965bece75a8d8ba69589f2fadad8",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_retrieval_results.csv",
+      "type": "output",
+      "role_in_v0_1": "Resultados por caso de BM25 attribute retrieval devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 294352,
+      "sha256": "a79979d5f03bc36da73db7feb5fc58601aad14499ed5ce8610e509b8e09d32b4",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_retrieval_metrics.json",
+      "type": "output",
+      "role_in_v0_1": "Metricas agregadas de Fase 7A-2.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 6231,
+      "sha256": "8fc8accd5bfa91d2fd1fdc00b04b721a3273cf608f7ce8f2681c145d6ce62ec5",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_retrieval_summary.md",
+      "type": "output",
+      "role_in_v0_1": "Resumen regenerable de Fase 7A-2.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 10971,
+      "sha256": "a90991638190f8f0f825aa25d3a7fc660cb6ca6fcc5b0d9ab4d5ba7f77941728",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_case_comparison_13_cases.csv",
+      "type": "output",
+      "role_in_v0_1": "Comparacion de 13 casos para Fase 7A-2.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 294497,
+      "sha256": "ae30194e76aefd6a0e40bf8f7e326fbbfed700a38259da0b60348a37b83ac6fd",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/llm_attribute_retrieval_devset_v0.1/attribute_metadata.json",
+      "type": "output",
+      "role_in_v0_1": "Metadata de corrida de Fase 7A-2.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 2223,
+      "sha256": "ac0bc5fc04c2f04ec272f1d22a38667319d846585b812944bf14b033abced094",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/corpus_nandina_fielded_v0.1.jsonl",
+      "type": "output",
+      "role_in_v0_1": "Corpus NANDINA fielded regenerable.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 18277787,
+      "sha256": "ffedf921e883099f927ee6e297bea6caa5c87652c6887f3d2d9a04dbad064b76",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/corpus_nandina_fielded_expanded_v0.1.jsonl",
+      "type": "output",
+      "role_in_v0_1": "Corpus NANDINA fielded-expanded regenerable.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 18353663,
+      "sha256": "eb243fa93b9218b1dd5e8b53fc58b749a9c34c9cf1c85b743628b57dc0b35883",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/corpus_nandina_fielded_v0.1_metadata.json",
+      "type": "output",
+      "role_in_v0_1": "Metadata de corpus fielded/expanded.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 5706,
+      "sha256": "0047d39ac11c2bf1b4a18516a7e92340762ad00fab0e3bfcae59da1a39282d61",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_nandina8_fielded_v0.1.pkl",
+      "type": "output",
+      "role_in_v0_1": "Indice BM25 fielded regenerable.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 4957942,
+      "sha256": "991e18e8a5aff874c42a0940ba6166fe68e5292fe57e9027f73aabf39abe23e9",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_nandina8_fielded_expanded_v0.1.pkl",
+      "type": "output",
+      "role_in_v0_1": "Indice BM25 fielded-expanded regenerable.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 4960881,
+      "sha256": "38c2677f44df888de8a146d2418d19c746845ee6022afb8f42fff92d246b03cc",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_nandina8_fielded_v0.1_run_metadata.json",
+      "type": "output",
+      "role_in_v0_1": "Metadata de indices BM25 fielded.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 2518,
+      "sha256": "c0115ffc848c6b54b4b18019b4e5b32c1daebfee356bd6d4e15d84e502928f47",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_devset_v0.1/fielded_retrieval_results.csv",
+      "type": "output",
+      "role_in_v0_1": "Resultados por caso de Fase 7A-3 devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 301514,
+      "sha256": "fbdd998c60f2a7dedb15a46c20e4b3dac6709aea4ca5a9cb998926732f2c1b94",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_devset_v0.1/fielded_retrieval_metrics.json",
+      "type": "output",
+      "role_in_v0_1": "Metricas agregadas de Fase 7A-3 devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 5447,
+      "sha256": "ddee96ef6b192ee22263ca50539744ac578e9d72de5f383770a1278baf0b4d16",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_devset_v0.1/fielded_summary.md",
+      "type": "output",
+      "role_in_v0_1": "Resumen regenerable de Fase 7A-3 devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 7597,
+      "sha256": "2cd768d9f683605d9a943059678897dbf0d935e4e0d3f6b54f8ab3eda10626c2",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_devset_v0.1/fielded_case_comparison_13_cases.csv",
+      "type": "output",
+      "role_in_v0_1": "Comparacion de 13 casos en Fase 7A-3.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 295659,
+      "sha256": "443e73053160a2e23183c212446b8aac26a6ee2930c4a01f4942278fd6268f52",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_devset_v0.1/fielded_critical_cases.csv",
+      "type": "output",
+      "role_in_v0_1": "Casos criticos de Fase 7A-3.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 217952,
+      "sha256": "1eedea0e679952f71839c4cf51118eecc1c5d0f9c9ba1c660b07a26e84471f7d",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_fielded_devset_v0.1/fielded_corpus_summary.json",
+      "type": "output",
+      "role_in_v0_1": "Resumen de corpus fielded generado.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 7311,
+      "sha256": "169f756188a3f01ffa8b3b76b4fb227313f4040b6c44e92505605f57cd2a3bf9",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "src/corpus/build_hierarchical_level_corpora.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: constructor inicial de corpus por niveles HS2/HS4/HS6/NANDINA8.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 15178,
+      "sha256": "b20d0b1a70b424c6ea9e42de65c6200332786a638df2bea61c5498603288e51d",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Preparacion versionada; evaluacion completa de Fase 8A pendiente."
+    },
+    {
+      "path": "src/experiments/build_bm25_level_indexes.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: constructor inicial de indices BM25 por nivel arancelario.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 4980,
+      "sha256": "d3f0c8fa9b93806017820a46271e7a79f2f412b93f1b6d897e91b77107b3bd39",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Preparacion versionada; outputs de indices quedan pendientes/regenerables."
+    },
+    {
+      "path": "src/experiments/evaluate_hierarchical_bm25_devset.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: evaluador inicial de recuperacion jerarquica sobre devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 21752,
+      "sha256": "489a5dcb27e22e5413dad579e15d38e140027e9a0fe04df84f6ba688ef9f53d0",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Preparacion versionada; documento de cierre de resultados pendiente."
+    },
+    {
+      "path": "src/analysis/diagnose_hierarchical_retrieval_ceiling.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8A: diagnostico inicial de techo jerarquico de recuperacion.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 16575,
+      "sha256": "7d1e391cc6352c9dc0b7524081a9f93e1c18af0ae7f16c23e856ee52b56ff4c5",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Usa recuperadores existentes para medir cobertura HS2/HS4/HS6/NANDINA8; outputs regenerables."
+    },
+    {
+      "path": "outputs/analysis/hierarchical_retrieval_ceiling_v0.1/devset_ceiling.json",
+      "type": "output",
+      "role_in_v0_1": "Diagnostico de techo jerarquico sobre devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 2918,
+      "sha256": "dddf6299132d15ced77976249d45f64f1564adf51d33e80a56594ed0e0cbe61d",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/analysis/hierarchical_retrieval_ceiling_v0.1/evalset_ceiling.json",
+      "type": "output",
+      "role_in_v0_1": "Diagnostico de techo jerarquico sobre evalset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 28356,
+      "sha256": "8fb93f3101d8a9a8639b187d200cab905183b4f608808b63508ee85357e95081",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/analysis/hierarchical_retrieval_ceiling_v0.1/evalset_error_by_hs2.csv",
+      "type": "output",
+      "role_in_v0_1": "Errores agrupados por HS2 en diagnostico jerarquico.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 6282,
+      "sha256": "ba1a05c151d27b36c54271f41cf3b32b8ef3d70dfd2ae3e72dfcdd300c4f5952",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/analysis/hierarchical_retrieval_ceiling_v0.1/evalset_error_by_hs4.csv",
+      "type": "output",
+      "role_in_v0_1": "Errores agrupados por HS4 en diagnostico jerarquico.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 13809,
+      "sha256": "d35c10989f6e800ef38cba76757d21fef980eb1f531add731c3b9ea1d4f1348e",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/analysis/hierarchical_retrieval_ceiling_v0.1/ceiling_summary.md",
+      "type": "output",
+      "role_in_v0_1": "Resumen regenerable del diagnostico jerarquico.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1110,
+      "sha256": "44010dffd5647d92bcdca8c23ec86330a6d99e853e1805adc32026eff0b3e636",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "docs/evaluacion_recuperacion_jerarquica_bm25_devset_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Fase 8A: cierre metodologico de recuperacion jerarquica BM25 sobre devset.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3847,
+      "sha256": "4b8d6b710c93e4fe67eda65b01bc1ee99deac955790ec8ad6cc7c4ee96ee2159",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta que no se selecciona estrategia jerarquica restrictiva para evalset."
+    },
+    {
+      "path": "data/processed/corpus_levels/hs2_corpus_v0.1.jsonl",
+      "type": "output",
+      "role_in_v0_1": "Corpus HS2 por nivel para Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 57535,
+      "sha256": "c322369e3daa7e63e265be11c96a2a7c931a09754f30ccb10bd725244d67fcf5",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/corpus_levels/hs4_corpus_v0.1.jsonl",
+      "type": "output",
+      "role_in_v0_1": "Corpus HS4 por nivel para Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1169414,
+      "sha256": "c6751fef1ad7e676ccbb198823a3e1d869cca849e1a2a0c52247da06a8bdcc32",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/corpus_levels/hs6_corpus_v0.1.jsonl",
+      "type": "output",
+      "role_in_v0_1": "Corpus HS6 por nivel para Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1957300,
+      "sha256": "388c909c21aad75ea8093681f0847c8e7b45082951fc1848a11de557dd0a72d1",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/corpus_levels/nandina8_corpus_v0.1.jsonl",
+      "type": "output",
+      "role_in_v0_1": "Corpus NANDINA8 por nivel para Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 13224791,
+      "sha256": "4858db3c0da7ed6e8cf36d4a609d293431e17703a7ce581b9d6a1bc321a2b41b",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/corpus_levels/corpus_levels_metadata_v0.1.json",
+      "type": "output",
+      "role_in_v0_1": "Metadata de corpus por niveles Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1897,
+      "sha256": "38cc7a4e1192351dd40c220e77b0b8e5141ae2388941587e0dabc39ffe6216ea",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_levels/hs2_v0.1.pkl",
+      "type": "output",
+      "role_in_v0_1": "Indice BM25 HS2 Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 30014,
+      "sha256": "91958dadd7e13928ec156b88ef8843af764259e811c2bf95f7284882f4a8c7a1",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_levels/hs4_v0.1.pkl",
+      "type": "output",
+      "role_in_v0_1": "Indice BM25 HS4 Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 718654,
+      "sha256": "bb59b8301df86fd7eb30a1b325fa80c6ac6e6c4fa4f814e628b9b76af6825530",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_levels/hs6_v0.1.pkl",
+      "type": "output",
+      "role_in_v0_1": "Indice BM25 HS6 Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 942583,
+      "sha256": "92f1a86592f918567cdf293826a4db8d50c5e47e3f9794b2fc934f0ad484554b",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_levels/nandina8_v0.1.pkl",
+      "type": "output",
+      "role_in_v0_1": "Indice BM25 NANDINA8 por nivel Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 5350308,
+      "sha256": "9220be0b46bda0d3142c7a44e119776824e8029124d8e938cb312dbe62faec56",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "data/processed/indexes/bm25_levels/index_metadata_v0.1.json",
+      "type": "output",
+      "role_in_v0_1": "Metadata de indices BM25 por nivel Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 3841,
+      "sha256": "20a55fed00583b31da2668e337c6481e2dda5488574a4f2957c222d4d93abd0a",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/hierarchical_bm25_devset_v0.1/hierarchical_devset_results.csv",
+      "type": "output",
+      "role_in_v0_1": "Resultados por estrategia de Fase 8A devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 45164,
+      "sha256": "019501de6b173264f79e251fa239add99b0b0a9c822e3f0dbbd46ac60979a259",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/hierarchical_bm25_devset_v0.1/hierarchical_devset_metrics.json",
+      "type": "output",
+      "role_in_v0_1": "Metricas agregadas de Fase 8A devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 116668,
+      "sha256": "5a9a12bc5fe1c3d3b21caac94a594079d6bada37c2ab6e7796dcae1f8d0782e2",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/hierarchical_bm25_devset_v0.1/hierarchical_devset_summary.md",
+      "type": "output",
+      "role_in_v0_1": "Resumen regenerable de Fase 8A devset.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1180,
+      "sha256": "4eb5bf8e512744fa6d9c4dab1af73a67fd03a46ac8c0703f6fc1804f38040130",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/hierarchical_bm25_devset_v0.1/hierarchical_devset_case_comparison.csv",
+      "type": "output",
+      "role_in_v0_1": "Comparacion por caso de estrategia seleccionada Fase 8A.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 4210,
+      "sha256": "8a1e77ef29a7c2f24f874a37ca34e8ab28171ff1fecd028ede2f9504727154da",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza a Git."
     }
   ],
   "known_absent_or_omitted_paths": [
