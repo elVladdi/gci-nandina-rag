@@ -305,6 +305,27 @@ Se documenta como output regenerable e ignorado por Git:
 
 - `outputs/evaluation/hybrid_historical_normative_pool_v0.1/`.
 
+## Evaluacion LLM rerank hybrid pool sample v0.1
+
+La Fase 9C-A ejecuta una prueba diagnostica minima de LLM como re-ranker cerrado sobre el pool operativo `historical_first_80_normative_20`. Usa una muestra deterministica de 20 casos, `candidate_limit = 10`, temperatura 0 y el modelo local `qwen2.5:7b-instruct` mediante Ollama en `127.0.0.1:11434`. No usa OpenAI ni APIs remotas.
+
+Composicion de muestra: 5 casos rank 1, 5 casos rank 2-10, 5 casos rank 11-100 y 5 singleton. Las filas con `oracle` se omitieron y solo se usaron filas del pool operativo.
+
+Resultado de cierre: el ranking original enviado obtiene `Top-1 = 0.2500`, `Top-10 = 0.5000` y `MRR = 0.3542`; el re-ranking LLM obtiene `Top-1 = 0.2000`, `Top-10 = 0.5000` y `MRR = 0.3083`. Hubo JSON valido 20/20, violaciones de pool 0, duplicados 0, ganados 0, perdidos 4 y sin cambio 16.
+
+Decision de cierre: no escalar re-ranking a Fase 9C-B porque degrada Top-1 y MRR. Si se usa LLM despues, debe evaluarse como justificacion breve/controlada de candidatos ya seleccionados, no como re-ranker operativo.
+
+Se versionan como codigo, prompt y documentacion metodologica:
+
+- `src/llm/rerank_hybrid_pool_prompt_v0.1.md`: prompt cerrado que prohibe inventar NANDINA, clasificar desde cero o devolver codigos fuera del pool.
+- `src/experiments/run_llm_rerank_hybrid_pool_sample.py`: runner local Ollama para construir muestra, enviar Top-10, guardar respuesta cruda y normalizada, y detectar adherencia JSON/pool.
+- `src/experiments/evaluate_llm_rerank_hybrid_pool_sample.py`: evaluador de ranking original vs LLM, MRR, ganados/perdidos/sin cambio y violaciones.
+- `docs/evaluacion_llm_rerank_hybrid_pool_sample_v0.1.md`: cierre metodologico de Fase 9C-A.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/llm_rerank_hybrid_pool_sample_v0.1/`.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:

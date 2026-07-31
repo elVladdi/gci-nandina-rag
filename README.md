@@ -27,8 +27,9 @@ El repositorio contiene fases cerradas y versionadas hasta la Fase 7B diagnostic
 - **Fase 8B:** pool expandido no restrictivo; mejora cobertura a Top-200 frente a Fase 7A, pero no mejora Recall@100 y queda lejos de 0.90.
 - **Fase 9A:** recuperacion basada en ejemplos historicos con leave-one-out sobre evalset; `historical_bm25_description` alcanza `Recall@100 = 0.9100` sin LLM ni APIs remotas, condicionado a que exista precedente de la misma NANDINA en el banco historico.
 - **Fase 9B:** pool hibrido historico + normativo; la estrategia operativa `historical_first_80_normative_20` alcanza `Recall@100 = 0.9167` sin fuga de etiqueta, rescata 5 singleton y mantiene Top-1/Top-10 de Fase 9A. El `oracle_historical_if_label_supported_else_normative` queda solo como techo diagnostico (`Recall@100 = 0.9250`).
+- **Fase 9C-A:** re-ranking LLM diagnostico minimo sobre 20 casos del pool operativo `historical_first_80_normative_20`; JSON valido y sin violaciones de pool, pero degrada Top-1/MRR, por lo que no escala a 9C-B.
 
-Decision metodologica vigente: el historico queda como fuente principal y lo normativo como backfill/trazabilidad. La estrategia operativa candidata es `historical_first_80_normative_20`, que mejora Fase 9A en `Recall@100` (`0.9167` vs `0.9100`) sin mirar la etiqueta esperada. El oraculo basado en soporte de la NANDINA esperada se conserva solo como diagnostico, no como pipeline defendible.
+Decision metodologica vigente: el historico queda como fuente principal y lo normativo como backfill/trazabilidad. La estrategia operativa candidata es `historical_first_80_normative_20`, que mejora Fase 9A en `Recall@100` (`0.9167` vs `0.9100`) sin mirar la etiqueta esperada. El re-ranking LLM de 9C-A no debe escalarse porque degrada Top-1 y MRR; el LLM podria reservarse para justificacion controlada posterior.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -336,7 +337,7 @@ La Fase 6C ejecutó una sola vez el evalset final v0.1 para la variante congelad
 | BM25_hierarchical_v0.1 | 0.0283 | 0.1067 | 0.0524 | 0.2500 |
 | BM25_dual_protected_top_5_backfill | 0.0233 | 0.0850 | 0.0406 | 0.2700 |
 
-Decision metodologica vigente: `BM25_hierarchical_v0.1`, `BM25_dual_protected_top_5_backfill`, `BM25_fielded_weighted_expanded_v0.1` y Fase 8B quedan como componentes normativos/lexicales de respaldo. Fase 9B confirma que el historico debe dominar cuando hay precedente, mientras el bloque normativo aporta trazabilidad y rescate de singleton.
+Decision metodologica vigente: `BM25_hierarchical_v0.1`, `BM25_dual_protected_top_5_backfill`, `BM25_fielded_weighted_expanded_v0.1` y Fase 8B quedan como componentes normativos/lexicales de respaldo. Fase 9B confirma que el historico debe dominar cuando hay precedente, mientras el bloque normativo aporta trazabilidad y rescate de singleton. Fase 9C-A descarta escalar re-ranking LLM sobre el pool operativo.
 
 Scripts y rutas principales:
 
@@ -543,6 +544,30 @@ Artefactos versionables:
 Outputs regenerables e ignorados por Git:
 
 - `outputs/evaluation/hybrid_historical_normative_pool_v0.1/`
+
+## Fase 9C-A: Re-ranking LLM Diagnostico Minimo
+
+La Fase 9C-A evalua `qwen2.5:7b-instruct` mediante Ollama local como re-ranker cerrado sobre una muestra deterministica de 20 casos del pool operativo `historical_first_80_normative_20`, con `candidate_limit = 10`. No usa OpenAI ni APIs remotas.
+
+Composicion de muestra: 5 casos con la NANDINA correcta en rank 1, 5 en rank 2-10, 5 en rank 11-100 y 5 singleton. Se omitieron las filas con `oracle` y solo se usaron filas del pool operativo.
+
+| Ranking | Top-1 | Top-3 | Top-5 | Top-10 | MRR |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Original enviado | 0.2500 | 0.4500 | 0.5000 | 0.5000 | 0.3542 |
+| LLM | 0.2000 | 0.4500 | 0.4500 | 0.5000 | 0.3083 |
+
+Adherencia: JSON valido 20/20, violaciones de pool 0, duplicados 0. Resultado: 0 ganados, 4 perdidos y 16 sin cambio; 1 caso Top-1 correcto fue degradado. Decision: no escalar re-ranking a 9C-B. Si se usa LLM despues, debe ser para justificacion breve/controlada, no para reordenar el pool operativo.
+
+Artefactos versionables:
+
+- `src/llm/rerank_hybrid_pool_prompt_v0.1.md`
+- `src/experiments/run_llm_rerank_hybrid_pool_sample.py`
+- `src/experiments/evaluate_llm_rerank_hybrid_pool_sample.py`
+- `docs/evaluacion_llm_rerank_hybrid_pool_sample_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/llm_rerank_hybrid_pool_sample_v0.1/`
 
 ## Manifiesto de Artefactos
 

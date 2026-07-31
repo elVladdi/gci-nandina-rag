@@ -62,8 +62,8 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 26207,
-      "sha256": "ce0c76455e6b75a1ac892ed3a81d9a7b7b6ef0b2b164c33fcb13d3f127b86ea8",
+      "size_bytes": 28031,
+      "sha256": "e6ddcf5eda85e0fd1808e518c80c61f5ef6a5d0b0e8f597d564e09a78143cf55",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
@@ -2136,16 +2136,16 @@
     {
       "path": "README.md",
       "type": "documentation",
-      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9B.",
+      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9C-A.",
       "git_status_expected": [
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 30482,
-      "sha256": "11401a75fbfb1c5f17d10a9171b3a985dd62cd2c5a29a4e6cbfe242411aa9683",
+      "size_bytes": 32134,
+      "sha256": "73ef778731050edf68f38cba9984623c2a6ec5265004038646e0fbcf1e020adc",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado con cierre Fase 9B y decision de pool hibrido historico + normativo."
+      "methodological_notes": "Actualizado con cierre Fase 9C-A y decision de no escalar re-ranking LLM."
     },
     {
       "path": "src/experiments/evaluate_historical_examples_leave_one_out.py",
@@ -2232,6 +2232,77 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Incluye hybrid_pool.csv, hybrid_case_summary.csv, hybrid_metrics.json, hybrid_summary.md, hybrid_rescue_cases.csv, hybrid_loss_cases.csv, hybrid_singleton_cases.csv y hybrid_source_contribution.csv."
+    },
+    {
+      "path": "src/llm/rerank_hybrid_pool_prompt_v0.1.md",
+      "type": "prompt",
+      "role_in_v0_1": "Fase 9C-A: prompt cerrado para re-ranking LLM del pool hibrido operativo.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 1198,
+      "sha256": "52b8a9298d253f1d4e75ac5dfc7ffade12a35f3e5743c45ace0f93844538ca44",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Ordena reordenar solo candidatos recibidos, no inventar NANDINA, no clasificar desde cero y devolver JSON estricto."
+    },
+    {
+      "path": "src/experiments/run_llm_rerank_hybrid_pool_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 9C-A: runner Ollama local para re-ranking de muestra del pool hibrido.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 15607,
+      "sha256": "a7c976fda809828d21d9fd2c8ef706fd3e5ee9cf5f343ff99edd4d7c1d93b75f",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Verifica Ollama local y qwen2.5:7b-instruct ya instalado, construye muestra de 20 casos, usa solo historical_first_80_normative_20, omite oraculo, candidate_limit=10, temperatura 0 y guarda respuestas crudas/normalizadas. No usa OpenAI ni APIs remotas."
+    },
+    {
+      "path": "src/experiments/evaluate_llm_rerank_hybrid_pool_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 9C-A: evaluador de ranking original vs LLM sobre muestra del pool hibrido.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 14912,
+      "sha256": "0647b9fd8b32585be1d6ba1ee5f6baaa19dd3ed7f5f7c1086ee4c9f88904782f",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Calcula Top-K, MRR, ganados, perdidos, sin cambio, degradaciones Top-1, JSON valido y violaciones de pool; confirma uso del pool operativo y no del oraculo."
+    },
+    {
+      "path": "docs/evaluacion_llm_rerank_hybrid_pool_sample_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 9C-A re-ranking LLM diagnostico minimo.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3172,
+      "sha256": "e6c6b31654cddca5b0281ec1d1f67ff8092e41e09b93ea282135688d2dd69f9c",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, modelo usado, composicion de muestra, metricas original vs LLM, adherencia JSON, violaciones de pool, ganados/perdidos/sin cambio y decision de no escalar a 9C-B."
+    },
+    {
+      "path": "outputs/evaluation/llm_rerank_hybrid_pool_sample_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion Fase 9C-A re-ranking LLM sobre muestra del pool hibrido.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye sample_cases.csv, llm_rerank_raw.jsonl, llm_rerank_normalized.csv, llm_rerank_metrics.json, llm_rerank_summary.md y llm_rerank_case_comparison.csv."
     }
   ],
   "known_absent_or_omitted_paths": [
