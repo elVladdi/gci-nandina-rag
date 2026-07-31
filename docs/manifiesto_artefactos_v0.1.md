@@ -247,6 +247,43 @@ Se documentan como artefactos regenerables e ignorados por Git:
 - `outputs/analysis/hierarchical_retrieval_ceiling_v0.1/`.
 - `outputs/evaluation/hierarchical_bm25_devset_v0.1/`.
 
+## Evaluacion pool expandido no restrictivo v0.1
+
+La Fase 8B construye y evalua un pool expandido no restrictivo de candidatos NANDINA8. Las familias `HS2`, `HS4` y `HS6` se usan como senales auxiliares de backfill, no como filtros excluyentes. La estrategia se selecciona solo con devset y el evalset se ejecuta una vez con la configuracion congelada.
+
+Estrategia seleccionada en devset: `phase7a_plus_all_sources_200`, `protected_base = 50`, `HS2 Top-M = 3`, `HS4 Top-M = 5`, `HS6 Top-M = 10`. En devset sube a `Recall@200 = 0.9231`, con una perdida frente al pool 7A a Top-100. En evalset logra `Recall@200 = 0.3233`; a Top-100 rescata 4 casos pero desplaza 6 frente al pool 7A, y a Top-200 rescata 34 casos sin perder casos recuperados por Fase 7A. `Recall@100 = 0.2633` no mejora el pool 7A (`0.2667`).
+
+Decision de cierre: la expansion no restrictiva aporta cobertura a Top-200, pero el techo sigue lejos de `0.90`. Conviene pasar a Fase 9 con evidencia historica y/o clasificador supervisado, manteniendo el pool expandido como fuente auxiliar.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/build_nonrestrictive_expanded_pool.py`: construye y evalua pools no restrictivos para devset/evalset, con seleccion congelada desde devset.
+- `docs/evaluacion_pool_expandido_no_restrictivo_v0.1.md`: cierre metodologico de Fase 8B.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/nonrestrictive_expanded_pool_devset_v0.1/`.
+- `outputs/evaluation/nonrestrictive_expanded_pool_evalset_v0.1/`.
+
+## Evaluacion recuperacion historica leave-one-out v0.1
+
+La Fase 9A evalua recuperacion basada en ejemplos historicos usando `data/processed/evalset_v0.1.csv` como banco inicial de pares `descripcion -> nandina_ref`. El protocolo es leave-one-out: cada caso se consulta contra los otros 599, sin self-match y con ranking final deduplicado por NANDINA8.
+
+Resultado de cierre: `historical_bm25_description` alcanza `Recall@100 = 0.9100`, `Top-1 = 0.7967` y `MRR = 0.8305` sobre 600 casos. `historical_tfidf_char_word` se omite porque `scikit-learn` no esta disponible en el runtime local usable y no se instalaron dependencias. La corrida no usa LLM, Ollama, OpenAI ni APIs remotas.
+
+Comparacion evalset: Fase 7A logra `Recall@100 = 0.2667`, Fase 8B logra `Recall@100 = 0.2633` y `Recall@200 = 0.3233`, mientras Fase 9A logra `Recall@100 = 0.9100`. El recuperador historico rescata 400 casos frente a Fase 7A/8B y deja 54 casos fuera de Top-100.
+
+Decision de cierre: la mejora es sustancial; conviene ejecutar Fase 9B como pool hibrido historico + normativo, y ampliar despues el banco con historicos reales para validar generalizacion fuera del propio evalset.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_historical_examples_leave_one_out.py`: evalua BM25 historico leave-one-out sobre descripciones comerciales del evalset, calcula metricas exactas y jerarquicas, compara contra Fase 7A/8B si sus outputs existen y genera analisis de rescates/fallos.
+- `docs/evaluacion_recuperacion_historica_leave_one_out_v0.1.md`: cierre metodologico de Fase 9A con protocolo, metricas, comparacion y decision.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/historical_examples_leave_one_out_v0.1/`.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:

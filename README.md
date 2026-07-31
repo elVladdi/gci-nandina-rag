@@ -24,8 +24,10 @@ El repositorio contiene fases cerradas y versionadas hasta la Fase 7B diagnostic
 - **Fase 7A-3B:** validacion en evalset de `BM25_fielded_weighted_expanded_v0.1`, congelada desde devset; mejora levemente Recall@100, pero degrada Top-10/MRR frente a `BM25_hierarchical_v0.1`.
 - **Fase 7B:** re-ranking diagnostico preliminar con `qwen2.5:7b-instruct` sobre devset; no mejora el ranking original, presenta limitaciones de diseno experimental y no pasa a evalset.
 - **Fase 8A:** diagnostico y primer prototipo BM25 jerarquico HS2/HS4/HS6 -> NANDINA8; no mejora Recall@100 frente al directo ni al pool Fase 7A, por lo que no pasa a evalset como Fase 8B en esta forma.
+- **Fase 8B:** pool expandido no restrictivo; mejora cobertura a Top-200 frente a Fase 7A, pero no mejora Recall@100 y queda lejos de 0.90.
+- **Fase 9A:** recuperacion basada en ejemplos historicos con leave-one-out sobre evalset; `historical_bm25_description` alcanza `Recall@100 = 0.9100` sin LLM ni APIs remotas, condicionado a que exista precedente de la misma NANDINA en el banco historico.
 
-Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. Las pruebas LLM pre-retrieval no mejoran la recuperacion base. `BM25_fielded_weighted_expanded_v0.1` queda como experimento de cobertura amplia o posible fuente auxiliar, no como sustituto del ranking base. La Fase 8A confirma techo familiar parcial, pero no selecciona un filtro jerarquico HS2/HS4/HS6 como estrategia candidata. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
+Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal normativo por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` y Fase 8B quedan como fuentes auxiliares de ampliacion. Fase 9A muestra que los precedentes historicos son la via con mayor salto de cobertura (`Recall@100 = 0.9100`), pero el resultado esta condicionado por soporte historico interno: los 54 casos fallidos son NANDINA8 con una sola instancia en el evalset. Conviene pasar a Fase 9B con un pool hibrido historico + normativo y validar despues con historicos reales adicionales.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -333,7 +335,7 @@ La Fase 6C ejecutó una sola vez el evalset final v0.1 para la variante congelad
 | BM25_hierarchical_v0.1 | 0.0283 | 0.1067 | 0.0524 | 0.2500 |
 | BM25_dual_protected_top_5_backfill | 0.0233 | 0.0850 | 0.0406 | 0.2700 |
 
-Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. Las pruebas LLM pre-retrieval no mejoran la recuperacion base. `BM25_fielded_weighted_expanded_v0.1` queda como experimento de cobertura amplia o posible fuente auxiliar, no como sustituto del ranking base. La etapa LLM de re-ranking y justificacion queda pendiente como validacion final; cualquier nueva prueba debera operar sobre candidatos recuperados, no buscar NANDINAS desde cero.
+Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal normativo por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. Las pruebas LLM pre-retrieval no mejoran la recuperacion base. `BM25_fielded_weighted_expanded_v0.1` y Fase 8B quedan como experimentos de cobertura amplia. Fase 9A muestra que la recuperacion historica aporta el mayor salto de cobertura, por lo que Fase 9B debe evaluar un pool hibrido historico + normativo.
 
 Scripts y rutas principales:
 
@@ -481,6 +483,48 @@ Outputs regenerables e ignorados por Git:
 - `data/processed/indexes/bm25_levels/`
 - `outputs/analysis/hierarchical_retrieval_ceiling_v0.1/`
 - `outputs/evaluation/hierarchical_bm25_devset_v0.1/`
+
+## Fase 8B: Pool Expandido No Restrictivo
+
+La Fase 8B usa las familias `HS2`, `HS4` y `HS6` como senales auxiliares de expansion, no como filtros excluyentes. La estrategia se selecciono solo con devset y el evalset se ejecuto una vez con la configuracion congelada. No se uso LLM, Ollama, OpenAI, Text2Trade ni APIs remotas.
+
+Estrategia seleccionada desde devset: `phase7a_plus_all_sources_200`, con `protected_base = 50`, `HS2 Top-M = 3`, `HS4 Top-M = 5`, `HS6 Top-M = 10` y `pool_depth = 200`.
+
+| Dataset | Metodo | Final@100 | Final@200 | HS2@100 | HS4@100 | HS6@100 | Rescates@100 | Perdidas@100 | Rescates@200 | Perdidas@200 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| devset | phase7a base | 0.7692 | NA | 0.9231 | 0.9231 | 0.7692 | 0 | 0 | NA | NA |
+| devset | pool expandido 8B | 0.6923 | 0.9231 | 0.9231 | 0.9231 | 0.6923 | 0 | 1 | 3 | 1 |
+| evalset | phase7a base | 0.2667 | NA | 0.5283 | 0.2983 | 0.2717 | 0 | 0 | NA | NA |
+| evalset | pool expandido 8B | 0.2633 | 0.3233 | 0.5533 | 0.3033 | 0.2683 | 4 | 6 | 34 | 0 |
+
+Decision: la expansion no restrictiva mejora cobertura amplia a `Recall@200 = 0.3233`, pero no mejora `Recall@100` frente al pool Fase 7A; a Top-100 rescata 4 casos y desplaza 6, mientras que a Top-200 rescata 34 y no pierde casos recuperados por 7A. El techo sigue lejos de `0.90`; falta `0.5767` aun midiendo a Top-200. La siguiente fase recomendada es Fase 9 con ejemplos historicos y/o clasificador supervisado.
+
+Artefactos versionables:
+
+- `src/experiments/build_nonrestrictive_expanded_pool.py`
+- `docs/evaluacion_pool_expandido_no_restrictivo_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/nonrestrictive_expanded_pool_devset_v0.1/`
+- `outputs/evaluation/nonrestrictive_expanded_pool_evalset_v0.1/`
+
+## Fase 9A: Recuperacion Historica Leave-One-Out
+
+La Fase 9A usa el evalset actual como banco inicial de ejemplos historicos `descripcion -> NANDINA`, con evaluacion leave-one-out: cada caso se consulta contra los otros 599, sin self-match y con deduplicacion por `nandina_ref`. No se usa LLM, Ollama, OpenAI ni APIs remotas.
+
+Resultado principal: `historical_bm25_description` alcanza `Recall@100 = 0.9100`, `Top-1 = 0.7967` y `MRR = 0.8305` sobre 600 casos. La lectura correcta es condicionada: 546 casos tienen otra instancia de su misma NANDINA8 dentro del evalset y los 546 se recuperan en Top-100; los 54 fallos corresponden a NANDINA8 singleton, sin precedente interno. `historical_tfidf_char_word` se omitio porque `scikit-learn` no esta disponible en el runtime local usable y no se instalaron dependencias.
+
+Frente a Fase 7A (`Recall@100 = 0.2667`) y Fase 8B (`Recall@100 = 0.2633`, `Recall@200 = 0.3233`), el enfoque historico mejora sustancialmente la cobertura cuando hay precedente disponible. La recomendacion para Fase 9B es construir un pool hibrido que incorpore recuperacion historica como fuente prioritaria, manteniendo senales normativas para trazabilidad y ampliando luego con historicos reales o validacion temporal.
+
+Artefactos versionables:
+
+- `src/experiments/evaluate_historical_examples_leave_one_out.py`
+- `docs/evaluacion_recuperacion_historica_leave_one_out_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/historical_examples_leave_one_out_v0.1/`
 
 ## Manifiesto de Artefactos
 

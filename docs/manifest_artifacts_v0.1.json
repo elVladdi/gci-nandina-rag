@@ -62,8 +62,8 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 20667,
-      "sha256": "0a15790e21154b338309437e0acc655a300763f37389c573832561e2e5294c2f",
+      "size_bytes": 23998,
+      "sha256": "c83fb505aa849ff53a684903fa06f03a2ce65a12221bccbfcba8bd5c193e28ee",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
@@ -2074,6 +2074,121 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Regenerable con src.experiments.evaluate_hierarchical_bm25_devset; no se fuerza a Git."
+    },
+    {
+      "path": "src/experiments/build_nonrestrictive_expanded_pool.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 8B: constructor y evaluador de pool expandido no restrictivo.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 40624,
+      "sha256": "acedbe036352df1528b9e82dec7e92ea3d09f94ac4c5596170685597db52feb8",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Selecciona estrategia solo con devset; ejecuta evalset solo con configuracion congelada. No usa LLM, Ollama, OpenAI, Text2Trade, requests, HTTP ni APIs remotas."
+    },
+    {
+      "path": "docs/evaluacion_pool_expandido_no_restrictivo_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 8B pool expandido no restrictivo.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3226,
+      "sha256": "879df367949c7c0a104db30ae4f225c4b03db4ac94137915cb9ce3938118193e",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta por que Fase 8A restrictiva no funciono, seleccion devset, evalset congelado y recomendacion hacia Fase 9."
+    },
+    {
+      "path": "outputs/evaluation/nonrestrictive_expanded_pool_devset_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion devset Fase 8B.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye expanded_pool.csv, case_summary, metrics, summary, source_contribution, rescued_cases y missed_cases."
+    },
+    {
+      "path": "outputs/evaluation/nonrestrictive_expanded_pool_evalset_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion evalset Fase 8B.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Evalset ejecutado una sola vez con estrategia congelada desde devset; no se fuerza a Git."
+    },
+    {
+      "path": "README.md",
+      "type": "documentation",
+      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9A.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 29266,
+      "sha256": "4e590e6fb102a3e9be5425938190086394c35f552eee48ce38979cdadde01733",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Actualizado con cierre Fase 9A y recomendacion hacia Fase 9B hibrida."
+    },
+    {
+      "path": "src/experiments/evaluate_historical_examples_leave_one_out.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 9A: evaluador leave-one-out de recuperacion basada en ejemplos historicos.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 26043,
+      "sha256": "c7b8702a8b61ed15708d8acebf6a099049360c6cf53f358543fe4ce44e271c51",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Usa evalset_v0.1.csv como banco inicial descripcion -> NANDINA, excluye self-match, deduplica por nandina_ref, calcula metricas exactas y jerarquicas, y compara contra Fase 7A/8B si existen outputs locales. No usa LLM, Ollama, OpenAI, requests, HTTP ni APIs remotas."
+    },
+    {
+      "path": "docs/evaluacion_recuperacion_historica_leave_one_out_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 9A recuperacion historica leave-one-out.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 5963,
+      "sha256": "92e4bde77a7a831c5f9cf48edc4782fa270f3f11b4ef7fc3c78573d04e9d602f",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta proposito, protocolo leave-one-out, metricas, comparacion contra Fase 7A/8B, decision Fase 9B y politica de no uso de modelos generativos ni APIs remotas."
+    },
+    {
+      "path": "outputs/evaluation/historical_examples_leave_one_out_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion Fase 9A historica leave-one-out.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye historical_results.csv, historical_metrics.json, historical_summary.md, historical_case_summary.csv, historical_failure_cases.csv y historical_rescue_cases.csv."
     }
   ],
   "known_absent_or_omitted_paths": [
