@@ -62,8 +62,8 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 23998,
-      "sha256": "c83fb505aa849ff53a684903fa06f03a2ce65a12221bccbfcba8bd5c193e28ee",
+      "size_bytes": 26207,
+      "sha256": "ce0c76455e6b75a1ac892ed3a81d9a7b7b6ef0b2b164c33fcb13d3f127b86ea8",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
@@ -2136,16 +2136,16 @@
     {
       "path": "README.md",
       "type": "documentation",
-      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9A.",
+      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9B.",
       "git_status_expected": [
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 29266,
-      "sha256": "4e590e6fb102a3e9be5425938190086394c35f552eee48ce38979cdadde01733",
+      "size_bytes": 30482,
+      "sha256": "11401a75fbfb1c5f17d10a9171b3a985dd62cd2c5a29a4e6cbfe242411aa9683",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado con cierre Fase 9A y recomendacion hacia Fase 9B hibrida."
+      "methodological_notes": "Actualizado con cierre Fase 9B y decision de pool hibrido historico + normativo."
     },
     {
       "path": "src/experiments/evaluate_historical_examples_leave_one_out.py",
@@ -2189,6 +2189,49 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Incluye historical_results.csv, historical_metrics.json, historical_summary.md, historical_case_summary.csv, historical_failure_cases.csv y historical_rescue_cases.csv."
+    },
+    {
+      "path": "src/experiments/build_hybrid_historical_normative_pool.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 9B: constructor y evaluador de pools hibridos historico + normativo.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 34745,
+      "sha256": "45e87a6f439d1b2474ca22145b9da63cccaa7a52ce61b9dddbb4d819089d0761",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Fusiona Fase 9A historica con Fase 7A y Fase 8B; calcula metricas exactas, jerarquicas, por soporte historico, rescates, perdidas, singleton y contribucion de fuentes. No usa LLM, Ollama, OpenAI, requests, HTTP ni APIs remotas."
+    },
+    {
+      "path": "docs/evaluacion_pool_hibrido_historico_normativo_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 9B pool hibrido historico normativo.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 6414,
+      "sha256": "1d654327d11f04a6f4e9ae7f7523784e015077613ce88fdc6a8e5a8ef7dfc982",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, fuentes, estrategias, comparacion, metricas por soporte, analisis singleton, decision y politica de no uso de modelos generativos ni APIs remotas."
+    },
+    {
+      "path": "outputs/evaluation/hybrid_historical_normative_pool_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion Fase 9B pool hibrido historico normativo.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye hybrid_pool.csv, hybrid_case_summary.csv, hybrid_metrics.json, hybrid_summary.md, hybrid_rescue_cases.csv, hybrid_loss_cases.csv, hybrid_singleton_cases.csv y hybrid_source_contribution.csv."
     }
   ],
   "known_absent_or_omitted_paths": [

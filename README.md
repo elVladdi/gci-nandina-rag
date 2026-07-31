@@ -26,8 +26,9 @@ El repositorio contiene fases cerradas y versionadas hasta la Fase 7B diagnostic
 - **Fase 8A:** diagnostico y primer prototipo BM25 jerarquico HS2/HS4/HS6 -> NANDINA8; no mejora Recall@100 frente al directo ni al pool Fase 7A, por lo que no pasa a evalset como Fase 8B en esta forma.
 - **Fase 8B:** pool expandido no restrictivo; mejora cobertura a Top-200 frente a Fase 7A, pero no mejora Recall@100 y queda lejos de 0.90.
 - **Fase 9A:** recuperacion basada en ejemplos historicos con leave-one-out sobre evalset; `historical_bm25_description` alcanza `Recall@100 = 0.9100` sin LLM ni APIs remotas, condicionado a que exista precedente de la misma NANDINA en el banco historico.
+- **Fase 9B:** pool hibrido historico + normativo; la estrategia operativa `historical_first_80_normative_20` alcanza `Recall@100 = 0.9167` sin fuga de etiqueta, rescata 5 singleton y mantiene Top-1/Top-10 de Fase 9A. El `oracle_historical_if_label_supported_else_normative` queda solo como techo diagnostico (`Recall@100 = 0.9250`).
 
-Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal normativo por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` y Fase 8B quedan como fuentes auxiliares de ampliacion. Fase 9A muestra que los precedentes historicos son la via con mayor salto de cobertura (`Recall@100 = 0.9100`), pero el resultado esta condicionado por soporte historico interno: los 54 casos fallidos son NANDINA8 con una sola instancia en el evalset. Conviene pasar a Fase 9B con un pool hibrido historico + normativo y validar despues con historicos reales adicionales.
+Decision metodologica vigente: el historico queda como fuente principal y lo normativo como backfill/trazabilidad. La estrategia operativa candidata es `historical_first_80_normative_20`, que mejora Fase 9A en `Recall@100` (`0.9167` vs `0.9100`) sin mirar la etiqueta esperada. El oraculo basado en soporte de la NANDINA esperada se conserva solo como diagnostico, no como pipeline defendible.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -335,7 +336,7 @@ La Fase 6C ejecutó una sola vez el evalset final v0.1 para la variante congelad
 | BM25_hierarchical_v0.1 | 0.0283 | 0.1067 | 0.0524 | 0.2500 |
 | BM25_dual_protected_top_5_backfill | 0.0233 | 0.0850 | 0.0406 | 0.2700 |
 
-Decision metodologica vigente: `BM25_hierarchical_v0.1` queda como ranking documental principal normativo por Top-10 y MRR en evalset; `BM25_dual_protected_top_5_backfill` queda como fuente auxiliar para ampliar el pool por su mejor Recall@100. Las pruebas LLM pre-retrieval no mejoran la recuperacion base. `BM25_fielded_weighted_expanded_v0.1` y Fase 8B quedan como experimentos de cobertura amplia. Fase 9A muestra que la recuperacion historica aporta el mayor salto de cobertura, por lo que Fase 9B debe evaluar un pool hibrido historico + normativo.
+Decision metodologica vigente: `BM25_hierarchical_v0.1`, `BM25_dual_protected_top_5_backfill`, `BM25_fielded_weighted_expanded_v0.1` y Fase 8B quedan como componentes normativos/lexicales de respaldo. Fase 9B confirma que el historico debe dominar cuando hay precedente, mientras el bloque normativo aporta trazabilidad y rescate de singleton.
 
 Scripts y rutas principales:
 
@@ -525,6 +526,23 @@ Artefactos versionables:
 Outputs regenerables e ignorados por Git:
 
 - `outputs/evaluation/historical_examples_leave_one_out_v0.1/`
+
+## Fase 9B: Pool Hibrido Historico + Normativo
+
+La Fase 9B combina la recuperacion historica de Fase 9A con los pools normativos/lexicales de Fase 7A y Fase 8B. Evalua cinco estrategias sin LLM, Ollama, OpenAI ni APIs remotas, deduplicando candidatos por `nandina_ref` y reportando metricas por soporte historico.
+
+Resultado principal operativo: `historical_first_80_normative_20` alcanza `Top-1 = 0.7967`, `Top-10 = 0.8750`, `Recall@100 = 0.9167` y `MRR = 0.8306`. Frente a Fase 9A, rescata 5 singleton y pierde 1 caso. El oraculo `oracle_historical_if_label_supported_else_normative` alcanza `Recall@100 = 0.9250`, pero usa soporte de la NANDINA esperada y no se adopta como regla operativa.
+
+Decision: usar `historical_first_80_normative_20` como candidato operativo de pool oficial auditable. La siguiente fase debe formalizar ese pool o probar una variante adaptativa basada en senales observables de confianza historica, no en soporte de la etiqueta esperada.
+
+Artefactos versionables:
+
+- `src/experiments/build_hybrid_historical_normative_pool.py`
+- `docs/evaluacion_pool_hibrido_historico_normativo_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/hybrid_historical_normative_pool_v0.1/`
 
 ## Manifiesto de Artefactos
 

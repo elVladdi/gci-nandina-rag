@@ -284,6 +284,27 @@ Se documentan como outputs regenerables e ignorados por Git:
 
 - `outputs/evaluation/historical_examples_leave_one_out_v0.1/`.
 
+## Evaluacion pool hibrido historico normativo v0.1
+
+La Fase 9B combina recuperacion historica con fuentes normativas/lexicales ya generadas en Fase 7A y Fase 8B. El objetivo es mantener la fortaleza historica cuando existe precedente y usar lo normativo como trazabilidad y respaldo para singleton. La corrida no usa LLM, Ollama, OpenAI ni APIs remotas.
+
+Estrategias evaluadas: `historical_first_95_normative_5`, `historical_first_80_normative_20`, `historical_first_50_normative_50`, `historical_plus_normative_rrf` y `oracle_historical_if_label_supported_else_normative`.
+
+Resultado de cierre operativo: la mejor estrategia defendible es `historical_first_80_normative_20`, con `Top-1 = 0.7967`, `Top-10 = 0.8750`, `Recall@100 = 0.9167` y `MRR = 0.8306`. Frente a Fase 9A rescata 5 singleton y pierde 1 caso. En casos con precedente historico logra `Recall@100 = 0.9982`; en singleton logra `Recall@100 = 0.0926`.
+
+Resultado diagnostico no operativo: `oracle_historical_if_label_supported_else_normative` alcanza `Recall@100 = 0.9250`, pero usa soporte de la NANDINA esperada (`support_counts[expected]`) y por eso queda solo como techo exploratorio, no como pipeline defendible para casos futuros.
+
+Decision de cierre: el historico queda como fuente dominante; el bloque normativo queda como backfill y respaldo de trazabilidad. Conviene convertir `historical_first_80_normative_20` en pool oficial auditable o disenar una variante adaptativa basada en senales observables de confianza historica, no en soporte de la etiqueta esperada.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/build_hybrid_historical_normative_pool.py`: construye pools hibridos desde Fase 9A, Fase 7A y Fase 8B; calcula metricas exactas y jerarquicas, metricas por soporte historico, rescates, perdidas, singleton y contribucion de fuentes.
+- `docs/evaluacion_pool_hibrido_historico_normativo_v0.1.md`: cierre metodologico de Fase 9B con fuentes, estrategias, comparacion, soporte historico, singleton y decision.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/hybrid_historical_normative_pool_v0.1/`.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:
