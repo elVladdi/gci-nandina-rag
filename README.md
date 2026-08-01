@@ -11,7 +11,7 @@ El proyecto organiza corpus normativo, conjuntos de evaluación, recuperación d
 El repositorio contiene fases cerradas y versionadas hasta la Fase 7B diagnostica preliminar:
 
 - **Fase 1:** base reproducible BM25, corpus indexable y smoke test.
-- **Fase 2:** protocolo experimental v0.1 y manifiesto de artefactos.
+- **Fase 2:** protocolo experimental v0.1, manifiesto de artefactos e incorporacion de `data_aduanas` como fuente operativa normalizada para la proxima actualizacion de Fase 3.
 - **Fase 3:** evalset final v0.1 construido, deduplicado, validado y versionado.
 - **Fase 4:** evaluación formal del baseline BM25 sobre el evalset final.
 - **Fase 5:** evaluación Text2Trade dense por fuerza bruta y comparación contra BM25.
@@ -60,10 +60,13 @@ data/processed/evalset_v0.1.csv
 data/processed/evalset_v0.1_metadata.json
 ```
 
+Nota Fase 2: `data_aduanas` fue incorporada como fuente operativa normalizada para la proxima actualizacion de Fase 3. El evalset v0.1 de 600 casos sigue siendo el evalset versionado vigente hasta que Fase 3 sea actualizada.
+
+
 Características principales:
 
 - 600 casos finales.
-- Fuente: Excel SUNAT en formato por bloques.
+- Fuente: fuente aduanera previa en formato por bloques.
 - Deduplicación exacta por `descripcion + nandina_ref + regimen`.
 - Columnas principales: `case_id`, `descripcion`, `nandina_ref`, `regimen`, `fuente_url`, `fecha_consulta`, `capitulo`, `partida`, `origen_caso`, `observaciones`.
 - Documentación asociada:

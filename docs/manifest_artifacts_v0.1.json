@@ -20,11 +20,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 4990,
-      "sha256": "c9a78c0267b00e1faa34e58a3955559345efa706469de61d6a543d2c9b39d496",
+      "size_bytes": 6045,
+      "sha256": "a448c204b3e2a785c7907cef5712870afaa4342a84e08fa25c0aaf215085d3fa",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Define corpus, dataset, baseline BM25, variante preliminar BM25+LLM rewrite, artefacto exploratorio Text2Trade y politica de parametros fijos."
+      "methodological_notes": "Define corpus, dataset, baseline BM25, variantes preliminares, politica de parametros fijos y referencia metodologica `data_aduanas` para futura actualizacion de Fase 3."
     },
     {
       "path": "src/configs/experiment_config.json",
@@ -48,11 +48,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 3270,
-      "sha256": "29106243ed1d9e491fee1904ae5f8d4edae9deb3d9d2fc8089de71bb6bdd5766",
+      "size_bytes": 4705,
+      "sha256": "856446fab528a5db8d9bc386b471f2ceaecd554e53a482837b42fe6f05f53aa9",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Necesario para auditoria metodologica; no ejecuta codigo ni contiene resultados finales."
+      "methodological_notes": "Necesario para auditoria metodologica; incorpora `data_aduanas` como fuente operativa normalizada de Fase 2 sin reemplazar evalset/devset vigentes."
     },
     {
       "path": "docs/manifiesto_artefactos_v0.1.md",
@@ -62,11 +62,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 28031,
-      "sha256": "e6ddcf5eda85e0fd1808e518c80c61f5ef6a5d0b0e8f597d564e09a78143cf55",
+      "size_bytes": 29645,
+      "sha256": "c23a731115c113ac2a2b78e89e529397fcfa2427cb5d1e12847db94e8a4178b8",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documento derivado del manifiesto JSON para revision humana."
+      "methodological_notes": "Documento derivado del manifiesto JSON para revision humana; incluye politica Git/no Git de `data_aduanas` y sus artefactos regenerables/locales."
     },
     {
       "path": "docs/evaluacion_bm25_baseline_v0.1.md",
@@ -300,7 +300,7 @@
       "sha256": "efa50624a29009f51b77ffc2d7610bcf827f54d8f7b4837dca739881b536fbc5",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Generado desde Excel SUNAT real en modo sunat-block; 647 casos extraidos, deduplicacion exacta por descripcion + nandina_ref + regimen, 600 casos unicos validos finales. Aunque data/processed esta ignorado por defecto, este artefacto final requiere versionado explicito si se congela en Git. Alcance empirico concentrado en regimen 10/importacion para el consumo; no generalizar automaticamente a otros regimenes."
+      "methodological_notes": "Generado desde fuente aduanera previa en modo sunat-block; 647 casos extraidos, deduplicacion exacta por descripcion + nandina_ref + regimen, 600 casos unicos validos finales. Aunque data/processed esta ignorado por defecto, este artefacto final requiere versionado explicito si se congela en Git. Alcance empirico concentrado en regimen 10/importacion para el consumo; no generalizar automaticamente a otros regimenes."
     },
     {
       "path": "data/processed/evalset_v0.1_metadata.json",
@@ -2141,11 +2141,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 32134,
-      "sha256": "73ef778731050edf68f38cba9984623c2a6ec5265004038646e0fbcf1e020adc",
+      "size_bytes": 31916,
+      "sha256": "acdeeecc68b29d1b49de011eb2a01495e5d5106102fdeb2f10f43fc4d539ed13",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado con cierre Fase 9C-A y decision de no escalar re-ranking LLM."
+      "methodological_notes": "Actualizado con cierre Fase 9C-A y nota de Fase 2 sobre `data_aduanas` como fuente operativa normalizada para futura actualizacion de Fase 3."
     },
     {
       "path": "src/experiments/evaluate_historical_examples_leave_one_out.py",
@@ -2303,6 +2303,129 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Incluye sample_cases.csv, llm_rerank_raw.jsonl, llm_rerank_normalized.csv, llm_rerank_metrics.json, llm_rerank_summary.md y llm_rerank_case_comparison.csv."
+    },
+    {
+      "path": "data/Series - Descripciones.xlsx",
+      "type": "source_data",
+      "role_in_v0_1": "Fuente operativa local tratada metodologicamente como `data_aduanas` para futura actualizacion de Fase 3.",
+      "git_status_expected": [
+        "local_only",
+        "external_reference"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Fuente local fisica de `data_aduanas`; no reemplaza el evalset v0.1 vigente ni debe forzarse a Git en esta actualizacion de Fase 2.",
+      "exists": true,
+      "size_bytes": 7902365,
+      "sha256": "cfc85f3d1a3dede6680cc3dcdb303e93823264cfa4579e961bbcdb7781de30e7"
+    },
+    {
+      "path": "src/ingestion/sunat_series_parser.py",
+      "type": "script",
+      "role_in_v0_1": "Parser de ingesta que normaliza la fuente `data_aduanas` hacia capa intermedia por serie/DAM.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "El nombre fisico del script se conserva por compatibilidad; metodologicamente la fuente procesada se documenta como `data_aduanas`.",
+      "exists": true,
+      "size_bytes": 30912,
+      "sha256": "5995e635b9c405bfda361bb9ef79d9ec36b24b8d43d510ce1cf0a064e2c4cad2"
+    },
+    {
+      "path": "docs/protocolo_ingesta_sunat_series_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Protocolo de ingesta de la fuente `data_aduanas` y descripcion de columnas conservadas por el parser.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta el nombre metodologico `data_aduanas`, el archivo local, el parser y las salidas intermedias regenerables.",
+      "exists": true,
+      "size_bytes": 5367,
+      "sha256": "a3da57872a58d62f081dbca04a24ab51062bf3f69be4fb7c164deb0035cacdc3"
+    },
+    {
+      "path": "data/interim/sunat_series_descripciones_normalized.csv",
+      "type": "normalized_intermediate",
+      "role_in_v0_1": "Capa normalizada/intermedia CSV generada desde `data_aduanas`.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Salida regenerable del parser; contiene 11,320 series normalizadas y no se fuerza a Git.",
+      "exists": true,
+      "size_bytes": 13309984,
+      "sha256": "090aafd3062939b2dad91a66bb766889c3b466abf1c33538a7a93ed10b587d3f"
+    },
+    {
+      "path": "data/interim/sunat_series_descripciones_normalized.xlsx",
+      "type": "normalized_intermediate",
+      "role_in_v0_1": "Exportacion XLSX opcional de la capa normalizada `data_aduanas`.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Salida local regenerable para inspeccion; no se fuerza a Git.",
+      "exists": true,
+      "size_bytes": 5788284,
+      "sha256": "840b0842d827ce08cd7f3e82baed3c04518c4bfb155e37ab5b48eb02da7caf13"
+    },
+    {
+      "path": "data/interim/sunat_series_descripciones_normalized_metadata.json",
+      "type": "metadata",
+      "role_in_v0_1": "Metadata de normalizacion de `data_aduanas`.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Registra conteos de DAM, series, `id_unico` y advertencias de parseo; regenerable con el parser.",
+      "exists": true,
+      "size_bytes": 5485,
+      "sha256": "ee35a16b89a35ebe0047db837e19578279661b05a777615270711bed2e742b7e"
+    },
+    {
+      "path": "outputs/audits/sunat_series_labels_v0.1/labels.csv",
+      "type": "audit_output",
+      "role_in_v0_1": "Auditoria de etiquetas extraidas durante la normalizacion de `data_aduanas`.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output de auditoria local y regenerable; no se fuerza a Git.",
+      "exists": true,
+      "size_bytes": 4755,
+      "sha256": "82fe61bd18d749b8efd8334495dbe7463246f6e641979b21b59d5410fea31317"
+    },
+    {
+      "path": "outputs/audits/sunat_series_labels_v0.1/id_unico_duplicates.csv",
+      "type": "audit_output",
+      "role_in_v0_1": "Auditoria de duplicados `id_unico` detectados durante la normalizacion de `data_aduanas`.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Las particiones finales historico/dev/eval no deberan contener `id_unico` repetidos; este output local documenta duplicados a resolver en fases posteriores.",
+      "exists": true,
+      "size_bytes": 90806,
+      "sha256": "5bac011004dd8e8943fc20191c691b2b1acb0f270c1a0742f319eb41cfe1f5d3"
     }
   ],
   "known_absent_or_omitted_paths": [

@@ -18,9 +18,32 @@ Los insumos oficiales son los archivos necesarios para sostener el piloto offlin
 El indice `data/processed/indexes/bm25_nandina8.pkl` se considera artefacto de aceleracion. Esta disponible localmente y ya esta versionado, pero metodologicamente puede regenerarse desde el corpus indexable y los parametros BM25 congelados.
 
 
+
+## Fuente operativa data_aduanas
+
+La Fase 2 incorpora `data_aduanas` como fuente operativa normalizada para la futura actualizacion de Fase 3. La fuente local fisica es `data/Series - Descripciones.xlsx`, procesada por `src/ingestion/sunat_series_parser.py`; el nombre metodologico de la fuente es `data_aduanas`.
+
+Se documentan como trazabilidad versionable:
+
+- `src/ingestion/sunat_series_parser.py`: parser de ingesta.
+- `docs/protocolo_ingesta_sunat_series_v0.1.md`: protocolo de ingesta asociado, si se versiona junto con Fase 2.
+
+Se documentan como fuente local y artefactos regenerables/locales:
+
+- `data/Series - Descripciones.xlsx`: fuente local `data_aduanas`; politica `local_only` y `external_reference`, sin forzar versionado Git.
+- `data/interim/sunat_series_descripciones_normalized.csv`: capa normalizada intermedia, `ignored`, `local_only` y `regenerable`.
+- `data/interim/sunat_series_descripciones_normalized.xlsx`: exportacion intermedia opcional, `ignored`, `local_only` y `regenerable`.
+- `data/interim/sunat_series_descripciones_normalized_metadata.json`: metadata de normalizacion, `ignored`, `local_only` y `regenerable`.
+- `outputs/audits/sunat_series_labels_v0.1/labels.csv`: auditoria de etiquetas, `ignored`, `local_only` y `regenerable`.
+- `outputs/audits/sunat_series_labels_v0.1/id_unico_duplicates.csv`: auditoria de duplicados `id_unico`, `ignored`, `local_only` y `regenerable`.
+
+La normalizacion disponible registra 107 DAM detectadas, 11,320 series normalizadas, 11,320 filas con `id_unico` y 81 filas con advertencias de parseo. El alcance operativo proyectado para las particiones finales es `Clase = 87` (4,232 instancias y 69 NANDINAS distintas). Historico, desarrollo y evaluacion deberan conservar las mismas columnas y no contener `id_unico` repetidos.
+
+Esta incorporacion actualiza la trazabilidad de Fase 2; no reemplaza todavia el evalset v0.1 de Fase 3 ni cambia los datasets experimentales vigentes.
+
 ## Evalset final v0.1
 
-El evalset final v0.1 fue generado desde el Excel SUNAT real en modo `sunat-block` y congelado en `data/processed/evalset_v0.1.csv` con 600 casos unicos validos. Antes de congelarlo se auditaron 647 casos extraidos, 31 grupos duplicados exactos y 47 filas excedentes por la llave `descripcion + nandina_ref + regimen`.
+El evalset final v0.1 fue generado desde una fuente aduanera previa en modo `sunat-block` y congelado en `data/processed/evalset_v0.1.csv` con 600 casos unicos validos. Antes de congelarlo se auditaron 647 casos extraidos, 31 grupos duplicados exactos y 47 filas excedentes por la llave `descripcion + nandina_ref + regimen`.
 
 La metadata asociada queda en `data/processed/evalset_v0.1_metadata.json` y registra fuente, fecha de consulta, formato de extraccion, regla de deduplicacion, conteos de calidad y checksums. Estos artefactos sostienen la evaluacion final posterior, pero no constituyen por si mismos resultados experimentales ni validacion de hipotesis. El alcance empirico queda concentrado en regimen `10` (importacion para el consumo), por lo que los resultados no deben generalizarse a otros regimenes aduaneros.
 

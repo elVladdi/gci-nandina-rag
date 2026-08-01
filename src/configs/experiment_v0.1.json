@@ -125,5 +125,33 @@
       "Entrenamiento o movimiento de modelos pesados",
       "Declarar Text2Trade como componente formal sin validacion comparativa"
     ]
+  },
+  "methodological_sources": {
+    "data_aduanas": {
+      "logical_name": "data_aduanas",
+      "local_source": "data/Series - Descripciones.xlsx",
+      "intermediate_output": "data/interim/sunat_series_descripciones_normalized.csv",
+      "parser": "src/ingestion/sunat_series_parser.py",
+      "projected_scope": "Clase = 87",
+      "status": "fuente_normalizada_para_futura_actualizacion_de_fase_3",
+      "phase_policy": "Actualiza trazabilidad de Fase 2; no reemplaza evalset_v0.1 ni datasets vigentes de Fase 3.",
+      "normalization_snapshot": {
+        "dam_detectadas": 107,
+        "series_normalizadas": 11320,
+        "filas_con_id_unico": 11320,
+        "filas_con_advertencias_parseo": 81,
+        "clase_87_instancias": 4232,
+        "clase_87_nandinas_distintas": 69
+      },
+      "future_partition_policy": {
+        "partitions": [
+          "historico",
+          "desarrollo",
+          "evaluacion"
+        ],
+        "homogeneous_columns": true,
+        "no_repeated_id_unico": true
+      }
+    }
   }
 }
