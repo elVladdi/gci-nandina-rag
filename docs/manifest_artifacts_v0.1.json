@@ -57,16 +57,16 @@
     {
       "path": "docs/manifiesto_artefactos_v0.1.md",
       "type": "documentation",
-      "role_in_v0_1": "Explicacion legible de insumos oficiales, resultados preliminares, artefactos exploratorios y politica Git/no Git.",
+      "role_in_v0_1": "Explicacion legible de insumos oficiales, resultados integrados, artefactos exploratorios y politica Git/no Git.",
       "git_status_expected": [
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 48125,
-      "sha256": "b1b725b9f33cc623b6181d35be91c6467953c8aab9e49ae679e495672b2b9d27",
+      "size_bytes": 51644,
+      "sha256": "3010ed94ed1e5b854839264f451daf9b5b81797610de4f74175f2c1e22567f1b",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado con correccion de descripciones data_aduanas, metricas 7A/9A/9B recalculadas y Fase 10A explicacion Top-3 sample."
+      "methodological_notes": "Actualizado con evaluacion final integrada v0.1, metricas consolidadas, script, documento final y output regenerable."
     },
     {
       "path": "docs/evaluacion_bm25_baseline_v0.1.md",
@@ -2414,16 +2414,16 @@
     {
       "path": "README.md",
       "type": "documentation",
-      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9C-A y con Fase 9B actualizada sobre data_aduanas clase 87.",
+      "role_in_v0_1": "Documento de trazabilidad actualizado hasta la evaluacion final integrada v0.1.",
       "git_status_expected": [
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 46460,
-      "sha256": "8540e2d6536e6af803f6f7c23d9f4ef9e315cc6d46d7f3a02cb0104b50b6bd54",
+      "size_bytes": 50094,
+      "sha256": "ad746bfe3abd8a661259c30aa812e58f6e50d097b66b3b8c49b8a9433e7d73be",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado con limpieza de descripciones data_aduanas, metricas 9A/9B corregidas y nota de que 10B debe usar splits corregidos."
+      "methodological_notes": "Actualizado con enlace a la evaluacion final integrada, comando reproducible y outputs consolidados."
     },
     {
       "path": "src/experiments/evaluate_historical_examples_leave_one_out.py",
@@ -3202,10 +3202,10 @@
       ],
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Genera audit_cards.md y una ficha .md por caso con Top-3 recibido, respuesta LLM, evidencias citadas y controles de calidad.",
+      "methodological_notes": "Genera audit_cards.md y una ficha .md por caso con Top-3 recibido, respuesta LLM, evidencias citadas y controles de calidad. En 10D se actualiza de forma compatible para mostrar alertas globales, tipo de evidencia normativa, lectura historica y revision experta cuando existan.",
       "exists": true,
-      "size_bytes": 13201,
-      "sha256": "04f7bbe931afc88096acb4a82c853f1087189eec6a9d757561758fd36f2c0965"
+      "size_bytes": 14529,
+      "sha256": "a3c379aee6dad803b77bcf0c1d401fc6c6fd23f30888de2dd24a9998671510bf"
     },
     {
       "path": "docs/evaluacion_llm_explicacion_top3_auditable_v0.1.md",
@@ -3232,6 +3232,120 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Incluye sample_cases.csv, payloads.jsonl, llm_explanations.jsonl, llm_explanations.csv, audit_quality_metrics.json, audit_quality_summary.md, case_audit_quality_summary.csv, audit_cards.md y audit_cards/ con 50 fichas.",
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "path": "docs/revision_cualitativa_fichas_auditables_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Revision cualitativa Fase 10C de fichas auditables generadas en 10B.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Revisa 10 fichas sin ejecutar LLM ni regenerar outputs; identifica fortalezas de trazabilidad y mejoras de prudencia, normativa generica y escalamiento experto.",
+      "exists": true,
+      "size_bytes": 17284,
+      "sha256": "2466a0679aa4c11650d2f4288705c50b17094f518a0389a14760dea5b736d77d"
+    },
+    {
+      "path": "docs/revision_cualitativa_fichas_auditables_v0.1.csv",
+      "type": "documentation",
+      "role_in_v0_1": "Matriz tabular de la revision cualitativa Fase 10C de fichas auditables.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Tabla auxiliar versionable con casos revisados, juicios cualitativos y observaciones de auditoria humana.",
+      "exists": true,
+      "size_bytes": 2022,
+      "sha256": "7e0fbe3fb1600278480149acd43ec4883f1e609d9419a5d2cb5edc723fc865e3"
+    },
+    {
+      "path": "src/llm/explain_top3_nandina_prompt_v0.3.md",
+      "type": "prompt",
+      "role_in_v0_1": "Prompt Fase 10D para explicacion auditable prudente del Top-3 NANDINA recuperado.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Refuerza prohibicion de buscar, clasificar, reordenar o emitir clasificacion oficial; separa evidencia historica/normativa, detecta normativa generica y agrega requiere_revision_experta.",
+      "exists": true,
+      "size_bytes": 9082,
+      "sha256": "2a066856f0f72f29ccf69b1dad122b6929a6147374fb3ab0d03815cede8858c1"
+    },
+    {
+      "path": "docs/rubrica_auditabilidad_llm_top3_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Rubrica Fase 10D para evaluar auditabilidad de fichas LLM Top-3.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Evalua trazabilidad, verificabilidad, separacion historico/normativo, prudencia, consistencia con Top-3 fijo, deteccion de normativa generica y utilidad para auditoria humana.",
+      "exists": true,
+      "size_bytes": 4848,
+      "sha256": "71d977dff57171e112e4254ef6faba492f8ac5e96046483beb7d4a38abf4e727"
+    },
+    {
+      "path": "docs/mejora_ficha_auditable_llm_top3_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico Fase 10D de mejora de ficha auditable LLM Top-3.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta motivacion desde 10C, cambios respecto a 10B, respuesta a hallazgos cualitativos, decision de no cambiar metricas de recuperacion y pendientes para 10E.",
+      "exists": true,
+      "size_bytes": 4182,
+      "sha256": "8e3d9ee525c2c8fce146ea90c1df3c5d3e2105d15f7e87259cfeb0176166a1f0"
+    },
+    {
+      "path": "src/analysis/build_integrated_final_evaluation.py",
+      "type": "script",
+      "role_in_v0_1": "Script reproducible de evaluacion final integrada del piloto offline.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Lee metricas existentes desde JSON/CSV/Markdown, prioriza JSON/CSV, no reentrena modelos, no ejecuta LLM/Ollama/APIs remotas y genera outputs integrados.",
+      "exists": true,
+      "size_bytes": 30265,
+      "sha256": "9b701e60119a14ea732b9d65afb015e1f63e0fc55bc852892ddc1810fb9aa0ad"
+    },
+    {
+      "path": "docs/evaluacion_final_integrada_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Documento final de evaluacion integrada con resumen ejecutivo, tabla comparativa, hipotesis, decisiones, limites y pendientes.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Generado por src/analysis/build_integrated_final_evaluation.py a partir de resultados existentes; consolida la decision metodologica final del piloto offline.",
+      "exists": true,
+      "size_bytes": 7493,
+      "sha256": "4782a4e7ce2497ac3024dfcbf768fb544120762226af5b182222ba8de577f3cc"
+    },
+    {
+      "path": "outputs/evaluation/integrated_final_evaluation_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de la evaluacion final integrada v0.1.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye integrated_metrics.json/csv, integrated_summary.md, hypothesis_validation_matrix.csv/md y experimental_decisions_timeline.csv. No debe versionarse salvo decision explicita.",
       "exists": true,
       "size_bytes": null,
       "sha256": null

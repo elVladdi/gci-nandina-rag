@@ -529,6 +529,41 @@ Se documenta como output regenerable e ignorado por Git:
 
 - `outputs/evaluation/llm_explanation_top3_audit_sample_v0.1/`.
 
+## Revision cualitativa fichas auditables v0.1
+
+La Fase 10C revisa cualitativamente 10 fichas auditables producidas en Fase 10B. No ejecuta LLM, Ollama, OpenAI ni APIs remotas; no regenera outputs 10B y no amplia la muestra. La revision confirma utilidad para auditoria humana y trazabilidad formal, pero detecta debilidades en la lectura de evidencia normativa generica, predominio historico y conclusiones con tono a veces mas decisivo que el soporte declarado.
+
+Se versionan como documentacion metodologica:
+
+- `docs/revision_cualitativa_fichas_auditables_v0.1.md`: revision cualitativa, criterios de seleccion, hallazgos por ficha, hallazgos transversales y recomendacion de Fase 10D.
+- `docs/revision_cualitativa_fichas_auditables_v0.1.csv`: matriz tabular de revision cualitativa de las 10 fichas.
+
+## Mejora ficha auditable LLM Top-3 v0.1
+
+La Fase 10D es una mejora corta de diseno de explicacion auditable. No ejecuta LLM, no usa Ollama/OpenAI/APIs remotas, no regenera fichas y no modifica datos, splits ni outputs masivos. Su objetivo es trasladar los hallazgos de 10C a prompt, rubrica y formato de ficha, manteniendo al LLM como explicador del Top-3 fijo.
+
+Se versionan como codigo, prompt y documentacion metodologica:
+
+- `src/llm/explain_top3_nandina_prompt_v0.3.md`: prompt prudente que separa evidencia historica y normativa, detecta normativa generica/residual, prohibe clasificacion oficial y agrega `requiere_revision_experta`.
+- `docs/rubrica_auditabilidad_llm_top3_v0.1.md`: rubrica de trazabilidad, verificabilidad, separacion historico/normativo, prudencia, consistencia con Top-3 fijo, deteccion de normativa generica y utilidad para auditoria humana.
+- `docs/mejora_ficha_auditable_llm_top3_v0.1.md`: cierre metodologico de 10D, motivacion, cambios frente a 10B, respuesta a hallazgos 10C y pendientes para 10E.
+- `src/experiments/render_llm_explanation_audit_cards.py`: renderizador actualizado de forma compatible para mostrar campos nuevos cuando existan sin romper outputs 10B.
+
+## Evaluacion final integrada v0.1
+
+La evaluacion final integrada consolida metricas y decisiones ya producidas por las fases cerradas del piloto offline. No reentrena modelos, no ejecuta LLM/Ollama/OpenAI/APIs remotas, no modifica datos fuente, splits, Excel original ni outputs historicos. Cuando una metrica no existe o no es comparable, se marca explicitamente como `no evaluado` o `no comparable`.
+
+Resultado integrado principal: el historico real y el hibrido recomendado alcanzan `Top-1 = 0.8628`, `Top-10 = 0.9801`, `Recall@100 = 1.0000` y `MRR = 0.9062`; el pool normativo queda como respaldo/trazabilidad (`Recall@100 = 0.3489`, `Recall@200 = 0.6292`); el re-ranking LLM queda como resultado negativo (`Top-1 = 0.2000`, `MRR = 0.3083` frente a `MRR = 0.3542` original); y la explicacion LLM Top-3 queda respaldada como salida auditable (`JSON valido = 1.0000`, ranking preservado `1.0000`, score promedio de auditabilidad `0.9520`).
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/analysis/build_integrated_final_evaluation.py`: consolida metricas desde JSON/CSV/Markdown existentes, genera tabla integrada, matriz de hipotesis y linea de tiempo experimental.
+- `docs/evaluacion_final_integrada_v0.1.md`: documento final con resumen ejecutivo, tabla comparativa, hallazgos, validacion de hipotesis, decisiones metodologicas, limites y pendientes de reproducibilidad.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/integrated_final_evaluation_v0.1/`.
+
 ## Politica Git/no Git
 
 Debe versionarse en Git:

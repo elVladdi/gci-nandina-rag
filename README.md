@@ -30,8 +30,11 @@ El repositorio contiene las fases históricas cerradas y la actualización metod
 - **Fase 9C-A:** re-ranking LLM diagnostico minimo sobre 20 casos del pool operativo `historical_first_80_normative_20`; JSON valido y sin violaciones de pool, pero degrada Top-1/MRR, por lo que no escala a 9C-B.
 - **Fase 10A:** explicacion LLM+RAG diagnostica del Top-3 historico ya recuperado sobre 30 casos `data_aduanas` clase 87; `qwen2.5:7b-instruct` via Ollama local genera JSON valido 30/30, respeta Top-3 y ranking 30/30, no inventa codigos 30/30 y pasa a 10B como explicacion controlada, no como recuperacion ni re-ranking.
 - **Fase 10B:** explicacion LLM+RAG auditable formal del Top-3 historico sobre 50 casos `data_aduanas` clase 87 corregido; genera JSON tecnico y fichas auditables, preserva Top-3/ranking 50/50, cita evidencia historica y normativa por candidato 50/50 y pasa metodologicamente a 10C.
+- **Fase 10C:** revision cualitativa de 10 fichas auditables 10B; confirma trazabilidad formal y utilidad humana, pero detecta normativa generica tratada con excesiva fuerza, predominio historico y conclusiones a veces demasiado decisivas.
+- **Fase 10D:** mejora corta de diseno de ficha auditable, sin generacion masiva ni nuevas metricas de recuperacion; agrega prompt v0.3 prudente, rubrica de auditabilidad y render compatible con campos de revision experta.
+- **Evaluacion final integrada:** consolidacion offline de metricas y decisiones de Fases 4-10D, sin reentrenar modelos ni ejecutar LLM/Ollama/APIs remotas; genera tabla comparativa, matriz de hipotesis y linea de tiempo experimental.
 
-Decision metodologica vigente: el historico queda como fuente principal y lo normativo como backfill/trazabilidad. En `data_aduanas` clase 87 corregido, el hibrido recomendado conserva el orden historico temprano (`Top-1 = 0.8628`, `Top-10 = 0.9801`, `MRR = 0.9062`) y mantiene cobertura exacta completa a Top-100/Top-200; el normativo no desplaza candidatos historicos tempranos y queda como respaldo documental. El re-ranking LLM de 9C-A no debe escalarse porque degrada Top-1 y MRR. Fase 10B confirma que el LLM debe usarse como explicador auditable del Top-3 fijo, no como recuperador, clasificador ni re-ranker, y pasa metodologicamente a 10C.
+Decision metodologica vigente: el historico queda como fuente principal y lo normativo como backfill/trazabilidad. En `data_aduanas` clase 87 corregido, el hibrido recomendado conserva el orden historico temprano (`Top-1 = 0.8628`, `Top-10 = 0.9801`, `MRR = 0.9062`) y mantiene cobertura exacta completa a Top-100/Top-200; el normativo no desplaza candidatos historicos tempranos y queda como respaldo documental. El re-ranking LLM de 9C-A no debe escalarse porque degrada Top-1 y MRR. Fases 10B-10D confirman que el LLM debe usarse como explicador auditable del Top-3 fijo, no como recuperador, clasificador ni re-ranker. 10D mejora formato, rubrica y prompt; no cambia metricas de recuperacion. La evaluacion final integrada deja estas conclusiones consolidadas en `docs/evaluacion_final_integrada_v0.1.md`.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -844,6 +847,54 @@ Artefactos versionables:
 Outputs regenerables e ignorados por Git:
 
 - `outputs/evaluation/llm_explanation_top3_audit_sample_v0.1/`
+
+## Fase 10C: Revision Cualitativa de Fichas Auditables
+
+La Fase 10C revisa cualitativamente 10 fichas de la muestra 10B. No ejecuta LLM, no ejecuta Ollama, no usa OpenAI ni APIs remotas, no regenera outputs y no amplia la muestra.
+
+Resultado: las fichas son fuertes en trazabilidad formal y utiles para auditoria humana, pero la revision detecta que la evidencia normativa residual o generica (`Los demas`, `Partes`) puede aparecer con lenguaje demasiado fuerte, que la evidencia historica domina la explicacion y que algunas conclusiones requieren tono mas prudente.
+
+Artefactos versionables:
+
+- `docs/revision_cualitativa_fichas_auditables_v0.1.md`
+- `docs/revision_cualitativa_fichas_auditables_v0.1.csv`
+
+## Fase 10D: Mejora de Ficha Auditable Top-3
+
+La Fase 10D es una mejora corta de diseno, sin generacion masiva y sin nuevas metricas de recuperacion. No usa LLM ni regenera fichas. Su objetivo es incorporar los hallazgos 10C en prompt, rubrica y formato de ficha.
+
+Cambios principales:
+
+- Prompt v0.3 con tono prudente, prohibicion reforzada de clasificacion oficial, separacion historico/normativo, advertencias por normativa generica y campo `requiere_revision_experta`.
+- Rubrica de auditabilidad para trazabilidad, verificabilidad, separacion de evidencia, prudencia, consistencia con Top-3 fijo, deteccion de normativa generica y utilidad para auditoria humana.
+- Renderizador compatible con outputs 10B y preparado para mostrar campos nuevos de 10D cuando existan.
+
+Artefactos versionables:
+
+- `src/llm/explain_top3_nandina_prompt_v0.3.md`
+- `docs/rubrica_auditabilidad_llm_top3_v0.1.md`
+- `docs/mejora_ficha_auditable_llm_top3_v0.1.md`
+- `src/experiments/render_llm_explanation_audit_cards.py`
+
+## Evaluacion Final Integrada v0.1
+
+La evaluacion final integrada consolida resultados existentes de recuperacion normativa, recuperacion historica, pool hibrido, re-ranking LLM diagnostico, explicacion LLM auditable, revision cualitativa y mejora de ficha. No reentrena modelos, no ejecuta LLM/Ollama/OpenAI/APIs remotas y no modifica datos fuente, splits, Excel original ni outputs historicos.
+
+Comando reproducible:
+
+```powershell
+python src/analysis/build_integrated_final_evaluation.py
+```
+
+Outputs nuevos:
+
+- `outputs/evaluation/integrated_final_evaluation_v0.1/integrated_metrics.json`
+- `outputs/evaluation/integrated_final_evaluation_v0.1/integrated_metrics.csv`
+- `outputs/evaluation/integrated_final_evaluation_v0.1/integrated_summary.md`
+- `outputs/evaluation/integrated_final_evaluation_v0.1/hypothesis_validation_matrix.csv`
+- `outputs/evaluation/integrated_final_evaluation_v0.1/hypothesis_validation_matrix.md`
+- `outputs/evaluation/integrated_final_evaluation_v0.1/experimental_decisions_timeline.csv`
+- `docs/evaluacion_final_integrada_v0.1.md`
 
 ## Manifiesto de Artefactos
 

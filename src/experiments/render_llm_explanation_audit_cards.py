@@ -87,6 +87,17 @@ def _render_list(values: Sequence[Any]) -> str:
     return "; ".join(items) if items else "No registrado."
 
 
+def _render_bool(value: Any) -> str:
+    if isinstance(value, bool):
+        return "si" if value else "no"
+    text = _clean(value).lower()
+    if text in {"true", "1", "si", "yes"}:
+        return "si"
+    if text in {"false", "0", "no"}:
+        return "no"
+    return "No registrado."
+
+
 def _render_card(
     sample: Mapping[str, str],
     payload: Mapping[str, Any],
@@ -152,6 +163,12 @@ def _render_card(
                 f"- Atributos tecnicos: {_render_list(_as_list(summary.get('atributos_tecnicos')))}",
                 f"- Datos faltantes relevantes: {_render_list(_as_list(summary.get('datos_faltantes_relevantes')))}",
                 "",
+                "### Alertas de revision",
+                "",
+                f"- Advertencias globales: {_render_list(_as_list(parsed.get('advertencias_globales')))}",
+                f"- Requiere revision experta: {_render_bool(parsed.get('requiere_revision_experta'))}",
+                f"- Motivo de revision experta: {_clean(parsed.get('motivo_revision_experta')) or 'No registrado.'}",
+                "",
                 "### Candidatos explicados",
                 "",
             ]
@@ -168,24 +185,34 @@ def _render_card(
                     f"- Razon de soporte: {_clean(item.get('razon_de_soporte')) or 'No registrada.'}",
                     f"- Advertencias: {_render_list(_as_list(item.get('advertencias')))}",
                     "",
-                    "| Evidencia historica citada | Fragmento usado |",
-                    "| --- | --- |",
+                    "| Evidencia historica citada | Fragmento usado | Lectura historica |",
+                    "| --- | --- | --- |",
                 ]
             )
             for evidence in _as_list(item.get("evidencia_historica_usada")):
                 if isinstance(evidence, dict):
-                    lines.append(f"| `{_md(evidence.get('candidate_id_unico'))}` | {_md(evidence.get('fragmento_usado'))} |")
+                    lines.append(
+                        f"| `{_md(evidence.get('candidate_id_unico'))}` | {_md(evidence.get('fragmento_usado'))} | "
+                        f"{_md(evidence.get('lectura_historica'))} |"
+                    )
             if not _as_list(item.get("evidencia_historica_usada")):
-                lines.append("| No registrada | No registrado |")
-            lines.extend(["", "| Evidencia normativa citada | Texto citado | Limitaciones |", "| --- | --- | --- |"])
+                lines.append("| No registrada | No registrado | No registrado |")
+            lines.extend(
+                [
+                    "",
+                    "| Evidencia normativa citada | Texto citado | Tipo | Limitaciones |",
+                    "| --- | --- | --- | --- |",
+                ]
+            )
             for evidence in _as_list(item.get("evidencia_normativa_usada")):
                 if isinstance(evidence, dict):
                     lines.append(
                         f"| `{_md(evidence.get('evidence_id'))}` | {_md(evidence.get('texto_citado'))} | "
+                        f"{_md(evidence.get('tipo_evidencia_normativa')) or 'No registrado'} | "
                         f"{_render_list(_as_list(evidence.get('limitaciones')))} |"
                     )
             if not _as_list(item.get("evidencia_normativa_usada")):
-                lines.append("| No registrada | No registrado | No registrado |")
+                lines.append("| No registrada | No registrado | No registrado | No registrado |")
             lines.append("")
 
         comparison = parsed.get("comparacion_top3") if isinstance(parsed.get("comparacion_top3"), dict) else {}
@@ -195,6 +222,8 @@ def _render_card(
                 "### Comparacion Top-3",
                 "",
                 f"- Criterios comparados: {_render_list(_as_list(comparison.get('criterios_comparados')))}",
+                f"- Comparacion historica: {_clean(comparison.get('comparacion_historica')) or 'No registrada.'}",
+                f"- Comparacion normativa: {_clean(comparison.get('comparacion_normativa')) or 'No registrada.'}",
                 f"- Mayor soporte declarado: rank `{_clean(best.get('rank_original'))}`, NANDINA `{_clean(best.get('nandina'))}`.",
                 f"- Motivo: {_clean(best.get('motivo')) or 'No registrado.'}",
                 f"- Menor soporte de alternativos: {_render_list(_as_list(comparison.get('por_que_los_otros_tienen_menor_soporte')))}",
