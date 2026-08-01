@@ -1,0 +1,11 @@
+case_id,id_unico,audit_score,categoria_revision,claridad,trazabilidad,pertinencia,incertidumbre,utilidad_auditoria,riesgo_sobrequestion,decision,mejora_recomendada
+DA-EVAL-00316,118-2026-10-096423-00-36,1.0,alto,alto,alto,alto,medio,alto,bajo,sirve,Agregar alerta visible para verificar part number cuando no coincide exactamente.
+DA-EVAL-00520,118-2026-10-128583-00-2569,1.0,alto,alto,alto,alto,medio,alto,bajo,sirve,Distinguir normativa generica de normativa especifica pero no pertinente.
+DA-EVAL-00778,118-2026-10-146957-00-1227,1.0,alto,alto,alto,medio,medio,alto,medio,sirve_con_cautela,Reducir fuerza de la conclusion cuando la norma sea residual o de partes.
+DA-EVAL-00047,118-2026-10-006732-00-1,0.9333333333333333,medio,alto,alto,medio,bajo,medio,medio,sirve_con_cautela,Separar propulsion de material y marcar Los demas como baja especificidad normativa.
+DA-EVAL-00059,118-2026-10-007407-00-1,0.9333333333333333,medio,medio,alto,bajo,bajo,medio,medio,sirve_parcialmente,Exigir atributos decisivos de vehiculos como cilindrada combustible y subpartida.
+DA-EVAL-00067,118-2026-10-008011-00-42,0.9333333333333333,medio,alto,alto,alto,medio,alto,medio,sirve,Calibrar la conclusion con el soporte medio y pedir verificacion experta explicita.
+DA-EVAL-00021,118-2026-10-002710-00-3,0.8666666666666667,bajo,medio,alto,medio,alto,medio,medio,sirve_como_alerta,Obligar coincidencia y diferencia por candidato o justificar ausencia.
+DA-EVAL-00053,118-2026-10-006732-00-45,0.8666666666666667,bajo,medio,alto,bajo,alto,medio,bajo,sirve_como_alerta,Agregar escalamiento cuando todos los candidatos tienen soporte bajo o falta conclusion.
+DA-EVAL-00064,118-2026-10-008011-00-34,1.0,no_rank1,medio,alto,medio,medio,medio,medio,sirve_parcialmente,Resaltar disputa entre evidencia historica de parte y contexto funcional del vehiculo.
+DA-EVAL-00429,118-2026-10-120519-00-28,1.0,no_rank1,alto,alto,medio,bajo,medio,alto,sirve_parcialmente,Incluir indicador externo para revision cuando la NANDINA esperada queda fuera del Top-3.
