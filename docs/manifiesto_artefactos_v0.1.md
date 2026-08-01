@@ -21,12 +21,20 @@ El indice `data/processed/indexes/bm25_nandina8.pkl` se considera artefacto de a
 
 ## Fuente operativa data_aduanas
 
-La Fase 2 incorpora `data_aduanas` como fuente operativa normalizada para la futura actualizacion de Fase 3. La fuente local fisica es `data/Series - Descripciones.xlsx`, procesada por `src/ingestion/sunat_series_parser.py`; el nombre metodologico de la fuente es `data_aduanas`.
+La Fase 2 incorpora `data_aduanas` como fuente operativa normalizada y la Fase 3 actualizada la usa para construir particiones experimentales de `Clase = 87`. La fuente local fisica es `data/Series - Descripciones.xlsx`, procesada por `src/ingestion/sunat_series_parser.py`; el nombre metodologico de la fuente es `data_aduanas`.
 
 Se documentan como trazabilidad versionable:
 
 - `src/ingestion/sunat_series_parser.py`: parser de ingesta.
 - `docs/protocolo_ingesta_sunat_series_v0.1.md`: protocolo de ingesta asociado, si se versiona junto con Fase 2.
+- `src/evaluation/build_data_aduanas_splits.py`: constructor reproducible de particiones `data_aduanas` clase 87.
+- `docs/protocolo_data_aduanas_clase87_v0.1.md`: protocolo de Fase 3 actualizada.
+- `docs/ficha_data_aduanas_clase87_v0.1.md`: ficha de las particiones clase 87.
+- `docs/politica_curacion_data_aduanas_clase87_v0.1.md`: politica de curacion y duplicados `id_unico`.
+- `data/processed/data_aduanas_historico_clase87_v0.1.csv`: historico congelado, 3,000 filas.
+- `data/processed/data_aduanas_devset_clase87_v0.1.csv`: desarrollo congelado, 100 filas.
+- `data/processed/data_aduanas_evalset_clase87_v0.1.csv`: evaluacion congelada, 1,006 filas.
+- `data/processed/data_aduanas_splits_clase87_v0.1_metadata.json`: metadata de generacion, curacion, checksums y validacion.
 
 Se documentan como fuente local y artefactos regenerables/locales:
 
@@ -36,10 +44,11 @@ Se documentan como fuente local y artefactos regenerables/locales:
 - `data/interim/sunat_series_descripciones_normalized_metadata.json`: metadata de normalizacion, `ignored`, `local_only` y `regenerable`.
 - `outputs/audits/sunat_series_labels_v0.1/labels.csv`: auditoria de etiquetas, `ignored`, `local_only` y `regenerable`.
 - `outputs/audits/sunat_series_labels_v0.1/id_unico_duplicates.csv`: auditoria de duplicados `id_unico`, `ignored`, `local_only` y `regenerable`.
+- `outputs/audits/data_aduanas_splits_clase87_v0.1/`: auditorias regenerables de curacion, duplicados y distribucion por split, `ignored`, `local_only` y `regenerable`.
 
-La normalizacion disponible registra 107 DAM detectadas, 11,320 series normalizadas, 11,320 filas con `id_unico` y 81 filas con advertencias de parseo. El alcance operativo proyectado para las particiones finales es `Clase = 87` (4,232 instancias y 69 NANDINAS distintas). Historico, desarrollo y evaluacion deberan conservar las mismas columnas y no contener `id_unico` repetidos.
+La normalizacion disponible registra 107 DAM detectadas, 11,320 series normalizadas, 11,320 filas con `id_unico` y 81 filas con advertencias de parseo. El alcance operativo de las particiones finales es `Clase = 87`: 4,232 instancias fuente, 69 NANDINAS distintas, 4,106 filas curadas finales, 126 filas excluidas por duplicados `id_unico`, sin exclusiones por campos obligatorios o calidad. Historico, desarrollo y evaluacion conservan las mismas columnas y no contienen `id_unico` repetidos ni solapados.
 
-Esta incorporacion actualiza la trazabilidad de Fase 2; no reemplaza todavia el evalset v0.1 de Fase 3 ni cambia los datasets experimentales vigentes.
+Esta incorporacion actualiza la Fase 3: el evalset v0.1 de 600 casos se conserva como artefacto historico/versionado, pero las particiones `data_aduanas` clase 87 pasan a ser la base metodologica para fases futuras una vez validadas.
 
 ## Evalset final v0.1
 
@@ -104,6 +113,24 @@ Se documentan como outputs regenerables e ignorados por Git:
 
 Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde los scripts versionados, el evalset final, el indice BM25 y la configuracion operativa.
 
+### Actualizacion BM25 data_aduanas clase 87 v0.1
+
+La actualizacion de Fase 4 evalua el baseline BM25 normativo plano sobre `data/processed/data_aduanas_evalset_clase87_v0.1.csv`, usando `DESCRIPCION DE MERCANCIAS CONCATENADA` como consulta y `NANDINA` como etiqueta esperada. La corrida no ejecuta LLM ni Text2Trade y no modifica el evalset historico v0.1 ni los splits `data_aduanas` de Fase 3.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_bm25_data_aduanas.py`: evalua el indice normativo `data/processed/indexes/bm25_nandina8.pkl` sobre el evalset `data_aduanas` clase 87, con Top-k, MRR, Recall@50/100 y metricas jerarquicas Partida/Sub Partida/Clase.
+- `docs/evaluacion_bm25_data_aduanas_clase87_v0.1.md`: cierre metodologico de la evaluacion BM25 normativa sobre `data_aduanas` clase 87.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/results.csv`.
+- `outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/metrics.json`.
+- `outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/summary.md`.
+- `outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/failure_sample.csv`.
+
+Resultado de cierre sobre 1,006 casos: Top-1 = 0.0229, Top-10 = 0.0467, MRR = 0.0312, Recall@50 = 0.0616 y Recall@100 = 0.0626. A nivel jerarquico, Clase@100 = 0.8887, Sub Partida@100 = 0.0755 y Partida@100 = 0.1252. Estos valores no son comparables de forma pareada con el BM25 historico de 600 casos porque cambian fuente, alcance y distribucion del evalset.
+
 ## Evaluacion Text2Trade dense v0.1
 
 La Fase 5 formaliza una evaluacion reproducible del artefacto Text2Trade por fuerza bruta sobre `data/processed/evalset_v0.1.csv`, comparable contra el baseline BM25. No se usa HNSW porque `data/processed/indexes/text2trade_nandina8_v1/index/hnsw.index` esta ausente, no se reconstruye indice y no se ejecuta LLM.
@@ -124,6 +151,28 @@ Se documentan como outputs regenerables e ignorados por Git:
 - `outputs/evaluation/text2trade_dense_eval_v0.1/comparison_bm25_dense.md`.
 
 Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde los scripts versionados, el evalset final y los artefactos Text2Trade locales congelados.
+
+### Actualizacion Text2Trade dense data_aduanas clase 87 v0.1
+
+La actualizacion de Fase 5 repite la evaluacion Dense Text2Trade vs BM25 sobre `data/processed/data_aduanas_evalset_clase87_v0.1.csv`, usando `DESCRIPCION DE MERCANCIAS CONCATENADA` como consulta y `NANDINA` como etiqueta esperada. La corrida usa fuerza bruta sobre los artefactos Text2Trade locales porque `hnsw.index` esta ausente; no reconstruye HNSW, no ejecuta LLM, no ejecuta Ollama y no usa APIs remotas. La Fase 5 historica de 600 casos se conserva como artefacto previo y no es comparable de forma directa con esta actualizacion.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_dense_text2trade_data_aduanas.py`: evalua Text2Trade dense sobre el evalset `data_aduanas` clase 87, con Top-k, MRR, Recall@50/100 y metricas jerarquicas Partida/Sub Partida/Clase.
+- `src/analysis/compare_bm25_dense_data_aduanas.py`: compara BM25 clase 87 contra Dense clase 87, reportando deltas, casos ganados/perdidos/ambos recuperan/ambos fallan y comparacion jerarquica.
+- `docs/evaluacion_text2trade_dense_data_aduanas_clase87_v0.1.md`: cierre metodologico de la evaluacion dense actualizada y su comparacion contra BM25.
+
+Se documentan como outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/results.csv`.
+- `outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/metrics.json`.
+- `outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/summary.md`.
+- `outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/failure_sample.csv`.
+- `outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/comparison_bm25_dense_data_aduanas.json`.
+- `outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/comparison_bm25_dense_data_aduanas.md`.
+- `outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/case_comparison.csv`.
+
+Resultado de cierre sobre 1,006 casos: Dense obtiene Top-1 = 0.0000, Top-10 = 0.0000, MRR = 0.0000, Recall@50 = 0.0010 y Recall@100 = 0.0010. A nivel jerarquico, Partida@100 = 0.2028, Sub Partida@100 = 0.0288 y Clase@100 = 0.8618. Frente a BM25 clase 87, Dense gana 0 casos Top-10, pierde 47, ambos recuperan 0 y ambos fallan 959. La decision metodologica es no promover Dense como recuperador principal ni sustituto de BM25 para este nuevo evalset.
 
 ## Evaluacion BM25 dual backfill evalset v0.1
 
@@ -154,6 +203,21 @@ Se documentan como outputs regenerables e ignorados por Git:
 
 Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde el script versionado, el evalset final y los indices BM25 locales congelados.
 
+### Actualizacion Fase 6B/6C data_aduanas clase 87 v0.1
+
+La actualizacion reevalua de forma acotada las variantes normativas previamente definidas sobre `data/processed/data_aduanas_evalset_clase87_v0.1.csv`. No rehace la exploracion jerarquica, no repite todas las ablaciones antiguas y no ajusta reglas mirando el evalset clase 87.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_bm25_hierarchical_data_aduanas.py`: evalua `BM25_flat_current`, `BM25_hierarchical_v0.1` y `BM25_dual_protected_top_5_backfill` sobre `data_aduanas` clase 87, usando `DESCRIPCION DE MERCANCIAS CONCATENADA` como consulta y `NANDINA` como etiqueta esperada.
+- `docs/evaluacion_bm25_jerarquico_dual_data_aduanas_clase87_v0.1.md`: cierre metodologico de la reinterpretacion Fase 6B/6C sobre clase 87.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/bm25_hierarchical_data_aduanas_clase87_v0.1/`.
+
+Resultado de cierre sobre 1,006 casos: `BM25_hierarchical_v0.1` obtiene Top-1 = 0.0249, Top-10 = 0.0497, MRR = 0.0385 y Recall@100 = 0.3449; `BM25_dual_protected_top_5_backfill` obtiene Top-1 = 0.0239, Top-10 = 0.0487, MRR = 0.0340 y Recall@100 = 0.1948. Frente al BM25 plano clase 87, el jerarquico aporta mayor cobertura exacta profunda y el dual queda como cobertura auxiliar, pero ninguno se promueve como ranking principal para clase 87.
+
 ## Evaluacion candidate pool v0.1
 
 La Fase 7A construye y evalua un pool combinado de candidatos NANDINA usando `BM25_hierarchical_v0.1` como ranking documental principal y `BM25_dual_protected_top_5_backfill` como fuente auxiliar de expansion. La evaluacion corregida separa recall jerarquico, recall dual, union disponible (`union_oracle`) y pool final recortado (`final_pool`). La corrida no ejecuta LLM ni Text2Trade, no modifica devset/evalset/Excel fuente y no ajusta reglas mirando resultados del evalset.
@@ -169,6 +233,21 @@ Se documentan como outputs regenerables e ignorados por Git:
 - `outputs/evaluation/candidate_pool_evalset_v0.1/`.
 
 Estos outputs no se fuerzan al repositorio porque pueden regenerarse desde el script versionado, devset/evalset y los indices BM25 locales congelados.
+
+### Actualizacion Candidate Pool Normativo data_aduanas clase 87 v0.1
+
+La actualizacion de Fase 7A construye y evalua un pool normativo sobre `data/processed/data_aduanas_evalset_clase87_v0.1.csv`, usando `DESCRIPCION DE MERCANCIAS CONCATENADA` como consulta y `NANDINA` como etiqueta esperada. La corrida no usa historico real como fuente de recuperacion, no usa Dense, no ejecuta LLM, Ollama, Text2Trade ni APIs remotas. El historico real queda reservado para Fase 9.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/build_candidate_pool_data_aduanas.py`: construye pools normativos clase 87 con `BM25_hierarchical_v0.1` y `BM25_dual_protected_top_5_backfill`; calcula `hierarchical_at_K`, `dual_at_K`, `union_oracle_at_K`, `final_pool_at_K` y metricas jerarquicas de Clase/Partida/Sub Partida.
+- `docs/evaluacion_candidate_pool_data_aduanas_clase87_v0.1.md`: cierre metodologico de la actualizacion Fase 7A normativa sobre `data_aduanas` clase 87.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/candidate_pool_data_aduanas_clase87_v0.1/`.
+
+Resultado de cierre sobre 1,006 casos: `union_oracle@100 = 0.3658`, `union_oracle@200 = 0.6372`. El mejor pool operativo a Top-100 es `hierarchical_70_dual_backfill_30`, con `final_pool@100 = 0.3489`, `Partida@100 = 0.5885`, `Sub Partida@100 = 0.5268` y `Clase@100 = 0.7445`. A Top-200, `hierarchical_80_dual_backfill_20` y `hierarchical_70_dual_backfill_30` empatan en exactitud (`final_pool@200 = 0.6272`). El bloque normativo queda como respaldo/trazabilidad, no como fuente principal frente al pool historico de Fase 9.
 
 ## Evaluacion LLM rerank pool v0.1
 
@@ -307,6 +386,25 @@ Se documentan como outputs regenerables e ignorados por Git:
 
 - `outputs/evaluation/historical_examples_leave_one_out_v0.1/`.
 
+### Actualizacion recuperacion historica data_aduanas clase 87 v0.1
+
+La actualizacion de Fase 9A reemplaza el banco leave-one-out por un historico real separado: `data/processed/data_aduanas_historico_clase87_v0.1.csv` (3,000 filas) contra `data/processed/data_aduanas_evalset_clase87_v0.1.csv` (1,006 filas). Usa `DESCRIPCION DE MERCANCIAS CONCATENADA` como consulta y `NANDINA` como etiqueta esperada.
+
+La corrida valida `id_unico_overlap_count = 0`, no permite self-match entre particiones, deduplica el ranking final por `NANDINA` y no usa BM25 normativo como fuente de candidatos. Tampoco usa LLM, Ollama, Text2Trade, OpenAI ni APIs remotas.
+
+Resultado de cierre sobre 1,006 casos: `Top-1 = 0.8638`, `Top-10 = 0.9791`, `Recall@100 = 0.9980` y `MRR = 0.9071`. A nivel jerarquico logra `Partida@100 = 1.0000`, `Sub Partida@100 = 1.0000` y `Clase@100 = 1.0000`. Solo 2 casos quedan fuera de Top-100; ambos pertenecen a NANDINAs con bajo soporte historico (`87089911` y `87089950`).
+
+Comparacion metodologica: el mejor pool normativo Fase 7A sobre `data_aduanas` clase 87 alcanza `final_pool@100 = 0.3489` y `final_pool@200 = 0.6272`, por lo que la recuperacion historica real pasa a ser la fuente dominante recomendada para Fase 9B. El bloque normativo queda como backfill y trazabilidad, especialmente para codigos con poco o ningun soporte historico.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/evaluate_historical_retrieval_data_aduanas.py`: evalua recuperacion BM25 contra historico real `data_aduanas` clase 87, valida ausencia de solape por `id_unico`, deduplica candidatos por `NANDINA`, calcula metricas exactas, jerarquicas y por soporte historico, y genera analisis de fallos/rescates.
+- `docs/evaluacion_recuperacion_historica_data_aduanas_clase87_v0.1.md`: cierre metodologico de la actualizacion Fase 9A sobre historico real separado.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.1/`.
+
 ## Evaluacion pool hibrido historico normativo v0.1
 
 La Fase 9B combina recuperacion historica con fuentes normativas/lexicales ya generadas en Fase 7A y Fase 8B. El objetivo es mantener la fortaleza historica cuando existe precedente y usar lo normativo como trazabilidad y respaldo para singleton. La corrida no usa LLM, Ollama, OpenAI ni APIs remotas.
@@ -327,6 +425,27 @@ Se versionan como codigo y documentacion metodologica:
 Se documenta como output regenerable e ignorado por Git:
 
 - `outputs/evaluation/hybrid_historical_normative_pool_v0.1/`.
+
+### Actualizacion pool hibrido data_aduanas clase 87 v0.1
+
+La actualizacion de Fase 9B combina el historico real de Fase 9A (`outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.1/`) con el pool normativo Fase 7A (`outputs/evaluation/candidate_pool_data_aduanas_clase87_v0.1/`). Usa como fuente normativa `hierarchical_70_dual_backfill_30`, el mejor pool operativo normativo clase 87 a Top-100.
+
+La corrida valida cero solape por `id_unico` entre historico y evalset, no usa la NANDINA esperada para decidir reglas, tolera casos sin candidatos normativos y no ejecuta LLM, Ollama, Text2Trade, Dense, OpenAI ni APIs remotas.
+
+Estrategias evaluadas: `historical_only`, `historical_first_90_normative_10`, `historical_first_80_normative_20`, `historical_first_70_normative_30`, `historical_first_50_normative_50`, `historical_with_normative_backfill_if_low_support`, `historical_with_normative_backfill_if_missing_code` y `normative_only_reference`.
+
+Resultado de cierre sobre 1,006 casos: `historical_only` logra `Top-1 = 0.8638`, `Top-10 = 0.9791`, `Recall@100 = 0.9980`, `Recall@200 = 0.9980` y `MRR = 0.9071`. La estrategia recomendada `historical_with_normative_backfill_if_missing_code` conserva `Top-1 = 0.8638`, `Top-10 = 0.9791`, `Recall@100 = 0.9980` y `MRR = 0.9071`, y sube `Recall@200` a `0.9990`. El normativo puro queda como referencia: `Top-1 = 0.0249`, `Top-10 = 0.0497`, `Recall@100 = 0.3489`, `Recall@200 = 0.6272` y `MRR = 0.0407`.
+
+Decision de cierre: el historico solo se mantiene como ranking operativo temprano. El hibrido recomendado agrega backfill normativo posterior para trazabilidad y robustez futura, pero no mejora Top-100. Como todas las NANDINAS del evalset tienen soporte historico, el valor del backfill para codigos ausentes debe validarse despues con particiones temporales o historicos ampliados.
+
+Se versionan como codigo y documentacion metodologica:
+
+- `src/experiments/build_hybrid_pool_data_aduanas.py`: construye pools hibridos clase 87 desde outputs regenerables de Fase 9A y Fase 7A, valida checksums e inexistencia de solape `id_unico`, calcula metricas exactas, jerarquicas, por soporte historico, contribucion por fuente y casos de bajo soporte.
+- `docs/evaluacion_pool_hibrido_data_aduanas_clase87_v0.1.md`: cierre metodologico de la actualizacion Fase 9B sobre `data_aduanas` clase 87.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/hybrid_pool_data_aduanas_clase87_v0.1/`.
 
 ## Evaluacion LLM rerank hybrid pool sample v0.1
 

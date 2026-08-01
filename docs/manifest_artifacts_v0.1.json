@@ -62,11 +62,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 29645,
-      "sha256": "c23a731115c113ac2a2b78e89e529397fcfa2427cb5d1e12847db94e8a4178b8",
+      "size_bytes": 42275,
+      "sha256": "697d810bf0401347ce9db7ce48c14452db62013e2c710610f4487436ab9443a1",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documento derivado del manifiesto JSON para revision humana; incluye politica Git/no Git de `data_aduanas` y sus artefactos regenerables/locales."
+      "methodological_notes": "Actualizado con el pool hibrido real Fase 9B sobre data_aduanas clase 87, su documento de cierre y outputs regenerables."
     },
     {
       "path": "docs/evaluacion_bm25_baseline_v0.1.md",
@@ -213,6 +213,94 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable usado para inspeccion cualitativa; no se fuerza su versionado."
+    },
+    {
+      "path": "src/experiments/evaluate_bm25_data_aduanas.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 4 actualizada: evaluador BM25 normativo plano sobre evalset data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 19031,
+      "sha256": "16ec6aa161f85408afc21ca008f558ce27abf51907b3fc328e7a8b630c2ee1c3",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Lee data_aduanas_evalset_clase87_v0.1.csv, usa DESCRIPCION DE MERCANCIAS CONCATENADA como consulta y NANDINA como etiqueta esperada, evalua el indice normativo bm25_nandina8.pkl y calcula Top-k, MRR, Recall@50/100 y metricas jerarquicas Partida/Sub Partida/Clase. No ejecuta LLM ni Text2Trade."
+    },
+    {
+      "path": "docs/evaluacion_bm25_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 4 actualizada BM25 normativo sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 2645,
+      "sha256": "d46d80f6f876563f37995599ac08cdfc5b6ef63d5477a872ea2b3ca3517318b9",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, fuente data_aduanas, alcance Clase 87, evalset, columnas, indice BM25, metricas, resultados, lectura metodologica, advertencia de comparabilidad con Fase 4 historica y decision sobre el rol del BM25 normativo."
+    },
+    {
+      "path": "outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/results.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resultados por caso de la evaluacion BM25 normativa sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 1423614,
+      "sha256": "b961e39bf8b3e64eb2873310aa1556279446337af98ea7a69552723a98540b87",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25_data_aduanas; no se fuerza su versionado."
+    },
+    {
+      "path": "outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/metrics.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Metricas agregadas de la evaluacion BM25 normativa sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 4143,
+      "sha256": "668212195aee5c96ea9ff3adaef556ecac3aa52b06b43a5c4dd25f3fb7b77362",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; registra Top-k, MRR, Recall@50/100, metricas jerarquicas, validaciones y controles de no uso de LLM/Text2Trade."
+    },
+    {
+      "path": "outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/summary.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible regenerable de la evaluacion BM25 normativa sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 2645,
+      "sha256": "d46d80f6f876563f37995599ac08cdfc5b6ef63d5477a872ea2b3ca3517318b9",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; coincide con el documento versionable de cierre generado para esta subfase."
+    },
+    {
+      "path": "outputs/evaluation/bm25_data_aduanas_clase87_evalset_v0.1/failure_sample.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Muestra cualitativa de fallos Top-10 de la evaluacion BM25 normativa sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 63731,
+      "sha256": "d7c28ca2a9829f18bd0c7320bbe911318af3d0af10458dca304dac22232efce6",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable para inspeccion cualitativa; no se fuerza su versionado."
     },
     {
       "path": "data/raw/Arancel 2022.pdf",
@@ -928,6 +1016,153 @@
       "size_bytes": 778
     },
     {
+      "path": "src/experiments/evaluate_dense_text2trade_data_aduanas.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 5 actualizada: evaluador Text2Trade dense por fuerza bruta sobre evalset data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Lee data_aduanas_evalset_clase87_v0.1.csv, usa DESCRIPCION DE MERCANCIAS CONCATENADA como consulta y NANDINA como etiqueta esperada, carga artefactos Text2Trade locales, calcula Top-k, MRR, Recall@50/100 y metricas jerarquicas Partida/Sub Partida/Clase. No ejecuta LLM, Ollama ni APIs remotas; usa fuerza bruta si hnsw.index esta ausente.",
+      "sha256": "7724007d2fe96a74ef64dcd46813478575ef89c907f238c3f14ee8f160ef6afa",
+      "exists": true,
+      "size_bytes": 19712
+    },
+    {
+      "path": "src/analysis/compare_bm25_dense_data_aduanas.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 5 actualizada: comparacion BM25 normativo vs Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Compara outputs BM25 data_aduanas clase 87 contra outputs dense clase 87, reporta deltas Top-1/Top-10/MRR/Recall@100, casos ganados/perdidos/ambos recuperan/ambos fallan y metricas jerarquicas. No ejecuta LLM, Ollama ni APIs remotas.",
+      "sha256": "77cab8548f0fcf8073b557ee02bc4d5b5e9617e63258c95a5b1bb8df1900975c",
+      "exists": true,
+      "size_bytes": 14082
+    },
+    {
+      "path": "docs/evaluacion_text2trade_dense_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 5 actualizada Text2Trade dense sobre data_aduanas clase 87 y comparacion contra BM25.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, fuente data_aduanas, alcance Clase 87, evalset, columnas, artefacto dense, fuerza bruta vs HNSW, metricas, comparacion contra BM25 actualizado, decision metodologica y advertencia de comparabilidad con Fase 5 historica de 600 casos.",
+      "sha256": "2e3aee0b064785dedef1e39c3875712e4b4779ebdc24e8bc5ab22f6d7560ea1d",
+      "exists": true,
+      "size_bytes": 4501
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/results.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resultados por caso de la evaluacion Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": "21098e3a581f2b088c12682603a1b292de3637848296c486249a77fed6ce2362",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_dense_text2trade_data_aduanas; no se fuerza su versionado.",
+      "exists": true,
+      "size_bytes": 1075579
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/metrics.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Metricas agregadas de la evaluacion Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": "7914244e89a64ec305b528297fc540842c31b4f15319d2e81949b6a89c7da3fa",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; registra Top-k, MRR, Recall@50/100, metricas jerarquicas, validaciones, uso local del modelo y fuerza bruta por ausencia de hnsw.index.",
+      "exists": true,
+      "size_bytes": 4748
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/summary.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible regenerable de la evaluacion Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": "a798b017f7ce1b93787e2f87e492a5b2722c822c40477bb00bc687dde30a34a2",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no sustituye el documento versionable de cierre.",
+      "exists": true,
+      "size_bytes": 1788
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/failure_sample.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Muestra cualitativa de fallos Top-10 de la evaluacion Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": "97bf5d090dd84632ac55a6c0c58b283cd8c9fe464312bfc557578020c4b16a74",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable para inspeccion cualitativa; no se fuerza su versionado.",
+      "exists": true,
+      "size_bytes": 56858
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/comparison_bm25_dense_data_aduanas.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Comparacion machine-readable BM25 vs Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": "95f1fca9b6be1e019a3306977232f76faaaba035708043b899613e90f9e85b26",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.analysis.compare_bm25_dense_data_aduanas; no se fuerza su versionado.",
+      "exists": true,
+      "size_bytes": 5898
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/comparison_bm25_dense_data_aduanas.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible de la comparacion BM25 vs Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": "fbadc6049c3f6875f2b9cc2dd7e5e5000d8d2b21ce0b028c13ac64645e3a2180",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable; no se fuerza su versionado.",
+      "exists": true,
+      "size_bytes": 1635
+    },
+    {
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.1/case_comparison.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Comparacion por caso BM25 vs Text2Trade dense sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "sha256": "b2535bdfb5e927d93af0c578ca92dc4be4f62dcb9ccbf72a727b4dbd81db4e01",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable opcional para auditar casos ganados, perdidos, ambos recuperan y ambos fallan; no se fuerza su versionado.",
+      "exists": true,
+      "size_bytes": 395701
+    },
+    {
       "path": "data/processed/indexes/text2trade_nandina8_v1/index/id_map.json",
       "type": "model_artifact",
       "role_in_v0_1": "Mapa local de ids del artefacto Text2Trade, necesario para convertir filas vectoriales en codigos NANDINA.",
@@ -1056,6 +1291,49 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Contiene candidate_pool.csv, metricas JSON, resumen, resumen por caso y solapamiento de fuentes. No se fuerza su versionado en Git.",
+      "sha256": null,
+      "exists": true,
+      "size_bytes": null
+    },
+    {
+      "path": "src/experiments/build_candidate_pool_data_aduanas.py",
+      "type": "script",
+      "role_in_v0_1": "Actualizacion Fase 7A: constructor/evaluador de candidate pool normativo sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Usa solo fuentes normativas BM25_hierarchical_v0.1 y BM25_dual_protected_top_5_backfill. Evalua hierarchical_only, dual_only, hierarchical_first_100, hierarchical_80_dual_backfill_20 y hierarchical_70_dual_backfill_30; reporta hierarchical_at_K, dual_at_K, union_oracle_at_K, final_pool_at_K y metricas jerarquicas Clase/Partida/Sub Partida. No usa historico real, Dense, LLM, Ollama, Text2Trade ni APIs remotas.",
+      "sha256": "aafb586ad09ef855ef92b38c9d47afad28e292b93c5ab4598588465c9f743bbe",
+      "exists": true,
+      "size_bytes": 35281
+    },
+    {
+      "path": "docs/evaluacion_candidate_pool_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de la actualizacion Fase 7A candidate pool normativo data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, alcance clase 87, fuentes normativas, no uso de historico real, estrategias evaluadas, union_oracle vs final_pool, metricas exactas y jerarquicas, aporte dual, decision y relacion con Fase 9 historica.",
+      "sha256": "7d5e89f910966f45421c8da1bafc18b8d386e3815e991e4059db81fa74f8c078",
+      "exists": true,
+      "size_bytes": 7521
+    },
+    {
+      "path": "outputs/evaluation/candidate_pool_data_aduanas_clase87_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de candidate pool normativo data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye candidate_pool.csv, candidate_pool_case_summary.csv, candidate_pool_metrics.json, candidate_pool_summary.md, source_contribution.csv y rescue_loss_cases.csv. No se fuerza su versionado en Git.",
       "sha256": null,
       "exists": true,
       "size_bytes": null
@@ -2136,16 +2414,16 @@
     {
       "path": "README.md",
       "type": "documentation",
-      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9C-A.",
+      "role_in_v0_1": "Documento de trazabilidad actualizado hasta Fase 9C-A y con Fase 9B actualizada sobre data_aduanas clase 87.",
       "git_status_expected": [
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 31916,
-      "sha256": "acdeeecc68b29d1b49de011eb2a01495e5d5106102fdeb2f10f43fc4d539ed13",
+      "size_bytes": 43299,
+      "sha256": "d7c1f470c78ee75658b928ef2796eef01bca4a93519f35be6eed17c4f82938ee",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado con cierre Fase 9C-A y nota de Fase 2 sobre `data_aduanas` como fuente operativa normalizada para futura actualizacion de Fase 3."
+      "methodological_notes": "Actualizado para distinguir la Fase 9B historica del nuevo pool hibrido real data_aduanas clase 87 y su decision de historico principal con backfill normativo."
     },
     {
       "path": "src/experiments/evaluate_historical_examples_leave_one_out.py",
@@ -2191,6 +2469,49 @@
       "methodological_notes": "Incluye historical_results.csv, historical_metrics.json, historical_summary.md, historical_case_summary.csv, historical_failure_cases.csv y historical_rescue_cases.csv."
     },
     {
+      "path": "src/experiments/evaluate_historical_retrieval_data_aduanas.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 9A actualizada: evaluador de recuperacion historica real sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 22408,
+      "sha256": "af9a453745749f66907ac244986ee4acfc4dc2e8cf77eaf7df02d7c6310f4d42",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Usa el historico data_aduanas clase 87 como banco separado, valida cero solape por id_unico, deduplica candidatos por NANDINA, calcula metricas exactas, jerarquicas y por soporte historico. No usa LLM, Ollama, Text2Trade, OpenAI, requests, HTTP ni APIs remotas; tampoco usa BM25 normativo como fuente de candidatos."
+    },
+    {
+      "path": "docs/evaluacion_recuperacion_historica_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 9A actualizada con recuperacion historica real data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 5363,
+      "sha256": "2bab30093fc82685914391a86418a1b892a54c650dcbe145d232d792215441bf",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, diferencia frente al leave-one-out, protocolo, metodo, metricas globales, metricas jerarquicas, soporte historico, comparacion contra Fase 7A normativa y decision para Fase 9B."
+    },
+    {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion Fase 9A actualizada recuperacion historica real data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye historical_results.csv, historical_metrics.json, historical_summary.md, historical_case_summary.csv, historical_failure_cases.csv, historical_rescue_cases.csv y historical_support_by_nandina.csv."
+    },
+    {
       "path": "src/experiments/build_hybrid_historical_normative_pool.py",
       "type": "script",
       "role_in_v0_1": "Fase 9B: constructor y evaluador de pools hibridos historico + normativo.",
@@ -2232,6 +2553,50 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Incluye hybrid_pool.csv, hybrid_case_summary.csv, hybrid_metrics.json, hybrid_summary.md, hybrid_rescue_cases.csv, hybrid_loss_cases.csv, hybrid_singleton_cases.csv y hybrid_source_contribution.csv."
+    },
+    {
+      "path": "src/experiments/build_hybrid_pool_data_aduanas.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 9B actualizada: constructor y evaluador de pool hibrido historico real + normativo para data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 41089,
+      "sha256": "ee30d8b49c25c3c4e5c67eca650889f104478a0c79e3ee21d6f04511aefa8227",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Lee outputs regenerables de Fase 9A historica real y Fase 7A normativa, valida checksums y cero solape por id_unico, evalua estrategias hibridas sin usar la etiqueta esperada para decidir reglas, calcula metricas exactas, jerarquicas, por soporte historico y contribucion por fuente. No usa LLM, Ollama, Text2Trade, Dense, OpenAI, requests, HTTP ni APIs remotas."
+    },
+    {
+      "path": "docs/evaluacion_pool_hibrido_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 9B actualizada con pool hibrido real data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 8243,
+      "sha256": "1b76282d44b36ea3610279316c08b525d7e1ee36b4371eead10bae9e7484e55b",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, diferencia frente a Fase 9B historica, fuentes, verificacion de no fuga, estrategias, metricas globales y por soporte, comparacion contra historico solo y normativo solo, decision y recomendacion para futura fase LLM+RAG."
+    },
+    {
+      "path": "outputs/evaluation/hybrid_pool_data_aduanas_clase87_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion Fase 9B actualizada pool hibrido real data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye hybrid_pool.csv, hybrid_case_summary.csv, hybrid_metrics.json, hybrid_summary.md, hybrid_source_contribution.csv, hybrid_rescue_loss_cases.csv y hybrid_low_support_cases.csv. No debe versionarse."
     },
     {
       "path": "src/llm/rerank_hybrid_pool_prompt_v0.1.md",
@@ -2426,6 +2791,252 @@
       "exists": true,
       "size_bytes": 90806,
       "sha256": "5bac011004dd8e8943fc20191c691b2b1acb0f270c1a0742f319eb41cfe1f5d3"
+    },
+    {
+      "path": "src/evaluation/build_data_aduanas_splits.py",
+      "type": "script",
+      "role_in_v0_1": "Fase 3 actualizada: construye particiones historico/desarrollo/evaluacion desde data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 26990,
+      "sha256": "c0acda0381abf4b2cf120bbc7fb9dfcba1884030033df463534390f3732bed28",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Lee la capa normalizada data_aduanas, aplica criterios de inclusion/exclusion, politica conservadora de duplicados id_unico, split estratificado por NANDINA, metadata y auditorias. No ejecuta LLM, BM25 ni Text2Trade."
+    },
+    {
+      "path": "docs/protocolo_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Protocolo metodologico de Fase 3 actualizada para particiones data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 4769,
+      "sha256": "860a6ab5ee807663c430cb8ddfe7a09278802fde6af0cd2464a7caa4fd12208b",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta fuente data_aduanas, alcance Clase 87, criterios de inclusion/exclusion, politica id_unico, split historico/dev/eval y relacion con el evalset v0.1 historico."
+    },
+    {
+      "path": "docs/ficha_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Ficha de dataset de las particiones data_aduanas clase 87 v0.1.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3159,
+      "sha256": "edaafb5a7257bd53f8e4a08cd4b1d592e270b4e58daba02c67ac1ae710968107",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Resume identidad, fuente, conteos, rutas finales, campos principales, uso previsto y limitaciones de las particiones."
+    },
+    {
+      "path": "docs/politica_curacion_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Politica de curacion y duplicados para data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3304,
+      "sha256": "dd99a1716f73643931e017636fd0e5dae6d447c58cba5d0413e2d9dc92beaee6",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Define reglas de inclusion/exclusion, tratamiento conservador de id_unico duplicado y auditorias regenerables."
+    },
+    {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.1.csv",
+      "type": "dataset",
+      "role_in_v0_1": "Particion historica congelada de data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3609847,
+      "sha256": "6dfa703a51a7801d47881f67d96496e89c921d949f84049c3b548cce3da37c50",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Contiene 3,000 instancias curadas, 69 NANDINAS distintas, mismas columnas que desarrollo/evaluacion y sin id_unico repetidos."
+    },
+    {
+      "path": "data/processed/data_aduanas_devset_clase87_v0.1.csv",
+      "type": "dataset",
+      "role_in_v0_1": "Particion de desarrollo congelada de data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 123188,
+      "sha256": "19eeb607cb1586f3eb459a95d267844bcb068daf93f05e4055ce1183dd698a50",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Contiene 100 instancias curadas, 44 NANDINAS distintas, mismas columnas que historico/evaluacion y sin id_unico repetidos."
+    },
+    {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.1.csv",
+      "type": "dataset",
+      "role_in_v0_1": "Particion de evaluacion congelada de data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 1218402,
+      "sha256": "fc1b532ea99700ee5e7546bc118bd7ebc8beb55916790c79faa99c2823e87281",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Contiene 1,006 instancias curadas, 62 NANDINAS distintas, mismas columnas que historico/desarrollo y sin id_unico repetidos."
+    },
+    {
+      "path": "data/processed/data_aduanas_splits_clase87_v0.1_metadata.json",
+      "type": "metadata",
+      "role_in_v0_1": "Metadata de generacion, curacion, split, checksums y validacion de data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 18365,
+      "sha256": "490ef6f3be502a6f14c7b3521b2d5c6d95b005463c18058db354f0bb2cc0b7c1",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Registra 4,232 filas fuente clase 87, 4,106 curadas finales, 126 excluidas por duplicados id_unico, parametros de split y validaciones sin errores."
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.1",
+      "type": "audit_output",
+      "role_in_v0_1": "Directorio regenerable de auditorias de Fase 3 actualizada data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "local_only",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye exclusiones por calidad, exclusiones por duplicados, politica por grupo id_unico y distribucion por NANDINA en cada split. No se fuerza a Git."
+    },
+    {
+      "path": "src/experiments/evaluate_bm25_hierarchical_data_aduanas.py",
+      "type": "script",
+      "role_in_v0_1": "Actualizacion Fase 6B/6C: evaluador BM25 jerarquico/dual sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 27364,
+      "sha256": "c390df9646f05b010b61dfff34e46af285d1dfa90f56ac2774612e5ec2aaf2da",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Evalua BM25_flat_current, BM25_hierarchical_v0.1 y BM25_dual_protected_top_5_backfill sobre data_aduanas_evalset_clase87_v0.1.csv. Usa DESCRIPCION DE MERCANCIAS CONCATENADA como consulta y NANDINA como etiqueta esperada; calcula Top-k, MRR, Recall@50/100 y metricas Partida/Sub Partida/Clase. No ejecuta LLM, Ollama, Text2Trade ni APIs remotas."
+    },
+    {
+      "path": "docs/evaluacion_bm25_jerarquico_dual_data_aduanas_clase87_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de la reinterpretacion Fase 6B/6C sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 3588,
+      "sha256": "e17261074e56ad30e520be053303b906bcfb629ab9727e019555c9703630b007",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, alcance acotado, variantes evaluadas, evalset clase 87, metricas, comparacion contra BM25 plano Fase 4 actualizada, lectura metodologica, decision y advertencia de comparabilidad con Fase 6B/6C historica."
+    },
+    {
+      "path": "outputs/evaluation/bm25_hierarchical_data_aduanas_clase87_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion BM25 jerarquico/dual sobre data_aduanas clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye results_by_method.csv, metrics.json, summary.md, case_comparison.csv y failure_sample.csv. No se fuerza a Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_hierarchical_data_aduanas_clase87_v0.1/results_by_method.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resultados por caso y metodo de la evaluacion BM25 jerarquico/dual clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 8037812,
+      "sha256": "6669889abec20e796649bbfa495a3a0949a5d591f39e8300509f819d606c37b2",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25_hierarchical_data_aduanas; permanece ignorado por Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_hierarchical_data_aduanas_clase87_v0.1/metrics.json",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Metricas agregadas y controles de la evaluacion BM25 jerarquico/dual clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 8768,
+      "sha256": "4a38e857f56529df15e1d8b71aec75082e01d7d0849727e94e2d75848d8169fc",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25_hierarchical_data_aduanas; permanece ignorado por Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_hierarchical_data_aduanas_clase87_v0.1/summary.md",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Resumen legible regenerable de la evaluacion BM25 jerarquico/dual clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 3588,
+      "sha256": "e17261074e56ad30e520be053303b906bcfb629ab9727e019555c9703630b007",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25_hierarchical_data_aduanas; permanece ignorado por Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_hierarchical_data_aduanas_clase87_v0.1/case_comparison.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Comparacion por caso entre BM25 plano, jerarquico y dual protegido clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 470095,
+      "sha256": "c2e3eac7bd339e11779d4517c123841c6477f9c88200373bc798c052dbc367da",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25_hierarchical_data_aduanas; permanece ignorado por Git."
+    },
+    {
+      "path": "outputs/evaluation/bm25_hierarchical_data_aduanas_clase87_v0.1/failure_sample.csv",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Muestra cualitativa de fallos Top-10 para inspeccion clase 87.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": 26281,
+      "sha256": "6aa703e183ecea1fa762dab9bfd18a45d27b082e720d4f3f46644d2149035b86",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25_hierarchical_data_aduanas; permanece ignorado por Git."
     }
   ],
   "known_absent_or_omitted_paths": [
