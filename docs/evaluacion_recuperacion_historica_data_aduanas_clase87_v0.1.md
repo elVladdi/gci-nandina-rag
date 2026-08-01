@@ -48,15 +48,15 @@ La profundidad historica operativa fue `history_depth = 500` y la profundidad fi
 | Casos evaluados | 1,006 |
 | NANDINA esperada presente en historico | 1,006 |
 | NANDINA esperada ausente en historico | 0 |
-| Top-1 | 0.8638 |
-| Top-3 | 0.9384 |
-| Top-5 | 0.9612 |
-| Top-10 | 0.9791 |
-| Top-20 | 0.9960 |
-| Top-50 | 0.9980 |
-| Recall@100 | 0.9980 |
-| MRR | 0.9071 |
-| Casos fuera de Top-100 | 2 |
+| Top-1 | 0.8628 |
+| Top-3 | 0.9374 |
+| Top-5 | 0.9592 |
+| Top-10 | 0.9801 |
+| Top-20 | 0.9970 |
+| Top-50 | 1.0000 |
+| Recall@100 | 1.0000 |
+| MRR | 0.9062 |
+| Casos fuera de Top-100 | 0 |
 
 ## Metricas jerarquicas
 
@@ -71,24 +71,21 @@ La profundidad historica operativa fue `history_depth = 500` y la profundidad fi
 | Bucket soporte historico | Casos | Top-1 | Top-10 | Recall@100 | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | 0 | 0 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-| 1 | 5 | 0.8000 | 0.8000 | 0.8000 | 0.8000 |
-| 2-4 | 7 | 0.2857 | 0.8571 | 1.0000 | 0.4966 |
-| 5-9 | 32 | 0.8125 | 0.9688 | 0.9688 | 0.8776 |
-| 10+ | 962 | 0.8701 | 0.9813 | 1.0000 | 0.9116 |
+| 1 | 5 | 0.8000 | 0.8000 | 1.0000 | 0.8077 |
+| 2-4 | 7 | 0.2857 | 0.8571 | 1.0000 | 0.4813 |
+| 5-9 | 32 | 0.8125 | 0.9688 | 1.0000 | 0.8783 |
+| 10+ | 962 | 0.8690 | 0.9823 | 1.0000 | 0.9108 |
 
-La recuperacion es casi completa cuando existe soporte historico amplio. Los dos fallos Top-100 estan en:
-
-- `87089911`: 1 precedente historico, 1 caso eval, 0 recuperados en Top-100.
-- `87089950`: 9 precedentes historicos, 2 casos eval, 1 recuperado en Top-100.
+La recuperacion es completa a Top-100 en esta corrida corregida. Las NANDINAS de bajo soporte historico siguen siendo el grupo metodologicamente mas delicado para seguimiento, aunque ya no quedan casos fuera de Top-100.
 
 ## Comparacion metodologica
 
 La referencia normativa actualizada de Fase 7A sobre `data_aduanas` clase 87 reporta:
 
 - Mejor pool operativo normativo @100: `0.3489`.
-- Mejor pool operativo normativo @200: `0.6272`.
+- Mejor pool operativo normativo @200: `0.6292`.
 
-La recuperacion historica real alcanza `Recall@100 = 0.9980`, con `Top-1 = 0.8638` y `MRR = 0.9071`. La mejora es sustancial y no depende de BM25 normativo como fuente de candidatos.
+La recuperacion historica real alcanza `Recall@100 = 1.0000`, con `Top-1 = 0.8628` y `MRR = 0.9062`. La mejora es sustancial y no depende de BM25 normativo como fuente de candidatos.
 
 La comparacion no debe interpretarse como que las normas son innecesarias. El historico domina cuando hay precedentes suficientes; el bloque normativo sigue siendo necesario para trazabilidad, explicacion y codigos con poco o ningun soporte historico.
 

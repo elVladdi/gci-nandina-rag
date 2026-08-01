@@ -13,6 +13,8 @@ Este documento actualiza la Fase 3 para preparar particiones experimentales desd
 
 La normalizacion disponible contiene 11,320 series. De ellas, 4,232 pertenecen a `Clase = 87` y cubren 69 NANDINAS distintas antes de curacion por `id_unico`.
 
+La normalizacion corregida usa `normalize_sunat_dam_series_positional_v0.3`: las lineas de `DESCRIPCION DE MERCANCIAS 1` a `DESCRIPCION DE MERCANCIAS 5` y `DESCRIPCION DE MERCANCIAS CONCATENADA` excluyen encabezados/secciones DAM claros como `REGISTRO DE ADUANAS`, `DECLARACION`, `FECHA NUMERACION`, `IDENTIFICACION`, `TRANSACCION`, `BASE IMPONIBLE` y `LIQUIDACION DEL ADEUDO`.
+
 ## Salidas congeladas
 
 La Fase 3 actualizada genera tres CSV finales con identico esquema y orden de columnas:
@@ -79,6 +81,8 @@ Resultado v0.1:
 | historico | 3,000 | 69 |
 | desarrollo | 100 | 44 |
 | evaluacion | 1,006 | 62 |
+
+La corrida corregida mantiene los mismos tamanos de particion y la misma politica de duplicados: 4,232 filas de entrada clase 87, 4,106 filas curadas finales, 102 grupos de duplicado exacto, 114 filas excedentes exactas excluidas, 6 grupos conflictivos y 12 filas conflictivas excluidas. La validacion confirma cero apariciones de encabezados DAM en las columnas de descripcion de los tres splits.
 
 Las NANDINAS con pocas instancias se asignan mediante cuota proporcional. Si un estrato no alcanza cuota en una particion pequena, permanece trazado en las particiones donde la cuota proporcional y el remanente lo permiten; no se replica ningun `id_unico` para forzar cobertura.
 

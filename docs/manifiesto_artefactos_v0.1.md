@@ -247,7 +247,7 @@ Se documenta como output regenerable e ignorado por Git:
 
 - `outputs/evaluation/candidate_pool_data_aduanas_clase87_v0.1/`.
 
-Resultado de cierre sobre 1,006 casos: `union_oracle@100 = 0.3658`, `union_oracle@200 = 0.6372`. El mejor pool operativo a Top-100 es `hierarchical_70_dual_backfill_30`, con `final_pool@100 = 0.3489`, `Partida@100 = 0.5885`, `Sub Partida@100 = 0.5268` y `Clase@100 = 0.7445`. A Top-200, `hierarchical_80_dual_backfill_20` y `hierarchical_70_dual_backfill_30` empatan en exactitud (`final_pool@200 = 0.6272`). El bloque normativo queda como respaldo/trazabilidad, no como fuente principal frente al pool historico de Fase 9.
+Resultado corregido sobre 1,006 casos: `union_oracle@100 = 0.3658`. El mejor pool operativo a Top-100 es `hierarchical_70_dual_backfill_30`, con `final_pool@100 = 0.3489`, `final_pool@200 = 0.6292`, `Partida@100 = 0.5885`, `Sub Partida@100 = 0.5268` y `Clase@100 = 0.7445`. A Top-200, `hierarchical_80_dual_backfill_20` y `hierarchical_70_dual_backfill_30` empatan en exactitud (`final_pool@200 = 0.6292`). El bloque normativo queda como respaldo/trazabilidad, no como fuente principal frente al pool historico de Fase 9.
 
 ## Evaluacion LLM rerank pool v0.1
 
@@ -392,9 +392,9 @@ La actualizacion de Fase 9A reemplaza el banco leave-one-out por un historico re
 
 La corrida valida `id_unico_overlap_count = 0`, no permite self-match entre particiones, deduplica el ranking final por `NANDINA` y no usa BM25 normativo como fuente de candidatos. Tampoco usa LLM, Ollama, Text2Trade, OpenAI ni APIs remotas.
 
-Resultado de cierre sobre 1,006 casos: `Top-1 = 0.8638`, `Top-10 = 0.9791`, `Recall@100 = 0.9980` y `MRR = 0.9071`. A nivel jerarquico logra `Partida@100 = 1.0000`, `Sub Partida@100 = 1.0000` y `Clase@100 = 1.0000`. Solo 2 casos quedan fuera de Top-100; ambos pertenecen a NANDINAs con bajo soporte historico (`87089911` y `87089950`).
+Resultado corregido sobre 1,006 casos: `Top-1 = 0.8628`, `Top-3 = 0.9374`, `Top-10 = 0.9801`, `Recall@100 = 1.0000` y `MRR = 0.9062`. A nivel jerarquico logra `Partida@100 = 1.0000`, `Sub Partida@100 = 1.0000` y `Clase@100 = 1.0000`. No quedan casos fuera de Top-100.
 
-Comparacion metodologica: el mejor pool normativo Fase 7A sobre `data_aduanas` clase 87 alcanza `final_pool@100 = 0.3489` y `final_pool@200 = 0.6272`, por lo que la recuperacion historica real pasa a ser la fuente dominante recomendada para Fase 9B. El bloque normativo queda como backfill y trazabilidad, especialmente para codigos con poco o ningun soporte historico.
+Comparacion metodologica: el mejor pool normativo Fase 7A sobre `data_aduanas` clase 87 alcanza `final_pool@100 = 0.3489` y `final_pool@200 = 0.6292`, por lo que la recuperacion historica real pasa a ser la fuente dominante recomendada para Fase 9B. El bloque normativo queda como backfill y trazabilidad, especialmente para codigos con poco o ningun soporte historico.
 
 Se versionan como codigo y documentacion metodologica:
 
@@ -434,7 +434,7 @@ La corrida valida cero solape por `id_unico` entre historico y evalset, no usa l
 
 Estrategias evaluadas: `historical_only`, `historical_first_90_normative_10`, `historical_first_80_normative_20`, `historical_first_70_normative_30`, `historical_first_50_normative_50`, `historical_with_normative_backfill_if_low_support`, `historical_with_normative_backfill_if_missing_code` y `normative_only_reference`.
 
-Resultado de cierre sobre 1,006 casos: `historical_only` logra `Top-1 = 0.8638`, `Top-10 = 0.9791`, `Recall@100 = 0.9980`, `Recall@200 = 0.9980` y `MRR = 0.9071`. La estrategia recomendada `historical_with_normative_backfill_if_missing_code` conserva `Top-1 = 0.8638`, `Top-10 = 0.9791`, `Recall@100 = 0.9980` y `MRR = 0.9071`, y sube `Recall@200` a `0.9990`. El normativo puro queda como referencia: `Top-1 = 0.0249`, `Top-10 = 0.0497`, `Recall@100 = 0.3489`, `Recall@200 = 0.6272` y `MRR = 0.0407`.
+Resultado corregido sobre 1,006 casos: `historical_only` logra `Top-1 = 0.8628`, `Top-3 = 0.9374`, `Top-10 = 0.9801`, `Recall@100 = 1.0000`, `Recall@200 = 1.0000` y `MRR = 0.9062`. La estrategia recomendada `historical_with_normative_backfill_if_missing_code` conserva `Top-1 = 0.8628`, `Top-3 = 0.9374`, `Top-10 = 0.9801`, `Recall@100 = 1.0000`, `Recall@200 = 1.0000` y `MRR = 0.9062`. El normativo puro queda como referencia: `Top-1 = 0.0249`, `Top-10 = 0.0497`, `Recall@100 = 0.3489`, `Recall@200 = 0.6292` y `MRR = 0.0407`.
 
 Decision de cierre: el historico solo se mantiene como ranking operativo temprano. El hibrido recomendado agrega backfill normativo posterior para trazabilidad y robustez futura, pero no mejora Top-100. Como todas las NANDINAS del evalset tienen soporte historico, el valor del backfill para codigos ausentes debe validarse despues con particiones temporales o historicos ampliados.
 
@@ -446,6 +446,16 @@ Se versionan como codigo y documentacion metodologica:
 Se documenta como output regenerable e ignorado por Git:
 
 - `outputs/evaluation/hybrid_pool_data_aduanas_clase87_v0.1/`.
+
+## Correccion data_aduanas descripciones v0.1
+
+Se corrigio la ingesta SUNAT DAM para evitar que encabezados/secciones administrativas entren en `DESCRIPCION DE MERCANCIAS 1..5` o en `DESCRIPCION DE MERCANCIAS CONCATENADA`. La regla vive en `src/ingestion/sunat_series_parser.py` y se ejecuta desde el Excel local `data/Series - Descripciones.xlsx`, sin edicion manual de CSV.
+
+La validacion post-correccion confirma cero apariciones de `REGISTRO DE ADUANAS`, `DECLARACION`, `FECHA NUMERACION`, `IDENTIFICACION`, `TRANSACCION`, `BASE IMPONIBLE` y `LIQUIDACION DEL ADEUDO` en las columnas descriptivas de historico, devset y evalset.
+
+Se versiona como documentacion metodologica:
+
+- `docs/correccion_data_aduanas_descripciones_v0.1.md`: diagnostico, causa, regla de correccion, conteos, validaciones, impacto en metricas 9A/9B y nota metodologica para Fase 10B.
 
 ## Evaluacion LLM rerank hybrid pool sample v0.1
 
@@ -467,6 +477,57 @@ Se versionan como codigo, prompt y documentacion metodologica:
 Se documenta como output regenerable e ignorado por Git:
 
 - `outputs/evaluation/llm_rerank_hybrid_pool_sample_v0.1/`.
+
+## Evaluacion LLM explicacion Top-3 sample v0.1
+
+La Fase 10A ejecuta una prueba diagnostica de LLM+RAG para explicacion auditable comparativa del Top-3 historico recuperado sobre `data_aduanas` clase 87. A diferencia de Fase 9C-A, el LLM no reordena candidatos, no busca NANDINA y no clasifica desde cero. Recibe solo los tres candidatos ya entregados por Fase 9A, en orden fijo, enriquecidos con contexto normativo jerarquico y evidencia textual.
+
+Modelo local usado: `qwen2.5:7b-instruct` via Ollama en `127.0.0.1:11434`, temperatura 0. No se uso OpenAI, APIs remotas, descargas ni servicios con costo.
+
+Composicion de muestra: 30 casos del evalset `data_aduanas` clase 87, balanceados como 10 rank 1, 10 rank 2-3, 5 rank 4-10 y 5 dificiles o de bajo soporte historico. La etiqueta esperada se conserva solo en `sample_cases.csv` para auditoria, no en el payload enviado al LLM.
+
+Resultado de cierre: JSON valido 30/30, candidatos explicados completos 30/30, respeto del Top-3 original 30/30, ranking sin cambios 30/30, sin codigos inventados 30/30, evidencia citada por candidato 27/30 y comparacion Top-3 presente 29/30. Fallos parciales: 3 casos sin evidencia citada por todos los candidatos y 1 caso sin comparacion Top-3.
+
+Decision de cierre: pasa a Fase 10B como explicacion controlada, no como recuperacion ni re-ranking. Para escalar, se recomienda reforzar la citacion obligatoria de evidencia por candidato.
+
+Se versionan como codigo, prompt y documentacion metodologica:
+
+- `src/llm/explain_top3_nandina_prompt_v0.1.md`: prompt cerrado para explicar y comparar el Top-3 sin agregar ni reordenar candidatos.
+- `src/experiments/build_llm_explanation_top3_sample.py`: construye muestra, `sample_cases.csv` y `payloads.jsonl` con Top-3 historico y evidencia normativa.
+- `src/experiments/run_llm_explanation_top3_sample.py`: runner local Ollama para generar explicaciones JSON estrictas.
+- `src/experiments/evaluate_llm_explanation_top3_sample.py`: evaluador de estructura, adherencia al Top-3, no invencion y auditabilidad basica.
+- `docs/evaluacion_llm_explicacion_top3_sample_v0.1.md`: cierre metodologico de Fase 10A.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/llm_explanation_top3_sample_v0.1/`.
+
+## Evaluacion LLM explicacion Top-3 auditable v0.1
+
+La Fase 10B formaliza la explicacion LLM+RAG auditable sobre el Top-3 historico recuperado usando los splits `data_aduanas` clase 87 corregidos. El LLM no busca NANDINA, no clasifica desde cero y no reordena candidatos; solo explica y compara los tres candidatos ya recuperados.
+
+Modelo local usado: `qwen2.5:7b-instruct` via Ollama en `127.0.0.1:11434`, temperatura 0. No se uso OpenAI, APIs remotas, descargas ni servicios con costo.
+
+Composicion de muestra: 50 casos del evalset `data_aduanas` clase 87, balanceados exactamente como 15 rank 1, 15 rank 2-3, 10 rank 4-10 y 10 dificiles o de bajo soporte historico. La etiqueta esperada queda solo en `sample_cases.csv` para auditoria, no en `payloads.jsonl`.
+
+Resultado de cierre: JSON valido 50/50, Top-3 completo 50/50, ranking preservado 50/50, sin codigos fuera del pool 50/50, evidencia historica citada por candidato 50/50, evidencia normativa citada por candidato 50/50, comparacion Top-3 presente 50/50, advertencia final presente 50/50, sin clasificacion oficial 50/50 y score promedio de auditabilidad 0.9520.
+
+Correccion metodologica menor: la nota del payload 10B fue cambiada a una frase neutral limitada a datos observables, candidatos Top-3 y evidencias recuperadas. La validacion posterior confirma que `payloads.jsonl` no contiene etiquetas esperadas ni variables de resultado, ni como claves ni como texto. Las metricas duras de paso se mantienen tras regenerar la fase completa; el score promedio cambia levemente por la nueva corrida local.
+
+Decision de cierre: pasa metodologicamente a Fase 10C como explicacion auditable controlada. El LLM se mantiene como justificador de candidatos ya seleccionados, no como recuperador ni re-ranker.
+
+Se versionan como codigo, prompt y documentacion metodologica:
+
+- `src/llm/explain_top3_nandina_prompt_v0.2.md`: prompt cerrado formal que exige JSON estricto, trazabilidad por `candidate_id_unico` y `evidence_id`, comparacion Top-3 y advertencia final.
+- `src/experiments/build_llm_explanation_top3_audit_sample.py`: constructor de muestra, payloads y metadata 10B.
+- `src/experiments/run_llm_explanation_top3_audit_sample.py`: runner local Ollama con modo `--resume`, sin descarga de modelos y restringido a URLs locales.
+- `src/experiments/evaluate_llm_explanation_top3_audit_sample.py`: evaluador formal de estructura, trazabilidad, comparacion, incertidumbre y criterios de paso a 10C.
+- `src/experiments/render_llm_explanation_audit_cards.py`: renderizador de fichas auditables Markdown por caso.
+- `docs/evaluacion_llm_explicacion_top3_auditable_v0.1.md`: cierre metodologico de Fase 10B.
+
+Se documenta como output regenerable e ignorado por Git:
+
+- `outputs/evaluation/llm_explanation_top3_audit_sample_v0.1/`.
 
 ## Politica Git/no Git
 

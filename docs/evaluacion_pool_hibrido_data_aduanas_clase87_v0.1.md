@@ -26,7 +26,7 @@ La validacion confirma `id_unico_overlap_count = 0`. No hay self-match entre his
 | Historico real Fase 9A | `historical_bm25_data_aduanas_clase87` | Ranking principal. |
 | Normativo Fase 7A | `hierarchical_70_dual_backfill_30` | Backfill y trazabilidad normativa. |
 
-Se eligio `hierarchical_70_dual_backfill_30` como fuente normativa porque fue el mejor pool operativo normativo a Top-100 sobre clase 87 (`0.3489`). A Top-200 empata con `hierarchical_80_dual_backfill_20` (`0.6272`).
+Se eligio `hierarchical_70_dual_backfill_30` como fuente normativa porque fue el mejor pool operativo normativo a Top-100 sobre clase 87 (`0.3489`). A Top-200 empata con `hierarchical_80_dual_backfill_20` (`0.6292`).
 
 ## Estrategias evaluadas
 
@@ -47,16 +47,16 @@ Las reglas de bajo soporte y codigo faltante usan solo senales observables del r
 
 | Estrategia | Top-1 | Top-10 | Top-20 | Top-50 | Top-100 | Top-200 | MRR | Fuera Top-100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `historical_only` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9980 | 0.9071 | 2 |
-| `historical_first_90_normative_10` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9990 | 0.9071 | 2 |
-| `historical_first_80_normative_20` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9990 | 0.9071 | 2 |
-| `historical_first_70_normative_30` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9990 | 0.9071 | 2 |
-| `historical_first_50_normative_50` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9990 | 0.9071 | 2 |
-| `historical_with_normative_backfill_if_low_support` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9990 | 0.9071 | 2 |
-| `historical_with_normative_backfill_if_missing_code` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9990 | 0.9071 | 2 |
-| `normative_only_reference` | 0.0249 | 0.0497 | 0.0517 | 0.0626 | 0.3489 | 0.6272 | 0.0407 | 655 |
+| `historical_only` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 | 0 |
+| `historical_first_90_normative_10` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 | 0 |
+| `historical_first_80_normative_20` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 | 0 |
+| `historical_first_70_normative_30` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 | 0 |
+| `historical_first_50_normative_50` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 | 0 |
+| `historical_with_normative_backfill_if_low_support` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 | 0 |
+| `historical_with_normative_backfill_if_missing_code` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 | 0 |
+| `normative_only_reference` | 0.0249 | 0.0497 | 0.0517 | 0.0626 | 0.3489 | 0.6292 | 0.0407 | 655 |
 
-Ningun hibrido mejora Top-100 frente a `historical_only`; todos los hibridos operativos mantienen Top-1, Top-10, Top-20, Top-50, Top-100 y MRR. El backfill normativo agrega un rescate adicional solo a Top-200.
+Ningun hibrido mejora Top-100 frente a `historical_only` porque el historico corregido ya alcanza cobertura completa a Top-100. Todos los hibridos operativos mantienen Top-1, Top-10, Top-20, Top-50, Top-100, Top-200 y MRR. El backfill normativo queda como respaldo/trazabilidad posterior, no como fuente de rescate en esta corrida.
 
 ## Metricas jerarquicas
 
@@ -75,23 +75,16 @@ Para la estrategia recomendada:
 | Bucket soporte historico | Casos | Top-1 | Top-10 | Top-100 | Top-200 | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | 0 | 0 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-| 1 | 5 | 0.8000 | 0.8000 | 0.8000 | 0.8000 | 0.8000 |
-| 2-4 | 7 | 0.2857 | 0.8571 | 1.0000 | 1.0000 | 0.4966 |
-| 5-9 | 32 | 0.8125 | 0.9688 | 0.9688 | 1.0000 | 0.8778 |
-| 10+ | 962 | 0.8701 | 0.9813 | 1.0000 | 1.0000 | 0.9116 |
+| 1 | 5 | 0.8000 | 0.8000 | 1.0000 | 1.0000 | 0.8077 |
+| 2-4 | 7 | 0.2857 | 0.8571 | 1.0000 | 1.0000 | 0.4813 |
+| 5-9 | 32 | 0.8125 | 0.9688 | 1.0000 | 1.0000 | 0.8783 |
+| 10+ | 962 | 0.8690 | 0.9823 | 1.0000 | 1.0000 | 0.9108 |
 
 Todas las NANDINAS esperadas del evalset estan presentes en el historico. Por eso esta corrida no mide todavia el valor real del backfill normativo para codigos completamente ausentes; esa condicion requiere validacion futura con particiones temporales o historicos ampliados.
 
 ## Casos de bajo soporte y fallos historicos
 
-La Fase 9A tenia dos fallos Top-100:
-
-| Caso | NANDINA | Soporte | Resultado hibrido recomendado |
-| --- | --- | ---: | --- |
-| `DA-EVAL-00442` | `87089911` | 1 | Sigue fuera de Top-200; tampoco aparece en el pool normativo. |
-| `DA-EVAL-00536` | `87089950` | 9 | Sube a rank 131 por backfill normativo; queda rescatado a Top-200, pero sigue fuera de Top-100. |
-
-El otro caso eval con `87089950`, `DA-EVAL-00736`, ya estaba recuperado por historico en rank 1.
+La Fase 9A corregida no deja casos fuera de Top-100. Las NANDINAS de bajo soporte historico se mantienen como watchlist metodologica, pero no generan fallos de cobertura en esta corrida.
 
 ## Contribucion por fuente
 
@@ -99,21 +92,21 @@ Para la estrategia recomendada, entre los aciertos Top-100:
 
 | Fuente del codigo esperado | Casos |
 | --- | ---: |
-| Historico solo | 374 |
-| Historico y normativo | 630 |
+| Historico solo | 373 |
+| Historico y normativo | 633 |
 | Normativo solo | 0 |
 
-El normativo no rescata casos adicionales a Top-100, pero aporta presencia concurrente para 630 aciertos y evidencia normativa asociada para trazabilidad. En el output normativo hubo 5 casos sin candidatos para la estrategia `hierarchical_70_dual_backfill_30`; el historico cubre esos casos.
+El normativo no rescata casos adicionales a Top-100, pero aporta presencia concurrente para 633 aciertos y evidencia normativa asociada para trazabilidad. En el output normativo hubo 5 casos sin candidatos para la estrategia `hierarchical_70_dual_backfill_30`; el historico cubre esos casos.
 
 ## Comparacion contra referencias
 
 | Referencia | Top-1 | Top-10 | Top-100 | Top-200 | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Historico solo Fase 9A | 0.8638 | 0.9791 | 0.9980 | 0.9980 | 0.9071 |
-| Normativo solo Fase 7A | 0.0249 | 0.0497 | 0.3489 | 0.6272 | 0.0407 |
-| Hibrido recomendado | 0.8638 | 0.9791 | 0.9980 | 0.9990 | 0.9071 |
+| Historico solo Fase 9A | 0.8628 | 0.9801 | 1.0000 | 1.0000 | 0.9062 |
+| Normativo solo Fase 7A | 0.0249 | 0.0497 | 0.3489 | 0.6292 | 0.0407 |
+| Hibrido recomendado | 0.8628 | 0.9801 | 1.0000 | 1.0000 | 0.9062 |
 
-La ganancia del hibrido se observa solo a Top-200. A profundidades relevantes para un re-ranker corto o LLM posterior (`10`, `20`, `50`), el historico real ya domina y el normativo no cambia el resultado.
+No hay ganancia de cobertura exacta del hibrido frente al historico en esta corrida corregida, porque el historico ya cubre Top-100 y Top-200. A profundidades relevantes para un re-ranker corto o LLM posterior (`10`, `20`, `50`), el historico real domina y el normativo no cambia el resultado.
 
 ## Decision
 

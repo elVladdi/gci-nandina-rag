@@ -25,11 +25,13 @@ El repositorio contiene las fases históricas cerradas y la actualización metod
 - **Fase 7B:** re-ranking diagnostico preliminar con `qwen2.5:7b-instruct` sobre devset; no mejora el ranking original, presenta limitaciones de diseno experimental y no pasa a evalset.
 - **Fase 8A:** diagnostico y primer prototipo BM25 jerarquico HS2/HS4/HS6 -> NANDINA8; no mejora Recall@100 frente al directo ni al pool Fase 7A, por lo que no pasa a evalset como Fase 8B en esta forma.
 - **Fase 8B:** pool expandido no restrictivo; mejora cobertura a Top-200 frente a Fase 7A, pero no mejora Recall@100 y queda lejos de 0.90.
-- **Fase 9A:** recuperacion basada en ejemplos historicos; el diagnostico leave-one-out inicial alcanza `Recall@100 = 0.9100`, y la actualizacion con historico real `data_aduanas` clase 87 alcanza `Recall@100 = 0.9980` sin LLM ni APIs remotas.
-- **Fase 9B:** pool hibrido historico + normativo; la corrida historica conserva `historical_first_80_normative_20` como antecedente (`Recall@100 = 0.9167`) y la actualizacion `data_aduanas` clase 87 recomienda `historical_with_normative_backfill_if_missing_code` (`Recall@100 = 0.9980`, `Recall@200 = 0.9990`) sin degradar Top-1/Top-10/MRR.
+- **Fase 9A:** recuperacion basada en ejemplos historicos; el diagnostico leave-one-out inicial alcanza `Recall@100 = 0.9100`, y la actualizacion corregida con historico real `data_aduanas` clase 87 alcanza `Recall@100 = 1.0000` sin LLM ni APIs remotas.
+- **Fase 9B:** pool hibrido historico + normativo; la corrida historica conserva `historical_first_80_normative_20` como antecedente (`Recall@100 = 0.9167`) y la actualizacion corregida `data_aduanas` clase 87 recomienda `historical_with_normative_backfill_if_missing_code` (`Recall@100 = 1.0000`, `Recall@200 = 1.0000`) sin degradar Top-1/Top-10/MRR.
 - **Fase 9C-A:** re-ranking LLM diagnostico minimo sobre 20 casos del pool operativo `historical_first_80_normative_20`; JSON valido y sin violaciones de pool, pero degrada Top-1/MRR, por lo que no escala a 9C-B.
+- **Fase 10A:** explicacion LLM+RAG diagnostica del Top-3 historico ya recuperado sobre 30 casos `data_aduanas` clase 87; `qwen2.5:7b-instruct` via Ollama local genera JSON valido 30/30, respeta Top-3 y ranking 30/30, no inventa codigos 30/30 y pasa a 10B como explicacion controlada, no como recuperacion ni re-ranking.
+- **Fase 10B:** explicacion LLM+RAG auditable formal del Top-3 historico sobre 50 casos `data_aduanas` clase 87 corregido; genera JSON tecnico y fichas auditables, preserva Top-3/ranking 50/50, cita evidencia historica y normativa por candidato 50/50 y pasa metodologicamente a 10C.
 
-Decision metodologica vigente: el historico queda como fuente principal y lo normativo como backfill/trazabilidad. En `data_aduanas` clase 87, el hibrido recomendado conserva el orden historico temprano (`Top-1 = 0.8638`, `Top-10 = 0.9791`, `MRR = 0.9071`) y agrega backfill normativo posterior; el normativo no mejora Top-100, pero rescata un caso adicional a Top-200. El re-ranking LLM de 9C-A no debe escalarse porque degrada Top-1 y MRR; el LLM podria reservarse para justificacion controlada posterior.
+Decision metodologica vigente: el historico queda como fuente principal y lo normativo como backfill/trazabilidad. En `data_aduanas` clase 87 corregido, el hibrido recomendado conserva el orden historico temprano (`Top-1 = 0.8628`, `Top-10 = 0.9801`, `MRR = 0.9062`) y mantiene cobertura exacta completa a Top-100/Top-200; el normativo no desplaza candidatos historicos tempranos y queda como respaldo documental. El re-ranking LLM de 9C-A no debe escalarse porque degrada Top-1 y MRR. Fase 10B confirma que el LLM debe usarse como explicador auditable del Top-3 fijo, no como recuperador, clasificador ni re-ranker, y pasa metodologicamente a 10C.
 
 El branch principal es `main` y los artefactos versionables están pensados para reconstruir las evaluaciones. Los outputs bajo `outputs/` son regenerables y permanecen ignorados por Git.
 
@@ -83,7 +85,7 @@ python -m src.evaluation.build_evalset_from_sunat_excel
 
 ### Splits data_aduanas clase 87
 
-La Fase 3 actualizada usa `data_aduanas` como fuente metodologica para construir particiones experimentales homogeneas de `Clase = 87`, sin `id_unico` repetidos dentro de particiones ni solapamiento entre ellas.
+La Fase 3 actualizada usa `data_aduanas` como fuente metodologica para construir particiones experimentales homogeneas de `Clase = 87`, sin `id_unico` repetidos dentro de particiones ni solapamiento entre ellas. La ingesta corregida corta o recorta encabezados DAM claros para que no entren en `DESCRIPCION DE MERCANCIAS 1..5` ni en `DESCRIPCION DE MERCANCIAS CONCATENADA`.
 
 Artefactos finales:
 
@@ -566,11 +568,11 @@ Estrategias evaluadas: `hierarchical_only`, `dual_only`, `hierarchical_first_100
 
 | Estrategia | Pool@100 | Pool@200 | Partida@100 | Sub Partida@100 | Clase@100 |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `hierarchical_only` | 0.3449 | 0.6213 | 0.5865 | 0.5209 | 0.7386 |
+| `hierarchical_only` | 0.3449 | 0.6233 | 0.5865 | 0.5209 | 0.7386 |
 | `dual_only` | 0.1948 | 0.5934 | 0.5905 | 0.3708 | 0.7753 |
 | `hierarchical_first_100` | 0.3449 | 0.5895 | 0.5865 | 0.5209 | 0.7386 |
-| `hierarchical_80_dual_backfill_20` | 0.3459 | 0.6272 | 0.5865 | 0.5219 | 0.7406 |
-| `hierarchical_70_dual_backfill_30` | 0.3489 | 0.6272 | 0.5885 | 0.5268 | 0.7445 |
+| `hierarchical_80_dual_backfill_20` | 0.3459 | 0.6292 | 0.5865 | 0.5219 | 0.7406 |
+| `hierarchical_70_dual_backfill_30` | 0.3489 | 0.6292 | 0.5885 | 0.5268 | 0.7445 |
 
 Techos diagnosticos: `union_oracle@100 = 0.3658` y `union_oracle@200 = 0.6372`. Decision: `hierarchical_70_dual_backfill_30` queda como mejor respaldo normativo Top-100; a Top-200 empata en exactitud con `hierarchical_80_dual_backfill_20`. El bloque normativo queda como respaldo/trazabilidad frente al pool historico de Fase 9, no como fuente principal.
 
@@ -735,9 +737,9 @@ La actualizacion de Fase 9A reemplaza el banco leave-one-out por historico real 
 
 La validacion confirma `id_unico_overlap_count = 0`. El metodo `historical_bm25_data_aduanas_clase87` construye un indice BM25 local sobre las descripciones historicas, deduplica candidatos por `NANDINA` y no usa BM25 normativo como fuente de candidatos.
 
-Resultados principales: `Top-1 = 0.8638`, `Top-10 = 0.9791`, `Recall@100 = 0.9980` y `MRR = 0.9071`. A nivel jerarquico, `Partida@100 = 1.0000`, `Sub Partida@100 = 1.0000` y `Clase@100 = 1.0000`. Solo 2 casos quedan fuera de Top-100, ambos en NANDINAs de bajo soporte historico.
+Resultados corregidos principales: `Top-1 = 0.8628`, `Top-3 = 0.9374`, `Top-10 = 0.9801`, `Recall@100 = 1.0000` y `MRR = 0.9062`. A nivel jerarquico, `Partida@100 = 1.0000`, `Sub Partida@100 = 1.0000` y `Clase@100 = 1.0000`. No quedan casos fuera de Top-100.
 
-Frente al pool normativo Fase 7A actualizado para clase 87 (`final_pool@100 = 0.3489`; `final_pool@200 = 0.6272`), la mejora historica es sustancial. La recomendacion para Fase 9B actualizada es un pool hibrido con historico como fuente dominante y backfill normativo para trazabilidad y bajo soporte.
+Frente al pool normativo Fase 7A actualizado para clase 87 (`final_pool@100 = 0.3489`; `final_pool@200 = 0.6292`), la mejora historica es sustancial. La recomendacion para Fase 9B actualizada es un pool hibrido con historico como fuente dominante y backfill normativo para trazabilidad y bajo soporte.
 
 Artefactos versionables:
 
@@ -779,11 +781,11 @@ La validacion confirma cero solape por `id_unico` entre historico y evalset. Las
 
 | Estrategia | Top-1 | Top-10 | Top-20 | Top-50 | Top-100 | Top-200 | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `historical_only` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9980 | 0.9071 |
-| `historical_with_normative_backfill_if_missing_code` | 0.8638 | 0.9791 | 0.9960 | 0.9980 | 0.9980 | 0.9990 | 0.9071 |
-| `normative_only_reference` | 0.0249 | 0.0497 | 0.0517 | 0.0626 | 0.3489 | 0.6272 | 0.0407 |
+| `historical_only` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 |
+| `historical_with_normative_backfill_if_missing_code` | 0.8628 | 0.9801 | 0.9970 | 1.0000 | 1.0000 | 1.0000 | 0.9062 |
+| `normative_only_reference` | 0.0249 | 0.0497 | 0.0517 | 0.0626 | 0.3489 | 0.6292 | 0.0407 |
 
-Decision: recomendar `historical_with_normative_backfill_if_missing_code`. Conserva el ranking historico como orden operativo principal, no degrada Top-1/Top-10/Top-100/MRR y agrega backfill normativo posterior para trazabilidad y robustez futura. Como todas las NANDINAS del evalset tienen soporte historico, el valor del backfill para codigos ausentes requiere validacion futura.
+Decision: recomendar `historical_with_normative_backfill_if_missing_code`. Conserva el ranking historico como orden operativo principal, no degrada Top-1/Top-10/Top-100/MRR y agrega backfill normativo posterior para trazabilidad y robustez futura. Como todas las NANDINAS del evalset tienen soporte historico y ya se alcanza cobertura completa a Top-100, el valor del backfill para codigos ausentes requiere validacion futura.
 
 Artefactos versionables:
 
@@ -817,6 +819,31 @@ Artefactos versionables:
 Outputs regenerables e ignorados por Git:
 
 - `outputs/evaluation/llm_rerank_hybrid_pool_sample_v0.1/`
+
+## Fase 10B: Explicacion LLM Top-3 Auditable
+
+La Fase 10B formaliza la explicacion auditable LLM+RAG del Top-3 historico recuperado sobre `data_aduanas` clase 87 corregido. Usa `qwen2.5:7b-instruct` mediante Ollama local, temperatura 0, sin OpenAI, sin APIs remotas, sin descargas y sin servicios con costo.
+
+La muestra contiene 50 casos del evalset, balanceados de forma deterministica: 15 casos con NANDINA correcta en rank 1 historico, 15 en rank 2-3, 10 en rank 4-10 y 10 dificiles o de bajo soporte historico. El balance se logro exactamente. La etiqueta esperada queda solo en `sample_cases.csv` para auditoria y no se envia al LLM.
+
+Resultado principal: JSON valido 50/50, Top-3 completo 50/50, ranking preservado 50/50, sin codigos fuera del pool 50/50, evidencia historica citada por candidato 50/50, evidencia normativa citada por candidato 50/50, comparacion Top-3 presente 50/50, advertencia final presente 50/50 y score promedio de auditabilidad 0.9520.
+
+Correccion metodologica menor: el payload 10B usa una nota neutral (`Payload limitado a datos observables, candidatos Top-3 y evidencias recuperadas.`) y la validacion posterior confirma que `payloads.jsonl` no contiene etiquetas esperadas ni variables de resultado, ni como claves ni como texto. Las metricas duras de paso se mantienen tras regenerar la fase; el score promedio cambia levemente por la nueva corrida local.
+
+Decision: pasa metodologicamente a Fase 10C. La salida debe leerse como apoyo documental para revision experta; no reemplaza clasificacion oficial.
+
+Artefactos versionables:
+
+- `src/llm/explain_top3_nandina_prompt_v0.2.md`
+- `src/experiments/build_llm_explanation_top3_audit_sample.py`
+- `src/experiments/run_llm_explanation_top3_audit_sample.py`
+- `src/experiments/evaluate_llm_explanation_top3_audit_sample.py`
+- `src/experiments/render_llm_explanation_audit_cards.py`
+- `docs/evaluacion_llm_explicacion_top3_auditable_v0.1.md`
+
+Outputs regenerables e ignorados por Git:
+
+- `outputs/evaluation/llm_explanation_top3_audit_sample_v0.1/`
 
 ## Manifiesto de Artefactos
 

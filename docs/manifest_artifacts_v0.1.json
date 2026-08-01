@@ -62,11 +62,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 42275,
-      "sha256": "697d810bf0401347ce9db7ce48c14452db62013e2c710610f4487436ab9443a1",
+      "size_bytes": 48125,
+      "sha256": "b1b725b9f33cc623b6181d35be91c6467953c8aab9e49ae679e495672b2b9d27",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado con el pool hibrido real Fase 9B sobre data_aduanas clase 87, su documento de cierre y outputs regenerables."
+      "methodological_notes": "Actualizado con correccion de descripciones data_aduanas, metricas 7A/9A/9B recalculadas y Fase 10A explicacion Top-3 sample."
     },
     {
       "path": "docs/evaluacion_bm25_baseline_v0.1.md",
@@ -442,7 +442,7 @@
         "local_only"
       ],
       "exists": true,
-      "size_bytes": 25546,
+      "size_bytes": null,
       "sha256": null,
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -502,7 +502,7 @@
         "local_only"
       ],
       "exists": true,
-      "size_bytes": 34048,
+      "size_bytes": null,
       "sha256": null,
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -562,7 +562,7 @@
         "local_only"
       ],
       "exists": true,
-      "size_bytes": 25693,
+      "size_bytes": null,
       "sha256": null,
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -592,7 +592,7 @@
         "local_only"
       ],
       "exists": true,
-      "size_bytes": 34420,
+      "size_bytes": null,
       "sha256": null,
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -652,7 +652,7 @@
         "local_only"
       ],
       "exists": true,
-      "size_bytes": 54650,
+      "size_bytes": null,
       "sha256": null,
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -727,7 +727,7 @@
         "local_only"
       ],
       "exists": true,
-      "size_bytes": 1094,
+      "size_bytes": null,
       "sha256": null,
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -772,7 +772,7 @@
         "local_only"
       ],
       "exists": true,
-      "size_bytes": 34093,
+      "size_bytes": null,
       "sha256": null,
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
@@ -1318,8 +1318,8 @@
       ],
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documenta objetivo, alcance clase 87, fuentes normativas, no uso de historico real, estrategias evaluadas, union_oracle vs final_pool, metricas exactas y jerarquicas, aporte dual, decision y relacion con Fase 9 historica.",
-      "sha256": "7d5e89f910966f45421c8da1bafc18b8d386e3815e991e4059db81fa74f8c078",
+      "methodological_notes": "Cierre Fase 7A normativo actualizado tras regenerar el evalset data_aduanas corregido.",
+      "sha256": "c0f07dbbda5589f6cbe2002f3cbe995e292797057629e6da3de6cd191cc89209",
       "exists": true,
       "size_bytes": 7521
     },
@@ -2419,11 +2419,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 43299,
-      "sha256": "d7c1f470c78ee75658b928ef2796eef01bca4a93519f35be6eed17c4f82938ee",
+      "size_bytes": 46460,
+      "sha256": "8540e2d6536e6af803f6f7c23d9f4ef9e315cc6d46d7f3a02cb0104b50b6bd54",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Actualizado para distinguir la Fase 9B historica del nuevo pool hibrido real data_aduanas clase 87 y su decision de historico principal con backfill normativo."
+      "methodological_notes": "Actualizado con limpieza de descripciones data_aduanas, metricas 9A/9B corregidas y nota de que 10B debe usar splits corregidos."
     },
     {
       "path": "src/experiments/evaluate_historical_examples_leave_one_out.py",
@@ -2490,11 +2490,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 5363,
-      "sha256": "2bab30093fc82685914391a86418a1b892a54c650dcbe145d232d792215441bf",
+      "size_bytes": 5320,
+      "sha256": "f5a48d04e4f1d19514ee1bba1fb3e6f27ab6c695b13100b2a0aacc9972d4957c",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documenta objetivo, diferencia frente al leave-one-out, protocolo, metodo, metricas globales, metricas jerarquicas, soporte historico, comparacion contra Fase 7A normativa y decision para Fase 9B."
+      "methodological_notes": "Cierre Fase 9A actualizado con metricas sobre splits data_aduanas corregidos."
     },
     {
       "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.1",
@@ -2576,11 +2576,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 8243,
-      "sha256": "1b76282d44b36ea3610279316c08b525d7e1ee36b4371eead10bae9e7484e55b",
+      "size_bytes": 8181,
+      "sha256": "81680f63cf6202e3ea7dd3b280f27cfbf7c8623dbbac34b2b28e7a42ba315806",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documenta objetivo, diferencia frente a Fase 9B historica, fuentes, verificacion de no fuga, estrategias, metricas globales y por soporte, comparacion contra historico solo y normativo solo, decision y recomendacion para futura fase LLM+RAG."
+      "methodological_notes": "Cierre Fase 9B actualizado con pool historico+normativo sobre splits data_aduanas corregidos."
     },
     {
       "path": "outputs/evaluation/hybrid_pool_data_aduanas_clase87_v0.1",
@@ -2693,10 +2693,10 @@
       ],
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "El nombre fisico del script se conserva por compatibilidad; metodologicamente la fuente procesada se documenta como `data_aduanas`.",
+      "methodological_notes": "Parser SUNAT DAM actualizado a normalize_sunat_dam_series_positional_v0.3; filtra y recorta encabezados DAM en descripcion de mercancias.",
       "exists": true,
-      "size_bytes": 30912,
-      "sha256": "5995e635b9c405bfda361bb9ef79d9ec36b24b8d43d510ce1cf0a064e2c4cad2"
+      "size_bytes": 33276,
+      "sha256": "6e66e55a0f0b70e66727e7ff988d9efa3583ae75c3802609d3600fd04ca05da8"
     },
     {
       "path": "docs/protocolo_ingesta_sunat_series_v0.1.md",
@@ -2707,10 +2707,10 @@
       ],
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documenta el nombre metodologico `data_aduanas`, el archivo local, el parser y las salidas intermedias regenerables.",
+      "methodological_notes": "Documenta el parser SUNAT DAM y la regla conservadora v0.3 para cortar/recortar encabezados DAM fuera de descripcion de mercancias.",
       "exists": true,
-      "size_bytes": 5367,
-      "sha256": "a3da57872a58d62f081dbca04a24ab51062bf3f69be4fb7c164deb0035cacdc3"
+      "size_bytes": 5809,
+      "sha256": "213761a38abaf714a1f0dcb1e5e8e187e7ea361bcc9840ec1988589d1302ff5e"
     },
     {
       "path": "data/interim/sunat_series_descripciones_normalized.csv",
@@ -2725,8 +2725,8 @@
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Salida regenerable del parser; contiene 11,320 series normalizadas y no se fuerza a Git.",
       "exists": true,
-      "size_bytes": 13309984,
-      "sha256": "090aafd3062939b2dad91a66bb766889c3b466abf1c33538a7a93ed10b587d3f"
+      "size_bytes": 13300274,
+      "sha256": "afee8058d6454dba4725224f61111f09809d41d4cdce549dfd80890647c59ae2"
     },
     {
       "path": "data/interim/sunat_series_descripciones_normalized.xlsx",
@@ -2741,8 +2741,8 @@
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Salida local regenerable para inspeccion; no se fuerza a Git.",
       "exists": true,
-      "size_bytes": 5788284,
-      "sha256": "840b0842d827ce08cd7f3e82baed3c04518c4bfb155e37ab5b48eb02da7caf13"
+      "size_bytes": 5778122,
+      "sha256": "eadbbeb60ad45b48168f8519f93ccfbd9179fbb67d311c2969fffb06df38005f"
     },
     {
       "path": "data/interim/sunat_series_descripciones_normalized_metadata.json",
@@ -2757,8 +2757,8 @@
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Registra conteos de DAM, series, `id_unico` y advertencias de parseo; regenerable con el parser.",
       "exists": true,
-      "size_bytes": 5485,
-      "sha256": "ee35a16b89a35ebe0047db837e19578279661b05a777615270711bed2e742b7e"
+      "size_bytes": 5491,
+      "sha256": "7bc1a8929245632f25414a3a4131aa32de21960af629569bbcd1ea42572825fc"
     },
     {
       "path": "outputs/audits/sunat_series_labels_v0.1/labels.csv",
@@ -2774,7 +2774,7 @@
       "methodological_notes": "Output de auditoria local y regenerable; no se fuerza a Git.",
       "exists": true,
       "size_bytes": 4755,
-      "sha256": "82fe61bd18d749b8efd8334495dbe7463246f6e641979b21b59d5410fea31317"
+      "sha256": "70e441c88c6379194df5e33edf6ec949a5543cf4de346c6b3d85bd03afb7f237"
     },
     {
       "path": "outputs/audits/sunat_series_labels_v0.1/id_unico_duplicates.csv",
@@ -2789,8 +2789,8 @@
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Las particiones finales historico/dev/eval no deberan contener `id_unico` repetidos; este output local documenta duplicados a resolver en fases posteriores.",
       "exists": true,
-      "size_bytes": 90806,
-      "sha256": "5bac011004dd8e8943fc20191c691b2b1acb0f270c1a0742f319eb41cfe1f5d3"
+      "size_bytes": 90737,
+      "sha256": "43486abd6fbf3b995ebd7f4876187b21194cb9b47e54c07601344c77c66aaa38"
     },
     {
       "path": "src/evaluation/build_data_aduanas_splits.py",
@@ -2814,11 +2814,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 4769,
-      "sha256": "860a6ab5ee807663c430cb8ddfe7a09278802fde6af0cd2464a7caa4fd12208b",
+      "size_bytes": 5547,
+      "sha256": "db8871fb4b9a1c43c97d4a26015956fa2b976373fb77a275e45819a71ef22a54",
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Documenta fuente data_aduanas, alcance Clase 87, criterios de inclusion/exclusion, politica id_unico, split historico/dev/eval y relacion con el evalset v0.1 historico."
+      "methodological_notes": "Documenta los splits clase 87 regenerados desde ingesta corregida, sin encabezados DAM en descripciones."
     },
     {
       "path": "docs/ficha_data_aduanas_clase87_v0.1.md",
@@ -2856,11 +2856,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 3609847,
-      "sha256": "6dfa703a51a7801d47881f67d96496e89c921d949f84049c3b548cce3da37c50",
+      "size_bytes": 3604567,
+      "sha256": "ea3286063fc890d2569a8cd3704ab18d82970e3b41973153957e27486c28f2f0",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Contiene 3,000 instancias curadas, 69 NANDINAS distintas, mismas columnas que desarrollo/evaluacion y sin id_unico repetidos."
+      "methodological_notes": "Split historico clase 87 regenerado desde ingesta corregida; versionable y reproducible."
     },
     {
       "path": "data/processed/data_aduanas_devset_clase87_v0.1.csv",
@@ -2874,7 +2874,7 @@
       "sha256": "19eeb607cb1586f3eb459a95d267844bcb068daf93f05e4055ce1183dd698a50",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Contiene 100 instancias curadas, 44 NANDINAS distintas, mismas columnas que historico/evaluacion y sin id_unico repetidos."
+      "methodological_notes": "Split desarrollo clase 87 regenerado desde ingesta corregida; versionable y reproducible."
     },
     {
       "path": "data/processed/data_aduanas_evalset_clase87_v0.1.csv",
@@ -2884,11 +2884,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 1218402,
-      "sha256": "fc1b532ea99700ee5e7546bc118bd7ebc8beb55916790c79faa99c2823e87281",
+      "size_bytes": 1216979,
+      "sha256": "ae642d01c0e941ab94a187fb2a820fbc8dcd6259c90d9decb70408b9dea344bb",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": false,
-      "methodological_notes": "Contiene 1,006 instancias curadas, 62 NANDINAS distintas, mismas columnas que historico/desarrollo y sin id_unico repetidos."
+      "methodological_notes": "Split evaluacion clase 87 regenerado desde ingesta corregida; versionable y reproducible."
     },
     {
       "path": "data/processed/data_aduanas_splits_clase87_v0.1_metadata.json",
@@ -2898,11 +2898,11 @@
         "tracked"
       ],
       "exists": true,
-      "size_bytes": 18365,
-      "sha256": "490ef6f3be502a6f14c7b3521b2d5c6d95b005463c18058db354f0bb2cc0b7c1",
+      "size_bytes": 18364,
+      "sha256": "71a42f793ae7e7cb02ec5b97723c74ac7b60d67f9f7b542ebfa43bb77834189a",
       "required_to_reproduce": true,
       "required_for_acceleration_or_inspection": true,
-      "methodological_notes": "Registra 4,232 filas fuente clase 87, 4,106 curadas finales, 126 excluidas por duplicados id_unico, parametros de split y validaciones sin errores."
+      "methodological_notes": "Metadata de splits clase 87 regenerada desde ingesta corregida; conserva conteos y validaciones de curacion."
     },
     {
       "path": "outputs/audits/data_aduanas_splits_clase87_v0.1",
@@ -3037,6 +3037,204 @@
       "required_to_reproduce": false,
       "required_for_acceleration_or_inspection": true,
       "methodological_notes": "Output regenerable con src.experiments.evaluate_bm25_hierarchical_data_aduanas; permanece ignorado por Git."
+    },
+    {
+      "path": "src/llm/explain_top3_nandina_prompt_v0.1.md",
+      "type": "prompt",
+      "role_in_v0_1": "Prompt cerrado Fase 10A para explicacion auditada del Top-3 NANDINA recuperado.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 2989,
+      "sha256": "824c93a643d06c3a178f3dbef081f14a757028834c119e4897b029ba5d6122c1",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Prohibe buscar, agregar, inventar o reordenar candidatos; exige JSON estricto con soporte, evidencias, comparacion y advertencias."
+    },
+    {
+      "path": "src/experiments/build_llm_explanation_top3_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Constructor de muestra y payloads Fase 10A para explicacion Top-3.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 17439,
+      "sha256": "eb766129efe5aecbb46b90152772231c7b689d0debac4cd027dd33713a66006f",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Selecciona 30 casos balanceados del evalset data_aduanas clase 87, conserva etiqueta solo en sample_cases.csv y arma payloads sin exponer la NANDINA esperada al LLM."
+    },
+    {
+      "path": "src/experiments/run_llm_explanation_top3_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Runner local Ollama Fase 10A para explicaciones JSON del Top-3.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 8114,
+      "sha256": "e56d876959865d35cb87ca2743b93ce1bfaf3542bcf805d1efa32d65d6898ec0",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Verifica modelo local, llama solo a 127.0.0.1:11434, no descarga modelos y guarda respuestas crudas/parseadas."
+    },
+    {
+      "path": "src/experiments/evaluate_llm_explanation_top3_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Evaluador estructural y de auditabilidad basica para explicaciones Top-3 Fase 10A.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 18446,
+      "sha256": "69c6a327e0f765ee07f4e776d7a0d948499b2feacb2d8187caba8c9eebcbe8df",
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Calcula JSON valido, candidatos completos, respeto de Top-3, no invencion, no re-ranking, evidencia citada, advertencias, soportes y fallos por tipo."
+    },
+    {
+      "path": "docs/evaluacion_llm_explicacion_top3_sample_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 10A explicacion LLM Top-3 sample.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 4852,
+      "sha256": "633b74c24350c95579858f429456fe5ef017b7be1eb8f8ab495f6b1aba416f44",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, uso del LLM como explicador, modelo local, muestra, prompt, controles anti-invencion, metricas, ejemplos, limitaciones y decision de paso a 10B."
+    },
+    {
+      "path": "outputs/evaluation/llm_explanation_top3_sample_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion Fase 10A explicacion LLM del Top-3 historico.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null,
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye sample_cases.csv, payloads.jsonl, llm_explanations.jsonl, llm_explanations.csv, explanation_quality_metrics.json, explanation_quality_summary.md y case_quality_summary.csv."
+    },
+    {
+      "path": "docs/correccion_data_aduanas_descripciones_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Documento breve de correccion de ingesta data_aduanas para excluir encabezados DAM de descripciones de mercancias.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "exists": true,
+      "size_bytes": 4000,
+      "sha256": "f89169339191fb02760069e3ebfec008866fe822bcaffd93600b3a38efc2f117",
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta problema, causa, regla de parser, conteos antes/despues, ausencia de encabezados y metricas 9A/9B corregidas."
+    },
+    {
+      "path": "src/llm/explain_top3_nandina_prompt_v0.2.md",
+      "type": "prompt",
+      "role_in_v0_1": "Prompt formal Fase 10B para explicacion auditable del Top-3 NANDINA recuperado.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Exige JSON estricto, evidencia historica y normativa por candidato, candidate_id_unico, evidence_id, comparacion Top-3 con criterios explicitos, advertencia final y prohibicion de buscar, reordenar o emitir clasificacion oficial.",
+      "exists": true,
+      "size_bytes": 6206,
+      "sha256": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0"
+    },
+    {
+      "path": "src/experiments/build_llm_explanation_top3_audit_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Constructor de muestra y payloads Fase 10B para explicacion Top-3 auditable.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Selecciona 50 casos balanceados del evalset data_aduanas clase 87 corregido, conserva etiqueta solo en sample_cases.csv, usa una nota neutral en el payload y valida nombres de claves estructurales prohibidas sin escanear texto explicativo.",
+      "exists": true,
+      "size_bytes": 19336,
+      "sha256": "73b9a1ec98c99beec153d2ecb385cac9df1d255f145d2d65431c22422ef826a5"
+    },
+    {
+      "path": "src/experiments/run_llm_explanation_top3_audit_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Runner local Ollama Fase 10B para explicaciones JSON auditables del Top-3.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Verifica modelo local qwen2.5:7b-instruct, llama solo a Ollama local, no descarga modelos, guarda respuestas crudas/parseadas y permite --resume para completar corridas largas.",
+      "exists": true,
+      "size_bytes": 9668,
+      "sha256": "c891165e163a5a686216e04b32a4f3472b9f04cd4cddc33f3a6247379cf90f9f"
+    },
+    {
+      "path": "src/experiments/evaluate_llm_explanation_top3_audit_sample.py",
+      "type": "script",
+      "role_in_v0_1": "Evaluador formal de auditabilidad para explicaciones Top-3 Fase 10B.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": false,
+      "methodological_notes": "Calcula JSON valido, Top-3 completo, ranking preservado, codigos fuera de pool, evidencia historica/normativa por candidato, comparacion, advertencia final, soportes, advertencias, score de auditabilidad y decision de paso a 10C.",
+      "exists": true,
+      "size_bytes": 28257,
+      "sha256": "034c85b90a6f4d112e705456778298a42d9885ae2e63286cc1dd72a2ccc501ec"
+    },
+    {
+      "path": "src/experiments/render_llm_explanation_audit_cards.py",
+      "type": "script",
+      "role_in_v0_1": "Renderizador de fichas auditables Markdown por caso para Fase 10B.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": true,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Genera audit_cards.md y una ficha .md por caso con Top-3 recibido, respuesta LLM, evidencias citadas y controles de calidad.",
+      "exists": true,
+      "size_bytes": 13201,
+      "sha256": "04f7bbe931afc88096acb4a82c853f1087189eec6a9d757561758fd36f2c0965"
+    },
+    {
+      "path": "docs/evaluacion_llm_explicacion_top3_auditable_v0.1.md",
+      "type": "documentation",
+      "role_in_v0_1": "Cierre metodologico de Fase 10B explicacion LLM Top-3 auditable.",
+      "git_status_expected": [
+        "tracked"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Documenta objetivo, relacion con 10A, antecedentes, muestra, prompt v0.2, estructura JSON, ficha auditable, rubrica, metricas actualizadas, correccion de nota del payload, limitaciones y decision de paso a 10C.",
+      "exists": true,
+      "size_bytes": 10049,
+      "sha256": "7c9cb97109fa9469b0d3682ae15d8bfcefa432b8fe8e364665ff4f3532b5c936"
+    },
+    {
+      "path": "outputs/evaluation/llm_explanation_top3_audit_sample_v0.1",
+      "type": "evaluation_output",
+      "role_in_v0_1": "Directorio regenerable de evaluacion Fase 10B explicacion LLM Top-3 auditable.",
+      "git_status_expected": [
+        "ignored",
+        "regenerable"
+      ],
+      "required_to_reproduce": false,
+      "required_for_acceleration_or_inspection": true,
+      "methodological_notes": "Incluye sample_cases.csv, payloads.jsonl, llm_explanations.jsonl, llm_explanations.csv, audit_quality_metrics.json, audit_quality_summary.md, case_audit_quality_summary.csv, audit_cards.md y audit_cards/ con 50 fichas.",
+      "exists": true,
+      "size_bytes": null,
+      "sha256": null
     }
   ],
   "known_absent_or_omitted_paths": [

@@ -38,11 +38,11 @@ No se incorpora `BM25_flat_current` al pool final. Sus metricas quedan como refe
 
 | Estrategia | Pool@10 | Pool@20 | Pool@50 | Pool@100 | Pool@200 |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `hierarchical_only` | 0.0497 | 0.0517 | 0.0626 | 0.3449 | 0.6213 |
+| `hierarchical_only` | 0.0497 | 0.0517 | 0.0626 | 0.3449 | 0.6233 |
 | `dual_only` | 0.0487 | 0.0517 | 0.0716 | 0.1948 | 0.5934 |
 | `hierarchical_first_100` | 0.0497 | 0.0517 | 0.0626 | 0.3449 | 0.5895 |
-| `hierarchical_80_dual_backfill_20` | 0.0497 | 0.0517 | 0.0626 | 0.3459 | 0.6272 |
-| `hierarchical_70_dual_backfill_30` | 0.0497 | 0.0517 | 0.0626 | 0.3489 | 0.6272 |
+| `hierarchical_80_dual_backfill_20` | 0.0497 | 0.0517 | 0.0626 | 0.3459 | 0.6292 |
+| `hierarchical_70_dual_backfill_30` | 0.0497 | 0.0517 | 0.0626 | 0.3489 | 0.6292 |
 | `union_oracle` diagnostico | 0.0497 | 0.0527 | 0.0805 | 0.3658 | 0.6372 |
 
 La diferencia clave a Top-100 es:
@@ -95,13 +95,13 @@ Frente a `hierarchical_only`, los pools mixtos muestran:
 | `hierarchical_80_dual_backfill_20` | 1 | 0 | 6 | 0 |
 | `hierarchical_70_dual_backfill_30` | 7 | 3 | 6 | 0 |
 
-`hierarchical_70_dual_backfill_30` es el mejor pool entregable a Top-100. A Top-200, `hierarchical_80_dual_backfill_20` y `hierarchical_70_dual_backfill_30` empatan en exactitud (`0.6272`) y en las metricas jerarquicas principales reportadas.
+`hierarchical_70_dual_backfill_30` es el mejor pool entregable a Top-100. A Top-200, `hierarchical_80_dual_backfill_20` y `hierarchical_70_dual_backfill_30` empatan en exactitud (`0.6292`) y en las metricas jerarquicas principales reportadas.
 
 ## Lectura metodologica
 
 La actualizacion confirma que la Fase 7A normativa mejora la cobertura profunda respecto al BM25 plano clase 87 y preserva trazabilidad arancelaria, pero no alcanza cobertura suficiente para ser fuente principal de candidatos. El mejor `final_pool@100` normativo llega a 0.3489 y el techo `union_oracle@100` llega a 0.3658.
 
-Top-200 mejora de forma sustantiva (`final_pool@200 = 0.6272`), pero aun queda lejos de la cobertura esperada para un flujo operativo cerrado. Esto refuerza la decision metodologica ya abierta por Fase 9: el historico real debe dominar cuando haya precedente, mientras el bloque normativo debe funcionar como backfill, respaldo y explicabilidad.
+Top-200 mejora de forma sustantiva (`final_pool@200 = 0.6292`), pero aun queda lejos de la cobertura esperada para un flujo operativo cerrado. Esto refuerza la decision metodologica ya abierta por Fase 9: el historico real debe dominar cuando haya precedente, mientras el bloque normativo debe funcionar como backfill, respaldo y explicabilidad.
 
 ## Decision
 

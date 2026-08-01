@@ -64,7 +64,8 @@ Cada fila normalizada representa una serie de una DAM.
 7. El codigo NANDINA visible de SUNAT se conserva en `NANDINA ORIGINAL`, por ejemplo `70.09.10.00.00`.
 8. Desde ese codigo se derivan columnas sin puntos: `Clase` (2 digitos), `Partida` (4 digitos), `Sub Partida` (6 digitos) y `NANDINA` (8 digitos).
 9. `DESCRIPCION DE MERCANCIAS` se conserva en cinco columnas (`DESCRIPCION DE MERCANCIAS 1` a `DESCRIPCION DE MERCANCIAS 5`) porque el formato SUNAT separa esa descripcion en filas. Tambien se genera `DESCRIPCION DE MERCANCIAS CONCATENADA` para busqueda y recuperacion.
-10. Se crea `id_unico = DECLARACION + '-' + SERIE`.
+10. La extraccion de descripcion se corta o recorta cuando encuentra encabezados/secciones claros del formato DAM, por ejemplo `REGISTRO DE ADUANAS`, `DECLARACION`, `FECHA NUMERACION`, `1. IDENTIFICACION`, `3. TRANSACCION`, `4. TRANSPORTE`, `5. ALMACENAMIENTO`, `6. BASE IMPONIBLE`, `LIQUIDACION DEL ADEUDO` o `ULTIMO DIA DE PAGO`. Esta regla evita que texto administrativo entre al campo de busqueda sin eliminar lineas reales de mercancia.
+11. Se crea `id_unico = DECLARACION + '-' + SERIE`.
 
 ## Salidas
 

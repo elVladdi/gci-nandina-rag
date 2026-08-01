@@ -70,6 +70,26 @@ LIQUIDACION_MARKER = "LIQUIDACION DEL ADEUDO"
 CONCEPTO_MARKER = "CONCEPTO"
 ULTIMO_DIA_PAGO_LABEL = "ULTIMO DIA DE PAGO"
 
+DAM_SECTION_HEADER_PREFIXES = [
+    "1. IDENTIFICACION",
+    "2. REGISTRO DE ADUANAS",
+    "3. TRANSACCION",
+    "4. TRANSPORTE",
+    "5. ALMACENAMIENTO",
+    "6. BASE IMPONIBLE",
+    "REGISTRO DE ADUANAS",
+    "LIQUIDACION DEL ADEUDO",
+    "ULTIMO DIA DE PAGO",
+]
+DAM_LABEL_HEADER_CELLS = {
+    "DECLARACION",
+    "FECHA NUMERACION",
+}
+DAM_DESCRIPTION_STOP_MARKERS = [
+    *DAM_SECTION_HEADER_PREFIXES,
+    *sorted(DAM_LABEL_HEADER_CELLS),
+]
+
 
 @dataclass
 class DamBlock:
@@ -147,6 +167,65 @@ def is_series_start_row(row: list[Any]) -> bool:
 
 def is_blank_row(values: Iterable[Any]) -> bool:
     return all(clean_text(value) == "" for value in values)
+
+
+def is_dam_section_header_line(values: Iterable[Any] | str) -> bool:
+    """Detect clear DAM section/header rows that are not merchandise text."""
+
+    if isinstance(values, str):
+        cells = [values]
+    else:
+        cells = [clean_text(value) for value in values if clean_text(value)]
+    if not cells:
+        return False
+
+    normalized_cells = [normalize_label(cell).upper() for cell in cells]
+    if any(cell in DAM_LABEL_HEADER_CELLS for cell in normalized_cells):
+        return True
+
+    line = " ".join(cells).upper()
+    line = re.sub(r"\s+", " ", line).strip()
+    for prefix in DAM_SECTION_HEADER_PREFIXES:
+        if line == prefix or line.startswith(f"{prefix} ") or line.startswith(f"{prefix}:"):
+            return True
+    return False
+
+
+def trim_dam_section_header_fragment(line: str) -> str:
+    """Remove a trailing DAM header fragment accidentally attached to text."""
+
+    trimmed = clean_text(line)
+    upper = trimmed.upper()
+    for marker in sorted(DAM_DESCRIPTION_STOP_MARKERS, key=len, reverse=True):
+        pattern = re.compile(rf"(?<!\w){re.escape(marker)}\b.*$", re.IGNORECASE)
+        match = pattern.search(upper)
+        if not match:
+            continue
+        if match.start() == 0:
+            return ""
+        prefix = trimmed[: match.start()]
+        return prefix.rstrip(" .;:-|")
+    return trimmed
+
+
+def extract_description_lines(all_rows: list[list[Any]], description_start: int, description_end: int) -> list[str]:
+    """Extract merchandise description rows, stopping at the next DAM section."""
+
+    description_lines: list[str] = []
+    for row_number in range(description_start, description_end + 1):
+        if row_number > len(all_rows):
+            continue
+        values = all_rows[row_number - 1]
+        if is_blank_row(values):
+            continue
+        if is_dam_section_header_line(values):
+            break
+        line_parts = [clean_text(value) for value in values if clean_text(value)]
+        if line_parts:
+            line = trim_dam_section_header_fragment(" ".join(line_parts))
+            if line and not is_dam_section_header_line(line):
+                description_lines.append(line)
+    return description_lines
 
 
 def append_value(existing: str, new_value: str) -> str:
@@ -362,16 +441,11 @@ def parse_series_block(
             if col_idx < len(values):
                 set_field(record, label, clean_text(values[col_idx]), warnings)
 
-    description_lines: list[str] = []
-    for row_number in range(series_start + DETAIL_VALUE_ROWS, series_end + 1):
-        if row_number > len(all_rows):
-            continue
-        values = all_rows[row_number - 1]
-        if is_blank_row(values):
-            continue
-        line_parts = [clean_text(value) for value in values if clean_text(value)]
-        if line_parts:
-            description_lines.append(" ".join(line_parts))
+    description_lines = extract_description_lines(
+        all_rows,
+        description_start=series_start + DETAIL_VALUE_ROWS,
+        description_end=series_end,
+    )
 
     for idx, column in enumerate(DESCRIPTION_LINE_COLUMNS):
         record[column] = description_lines[idx] if idx < len(description_lines) else ""
@@ -654,7 +728,7 @@ def write_metadata(
         "sheet_name": args.sheet,
         "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "parser": "src.ingestion.sunat_series_parser",
-        "parser_mode": "normalize_sunat_dam_series_positional_v0.2",
+        "parser_mode": "normalize_sunat_dam_series_positional_v0.3",
         "dam_blocks_detected": result.dam_count,
         "series_rows_output": result.series_count,
         "skipped_dams_without_series": result.skipped_dams_without_series,

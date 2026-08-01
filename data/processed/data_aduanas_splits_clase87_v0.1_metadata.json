@@ -4,21 +4,21 @@
   "methodological_source_name": "data_aduanas",
   "scope_class": "87",
   "input_path": "data\\interim\\sunat_series_descripciones_normalized.csv",
-  "input_sha256": "090aafd3062939b2dad91a66bb766889c3b466abf1c33538a7a93ed10b587d3f",
+  "input_sha256": "afee8058d6454dba4725224f61111f09809d41d4cdce549dfd80890647c59ae2",
   "output_dir": "data\\processed",
   "audit_dir": "outputs\\audits\\data_aduanas_splits_clase87_v0.1",
-  "generated_at_utc": "2026-08-01T03:24:24+00:00",
+  "generated_at_utc": "2026-08-01T15:38:01+00:00",
   "parameters": {
     "historical_size": 3000,
     "dev_size": 100,
     "seed": 2026,
     "overwrite": true,
-    "regenerate_normalized": false
+    "regenerate_normalized": true
   },
   "outputs": {
     "historico": {
       "path": "data\\processed\\data_aduanas_historico_clase87_v0.1.csv",
-      "sha256": "6dfa703a51a7801d47881f67d96496e89c921d949f84049c3b548cce3da37c50"
+      "sha256": "ea3286063fc890d2569a8cd3704ab18d82970e3b41973153957e27486c28f2f0"
     },
     "desarrollo": {
       "path": "data\\processed\\data_aduanas_devset_clase87_v0.1.csv",
@@ -26,7 +26,7 @@
     },
     "evaluacion": {
       "path": "data\\processed\\data_aduanas_evalset_clase87_v0.1.csv",
-      "sha256": "fc1b532ea99700ee5e7546bc118bd7ebc8beb55916790c79faa99c2823e87281"
+      "sha256": "ae642d01c0e941ab94a187fb2a820fbc8dcd6259c90d9decb70408b9dea344bb"
     }
   },
   "columns": [
