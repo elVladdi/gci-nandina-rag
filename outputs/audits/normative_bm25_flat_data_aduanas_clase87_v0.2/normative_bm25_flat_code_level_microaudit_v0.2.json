@@ -1,0 +1,115 @@
+{
+  "audit_id": "normative_bm25_flat_code_level_microaudit_v0.2",
+  "created_at_utc": "2026-08-29T22:55:59.358374+00:00",
+  "inputs": {
+    "corpus": "data/processed/corpus_rag_v1_index.jsonl",
+    "corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "normative_case_summary": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv",
+    "normative_case_summary_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+    "normative_results": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv",
+    "normative_results_sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+    "normative_metrics": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json",
+    "normative_metrics_sha256": "56a702398d3b9d1483ecd1be3ca79587682ad8fd3afd84858917f248b5ae0460"
+  },
+  "corpus_duplicate_audit": {
+    "records_total": 7748,
+    "doc_id_unique": 7748,
+    "doc_id_duplicate_rows": 0,
+    "type_counts": {
+      "nandina_8": 7644,
+      "nota_capitulo": 87,
+      "nota_seccion": 9,
+      "rgi": 6,
+      "rgi_contexto": 2
+    },
+    "non_nandina8_records": 104,
+    "nandina8_records": 7644,
+    "nandina8_unique_codes": 7644,
+    "nandina8_codes_with_multiple_documents": 0,
+    "nandina8_records_belonging_to_repeated_codes": 0,
+    "max_documents_for_same_nandina8_code": 1,
+    "multiplicity_distribution": {
+      "1": 7644
+    },
+    "exact_duplicate_records_all_fields_extra_copies": 0,
+    "repeated_codes_with_distinct_texts": 0,
+    "repeated_codes_with_distinct_metadata_or_types": 0
+  },
+  "ranking_unit_audit": {
+    "bm25_returns": "document hits from BM25Index.score; retrieve maps doc_idx to index.doc_ids[doc_idx] as code",
+    "effective_ranking": "code ranking because the flat NANDINA-8 index has one document per NANDINA-8 code",
+    "explicit_deduplication_before_metrics": false,
+    "deduplication_method": "No post-retrieval deduplication was needed: corpus/index enforce unique NANDINA-8 doc_ids. First occurrence equals unique occurrence.",
+    "first_occurrence_determines_position": true,
+    "first_reference_position_matches_case_summary": true,
+    "cases_evaluated": 1056,
+    "cases_with_no_retrieved_documents": 10,
+    "cases_with_repeated_codes_in_effective_ranking": 0,
+    "max_repetitions_for_same_code_within_case": 1,
+    "global_result": "PASS"
+  },
+  "metrics_recalculated_from_artifacts": {
+    "top_1": {
+      "numerator": 29,
+      "denominator": 1056,
+      "value": 0.027462121212121212
+    },
+    "top_3": {
+      "numerator": 54,
+      "denominator": 1056,
+      "value": 0.05113636363636364
+    },
+    "top_5": {
+      "numerator": 65,
+      "denominator": 1056,
+      "value": 0.061553030303030304
+    },
+    "top_10": {
+      "numerator": 69,
+      "denominator": 1056,
+      "value": 0.06534090909090909
+    },
+    "top_50": {
+      "numerator": 74,
+      "denominator": 1056,
+      "value": 0.07007575757575757
+    },
+    "recall_at_100": {
+      "numerator": 75,
+      "denominator": 1056,
+      "value": 0.07102272727272728
+    },
+    "mrr": {
+      "numerator": 44.66596703438809,
+      "denominator": 1056,
+      "value": 0.04229731726741296
+    }
+  },
+  "metrics_match_expected_gate_b": true,
+  "normative_8_digit_coverage": {
+    "target_experimental": "NANDINA-8",
+    "corpus_normative_level": "NANDINA-8",
+    "normative_target_digits": 8,
+    "normative_supported_digits_for_primary_baseline": 8,
+    "eval_unique_codes": 42,
+    "eval_codes_with_nandina8_entry": 42,
+    "eval_cases_with_nandina8_entry": 1056,
+    "eval_codes_covered_by_parent_only": 0,
+    "parent_hs6_coverage_used_as_primary_coverage": false
+  },
+  "compatibility_with_historical_v0_2": {
+    "artifact_id": "historical_vs_normative_flat_compatibility_v0.2",
+    "total_cases_normative": 1056,
+    "total_cases_historical": 1056,
+    "identical_case_id_set": true,
+    "identical_labels": true,
+    "label_mismatch_count": 0,
+    "label_mismatch_examples": [],
+    "missing_in_normative": [],
+    "missing_in_historical": [],
+    "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_normative": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "compatible": true
+  },
+  "gate_b_hardened_result": "APPROVED"
+}
