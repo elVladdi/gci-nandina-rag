@@ -1,0 +1,269 @@
+{
+  "dataset_name": "data_aduanas_clase87",
+  "version": "v0.2",
+  "strategy": "T5-safe-159",
+  "seed": 2026,
+  "grouping_field": "DECLARACION",
+  "analysis_unit": "SERIE",
+  "eligible_class": "87",
+  "selection_policy": "explicit_dam_assignment_no_heuristic_search_no_model_metrics",
+  "config_file": "src/configs/data_aduanas_split_clase87_v0.2.json",
+  "config_sha256": "a107cf3121faa304b0d83c3ad5378742a4547c257bc04ed5c324195cbf877954",
+  "source_v0_1_sha256_verified": {
+    "data/processed/data_aduanas_historico_clase87_v0.1.csv": "ea3286063fc890d2569a8cd3704ab18d82970e3b41973153957e27486c28f2f0",
+    "data/processed/data_aduanas_devset_clase87_v0.1.csv": "19eeb607cb1586f3eb459a95d267844bcb068daf93f05e4055ce1183dd698a50",
+    "data/processed/data_aduanas_evalset_clase87_v0.1.csv": "ae642d01c0e941ab94a187fb2a820fbc8dcd6259c90d9decb70408b9dea344bb",
+    "data/processed/data_aduanas_splits_clase87_v0.1_metadata.json": "71a42f793ae7e7cb02ec5b97723c74ac7b60d67f9f7b542ebfa43bb77834189a"
+  },
+  "output_sha256": {
+    "data/processed/data_aduanas_historico_clase87_v0.2.csv": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "data/processed/data_aduanas_devset_clase87_v0.2.csv": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+    "data/processed/data_aduanas_evalset_clase87_v0.2.csv": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+  },
+  "audit_sha256": {
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.md": "24196e8578b5f042d8f443f09294a811f82428c49497e9beb9e63178129d6420",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/concentration_by_dam_v0.2.csv": "1a50e59c0c7963a3583d769931097e4e4600a8e55cc51b58babb330c50ddac31",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/concentration_summary_v0.2.json": "0e8fce3a290f78f745bf1859b6bb10448e54b9d93bb4fcef93a047fde04be246",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/exact_duplicates_cross_split_details_v0.2.csv": "691b094fbd4e6a142b235226abea27ba20897418b5929fa7dedcee48bc295525",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/exact_duplicates_cross_split_summary_v0.2.csv": "b5e6239f0c69de7fdc5989f1fb301ba33621fb9c72d5f33fd07830290d5225d1",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_by_code_v0.2.csv": "f392a0ada7b1e1c8a3d1134232ba0ec01a0afeff4adbe150d7be4f6845afa899",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_by_eval_row_v0.2.csv": "4fed0fe48a8d36718bb65e1adbb5eecce2ca671fbb5aa846bd22a2dc2762f385",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_summary_v0.2.json": "f9f781d7f23c4658d8d6cc164fcef930569eb9f6f63c76378f7b5ac7d67c56b9",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/independence_audit_v0.2.json": "aa863c0d5850c8f77230bff6602e803be11316677889bc6b377e99ad34bd5dc9",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/near_duplicates_hist_eval_details_v0.2.csv": "0f1f0283c993dd57ab3e02ba064b8c964fd688777726f7ae80c04c47e9c9b955",
+    "outputs/audits/data_aduanas_splits_clase87_v0.2/near_duplicates_hist_eval_summary_v0.2.csv": "80cd723ae6fe7e5fe2898b446baa582dde4d69b127a7e59fce736c324e576e43"
+  },
+  "approved_counts": {
+    "historico": {
+      "series": 2950,
+      "dam": 28,
+      "codes": 66
+    },
+    "desarrollo": {
+      "series": 100,
+      "dam": 6,
+      "codes": 9
+    },
+    "evaluacion": {
+      "series": 1056,
+      "dam": 67,
+      "codes": 42
+    }
+  },
+  "split_stats": {
+    "historico": {
+      "series": 2950,
+      "dam": 28,
+      "codes": 66,
+      "max_dam_pct": 35.42372881355932,
+      "hhi": 0.23613513358230395,
+      "effective_dam": 4.234863253211975
+    },
+    "desarrollo": {
+      "series": 100,
+      "dam": 6,
+      "codes": 9,
+      "max_dam_pct": 91.0,
+      "hhi": 0.8302,
+      "effective_dam": 1.2045290291496025
+    },
+    "evaluacion": {
+      "series": 1056,
+      "dam": 67,
+      "codes": 42,
+      "max_dam_pct": 14.109848484848486,
+      "hhi": 0.062412118342516074,
+      "effective_dam": 16.022529383028246
+    }
+  },
+  "validation": {
+    "total_source_rows": 4106,
+    "total_output_rows": 4106,
+    "full_assignment": true,
+    "source_unique_id_unico": 4106,
+    "output_unique_id_unico": 4106,
+    "dam_overlap": {
+      "desarrollo__evaluacion": 0,
+      "desarrollo__historico": 0,
+      "evaluacion__historico": 0
+    },
+    "id_overlap": {
+      "desarrollo__evaluacion": 0,
+      "desarrollo__historico": 0,
+      "evaluacion__historico": 0
+    },
+    "eval_cases_with_historical_support": 1056,
+    "eval_cases_without_historical_support": 0,
+    "eval_support_pct": 100.0,
+    "sizes_match_approved": {
+      "historico": {
+        "series": true,
+        "dam": true,
+        "codes": true
+      },
+      "desarrollo": {
+        "series": true,
+        "dam": true,
+        "codes": true
+      },
+      "evaluacion": {
+        "series": true,
+        "dam": true,
+        "codes": true
+      }
+    }
+  },
+  "audits": {
+    "independence": {
+      "dam_overlap": {
+        "desarrollo__evaluacion": 0,
+        "desarrollo__historico": 0,
+        "evaluacion__historico": 0
+      },
+      "id_unico_overlap": {
+        "desarrollo__evaluacion": 0,
+        "desarrollo__historico": 0,
+        "evaluacion__historico": 0
+      },
+      "zero_dam_overlap": true,
+      "zero_id_overlap": true
+    },
+    "concentration": {
+      "historico": {
+        "series": 2950,
+        "dam": 28,
+        "codes": 66,
+        "max_dam_pct": 35.42372881355932,
+        "hhi": 0.23613513358230395,
+        "effective_dam": 4.234863253211975
+      },
+      "desarrollo": {
+        "series": 100,
+        "dam": 6,
+        "codes": 9,
+        "max_dam_pct": 91.0,
+        "hhi": 0.8302,
+        "effective_dam": 1.2045290291496025
+      },
+      "evaluacion": {
+        "series": 1056,
+        "dam": 67,
+        "codes": 42,
+        "max_dam_pct": 14.109848484848486,
+        "hhi": 0.062412118342516074,
+        "effective_dam": 16.022529383028246
+      }
+    },
+    "historical_support": {
+      "eval_total_cases": 1056,
+      "eval_cases_with_historical_support": 1056,
+      "eval_cases_without_historical_support": 0,
+      "eval_total_codes": 42,
+      "eval_codes_with_historical_support": 42,
+      "eval_codes_without_historical_support": 0,
+      "bucket_cases": {
+        "C. 3-4 DAM historicas": 425,
+        "D. 5+ DAM historicas": 583,
+        "B. 2 DAM historicas": 21,
+        "A. 1 DAM historica": 27
+      },
+      "bucket_codes": {
+        "C. 3-4 DAM historicas": 18,
+        "D. 5+ DAM historicas": 15,
+        "B. 2 DAM historicas": 2,
+        "A. 1 DAM historica": 7
+      }
+    },
+    "exact_duplicates_cross_split": [
+      {
+        "comparison": "historico-evaluacion",
+        "method": "exact_normalized_description",
+        "right_rows": 1056,
+        "affected_rows": 35,
+        "affected_pct": 3.3143939393939394,
+        "same_nandina_rows": 34,
+        "different_nandina_rows": 1,
+        "same_dam_rows": 0,
+        "different_dam_rows": 35,
+        "same_nandina_pairs": 34,
+        "different_nandina_pairs": 1
+      },
+      {
+        "comparison": "historico-desarrollo",
+        "method": "exact_normalized_description",
+        "right_rows": 100,
+        "affected_rows": 0,
+        "affected_pct": 0.0,
+        "same_nandina_rows": 0,
+        "different_nandina_rows": 0,
+        "same_dam_rows": 0,
+        "different_dam_rows": 0,
+        "same_nandina_pairs": 0,
+        "different_nandina_pairs": 0
+      },
+      {
+        "comparison": "desarrollo-evaluacion",
+        "method": "exact_normalized_description",
+        "right_rows": 1056,
+        "affected_rows": 0,
+        "affected_pct": 0.0,
+        "same_nandina_rows": 0,
+        "different_nandina_rows": 0,
+        "same_dam_rows": 0,
+        "different_dam_rows": 0,
+        "same_nandina_pairs": 0,
+        "different_nandina_pairs": 0
+      }
+    ],
+    "near_duplicates_hist_eval": [
+      {
+        "comparison": "historico-evaluacion",
+        "threshold": 0.9,
+        "right_rows": 1056,
+        "affected_rows": 55,
+        "affected_pct": 5.208333333333334,
+        "same_nandina_rows": 51,
+        "different_nandina_rows": 14,
+        "pairs": 82,
+        "same_nandina_pairs": 63,
+        "different_nandina_pairs": 19,
+        "method": "token_jaccard_rare_block",
+        "rare_token_max_df": 737
+      },
+      {
+        "comparison": "historico-evaluacion",
+        "threshold": 0.95,
+        "right_rows": 1056,
+        "affected_rows": 44,
+        "affected_pct": 4.166666666666666,
+        "same_nandina_rows": 42,
+        "different_nandina_rows": 3,
+        "pairs": 46,
+        "same_nandina_pairs": 43,
+        "different_nandina_pairs": 3,
+        "method": "token_jaccard_rare_block",
+        "rare_token_max_df": 737
+      },
+      {
+        "comparison": "historico-evaluacion",
+        "threshold": 0.98,
+        "right_rows": 1056,
+        "affected_rows": 37,
+        "affected_pct": 3.5037878787878785,
+        "same_nandina_rows": 36,
+        "different_nandina_rows": 1,
+        "pairs": 38,
+        "same_nandina_pairs": 37,
+        "different_nandina_pairs": 1,
+        "method": "token_jaccard_rare_block",
+        "rare_token_max_df": 737
+      }
+    ]
+  },
+  "notes": [
+    "La búsqueda Pareto está cerrada; esta configuración congela la composición aprobada T5-safe-159.",
+    "El split v0.2 se reproduce por listas explícitas de DAM y no por heurística de búsqueda.",
+    "Los casos de evaluación conservan soporte histórico nominal sin usar métricas BM25, Top-k, MRR, Text2Trade, RAG ni LLM."
+  ]
+}

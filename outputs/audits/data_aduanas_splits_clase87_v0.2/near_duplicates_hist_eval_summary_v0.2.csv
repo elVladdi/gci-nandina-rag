@@ -1,0 +1,4 @@
+﻿comparison,threshold,right_rows,affected_rows,affected_pct,same_nandina_rows,different_nandina_rows,pairs,same_nandina_pairs,different_nandina_pairs,method,rare_token_max_df
+historico-evaluacion,0.9,1056,55,5.208333333333334,51,14,82,63,19,token_jaccard_rare_block,737
+historico-evaluacion,0.95,1056,44,4.166666666666666,42,3,46,43,3,token_jaccard_rare_block,737
+historico-evaluacion,0.98,1056,37,3.5037878787878785,36,1,38,37,1,token_jaccard_rare_block,737

@@ -1,0 +1,198 @@
+{
+  "manifest_version": "v0.2",
+  "dataset_name": "data_aduanas_clase87",
+  "strategy": "T5-safe-159",
+  "generated_date": "2026-08-29",
+  "branch": "codex/exp01-exp03-exp02-group-dam-split",
+  "gate5_status": "APROBADO_ENDURECIDO",
+  "gate5_hardening": {
+    "exact_universe_id_test": "SOURCE_UNIVERSE_IDS == V02_UNIVERSE_IDS",
+    "nandina_format_test": "8 digits, nonempty, Clase 87; hierarchy checked against Clase/Partida/Sub Partida when populated",
+    "historical_concentration_documented": true,
+    "devset_limitation_documented": true,
+    "residual_duplicates_documented_for_HE5_sensitivity": true
+  },
+  "gate5_summary": {
+    "total_series": 4106,
+    "historico_series": 2950,
+    "historico_dam": 28,
+    "historico_codes": 66,
+    "historico_top1_dam_pct": 35.42372881355932,
+    "historico_top2_dam_pct_approx": 67.29,
+    "historico_hhi": 0.23613513358230395,
+    "historico_effective_dam_approx": 4.23,
+    "desarrollo_series": 100,
+    "desarrollo_dam": 6,
+    "desarrollo_codes": 9,
+    "desarrollo_top1_dam_series": 91,
+    "desarrollo_top1_dam_pct": 91.0,
+    "desarrollo_hhi": 0.8302,
+    "desarrollo_effective_dam_approx": 1.2,
+    "dev_eval_shared_codes": 6,
+    "eval_codes": 42,
+    "dev_eval_coverage_pct": 14.29,
+    "evaluacion_series": 1056,
+    "evaluacion_dam": 67,
+    "dam_overlap": 0,
+    "id_unico_overlap": 0,
+    "eval_cases_without_historical_support": 0,
+    "eval_max_dam_concentration_pct": 14.109848484848486,
+    "exact_duplicates_hist_eval_affected_rows": 35,
+    "exact_duplicates_hist_eval_same_nandina_rows": 34,
+    "exact_duplicates_hist_eval_different_nandina_rows": 1,
+    "exact_duplicates_hist_eval_same_dam_rows": 0,
+    "near_duplicates_hist_eval_affected_rows": {
+      "0.90": 55,
+      "0.95": 44,
+      "0.98": 37
+    }
+  },
+  "v0_1_preserved_sha256": {
+    "data/processed/data_aduanas_historico_clase87_v0.1.csv": "ea3286063fc890d2569a8cd3704ab18d82970e3b41973153957e27486c28f2f0",
+    "data/processed/data_aduanas_devset_clase87_v0.1.csv": "19eeb607cb1586f3eb459a95d267844bcb068daf93f05e4055ce1183dd698a50",
+    "data/processed/data_aduanas_evalset_clase87_v0.1.csv": "ae642d01c0e941ab94a187fb2a820fbc8dcd6259c90d9decb70408b9dea344bb",
+    "data/processed/data_aduanas_splits_clase87_v0.1_metadata.json": "71a42f793ae7e7cb02ec5b97723c74ac7b60d67f9f7b542ebfa43bb77834189a"
+  },
+  "v0_2_dataset_sha256_locked": {
+    "data/processed/data_aduanas_historico_clase87_v0.2.csv": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "data/processed/data_aduanas_devset_clase87_v0.2.csv": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+    "data/processed/data_aduanas_evalset_clase87_v0.2.csv": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+  },
+  "artifacts": [
+    {
+      "path": "src/configs/data_aduanas_split_clase87_v0.2.json",
+      "role": "configuration",
+      "bytes": 6345,
+      "sha256": "a107cf3121faa304b0d83c3ad5378742a4547c257bc04ed5c324195cbf877954"
+    },
+    {
+      "path": "src/evaluation/group_split_by_dam.py",
+      "role": "generator",
+      "bytes": 29982,
+      "sha256": "dd31da90f736024be06997cc3e6cc28371bf462ec026208c1e06565e0c9b8409"
+    },
+    {
+      "path": "tests/test_data_aduanas_split_v02.py",
+      "role": "automated_tests",
+      "bytes": 10284,
+      "sha256": "c30a99009c8db4d417b9ec75f1377be21eaf54533096b4feedcdabcd5a1f56d0"
+    },
+    {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "role": "dataset",
+      "bytes": 3462862,
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff"
+    },
+    {
+      "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+      "role": "dataset",
+      "bytes": 135082,
+      "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00"
+    },
+    {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "role": "dataset",
+      "bytes": 1363273,
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+    },
+    {
+      "path": "data/processed/data_aduanas_splits_clase87_v0.2_metadata.json",
+      "role": "metadata",
+      "bytes": 10019,
+      "sha256": "1ac08e760bc3885866507a4c1ca515430c417e812dc01c7dece0f513c5e4d9ec"
+    },
+    {
+      "path": "docs/protocolo_data_aduanas_clase87_v0.2.md",
+      "role": "documentation",
+      "bytes": 5251,
+      "sha256": "5a8c31c32618416c658ee9d2913c6ca854ec9053d45e4cdb850f81e475e47586"
+    },
+    {
+      "path": "docs/ficha_data_aduanas_clase87_v0.2.md",
+      "role": "documentation",
+      "bytes": 4122,
+      "sha256": "30b85959b2384fc798d5ed1d309491848be5dd8d02cb56f90409bdcfb7be5113"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
+      "role": "audit",
+      "bytes": 4125,
+      "sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.md",
+      "role": "audit",
+      "bytes": 932,
+      "sha256": "24196e8578b5f042d8f443f09294a811f82428c49497e9beb9e63178129d6420"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/concentration_by_dam_v0.2.csv",
+      "role": "audit",
+      "bytes": 7389,
+      "sha256": "1a50e59c0c7963a3583d769931097e4e4600a8e55cc51b58babb330c50ddac31"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/concentration_summary_v0.2.json",
+      "role": "audit",
+      "bytes": 555,
+      "sha256": "0e8fce3a290f78f745bf1859b6bb10448e54b9d93bb4fcef93a047fde04be246"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/exact_duplicates_cross_split_details_v0.2.csv",
+      "role": "audit",
+      "bytes": 8765,
+      "sha256": "691b094fbd4e6a142b235226abea27ba20897418b5929fa7dedcee48bc295525"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/exact_duplicates_cross_split_summary_v0.2.csv",
+      "role": "audit",
+      "bytes": 414,
+      "sha256": "b5e6239f0c69de7fdc5989f1fb301ba33621fb9c72d5f33fd07830290d5225d1"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_by_code_v0.2.csv",
+      "role": "audit",
+      "bytes": 1885,
+      "sha256": "f392a0ada7b1e1c8a3d1134232ba0ec01a0afeff4adbe150d7be4f6845afa899"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_by_eval_row_v0.2.csv",
+      "role": "audit",
+      "bytes": 299774,
+      "sha256": "4fed0fe48a8d36718bb65e1adbb5eecce2ca671fbb5aa846bd22a2dc2762f385"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_summary_v0.2.json",
+      "role": "audit",
+      "bytes": 559,
+      "sha256": "f9f781d7f23c4658d8d6cc164fcef930569eb9f6f63c76378f7b5ac7d67c56b9"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/independence_audit_v0.2.json",
+      "role": "audit",
+      "bytes": 317,
+      "sha256": "aa863c0d5850c8f77230bff6602e803be11316677889bc6b377e99ad34bd5dc9"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/near_duplicates_hist_eval_details_v0.2.csv",
+      "role": "audit",
+      "bytes": 34995,
+      "sha256": "0f1f0283c993dd57ab3e02ba064b8c964fd688777726f7ae80c04c47e9c9b955"
+    },
+    {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/near_duplicates_hist_eval_summary_v0.2.csv",
+      "role": "audit",
+      "bytes": 461,
+      "sha256": "80cd723ae6fe7e5fe2898b446baa582dde4d69b127a7e59fce736c324e576e43"
+    }
+  ],
+  "prohibited_in_this_stage": [
+    "BM25 final",
+    "Text2Trade final",
+    "candidate pools finales",
+    "RAG",
+    "reranking LLM",
+    "explicador LLM",
+    "EXP-04"
+  ]
+}

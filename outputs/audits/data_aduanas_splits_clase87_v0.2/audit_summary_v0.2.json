@@ -1,0 +1,147 @@
+{
+  "independence": {
+    "dam_overlap": {
+      "desarrollo__evaluacion": 0,
+      "desarrollo__historico": 0,
+      "evaluacion__historico": 0
+    },
+    "id_unico_overlap": {
+      "desarrollo__evaluacion": 0,
+      "desarrollo__historico": 0,
+      "evaluacion__historico": 0
+    },
+    "zero_dam_overlap": true,
+    "zero_id_overlap": true
+  },
+  "concentration": {
+    "historico": {
+      "series": 2950,
+      "dam": 28,
+      "codes": 66,
+      "max_dam_pct": 35.42372881355932,
+      "hhi": 0.23613513358230395,
+      "effective_dam": 4.234863253211975
+    },
+    "desarrollo": {
+      "series": 100,
+      "dam": 6,
+      "codes": 9,
+      "max_dam_pct": 91.0,
+      "hhi": 0.8302,
+      "effective_dam": 1.2045290291496025
+    },
+    "evaluacion": {
+      "series": 1056,
+      "dam": 67,
+      "codes": 42,
+      "max_dam_pct": 14.109848484848486,
+      "hhi": 0.062412118342516074,
+      "effective_dam": 16.022529383028246
+    }
+  },
+  "historical_support": {
+    "eval_total_cases": 1056,
+    "eval_cases_with_historical_support": 1056,
+    "eval_cases_without_historical_support": 0,
+    "eval_total_codes": 42,
+    "eval_codes_with_historical_support": 42,
+    "eval_codes_without_historical_support": 0,
+    "bucket_cases": {
+      "C. 3-4 DAM historicas": 425,
+      "D. 5+ DAM historicas": 583,
+      "B. 2 DAM historicas": 21,
+      "A. 1 DAM historica": 27
+    },
+    "bucket_codes": {
+      "C. 3-4 DAM historicas": 18,
+      "D. 5+ DAM historicas": 15,
+      "B. 2 DAM historicas": 2,
+      "A. 1 DAM historica": 7
+    }
+  },
+  "exact_duplicates_cross_split": [
+    {
+      "comparison": "historico-evaluacion",
+      "method": "exact_normalized_description",
+      "right_rows": 1056,
+      "affected_rows": 35,
+      "affected_pct": 3.3143939393939394,
+      "same_nandina_rows": 34,
+      "different_nandina_rows": 1,
+      "same_dam_rows": 0,
+      "different_dam_rows": 35,
+      "same_nandina_pairs": 34,
+      "different_nandina_pairs": 1
+    },
+    {
+      "comparison": "historico-desarrollo",
+      "method": "exact_normalized_description",
+      "right_rows": 100,
+      "affected_rows": 0,
+      "affected_pct": 0.0,
+      "same_nandina_rows": 0,
+      "different_nandina_rows": 0,
+      "same_dam_rows": 0,
+      "different_dam_rows": 0,
+      "same_nandina_pairs": 0,
+      "different_nandina_pairs": 0
+    },
+    {
+      "comparison": "desarrollo-evaluacion",
+      "method": "exact_normalized_description",
+      "right_rows": 1056,
+      "affected_rows": 0,
+      "affected_pct": 0.0,
+      "same_nandina_rows": 0,
+      "different_nandina_rows": 0,
+      "same_dam_rows": 0,
+      "different_dam_rows": 0,
+      "same_nandina_pairs": 0,
+      "different_nandina_pairs": 0
+    }
+  ],
+  "near_duplicates_hist_eval": [
+    {
+      "comparison": "historico-evaluacion",
+      "threshold": 0.9,
+      "right_rows": 1056,
+      "affected_rows": 55,
+      "affected_pct": 5.208333333333334,
+      "same_nandina_rows": 51,
+      "different_nandina_rows": 14,
+      "pairs": 82,
+      "same_nandina_pairs": 63,
+      "different_nandina_pairs": 19,
+      "method": "token_jaccard_rare_block",
+      "rare_token_max_df": 737
+    },
+    {
+      "comparison": "historico-evaluacion",
+      "threshold": 0.95,
+      "right_rows": 1056,
+      "affected_rows": 44,
+      "affected_pct": 4.166666666666666,
+      "same_nandina_rows": 42,
+      "different_nandina_rows": 3,
+      "pairs": 46,
+      "same_nandina_pairs": 43,
+      "different_nandina_pairs": 3,
+      "method": "token_jaccard_rare_block",
+      "rare_token_max_df": 737
+    },
+    {
+      "comparison": "historico-evaluacion",
+      "threshold": 0.98,
+      "right_rows": 1056,
+      "affected_rows": 37,
+      "affected_pct": 3.5037878787878785,
+      "same_nandina_rows": 36,
+      "different_nandina_rows": 1,
+      "pairs": 38,
+      "same_nandina_pairs": 37,
+      "different_nandina_pairs": 1,
+      "method": "token_jaccard_rare_block",
+      "rare_token_max_df": 737
+    }
+  ]
+}

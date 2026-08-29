@@ -1,0 +1,200 @@
+{
+  "version": "v0.2",
+  "strategy": "T5-safe-159",
+  "seed": 2026,
+  "grouping_field": "DECLARACION",
+  "analysis_unit": "SERIE",
+  "eligible_class": "87",
+  "source_version": "v0.1_curated_union",
+  "source_files": {
+    "historico": "data/processed/data_aduanas_historico_clase87_v0.1.csv",
+    "desarrollo": "data/processed/data_aduanas_devset_clase87_v0.1.csv",
+    "evaluacion": "data/processed/data_aduanas_evalset_clase87_v0.1.csv",
+    "metadata": "data/processed/data_aduanas_splits_clase87_v0.1_metadata.json"
+  },
+  "source_v0_1_sha256_locked": {
+    "data/processed/data_aduanas_historico_clase87_v0.1.csv": "ea3286063fc890d2569a8cd3704ab18d82970e3b41973153957e27486c28f2f0",
+    "data/processed/data_aduanas_devset_clase87_v0.1.csv": "19eeb607cb1586f3eb459a95d267844bcb068daf93f05e4055ce1183dd698a50",
+    "data/processed/data_aduanas_evalset_clase87_v0.1.csv": "ae642d01c0e941ab94a187fb2a820fbc8dcd6259c90d9decb70408b9dea344bb",
+    "data/processed/data_aduanas_splits_clase87_v0.1_metadata.json": "71a42f793ae7e7cb02ec5b97723c74ac7b60d67f9f7b542ebfa43bb77834189a"
+  },
+  "targets": {
+    "historico": {
+      "target": 3000,
+      "range": [
+        2850,
+        3150
+      ],
+      "approved_n": 2950
+    },
+    "desarrollo": {
+      "target": 100,
+      "range": [
+        95,
+        105
+      ],
+      "approved_n": 100
+    },
+    "evaluacion": {
+      "target": 1006,
+      "range": [
+        956,
+        1056
+      ],
+      "approved_n": 1056
+    }
+  },
+  "approved_counts": {
+    "historico": {
+      "series": 2950,
+      "dam": 28,
+      "codes": 66
+    },
+    "desarrollo": {
+      "series": 100,
+      "dam": 6,
+      "codes": 9
+    },
+    "evaluacion": {
+      "series": 1056,
+      "dam": 67,
+      "codes": 42
+    }
+  },
+  "requirements": {
+    "require_zero_dam_overlap": true,
+    "require_zero_id_overlap": true,
+    "require_full_assignment": true,
+    "require_eval_historical_support": true,
+    "eval_max_dam_concentration": 0.15,
+    "preserve_v0_1": true,
+    "no_model_metric_selection": true
+  },
+  "structural_criterion": [
+    "independencia absoluta por DAM",
+    "unidad de análisis SERIE preservada",
+    "tolerancia T5 respecto de tamaños v0.1",
+    "100% soporte histórico nominal en evaluación",
+    "concentración máxima DAM evaluación <= 15%",
+    "composición explícita reproducible sin reoptimización"
+  ],
+  "expected_audit_values": {
+    "eval_cases_without_historical_support": 0,
+    "exact_duplicates_hist_eval_affected_rows": 35,
+    "near_duplicates_hist_eval_rows_at_0_95": 44
+  },
+  "dam_assignments": {
+    "historico": [
+      "118-2026-10-002590-00",
+      "118-2026-10-002710-00",
+      "118-2026-10-006732-00",
+      "118-2026-10-007407-00",
+      "118-2026-10-008011-00",
+      "118-2026-10-010497-00",
+      "118-2026-10-011206-00",
+      "118-2026-10-016902-00",
+      "118-2026-10-032318-00",
+      "118-2026-10-032394-00",
+      "118-2026-10-032668-00",
+      "118-2026-10-046174-00",
+      "118-2026-10-047354-00",
+      "118-2026-10-048311-00",
+      "118-2026-10-050585-00",
+      "118-2026-10-069870-00",
+      "118-2026-10-073097-00",
+      "118-2026-10-087382-00",
+      "118-2026-10-090864-00",
+      "118-2026-10-096423-00",
+      "118-2026-10-106393-00",
+      "118-2026-10-113456-00",
+      "118-2026-10-115368-00",
+      "118-2026-10-116515-00",
+      "118-2026-10-117220-00",
+      "118-2026-10-119237-00",
+      "118-2026-10-128583-00",
+      "118-2026-10-146957-00"
+    ],
+    "desarrollo": [
+      "118-2026-10-000960-00",
+      "118-2026-10-002384-00",
+      "118-2026-10-003519-00",
+      "118-2026-10-003526-00",
+      "118-2026-10-013935-00",
+      "118-2026-10-050656-00"
+    ],
+    "evaluacion": [
+      "118-2026-10-000136-00",
+      "118-2026-10-001133-00",
+      "118-2026-10-001566-00",
+      "118-2026-10-001787-00",
+      "118-2026-10-004975-00",
+      "118-2026-10-008922-00",
+      "118-2026-10-009478-00",
+      "118-2026-10-010823-00",
+      "118-2026-10-016753-00",
+      "118-2026-10-016934-00",
+      "118-2026-10-017029-00",
+      "118-2026-10-017375-00",
+      "118-2026-10-017759-00",
+      "118-2026-10-019265-00",
+      "118-2026-10-019844-00",
+      "118-2026-10-019925-00",
+      "118-2026-10-019989-00",
+      "118-2026-10-020425-00",
+      "118-2026-10-021719-00",
+      "118-2026-10-025850-00",
+      "118-2026-10-027647-00",
+      "118-2026-10-027907-00",
+      "118-2026-10-028002-00",
+      "118-2026-10-028016-00",
+      "118-2026-10-029955-00",
+      "118-2026-10-031666-00",
+      "118-2026-10-032097-00",
+      "118-2026-10-032693-00",
+      "118-2026-10-033870-00",
+      "118-2026-10-036105-00",
+      "118-2026-10-038080-00",
+      "118-2026-10-038926-00",
+      "118-2026-10-039752-00",
+      "118-2026-10-042140-00",
+      "118-2026-10-042754-00",
+      "118-2026-10-046923-00",
+      "118-2026-10-048010-00",
+      "118-2026-10-048459-00",
+      "118-2026-10-051468-00",
+      "118-2026-10-052270-00",
+      "118-2026-10-052329-00",
+      "118-2026-10-052357-00",
+      "118-2026-10-053436-00",
+      "118-2026-10-054732-00",
+      "118-2026-10-064520-00",
+      "118-2026-10-064541-00",
+      "118-2026-10-069662-00",
+      "118-2026-10-070945-00",
+      "118-2026-10-072568-00",
+      "118-2026-10-076761-00",
+      "118-2026-10-077064-00",
+      "118-2026-10-077797-00",
+      "118-2026-10-080008-00",
+      "118-2026-10-087957-00",
+      "118-2026-10-088233-00",
+      "118-2026-10-092277-00",
+      "118-2026-10-105380-00",
+      "118-2026-10-108366-00",
+      "118-2026-10-113253-00",
+      "118-2026-10-120519-00",
+      "118-2026-10-128946-00",
+      "118-2026-10-133041-00",
+      "118-2026-10-133527-00",
+      "118-2026-10-138517-00",
+      "118-2026-10-144002-00",
+      "118-2026-10-144736-00",
+      "118-2026-10-147973-00"
+    ]
+  },
+  "notes": [
+    "La búsqueda Pareto está cerrada; esta configuración congela la composición aprobada T5-safe-159.",
+    "El split v0.2 se reproduce por listas explícitas de DAM y no por heurística de búsqueda.",
+    "Los casos de evaluación conservan soporte histórico nominal sin usar métricas BM25, Top-k, MRR, Text2Trade, RAG ni LLM."
+  ]
+}
