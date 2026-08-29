@@ -10,7 +10,8 @@
     "nandina_format_test": "8 digits, nonempty, Clase 87; hierarchy checked against Clase/Partida/Sub Partida when populated",
     "historical_concentration_documented": true,
     "devset_limitation_documented": true,
-    "residual_duplicates_documented_for_HE5_sensitivity": true
+    "residual_duplicates_documented_for_HE5_sensitivity": true,
+    "lf_serialization_test": "frozen v0.2 dataset CSVs and audit CSVs contain LF only and end with LF"
   },
   "gate5_summary": {
     "total_series": 4106,
@@ -60,6 +61,12 @@
   },
   "artifacts": [
     {
+      "path": ".gitattributes",
+      "role": "line_endings_policy",
+      "bytes": 229,
+      "sha256": "da92d8ab43a1e28b4145318ad094f2b93b0aff0a5d01c230da24a9e6861779e4"
+    },
+    {
       "path": "src/configs/data_aduanas_split_clase87_v0.2.json",
       "role": "configuration",
       "bytes": 6345,
@@ -74,8 +81,8 @@
     {
       "path": "tests/test_data_aduanas_split_v02.py",
       "role": "automated_tests",
-      "bytes": 10284,
-      "sha256": "c30a99009c8db4d417b9ec75f1377be21eaf54533096b4feedcdabcd5a1f56d0"
+      "bytes": 10934,
+      "sha256": "760c594b444d705dd69580f28f174446a98f133f14f35cbbce45cc74deee2a48"
     },
     {
       "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
@@ -104,14 +111,14 @@
     {
       "path": "docs/protocolo_data_aduanas_clase87_v0.2.md",
       "role": "documentation",
-      "bytes": 5251,
-      "sha256": "5a8c31c32618416c658ee9d2913c6ca854ec9053d45e4cdb850f81e475e47586"
+      "bytes": 5336,
+      "sha256": "c2da4d41046384035de508d94e8fbf3c9a7ac8c1c77e803a6689cddda2acc73d"
     },
     {
       "path": "docs/ficha_data_aduanas_clase87_v0.2.md",
       "role": "documentation",
-      "bytes": 4122,
-      "sha256": "30b85959b2384fc798d5ed1d309491848be5dd8d02cb56f90409bdcfb7be5113"
+      "bytes": 4203,
+      "sha256": "73c0e0c29f4fb78a499bb1f8b73e23802a9403fdbd1c7fbac0c74a3aafcce1c7"
     },
     {
       "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
@@ -194,5 +201,13 @@
     "reranking LLM",
     "explicador LLM",
     "EXP-04"
-  ]
+  ],
+  "line_endings_policy": {
+    "core_autocrlf_observed": "true",
+    "policy_file": ".gitattributes",
+    "policy_file_eol": "lf",
+    "dataset_csv_v0_2": "text eol=lf",
+    "audit_csv_v0_2": "text eol=lf",
+    "reference_hashes": "LF bytes as stored in Git blobs and dataset metadata"
+  }
 }

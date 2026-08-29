@@ -205,5 +205,15 @@ class TestDataAduanasSplitV02(unittest.TestCase):
             self.assertEqual(sha256(path), expected, path)
 
 
+
+    def test_25_v02_csv_files_use_lf_serialization(self):
+        frozen_csvs = list(V02_DATASET_HASHES)
+        frozen_csvs.extend(ROOT / rel for rel in self.metadata["audit_sha256"] if rel.endswith(".csv"))
+        for path in frozen_csvs:
+            data = path.read_bytes()
+            self.assertNotIn(b"\r\n", data, path)
+            self.assertIn(b"\n", data, path)
+            self.assertTrue(data.endswith(b"\n"), path)
+
 if __name__ == "__main__":
     unittest.main()

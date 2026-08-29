@@ -1,0 +1,4 @@
+# Keep frozen experimental CSV artifacts byte-reproducible across platforms.
+.gitattributes text eol=lf
+data/processed/data_aduanas_*_clase87_v0.2.csv text eol=lf
+outputs/audits/data_aduanas_splits_clase87_v0.2/*.csv text eol=lf
