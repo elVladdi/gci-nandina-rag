@@ -3,3 +3,6 @@
 data/processed/data_aduanas_*_clase87_v0.2.csv text eol=lf
 outputs/audits/data_aduanas_splits_clase87_v0.2/*.csv text eol=lf
 outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/*.csv text eol=lf
+
+outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/*.json text eol=lf
+outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/*.md text eol=lf

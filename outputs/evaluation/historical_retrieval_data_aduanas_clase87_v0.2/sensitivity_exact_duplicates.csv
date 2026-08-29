@@ -1,0 +1,5 @@
+group,value,cases,mrr,exact_at_1,exact_at_3,exact_at_5,exact_at_10,exact_at_50,exact_at_1_numerator,exact_at_3_numerator,exact_at_5_numerator,exact_at_10_numerator,exact_at_50_numerator,exact_at_1_denominator,exact_at_3_denominator,exact_at_5_denominator,exact_at_10_denominator,exact_at_50_denominator
+exact_duplicate_cross_split,exact_duplicate_present,35,0.9857142857142858,0.9714285714285714,1.0,1.0,1.0,1.0,34,35,35,35,35,35,35,35,35,35
+exact_duplicate_cross_split,exact_duplicate_absent,1021,0.6175038034439012,0.49363369245837413,0.6601371204701273,0.7551420176297747,0.8873653281096964,0.9911851126346719,504,674,771,906,1012,1021,1021,1021,1021,1021
+exact_duplicate_cross_split,exact_duplicate_same_nandina,34,1.0,1.0,1.0,1.0,1.0,1.0,34,34,34,34,34,34,34,34,34,34
+exact_duplicate_cross_split,exact_duplicate_different_nandina,1,0.5,0.0,1.0,1.0,1.0,1.0,0,1,1,1,1,1,1,1,1,1

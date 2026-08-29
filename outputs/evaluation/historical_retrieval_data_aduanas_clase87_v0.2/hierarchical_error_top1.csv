@@ -1,0 +1,6 @@
+top1_error_family,errors,pct_of_top1_errors,pct_of_all_cases
+same_sub_partida_6d,87,0.16795366795366795,0.08238636363636363
+same_partida_4d,284,0.5482625482625483,0.2689393939393939
+same_chapter_2d,147,0.28378378378378377,0.13920454545454544
+different_chapter,0,0.0,0.0
+no_candidate,0,0.0,0.0

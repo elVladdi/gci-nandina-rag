@@ -1,0 +1,868 @@
+{
+  "version": "v0.2",
+  "experiment_id": "exp04_phase_a_historical_bm25_v0.2",
+  "phase": "EXP-04_Fase_A_BM25_historico_v0.2",
+  "method": "historical_bm25_data_aduanas_clase87_v0.2",
+  "created_at_utc": "2026-08-29T19:06:02.475885+00:00",
+  "runtime": {
+    "python": "3.10.11",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "pandas": "2.3.3",
+      "numpy": "2.2.6"
+    }
+  },
+  "git": {
+    "branch": "codex/exp04-rerun-v02",
+    "commit": "c92da6e2d42bfc274a44e25e8fcb4c4628a41ea0",
+    "dirty_status_short": [
+      "?? Referencias/Antecedentes/",
+      "?? Referencias/Glosario/",
+      "?? \"data/Series - Descripciones.xlsx\""
+    ]
+  },
+  "command": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA\\src\\experiments\\evaluate_historical_retrieval_data_aduanas_v02.py --history-depth 2950 --candidate-depth 100",
+  "inputs": {
+    "historical": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+    "historical_sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "split_metadata": "data/processed/data_aduanas_splits_clase87_v0.2_metadata.json",
+    "split_metadata_sha256": "1ac08e760bc3885866507a4c1ca515430c417e812dc01c7dece0f513c5e4d9ec",
+    "split_config": "src/configs/data_aduanas_split_clase87_v0.2.json",
+    "split_config_sha256": "a107cf3121faa304b0d83c3ad5378742a4547c257bc04ed5c324195cbf877954",
+    "support_by_eval_row": "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_by_eval_row_v0.2.csv",
+    "support_by_eval_row_sha256": "4fed0fe48a8d36718bb65e1adbb5eecce2ca671fbb5aa846bd22a2dc2762f385",
+    "exact_duplicates": "outputs/audits/data_aduanas_splits_clase87_v0.2/exact_duplicates_cross_split_details_v0.2.csv",
+    "exact_duplicates_sha256": "691b094fbd4e6a142b235226abea27ba20897418b5929fa7dedcee48bc295525",
+    "near_duplicates": "outputs/audits/data_aduanas_splits_clase87_v0.2/near_duplicates_hist_eval_details_v0.2.csv",
+    "near_duplicates_sha256": "0f1f0283c993dd57ab3e02ba064b8c964fd688777726f7ae80c04c47e9c9b955",
+    "v01_historical_metrics_reference": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.1/historical_metrics.json"
+  },
+  "input_rows": {
+    "historical": 2950,
+    "evalset": 1056
+  },
+  "parameters": {
+    "history_depth": 2950,
+    "candidate_depth": 100,
+    "k1": 1.5,
+    "b": 0.75
+  },
+  "columns": {
+    "query": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label": "NANDINA"
+  },
+  "validation": {
+    "id_unico_overlap_count": 0,
+    "eval_case_ids_unique": true,
+    "eval_case_id_prefix": "DA-EVAL-V02-",
+    "historical_case_id_prefix": "DA-HIST-V02-",
+    "v01_case_ids_detected": 0,
+    "eval_unique_nandina_codes": 42,
+    "eval_cases_with_historical_support": 1056,
+    "candidate_depth_supports_top_50": true,
+    "cases_with_at_least_50_candidates": 1010,
+    "eval_cases_with_exact_duplicate": 35,
+    "eval_cases_with_near_duplicate_095": 44,
+    "metrics_recomputed_from_case_summary": true,
+    "historical_queries_non_empty": true,
+    "eval_queries_non_empty": true,
+    "nandina8_labels_valid": true,
+    "candidates_deduplicated_by_nandina": true,
+    "llm_used": false,
+    "ollama_used": false,
+    "text2trade_used": false,
+    "remote_api_used": false,
+    "normative_bm25_used_as_candidate_source": false,
+    "hierarchical_bm25_used_as_candidate_source": false
+  },
+  "metrics": {
+    "mrr": 0.6297077493524843,
+    "exact_at_1": 0.509469696969697,
+    "exact_at_3": 0.6714015151515151,
+    "exact_at_5": 0.7632575757575758,
+    "exact_at_10": 0.8910984848484849,
+    "exact_at_50": 0.9914772727272727,
+    "partida_at_10": 0.9990530303030303,
+    "sub_partida_at_10": 0.9375,
+    "clase_at_10": 1.0,
+    "partida_at_50": 1.0,
+    "sub_partida_at_50": 1.0,
+    "clase_at_50": 1.0,
+    "mrr_numerator": 664.9713833162234,
+    "mrr_denominator": 1056,
+    "exact_at_1_numerator": 538,
+    "exact_at_1_denominator": 1056,
+    "exact_at_3_numerator": 709,
+    "exact_at_3_denominator": 1056,
+    "exact_at_5_numerator": 806,
+    "exact_at_5_denominator": 1056,
+    "exact_at_10_numerator": 941,
+    "exact_at_10_denominator": 1056,
+    "exact_at_50_numerator": 1047,
+    "exact_at_50_denominator": 1056,
+    "partida_at_10_numerator": 1055,
+    "partida_at_10_denominator": 1056,
+    "sub_partida_at_10_numerator": 990,
+    "sub_partida_at_10_denominator": 1056,
+    "clase_at_10_numerator": 1056,
+    "clase_at_10_denominator": 1056,
+    "partida_at_50_numerator": 1056,
+    "partida_at_50_denominator": 1056,
+    "sub_partida_at_50_numerator": 1056,
+    "sub_partida_at_50_denominator": 1056,
+    "clase_at_50_numerator": 1056,
+    "clase_at_50_denominator": 1056,
+    "cases": 1056,
+    "median_exact_rank_nonzero": 1.0,
+    "cases_evaluated": 1056,
+    "cases_nandina_present_in_history": 1056,
+    "cases_nandina_absent_in_history": 0,
+    "cases_with_at_least_50_candidates": 1010,
+    "min_unique_candidates": 4,
+    "max_unique_candidates": 66,
+    "metric_table": [
+      {
+        "metric": "mrr",
+        "numerator": 664.9713833162234,
+        "denominator": 1056,
+        "value": 0.6297077493524843
+      },
+      {
+        "metric": "exact_at_1",
+        "numerator": 538,
+        "denominator": 1056,
+        "value": 0.509469696969697
+      },
+      {
+        "metric": "exact_at_3",
+        "numerator": 709,
+        "denominator": 1056,
+        "value": 0.6714015151515151
+      },
+      {
+        "metric": "exact_at_5",
+        "numerator": 806,
+        "denominator": 1056,
+        "value": 0.7632575757575758
+      },
+      {
+        "metric": "exact_at_10",
+        "numerator": 941,
+        "denominator": 1056,
+        "value": 0.8910984848484849
+      },
+      {
+        "metric": "exact_at_50",
+        "numerator": 1047,
+        "denominator": 1056,
+        "value": 0.9914772727272727
+      },
+      {
+        "metric": "partida_at_10",
+        "numerator": 1055,
+        "denominator": 1056,
+        "value": 0.9990530303030303
+      },
+      {
+        "metric": "sub_partida_at_10",
+        "numerator": 990,
+        "denominator": 1056,
+        "value": 0.9375
+      },
+      {
+        "metric": "clase_at_10",
+        "numerator": 1056,
+        "denominator": 1056,
+        "value": 1.0
+      },
+      {
+        "metric": "partida_at_50",
+        "numerator": 1056,
+        "denominator": 1056,
+        "value": 1.0
+      },
+      {
+        "metric": "sub_partida_at_50",
+        "numerator": 1056,
+        "denominator": 1056,
+        "value": 1.0
+      },
+      {
+        "metric": "clase_at_50",
+        "numerator": 1056,
+        "denominator": 1056,
+        "value": 1.0
+      }
+    ]
+  },
+  "position_distribution": [
+    {
+      "position_bucket": "1",
+      "cases": 538,
+      "pct": 0.509469696969697
+    },
+    {
+      "position_bucket": "2-3",
+      "cases": 171,
+      "pct": 0.16193181818181818
+    },
+    {
+      "position_bucket": "4-5",
+      "cases": 97,
+      "pct": 0.09185606060606061
+    },
+    {
+      "position_bucket": "6-10",
+      "cases": 135,
+      "pct": 0.1278409090909091
+    },
+    {
+      "position_bucket": "11-50",
+      "cases": 106,
+      "pct": 0.10037878787878787
+    },
+    {
+      "position_bucket": ">50_or_not_retrieved",
+      "cases": 9,
+      "pct": 0.008522727272727272
+    }
+  ],
+  "metrics_by_support_count_series": [
+    {
+      "group": "support_count_series",
+      "value": "1",
+      "cases": 15,
+      "mrr": 0.6035185185185185,
+      "exact_at_1": 0.4666666666666667,
+      "exact_at_3": 0.6666666666666666,
+      "exact_at_5": 0.8666666666666667,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 7,
+      "exact_at_3_numerator": 10,
+      "exact_at_5_numerator": 13,
+      "exact_at_10_numerator": 15,
+      "exact_at_50_numerator": 15,
+      "exact_at_1_denominator": 15,
+      "exact_at_3_denominator": 15,
+      "exact_at_5_denominator": 15,
+      "exact_at_10_denominator": 15,
+      "exact_at_50_denominator": 15
+    },
+    {
+      "group": "support_count_series",
+      "value": "2-4",
+      "cases": 32,
+      "mrr": 0.8868055555555555,
+      "exact_at_1": 0.84375,
+      "exact_at_3": 0.9375,
+      "exact_at_5": 0.9375,
+      "exact_at_10": 0.9375,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 27,
+      "exact_at_3_numerator": 30,
+      "exact_at_5_numerator": 30,
+      "exact_at_10_numerator": 30,
+      "exact_at_50_numerator": 32,
+      "exact_at_1_denominator": 32,
+      "exact_at_3_denominator": 32,
+      "exact_at_5_denominator": 32,
+      "exact_at_10_denominator": 32,
+      "exact_at_50_denominator": 32
+    },
+    {
+      "group": "support_count_series",
+      "value": "5-9",
+      "cases": 27,
+      "mrr": 0.6963276504017244,
+      "exact_at_1": 0.5185185185185185,
+      "exact_at_3": 0.8518518518518519,
+      "exact_at_5": 0.8888888888888888,
+      "exact_at_10": 0.8888888888888888,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 14,
+      "exact_at_3_numerator": 23,
+      "exact_at_5_numerator": 24,
+      "exact_at_10_numerator": 24,
+      "exact_at_50_numerator": 27,
+      "exact_at_1_denominator": 27,
+      "exact_at_3_denominator": 27,
+      "exact_at_5_denominator": 27,
+      "exact_at_10_denominator": 27,
+      "exact_at_50_denominator": 27
+    },
+    {
+      "group": "support_count_series",
+      "value": "10+",
+      "cases": 982,
+      "mrr": 0.6198981478613248,
+      "exact_at_1": 0.4989816700610998,
+      "exact_at_3": 0.6578411405295316,
+      "exact_at_5": 0.7525458248472505,
+      "exact_at_10": 0.8879837067209776,
+      "exact_at_50": 0.9908350305498982,
+      "exact_at_1_numerator": 490,
+      "exact_at_3_numerator": 646,
+      "exact_at_5_numerator": 739,
+      "exact_at_10_numerator": 872,
+      "exact_at_50_numerator": 973,
+      "exact_at_1_denominator": 982,
+      "exact_at_3_denominator": 982,
+      "exact_at_5_denominator": 982,
+      "exact_at_10_denominator": 982,
+      "exact_at_50_denominator": 982
+    }
+  ],
+  "metrics_by_support_count_dams": [
+    {
+      "group": "support_count_dams",
+      "value": "1 DAM",
+      "cases": 27,
+      "mrr": 0.5644473838918284,
+      "exact_at_1": 0.37037037037037035,
+      "exact_at_3": 0.7037037037037037,
+      "exact_at_5": 0.8148148148148148,
+      "exact_at_10": 0.9259259259259259,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 10,
+      "exact_at_3_numerator": 19,
+      "exact_at_5_numerator": 22,
+      "exact_at_10_numerator": 25,
+      "exact_at_50_numerator": 27,
+      "exact_at_1_denominator": 27,
+      "exact_at_3_denominator": 27,
+      "exact_at_5_denominator": 27,
+      "exact_at_10_denominator": 27,
+      "exact_at_50_denominator": 27
+    },
+    {
+      "group": "support_count_dams",
+      "value": "2 DAM",
+      "cases": 21,
+      "mrr": 0.2393836322407751,
+      "exact_at_1": 0.047619047619047616,
+      "exact_at_3": 0.19047619047619047,
+      "exact_at_5": 0.6190476190476191,
+      "exact_at_10": 0.8571428571428571,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 1,
+      "exact_at_3_numerator": 4,
+      "exact_at_5_numerator": 13,
+      "exact_at_10_numerator": 18,
+      "exact_at_50_numerator": 21,
+      "exact_at_1_denominator": 21,
+      "exact_at_3_denominator": 21,
+      "exact_at_5_denominator": 21,
+      "exact_at_10_denominator": 21,
+      "exact_at_50_denominator": 21
+    },
+    {
+      "group": "support_count_dams",
+      "value": "3-4 DAM",
+      "cases": 425,
+      "mrr": 0.760152088629374,
+      "exact_at_1": 0.691764705882353,
+      "exact_at_3": 0.7670588235294118,
+      "exact_at_5": 0.7905882352941176,
+      "exact_at_10": 0.9388235294117647,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 294,
+      "exact_at_3_numerator": 326,
+      "exact_at_5_numerator": 336,
+      "exact_at_10_numerator": 399,
+      "exact_at_50_numerator": 425,
+      "exact_at_1_denominator": 425,
+      "exact_at_3_denominator": 425,
+      "exact_at_5_denominator": 425,
+      "exact_at_10_denominator": 425,
+      "exact_at_50_denominator": 425
+    },
+    {
+      "group": "support_count_dams",
+      "value": "5+ DAM",
+      "cases": 583,
+      "mrr": 0.5516974442651861,
+      "exact_at_1": 0.3996569468267582,
+      "exact_at_3": 0.6174957118353345,
+      "exact_at_5": 0.7461406518010292,
+      "exact_at_10": 0.855917667238422,
+      "exact_at_50": 0.9845626072041166,
+      "exact_at_1_numerator": 233,
+      "exact_at_3_numerator": 360,
+      "exact_at_5_numerator": 435,
+      "exact_at_10_numerator": 499,
+      "exact_at_50_numerator": 574,
+      "exact_at_1_denominator": 583,
+      "exact_at_3_denominator": 583,
+      "exact_at_5_denominator": 583,
+      "exact_at_10_denominator": 583,
+      "exact_at_50_denominator": 583
+    }
+  ],
+  "sensitivity_exact_duplicates": [
+    {
+      "group": "exact_duplicate_cross_split",
+      "value": "exact_duplicate_present",
+      "cases": 35,
+      "mrr": 0.9857142857142858,
+      "exact_at_1": 0.9714285714285714,
+      "exact_at_3": 1.0,
+      "exact_at_5": 1.0,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 34,
+      "exact_at_3_numerator": 35,
+      "exact_at_5_numerator": 35,
+      "exact_at_10_numerator": 35,
+      "exact_at_50_numerator": 35,
+      "exact_at_1_denominator": 35,
+      "exact_at_3_denominator": 35,
+      "exact_at_5_denominator": 35,
+      "exact_at_10_denominator": 35,
+      "exact_at_50_denominator": 35
+    },
+    {
+      "group": "exact_duplicate_cross_split",
+      "value": "exact_duplicate_absent",
+      "cases": 1021,
+      "mrr": 0.6175038034439012,
+      "exact_at_1": 0.49363369245837413,
+      "exact_at_3": 0.6601371204701273,
+      "exact_at_5": 0.7551420176297747,
+      "exact_at_10": 0.8873653281096964,
+      "exact_at_50": 0.9911851126346719,
+      "exact_at_1_numerator": 504,
+      "exact_at_3_numerator": 674,
+      "exact_at_5_numerator": 771,
+      "exact_at_10_numerator": 906,
+      "exact_at_50_numerator": 1012,
+      "exact_at_1_denominator": 1021,
+      "exact_at_3_denominator": 1021,
+      "exact_at_5_denominator": 1021,
+      "exact_at_10_denominator": 1021,
+      "exact_at_50_denominator": 1021
+    },
+    {
+      "group": "exact_duplicate_cross_split",
+      "value": "exact_duplicate_same_nandina",
+      "cases": 34,
+      "mrr": 1.0,
+      "exact_at_1": 1.0,
+      "exact_at_3": 1.0,
+      "exact_at_5": 1.0,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 34,
+      "exact_at_3_numerator": 34,
+      "exact_at_5_numerator": 34,
+      "exact_at_10_numerator": 34,
+      "exact_at_50_numerator": 34,
+      "exact_at_1_denominator": 34,
+      "exact_at_3_denominator": 34,
+      "exact_at_5_denominator": 34,
+      "exact_at_10_denominator": 34,
+      "exact_at_50_denominator": 34
+    },
+    {
+      "group": "exact_duplicate_cross_split",
+      "value": "exact_duplicate_different_nandina",
+      "cases": 1,
+      "mrr": 0.5,
+      "exact_at_1": 0.0,
+      "exact_at_3": 1.0,
+      "exact_at_5": 1.0,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 0,
+      "exact_at_3_numerator": 1,
+      "exact_at_5_numerator": 1,
+      "exact_at_10_numerator": 1,
+      "exact_at_50_numerator": 1,
+      "exact_at_1_denominator": 1,
+      "exact_at_3_denominator": 1,
+      "exact_at_5_denominator": 1,
+      "exact_at_10_denominator": 1,
+      "exact_at_50_denominator": 1
+    }
+  ],
+  "sensitivity_near_duplicates_095": [
+    {
+      "group": "near_duplicate_095",
+      "value": "near_duplicate_095_present",
+      "cases": 44,
+      "mrr": 0.9772727272727273,
+      "exact_at_1": 0.9545454545454546,
+      "exact_at_3": 1.0,
+      "exact_at_5": 1.0,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 42,
+      "exact_at_3_numerator": 44,
+      "exact_at_5_numerator": 44,
+      "exact_at_10_numerator": 44,
+      "exact_at_50_numerator": 44,
+      "exact_at_1_denominator": 44,
+      "exact_at_3_denominator": 44,
+      "exact_at_5_denominator": 44,
+      "exact_at_10_denominator": 44,
+      "exact_at_50_denominator": 44
+    },
+    {
+      "group": "near_duplicate_095",
+      "value": "near_duplicate_095_absent",
+      "cases": 1012,
+      "mrr": 0.6145962285733431,
+      "exact_at_1": 0.4901185770750988,
+      "exact_at_3": 0.6571146245059288,
+      "exact_at_5": 0.7529644268774703,
+      "exact_at_10": 0.8863636363636364,
+      "exact_at_50": 0.991106719367589,
+      "exact_at_1_numerator": 496,
+      "exact_at_3_numerator": 665,
+      "exact_at_5_numerator": 762,
+      "exact_at_10_numerator": 897,
+      "exact_at_50_numerator": 1003,
+      "exact_at_1_denominator": 1012,
+      "exact_at_3_denominator": 1012,
+      "exact_at_5_denominator": 1012,
+      "exact_at_10_denominator": 1012,
+      "exact_at_50_denominator": 1012
+    },
+    {
+      "group": "near_duplicate_095",
+      "value": "near_duplicate_095_same_nandina",
+      "cases": 42,
+      "mrr": 1.0,
+      "exact_at_1": 1.0,
+      "exact_at_3": 1.0,
+      "exact_at_5": 1.0,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 42,
+      "exact_at_3_numerator": 42,
+      "exact_at_5_numerator": 42,
+      "exact_at_10_numerator": 42,
+      "exact_at_50_numerator": 42,
+      "exact_at_1_denominator": 42,
+      "exact_at_3_denominator": 42,
+      "exact_at_5_denominator": 42,
+      "exact_at_10_denominator": 42,
+      "exact_at_50_denominator": 42
+    },
+    {
+      "group": "near_duplicate_095",
+      "value": "near_duplicate_095_different_nandina",
+      "cases": 3,
+      "mrr": 0.6666666666666666,
+      "exact_at_1": 0.3333333333333333,
+      "exact_at_3": 1.0,
+      "exact_at_5": 1.0,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "exact_at_1_numerator": 1,
+      "exact_at_3_numerator": 3,
+      "exact_at_5_numerator": 3,
+      "exact_at_10_numerator": 3,
+      "exact_at_50_numerator": 3,
+      "exact_at_1_denominator": 3,
+      "exact_at_3_denominator": 3,
+      "exact_at_5_denominator": 3,
+      "exact_at_10_denominator": 3,
+      "exact_at_50_denominator": 3
+    }
+  ],
+  "hierarchical_error_top1": [
+    {
+      "top1_error_family": "same_sub_partida_6d",
+      "errors": 87,
+      "pct_of_top1_errors": 0.16795366795366795,
+      "pct_of_all_cases": 0.08238636363636363
+    },
+    {
+      "top1_error_family": "same_partida_4d",
+      "errors": 284,
+      "pct_of_top1_errors": 0.5482625482625483,
+      "pct_of_all_cases": 0.2689393939393939
+    },
+    {
+      "top1_error_family": "same_chapter_2d",
+      "errors": 147,
+      "pct_of_top1_errors": 0.28378378378378377,
+      "pct_of_all_cases": 0.13920454545454544
+    },
+    {
+      "top1_error_family": "different_chapter",
+      "errors": 0,
+      "pct_of_top1_errors": 0.0,
+      "pct_of_all_cases": 0.0
+    },
+    {
+      "top1_error_family": "no_candidate",
+      "errors": 0,
+      "pct_of_top1_errors": 0.0,
+      "pct_of_all_cases": 0.0
+    }
+  ],
+  "comparison_bm25_historical_v0_1_v0_2": [
+    {
+      "metric": "mrr",
+      "bm25_historical_v0_1": 0.9062394558614824,
+      "bm25_historical_v0_2": 0.6297077493524843,
+      "delta_v02_minus_v01": -0.27653170650899805
+    },
+    {
+      "metric": "exact_at_1",
+      "bm25_historical_v0_1": 0.8628230616302187,
+      "bm25_historical_v0_2": 0.509469696969697,
+      "delta_v02_minus_v01": -0.3533533646605217
+    },
+    {
+      "metric": "exact_at_3",
+      "bm25_historical_v0_1": 0.937375745526839,
+      "bm25_historical_v0_2": 0.6714015151515151,
+      "delta_v02_minus_v01": -0.26597423037532386
+    },
+    {
+      "metric": "exact_at_5",
+      "bm25_historical_v0_1": 0.9592445328031809,
+      "bm25_historical_v0_2": 0.7632575757575758,
+      "delta_v02_minus_v01": -0.1959869570456051
+    },
+    {
+      "metric": "exact_at_10",
+      "bm25_historical_v0_1": 0.9801192842942346,
+      "bm25_historical_v0_2": 0.8910984848484849,
+      "delta_v02_minus_v01": -0.0890207994457497
+    },
+    {
+      "metric": "exact_at_50",
+      "bm25_historical_v0_1": 1.0,
+      "bm25_historical_v0_2": 0.9914772727272727,
+      "delta_v02_minus_v01": -0.008522727272727293
+    },
+    {
+      "metric": "partida_at_10",
+      "bm25_historical_v0_1": 1.0,
+      "bm25_historical_v0_2": 0.9990530303030303,
+      "delta_v02_minus_v01": -0.0009469696969697239
+    },
+    {
+      "metric": "sub_partida_at_10",
+      "bm25_historical_v0_1": 0.9920477137176938,
+      "bm25_historical_v0_2": 0.9375,
+      "delta_v02_minus_v01": -0.054547713717693846
+    },
+    {
+      "metric": "clase_at_10",
+      "bm25_historical_v0_1": 1.0,
+      "bm25_historical_v0_2": 1.0,
+      "delta_v02_minus_v01": 0.0
+    },
+    {
+      "metric": "partida_at_50",
+      "bm25_historical_v0_1": 1.0,
+      "bm25_historical_v0_2": 1.0,
+      "delta_v02_minus_v01": 0.0
+    },
+    {
+      "metric": "sub_partida_at_50",
+      "bm25_historical_v0_1": 1.0,
+      "bm25_historical_v0_2": 1.0,
+      "delta_v02_minus_v01": 0.0
+    },
+    {
+      "metric": "clase_at_50",
+      "bm25_historical_v0_1": 1.0,
+      "bm25_historical_v0_2": 1.0,
+      "delta_v02_minus_v01": 0.0
+    }
+  ],
+  "top_nandinas_with_most_failures_at_50": [
+    {
+      "nandina": "87082910",
+      "historical_support_count_series": 19,
+      "eval_cases": 56,
+      "recovered_at_50": 47,
+      "failures_at_50": 9,
+      "exact_at_1": 0.19642857142857142,
+      "exact_at_10": 0.6785714285714286,
+      "exact_at_50": 0.8392857142857143,
+      "mrr": 0.3486053288870407
+    },
+    {
+      "nandina": "87032100",
+      "historical_support_count_series": 76,
+      "eval_cases": 235,
+      "recovered_at_50": 235,
+      "failures_at_50": 0,
+      "exact_at_1": 0.8680851063829788,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "mrr": 0.8900709219858157
+    },
+    {
+      "nandina": "87089999",
+      "historical_support_count_series": 321,
+      "eval_cases": 147,
+      "recovered_at_50": 147,
+      "failures_at_50": 0,
+      "exact_at_1": 0.3673469387755102,
+      "exact_at_10": 0.9523809523809523,
+      "exact_at_50": 1.0,
+      "mrr": 0.5432821174867996
+    },
+    {
+      "nandina": "87082920",
+      "historical_support_count_series": 269,
+      "eval_cases": 89,
+      "recovered_at_50": 89,
+      "failures_at_50": 0,
+      "exact_at_1": 0.6404494382022472,
+      "exact_at_10": 0.9775280898876404,
+      "exact_at_50": 1.0,
+      "mrr": 0.7389862946042721
+    },
+    {
+      "nandina": "87141090",
+      "historical_support_count_series": 36,
+      "eval_cases": 68,
+      "recovered_at_50": 68,
+      "failures_at_50": 0,
+      "exact_at_1": 0.17647058823529413,
+      "exact_at_10": 0.9117647058823529,
+      "exact_at_50": 1.0,
+      "mrr": 0.38131525337407685
+    },
+    {
+      "nandina": "87082990",
+      "historical_support_count_series": 184,
+      "eval_cases": 64,
+      "recovered_at_50": 64,
+      "failures_at_50": 0,
+      "exact_at_1": 0.265625,
+      "exact_at_10": 0.75,
+      "exact_at_50": 1.0,
+      "mrr": 0.41573352701327754
+    },
+    {
+      "nandina": "87081000",
+      "historical_support_count_series": 495,
+      "eval_cases": 38,
+      "recovered_at_50": 38,
+      "failures_at_50": 0,
+      "exact_at_1": 0.631578947368421,
+      "exact_at_10": 0.9736842105263158,
+      "exact_at_50": 1.0,
+      "mrr": 0.7431032290872107
+    },
+    {
+      "nandina": "87083029",
+      "historical_support_count_series": 156,
+      "eval_cases": 32,
+      "recovered_at_50": 32,
+      "failures_at_50": 0,
+      "exact_at_1": 0.15625,
+      "exact_at_10": 0.78125,
+      "exact_at_50": 1.0,
+      "mrr": 0.37819671647796643
+    },
+    {
+      "nandina": "87089400",
+      "historical_support_count_series": 33,
+      "eval_cases": 31,
+      "recovered_at_50": 31,
+      "failures_at_50": 0,
+      "exact_at_1": 0.2903225806451613,
+      "exact_at_10": 0.9032258064516129,
+      "exact_at_50": 1.0,
+      "mrr": 0.5875350140056023
+    },
+    {
+      "nandina": "87032290",
+      "historical_support_count_series": 4,
+      "eval_cases": 28,
+      "recovered_at_50": 28,
+      "failures_at_50": 0,
+      "exact_at_1": 0.9285714285714286,
+      "exact_at_10": 1.0,
+      "exact_at_50": 1.0,
+      "mrr": 0.9642857142857143
+    },
+    {
+      "nandina": "87089100",
+      "historical_support_count_series": 51,
+      "eval_cases": 27,
+      "recovered_at_50": 27,
+      "failures_at_50": 0,
+      "exact_at_1": 0.7407407407407407,
+      "exact_at_10": 0.9629629629629629,
+      "exact_at_50": 1.0,
+      "mrr": 0.837742504409171
+    },
+    {
+      "nandina": "87088020",
+      "historical_support_count_series": 170,
+      "eval_cases": 25,
+      "recovered_at_50": 25,
+      "failures_at_50": 0,
+      "exact_at_1": 0.48,
+      "exact_at_10": 0.8,
+      "exact_at_50": 1.0,
+      "mrr": 0.6035820105820107
+    },
+    {
+      "nandina": "87082930",
+      "historical_support_count_series": 63,
+      "eval_cases": 21,
+      "recovered_at_50": 21,
+      "failures_at_50": 0,
+      "exact_at_1": 0.5714285714285714,
+      "exact_at_10": 0.7142857142857143,
+      "exact_at_50": 1.0,
+      "mrr": 0.6539645340720609
+    },
+    {
+      "nandina": "87149400",
+      "historical_support_count_series": 28,
+      "eval_cases": 19,
+      "recovered_at_50": 19,
+      "failures_at_50": 0,
+      "exact_at_1": 0.0,
+      "exact_at_10": 0.8421052631578947,
+      "exact_at_50": 1.0,
+      "mrr": 0.19440647072226017
+    },
+    {
+      "nandina": "87085011",
+      "historical_support_count_series": 10,
+      "eval_cases": 17,
+      "recovered_at_50": 17,
+      "failures_at_50": 0,
+      "exact_at_1": 0.7058823529411765,
+      "exact_at_10": 0.9411764705882353,
+      "exact_at_50": 1.0,
+      "mrr": 0.8263305322128851
+    }
+  ],
+  "decision": "BM25 historico v0.2 mantiene una recuperacion fuerte sobre evaluacion v0.2 y queda habilitado como baseline historico congelado para comparaciones posteriores, sin activar componentes normativos ni LLM.",
+  "outputs": {
+    "historical_results_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_results.csv",
+    "historical_case_summary_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv",
+    "historical_failure_cases_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_failure_cases.csv",
+    "historical_rescue_cases_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_rescue_cases.csv",
+    "historical_support_by_nandina_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_support_by_nandina.csv",
+    "position_distribution_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/position_distribution.csv",
+    "metrics_by_support_count_series_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/metrics_by_support_count_series.csv",
+    "metrics_by_support_count_dams_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/metrics_by_support_count_dams.csv",
+    "sensitivity_exact_duplicates_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/sensitivity_exact_duplicates.csv",
+    "sensitivity_near_duplicates_095_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/sensitivity_near_duplicates_095.csv",
+    "hierarchical_error_top1_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/hierarchical_error_top1.csv",
+    "comparison_bm25_historical_v0_1_v0_2_csv": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/comparison_bm25_historical_v0.1_v0.2.csv",
+    "historical_metrics_json": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json",
+    "run_metadata_json": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/run_metadata.json",
+    "historical_summary_md": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_summary.md"
+  },
+  "elapsed_seconds": 4.872142000007443
+}
