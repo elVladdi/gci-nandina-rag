@@ -1,0 +1,49 @@
+{
+  "eval_unique_codes": 42,
+  "eval_codes_covered_by_corpus": 42,
+  "eval_codes_absent_from_corpus": 0,
+  "missing_eval_codes": [],
+  "eval_cases": 1056,
+  "eval_cases_covered_by_corpus": 1056,
+  "eval_cases_absent_from_corpus": 0,
+  "eval_cases_recovered_at_depth": 75,
+  "eval_cases_covered_but_not_recovered_at_depth": 981,
+  "eval_cases_covered_but_not_recovered_top_50": 982,
+  "coverage_distribution": [
+    {
+      "coverage_class": "reference_code_absent_from_corpus",
+      "cases": 0,
+      "pct": 0.0
+    },
+    {
+      "coverage_class": "present_not_recovered_top_50",
+      "cases": 982,
+      "pct": 0.9299242424242424
+    },
+    {
+      "coverage_class": "rank_11_50",
+      "cases": 5,
+      "pct": 0.004734848484848485
+    },
+    {
+      "coverage_class": "rank_6_10",
+      "cases": 4,
+      "pct": 0.003787878787878788
+    },
+    {
+      "coverage_class": "rank_4_5",
+      "cases": 11,
+      "pct": 0.010416666666666666
+    },
+    {
+      "coverage_class": "rank_2_3",
+      "cases": 25,
+      "pct": 0.023674242424242424
+    },
+    {
+      "coverage_class": "top_1",
+      "cases": 29,
+      "pct": 0.027462121212121212
+    }
+  ]
+}
