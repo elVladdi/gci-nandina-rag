@@ -20,6 +20,16 @@ SPLITS = {
     "desarrollo": DATA / "data_aduanas_devset_clase87_v0.2.csv",
     "evaluacion": DATA / "data_aduanas_evalset_clase87_v0.2.csv",
 }
+V01_SPLITS = {
+    "historico": DATA / "data_aduanas_historico_clase87_v0.1.csv",
+    "desarrollo": DATA / "data_aduanas_devset_clase87_v0.1.csv",
+    "evaluacion": DATA / "data_aduanas_evalset_clase87_v0.1.csv",
+}
+V02_DATASET_HASHES = {
+    DATA / "data_aduanas_historico_clase87_v0.2.csv": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    DATA / "data_aduanas_devset_clase87_v0.2.csv": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+    DATA / "data_aduanas_evalset_clase87_v0.2.csv": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+}
 V01_HASHES = {
     DATA / "data_aduanas_historico_clase87_v0.1.csv": "ea3286063fc890d2569a8cd3704ab18d82970e3b41973153957e27486c28f2f0",
     DATA / "data_aduanas_devset_clase87_v0.1.csv": "19eeb607cb1586f3eb459a95d267844bcb068daf93f05e4055ce1183dd698a50",
@@ -173,6 +183,26 @@ class TestDataAduanasSplitV02(unittest.TestCase):
             )
             for split, source_path in SPLITS.items():
                 self.assertEqual(sha256(out_dir / source_path.name), self.metadata["output_sha256"][str(source_path.relative_to(ROOT)).replace("\\", "/")])
+
+    def test_22_exact_universe_ids_match_v01(self):
+        source_ids = {row["id_unico"] for path in V01_SPLITS.values() for row in rows(path)}
+        v02_ids = {row["id_unico"] for part in self.parts.values() for row in part}
+        self.assertSetEqual(source_ids, v02_ids)
+
+    def test_23_nandina_format_and_hierarchy(self):
+        hierarchy = [("Clase", 2), ("Partida", 4), ("Sub Partida", 6)]
+        for row in self.all_rows:
+            nandina = row["NANDINA"].strip()
+            self.assertRegex(nandina, r"^\d{8}$")
+            self.assertTrue(nandina.startswith("87"))
+            for column, length in hierarchy:
+                value = row.get(column, "").strip()
+                if value:
+                    self.assertEqual(value, nandina[:length], (column, value, nandina))
+
+    def test_24_v02_dataset_hashes_are_unchanged(self):
+        for path, expected in V02_DATASET_HASHES.items():
+            self.assertEqual(sha256(path), expected, path)
 
 
 if __name__ == "__main__":
