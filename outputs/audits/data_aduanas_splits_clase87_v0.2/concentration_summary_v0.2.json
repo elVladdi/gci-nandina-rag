@@ -1,0 +1,26 @@
+{
+  "historico": {
+    "series": 2950,
+    "dam": 28,
+    "codes": 66,
+    "max_dam_pct": 35.42372881355932,
+    "hhi": 0.23613513358230395,
+    "effective_dam": 4.234863253211975
+  },
+  "desarrollo": {
+    "series": 100,
+    "dam": 6,
+    "codes": 9,
+    "max_dam_pct": 91.0,
+    "hhi": 0.8302,
+    "effective_dam": 1.2045290291496025
+  },
+  "evaluacion": {
+    "series": 1056,
+    "dam": 67,
+    "codes": 42,
+    "max_dam_pct": 14.109848484848486,
+    "hhi": 0.062412118342516074,
+    "effective_dam": 16.022529383028246
+  }
+}

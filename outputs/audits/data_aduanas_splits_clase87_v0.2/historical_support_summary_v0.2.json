@@ -1,0 +1,20 @@
+{
+  "eval_total_cases": 1056,
+  "eval_cases_with_historical_support": 1056,
+  "eval_cases_without_historical_support": 0,
+  "eval_total_codes": 42,
+  "eval_codes_with_historical_support": 42,
+  "eval_codes_without_historical_support": 0,
+  "bucket_cases": {
+    "C. 3-4 DAM historicas": 425,
+    "D. 5+ DAM historicas": 583,
+    "B. 2 DAM historicas": 21,
+    "A. 1 DAM historica": 27
+  },
+  "bucket_codes": {
+    "C. 3-4 DAM historicas": 18,
+    "D. 5+ DAM historicas": 15,
+    "B. 2 DAM historicas": 2,
+    "A. 1 DAM historica": 7
+  }
+}

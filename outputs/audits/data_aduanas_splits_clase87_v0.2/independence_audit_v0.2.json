@@ -1,0 +1,14 @@
+{
+  "dam_overlap": {
+    "desarrollo__evaluacion": 0,
+    "desarrollo__historico": 0,
+    "evaluacion__historico": 0
+  },
+  "id_unico_overlap": {
+    "desarrollo__evaluacion": 0,
+    "desarrollo__historico": 0,
+    "evaluacion__historico": 0
+  },
+  "zero_dam_overlap": true,
+  "zero_id_overlap": true
+}

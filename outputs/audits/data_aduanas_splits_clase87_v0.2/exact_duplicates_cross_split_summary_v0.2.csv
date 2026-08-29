@@ -1,0 +1,4 @@
+﻿comparison,method,right_rows,affected_rows,affected_pct,same_nandina_rows,different_nandina_rows,same_dam_rows,different_dam_rows,same_nandina_pairs,different_nandina_pairs
+historico-evaluacion,exact_normalized_description,1056,35,3.3143939393939394,34,1,0,35,34,1
+historico-desarrollo,exact_normalized_description,100,0,0.0,0,0,0,0,0,0
+desarrollo-evaluacion,exact_normalized_description,1056,0,0.0,0,0,0,0,0,0
