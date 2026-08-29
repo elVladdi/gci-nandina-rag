@@ -46,6 +46,18 @@ El script produce:
 | desarrollo | 100 | 6 | 9 |
 | evaluacion | 1056 | 67 | 42 |
 
+
+## Limitaciones estructurales del banco historico
+
+El banco historico v0.2 contiene 2950 series, 28 DAM y 66 codigos NANDINA. Aunque cumple independencia respecto del evalset, su composicion refleja una concentracion real fuerte de series en pocas DAM: la DAM mas grande concentra 35.42372881355932% del historico, las dos DAM principales concentran aproximadamente 67.29%, el HHI historico es 0.23613513358230395 y el numero efectivo de DAM es aproximadamente 4.23.
+
+Por esta razon, el numero de precedentes por codigo debe interpretarse junto con support_count_series y support_count_dams. Multiples series provenientes de una misma DAM no deben presentarse como equivalentes a multiples declaraciones independientes. Esta condicion queda registrada como limitacion relevante para HE5.
+
+## Limitaciones estructurales del devset
+
+El conjunto de desarrollo v0.2 contiene 100 series, 6 DAM y 9 codigos NANDINA. Presenta una DAM dominante con 91/100 series, equivalente a 91%, HHI de 0.8302 y numero efectivo de DAM aproximado de 1.20. Solo 6 de los 42 codigos del evalset estan representados en dev, con cobertura dev->eval de 14.29%.
+
+El devset v0.2 se conserva como conjunto pequeno para ajustes exploratorios y pruebas de configuracion. Debido a su baja diversidad taxonomica y alta concentracion por DAM, no debe interpretarse como muestra representativa de toda la Clase 87 ni utilizarse para justificar seleccion taxonomica amplia. Esta limitacion no requiere cambiar el split aprobado.
 ## Reglas de auditoria
 
 El generador valida y deja artefactos en outputs/audits/data_aduanas_splits_clase87_v0.2/:
@@ -67,9 +79,13 @@ Gate 5 queda aprobado para el split v0.2:
 - 0 id_unico compartidos entre particiones;
 - 1056/1056 casos de evaluacion con soporte historico nominal;
 - concentracion maxima DAM en evaluacion = 14.109848484848486%, menor o igual a 15%;
-- duplicados exactos historico-evaluacion documentados: 35 filas afectadas, 34 misma NANDINA, 1 NANDINA distinta;
-- near-duplicates historico-evaluacion documentados: 55 filas a 0.90, 44 a 0.95, 37 a 0.98.
+- duplicados exactos historico-evaluacion documentados: 35 filas afectadas, 34 misma NANDINA, 1 NANDINA distinta y todas en DAM distintas;
+- near-duplicates historico-evaluacion documentados: 55 filas a 0.90, 44 a 0.95, 37 a 0.98;
+- duplicados y near-duplicates residuales no fueron utilizados para seleccionar el split, no fueron eliminados y seran objeto de analisis de sensibilidad posterior bajo HE5, sin definir todavia un umbral de exclusion.
 
 ## Restricciones
 
 Esta etapa no ejecuta BM25 final, Text2Trade final, candidate pools finales, RAG, reranking LLM ni explicador LLM. Las metricas de modelo no intervienen en la seleccion del split.
+
+
+

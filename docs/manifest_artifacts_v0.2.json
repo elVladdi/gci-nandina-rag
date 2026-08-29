@@ -4,17 +4,43 @@
   "strategy": "T5-safe-159",
   "generated_date": "2026-08-29",
   "branch": "codex/exp01-exp03-exp02-group-dam-split",
-  "gate5_status": "APROBADO",
+  "gate5_status": "APROBADO_ENDURECIDO",
+  "gate5_hardening": {
+    "exact_universe_id_test": "SOURCE_UNIVERSE_IDS == V02_UNIVERSE_IDS",
+    "nandina_format_test": "8 digits, nonempty, Clase 87; hierarchy checked against Clase/Partida/Sub Partida when populated",
+    "historical_concentration_documented": true,
+    "devset_limitation_documented": true,
+    "residual_duplicates_documented_for_HE5_sensitivity": true
+  },
   "gate5_summary": {
     "total_series": 4106,
     "historico_series": 2950,
+    "historico_dam": 28,
+    "historico_codes": 66,
+    "historico_top1_dam_pct": 35.42372881355932,
+    "historico_top2_dam_pct_approx": 67.29,
+    "historico_hhi": 0.23613513358230395,
+    "historico_effective_dam_approx": 4.23,
     "desarrollo_series": 100,
+    "desarrollo_dam": 6,
+    "desarrollo_codes": 9,
+    "desarrollo_top1_dam_series": 91,
+    "desarrollo_top1_dam_pct": 91.0,
+    "desarrollo_hhi": 0.8302,
+    "desarrollo_effective_dam_approx": 1.2,
+    "dev_eval_shared_codes": 6,
+    "eval_codes": 42,
+    "dev_eval_coverage_pct": 14.29,
     "evaluacion_series": 1056,
+    "evaluacion_dam": 67,
     "dam_overlap": 0,
     "id_unico_overlap": 0,
     "eval_cases_without_historical_support": 0,
     "eval_max_dam_concentration_pct": 14.109848484848486,
     "exact_duplicates_hist_eval_affected_rows": 35,
+    "exact_duplicates_hist_eval_same_nandina_rows": 34,
+    "exact_duplicates_hist_eval_different_nandina_rows": 1,
+    "exact_duplicates_hist_eval_same_dam_rows": 0,
     "near_duplicates_hist_eval_affected_rows": {
       "0.90": 55,
       "0.95": 44,
@@ -26,6 +52,11 @@
     "data/processed/data_aduanas_devset_clase87_v0.1.csv": "19eeb607cb1586f3eb459a95d267844bcb068daf93f05e4055ce1183dd698a50",
     "data/processed/data_aduanas_evalset_clase87_v0.1.csv": "ae642d01c0e941ab94a187fb2a820fbc8dcd6259c90d9decb70408b9dea344bb",
     "data/processed/data_aduanas_splits_clase87_v0.1_metadata.json": "71a42f793ae7e7cb02ec5b97723c74ac7b60d67f9f7b542ebfa43bb77834189a"
+  },
+  "v0_2_dataset_sha256_locked": {
+    "data/processed/data_aduanas_historico_clase87_v0.2.csv": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "data/processed/data_aduanas_devset_clase87_v0.2.csv": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+    "data/processed/data_aduanas_evalset_clase87_v0.2.csv": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
   },
   "artifacts": [
     {
@@ -43,8 +74,8 @@
     {
       "path": "tests/test_data_aduanas_split_v02.py",
       "role": "automated_tests",
-      "bytes": 8712,
-      "sha256": "35cdf2705dad0f44b20e15da984bba5bd1617af65a4b48206571eb5822930cec"
+      "bytes": 10284,
+      "sha256": "c30a99009c8db4d417b9ec75f1377be21eaf54533096b4feedcdabcd5a1f56d0"
     },
     {
       "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
@@ -73,14 +104,14 @@
     {
       "path": "docs/protocolo_data_aduanas_clase87_v0.2.md",
       "role": "documentation",
-      "bytes": 3507,
-      "sha256": "bc54612d40c9de849f8469d2149108ddafc01464fbfbd7f0b8491b237a381ee7"
+      "bytes": 5251,
+      "sha256": "5a8c31c32618416c658ee9d2913c6ca854ec9053d45e4cdb850f81e475e47586"
     },
     {
       "path": "docs/ficha_data_aduanas_clase87_v0.2.md",
       "role": "documentation",
-      "bytes": 2695,
-      "sha256": "4b78e03af8774ddf334b08c7b6e2e02113a617b610bf7a767f1373a825a554bc"
+      "bytes": 4122,
+      "sha256": "30b85959b2384fc798d5ed1d309491848be5dd8d02cb56f90409bdcfb7be5113"
     },
     {
       "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
@@ -161,6 +192,7 @@
     "candidate pools finales",
     "RAG",
     "reranking LLM",
-    "explicador LLM"
+    "explicador LLM",
+    "EXP-04"
   ]
 }

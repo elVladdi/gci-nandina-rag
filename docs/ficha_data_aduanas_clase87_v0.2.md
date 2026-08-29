@@ -45,6 +45,12 @@ Los case_id fueron regenerados con prefijos v0.2 por particion: DA-HIST-V02, DA-
 - Soporte historico de evaluacion: 1056/1056 casos.
 - Concentracion maxima DAM en evaluacion: 14.109848484848486%.
 
+
+## Limitaciones estructurales
+
+Historico: contiene 2950 series, 28 DAM y 66 codigos. La DAM mas grande concentra 35.42372881355932% del historico; las dos DAM principales concentran aproximadamente 67.29%; el HHI historico es 0.23613513358230395 y el numero efectivo de DAM es aproximadamente 4.23. El banco historico cumple independencia frente a evaluacion, pero su concentracion real exige interpretar los precedentes por codigo junto con support_count_series y support_count_dams. Varias series de una misma DAM no equivalen a varias declaraciones independientes, condicion relevante para HE5.
+
+Desarrollo: contiene 100 series, 6 DAM y 9 codigos. La DAM dominante aporta 91/100 series, equivalente a 91%; el HHI desarrollo es 0.8302 y el numero efectivo de DAM es aproximadamente 1.20. Unicamente 6 de los 42 codigos del evalset estan representados en dev, con cobertura dev->eval de 14.29%. El devset v0.2 se conserva como conjunto pequeno para ajustes exploratorios y pruebas de configuracion; no debe interpretarse como muestra representativa de toda la Clase 87 ni usarse para justificar seleccion taxonomica amplia.
 ## Soporte historico de evaluacion
 
 | bucket | codigos | casos |
@@ -60,7 +66,9 @@ Los duplicados no se eliminan automaticamente; se documentan para auditoria meto
 
 - Duplicados exactos historico-evaluacion: 35 filas de evaluacion afectadas.
 - De esas filas, 34 comparten NANDINA y 1 presenta NANDINA distinta.
+- Todas las coincidencias exactas historico-evaluacion ocurren en DAM distintas.
 - Near-duplicates historico-evaluacion: 55 filas afectadas a 0.90, 44 a 0.95 y 37 a 0.98.
+- Estos duplicados residuales no fueron utilizados para seleccionar el split, no fueron eliminados y quedan pendientes para analisis de sensibilidad posterior bajo HE5. No se define aun un umbral de exclusion.
 
 ## Reproducibilidad
 
@@ -76,3 +84,6 @@ Los hashes SHA-256 de datasets, metadata, auditorias, configuracion, script y do
 ## Usos permitidos
 
 Esta version queda lista como base de evaluacion posterior, una vez autorizadas las fases siguientes. La tarea actual no ejecuta BM25 final, Text2Trade final, RAG, reranking LLM ni explicador LLM.
+
+
+
