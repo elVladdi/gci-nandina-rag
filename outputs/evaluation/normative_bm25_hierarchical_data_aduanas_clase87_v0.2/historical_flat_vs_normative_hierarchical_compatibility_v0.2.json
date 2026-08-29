@@ -1,0 +1,14 @@
+{
+  "artifact_id": "historical_flat_vs_normative_hierarchical_compatibility_v0.2",
+  "total_cases_hierarchical": 1056,
+  "total_cases_historical": 1056,
+  "total_cases_flat": 1056,
+  "identical_case_id_set": true,
+  "identical_labels": true,
+  "label_mismatch_count": 0,
+  "label_mismatch_examples": [],
+  "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "eval_hash_flat": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "eval_hash_hierarchical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "compatible": true
+}

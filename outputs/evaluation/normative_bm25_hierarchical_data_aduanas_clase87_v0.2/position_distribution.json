@@ -1,0 +1,44 @@
+{
+  "position_distribution": [
+    {
+      "position_bucket": "1",
+      "cases": 28,
+      "pct": 0.026515151515151516
+    },
+    {
+      "position_bucket": "2-3",
+      "cases": 27,
+      "pct": 0.02556818181818182
+    },
+    {
+      "position_bucket": "4-5",
+      "cases": 11,
+      "pct": 0.010416666666666666
+    },
+    {
+      "position_bucket": "6-10",
+      "cases": 3,
+      "pct": 0.002840909090909091
+    },
+    {
+      "position_bucket": "11-50",
+      "cases": 27,
+      "pct": 0.02556818181818182
+    },
+    {
+      "position_bucket": "51-100",
+      "cases": 11,
+      "pct": 0.010416666666666666
+    },
+    {
+      "position_bucket": "101-200",
+      "cases": 214,
+      "pct": 0.20265151515151514
+    },
+    {
+      "position_bucket": ">200_or_not_retrieved",
+      "cases": 735,
+      "pct": 0.6960227272727273
+    }
+  ]
+}

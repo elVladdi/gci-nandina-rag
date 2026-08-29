@@ -1,0 +1,720 @@
+{
+  "version": "v0.2",
+  "dataset_version": "v0.2",
+  "experiment_id": "exp04_phase_c_normative_bm25_hierarchical_v0.2",
+  "strategy": "normative_bm25_hierarchical",
+  "method": "normative_bm25_hierarchical_data_aduanas_clase87_v0.2",
+  "created_at_utc": "2026-08-29T23:38:15.834676+00:00",
+  "runtime": {
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "3.0.1"
+    }
+  },
+  "git": {
+    "branch": "codex/exp04-rerun-v02",
+    "commit": "e3590cf8ea07d0cbcec97a5a41931220c56a3ce0",
+    "dirty_status_short": [
+      "M .gitattributes",
+      "?? Referencias/Antecedentes/",
+      "?? Referencias/Glosario/",
+      "?? \"data/Series - Descripciones.xlsx\"",
+      "?? docs/exp04_bm25_normative_hierarchical_v02_inventory.md",
+      "?? src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+      "?? tests/test_normative_bm25_hierarchical_v02.py"
+    ]
+  },
+  "command": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA\\src\\experiments\\evaluate_normative_bm25_hierarchical_data_aduanas_v02.py --retrieval-depth 200",
+  "inputs": {
+    "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "hierarchical_corpus": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl",
+    "hierarchical_corpus_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+    "hierarchical_corpus_metadata": "data/processed/corpus_nandina_hierarchical_v0.1_metadata.json",
+    "hierarchical_corpus_metadata_sha256": "e8a96bf4de89d7124721b58a2763453fc6ba6d44ab57ee3a125e5e7a63feb7a4",
+    "hierarchical_index": "data/processed/indexes/bm25_nandina8_hierarchical_v0.1.pkl",
+    "hierarchical_index_sha256": "f828736ea700471c95d2b985bdd969d751cd36c3ca01c407049209010bdbe60b",
+    "hierarchical_index_metadata": "data/processed/indexes/bm25_nandina8_hierarchical_v0.1_run_metadata.json",
+    "hierarchical_index_metadata_sha256": "4c960cd4bbae085ea63dd658c3df3b993ee60167c12ee0e13ce851ec5b35474f",
+    "hierarchical_audit": "outputs/corpus/auditoria_nandina_jerarquica_v0.1/audit_summary.json",
+    "hierarchical_audit_sha256": "cf7eebc8c620a5497a389d3dcfd0f83d2dafe35aeae380bab8999b675b2630ee",
+    "config": "src/configs/experiment_config.json",
+    "config_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+    "historical_case_summary": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv",
+    "historical_metadata": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/run_metadata.json",
+    "flat_case_summary": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv",
+    "flat_metrics": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json",
+    "flat_metadata": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/run_metadata.json"
+  },
+  "columns": {
+    "query": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label": "NANDINA"
+  },
+  "parameters": {
+    "retrieval_depth": 200,
+    "raw_retrieval_depth": 7648,
+    "k_values": [
+      1,
+      3,
+      5,
+      10,
+      50
+    ],
+    "recall_k_values": [
+      50,
+      100,
+      200
+    ],
+    "hierarchical_k_values": [
+      10,
+      50,
+      100,
+      200
+    ],
+    "k1": 1.5,
+    "b": 0.75,
+    "use_stopwords_in_index_build": true,
+    "configured_top_n": 100,
+    "ranking_unit": "unique NANDINA-8 code",
+    "duplicate_code_collapse_rule": "first BM25 occurrence by score order wins"
+  },
+  "index_stats": {
+    "docs_indexed": 7648,
+    "unique_codes": 7644,
+    "duplicate_codes": 4,
+    "avgdl": 47.0774040222168,
+    "vocab_size": 17423
+  },
+  "validation": {
+    "evalset_rows": 1056,
+    "case_ids_unique": true,
+    "all_case_ids_v02_eval": true,
+    "v01_eval_or_split_inputs_used": false,
+    "hierarchical_methodology_uses_existing_v01_corpus_artifact": true,
+    "true_labels_match_evalset": true,
+    "same_case_ids_as_historical_v02": true,
+    "same_case_ids_as_flat_v02": true,
+    "same_labels_as_historical_and_flat_v02": true,
+    "compatible_with_historical_and_flat_v02": true,
+    "label_string_found_inside_query_count": 0,
+    "final_ranking_effective_codes_unique": true,
+    "cases_with_repeated_codes_in_effective_ranking": 0,
+    "cases_with_repeated_codes_in_raw_ranking": 303,
+    "llm_used": false,
+    "text2trade_used": false,
+    "dual_protected_used": false,
+    "candidate_pool_used": false,
+    "dense_retrieval_used": false,
+    "rag_used": false,
+    "historical_results_used_as_retrieval_features": false,
+    "flat_results_used_as_retrieval_features": false,
+    "dam_used_as_query_feature": false,
+    "serie_used_as_query_feature": false,
+    "phase_a_b_artifacts_preserved": true
+  },
+  "metrics": {
+    "mrr": 0.04334161160288281,
+    "top_1": 0.026515151515151516,
+    "top_3": 0.052083333333333336,
+    "top_5": 0.0625,
+    "top_10": 0.06534090909090909,
+    "top_50": 0.09090909090909091,
+    "recall_at_50": 0.09090909090909091,
+    "recall_at_100": 0.10132575757575757,
+    "recall_at_200": 0.3039772727272727,
+    "pool_recall_at_200": 0.3039772727272727,
+    "exact_at_10": 0.06534090909090909,
+    "hs6_at_10": 0.07102272727272728,
+    "hs4_at_10": 0.0946969696969697,
+    "chapter_at_10": 0.22348484848484848,
+    "exact_at_50": 0.09090909090909091,
+    "hs6_at_50": 0.10037878787878787,
+    "hs4_at_50": 0.18181818181818182,
+    "chapter_at_50": 0.3778409090909091,
+    "exact_at_100": 0.10132575757575757,
+    "hs6_at_100": 0.11174242424242424,
+    "hs4_at_100": 0.25,
+    "chapter_at_100": 0.509469696969697,
+    "exact_at_200": 0.3039772727272727,
+    "hs6_at_200": 0.34375,
+    "hs4_at_200": 0.5009469696969697,
+    "chapter_at_200": 0.7670454545454546,
+    "mrr_numerator": 45.76874185264425,
+    "mrr_denominator": 1056,
+    "top_1_numerator": 28,
+    "top_1_denominator": 1056,
+    "top_3_numerator": 55,
+    "top_3_denominator": 1056,
+    "top_5_numerator": 66,
+    "top_5_denominator": 1056,
+    "top_10_numerator": 69,
+    "top_10_denominator": 1056,
+    "top_50_numerator": 96,
+    "top_50_denominator": 1056,
+    "recall_at_50_numerator": 96,
+    "recall_at_50_denominator": 1056,
+    "recall_at_100_numerator": 107,
+    "recall_at_100_denominator": 1056,
+    "recall_at_200_numerator": 321,
+    "recall_at_200_denominator": 1056,
+    "pool_recall_at_200_numerator": 321,
+    "pool_recall_at_200_denominator": 1056,
+    "exact_at_10_numerator": 69,
+    "exact_at_10_denominator": 1056,
+    "hs6_at_10_numerator": 75,
+    "hs6_at_10_denominator": 1056,
+    "hs4_at_10_numerator": 100,
+    "hs4_at_10_denominator": 1056,
+    "chapter_at_10_numerator": 236,
+    "chapter_at_10_denominator": 1056,
+    "exact_at_50_numerator": 96,
+    "exact_at_50_denominator": 1056,
+    "hs6_at_50_numerator": 106,
+    "hs6_at_50_denominator": 1056,
+    "hs4_at_50_numerator": 192,
+    "hs4_at_50_denominator": 1056,
+    "chapter_at_50_numerator": 399,
+    "chapter_at_50_denominator": 1056,
+    "exact_at_100_numerator": 107,
+    "exact_at_100_denominator": 1056,
+    "hs6_at_100_numerator": 118,
+    "hs6_at_100_denominator": 1056,
+    "hs4_at_100_numerator": 264,
+    "hs4_at_100_denominator": 1056,
+    "chapter_at_100_numerator": 538,
+    "chapter_at_100_denominator": 1056,
+    "exact_at_200_numerator": 321,
+    "exact_at_200_denominator": 1056,
+    "hs6_at_200_numerator": 363,
+    "hs6_at_200_denominator": 1056,
+    "hs4_at_200_numerator": 529,
+    "hs4_at_200_denominator": 1056,
+    "chapter_at_200_numerator": 810,
+    "chapter_at_200_denominator": 1056,
+    "cases_evaluated": 1056,
+    "cases_with_retrieval": 1056,
+    "zero_retrieval_cases": 0,
+    "not_found_at_depth": 735,
+    "metric_table": [
+      {
+        "metric": "mrr",
+        "numerator": 45.76874185264425,
+        "denominator": 1056,
+        "value": 0.04334161160288281
+      },
+      {
+        "metric": "top_1",
+        "numerator": 28,
+        "denominator": 1056,
+        "value": 0.026515151515151516
+      },
+      {
+        "metric": "top_3",
+        "numerator": 55,
+        "denominator": 1056,
+        "value": 0.052083333333333336
+      },
+      {
+        "metric": "top_5",
+        "numerator": 66,
+        "denominator": 1056,
+        "value": 0.0625
+      },
+      {
+        "metric": "top_10",
+        "numerator": 69,
+        "denominator": 1056,
+        "value": 0.06534090909090909
+      },
+      {
+        "metric": "top_50",
+        "numerator": 96,
+        "denominator": 1056,
+        "value": 0.09090909090909091
+      },
+      {
+        "metric": "recall_at_50",
+        "numerator": 96,
+        "denominator": 1056,
+        "value": 0.09090909090909091
+      },
+      {
+        "metric": "recall_at_100",
+        "numerator": 107,
+        "denominator": 1056,
+        "value": 0.10132575757575757
+      },
+      {
+        "metric": "recall_at_200",
+        "numerator": 321,
+        "denominator": 1056,
+        "value": 0.3039772727272727
+      },
+      {
+        "metric": "pool_recall_at_200",
+        "numerator": 321,
+        "denominator": 1056,
+        "value": 0.3039772727272727
+      },
+      {
+        "metric": "exact_at_10",
+        "numerator": 69,
+        "denominator": 1056,
+        "value": 0.06534090909090909
+      },
+      {
+        "metric": "hs6_at_10",
+        "numerator": 75,
+        "denominator": 1056,
+        "value": 0.07102272727272728
+      },
+      {
+        "metric": "hs4_at_10",
+        "numerator": 100,
+        "denominator": 1056,
+        "value": 0.0946969696969697
+      },
+      {
+        "metric": "chapter_at_10",
+        "numerator": 236,
+        "denominator": 1056,
+        "value": 0.22348484848484848
+      },
+      {
+        "metric": "exact_at_50",
+        "numerator": 96,
+        "denominator": 1056,
+        "value": 0.09090909090909091
+      },
+      {
+        "metric": "hs6_at_50",
+        "numerator": 106,
+        "denominator": 1056,
+        "value": 0.10037878787878787
+      },
+      {
+        "metric": "hs4_at_50",
+        "numerator": 192,
+        "denominator": 1056,
+        "value": 0.18181818181818182
+      },
+      {
+        "metric": "chapter_at_50",
+        "numerator": 399,
+        "denominator": 1056,
+        "value": 0.3778409090909091
+      },
+      {
+        "metric": "exact_at_100",
+        "numerator": 107,
+        "denominator": 1056,
+        "value": 0.10132575757575757
+      },
+      {
+        "metric": "hs6_at_100",
+        "numerator": 118,
+        "denominator": 1056,
+        "value": 0.11174242424242424
+      },
+      {
+        "metric": "hs4_at_100",
+        "numerator": 264,
+        "denominator": 1056,
+        "value": 0.25
+      },
+      {
+        "metric": "chapter_at_100",
+        "numerator": 538,
+        "denominator": 1056,
+        "value": 0.509469696969697
+      },
+      {
+        "metric": "exact_at_200",
+        "numerator": 321,
+        "denominator": 1056,
+        "value": 0.3039772727272727
+      },
+      {
+        "metric": "hs6_at_200",
+        "numerator": 363,
+        "denominator": 1056,
+        "value": 0.34375
+      },
+      {
+        "metric": "hs4_at_200",
+        "numerator": 529,
+        "denominator": 1056,
+        "value": 0.5009469696969697
+      },
+      {
+        "metric": "chapter_at_200",
+        "numerator": 810,
+        "denominator": 1056,
+        "value": 0.7670454545454546
+      }
+    ]
+  },
+  "coverage_summary": {
+    "eval_unique_codes": 42,
+    "eval_codes_covered_by_corpus": 42,
+    "eval_codes_absent_from_corpus": 0,
+    "missing_eval_codes": [],
+    "eval_cases": 1056,
+    "eval_cases_covered_by_corpus": 1056,
+    "eval_cases_absent_from_corpus": 0,
+    "eval_cases_recovered_at_depth": 321,
+    "eval_cases_covered_but_not_recovered_at_depth": 735,
+    "eval_cases_covered_but_not_recovered_top_50": 960,
+    "reference_present_but_not_exact_at_100": 949,
+    "reference_present_but_not_exact_at_200": 735,
+    "exact_recovered_at_100": 107,
+    "exact_recovered_at_200": 321,
+    "hs6_recovered_without_exact_at_100": 11,
+    "hs6_recovered_without_exact_at_200": 42,
+    "hs4_recovered_without_hs6_or_exact_at_100": 146,
+    "hs4_recovered_without_hs6_or_exact_at_200": 166,
+    "chapter_only_at_100": 274,
+    "chapter_only_at_200": 281,
+    "no_hierarchical_evidence_at_100": 518,
+    "no_hierarchical_evidence_at_200": 246,
+    "coverage_distribution_at_100": [
+      {
+        "coverage_class": "reference_absent",
+        "cases": 0,
+        "pct": 0.0,
+        "k": 100
+      },
+      {
+        "coverage_class": "exact_recovered",
+        "cases": 107,
+        "pct": 0.10132575757575757,
+        "k": 100
+      },
+      {
+        "coverage_class": "hs6_recovered_without_exact",
+        "cases": 11,
+        "pct": 0.010416666666666666,
+        "k": 100
+      },
+      {
+        "coverage_class": "hs4_recovered_without_hs6_or_exact",
+        "cases": 146,
+        "pct": 0.13825757575757575,
+        "k": 100
+      },
+      {
+        "coverage_class": "chapter_only",
+        "cases": 274,
+        "pct": 0.25946969696969696,
+        "k": 100
+      },
+      {
+        "coverage_class": "no_hierarchical_evidence",
+        "cases": 518,
+        "pct": 0.49053030303030304,
+        "k": 100
+      }
+    ],
+    "coverage_distribution_at_200": [
+      {
+        "coverage_class": "reference_absent",
+        "cases": 0,
+        "pct": 0.0,
+        "k": 200
+      },
+      {
+        "coverage_class": "exact_recovered",
+        "cases": 321,
+        "pct": 0.3039772727272727,
+        "k": 200
+      },
+      {
+        "coverage_class": "hs6_recovered_without_exact",
+        "cases": 42,
+        "pct": 0.03977272727272727,
+        "k": 200
+      },
+      {
+        "coverage_class": "hs4_recovered_without_hs6_or_exact",
+        "cases": 166,
+        "pct": 0.1571969696969697,
+        "k": 200
+      },
+      {
+        "coverage_class": "chapter_only",
+        "cases": 281,
+        "pct": 0.26609848484848486,
+        "k": 200
+      },
+      {
+        "coverage_class": "no_hierarchical_evidence",
+        "cases": 246,
+        "pct": 0.23295454545454544,
+        "k": 200
+      }
+    ],
+    "position_distribution": [
+      {
+        "position_bucket": "1",
+        "cases": 28,
+        "pct": 0.026515151515151516
+      },
+      {
+        "position_bucket": "2-3",
+        "cases": 27,
+        "pct": 0.02556818181818182
+      },
+      {
+        "position_bucket": "4-5",
+        "cases": 11,
+        "pct": 0.010416666666666666
+      },
+      {
+        "position_bucket": "6-10",
+        "cases": 3,
+        "pct": 0.002840909090909091
+      },
+      {
+        "position_bucket": "11-50",
+        "cases": 27,
+        "pct": 0.02556818181818182
+      },
+      {
+        "position_bucket": "51-100",
+        "cases": 11,
+        "pct": 0.010416666666666666
+      },
+      {
+        "position_bucket": "101-200",
+        "cases": 214,
+        "pct": 0.20265151515151514
+      },
+      {
+        "position_bucket": ">200_or_not_retrieved",
+        "cases": 735,
+        "pct": 0.6960227272727273
+      }
+    ],
+    "depth": 200
+  },
+  "position_distribution": [
+    {
+      "position_bucket": "1",
+      "cases": 28,
+      "pct": 0.026515151515151516
+    },
+    {
+      "position_bucket": "2-3",
+      "cases": 27,
+      "pct": 0.02556818181818182
+    },
+    {
+      "position_bucket": "4-5",
+      "cases": 11,
+      "pct": 0.010416666666666666
+    },
+    {
+      "position_bucket": "6-10",
+      "cases": 3,
+      "pct": 0.002840909090909091
+    },
+    {
+      "position_bucket": "11-50",
+      "cases": 27,
+      "pct": 0.02556818181818182
+    },
+    {
+      "position_bucket": "51-100",
+      "cases": 11,
+      "pct": 0.010416666666666666
+    },
+    {
+      "position_bucket": "101-200",
+      "cases": 214,
+      "pct": 0.20265151515151514
+    },
+    {
+      "position_bucket": ">200_or_not_retrieved",
+      "cases": 735,
+      "pct": 0.6960227272727273
+    }
+  ],
+  "compatibility": {
+    "artifact_id": "historical_flat_vs_normative_hierarchical_compatibility_v0.2",
+    "total_cases_hierarchical": 1056,
+    "total_cases_historical": 1056,
+    "total_cases_flat": 1056,
+    "identical_case_id_set": true,
+    "identical_labels": true,
+    "label_mismatch_count": 0,
+    "label_mismatch_examples": [],
+    "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_flat": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_hierarchical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "compatible": true
+  },
+  "flat_vs_hierarchical_comparison": [
+    {
+      "metric": "Top-1",
+      "flat_v0_2": 0.027462121212121212,
+      "hierarchical_v0_2": 0.026515151515151516,
+      "delta_hierarchical_minus_flat": -0.0009469696969696961
+    },
+    {
+      "metric": "Top-3",
+      "flat_v0_2": 0.05113636363636364,
+      "hierarchical_v0_2": 0.052083333333333336,
+      "delta_hierarchical_minus_flat": 0.0009469696969696961
+    },
+    {
+      "metric": "Top-5",
+      "flat_v0_2": 0.061553030303030304,
+      "hierarchical_v0_2": 0.0625,
+      "delta_hierarchical_minus_flat": 0.0009469696969696961
+    },
+    {
+      "metric": "Top-10",
+      "flat_v0_2": 0.06534090909090909,
+      "hierarchical_v0_2": 0.06534090909090909,
+      "delta_hierarchical_minus_flat": 0.0
+    },
+    {
+      "metric": "Top-50",
+      "flat_v0_2": 0.07007575757575757,
+      "hierarchical_v0_2": 0.09090909090909091,
+      "delta_hierarchical_minus_flat": 0.020833333333333343
+    },
+    {
+      "metric": "Recall@100",
+      "flat_v0_2": 0.07102272727272728,
+      "hierarchical_v0_2": 0.10132575757575757,
+      "delta_hierarchical_minus_flat": 0.03030303030303029
+    },
+    {
+      "metric": "MRR",
+      "flat_v0_2": 0.04229731726741296,
+      "hierarchical_v0_2": 0.04334161160288281,
+      "delta_hierarchical_minus_flat": 0.0010442943354698475
+    }
+  ],
+  "hierarchical_coverage_comparison": [
+    {
+      "coverage": "Exact@100",
+      "flat_v0_2": 0.07102272727272728,
+      "hierarchical_v0_2": 0.10132575757575757,
+      "delta_hierarchical_minus_flat": 0.03030303030303029
+    },
+    {
+      "coverage": "HS-6@100",
+      "flat_v0_2": 0.09375,
+      "hierarchical_v0_2": 0.11174242424242424,
+      "delta_hierarchical_minus_flat": 0.01799242424242424
+    },
+    {
+      "coverage": "HS-4@100",
+      "flat_v0_2": 0.20833333333333334,
+      "hierarchical_v0_2": 0.25,
+      "delta_hierarchical_minus_flat": 0.04166666666666666
+    },
+    {
+      "coverage": "Chapter@100",
+      "flat_v0_2": 0.7632575757575758,
+      "hierarchical_v0_2": 0.509469696969697,
+      "delta_hierarchical_minus_flat": -0.2537878787878788
+    },
+    {
+      "coverage": "Exact@200",
+      "flat_v0_2": "not_available_frozen_depth_100",
+      "hierarchical_v0_2": 0.3039772727272727,
+      "delta_hierarchical_minus_flat": "not_computed"
+    },
+    {
+      "coverage": "HS-6@200",
+      "flat_v0_2": "not_available_frozen_depth_100",
+      "hierarchical_v0_2": 0.34375,
+      "delta_hierarchical_minus_flat": "not_computed"
+    },
+    {
+      "coverage": "HS-4@200",
+      "flat_v0_2": "not_available_frozen_depth_100",
+      "hierarchical_v0_2": 0.5009469696969697,
+      "delta_hierarchical_minus_flat": "not_computed"
+    },
+    {
+      "coverage": "Chapter@200",
+      "flat_v0_2": "not_available_frozen_depth_100",
+      "hierarchical_v0_2": 0.7670454545454546,
+      "delta_hierarchical_minus_flat": "not_computed"
+    }
+  ],
+  "limitation_stratified_metrics": [
+    {
+      "group": "all_cases",
+      "n": 1056,
+      "exact_at_100": 0.10132575757575757,
+      "hs6_at_100": 0.11174242424242424,
+      "hs4_at_100": 0.25,
+      "mrr": 0.04334161160288281
+    },
+    {
+      "group": "missing_parent_4d",
+      "n": 0,
+      "exact_at_100": 0.0,
+      "hs6_at_100": 0.0,
+      "hs4_at_100": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "group": "missing_parent_hs6",
+      "n": 381,
+      "exact_at_100": 0.15748031496062992,
+      "hs6_at_100": 0.15748031496062992,
+      "hs4_at_100": 0.2887139107611549,
+      "mrr": 0.10307802011887786
+    },
+    {
+      "group": "missing_both_parents",
+      "n": 0,
+      "exact_at_100": 0.0,
+      "hs6_at_100": 0.0,
+      "hs4_at_100": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "group": "duplicate_code_documents",
+      "n": 0,
+      "exact_at_100": 0.0,
+      "hs6_at_100": 0.0,
+      "hs4_at_100": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "group": "generic_or_short_leaf_description",
+      "n": 369,
+      "exact_at_100": 0.06504065040650407,
+      "hs6_at_100": 0.08672086720867209,
+      "hs4_at_100": 0.27371273712737126,
+      "mrr": 0.004051702955505876
+    }
+  ],
+  "gate_c_status": "APPROVED",
+  "outputs": {
+    "normative_hierarchical_results_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+    "normative_hierarchical_case_summary_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+    "normative_hierarchical_failure_cases_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_failure_cases.csv",
+    "normative_hierarchical_metrics_json": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+    "hierarchical_coverage_summary_json": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/hierarchical_coverage_summary.json",
+    "hierarchical_coverage_summary_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/hierarchical_coverage_summary.csv",
+    "position_distribution_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/position_distribution.csv",
+    "position_distribution_json": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/position_distribution.json",
+    "corpus_hierarchical_audit_json": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/corpus_hierarchical_audit.json",
+    "historical_flat_vs_normative_hierarchical_compatibility_json": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/historical_flat_vs_normative_hierarchical_compatibility_v0.2.json",
+    "flat_vs_hierarchical_comparison_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/flat_vs_hierarchical_comparison_v0.2.csv",
+    "hierarchical_coverage_comparison_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/hierarchical_coverage_comparison_v0.2.csv",
+    "limitation_stratified_metrics_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/limitation_stratified_metrics_v0.2.csv",
+    "run_metadata_json": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
+    "summary_md": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/summary.md"
+  }
+}

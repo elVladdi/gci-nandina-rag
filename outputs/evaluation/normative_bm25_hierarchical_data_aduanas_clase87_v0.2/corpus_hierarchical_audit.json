@@ -1,0 +1,166 @@
+{
+  "path_methodology_version": "v0.1",
+  "source_methodology": "src.corpus.build_hierarchical_nandina_corpus",
+  "records_total": 7648,
+  "nandina_8_rows": 7648,
+  "nandina_8_unique_codes": 7644,
+  "nandina_8_codes_with_multiple_documents": 2,
+  "total_extra_documents_from_duplicate_codes": 4,
+  "max_documents_per_code": 4,
+  "duplicate_code_details": {
+    "48051900": [
+      {
+        "doc_id": "NANDINA_48051900",
+        "titulo": "Los demás",
+        "partida_4d": "4805",
+        "hs_6d": "",
+        "source_page": 213,
+        "texto_index_jerarquico_length": 292
+      },
+      {
+        "doc_id": "NANDINA_48051900",
+        "titulo": ", 4805.24.00 o 4805.25.00)",
+        "partida_4d": "4805",
+        "hs_6d": "",
+        "source_page": 213,
+        "texto_index_jerarquico_length": 290
+      },
+      {
+        "doc_id": "NANDINA_48051900",
+        "titulo": ", 4805.24.00 o 4805.25.00)",
+        "partida_4d": "4805",
+        "hs_6d": "",
+        "source_page": 214,
+        "texto_index_jerarquico_length": 290
+      },
+      {
+        "doc_id": "NANDINA_48051900",
+        "titulo": ", 4805.24.00 o 4805.25.00)",
+        "partida_4d": "4805",
+        "hs_6d": "",
+        "source_page": 214,
+        "texto_index_jerarquico_length": 290
+      }
+    ],
+    "84472010": [
+      {
+        "doc_id": "NANDINA_84472010",
+        "titulo": ", las que posean una o dos camas de menos de 7 agujas por cada 2,54 cm (pulgada lineal). .",
+        "partida_4d": "8447",
+        "hs_6d": "844720",
+        "source_page": 350,
+        "texto_index_jerarquico_length": 545
+      },
+      {
+        "doc_id": "NANDINA_84472010",
+        "titulo": "Máquinas rectilíneas de tricotar, de uso doméstico",
+        "partida_4d": "8447",
+        "hs_6d": "844720",
+        "source_page": 365,
+        "texto_index_jerarquico_length": 523
+      }
+    ]
+  },
+  "fields": [
+    "chapter",
+    "chapter_title",
+    "codigo",
+    "descripcion_hs_6d",
+    "descripcion_nandina_8d",
+    "descripcion_partida_4d",
+    "doc_id",
+    "fuente",
+    "hs_6d",
+    "idioma",
+    "nandina_8d",
+    "pagina_fin",
+    "pagina_inicio",
+    "partida_4d",
+    "section",
+    "section_title",
+    "source_line_no",
+    "source_line_text",
+    "source_page",
+    "texto",
+    "texto_index",
+    "texto_index_jerarquico",
+    "tipo",
+    "titulo",
+    "unidad_fisica",
+    "version"
+  ],
+  "source_values": [
+    "NANDINA"
+  ],
+  "version_values": [
+    "hierarchical_v0.1"
+  ],
+  "type_counts": {
+    "nandina_8": 7648
+  },
+  "text_length": {
+    "min": 130,
+    "max": 16809,
+    "median": 328
+  },
+  "hierarchical_levels_in_text": [
+    "section",
+    "chapter",
+    "partida_4d",
+    "hs_6d",
+    "nandina_8d",
+    "unidad_fisica"
+  ],
+  "document_unit": "one hierarchical document row per NANDINA-8 source row; effective evaluation collapses duplicate rows to unique NANDINA-8 codes by first BM25 score occurrence",
+  "indexed_text": "titulo + texto_index_jerarquico, with texto_index fallback during index build",
+  "build_rule": "Seccion + Capitulo + Partida 4D + Subpartida HS6 nullable + NANDINA 8D + Unidad fisica, deduplicated by normalized text fragment.",
+  "own_code_information": [
+    "codigo/nandina_8d",
+    "descripcion_nandina_8d",
+    "unidad_fisica"
+  ],
+  "parent_information": [
+    "section",
+    "section_title",
+    "chapter",
+    "chapter_title",
+    "partida_4d",
+    "descripcion_partida_4d",
+    "hs_6d nullable",
+    "descripcion_hs_6d nullable"
+  ],
+  "normative_context": "No standalone notes are appended by the builder; notes/context only appear if already embedded in source descriptions, including known extraction contamination warnings.",
+  "metadata_counts": {
+    "total_nandina8_esperadas": 7648,
+    "total_documentos_generados": 7648,
+    "cantidad_sin_padre_4d": 407,
+    "cantidad_sin_padre_hs6": 4504,
+    "cantidad_sin_padres": 185,
+    "cantidad_textos_todavia_genericos": 0,
+    "cantidad_descripciones_8d_genericas_o_cortas": 2736
+  },
+  "versioned_audit_counts": {
+    "source_records_total": 9785,
+    "source_partida_4d": 1020,
+    "source_hs_6d": 1117,
+    "source_nandina_8d": 7648,
+    "source_missing_parent_4d": 407,
+    "source_missing_parent_hs6": 4504,
+    "source_conflicting_parent_duplicates": 56,
+    "source_header_contamination": 17,
+    "source_generic_or_short_rows": 3498
+  },
+  "known_warnings": [
+    "407 NANDINA8 records do not have an explicit 4D parent row.",
+    "4504 NANDINA8 records do not have an explicit HS6 parent row.",
+    "56 code/level groups have conflicting duplicate descriptions.",
+    "HS6 context is nullable because the intermediate JSONL does not represent every HS6 heading as a separate row."
+  ],
+  "methodology_linkage": {
+    "metadata_matches_current_corpus": true,
+    "metadata_source_sha256_matches_audit": true,
+    "current_counts_match_metadata": true,
+    "current_counts_match_audit_source_nandina8": true,
+    "linked_to_approved_methodology": true
+  }
+}

@@ -1,0 +1,13 @@
+k,coverage_class,cases,pct
+100,reference_absent,0,0.0
+100,exact_recovered,107,0.10132575757575757
+100,hs6_recovered_without_exact,11,0.010416666666666666
+100,hs4_recovered_without_hs6_or_exact,146,0.13825757575757575
+100,chapter_only,274,0.25946969696969696
+100,no_hierarchical_evidence,518,0.49053030303030304
+200,reference_absent,0,0.0
+200,exact_recovered,321,0.3039772727272727
+200,hs6_recovered_without_exact,42,0.03977272727272727
+200,hs4_recovered_without_hs6_or_exact,166,0.1571969696969697
+200,chapter_only,281,0.26609848484848486
+200,no_hierarchical_evidence,246,0.23295454545454544

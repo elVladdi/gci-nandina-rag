@@ -1,0 +1,143 @@
+{
+  "eval_unique_codes": 42,
+  "eval_codes_covered_by_corpus": 42,
+  "eval_codes_absent_from_corpus": 0,
+  "missing_eval_codes": [],
+  "eval_cases": 1056,
+  "eval_cases_covered_by_corpus": 1056,
+  "eval_cases_absent_from_corpus": 0,
+  "eval_cases_recovered_at_depth": 321,
+  "eval_cases_covered_but_not_recovered_at_depth": 735,
+  "eval_cases_covered_but_not_recovered_top_50": 960,
+  "reference_present_but_not_exact_at_100": 949,
+  "reference_present_but_not_exact_at_200": 735,
+  "exact_recovered_at_100": 107,
+  "exact_recovered_at_200": 321,
+  "hs6_recovered_without_exact_at_100": 11,
+  "hs6_recovered_without_exact_at_200": 42,
+  "hs4_recovered_without_hs6_or_exact_at_100": 146,
+  "hs4_recovered_without_hs6_or_exact_at_200": 166,
+  "chapter_only_at_100": 274,
+  "chapter_only_at_200": 281,
+  "no_hierarchical_evidence_at_100": 518,
+  "no_hierarchical_evidence_at_200": 246,
+  "coverage_distribution_at_100": [
+    {
+      "coverage_class": "reference_absent",
+      "cases": 0,
+      "pct": 0.0,
+      "k": 100
+    },
+    {
+      "coverage_class": "exact_recovered",
+      "cases": 107,
+      "pct": 0.10132575757575757,
+      "k": 100
+    },
+    {
+      "coverage_class": "hs6_recovered_without_exact",
+      "cases": 11,
+      "pct": 0.010416666666666666,
+      "k": 100
+    },
+    {
+      "coverage_class": "hs4_recovered_without_hs6_or_exact",
+      "cases": 146,
+      "pct": 0.13825757575757575,
+      "k": 100
+    },
+    {
+      "coverage_class": "chapter_only",
+      "cases": 274,
+      "pct": 0.25946969696969696,
+      "k": 100
+    },
+    {
+      "coverage_class": "no_hierarchical_evidence",
+      "cases": 518,
+      "pct": 0.49053030303030304,
+      "k": 100
+    }
+  ],
+  "coverage_distribution_at_200": [
+    {
+      "coverage_class": "reference_absent",
+      "cases": 0,
+      "pct": 0.0,
+      "k": 200
+    },
+    {
+      "coverage_class": "exact_recovered",
+      "cases": 321,
+      "pct": 0.3039772727272727,
+      "k": 200
+    },
+    {
+      "coverage_class": "hs6_recovered_without_exact",
+      "cases": 42,
+      "pct": 0.03977272727272727,
+      "k": 200
+    },
+    {
+      "coverage_class": "hs4_recovered_without_hs6_or_exact",
+      "cases": 166,
+      "pct": 0.1571969696969697,
+      "k": 200
+    },
+    {
+      "coverage_class": "chapter_only",
+      "cases": 281,
+      "pct": 0.26609848484848486,
+      "k": 200
+    },
+    {
+      "coverage_class": "no_hierarchical_evidence",
+      "cases": 246,
+      "pct": 0.23295454545454544,
+      "k": 200
+    }
+  ],
+  "position_distribution": [
+    {
+      "position_bucket": "1",
+      "cases": 28,
+      "pct": 0.026515151515151516
+    },
+    {
+      "position_bucket": "2-3",
+      "cases": 27,
+      "pct": 0.02556818181818182
+    },
+    {
+      "position_bucket": "4-5",
+      "cases": 11,
+      "pct": 0.010416666666666666
+    },
+    {
+      "position_bucket": "6-10",
+      "cases": 3,
+      "pct": 0.002840909090909091
+    },
+    {
+      "position_bucket": "11-50",
+      "cases": 27,
+      "pct": 0.02556818181818182
+    },
+    {
+      "position_bucket": "51-100",
+      "cases": 11,
+      "pct": 0.010416666666666666
+    },
+    {
+      "position_bucket": "101-200",
+      "cases": 214,
+      "pct": 0.20265151515151514
+    },
+    {
+      "position_bucket": ">200_or_not_retrieved",
+      "cases": 735,
+      "pct": 0.6960227272727273
+    }
+  ],
+  "depth": 200
+}
