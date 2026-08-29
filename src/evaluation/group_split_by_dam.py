@@ -59,6 +59,13 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def artifact_key(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(repo_root()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
 def clean_text(value: Any) -> str:
     text = "" if value is None else str(value).replace("\xa0", " ").strip()
     if text.casefold() in {"nan", "nat", "none"}:
@@ -167,7 +174,7 @@ def write_outputs(outputs: dict[str, pd.DataFrame], output_dir: Path, overwrite:
         if path.exists() and not overwrite:
             raise FileExistsError(f"Refusing to overwrite {path}; pass --overwrite")
         outputs[split].to_csv(path, index=False, encoding="utf-8-sig", lineterminator="\n")
-        rel_hashes[str(path)] = sha256_file(path)
+        rel_hashes[artifact_key(path)] = sha256_file(path)
     return rel_hashes
 
 
@@ -521,7 +528,7 @@ def write_audits(outputs: dict[str, pd.DataFrame], audit_dir: Path, overwrite: b
     for name, rows in csv_artifacts.items():
         write_csv_rows(audit_dir / name, rows)
     write_markdown_audit_summary(audit_dir / "audit_summary_v0.2.md", audit_summary)
-    hashes = {str(path): sha256_file(path) for path in sorted(audit_dir.glob("*_v0.2.*"))}
+    hashes = {artifact_key(path): sha256_file(path) for path in sorted(audit_dir.glob("*_v0.2.*"))}
     return audit_summary, hashes
 
 
@@ -668,5 +675,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 
