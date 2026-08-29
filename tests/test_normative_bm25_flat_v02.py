@@ -136,6 +136,46 @@ class TestNormativeBm25FlatV02(unittest.TestCase):
         self.assertFalse(validation["candidate_pool_used"])
         self.assertFalse(validation["rag_used"])
 
+    def test_11_microaudit_corpus_explains_7748_vs_7644(self):
+        audit = load_json(ROOT / "outputs" / "audits" / "normative_bm25_flat_data_aduanas_clase87_v0.2" / "normative_bm25_flat_code_level_microaudit_v0.2.json")
+        corpus = audit["corpus_duplicate_audit"]
+        self.assertEqual(corpus["records_total"], 7748)
+        self.assertEqual(corpus["nandina8_records"], 7644)
+        self.assertEqual(corpus["non_nandina8_records"], 104)
+        self.assertEqual(corpus["type_counts"]["nota_capitulo"], 87)
+        self.assertEqual(corpus["type_counts"]["nota_seccion"], 9)
+        self.assertEqual(corpus["type_counts"]["rgi"], 6)
+        self.assertEqual(corpus["type_counts"]["rgi_contexto"], 2)
+        self.assertEqual(corpus["nandina8_codes_with_multiple_documents"], 0)
+        self.assertEqual(corpus["multiplicity_distribution"], {"1": 7644})
+
+    def test_12_microaudit_ranking_effective_codes_are_unique(self):
+        audit = load_json(ROOT / "outputs" / "audits" / "normative_bm25_flat_data_aduanas_clase87_v0.2" / "normative_bm25_flat_code_level_microaudit_v0.2.json")
+        ranking = audit["ranking_unit_audit"]
+        self.assertEqual(ranking["cases_evaluated"], 1056)
+        self.assertEqual(ranking["cases_with_repeated_codes_in_effective_ranking"], 0)
+        self.assertEqual(ranking["max_repetitions_for_same_code_within_case"], 1)
+        self.assertTrue(ranking["first_occurrence_determines_position"])
+        self.assertTrue(ranking["first_reference_position_matches_case_summary"])
+        self.assertEqual(ranking["global_result"], "PASS")
+        repeated_rows = rows(ROOT / "outputs" / "audits" / "normative_bm25_flat_data_aduanas_clase87_v0.2" / "ranking_repeated_codes_by_case_v0.2.csv")
+        self.assertEqual(repeated_rows, [])
+
+    def test_13_microaudit_metrics_and_nandina8_coverage_are_frozen(self):
+        audit = load_json(ROOT / "outputs" / "audits" / "normative_bm25_flat_data_aduanas_clase87_v0.2" / "normative_bm25_flat_code_level_microaudit_v0.2.json")
+        self.assertTrue(audit["metrics_match_expected_gate_b"])
+        self.assertEqual(audit["metrics_recalculated_from_artifacts"]["top_1"]["numerator"], 29)
+        self.assertEqual(audit["metrics_recalculated_from_artifacts"]["top_50"]["numerator"], 74)
+        self.assertEqual(audit["metrics_recalculated_from_artifacts"]["recall_at_100"]["numerator"], 75)
+        self.assertAlmostEqual(audit["metrics_recalculated_from_artifacts"]["mrr"]["value"], 0.04229731726741296)
+        coverage = audit["normative_8_digit_coverage"]
+        self.assertEqual(coverage["normative_target_digits"], 8)
+        self.assertEqual(coverage["normative_supported_digits_for_primary_baseline"], 8)
+        self.assertEqual(coverage["eval_codes_with_nandina8_entry"], 42)
+        self.assertEqual(coverage["eval_cases_with_nandina8_entry"], 1056)
+        self.assertEqual(coverage["eval_codes_covered_by_parent_only"], 0)
+        self.assertFalse(coverage["parent_hs6_coverage_used_as_primary_coverage"])
+        self.assertEqual(audit["gate_b_hardened_result"], "APPROVED")
 
 if __name__ == "__main__":
     unittest.main()
