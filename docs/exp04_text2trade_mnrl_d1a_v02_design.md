@@ -43,7 +43,7 @@ La configuración canónica está en `src/configs/text2trade_mnrl_v0.2.json`:
 
 - base local `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`;
 - `MultipleNegativesRankingLoss`, cosine, escala 20;
-- 1 época, batch 8, AdamW, learning rate `2e-5`, weight decay `0.01`, warmup 10%;
+- 1 época, batch 8, AdamW, learning rate `2e-5`, weight decay `0.01`, clipping de gradiente 1.0 y warmup lineal 10%;
 - semilla 2026, CPU, float32, max sequence length 128, sin AMP;
 - sin early stopping, sin MCD, sin ajuste ni selección con dev/eval.
 

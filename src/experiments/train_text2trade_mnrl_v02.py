@@ -15,6 +15,7 @@ import torch
 from sentence_transformers import InputExample, SentenceTransformer
 from sentence_transformers.sentence_transformer import losses
 from torch.utils.data import DataLoader, Sampler
+from transformers import get_linear_schedule_with_warmup
 
 from ..retrieval.text2trade_mnrl_v02 import (
     build_normative_documents,
@@ -140,23 +141,31 @@ def main() -> int:
     for batch in batches:
         batch_indices.append(list(range(offset, offset + len(batch))))
         offset += len(batch)
-    loader = DataLoader(examples, batch_sampler=StaticBatchSampler(batch_indices))
+    loader = DataLoader(examples, batch_sampler=StaticBatchSampler(batch_indices), collate_fn=model.smart_batching_collate)
     loss = losses.MultipleNegativesRankingLoss(model, scale=float(training["mnrl_scale"]))
     total_steps = len(loader) * int(training["epochs"])
     warmup_steps = int(total_steps * float(training["warmup_ratio"]))
-    training_dir.mkdir(parents=True, exist_ok=False)
+    if training_dir.exists() and any(training_dir.iterdir()):
+        raise FileExistsError(f"Refusing to overwrite training metadata: {training_dir}")
+    training_dir.mkdir(parents=True, exist_ok=True)
     started = datetime.now(timezone.utc)
-    model.fit(
-        train_objectives=[(loader, loss)],
-        epochs=int(training["epochs"]),
-        warmup_steps=warmup_steps,
-        optimizer_params={"lr": float(training["learning_rate"])},
-        weight_decay=float(training["weight_decay"]),
-        output_path=str(model_dir),
-        save_best_model=False,
-        use_amp=bool(training["amp"]),
-        show_progress_bar=True,
-    )
+    optimizer = torch.optim.AdamW(model.parameters(), lr=float(training["learning_rate"]), weight_decay=float(training["weight_decay"]))
+    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps)
+    loss_values: list[float] = []
+    model.train()
+    for epoch in range(int(training["epochs"])):
+        for sentence_features, labels in loader:
+            sentence_features = [{key: value.to(model.device) for key, value in features.items()} for features in sentence_features]
+            labels = labels.to(model.device)
+            optimizer.zero_grad(set_to_none=True)
+            value = loss(sentence_features, labels)
+            value.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), float(training["max_grad_norm"]))
+            optimizer.step()
+            scheduler.step()
+            loss_values.append(float(value.detach().cpu()))
+        print(f"epoch={epoch + 1} mean_mnrl_loss={sum(loss_values) / len(loss_values):.8f}")
+    model.save(str(model_dir))
     finished = datetime.now(timezone.utc)
     metadata = {
         "experiment_id": config["experiment_id"],
@@ -192,7 +201,7 @@ def main() -> int:
             "batch_count": len(batches),
             "positive_codes_unique_within_every_batch": True,
         },
-        "training": {**training, "warmup_steps": warmup_steps, "total_steps": total_steps},
+        "training": {**training, "warmup_steps": warmup_steps, "total_steps": total_steps, "loss_first": loss_values[0], "loss_last": loss_values[-1], "loss_mean": sum(loss_values) / len(loss_values)},
         "runtime": {"python": platform.python_version(), "platform": platform.platform(), "torch": torch.__version__},
         "outputs": {"model_dir": relative(model_dir, root), "model_files": model_file_manifest(model_dir, root)},
         "mcd_used": False,
