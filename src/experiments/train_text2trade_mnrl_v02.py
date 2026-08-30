@@ -155,7 +155,10 @@ def main() -> int:
     model.train()
     for epoch in range(int(training["epochs"])):
         for sentence_features, labels in loader:
-            sentence_features = [{key: value.to(model.device) for key, value in features.items()} for features in sentence_features]
+            sentence_features = [
+                {key: value.to(model.device) if isinstance(value, torch.Tensor) else value for key, value in features.items()}
+                for features in sentence_features
+            ]
             labels = labels.to(model.device)
             optimizer.zero_grad(set_to_none=True)
             value = loss(sentence_features, labels)
