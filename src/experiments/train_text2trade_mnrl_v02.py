@@ -14,7 +14,7 @@ import numpy as np
 import torch
 from sentence_transformers import InputExample, SentenceTransformer
 from sentence_transformers.sentence_transformer import losses
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Sampler
 
 from ..retrieval.text2trade_mnrl_v02 import (
     build_normative_documents,
@@ -25,7 +25,7 @@ from ..retrieval.text2trade_mnrl_v02 import (
     load_jsonl,
     model_file_manifest,
     normalize_code,
-    order_rows_for_unique_positive_batches,
+    rows_by_unique_positive_batches,
     read_csv,
     relative,
     sha256_file,
@@ -45,6 +45,17 @@ def assert_hash(path: Path, expected: str) -> None:
     actual = sha256_file(path)
     if actual != expected:
         raise ValueError(f"Frozen input hash mismatch for {path}: {actual} != {expected}")
+
+
+class StaticBatchSampler(Sampler[list[int]]):
+    def __init__(self, batches: list[list[int]]) -> None:
+        self.batches = batches
+
+    def __iter__(self):
+        return iter(self.batches)
+
+    def __len__(self) -> int:
+        return len(self.batches)
 
 
 def main() -> int:
@@ -115,16 +126,21 @@ def main() -> int:
             }
         )
         negative_levels[level] += 1
-    ordered_records = order_rows_for_unique_positive_batches(records, int(training["batch_size"]))
-    batches = [ordered_records[index : index + int(training["batch_size"])] for index in range(0, len(ordered_records), int(training["batch_size"]))]
+    batches = rows_by_unique_positive_batches(records, int(training["batch_size"]))
     if any(len({row["positive_code"] for row in batch}) != len(batch) for batch in batches):
         raise ValueError("MNRL batch construction repeated a positive code")
 
     set_seed(int(training["seed"]))
     model = SentenceTransformer(str(base_model_path), device=training["device"])
     model.max_seq_length = int(training["max_sequence_length"])
+    ordered_records = [row for batch in batches for row in batch]
     examples = [InputExample(texts=[row["query"], row["positive_text"], row["negative_text"]]) for row in ordered_records]
-    loader = DataLoader(examples, batch_size=int(training["batch_size"]), shuffle=False)
+    batch_indices: list[list[int]] = []
+    offset = 0
+    for batch in batches:
+        batch_indices.append(list(range(offset, offset + len(batch))))
+        offset += len(batch)
+    loader = DataLoader(examples, batch_sampler=StaticBatchSampler(batch_indices))
     loss = losses.MultipleNegativesRankingLoss(model, scale=float(training["mnrl_scale"]))
     total_steps = len(loader) * int(training["epochs"])
     warmup_steps = int(total_steps * float(training["warmup_ratio"]))

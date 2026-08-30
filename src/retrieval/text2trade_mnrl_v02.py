@@ -123,13 +123,13 @@ def choose_hard_negative(case_id: str, positive_code: str, training_codes: Seque
     raise ValueError(f"No negative available for {case_id} / {positive_code}")
 
 
-def order_rows_for_unique_positive_batches(rows: Sequence[dict[str, Any]], batch_size: int) -> list[dict[str, Any]]:
+def rows_by_unique_positive_batches(rows: Sequence[dict[str, Any]], batch_size: int) -> list[list[dict[str, Any]]]:
     """Round-robin labels so explicit MNRL positives do not repeat in a batch."""
     buckets: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in sorted(rows, key=lambda item: (item["positive_code"], item["case_id"])):
         buckets[row["positive_code"]].append(row)
     codes = sorted(buckets)
-    ordered: list[dict[str, Any]] = []
+    batches: list[list[dict[str, Any]]] = []
     cursor = 0
     while any(buckets.values()):
         batch: list[dict[str, Any]] = []
@@ -141,9 +141,9 @@ def order_rows_for_unique_positive_batches(rows: Sequence[dict[str, Any]], batch
                 break
         if not batch:
             break
-        ordered.extend(batch)
+        batches.append(batch)
         cursor = (cursor + len(batch)) % len(codes)
-    return ordered
+    return batches
 
 
 def sample_indices(documents: Sequence[Mapping[str, Any]], eval_rows: Sequence[Mapping[str, str]], label_column: str) -> dict[int, list[str]]:
