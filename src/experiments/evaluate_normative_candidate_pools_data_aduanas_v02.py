@@ -365,15 +365,15 @@ def main() -> int:
         rank = next((index for index, code in enumerate(dual_rankings[case_id], 1) if code == reference), 0)
         dual_case_rows.append({"case_id": case_id, "rank": rank})
     dual_metrics = source_metrics(dual_case_rows, "rank", max_depth)
-    historical_metrics = json.loads((resolve_project_path("outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json")).read_text(encoding="utf-8"))["metrics"]
-    flat_metrics = json.loads((resolve_project_path("outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json")).read_text(encoding="utf-8"))["metrics"]
-    hierarchical_metrics = json.loads((resolve_project_path("outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json")).read_text(encoding="utf-8"))["metrics"]
-    d1_metrics = json.loads((resolve_project_path("outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json")).read_text(encoding="utf-8"))["metrics"]
+    historical_metrics = source_metrics(hist_cases, "exact_rank", 100)
+    flat_metrics = source_metrics(flat_cases, "rank_ref", 100)
+    hierarchical_metrics = source_metrics(hier_cases, "rank_ref", 100)
+    d1_metrics = source_metrics(d1_cases, "rank_ref", 100)
     ranking_comparison = [
-        {"strategy": "Historical BM25", "classification": "ranking", "top_1": historical_metrics["top_1"], "top_3": historical_metrics["top_3"], "top_5": historical_metrics["top_5"], "top_10": historical_metrics["top_10"], "top_50": historical_metrics["top_50"], "recall_at_100": historical_metrics["recall_at_100"], "mrr_at_100": historical_metrics["mrr"]},
-        {"strategy": "Normative BM25 flat", "classification": "ranking", "top_1": flat_metrics["top_1"], "top_3": flat_metrics["top_3"], "top_5": flat_metrics["top_5"], "top_10": flat_metrics["top_10"], "top_50": flat_metrics["top_50"], "recall_at_100": flat_metrics["recall_at_100"], "mrr_at_100": flat_metrics["mrr"]},
-        {"strategy": "Normative BM25 hierarchical", "classification": "ranking", "top_1": hierarchical_metrics["top_1"], "top_3": hierarchical_metrics["top_3"], "top_5": hierarchical_metrics["top_5"], "top_10": hierarchical_metrics["top_10"], "top_50": hierarchical_metrics["top_50"], "recall_at_100": hierarchical_metrics["recall_at_100"], "mrr_at_100": hierarchical_metrics["mrr_at_100"]},
-        {"strategy": "D1a Text2Trade-inspired MNRL", "classification": "ranking", "top_1": d1_metrics["top_1"], "top_3": d1_metrics["top_3"], "top_5": d1_metrics["top_5"], "top_10": d1_metrics["top_10"], "top_50": d1_metrics["top_50"], "recall_at_100": d1_metrics["recall_at_100"], "mrr_at_100": d1_metrics["mrr_at_100"]},
+        {"strategy": "Historical BM25", "classification": "ranking", **{key: historical_metrics[key] for key in ("top_1", "top_3", "top_5", "top_10", "top_50", "recall_at_100", "mrr_at_100")}},
+        {"strategy": "Normative BM25 flat", "classification": "ranking", **{key: flat_metrics[key] for key in ("top_1", "top_3", "top_5", "top_10", "top_50", "recall_at_100", "mrr_at_100")}},
+        {"strategy": "Normative BM25 hierarchical", "classification": "ranking", **{key: hierarchical_metrics[key] for key in ("top_1", "top_3", "top_5", "top_10", "top_50", "recall_at_100", "mrr_at_100")}},
+        {"strategy": "D1a Text2Trade-inspired MNRL", "classification": "ranking", **{key: d1_metrics[key] for key in ("top_1", "top_3", "top_5", "top_10", "top_50", "recall_at_100", "mrr_at_100")}},
         {"strategy": "Dual protected historical", "classification": "ranking", **{key: dual_metrics[key] for key in ("top_1", "top_3", "top_5", "top_10", "top_50", "recall_at_100", "mrr_at_100")}},
     ]
     pool_comparison = [{"pool_id": row["pool_id"], "classification": row["classification"], "nominal_size": row["nominal_size"], "effective_size_mean": row["effective_size_mean"], "effective_size_min": row["effective_size_min"], "effective_size_max": row["effective_size_max"], "effective_size_median": row["effective_size_median"], "pool_recall": row["exact_at_depth"], "pool_recall_numerator": row["exact_numerator"], "pool_recall_denominator": row["exact_denominator"], "hs6_at_depth": row["hs6_at_depth"], "hs4_at_depth": row["hs4_at_depth"], "chapter_at_depth": row["chapter_at_depth"], "depth": row["depth"]} for row in all_metrics]
