@@ -1,0 +1,29 @@
+{
+  "experiment_id": "exp04_phase_f_historical_normative_integration_v0.2",
+  "phase": "EXP-04-F",
+  "execution_commit": "d56e0f952ce85eed1ac9d9e740cc9cc565c562a1",
+  "eval_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "historical_results_sha256": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8",
+  "candidate_slots": 3168,
+  "compatibility": true,
+  "ranking_invariance": true,
+  "top3_invariance": true,
+  "output_sha256": {
+    "integration_candidate_slots.csv": "2d2c79ef01aea312640997ae24754a86675f77076f728d95eee7bd52ed201035",
+    "integration_case_summary.csv": "0b1916f9a91fcdc1f1c678db7cff45db984651fb26362ee86ebf7e6c6684f44e",
+    "integration_metrics.json": "6d21801fea34dec4d0e519f5df1b522df65533c869b9b765000f4e6bf8d781c9",
+    "integration_evidence_coverage.json": "d9e8a65e7d96af8b01c46321624808908475d7c09733ac16f979af7401e9ad31",
+    "integration_ranking_invariance.json": "f3137e90eb62109991b905cadb79c2f1aabbfab022d13299a508f3e88d863d35",
+    "integration_top3_invariance.json": "a39f6fdbd87b29d3bebe61bae6997ed8983828b51678ee241d3f322547dfefee",
+    "integration_traceability.json": "bfb6d55350a8aaec15a0f8fe2f7950c2ebb1d6d1e849ed6c116c86c56579bfd0",
+    "integration_missing_exact_evidence.csv": "393f20ed94b0f9e8659e7f60511335953fad61beec47c211b37729e11e697838",
+    "integration_compatibility.json": "33d175820590962819eab76aedf54af6142a4b1ae6d4cd7b9cca21bc5466307c",
+    "integration_label_leakage_audit.json": "36db521c3a9856932d50e3a74e92489f08dfa9fe1b948336abdd744554eed6c8",
+    "summary.md": "ebd185a82b3cb44db88940825beaf8c48dea6a908961db19e490bfa3d67f62f9"
+  },
+  "large_outputs_over_25_mb": [],
+  "llm_used": false,
+  "reranker_used": false,
+  "candidate_pool_used": false,
+  "d1a_used": false
+}
