@@ -36,7 +36,7 @@
         "pass": true
       }
     },
-    "head": "12acbee8d796a28df8f7b6b7a04370f65b3b8fdd",
+    "head": "434c980e9074204399794df194bd2a93b18a0134",
     "initial_head_expected": "12acbee8d796a28df8f7b6b7a04370f65b3b8fdd",
     "initial_head_is_ancestor": true,
     "model": {
@@ -78,7 +78,7 @@
     },
     "unique_case_ids": 50
   },
-  "created_at_utc": "2026-08-30T18:20:51.366895+00:00",
+  "created_at_utc": "2026-08-30T18:21:39.858594+00:00",
   "passed": true,
   "version": "gate_i_pre_generation_check_v0.2"
 }

@@ -1,0 +1,18 @@
+{
+  "calls_attempted": 50,
+  "calls_completed": 50,
+  "completion_tokens_reported": 95598,
+  "inputs": 50,
+  "latency_mean_seconds": 33.333234507991,
+  "latency_median_seconds": 30.800146950001363,
+  "latency_total_seconds": 1666.66172539955,
+  "non_parseable_json": 0,
+  "parseable_json": 50,
+  "prompt_tokens_reported": 177417,
+  "raw_responses_stored": 50,
+  "retries": 0,
+  "status": "completed",
+  "technical_failure_detail": "",
+  "technical_failures": 0,
+  "version": "he4_generation_status_v0.2"
+}
