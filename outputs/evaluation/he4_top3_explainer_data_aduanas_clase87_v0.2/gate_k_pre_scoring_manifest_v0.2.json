@@ -1,0 +1,35 @@
+{
+  "buckets_hidden": true,
+  "created_at_utc": "2026-08-30T20:05:58.004364+00:00",
+  "evaluator_identifier": "unassigned_human_reviewer",
+  "evaluator_modality": "A. HUMAN/MANUAL REVIEW",
+  "excluded_from_qualitative_scoring_reason": "PROMPT_SCHEMA_SPECIFICATION_MISMATCH",
+  "external_evidence_prohibited": true,
+  "gate_k": "PENDING HUMAN SCORING",
+  "inputs_sha256": {
+    "inputs": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "j_metrics": "3dc43932698033cc94149d20be9a474662e990152b1fd1d66f3d067285f21b85",
+    "j_microaudit": "8d7258ecd1ff6273d8772fc21da55a70d0bc03721c3fc7fd969a498654bafe5f",
+    "parsed": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+    "raw": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+    "rubric": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514"
+  },
+  "labels_hidden": true,
+  "no_model_judge": true,
+  "no_retrieval": true,
+  "no_scores_assigned": true,
+  "no_web": true,
+  "phase_k_executed": false,
+  "phase_k_status": "AWAITING HUMAN RUBRIC SCORING",
+  "ready_for_human_scoring": true,
+  "ready_for_phase_l": false,
+  "rubric": {
+    "path": "src\\configs\\he4_rubric_v0.2.json",
+    "sha256": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+    "source_path": "docs\\rubrica_auditabilidad_llm_top3_v0.1.md",
+    "source_sha256": "71d977dff57171e112e4254ef6faba492f8ac5e96046483beb7d4a38abf4e727"
+  },
+  "scoring_date": null,
+  "scoring_rule": "0-2 per frozen dimension; auditable iff total >= 12/16 and no hard violation",
+  "version": "gate_k_pre_scoring_manifest_v0.2"
+}
