@@ -202,7 +202,7 @@ def main() -> int:
     config_path = resolve_project_path(args.config)
     config = json.loads(config_path.read_text(encoding="utf-8"))
     output_dir = resolve_project_path(config["outputs"]["directory"])
-    if output_dir.exists():
+    if output_dir.exists() and any(output_dir.iterdir()):
         raise FileExistsError(f"Refusing to overwrite Fase E output: {output_dir}")
 
     eval_cfg = config["eval"]
