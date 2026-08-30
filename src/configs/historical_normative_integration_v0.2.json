@@ -1,0 +1,68 @@
+{
+  "experiment_id": "exp04_phase_f_historical_normative_integration_v0.2",
+  "phase": "EXP-04-F",
+  "dataset_version": "v0.2",
+  "eval": {
+    "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "cases": 1056,
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label_column": "NANDINA"
+  },
+  "historical_ranking": {
+    "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_results.csv",
+    "sha256": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8",
+    "method": "historical_bm25_data_aduanas_clase87_v0.2",
+    "top_k": 3,
+    "role": "sole_ranking_source"
+  },
+  "historical_dataset": {
+    "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+    "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "split": "historico",
+    "role": "precedent_lookup_only"
+  },
+  "normative_corpus": {
+    "path": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl",
+    "sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+    "metadata_path": "data/processed/corpus_nandina_hierarchical_v0.1_metadata.json",
+    "metadata_sha256": "e8a96bf4de89d7124721b58a2763453fc6ba6d44ab57ee3a125e5e7a63feb7a4",
+    "normative_version": "hierarchical_v0.1",
+    "role": "canonical_normative_document_corpus_already_frozen_in_phase_c"
+  },
+  "evidence_selection": {
+    "operation": "CODE_TO_NORMATIVE_EVIDENCE_LOOKUP",
+    "rule": "direct lookup of each frozen historical candidate NANDINA-8 in the hierarchical normative corpus",
+    "source": "historical Top-3 candidate code only",
+    "fallback": "none; parent fields are reported as explicit context, never promoted to exact evidence",
+    "uses_eval_label": false,
+    "uses_query_retrieval": false,
+    "uses_candidate_pools": false,
+    "uses_d1a": false
+  },
+  "precedent_selection": {
+    "rule": "one frozen source precedent per unique historical candidate: the historical row selected by Phase A BM25 before NANDINA-8 deduplication",
+    "uses_only_historical_v0_2": true,
+    "uses_eval_or_dev": false
+  },
+  "frozen_phase_artifacts": {
+    "phase_a_case_summary": {"path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv", "sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56"},
+    "phase_b_results": {"path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv", "sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015"},
+    "phase_c_results": {"path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv", "sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662"},
+    "phase_d1a_case_summary": {"path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv", "sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd"},
+    "phase_e_metrics": {"path": "outputs/evaluation/normative_candidate_pools_data_aduanas_clase87_v0.2/candidate_pool_metrics.json", "sha256": "1c183346a63d69817def2f6b1ef9666023cd32eed53e599d9842ff4d6900122f"}
+  },
+  "exclusions": {
+    "reranking": false,
+    "llm": false,
+    "rag_generation": false,
+    "candidate_pool_integration": false,
+    "d1a_integration": false,
+    "score_fusion": false,
+    "candidate_insertion": false,
+    "phase_g": false
+  },
+  "outputs": {
+    "directory": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2"
+  }
+}
