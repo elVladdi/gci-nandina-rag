@@ -12,7 +12,7 @@ La implementación anterior relevante es `src/experiments/build_candidate_pool_d
 | `hierarchical_80_dual_backfill_20` | 80 jerárquicas y 20 duales dentro de las primeras 100 posiciones | candidate pool híbrido |
 | `hierarchical_70_dual_backfill_30` | 70 jerárquicas y 30 duales dentro de las primeras 100 posiciones | candidate pool híbrido |
 
-Después de la primera centena, el código histórico completa con dual remanente y después jerárquico remanente, siempre con deduplicación por primera aparición. A profundidad menor que 100, la misma regla escala el bloque inicial: por ejemplo, 80/20 produce 40 jerárquicos y 10 duales a profundidad 50.
+Después de la primera centena, el código histórico completa con dual remanente y después jerárquico remanente, siempre con deduplicación por primera aparición. A profundidad menor que 100, los slots jerárquicos se aplican primero contra la profundidad disponible: por tanto, a profundidad 50 las variantes 80/20 y 70/30 contienen 50 candidatos jerárquicos y ningún candidato dual; la distribución 80/20 o 70/30 se materializa dentro de las primeras 100 posiciones.
 
 ## Dual y dual protegido
 
