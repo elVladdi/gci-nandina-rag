@@ -1,0 +1,168 @@
+{
+  "branch": "codex/exp04-rerun-v02",
+  "calls": 20,
+  "candidate_closure": {
+    "candidate_closure_pass_cases": 20,
+    "cases": 20,
+    "duplicate_code_attempts": 0,
+    "external_code_attempts": 0,
+    "invalid_final": 0,
+    "missing_code_outputs": 0,
+    "parse_errors": 0,
+    "pass": true
+  },
+  "compatibility": {
+    "case_ids_exist_in_eval": true,
+    "compatible": true,
+    "eval_hash": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "frozen_hashes_match": true,
+    "labels_used_only_in_evaluation": true,
+    "phase_a_to_f_intact": true,
+    "pool_built_on_v0_2": true
+  },
+  "created_at_utc": "2026-08-30T14:30:28.422372+00:00",
+  "evaluation_commit": "b8941f2f5ee12911d87bd8e55fd7e46893ede596",
+  "execution_commit": "b8941f2f5ee12911d87bd8e55fd7e46893ede596",
+  "experiment_id": "exp04_phase_g_exp06_diagnostic_llm_reranker_v0.2",
+  "freeze_hashes": {
+    "inputs": "02e31dacf4c3ce4eb1e5a67a5f89fdc6059be54d6446594a7fd384ac1b05dc0b",
+    "pool": "66322c89c91b5106f275a976e6b59e1de25ab194fe32c4dc670ebd69f5e350c9",
+    "prompt": "94e32d557e825c06795b01ed691422b2e079b4ae93975302b53f58ad56a6d2bf",
+    "sample": "9f7f991232e06e032c772aee508e2bc94b8adb5055a8a63c6e7f854ba6cf06f0"
+  },
+  "he3_g": "SUPPORTED",
+  "he3_global": "SUPPORTED",
+  "metrics": {
+    "after": {
+      "top_1": {
+        "denominator": 20,
+        "numerator": 10,
+        "value": 0.5
+      },
+      "top_3": {
+        "denominator": 20,
+        "numerator": 13,
+        "value": 0.65
+      },
+      "top_5": {
+        "denominator": 20,
+        "numerator": 16,
+        "value": 0.8
+      }
+    },
+    "before": {
+      "top_1": {
+        "denominator": 20,
+        "numerator": 10,
+        "value": 0.5
+      },
+      "top_3": {
+        "denominator": 20,
+        "numerator": 13,
+        "value": 0.65
+      },
+      "top_5": {
+        "denominator": 20,
+        "numerator": 16,
+        "value": 0.8
+      }
+    },
+    "delta_mrr": 0.0,
+    "delta_rr_distribution": {
+      "mean": 0.0,
+      "median": 0.0,
+      "negative": 0,
+      "positive": 0,
+      "sum": 0.0,
+      "zero": 19
+    },
+    "delta_top_1": 0.0,
+    "delta_top_3": 0.0,
+    "delta_top_5": 0.0,
+    "mrr_after": 0.632638888888889,
+    "mrr_before": 0.632638888888889,
+    "paired_inference": "not run; no pre-specified inferential test exists",
+    "reference_in_pool": 19,
+    "reference_not_in_pool": 1,
+    "sample_cases": 20,
+    "scope": "DIAGNOSTIC SAMPLE ONLY",
+    "transitions": {
+      "outside_top_1_to_top_1": 0,
+      "outside_top_3_to_top_3": 0,
+      "outside_top_5_to_top_5": 0,
+      "top_1_to_outside_top_1": 0,
+      "top_3_to_outside_top_3": 0,
+      "top_5_to_outside_top_5": 0
+    }
+  },
+  "model": {
+    "backend": "Ollama local",
+    "base_url": "http://127.0.0.1:11434",
+    "expected_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "historical_quantization": "Q4_K_M",
+    "name": "qwen2.5:7b-instruct",
+    "parameters": {
+      "num_ctx": null,
+      "num_predict": null,
+      "response_format": "json",
+      "seed": null,
+      "stop": [],
+      "stream": false,
+      "temperature": 0,
+      "timeout_seconds": 180,
+      "top_k": null,
+      "top_p": null
+    },
+    "retry_policy": "none; one attempt per frozen input, including structural or parse failures"
+  },
+  "model_status": {
+    "available_models": [
+      "qwen2.5:7b-instruct"
+    ],
+    "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "selected_model": {
+      "capabilities": [
+        "completion",
+        "tools"
+      ],
+      "details": {
+        "context_length": 32768,
+        "embedding_length": 3584,
+        "families": [
+          "qwen2"
+        ],
+        "family": "qwen2",
+        "format": "gguf",
+        "parameter_size": "7.6B",
+        "parent_model": "",
+        "quantization_level": "Q4_K_M"
+      },
+      "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+      "model": "qwen2.5:7b-instruct",
+      "modified_at": "2026-06-15T20:14:11.7480326-05:00",
+      "name": "qwen2.5:7b-instruct",
+      "size": 4683087332
+    }
+  },
+  "output_sha256": {
+    "case_results": "63f8a04e89012b49b4464b1288a1f94fa3cff91e4d05523a68a6d23ae9058ba9",
+    "closure": "af11e5284f16f8846456c275722ea172d97d8784c529103cfdbe0d57af2f728a",
+    "compatibility": "25df7965aa505c5b606070067ba3b074c41f33bfee964a55dbe20015329317f2",
+    "inputs": "02e31dacf4c3ce4eb1e5a67a5f89fdc6059be54d6446594a7fd384ac1b05dc0b",
+    "label_audit": "f167541971e706d454269c02a887d097b4d6dc236b3d6519d31543b0ea0ea417",
+    "metrics": "07b6183e6cbd7af5cbc350fe2a8afe636287079f30502b0758685bcdfd2adb6b",
+    "outputs": "efe35d4b72d4a849671ab27d6a7afc7af565f3441e5e28a0052a95210208b65d",
+    "pool": "66322c89c91b5106f275a976e6b59e1de25ab194fe32c4dc670ebd69f5e350c9",
+    "position_changes": "63f8a04e89012b49b4464b1288a1f94fa3cff91e4d05523a68a6d23ae9058ba9",
+    "sample": "9f7f991232e06e032c772aee508e2bc94b8adb5055a8a63c6e7f854ba6cf06f0",
+    "summary": "2656de19b297627ee301cbb4ef66db615f9e9e45969e7cef291f4e75631cb813",
+    "win_tie_loss": "5e1547a367afde4bb38218c2da357a6f9c7371358eb83b6e1e5703535e382528"
+  },
+  "outputs": {
+    "reranker_outputs": "outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2/reranker_outputs_v0.2.jsonl"
+  },
+  "phase": "EXP-04-G / EXP-06",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.13 (main, Aug  7 2026, 02:26:41) [MSC v.1944 64 bit (AMD64)]",
+  "retry_policy": "none; one attempt per frozen input, including structural or parse failures"
+}

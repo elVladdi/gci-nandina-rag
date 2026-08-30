@@ -1,0 +1,8 @@
+{
+  "invalid_output": 0,
+  "losses": 0,
+  "reference_in_pool": 19,
+  "reference_not_in_pool": 1,
+  "ties": 19,
+  "wins": 0
+}

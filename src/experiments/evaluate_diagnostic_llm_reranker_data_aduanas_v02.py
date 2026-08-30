@@ -479,6 +479,7 @@ def evaluate(config_path: Path) -> dict[str, Any]:
             outcome, delta = "LOSS", before_rank - after_rank
         rows.append({"case_id": case_id, "reference_nandina_evaluation_only": reference, "reference_rank_before": before_rank, "reference_rank_after": after_rank, "delta_position": delta, "rr_before": 1 / before_rank if before_rank else 0.0, "rr_after": 1 / after_rank if after_rank else 0.0, "delta_rr": (1 / after_rank if after_rank else 0.0) - (1 / before_rank if before_rank else 0.0), "outcome": outcome, "candidate_closure_pass": int(validation["candidate_closure_pass"]), "parse_status": validation["parse_status"], "validation_status": validation["validation_status"], "external_codes": "|".join(validation["external_codes"]), "missing_codes": "|".join(validation["missing_codes"]), "duplicate_codes": "|".join(validation["duplicate_codes"])})
     write_csv(output_paths["case_results"], rows, list(rows[0]))
+    write_csv(output_paths["position_changes"], rows, list(rows[0]))
     before = [int(row["reference_rank_before"]) for row in rows]
     after = [int(row["reference_rank_after"]) for row in rows]
     evaluable = [row for row in rows if row["outcome"] in {"WIN", "TIE", "LOSS"}]

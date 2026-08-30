@@ -86,9 +86,11 @@ class DiagnosticRerankerPreLlmTests(unittest.TestCase):
         self.assertEqual(sha256(OUT / "reranker_inputs_v0.2.jsonl"), self.gate["hashes"]["inputs"])
         self.assertEqual(sha256(ROOT / "src/prompts/reranker_diagnostic_v0.2.txt"), self.gate["hashes"]["prompt"])
 
-    def test_07_no_llm_outputs_exist_before_execution(self) -> None:
-        self.assertFalse((OUT / "reranker_outputs_v0.2.jsonl").exists())
-        self.assertFalse((OUT / "reranker_case_results_v0.2.csv").exists())
+    def test_07_gate_contains_only_pre_llm_freeze_state(self) -> None:
+        serialized = json.dumps(self.gate, ensure_ascii=False).lower()
+        self.assertNotIn("reranker_outputs_v0.2.jsonl", serialized)
+        self.assertNotIn("execution_commit", serialized)
+        self.assertEqual(self.gate["status"], "PRE_LLM_FREEZE_PASS")
 
 
 if __name__ == "__main__":

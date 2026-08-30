@@ -1,0 +1,63 @@
+{
+  "after": {
+    "top_1": {
+      "denominator": 20,
+      "numerator": 10,
+      "value": 0.5
+    },
+    "top_3": {
+      "denominator": 20,
+      "numerator": 13,
+      "value": 0.65
+    },
+    "top_5": {
+      "denominator": 20,
+      "numerator": 16,
+      "value": 0.8
+    }
+  },
+  "before": {
+    "top_1": {
+      "denominator": 20,
+      "numerator": 10,
+      "value": 0.5
+    },
+    "top_3": {
+      "denominator": 20,
+      "numerator": 13,
+      "value": 0.65
+    },
+    "top_5": {
+      "denominator": 20,
+      "numerator": 16,
+      "value": 0.8
+    }
+  },
+  "delta_mrr": 0.0,
+  "delta_rr_distribution": {
+    "mean": 0.0,
+    "median": 0.0,
+    "negative": 0,
+    "positive": 0,
+    "sum": 0.0,
+    "zero": 19
+  },
+  "delta_top_1": 0.0,
+  "delta_top_3": 0.0,
+  "delta_top_5": 0.0,
+  "mrr_after": 0.632638888888889,
+  "mrr_before": 0.632638888888889,
+  "paired_inference": "not run; no pre-specified inferential test exists",
+  "reference_in_pool": 19,
+  "reference_not_in_pool": 1,
+  "sample_cases": 20,
+  "scope": "DIAGNOSTIC SAMPLE ONLY",
+  "transitions": {
+    "outside_top_1_to_top_1": 0,
+    "outside_top_3_to_top_3": 0,
+    "outside_top_5_to_top_5": 0,
+    "top_1_to_outside_top_1": 0,
+    "top_3_to_outside_top_3": 0,
+    "top_5_to_outside_top_5": 0
+  }
+}

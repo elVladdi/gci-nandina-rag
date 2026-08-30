@@ -1,0 +1,10 @@
+{
+  "candidate_closure_pass_cases": 20,
+  "cases": 20,
+  "duplicate_code_attempts": 0,
+  "external_code_attempts": 0,
+  "invalid_final": 0,
+  "missing_code_outputs": 0,
+  "parse_errors": 0,
+  "pass": true
+}
