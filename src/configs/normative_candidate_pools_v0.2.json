@@ -1,0 +1,88 @@
+{
+  "experiment_id": "exp04_phase_e_normative_candidate_pools_v0.2",
+  "phase": "EXP-04-E",
+  "dataset_version": "v0.2",
+  "eval": {
+    "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "cases": 1056,
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label_column": "NANDINA"
+  },
+  "frozen_input_rankings": {
+    "historical": {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv",
+      "sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56",
+      "role": "compatibility_and_ranking_table_only"
+    },
+    "flat": {
+      "case_summary": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv",
+      "case_summary_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+      "results": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv",
+      "results_sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+      "role": "ranking_table_and_compatibility_only"
+    },
+    "hierarchical": {
+      "case_summary": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+      "case_summary_sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+      "results": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+      "results_sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662",
+      "role": "candidate_pool_primary_source"
+    },
+    "d1a": {
+      "case_summary": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+      "case_summary_sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd",
+      "ranking_trace": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
+      "ranking_trace_sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c",
+      "role": "compatibility_and_ranking_table_only"
+    }
+  },
+  "dual_protected": {
+    "classification": "historical_normative_ranking",
+    "precision_index": {
+      "path": "data/processed/indexes/bm25_ablation_nandina_v0.1/C_hs6_leaf.pkl",
+      "sha256": "727cf33aa70e28fc3caed0fcb7bb6fa183061c5932b15e13ce571fede0386725",
+      "representation": "HS6 + NANDINA8 leaf"
+    },
+    "recall_index": {
+      "path": "data/processed/indexes/bm25_ablation_nandina_v0.1/D_4d_hs6_leaf.pkl",
+      "sha256": "dae1855f4115d9f7a30b8509f2d754f3c63c1417adf6c1e3e654566bed37b835",
+      "representation": "HS4 + HS6 + NANDINA8 leaf"
+    },
+    "rule": "protected_top_5_backfill",
+    "protected_precision_top_n": 5,
+    "deduplication": "first appearance; precision top-5, recall, then remaining precision",
+    "weighted_score": false,
+    "selection": "defined in historical Fase 6/7 code; rerun unchanged on v0.2 eval"
+  },
+  "depths": [50, 100, 200],
+  "candidate_pool_variants": {
+    "hierarchical_only": {"classification": "candidate_pool", "kind": "single_source", "source": "hierarchical", "pre_specification": "A_historical_defined"},
+    "dual_only": {"classification": "candidate_pool", "kind": "single_source", "source": "dual", "pre_specification": "A_historical_defined"},
+    "hierarchical_first_100": {"classification": "candidate_pool", "kind": "hybrid", "hierarchical_slots_in_first_100": 100, "pre_specification": "A_historical_defined"},
+    "hierarchical_80_dual_backfill_20": {"classification": "candidate_pool", "kind": "hybrid", "hierarchical_slots_in_first_100": 80, "pre_specification": "A_historical_defined"},
+    "hierarchical_70_dual_backfill_30": {"classification": "candidate_pool", "kind": "hybrid", "hierarchical_slots_in_first_100": 70, "pre_specification": "B_historical_not_formally_frozen_for_v0_2"}
+  },
+  "diagnostic_union": {
+    "pool_id": "diagnostic_union_hierarchical_dual",
+    "classification": "diagnostic_union",
+    "label": "DIAGNOSTIC ORACLE-LIKE UNION / COVERAGE CEILING",
+    "sources": ["hierarchical", "dual"],
+    "construction": "set union of each source top-N, no reference label used to construct it",
+    "not_a_ranking": true
+  },
+  "exclusions": {
+    "historical_in_pool": false,
+    "flat_in_pool": false,
+    "d1a_in_pool": false,
+    "d0_in_comparison": false,
+    "mcd": false,
+    "integration_historical_normative": false,
+    "reranking_llm": false,
+    "rag": false,
+    "phase_f": false
+  },
+  "outputs": {
+    "directory": "outputs/evaluation/normative_candidate_pools_data_aduanas_clase87_v0.2"
+  }
+}
