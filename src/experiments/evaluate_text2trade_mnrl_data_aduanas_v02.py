@@ -41,19 +41,27 @@ def baseline_values(root: Path) -> list[dict[str, Any]]:
         "Normative BM25 hierarchical": root / "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
         "D0 pretrained dense SBERT baseline": root / "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json",
     }
-    fields = {"Top-1": "top_1", "Top-3": "top_3", "Top-5": "top_5", "Top-10": "top_10", "Top-50": "top_50", "Recall@100": "recall_at_100", "MRR@100": "mrr_at_100", "Recall@200": "recall_at_200", "MRR@200": "mrr_at_200"}
+    fields = ("Top-1", "Top-3", "Top-5", "Top-10", "Top-50", "Recall@100", "MRR@100", "Recall@200", "MRR@200")
+    keys = {
+        "Historical BM25": {"Top-1": "exact_at_1", "Top-3": "exact_at_3", "Top-5": "exact_at_5", "Top-10": "exact_at_10", "Top-50": "exact_at_50", "MRR@100": "mrr"},
+        "Normative BM25 flat": {"Top-1": "top_1", "Top-3": "top_3", "Top-5": "top_5", "Top-10": "top_10", "Top-50": "top_50", "Recall@100": "recall_at_100", "MRR@100": "mrr"},
+        "Normative BM25 hierarchical": {"Top-1": "top_1", "Top-3": "top_3", "Top-5": "top_5", "Top-10": "top_10", "Top-50": "top_50", "Recall@100": "recall_at_100", "MRR@100": "mrr", "Recall@200": "recall_at_200", "MRR@200": "mrr_at_200"},
+        "D0 pretrained dense SBERT baseline": {"Top-1": "top_1", "Top-3": "top_3", "Top-5": "top_5", "Top-10": "top_10", "Top-50": "top_50", "Recall@100": "recall_at_100", "MRR@100": "mrr_at_100", "Recall@200": "recall_at_200", "MRR@200": "mrr_at_200"},
+    }
     rows = []
     for name, path in sources.items():
         payload = load_json(path)
         metrics = payload.get("metrics", payload)
-        for label, key in fields.items():
-            rows.append({"strategy": name, "metric": label, "value": metrics.get(key), "source": relative(path, root)})
+        for label in fields:
+            key = keys[name].get(label)
+            rows.append({"strategy": name, "metric": label, "value": metrics.get(key) if key else None, "source": relative(path, root)})
     return rows
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate D1a MNRL on frozen data_aduanas evalset v0.2 after vector integrity passes.")
     parser.add_argument("--config", type=Path, default=Path("src/configs/text2trade_mnrl_v0.2.json"))
+    parser.add_argument("--refresh-comparison-only", action="store_true")
     args = parser.parse_args()
     os.environ.setdefault("HF_HUB_OFFLINE", "1")
     os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
@@ -67,6 +75,14 @@ def main() -> int:
     index_dir = resolve_project_path(config["index"]["output_dir"])
     model_dir = resolve_project_path(config["outputs"]["model_dir"])
     output_dir = resolve_project_path(config["outputs"]["evaluation_dir"])
+    if args.refresh_comparison_only:
+        payload = load_json(output_dir / "d1a_metrics.json")
+        comparison = baseline_values(root)
+        d1_fields = {"Top-1": "top_1", "Top-3": "top_3", "Top-5": "top_5", "Top-10": "top_10", "Top-50": "top_50", "Recall@100": "recall_at_100", "MRR@100": "mrr_at_100", "Recall@200": "recall_at_200", "MRR@200": "mrr_at_200"}
+        comparison.extend({"strategy": "D1a Text2Trade-inspired MNRL", "metric": label, "value": payload["metrics"][key], "source": "D1a"} for label, key in d1_fields.items())
+        write_csv(output_dir / "strategy_comparison_a_b_c_d0_d1a_v0.2.csv", comparison, ["strategy", "metric", "value", "source"])
+        print("OK: D1a comparison refreshed from existing metrics only")
+        return 0
     if output_dir.exists():
         raise FileExistsError(f"Refusing to overwrite D1a evaluation output: {output_dir}")
     assert_hash(eval_path, frozen["eval_sha256"])

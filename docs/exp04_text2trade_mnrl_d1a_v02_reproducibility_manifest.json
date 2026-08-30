@@ -1,0 +1,133 @@
+{
+  "experiment_id": "exp04_phase_d_d1a_text2trade_inspired_mnrl_v0.2",
+  "variant": "D1a",
+  "status": "completed_pending_gate_review",
+  "commands": {
+    "training": "python -B -m src.experiments.train_text2trade_mnrl_v02",
+    "index": "python -B -m src.experiments.build_text2trade_mnrl_index_v02",
+    "evaluation": "python -B -m src.experiments.evaluate_text2trade_mnrl_data_aduanas_v02"
+  },
+  "frozen_inputs": {
+    "config": {
+      "path": "src/configs/text2trade_mnrl_v0.2.json",
+      "sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
+    },
+    "historical": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "rows": 2950
+    },
+    "evaluation": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "rows": 1056,
+      "used_for_training_or_selection": false
+    },
+    "corpus": {
+      "path": "data/processed/corpus_rag_v1_index.jsonl",
+      "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0"
+    },
+    "base_model_safetensors": {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/model.safetensors",
+      "bytes": 470637416,
+      "sha256": "7f4f89d628f87ade0e0b57c40affb6402cd77abc8110584d8d35dc86da514ee8"
+    }
+  },
+  "training": {
+    "loss": "MultipleNegativesRankingLoss",
+    "epochs": 1,
+    "batch_size": 8,
+    "learning_rate": 0.00002,
+    "mnrl_scale": 20.0,
+    "seed": 2026,
+    "historical_rows": 2950,
+    "unique_codes": 66,
+    "negative_level_counts": {
+      "same_hs4_different_code": 2875,
+      "same_chapter_different_code": 75
+    },
+    "dev_or_eval_selection": false
+  },
+  "large_local_artifacts_not_committed": {
+    "model_directory": {
+      "path": "models/text2trade_mnrl_v0.2",
+      "bytes": 477616987
+    },
+    "model_safetensors": {
+      "path": "models/text2trade_mnrl_v0.2/model.safetensors",
+      "bytes": 470637416,
+      "sha256": "ef9b92b2fb0239e46c0d81e403f00b3255d3822dfa25e0ce354d03828f7a8c87"
+    },
+    "vectors": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/index/vectors.npy",
+      "bytes": 11741312,
+      "sha256": "137d8f28ed0cde0f4111a39b84aee04c514847e505594db77217bdd5a1fd5354",
+      "shape": [7644, 384],
+      "dtype": "float32"
+    },
+    "docstore": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/store/nandina8_docstore.jsonl",
+      "bytes": 2724321,
+      "sha256": "07589433dea72061480fdbf807c8c3ee3d1ada87631d4448b29974d754a9e948"
+    },
+    "id_map": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/index/id_map.json",
+      "bytes": 579837,
+      "sha256": "5e4d85f2e1d92f14ef2eed2cfd3a4db2b300c6c88b6f5862197cfe56b52b604d"
+    }
+  },
+  "small_local_outputs_not_committed": {
+    "training_metadata": {
+      "path": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
+      "bytes": 7350,
+      "sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075"
+    },
+    "index_metadata": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/text2trade_mnrl_nandina8_v02_run_metadata.json",
+      "bytes": 5068,
+      "sha256": "141211f31120ef744d854b45c1d7067aa8e3b9aa27bab88a0d351ca67d46975f"
+    },
+    "vector_integrity_gate": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/vector_integrity_gate_v0.2.json",
+      "bytes": 702,
+      "sha256": "b34dc2efe705af4e62ff175db58e5ee048830acef8c0e786af63b8fe0156166e"
+    },
+    "evaluation_metrics": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json",
+      "bytes": 4083,
+      "sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c"
+    },
+    "case_summary": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+      "bytes": 138163,
+      "sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd"
+    },
+    "ranking_trace": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
+      "bytes": 2619936,
+      "sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c"
+    },
+    "strategy_comparison": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+      "bytes": 5572,
+      "sha256": "abced744f2b3be8dec5ab9616651cf1b6595025719caba24db34f489b825db05"
+    }
+  },
+  "vector_integrity_gate": {
+    "status": "PASS",
+    "sample_count": 21,
+    "byte_exact_count": 9,
+    "cosine_min": 0.999999887840059,
+    "cosine_max": 1.0000001403452747,
+    "max_absolute_difference": 1.1920928955078125e-07,
+    "max_l2_difference": 4.3145173072568673e-07,
+    "tolerance": 9.5367431640625e-07,
+    "sample_sha256": "17a35472221d72575cab17244d81157dd98801e657f3d1eed56f9abd83b62a45"
+  },
+  "forbidden_components": {
+    "mcd_used": false,
+    "candidate_pool_used": false,
+    "phase_e_started": false,
+    "git_lfs_used": false
+  }
+}
