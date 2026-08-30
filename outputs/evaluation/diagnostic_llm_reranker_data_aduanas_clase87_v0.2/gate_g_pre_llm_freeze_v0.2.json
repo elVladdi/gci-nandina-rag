@@ -1,0 +1,83 @@
+{
+  "created_at_utc": "2026-08-30T14:26:13.616169+00:00",
+  "experiment_id": "exp04_phase_g_exp06_diagnostic_llm_reranker_v0.2",
+  "git": {
+    "branch": "codex/exp04-rerun-v02",
+    "commit": "fb5e7160165d9c674782d1892a8573260594a572"
+  },
+  "hashes": {
+    "inputs": "02e31dacf4c3ce4eb1e5a67a5f89fdc6059be54d6446594a7fd384ac1b05dc0b",
+    "pool": "66322c89c91b5106f275a976e6b59e1de25ab194fe32c4dc670ebd69f5e350c9",
+    "prompt": "94e32d557e825c06795b01ed691422b2e079b4ae93975302b53f58ad56a6d2bf",
+    "sample": "9f7f991232e06e032c772aee508e2bc94b8adb5055a8a63c6e7f854ba6cf06f0"
+  },
+  "label_leakage_audit": {
+    "forbidden_tokens": [
+      "nandina_ref",
+      "expected_nandina",
+      "reference_nandina",
+      "correctness_flag",
+      "label",
+      "target"
+    ],
+    "label_used_for_input": false,
+    "label_used_for_parser": false,
+    "label_used_for_pool_construction": false,
+    "label_used_for_prompt": false,
+    "label_used_for_sample_selection": false,
+    "observed_forbidden_tokens": {
+      "inputs": [],
+      "pool_columns": [],
+      "prompt": [],
+      "sample_columns": []
+    },
+    "pass": true,
+    "source_reader_excludes_label_columns": true
+  },
+  "model": {
+    "backend": "Ollama local",
+    "base_url": "http://127.0.0.1:11434",
+    "expected_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "historical_quantization": "Q4_K_M",
+    "name": "qwen2.5:7b-instruct",
+    "parameters": {
+      "num_ctx": null,
+      "num_predict": null,
+      "response_format": "json",
+      "seed": null,
+      "stop": [],
+      "stream": false,
+      "temperature": 0,
+      "timeout_seconds": 180,
+      "top_k": null,
+      "top_p": null
+    },
+    "retry_policy": "none; one attempt per frozen input, including structural or parse failures"
+  },
+  "phase": "EXP-04-G / EXP-06",
+  "pool": {
+    "cases": 1056,
+    "duplicates": 0,
+    "maximum": 100,
+    "mean": 99.92518939393939,
+    "median": 100.0,
+    "minimum": 63,
+    "nominal_depth": 100,
+    "strategy": "historical_first_80_normative_20"
+  },
+  "sample": {
+    "candidate_limit": 10,
+    "population": 1056,
+    "seed": 0,
+    "selection_rule": "uniform_random_sample_without_replacement_over_sorted_case_ids_with_at_least_10_closed_candidates",
+    "size": 20
+  },
+  "status": "PRE_LLM_FREEZE_PASS",
+  "tests_required_before_execution": [
+    "eval_hash",
+    "deterministic_pool",
+    "no_label_in_pre_llm_artifacts",
+    "closed_input_candidates",
+    "frozen_phase_hashes"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "forbidden_tokens": [
+    "nandina_ref",
+    "expected_nandina",
+    "reference_nandina",
+    "correctness_flag",
+    "label",
+    "target"
+  ],
+  "label_used_for_input": false,
+  "label_used_for_parser": false,
+  "label_used_for_pool_construction": false,
+  "label_used_for_prompt": false,
+  "label_used_for_sample_selection": false,
+  "observed_forbidden_tokens": {
+    "inputs": [],
+    "pool_columns": [],
+    "prompt": [],
+    "sample_columns": []
+  },
+  "pass": true,
+  "source_reader_excludes_label_columns": true
+}

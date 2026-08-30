@@ -1,0 +1,74 @@
+{
+  "experiment_id": "exp04_phase_g_exp06_diagnostic_llm_reranker_v0.2",
+  "phase": "EXP-04-G / EXP-06",
+  "dataset_version": "v0.2",
+  "eval": {
+    "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "cases": 1056,
+    "case_id_column": "case_id",
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label_column_evaluation_only": "NANDINA"
+  },
+  "pool": {
+    "historical_results": {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_results.csv",
+      "sha256": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8",
+      "method": "historical_bm25_data_aduanas_clase87_v0.2"
+    },
+    "normative_pool": {
+      "path": "outputs/evaluation/normative_candidate_pools_data_aduanas_clase87_v0.2/candidate_pool_results.csv",
+      "sha256": "baed5290004744ef93af32704dd3c85bb41c2483aaf9e580d7f531825f4efc97",
+      "pool_id": "hierarchical_80_dual_backfill_20",
+      "depth": 100,
+      "role": "approved_v0_2_equivalent_of_historical_normative_source"
+    },
+    "strategy": "historical_first_80_normative_20",
+    "depth": 100,
+    "protected_historical_candidates": 80,
+    "deduplication": "first appearance by NANDINA-8; historical prefix, then approved normative pool, then remaining historical candidates"
+  },
+  "sample": {
+    "selection_rule": "uniform_random_sample_without_replacement_over_sorted_case_ids_with_at_least_10_closed_candidates",
+    "seed": 0,
+    "size": 20,
+    "candidate_limit": 10
+  },
+  "model": {
+    "backend": "Ollama local",
+    "base_url": "http://127.0.0.1:11434",
+    "name": "qwen2.5:7b-instruct",
+    "expected_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "historical_quantization": "Q4_K_M",
+    "parameters": {
+      "temperature": 0,
+      "stream": false,
+      "response_format": "json",
+      "timeout_seconds": 180,
+      "top_p": null,
+      "top_k": null,
+      "seed": null,
+      "num_predict": null,
+      "num_ctx": null,
+      "stop": []
+    },
+    "retry_policy": "none; one attempt per frozen input, including structural or parse failures"
+  },
+  "frozen_phase_artifacts": {
+    "phase_a_case_summary": {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv",
+      "sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56"
+    },
+    "phase_f_manifest": {
+      "path": "docs/exp04_phase_f_historical_normative_integration_v02_manifest.json",
+      "sha256": "56f53fd71ee07de1625ae9313b46fef3f07913463fa8fe4200a05a03ef03cb56"
+    },
+    "phase_f_slots": {
+      "path": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_candidate_slots.csv",
+      "sha256": "2d2c79ef01aea312640997ae24754a86675f77076f728d95eee7bd52ed201035"
+    }
+  },
+  "outputs": {
+    "directory": "outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2"
+  }
+}
