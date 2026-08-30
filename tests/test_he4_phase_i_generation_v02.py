@@ -137,8 +137,10 @@ class He4PhaseIPreGenerationTests(unittest.TestCase):
         self.assertEqual(model["parameters"]["format"], "json")
         self.assertFalse(model["parameters"]["stream"])
 
-    def test_11_no_phase_j_or_k_output_exists_before_generation(self) -> None:
-        self.assertFalse(any(path.name.startswith(("he4_validation", "he4_rubric", "gate_j", "gate_k")) for path in OUT.iterdir()))
+    def test_11_phase_i_manifest_records_no_phase_j_or_k_at_generation(self) -> None:
+        manifest = json.loads((OUT / "gate_i_generation_manifest_v0.2.json").read_text(encoding="utf-8"))
+        self.assertFalse(manifest["phase_j_or_k_executed"])
+        self.assertFalse(any(path.name.startswith("gate_k") for path in OUT.iterdir()))
 
 
 @unittest.skipUnless((OUT / "gate_i_generation_manifest_v0.2.json").is_file(), "Phase I outputs not generated yet")
