@@ -1,0 +1,9 @@
+{
+  "label_exposed_to_llm": false,
+  "label_used_for_context": false,
+  "label_used_for_evidence": false,
+  "label_used_for_sample_design": true,
+  "label_used_for_top3": false,
+  "pass": true,
+  "phase_g_information_in_context": false
+}

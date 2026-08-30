@@ -1,0 +1,10 @@
+{
+  "version": "top3_explainer_schema_v0.2",
+  "source_prompt": "src/llm/explain_top3_nandina_prompt_v0.2.md",
+  "required_root_fields": ["id_unico", "case_id", "descripcion_mercancia", "resumen_observable", "candidatos_explicados", "comparacion_top3", "advertencias_globales", "conclusion_auditable", "advertencia_final"],
+  "candidate_count": 3,
+  "candidate_ranks": [1, 2, 3],
+  "hard_constraints": ["JSON estricto", "Top-3 completo y en orden", "sin codigos externos", "sin clasificacion oficial", "sin reranking", "candidate_id_unico y evidence_id citables"],
+  "post_generation_validator": "src/experiments/evaluate_llm_explanation_top3_audit_sample.py",
+  "pass_criteria": {"json_valido_rate_min": 0.95, "ranking_preservado_rate": 1.0, "sin_codigos_fuera_pool_rate": 1.0, "evidencia_historica_citada_por_candidato_rate_min": 0.95, "evidencia_normativa_citada_por_candidato_rate_min": 0.95, "comparacion_top3_presente_rate_min": 0.95, "advertencia_final_presente_rate_min": 0.95, "sin_senales_reranking_rate": 1.0, "sin_clasificacion_oficial_rate": 1.0}
+}

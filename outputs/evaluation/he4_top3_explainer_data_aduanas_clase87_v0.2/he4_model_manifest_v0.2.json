@@ -1,0 +1,29 @@
+{
+  "availability_checked": false,
+  "availability_note": "Not queried in Fase H: Ollama/model calls are prohibited.",
+  "model": {
+    "backend": "Ollama local",
+    "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "name": "qwen2.5:7b-instruct",
+    "parameters": {
+      "format": "json",
+      "num_ctx": 8192,
+      "num_predict": null,
+      "retry_policy": "historical runner supports resume only; no performance-based retry",
+      "seed": null,
+      "stream": false,
+      "temperature": 0,
+      "timeout_seconds": 300,
+      "top_k": null,
+      "top_p": null
+    },
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "change_classification": "A: exact historical final-execution prompt",
+    "path": "src/llm/explain_top3_nandina_prompt_v0.2.md",
+    "sha256": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0"
+  },
+  "rubric_sha256": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+  "schema_sha256": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6"
+}

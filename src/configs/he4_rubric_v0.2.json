@@ -1,0 +1,8 @@
+{
+  "version": "he4_rubric_v0.2",
+  "source": "docs/rubrica_auditabilidad_llm_top3_v0.1.md",
+  "source_sha256": "71d977dff57171e112e4254ef6faba492f8ac5e96046483beb7d4a38abf4e727",
+  "scale": "0-2 per dimension; auditable at >=12/16 only if no hard violation",
+  "dimensions": ["trazabilidad", "verificabilidad", "separacion_historico_normativo", "prudencia_de_la_conclusion", "consistencia_con_top3_fijo", "deteccion_de_evidencia_normativa_generica", "comparacion_entre_candidatos", "utilidad_para_auditoria_humana"],
+  "hard_constraints": ["Top-3 exacto y ordenado", "sin codigos fuera del Top-3", "sin clasificacion oficial", "conclusion prudente", "JSON estricto"]
+}

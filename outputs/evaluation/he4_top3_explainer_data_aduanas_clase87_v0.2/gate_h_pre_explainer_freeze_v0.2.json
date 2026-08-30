@@ -1,0 +1,42 @@
+{
+  "compatibility": {
+    "compatible": true,
+    "corpus_hash": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+    "eval_hash": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "label_exposed_context": false,
+    "no_experimental_v01_input": true,
+    "phase_a_to_g_intact": true,
+    "sample_cases": 50,
+    "sample_subset_eval": true,
+    "top3_from_phase_a_f": true
+  },
+  "created_at_utc": "2026-08-30T16:35:26.646582+00:00",
+  "execution_commit": "883be19b3025321247c543812e6a9281e25202ac",
+  "experiment_id": "exp04_phase_h_exp09_he4_pre_explainer_v0.2",
+  "generation_outputs_exist": false,
+  "hashes": {
+    "contexts": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "eval": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "generation_inputs": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "integration_f": "2d2c79ef01aea312640997ae24754a86675f77076f728d95eee7bd52ed201035",
+    "model_manifest": "50d73caecd21730ef91f7b0ffe6e0f43342c71824aaed5a9f277e9b7b862c79d",
+    "prompt": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+    "ranking_a": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8",
+    "rubric": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+    "sample": "dfdfa08cc0b15e33f493559ee66a679c8730d6d4eb0842e78cea50ffaf659ec2",
+    "schema": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6"
+  },
+  "he4_status": "PENDING GENERATION / VALIDATION / QUALITATIVE EVALUATION",
+  "label_leakage": {
+    "label_exposed_to_llm": false,
+    "label_used_for_context": false,
+    "label_used_for_evidence": false,
+    "label_used_for_sample_design": true,
+    "label_used_for_top3": false,
+    "pass": true,
+    "phase_g_information_in_context": false
+  },
+  "llm_called": false,
+  "phase": "EXP-04-H / EXP-09",
+  "ready_for_phase_i": true
+}
