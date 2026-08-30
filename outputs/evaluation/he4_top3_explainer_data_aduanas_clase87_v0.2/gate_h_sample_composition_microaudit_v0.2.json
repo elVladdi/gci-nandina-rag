@@ -1,0 +1,205 @@
+{
+  "bucket_by_full_reference_rank": {
+    "difficult_low_support": {
+      "rank_1": 0,
+      "rank_11_50": 10,
+      "rank_2_3": 0,
+      "rank_4_10": 0,
+      "rank_gt_50_or_not_recovered": 0
+    },
+    "rank_1": {
+      "rank_1": 15,
+      "rank_11_50": 0,
+      "rank_2_3": 0,
+      "rank_4_10": 0,
+      "rank_gt_50_or_not_recovered": 0
+    },
+    "rank_2_3": {
+      "rank_1": 0,
+      "rank_11_50": 0,
+      "rank_2_3": 15,
+      "rank_4_10": 0,
+      "rank_gt_50_or_not_recovered": 0
+    },
+    "rank_4_10": {
+      "rank_1": 0,
+      "rank_11_50": 0,
+      "rank_2_3": 0,
+      "rank_4_10": 10,
+      "rank_gt_50_or_not_recovered": 0
+    }
+  },
+  "contexts_inputs_relation": {
+    "byte_for_byte_identical": true,
+    "contexts_sha256": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "explanation": "Builder serializes the same closed Top-3 context objects twice; no prompt-templating transformation occurs before future generation.",
+    "generation_inputs_sha256": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "intentional": true
+  },
+  "decision": {
+    "gate_h": "APPROVED",
+    "ready_for_phase_i": true,
+    "reason": "Reproducible selection, direct quotas, consistent full ranks and Top-3 projection, invariant Top-3, no payload label leakage, intact freeze, and no LLM execution. Phase I remains unstarted pending review."
+  },
+  "evaluation_only_audit": {
+    "interpretation": "reference_rank_evaluation_only is rank within exported Phase A Top-3, zero if reference code is absent there; it is not complete Phase A exact_rank. Its 20 zeroes are ten full ranks 4-10 and ten full ranks 11-50.",
+    "mismatched_rows": 0,
+    "previous_report_correction": "Previous Top-1=0/50 and Top-3=50/50 came from reading nonexistent column reference_rank instead of reference_rank_evaluation_only. No frozen artifact is affected.",
+    "projection_distribution": {
+      "not_in_exported_top3": 20,
+      "rank_1": 15,
+      "rank_2": 10,
+      "rank_3": 5
+    },
+    "reference_code_matches_evalset": true,
+    "reference_rank_matches_phase_a_exported_top3": true,
+    "rows_checked": 50,
+    "status": "CORRECT_AS_TOP3_PROJECTION"
+  },
+  "execution_constraints": {
+    "generation_outputs_exist": false,
+    "he4_responses_file_exists": false,
+    "llm_called": false,
+    "phase_a_to_g_intact": true
+  },
+  "freeze_base_commit": "883be19b3025321247c543812e6a9281e25202ac",
+  "frozen_hashes": {
+    "contexts": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "generation_inputs": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "prompt": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+    "rubric": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+    "sample": "dfdfa08cc0b15e33f493559ee66a679c8730d6d4eb0842e78cea50ffaf659ec2",
+    "schema": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6"
+  },
+  "full_reference_rank_composition": {
+    "rank_1": 15,
+    "rank_11_50": 10,
+    "rank_2_3": 15,
+    "rank_4_10": 10,
+    "rank_gt_50_or_not_recovered": 0
+  },
+  "full_reference_rank_top_k": {
+    "top_1": "15/50",
+    "top_10": "40/50",
+    "top_3": "30/50",
+    "top_50": "50/50"
+  },
+  "inputs": {
+    "evalset": {
+      "cases": 1056,
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+    },
+    "historical_case_summary": {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv",
+      "sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56"
+    },
+    "historical_results": {
+      "method": "historical_bm25_data_aduanas_clase87_v0.2",
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_results.csv",
+      "sha256": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8"
+    },
+    "phase_f_slots": {
+      "path": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_candidate_slots.csv",
+      "sha256": "2d2c79ef01aea312640997ae24754a86675f77076f728d95eee7bd52ed201035"
+    }
+  },
+  "label_leakage": {
+    "interpretation": "Expected label supports sample design only. Future LLM payloads contain no expected/reference fields or values.",
+    "label_exposed_to_llm": false,
+    "label_used_for_sample_design": true,
+    "prompt_hash_matches_freeze": true
+  },
+  "potential_bug_audit": {
+    "bucket_label_confused_with_candidate_rank": false,
+    "duplicate_case_selection": false,
+    "fallback_reassigned_without_semantics": false,
+    "nandina_normalization_or_join_error": false,
+    "rank_calculated_over_top3_instead_of_complete_for_selector": false,
+    "reference_rank_overwrite": false,
+    "result": "No material selection bug found. Only the earlier external report used a nonexistent column.",
+    "sorting_error": false,
+    "string_int_rank_comparison": false,
+    "top3_filter_used_for_selector_exact_rank": false
+  },
+  "quota_audit": {
+    "difficult_low_support": {
+      "eligible_initial": 115,
+      "fallback_source": null,
+      "quota": 10,
+      "selected_by_fallback": 0,
+      "selected_directly": 10,
+      "shortfall": 0,
+      "status": "A. QUOTA SATISFIED DIRECTLY",
+      "total_final_attributed": 10
+    },
+    "rank_1": {
+      "eligible_initial": 538,
+      "fallback_source": null,
+      "quota": 15,
+      "selected_by_fallback": 0,
+      "selected_directly": 15,
+      "shortfall": 0,
+      "status": "A. QUOTA SATISFIED DIRECTLY",
+      "total_final_attributed": 15
+    },
+    "rank_2_3": {
+      "eligible_initial": 171,
+      "fallback_source": null,
+      "quota": 15,
+      "selected_by_fallback": 0,
+      "selected_directly": 15,
+      "shortfall": 0,
+      "status": "A. QUOTA SATISFIED DIRECTLY",
+      "total_final_attributed": 15
+    },
+    "rank_4_10": {
+      "eligible_initial": 232,
+      "fallback_source": null,
+      "quota": 10,
+      "selected_by_fallback": 0,
+      "selected_directly": 10,
+      "shortfall": 0,
+      "status": "A. QUOTA SATISFIED DIRECTLY",
+      "total_final_attributed": 10
+    }
+  },
+  "scope": "Read-only microaudit of frozen HE4. No reselection, retrieval, LLM call, response generation, or Phase I execution.",
+  "selector": {
+    "bucket_conditions_in_code_order": {
+      "difficult_low_support": "exact_rank == 0 OR exact_rank > 10 OR support bucket in 0, 1, 2-4, 5-9; after prior branches on this non-negative population, equals exact_rank == 0 OR exact_rank > 10.",
+      "rank_1": "exact_rank == 1",
+      "rank_2_3": "2 <= exact_rank <= 3",
+      "rank_4_10": "4 <= exact_rank <= 10"
+    },
+    "bucket_semantics": "Ordered conditions make buckets mutually exclusive and exhaustive. difficult_low_support is not an independent low-support stratum for ranks 1-10; support determines selection order. All selected difficult cases have support_count_dams 1-3.",
+    "deduplication_and_priority": "used case_id prevents reuse; targets are processed rank_1, rank_2_3, rank_4_10, difficult_low_support.",
+    "eligibility_population": {
+      "difficult_low_support": 115,
+      "rank_1": 538,
+      "rank_2_3": 171,
+      "rank_4_10": 232
+    },
+    "exact_rank_definition": "One-based rank of expected NANDINA in Phase A complete code-deduplicated candidate list; zero means absent.",
+    "fallback": "Target rows in global order, followed by non-target rows in global order, skipping used case_id. No fallback selected.",
+    "input_population": "historical_case_summary.csv: 1056 frozen Phase A evaluation rows.",
+    "quotas": {
+      "difficult_low_support": 10,
+      "rank_1": 15,
+      "rank_2_3": 15,
+      "rank_4_10": 10
+    },
+    "script": "src/experiments/prepare_he4_pre_explainer_data_aduanas_v02.py",
+    "seed_2026": "Metadata only; no random generator or shuffle is called.",
+    "selection_order": "Support bucket 0, 1, 2-4, 5-9, 10+; numeric support ascending; exact rank ascending with zero last; case_id ascending.",
+    "support_count_dams_definition": "Count of distinct historical DAM declarations supporting expected NANDINA in the frozen historical split."
+  },
+  "top3_invariance": {
+    "cases": 50,
+    "expected_slots": 150,
+    "pass": true,
+    "phase_a_equals_phase_f_codes_positions_scores": true,
+    "slots": 150
+  },
+  "version": "gate_h_sample_composition_microaudit_v0.2"
+}
