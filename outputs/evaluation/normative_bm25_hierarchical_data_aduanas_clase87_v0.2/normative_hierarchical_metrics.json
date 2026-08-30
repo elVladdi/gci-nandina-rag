@@ -199,7 +199,13 @@
     "not_found_at_depth": 735,
     "metric_table": [
       {
-        "metric": "mrr",
+        "metric": "mrr_at_100",
+        "numerator": 44.33224687474574,
+        "denominator": 1056,
+        "value": 0.04198129438896377
+      },
+      {
+        "metric": "mrr_at_200",
         "numerator": 45.76874185264425,
         "denominator": 1056,
         "value": 0.04334161160288281
@@ -354,7 +360,16 @@
         "denominator": 1056,
         "value": 0.7670454545454546
       }
-    ]
+    ],
+    "mrr_at_100": 0.04198129438896377,
+    "mrr_at_200": 0.04334161160288281,
+    "mrr_at_100_numerator": 44.33224687474574,
+    "mrr_at_200_numerator": 45.76874185264425,
+    "mrr_at_100_denominator": 1056,
+    "mrr_at_200_denominator": 1056,
+    "mrr_definition": "legacy mrr field is MRR@200 because EXP-04 Fase C retrieval_depth=200; comparable flat-vs-hierarchical value is mrr_at_100",
+    "mrr_101_200_contribution_numerator": 1.436494977898505,
+    "mrr_101_200_contribution": 0.0013603172139190387
   },
   "coverage_summary": {
     "eval_unique_codes": 42,
@@ -593,10 +608,10 @@
       "delta_hierarchical_minus_flat": 0.03030303030303029
     },
     {
-      "metric": "MRR",
+      "metric": "MRR@100",
       "flat_v0_2": 0.04229731726741296,
-      "hierarchical_v0_2": 0.04334161160288281,
-      "delta_hierarchical_minus_flat": 0.0010442943354698475
+      "hierarchical_v0_2": 0.04198129438896377,
+      "delta_hierarchical_minus_flat": -0.00031602287844918753
     }
   ],
   "hierarchical_coverage_comparison": [
@@ -651,52 +666,52 @@
   ],
   "limitation_stratified_metrics": [
     {
-      "group": "all_cases",
+      "group": "parent_hs4_present",
       "n": 1056,
       "exact_at_100": 0.10132575757575757,
       "hs6_at_100": 0.11174242424242424,
       "hs4_at_100": 0.25,
-      "mrr": 0.04334161160288281
+      "mrr_at_100": 0.04198129438896378
     },
     {
-      "group": "missing_parent_4d",
+      "group": "parent_hs4_missing",
       "n": 0,
-      "exact_at_100": 0.0,
-      "hs6_at_100": 0.0,
-      "hs4_at_100": 0.0,
-      "mrr": 0.0
+      "exact_at_100": null,
+      "hs6_at_100": null,
+      "hs4_at_100": null,
+      "mrr_at_100": null
     },
     {
-      "group": "missing_parent_hs6",
+      "group": "parent_hs6_present",
+      "n": 675,
+      "exact_at_100": 0.06962962962962962,
+      "hs6_at_100": 0.08592592592592592,
+      "hs4_at_100": 0.22814814814814816,
+      "mrr_at_100": 0.009110401658893536
+    },
+    {
+      "group": "parent_hs6_missing",
       "n": 381,
       "exact_at_100": 0.15748031496062992,
       "hs6_at_100": 0.15748031496062992,
       "hs4_at_100": 0.2887139107611549,
-      "mrr": 0.10307802011887786
+      "mrr_at_100": 0.10021712796585987
     },
     {
-      "group": "missing_both_parents",
+      "group": "both_parents_missing",
       "n": 0,
-      "exact_at_100": 0.0,
-      "hs6_at_100": 0.0,
-      "hs4_at_100": 0.0,
-      "mrr": 0.0
+      "exact_at_100": null,
+      "hs6_at_100": null,
+      "hs4_at_100": null,
+      "mrr_at_100": null
     },
     {
-      "group": "duplicate_code_documents",
-      "n": 0,
-      "exact_at_100": 0.0,
-      "hs6_at_100": 0.0,
-      "hs4_at_100": 0.0,
-      "mrr": 0.0
-    },
-    {
-      "group": "generic_or_short_leaf_description",
-      "n": 369,
-      "exact_at_100": 0.06504065040650407,
-      "hs6_at_100": 0.08672086720867209,
-      "hs4_at_100": 0.27371273712737126,
-      "mrr": 0.004051702955505876
+      "group": "not_both_parents_missing",
+      "n": 1056,
+      "exact_at_100": 0.10132575757575757,
+      "hs6_at_100": 0.11174242424242424,
+      "hs4_at_100": 0.25,
+      "mrr_at_100": 0.04198129438896378
     }
   ],
   "gate_c_status": "APPROVED",
@@ -716,5 +731,32 @@
     "limitation_stratified_metrics_csv": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/limitation_stratified_metrics_v0.2.csv",
     "run_metadata_json": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
     "summary_md": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/summary.md"
+  },
+  "compatibility_report": {
+    "artifact_id": "historical_flat_vs_normative_hierarchical_compatibility_v0.2",
+    "total_cases_hierarchical": 1056,
+    "total_cases_historical": 1056,
+    "total_cases_flat": 1056,
+    "identical_case_id_set": true,
+    "identical_labels": true,
+    "label_mismatch_count": 0,
+    "label_mismatch_examples": [],
+    "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_flat": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_hierarchical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "compatible": true,
+    "total_cases": 1056,
+    "identical_historical_case_id_set": true,
+    "identical_flat_case_id_set": true
+  },
+  "mrr_comparability_audit": {
+    "phase_b_flat_depth": 100,
+    "phase_c_hierarchical_depth": 200,
+    "reported_legacy_mrr_includes_ranks_101_200": true,
+    "reported_legacy_mrr_equals_mrr_at_200": true,
+    "mrr_at_100": 0.04198129438896377,
+    "mrr_at_200": 0.04334161160288281,
+    "mrr_101_200_contribution": 0.0013603172139190387,
+    "comparison_rule": "Use flat MRR@100 vs hierarchical MRR@100. Recall@200 and MRR@200 are reported separately for hierarchical only unless a flat depth-200 artifact exists."
   }
 }

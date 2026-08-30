@@ -17,7 +17,7 @@ Se evaluo exclusivamente BM25 normativo jerarquico sobre el evalset data_aduanas
 - Version normativa en corpus: hierarchical_v0.1.
 - Fuente: NANDINA.
 - Unidad documental: one hierarchical document row per NANDINA-8 source row; effective evaluation collapses duplicate rows to unique NANDINA-8 codes by first BM25 score occurrence.
-- Regla de texto: Seccion + Capitulo + Partida 4D + Subpartida HS6 nullable + NANDINA 8D + Unidad fisica, deduplicated by normalized text fragment..
+- Regla de texto: Seccion + Capitulo + Partida 4D + Subpartida HS6 nullable + NANDINA 8D + Unidad fisica, deduplicated by normalized text fragment.
 
 ## Auditoria del corpus
 
@@ -43,7 +43,8 @@ Se evaluo exclusivamente BM25 normativo jerarquico sobre el evalset data_aduanas
 
 | Metrica | Numerador | Denominador | Valor |
 | --- | ---: | ---: | ---: |
-| mrr | 45.76874185264425 | 1056 | 0.043341611603 |
+| mrr_at_100 | 44.33224687474574 | 1056 | 0.041981294389 |
+| mrr_at_200 | 45.76874185264425 | 1056 | 0.043341611603 |
 | top_1 | 28 | 1056 | 0.026515151515 |
 | top_3 | 55 | 1056 | 0.052083333333 |
 | top_5 | 66 | 1056 | 0.062500000000 |
@@ -58,9 +59,14 @@ Se evaluo exclusivamente BM25 normativo jerarquico sobre el evalset data_aduanas
 | hs4_at_200 | 529 | 1056 | 0.500946969697 |
 | chapter_at_200 | 810 | 1056 | 0.767045454545 |
 
+El campo historico `mrr` en JSON se conserva como alias de MRR@200 porque Fase C corrio con depth 200. Para comparacion contra BM25 plano Fase B se usa exclusivamente MRR@100.
+
 ## Cobertura jerarquica
 
 - Referencias en corpus: 1056/1056.
+- Codigos unicos del evalset: 42.
+- Codigos del evalset presentes como NANDINA-8 exacto en corpus: 42/42.
+- Parent codes no cuentan como cobertura exacta.
 - Exact@100: 107/1056 = 0.101325757576.
 - HS6@100: 118/1056 = 0.111742424242.
 - HS4@100: 264/1056 = 0.250000000000.
@@ -80,7 +86,9 @@ Se evaluo exclusivamente BM25 normativo jerarquico sobre el evalset data_aduanas
 | Top-10 | 0.065340909091 | 0.065340909091 | 0.000000000000 |
 | Top-50 | 0.070075757576 | 0.090909090909 | 0.020833333333 |
 | Recall@100 | 0.071022727273 | 0.101325757576 | 0.030303030303 |
-| MRR | 0.042297317267 | 0.043341611603 | 0.001044294335 |
+| MRR@100 | 0.042297317267 | 0.041981294389 | -0.000316022878 |
+
+Recall@200 y MRR@200 se reportan solo para jerarquico porque no existe artefacto BM25 plano depth 200 en Fase B.
 
 ## Cobertura comparable plano vs jerarquico
 
@@ -97,6 +105,15 @@ Se evaluo exclusivamente BM25 normativo jerarquico sobre el evalset data_aduanas
 - Mismas etiquetas por case_id: True.
 - Eval hash historico/plano/jerarquico: 3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941 / 3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941 / 3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941.
 - Compatible: True.
+
+## Microauditoria Gate C
+
+- MRR@100 recalculado desde `normative_hierarchical_case_summary.csv`: 0.041981294389.
+- MRR@200 recalculado desde `normative_hierarchical_case_summary.csv`: 0.043341611603.
+- Contribucion de ranks 101-200 al MRR legacy: 0.001360317214.
+- Metricas jerarquicas recalculadas desde `normative_hierarchical_results.csv`.
+- Distribucion de rank suma 1056 casos.
+- Archivo grande: `normative_hierarchical_results.csv`, 85426164 bytes, 81.47 MiB aprox.; no fue modificado ni eliminado.
 
 ## Controles
 

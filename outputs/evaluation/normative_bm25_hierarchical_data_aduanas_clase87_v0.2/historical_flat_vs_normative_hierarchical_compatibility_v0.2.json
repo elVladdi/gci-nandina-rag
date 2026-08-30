@@ -10,5 +10,8 @@
   "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
   "eval_hash_flat": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
   "eval_hash_hierarchical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
-  "compatible": true
+  "compatible": true,
+  "total_cases": 1056,
+  "identical_historical_case_id_set": true,
+  "identical_flat_case_id_set": true
 }

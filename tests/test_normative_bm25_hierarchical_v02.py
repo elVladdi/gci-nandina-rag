@@ -120,8 +120,14 @@ class TestNormativeBm25HierarchicalV02(unittest.TestCase):
         denominator = len(self.case_rows)
         self.assertEqual(denominator, metrics["cases_evaluated"])
         reciprocal_sum = sum(float(row["reciprocal_rank"]) for row in self.case_rows)
-        self.assertAlmostEqual(reciprocal_sum, metrics["mrr_numerator"])
-        self.assertAlmostEqual(reciprocal_sum / denominator, metrics["mrr"])
+        reciprocal_sum_100 = sum((1 / int(row["rank_ref"])) for row in self.case_rows if 1 <= int(row["rank_ref"]) <= 100)
+        reciprocal_sum_200 = sum((1 / int(row["rank_ref"])) for row in self.case_rows if 1 <= int(row["rank_ref"]) <= 200)
+        self.assertAlmostEqual(reciprocal_sum_100, metrics["mrr_at_100_numerator"])
+        self.assertAlmostEqual(reciprocal_sum_200, metrics["mrr_at_200_numerator"])
+        self.assertAlmostEqual(reciprocal_sum_100 / denominator, metrics["mrr_at_100"])
+        self.assertAlmostEqual(reciprocal_sum_200 / denominator, metrics["mrr_at_200"])
+        self.assertAlmostEqual(metrics["mrr"], metrics["mrr_at_200"])
+        self.assertLess(metrics["mrr_at_100"], metrics["mrr_at_200"])
         for k in K_VALUES:
             numerator = sum(int(row[f"hit_top_{k}"]) for row in self.case_rows)
             self.assertEqual(numerator, metrics[f"top_{k}_numerator"])
@@ -184,7 +190,8 @@ class TestNormativeBm25HierarchicalV02(unittest.TestCase):
         self.assertAlmostEqual(float(rows_by_metric["Top-1"]["flat_v0_2"]), 0.027462121212121212)
         self.assertAlmostEqual(float(rows_by_metric["Top-1"]["hierarchical_v0_2"]), 0.026515151515151516)
         self.assertAlmostEqual(float(rows_by_metric["Recall@100"]["hierarchical_v0_2"]), 0.10132575757575757)
-        self.assertAlmostEqual(float(rows_by_metric["MRR"]["hierarchical_v0_2"]), 0.04334161160288281)
+        self.assertAlmostEqual(float(rows_by_metric["MRR@100"]["flat_v0_2"]), 0.04229731726741296)
+        self.assertAlmostEqual(float(rows_by_metric["MRR@100"]["hierarchical_v0_2"]), 0.04198129438896377)
 
     def test_12_corpus_coverage_classes_are_separated(self):
         self.assertEqual(self.coverage["eval_codes_covered_by_corpus"], 42)
@@ -198,10 +205,14 @@ class TestNormativeBm25HierarchicalV02(unittest.TestCase):
 
     def test_13_stratified_limitations_are_present(self):
         groups = {row["group"]: row for row in self.stratified_rows}
-        self.assertEqual(set(groups), {"all_cases", "missing_parent_4d", "missing_parent_hs6", "missing_both_parents", "duplicate_code_documents", "generic_or_short_leaf_description"})
-        self.assertEqual(int(groups["all_cases"]["n"]), 1056)
-        self.assertEqual(int(groups["missing_parent_hs6"]["n"]), 381)
-        self.assertEqual(int(groups["generic_or_short_leaf_description"]["n"]), 369)
+        self.assertEqual(set(groups), {"parent_hs4_present", "parent_hs4_missing", "parent_hs6_present", "parent_hs6_missing", "both_parents_missing", "not_both_parents_missing"})
+        self.assertEqual(int(groups["parent_hs4_present"]["n"]), 1056)
+        self.assertEqual(int(groups["parent_hs4_missing"]["n"]), 0)
+        self.assertEqual(int(groups["parent_hs6_present"]["n"]), 675)
+        self.assertEqual(int(groups["parent_hs6_missing"]["n"]), 381)
+        self.assertEqual(int(groups["both_parents_missing"]["n"]), 0)
+        self.assertEqual(int(groups["not_both_parents_missing"]["n"]), 1056)
+        self.assertIn("mrr_at_100", groups["parent_hs6_missing"])
 
     def test_14_output_hashes_and_lf_serialization(self):
         for name, expected in self.metadata["output_sha256"].items():
@@ -221,7 +232,21 @@ class TestNormativeBm25HierarchicalV02(unittest.TestCase):
             self.assertEqual(sha256(HIST_OUT / name), expected, name)
         self.assertTrue(self.metadata["previous_phase_artifact_hashes"]["all_match_expected"])
 
-    def test_16_gate_c_is_approved(self):
+    def test_16_microaudit_mrr_and_coverage_are_locked(self):
+        micro = load_json(OUT / "gate_c_microaudit_v0.2.json")
+        self.assertEqual(micro["status"], "APPROVED")
+        self.assertFalse(micro["retrieval_reexecuted"])
+        self.assertFalse(micro["phase_d_started"])
+        self.assertTrue(micro["mrr_comparability"]["reported_legacy_mrr_includes_ranks_101_200"])
+        self.assertAlmostEqual(micro["mrr_comparability"]["mrr_at_100"], 0.04198129438896377)
+        self.assertAlmostEqual(micro["mrr_comparability"]["mrr_at_200"], 0.04334161160288281)
+        self.assertEqual(micro["hierarchical_counts"]["100"]["chapter"], 538)
+        self.assertEqual(micro["coverage"]["eval_unique_codes"], 42)
+        self.assertEqual(micro["coverage"]["eval_codes_present_exact_nandina8_in_corpus"], 42)
+        self.assertFalse(micro["coverage"]["parent_codes_counted_as_exact_coverage"])
+        self.assertEqual(sum(micro["position_distribution"].values()), 1056)
+
+    def test_17_gate_c_is_approved(self):
         self.assertEqual(self.metadata["gate_c_status"], "APPROVED")
         self.assertEqual(self.metrics_payload["gate_c_status"], "APPROVED")
 

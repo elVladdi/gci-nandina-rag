@@ -4,6 +4,8 @@
 
 GATE C APROBADO.
 
+El campo legacy `mrr` de los JSON equivale a MRR@200 por depth 200; la comparacion plano vs jerarquico usa MRR@100.
+
 ## Pipeline jerarquico identificado
 
 - Constructor de corpus: `src/corpus/build_hierarchical_nandina_corpus.py`.
@@ -71,7 +73,8 @@ No se corrigieron estos problemas en Fase C.
 | Top-50 | 96 | 1056 | 0.09090909090909091 |
 | Recall@100 | 107 | 1056 | 0.10132575757575757 |
 | Pool/Recall@200 | 321 | 1056 | 0.3039772727272727 |
-| MRR | 45.76874185264425 | 1056 | 0.04334161160288281 |
+| MRR@100 | 44.33224687474574 | 1056 | 0.04198129438896377 |
+| MRR@200 | 45.76874185264425 | 1056 | 0.04334161160288281 |
 
 ## Cobertura jerarquica
 
@@ -96,7 +99,7 @@ No se corrigieron estos problemas en Fase C.
 | Top-10 | 0.06534090909090909 | 0.06534090909090909 | 0.0 |
 | Top-50 | 0.07007575757575757 | 0.09090909090909091 | 0.020833333333333343 |
 | Recall@100 | 0.07102272727272728 | 0.10132575757575757 | 0.03030303030303029 |
-| MRR | 0.04229731726741296 | 0.04334161160288281 | 0.001044294335469849 |
+| MRR@100 | 0.04229731726741296 | 0.04198129438896377 | -0.00031602287844918753 |
 
 ## Outputs principales
 
@@ -109,3 +112,5 @@ No se corrigieron estos problemas en Fase C.
 - `outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/flat_vs_hierarchical_comparison_v0.2.csv`
 - `outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json`
 - `outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/summary.md`
+- `outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.json`
+- `outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.md`

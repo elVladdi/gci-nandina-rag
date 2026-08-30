@@ -1,0 +1,228 @@
+{
+  "artifact_id": "gate_c_microaudit_v0.2",
+  "gate": "EXP-04 Gate C",
+  "status": "APPROVED",
+  "source_artifacts_only": true,
+  "retrieval_reexecuted": false,
+  "phase_d_started": false,
+  "branch": "codex/exp04-rerun-v02",
+  "head_at_microaudit_start": "13d317630bbe59e91bc1058800d4593ba6ace66a",
+  "mrr_comparability": {
+    "phase_b_flat_depth": 100,
+    "phase_c_hierarchical_depth": 200,
+    "reported_legacy_mrr_includes_ranks_101_200": true,
+    "reported_legacy_mrr_equals_mrr_at_200": true,
+    "mrr_at_100": 0.04198129438896377,
+    "mrr_at_200": 0.04334161160288281,
+    "mrr_101_200_contribution": 0.0013603172139190387,
+    "comparison_rule": "Use flat MRR@100 vs hierarchical MRR@100. Recall@200 and MRR@200 are reported separately for hierarchical only unless a flat depth-200 artifact exists."
+  },
+  "metrics_recomputed_from": {
+    "mrr": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+    "hierarchical_metrics": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+    "coverage": [
+      "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "data/processed/corpus_nandina_hierarchical_v0.1.jsonl"
+    ]
+  },
+  "hierarchical_counts": {
+    "100": {
+      "exact": 107,
+      "hs6": 118,
+      "hs4": 264,
+      "chapter": 538
+    },
+    "200": {
+      "exact": 321,
+      "hs6": 363,
+      "hs4": 529,
+      "chapter": 810
+    }
+  },
+  "hierarchical_ratios": {
+    "100": {
+      "exact": 0.10132575757575757,
+      "hs6": 0.11174242424242424,
+      "hs4": 0.25,
+      "chapter": 0.509469696969697
+    },
+    "200": {
+      "exact": 0.3039772727272727,
+      "hs6": 0.34375,
+      "hs4": 0.5009469696969697,
+      "chapter": 0.7670454545454546
+    }
+  },
+  "coverage": {
+    "eval_unique_codes": 42,
+    "eval_codes_present_exact_nandina8_in_corpus": 42,
+    "eval_cases_present": 1056,
+    "parent_codes_counted_as_exact_coverage": false
+  },
+  "position_distribution": {
+    "1": 28,
+    "2-3": 27,
+    "4-5": 11,
+    "6-10": 3,
+    "11-50": 27,
+    "51-100": 11,
+    "101-200": 214,
+    ">200_or_not_retrieved": 735
+  },
+  "position_distribution_sum": 1056,
+  "limitation_stratified_metrics": [
+    {
+      "group": "parent_hs4_present",
+      "n": 1056,
+      "exact_at_100": 0.10132575757575757,
+      "hs6_at_100": 0.11174242424242424,
+      "hs4_at_100": 0.25,
+      "mrr_at_100": 0.04198129438896378
+    },
+    {
+      "group": "parent_hs4_missing",
+      "n": 0,
+      "exact_at_100": null,
+      "hs6_at_100": null,
+      "hs4_at_100": null,
+      "mrr_at_100": null
+    },
+    {
+      "group": "parent_hs6_present",
+      "n": 675,
+      "exact_at_100": 0.06962962962962962,
+      "hs6_at_100": 0.08592592592592592,
+      "hs4_at_100": 0.22814814814814816,
+      "mrr_at_100": 0.009110401658893536
+    },
+    {
+      "group": "parent_hs6_missing",
+      "n": 381,
+      "exact_at_100": 0.15748031496062992,
+      "hs6_at_100": 0.15748031496062992,
+      "hs4_at_100": 0.2887139107611549,
+      "mrr_at_100": 0.10021712796585987
+    },
+    {
+      "group": "both_parents_missing",
+      "n": 0,
+      "exact_at_100": null,
+      "hs6_at_100": null,
+      "hs4_at_100": null,
+      "mrr_at_100": null
+    },
+    {
+      "group": "not_both_parents_missing",
+      "n": 1056,
+      "exact_at_100": 0.10132575757575757,
+      "hs6_at_100": 0.11174242424242424,
+      "hs4_at_100": 0.25,
+      "mrr_at_100": 0.04198129438896378
+    }
+  ],
+  "conflict_flag_analysis": {
+    "source_conflicting_parent_duplicates": 56,
+    "deterministic_case_join_available": false,
+    "reason": "The corpus audit reports source-level conflicting duplicate groups, but Fase C case_summary contains no deterministic per-case conflict flag. No conflict stratum is computed to avoid inferred labels."
+  },
+  "compatibility_report": {
+    "artifact_id": "historical_flat_vs_normative_hierarchical_compatibility_v0.2",
+    "total_cases_hierarchical": 1056,
+    "total_cases_historical": 1056,
+    "total_cases_flat": 1056,
+    "identical_case_id_set": true,
+    "identical_labels": true,
+    "label_mismatch_count": 0,
+    "label_mismatch_examples": [],
+    "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_flat": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_hierarchical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "compatible": true,
+    "total_cases": 1056,
+    "identical_historical_case_id_set": true,
+    "identical_flat_case_id_set": true
+  },
+  "methodology": {
+    "corpus_builder": "src/corpus/build_hierarchical_nandina_corpus.py",
+    "index_builder": "src/experiments/build_bm25_hierarchical_index.py",
+    "runner": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+    "version": "hierarchical_v0.1 corpus evaluated in EXP-04 v0.2",
+    "index_fields": "titulo + texto_index_jerarquico with fallback texto_index",
+    "hierarchical_text": "section + chapter + partida 4D + HS6 nullable + NANDINA 8D + unidad fisica; fragments deduplicated by normalized text",
+    "missing_parents": {
+      "hs4": 407,
+      "hs6": 4504,
+      "both": 185
+    },
+    "unit_doc": "one hierarchical document row per NANDINA-8 source row; final evaluation ranking unit is unique NANDINA-8 code",
+    "duplicate_code_resolution": "first BM25 occurrence by score order wins",
+    "leakage_controls": "No DAM/SERIE/true label/historical/flat outputs used as retrieval features; no LLM/RAG/dense/candidate pools used."
+  },
+  "large_file_assessment": {
+    "name": "normative_hierarchical_results.csv",
+    "size_bytes": 85426164,
+    "size_mib": 81.4687385559082,
+    "schema": [
+      "case_id",
+      "id_unico",
+      "nandina_ref",
+      "candidate_rank",
+      "candidate_raw_rank",
+      "candidate_doc_id",
+      "candidate_code",
+      "candidate_partida",
+      "candidate_sub_partida",
+      "candidate_clase",
+      "score",
+      "candidate_text",
+      "is_reference_code",
+      "method"
+    ],
+    "reason_for_size": "Stores up to 200 effective candidates for each of 1056 cases, including BM25 scores and truncated candidate_text snippets.",
+    "redundancy_assessment": "Partially redundant for aggregate metrics because case_summary is sufficient for Top-k/MRR and results can recalculate hierarchy; not deleted or modified in this microaudit."
+  },
+  "commit_traceability": {
+    "pre_phase_c_authorized_start": "63b748a feat: add EXP-04 hierarchical normative BM25 v0.2 runner",
+    "current_runner_commit": "ce23905 feat: add EXP-04 hierarchical normative BM25 v0.2 runner",
+    "relation": "63b748a was an unpublished local runner commit from the first Fase C attempt. The first output history contained an oversized CSV blob rejected by GitHub. After approved local history cleanup, the runner commit was recreated as ce23905 with CSV serialization limited to 240 characters for candidate_text; retrieval, BM25 parameters, corpus, split, evalset, and metrics logic were not changed to improve results. 63b748a is not in current branch history and was not reverted by a later commit.",
+    "git_log_oneline_decorate_15": [
+      "13d3176 (HEAD -> codex/exp04-rerun-v02, origin/codex/exp04-rerun-v02) test: add EXP-04 hierarchical normative BM25 gate checks",
+      "0015809 results: add EXP-04 hierarchical normative BM25 v0.2 outputs",
+      "ce23905 feat: add EXP-04 hierarchical normative BM25 v0.2 runner",
+      "e3590cf test: harden EXP-04 flat normative BM25 code-level checks",
+      "ce9cd0b docs: add EXP-04 flat normative BM25 code-level microaudit",
+      "24149c2 test: add EXP-04 flat normative BM25 v0.2 integrity checks",
+      "24aac2b results: add EXP-04 flat normative BM25 v0.2 outputs",
+      "df60c77 feat: add EXP-04 flat normative BM25 v0.2 runner",
+      "e9325e7 docs: update README with v0.2 experimental status",
+      "def17c9 test: add EXP-04 historical BM25 v0.2 integrity checks",
+      "52784ce results: add EXP-04 historical BM25 v0.2 outputs",
+      "c92da6e feat: add EXP-04 historical BM25 v0.2 runner",
+      "a2f0b82 (origin/main, origin/HEAD, main) test: enforce reproducible LF dataset serialization",
+      "7a9f43d merge: integrate split v0.2 Gate 5",
+      "1e7960d (codex/exp01-exp03-exp02-group-dam-split) docs: document split v0.2 concentration limitations"
+    ]
+  },
+  "run_metadata_confirmation": {
+    "command": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA\\src\\experiments\\evaluate_normative_bm25_hierarchical_data_aduanas_v02.py --retrieval-depth 200",
+    "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "corpus": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl",
+    "corpus_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+    "version": "v0.2",
+    "retrieval_depth": 200,
+    "bm25_k1": 1.5,
+    "bm25_b": 0.75,
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "branch_in_run_metadata": "codex/exp04-rerun-v02",
+    "commit_in_run_metadata": "e3590cf8ea07d0cbcec97a5a41931220c56a3ce0",
+    "runtime": {
+      "python": "3.12.13",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "packages": {
+        "numpy": "2.3.5",
+        "pandas": "3.0.1"
+      }
+    }
+  }
+}
