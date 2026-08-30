@@ -1,0 +1,78 @@
+{
+  "experiment_id": "exp04_phase_d_d1a_text2trade_inspired_mnrl_v0.2",
+  "version": "v0.2",
+  "variant": "D1a",
+  "method_label": "Text2Trade-inspired MNRL dense retriever",
+  "base_model": {
+    "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "local_path": "data/processed/indexes/text2trade_nandina8_v1/model",
+    "classification": "pretrained SBERT base; local adaptation is not the original Text2Trade checkpoint",
+    "model_safetensors_sha256": "7f4f89d628f87ade0e0b57c40affb6402cd77abc8110584d8d35dc86da514ee8"
+  },
+  "frozen_inputs": {
+    "historical_csv": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+    "historical_sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "dev_csv": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+    "dev_sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+    "eval_csv": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "eval_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "normative_corpus": "data/processed/corpus_rag_v1_index.jsonl",
+    "normative_corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0"
+  },
+  "columns": {
+    "query": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label": "NANDINA",
+    "dam": "DECLARACION",
+    "id": "id_unico"
+  },
+  "document_text": {
+    "formula": "titulo.strip() + '\\n' + texto_index.strip(), then outer strip; omit title when empty",
+    "source_field_priority": ["texto_index", "texto", "text", "content", "descripcion"],
+    "lowercase": false,
+    "normalization": "strip only after frozen corpus texto_index preprocessing"
+  },
+  "training": {
+    "loss": "MultipleNegativesRankingLoss",
+    "similarity": "cosine",
+    "mnrl_scale": 20.0,
+    "epochs": 1,
+    "batch_size": 8,
+    "learning_rate": 2e-05,
+    "warmup_ratio": 0.1,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "max_sequence_length": 128,
+    "seed": 2026,
+    "device": "cpu",
+    "precision": "float32",
+    "amp": false,
+    "early_stopping": false,
+    "devset_used_for_training_or_selection": false,
+    "evalset_used_for_training_or_selection": false
+  },
+  "hard_negatives": {
+    "format": "MNRL triplet: query, positive normative document, explicit negative normative document",
+    "candidate_codes_source": "unique NANDINA labels in historical training only, joined to frozen normative corpus",
+    "priority": ["same_hs4_different_code", "same_chapter_different_code", "other_historical_code"],
+    "selection": "deterministic SHA-256(case_id) modulo the first non-empty priority pool",
+    "eval_labels_used": false
+  },
+  "index": {
+    "output_dir": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2",
+    "retrieval": "exact brute-force dot product over normalized vectors",
+    "normalize_embeddings": true,
+    "ranking_unit": "unique NANDINA-8 code",
+    "hnsw": false
+  },
+  "outputs": {
+    "model_dir": "models/text2trade_mnrl_v0.2",
+    "training_dir": "outputs/training/text2trade_mnrl_v0.2",
+    "evaluation_dir": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2"
+  },
+  "mcd": {
+    "variant": "D1b",
+    "implemented_in_d1a": false,
+    "reason": "D1a isolates MNRL retrieval; MCD reranking and uncertainty are a later explicitly authorized decision."
+  },
+  "selection_policy": "Fixed before training from the Text2Trade paper, existing local multilingual MiniLM base, and SentenceTransformers defaults. No hyperparameter search or selection on evalset."
+}
