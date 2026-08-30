@@ -31,6 +31,7 @@ PHASE_I_FILES = (
     "gate_i_generation_manifest_v0.2.json",
     "summary_phase_i.md",
 )
+PHASE_I_HASH_FILES = ("gate_i_pre_generation_check_v0.2.json", *PHASE_I_FILES)
 FORBIDDEN_PAYLOAD_KEYS = {
     "expected_nandina",
     "reference_code",
@@ -308,7 +309,7 @@ def _runtime_environment(model: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def _output_hashes(out: Path) -> dict[str, str]:
-    return {name: _sha256(out / name) for name in PHASE_I_FILES if name != "gate_i_generation_manifest_v0.2.json" and (out / name).is_file()}
+    return {name: _sha256(out / name) for name in PHASE_I_HASH_FILES if name != "gate_i_generation_manifest_v0.2.json" and (out / name).is_file()}
 
 
 def _summary(metadata: Mapping[str, Any], status: Mapping[str, Any], hashes: Mapping[str, str]) -> str:

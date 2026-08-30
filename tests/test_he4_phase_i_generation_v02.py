@@ -124,6 +124,7 @@ class He4PhaseIPreGenerationTests(unittest.TestCase):
         self.assertNotIn("bm25", source.lower())
         self.assertNotIn("candidate_pool", source.lower())
         self.assertNotIn("dense", source.lower())
+        self.assertIn("_assert_no_phase_i_overwrite", source)
 
     def test_10_model_manifest_and_parameters_are_frozen(self) -> None:
         manifest = json.loads((OUT / "he4_model_manifest_v0.2.json").read_text(encoding="utf-8"))
@@ -159,6 +160,8 @@ class He4PhaseIPostGenerationTests(unittest.TestCase):
         self.assertEqual(len(self.parsed), 50)
         self.assertEqual([int(row["generation_sequence"]) for row in self.execution], list(range(1, 51)))
         self.assertTrue(all(row["attempt_count"] == "1" and not row["retry_reason"] for row in self.execution))
+        self.assertEqual([str(row["case_id"]) for row in self.raw], [row["case_id"] for row in self.execution])
+        self.assertTrue(all(isinstance(row["raw_response"], str) and row["raw_response"] for row in self.raw))
 
     def test_21_outputs_are_linked_to_frozen_inputs_and_model(self) -> None:
         input_hashes = {hashlib.sha256(line.encode("utf-8")).hexdigest() for line in (OUT / "he4_generation_inputs_v0.2.jsonl").read_text(encoding="utf-8").splitlines() if line}

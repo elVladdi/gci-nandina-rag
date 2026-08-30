@@ -1,0 +1,120 @@
+{
+  "gate_i": "APPROVED",
+  "generation_status": {
+    "calls_attempted": 50,
+    "calls_completed": 50,
+    "completion_tokens_reported": 95598,
+    "inputs": 50,
+    "latency_mean_seconds": 33.333234507991,
+    "latency_median_seconds": 30.800146950001363,
+    "latency_total_seconds": 1666.66172539955,
+    "non_parseable_json": 0,
+    "parseable_json": 50,
+    "prompt_tokens_reported": 177417,
+    "raw_responses_stored": 50,
+    "retries": 0,
+    "status": "completed",
+    "technical_failure_detail": "",
+    "technical_failures": 0,
+    "version": "he4_generation_status_v0.2"
+  },
+  "he4_status": "PENDING AUTOMATIC VALIDATION / QUALITATIVE EVALUATION",
+  "manifest_self_hash_excluded": true,
+  "output_sha256": {
+    "gate_i_pre_generation_check_v0.2.json": "a36232f0846f9babdf12e48c9779e1c10cae5b406dd91de1db7a06a9a231bfbb",
+    "he4_generation_execution_v0.2.csv": "323a79cb2a54601c669e711bb4f698fa328f0c51a9f77998612d46bbfbb9cc80",
+    "he4_generation_metadata_v0.2.json": "29b5090f9ed64a3c81aa42a2b3c9805551167d44830227886122a6c3ab1c394b",
+    "he4_generation_status_v0.2.json": "d8417a1293de5928c4a227e755506c1969e322f1f97b742df06933aafc50c48e",
+    "he4_responses_parsed_v0.2.jsonl": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+    "he4_responses_raw_v0.2.jsonl": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+    "summary_phase_i.md": "7af92a8c38e83e050c18ffa983a4bf5d138571eea2101af5b912d5606872e3dc"
+  },
+  "outputs_over_25_mib": [],
+  "outputs_over_50_mib": [],
+  "phase_j_or_k_executed": false,
+  "pre_generation_gate": {
+    "checks": {
+      "branch": "codex/exp04-rerun-v02",
+      "contexts_inputs_byte_identical": true,
+      "forbidden_payload_keys": [],
+      "generation_inputs": 50,
+      "hashes": {
+        "contexts": {
+          "actual": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+          "expected": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+          "pass": true
+        },
+        "generation_inputs": {
+          "actual": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+          "expected": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+          "pass": true
+        },
+        "prompt": {
+          "actual": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+          "expected": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+          "pass": true
+        },
+        "rubric": {
+          "actual": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+          "expected": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+          "pass": true
+        },
+        "sample": {
+          "actual": "dfdfa08cc0b15e33f493559ee66a679c8730d6d4eb0842e78cea50ffaf659ec2",
+          "expected": "dfdfa08cc0b15e33f493559ee66a679c8730d6d4eb0842e78cea50ffaf659ec2",
+          "pass": true
+        },
+        "schema": {
+          "actual": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6",
+          "expected": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6",
+          "pass": true
+        }
+      },
+      "head": "434c980e9074204399794df194bd2a93b18a0134",
+      "initial_head_expected": "12acbee8d796a28df8f7b6b7a04370f65b3b8fdd",
+      "initial_head_is_ancestor": true,
+      "model": {
+        "backend": "Ollama local",
+        "context_length_available": 32768,
+        "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+        "format": "gguf",
+        "name": "qwen2.5:7b-instruct",
+        "ollama_url": "http://127.0.0.1:11434",
+        "ollama_version": "0.32.15",
+        "parameter_size": "7.6B",
+        "quantization": "Q4_K_M",
+        "size_bytes": 4683087332
+      },
+      "parameters": {
+        "backend_default_or_unspecified": [
+          "top_p",
+          "top_k",
+          "seed",
+          "num_predict"
+        ],
+        "explicit": {
+          "format": "json",
+          "num_ctx": 8192,
+          "retry_policy": "historical runner supports resume only; no performance-based retry",
+          "stream": false,
+          "temperature": 0,
+          "timeout_seconds": 300
+        },
+        "retry_policy": "historical runner supports resume only; no performance-based retry"
+      },
+      "phase_g_or_evaluation_only_loaded": false,
+      "retrieval_performed": false,
+      "sample_cases": 50,
+      "top3_invariance": {
+        "cases": 50,
+        "pass": true,
+        "slots": 150
+      },
+      "unique_case_ids": 50
+    },
+    "created_at_utc": "2026-08-30T18:21:39.858594+00:00",
+    "passed": true,
+    "version": "gate_i_pre_generation_check_v0.2"
+  },
+  "version": "gate_i_generation_manifest_v0.2"
+}
