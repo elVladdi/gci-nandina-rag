@@ -1,0 +1,8 @@
+{
+  "codes_positions_scores_identical": true,
+  "exact_normative_evidence": 150,
+  "pass": true,
+  "phase_a_equals_phase_f": true,
+  "slots": 150,
+  "slots_expected": 150
+}
