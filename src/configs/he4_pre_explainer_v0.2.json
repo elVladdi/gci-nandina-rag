@@ -1,0 +1,15 @@
+{
+  "experiment_id": "exp04_phase_h_exp09_he4_pre_explainer_v0.2",
+  "phase": "EXP-04-H / EXP-09",
+  "eval": {"path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv", "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941", "cases": 1056},
+  "historical_results": {"path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_results.csv", "sha256": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8", "method": "historical_bm25_data_aduanas_clase87_v0.2"},
+  "historical_case_summary": {"path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv", "sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56"},
+  "phase_f_slots": {"path": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_candidate_slots.csv", "sha256": "2d2c79ef01aea312640997ae24754a86675f77076f728d95eee7bd52ed201035"},
+  "corpus": {"path": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl", "sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175"},
+  "sample": {"size": 50, "seed": 2026, "targets": {"rank_1": 15, "rank_2_3": 15, "rank_4_10": 10, "difficult_low_support": 10}, "rule": "historical deterministic stratification: support bucket, support count, exact rank, case_id"},
+  "prompt": {"path": "src/llm/explain_top3_nandina_prompt_v0.2.md", "sha256": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0", "change_classification": "A: exact historical final-execution prompt"},
+  "model": {"backend": "Ollama local", "name": "qwen2.5:7b-instruct", "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e", "quantization": "Q4_K_M", "parameters": {"temperature": 0, "num_ctx": 8192, "format": "json", "stream": false, "timeout_seconds": 300, "top_p": null, "top_k": null, "seed": null, "num_predict": null, "retry_policy": "historical runner supports resume only; no performance-based retry"}},
+  "schema": {"path": "src/configs/he4_explainer_schema_v0.2.json"},
+  "rubric": {"path": "src/configs/he4_rubric_v0.2.json"},
+  "outputs": {"directory": "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2"}
+}
