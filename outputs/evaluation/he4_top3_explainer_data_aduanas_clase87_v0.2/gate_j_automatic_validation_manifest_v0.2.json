@@ -1,0 +1,224 @@
+{
+  "created_at_utc": "2026-08-30T19:16:50.567161+00:00",
+  "deterministic_offline": true,
+  "exp10_executed": false,
+  "gate_j": "APPROVED",
+  "gate_j_meaning": "Automatic evaluation integrity and reproducibility are approved; individual response failures remain experimental observations.",
+  "he4_global_status": "PENDING QUALITATIVE EVALUATION - FASE K",
+  "he4_j": "AUTOMATIC CONTROLS",
+  "input_hashes": {
+    "contexts": {
+      "actual": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+      "expected": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+      "pass": true
+    },
+    "gate_i_pre_generation": {
+      "actual": "a36232f0846f9babdf12e48c9779e1c10cae5b406dd91de1db7a06a9a231bfbb",
+      "expected": "a36232f0846f9babdf12e48c9779e1c10cae5b406dd91de1db7a06a9a231bfbb",
+      "pass": true
+    },
+    "generation_execution": {
+      "actual": "323a79cb2a54601c669e711bb4f698fa328f0c51a9f77998612d46bbfbb9cc80",
+      "expected": "323a79cb2a54601c669e711bb4f698fa328f0c51a9f77998612d46bbfbb9cc80",
+      "pass": true
+    },
+    "generation_inputs": {
+      "actual": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+      "expected": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+      "pass": true
+    },
+    "parsed_responses": {
+      "actual": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+      "expected": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+      "pass": true
+    },
+    "prompt": {
+      "actual": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+      "expected": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+      "pass": true
+    },
+    "raw_responses": {
+      "actual": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+      "expected": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+      "pass": true
+    },
+    "rubric": {
+      "actual": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+      "expected": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+      "pass": true
+    },
+    "sample": {
+      "actual": "dfdfa08cc0b15e33f493559ee66a679c8730d6d4eb0842e78cea50ffaf659ec2",
+      "expected": "dfdfa08cc0b15e33f493559ee66a679c8730d6d4eb0842e78cea50ffaf659ec2",
+      "pass": true
+    },
+    "schema": {
+      "actual": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6",
+      "expected": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6",
+      "pass": true
+    }
+  },
+  "manifest_self_hash_excluded": true,
+  "metrics": {
+    "automatic_validation_pass": {
+      "applicable": false,
+      "reason": "No pre-generation per-case PASS/FAIL rule existed in the frozen schema or historical validator."
+    },
+    "candidate_slots": 150,
+    "case_metrics": {
+      "candidate_set_closure_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "comparison_presence_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "duplicate_candidate_free_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "explicit_label_leakage_free_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "external_code_free_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "fabricated_reference_free_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "historical_reference_validity_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "missing_candidate_free_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "normative_reference_validity_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "out_of_context_reference_free_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "parsed_raw_identity_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "rank_consistency_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "raw_json_parse_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "required_fields_completeness_rate": {
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "schema_compliance_rate": {
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "top3_order_preservation_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "traceability_completeness_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      },
+      "warnings_field_compliance_rate": {
+        "denominator": 50,
+        "numerator": 50,
+        "value": 1.0
+      }
+    },
+    "cases": 50,
+    "error_taxonomy": {
+      "INVALID_WARNING_FIELD": 9,
+      "MISSING_REQUIRED_FIELD": 50,
+      "SCHEMA_ERROR": 50
+    },
+    "frozen_aggregate_pass": {
+      "criteria": {
+        "advertencia_final_presente_rate_min": true,
+        "comparacion_top3_presente_rate_min": true,
+        "evidencia_historica_citada_por_candidato_rate_min": true,
+        "evidencia_normativa_citada_por_candidato_rate_min": true,
+        "json_valido_rate_min": true,
+        "ranking_preservado_rate": true,
+        "sin_clasificacion_oficial_rate": true,
+        "sin_codigos_fuera_pool_rate": true,
+        "sin_senales_reranking_rate": true
+      },
+      "passed": true
+    },
+    "slot_metrics": {
+      "candidate_code_valid_rate": {
+        "denominator": 150,
+        "numerator": 150,
+        "value": 1.0
+      },
+      "historical_reference_valid_rate": {
+        "denominator": 150,
+        "numerator": 150,
+        "value": 1.0
+      },
+      "normative_reference_valid_rate": {
+        "denominator": 150,
+        "numerator": 150,
+        "value": 1.0
+      },
+      "rank_consistent_rate": {
+        "denominator": 150,
+        "numerator": 150,
+        "value": 1.0
+      }
+    },
+    "version": "he4_automatic_validation_metrics_v0.2"
+  },
+  "no_model_calls": true,
+  "no_retrieval": true,
+  "output_sha256": {
+    "he4_automatic_validation_by_bucket_v0.2.csv": "74347b6016b8dc79201bed1fe2ee3c6474c1eb14071e92f0655759e9e8153325",
+    "he4_automatic_validation_case_results_v0.2.csv": "c177033bb21f80579da18f375c8443192c2df7ad72a9f3ffadc45937867c482c",
+    "he4_automatic_validation_errors_v0.2.csv": "2e82c5562bf1780ec45f64484dd585d6b49a837bc50d7ec0117437d896f49fba",
+    "he4_automatic_validation_metrics_v0.2.json": "3dc43932698033cc94149d20be9a474662e990152b1fd1d66f3d067285f21b85",
+    "he4_automatic_validation_slot_results_v0.2.csv": "074686da4e2dc096adf3039b7ab34cb6638742b4f161864b1f93aa24be8068ed",
+    "he4_reference_validation_v0.2.json": "c926ad55008be5c7744a33e2b87fe392d6e631d7deba7a641c5c2c467bb2ba8f",
+    "he4_traceability_validation_v0.2.json": "e96bb0ee5dc626808e3b9228927beedd7f649b156b0234dd1c6330606d3e467f",
+    "summary_phase_j.md": "f5758947d6942d632662b1b036229700d9f59fe1629104c02945c9d37dc93ab0"
+  },
+  "outputs_over_25_mib": [],
+  "outputs_over_50_mib": [],
+  "phase_k_executed": false,
+  "raw_and_parsed_unchanged_after_j": {
+    "parsed_responses": true,
+    "raw_responses": true
+  },
+  "version": "gate_j_automatic_validation_manifest_v0.2"
+}

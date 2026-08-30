@@ -1,0 +1,142 @@
+{
+  "automatic_validation_pass": {
+    "applicable": false,
+    "reason": "No pre-generation per-case PASS/FAIL rule existed in the frozen schema or historical validator."
+  },
+  "candidate_slots": 150,
+  "case_metrics": {
+    "candidate_set_closure_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "comparison_presence_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "duplicate_candidate_free_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "explicit_label_leakage_free_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "external_code_free_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "fabricated_reference_free_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "historical_reference_validity_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "missing_candidate_free_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "normative_reference_validity_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "out_of_context_reference_free_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "parsed_raw_identity_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "rank_consistency_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "raw_json_parse_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "required_fields_completeness_rate": {
+      "denominator": 50,
+      "numerator": 0,
+      "value": 0.0
+    },
+    "schema_compliance_rate": {
+      "denominator": 50,
+      "numerator": 0,
+      "value": 0.0
+    },
+    "top3_order_preservation_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "traceability_completeness_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "warnings_field_compliance_rate": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    }
+  },
+  "cases": 50,
+  "error_taxonomy": {
+    "INVALID_WARNING_FIELD": 9,
+    "MISSING_REQUIRED_FIELD": 50,
+    "SCHEMA_ERROR": 50
+  },
+  "frozen_aggregate_pass": {
+    "criteria": {
+      "advertencia_final_presente_rate_min": true,
+      "comparacion_top3_presente_rate_min": true,
+      "evidencia_historica_citada_por_candidato_rate_min": true,
+      "evidencia_normativa_citada_por_candidato_rate_min": true,
+      "json_valido_rate_min": true,
+      "ranking_preservado_rate": true,
+      "sin_clasificacion_oficial_rate": true,
+      "sin_codigos_fuera_pool_rate": true,
+      "sin_senales_reranking_rate": true
+    },
+    "passed": true
+  },
+  "slot_metrics": {
+    "candidate_code_valid_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    },
+    "historical_reference_valid_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    },
+    "normative_reference_valid_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    },
+    "rank_consistent_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    }
+  },
+  "version": "he4_automatic_validation_metrics_v0.2"
+}

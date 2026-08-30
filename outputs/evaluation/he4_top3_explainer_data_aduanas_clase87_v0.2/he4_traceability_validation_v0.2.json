@@ -1,0 +1,356 @@
+{
+  "cases": [
+    {
+      "case_id": "DA-EVAL-V02-00106",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00675",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00676",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00677",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00680",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00681",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00686",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00887",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00888",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00889",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00284",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00002",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00003",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00004",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00017",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00426",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00427",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00439",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00440",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00441",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00442",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00685",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00671",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00682",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00285",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00927",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00973",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00112",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00113",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00239",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00001",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00168",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00500",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00423",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00501",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00287",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00914",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00948",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00971",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00972",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00740",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00770",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00925",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00975",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00947",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00920",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-00960",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-01020",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-01021",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    },
+    {
+      "case_id": "DA-EVAL-V02-01022",
+      "input_present": true,
+      "parsed_present": true,
+      "raw_present": true,
+      "traceability_complete": true
+    }
+  ],
+  "definition": "case_id -> H input -> Top-3/evidence -> I raw -> I parsed -> J validation",
+  "version": "he4_traceability_validation_v0.2"
+}

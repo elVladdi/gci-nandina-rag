@@ -1,0 +1,30 @@
+{
+  "definition": "Reference existence is tested against the frozen 50-input H context; allowed means present in the same case context; candidate match means it belongs to the slot rank.",
+  "fabricated_reference_total": 0,
+  "historical_global_ids": 46,
+  "normative_global_ids": 27,
+  "out_of_context_reference_total": 0,
+  "slot_metrics": {
+    "candidate_code_valid_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    },
+    "historical_reference_valid_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    },
+    "normative_reference_valid_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    },
+    "rank_consistent_rate": {
+      "denominator": 150,
+      "numerator": 150,
+      "value": 1.0
+    }
+  },
+  "version": "he4_reference_validation_v0.2"
+}
