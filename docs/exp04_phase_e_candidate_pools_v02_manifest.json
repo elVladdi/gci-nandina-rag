@@ -1,0 +1,25 @@
+{
+  "experiment_id": "exp04_phase_e_normative_candidate_pools_v0.2",
+  "phase": "EXP-04-E",
+  "execution_commit": "36373e4f637c5f904948ffd48c8540f03e750f1e",
+  "eval_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "cases": 1056,
+  "outputs_directory": "outputs/evaluation/normative_candidate_pools_data_aduanas_clase87_v0.2",
+  "output_sha256": {
+    "candidate_pool_results.csv": "baed5290004744ef93af32704dd3c85bb41c2483aaf9e580d7f531825f4efc97",
+    "candidate_pool_case_summary.csv": "2280716a49742c8d8ff89c8d4f5452d44ce80a63b51cd6f3aad4c6596ff25f77",
+    "candidate_pool_metrics.json": "1c183346a63d69817def2f6b1ef9666023cd32eed53e599d9842ff4d6900122f",
+    "candidate_pool_overlap.csv": "3d93335f0ea36cb09c4694df94f248234b3a39284361b66fccd711d6352b0a07",
+    "candidate_pool_complementarity.json": "a642e2ec82b9087823b01a60f1564388a6333906a6a5e23d364096510ab8fb0c",
+    "candidate_pool_backfill_analysis.json": "a2733426c2b48239962bccef02d719be113dd61f1bcd928129e15115314cdbb0",
+    "candidate_pool_coverage_ceiling.json": "eccd40b650770215cf6b026a655a101284860f9a89ddc4c2e3aff12bc5c02451",
+    "candidate_pool_unrecovered_cases.csv": "04af2253bdad16c32e5d827e9e1ff31d95411a936dd5bdcf24bb3db3ddb46670",
+    "candidate_pool_strategy_comparison.csv": "1f46f59243491482c15703d38ddae127f000dd7eff18078ae0ee4564da005a06",
+    "candidate_pool_compatibility.json": "6c5575778c4d94b2fe7342211feaf80ebc040b847a1f19c300ea57f85ed8b323",
+    "summary.md": "9f1dda5d05da0ee8f4254c77b115df8d0a57fcb80e9d8b4c6b28241f3d1740ba"
+  },
+  "large_outputs_over_25_mb": [],
+  "compatibility": true,
+  "d0_confirmatory_comparator": false,
+  "diagnostic_union_is_ranking": false
+}
