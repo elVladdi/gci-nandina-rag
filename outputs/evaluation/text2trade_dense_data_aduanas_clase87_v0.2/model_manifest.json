@@ -1,0 +1,93 @@
+{
+  "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "local_model_path": "data/processed/indexes/text2trade_nandina8_v1/model",
+  "revision": null,
+  "revision_status": "not recorded in local Text2Trade artifact metadata",
+  "model_type": "SentenceTransformer",
+  "similarity_fn_name": "cosine",
+  "prompts": {
+    "query": "",
+    "document": ""
+  },
+  "tokenizer_class": "BertTokenizer",
+  "tokenizer_max_length": 128,
+  "truncation_side": "right",
+  "truncation_strategy": "longest_first",
+  "transformer_model_type": "bert",
+  "hidden_size": 384,
+  "dtype": "float32",
+  "pooling": {
+    "word_embedding_dimension": 384,
+    "pooling_mode_cls_token": false,
+    "pooling_mode_mean_tokens": true,
+    "pooling_mode_max_tokens": false,
+    "pooling_mode_mean_sqrt_len_tokens": false,
+    "pooling_mode_weightedmean_tokens": false,
+    "pooling_mode_lasttoken": false,
+    "include_prompt": true
+  },
+  "files": [
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/config_sentence_transformers.json",
+      "size_bytes": 290,
+      "sha256": "35157962b5f11b995927a41de25d649e9aacc84f5a23ccf424a7973b61980127"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/config.json",
+      "size_bytes": 638,
+      "sha256": "1de3784e8747f78505b9ef98acbb1acbdf9c71fd6aad82944537fa4351e78ed8"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/modules.json",
+      "size_bytes": 242,
+      "sha256": "27e3a229cecaf4d6ec90fb8e439d6bd2da7b2e22ff49a23e0b0a293a5f3e413c"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/sentence_bert_config.json",
+      "size_bytes": 60,
+      "sha256": "874954176b1baf79cb203116c9583f72249d6d28012447ecccfc248a680e0400"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/special_tokens_map.json",
+      "size_bytes": 1015,
+      "sha256": "66715ae6a0dd4aff4fe228bcaaccac6e52c83fd0ba80992c2be7d0e43b362307"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/tokenizer_config.json",
+      "size_bytes": 1512,
+      "sha256": "4646a38cb96214b077fa0094a64d47ff1ecab88ea972687d2c2ce13eeb1909a9"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/tokenizer.json",
+      "size_bytes": 17082987,
+      "sha256": "cad551d5600a84242d0973327029452a1e3672ba6313c2a3c3d69c4310e12719"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/unigram.json",
+      "size_bytes": 14763260,
+      "sha256": "da145b5e7700ae40f16691ec32a0b1fdc1ee3298db22a31ea55f57a966c4a65d"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/model.safetensors",
+      "size_bytes": 470637416,
+      "sha256": "7f4f89d628f87ade0e0b57c40affb6402cd77abc8110584d8d35dc86da514ee8"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/1_Pooling/config.json",
+      "size_bytes": 321,
+      "sha256": "b4105bf48c5257a542a7e1968cef220b3ecd49ae24943143279650c4ac6e30a0"
+    },
+    {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/model/README.md",
+      "size_bytes": 4043,
+      "sha256": "90bc9c8da4ec9fad492fd04218f7f3eabaa4173c9e8eec9dc59b519a01751cbb"
+    }
+  ],
+  "embedding_dim": 384,
+  "device": "cpu",
+  "batch_size": 32,
+  "normalize_embeddings": true,
+  "query_document_encoding_policy": "same SentenceTransformer encoder, empty query/document prompts",
+  "similarity_metric": "cosine via dot product over normalized vectors",
+  "monte_carlo_dropout_in_run": false
+}

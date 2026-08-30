@@ -1,0 +1,45 @@
+{
+  "rows": [
+    {
+      "position_bucket": "1",
+      "cases": 0,
+      "share": 0.0
+    },
+    {
+      "position_bucket": "2-3",
+      "cases": 0,
+      "share": 0.0
+    },
+    {
+      "position_bucket": "4-5",
+      "cases": 0,
+      "share": 0.0
+    },
+    {
+      "position_bucket": "6-10",
+      "cases": 0,
+      "share": 0.0
+    },
+    {
+      "position_bucket": "11-50",
+      "cases": 1,
+      "share": 0.000946969696969697
+    },
+    {
+      "position_bucket": "51-100",
+      "cases": 3,
+      "share": 0.002840909090909091
+    },
+    {
+      "position_bucket": "101-200",
+      "cases": 7,
+      "share": 0.006628787878787879
+    },
+    {
+      "position_bucket": ">200_or_not_retrieved",
+      "cases": 1045,
+      "share": 0.9895833333333334
+    }
+  ],
+  "total": 1056
+}

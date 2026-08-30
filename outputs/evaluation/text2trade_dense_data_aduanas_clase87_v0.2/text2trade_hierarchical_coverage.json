@@ -1,0 +1,31 @@
+{
+  "source": "text2trade_case_summary.csv",
+  "diagnostic_only": true,
+  "parent_match_is_not_exact_recovery": true,
+  "metrics": {
+    "exact_at_100_numerator": 4,
+    "exact_at_100_denominator": 1056,
+    "exact_at_100": 0.003787878787878788,
+    "hs6_at_100_numerator": 35,
+    "hs6_at_100_denominator": 1056,
+    "hs6_at_100": 0.03314393939393939,
+    "hs4_at_100_numerator": 287,
+    "hs4_at_100_denominator": 1056,
+    "hs4_at_100": 0.27178030303030304,
+    "chapter_at_100_numerator": 828,
+    "chapter_at_100_denominator": 1056,
+    "chapter_at_100": 0.7840909090909091,
+    "exact_at_200_numerator": 11,
+    "exact_at_200_denominator": 1056,
+    "exact_at_200": 0.010416666666666666,
+    "hs6_at_200_numerator": 148,
+    "hs6_at_200_denominator": 1056,
+    "hs6_at_200": 0.14015151515151514,
+    "hs4_at_200_numerator": 581,
+    "hs4_at_200_denominator": 1056,
+    "hs4_at_200": 0.5501893939393939,
+    "chapter_at_200_numerator": 1027,
+    "chapter_at_200_denominator": 1056,
+    "chapter_at_200": 0.9725378787878788
+  }
+}

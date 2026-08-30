@@ -1,0 +1,19 @@
+{
+  "artifact_id": "historical_flat_hierarchical_text2trade_compatibility_v0.2",
+  "total_cases": 1056,
+  "total_cases_historical": 1056,
+  "total_cases_flat": 1056,
+  "total_cases_hierarchical": 1056,
+  "total_cases_text2trade": 1056,
+  "identical_historical_case_id_set": true,
+  "identical_flat_case_id_set": true,
+  "identical_hierarchical_case_id_set": true,
+  "identical_case_id_sets": true,
+  "identical_labels": true,
+  "label_mismatch_count": 0,
+  "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "eval_hash_flat": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "eval_hash_hierarchical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "eval_hash_text2trade": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "compatible": true
+}

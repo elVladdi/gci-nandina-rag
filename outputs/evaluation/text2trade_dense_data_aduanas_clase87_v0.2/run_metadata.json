@@ -1,0 +1,469 @@
+{
+  "version": "v0.2",
+  "dataset_version": "v0.2",
+  "experiment_id": "exp04_phase_d_text2trade_dense_v0.2",
+  "strategy": "text2trade_dense",
+  "method": "text2trade_dense_data_aduanas_clase87_v0.2",
+  "created_at_utc": "2026-08-30T04:21:40.333940+00:00",
+  "command": "python -B -m src.experiments.evaluate_dense_text2trade_data_aduanas_v02 --retrieval-depth 200",
+  "runtime": {
+    "python": "3.10.11",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.2.6",
+      "torch": "2.12.0",
+      "sentence-transformers": "5.5.1",
+      "transformers": "5.12.1",
+      "tokenizers": "0.22.2",
+      "safetensors": "0.8.0",
+      "hnswlib": null
+    }
+  },
+  "git": {
+    "branch": "codex/exp04-rerun-v02",
+    "commit": "9fcffa91c64cf87349dd10df424ec61829adb20f",
+    "dirty_status_short": [
+      "?? Referencias/Antecedentes/",
+      "?? Referencias/Glosario/",
+      "?? \"data/Series - Descripciones.xlsx\""
+    ]
+  },
+  "inputs": {
+    "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "dense_artifact_dir": "data/processed/indexes/text2trade_nandina8_v1",
+    "source_corpus": "data/processed/corpus_rag_v1_index.jsonl",
+    "source_corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "docstore": "data/processed/indexes/text2trade_nandina8_v1/store/nandina8_docstore.jsonl",
+    "docstore_sha256": "acff90a10c3a0e52e8a8a6adbaf98fd747b76af01218acffcff00956952a5721",
+    "vectors": "data/processed/indexes/text2trade_nandina8_v1/index/vectors.npy",
+    "vectors_sha256": "67cd07f96fe98712940db467ea2510018698e40e3b3a24e8478256e62e0f3773",
+    "id_map": "data/processed/indexes/text2trade_nandina8_v1/index/id_map.json",
+    "id_map_sha256": "b9d526c66a61a3fc5aeb5209a9431ac74566eb1971418ea67b43fbd6e877e976",
+    "retrieval_config": "data/processed/indexes/text2trade_nandina8_v1/retrieval_config.json",
+    "retrieval_config_sha256": "439ab2001bc1600ffe86885729fce56135950b0adecf034a4ece57c1fa7c42f8",
+    "artifact_metadata": "data/processed/indexes/text2trade_nandina8_v1/text2trade_nandina8_run_metadata.json",
+    "artifact_metadata_sha256": "66474982bfe178f7cf182489b0f36453513ce4fea90a9a2557a6177a99e3e51f"
+  },
+  "artifact_hashes": {
+    "retrieval_config.json": {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/retrieval_config.json",
+      "exists": true,
+      "size_bytes": 625,
+      "sha256": "439ab2001bc1600ffe86885729fce56135950b0adecf034a4ece57c1fa7c42f8"
+    },
+    "text2trade_nandina8_run_metadata.json": {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/text2trade_nandina8_run_metadata.json",
+      "exists": true,
+      "size_bytes": 2796,
+      "sha256": "66474982bfe178f7cf182489b0f36453513ce4fea90a9a2557a6177a99e3e51f"
+    },
+    "index/vectors.npy": {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/index/vectors.npy",
+      "exists": true,
+      "size_bytes": 11741312,
+      "sha256": "67cd07f96fe98712940db467ea2510018698e40e3b3a24e8478256e62e0f3773"
+    },
+    "index/id_map.json": {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/index/id_map.json",
+      "exists": true,
+      "size_bytes": 610413,
+      "sha256": "b9d526c66a61a3fc5aeb5209a9431ac74566eb1971418ea67b43fbd6e877e976"
+    },
+    "store/nandina8_docstore.jsonl": {
+      "path": "data/processed/indexes/text2trade_nandina8_v1/store/nandina8_docstore.jsonl",
+      "exists": true,
+      "size_bytes": 2549619,
+      "sha256": "acff90a10c3a0e52e8a8a6adbaf98fd747b76af01218acffcff00956952a5721"
+    }
+  },
+  "columns": {
+    "query": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label": "NANDINA"
+  },
+  "parameters": {
+    "retrieval_depth": 200,
+    "batch_size": 32,
+    "embedding_normalize": true,
+    "ranking_unit": "unique NANDINA-8 code",
+    "score": "dot product over normalized dense embeddings",
+    "ann_backend_configured": "hnswlib cosine",
+    "ann_backend_used": null,
+    "brute_force_used": true,
+    "hnsw_index_exists": false,
+    "mcd_configured_in_artifact": true,
+    "mcd_used_in_run": false,
+    "max_sequence_length": 128,
+    "truncation_policy": "tokenizer max_length=128, truncation_side=right, truncation_strategy=longest_first"
+  },
+  "model_manifest": {
+    "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "local_model_path": "data/processed/indexes/text2trade_nandina8_v1/model",
+    "revision": null,
+    "revision_status": "not recorded in local Text2Trade artifact metadata",
+    "model_type": "SentenceTransformer",
+    "similarity_fn_name": "cosine",
+    "prompts": {
+      "query": "",
+      "document": ""
+    },
+    "tokenizer_class": "BertTokenizer",
+    "tokenizer_max_length": 128,
+    "truncation_side": "right",
+    "truncation_strategy": "longest_first",
+    "transformer_model_type": "bert",
+    "hidden_size": 384,
+    "dtype": "float32",
+    "pooling": {
+      "word_embedding_dimension": 384,
+      "pooling_mode_cls_token": false,
+      "pooling_mode_mean_tokens": true,
+      "pooling_mode_max_tokens": false,
+      "pooling_mode_mean_sqrt_len_tokens": false,
+      "pooling_mode_weightedmean_tokens": false,
+      "pooling_mode_lasttoken": false,
+      "include_prompt": true
+    },
+    "files": [
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/config_sentence_transformers.json",
+        "size_bytes": 290,
+        "sha256": "35157962b5f11b995927a41de25d649e9aacc84f5a23ccf424a7973b61980127"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/config.json",
+        "size_bytes": 638,
+        "sha256": "1de3784e8747f78505b9ef98acbb1acbdf9c71fd6aad82944537fa4351e78ed8"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/modules.json",
+        "size_bytes": 242,
+        "sha256": "27e3a229cecaf4d6ec90fb8e439d6bd2da7b2e22ff49a23e0b0a293a5f3e413c"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/sentence_bert_config.json",
+        "size_bytes": 60,
+        "sha256": "874954176b1baf79cb203116c9583f72249d6d28012447ecccfc248a680e0400"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/special_tokens_map.json",
+        "size_bytes": 1015,
+        "sha256": "66715ae6a0dd4aff4fe228bcaaccac6e52c83fd0ba80992c2be7d0e43b362307"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/tokenizer_config.json",
+        "size_bytes": 1512,
+        "sha256": "4646a38cb96214b077fa0094a64d47ff1ecab88ea972687d2c2ce13eeb1909a9"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/tokenizer.json",
+        "size_bytes": 17082987,
+        "sha256": "cad551d5600a84242d0973327029452a1e3672ba6313c2a3c3d69c4310e12719"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/unigram.json",
+        "size_bytes": 14763260,
+        "sha256": "da145b5e7700ae40f16691ec32a0b1fdc1ee3298db22a31ea55f57a966c4a65d"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/model.safetensors",
+        "size_bytes": 470637416,
+        "sha256": "7f4f89d628f87ade0e0b57c40affb6402cd77abc8110584d8d35dc86da514ee8"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/1_Pooling/config.json",
+        "size_bytes": 321,
+        "sha256": "b4105bf48c5257a542a7e1968cef220b3ecd49ae24943143279650c4ac6e30a0"
+      },
+      {
+        "path": "data/processed/indexes/text2trade_nandina8_v1/model/README.md",
+        "size_bytes": 4043,
+        "sha256": "90bc9c8da4ec9fad492fd04218f7f3eabaa4173c9e8eec9dc59b519a01751cbb"
+      }
+    ],
+    "embedding_dim": 384,
+    "device": "cpu",
+    "batch_size": 32,
+    "normalize_embeddings": true,
+    "query_document_encoding_policy": "same SentenceTransformer encoder, empty query/document prompts",
+    "similarity_metric": "cosine via dot product over normalized vectors",
+    "monte_carlo_dropout_in_run": false
+  },
+  "corpus": {
+    "source_corpus_path": "data/processed/corpus_rag_v1_index.jsonl",
+    "source_corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "source": "corpus_rag_v1_index.jsonl",
+    "normative_version": "text2trade_nandina8_v1",
+    "source_rows_total": 7748,
+    "source_nandina8_rows": 7644,
+    "docstore_path": "data/processed/indexes/text2trade_nandina8_v1/store/nandina8_docstore.jsonl",
+    "docstore_sha256": "acff90a10c3a0e52e8a8a6adbaf98fd747b76af01218acffcff00956952a5721",
+    "docstore_docs": 7644,
+    "docstore_unique_codes": 7644,
+    "duplicate_codes": {},
+    "document_unit": "one vector/document per unique NANDINA-8 code",
+    "text_fields": [
+      "texto_index",
+      "texto",
+      "text",
+      "content",
+      "descripcion"
+    ],
+    "text_field_used": [
+      "texto_index"
+    ],
+    "hierarchical_levels": [
+      "NANDINA-8 leaf text only in frozen Text2Trade docstore"
+    ],
+    "eval_cases": 1056,
+    "eval_unique_codes": 42,
+    "eval_codes_present_exact_nandina8_in_corpus": 42,
+    "eval_cases_present_exact_nandina8_in_corpus": 1056,
+    "eval_cases_absent_from_corpus": 0,
+    "reference_recovered_top_100": 4,
+    "reference_recovered_101_200": 7,
+    "reference_present_not_recovered_top_200": 1045,
+    "reference_present_but_not_recovered_top_100": 1052,
+    "parent_codes_counted_as_exact_coverage": false
+  },
+  "metrics": {
+    "cases_evaluated": 1056,
+    "cases_with_retrieval": 1056,
+    "zero_retrieval_cases": 0,
+    "not_found_at_depth": 1045,
+    "top_1_numerator": 0,
+    "top_1_denominator": 1056,
+    "top_1": 0.0,
+    "top_3_numerator": 0,
+    "top_3_denominator": 1056,
+    "top_3": 0.0,
+    "top_5_numerator": 0,
+    "top_5_denominator": 1056,
+    "top_5": 0.0,
+    "top_10_numerator": 0,
+    "top_10_denominator": 1056,
+    "top_10": 0.0,
+    "top_50_numerator": 1,
+    "top_50_denominator": 1056,
+    "top_50": 0.000946969696969697,
+    "recall_at_100_numerator": 4,
+    "recall_at_100_denominator": 1056,
+    "recall_at_100": 0.003787878787878788,
+    "recall_at_200_numerator": 11,
+    "recall_at_200_denominator": 1056,
+    "recall_at_200": 0.010416666666666666,
+    "mrr_at_100_numerator": 0.06384783476059974,
+    "mrr_at_100_denominator": 1056,
+    "mrr_at_100": 6.046196473541642e-05,
+    "mrr_at_200_numerator": 0.11292224793780954,
+    "mrr_at_200_denominator": 1056,
+    "mrr_at_200": 0.00010693394691080449,
+    "exact_at_100_numerator": 4,
+    "exact_at_100_denominator": 1056,
+    "exact_at_100": 0.003787878787878788,
+    "hs6_at_100_numerator": 35,
+    "hs6_at_100_denominator": 1056,
+    "hs6_at_100": 0.03314393939393939,
+    "hs4_at_100_numerator": 287,
+    "hs4_at_100_denominator": 1056,
+    "hs4_at_100": 0.27178030303030304,
+    "chapter_at_100_numerator": 828,
+    "chapter_at_100_denominator": 1056,
+    "chapter_at_100": 0.7840909090909091,
+    "exact_at_200_numerator": 11,
+    "exact_at_200_denominator": 1056,
+    "exact_at_200": 0.010416666666666666,
+    "hs6_at_200_numerator": 148,
+    "hs6_at_200_denominator": 1056,
+    "hs6_at_200": 0.14015151515151514,
+    "hs4_at_200_numerator": 581,
+    "hs4_at_200_denominator": 1056,
+    "hs4_at_200": 0.5501893939393939,
+    "chapter_at_200_numerator": 1027,
+    "chapter_at_200_denominator": 1056,
+    "chapter_at_200": 0.9725378787878788
+  },
+  "coverage_summary": {
+    "eval_cases": 1056,
+    "eval_unique_codes": 42,
+    "eval_codes_present_exact_nandina8_in_corpus": 42,
+    "eval_cases_present_exact_nandina8_in_corpus": 1056,
+    "eval_cases_absent_from_corpus": 0,
+    "reference_recovered_top_100": 4,
+    "reference_recovered_101_200": 7,
+    "reference_present_not_recovered_top_200": 1045,
+    "reference_present_but_not_recovered_top_100": 1052,
+    "parent_codes_counted_as_exact_coverage": false
+  },
+  "position_distribution": {
+    ">200_or_not_retrieved": 1045,
+    "101-200": 7,
+    "51-100": 3,
+    "11-50": 1
+  },
+  "compatibility_report": {
+    "artifact_id": "historical_flat_hierarchical_text2trade_compatibility_v0.2",
+    "total_cases": 1056,
+    "total_cases_historical": 1056,
+    "total_cases_flat": 1056,
+    "total_cases_hierarchical": 1056,
+    "total_cases_text2trade": 1056,
+    "identical_historical_case_id_set": true,
+    "identical_flat_case_id_set": true,
+    "identical_hierarchical_case_id_set": true,
+    "identical_case_id_sets": true,
+    "identical_labels": true,
+    "label_mismatch_count": 0,
+    "eval_hash_historical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_flat": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_hierarchical": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_hash_text2trade": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "compatible": true
+  },
+  "strategy_comparison": [
+    {
+      "metric": "Top-1",
+      "historical": 0.509469696969697,
+      "flat": 0.027462121212121212,
+      "hierarchical": 0.026515151515151516,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-3",
+      "historical": 0.6714015151515151,
+      "flat": 0.05113636363636364,
+      "hierarchical": 0.052083333333333336,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-5",
+      "historical": 0.7632575757575758,
+      "flat": 0.061553030303030304,
+      "hierarchical": 0.0625,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-10",
+      "historical": 0.8910984848484849,
+      "flat": 0.06534090909090909,
+      "hierarchical": 0.06534090909090909,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-50",
+      "historical": 0.9914772727272727,
+      "flat": 0.07007575757575757,
+      "hierarchical": 0.09090909090909091,
+      "text2trade": 0.000946969696969697
+    },
+    {
+      "metric": "Recall@100",
+      "historical": null,
+      "flat": 0.07102272727272728,
+      "hierarchical": 0.10132575757575757,
+      "text2trade": 0.003787878787878788
+    },
+    {
+      "metric": "MRR@100",
+      "historical": 0.6297077493524843,
+      "flat": 0.04229731726741296,
+      "hierarchical": 0.04198129438896377,
+      "text2trade": 6.046196473541642e-05
+    }
+  ],
+  "previous_phase_artifact_hashes": {
+    "all_match_expected": true,
+    "entries": {
+      "historical_metrics": {
+        "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json",
+        "expected_sha256": "5334e64ab2b3f812f939b652fe1ee8ad8db24b673ebb48fd4d7b1ddb0dd444fa",
+        "actual_sha256": "5334e64ab2b3f812f939b652fe1ee8ad8db24b673ebb48fd4d7b1ddb0dd444fa",
+        "matches": true
+      },
+      "historical_case_summary": {
+        "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv",
+        "expected_sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56",
+        "actual_sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56",
+        "matches": true
+      },
+      "flat_metrics": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json",
+        "expected_sha256": "56a702398d3b9d1483ecd1be3ca79587682ad8fd3afd84858917f248b5ae0460",
+        "actual_sha256": "56a702398d3b9d1483ecd1be3ca79587682ad8fd3afd84858917f248b5ae0460",
+        "matches": true
+      },
+      "flat_case_summary": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv",
+        "expected_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+        "actual_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+        "matches": true
+      },
+      "hierarchical_metrics": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+        "expected_sha256": "557c46668cfd51fbeabba0ecdb9bf3ca4a2a34a7f2850384252c5d963a26fd9f",
+        "actual_sha256": "557c46668cfd51fbeabba0ecdb9bf3ca4a2a34a7f2850384252c5d963a26fd9f",
+        "matches": true
+      },
+      "hierarchical_case_summary": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+        "expected_sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+        "actual_sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+        "matches": true
+      }
+    }
+  },
+  "validation": {
+    "evalset_hash_matches_official_v02": true,
+    "cases_evaluated_1056": true,
+    "case_ids_unique": true,
+    "same_case_ids_as_a_b_c": true,
+    "same_labels_as_a_b_c": true,
+    "compatibility_true": true,
+    "reference_codes_all_present_in_dense_corpus": true,
+    "ranking_effective_codes_unique": true,
+    "label_string_found_inside_query_count": 0,
+    "dam_used_as_query_feature": false,
+    "serie_used_as_query_feature": false,
+    "historical_results_used_as_retrieval_features": false,
+    "flat_results_used_as_retrieval_features": false,
+    "hierarchical_results_used_as_retrieval_features": false,
+    "candidate_pool_used": false,
+    "dual_protected_used": false,
+    "mixed_70_30_used": false,
+    "rag_used": false,
+    "llm_used": false,
+    "phase_e_started": false,
+    "previous_phase_artifacts_preserved": true,
+    "large_outputs_over_50mb_versioned": false
+  },
+  "gate_d_status": "GATE D APROBADO",
+  "outputs": {
+    "text2trade_results_csv": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/text2trade_results.csv",
+    "text2trade_case_summary_csv": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/text2trade_case_summary.csv",
+    "text2trade_metrics_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/text2trade_metrics.json",
+    "text2trade_coverage_summary_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/text2trade_coverage_summary.json",
+    "text2trade_hierarchical_coverage_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/text2trade_hierarchical_coverage.json",
+    "position_distribution_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/position_distribution.json",
+    "position_distribution_csv": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/position_distribution.csv",
+    "compatibility_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/historical_flat_hierarchical_text2trade_compatibility_v0.2.json",
+    "strategy_comparison_csv": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/strategy_comparison_v0.2.csv",
+    "strategy_comparison_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/strategy_comparison_v0.2.json",
+    "model_manifest_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/model_manifest.json",
+    "run_metadata_json": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json",
+    "summary_md": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/summary.md"
+  },
+  "output_sha256": {
+    "text2trade_results_csv": "283890d71b14bd57699653180e0e624684835391f6951c63fbb62730b3318cdf",
+    "text2trade_case_summary_csv": "4709820047c9579cea9371e15f9342e96196d24b799a2b21febac3273108d480",
+    "text2trade_metrics_json": "60366fff27194faf00d18acad10d68ea6cd5dd2a5dc0c3a7dedcdc1ed3f4c660",
+    "text2trade_coverage_summary_json": "70d2d47a0cf4ef9ecce1996f77deebbcb0cf966a43759f95d302b7c4de3cd220",
+    "text2trade_hierarchical_coverage_json": "92a661659e3a2e82db1cef0855a9a2fb21e634935c9261518dc2c37b3677c7c5",
+    "position_distribution_json": "2e2ac5b74c02b4ccd40e1c0ca48686b22d113e5adf67c403b0214436fc31fcd5",
+    "position_distribution_csv": "8743b0f3315e067f129b124c04a9b5c983e2db5e109919dbc0f4ed857edf8c65",
+    "compatibility_json": "cb622fbdd78dce79f1050ee29218c6f641ea1131796013aa203775f82f1b9568",
+    "strategy_comparison_csv": "c876ea8ee48f85acb053e42863afe360bda296eadfdfe9ea51d7837e7148ed7d",
+    "strategy_comparison_json": "850802801cded4f2ffb7d5127079716470ff6117f39af935464bb5c7938d70e6",
+    "model_manifest_json": "8234246996f5f5c5b69d9f5f6cdb4a1b4a3726c9eb91c4e56aaf48f00da6af9d",
+    "summary_md": "6f251aff041da2b16e64e0b8f3d6aacec13f74f4eb38d98ea67879321ffb324c"
+  }
+}

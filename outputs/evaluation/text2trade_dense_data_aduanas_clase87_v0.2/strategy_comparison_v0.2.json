@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "metric": "Top-1",
+      "historical": 0.509469696969697,
+      "flat": 0.027462121212121212,
+      "hierarchical": 0.026515151515151516,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-3",
+      "historical": 0.6714015151515151,
+      "flat": 0.05113636363636364,
+      "hierarchical": 0.052083333333333336,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-5",
+      "historical": 0.7632575757575758,
+      "flat": 0.061553030303030304,
+      "hierarchical": 0.0625,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-10",
+      "historical": 0.8910984848484849,
+      "flat": 0.06534090909090909,
+      "hierarchical": 0.06534090909090909,
+      "text2trade": 0.0
+    },
+    {
+      "metric": "Top-50",
+      "historical": 0.9914772727272727,
+      "flat": 0.07007575757575757,
+      "hierarchical": 0.09090909090909091,
+      "text2trade": 0.000946969696969697
+    },
+    {
+      "metric": "Recall@100",
+      "historical": null,
+      "flat": 0.07102272727272728,
+      "hierarchical": 0.10132575757575757,
+      "text2trade": 0.003787878787878788
+    },
+    {
+      "metric": "MRR@100",
+      "historical": 0.6297077493524843,
+      "flat": 0.04229731726741296,
+      "hierarchical": 0.04198129438896377,
+      "text2trade": 6.046196473541642e-05
+    }
+  ],
+  "note": "Descriptive only; HE2 remains open until candidate pools are completed."
+}

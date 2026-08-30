@@ -1,0 +1,12 @@
+{
+  "eval_cases": 1056,
+  "eval_unique_codes": 42,
+  "eval_codes_present_exact_nandina8_in_corpus": 42,
+  "eval_cases_present_exact_nandina8_in_corpus": 1056,
+  "eval_cases_absent_from_corpus": 0,
+  "reference_recovered_top_100": 4,
+  "reference_recovered_101_200": 7,
+  "reference_present_not_recovered_top_200": 1045,
+  "reference_present_but_not_recovered_top_100": 1052,
+  "parent_codes_counted_as_exact_coverage": false
+}
