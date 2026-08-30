@@ -1,0 +1,326 @@
+{
+  "classification": "B. PROMPT-SCHEMA SPECIFICATION MISMATCH",
+  "created_at_utc": "2026-08-30T19:36:54.987406+00:00",
+  "gate_j": {
+    "decision": "APPROVED WITH PROTOCOL/SPECIFICATION LIMITATION",
+    "preserved": true,
+    "ready_for_phase_k": false
+  },
+  "git_origin": {
+    "interpretation": "The v0.2 schema was added after the v0.2 prompt and includes a field introduced by the later v0.3 prompt structure.",
+    "prompt_v0_2_added_commit": "51380925e9e6d0617dc65c1b37b82e685493abf9",
+    "prompt_v0_3_introduces_advertencias_globales": true,
+    "schema_and_rubric_v0_2_added_commit": "a6c98c2dbd2dcc7d61641755f5f8eddc5c0db94c"
+  },
+  "hashes": {
+    "parsed": {
+      "actual": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+      "expected": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+      "pass": true
+    },
+    "prompt": {
+      "actual": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+      "expected": "1b56ba51863df4d73c8cd882d9154d32df3339a6292d4f72f61d400876f8b1d0",
+      "pass": true
+    },
+    "raw": {
+      "actual": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+      "expected": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+      "pass": true
+    },
+    "rubric": {
+      "actual": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+      "expected": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+      "pass": true
+    },
+    "schema": {
+      "actual": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6",
+      "expected": "b31c0ce9b3bf82d6e80572f2debd5564a46a0d25d5e228a1272aca4f320f9bc6",
+      "pass": true
+    }
+  },
+  "historical_validator_audit": {
+    "advertencias_globales_required": false,
+    "generic_warning_control_present": true,
+    "historical_failure_label": "generic_normative_warning_missing",
+    "path": "src/experiments/evaluate_llm_explanation_top3_audit_sample.py"
+  },
+  "model_called": false,
+  "original_j_metrics_preserved": true,
+  "phase_k_executed": false,
+  "prompt_audit": {
+    "advertencias_globales_explicitly_required": false,
+    "exact_output_structure_has_field": false,
+    "path": "src\\llm\\explain_top3_nandina_prompt_v0.2.md"
+  },
+  "retrieval_performed": false,
+  "rubric_applied": false,
+  "rubric_audit": {
+    "advertencias_globales_present": false,
+    "hard_constraints": [
+      "Top-3 exacto y ordenado",
+      "sin codigos fuera del Top-3",
+      "sin clasificacion oficial",
+      "conclusion prudente",
+      "JSON estricto"
+    ],
+    "missing_advertencias_globales_is_hard_violation": false,
+    "path": "src\\configs\\he4_rubric_v0.2.json"
+  },
+  "schema_audit": {
+    "advertencias_globales_required_root_field": true,
+    "path": "src\\configs\\he4_explainer_schema_v0.2.json"
+  },
+  "schema_impact": {
+    "cases_complete_if_field_is_not_evaluable": 50,
+    "cases_failing_only_advertencias_globales": 50,
+    "cases_with_other_schema_errors": 0,
+    "interpretation": "SCHEMA RESULT CONFOUNDED BY PROMPT-SCHEMA SPECIFICATION MISMATCH",
+    "original_schema_compliance": "0/50 (compliance against frozen schema)"
+  },
+  "version": "gate_j_prompt_schema_microaudit_v0.2",
+  "warning_control_decomposition": {
+    "cases_failing_generic_control": [
+      "DA-EVAL-V02-00002",
+      "DA-EVAL-V02-00003",
+      "DA-EVAL-V02-00017",
+      "DA-EVAL-V02-00106",
+      "DA-EVAL-V02-00284",
+      "DA-EVAL-V02-00441",
+      "DA-EVAL-V02-00442",
+      "DA-EVAL-V02-00677",
+      "DA-EVAL-V02-00889"
+    ],
+    "cases_failing_warnings_field": [],
+    "derived_descriptive_label": "MISSING_GENERIC_NORMATIVE_WARNING",
+    "failure_details": [
+      {
+        "candidate_code": "87032390",
+        "candidate_rank": 1,
+        "case_id": "DA-EVAL-V02-00106",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87032390",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.23.90 - - - Los demás u",
+        "trigger_text": "8703.23.90 - - - Los demás u",
+        "warning_and_limitations_output": "No se especifica si es híbrido o no | No se especifica el tipo de sistema de alimentación | No se especifica si es híbrido o no | No se especifica el tipo de sistema de alimentación",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87032290",
+        "candidate_rank": 2,
+        "case_id": "DA-EVAL-V02-00106",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87032290",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.22.90 - - - Los demás u",
+        "trigger_text": "8703.22.90 - - - Los demás u",
+        "warning_and_limitations_output": "No se especifica si es híbrido o no | No se especifica el tipo de sistema de alimentación | No se especifica si es híbrido o no | No se especifica el tipo de sistema de alimentación",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87034090",
+        "candidate_rank": 3,
+        "case_id": "DA-EVAL-V02-00106",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87034090",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.40.90 - - Los demás u",
+        "trigger_text": "8703.40.90 - - Los demás u",
+        "warning_and_limitations_output": "No se especifica si es híbrido o no | No se especifica el tipo de sistema de alimentación | No se especifica si es híbrido o no | No se especifica el tipo de sistema de alimentación",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87032290",
+        "candidate_rank": 2,
+        "case_id": "DA-EVAL-V02-00677",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87032290",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.22.90 - - - Los demás u",
+        "trigger_text": "8703.22.90 - - - Los demás u",
+        "warning_and_limitations_output": "Cilindrada y Peso no coinciden con la mercancía observada",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87038090",
+        "candidate_rank": 3,
+        "case_id": "DA-EVAL-V02-00677",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87038090",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.80.90 - - Los demás u",
+        "trigger_text": "8703.80.90 - - Los demás u",
+        "warning_and_limitations_output": "Tipo de vehículo no coincide con la mercancía observada",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87089999",
+        "candidate_rank": 3,
+        "case_id": "DA-EVAL-V02-00889",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87089999",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8708.99.99 - - - - Los demás u",
+        "trigger_text": "8708.99.99 - - - - Los demás u",
+        "warning_and_limitations_output": "Descripción general, no específica la cabina",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87038090",
+        "candidate_rank": 1,
+        "case_id": "DA-EVAL-V02-00284",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87038090",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.80.90 - - Los demás u",
+        "trigger_text": "8703.80.90 - - Los demás u",
+        "warning_and_limitations_output": "Falta información sobre el tipo de vehículo (hatchback vs cuatrimoto)",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87032290",
+        "candidate_rank": 2,
+        "case_id": "DA-EVAL-V02-00284",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87032290",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.22.90 - - - Los demás u",
+        "trigger_text": "8703.22.90 - - - Los demás u",
+        "warning_and_limitations_output": "Falta información sobre el tipo de vehículo (hatchback vs cuatrimoto)",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87032290",
+        "candidate_rank": 1,
+        "case_id": "DA-EVAL-V02-00002",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87032290",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.22.90 - - - Los demás u",
+        "trigger_text": "8703.22.90 - - - Los demás u",
+        "warning_and_limitations_output": "Año 2027 no coincide con 2026",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87034090",
+        "candidate_rank": 2,
+        "case_id": "DA-EVAL-V02-00002",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87034090",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.40.90 - - Los demás u",
+        "trigger_text": "8703.40.90 - - Los demás u",
+        "warning_and_limitations_output": "Modelo no coincide con la mercancia | Modelo RAV 4 no coincide con RAIZE, y no se especifica si es híbrido o gasolina",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87038090",
+        "candidate_rank": 3,
+        "case_id": "DA-EVAL-V02-00002",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87038090",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.80.90 - - Los demás u",
+        "trigger_text": "8703.80.90 - - Los demás u",
+        "warning_and_limitations_output": "VE:2026 vs 2026, no se especifica si es híbrido o gasolina | VE:2026 no coincide con 2026, y no se especifica si es híbrido o gasolina",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87032290",
+        "candidate_rank": 1,
+        "case_id": "DA-EVAL-V02-00003",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87032290",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.22.90 - - - Los demás u",
+        "trigger_text": "8703.22.90 - - - Los demás u",
+        "warning_and_limitations_output": "Año de fabricación no coincide | No se especifica el año de fabricación",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87034090",
+        "candidate_rank": 2,
+        "case_id": "DA-EVAL-V02-00003",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87034090",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.40.90 - - Los demás u",
+        "trigger_text": "8703.40.90 - - Los demás u",
+        "warning_and_limitations_output": "Tipo de tracción no coincide | No se especifica el tipo de tracción",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87032390",
+        "candidate_rank": 3,
+        "case_id": "DA-EVAL-V02-00003",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87032390",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8703.23.90 - - - Los demás u",
+        "trigger_text": "8703.23.90 - - - Los demás u",
+        "warning_and_limitations_output": "Tipo de tracción no coincide | No se especifica el tipo de tracción",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87089999",
+        "candidate_rank": 2,
+        "case_id": "DA-EVAL-V02-00017",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87089999",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8708.99.99 - - - - Los demás u",
+        "trigger_text": "8708.99.99 - - - - Los demás u",
+        "warning_and_limitations_output": "",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87082990",
+        "candidate_rank": 3,
+        "case_id": "DA-EVAL-V02-00441",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87082990",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8708.29.90 - - - Los demás u",
+        "trigger_text": "8708.29.90 - - - Los demás u",
+        "warning_and_limitations_output": "Específicamente para otros componentes, no para cabina | Específicamente para otros componentes, no para cabina",
+        "warnings_field_valid": 1
+      },
+      {
+        "candidate_code": "87082990",
+        "candidate_rank": 3,
+        "case_id": "DA-EVAL-V02-00442",
+        "deterministic_failure_reason": "MISSING_GENERIC_NORMATIVE_WARNING",
+        "evidence_id": "NANDINA_87082990",
+        "generic_normative_warning_when_required": 0,
+        "generic_rule_triggered": 1,
+        "normative_reference": "8708.29.90 - - - Los demás u",
+        "trigger_text": "8708.29.90 - - - Los demás u",
+        "warning_and_limitations_output": "Específicamente para otros componentes, no para cabina | Específicamente para otros componentes, no para cabina",
+        "warnings_field_valid": 1
+      }
+    ],
+    "generic_normative_warning_when_required": "41/50",
+    "generic_rule_pre_specified": true,
+    "interpretation": "The original label conflates a structural warning-field check with a distinct content-token check for generic normative evidence.",
+    "original_taxonomy_label": "INVALID_WARNING_FIELD",
+    "overlap": [],
+    "warnings_field_valid": "50/50"
+  }
+}
