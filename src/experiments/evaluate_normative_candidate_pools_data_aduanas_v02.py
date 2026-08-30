@@ -270,7 +270,7 @@ def main() -> int:
         dual_rankings[case_id] = [item["code"] for item in dual_items]
         dual_detail[case_id] = stats
 
-    output_dir.mkdir(parents=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     depths = [int(value) for value in config["depths"]]
     case_summary: list[dict[str, Any]] = []
     result_rows: list[dict[str, Any]] = []
