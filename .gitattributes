@@ -15,3 +15,17 @@ outputs/audits/normative_bm25_flat_data_aduanas_clase87_v0.2/*.md text eol=lf
 outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/*.csv text eol=lf
 outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/*.json text eol=lf
 outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/*.md text eol=lf
+
+# Frozen v0.2 closure artifacts must retain LF bytes after checkout on Windows.
+outputs/audits/data_aduanas_splits_clase87_v0.2/** text eol=lf
+outputs/audits/exp05_unified_eval_hash_v0.2/** text eol=lf
+outputs/audits/exp07_dev_eval_freeze_v0.2/** text eol=lf
+outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/** text eol=lf
+outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/** text eol=lf
+outputs/evaluation/normative_candidate_pools_data_aduanas_clase87_v0.2/** text eol=lf
+outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/** text eol=lf
+outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2/** text eol=lf
+outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/** text eol=lf
+outputs/evaluation/he5_integrated_error_analysis_v0.2/** text eol=lf
+outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/** text eol=lf
+outputs/evaluation/exp04_consolidated_closure_v0.2/** text eol=lf
