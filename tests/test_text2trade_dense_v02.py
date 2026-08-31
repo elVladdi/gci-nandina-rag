@@ -5,6 +5,8 @@ import unittest
 from collections import defaultdict
 from pathlib import Path
 
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2"
@@ -18,11 +20,7 @@ HIER_VALUES = [100, 200]
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -184,13 +182,13 @@ class TestText2TradeDenseV02(unittest.TestCase):
     def test_13_output_hashes_match_run_metadata(self):
         for name, expected in self.metadata["output_sha256"].items():
             path = ROOT / self.metadata["outputs"][name]
-            self.assertEqual(sha256(path), expected, name)
+            assert_frozen_sha(self, path, expected)
 
     def test_14_previous_phase_outputs_preserved(self):
         status = self.metadata["previous_phase_artifact_hashes"]
         self.assertTrue(status["all_match_expected"])
         for entry in status["entries"].values():
-            self.assertEqual(sha256(ROOT / entry["path"]), entry["expected_sha256"])
+            assert_frozen_sha(self, ROOT / entry["path"], entry["expected_sha256"])
             self.assertEqual(entry["actual_sha256"], entry["expected_sha256"])
 
     def test_15_large_outputs_policy(self):

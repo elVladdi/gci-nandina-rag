@@ -8,6 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "processed"
 AUDIT = ROOT / "outputs" / "audits" / "data_aduanas_splits_clase87_v0.2"
@@ -39,11 +41,7 @@ V01_HASHES = {
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as fh:
-        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -131,13 +129,13 @@ class TestDataAduanasSplitV02(unittest.TestCase):
 
     def test_15_v01_hashes_are_unchanged(self):
         for path, expected in V01_HASHES.items():
-            self.assertEqual(sha256(path), expected, path)
+            assert_frozen_sha(self, path, expected)
 
     def test_16_v02_hashes_match_metadata(self):
         for rel, expected in self.metadata["output_sha256"].items():
-            self.assertEqual(sha256(ROOT / rel), expected, rel)
+            assert_frozen_sha(self, ROOT / rel, expected)
         for rel, expected in self.metadata["audit_sha256"].items():
-            self.assertEqual(sha256(ROOT / rel), expected, rel)
+            assert_frozen_sha(self, ROOT / rel, expected)
 
     def test_17_exact_duplicate_audit_hist_eval(self):
         row = next(r for r in self.exact_summary if r["comparison"] == "historico-evaluacion")

@@ -7,6 +7,8 @@ import unittest
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2"
@@ -14,11 +16,7 @@ CONFIG = json.loads((ROOT / "src/configs/he4_pre_explainer_v0.2.json").read_text
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def csv_rows(path: Path) -> list[dict[str, str]]:
@@ -75,7 +73,7 @@ class He4PreExplainerTests(unittest.TestCase):
     def test_01_frozen_source_hashes_and_eval_scope(self) -> None:
         for name in ("eval", "historical_results", "historical_case_summary", "phase_f_slots", "corpus"):
             entry = CONFIG[name]
-            self.assertEqual(sha256(ROOT / entry["path"]), entry["sha256"], name)
+            assert_frozen_sha(self, ROOT / entry["path"], entry["sha256"])
         self.assertEqual(len(csv_rows(ROOT / CONFIG["eval"]["path"])), 1056)
 
     def test_02_sample_is_exactly_fifty_unique_eval_cases(self) -> None:
@@ -88,7 +86,7 @@ class He4PreExplainerTests(unittest.TestCase):
 
     def test_03_rule_seed_and_sample_hash_are_frozen(self) -> None:
         self.assertEqual(CONFIG["sample"]["seed"], 2026)
-        self.assertEqual(self.gate["hashes"]["sample"], sha256(OUT / "he4_explainer_sample_v0.2.csv"))
+        assert_frozen_sha(self, OUT / "he4_explainer_sample_v0.2.csv", self.gate["hashes"]["sample"])
         self.assertEqual(self.gate["hashes"]["eval"], CONFIG["eval"]["sha256"])
 
     def test_04_contexts_and_generation_inputs_are_closed_top3(self) -> None:
@@ -124,7 +122,7 @@ class He4PreExplainerTests(unittest.TestCase):
         self.assertFalse((OUT / "he4_responses_v0.2.jsonl").exists())
 
     def test_08_prompt_model_schema_rubric_and_compatibility_are_frozen(self) -> None:
-        self.assertEqual(sha256(ROOT / CONFIG["prompt"]["path"]), CONFIG["prompt"]["sha256"])
+        assert_frozen_sha(self, ROOT / CONFIG["prompt"]["path"], CONFIG["prompt"]["sha256"])
         self.assertTrue((ROOT / CONFIG["schema"]["path"]).is_file())
         self.assertTrue((ROOT / CONFIG["rubric"]["path"]).is_file())
         self.assertTrue((OUT / "he4_model_manifest_v0.2.json").is_file())

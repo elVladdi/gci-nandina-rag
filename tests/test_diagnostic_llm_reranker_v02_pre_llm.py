@@ -7,6 +7,8 @@ import unittest
 from collections import defaultdict
 from pathlib import Path
 
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "src/configs/diagnostic_llm_reranker_v0.2.json"
@@ -14,11 +16,7 @@ OUT = ROOT / "outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -36,9 +34,9 @@ class DiagnosticRerankerPreLlmTests(unittest.TestCase):
         cls.inputs = [json.loads(line) for line in (OUT / "reranker_inputs_v0.2.jsonl").read_text(encoding="utf-8").splitlines() if line]
 
     def test_01_eval_and_frozen_phase_hashes_match(self) -> None:
-        self.assertEqual(sha256(ROOT / self.config["eval"]["path"]), self.config["eval"]["sha256"])
+        assert_frozen_sha(self, ROOT / self.config["eval"]["path"], self.config["eval"]["sha256"])
         for name, item in self.config["frozen_phase_artifacts"].items():
-            self.assertEqual(sha256(ROOT / item["path"]), item["sha256"], name)
+            assert_frozen_sha(self, ROOT / item["path"], item["sha256"])
 
     def test_02_pool_is_closed_unique_and_v02_only(self) -> None:
         grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
@@ -81,10 +79,10 @@ class DiagnosticRerankerPreLlmTests(unittest.TestCase):
 
     def test_06_hashes_and_pre_llm_gate_are_frozen(self) -> None:
         self.assertEqual(self.gate["status"], "PRE_LLM_FREEZE_PASS")
-        self.assertEqual(sha256(OUT / "reranker_candidate_pool_v0.2.csv"), self.gate["hashes"]["pool"])
-        self.assertEqual(sha256(OUT / "reranker_diagnostic_sample_v0.2.csv"), self.gate["hashes"]["sample"])
-        self.assertEqual(sha256(OUT / "reranker_inputs_v0.2.jsonl"), self.gate["hashes"]["inputs"])
-        self.assertEqual(sha256(ROOT / "src/prompts/reranker_diagnostic_v0.2.txt"), self.gate["hashes"]["prompt"])
+        assert_frozen_sha(self, OUT / "reranker_candidate_pool_v0.2.csv", self.gate["hashes"]["pool"])
+        assert_frozen_sha(self, OUT / "reranker_diagnostic_sample_v0.2.csv", self.gate["hashes"]["sample"])
+        assert_frozen_sha(self, OUT / "reranker_inputs_v0.2.jsonl", self.gate["hashes"]["inputs"])
+        assert_frozen_sha(self, ROOT / "src/prompts/reranker_diagnostic_v0.2.txt", self.gate["hashes"]["prompt"])
 
     def test_07_gate_contains_only_pre_llm_freeze_state(self) -> None:
         serialized = json.dumps(self.gate, ensure_ascii=False).lower()

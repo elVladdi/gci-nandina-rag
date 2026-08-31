@@ -8,6 +8,8 @@ import unittest
 from collections import defaultdict
 from pathlib import Path
 
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2"
@@ -16,11 +18,7 @@ BASE_HEAD = "12acbee8d796a28df8f7b6b7a04370f65b3b8fdd"
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def csv_rows(path: Path) -> list[dict[str, str]]:
@@ -59,7 +57,7 @@ class He4PhaseIPreGenerationTests(unittest.TestCase):
             "rubric": ROOT / CONFIG["rubric"]["path"],
         }
         for name, path in paths.items():
-            self.assertEqual(sha256(path), expected[name], name)
+            assert_frozen_sha(self, path, expected[name])
 
     def test_03_sample_and_generation_input_counts_are_frozen(self) -> None:
         self.assertEqual(len(csv_rows(self.sample_path)), 50)
@@ -182,7 +180,7 @@ class He4PhaseIPostGenerationTests(unittest.TestCase):
         self.assertEqual(self.status["technical_failures"], 0)
         self.assertEqual(self.status["raw_responses_stored"], 50)
         for name, expected in self.manifest["output_sha256"].items():
-            self.assertEqual(sha256(OUT / name), expected, name)
+            assert_frozen_sha(self, OUT / name, expected)
 
 
 if __name__ == "__main__":

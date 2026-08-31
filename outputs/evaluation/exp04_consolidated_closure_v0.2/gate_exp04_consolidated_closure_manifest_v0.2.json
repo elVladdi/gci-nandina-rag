@@ -78,29 +78,38 @@
     {
       "phase": "EXP-01",
       "artifact": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
-      "sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
+      "sha256": "9c2ee54c1e8c04c004e09ab5c5c0b4d02f326dcf9a308723edbd6eef1aa1f770",
       "exists": true,
       "frozen_evidence": true,
       "git_tracked": true,
-      "role": "DAM overlap and duplicate audit"
+      "role": "DAM overlap and duplicate audit",
+      "legacy_sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
+      "hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+      "hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH"
     },
     {
       "phase": "EXP-02",
       "artifact": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
-      "sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
+      "sha256": "9c2ee54c1e8c04c004e09ab5c5c0b4d02f326dcf9a308723edbd6eef1aa1f770",
       "exists": true,
       "frozen_evidence": true,
       "git_tracked": true,
-      "role": "exact and near-duplicate controls"
+      "role": "exact and near-duplicate controls",
+      "legacy_sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
+      "hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+      "hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH"
     },
     {
       "phase": "EXP-03",
       "artifact": "outputs/audits/data_aduanas_splits_clase87_v0.2/concentration_summary_v0.2.json",
-      "sha256": "0e8fce3a290f78f745bf1859b6bb10448e54b9d93bb4fcef93a047fde04be246",
+      "sha256": "b9a2200a9e5c95218a138d8ca391134585baaf394dfa86a32ec2d459f8d36e2b",
       "exists": true,
       "frozen_evidence": true,
       "git_tracked": true,
-      "role": "concentration audit"
+      "role": "concentration audit",
+      "legacy_sha256": "0e8fce3a290f78f745bf1859b6bb10448e54b9d93bb4fcef93a047fde04be246",
+      "hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+      "hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH"
     },
     {
       "phase": "EXP-04 A",
@@ -213,45 +222,67 @@
     {
       "phase": "EXP-04 L",
       "artifact": "outputs/evaluation/he5_integrated_error_analysis_v0.2/gate_l_corrective_microclose_manifest_v0.2.json",
-      "sha256": "8944de61d50dfeb3cb547bd4ee1c48bf15b471d9605e1c071803f5260b7bbd2c",
+      "sha256": "b4063a122460dfce555ad51dfe70e2c90a4f9791c4959d1bdcfb2d58ab75a59b",
       "exists": true,
       "frozen_evidence": true,
       "git_tracked": true,
-      "role": "HE5 corrective closure"
+      "role": "HE5 corrective closure",
+      "legacy_sha256": "8944de61d50dfeb3cb547bd4ee1c48bf15b471d9605e1c071803f5260b7bbd2c",
+      "hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+      "hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH"
     },
     {
       "phase": "EXP-05",
       "artifact": "outputs/audits/exp05_unified_eval_hash_v0.2/gate_exp05_unified_eval_hash_manifest_v0.2.json",
-      "sha256": "929ba1f34699cf511a28913543098f09db84d8b8a3a284b91993be78db0c72b4",
+      "sha256": "db5dba9c56ad3cd1dd9ccccb9bacea0d8ed2e4b358f8f90f39d99e34993c4b1c",
       "exists": true,
       "frozen_evidence": true,
       "git_tracked": true,
-      "role": "unified evaluation freeze"
+      "role": "unified evaluation freeze",
+      "legacy_sha256": "929ba1f34699cf511a28913543098f09db84d8b8a3a284b91993be78db0c72b4",
+      "hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+      "hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH"
     },
     {
       "phase": "EXP-07",
       "artifact": "outputs/audits/exp07_dev_eval_freeze_v0.2/gate_exp07_dev_eval_freeze_manifest_v0.2.json",
-      "sha256": "5bc0b186628e71ec3651de3f7956a489e2db0ccbd535e434696fb0f49aafc1dd",
+      "sha256": "998a6ace66354323d7a32ef9c5563b7fb6ea4a20f4bb6c91f154f7a0eb246e74",
       "exists": true,
       "frozen_evidence": true,
       "git_tracked": true,
-      "role": "dev/eval freeze"
+      "role": "dev/eval freeze",
+      "legacy_sha256": "5bc0b186628e71ec3651de3f7956a489e2db0ccbd535e434696fb0f49aafc1dd",
+      "hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+      "hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH"
     },
     {
       "phase": "EXP-08",
       "artifact": "outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/gate_exp08_corrective_microclose_manifest_v0.2.json",
-      "sha256": "8ffeb632e5ef58ebf7523b38fc0815aa124509f5982641a76cc9cf8b570ee2c7",
+      "sha256": "99a4ea28ba820e648fed7d64768bf3a50ef7bccd8405ca045de864218001c986",
       "exists": true,
       "frozen_evidence": true,
       "git_tracked": true,
-      "role": "sensitivity corrective closure"
+      "role": "sensitivity corrective closure",
+      "legacy_sha256": "8ffeb632e5ef58ebf7523b38fc0815aa124509f5982641a76cc9cf8b570ee2c7",
+      "hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+      "hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH"
     }
   ],
   "generated_file_hashes": {
+    "exp04_final_results_registry_v0.2.csv": "f3ade9f541f45bdb74cbb010a5d630e4b3b705896d5e9563a4dfd47c1880118a",
+    "exp04_group1_card_closure_matrix_v0.2.csv": "37ef7ff78af5073f82fb6872b25f27df6007c015e2823b7d3405376a79f3b215",
+    "exp04_hypothesis_status_registry_v0.2.csv": "c561ff1b24b19557d7bc32fd1ac5cf1e384f7967e4d45333c98a7dab9381cbdc",
+    "exp04_consolidated_limitations_v0.2.csv": "b76a639487206efc95317708454290205403c95b3692e4ada5f59ec8c4332de5",
+    "exp04_final_provenance_registry_v0.2.csv": "4a01a6234092fe604c5c886fdba343a20bd46f63eab65c08534edc840752ed7c"
+  },
+  "generated_file_hashes_legacy": {
     "exp04_final_results_registry_v0.2.csv": "35984c5f86eb0f769cff1c464888d2cf99207da7f3c34c40cdfd606abc633fcc",
     "exp04_group1_card_closure_matrix_v0.2.csv": "16463eebbc7cc3ab9fa55d3a03868a0d9ec07eeb8609c6a392f985a5aa80ddec",
     "exp04_hypothesis_status_registry_v0.2.csv": "465a8cbb46dfcbed5005e3d7443469f234cd30dd55a6157d6c7bc75578811faf",
     "exp04_consolidated_limitations_v0.2.csv": "c92799646e1e13c7e5bf21d72932985ee0b8b6e7d82e9d674b4f1f60cc625c8a",
     "exp04_final_provenance_registry_v0.2.csv": "e9a5a7de7cac9f7cd5fe15e9dd386b5a0eaf9861c0e415b3b26cdd065cdb629a"
-  }
+  },
+  "generated_file_hash_basis": "CANONICAL_GIT_LF_CONTENT_BYTES",
+  "generated_file_hash_migration_reason": "WORKTREE_EOL_DEPENDENT_HASH",
+  "current_portable_provenance_contract": true
 }

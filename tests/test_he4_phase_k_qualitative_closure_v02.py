@@ -6,6 +6,8 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2"
@@ -23,7 +25,7 @@ EXPECTED_TEMPLATE_SHA256 = "5779d6e5f59c8f947a4efa0903da79ff0ec62c8047b79a2eb94a
 
 
 def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return git_content_sha256(path)
 
 
 class He4PhaseKQualitativeClosureTests(unittest.TestCase):
@@ -40,7 +42,7 @@ class He4PhaseKQualitativeClosureTests(unittest.TestCase):
         cls.pre_manifest = json.loads((OUT / "gate_k_pre_scoring_manifest_v0.2.json").read_text(encoding="utf-8"))
 
     def test_01_received_scoring_is_the_authorized_input(self) -> None:
-        self.assertEqual(sha256(OUT / "he4_qualitative_scoring_template_v0.2.csv"), EXPECTED_TEMPLATE_SHA256)
+        assert_frozen_sha(self, OUT / "he4_qualitative_scoring_template_v0.2.csv", EXPECTED_TEMPLATE_SHA256)
         self.assertEqual(len(self.template), 50)
         self.assertEqual(len({row["case_id"] for row in self.template}), 50)
         self.assertEqual({row["case_id"] for row in self.template}, {row["case_id"] for row in self.packet})
@@ -104,7 +106,7 @@ class He4PhaseKQualitativeClosureTests(unittest.TestCase):
                 "joint_assessment": OUT / "he4_he4_joint_jk_assessment_v0.2.json",
             }[name]
             self.assertTrue(path.exists())
-            self.assertEqual(sha256(path), expected_hash)
+            assert_frozen_sha(self, path, expected_hash)
 
     def test_07_closer_uses_no_external_runtime(self) -> None:
         source = (ROOT / "src/experiments/close_he4_qualitative_ai_scoring_v02.py").read_text(encoding="utf-8").lower()

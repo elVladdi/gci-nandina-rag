@@ -25,3 +25,7 @@ The closure prepares the branch for human review before any merge to `main`. It 
 ## Corrective Microclose
 
 The consolidated registry was corrected against the tracked, frozen D1a MNRL metrics artifact rather than the invalidated D0 legacy dense baseline. The corrective manifest records the split hashes, Git-tracking checks for every frozen provenance row, the corrected EXP-06 title, and the complete schemas for result, provenance, limitation, and hypothesis registries. The microclose makes no experimental claim beyond the existing frozen artifacts.
+
+## SHA-256 Canonicalization / EOL Portability Microclose
+
+Some frozen SHA-256 contracts were originally captured from CRLF working-tree bytes while Git stored the same artifacts as LF blobs. The forensic inventory records the exact legacy-to-canonical equivalence for every affected reference: scientific content is identical, legacy SHA values remain preserved, and the active consolidated provenance contract now uses SHA-256 over canonical Git LF content bytes. No result was regenerated and historical manifests remain byte-identical evidence.

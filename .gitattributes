@@ -29,3 +29,5 @@ outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/** text eol=lf
 outputs/evaluation/he5_integrated_error_analysis_v0.2/** text eol=lf
 outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/** text eol=lf
 outputs/evaluation/exp04_consolidated_closure_v0.2/** text eol=lf
+data/processed/data_aduanas_splits_clase87_v0.2_metadata.json text eol=lf
+src/configs/data_aduanas_split_clase87_v0.2.json text eol=lf

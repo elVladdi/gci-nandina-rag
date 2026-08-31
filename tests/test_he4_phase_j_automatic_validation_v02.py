@@ -6,6 +6,8 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2"
@@ -14,11 +16,7 @@ PARSED_SHA = "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6"
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def csv_rows(path: Path) -> list[dict[str, str]]:
@@ -35,8 +33,8 @@ class He4PhaseJAutomaticValidationTests(unittest.TestCase):
         cls.manifest = json.loads((OUT / "gate_j_automatic_validation_manifest_v0.2.json").read_text(encoding="utf-8"))
 
     def test_01_all_frozen_inputs_have_expected_hashes(self) -> None:
-        self.assertEqual(sha256(OUT / "he4_responses_raw_v0.2.jsonl"), RAW_SHA)
-        self.assertEqual(sha256(OUT / "he4_responses_parsed_v0.2.jsonl"), PARSED_SHA)
+        assert_frozen_sha(self, OUT / "he4_responses_raw_v0.2.jsonl", RAW_SHA)
+        assert_frozen_sha(self, OUT / "he4_responses_parsed_v0.2.jsonl", PARSED_SHA)
         for name, item in self.manifest["input_hashes"].items():
             self.assertTrue(item["pass"], name)
 
@@ -81,7 +79,7 @@ class He4PhaseJAutomaticValidationTests(unittest.TestCase):
 
     def test_09_outputs_are_hashed_and_under_size_limit(self) -> None:
         for name, expected in self.manifest["output_sha256"].items():
-            self.assertEqual(sha256(OUT / name), expected, name)
+            assert_frozen_sha(self, OUT / name, expected)
         self.assertEqual(self.manifest["outputs_over_50_mib"], [])
 
     def test_10_traceability_and_bucket_outputs_are_complete(self) -> None:

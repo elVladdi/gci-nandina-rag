@@ -38,6 +38,12 @@ def git_tracked(path: str) -> bool:
     ).returncode == 0
 
 
+def git_content_sha256(path: str) -> str:
+    return hashlib.sha256(
+        subprocess.check_output(["git", "-C", str(REPO), "show", f":{path}"])
+    ).hexdigest()
+
+
 def test_all_ten_group1_cards_are_closed_and_approved() -> None:
     matrix = rows("exp04_group1_card_closure_matrix_v0.2.csv")
     assert [row["card"] for row in matrix] == [f"EXP-{number:02d}" for number in range(1, 11)]
@@ -71,7 +77,7 @@ def test_normative_metrics_are_preserved_without_reinterpretation() -> None:
 def test_d1a_metrics_reconcile_exactly_with_frozen_source_and_not_d0() -> None:
     source_path = REPO / D1A_PATH
     assert source_path.exists()
-    assert hashlib.sha256(source_path.read_bytes()).hexdigest() == D1A_SHA256
+    assert git_content_sha256(D1A_PATH) == D1A_SHA256
     assert git_tracked(D1A_PATH)
     source = json.loads(source_path.read_text(encoding="utf-8"))["metrics"]
     expected = {
@@ -115,7 +121,7 @@ def test_provenance_hashes_match_existing_frozen_artifacts() -> None:
         path = REPO / row["artifact"]
         if row["exists"] == "True" and row["frozen_evidence"] == "True":
             assert path.exists()
-            assert hashlib.sha256(path.read_bytes()).hexdigest() == row["sha256"]
+            assert git_content_sha256(row["artifact"]) == row["sha256"]
             assert row["git_tracked"] == "True"
             assert git_tracked(row["artifact"])
 
@@ -155,7 +161,7 @@ def test_gate_declares_no_new_execution_or_merge() -> None:
 def test_generated_registry_hashes_are_current() -> None:
     value = manifest()
     for name, expected in value["generated_file_hashes"].items():
-        actual = hashlib.sha256((OUT / name).read_bytes()).hexdigest()
+        actual = git_content_sha256(f"outputs/evaluation/exp04_consolidated_closure_v0.2/{name}")
         assert actual == expected
 
 

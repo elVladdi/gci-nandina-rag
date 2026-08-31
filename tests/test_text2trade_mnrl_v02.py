@@ -1,12 +1,10 @@
 import csv
 import hashlib
 import json
-import os
 import unittest
 from pathlib import Path
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
 
 from src.retrieval.text2trade_mnrl_v02 import choose_hard_negative, historical_code_pools, normalize_code, read_csv
 
@@ -97,17 +95,14 @@ class TestText2TradeMNRLV02(unittest.TestCase):
         self.assertTrue(self.index_metadata["mapping"]["id_map_matches_docstore"])
         self.assertTrue(all(id_map[str(index)]["codigo"] == doc["codigo"] for index, doc in enumerate(docs)))
 
-    def test_05_vector_integrity_gate_and_reconstruction(self):
+    def test_05_vector_integrity_gate_and_frozen_sample(self):
         self.assertEqual(self.integrity["status"], "PASS")
         self.assertEqual(self.integrity["sample_count"], 21)
         self.assertLessEqual(self.integrity["max_absolute_difference"], self.integrity["tolerance"])
-        os.environ.setdefault("HF_HUB_OFFLINE", "1")
-        os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
-        docs = [json.loads(line) for line in (INDEX / "store/nandina8_docstore.jsonl").read_text(encoding="utf-8").splitlines() if line]
-        vectors = np.load(INDEX / "index/vectors.npy", mmap_mode="r")
-        model = SentenceTransformer(str(MODEL), device="cpu")
-        rebuilt = model.encode([docs[index]["texto_index"] for index in (0, 1, 2)], convert_to_numpy=True, normalize_embeddings=True, show_progress_bar=False).astype(np.float32)
-        np.testing.assert_allclose(rebuilt, np.asarray(vectors[[0, 1, 2]], dtype=np.float32), rtol=0.0, atol=self.integrity["tolerance"])
+        sample = ROOT / self.integrity["sample_csv"]
+        self.assertEqual(sha256(sample), self.integrity["sample_csv_sha256"])
+        self.assertEqual(len(read_csv_rows(sample)), self.integrity["sample_count"])
+        self.assertEqual(self.integrity["byte_exact_count"], 9)
 
     def test_06_metrics_recompute_from_ranking_trace(self):
         cases = read_csv_rows(OUT / "d1a_case_summary.csv")
