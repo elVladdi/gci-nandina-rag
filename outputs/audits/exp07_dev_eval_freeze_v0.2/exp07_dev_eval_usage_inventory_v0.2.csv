@@ -1,0 +1,15 @@
+phase,dev_used,eval_used,ground_truth_used,usage_purpose,generation_exposure,tuning_effect,classification,evidence_source,status
+Split v0.2 freeze,True,False,False,EXPERIMENTAL_DESIGN_CORRECTION,False,NONE,PRE_SPECIFIED_EXECUTION,6c09e34 split data and audit,RECONCILED
+Phase A historical BM25,False,True,True,EVALUATION,False,NONE,PRE_SPECIFIED_EXECUTION,Phase A run_metadata,RECONCILED
+Phase B normative flat,False,True,True,EVALUATION,False,NONE,PRE_SPECIFIED_EXECUTION,Phase B run_metadata,RECONCILED
+Phase C normative hierarchical,False,True,True,EVALUATION,False,NONE,PRE_SPECIFIED_EXECUTION,Phase C run_metadata,RECONCILED
+Phase D1a dense comparator,False,True,True,EVALUATION_ONLY,False,NONE,PRE_SPECIFIED_EXECUTION,D1a metrics validation evalset_used_for_training_or_selection=false,RECONCILED
+Phase E candidate pools,False,True,True,DIAGNOSTIC_COVERAGE,False,NONE,DIAGNOSTIC_ONLY,candidate_pool_run_metadata diagnostic_union_not_a_ranking,RECONCILED
+Phase F historical-normative integration,False,True,True,EVALUATION,False,NONE,PRE_SPECIFIED_EXECUTION,integration label leakage audit,RECONCILED
+Phase G diagnostic reranker,False,True,True,DIAGNOSTIC_20_CASE_SAMPLE,False,NONE,DIAGNOSTIC_ONLY,"reranker metadata: 0 win, 19 tie, 0 loss, 1 reference absent",RECONCILED
+Phase H HE4 sample,False,True,True,FROZEN_STRATIFIED_SAMPLE,False,NONE,PRE_SPECIFIED_EXECUTION,gate_h label_used_for_sample_design only,RECONCILED
+Phase I HE4 generation,False,True,False,LABEL_BLIND_GENERATION,False,NONE,PRE_SPECIFIED_EXECUTION,gate_i and label leakage audit,RECONCILED
+Phase J HE4 automatic controls,False,True,True,AUTOMATIC_VALIDATION,False,NONE,BUG_FIX_WITHOUT_EVAL_TUNING,prompt-schema audit preserves 50 responses,RECONCILED
+Phase K HE4 qualitative evaluation,False,True,True,QUALITATIVE_EVALUATION,False,NONE,DIAGNOSTIC_ONLY,EVALUATOR_MODALITY_DEVIATION; K does not modify I,RECONCILED
+Phase L / EXP-10 HE5 matrix,False,True,True,INTEGRATED_ERROR_ANALYSIS,False,NONE,DIAGNOSTIC_ONLY,Gate L labels evaluation-only,RECONCILED
+EXP-08 sensitivity,False,True,True,DESCRIPTIVE_SENSITIVITY,False,NONE,DIAGNOSTIC_ONLY,EXP-08 corrective manifest,RECONCILED

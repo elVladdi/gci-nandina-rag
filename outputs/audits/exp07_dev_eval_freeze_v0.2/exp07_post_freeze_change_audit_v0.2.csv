@@ -1,0 +1,10 @@
+commit,date,component,change_type,eval_information_available,eval_information_used_for_change,classification,evidence,risk
+6c09e34503c3c064990503917f05e04f08ffbcf0,2026-08-29,split,EXPERIMENTAL_DESIGN_CORRECTION,False,False,PRE_SPECIFIED_EXECUTION,v0.1 to v0.2 corrects group leakage and cross-split dependence; not eval tuning,NONE
+c5c1544487f2281a34f195b057ecfb76ab1831e8,2026-08-30,D1a,METHODOLOGICAL_ADAPTATION,True,False,PRE_SPECIFIED_EXECUTION,D1a metadata records evalset_used_for_training_or_selection=false; D0 invalidated for provenance/vector mismatch,NONE
+829aed4c95260397f15b0d30959164f48a38dd03,2026-08-30,Phase E,CANDIDATE_POOL_DIAGNOSTIC,True,False,DIAGNOSTIC_ONLY,70/30 is diagnostic; union is coverage ceiling and not ranking,NONE
+b8941f2f5ee12911d87bd8e55fd7e46893ede596,2026-08-30,Phase G,DIAGNOSTIC_RERANKER,True,False,DIAGNOSTIC_ONLY,20 frozen cases; historical final ranking remains unchanged,NONE
+814a1dff2cf5c96a7e620800714e2067e852619c,2026-08-30,Phase H,FROZEN_HE4_SAMPLE,True,False,PRE_SPECIFIED_EXECUTION,labels only for sample design; not exposed to LLM,NONE
+e7d398685dc6f7206aae0cb9a6ef4d342d29352e,2026-08-30,Phase J,POST_HOC_SPECIFICATION_AUDIT,True,False,BUG_FIX_WITHOUT_EVAL_TUNING,PROMPT_SCHEMA_SPECIFICATION_MISMATCH audit did not regenerate 50 responses,LIMITATION_PRESERVED
+b08a8282d47eefb11981c3720a979b5a7793f4d2,2026-08-30,Phase K,QUALITATIVE_CLOSURE,True,False,DIAGNOSTIC_ONLY,EVALUATOR_MODALITY_DEVIATION recorded; no generation or scoring retuning,LIMITATION_PRESERVED
+97cf15f6efa3c4342fb638d1a7ff36e181f7bd86,2026-08-30,Phase L,INTEGRATED_ERROR_ANALYSIS,True,False,DIAGNOSTIC_ONLY,labels used for evaluation; label exposure to generation false,NONE
+7f4a5ada29450048d8c924461e937d1470750644,2026-08-30,EXP-08,DESCRIPTIVE_SENSITIVITY,True,False,DIAGNOSTIC_ONLY,frozen v0.1/v0.2 artifacts; no retrieval or model,NONE

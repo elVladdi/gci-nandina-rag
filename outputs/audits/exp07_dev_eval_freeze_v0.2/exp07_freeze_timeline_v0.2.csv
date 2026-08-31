@@ -1,0 +1,15 @@
+stage,commit,date,event
+SPLIT_FREEZE,6c09e34503c3c064990503917f05e04f08ffbcf0,2026-08-29,v0.2 historical/dev/eval hashes fixed
+A,52784ce707a3c52b002820bf84e5ba1f2d0fed46,2026-08-29,historical BM25 outputs
+B,24aac2bff05f1740a2fe1e6887e03d4bb07e6abd,2026-08-29,normative flat outputs
+C,001580944b417e81634dd6d11a9d2facc9ed29be,2026-08-29,normative hierarchical outputs
+D1a,c5c1544487f2281a34f195b057ecfb76ab1831e8,2026-08-30,Text2Trade-inspired MNRL
+E,42dc22bef2aa977a6a27659289a21c518ebbe906,2026-08-30,candidate pools recorded
+F,ae55a18b5293d692bd3dadfa67eaaa3ffbc0cc95,2026-08-30,historical-normative integration
+G,7e939bce152eb961d6f20c74ab28b5745d2ef40a,2026-08-30,diagnostic reranker
+H,814a1dff2cf5c96a7e620800714e2067e852619c,2026-08-30,HE4 contexts frozen
+I,0d71e5affb5e7730476ec84773cc6b07a575d60d,2026-08-30,HE4 generation
+J,9343ae5b43d85679bcd8f85fd34ae2069d5ad0e8,2026-08-30,HE4 automatic controls
+K,b08a8282d47eefb11981c3720a979b5a7793f4d2,2026-08-30,HE4 qualitative metrics
+L,4915da12c7c011c4c9f2061a0d7752aa56e5bf9a,2026-08-30,HE5 closure
+EXP-08,92c7f9aae2d43ad1cf8837919ec05012a353b683,2026-08-30,corrective microclose
