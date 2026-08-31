@@ -126,8 +126,9 @@ Reglas:
 
 - DAM completas;
 - no muestreo simple por filas;
-- preferencia por `H25 ⊂ H50 ⊂ H75 ⊂ H100`;
-- varias réplicas cuando corresponda;
+- **nesting no requerido**: la preferencia original `H25 ⊂ H50 ⊂ H75 ⊂ H100` fue descartada en G2A-F008 por inviabilidad estructural con DAM completas;
+- H25/H50/H75 se construirán como subconjuntos independientes por condición, preservando DAM completas y control de volumen;
+- varias réplicas por condición para cuantificar variabilidad de composición;
 - seeds congeladas;
 - pipeline/configs fijos;
 - evalset v0.2 idéntico.
