@@ -1,0 +1,80 @@
+{
+  "advertencias_globales_excluded": true,
+  "bucket_exposed": false,
+  "created_at_utc": "2026-08-31T01:50:47.277814+00:00",
+  "evaluation_basis": "frozen blind HE4 review packet + frozen HE4 rubric",
+  "evaluator_identifier": "independent_ai_reviewer_01",
+  "evaluator_modality": "AI_EXPERT_ROLE",
+  "external_evidence_used": false,
+  "gate_k": "APPROVED WITH EVALUATOR-MODALITY LIMITATION",
+  "ground_truth_exposed": false,
+  "human_scoring": false,
+  "input_sha256": {
+    "inputs": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+    "j_metrics": "3dc43932698033cc94149d20be9a474662e990152b1fd1d66f3d067285f21b85",
+    "j_microaudit": "8d7258ecd1ff6273d8772fc21da55a70d0bc03721c3fc7fd969a498654bafe5f",
+    "parsed": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+    "pre_scoring_manifest": "a44716dc1eb4b3ebbfa44295668c99f340b48ae992772f4ed55c1f733931ffef",
+    "raw": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+    "review_packet": "e400a5a9b342cef519307713f435629ccb241a1f6eed2ec2d7f7c57a633c2a3d",
+    "rubric": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+    "scoring_guide": "f0be109fd742f33a9ce1df1b2569317a85a8b51d4c61c576e1e2957850408eea",
+    "scoring_template": "5779d6e5f59c8f947a4efa0903da79ff0ec62c8047b79a2eb94ade0518c980c4"
+  },
+  "llm_as_judge": true,
+  "methodological_deviation": true,
+  "methodological_deviation_type": "EVALUATOR_MODALITY_DEVIATION",
+  "original_pre_scoring_modality": "HUMAN/MANUAL REVIEW",
+  "outputs_sha256_excluding_manifest_and_summary": {
+    "by_bucket": "3547a553d8299ed8d936d5703d56dc6cf44e18412e03af88560941434b6b0c24",
+    "case_scores": "ad8e1818a0032f07f02db43da7a5e732cfcf534dbad312cda7a551226f6d001a",
+    "dimension_metrics": "54a2346e3e2ae3eb5e9e59dbe5d72effd109daa64a361ff48edcda8d6a36f325",
+    "findings": "f27b73199065d9d2e4a39e5ef4807a11f5cc3ba9093eee2579af47dc0294db9c",
+    "hard_violations": "5a38226008364846c3fb6d6f23908c5636dd4e09a3a2bd7b63fc9cc0f7934167",
+    "joint_assessment": "06b01e5cb0855294771b9354ce28a100d3f226444c4b917bbb1ecb7310bd1e76",
+    "metrics": "f7f3a739ea5d1549144ae240c6c0f7f814f07cef03ea910fba29a73ef6000af8",
+    "warning_comparison": "3b5e3f01dc25affe70a56cdb80a13d66f98d3906dd4eea44ecca95c9639263ce"
+  },
+  "phase": "EXP-04 K",
+  "pre_scoring_manifest_preserved": true,
+  "prompt_schema_limitation_preserved": true,
+  "ready_for_phase_l": true,
+  "reference_rank_exposed": false,
+  "retrieval_used": false,
+  "rubric_frozen": true,
+  "scores_modified_by_codex": false,
+  "validation": {
+    "auditable_consistency": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "case_count": 50,
+    "case_id_set_matches_review_packet": true,
+    "case_order_matches_review_packet": true,
+    "columns_exact": true,
+    "frozen_input_sha256": {
+      "inputs": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+      "j_metrics": "3dc43932698033cc94149d20be9a474662e990152b1fd1d66f3d067285f21b85",
+      "j_microaudit": "8d7258ecd1ff6273d8772fc21da55a70d0bc03721c3fc7fd969a498654bafe5f",
+      "parsed": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+      "pre_scoring_manifest": "a44716dc1eb4b3ebbfa44295668c99f340b48ae992772f4ed55c1f733931ffef",
+      "raw": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+      "review_packet": "e400a5a9b342cef519307713f435629ccb241a1f6eed2ec2d7f7c57a633c2a3d",
+      "rubric": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+      "scoring_guide": "f0be109fd742f33a9ce1df1b2569317a85a8b51d4c61c576e1e2957850408eea",
+      "scoring_template": "5779d6e5f59c8f947a4efa0903da79ff0ec62c8047b79a2eb94ade0518c980c4"
+    },
+    "justification_count": 400,
+    "score_count": 400,
+    "template_sha256": "5779d6e5f59c8f947a4efa0903da79ff0ec62c8047b79a2eb94ade0518c980c4",
+    "total_score_consistency": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "unique_case_ids": 50
+  },
+  "version": "gate_k_qualitative_evaluation_manifest_v0.2",
+  "web_used": false
+}

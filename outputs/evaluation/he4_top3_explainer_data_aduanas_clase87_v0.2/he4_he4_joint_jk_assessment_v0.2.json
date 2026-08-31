@@ -1,0 +1,54 @@
+{
+  "evaluator_provenance": {
+    "bucket_exposed": false,
+    "evaluator_identifier": "independent_ai_reviewer_01",
+    "evaluator_modality": "AI_EXPERT_ROLE",
+    "external_evidence_used": false,
+    "ground_truth_exposed": false,
+    "human_scoring": false,
+    "llm_as_judge": true,
+    "reference_rank_exposed": false,
+    "retrieval_used": false,
+    "web_used": false
+  },
+  "he4_global": "PARTIALLY SUPPORTED",
+  "he4_j": {
+    "gate": "APPROVED WITH PROTOCOL/SPECIFICATION LIMITATION",
+    "generic_normative_warning_control": "41/50",
+    "prompt_schema_limitation": "PROMPT_SCHEMA_SPECIFICATION_MISMATCH",
+    "top3_order_preservation": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "traceability_completeness": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    }
+  },
+  "he4_k": {
+    "auditable": {
+      "denominator": 50,
+      "numerator": 28,
+      "rate": 0.56
+    },
+    "gate": "APPROVED WITH EVALUATOR-MODALITY LIMITATION",
+    "hard_violations": {
+      "count": 0,
+      "rate": 0.0
+    },
+    "qualitative_result": "Qualitative scores were processed without changing the received evaluation."
+  },
+  "j_k_concordance": {
+    "qualitative_auditable_cases": 28,
+    "statement": "All 50 cases passed the preserved structural Top-3 and traceability controls in J, while K marks 28 of 50 as individually auditable under the frozen qualitative threshold. The two controls measure different properties and are not interchangeable.",
+    "structural_pass_cases": 50
+  },
+  "limitations": [
+    "PROMPT_SCHEMA_SPECIFICATION_MISMATCH",
+    "EVALUATOR_MODALITY_DEVIATION",
+    "The qualitative scoring was performed by an independent AI reviewer operating under the frozen expert-role rubric, rather than by the human review modality originally prepared in the pre-scoring protocol."
+  ],
+  "version": "he4_he4_joint_jk_assessment_v0.2"
+}

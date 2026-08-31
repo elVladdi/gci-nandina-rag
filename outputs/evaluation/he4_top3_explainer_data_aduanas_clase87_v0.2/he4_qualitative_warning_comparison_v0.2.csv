@@ -1,0 +1,3 @@
+group,cases,auditable_cases,auditable_rate,mean_total_score,generic_normative_warning_control
+generic_normative_warning_missing,9,1,0.111111,9.666667,failed
+other_cases,41,27,0.658537,12.170732,passed

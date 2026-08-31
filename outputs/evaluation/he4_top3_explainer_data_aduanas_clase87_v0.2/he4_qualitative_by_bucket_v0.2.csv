@@ -1,0 +1,9 @@
+selection_target,support_bucket_dams,cases,auditable_cases,auditable_rate,mean_total_score
+difficult_low_support,1,2,1,0.5,12
+difficult_low_support,2-4,8,6,0.75,12
+rank_1,1,10,1,0.1,10.4
+rank_1,2-4,5,1,0.2,9.6
+rank_2_3,1,9,6,0.666667,12.444444
+rank_2_3,2-4,6,4,0.666667,12.666667
+rank_4_10,1,6,6,1.0,12.5
+rank_4_10,2-4,4,3,0.75,12.75

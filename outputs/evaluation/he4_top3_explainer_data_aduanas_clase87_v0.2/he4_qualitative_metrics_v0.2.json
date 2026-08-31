@@ -1,0 +1,131 @@
+{
+  "auditable": {
+    "denominator": 50,
+    "numerator": 28,
+    "rate": 0.56
+  },
+  "cases": 50,
+  "dimension_metrics": {
+    "comparacion_entre_candidatos": {
+      "mean_score": 1.46,
+      "median_score": 1.0,
+      "score_0_count": 0,
+      "score_1_count": 27,
+      "score_2_count": 23
+    },
+    "consistencia_con_top3_fijo": {
+      "mean_score": 1.96,
+      "median_score": 2.0,
+      "score_0_count": 0,
+      "score_1_count": 2,
+      "score_2_count": 48
+    },
+    "deteccion_de_evidencia_normativa_generica": {
+      "mean_score": 1.68,
+      "median_score": 2.0,
+      "score_0_count": 4,
+      "score_1_count": 8,
+      "score_2_count": 38
+    },
+    "prudencia_de_la_conclusion": {
+      "mean_score": 1.78,
+      "median_score": 2.0,
+      "score_0_count": 0,
+      "score_1_count": 11,
+      "score_2_count": 39
+    },
+    "separacion_historico_normativo": {
+      "mean_score": 1.04,
+      "median_score": 1.0,
+      "score_0_count": 13,
+      "score_1_count": 22,
+      "score_2_count": 15
+    },
+    "trazabilidad": {
+      "mean_score": 2,
+      "median_score": 2.0,
+      "score_0_count": 0,
+      "score_1_count": 0,
+      "score_2_count": 50
+    },
+    "utilidad_para_auditoria_humana": {
+      "mean_score": 1.26,
+      "median_score": 1.0,
+      "score_0_count": 1,
+      "score_1_count": 35,
+      "score_2_count": 14
+    },
+    "verificabilidad": {
+      "mean_score": 0.54,
+      "median_score": 1.0,
+      "score_0_count": 24,
+      "score_1_count": 25,
+      "score_2_count": 1
+    }
+  },
+  "evaluation_basis": "frozen blind HE4 review packet + frozen HE4 rubric",
+  "evaluator_identifier": "independent_ai_reviewer_01",
+  "evaluator_modality": "AI_EXPERT_ROLE",
+  "hard_violations": {
+    "count": 0,
+    "rate": 0.0
+  },
+  "human_scoring": false,
+  "llm_as_judge": true,
+  "non_auditable": {
+    "denominator": 50,
+    "numerator": 22,
+    "rate": 0.44
+  },
+  "scoring_date": "NOT_RECORDED_IN_RECEIVED_CSV",
+  "scoring_processed_at_utc": "2026-08-31T01:50:47.208814+00:00",
+  "total_score": {
+    "distribution": {
+      "10": 5,
+      "11": 12,
+      "12": 14,
+      "13": 3,
+      "14": 10,
+      "15": 1,
+      "6": 1,
+      "9": 4
+    },
+    "max": 15,
+    "mean": 11.72,
+    "median": 12.0,
+    "min": 6
+  },
+  "validation": {
+    "auditable_consistency": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "case_count": 50,
+    "case_id_set_matches_review_packet": true,
+    "case_order_matches_review_packet": true,
+    "columns_exact": true,
+    "frozen_input_sha256": {
+      "inputs": "117ebffc1a113dfc2e28aeffc05b3e0b88998e6a245cd05f14d16147fbdc1596",
+      "j_metrics": "3dc43932698033cc94149d20be9a474662e990152b1fd1d66f3d067285f21b85",
+      "j_microaudit": "8d7258ecd1ff6273d8772fc21da55a70d0bc03721c3fc7fd969a498654bafe5f",
+      "parsed": "daf7ab5c475764e281866e5faf7929314811ce2ff002c529f94366d7fca7b0b6",
+      "pre_scoring_manifest": "a44716dc1eb4b3ebbfa44295668c99f340b48ae992772f4ed55c1f733931ffef",
+      "raw": "8a34a4c46f11ca9d54bf558eb81ce2428e3e12f03e6ff7f02e46757b4e5134b4",
+      "review_packet": "e400a5a9b342cef519307713f435629ccb241a1f6eed2ec2d7f7c57a633c2a3d",
+      "rubric": "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514",
+      "scoring_guide": "f0be109fd742f33a9ce1df1b2569317a85a8b51d4c61c576e1e2957850408eea",
+      "scoring_template": "5779d6e5f59c8f947a4efa0903da79ff0ec62c8047b79a2eb94ade0518c980c4"
+    },
+    "justification_count": 400,
+    "score_count": 400,
+    "template_sha256": "5779d6e5f59c8f947a4efa0903da79ff0ec62c8047b79a2eb94ade0518c980c4",
+    "total_score_consistency": {
+      "denominator": 50,
+      "numerator": 50,
+      "value": 1.0
+    },
+    "unique_case_ids": 50
+  },
+  "version": "he4_qualitative_metrics_v0.2"
+}

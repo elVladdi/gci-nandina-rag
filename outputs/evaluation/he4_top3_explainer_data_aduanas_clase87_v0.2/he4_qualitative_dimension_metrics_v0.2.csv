@@ -1,0 +1,9 @@
+dimension,score_0_count,score_1_count,score_2_count,mean_score,median_score
+trazabilidad,0,0,50,2,2.0
+verificabilidad,24,25,1,0.54,1.0
+separacion_historico_normativo,13,22,15,1.04,1.0
+prudencia_de_la_conclusion,0,11,39,1.78,2.0
+consistencia_con_top3_fijo,0,2,48,1.96,2.0
+deteccion_de_evidencia_normativa_generica,4,8,38,1.68,2.0
+comparacion_entre_candidatos,0,27,23,1.46,1.0
+utilidad_para_auditoria_humana,1,35,14,1.26,1.0
