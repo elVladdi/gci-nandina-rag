@@ -1,0 +1,17 @@
+{
+  "classification": {
+    "EXPLORATORY": "critical-case combinations; not used for HE5 confirmation",
+    "PRE_SPECIFIED": "historical retrieval, support and duplicate sensitivity",
+    "TECHNICAL_DERIVED": "frozen-output integration without new retrieval"
+  },
+  "families": [
+    "DUPLICATE_SENSITIVITY",
+    "EXPLANATION_AUDITABILITY",
+    "HISTORICAL_RETRIEVAL",
+    "NORMATIVE_RETRIEVAL"
+  ],
+  "global_protocol_limitations": [
+    "PROMPT_SCHEMA_SPECIFICATION_MISMATCH",
+    "EVALUATOR_MODALITY_DEVIATION"
+  ]
+}

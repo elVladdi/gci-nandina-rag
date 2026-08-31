@@ -1,0 +1,12 @@
+{
+  "gate_l": "APPROVED",
+  "he5": "NOT EVALUABLE: no formulacion literal versionada localizada",
+  "not_project_complete": true,
+  "oe5": "NOT EVALUABLE: no formulacion literal versionada localizada",
+  "preserved": {
+    "HE2": "PARTIALLY SUPPORTED",
+    "HE3": "SUPPORTED",
+    "HE4": "PARTIALLY SUPPORTED"
+  },
+  "ready_for_exp08": true
+}

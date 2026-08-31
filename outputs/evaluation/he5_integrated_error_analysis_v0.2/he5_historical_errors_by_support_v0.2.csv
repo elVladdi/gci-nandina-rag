@@ -1,0 +1,5 @@
+group,value,cases,top1_numerator,top1_rate,top3_numerator,top3_rate,mean_reciprocal_rank
+support_bucket_dams,1 DAM,27,10,0.37037,19,0.703704,0.564447
+support_bucket_dams,2 DAM,21,1,0.047619,4,0.190476,0.239384
+support_bucket_dams,3-4 DAM,425,294,0.691765,326,0.767059,0.760152
+support_bucket_dams,5+ DAM,583,233,0.399657,360,0.617496,0.551697

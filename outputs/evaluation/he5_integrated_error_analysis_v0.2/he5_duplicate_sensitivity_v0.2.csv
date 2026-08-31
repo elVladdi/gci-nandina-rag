@@ -1,0 +1,5 @@
+group,value,cases,top1_numerator,top1_rate,top3_numerator,top3_rate,mean_reciprocal_rank
+exact_normalized_description_in_history,False,1021,504,0.493634,674,0.660137,0.617504
+exact_normalized_description_in_history,True,35,34,0.971429,35,1.0,0.985714
+near_ge_095,False,1012,496,0.490119,665,0.657115,0.614596
+near_ge_095,True,44,42,0.954545,44,1.0,0.977273

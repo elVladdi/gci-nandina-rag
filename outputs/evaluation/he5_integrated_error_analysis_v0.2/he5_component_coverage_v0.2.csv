@@ -1,0 +1,5 @@
+component,eligible_cases,evaluated_cases,coverage_rate,reason_not_full_coverage
+historical_A,1056,1056,1.0,
+normative_B_C_D1a_E_F,1056,1056,1.0,
+reranker_G,1056,20,0.018939,diagnostic sample
+HE4_J_K,1056,50,0.047348,frozen HE4 sample

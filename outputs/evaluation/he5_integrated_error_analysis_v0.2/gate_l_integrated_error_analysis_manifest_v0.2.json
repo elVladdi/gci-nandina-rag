@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-08-31T02:26:49.856063+00:00",
+  "gate_l": "APPROVED",
+  "inputs_sha256": {
+    "a_metrics": "5334e64ab2b3f812f939b652fe1ee8ad8db24b673ebb48fd4d7b1ddb0dd444fa",
+    "dense": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd",
+    "evalset": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "flat": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+    "he4_j": "c177033bb21f80579da18f375c8443192c2df7ad72a9f3ffadc45937867c482c",
+    "he4_k": "ad8e1818a0032f07f02db43da7a5e732cfcf534dbad312cda7a551226f6d001a",
+    "he4_sample": "dfdfa08cc0b15e33f493559ee66a679c8730d6d4eb0842e78cea50ffaf659ec2",
+    "hierarchical": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+    "historical": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56",
+    "integration": "0b1916f9a91fcdc1f1c678db7cff45db984651fb26362ee86ebf7e6c6684f44e",
+    "k_manifest": "9f3ac3c189bad47a9f67f03530c2aea9411d01fa170df4e3b90ced7035201bba",
+    "pools": "2280716a49742c8d8ff89c8d4f5452d44ce80a63b51cd6f3aad4c6596ff25f77",
+    "reranker": "63f8a04e89012b49b4464b1288a1f94fa3cff91e4d05523a68a6d23ae9058ba9"
+  },
+  "label_exposed_to_generation": false,
+  "label_used_for_evaluation": true,
+  "no_model_call": true,
+  "no_new_retrieval": true,
+  "no_web": true,
+  "outputs_sha256": {
+    "he5_component_coverage_v0.2.csv": "c3fcbca3fa7d37190fe17768784b38200c1a470298ce449085b560f66906e10e",
+    "he5_duplicate_sensitivity_v0.2.csv": "1eca1abdfd61adc0616e2eee613b458f1775941c872c15f3a56644fa09aa51a6",
+    "he5_error_events_v0.2.csv": "56d53edb7c9880a05a1400280c76dc6b73bd5ef3363a7a3029fbda2ac867e62e",
+    "he5_error_taxonomy_v0.2.json": "e769fae58f9a7a1de8fc1207e8bf8132fd09d86ab02adfae4af0cf2800d6c714",
+    "he5_historical_errors_by_support_v0.2.csv": "6600d1117256685b48a5070e777737521be3ea98f610630f33cdc0341bafd201",
+    "he5_historical_hierarchy_errors_v0.2.csv": "d02fab75bbccd1ddbf12c75c00d920bf04b64333c179fc258029b55e12561cc1",
+    "he5_historical_vs_normative_v0.2.csv": "d070609c11967588a91a291cfbf547550ee5514a71638330ad4a1fb3f46af0d6",
+    "he5_hypothesis_assessment_v0.2.json": "6e0e34c5c8dea390bc08db1d2c4f807742202d941a7bc85ad32de08f47954ad4",
+    "he5_integrated_error_matrix_dictionary_v0.2.md": "61ca37c63302c865b67070531fb2f210c9ff01d4732f56b3fd2b6a3fa4719fd2",
+    "he5_integrated_error_matrix_v0.2.csv": "f9e5c2e3de7dd37c5923d39344865bfb1ad7fd06d30581f709de7d482d9b25ac",
+    "he5_integrated_findings_v0.2.md": "12b8f0709e0c5d0a8c8554d4edacd3b119c1e805daf807288fde782bd238f253",
+    "he5_normative_failure_analysis_v0.2.csv": "933ef825afb6a0286b61ef02c0d2db272c0c3c33603d384fabe2d7680d71e5eb"
+  },
+  "phase": "EXP-04 L / EXP-10",
+  "ready_for_exp08": true
+}
