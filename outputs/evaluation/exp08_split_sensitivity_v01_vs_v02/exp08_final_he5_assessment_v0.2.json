@@ -1,0 +1,9 @@
+{
+  "hypothesis": "HE5",
+  "statement": "Los errores y l\u00edmites del piloto se concentrar\u00e1n en descripciones ambiguas o incompletas, subpartidas jer\u00e1rquicamente pr\u00f3ximas, casos con precedentes hist\u00f3ricos insuficientes y condiciones que restringir\u00e1n la validez de los resultados al conjunto interno evaluado.",
+  "status": "PARTIALLY_SUPPORTED",
+  "evaluated_components": 3,
+  "total_components": 4,
+  "limitation": "Description quality is not evaluated because no frozen case-level rule exists.",
+  "v02_final_benchmark": true
+}

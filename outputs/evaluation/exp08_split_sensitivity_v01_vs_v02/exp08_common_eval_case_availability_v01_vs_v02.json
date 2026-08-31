@@ -1,0 +1,7 @@
+{
+  "v01_case_ids": 1006,
+  "v02_case_ids": 1056,
+  "common_case_ids": 0,
+  "paired_common_case_analysis_generated": false,
+  "reason": "case identifiers are version-specific and no equivalent frozen pairing key was approved"
+}

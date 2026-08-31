@@ -1,0 +1,11 @@
+version,signal,count,availability
+v0.1,exact_duplicate_cross_split,377,FROZEN
+v0.1,same_nandina_duplicate_cross_split,376,FROZEN
+v0.1,same_dam_exact_duplicate_cross_split,358,FROZEN
+v0.1,near_duplicate_095,NOT_AVAILABLE,NOT_PRESERVED_IN_FROZEN_V01_ARTIFACTS
+v0.2,exact_duplicate_cross_split,35,FROZEN
+v0.2,same_nandina_duplicate_cross_split,34,FROZEN
+v0.2,different_nandina_exact_duplicate_cross_split,1,FROZEN
+v0.2,near_duplicate_095_cross_split,55,FROZEN
+v0.2,near_duplicate_095_same_nandina,44,FROZEN
+v0.2,near_duplicate_095_different_nandina,37,FROZEN

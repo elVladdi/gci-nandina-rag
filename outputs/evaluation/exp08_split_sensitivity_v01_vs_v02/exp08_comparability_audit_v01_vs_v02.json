@@ -1,0 +1,39 @@
+{
+  "normalization": {
+    "status": "SAME",
+    "evidence_source": "frozen case summaries"
+  },
+  "BM25_implementation": {
+    "status": "SAME",
+    "evidence_source": "historical runners"
+  },
+  "BM25_parameters": {
+    "status": "UNKNOWN",
+    "evidence_source": "v0.1 run_metadata absent"
+  },
+  "candidate_deduplication": {
+    "status": "SAME",
+    "evidence_source": "historical metrics"
+  },
+  "metric_definitions": {
+    "status": "SAME",
+    "evidence_source": "frozen metrics"
+  },
+  "ranking_depth": {
+    "status": "IMPLEMENTATION_DIFFERENCE",
+    "evidence_source": "v0.1 depth 200; v0.2 depth 100"
+  },
+  "historical_bank_composition": {
+    "status": "SPLIT_INHERENT_DIFFERENCE",
+    "evidence_source": "split metadata"
+  },
+  "evalset_composition": {
+    "status": "SPLIT_INHERENT_DIFFERENCE",
+    "evidence_source": "evalsets"
+  },
+  "metadata_availability": {
+    "status": "UNKNOWN",
+    "evidence_source": "V01_METADATA_PROVENANCE_LIMITATION"
+  },
+  "interpretation": "Descriptive frozen-configuration comparison; no exclusive causal attribution to split policy."
+}

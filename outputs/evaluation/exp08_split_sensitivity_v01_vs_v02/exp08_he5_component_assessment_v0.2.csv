@@ -1,0 +1,5 @@
+component,evaluated,status,evidence
+DESCRIPTION_QUALITY,False,NOT_EVALUATED_NO_FROZEN_CASE_RULE,No frozen case-level description quality rule exists.
+HIERARCHICAL_PROXIMITY,True,SUPPORTED,"{""error_cases"": 518, ""same_hs6"": 87, ""same_hs4"": 284, ""same_chapter"": 147, ""different_chapter"": 0}"
+HISTORICAL_PRECEDENT_AVAILABILITY,True,MIXED_NON_MONOTONIC,"[{""bucket"": ""1_DAM"", ""n"": 27, ""Top1"": 0.37037037037037035, ""Top3"": 0.7037037037037037}, {""bucket"": ""2_DAM"", ""n"": 21, ""Top1"": 0.047619047619047616, ""Top3"": 0.19047619047619047}, {""bucket"": ""3_4_DAM"", ""n"": 425, ""Top1"": 0.691764705882353, ""Top3"": 0.7670588235294118}, {""bucket"": ""5_PLUS_DAM"", ""n"": 583, ""Top1"": 0.3996569468267582, ""Top3"": 0.6174957118353345}, {""bucket"": ""ONE_TWO_DAM"", ""n"": 48, ""Top1"": 0.22916666666666666, ""Top3"": 0.4791666666666667}, {""bucket"": ""THREE_PLUS_DAM"", ""n"": 1008, ""Top1"": 0.5228174603174603, ""Top3"": 0.6805555555555556}]"
+INTERNAL_EVALUATION_SCOPE,True,SUPPORTED,v0.2 remains the internal final benchmark; no external validity claim.
