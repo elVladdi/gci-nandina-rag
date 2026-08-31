@@ -8,13 +8,28 @@ El alcance experimental actual se mantiene en `data_aduanas`, `Clase = 87`, con 
 
 ## Estado Actual
 
-El piloto v0.1 queda preservado como referencia historica. La linea vigente para nuevas evaluaciones es el split `data_aduanas` Clase 87 `v0.2`, estrategia `T5-safe-159`, construido con independencia por `DECLARACION` / DAM.
+**Grupo 1 — Diseño y ejecución experimental: CLOSED / APPROVED.** El benchmark final es `v0.2`, `DAM_GROUPED_FINAL_SPLIT`; `v0.1` queda solo como referencia histórica de sensibilidad, no como benchmark final.
 
-| Version | Estado | Uso |
-|---|---|---|
-| v0.1 | Cerrada y preservada | Referencia historica; no sobrescribir outputs ni splits |
-| v0.2 | Gate 5 cerrado | Base oficial para reruns experimentales posteriores |
-| EXP-04 Fase A | Gate A aprobado | BM25 historico sobre split v0.2 completado |
+| Tarjeta | Estado |
+|---|---|
+| EXP-01 | CLOSED |
+| EXP-02 | CLOSED |
+| EXP-03 | CLOSED |
+| EXP-04 | CLOSED |
+| EXP-05 | CLOSED |
+| EXP-06 | CLOSED |
+| EXP-07 | CLOSED |
+| EXP-08 | CLOSED |
+| EXP-09 | CLOSED |
+| EXP-10 | CLOSED |
+
+## Arquitectura Metodológica
+
+- **Historical retrieval:** ranking principal de candidatos.
+- **Normative retrieval:** evidencia documental; no reemplaza el ranking histórico.
+- **Fixed Top-3:** entrada cerrada del explicador.
+- **Local LLM:** explicación controlada sobre ese contexto; no clasifica NANDINA desde cero.
+- **Diagnostic reranker:** diagnóstico solamente, sin reclamo de benchmark.
 
 ## Dataset v0.2
 
@@ -60,67 +75,57 @@ El split v0.1 fue util para cerrar el piloto inicial, pero tenia dependencia est
 
 La diferencia documenta una mejora del control de independencia experimental. No implica cambio del algoritmo BM25 ni debe interpretarse como evidencia causal mas alla del cambio de politica de particion.
 
-## Experimental Status
+## Resumen de Resultados Congelados
 
-| Phase | Status |
+| Componente | Métricas compactas |
 |---|---|
-| EXP-01 DAM-grouped split | Complete |
-| EXP-02 Cross-split duplicate audit | Complete |
-| EXP-03 Balanced split design | Complete |
-| Gate 5 | Closed |
-| EXP-04 A Historical BM25 v0.2 | Complete |
-| EXP-04 B Flat normative BM25 | Pending |
-| EXP-04 C Hierarchical normative BM25 | Pending |
-| Text2Trade / dense comparator | Pending |
-| Candidate pools v0.2 | Pending |
-| Diagnostic LLM reranker | Pending |
-| Top-3 explainer v0.2 | Pending |
-| Integrated error analysis | Pending |
+| Historical BM25 v0.2 (`n=1056`) | Top1 `0.509470`; Top3 `0.671402`; Top5 `0.763258`; Top10 `0.891098`; Top50 `0.991477`; MRR `0.629708` |
+| Normative flat | Top1 `0.027462`; Recall@100 `0.071023`; MRR@100 `0.042297` |
+| Normative hierarchical | Top1 `0.026515`; Recall@100 `0.101326`; Recall@200 `0.303977` |
+| D1a Text2Trade-inspired MNRL | Top1 `0/1056`; Top3 `4/1056`; Top5 `36/1056`; Top10 `165/1056`; Top50 `323/1056`; Recall@100 `365/1056`; MRR@100 `0.032424326`; Recall@200 `383/1056`; MRR@200 `0.032548535` |
 
-### EXP-04 Fase A - Historical BM25 v0.2
+La fuente D1a final es [`d1a_metrics.json`](outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json), SHA-256 `620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c`. No se usan métricas del baseline D0 legacy como D1a.
 
-BM25 historico v0.2 esta completado y Gate A esta aprobado. La consulta usa exclusivamente `DESCRIPCION DE MERCANCIAS CONCATENADA`; no usa etiqueta, DAM, SERIE, BM25 normativo, Text2Trade, RAG, reranking LLM ni explicador LLM.
+## Integración y Auditorías LLM
 
-| Metrica | Valor |
-|---|---:|
-| Casos | 1056 |
-| Top-1 | 0.5095 |
-| Top-3 | 0.6714 |
-| Top-5 | 0.7633 |
-| Top-10 | 0.8911 |
-| Top-50 | 0.9915 |
-| MRR | 0.6297 |
+- **F:** 1056 casos, 3168 slots Top-3; se preservó el ranking histórico y hubo evidencia normativa exacta en `3168/3168` slots.
+- **G:** 20 casos diagnósticos: `0` win, `19` tie, `0` loss y `1` reference absent.
+- **HE4:** 50 casos, `28/50` auditables, `PARTIALLY_SUPPORTED`.
+- `PROMPT_SCHEMA_SPECIFICATION_MISMATCH` y `EVALUATOR_MODALITY_DEVIATION` permanecen como limitaciones.
 
-Los valores completos, numeradores, denominadores y hashes de outputs estan en `outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json` y `outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/run_metadata.json`.
+## Hipótesis
 
-### Comparacion Descriptiva v0.1 vs v0.2
+| Hipótesis | Estado final |
+|---|---|
+| HE2 | PARTIALLY_SUPPORTED |
+| HE3 | SUPPORTED |
+| HE4 | PARTIALLY_SUPPORTED |
+| HE5 | PARTIALLY_SUPPORTED |
 
-| Metric | v0.1 | v0.2 |
-|---|---:|---:|
-| Top-1 | 0.8628 | 0.5095 |
-| Top-3 | 0.9374 | 0.6714 |
-| Top-5 | 0.9592 | 0.7633 |
-| Top-10 | 0.9801 | 0.8911 |
-| Top-50 | 1.0000 | 0.9915 |
-| MRR | 0.9062 | 0.6297 |
+## Sensibilidad EXP-08
 
-La diferencia no representa un cambio del algoritmo BM25. Representa sensibilidad al cambio desde el split v0.1 por serie hacia el split v0.2 independiente por DAM.
+v0.1 Top1 `0.862823` frente a v0.2 Top1 `0.509470` (delta `-35.335 pp`); v0.1 MRR `0.906239` frente a v0.2 MRR `0.629708`. Es sensibilidad al diseño/configuración experimental, no una degradación causal de BM25.
 
 ## Limitaciones Conocidas v0.2
 
-- Historico concentrado en pocas DAM: DAM mayor = 35.42%; Top-2 DAM aprox. 67.29%; HHI = 0.2361.
-- Devset reducido y concentrado: 100 series, 6 DAM, 9 codigos, DAM dominante = 91%.
-- Duplicados exactos historico-evaluacion: 35 casos.
-- Near-duplicates historico-evaluacion >= 0.95: 44 casos.
-- Estos casos se conservan para analisis de sensibilidad bajo HE5; no se eliminan del benchmark v0.2.
+- Concentración DAM y duplicados residuales.
+- Debilidad de los early rankings normativo y denso.
+- Tamaños diagnósticos de G y HE4.
+- `PROMPT_SCHEMA_SPECIFICATION_MISMATCH` y `EVALUATOR_MODALITY_DEVIATION`.
+- Calidad de descripción no operacionalizada, limitación de provenance v0.1 y alcance interno de Clase 87.
+
+Las 13 limitaciones preservadas y su tratamiento están en [exp04_consolidated_limitations_v0.2.csv](outputs/evaluation/exp04_consolidated_closure_v0.2/exp04_consolidated_limitations_v0.2.csv).
 
 ## Documentacion Relacionada
 
 - [Protocolo data_aduanas Clase 87 v0.2](docs/protocolo_data_aduanas_clase87_v0.2.md)
 - [Ficha dataset data_aduanas Clase 87 v0.2](docs/ficha_data_aduanas_clase87_v0.2.md)
 - [Manifiesto de artefactos v0.2](docs/manifiesto_artefactos_v0.2.md)
-- [Inventario EXP-04 Fase A BM25 historico v0.2](docs/exp04_bm25_historico_v02_inventory.md)
-- [Resumen BM25 historico v0.2](outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_summary.md)
+- [Cierre consolidado EXP-04 / Grupo 1](docs/exp04_group1_consolidated_closure_inventory.md)
+- [Gate consolidado](outputs/evaluation/exp04_consolidated_closure_v0.2/gate_exp04_consolidated_closure_manifest_v0.2.json)
+- [Gate correctivo de procedencia](outputs/evaluation/exp04_consolidated_closure_v0.2/gate_exp04_consolidated_corrective_microclose_manifest_v0.2.json)
+- [Registro final de resultados](outputs/evaluation/exp04_consolidated_closure_v0.2/exp04_final_results_registry_v0.2.csv)
+- [Registro final de procedencia](outputs/evaluation/exp04_consolidated_closure_v0.2/exp04_final_provenance_registry_v0.2.csv)
 
 ## Comandos Utiles
 
@@ -128,18 +133,6 @@ Tests:
 
 ```powershell
 python -m unittest discover -s tests -v
-```
-
-Generacion split v0.2:
-
-```powershell
-python src/evaluation/group_split_by_dam.py --overwrite
-```
-
-BM25 historico v0.2:
-
-```powershell
-python -m src.experiments.evaluate_historical_retrieval_data_aduanas_v02 --history-depth 2950 --candidate-depth 100
 ```
 
 ## Estructura del Repositorio

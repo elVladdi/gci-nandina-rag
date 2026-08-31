@@ -1,12 +1,12 @@
 # Documentación del proyecto
 
-Esta carpeta reúne la documentación metodológica y técnica del proyecto.
+La campaña experimental final del Grupo 1 está cerrada sobre el benchmark `v0.2` con `DAM_GROUPED_FINAL_SPLIT`.
 
-## Contenido previsto
+## Índices vigentes
 
-- `protocolo_experimental.md`: fases del piloto experimental offline.
-- `estructura_repositorio.md`: descripción de carpetas y criterios de organización.
-- `ficha_corpus.md`: plantilla para documentar el corpus normativo.
-- `rubrica_explicacion.md`: criterios para evaluar explicaciones auditables.
+- [Protocolo data_aduanas Clase 87 v0.2](protocolo_data_aduanas_clase87_v0.2.md)
+- [Ficha dataset data_aduanas Clase 87 v0.2](ficha_data_aduanas_clase87_v0.2.md)
+- [Manifiesto de artefactos v0.2](manifiesto_artefactos_v0.2.md)
+- [Cierre consolidado EXP-04 / Grupo 1](exp04_group1_consolidated_closure_inventory.md)
 
-La documentación debe mantenerse sincronizada con el código, los datos procesados y las salidas experimentales.
+Los resultados, Gates, hashes y procedencia congelada se encuentran en [`outputs/evaluation/exp04_consolidated_closure_v0.2/`](../outputs/evaluation/exp04_consolidated_closure_v0.2/).
