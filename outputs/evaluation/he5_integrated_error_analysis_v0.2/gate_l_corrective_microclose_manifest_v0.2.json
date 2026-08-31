@@ -1,0 +1,30 @@
+{
+  "created_at_utc": "2026-08-31T02:51:32.591939+00:00",
+  "description_field_added": true,
+  "description_quality_operationalized": false,
+  "exp10_source_restored": true,
+  "gate_l_corrective_microclose": "APPROVED",
+  "he5_final_assessment_deferred_to_exp08": true,
+  "near090_restored": true,
+  "oe5_he5_source_restored": true,
+  "original_gate_l_commit": "4915da12c7c011c4c9f2061a0d7752aa56e5bf9a",
+  "outputs_sha256": {
+    "gate_l_integrated_error_analysis_manifest_v0.2.json": "bc64be6c747d72e2f8e04882eb69a7fd816a15b2bf7f5386f39cb56d615f468e",
+    "he5_component_coverage_v0.2.csv": "c3fcbca3fa7d37190fe17768784b38200c1a470298ce449085b560f66906e10e",
+    "he5_duplicate_sensitivity_v0.2.csv": "1eca1abdfd61adc0616e2eee613b458f1775941c872c15f3a56644fa09aa51a6",
+    "he5_error_events_v0.2.csv": "56d53edb7c9880a05a1400280c76dc6b73bd5ef3363a7a3029fbda2ac867e62e",
+    "he5_error_taxonomy_v0.2.json": "26f16072e99882a7d8292e40015ed7950d6542d121cdd80333397a48785981ac",
+    "he5_historical_errors_by_support_v0.2.csv": "6600d1117256685b48a5070e777737521be3ea98f610630f33cdc0341bafd201",
+    "he5_historical_hierarchy_errors_v0.2.csv": "d02fab75bbccd1ddbf12c75c00d920bf04b64333c179fc258029b55e12561cc1",
+    "he5_historical_vs_normative_v0.2.csv": "d070609c11967588a91a291cfbf547550ee5514a71638330ad4a1fb3f46af0d6",
+    "he5_hypothesis_assessment_v0.2.json": "76cc968bdcfc8a0a8cd070210fdca8852a3161215343cd4c2973cb28711bff28",
+    "he5_integrated_error_matrix_dictionary_v0.2.md": "80e75baa4a8ce94a17afba505182ad4887f71b5081f57b802a7e401547213e9c",
+    "he5_integrated_error_matrix_v0.2.csv": "a36ecab58d9df162addf812edc47b4fec875bffb4bc83184c0fff1b0a3ab636d",
+    "he5_integrated_findings_v0.2.md": "bb143925e726480d65293cbebd2bd7df792244e5b317445ef2ec5c1d876a3f6d",
+    "he5_normative_failure_analysis_v0.2.csv": "933ef825afb6a0286b61ef02c0d2db272c0c3c33603d384fabe2d7680d71e5eb",
+    "summary_phase_l.md": "b42b78f06684ce2401f9e42d6e73e3879c73f85fdd266a0ac698455d1fa39200"
+  },
+  "ready_for_exp08": true,
+  "source_discovery_correction": true,
+  "source_not_versioned_in_execution_repo": true
+}

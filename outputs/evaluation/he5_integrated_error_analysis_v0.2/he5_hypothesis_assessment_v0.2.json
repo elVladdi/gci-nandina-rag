@@ -1,8 +1,15 @@
 {
-  "gate_l": "APPROVED",
-  "he5": "NOT EVALUABLE: no formulacion literal versionada localizada",
-  "not_project_complete": true,
-  "oe5": "NOT EVALUABLE: no formulacion literal versionada localizada",
+  "components": {
+    "descriptive_quality": "NOT_EVALUATED_NO_FROZEN_CASE_RULE",
+    "hierarchical_proximity": "EVALUATED",
+    "historical_precedent_availability": "EVALUATED",
+    "internal_evaluation_scope": "PARTIALLY_EVALUATED_EXP08_PENDING"
+  },
+  "exp10_source": "Anexo_1_NANDINA_LLM_RAG_v13.docx (approved research project; source not versioned in execution repository)",
+  "he5_literal": "Los errores y límites del piloto se concentrarán en descripciones ambiguas o incompletas, subpartidas jerárquicamente próximas, casos con precedentes históricos insuficientes y condiciones que restringirán la validez de los resultados al conjunto interno evaluado.",
+  "he5_status": "PENDING_FINAL_ASSESSMENT_AFTER_EXP08",
+  "oe5_literal": "Analizar cuantitativa y cualitativamente los errores y límites del piloto, considerando la calidad de las descripciones, la proximidad jerárquica, la disponibilidad de precedentes históricos y el alcance interno de la evaluación.",
+  "oe5_status": "IN_PROGRESS: Integrated error analysis completed; final sensitivity/internal-validity analysis pending EXP-08.",
   "preserved": {
     "HE2": "PARTIALLY SUPPORTED",
     "HE3": "SUPPORTED",
