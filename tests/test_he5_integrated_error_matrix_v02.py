@@ -45,8 +45,15 @@ class He5IntegratedErrorMatrixTests(unittest.TestCase):
         self.assertTrue(self.manifest["no_model_call"])
         self.assertTrue(self.manifest["no_new_retrieval"])
         self.assertTrue(self.manifest["no_web"])
-        self.assertEqual(self.hypothesis["he5"].split(":")[0], "NOT EVALUABLE")
+        self.assertEqual(self.hypothesis["he5_status"], "PENDING_FINAL_ASSESSMENT_AFTER_EXP08")
         self.assertEqual(self.hypothesis["preserved"], {"HE2": "PARTIALLY SUPPORTED", "HE3": "SUPPORTED", "HE4": "PARTIALLY SUPPORTED"})
+
+    def test_05_corrective_description_and_near_duplicate_contract(self) -> None:
+        self.assertTrue(all(row["commercial_description"] for row in self.matrix))
+        self.assertEqual(sum(int(row["near_ge_090"]) for row in self.matrix), 55)
+        self.assertEqual(sum(int(row["near_ge_095"]) for row in self.matrix), 44)
+        self.assertEqual(sum(int(row["near_ge_098"]) for row in self.matrix), 37)
+        self.assertTrue(all(row["description_quality_operationalized"] == "0" for row in self.matrix))
 
 
 if __name__ == "__main__":
