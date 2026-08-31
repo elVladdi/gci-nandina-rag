@@ -21,3 +21,7 @@ HE2 is `PARTIALLY_SUPPORTED`, HE3 is `SUPPORTED`, HE4 is `PARTIALLY_SUPPORTED`, 
 ## Resulting Boundary
 
 The closure prepares the branch for human review before any merge to `main`. It does not begin Group 2 or authorize a new experiment, retrieval run, model invocation, or web access.
+
+## Corrective Microclose
+
+The consolidated registry was corrected against the tracked, frozen D1a MNRL metrics artifact rather than the invalidated D0 legacy dense baseline. The corrective manifest records the split hashes, Git-tracking checks for every frozen provenance row, the corrected EXP-06 title, and the complete schemas for result, provenance, limitation, and hypothesis registries. The microclose makes no experimental claim beyond the existing frozen artifacts.
