@@ -8,8 +8,8 @@
     "evidence_source": "historical runners"
   },
   "BM25_parameters": {
-    "status": "UNKNOWN",
-    "evidence_source": "v0.1 run_metadata absent"
+    "status": "PARTIALLY_TRACED",
+    "evidence_source": "v0.1 historical_metrics.json records candidate_depth 200; v0.2 run_metadata.json records depth 100"
   },
   "candidate_deduplication": {
     "status": "SAME",
@@ -32,8 +32,8 @@
     "evidence_source": "evalsets"
   },
   "metadata_availability": {
-    "status": "UNKNOWN",
-    "evidence_source": "V01_METADATA_PROVENANCE_LIMITATION"
+    "status": "PARTIAL",
+    "evidence_source": "v0.1 historical_metrics.json exists, but v0.1 run_metadata.json is absent (V01_METADATA_PROVENANCE_LIMITATION)"
   },
   "interpretation": "Descriptive frozen-configuration comparison; no exclusive causal attribution to split policy."
 }

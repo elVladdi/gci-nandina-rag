@@ -1,3 +1,3 @@
-version,eval_cases,unique_expected_nandina,single_case_codes,max_cases_per_code
-v0.1,1006,62,12,131
-v0.2,1056,42,4,235
+version,eval_cases,unique_expected_nandina,cases_with_historical_nominal_support,historical_nominal_support_rate,supported_codes,total_eval_codes,single_case_codes,max_cases_per_code
+v0.1,1006,62,1006,1.0,62,62,12,131
+v0.2,1056,42,1056,1.0,42,42,4,235
