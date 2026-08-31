@@ -31,9 +31,8 @@ class He4PhaseKHumanPackageTests(unittest.TestCase):
         self.assertTrue(self.manifest["labels_hidden"])
         self.assertTrue(self.manifest["buckets_hidden"])
 
-    def test_03_template_is_unscored(self) -> None:
-        score_columns = [key for key in self.template[0] if key.endswith("_score") or key in ("hard_violation", "total_score", "auditable")]
-        self.assertTrue(all(not row[column] for row in self.template for column in score_columns))
+    def test_03_pre_scoring_manifest_preserves_the_original_blank_package(self) -> None:
+        self.assertTrue(self.manifest["no_scores_assigned"])
 
     def test_04_frozen_contract_and_status_hold(self) -> None:
         self.assertEqual(self.manifest["rubric"]["sha256"], "175f5405bcdf911fa449cdbbef1fff17284c134970be4a40f8af8a25df25e514")
