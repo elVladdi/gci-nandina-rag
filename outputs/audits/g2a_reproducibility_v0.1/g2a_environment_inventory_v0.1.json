@@ -1,0 +1,41 @@
+{
+  "inventory_version": "v0.1",
+  "scope": "historical evidence and observed current environment; no current value is asserted as historical evidence",
+  "historically_frozen": [
+    {"component": "D1a training config", "evidence": "src/configs/text2trade_mnrl_v0.2.json", "classification": "HISTORICALLY_FROZEN"},
+    {"component": "Group 1 clean checkout suite", "evidence": "outputs/evaluation/exp04_consolidated_closure_v0.2/gate_group1_clean_checkout_reproducibility_v0.2.json", "classification": "HISTORICALLY_FROZEN"}
+  ],
+  "historically_recorded": [
+    {"component": "D1a Python", "value": "3.10.11", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "D1a Windows", "value": "Windows-10-10.0.26200-SP0", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "D1a Torch", "value": "2.12.0+cpu", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "HE4 Ollama", "value": "0.32.15", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "HE4 model", "value": "qwen2.5:7b-instruct", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "HE4 model digest", "value": "845db...", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "HE4 quantization", "value": "Q4_K_M", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "HE4 context length", "value": "8192", "classification": "HISTORICALLY_RECORDED"},
+    {"component": "HE4 temperature", "value": "0", "classification": "HISTORICALLY_RECORDED"}
+  ],
+  "current_env_only": [
+    {"component": "Python", "value": "3.10.11", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "NumPy", "value": "2.2.6", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "Pandas", "value": "2.3.3", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "Torch", "value": "2.12.0+cpu", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "sentence-transformers", "value": "5.5.1", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "openpyxl", "value": "3.1.5", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "hnswlib", "value": "NOT_INSTALLED_IN_OBSERVED_ENVIRONMENT", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "pdfplumber", "value": "NOT_INSTALLED_IN_OBSERVED_ENVIRONMENT", "classification": "CURRENT_ENV_ONLY"},
+    {"component": "pypdf", "value": "NOT_INSTALLED_IN_OBSERVED_ENVIRONMENT", "classification": "CURRENT_ENV_ONLY"}
+  ],
+  "unknown": [
+    {"component": "D1a full dependency lockfile", "value": "UNKNOWN", "classification": "UNKNOWN"},
+    {"component": "HE4/K AI evaluator model identity", "value": "UNKNOWN", "classification": "UNKNOWN"}
+  ],
+  "g2a_taxonomy": {
+    "F001": {"status": "PARTIALLY_RESOLVED", "resolution": "HISTORICAL_ENVIRONMENT_INCOMPLETE_BUT_EXPLICITLY_DELIMITED"},
+    "F004": {"status": "PARTIALLY_RESOLVED", "resolution": "LLM_AND_AI_EVALUATION_NOT_BYTE_EXACTLY_REPRODUCIBLE", "r5": "PARTIAL"}
+  },
+  "not_applicable": [
+    {"component": "deterministic BM25 phases", "value": "seed is not required", "classification": "NOT_APPLICABLE"}
+  ]
+}

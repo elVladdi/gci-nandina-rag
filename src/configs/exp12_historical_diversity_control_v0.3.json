@@ -1,0 +1,138 @@
+{
+  "experiment_id": "exp12_historical_diversity_control_v0.3",
+  "version": "v0.3",
+  "contract_status": "CONDITIONAL_FROZEN_PENDING_NEW_HISTORICAL_GATE",
+  "method_contract": "CONDITIONAL_FROZEN_PENDING_NEW_HISTORICAL_GATE",
+  "execution_authorized": false,
+  "fixed_eval": {
+    "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "rows": 1056,
+    "immutable": true,
+    "selection_usage": "SHA and DAM-overlap check only; labels and descriptions are prohibited"
+  },
+  "sampling_universe": {
+    "source": "PENDING_NEW_HISTORICAL_GATE",
+    "path": null,
+    "sha256": null,
+    "fail_closed": true,
+    "must_not_fallback_to_h100": true
+  },
+  "reference_h100": {
+    "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+    "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "rows": 2950,
+    "label_source": "NANDINA",
+    "role": "reference_label_set_and_distribution_only; never an EXP-12 sampling fallback"
+  },
+  "volume_control": {
+    "target_rows": 2950,
+    "max_abs_row_deviation": 148,
+    "minimum_rows": 2802,
+    "maximum_rows": 3098,
+    "tolerance_status": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "preserve_complete_dams": true
+  },
+  "replicate_policy": {
+    "number_of_replicates_per_condition": 10,
+    "seed_schedule": [20262001, 20262002, 20262003, 20262004, 20262005, 20262006, 20262007, 20262008, 20262009, 20262010],
+    "seed_classification": "FROZEN_CANDIDATE_SEED_PENDING_EXTERNAL_AUDIT",
+    "duplicate_triplet_policy": "report DUPLICATE_REPLICATE_STRUCTURE; do not replace automatically"
+  },
+  "conditions": {
+    "D-LOW": {"diversity_direction": "higher_hhi_lower_effective_dam", "quantile": 0.9, "status": "FROZEN_CANDIDATE"},
+    "D-MID": {"diversity_direction": "intermediate_hhi_and_effective_dam", "quantile": 0.5, "status": "FROZEN_CANDIDATE"},
+    "D-HIGH": {"diversity_direction": "lower_hhi_higher_effective_dam", "quantile": 0.1, "status": "FROZEN_CANDIDATE"}
+  },
+  "primary_diversity_variable": {
+    "name": "DAM_CONCENTRATION_HHI",
+    "share_d": "n_d / N",
+    "hhi": "sum_d(share_d ** 2)",
+    "effective_dam": "1 / HHI",
+    "dominant_dam_share": "max_d(share_d)",
+    "top2_dam_share": "sum of the two largest share_d values",
+    "dam_count": "number of distinct DAM identifiers",
+    "interpretation": "higher HHI means lower DAM diversity; effective_DAM is derived only"
+  },
+  "label_control": {
+    "reference": "H100_FROZEN_REFERENCE",
+    "reference_label_set": "all NANDINA present in reference_h100",
+    "reference_label_distribution": "series proportion by NANDINA in reference_h100",
+    "required_label_coverage_fraction": 1.0,
+    "distribution_distance": "TVD(p,q) = 0.5 * sum_c(abs(p_c - q_c)) over H100 reference codes",
+    "maximum_tvd": 0.05,
+    "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "on_infeasible": "FAIL_CLOSED_EXTERNAL_AUDIT_REQUIRED"
+  },
+  "selection": {
+    "algorithm": "deterministic_complete_dam_quantile_by_hhi",
+    "algorithm_version": "candidate-v0.3",
+    "no_weighted_multiobjective": true,
+    "uses_only_bank_composition": true,
+    "uses_eval_performance": false,
+    "uses_eval_labels_for_selection": false,
+    "requires_predeclared_label_target": true,
+    "requires_zero_eval_dam_overlap": true
+  },
+  "candidate_generation": {
+    "candidate_count": 10000,
+    "order_key": "SHA256(str(seed) + ':' + str(candidate_index) + ':' + dam_id)",
+    "selection": "complete-DAM prefix nearest to target_rows",
+    "prefix_tie_breaking": "fewer DAMs; then SHA256 of sorted DAM ids lexicographically smaller",
+    "deduplicate_by": "sorted DAM tuple"
+  },
+  "feasibility_filter": {
+    "minimum_unique_feasible_candidates": 30,
+    "requires_volume_range": [2802, 3098],
+    "requires_label_coverage_fraction": 1.0,
+    "requires_tvd_at_most": 0.05,
+    "requires_zero_eval_dam_overlap": true,
+    "requires_complete_dams": true,
+    "on_failure": "FAIL_CLOSED_EXTERNAL_AUDIT_REQUIRED"
+  },
+  "condition_selection": {
+    "sort": "HHI ascending",
+    "quantile_index": "floor(q * (n - 1))",
+    "quantiles": {"D-HIGH": 0.1, "D-MID": 0.5, "D-LOW": 0.9},
+    "equal_hhi_tie_breaking": "SHA256(seed:condition_id:sorted_dam_ids)",
+    "requires_distinct_dam_sets": true,
+    "requires_strict_hhi_order": "HHI_DLOW > HHI_DMID > HHI_DHIGH",
+    "on_failure": "FAIL_CLOSED_EXTERNAL_AUDIT_REQUIRED"
+  },
+  "future_manipulation_check": {
+    "required_reports": ["HHI_q10", "HHI_q50", "HHI_q90", "HHI_span_q90_q10", "effective_DAM_q10", "effective_DAM_q50", "effective_DAM_q90", "effective_DAM_ratio_high_low"],
+    "hhi_span_formula": "HHI_q90 - HHI_q10",
+    "effective_dam_ratio_formula": "effective_DAM_q90 / effective_DAM_q10",
+    "strict_hhi_order_fail_closed": "HHI_DLOW > HHI_DMID > HHI_DHIGH",
+    "manipulation_strength_review_required": true,
+    "new_threshold_introduced": false,
+    "execution_gate": "PENDING_NEW_HISTORICAL_GATE"
+  },
+  "primary_diversity_measures": ["hhi", "effective_dam", "dam_count", "dominant_dam_share", "top2_dam_share"],
+  "secondary_diversity_measures": ["normalized_unique_descriptions", "internal_exact_duplicate_rate", "internal_near_duplicate_rate", "lexical_diversity", "nandina_coverage", "independent_dams_per_nandina", "series_per_nandina", "code_support_distribution"],
+  "duplicate_measurement": {
+    "selection_role": "secondary descriptive only; not an objective for D-LOW/D-MID/D-HIGH",
+    "exact_duplicate_method": "exact_normalized_description",
+    "normalization": "NFC; replace non-breaking spaces; strip; collapse whitespace; casefold",
+    "near_duplicate_method": "token_jaccard_rare_block",
+    "near_duplicate_provenance_path": "src/evaluation/group_split_by_dam.py",
+    "near_duplicate_provenance_commit": "327762363898be99d5c66c1e7e0ff2178b8ed221",
+    "near_duplicate_tokenization": "Unicode word tokens of length >= 3 after canonical normalization",
+    "near_duplicate_candidate_block": "tokens whose document frequency is <= max(20, floor(0.25 * left_rows))",
+    "thresholds": [0.9, 0.95, 0.98]
+  },
+  "controls": {
+    "common_clean_policy": "defined against the approved maximum historical universe; does not replace the fixed 1056-case primary denominator",
+    "no_eval_performance_selection": true
+  },
+  "evaluation_contract": {
+    "primary_metric": "top_3_accuracy",
+    "secondary_metrics": ["top_1_accuracy", "top_5_accuracy", "top_10_accuracy", "top_50_accuracy", "mrr", "hierarchical_error_categories"],
+    "case_level_outputs": ["case_id", "reference_rank", "top_1", "top_3", "best_historical_precedent", "best_precedent_dam", "independent_dam_support", "hierarchical_error_distance"]
+  },
+  "output_contract": {
+    "execution_outputs_not_created_by_this_contract": true,
+    "required_at_execution": ["exp12_condition_manifest.csv", "exp12_diversity_metrics_by_run.csv", "exp12_metrics_by_run.csv", "exp12_metrics_by_condition.csv", "exp12_case_level_transitions.csv", "exp12_duplicate_nearduplicate_audit.csv", "exp12_matching_quality.csv", "exp12_findings.md"],
+    "manifest_required_fields": ["experiment_id", "condition_id", "replicate_id", "run_id", "timestamp_utc", "git_commit", "historical_path", "historical_sha256", "historical_rows", "dam_list", "eval_sha256", "dam_overlap_count", "selection_algorithm", "selection_seed", "selection_used_eval_performance", "hhi", "effective_dam", "output_hashes"]
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "experiment_id": "exp11_historical_size_sensitivity_v0.3",
+  "version": "v0.3",
+  "contract_status": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "execution_authorized": false,
+  "fixed_eval": {
+    "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "rows": 1056,
+    "immutable": true
+  },
+  "h100_frozen_reference": {
+    "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+    "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "rows": 2950,
+    "dams": 28,
+    "role": "H100_FROZEN_REFERENCE"
+  },
+  "selection": {
+    "selection_unit": "DAM",
+    "preserve_complete_dams": true,
+    "nested_policy": "NOT_REQUIRED_STRUCTURALLY_INFEASIBLE",
+    "sampling_design": "INDEPENDENT_COMPLETE_DAM_SUBSETS_BY_CONDITION",
+    "algorithm": "sha256_seeded_independent_condition_complete_dam_prefix_with_paired_h50_strata",
+    "algorithm_version": "candidate-v0.3-g2a-1d",
+    "algorithm_description": "H25 and H75 retain their frozen independent complete-DAM selectors. H50 accepts paired D1/D2 candidates from the same seed, each using SHA-256(seed:H50:stratum:dam_id) over non-dominant DAM and the forced dominant for its stratum. All prefix ties use fewer DAM and then SHA-256 of sorted final DAM ids.",
+    "tie_breaking": "lower_absolute_row_deviation; lower_prefix_length; SHA-256 of sorted final DAM ids",
+    "uses_eval_performance": false,
+    "uses_eval_labels_for_selection": false,
+    "uses_nandina_for_selection": false,
+    "uses_only_bank_composition": true
+  },
+  "replicate_policy": {
+    "number_of_replicates": 10,
+    "h100_replicates": 1,
+    "seed_schedule": [],
+    "accepted_seed_schedule_H25": [20261001, 20261002, 20261003, 20261004, 20261005, 20261006, 20261007, 20261008, 20261009, 20261010],
+    "accepted_paired_seed_schedule_H50": [20261001, 20261002, 20261003, 20261004, 20261005],
+    "accepted_seed_schedule_H50_D1": [20261001, 20261002, 20261003, 20261004, 20261005],
+    "accepted_seed_schedule_H50_D2": [20261001, 20261002, 20261003, 20261004, 20261005],
+    "accepted_seed_schedule_H75": [20261001, 20261002, 20261003, 20261004, 20261005, 20261006, 20261007, 20261008, 20261009, 20261010],
+    "initial_candidate_seed_schedule": [20261001, 20261002, 20261003, 20261004, 20261005, 20261006, 20261007, 20261008, 20261009, 20261010],
+    "seed_classification": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "seed_stream_start": 20261001,
+    "seed_increment": 1,
+    "max_seed_candidates": 100000,
+    "acceptance_policy": "H25 and H75 retain their frozen independent schedules. For H50, accept the first five paired seed values for which both D1 and D2 satisfy the frozen tolerance, complete-DAM selection, the forced stratum dominant, exclusion of the other dominant, and unique composition SHA-256 within stratum; fail closed when fewer than five pairs exist",
+    "planning_feasibility": {
+      "nested_design_status": "STRUCTURALLY_INFEASIBLE_UNDER_FROZEN_GROUP_AND_VOLUME_CONSTRAINTS",
+      "nested_design_evidence_path": "outputs/audits/g2a_reproducibility_v0.1/exp11_h100_seed_feasibility_v0.1.json",
+      "status": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+      "evidence_path": "outputs/audits/g2a_reproducibility_v0.1/exp11_independent_condition_feasibility_v0.2.json",
+      "candidates_evaluated_per_condition": {
+        "H25": 10,
+        "H50_PAIRED": 5,
+        "H75": 10
+      },
+      "accepted_seed_count_per_condition": {"H25": 10, "H50_D1": 5, "H50_D2": 5, "H75": 10},
+      "resolution": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT; H50 has five paired D1/D2 seeds; no EXP-11 retrieval authorization"
+    }
+  },
+  "feasibility_contract": {
+    "reference_rows": 2950,
+    "nominal_target_formula": "floor(fraction * 2950 + 0.5)",
+    "target_rows": {"H25": 738, "H50": 1475, "H75": 2213, "H100": 2950},
+    "max_abs_row_deviation": 148,
+    "validity": "each independent H25/H50/H75 deviation <= 148; complete DAMs; structural dominant-DAM count satisfied",
+    "no_label_balancing": true,
+    "no_nandina_distribution_selection": true,
+    "no_eval_performance_selection": true
+  },
+  "structural_volume_consequences": {
+    "dominant_dams": {
+      "118-2026-10-128583-00": 1045,
+      "118-2026-10-146957-00": 940
+    },
+    "remaining_dams_rows": 965,
+    "required_dominant_count": {
+      "H25": 0,
+      "H50": 1,
+      "H75": 2
+    },
+    "nested_design_status": "STRUCTURALLY_INFEASIBLE_UNDER_FROZEN_GROUP_AND_VOLUME_CONSTRAINTS",
+    "minimum_h75_rows_if_nested_with_h25": 2575,
+    "h75_maximum_rows": 2361
+  },
+  "interpretation": {
+    "primary_interpretation": "Sensitivity of historical retrieval performance to nominal historical bank size under complete-DAM sampling and the composition constraints of the frozen H100 bank.",
+    "isolated_size_causal_effect_claim_allowed": false,
+    "h50_primary_analysis": "POOLED_EQUAL_WEIGHT_5_D1_5_D2",
+    "h50_secondary_diagnostic": "DOMINANT_STRATUM_COMPARISON",
+    "h50_dominant_identity_causal_claim_allowed": false,
+    "required_future_reporting": [
+      "nominal_condition",
+      "realized_rows",
+      "realized_fraction",
+      "replicate_variability",
+      "dam_concentration",
+      "historical_coverage"
+    ]
+  },
+  "h50_stratification": {
+    "status": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "paired_seed_stream_start": 20261001,
+    "seed_increment": 1,
+    "max_seed_candidates": 100000,
+    "strata": {
+      "D1": {"forced_included": "118-2026-10-128583-00", "forced_excluded": "118-2026-10-146957-00", "forced_rows": 1045, "residual_target_rows": 430, "replicates": 5},
+      "D2": {"forced_included": "118-2026-10-146957-00", "forced_excluded": "118-2026-10-128583-00", "forced_rows": 940, "residual_target_rows": 535, "replicates": 5}
+    },
+    "pair_acceptance": "same seed produces one valid unique D1 and one valid unique D2 composition",
+    "primary_analysis": "POOLED_EQUAL_WEIGHT_5_D1_5_D2",
+    "secondary_diagnostic": "DOMINANT_STRATUM_COMPARISON"
+  },
+  "g2a_findings": {
+    "F008": {
+      "classification": "PRE_EXECUTION_DESIGN_INFEASIBILITY",
+      "status": "VERIFIED_IN_G2",
+      "resolution": "FROZEN_PRE_EXECUTION_CORRECTION",
+      "scientific_results_affected": false,
+      "group1_reopen_required": false
+    },
+    "F009": {
+      "classification": "STRUCTURAL_SIZE_COMPOSITION_COUPLING",
+      "status": "VERIFIED_IN_G2",
+      "resolution": "DECLARED_LIMITATION",
+      "isolated_size_causal_effect_claim_allowed": false,
+      "scientific_results_affected": false,
+      "group1_reopen_required": false
+    },
+    "F010": {
+      "classification": "H50_DOMINANT_STRATUM_IMBALANCE",
+      "status": "VERIFIED_IN_G2",
+      "resolution": "RESOLVED_PRE_EXECUTION_BY_H50_STRATIFICATION",
+      "severity": "S2",
+      "scientific_results_affected": false,
+      "group1_reopen_required": false,
+      "previous_v0_1_dominant_counts": {"D1": 2, "D2": 8},
+      "previous_v0_1_mean_hhi": {"D1": 0.5197288651, "D2": 0.4232268197},
+      "final_dominant_counts": {"D1": 5, "D2": 5}
+    }
+  },
+  "target_conditions": {
+    "H25": {"target_fraction_of_h100": 0.25, "nominal_target_rows": 738, "enabled": true, "source": "H100_FROZEN_REFERENCE"},
+    "H50": {"target_fraction_of_h100": 0.5, "nominal_target_rows": 1475, "enabled": true, "source": "H100_FROZEN_REFERENCE"},
+    "H75": {"target_fraction_of_h100": 0.75, "nominal_target_rows": 2213, "enabled": true, "source": "H100_FROZEN_REFERENCE"},
+    "H100": {"target_fraction_of_h100": 1.0, "nominal_target_rows": 2950, "enabled": true, "source": "H100_FROZEN_REFERENCE", "replicates": 1},
+    "H150": {"target_fraction_of_h100": 1.5, "enabled": false, "source": "PENDING_NEW_HISTORICAL_GATE", "fail_closed": true, "path": null, "sha256": null},
+    "H200": {"target_fraction_of_h100": 2.0, "enabled": false, "source": "PENDING_NEW_HISTORICAL_GATE", "fail_closed": true, "path": null, "sha256": null}
+  },
+  "retrieval_contract": {
+    "reference_runner": "src/experiments/evaluate_historical_retrieval_data_aduanas_v02.py",
+    "bm25": {"k1": 1.5, "b": 0.75},
+    "normalization": "frozen historical v0.2 normalization as implemented by the referenced runner",
+    "ranking_depth": 100,
+    "code_deduplication": "first occurrence per normalized NANDINA in descending BM25 ranking",
+    "modifiable_only_with_external_audit": true
+  },
+  "evaluation_contract": {
+    "primary_metric": "top_3_accuracy",
+    "secondary_metrics": ["top_1_accuracy", "top_5_accuracy", "top_10_accuracy", "top_50_accuracy", "mrr", "same_hs6", "same_hs4", "same_chapter", "different_chapter"],
+    "duplicate_thresholds": [0.9, 0.95, 0.98],
+    "common_clean_policy": "PENDING_MAXIMUM_HISTORICAL_BANK_GATE; primary denominator remains all 1056 fixed eval cases",
+    "no_eval_performance_selection": true
+  },
+  "output_contract": {
+    "execution_outputs_not_created_by_this_contract": true,
+    "planning_evidence_only": "outputs/audits/g2a_reproducibility_v0.1/exp11_independent_condition_feasibility_v0.2.json",
+    "required_at_execution": ["exp11_conditions.csv", "exp11_run_manifest.json", "exp11_metrics_by_run.csv", "exp11_metrics_by_condition.csv", "exp11_case_level_ranks.csv", "exp11_bank_composition_by_run.csv", "exp11_duplicate_nearduplicate_audit.csv", "exp11_learning_curve.csv", "exp11_findings.md"],
+    "manifest_required_fields": ["experiment_id", "condition_id", "nominal_condition", "replicate_id", "run_id", "timestamp_utc", "git_commit", "historical_path", "historical_sha256", "historical_rows", "historical_dams", "dam_list", "realized_rows", "realized_fraction", "dam_count", "dam_hhi", "effective_dam", "nandina_coverage", "dominant_structure", "historical_support_summary", "eval_path", "eval_sha256", "dam_overlap_count", "selection_algorithm", "selection_seed", "selection_used_eval_performance", "retrieval_config", "output_hashes"],
+    "case_level_required_fields": ["case_id", "reference_nandina_supported_in_bank", "reference_independent_dam_support_count"]
+  }
+}

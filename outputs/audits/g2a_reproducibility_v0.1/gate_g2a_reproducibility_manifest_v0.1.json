@@ -1,0 +1,134 @@
+{
+  "phase": "G2A MICROCLOSE CORRECTIVE 1E",
+  "status": "PENDING_EXTERNAL_FINAL_AUDIT",
+  "recommended_gate": "APPROVED_WITH_NONBLOCKING_LIMITATIONS",
+  "closure_state": "NOT_CLOSED",
+  "group1_reopen_required": false,
+  "blocking_findings_for_exp11a": [],
+  "nonblocking_historical_limitations": ["F001", "F002", "F003", "F004", "F005", "F009"],
+  "future_dependencies": ["F007"],
+  "resolved_in_g2": ["F006", "F008", "F010"],
+  "execution_authorization": {
+    "exp11": false,
+    "exp12": false,
+    "group3": false
+  },
+  "input_branch_head": "e8a5aa7218df54b2cc309424e85914b7d914df15",
+  "f003": {
+    "status": "PARTIALLY_RESOLVED",
+    "resolution": "SCRIPT_AND_CONFIG_PROVENANCE_RECOVERED_EXECUTION_HEAD_UNKNOWN",
+    "execution_repository_head": "UNKNOWN",
+    "training_script_last_modifying_commit_before_execution": "a91269ed3b5c52d08511063465be130adf185f0a",
+    "training_script_last_modifying_commit_timestamp_utc": "2026-08-30T05:05:54Z",
+    "config_last_modifying_commit_before_execution": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
+    "direct_dependency_provenance": {
+      "src/retrieval/text2trade_mnrl_v02.py": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b before execution",
+      "src/utils/paths.py": "d73ff147b02d69c65218de4b4bd08d501ff9f5d7 historical provenance; no change in D1a interval"
+    }
+  },
+  "f007": {
+    "status": "OPEN",
+    "dependency_type": "FUTURE_DEPENDENCY",
+    "severity": "S3_SCOPED_FUTURE",
+    "blocks_g2a_contractual_closure": false,
+    "blocks_exp11a_h25_h50_h75_h100": false,
+    "blocks_exp11b_h150_h200": true,
+    "blocks_all_exp12_execution": true
+  },
+  "scientific_results_changed": false,
+  "scientific_artifacts_regenerated": false,
+  "frozen_data_changed": false,
+  "frozen_outputs_changed": false,
+  "findings": {
+    "F001": {"status": "PARTIALLY_RESOLVED", "severity": "S2", "resolution": "HISTORICAL_ENVIRONMENT_INCOMPLETE_BUT_EXPLICITLY_DELIMITED"},
+    "F002": {"status": "NOT_RECOVERABLE", "severity": "S2", "resolution": "EXP04_C_HISTORICAL_RUNNER_NOT_VERSIONED_AT_EXECUTION", "scope": "R3_EXACT_COMPUTATIONAL_REPETITION_LIMITATION", "r1_r2_preserved": true},
+    "F003": {"status": "PARTIALLY_RESOLVED", "severity": "S2", "resolution": "SCRIPT_AND_CONFIG_PROVENANCE_RECOVERED_EXECUTION_HEAD_UNKNOWN", "execution_repository_head": "UNKNOWN"},
+    "F004": {"status": "PARTIALLY_RESOLVED", "severity": "S2", "resolution": "LLM_AND_AI_EVALUATION_NOT_BYTE_EXACTLY_REPRODUCIBLE", "r1_r2_preserved": true, "r5": "PARTIAL"},
+    "F005": {"status": "NOT_RECOVERABLE", "severity": "S2", "resolution": "EXP08_V01_METADATA_NOT_RECOVERABLE_NO_RETROSPECTIVE_RECONSTRUCTION", "r1_r2_preserved": true},
+    "F006": {"status": "VERIFIED_IN_G2", "resolution": "EXP11_EXP12_REPRODUCIBILITY_CONTRACTS_IMPLEMENTED_AND_TESTED", "original_diagnostic_status": "OPEN", "original_severity": "S3"},
+    "F007": {"status": "OPEN", "dependency_type": "FUTURE_DEPENDENCY", "severity": "S3_SCOPED_FUTURE", "blocking_scope": ["EXP11B_H150_H200", "ALL_EXP12_EXECUTION"], "non_blocking_scope": ["G2A_CLOSURE", "EXP11A_H25_H50_H75_H100"]},
+    "F008": {"status": "VERIFIED_IN_G2", "resolution": "FROZEN_PRE_EXECUTION_CORRECTION", "classification": "PRE_EXECUTION_DESIGN_INFEASIBILITY", "scientific_results_affected": false},
+    "F009": {"status": "VERIFIED_IN_G2", "resolution": "DECLARED_LIMITATION", "classification": "STRUCTURAL_SIZE_COMPOSITION_COUPLING", "isolated_size_causal_effect_claim_allowed": false},
+    "F010": {"status": "VERIFIED_IN_G2", "resolution": "RESOLVED_PRE_EXECUTION_BY_H50_STRATIFICATION", "classification": "H50_DOMINANT_STRATUM_IMBALANCE", "severity": "S2", "previous_state": "2_D1_8_D2", "final_state": "5_D1_5_D2", "scientific_results_affected": false}
+  },
+  "microclose_1b": {
+    "status": "PENDING_EXTERNAL_AUDIT",
+    "exp11_h100_planning_evidence": "exp11_h100_seed_feasibility_v0.1.json",
+    "exp11_seed_acceptance": "DESIGN_INFEASIBLE",
+    "exp11_candidates_evaluated": 100000,
+    "exp11_final_candidate_seeds": [],
+    "exp11_retrieval_started": false,
+    "exp12_real_data_planning_started": false,
+    "exp12_synthetic_contract_tests_only": true,
+    "exp12_execution_blocked_by_f007": true
+  },
+  "microclose_1c": {
+    "status": "PENDING_EXTERNAL_AUDIT",
+    "f008": {
+      "classification": "PRE_EXECUTION_DESIGN_INFEASIBILITY",
+      "severity": "S3_SCOPED_TO_EXP11A_DESIGN",
+      "scientific_results_affected": false,
+      "group1_reopen_required": false,
+      "status": "VERIFIED_IN_G2",
+      "resolution": "FROZEN_PRE_EXECUTION_CORRECTION",
+      "structural_design_status": "STRUCTURALLY_INFEASIBLE_UNDER_FROZEN_GROUP_AND_VOLUME_CONSTRAINTS"
+    },
+    "f009": {
+      "classification": "STRUCTURAL_SIZE_COMPOSITION_COUPLING",
+      "status": "VERIFIED_IN_G2",
+      "resolution": "DECLARED_LIMITATION",
+      "severity": "S2",
+      "scientific_results_affected": false,
+      "group1_reopen_required": false,
+      "isolated_size_causal_effect_claim_allowed": false
+    },
+    "exp11_independent_condition_evidence": "exp11_independent_condition_feasibility_v0.1.json",
+    "exp11_seed_acceptance": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "exp11_retrieval_started": false,
+    "exp12_method_contract": "CONDITIONAL_PENDING_NEW_HISTORICAL_GATE",
+    "exp12_started": false,
+    "group3_started": false
+  },
+  "microclose_1d": {
+    "status": "PENDING_EXTERNAL_AUDIT",
+    "f010": {
+      "classification": "H50_DOMINANT_STRATUM_IMBALANCE",
+      "status": "VERIFIED_IN_G2",
+      "resolution": "RESOLVED_PRE_EXECUTION_BY_H50_STRATIFICATION",
+      "severity": "S2",
+      "scientific_results_affected": false,
+      "group1_reopen_required": false,
+      "previous_v0_1_dominant_counts": {"D1": 2, "D2": 8},
+      "previous_v0_1_mean_hhi": {"D1": 0.5197288651, "D2": 0.4232268197},
+      "final_dominant_counts": {"D1": 5, "D2": 5}
+    },
+    "exp11_independent_condition_evidence": "exp11_independent_condition_feasibility_v0.2.json",
+    "h25_sha_preserved_from_v0_1": true,
+    "h75_sha_preserved_from_v0_1": true,
+    "h50_paired_seeds": [20261001, 20261002, 20261003, 20261004, 20261005],
+    "h50_replicates": {"D1": 5, "D2": 5, "total": 10},
+    "h50_primary_analysis": "POOLED_EQUAL_WEIGHT_5_D1_5_D2",
+    "h50_secondary_diagnostic": "DOMINANT_STRATUM_COMPARISON",
+    "exp11_retrieval_started": false,
+    "exp12_contract_status": "CONDITIONAL_FROZEN_PENDING_NEW_HISTORICAL_GATE",
+    "exp12_started": false,
+    "scientific_results_changed": false,
+    "scientific_artifacts_regenerated": false,
+    "frozen_data_changed": false,
+    "frozen_outputs_changed": false,
+    "group3_started": false
+  },
+  "microclose_1e": {
+    "status": "PENDING_EXTERNAL_FINAL_AUDIT",
+    "recommended_gate": "APPROVED_WITH_NONBLOCKING_LIMITATIONS",
+    "exp11_v3_design": "ACCEPTED_PENDING_VERSIONED_FREEZE",
+    "exp12_v3_method": "CONDITIONAL_ACCEPTED_PENDING_NEW_HISTORICAL_GATE",
+    "external_tesis_governance_documents": [
+      {"path": "C:/Users/Vladimir/OneDrive/Documentos/Maestría UNMSM/Cuarto ciclo/Tesis/Anexo 2 - Tesis/Fichas de mejora/Grupo 2/EXP-11_sensibilidad_tamano_banco_historico_v3.md", "sha256": "9478e4336cd01863432bc08eff1143e10dcbfa638085bbce81a8e7f54b1410d5", "role": "EXTERNAL_TESIS_GOVERNANCE_DOCUMENT", "required_for_clean_checkout_execution": false},
+      {"path": "C:/Users/Vladimir/OneDrive/Documentos/Maestría UNMSM/Cuarto ciclo/Tesis/Anexo 2 - Tesis/Fichas de mejora/Grupo 2/EXP-12_efecto_diversidad_banco_historico_volumen_controlado_v3.md", "sha256": "07e1eff49501b1d6b1c3c088ec37c8cb31869788e2f74a66397fee3a0c3c7dfb", "role": "EXTERNAL_TESIS_GOVERNANCE_DOCUMENT", "required_for_clean_checkout_execution": false}
+    ],
+    "exp11a_execution_authorized": false,
+    "exp12_execution_authorized": false,
+    "group3_started": false
+  }
+}

@@ -1,0 +1,20 @@
+asset_id,path_or_scope,asset_class,rationale,required_for_frozen_conclusion,git_tracked
+split_v02,data/processed/data_aduanas_*_clase87_v0.2.csv,VERSIONED_FROZEN_EVIDENCE,frozen benchmark inputs,true,true
+evalset_v02,data/processed/data_aduanas_evalset_clase87_v0.2.csv,VERSIONED_FROZEN_EVIDENCE,fixed evaluation contract,true,true
+normative_corpus,data/processed/corpus_rag_v1_index.jsonl,VERSIONED_FROZEN_EVIDENCE,frozen normative corpus,true,true
+historical_case_outputs,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2,VERSIONED_FROZEN_EVIDENCE,case-level ranking evidence,true,true
+he4_case_outputs,outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2,VERSIONED_FROZEN_EVIDENCE,HE4 gate evidence,true,true
+d1a_training_metadata,outputs/training/text2trade_mnrl_v0.2/training_metadata.json,VERSIONED_FROZEN_EVIDENCE,training provenance,true,true
+d1a_model,models/text2trade_mnrl_v0.2,RUNTIME_ONLY_DEPENDENCY,heavy trained runtime asset,false,false
+d1a_vectors,data/processed/indexes/text2trade_mnrl_nandina8_v0.2/vectors.npy,RECONSTRUCTABLE_ARTIFACT,rebuildable index array,false,false
+d1a_hnsw,data/processed/indexes/text2trade_mnrl_nandina8_v0.2,RECONSTRUCTABLE_ARTIFACT,HNSW index runtime;rebuildable index structure,false,false
+d1a_docstore,data/processed/indexes/text2trade_mnrl_nandina8_v0.2/docstore.json,RECONSTRUCTABLE_ARTIFACT,rebuildable document store,false,false
+d1a_id_map,data/processed/indexes/text2trade_mnrl_nandina8_v0.2/id_map.json,RECONSTRUCTABLE_ARTIFACT,rebuildable index identifiers,false,false
+sunat_excel,data/Series - Descripciones.xlsx,RESTRICTED_LOCAL_SOURCE,local administrative source;not added,true,false
+raw_pdfs,data/raw,RESTRICTED_LOCAL_SOURCE,local raw source material,false,false
+versioned_pdfs,data/external,VERSIONED_FROZEN_EVIDENCE,versioned normative source evidence,true,true
+ollama_runtime,local Ollama service and model cache,RUNTIME_ONLY_DEPENDENCY,local LLM runtime for optional generation,false,false
+diagnostic_reranker,outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2,OPTIONAL_DIAGNOSTIC_ASSET,diagnostic only;not central frozen conclusion,false,true
+historical_logs,unversioned shell logs,NOT_REQUIRED_FOR_FROZEN_CONCLUSION,existing metadata supports frozen conclusions,true,false
+exp11_v3_external_ficha,C:/Users/Vladimir/OneDrive/Documentos/Maestría UNMSM/Cuarto ciclo/Tesis/Anexo 2 - Tesis/Fichas de mejora/Grupo 2/EXP-11_sensibilidad_tamano_banco_historico_v3.md,EXTERNAL_TESIS_GOVERNANCE_DOCUMENT,external governance record; SHA recorded in G2A gate; not required for clean checkout execution,false,false
+exp12_v3_external_ficha,C:/Users/Vladimir/OneDrive/Documentos/Maestría UNMSM/Cuarto ciclo/Tesis/Anexo 2 - Tesis/Fichas de mejora/Grupo 2/EXP-12_efecto_diversidad_banco_historico_volumen_controlado_v3.md,EXTERNAL_TESIS_GOVERNANCE_DOCUMENT,external governance record; SHA recorded in G2A gate; not required for clean checkout execution,false,false
