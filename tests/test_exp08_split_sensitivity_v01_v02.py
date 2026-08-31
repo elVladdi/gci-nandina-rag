@@ -1,8 +1,9 @@
 import csv
-import hashlib
 import json
 import unittest
 from pathlib import Path
+
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,7 +18,7 @@ def rows(path: Path) -> list[dict[str, str]]:
 
 
 def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return git_content_sha256(path)
 
 
 class TestExp08SplitSensitivityV01V02(unittest.TestCase):
@@ -166,7 +167,7 @@ class TestExp08SplitSensitivityV01V02(unittest.TestCase):
         self.assertTrue(self.corrective["near_duplicate_semantics_corrected"])
         self.assertTrue(self.corrective["code_sensitivity_corrected"])
         for name, expected in self.corrective["new_output_sha256"].items():
-            self.assertEqual(sha256(OUTPUT / name), expected, name)
+            assert_frozen_sha(self, OUTPUT / name, expected)
         self.assertEqual(self.manifest["output_sha256"], self.corrective["new_output_sha256"])
 
 

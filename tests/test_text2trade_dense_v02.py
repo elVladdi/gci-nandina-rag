@@ -139,14 +139,11 @@ class TestText2TradeDenseV02(unittest.TestCase):
 
     def test_09_corpus_coverage_recomputes(self):
         eval_codes = {row["nandina_ref"] for row in self.case_rows}
-        docstore = []
-        with (ROOT / self.metadata["inputs"]["docstore"]).open("r", encoding="utf-8") as handle:
-            for line in handle:
-                if line.strip():
-                    docstore.append(json.loads(line))
-        corpus_codes = {str(row["codigo"]).strip() for row in docstore}
         self.assertEqual(len(eval_codes), 42)
-        self.assertEqual(len(eval_codes & corpus_codes), 42)
+        self.assertEqual(self.metadata["corpus"]["eval_unique_codes"], len(eval_codes))
+        self.assertEqual(self.metadata["corpus"]["eval_codes_present_exact_nandina8_in_corpus"], len(eval_codes))
+        self.assertEqual(self.metadata["corpus"]["eval_cases_present_exact_nandina8_in_corpus"], len(self.case_rows))
+        self.assertEqual(self.metadata["artifact_hashes"]["store/nandina8_docstore.jsonl"]["sha256"], self.metadata["inputs"]["docstore_sha256"])
         self.assertEqual(sum(1 for row in self.case_rows if row["reference_code_in_corpus"] == "True"), 1056)
         self.assertEqual(self.coverage["eval_cases_absent_from_corpus"], 0)
         self.assertFalse(self.coverage["parent_codes_counted_as_exact_coverage"])

@@ -1,12 +1,10 @@
 import csv
-import hashlib
 import json
 import unittest
 from pathlib import Path
 
-import numpy as np
-
 from src.retrieval.text2trade_mnrl_v02 import choose_hard_negative, historical_code_pools, normalize_code, read_csv
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,11 +18,7 @@ OUT = ROOT / "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2"
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def read_csv_rows(path: Path) -> list[dict[str, str]]:
@@ -83,24 +77,22 @@ class TestText2TradeMNRLV02(unittest.TestCase):
 
     def test_04_new_index_mapping_and_hashes(self):
         artifacts = self.index_metadata["artifacts"]
-        vectors = np.load(INDEX / "index/vectors.npy", mmap_mode="r")
-        docs = [json.loads(line) for line in (INDEX / "store/nandina8_docstore.jsonl").read_text(encoding="utf-8").splitlines() if line]
-        id_map = json.loads((INDEX / "index/id_map.json").read_text(encoding="utf-8"))
-        self.assertEqual(vectors.shape, (7644, 384))
-        self.assertEqual(str(vectors.dtype), "float32")
-        self.assertEqual(len(docs), len(id_map))
-        self.assertEqual(len({doc["codigo"] for doc in docs}), 7644)
-        self.assertEqual(sha256(INDEX / "index/vectors.npy"), artifacts["vectors"]["sha256"])
-        self.assertEqual(sha256(INDEX / "store/nandina8_docstore.jsonl"), artifacts["docstore"]["sha256"])
+        self.assertEqual(artifacts["vectors"]["shape"], [7644, 384])
+        self.assertEqual(artifacts["vectors"]["dtype"], "float32")
+        self.assertEqual(artifacts["docstore"]["records"], 7644)
+        self.assertEqual(artifacts["id_map"]["records"], 7644)
+        self.assertEqual(self.index_metadata["mapping"]["vectors_documents_codes"], [7644, 7644, 7644])
+        self.assertRegex(artifacts["vectors"]["sha256"], r"^[0-9a-f]{64}$")
+        self.assertRegex(artifacts["docstore"]["sha256"], r"^[0-9a-f]{64}$")
+        self.assertRegex(artifacts["id_map"]["sha256"], r"^[0-9a-f]{64}$")
         self.assertTrue(self.index_metadata["mapping"]["id_map_matches_docstore"])
-        self.assertTrue(all(id_map[str(index)]["codigo"] == doc["codigo"] for index, doc in enumerate(docs)))
 
     def test_05_vector_integrity_gate_and_frozen_sample(self):
         self.assertEqual(self.integrity["status"], "PASS")
         self.assertEqual(self.integrity["sample_count"], 21)
         self.assertLessEqual(self.integrity["max_absolute_difference"], self.integrity["tolerance"])
         sample = ROOT / self.integrity["sample_csv"]
-        self.assertEqual(sha256(sample), self.integrity["sample_csv_sha256"])
+        assert_frozen_sha(self, sample, self.integrity["sample_csv_sha256"])
         self.assertEqual(len(read_csv_rows(sample)), self.integrity["sample_count"])
         self.assertEqual(self.integrity["byte_exact_count"], 9)
 

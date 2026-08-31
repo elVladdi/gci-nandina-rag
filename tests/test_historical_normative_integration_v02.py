@@ -1,9 +1,10 @@
 import csv
-import hashlib
 import json
 import unittest
 from collections import Counter, defaultdict
 from pathlib import Path
+
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,11 +14,7 @@ EVAL_HASH = "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -141,14 +138,14 @@ class TestHistoricalNormativeIntegrationV02(unittest.TestCase):
         self.assertTrue(self.compatibility["ranking_unchanged"])
         self.assertTrue(self.compatibility["exactly_three_historical_candidates_per_case"])
         for name, entry in self.config["frozen_phase_artifacts"].items():
-            self.assertEqual(sha256(ROOT / entry["path"]), entry["sha256"], name)
+            assert_frozen_sha(self, ROOT / entry["path"], entry["sha256"])
         self.assertNotIn("v0.1", self.config["eval"]["path"])
         self.assertNotIn("v0.1", self.config["historical_ranking"]["path"])
 
     def test_11_output_hashes_match_metadata(self) -> None:
         self.assertTrue(self.metadata["output_sha256_excludes_self_referential_metadata"])
         for name, digest in self.metadata["output_sha256"].items():
-            self.assertEqual(sha256(ROOT / self.metadata["outputs"][name]), digest, name)
+            assert_frozen_sha(self, ROOT / self.metadata["outputs"][name], digest)
 
 
 if __name__ == "__main__":

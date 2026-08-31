@@ -1,5 +1,4 @@
 import csv
-import hashlib
 import json
 import statistics
 import unittest
@@ -7,6 +6,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from src.experiments.evaluate_normative_candidate_pools_data_aduanas_v02 import build_pool, hit_flags
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,11 +16,7 @@ EVAL_HASH = "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return git_content_sha256(path)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -80,9 +76,9 @@ class TestNormativeCandidatePoolsV02(unittest.TestCase):
             frozen["d1a"]["ranking_trace"]: frozen["d1a"]["ranking_trace_sha256"],
         }
         for path, digest in expected.items():
-            self.assertEqual(sha256(ROOT / path), digest, path)
+            assert_frozen_sha(self, ROOT / path, digest)
         for name, digest in self.metadata["output_sha256"].items():
-            self.assertEqual(sha256(ROOT / self.metadata["outputs"][name]), digest, name)
+            assert_frozen_sha(self, ROOT / self.metadata["outputs"][name], digest)
         self.assertTrue(self.metadata["output_sha256_excludes_self_referential_metadata"])
 
     def test_04_pools_are_unique_and_hierarchical_coverage_is_recalculable(self) -> None:

@@ -1,8 +1,9 @@
 import csv
-import hashlib
 import json
 import unittest
 from pathlib import Path
+
+from tests.sha_contracts_v02 import assert_frozen_sha, git_content_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,7 +20,7 @@ def rows(path):
 
 
 def sha256(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return git_content_sha256(path)
 
 
 class TestExp07DevEvalFreezeV02(unittest.TestCase):
@@ -66,7 +67,7 @@ class TestExp07DevEvalFreezeV02(unittest.TestCase):
         self.assertEqual(self.manifest["gate_exp07"], "APPROVED")
         self.assertTrue(self.manifest["ready_for_exp04_consolidated_close"])
         for name, expected in self.manifest["output_sha256"].items():
-            self.assertEqual(sha256(OUT / name), expected, name)
+            assert_frozen_sha(self, OUT / name, expected)
 
 
 if __name__ == "__main__":

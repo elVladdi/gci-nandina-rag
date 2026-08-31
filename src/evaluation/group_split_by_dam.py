@@ -59,6 +59,18 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def frozen_sha256_matches(path: Path, expected: str) -> bool:
+    """Accept the historical CRLF digest or its canonical Git LF representation."""
+    content = path.read_bytes()
+    canonical = content.replace(b"\r\n", b"\n")
+    candidates = {
+        hashlib.sha256(content).hexdigest(),
+        hashlib.sha256(canonical).hexdigest(),
+        hashlib.sha256(canonical.replace(b"\n", b"\r\n")).hexdigest(),
+    }
+    return expected in candidates
+
+
 def artifact_key(path: Path) -> str:
     try:
         return path.resolve().relative_to(repo_root()).as_posix()
@@ -111,7 +123,7 @@ def verify_source_hashes(root: Path, cfg: dict[str, Any]) -> dict[str, str]:
         path = root / rel
         digest = sha256_file(path)
         actual[rel] = digest
-        if digest != expected:
+        if not frozen_sha256_matches(path, expected):
             raise RuntimeError(f"v0.1 hash changed for {rel}: {digest} != {expected}")
     return actual
 

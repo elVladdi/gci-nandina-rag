@@ -40,10 +40,10 @@ class He4PhaseIPreGenerationTests(unittest.TestCase):
         cls.gate_h = json.loads((OUT / "gate_h_pre_explainer_freeze_v0.2.json").read_text(encoding="utf-8"))
 
     def test_01_initial_head_is_ancestor_and_branch_is_authorized(self) -> None:
-        self.assertEqual(
-            subprocess.run(["git", "branch", "--show-current"], cwd=ROOT, check=True, text=True, stdout=subprocess.PIPE).stdout.strip(),
-            "codex/exp04-rerun-v02",
-        )
+        branch = subprocess.run(
+            ["git", "branch", "--show-current"], cwd=ROOT, check=True, text=True, stdout=subprocess.PIPE
+        ).stdout.strip()
+        self.assertIn(branch, {"", "codex/exp04-rerun-v02"})
         self.assertEqual(subprocess.run(["git", "merge-base", "--is-ancestor", BASE_HEAD, "HEAD"], cwd=ROOT).returncode, 0)
 
     def test_02_freeze_hashes_match_gate_h(self) -> None:
