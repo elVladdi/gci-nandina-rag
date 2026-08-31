@@ -1,14 +1,14 @@
-id,limitation,category,status
-LIM-01,historical DAM concentration,DATA_LIMITATION,PRESERVED_NOT_RESOLVED
-LIM-02,dev DAM concentration,DATA_LIMITATION,PRESERVED_NOT_RESOLVED
-LIM-03,residual exact and near duplicates,EXPERIMENTAL_DESIGN,PRESERVED_NOT_RESOLVED
-LIM-04,weak early normative retrieval,MODEL_RETRIEVAL,PRESERVED_NOT_RESOLVED
-LIM-05,weak early D1a dense retrieval,MODEL_RETRIEVAL,PRESERVED_NOT_RESOLVED
-LIM-06,20-case reranker sample,EVALUATION,PRESERVED_NOT_RESOLVED
-LIM-07,50-case HE4 sample,EVALUATION,PRESERVED_NOT_RESOLVED
-LIM-08,HE4 prompt-schema mismatch,PROTOCOL,PRESERVED_NOT_RESOLVED
-LIM-09,AI evaluator modality,EVALUATION,PRESERVED_NOT_RESOLVED
-LIM-10,description quality not operationalized,DATA_LIMITATION,PRESERVED_NOT_RESOLVED
-LIM-11,v0.1 metadata provenance,PROVENANCE,PRESERVED_NOT_RESOLVED
-LIM-12,sensitivity depth difference,EXPERIMENTAL_DESIGN,PRESERVED_NOT_RESOLVED
-LIM-13,Clase 87 internal scope,GENERALIZATION,PRESERVED_NOT_RESOLVED
+limitation_id,category,description,affected_phase,scientific_consequence,mitigation_or_handling,status
+LIM-01,DATA_LIMITATION,historical DAM concentration,EXP-01/03,historical concentration can affect representativeness,reported in concentration audit,PRESERVED_NOT_RESOLVED
+LIM-02,DATA_LIMITATION,dev DAM concentration,EXP-03,development concentration limits selection interpretation,preserved as split limitation,PRESERVED_NOT_RESOLVED
+LIM-03,EXPERIMENTAL_DESIGN,residual exact and near duplicates,EXP-02,duplicate controls remain a validity constraint,audited explicitly,PRESERVED_NOT_RESOLVED
+LIM-04,MODEL_RETRIEVAL,weak early normative retrieval,EXP-04 B/C,normative evidence does not replace main ranking,documentary role only,PRESERVED_NOT_RESOLVED
+LIM-05,MODEL_RETRIEVAL,weak early D1a dense retrieval,EXP-04 D1a,dense retrieval remains an early comparison,frozen metrics reported,PRESERVED_NOT_RESOLVED
+LIM-06,EVALUATION,20-case reranker sample,EXP-04 G,no benchmark generalization,diagnostic role only,PRESERVED_NOT_RESOLVED
+LIM-07,EVALUATION,50-case HE4 sample,EXP-04 H-K,local explanation audit only,fixed sample preserved,PRESERVED_NOT_RESOLVED
+LIM-08,PROTOCOL,HE4 prompt-schema mismatch,EXP-04 J,generic warnings require cautious interpretation,preserved in automatic validation,PRESERVED_NOT_RESOLVED
+LIM-09,EVALUATION,AI evaluator modality,EXP-04 K,qualitative scores are exploratory,independent reviewer protocol preserved,PRESERVED_NOT_RESOLVED
+LIM-10,DATA_LIMITATION,description quality not operationalized,EXP-10,error attribution remains constrained,preserved in error inventory,PRESERVED_NOT_RESOLVED
+LIM-11,PROVENANCE,v0.1 metadata provenance,EXP-08,unpaired comparison is limited,no v0.1 flags invented,PRESERVED_NOT_RESOLVED
+LIM-12,EXPERIMENTAL_DESIGN,sensitivity depth difference,EXP-08,depth comparison is not a tuning result,reported as sensitivity constraint,PRESERVED_NOT_RESOLVED
+LIM-13,GENERALIZATION,Clase 87 internal scope,EXP-04,no external generalization claim,scope declared in closure,PRESERVED_NOT_RESOLVED

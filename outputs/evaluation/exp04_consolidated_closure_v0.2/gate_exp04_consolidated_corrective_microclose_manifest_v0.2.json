@@ -1,0 +1,19 @@
+{
+  "phase": "EXP-04 / GROUP 1 CONSOLIDATED CORRECTIVE MICROCLOSE",
+  "original_consolidated_head": "9c16f62f6a05bdd6e13305cf0ffe7685802ebcad",
+  "corrective_reasons": [
+    "D1A_FINAL_METRICS_REGISTRY_MISMATCH",
+    "D1A_FROZEN_ARTIFACT_NOT_GIT_TRACKED",
+    "D1A_TEST_HARDCODED_WRONG_VALUE",
+    "CONSOLIDATED_PROVENANCE_SCHEMA_INCOMPLETE"
+  ],
+  "d1a_metrics_corrected": true,
+  "d1a_frozen_evidence_git_tracked": true,
+  "exp06_title_corrected": true,
+  "benchmark_hashes_explicit": true,
+  "provenance_registry_complete": true,
+  "gate_exp04_consolidated_corrective_microclose": "APPROVED",
+  "group1_status": "CLOSED",
+  "ready_for_main_merge_review": true,
+  "all_frozen_evidence_git_tracked": true
+}

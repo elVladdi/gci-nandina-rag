@@ -1,5 +1,5 @@
-hypothesis,literal_statement,status,status_evidence,closure_note
-HE2,,PARTIALLY_SUPPORTED,docs/exp04_phase_e_candidate_pools_v02_results.md,Status preserved; no literal formulation restated.
-HE3,,SUPPORTED,docs/exp04_phase_f_historical_normative_integration_v02_results.md,Status preserved; no literal formulation restated.
-HE4,,PARTIALLY_SUPPORTED,outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/he4_qualitative_findings_v0.2.md,Status preserved; no literal formulation restated.
-HE5,"Los errores y limites del piloto se concentraran en descripciones ambiguas o incompletas, subpartidas jerarquicamente proximas, casos con precedentes historicos insuficientes y condiciones que restringiran la validez de los resultados al conjunto interno evaluado.",PARTIALLY_SUPPORTED,outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/exp08_final_he5_assessment_v0.2.json,Literal formulation and status preserved.
+hypothesis,literal_statement,literal_statement_available,source_status,status,status_evidence,closure_note
+HE2,,False,EXTERNAL_APPROVED_SOURCE_NOT_VERSIONED,PARTIALLY_SUPPORTED,docs/exp04_phase_e_candidate_pools_v02_results.md,Status preserved; literal formulation not invented.
+HE3,,False,EXTERNAL_APPROVED_SOURCE_NOT_VERSIONED,SUPPORTED,docs/exp04_phase_f_historical_normative_integration_v02_results.md,Status preserved; literal formulation not invented.
+HE4,,False,EXTERNAL_APPROVED_SOURCE_NOT_VERSIONED,PARTIALLY_SUPPORTED,outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/he4_qualitative_findings_v0.2.md,Status preserved; literal formulation not invented.
+HE5,"Los errores y limites del piloto se concentraran en descripciones ambiguas o incompletas, subpartidas jerarquicamente proximas, casos con precedentes historicos insuficientes y condiciones que restringiran la validez de los resultados al conjunto interno evaluado.",True,VERSIONED_FROZEN_SOURCE,PARTIALLY_SUPPORTED,outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/exp08_final_he5_assessment_v0.2.json,Literal formulation and status preserved.

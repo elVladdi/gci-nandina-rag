@@ -5,6 +5,12 @@
   "head_before_close": "96e8270a114a8c5e50f326eb102129c9028878cf",
   "benchmark_version": "v0.2",
   "eval_cases": 1056,
+  "historical_sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+  "dev_sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+  "eval_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "d1a_metrics_sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c",
+  "d1a_artifact_git_tracked": true,
+  "all_frozen_evidence_git_tracked": true,
   "historical_cases": 2950,
   "dev_cases": 100,
   "dam_overlap_zero": true,
@@ -43,12 +49,49 @@
   "group1_gate": "APPROVED",
   "inputs": [
     {
+      "phase": "SPLIT HISTORICAL v0.2",
+      "artifact": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "exists": true,
+      "frozen_evidence": true,
+      "git_tracked": true,
+      "role": "frozen historical split"
+    },
+    {
+      "phase": "SPLIT DEV v0.2",
+      "artifact": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+      "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+      "exists": true,
+      "frozen_evidence": true,
+      "git_tracked": true,
+      "role": "frozen development split"
+    },
+    {
+      "phase": "SPLIT EVAL v0.2",
+      "artifact": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "exists": true,
+      "frozen_evidence": true,
+      "git_tracked": true,
+      "role": "frozen evaluation split"
+    },
+    {
       "phase": "EXP-01",
       "artifact": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
       "sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "DAM overlap and duplicate audit"
+    },
+    {
+      "phase": "EXP-02",
+      "artifact": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
+      "sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
+      "exists": true,
+      "frozen_evidence": true,
+      "git_tracked": true,
+      "role": "exact and near-duplicate controls"
     },
     {
       "phase": "EXP-03",
@@ -56,6 +99,7 @@
       "sha256": "0e8fce3a290f78f745bf1859b6bb10448e54b9d93bb4fcef93a047fde04be246",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "concentration audit"
     },
     {
@@ -64,6 +108,7 @@
       "sha256": "5334e64ab2b3f812f939b652fe1ee8ad8db24b673ebb48fd4d7b1ddb0dd444fa",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "historical retrieval metrics"
     },
     {
@@ -72,6 +117,7 @@
       "sha256": "56a702398d3b9d1483ecd1be3ca79587682ad8fd3afd84858917f248b5ae0460",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "flat normative metrics"
     },
     {
@@ -80,6 +126,7 @@
       "sha256": "557c46668cfd51fbeabba0ecdb9bf3ca4a2a34a7f2850384252c5d963a26fd9f",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "hierarchical normative metrics"
     },
     {
@@ -88,7 +135,17 @@
       "sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c",
       "exists": true,
       "frozen_evidence": true,
-      "role": "dense metrics"
+      "git_tracked": true,
+      "role": "final MNRL dense metrics"
+    },
+    {
+      "phase": "EXP-04 D1a",
+      "artifact": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+      "sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd",
+      "exists": true,
+      "frozen_evidence": true,
+      "git_tracked": true,
+      "role": "final MNRL dense case evidence"
     },
     {
       "phase": "EXP-04 E",
@@ -96,6 +153,7 @@
       "sha256": "db1f860f67a7c372e7aac64c8ec671e3a8b26ffd24ee0521d46b691e12d6a25c",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "candidate-pool metadata"
     },
     {
@@ -104,6 +162,7 @@
       "sha256": "e931f79bf7429bd76b5511d1f1ef95a759fe2d89c4da80f45f956aa6b09958b3",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "integration metadata"
     },
     {
@@ -112,6 +171,7 @@
       "sha256": "e6b2d5c61af9efff66f8f5c7cd04d4630f691f04036dbcedd24dbc172b8a6515",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "diagnostic reranker metadata"
     },
     {
@@ -120,6 +180,7 @@
       "sha256": "dff03036e54502dedb6f56372a5fbde374d8c983a169df8fee044a6cb5116b2f",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "HE4 sample freeze"
     },
     {
@@ -128,6 +189,7 @@
       "sha256": "010ca00fed7a4381cabe8ed621c3a4b1f38953c5a6a20622108b2452f4b46192",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "HE4 generation manifest"
     },
     {
@@ -136,6 +198,7 @@
       "sha256": "d9b1a3fa91370cada27a8ee5a92abea254667a760a7585e0e78c6619306dc69a",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "automatic validation"
     },
     {
@@ -144,6 +207,7 @@
       "sha256": "9f3ac3c189bad47a9f67f03530c2aea9411d01fa170df4e3b90ced7035201bba",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "qualitative validation"
     },
     {
@@ -152,6 +216,7 @@
       "sha256": "8944de61d50dfeb3cb547bd4ee1c48bf15b471d9605e1c071803f5260b7bbd2c",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "HE5 corrective closure"
     },
     {
@@ -160,6 +225,7 @@
       "sha256": "929ba1f34699cf511a28913543098f09db84d8b8a3a284b91993be78db0c72b4",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "unified evaluation freeze"
     },
     {
@@ -168,6 +234,7 @@
       "sha256": "5bc0b186628e71ec3651de3f7956a489e2db0ccbd535e434696fb0f49aafc1dd",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "dev/eval freeze"
     },
     {
@@ -176,14 +243,15 @@
       "sha256": "8ffeb632e5ef58ebf7523b38fc0815aa124509f5982641a76cc9cf8b570ee2c7",
       "exists": true,
       "frozen_evidence": true,
+      "git_tracked": true,
       "role": "sensitivity corrective closure"
     }
   ],
   "generated_file_hashes": {
-    "exp04_final_results_registry_v0.2.csv": "8c0355ee8fb809144d308dc524b320034e3a05ff914f602eb38a05424d133fc8",
-    "exp04_group1_card_closure_matrix_v0.2.csv": "f870130797b2f0fbfa993176ba31bd332a78f9b662ee528331930f69e496648c",
-    "exp04_hypothesis_status_registry_v0.2.csv": "776f8ebab1cdba3af0425c909111f3751ffc1a7c66b20bd3e933d51da2807b26",
-    "exp04_consolidated_limitations_v0.2.csv": "5785d59fa51d459018b868b9658bcdb4c1e0f406fd72afe77f64753ceb9a3d59",
-    "exp04_final_provenance_registry_v0.2.csv": "a790245f7f1192f58a84d09f634157f8b35badcfe1d81f852d2d72f89f1d48d4"
+    "exp04_final_results_registry_v0.2.csv": "35984c5f86eb0f769cff1c464888d2cf99207da7f3c34c40cdfd606abc633fcc",
+    "exp04_group1_card_closure_matrix_v0.2.csv": "16463eebbc7cc3ab9fa55d3a03868a0d9ec07eeb8609c6a392f985a5aa80ddec",
+    "exp04_hypothesis_status_registry_v0.2.csv": "465a8cbb46dfcbed5005e3d7443469f234cd30dd55a6157d6c7bc75578811faf",
+    "exp04_consolidated_limitations_v0.2.csv": "c92799646e1e13c7e5bf21d72932985ee0b8b6e7d82e9d674b4f1f60cc625c8a",
+    "exp04_final_provenance_registry_v0.2.csv": "e9a5a7de7cac9f7cd5fe15e9dd386b5a0eaf9861c0e415b3b26cdd065cdb629a"
   }
 }
