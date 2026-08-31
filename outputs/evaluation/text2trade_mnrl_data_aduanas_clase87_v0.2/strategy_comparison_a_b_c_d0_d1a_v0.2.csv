@@ -1,0 +1,46 @@
+strategy,metric,value,source
+Historical BM25,Top-1,0.509469696969697,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,Top-3,0.6714015151515151,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,Top-5,0.7632575757575758,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,Top-10,0.8910984848484849,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,Top-50,0.9914772727272727,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,Recall@100,,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,MRR@100,0.6297077493524843,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,Recall@200,,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Historical BM25,MRR@200,,outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json
+Normative BM25 flat,Top-1,0.027462121212121212,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,Top-3,0.05113636363636364,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,Top-5,0.061553030303030304,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,Top-10,0.06534090909090909,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,Top-50,0.07007575757575757,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,Recall@100,0.07102272727272728,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,MRR@100,0.04229731726741296,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,Recall@200,,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 flat,MRR@200,,outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json
+Normative BM25 hierarchical,Top-1,0.026515151515151516,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,Top-3,0.052083333333333336,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,Top-5,0.0625,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,Top-10,0.06534090909090909,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,Top-50,0.09090909090909091,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,Recall@100,0.10132575757575757,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,MRR@100,0.04334161160288281,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,Recall@200,0.3039772727272727,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+Normative BM25 hierarchical,MRR@200,0.04334161160288281,outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json
+D0 pretrained dense SBERT baseline,Top-1,0.0,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,Top-3,0.0,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,Top-5,0.0,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,Top-10,0.0,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,Top-50,0.000946969696969697,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,Recall@100,0.003787878787878788,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,MRR@100,6.046196473541642e-05,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,Recall@200,0.010416666666666666,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D0 pretrained dense SBERT baseline,MRR@200,0.00010693394691080449,outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json
+D1a Text2Trade-inspired MNRL,Top-1,0.0,D1a
+D1a Text2Trade-inspired MNRL,Top-3,0.003787878787878788,D1a
+D1a Text2Trade-inspired MNRL,Top-5,0.03409090909090909,D1a
+D1a Text2Trade-inspired MNRL,Top-10,0.15625,D1a
+D1a Text2Trade-inspired MNRL,Top-50,0.3058712121212121,D1a
+D1a Text2Trade-inspired MNRL,Recall@100,0.3456439393939394,D1a
+D1a Text2Trade-inspired MNRL,MRR@100,0.03242432639034634,D1a
+D1a Text2Trade-inspired MNRL,Recall@200,0.3626893939393939,D1a
+D1a Text2Trade-inspired MNRL,MRR@200,0.03254853477630825,D1a

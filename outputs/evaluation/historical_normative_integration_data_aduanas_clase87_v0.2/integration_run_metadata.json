@@ -1,0 +1,166 @@
+{
+  "experiment_id": "exp04_phase_f_historical_normative_integration_v0.2",
+  "phase": "EXP-04-F",
+  "dataset_version": "v0.2",
+  "created_at_utc": "2026-08-30T13:56:04.113016+00:00",
+  "command": "python -B -m src.experiments.evaluate_historical_normative_integration_data_aduanas_v02",
+  "config": {
+    "path": "src/configs/historical_normative_integration_v0.2.json",
+    "sha256": "f8b939f9d15cec48ab14bd305c3c2e24ee38c6fb11f20cabb023a233740a0ec8"
+  },
+  "eval": {
+    "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "cases": 1056,
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label_column": "NANDINA"
+  },
+  "historical_ranking": {
+    "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_results.csv",
+    "sha256": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8",
+    "method": "historical_bm25_data_aduanas_clase87_v0.2",
+    "top_k": 3,
+    "role": "sole_ranking_source"
+  },
+  "historical_dataset": {
+    "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+    "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "split": "historico",
+    "role": "precedent_lookup_only"
+  },
+  "normative_corpus": {
+    "path": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl",
+    "sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+    "metadata_path": "data/processed/corpus_nandina_hierarchical_v0.1_metadata.json",
+    "metadata_sha256": "e8a96bf4de89d7124721b58a2763453fc6ba6d44ab57ee3a125e5e7a63feb7a4",
+    "normative_version": "hierarchical_v0.1",
+    "role": "canonical_normative_document_corpus_already_frozen_in_phase_c"
+  },
+  "evidence_selection": {
+    "operation": "CODE_TO_NORMATIVE_EVIDENCE_LOOKUP",
+    "rule": "direct lookup of each frozen historical candidate NANDINA-8 in the hierarchical normative corpus",
+    "source": "historical Top-3 candidate code only",
+    "fallback": "none; parent fields are reported as explicit context, never promoted to exact evidence",
+    "uses_eval_label": false,
+    "uses_query_retrieval": false,
+    "uses_candidate_pools": false,
+    "uses_d1a": false
+  },
+  "precedent_selection": {
+    "rule": "one frozen source precedent per unique historical candidate: the historical row selected by Phase A BM25 before NANDINA-8 deduplication",
+    "uses_only_historical_v0_2": true,
+    "uses_eval_or_dev": false
+  },
+  "frozen_phase_artifacts": {
+    "phase_a_case_summary": {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_case_summary.csv",
+      "sha256": "f8f4ac6d585194aace74c50f495720cc87b0c09a28438d888b0030dfaddd0d56"
+    },
+    "phase_b_results": {
+      "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv",
+      "sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015"
+    },
+    "phase_c_results": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+      "sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662"
+    },
+    "phase_d1a_case_summary": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+      "sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd"
+    },
+    "phase_e_metrics": {
+      "path": "outputs/evaluation/normative_candidate_pools_data_aduanas_clase87_v0.2/candidate_pool_metrics.json",
+      "sha256": "1c183346a63d69817def2f6b1ef9666023cd32eed53e599d9842ff4d6900122f"
+    }
+  },
+  "exclusions": {
+    "reranking": false,
+    "llm": false,
+    "rag_generation": false,
+    "candidate_pool_integration": false,
+    "d1a_integration": false,
+    "score_fusion": false,
+    "candidate_insertion": false,
+    "phase_g": false
+  },
+  "compatibility": {
+    "compatible": true,
+    "eval_hash": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "cases": 1056,
+    "identical_case_ids_with_phase_a": true,
+    "identical_labels_with_eval": true,
+    "exactly_three_historical_candidates_per_case": true,
+    "candidate_slots": 3168,
+    "ranking_unchanged": true
+  },
+  "label_leakage_audit": {
+    "label_used_for_candidate_selection": false,
+    "label_used_for_precedent_selection": false,
+    "label_used_for_evidence_selection": false,
+    "label_used_for_order_or_fallback": false,
+    "selection_input_fields": [
+      "historical candidate code",
+      "historical candidate metadata",
+      "historical precedent case ID",
+      "normative corpus code"
+    ],
+    "labels_only_used_after_construction_for_metrics": true,
+    "pass": true
+  },
+  "metrics": {
+    "experiment_id": "exp04_phase_f_historical_normative_integration_v0.2",
+    "phase": "EXP-04-F",
+    "cases": 1056,
+    "candidate_slots": 3168,
+    "historical_rank_invariance_rate": 1.0,
+    "top3_invariance_rate": 1.0,
+    "candidate_exact_evidence_rate": 1.0,
+    "candidate_hs6_evidence_rate": 0.6843434343434344,
+    "candidate_hs4_evidence_rate": 1.0,
+    "candidate_chapter_evidence_rate": 1.0,
+    "case_all_top3_exact_evidence_rate": 1.0,
+    "precedent_coverage_rate": 1.0,
+    "traceability_complete_rate": 1.0,
+    "llm_used": false,
+    "reranker_used": false,
+    "candidate_pool_used": false,
+    "d1a_used": false
+  },
+  "runtime": {
+    "python": "3.12.13 (main, Aug  7 2026, 02:26:41) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "git": {
+    "branch": "codex/exp04-rerun-v02",
+    "commit": "d56e0f952ce85eed1ac9d9e740cc9cc565c562a1"
+  },
+  "outputs": {
+    "integration_candidate_slots": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_candidate_slots.csv",
+    "integration_case_summary": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_case_summary.csv",
+    "integration_metrics": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_metrics.json",
+    "integration_evidence_coverage": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_evidence_coverage.json",
+    "integration_ranking_invariance": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_ranking_invariance.json",
+    "integration_top3_invariance": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_top3_invariance.json",
+    "integration_traceability": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_traceability.json",
+    "integration_missing_exact_evidence": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_missing_exact_evidence.csv",
+    "integration_compatibility": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_compatibility.json",
+    "integration_label_leakage_audit": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_label_leakage_audit.json",
+    "integration_run_metadata": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_run_metadata.json",
+    "summary": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/summary.md"
+  },
+  "large_outputs_over_25_mb": [],
+  "output_sha256_excludes_self_referential_metadata": true,
+  "output_sha256": {
+    "integration_candidate_slots": "2d2c79ef01aea312640997ae24754a86675f77076f728d95eee7bd52ed201035",
+    "integration_case_summary": "0b1916f9a91fcdc1f1c678db7cff45db984651fb26362ee86ebf7e6c6684f44e",
+    "integration_metrics": "6d21801fea34dec4d0e519f5df1b522df65533c869b9b765000f4e6bf8d781c9",
+    "integration_evidence_coverage": "d9e8a65e7d96af8b01c46321624808908475d7c09733ac16f979af7401e9ad31",
+    "integration_ranking_invariance": "f3137e90eb62109991b905cadb79c2f1aabbfab022d13299a508f3e88d863d35",
+    "integration_top3_invariance": "a39f6fdbd87b29d3bebe61bae6997ed8983828b51678ee241d3f322547dfefee",
+    "integration_traceability": "bfb6d55350a8aaec15a0f8fe2f7950c2ebb1d6d1e849ed6c116c86c56579bfd0",
+    "integration_missing_exact_evidence": "393f20ed94b0f9e8659e7f60511335953fad61beec47c211b37729e11e697838",
+    "integration_compatibility": "33d175820590962819eab76aedf54af6142a4b1ae6d4cd7b9cca21bc5466307c",
+    "integration_label_leakage_audit": "36db521c3a9856932d50e3a74e92489f08dfa9fe1b948336abdd744554eed6c8",
+    "summary": "ebd185a82b3cb44db88940825beaf8c48dea6a908961db19e490bfa3d67f62f9"
+  }
+}
