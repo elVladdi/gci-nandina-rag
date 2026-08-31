@@ -1,0 +1,11 @@
+card,title,status,gate,evidence,blocking_issue
+EXP-01,DAM-grouped split,CLOSED,APPROVED,DAM overlap is zero,
+EXP-02,duplicate controls,CLOSED,APPROVED,exact and near-duplicate audit preserved,
+EXP-03,split under imbalance,CLOSED,APPROVED,concentration limitation preserved,
+EXP-04,full rerun with corrected split,CLOSED,APPROVED,all authorized phases registered,
+EXP-05,unified evaluation hash,CLOSED,APPROVED,frozen evaluation hash,
+EXP-06,evaluation protocol,CLOSED,APPROVED,registered by EXP-04 evidence,
+EXP-07,dev/eval freeze,CLOSED,APPROVED,no eval drift or tuning,
+EXP-08,split sensitivity,CLOSED,APPROVED,corrective closure approved,
+EXP-09,HE4 audit protocol,CLOSED,APPROVED,H through K contracts completed,
+EXP-10,HE5 error inventory,CLOSED,APPROVED,L corrective microclose approved,

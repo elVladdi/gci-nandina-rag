@@ -1,0 +1,189 @@
+{
+  "schema_version": "v0.2",
+  "phase": "EXP-04 consolidated closure",
+  "branch": "codex/exp04-rerun-v02",
+  "head_before_close": "96e8270a114a8c5e50f326eb102129c9028878cf",
+  "benchmark_version": "v0.2",
+  "eval_cases": 1056,
+  "historical_cases": 2950,
+  "dev_cases": 100,
+  "dam_overlap_zero": true,
+  "eval_drift": false,
+  "eval_tuning": false,
+  "cards_closed": [
+    "EXP-01",
+    "EXP-02",
+    "EXP-03",
+    "EXP-04",
+    "EXP-05",
+    "EXP-06",
+    "EXP-07",
+    "EXP-08",
+    "EXP-09",
+    "EXP-10"
+  ],
+  "hypothesis_statuses": {
+    "HE2": "PARTIALLY_SUPPORTED",
+    "HE3": "SUPPORTED",
+    "HE4": "PARTIALLY_SUPPORTED",
+    "HE5": "PARTIALLY_SUPPORTED"
+  },
+  "oe1_he1_formal_status": "NOT_FABRICATED_NO_CONSOLIDATED_ASSESSMENT_FOUND",
+  "limitations_preserved": true,
+  "unresolved_blocking_issues": [],
+  "group1_ready_to_close": true,
+  "ready_for_main_merge_review": true,
+  "merged_to_main": false,
+  "no_model_call": true,
+  "no_new_retrieval": true,
+  "no_web": true,
+  "exp04_final_status": "CLOSED",
+  "group1_status": "CLOSED",
+  "gate_exp04_consolidated": "APPROVED",
+  "group1_gate": "APPROVED",
+  "inputs": [
+    {
+      "phase": "EXP-01",
+      "artifact": "outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json",
+      "sha256": "79097fcc162cca8690f9382b5e529cfbd8d714575ad7fb96fc044eca2343d027",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "DAM overlap and duplicate audit"
+    },
+    {
+      "phase": "EXP-03",
+      "artifact": "outputs/audits/data_aduanas_splits_clase87_v0.2/concentration_summary_v0.2.json",
+      "sha256": "0e8fce3a290f78f745bf1859b6bb10448e54b9d93bb4fcef93a047fde04be246",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "concentration audit"
+    },
+    {
+      "phase": "EXP-04 A",
+      "artifact": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json",
+      "sha256": "5334e64ab2b3f812f939b652fe1ee8ad8db24b673ebb48fd4d7b1ddb0dd444fa",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "historical retrieval metrics"
+    },
+    {
+      "phase": "EXP-04 B",
+      "artifact": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json",
+      "sha256": "56a702398d3b9d1483ecd1be3ca79587682ad8fd3afd84858917f248b5ae0460",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "flat normative metrics"
+    },
+    {
+      "phase": "EXP-04 C",
+      "artifact": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+      "sha256": "557c46668cfd51fbeabba0ecdb9bf3ca4a2a34a7f2850384252c5d963a26fd9f",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "hierarchical normative metrics"
+    },
+    {
+      "phase": "EXP-04 D1a",
+      "artifact": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json",
+      "sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "dense metrics"
+    },
+    {
+      "phase": "EXP-04 E",
+      "artifact": "outputs/evaluation/normative_candidate_pools_data_aduanas_clase87_v0.2/candidate_pool_run_metadata.json",
+      "sha256": "db1f860f67a7c372e7aac64c8ec671e3a8b26ffd24ee0521d46b691e12d6a25c",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "candidate-pool metadata"
+    },
+    {
+      "phase": "EXP-04 F",
+      "artifact": "outputs/evaluation/historical_normative_integration_data_aduanas_clase87_v0.2/integration_run_metadata.json",
+      "sha256": "e931f79bf7429bd76b5511d1f1ef95a759fe2d89c4da80f45f956aa6b09958b3",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "integration metadata"
+    },
+    {
+      "phase": "EXP-04 G",
+      "artifact": "outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2/reranker_run_metadata_v0.2.json",
+      "sha256": "e6b2d5c61af9efff66f8f5c7cd04d4630f691f04036dbcedd24dbc172b8a6515",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "diagnostic reranker metadata"
+    },
+    {
+      "phase": "EXP-04 H",
+      "artifact": "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/gate_h_pre_explainer_freeze_v0.2.json",
+      "sha256": "dff03036e54502dedb6f56372a5fbde374d8c983a169df8fee044a6cb5116b2f",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "HE4 sample freeze"
+    },
+    {
+      "phase": "EXP-04 I",
+      "artifact": "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/gate_i_generation_manifest_v0.2.json",
+      "sha256": "010ca00fed7a4381cabe8ed621c3a4b1f38953c5a6a20622108b2452f4b46192",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "HE4 generation manifest"
+    },
+    {
+      "phase": "EXP-04 J",
+      "artifact": "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/gate_j_automatic_validation_manifest_v0.2.json",
+      "sha256": "d9b1a3fa91370cada27a8ee5a92abea254667a760a7585e0e78c6619306dc69a",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "automatic validation"
+    },
+    {
+      "phase": "EXP-04 K",
+      "artifact": "outputs/evaluation/he4_top3_explainer_data_aduanas_clase87_v0.2/gate_k_qualitative_evaluation_manifest_v0.2.json",
+      "sha256": "9f3ac3c189bad47a9f67f03530c2aea9411d01fa170df4e3b90ced7035201bba",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "qualitative validation"
+    },
+    {
+      "phase": "EXP-04 L",
+      "artifact": "outputs/evaluation/he5_integrated_error_analysis_v0.2/gate_l_corrective_microclose_manifest_v0.2.json",
+      "sha256": "8944de61d50dfeb3cb547bd4ee1c48bf15b471d9605e1c071803f5260b7bbd2c",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "HE5 corrective closure"
+    },
+    {
+      "phase": "EXP-05",
+      "artifact": "outputs/audits/exp05_unified_eval_hash_v0.2/gate_exp05_unified_eval_hash_manifest_v0.2.json",
+      "sha256": "929ba1f34699cf511a28913543098f09db84d8b8a3a284b91993be78db0c72b4",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "unified evaluation freeze"
+    },
+    {
+      "phase": "EXP-07",
+      "artifact": "outputs/audits/exp07_dev_eval_freeze_v0.2/gate_exp07_dev_eval_freeze_manifest_v0.2.json",
+      "sha256": "5bc0b186628e71ec3651de3f7956a489e2db0ccbd535e434696fb0f49aafc1dd",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "dev/eval freeze"
+    },
+    {
+      "phase": "EXP-08",
+      "artifact": "outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/gate_exp08_corrective_microclose_manifest_v0.2.json",
+      "sha256": "8ffeb632e5ef58ebf7523b38fc0815aa124509f5982641a76cc9cf8b570ee2c7",
+      "exists": true,
+      "frozen_evidence": true,
+      "role": "sensitivity corrective closure"
+    }
+  ],
+  "generated_file_hashes": {
+    "exp04_final_results_registry_v0.2.csv": "8c0355ee8fb809144d308dc524b320034e3a05ff914f602eb38a05424d133fc8",
+    "exp04_group1_card_closure_matrix_v0.2.csv": "f870130797b2f0fbfa993176ba31bd332a78f9b662ee528331930f69e496648c",
+    "exp04_hypothesis_status_registry_v0.2.csv": "776f8ebab1cdba3af0425c909111f3751ffc1a7c66b20bd3e933d51da2807b26",
+    "exp04_consolidated_limitations_v0.2.csv": "5785d59fa51d459018b868b9658bcdb4c1e0f406fd72afe77f64753ceb9a3d59",
+    "exp04_final_provenance_registry_v0.2.csv": "a790245f7f1192f58a84d09f634157f8b35badcfe1d81f852d2d72f89f1d48d4"
+  }
+}
