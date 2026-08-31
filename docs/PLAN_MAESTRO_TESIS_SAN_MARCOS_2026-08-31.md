@@ -40,7 +40,7 @@ Debe evitar reabrir trabajo cerrado sin evidencia objetiva, mezclar auditoría c
 | Grupo | Nombre | Qué se revisa | Estado |
 |---|---|---|---|
 | **1** | Diseño y ejecución experimental | Si los experimentos permiten contrastar objetivos e hipótesis | **CERRADO / APPROVED** |
-| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **EN CURSO — G2A diagnóstico completado; microclose requerido** |
+| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **EN CURSO — G2A Microclose 1B: diseño anidado EXP-11 demostrado inviable; rediseño pre-ejecución requerido** |
 | **3** | Métricas y análisis estadístico/cuantitativo | Si se extrae toda la evidencia válida de los resultados | Pendiente |
 | **4** | Análisis e interpretación de resultados | Si los resultados permiten explicar el comportamiento observado | Pendiente |
 | **5** | Presentación de resultados | Si tablas y resultados comunican claramente la evidencia | Pendiente |
@@ -448,9 +448,11 @@ No adoptar una licencia nueva sin revisar por separado software, especificacione
 
 ## 23. Próximo paso inmediato
 
-**Grupo 2A — microclose correctivo controlado posterior al diagnóstico forense.**
+**Grupo 2A — Microclose 1C: rediseño pre-ejecución de EXP-11 y cierre condicional del contrato EXP-12.**
 
-Debe formalizar los inventarios y matrices de reproducibilidad exigidos por G2A, agotar la procedencia histórica recuperable —especialmente D1a— y preparar/fijar los contratos prospectivos de EXP-11/EXP-12. No se autoriza ejecutar EXP-11, EXP-12 ni iniciar Grupo 3 hasta que el Gate G2A sea auditado y aprobado.
+La factibilidad de planificación demostró que no existe ninguna cadena anidada H25⊂H50⊂H75⊂H100 que pueda respetar simultáneamente DAM completas y la tolerancia ±148 filas: las dos DAM dominantes (1,045 y 940 series) hacen estructuralmente incompatible el nesting. Debe eliminarse el nesting como requisito de EXP-11A y sustituirse por subconjuntos independientes por condición, siempre con DAM completas, volumen controlado y selección ajena al rendimiento del evalset. Esta corrección es pre-ejecución y no reabre Grupo 1.
+
+EXP-12 mantiene el universo ampliado como precondición fail-closed y debe conservar HHI como variable primaria de diversidad, volumen controlado y matching NANDINA contra H100. No se autoriza retrieval de EXP-11/EXP-12 ni Grupo 3 hasta aprobar G2A.
 
 ---
 
@@ -470,3 +472,16 @@ Si en el futuro se propone alterar el orden, agregar/quitar experimentos o cambi
 - El Gate preliminar G2A quedó en `REQUIRES_MICROCLOSE`.
 - No se modificaron resultados científicos, no se regeneraron artefactos y no se iniciaron EXP-11, EXP-12 ni Grupo 3.
 - Se mantiene el orden maestro: cerrar G2A antes de ejecutar EXP-11/EXP-12.
+
+### 2026-08-31 — G2A Microclose 1A y 1B
+
+- **Microclose 1A — validación técnica aprobada:** 14 tests G2A y suite completa **243/243**, sin fallos, errores ni skips; se corrigió el defecto de portabilidad del test HE4 sin alterar evidencia científica.
+- `G2A-F003` permanece `PARTIALLY_RESOLVED`: procedencia de script/config D1a recuperada, `execution_repository_head=UNKNOWN`.
+- `G2A-F007` queda `OPEN / FUTURE_DEPENDENCY`: el nuevo histórico ampliado bloquea H150/H200 y toda ejecución de EXP-12, pero no G2A contractual ni EXP-11A.
+- **Microclose 1B — hallazgo metodológico pre-ejecución:** el planificador evaluó 100,000 seeds sin ejecutar retrieval y confirmó `DESIGN_INFEASIBLE` para el requisito simultáneo de nesting + DAM completas + tolerancia ±148 filas en H25/H50/H75.
+- La inviabilidad es estructural: H100=2,950; DAM dominantes=1,045 y 940; resto=965. H25 admisible [590,886] no puede contener ninguna dominante; H50 [1327,1623] requiere exactamente una; H75 [2065,2361] requiere ambas. Con nesting, H75 tendría como mínimo 590+1,045+940=2,575, fuera de rango.
+- Se registra `G2A-F008 = PRE_EXECUTION_DESIGN_INFEASIBILITY`; no implica corrupción ni reapertura del Grupo 1.
+- EXP-12 quedó matemáticamente mejor especificado con HHI como variable primaria, `effective_DAM=1/HHI`, volumen 2,950±148, cobertura NANDINA H100=1.0 y TVD≤0.05; su factibilidad real solo puede verificarse después del Gate de histórico ampliado.
+- Suite posterior reportada: **249 tests, 0 failures, 0 errors**.
+- No se ejecutó retrieval EXP-11, no se inició EXP-12 y no se produjeron resultados científicos nuevos.
+- Próximo paso: **G2A Microclose 1C — reemplazar nesting EXP-11 por muestreo independiente por condición con DAM completas y control de volumen; validar 10 réplicas factibles por nivel antes de autorizar commit.**
