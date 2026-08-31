@@ -1,0 +1,33 @@
+{
+  "artifact_name": "text2trade_mnrl_nandina8_v0.2",
+  "variant": "D1a",
+  "retriever": {
+    "family": "Text2Trade-inspired MNRL dense retrieval",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "fine_tuned_model_path": "models/text2trade_mnrl_v0.2",
+    "embedding_normalize": true,
+    "batch_size": 32,
+    "max_sequence_length": 128
+  },
+  "index": {
+    "backend": "exact",
+    "score": "dot product over normalized float32 vectors",
+    "hnsw": false
+  },
+  "mcd": {
+    "enabled": false,
+    "variant": "D1b not executed"
+  },
+  "document_text": {
+    "formula": "titulo.strip() + '\\n' + texto_index.strip(), then outer strip; omit title when empty",
+    "source_field_priority": [
+      "texto_index",
+      "texto",
+      "text",
+      "content",
+      "descripcion"
+    ],
+    "lowercase": false,
+    "normalization": "strip only after frozen corpus texto_index preprocessing"
+  }
+}

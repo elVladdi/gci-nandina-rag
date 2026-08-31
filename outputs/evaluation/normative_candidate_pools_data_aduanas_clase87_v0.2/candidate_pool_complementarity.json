@@ -1,0 +1,35 @@
+{
+  "pair": "hierarchical_vs_dual",
+  "depths": {
+    "50": {
+      "strategy_a": "hierarchical",
+      "strategy_b": "dual_protected",
+      "depth": 50,
+      "both": 94,
+      "only_a": 2,
+      "only_b": 3,
+      "neither": 957,
+      "cases": 1056
+    },
+    "100": {
+      "strategy_a": "hierarchical",
+      "strategy_b": "dual_protected",
+      "depth": 100,
+      "both": 100,
+      "only_a": 7,
+      "only_b": 6,
+      "neither": 943,
+      "cases": 1056
+    },
+    "200": {
+      "strategy_a": "hierarchical",
+      "strategy_b": "dual_protected",
+      "depth": 200,
+      "both": 280,
+      "only_a": 41,
+      "only_b": 1,
+      "neither": 734,
+      "cases": 1056
+    }
+  }
+}

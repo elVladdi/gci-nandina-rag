@@ -1,0 +1,96 @@
+{
+  "label": "DIAGNOSTIC ORACLE-LIKE UNION / COVERAGE CEILING",
+  "not_a_ranking": true,
+  "depths": {
+    "50": {
+      "pool_id": "diagnostic_union_hierarchical_dual",
+      "classification": "diagnostic_union",
+      "depth": 50,
+      "cases": 1056,
+      "nominal_size": 50,
+      "effective_size_mean": 56.26231060606061,
+      "effective_size_min": 15,
+      "effective_size_max": 93,
+      "effective_size_median": 55.0,
+      "exact_numerator": 99,
+      "exact_denominator": 1056,
+      "exact_at_depth": 0.09375,
+      "hs6_numerator": 108,
+      "hs6_denominator": 1056,
+      "hs6_at_depth": 0.10227272727272728,
+      "hs4_numerator": 198,
+      "hs4_denominator": 1056,
+      "hs4_at_depth": 0.1875,
+      "chapter_numerator": 415,
+      "chapter_denominator": 1056,
+      "chapter_at_depth": 0.39299242424242425
+    },
+    "100": {
+      "pool_id": "diagnostic_union_hierarchical_dual",
+      "classification": "diagnostic_union",
+      "depth": 100,
+      "cases": 1056,
+      "nominal_size": 100,
+      "effective_size_mean": 112.7215909090909,
+      "effective_size_min": 15,
+      "effective_size_max": 164,
+      "effective_size_median": 109.0,
+      "exact_numerator": 113,
+      "exact_denominator": 1056,
+      "exact_at_depth": 0.10700757575757576,
+      "hs6_numerator": 126,
+      "hs6_denominator": 1056,
+      "hs6_at_depth": 0.11931818181818182,
+      "hs4_numerator": 272,
+      "hs4_denominator": 1056,
+      "hs4_at_depth": 0.25757575757575757,
+      "chapter_numerator": 582,
+      "chapter_denominator": 1056,
+      "chapter_at_depth": 0.5511363636363636
+    },
+    "200": {
+      "pool_id": "diagnostic_union_hierarchical_dual",
+      "classification": "diagnostic_union",
+      "depth": 200,
+      "cases": 1056,
+      "nominal_size": 200,
+      "effective_size_mean": 217.76988636363637,
+      "effective_size_min": 15,
+      "effective_size_max": 354,
+      "effective_size_median": 226.0,
+      "exact_numerator": 322,
+      "exact_denominator": 1056,
+      "exact_at_depth": 0.30492424242424243,
+      "hs6_numerator": 368,
+      "hs6_denominator": 1056,
+      "hs6_at_depth": 0.3484848484848485,
+      "hs4_numerator": 543,
+      "hs4_denominator": 1056,
+      "hs4_at_depth": 0.5142045454545454,
+      "chapter_numerator": 827,
+      "chapter_denominator": 1056,
+      "chapter_at_depth": 0.7831439393939394
+    }
+  },
+  "uncovered_at_200": 734,
+  "exclusive_source_distribution": {
+    "50": {
+      "hierarchical_only": 2,
+      "dual_only": 3,
+      "both": 94,
+      "neither": 957
+    },
+    "100": {
+      "hierarchical_only": 7,
+      "dual_only": 6,
+      "both": 100,
+      "neither": 943
+    },
+    "200": {
+      "hierarchical_only": 41,
+      "dual_only": 1,
+      "both": 280,
+      "neither": 734
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "compatible": true,
+  "eval_hash": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "cases": 1056,
+  "strategies": {
+    "historical": true,
+    "flat": true,
+    "hierarchical": true,
+    "d1a": true,
+    "dual": true,
+    "phase_e": true
+  },
+  "identical_case_id_sets": true,
+  "identical_labels": true,
+  "d0_excluded_from_confirmatory_comparison": true
+}

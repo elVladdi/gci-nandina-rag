@@ -1,0 +1,16 @@
+{
+  "historical_results_sha256_before": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8",
+  "historical_results_sha256_after": "c350b63e0180a4c28573d2626c76d030308913b690c524d2d62ea439cf34a6c8",
+  "historical_results_rows": 62734,
+  "cases_pass": 1056,
+  "cases_total": 1056,
+  "historical_rank_invariance_rate": 1.0,
+  "top1_unchanged": true,
+  "top3_unchanged": true,
+  "positions_unchanged": true,
+  "historical_scores_unchanged": true,
+  "no_new_candidate_inserted": true,
+  "no_candidate_removed": true,
+  "normative_score_affects_order": false,
+  "pass": true
+}

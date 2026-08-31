@@ -1,0 +1,73 @@
+{
+  "candidate_slots": 3168,
+  "exact_nandina8": {
+    "numerator": 3168,
+    "denominator": 3168,
+    "rate": 1.0
+  },
+  "hs6": {
+    "numerator": 2168,
+    "denominator": 3168,
+    "rate": 0.6843434343434344
+  },
+  "hs4": {
+    "numerator": 3168,
+    "denominator": 3168,
+    "rate": 1.0
+  },
+  "chapter": {
+    "numerator": 3168,
+    "denominator": 3168,
+    "rate": 1.0
+  },
+  "precedent": {
+    "numerator": 3168,
+    "denominator": 3168
+  },
+  "traceability": {
+    "numerator": 3168,
+    "denominator": 3168,
+    "rate": 1.0
+  },
+  "exact_by_historical_rank": {
+    "1": {
+      "numerator": 1056,
+      "denominator": 1056,
+      "rate": 1.0
+    },
+    "2": {
+      "numerator": 1056,
+      "denominator": 1056,
+      "rate": 1.0
+    },
+    "3": {
+      "numerator": 1056,
+      "denominator": 1056,
+      "rate": 1.0
+    }
+  },
+  "cases_exact_evidence_count": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 1056
+  },
+  "top3_reference_groups": {
+    "reference_in_historical_top3": {
+      "cases": 709,
+      "candidate_exact_evidence": {
+        "numerator": 2127,
+        "denominator": 2127,
+        "rate": 1.0
+      }
+    },
+    "reference_not_in_historical_top3": {
+      "cases": 347,
+      "candidate_exact_evidence": {
+        "numerator": 1041,
+        "denominator": 1041,
+        "rate": 1.0
+      }
+    }
+  }
+}

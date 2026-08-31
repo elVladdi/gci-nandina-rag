@@ -1,0 +1,129 @@
+{
+  "experiment_id": "exp04_phase_d_d1a_text2trade_inspired_mnrl_v0.2",
+  "variant": "D1a",
+  "created_at_utc": "2026-08-30T05:18:30.463119+00:00",
+  "command": "python -B -m src.experiments.build_text2trade_mnrl_index_v02",
+  "config": {
+    "path": "src/configs/text2trade_mnrl_v0.2.json",
+    "sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
+  },
+  "inputs": {
+    "corpus": {
+      "path": "data/processed/corpus_rag_v1_index.jsonl",
+      "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+      "rows": 7748
+    },
+    "model": {
+      "path": "models/text2trade_mnrl_v0.2",
+      "files": [
+        {
+          "path": "models/text2trade_mnrl_v0.2/1_Pooling/config.json",
+          "size_bytes": 94,
+          "sha256": "bb80272f7adad76ce93073c25e18113ee66be1e91f60bcdd72aa41d05b28247e"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/config.json",
+          "size_bytes": 777,
+          "sha256": "867cac582ca8ac9a39e1fd577d793a60089cf2786d86c547ad44c0a12be73b80"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/config_sentence_transformers.json",
+          "size_bytes": 295,
+          "sha256": "44cd1329eec2dd1658d9fe7af6d266460a762a11e7dc5c71b16f9237d161eca7"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/model.safetensors",
+          "size_bytes": 470637416,
+          "sha256": "ef9b92b2fb0239e46c0d81e403f00b3255d3822dfa25e0ce354d03828f7a8c87"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/modules.json",
+          "size_bytes": 290,
+          "sha256": "318d49f1092cad125a35af58d9795bcddce84bf7e7240bd8d95b9b6858f9476b"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/README.md",
+          "size_bytes": 4043,
+          "sha256": "90bc9c8da4ec9fad492fd04218f7f3eabaa4173c9e8eec9dc59b519a01751cbb"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/sentence_bert_config.json",
+          "size_bytes": 250,
+          "sha256": "5fee3fcdc4a727fad422f0fed0c867b0921eefa9051de221521956ed42eb4c19"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/tokenizer.json",
+          "size_bytes": 6973173,
+          "sha256": "15e67157ec6fa47df5b142c36fbb0f3ea8e303a96de2e9bbb59b755c7cc46e49"
+        },
+        {
+          "path": "models/text2trade_mnrl_v0.2/tokenizer_config.json",
+          "size_bytes": 649,
+          "sha256": "ec1137c53aaa844aab218f337912175bbc7cd0e64ed0896a45d7f982af5c1c71"
+        }
+      ]
+    },
+    "evalset_for_integrity_sampling_only": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "used_for_training": false
+    }
+  },
+  "artifacts": {
+    "vectors": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/index/vectors.npy",
+      "sha256": "137d8f28ed0cde0f4111a39b84aee04c514847e505594db77217bdd5a1fd5354",
+      "shape": [
+        7644,
+        384
+      ],
+      "dtype": "float32"
+    },
+    "docstore": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/store/nandina8_docstore.jsonl",
+      "sha256": "07589433dea72061480fdbf807c8c3ee3d1ada87631d4448b29974d754a9e948",
+      "records": 7644
+    },
+    "id_map": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/index/id_map.json",
+      "sha256": "5e4d85f2e1d92f14ef2eed2cfd3a4db2b300c6c88b6f5862197cfe56b52b604d",
+      "records": 7644
+    },
+    "retrieval_config": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/retrieval_config.json",
+      "sha256": "9f114ecb9bd79f998fcd114218248b746868a3c6ede141fa4f5964becebd40ce"
+    },
+    "vector_integrity_gate": {
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/vector_integrity_gate_v0.2.json",
+      "sha256": "b34dc2efe705af4e62ff175db58e5ee048830acef8c0e786af63b8fe0156166e",
+      "gate": "D1a vector integrity before eval",
+      "status": "PASS",
+      "criterion": "cosine within 8 float32 machine epsilons of identity and maximum component difference within 8 float32 machine epsilons",
+      "float32_epsilon": 1.1920928955078125e-07,
+      "tolerance": 9.5367431640625e-07,
+      "sample_count": 21,
+      "byte_exact_count": 9,
+      "cosine_min": 0.999999887840059,
+      "cosine_max": 1.0000001403452747,
+      "max_absolute_difference": 1.1920928955078125e-07,
+      "max_l2_difference": 4.3145173072568673e-07,
+      "sample_csv": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/vector_integrity_sample_v0.2.csv",
+      "sample_csv_sha256": "17a35472221d72575cab17244d81157dd98801e657f3d1eed56f9abd83b62a45"
+    }
+  },
+  "mapping": {
+    "vectors_documents_codes": [
+      7644,
+      7644,
+      7644
+    ],
+    "id_map_matches_docstore": true,
+    "source_order": "corpus_rag_v1_index.jsonl filtered in file order to nandina_8, first-code deduplication"
+  },
+  "validation": {
+    "vector_integrity_pass": true,
+    "hnsw_built": false,
+    "mcd_used": false,
+    "phase_e_started": false
+  }
+}

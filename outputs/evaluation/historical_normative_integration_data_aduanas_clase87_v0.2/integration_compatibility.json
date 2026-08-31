@@ -1,0 +1,10 @@
+{
+  "compatible": true,
+  "eval_hash": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "cases": 1056,
+  "identical_case_ids_with_phase_a": true,
+  "identical_labels_with_eval": true,
+  "exactly_three_historical_candidates_per_case": true,
+  "candidate_slots": 3168,
+  "ranking_unchanged": true
+}

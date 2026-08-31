@@ -1,0 +1,19 @@
+{
+  "experiment_id": "exp04_phase_f_historical_normative_integration_v0.2",
+  "phase": "EXP-04-F",
+  "cases": 1056,
+  "candidate_slots": 3168,
+  "historical_rank_invariance_rate": 1.0,
+  "top3_invariance_rate": 1.0,
+  "candidate_exact_evidence_rate": 1.0,
+  "candidate_hs6_evidence_rate": 0.6843434343434344,
+  "candidate_hs4_evidence_rate": 1.0,
+  "candidate_chapter_evidence_rate": 1.0,
+  "case_all_top3_exact_evidence_rate": 1.0,
+  "precedent_coverage_rate": 1.0,
+  "traceability_complete_rate": 1.0,
+  "llm_used": false,
+  "reranker_used": false,
+  "candidate_pool_used": false,
+  "d1a_used": false
+}

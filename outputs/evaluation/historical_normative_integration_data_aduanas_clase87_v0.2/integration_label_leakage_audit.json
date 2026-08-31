@@ -1,0 +1,14 @@
+{
+  "label_used_for_candidate_selection": false,
+  "label_used_for_precedent_selection": false,
+  "label_used_for_evidence_selection": false,
+  "label_used_for_order_or_fallback": false,
+  "selection_input_fields": [
+    "historical candidate code",
+    "historical candidate metadata",
+    "historical precedent case ID",
+    "normative corpus code"
+  ],
+  "labels_only_used_after_construction_for_metrics": true,
+  "pass": true
+}

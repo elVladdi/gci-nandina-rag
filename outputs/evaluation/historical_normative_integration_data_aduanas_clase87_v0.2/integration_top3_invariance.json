@@ -1,0 +1,8 @@
+{
+  "candidate_slots_pass": 3168,
+  "candidate_slots_total": 3168,
+  "top3_invariance_rate": 1.0,
+  "before_codes_equal_after_codes": true,
+  "before_scores_equal_after_scores": true,
+  "pass": true
+}

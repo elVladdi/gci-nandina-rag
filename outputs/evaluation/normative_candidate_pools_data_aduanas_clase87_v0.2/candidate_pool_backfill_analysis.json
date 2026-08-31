@@ -1,0 +1,92 @@
+{
+  "base": "hierarchical",
+  "variants": {
+    "hierarchical_first_100": {
+      "50": {
+        "hierarchical_covered_cases": 96,
+        "new_cases_from_backfill": 0,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 0,
+        "relative_gain_vs_hierarchical": 0.0,
+        "average_dual_only_candidates_added": 0.0,
+        "duplicates_discarded": 71
+      },
+      "100": {
+        "hierarchical_covered_cases": 107,
+        "new_cases_from_backfill": 0,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 0,
+        "relative_gain_vs_hierarchical": 0.0,
+        "average_dual_only_candidates_added": 0.0,
+        "duplicates_discarded": 248
+      },
+      "200": {
+        "hierarchical_covered_cases": 321,
+        "new_cases_from_backfill": 1,
+        "lost_vs_hierarchical": 42,
+        "absolute_gain": 1,
+        "relative_gain_vs_hierarchical": 0.003115264797507788,
+        "average_dual_only_candidates_added": 23.518939393939394,
+        "duplicates_discarded": 174971
+      }
+    },
+    "hierarchical_80_dual_backfill_20": {
+      "50": {
+        "hierarchical_covered_cases": 96,
+        "new_cases_from_backfill": 0,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 0,
+        "relative_gain_vs_hierarchical": 0.0,
+        "average_dual_only_candidates_added": 0.0,
+        "duplicates_discarded": 71
+      },
+      "100": {
+        "hierarchical_covered_cases": 107,
+        "new_cases_from_backfill": 0,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 0,
+        "relative_gain_vs_hierarchical": 0.0,
+        "average_dual_only_candidates_added": 0.030303030303030304,
+        "duplicates_discarded": 174723
+      },
+      "200": {
+        "hierarchical_covered_cases": 321,
+        "new_cases_from_backfill": 0,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 0,
+        "relative_gain_vs_hierarchical": 0.0,
+        "average_dual_only_candidates_added": 0.030303030303030304,
+        "duplicates_discarded": 473985
+      }
+    },
+    "hierarchical_70_dual_backfill_30": {
+      "50": {
+        "hierarchical_covered_cases": 96,
+        "new_cases_from_backfill": 0,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 0,
+        "relative_gain_vs_hierarchical": 0.0,
+        "average_dual_only_candidates_added": 0.0,
+        "duplicates_discarded": 71
+      },
+      "100": {
+        "hierarchical_covered_cases": 107,
+        "new_cases_from_backfill": 1,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 1,
+        "relative_gain_vs_hierarchical": 0.009345794392523364,
+        "average_dual_only_candidates_added": 0.061553030303030304,
+        "duplicates_discarded": 174723
+      },
+      "200": {
+        "hierarchical_covered_cases": 321,
+        "new_cases_from_backfill": 0,
+        "lost_vs_hierarchical": 0,
+        "absolute_gain": 0,
+        "relative_gain_vs_hierarchical": 0.0,
+        "average_dual_only_candidates_added": 0.061553030303030304,
+        "duplicates_discarded": 473969
+      }
+    }
+  }
+}

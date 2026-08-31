@@ -1,0 +1,4 @@
+strategy_a,strategy_b,depth,both,only_a,only_b,neither,cases
+hierarchical,dual_protected,50,94,2,3,957,1056
+hierarchical,dual_protected,100,100,7,6,943,1056
+hierarchical,dual_protected,200,280,41,1,734,1056

@@ -1,0 +1,15 @@
+{
+  "gate": "D1a vector integrity before eval",
+  "status": "PASS",
+  "criterion": "cosine within 8 float32 machine epsilons of identity and maximum component difference within 8 float32 machine epsilons",
+  "float32_epsilon": 1.1920928955078125e-07,
+  "tolerance": 9.5367431640625e-07,
+  "sample_count": 21,
+  "byte_exact_count": 9,
+  "cosine_min": 0.999999887840059,
+  "cosine_max": 1.0000001403452747,
+  "max_absolute_difference": 1.1920928955078125e-07,
+  "max_l2_difference": 4.3145173072568673e-07,
+  "sample_csv": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/vector_integrity_sample_v0.2.csv",
+  "sample_csv_sha256": "17a35472221d72575cab17244d81157dd98801e657f3d1eed56f9abd83b62a45"
+}
