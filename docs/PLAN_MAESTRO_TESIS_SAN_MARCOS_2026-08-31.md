@@ -40,7 +40,7 @@ Debe evitar reabrir trabajo cerrado sin evidencia objetiva, mezclar auditoría c
 | Grupo | Nombre | Qué se revisa | Estado |
 |---|---|---|---|
 | **1** | Diseño y ejecución experimental | Si los experimentos permiten contrastar objetivos e hipótesis | **CERRADO / APPROVED** |
-| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **EN CURSO — G2A Microclose 1B: diseño anidado EXP-11 demostrado inviable; rediseño pre-ejecución requerido** |
+| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **EN CURSO — G2A CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS; siguiente: EXP-11A** |
 | **3** | Métricas y análisis estadístico/cuantitativo | Si se extrae toda la evidencia válida de los resultados | Pendiente |
 | **4** | Análisis e interpretación de resultados | Si los resultados permiten explicar el comportamiento observado | Pendiente |
 | **5** | Presentación de resultados | Si tablas y resultados comunican claramente la evidencia | Pendiente |
@@ -59,55 +59,42 @@ No se reejecuta para mejorar resultados.
 ## 4.1 Registro de avance — Grupo 2A
 
 **Fecha:** 2026-08-31  
-**Hito:** Diagnóstico forense inicial `READ-ONLY` completado y auditado externamente.  
-**Gate preliminar:** `REQUIRES_MICROCLOSE`  
+**Hito:** G2A cerrado tras diagnóstico forense, microcierres metodológicos, versionamiento y clean checkout.  
+**Gate final:** `APPROVED_WITH_NONBLOCKING_LIMITATIONS`  
+**Rama auditada:** `codex/g2a-reproducibility-v01`  
+**Commit:** `c9751f67165b0bf6e06b54e4e979e7258481ded6`  
 **Grupo 1 requiere reapertura:** `false`  
-**EXP-11 iniciado:** `false`  
+**EXP-11 retrieval iniciado durante G2A:** `false`  
 **EXP-12 iniciado:** `false`  
 **Grupo 3 iniciado:** `false`
 
-Hallazgos preliminares registrados:
+Estados finales G2A:
 
-- `G2A-F001`: entorno histórico incompleto y dependencias no fijadas — S2.
-- `G2A-F002`: EXP-04 C presenta limitación de repetición exacta porque el runner no quedó versionado en el momento de la ejecución — S2.
-- `G2A-F003`: procedencia del entrenamiento D1a requiere cierre forense adicional. La historia Git permite recuperar al menos el último commit que modificó el runner antes de la ejecución; no debe declararse `NOT_RECOVERABLE` sin agotar esa evidencia.
-- `G2A-F004`: inferencia LLM/evaluación AI no es reproducible byte-a-byte con la evidencia actual — S2.
-- `G2A-F005`: metadata v0.1 utilizada en EXP-08 permanece no recuperable; debe declararse como limitación histórica y no reconstruirse especulativamente — S2.
-- `G2A-F006`: contratos ejecutables de EXP-11/EXP-12 aún no implementados — S3.
-- `G2A-F007`: banco ampliado H150/H200 aún no existe — S3 y dependencia futura, no defecto del benchmark H100.
+- `G2A-F001`: `PARTIALLY_RESOLVED` — entorno histórico incompleto pero explícitamente delimitado.
+- `G2A-F002`: `NOT_RECOVERABLE` — runner histórico EXP-04 C no versionado al ejecutar; R1/R2 preservados, R3 exacta limitada.
+- `G2A-F003`: `PARTIALLY_RESOLVED` — procedencia script/config D1a recuperada; `execution_repository_head=UNKNOWN`.
+- `G2A-F004`: `PARTIALLY_RESOLVED` — inferencia LLM/evaluación AI no reproducible byte a byte.
+- `G2A-F005`: `NOT_RECOVERABLE` — metadata v0.1 de EXP-08 no recuperable; no reconstrucción retrospectiva.
+- `G2A-F006`: `VERIFIED_IN_G2` — contratos EXP-11/EXP-12 implementados y testeados.
+- `G2A-F007`: `OPEN / FUTURE_DEPENDENCY` — bloquea H150/H200 y toda ejecución EXP-12; no bloquea G2A ni EXP-11A.
+- `G2A-F008`: `VERIFIED_IN_G2` — nesting EXP-11 demostrado estructuralmente inviable y corregido antes de retrieval.
+- `G2A-F009`: `VERIFIED_IN_G2` — limitación declarada: tamaño y composición DAM están acoplados en H100; no se permite reclamar efecto causal aislado del tamaño.
+- `G2A-F010`: `VERIFIED_IN_G2` — H50 corregido prospectivamente a 5 D1 / 5 D2 mediante seeds pareados.
 
-**Próximo paso autorizado:** microclose G2A controlado. Debe formalizar inventarios/matrices de reproducibilidad, agotar la procedencia forense recuperable —especialmente D1a— y preparar los contratos prospectivos de EXP-11/EXP-12 sin ejecutar ninguno de los dos experimentos.
+Validación final reportada:
+
+- 28 tests G2A, 0 fallos, 0 errores;
+- suite completa 257 tests, 0 fallos, 0 errores, 0 skips;
+- clean checkout post-commit limpio;
+- 11 artefactos G2A versionados con SHA coincidente entre working tree y clean checkout;
+- rama remota `origin/codex/g2a-reproducibility-v01` = `c9751f67165b0bf6e06b54e4e979e7258481ded6`;
+- comparación contra base `e8a5aa7218df54b2cc309424e85914b7d914df15`: ahead 1, behind 0; 18 archivos cambiados, 17 añadidos y una modificación HE4 autorizada.
 
 ## 5. Grupo 2A — auditoría y contratos previos de reproducibilidad
 
-Antes de EXP-11/12 debe cerrar los contratos que deben cumplir las nuevas corridas.
+**CERRADO / APPROVED_WITH_NONBLOCKING_LIMITATIONS.**
 
-Revisar:
-
-- datasets/corpus y versiones;
-- configuraciones;
-- seeds o `NOT_APPLICABLE`;
-- prompts;
-- logs;
-- manifests;
-- hashes;
-- procedencia;
-- dependencias;
-- entorno computacional;
-- matriz input → script → config → output → hash;
-- assets versionados/locales/regenerables/runtime-only;
-- clean checkout;
-- reproducibilidad Windows/Linux.
-
-Pendientes principales:
-
-1. **Freeze del entorno:** Python, OS/plataforma, versiones exactas de paquetes, Torch, sentence-transformers, hnswlib, Ollama, modelo/digest y parámetros.
-2. **Matriz end-to-end:** resultado, output, SHA, script, config, seed, inputs, hashes y procedencia.
-3. **Auditoría formal de configs/seeds:** A–L, EXP-05–EXP-10 y luego EXP-11/12.
-4. **Clasificación de assets:** frozen evidence, reconstructable, restricted/local, runtime-only, optional diagnostic, not required.
-5. **Nivel de reproducibilidad alcanzado:** analítica, computacional, fuente administrativa, entrenamiento, inferencia LLM y limitaciones.
-
-Grupo 2A no cambia resultados científicos.
+G2A no cambió resultados científicos. Congeló contratos, seeds, configuraciones, evidencia mínima, procedencia disponible, limitaciones históricas y reglas fail-closed para EXP-11/EXP-12.
 
 ## 6. EXP-11 — Sensibilidad al tamaño del banco histórico
 
@@ -122,18 +109,32 @@ Métricas secundarias: Top-1, Top-5, Top-10, MRR, errores HS6/HS4/capítulo y so
 - H75 ≈ 75%;
 - H100 = **2,950 series**.
 
-Reglas:
+Reglas congeladas:
 
 - DAM completas;
 - no muestreo simple por filas;
-- **nesting no requerido**: la preferencia original `H25 ⊂ H50 ⊂ H75 ⊂ H100` fue descartada en G2A-F008 por inviabilidad estructural con DAM completas;
-- H25/H50/H75 se construirán como subconjuntos independientes por condición, preservando DAM completas y control de volumen;
-- varias réplicas por condición para cuantificar variabilidad de composición;
-- seeds congeladas;
-- pipeline/configs fijos;
+- nesting no requerido: `H25 ⊂ H50 ⊂ H75` fue descartado por `G2A-F008` como estructuralmente inviable;
+- H25/H50/H75 se construyen como subconjuntos independientes por condición;
+- H25: 10 composiciones congeladas;
+- H50: 10 composiciones estratificadas **5 D1 / 5 D2** mediante cinco seeds pareados;
+- H75: 10 composiciones congeladas;
+- H100: una referencia única congelada;
+- tolerancia máxima de volumen ±148 filas;
+- selección sin NANDINA, eval, Top-k ni MRR;
+- análisis principal H50 `POOLED_EQUAL_WEIGHT_5_D1_5_D2`;
+- comparación D1/D2 solo diagnóstica;
+- no se permite afirmar efecto causal aislado del tamaño;
 - evalset v0.2 idéntico.
 
+Interpretación obligatoria:
+
+> Sensibilidad del desempeño de recuperación histórica al tamaño nominal del banco bajo muestreo por DAM completas y las restricciones de composición del H100 congelado.
+
 ### Gate de nuevo histórico
+
+**Nueva data todavía no necesaria.**
+
+El `NEW_HISTORICAL_GATE` se activa **después de cerrar y auditar EXP-11A**, antes de iniciar EXP-11B H150/H200 y antes de cualquier ejecución real de EXP-12.
 
 Antes de H150/H200 revisar:
 
@@ -159,51 +160,32 @@ Objetivos aproximados:
 - H150 ≈ **4,425 series**;
 - H200 ≈ **5,900 series**.
 
+Solo se ejecuta después de aprobar el `NEW_HISTORICAL_GATE`.
+
 Evaluar si la curva crece, se satura o empeora por redundancia/confusión.
 
 ## 7. EXP-12 — Diversidad con volumen controlado
+
+Estado contractual: **`CONDITIONAL_FROZEN_PENDING_NEW_HISTORICAL_GATE`**.
+
+`EXP12_EXECUTION_AUTHORIZED = false` hasta aprobar el histórico ampliado.
 
 Pregunta:
 
 **A igual o muy similar volumen histórico, ¿una mayor diversidad efectiva mejora Top-3?**
 
-Condiciones:
+Diseño congelado condicionalmente:
 
-- D-LOW;
-- D-MID;
-- D-HIGH.
-
-Medidas:
-
-- número de DAM;
-- HHI;
-- número efectivo de DAM;
-- descripciones únicas;
-- duplicados;
-- near-duplicates;
-- códigos cubiertos;
-- DAM por código;
-- soporte independiente por NANDINA;
-- diversidad descriptiva/léxica.
-
-Mantener aproximadamente constante el número de series mientras cambia la diversidad.
-
-### Freeze previo de fichas
-
-Antes de correr EXP-11/12 congelar:
-
-- número de réplicas;
-- selección de DAM;
-- seeds;
-- definición de diversidad;
-- reglas H150/H200;
-- tratamiento de NANDINA nuevas;
-- prohibición de cambiar eval;
-- métricas;
-- análisis estadístico;
-- outputs;
-- manifests;
-- Gates.
+- variable primaria: DAM HHI;
+- volumen objetivo: 2,950 ±148;
+- cobertura NANDINA H100 = 1.0;
+- TVD ≤ 0.05 contra distribución H100;
+- 10,000 candidatos por seed;
+- mínimo 30 candidatos factibles;
+- D-HIGH/D-MID/D-LOW por cuantiles HHI 0.10/0.50/0.90;
+- `must_not_fallback_to_h100 = true`;
+- manipulation check obligatorio antes de retrieval real;
+- duplicados y near-duplicates son descriptores secundarios, no criterios de selección.
 
 ## 8. Grupo 2B — cierre de reproducibilidad
 
@@ -235,21 +217,7 @@ Revisar Top-k, MRR, Pool@N, soporte histórico, análisis pareado, estratificaci
 
 ## 10. Grupo 4 — Análisis e interpretación
 
-Revisar:
-
-- precedentes insuficientes;
-- ambigüedad/incompletitud;
-- confusión jerárquica;
-- evidencia normativa débil;
-- saturación;
-- redundancia;
-- diversidad;
-- errores persistentes;
-- diferencias histórico/normativo;
-- límites del LLM;
-- alcance Clase 87.
-
-Evitar causalidad no demostrada.
+Revisar precedentes insuficientes, ambigüedad/incompletitud, confusión jerárquica, evidencia normativa débil, saturación, redundancia, diversidad, errores persistentes, diferencias histórico/normativo, límites del LLM y alcance Clase 87. Evitar causalidad no demostrada.
 
 ## 11. Grupo 5 — Presentación de resultados
 
@@ -257,19 +225,7 @@ Auditar tablas, denominadores, comparaciones homogéneas, benchmark principal vs
 
 ## 12. Grupo 6 — Figuras y visualizaciones
 
-Prioridades:
-
-- arquitectura RAG final;
-- histórico vs normativo;
-- flujo experimental;
-- curva H25–H200;
-- efecto de diversidad;
-- Top-k;
-- errores jerárquicos;
-- soporte histórico;
-- trazabilidad/reproducibilidad;
-- retrieval → augmentation → generation;
-- revisión humana.
+Prioridades: arquitectura RAG final, histórico vs normativo, flujo experimental, curva H25–H200, efecto de diversidad, Top-k, errores jerárquicos, soporte histórico, trazabilidad/reproducibilidad, retrieval → augmentation → generation y revisión humana.
 
 ## 13. Grupo 7 — Redacción y argumentación científica
 
@@ -281,208 +237,68 @@ Verificar:
 
 `Problema → Objetivos → Hipótesis → Variables → Indicadores → Experimentos → Resultados → Discusión → Conclusiones`
 
-Incluye PE↔OE, OE↔HE, HE↔métricas, HE↔EXP, EXP↔resultados, resultados↔conclusiones, anexos, tablas, figuras, repositorio, reproducibilidad y delimitaciones.
-
 ## 15. Congelamiento científico final
 
-Solo después de:
-
-1. Grupo 2A;
-2. EXP-11A;
-3. Gate de datos nuevos;
-4. EXP-11B;
-5. EXP-12;
-6. Grupo 2B;
-7. Grupos 3–8.
-
-Congelar:
-
-- commit final;
-- datasets/corpus;
-- configs;
-- prompts;
-- seeds;
-- modelos/digests;
-- manifests;
-- hashes;
-- outputs;
-- métricas;
-- figuras;
-- tablas;
-- veredictos;
-- limitaciones;
-- conclusiones;
-- protocolo.
+Solo después de Grupo 2A, EXP-11A, Gate de datos nuevos, EXP-11B, EXP-12, Grupo 2B y Grupos 3–8.
 
 ## 16. Repositorio público independiente de reproducibilidad
 
-Repositorio: `elVladdi/gci-nandina-rag-reproducibility`
+Repositorio: `elVladdi/gci-nandina-rag-reproducibility`.
 
-Principio: publicar una **especificación reproducible para replicación independiente**, no simplemente copiar la implementación privada.
-
-Debe contener:
-
-- protocolo;
-- especificaciones funcionales;
-- contratos de datos;
-- configs de referencia;
-- manifests;
-- hashes;
-- métricas/resultados verificables;
-- pseudocódigo;
-- invariantes;
-- test vectors;
-- ejemplos sintéticos;
-- guía de replicación;
-- criterios de validez.
-
-Debe permitir otras jurisdicciones, capítulos, HS-6, NANDINA/extensiones nacionales, datos propios y corpus propios.
-
-Completar **después del congelamiento científico final**.
+Completar después del congelamiento científico final.
 
 ## 17. Artículo científico principal
 
 Revista de referencia actual: **Knowledge-Based Systems (KBS)**, sujeta a reevaluación final.
 
-Alternativas: ESWA, IP&M, DSS, GIQ, AI & Law y World Customs Journal.
+## 18. Artículo sectorial / WCO
 
-Novedad: no limitarla a “RAG/LLM para HS Code”. Ejes:
+Producto diferenciado orientado a gobernanza, trazabilidad, revisión humana, privacidad y despliegue offline/local.
 
-- independencia por DAM;
-- sensibilidad al particionado;
-- tamaño/diversidad del histórico;
-- memoria documental;
-- histórico vs normativo;
-- separación ranking/evidencia/generación;
-- auditabilidad;
-- errores jerárquicos;
-- dependencia de precedentes;
-- reproducibilidad;
-- ejecución local/offline;
-- revisión humana.
+## 19. Licencia
 
-## 18. Segundo artículo — publicación sectorial aduanera
+Estado: `LICENSE_DECISION = PENDING`.
 
-Orientación principal: **WCO / WCO News**.  
-Alternativa: **World Customs Journal**.
+## 20. Orden maestro actualizado
 
-Foco: gobernanza, trazabilidad, revisión humana, privacidad, operación local/offline, memoria histórica institucional, evidencia normativa, auditabilidad, replicación en otras jurisdicciones y límites de automatización.
-
-No duplicar el paper científico.
-
-## 19. Cierre de tesis y archivo
-
-- consolidar tesis;
-- verificar anexos/referencias;
-- congelar tablas/figuras;
-- archivar SHA final;
-- release si corresponde;
-- documentar repositorios;
-- documentar datos no redistribuibles;
-- documentar replicación.
-
-## 20. Extensiones futuras
-
-Posteriores al trabajo principal:
-
-- validación temporal;
-- validación externa;
-- otros capítulos;
-- universo arancelario completo;
-- otras jurisdicciones;
-- otros retrieval/reranking;
-- evaluación humana externa;
-- evaluación operativa real;
-- actualización longitudinal del histórico.
-
-## 21. Licencia
-
-`LICENSE_DECISION = PENDING`
-
-No adoptar una licencia nueva sin revisar por separado software, especificaciones, datasets, materiales de terceros y derechos de redistribución.
-
-# 22. Orden maestro definitivo
-
-```text
-1. Grupo 1 — Diseño y ejecución experimental
-   ✅ CERRADO
-        ↓
-2. Grupo 2A — Auditoría y contratos de reproducibilidad
-        ↓
-3. EXP-11A — H25 / H50 / H75 / H100
-        ↓
-4. Gate de incorporación de nuevo histórico
-        ↓
-5. EXP-11B — H150 / H200
-        ↓
-6. EXP-12 — Diversidad con volumen controlado
-        ↓
-7. Grupo 2B — Reproducibilidad de EXP-11/12 + Gate final
-        ↓
-8. Grupo 3 — Métricas y análisis estadístico/cuantitativo
-        ↓
-9. Grupo 4 — Análisis e interpretación
-        ↓
-10. Grupo 5 — Presentación de resultados
-        ↓
-11. Grupo 6 — Figuras, diagramas y visualizaciones
-        ↓
-12. Grupo 7 — Redacción y argumentación científica
-        ↓
-13. Grupo 8 — Coherencia metodológica y documental
-        ↓
-14. CONGELAMIENTO CIENTÍFICO FINAL
-        ↓
-15. Completar repositorio público de reproducibilidad
-        ↓
-16. Artículo científico principal
-    → referencia actual: Knowledge-Based Systems
-        ↓
-17. Artículo sectorial internacional
-    → WCO / WCO News
-    → World Customs Journal como alternativa
-        ↓
-18. Cierre final de tesis / archivo / publicación
-        ↓
-19. Extensiones futuras
-```
+1. Grupo 1 — cerrado.
+2. Grupo 2A — **cerrado con limitaciones no bloqueantes**.
+3. **EXP-11A — siguiente paso.**
+4. Auditar resultados EXP-11A.
+5. Activar `NEW_HISTORICAL_GATE` y solicitar nueva data.
+6. EXP-11B H150/H200.
+7. EXP-12.
+8. Grupo 2B.
+9. Grupo 3.
+10. Grupo 4.
+11. Grupo 5.
+12. Grupo 6.
+13. Grupo 7.
+14. Grupo 8.
+15. Freeze científico.
+16. Repositorio público de reproducibilidad.
+17. Artículo científico.
+18. Artículo sectorial/WCO.
+19. Tesis final/archive.
+20. Extensiones futuras.
 
 ## 23. Próximo paso inmediato
 
-**Grupo 2A — Microclose 1C: rediseño pre-ejecución de EXP-11 y cierre condicional del contrato EXP-12.**
+**EXP-11A — ejecución de sensibilidad H25/H50/H75/H100 bajo el contrato congelado.**
 
-La factibilidad de planificación demostró que no existe ninguna cadena anidada H25⊂H50⊂H75⊂H100 que pueda respetar simultáneamente DAM completas y la tolerancia ±148 filas: las dos DAM dominantes (1,045 y 940 series) hacen estructuralmente incompatible el nesting. Debe eliminarse el nesting como requisito de EXP-11A y sustituirse por subconjuntos independientes por condición, siempre con DAM completas, volumen controlado y selección ajena al rendimiento del evalset. Esta corrección es pre-ejecución y no reabre Grupo 1.
+Se autoriza avanzar a EXP-11A únicamente con las composiciones, seeds, tolerancias, controles y outputs ya congelados. H100 permanece como referencia única.
 
-EXP-12 mantiene el universo ampliado como precondición fail-closed y debe conservar HHI como variable primaria de diversidad, volumen controlado y matching NANDINA contra H100. No se autoriza retrieval de EXP-11/EXP-12 ni Grupo 3 hasta aprobar G2A.
-
----
-
-## Nota de control
-
-Este documento es el **plan maestro acordado**.
-
-Si en el futuro se propone alterar el orden, agregar/quitar experimentos o cambiar la ubicación de EXP-11/EXP-12, debe registrarse explícitamente como una revisión del plan y justificarse antes de ejecutar el cambio.
+**Nueva data:** todavía no es necesaria. El punto de activación será después de cerrar y auditar EXP-11A, antes de EXP-11B H150/H200 y antes de cualquier ejecución real de EXP-12.
 
 ## 24. Historial de actualización del plan
 
-### 2026-08-31 — Inicio formal de Grupo 2A
+### 2026-08-31 — Cierre de G2A
 
+- Rama auditada: `codex/g2a-reproducibility-v01`.
+- Commit candidato remoto: `c9751f67165b0bf6e06b54e4e979e7258481ded6`.
+- Comparación contra `main`/base `e8a5aa7218df54b2cc309424e85914b7d914df15`: ahead 1, behind 0; 18 archivos cambiados.
+- Gate final G2A: **`APPROVED_WITH_NONBLOCKING_LIMITATIONS`**.
 - Grupo 1 permanece `CLOSED / APPROVED`.
-- Se crearon las fichas `G2-00`, `G2A-01` y `G2B-01`.
-- Se completó la primera auditoría forense G2A en modo `READ-ONLY`.
-- El Gate preliminar G2A quedó en `REQUIRES_MICROCLOSE`.
-- No se modificaron resultados científicos, no se regeneraron artefactos y no se iniciaron EXP-11, EXP-12 ni Grupo 3.
-- Se mantiene el orden maestro: cerrar G2A antes de ejecutar EXP-11/EXP-12.
-
-### 2026-08-31 — G2A Microclose 1A y 1B
-
-- **Microclose 1A — validación técnica aprobada:** 14 tests G2A y suite completa **243/243**, sin fallos, errores ni skips; se corrigió el defecto de portabilidad del test HE4 sin alterar evidencia científica.
-- `G2A-F003` permanece `PARTIALLY_RESOLVED`: procedencia de script/config D1a recuperada, `execution_repository_head=UNKNOWN`.
-- `G2A-F007` queda `OPEN / FUTURE_DEPENDENCY`: el nuevo histórico ampliado bloquea H150/H200 y toda ejecución de EXP-12, pero no G2A contractual ni EXP-11A.
-- **Microclose 1B — hallazgo metodológico pre-ejecución:** el planificador evaluó 100,000 seeds sin ejecutar retrieval y confirmó `DESIGN_INFEASIBLE` para el requisito simultáneo de nesting + DAM completas + tolerancia ±148 filas en H25/H50/H75.
-- La inviabilidad es estructural: H100=2,950; DAM dominantes=1,045 y 940; resto=965. H25 admisible [590,886] no puede contener ninguna dominante; H50 [1327,1623] requiere exactamente una; H75 [2065,2361] requiere ambas. Con nesting, H75 tendría como mínimo 590+1,045+940=2,575, fuera de rango.
-- Se registra `G2A-F008 = PRE_EXECUTION_DESIGN_INFEASIBILITY`; no implica corrupción ni reapertura del Grupo 1.
-- EXP-12 quedó matemáticamente mejor especificado con HHI como variable primaria, `effective_DAM=1/HHI`, volumen 2,950±148, cobertura NANDINA H100=1.0 y TVD≤0.05; su factibilidad real solo puede verificarse después del Gate de histórico ampliado.
-- Suite posterior reportada: **249 tests, 0 failures, 0 errors**.
-- No se ejecutó retrieval EXP-11, no se inició EXP-12 y no se produjeron resultados científicos nuevos.
-- Próximo paso: **G2A Microclose 1C — reemplazar nesting EXP-11 por muestreo independiente por condición con DAM completas y control de volumen; validar 10 réplicas factibles por nivel antes de autorizar commit.**
+- EXP-11 y EXP-12 no fueron ejecutados durante G2A.
+- Siguiente paso autorizado: **EXP-11A**.
+- La nueva data no se requiere aún; se solicita después de EXP-11A para el histórico ampliado previo a EXP-11B/EXP-12.
