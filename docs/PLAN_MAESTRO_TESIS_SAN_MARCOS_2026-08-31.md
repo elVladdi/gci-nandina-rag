@@ -40,7 +40,7 @@ Debe evitar reabrir trabajo cerrado sin evidencia objetiva, mezclar auditoría c
 | Grupo | Nombre | Qué se revisa | Estado |
 |---|---|---|---|
 | **1** | Diseño y ejecución experimental | Si los experimentos permiten contrastar objetivos e hipótesis | **CERRADO / APPROVED** |
-| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **SIGUIENTE** |
+| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **EN CURSO — G2A diagnóstico completado; microclose requerido** |
 | **3** | Métricas y análisis estadístico/cuantitativo | Si se extrae toda la evidencia válida de los resultados | Pendiente |
 | **4** | Análisis e interpretación de resultados | Si los resultados permiten explicar el comportamiento observado | Pendiente |
 | **5** | Presentación de resultados | Si tablas y resultados comunican claramente la evidencia | Pendiente |
@@ -55,6 +55,28 @@ Debe evitar reabrir trabajo cerrado sin evidencia objetiva, mezclar auditoría c
 Incluye EXP-01 a EXP-10; EXP-04 A–L; split v0.2 por DAM; controles de duplicados y near-duplicates; recuperación histórica y normativa; D1a MNRL; integración histórico-normativa; reranker diagnóstico; HE4; HE5; EXP-08; EXP-05/07; cierre consolidado; procedencia; SHA/EOL; clean checkout; integración final en `main`.
 
 No se reejecuta para mejorar resultados.
+
+## 4.1 Registro de avance — Grupo 2A
+
+**Fecha:** 2026-08-31  
+**Hito:** Diagnóstico forense inicial `READ-ONLY` completado y auditado externamente.  
+**Gate preliminar:** `REQUIRES_MICROCLOSE`  
+**Grupo 1 requiere reapertura:** `false`  
+**EXP-11 iniciado:** `false`  
+**EXP-12 iniciado:** `false`  
+**Grupo 3 iniciado:** `false`
+
+Hallazgos preliminares registrados:
+
+- `G2A-F001`: entorno histórico incompleto y dependencias no fijadas — S2.
+- `G2A-F002`: EXP-04 C presenta limitación de repetición exacta porque el runner no quedó versionado en el momento de la ejecución — S2.
+- `G2A-F003`: procedencia del entrenamiento D1a requiere cierre forense adicional. La historia Git permite recuperar al menos el último commit que modificó el runner antes de la ejecución; no debe declararse `NOT_RECOVERABLE` sin agotar esa evidencia.
+- `G2A-F004`: inferencia LLM/evaluación AI no es reproducible byte-a-byte con la evidencia actual — S2.
+- `G2A-F005`: metadata v0.1 utilizada en EXP-08 permanece no recuperable; debe declararse como limitación histórica y no reconstruirse especulativamente — S2.
+- `G2A-F006`: contratos ejecutables de EXP-11/EXP-12 aún no implementados — S3.
+- `G2A-F007`: banco ampliado H150/H200 aún no existe — S3 y dependencia futura, no defecto del benchmark H100.
+
+**Próximo paso autorizado:** microclose G2A controlado. Debe formalizar inventarios/matrices de reproducibilidad, agotar la procedencia forense recuperable —especialmente D1a— y preparar los contratos prospectivos de EXP-11/EXP-12 sin ejecutar ninguno de los dos experimentos.
 
 ## 5. Grupo 2A — auditoría y contratos previos de reproducibilidad
 
@@ -426,9 +448,9 @@ No adoptar una licencia nueva sin revisar por separado software, especificacione
 
 ## 23. Próximo paso inmediato
 
-**Grupo 2A — diagnóstico formal de reproducibilidad y trazabilidad.**
+**Grupo 2A — microclose correctivo controlado posterior al diagnóstico forense.**
 
-Debe comenzar con una auditoría diagnóstica, preferentemente sin modificar archivos, para identificar exactamente qué contratos de entorno, seeds, configuraciones, procedencia y reconstrucción end-to-end siguen pendientes antes de ejecutar EXP-11/EXP-12.
+Debe formalizar los inventarios y matrices de reproducibilidad exigidos por G2A, agotar la procedencia histórica recuperable —especialmente D1a— y preparar/fijar los contratos prospectivos de EXP-11/EXP-12. No se autoriza ejecutar EXP-11, EXP-12 ni iniciar Grupo 3 hasta que el Gate G2A sea auditado y aprobado.
 
 ---
 
@@ -437,3 +459,14 @@ Debe comenzar con una auditoría diagnóstica, preferentemente sin modificar arc
 Este documento es el **plan maestro acordado**.
 
 Si en el futuro se propone alterar el orden, agregar/quitar experimentos o cambiar la ubicación de EXP-11/EXP-12, debe registrarse explícitamente como una revisión del plan y justificarse antes de ejecutar el cambio.
+
+## 24. Historial de actualización del plan
+
+### 2026-08-31 — Inicio formal de Grupo 2A
+
+- Grupo 1 permanece `CLOSED / APPROVED`.
+- Se crearon las fichas `G2-00`, `G2A-01` y `G2B-01`.
+- Se completó la primera auditoría forense G2A en modo `READ-ONLY`.
+- El Gate preliminar G2A quedó en `REQUIRES_MICROCLOSE`.
+- No se modificaron resultados científicos, no se regeneraron artefactos y no se iniciaron EXP-11, EXP-12 ni Grupo 3.
+- Se mantiene el orden maestro: cerrar G2A antes de ejecutar EXP-11/EXP-12.
