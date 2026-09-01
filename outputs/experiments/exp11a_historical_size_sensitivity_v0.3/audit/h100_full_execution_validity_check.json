@@ -1,0 +1,75 @@
+{
+  "attempt_id": "FULL_EXECUTION_H100_GATE",
+  "execution_commit": "22b18cdc743b4b0f37b8b345215fb747d614d6eb",
+  "timestamp_start_utc": "2026-09-01T01:54:05.337186+00:00",
+  "timestamp_end_utc": "2026-09-01T01:54:09.406780+00:00",
+  "timestamp_h100_end_utc": "2026-09-01T01:54:09.406780+00:00",
+  "frozen_reference_path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json",
+  "frozen_reference_git_base": "a6140b66cf2975313be327d6d3d4e18e38f1fdf5",
+  "frozen": {
+    "Top1_count": 538,
+    "Top3_count": 709,
+    "Top5_count": 806,
+    "Top10_count": 941,
+    "Top50_count": 1047,
+    "MRR": 0.6297077493524843
+  },
+  "actual": {
+    "Top1_count": 538,
+    "Top3_count": 709,
+    "Top5_count": 806,
+    "Top10_count": 941,
+    "Top50_count": 1047,
+    "MRR": 0.6297077493524843
+  },
+  "comparison": {
+    "Top1_count": {
+      "expected": 538,
+      "actual": 538,
+      "absolute_delta": 0.0,
+      "tolerance": 0,
+      "match": true
+    },
+    "Top3_count": {
+      "expected": 709,
+      "actual": 709,
+      "absolute_delta": 0.0,
+      "tolerance": 0,
+      "match": true
+    },
+    "Top5_count": {
+      "expected": 806,
+      "actual": 806,
+      "absolute_delta": 0.0,
+      "tolerance": 0,
+      "match": true
+    },
+    "Top10_count": {
+      "expected": 941,
+      "actual": 941,
+      "absolute_delta": 0.0,
+      "tolerance": 0,
+      "match": true
+    },
+    "Top50_count": {
+      "expected": 1047,
+      "actual": 1047,
+      "absolute_delta": 0.0,
+      "tolerance": 0,
+      "match": true
+    },
+    "MRR": {
+      "expected": 0.6297077493524843,
+      "actual": 0.6297077493524843,
+      "absolute_delta": 0.0,
+      "tolerance": 1e-12,
+      "match": true
+    }
+  },
+  "status": "PASS",
+  "variable_runs_completed": 0,
+  "H25_runs_executed": 0,
+  "H50_runs_executed": 0,
+  "H75_runs_executed": 0,
+  "EXP11A_VARIABLE_RUNS_EXECUTED": 0
+}

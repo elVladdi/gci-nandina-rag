@@ -1,0 +1,62 @@
+{
+  "artifact_type": "EXP11A_RESULTS_FREEZE_MANIFEST_V0_1",
+  "freeze_status": "EXTERNAL_AUDIT_APPROVED_FOR_VERSIONING",
+  "execution_commit": "22b18cdc743b4b0f37b8b345215fb747d614d6eb",
+  "external_audit_result": "APPROVED",
+  "execution_complete": true,
+  "variable_runs": 30,
+  "H25": 10,
+  "H50": 10,
+  "H75": 10,
+  "H50_D1": 5,
+  "H50_D2": 5,
+  "H100_gate": "PASS",
+  "case_level_rows": 32736,
+  "hash_inventory_entries": 75,
+  "hash_mismatches": 0,
+  "post_execution_tests": "13/13",
+  "full_suite": "270/270",
+  "scientific_interpretation": "DESCRIPTIVE_ONLY_PENDING_GROUP3",
+  "isolated_size_causal_effect_claim_allowed": false,
+  "new_historical_gate_status": "READY_AFTER_EXP11A_FREEZE",
+  "reconciliation": {
+    "classification": "TRANSIENT_OBSERVATION_WHILE_PROCESS_CONTINUED",
+    "final_state": "30_of_30_variable_runs",
+    "F003_created": false,
+    "rerun_performed": false,
+    "resume_performed": false,
+    "scientific_outputs_modified_during_reconciliation": false
+  },
+  "versioning_scope": {
+    "versioned_artifact_count": 47,
+    "authorized_classifications": [
+      "EXECUTION_AUDIT",
+      "FREEZE_METADATA",
+      "POST_EXECUTION_RECONCILIATION",
+      "RUN_PROVENANCE",
+      "SCIENTIFIC_RESULT"
+    ],
+    "conditions": {
+      "versioned": false,
+      "classification": "DERIVED_REGENERABLE_NOT_VERSIONED",
+      "path_glob": "conditions/*.csv",
+      "reason": "Deterministically derived from frozen H100, evidence v0.2, and frozen DAM lists; digests remain in the original output inventory, run JSON, and execution manifest."
+    },
+    "attempt_outputs_versioned": false,
+    "versioned_paths_in_freeze_hash_inventory": "audit/exp11a_results_freeze_hashes_v0.1.csv"
+  },
+  "scientific_status": {
+    "EXP11A_EXECUTION": "APPROVED",
+    "EXP11A_RESULTS_INTEGRITY": "APPROVED",
+    "EXP11A_RESULTS_VERSIONED_CANDIDATE": true,
+    "EXP11A_HYPOTHESIS_INTERPRETATION": "PENDING_GROUP3",
+    "HE2_DECISION_MADE": false,
+    "HE5_DECISION_MADE": false,
+    "NEW_HISTORICAL_GATE_TRIGGER_REACHED": true,
+    "NEW_HISTORICAL_DATA_PROCESSED": false,
+    "EXCEL_MODIFIED": false,
+    "EXP11B_AUTHORIZED": false,
+    "EXP12_AUTHORIZED": false,
+    "GROUP3_STARTED": false
+  }
+}
