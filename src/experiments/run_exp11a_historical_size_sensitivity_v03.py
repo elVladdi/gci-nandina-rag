@@ -490,6 +490,53 @@ def _frozen_h100_pass(metrics: Mapping[str, Any], frozen_metrics: Mapping[str, A
     return {"status": "PASS" if passed else "FAILED", "comparisons": comparisons}
 
 
+def _persist_execution_start(path: Path, execution_commit: str, started: datetime, mode: str, attempt_start_key: str | None = None, attempt_id: str | None = None) -> None:
+    payload: dict[str, Any] = {
+        "execution_commit": execution_commit,
+        "timestamp_start_utc": started.isoformat(),
+        "mode": mode,
+        "EXP11_RETRIEVAL_STARTED": True,
+        "variable_runs_completed": 0,
+    }
+    if attempt_start_key:
+        payload[attempt_start_key] = started.isoformat()
+    if attempt_id:
+        payload["attempt_id"] = attempt_id
+    _write_json(path, payload)
+
+
+def _persist_h100_gate_audit(
+    path: Path,
+    attempt_id: str,
+    execution_commit: str,
+    started: datetime,
+    ended: datetime,
+    frozen_reference: Mapping[str, Any],
+    actual_metrics: Mapping[str, Any],
+    comparison: Mapping[str, Any],
+) -> dict[str, Any]:
+    audit = {
+        "attempt_id": attempt_id,
+        "execution_commit": execution_commit,
+        "timestamp_start_utc": started.isoformat(),
+        "timestamp_end_utc": ended.isoformat(),
+        "timestamp_h100_end_utc": ended.isoformat(),
+        "frozen_reference_path": frozen_reference["path"],
+        "frozen_reference_git_base": frozen_reference["git_base"],
+        "frozen": frozen_reference["metrics"],
+        "actual": _actual_h100_metrics(actual_metrics),
+        "comparison": comparison["comparisons"],
+        "status": comparison["status"],
+        "variable_runs_completed": 0,
+        "H25_runs_executed": 0,
+        "H50_runs_executed": 0,
+        "H75_runs_executed": 0,
+        "EXP11A_VARIABLE_RUNS_EXECUTED": 0,
+    }
+    _write_json(path, audit)
+    return audit
+
+
 def build_preflight(root: Path, config_path: Path, evidence_path: Path, gate_path: Path, historical_path: Path, eval_path: Path, output_dir: Path) -> dict[str, Any]:
     config = _read_json(config_path)
     evidence = _read_json(evidence_path)
@@ -572,15 +619,13 @@ def run_h100_check_only(preflight: Mapping[str, Any], root: Path, historical_pat
     for name in ("conditions", "runs", "logs", "audit"):
         (output_dir / name).mkdir()
     started = datetime.now(timezone.utc)
-    _write_json(
+    _persist_execution_start(
         output_dir / "audit" / "attempt02_start.json",
-        {
-            "attempt_id": "H100_ATTEMPT_02",
-            "execution_commit": preflight["git"]["commit"],
-            "EXP11A_H100_ATTEMPT_02_STARTED_AT": started.isoformat(),
-            "EXP11_RETRIEVAL_STARTED": True,
-            "variable_runs_executed": 0,
-        },
+        preflight["git"]["commit"],
+        started,
+        "H100_CHECK_ONLY",
+        "EXP11A_H100_ATTEMPT_02_STARTED_AT",
+        "H100_ATTEMPT_02",
     )
     frozen_reference = _load_frozen_h100_reference(root)
     historical_rows = historical._read_csv(historical_path)
@@ -593,23 +638,16 @@ def run_h100_check_only(preflight: Mapping[str, Any], root: Path, historical_pat
     actual_metrics, _case_rows = _run_bm25(h100_spec, subset, eval_rows)
     comparison = _frozen_h100_pass(actual_metrics, frozen_reference["metrics"])
     ended = datetime.now(timezone.utc)
-    audit = {
-        "attempt_id": "H100_ATTEMPT_02",
-        "execution_commit": preflight["git"]["commit"],
-        "timestamp_start_utc": started.isoformat(),
-        "timestamp_end_utc": ended.isoformat(),
-        "frozen_reference_path": frozen_reference["path"],
-        "frozen_reference_git_base": frozen_reference["git_base"],
-        "frozen": frozen_reference["metrics"],
-        "actual": _actual_h100_metrics(actual_metrics),
-        "comparison": comparison["comparisons"],
-        "status": comparison["status"],
-        "H25_runs_executed": 0,
-        "H50_runs_executed": 0,
-        "H75_runs_executed": 0,
-        "EXP11A_VARIABLE_RUNS_EXECUTED": 0,
-    }
-    _write_json(output_dir / "audit" / "h100_validity_check.json", audit)
+    audit = _persist_h100_gate_audit(
+        output_dir / "audit" / "h100_validity_check.json",
+        "H100_ATTEMPT_02",
+        preflight["git"]["commit"],
+        started,
+        ended,
+        frozen_reference,
+        actual_metrics,
+        comparison,
+    )
     _write_text(
         output_dir / "logs" / "exp11_execution_log.txt",
         "\n".join((
@@ -630,6 +668,12 @@ def execute(preflight: Mapping[str, Any], root: Path, historical_path: Path, eva
     for name in ("conditions", "runs", "logs", "audit"):
         (output_dir / name).mkdir()
     started = datetime.now(timezone.utc)
+    _persist_execution_start(
+        output_dir / "audit" / "full_execution_start.json",
+        preflight["git"]["commit"],
+        started,
+        "FULL_EXECUTION",
+    )
     historical_rows = historical._read_csv(historical_path)
     eval_rows = historical._read_csv(eval_path)
     evidence = _read_json(evidence_path)
@@ -657,6 +701,16 @@ def execute(preflight: Mapping[str, Any], root: Path, historical_path: Path, eva
         result_metrics, result_cases = _run_bm25(spec, subset, eval_rows)
         if spec["condition_id"] == "H100":
             h100_check = _frozen_h100_pass(result_metrics, frozen_h100_reference["metrics"])
+            _persist_h100_gate_audit(
+                output_dir / "audit" / "h100_full_execution_validity_check.json",
+                "FULL_EXECUTION_H100_GATE",
+                preflight["git"]["commit"],
+                started,
+                datetime.now(timezone.utc),
+                frozen_h100_reference,
+                result_metrics,
+                h100_check,
+            )
             _require(h100_check["status"] == "PASS", "EXP11A_VALIDITY_GATE = FAILED: H100 re-executed check differs from frozen baseline")
             result_metrics["h100_reexecuted_check"] = "PASS"
         else:

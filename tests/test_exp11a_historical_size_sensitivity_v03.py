@@ -19,6 +19,7 @@ from src.experiments.run_exp11a_historical_size_sensitivity_v03 import (
     _source_by_dam,
     _subset_rows,
     _validate_execution_contract,
+    execute,
     load_frozen_run_specs,
     run_h100_check_only,
 )
@@ -115,6 +116,37 @@ class TestExp11aHistoricalSizeSensitivityV03(unittest.TestCase):
             self.assertEqual(audit["status"], "FAILED")
             self.assertEqual(audit["H25_runs_executed"], 0)
             self.assertTrue((output / "audit" / "attempt02_start.json").is_file())
+
+    def test_full_execution_h100_failure_persists_before_raise(self) -> None:
+        bad_metrics = {"Top1_correct_count": 537, "Top3_correct_count": 709, "Top5_correct_count": 806, "Top10_correct_count": 941, "Top50_correct_count": 1047, "MRR": 0.6297077493524843}
+        preflight = {"status": "PASS", "git": {"commit": "test-commit"}, "frozen_execution_order": ["H100_REEXECUTED_CHECK"]}
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "full-execution"
+            with patch("src.experiments.run_exp11a_historical_size_sensitivity_v03._run_bm25", return_value=(bad_metrics, [])) as run_bm25:
+                with self.assertRaisesRegex(ValueError, "EXP11A_VALIDITY_GATE = FAILED"):
+                    execute(preflight, ROOT, self.historical_path, self.eval_path, AUDIT / "exp11_independent_condition_feasibility_v0.2.json", output)
+            audit = json.loads((output / "audit" / "h100_full_execution_validity_check.json").read_text(encoding="utf-8"))
+            self.assertEqual(audit["status"], "FAILED")
+            self.assertEqual(audit["variable_runs_completed"], 0)
+            run_bm25.assert_called_once()
+            self.assertEqual([path.name for path in (output / "conditions").iterdir()], ["H100_REEXECUTED_CHECK.csv"])
+            self.assertEqual(list((output / "runs").iterdir()), [])
+
+    def test_full_execution_h100_pass_persists_before_continuation(self) -> None:
+        frozen = _load_frozen_h100_reference(ROOT)["metrics"]
+        valid_metrics = {"Top1_correct_count": frozen["Top1_count"], "Top3_correct_count": frozen["Top3_count"], "Top5_correct_count": frozen["Top5_count"], "Top10_correct_count": frozen["Top10_count"], "Top50_correct_count": frozen["Top50_count"], "MRR": frozen["MRR"]}
+        preflight = {"status": "PASS", "git": {"commit": "test-commit"}, "frozen_execution_order": ["H100_REEXECUTED_CHECK"]}
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "full-execution"
+            with patch("src.experiments.run_exp11a_historical_size_sensitivity_v03._run_bm25", return_value=(valid_metrics, [])) as run_bm25:
+                with patch("src.experiments.run_exp11a_historical_size_sensitivity_v03._duplicate_audit", side_effect=RuntimeError("STOP_AFTER_H100_GATE")):
+                    with self.assertRaisesRegex(RuntimeError, "STOP_AFTER_H100_GATE"):
+                        execute(preflight, ROOT, self.historical_path, self.eval_path, AUDIT / "exp11_independent_condition_feasibility_v0.2.json", output)
+            audit = json.loads((output / "audit" / "h100_full_execution_validity_check.json").read_text(encoding="utf-8"))
+            self.assertEqual(audit["status"], "PASS")
+            self.assertEqual(audit["variable_runs_completed"], 0)
+            run_bm25.assert_called_once()
+            self.assertTrue((output / "audit" / "full_execution_start.json").is_file())
 
     def test_git_status_parser_preserves_permitted_path_with_spaces(self) -> None:
         status = "?? data/Series - Descripciones.xlsx\0?? Referencias/Antecedentes/\0"
