@@ -21,7 +21,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — EXP11B Bank Materialization microclose `95ffec45` aprobado externamente; integración a main pendiente; retrieval bloqueado** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — EXP11B Bank Materialization CLOSED e integrado en `main` (`95ffec45`); reproducción post-push 20/20 y suite 368/368; solo limpieza local de worktree pendiente, no científica** |
 | 3. Métricas e inferencia | Pendiente |
 | 4–8 | Pendientes |
 
@@ -55,68 +55,84 @@
 
 ## 6. EXP11B Bank Materialization Gate
 
-Rama: `codex/exp11b-bank-materialization-v01`  
-Candidato inicial: `7a80b1db657386705d3031559c2861d0a2f88eb2`  
-Microclose: `95ffec45ae5a734545ae7bb2d8d530f42f8f056c`  
-Base/main: `ed470d67315f505cb3bde471177268db6d16a676`.
+**CLOSED / APPROVED / INTEGRATED TO MAIN.**
 
-**AUDITORÍA EXTERNA DEL MICROCLOSE: APPROVED_FOR_MAIN_INTEGRATION.**
+Cadena:
 
-### Materialización validada
+1. `7a80b1db657386705d3031559c2861d0a2f88eb2` — materialización y freeze de las 20 identidades de banco.
+2. `95ffec45ae5a734545ae7bb2d8d530f42f8f056c` — procedencia DEV/EVAL, portabilidad float y verificación fail-closed del ledger.
 
-- 10 bancos H150 + 10 bancos H200.
-- H100 core 20/20 PASS.
-- selección Gate03 20/20 PASS.
-- descriptores 20/20 PASS.
-- nesting 10/10 PASS.
-- Los 20 CSV canónicos no se versionan en Git; son derivados deterministas.
-- Clean checkout reproduce 20/20 byte exacto.
-- Los 20 bank SHA, tamaños, filas, composition SHA y hashes de orden de IDs permanecen idénticos al candidato inicial `7a80b1d`.
-- `retrieval_executed=false`; `evaluation_metrics_computed=false`.
+Estado remoto verificado:
 
-### Microclose F001–F003
+`main = origin/main = 95ffec45ae5a734545ae7bb2d8d530f42f8f056c`.
 
-- `EXP11B-MAT-F001=VERIFIED_RESOLVED`.
-  - DEV y EVAL quedan pinneados por SHA y row count.
-  - El materializer falla si cualquiera cambia.
-  - El manifest registra SHA esperado y observado para ambos.
+### Materialización congelada
 
-- `EXP11B-MAT-F002=VERIFIED_RESOLVED`.
-  - Diferencia float observada en Python 3.12.13: `2.7755575615628914e-17` (1 ULP).
-  - Política explícita: `rel_tol=0`, `abs_tol=1e-12`.
-  - Gate03 30/30 PASS.
-  - Planner, feasibility, selección y bancos no cambian.
+- 10 H150 + 10 H200.
+- H100 core: 20/20 PASS.
+- selección Gate03: 20/20 PASS.
+- descriptores: 20/20 PASS.
+- nesting: 10/10 PASS.
+- Los 20 CSV no se versionan en Git; son derivados deterministas regenerables.
+- Bank identities, manifest y ledger sí están congelados.
+- Los 20 bank SHA, tamaños, filas, composition SHA y hashes de orden de IDs permanecen fijos.
 
-- `EXP11B-MAT-F003=VERIFIED_RESOLVED`.
-  - `--verify` compara campo a campo las 14 columnas del ledger por bank_id.
-  - Pruebas de corrupción son fail-closed.
+### Findings cerrados
 
-### Reconciliación de tests
+- `EXP11B-MAT-F001=VERIFIED_RESOLVED`: DEV/EVAL pinneados por SHA y row count y registrados con SHA esperado/observado.
+- `EXP11B-MAT-F002=VERIFIED_RESOLVED`: política float `rel_tol=0`, `abs_tol=1e-12`; diferencia observada 1 ULP en Python 3.12.13 sin cambio científico.
+- `EXP11B-MAT-F003=VERIFIED_RESOLVED`: `--verify` compara las 14 columnas del ledger por bank_id y falla ante corrupción.
 
-Mismo runtime Python 3.12.13:
+### Validación final post-push
 
-- base `ed470d6`: 326 tests; único fallo = comparación float exacta documentada;
-- candidato corregido: 368/368;
-- Gate02: 27/27;
-- Gate03: 30/30;
-- materialización: 41/41.
+- Gate02: 27/27.
+- Gate03: 30/30.
+- Materialization: 41/41.
+- Suite completa: 368/368.
+- Clean checkout post-push: PASS.
+- Rematerialización temporal: **20/20 byte exacta, 0 discrepancias**.
+- `retrieval_executed=false`.
+- `evaluation_metrics_computed=false`.
 
-Formal `--verify`: PASS.
+Flags:
 
-### Estado
-
-- `EXP11B_BANK_MATERIALIZATION_MICROCLOSE=APPROVED_FOR_MAIN_INTEGRATION`.
-- `BANK_IDENTITIES_UNCHANGED=true`.
+- `EXP11B_BANK_MATERIALIZATION_STATUS=CLOSED`.
+- `BANK_MATERIALIZATION_IN_MAIN=true`.
+- `BANK_IDENTITIES_FROZEN=true`.
 - `BANK_IDENTITIES_MATCH=20/20`.
-- `BANKS_BYTE_REPRODUCIBLE=20/20`.
-- `RETRIEVAL_EXECUTED=false`.
+- `BANKS_BYTE_REPRODUCIBLE=true`.
+- `H100_CORE_MATCH_ALL=true`.
+- `SELECTION_MATCH_ALL=true`.
+- `DESCRIPTORS_MATCH_ALL=true`.
+- `NESTING_MATCH_ALL=true`.
 - `EXP11B_RETRIEVAL_AUTHORIZED=false`.
 - `EXP12_AUTHORIZED=false`.
 - `GROUP3_STARTED=false`.
 
-**Siguiente paso:** integrar `95ffec45ae5a734545ae7bb2d8d530f42f8f056c` por fast-forward a `main`, validar post-integración y rematerializar temporalmente 20/20. Solo después de ese cierre puede abrirse el gate de ejecución EXP-11B retrieval.
+### Limpieza local pendiente
 
-## 7. Orden maestro
+Codex dejó comprobado que el worktree post-push estaba limpio. Solo falta retirarlo con `git worktree remove <ruta>` y ejecutar `git worktree prune`, sin `--force`. Esta tarea es **operativa y no científica**; no bloquea el cierre del gate. Si Windows conserva metadatos huérfanos por permisos pero el worktree ya no aparece en `git worktree list`, se registra como limitación local no científica.
+
+## 7. Próximo hito científico — EXP11B Retrieval Execution Gate
+
+Antes de ejecutar BM25 debe congelarse prospectivamente:
+
+- commit integrado `95ffec45...`;
+- SHA del manifest de materialización;
+- SHA del ledger de los 20 bancos;
+- los 20 bank SHA;
+- EVAL SHA;
+- configuración BM25 exacta;
+- normalización/tokenización;
+- valores k;
+- outputs y manifest esperados;
+- ejecución única/fail-closed;
+- denominador primario `N=1056`;
+- common-clean solo como sensibilidad complementaria.
+
+`EXP11B_RETRIEVAL_AUTHORIZED=false` hasta que ese gate sea auditado externamente.
+
+## 8. Orden maestro
 
 ```text
 Grupo 1 ✅
@@ -129,13 +145,13 @@ Gate 02 ✅
   ↓
 Real Ingest 01 ✅
   ↓
-Gate 03 ✅ CLOSED / INTEGRATED ed470d6
+Gate 03 ✅
   ↓
-EXP11B Bank Materialization 7a80b1d + microclose 95ffec45 ✅ auditoría externa
+EXP11B Bank Materialization ✅ CLOSED / INTEGRATED 95ffec45
   ↓
-Integración fast-forward a main ⏳
+EXP11B Retrieval Execution Gate ⏳
   ↓
-EXP-11B retrieval gate
+EXP-11B retrieval
   ↓
 EXP-12
   ↓
