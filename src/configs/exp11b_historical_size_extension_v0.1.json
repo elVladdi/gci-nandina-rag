@@ -1,0 +1,89 @@
+{
+  "experiment_id": "EXP-11B",
+  "version": "v0.1",
+  "contract_status": "NEW_HISTORICAL_GATE_03_PROSPECTIVE_DESIGN_ONLY",
+  "execution_authorized": false,
+  "retrieval_executed": false,
+  "banks_materialized": false,
+  "source_branch": "codex/new-historical-gate-expanded-pool-v01",
+  "frozen_datasets": {
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "rows": 2950
+    },
+    "DEV": {
+      "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+      "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00"
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "primary_denominator": 1056
+    }
+  },
+  "real_ingest_01": {
+    "eligible_path": "data/interim/new_historical_gate_v0.1/new_historical_eligible.csv",
+    "eligible_sha256": "a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4",
+    "eligible_rows": 6029,
+    "eligible_dams": 43,
+    "workbook_sha256": "087efd97cb17fd166c2e7eb5089690577491e99ab5d415f9e3a8614923ee4ba3"
+  },
+  "selection": {
+    "namespace": "EXP11B",
+    "selection_unit": "DAM",
+    "preserve_complete_dams": true,
+    "algorithm": "sha256_seeded_nested_complete_dam_prefix",
+    "algorithm_description": "Order DAM identifiers by SHA-256(seed:EXP11B:dam), choose each target prefix by minimum absolute new-row deviation, then fewer DAM and SHA-256(sorted DAM ids).",
+    "allowed_selection_inputs": ["DAM identifier", "row count per DAM", "seed", "namespace"],
+    "uses_nandina_for_selection": false,
+    "uses_description_for_selection": false,
+    "uses_eval_labels_for_selection": false,
+    "uses_eval_performance_for_selection": false,
+    "uses_duplicates_for_selection": false
+  },
+  "replicate_policy": {
+    "seed_stream_start": 20261001,
+    "seed_increment": 1,
+    "max_seed_candidates": 100000,
+    "accepted_replicates": 10,
+    "acceptance_policy": "Accept the first ten seeds that satisfy both tolerances, strict H150 subset H200 nesting, and unique H150, H200, and pair composition SHA-256 values."
+  },
+  "conditions": {
+    "H100": {
+      "frozen_rows": 2950,
+      "materialized": true
+    },
+    "H150": {
+      "target_total_rows": 4425,
+      "target_new_rows": 1475,
+      "materialized": false
+    },
+    "H200": {
+      "target_total_rows": 5900,
+      "target_new_rows": 2950,
+      "materialized": false
+    }
+  },
+  "feasibility_contract": {
+    "max_abs_new_row_deviation": 148,
+    "require_h150_strict_subset_h200": true,
+    "fail_closed": true
+  },
+  "common_clean_mask": {
+    "purpose": "Sensitivity-only duplicate and near-duplicate exposure against H100 plus all eligible new history.",
+    "primary_eval_denominator": 1056,
+    "thresholds": [0.9, 0.95, 0.98],
+    "affects_selection": false,
+    "affects_primary_denominator": false
+  },
+  "prohibitions": {
+    "execute_retrieval": false,
+    "materialize_h150": false,
+    "materialize_h200": false,
+    "run_exp11b": false,
+    "run_exp12": false,
+    "modify_excel": false,
+    "ingest_nueva_02": false
+  }
+}

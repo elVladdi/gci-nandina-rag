@@ -1,0 +1,93 @@
+{
+  "H150_materialized": false,
+  "H200_materialized": false,
+  "direct_h100_new_dam_overlap": [],
+  "direct_h100_new_dam_overlap_count": 0,
+  "frozen_data_changed": false,
+  "frozen_datasets": {
+    "DEV": {
+      "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+      "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+      "size_bytes": 135082
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "size_bytes": 1363273
+    },
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "size_bytes": 3462862
+    }
+  },
+  "gate": "NEW_HISTORICAL_GATE_03",
+  "real_ingest_artifacts": [
+    {
+      "path": "data/interim/new_historical_gate_v0.1/new_historical_normalized_all.csv",
+      "sha256": "f9f052f14b8dcb7623269bc1a3c2e2821ad45bbc267d3f408bb67b7ce71732a9",
+      "size_bytes": 19541716
+    },
+    {
+      "path": "data/interim/new_historical_gate_v0.1/new_historical_curated.csv",
+      "sha256": "8bb49e9d5fcc28dc4a7335ab737f937be999f1c4066d9c6bc8b01d85bee3b54f",
+      "size_bytes": 7552564
+    },
+    {
+      "path": "data/interim/new_historical_gate_v0.1/new_historical_eligible.csv",
+      "sha256": "a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4",
+      "size_bytes": 7661163
+    },
+    {
+      "path": "outputs/audits/new_historical_gate_v0.1/new_historical_exclusions.csv",
+      "sha256": "a3ab12880ce02422f61fe98d1ec7256a19719c7f5751159d5020b58e8c5b0d96",
+      "size_bytes": 19
+    },
+    {
+      "path": "outputs/audits/new_historical_gate_v0.1/new_historical_frozen_overlap_audit.csv",
+      "sha256": "a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4",
+      "size_bytes": 7661163
+    },
+    {
+      "path": "outputs/audits/new_historical_gate_v0.1/new_historical_duplicate_nearduplicate_audit.csv",
+      "sha256": "8359e69ed3da45148cb22638fe5923549b33ad5bc7c7054a60c15450c1513a4a",
+      "size_bytes": 4865082
+    },
+    {
+      "path": "outputs/audits/new_historical_gate_v0.1/new_historical_ingestion_manifest.json",
+      "sha256": "3b555bbbadb23d33d574683db7a467d302c12a626a3a0832f46d3ee23be756ac",
+      "size_bytes": 4142
+    },
+    {
+      "path": "outputs/audits/new_historical_gate_v0.1/new_historical_artifact_hashes.csv",
+      "sha256": "f372f76ddfa70948d290ab823c2ef70c21595771a245fa8741650e4a389c8a29",
+      "size_bytes": 1641
+    }
+  ],
+  "real_ingest_counts": {
+    "rows_after_new_data_duplicate_policy": 6029,
+    "rows_class_87": 6029,
+    "rows_excluded_fixed_dev_eval_dam": 0,
+    "rows_final_eligible": 6029,
+    "rows_parsed": 15596,
+    "rows_quality_eligible": 6029,
+    "rows_with_frozen_id_overlap": 0,
+    "unique_dam_final_eligible": 43,
+    "unique_nandina_final_eligible": 56
+  },
+  "real_ingest_regenerated": false,
+  "retrieval_executed": false,
+  "source_execution_commit": "ad4c630a6a4d442776740b59b9552ba72141ea48",
+  "status": "REAL_INGEST_01_FROZEN_FOR_PROSPECTIVE_EXP11B_DESIGN",
+  "version": "v0.1",
+  "workbook": {
+    "path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA_source_archive\\Series - Descripciones_EXPANDED_NUEVA_01_SOURCE_087efd97.xlsx",
+    "sha256": "087efd97cb17fd166c2e7eb5089690577491e99ab5d415f9e3a8614923ee4ba3",
+    "sheet_order": [
+      "Hoja2",
+      "Hoja1",
+      "NUEVA_01"
+    ],
+    "size_bytes": 16060154
+  }
+}

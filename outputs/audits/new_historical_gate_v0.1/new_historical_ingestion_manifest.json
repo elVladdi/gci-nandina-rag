@@ -1,0 +1,93 @@
+{
+  "capacity": {
+    "H100_rows": 2950,
+    "H150_FEASIBLE": true,
+    "H150_target": 4425,
+    "H200_FEASIBLE": true,
+    "H200_target": 5900,
+    "minimum_net_new_eligible_rows_for_H150": 1475,
+    "minimum_net_new_eligible_rows_for_H200": 2950
+  },
+  "counts": {
+    "rows_after_new_data_duplicate_policy": 6029,
+    "rows_class_87": 6029,
+    "rows_excluded_fixed_dev_eval_dam": 0,
+    "rows_final_eligible": 6029,
+    "rows_parsed": 15596,
+    "rows_quality_eligible": 6029,
+    "rows_with_frozen_id_overlap": 0,
+    "unique_dam_final_eligible": 43,
+    "unique_nandina_final_eligible": 56
+  },
+  "creates_H150_or_H200": false,
+  "curation": {
+    "duplicate_audit_rows": [],
+    "duplicate_policy": {
+      "conflict_duplicate_groups": 0,
+      "conflict_duplicate_rows_excluded": 0,
+      "exact_duplicate_groups": 0,
+      "exact_duplicate_rows_excluded": 0,
+      "key": "id_unico",
+      "policy": "Los id_unico duplicados exactos se colapsan conservando la primera aparicion estable; los id_unico conflictivos se excluyen completos."
+    },
+    "excluded_by_fields_or_quality": {},
+    "excluded_duplicate_rows": 0,
+    "excluded_quality_rows": 0,
+    "rows_after_inclusion_quality_rules": 6029,
+    "rows_curated_after_duplicate_policy": 6029,
+    "source_rows_scope_class": 6029,
+    "source_rows_total": 15596
+  },
+  "execution_commit": "ad4c630a6a4d442776740b59b9552ba72141ea48",
+  "frozen_datasets": {
+    "DEV": {
+      "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+      "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+      "size_bytes": 135082
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "size_bytes": 1363273
+    },
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "size_bytes": 3462862
+    }
+  },
+  "gate": "NEW_HISTORICAL_GATE_02",
+  "model_metric_selection_used": false,
+  "new_sheets_requested": [
+    "NUEVA_01"
+  ],
+  "outputs": {
+    "curated": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\data\\interim\\new_historical_gate_v0.1\\new_historical_curated.csv",
+    "duplicate_nearduplicate": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\outputs\\audits\\new_historical_gate_v0.1\\new_historical_duplicate_nearduplicate_audit.csv",
+    "eligible": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\data\\interim\\new_historical_gate_v0.1\\new_historical_eligible.csv",
+    "exclusions": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\outputs\\audits\\new_historical_gate_v0.1\\new_historical_exclusions.csv",
+    "frozen_overlap": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\outputs\\audits\\new_historical_gate_v0.1\\new_historical_frozen_overlap_audit.csv",
+    "manifest": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\outputs\\audits\\new_historical_gate_v0.1\\new_historical_ingestion_manifest.json",
+    "normalized_all": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\data\\interim\\new_historical_gate_v0.1\\new_historical_normalized_all.csv"
+  },
+  "parser": {
+    "explicit_sheet_selection": true,
+    "module": "src.ingestion.sunat_series_parser",
+    "rows_by_sheet": {
+      "NUEVA_01": 15596
+    }
+  },
+  "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "retrieval_executed": false,
+  "version": "v0.1",
+  "workbook": {
+    "path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA_source_archive\\Series - Descripciones_EXPANDED_NUEVA_01_SOURCE_087efd97.xlsx",
+    "sha256": "087efd97cb17fd166c2e7eb5089690577491e99ab5d415f9e3a8614923ee4ba3",
+    "sheet_order": [
+      "Hoja2",
+      "Hoja1",
+      "NUEVA_01"
+    ],
+    "size_bytes": 16060154
+  }
+}
