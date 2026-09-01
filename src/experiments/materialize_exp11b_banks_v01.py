@@ -20,6 +20,22 @@ CONFIG_PATH = Path("src/configs/exp11b_bank_materialization_v0.1.json")
 ID = "id_unico"
 DAM = "DECLARACION"
 NANDINA = "NANDINA"
+HASH_INVENTORY_FIELDS = (
+    "bank_id",
+    "filename",
+    "seed",
+    "condition",
+    "row_count",
+    "new_row_count",
+    "total_dam_count",
+    "new_dam_count",
+    "bank_csv_sha256",
+    "size_bytes",
+    "composition_sha256",
+    "H100_core_id_order_sha256",
+    "increment_id_order_sha256",
+    "total_bank_id_order_sha256",
+)
 
 
 class ContractViolation(RuntimeError):
@@ -202,8 +218,12 @@ def load_inputs(root: Path, config_path: Path | None = None) -> MaterializationI
     h100_codes = {row[NANDINA].strip() for row in h100.rows if row[NANDINA].strip()}
     if len(h100_codes) != h100_spec["nandina"]:
         raise ContractViolation("H100 NANDINA count mismatch")
-    dev = read_dataset(resolve(root, config["inputs"]["DEV"]["path"]))
-    evalset = read_dataset(resolve(root, config["inputs"]["EVAL"]["path"]))
+    dev_spec = config["inputs"]["DEV"]
+    eval_spec = config["inputs"]["EVAL"]
+    dev = validate_file_contract(resolve(root, dev_spec["path"]), dev_spec["sha256"], dev_spec["rows"], "DEV")
+    evalset = validate_file_contract(
+        resolve(root, eval_spec["path"]), eval_spec["sha256"], eval_spec["rows"], "EVAL"
+    )
     require_columns(dev, (DAM,), "DEV")
     require_columns(evalset, (DAM,), "EVAL")
     return MaterializationInputs(h100, new_eligible, dev, evalset, feasibility, config)
@@ -478,6 +498,8 @@ def manifest_payload(
         "banks_materialized": True,
         "banks_versioned_in_git": False,
         "banks_regenerable_from_versioned_inputs": True,
+        "bank_identity_source": "BASELINE_7A80B1D_UNCHANGED",
+        "bank_csvs_rewritten": False,
         "retrieval_executed": False,
         "evaluation_metrics_computed": False,
         "bank_row_order_policy": inputs.config["bank_row_order_policy"],
@@ -491,6 +513,14 @@ def manifest_payload(
             "NEW_ELIGIBLE": {
                 **inputs.config["inputs"]["NEW_ELIGIBLE"],
                 "observed_sha256": sha256_file(inputs.new_eligible.path),
+            },
+            "DEV": {
+                **inputs.config["inputs"]["DEV"],
+                "observed_sha256": sha256_file(inputs.dev.path),
+            },
+            "EVAL": {
+                **inputs.config["inputs"]["EVAL"],
+                "observed_sha256": sha256_file(inputs.eval.path),
             },
             "feasibility": {
                 **inputs.config["feasibility"],
@@ -515,12 +545,12 @@ def write_audits(audit_dir: Path, config: Mapping[str, Any], manifest: Mapping[s
     manifest_path = audit_dir / output["manifest_filename"]
     hashes_path = audit_dir / output["hashes_filename"]
     manifest_path.write_text(canonical_json(manifest), encoding="utf-8", newline="\n")
-    fields = [
-        "bank_id", "filename", "seed", "condition", "row_count", "new_row_count", "total_dam_count", "new_dam_count",
-        "bank_csv_sha256", "size_bytes", "composition_sha256", "H100_core_id_order_sha256",
-        "increment_id_order_sha256", "total_bank_id_order_sha256",
-    ]
-    hashes_path.write_bytes(serialize_csv(fields, ({field: entry[field] for field in fields} for entry in manifest["banks"])))
+    hashes_path.write_bytes(
+        serialize_csv(
+            HASH_INVENTORY_FIELDS,
+            ({field: entry[field] for field in HASH_INVENTORY_FIELDS} for entry in manifest["banks"]),
+        )
+    )
     return manifest_path, hashes_path
 
 
@@ -544,6 +574,41 @@ def compare_manifest_identities(actual: Mapping[str, Any], expected: Mapping[str
         for field in fields:
             if actual_by_id[bank_id].get(field) != expected_by_id[bank_id].get(field):
                 raise ContractViolation(f"Frozen manifest mismatch for {bank_id}: {field}")
+
+
+def validate_manifest_dev_eval_provenance(
+    manifest: Mapping[str, Any], reconstructed: Mapping[str, Any]
+) -> None:
+    manifest_inputs = manifest.get("inputs")
+    reconstructed_inputs = reconstructed.get("inputs")
+    if not isinstance(manifest_inputs, Mapping) or not isinstance(reconstructed_inputs, Mapping):
+        raise ContractViolation("Manifest lacks input provenance")
+    for label in ("DEV", "EVAL"):
+        actual = manifest_inputs.get(label)
+        expected = reconstructed_inputs.get(label)
+        if not isinstance(actual, Mapping) or not isinstance(expected, Mapping):
+            raise ContractViolation(f"Manifest lacks {label} provenance")
+        for field in ("path", "sha256", "observed_sha256", "rows"):
+            if actual.get(field) != expected.get(field):
+                raise ContractViolation(f"Manifest {label} provenance mismatch: {field}")
+        if actual["sha256"] != actual["observed_sha256"]:
+            raise ContractViolation(f"Manifest {label} observed SHA-256 mismatch")
+
+
+def validate_hash_inventory_rows(
+    hash_rows: Iterable[Mapping[str, str]], entries: Iterable[Mapping[str, Any]]
+) -> None:
+    rows = list(hash_rows)
+    expected_entries = list(entries)
+    expected_by_id = {entry["bank_id"]: entry for entry in expected_entries}
+    ids = [row.get("bank_id", "") for row in rows]
+    if len(rows) != len(expected_entries) or len(ids) != len(set(ids)) or set(ids) != set(expected_by_id):
+        raise ContractViolation("Hash audit must contain exactly one row for every bank")
+    for bank_id, expected in expected_by_id.items():
+        actual = next(row for row in rows if row["bank_id"] == bank_id)
+        for field in HASH_INVENTORY_FIELDS:
+            if actual.get(field) != str(expected[field]):
+                raise ContractViolation(f"Hash audit mismatch for {bank_id}: {field}")
 
 
 def materialize(
@@ -603,10 +668,10 @@ def verify(
         root, inputs, entries, manifest["materialization_start_utc"], manifest["materialization_finish_utc"], resolve(root, config_path or CONFIG_PATH)
     )
     compare_manifest_identities(reconstructed, manifest)
+    validate_manifest_dev_eval_provenance(manifest, reconstructed)
     with hashes_path.open(encoding="utf-8", newline="") as handle:
         hash_rows = list(csv.DictReader(handle))
-    if len(hash_rows) != 20 or {row["bank_id"] for row in hash_rows} != {entry["bank_id"] for entry in entries}:
-        raise ContractViolation("Hash audit must contain exactly one row for every bank")
+    validate_hash_inventory_rows(hash_rows, entries)
     if expected_manifest is not None:
         compare_manifest_identities(reconstructed, read_json(expected_manifest))
     return reconstructed

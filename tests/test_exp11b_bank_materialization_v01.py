@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MODULE_PATH = ROOT / "src/experiments/materialize_exp11b_banks_v01.py"
 CONFIG_PATH = ROOT / "src/configs/exp11b_bank_materialization_v0.1.json"
+AUDIT_MANIFEST_PATH = ROOT / "outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_materialization_manifest_v0.1.json"
 SPEC = importlib.util.spec_from_file_location("exp11b_bank_materializer_v01", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 MATERIALIZER = importlib.util.module_from_spec(SPEC)
@@ -54,6 +55,26 @@ class Exp11bBankMaterializationV01Tests(unittest.TestCase):
         path = ROOT / self.config["feasibility"]["path"]
         self.assertNotEqual(MATERIALIZER.sha256_file(path), "0" * 64)
         self.assertEqual(MATERIALIZER.sha256_file(path), self.config["feasibility"]["sha256"])
+
+    def test_05a_dev_sha_mismatch_fails_closed(self) -> None:
+        spec = self.config["inputs"]["DEV"]
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_file_contract(ROOT / spec["path"], "0" * 64, spec["rows"], "DEV")
+
+    def test_05b_eval_sha_mismatch_fails_closed(self) -> None:
+        spec = self.config["inputs"]["EVAL"]
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_file_contract(ROOT / spec["path"], "0" * 64, spec["rows"], "EVAL")
+
+    def test_05c_dev_row_count_mismatch_fails_closed(self) -> None:
+        spec = self.config["inputs"]["DEV"]
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_file_contract(ROOT / spec["path"], spec["sha256"], spec["rows"] - 1, "DEV")
+
+    def test_05d_eval_row_count_mismatch_fails_closed(self) -> None:
+        spec = self.config["inputs"]["EVAL"]
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_file_contract(ROOT / spec["path"], spec["sha256"], spec["rows"] - 1, "EVAL")
 
     def test_06_exactly_ten_frozen_replicates(self) -> None:
         replicates = self.inputs.feasibility["accepted_replicates"]
@@ -199,6 +220,99 @@ class Exp11bBankMaterializationV01Tests(unittest.TestCase):
     def test_28_feasibility_flags_remain_gate03_safe(self) -> None:
         self.assertIs(self.inputs.feasibility["execution_authorized"], False)
         self.assertIs(self.inputs.feasibility["retrieval_executed"], False)
+
+    def test_28a_manifest_pins_dev_and_eval_provenance(self) -> None:
+        manifest = json.loads(AUDIT_MANIFEST_PATH.read_text(encoding="utf-8"))
+        for label in ("DEV", "EVAL"):
+            provenance = manifest["inputs"][label]
+            self.assertEqual(provenance["path"], self.config["inputs"][label]["path"])
+            self.assertEqual(provenance["rows"], self.config["inputs"][label]["rows"])
+            self.assertEqual(provenance["sha256"], provenance["observed_sha256"])
+
+    def test_28b_manifest_dev_eval_provenance_mismatch_fails_closed(self) -> None:
+        expected = {
+            "inputs": {
+                label: {
+                    **self.config["inputs"][label],
+                    "observed_sha256": self.config["inputs"][label]["sha256"],
+                }
+                for label in ("DEV", "EVAL")
+            }
+        }
+        corrupted = copy.deepcopy(expected)
+        corrupted["inputs"]["DEV"]["observed_sha256"] = "0" * 64
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_manifest_dev_eval_provenance(corrupted, expected)
+
+    @staticmethod
+    def _hash_inventory_entry() -> dict[str, object]:
+        return {
+            "bank_id": "EXP11B_R01_H150",
+            "filename": "EXP11B_R01_H150.csv",
+            "seed": 20261005,
+            "condition": "H150",
+            "row_count": 4416,
+            "new_row_count": 1466,
+            "total_dam_count": 42,
+            "new_dam_count": 14,
+            "bank_csv_sha256": "a" * 64,
+            "size_bytes": 123,
+            "composition_sha256": "b" * 64,
+            "H100_core_id_order_sha256": "c" * 64,
+            "increment_id_order_sha256": "d" * 64,
+            "total_bank_id_order_sha256": "e" * 64,
+        }
+
+    @staticmethod
+    def _hash_inventory_row(entry: dict[str, object]) -> dict[str, str]:
+        return {field: str(entry[field]) for field in MATERIALIZER.HASH_INVENTORY_FIELDS}
+
+    def test_29_hash_inventory_bank_sha_corruption_fails_closed(self) -> None:
+        entry = self._hash_inventory_entry()
+        row = self._hash_inventory_row(entry)
+        row["bank_csv_sha256"] = "f" * 64
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_hash_inventory_rows((row,), (entry,))
+
+    def test_30_hash_inventory_size_corruption_fails_closed(self) -> None:
+        entry = self._hash_inventory_entry()
+        row = self._hash_inventory_row(entry)
+        row["size_bytes"] = "999"
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_hash_inventory_rows((row,), (entry,))
+
+    def test_31_hash_inventory_row_count_corruption_fails_closed(self) -> None:
+        entry = self._hash_inventory_entry()
+        row = self._hash_inventory_row(entry)
+        row["row_count"] = "999"
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_hash_inventory_rows((row,), (entry,))
+
+    def test_32_hash_inventory_composition_corruption_fails_closed(self) -> None:
+        entry = self._hash_inventory_entry()
+        row = self._hash_inventory_row(entry)
+        row["composition_sha256"] = "f" * 64
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_hash_inventory_rows((row,), (entry,))
+
+    def test_33_hash_inventory_total_id_order_corruption_fails_closed(self) -> None:
+        entry = self._hash_inventory_entry()
+        row = self._hash_inventory_row(entry)
+        row["total_bank_id_order_sha256"] = "f" * 64
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_hash_inventory_rows((row,), (entry,))
+
+    def test_34_hash_inventory_missing_bank_fails_closed(self) -> None:
+        entry = self._hash_inventory_entry()
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_hash_inventory_rows((), (entry,))
+
+    def test_35_hash_inventory_extra_bank_fails_closed(self) -> None:
+        entry = self._hash_inventory_entry()
+        extra = dict(entry, bank_id="EXP11B_R01_H200")
+        rows = (self._hash_inventory_row(entry), self._hash_inventory_row(extra))
+        with self.assertRaises(MATERIALIZER.ContractViolation):
+            MATERIALIZER.validate_hash_inventory_rows(rows, (entry,))
 
 
 if __name__ == "__main__":

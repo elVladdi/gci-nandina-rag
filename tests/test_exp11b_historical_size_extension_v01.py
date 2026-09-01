@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import inspect
 import json
+import math
 import subprocess
 import unittest
 from pathlib import Path
@@ -21,6 +22,8 @@ SPEC = importlib.util.spec_from_file_location("exp11b_planner_v01", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 PLANNER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PLANNER)
+FLOAT_DESCRIPTOR_ABS_TOL = 1e-12
+FLOAT_DESCRIPTOR_REL_TOL = 0.0
 
 
 class Exp11bHistoricalSizeExtensionV01Tests(unittest.TestCase):
@@ -182,8 +185,22 @@ class Exp11bHistoricalSizeExtensionV01Tests(unittest.TestCase):
         for row in total_rows:
             counts[row["DECLARACION"]] = counts.get(row["DECLARACION"], 0) + 1
         expected_hhi = sum((count / len(total_rows)) ** 2 for count in counts.values())
-        self.assertAlmostEqual(descriptor["dam_hhi"], expected_hhi, places=15)
+        self.assertTrue(
+            math.isclose(
+                descriptor["dam_hhi"],
+                expected_hhi,
+                rel_tol=FLOAT_DESCRIPTOR_REL_TOL,
+                abs_tol=FLOAT_DESCRIPTOR_ABS_TOL,
+            )
+        )
         self.assertNotEqual(descriptor["dam_hhi"], replicate["H150"]["increment_descriptor"]["dam_hhi"])
+
+    def test_24a_float_descriptor_portability_uses_explicit_absolute_tolerance(self) -> None:
+        observed = 0.13446841032608695
+        frozen = 0.13446841032608697
+        self.assertEqual(FLOAT_DESCRIPTOR_ABS_TOL, 1e-12)
+        self.assertEqual(FLOAT_DESCRIPTOR_REL_TOL, 0.0)
+        self.assertLess(abs(observed - frozen), FLOAT_DESCRIPTOR_ABS_TOL)
 
     def test_25_total_largest_dam_share_is_recalculable(self) -> None:
         feasibility = json.loads(FEASIBILITY_PATH.read_text(encoding="utf-8"))

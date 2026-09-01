@@ -2,6 +2,8 @@
   "H150_bank_count": 10,
   "H200_bank_count": 10,
   "bank_count": 20,
+  "bank_csvs_rewritten": false,
+  "bank_identity_source": "BASELINE_7A80B1D_UNCHANGED",
   "bank_row_order_policy": "H100_ORIGINAL_ORDER_THEN_NEW_ELIGIBLE_ORIGINAL_ORDER_FILTERED_BY_SELECTED_DAMS",
   "banks": [
     {
@@ -1307,7 +1309,7 @@
   "banks_versioned_in_git": false,
   "config": {
     "path": "src/configs/exp11b_bank_materialization_v0.1.json",
-    "sha256": "72927e8189a933cb19a77588a8e6cb77191d465df482511922266537eb2de991"
+    "sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c"
   },
   "descriptor_match_all": true,
   "evaluation_metrics_computed": false,
@@ -1315,6 +1317,18 @@
   "h100_core_match_all": true,
   "hash_mismatches": 0,
   "inputs": {
+    "DEV": {
+      "observed_sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+      "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+      "rows": 100,
+      "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00"
+    },
+    "EVAL": {
+      "observed_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "rows": 1056,
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+    },
     "H100": {
       "dams": 28,
       "nandina": 66,
@@ -1351,8 +1365,8 @@
       "sha256": "fa9eaf906feac264bca9e496557bbc1f17fe1462af412752c2b81a85af78fdf0"
     }
   },
-  "materialization_finish_utc": "2026-09-01T17:45:47.310667Z",
-  "materialization_start_utc": "2026-09-01T17:45:40.823470Z",
+  "materialization_finish_utc": "2026-09-01T18:13:37.509793Z",
+  "materialization_start_utc": "2026-09-01T18:13:33.221344Z",
   "nesting_match_all": true,
   "retrieval_executed": false,
   "selection_match_all": true,
