@@ -18,14 +18,15 @@
 9. El evalset v0.2 de **1,056 casos** permanece fijo.
 10. No se cambian reglas experimentales después de observar resultados.
 11. No se reabre Grupo 1 salvo evidencia objetiva nueva de severidad suficiente.
-12. No se permite interpretar EXP-11A como efecto causal aislado del tamaño del banco.
+12. EXP-11A no permite inferir un efecto causal aislado del tamaño del banco.
+13. Toda nueva data histórica debe seguir el flujo **Excel fuente → Python versionado → dataset derivado → auditoría → hashes → gate**. No se construyen CSV finales manualmente.
 
 ## 2. Estado del plan de auditoría
 
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A cerrado; EXP-11A cerrado e integrado; NEW_HISTORICAL_GATE siguiente** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A cerrado; EXP-11A cerrado; Forensic Audit 01 aprobado; siguiente Gate 02: freeze fuente + contrato multi-hoja** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -39,73 +40,37 @@
 - Desarrollo: **100 series / 6 DAM**.
 - Evaluación: **1,056 series / 67 DAM / 42 códigos**.
 - H100 SHA-256: `0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff`.
-- Eval SHA-256: `3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941`.
-- H100 histórico:
-  - Top-1 = 538/1056 = 0.50946969697
-  - Top-3 = 709/1056 = 0.67140151515
-  - Top-5 = 806/1056 = 0.76325757576
-  - Top-10 = 941/1056 = 0.89109848485
-  - Top-50 = 1047/1056 = 0.99147727273
-  - MRR = `0.6297077493524843`
+- DEV SHA-256: `434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00`.
+- EVAL SHA-256: `3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941`.
+
+H100 histórico: Top-1 0.509470; Top-3 0.671402; Top-5 0.763258; Top-10 0.891098; Top-50 0.991477; MRR 0.629708.
 
 ## 4. Grupo 1
 
 **CLOSED / APPROVED.**
 
-No se reejecuta para mejorar resultados.
-
 ## 5. Grupo 2A
 
 **CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS.**
 
-Commit de cierre G2A integrado a main:  
-`a6140b66cf2975313be327d6d3d4e18e38f1fdf5`
+Commit final G2A: `a6140b66cf2975313be327d6d3d4e18e38f1fdf5`.
 
-Estados finales:
-
-- F001 `PARTIALLY_RESOLVED`
-- F002 `NOT_RECOVERABLE`
-- F003 `PARTIALLY_RESOLVED`
-- F004 `PARTIALLY_RESOLVED`
-- F005 `NOT_RECOVERABLE`
-- F006 `VERIFIED_IN_G2`
-- F007 `OPEN / FUTURE_DEPENDENCY`
-- F008 `VERIFIED_IN_G2`
-- F009 `VERIFIED_IN_G2 / DECLARED_LIMITATION`
-- F010 `VERIFIED_IN_G2`
-
-F007 bloquea H150/H200 y EXP-12 hasta aprobar el nuevo histórico, pero no reabre G2A ni Grupo 1.
+F001 `PARTIALLY_RESOLVED`; F002 `NOT_RECOVERABLE`; F003 `PARTIALLY_RESOLVED`; F004 `PARTIALLY_RESOLVED`; F005 `NOT_RECOVERABLE`; F006 `VERIFIED_IN_G2`; F007 `OPEN / FUTURE_DEPENDENCY`; F008 `VERIFIED_IN_G2`; F009 `VERIFIED_IN_G2 / DECLARED_LIMITATION`; F010 `VERIFIED_IN_G2`.
 
 ## 6. EXP-11A — cierre definitivo
 
 **CLOSED / APPROVED / VERSIONED / INTEGRATED TO MAIN.**
 
-`origin/main` actual:  
-`9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`
+`main = origin/main = 9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
 
-Cadena EXP-11A sobre el cierre G2A:
-
-1. `d44ec215cce639b5bb25a481c944b8ee36a64098` — runner pre-ejecución.
-2. `58839ca838772b79df61e7decf62a43ea7df270f` — corrección de precisión del Gate H100.
-3. `22b18cdc743b4b0f37b8b345215fb747d614d6eb` — persistencia fail-closed en `--execute`.
-4. `9e8af129ca586bd1929e6afe6aa1a1c64d8fe667` — freeze de resultados auditados.
-
-Ejecución válida:
-
-- H25 = 10 corridas.
-- H50 = 10 corridas.
-- H75 = 10 corridas.
-- H100 = 1 referencia.
-- H50 = 5 D1 / 5 D2 con seeds pareadas 20261001–20261005.
-- Case-level = **32,736 filas = 31 × 1,056**.
-- H100 Gate = `PASS`.
-- No hubo rerun ni resume.
-- Reconciliación del reporte transitorio 25/30: `TRANSIENT_OBSERVATION_WHILE_PROCESS_CONTINUED`.
-- `EXP11A_F003_CREATED=false`.
-- Freeze: 47 artefactos versionados; 46 hashes directamente verificables; 0 mismatches; 1 autoexclusión del inventario.
-- Tests finales: 13/13 EXP-11A y 270/270 suite completa.
-
-### Resultados descriptivos EXP-11A
+- H25=10, H50=10, H75=10, H100=1 referencia.
+- H50=5 D1 / 5 D2.
+- H100 Gate PASS.
+- 32,736 filas case-level.
+- Sin rerun/resume.
+- Freeze de 47 artefactos; 0 hash mismatches.
+- Tests finales 13/13 y 270/270.
+- HE2/HE5 permanecen pendientes de Grupo 3.
 
 | Condición | Top-3 | MRR |
 |---|---:|---:|
@@ -114,167 +79,116 @@ Ejecución válida:
 | H75 | 0.463352 ± 0.132774 | 0.414030 ± 0.126668 |
 | H100 | 0.671402 | 0.629708 |
 
-Lectura permitida: sensibilidad al tamaño nominal **bajo restricciones naturales de composición**.  
-Lectura prohibida: “aumentar el tamaño causa una caída de desempeño”.
+## 7. NEW_HISTORICAL_GATE — Forensic Audit 01
 
-H25/H50/H75 difieren también en número de DAM, HHI, cobertura NANDINA y soporte. La inferencia formal y las decisiones HE2/HE5 quedan para Grupo 3.
+**EXTERNAL AUDIT: APPROVED_WITH_TERMINOLOGY_CORRECTIONS.**
 
-## 7. NEW_HISTORICAL_GATE
+- `FORENSIC_EXCEL_PIPELINE_AUDIT_COMPLETED=true`.
+- Excel actual: `data/Series - Descripciones.xlsx`.
+- SHA actual antes/después: `db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1`.
+- Tamaño: `7,895,186` bytes.
+- Hojas: índice 0 `Hoja2` (126,524×9), índice 1 `Hoja1` (41,578×10).
+- Hoja activa actual: `Hoja1`.
+- Hoja procesada históricamente: `Hoja2`, índice 0, por selección predeterminada de primera hoja, sin `--sheet`.
+- Parser: `openpyxl.load_workbook(..., read_only=True, data_only=True)`.
+- `__sheet_name` histórico: únicamente `Hoja2`.
+- Intermedio reproducido: 107 DAM / 11,320 series.
+- Clase 87: 4,232 filas; 4,106 curadas.
+- v0.1: split por fila, estratificado por NANDINA, seed 2026, tamaños 3000/100/1006.
+- v0.2: unión de v0.1 y **asignaciones explícitas de DAM** de T5-safe-159.
+- H100/DEV/EVAL v0.2 reproducidos byte a byte.
+- Clasificación conservadora: `PIPELINE_PARTIALLY_RECONSTRUCTED`.
 
-**Trigger alcanzado:** `NEW_HISTORICAL_GATE_TRIGGER_REACHED=true`.  
-**Nueva data requerida para la siguiente fase:** `true`.  
-**Nueva data procesada:** `false`.  
-**Excel modificado:** `false`.  
-**EXP-11B autorizado:** `false`.  
-**EXP-12 autorizado:** `false`.
+### Correcciones terminológicas
 
-### Próximo paso obligatorio
+1. El workbook histórico completo no es byte-identificable con el actual: metadata histórica `cfc85f3d…` vs actual `db01d1fc…`.
+2. La reproducción byte-exacta demuestra **equivalencia funcional del contenido procesado para el parser**, no identidad binaria de la hoja ni del workbook histórico completo.
+3. En v0.2, `seed=2026` queda como atributo de configuración/procedencia; el script materializa el split desde **listas explícitas de DAM** y no usa aleatoriedad para decidir la asignación v0.2.
+4. `build_evalset_from_sunat_excel.py` no se reutilizará para la expansión histórica: es un flujo distinto y produce otro esquema, aunque su modo `sunat-block` pueda iterar varias hojas.
 
-**Auditoría forense READ-ONLY del pipeline original:**
+El parser histórico procesa una sola hoja por invocación. Si no se pasa `--sheet`, procesa `workbook.worksheets[0]`. Nuevas pestañas no se incorporan automáticamente.
 
-`data/Series - Descripciones.xlsx`  
-→ Python de ingesta/normalización  
-→ datos v0.1  
-→ split por DAM v0.2  
-→ H100/dev/eval congelados.
+## 8. NEW_HISTORICAL_GATE — Gate 02: freeze fuente + contrato multi-hoja
 
-Antes de modificar el Excel se debe establecer con evidencia:
+**SIGUIENTE HITO.**
 
-- SHA-256 del libro actual;
-- nombres y orden de hojas;
-- hoja(s) utilizadas históricamente;
-- scripts `.py` exactos y commits;
-- argumentos/comandos recuperables;
-- reglas de parsing, normalización y filtrado;
-- filtro Clase 87;
-- construcción de `DECLARACION`, `SERIE`, `NANDINA`, descripción e `id_unico`;
-- generación de v0.1;
-- transformación v0.1 → v0.2 por DAM;
-- reproducción en directorio temporal;
-- comparación byte-exacta y, si fuese necesario, comparación canónica fila a fila.
+Antes de que el usuario modifique el Excel:
 
-Clasificación final permitida:
+1. congelar localmente una copia byte-a-byte del workbook actual `db01d1fc…`;
+2. denominarla como **fuente actual que reproduce H100**, no como “original histórico”;
+3. verificar SHA origen=copia;
+4. congelar mediante código/config/test el contrato de incorporación de nuevas pestañas;
+5. reutilizar `sunat_series_parser.py` explícitamente por nombre de hoja;
+6. preservar H100 congelado como núcleo, sin reconstruirlo desde el workbook modificado;
+7. procesar únicamente las hojas nuevas con Python;
+8. aplicar las mismas reglas de Clase 87, jerarquía, `id_unico`, warnings y curación;
+9. bloquear DAM de DEV/EVAL y overlaps de `id_unico`;
+10. auditar exact/near duplicates como descriptores;
+11. exigir capacidad posterior suficiente para H150/H200 y factibilidad de EXP-12.
 
-- `PIPELINE_EXACTLY_RECONSTRUCTED`
-- `PIPELINE_CONTENT_REPRODUCIBLE_NOT_BYTE_EXACT`
-- `PIPELINE_PARTIALLY_RECONSTRUCTED`
-- `PIPELINE_NOT_RECONSTRUCTIBLE`
+**El usuario todavía NO debe agregar las nuevas pestañas hasta cerrar Gate 02.**
 
-### Hallazgo preliminar a verificar
+## 9. EXP-11B
 
-El parser actual `src/ingestion/sunat_series_parser.py` usa por defecto la **primera hoja del workbook** cuando no se proporciona `--sheet`.
+- H150 ≈ 4,425 series.
+- H200 ≈ 5,900 series.
+- H100 debe permanecer exactamente preservado como núcleo.
+- Para capacidad H200 se necesitan al menos **2,950 series nuevas elegibles netas** sobre H100; condición post-procesamiento, no número bruto de filas Excel.
 
-Consecuencia: agregar una o dos hojas nuevas al mismo Excel **no implica que el pipeline actual vaya a leerlas**. No se diseñará aún la estrategia multi-hoja; primero se reconstruirá el pipeline histórico.
-
-### Regla para el usuario
-
-**NO modificar todavía `data/Series - Descripciones.xlsx`.**  
-No agregar nuevas pestañas hasta aprobar esta auditoría y congelar una copia byte-a-byte de la fuente histórica actual.
-
-## 8. EXP-11B
-
-Objetivos aproximados:
-
-- H150 ≈ **4,425 series**
-- H200 ≈ **5,900 series**
-
-Solo se autoriza tras:
-
-1. auditoría forense del pipeline Excel→Python;
-2. congelamiento de la fuente histórica actual;
-3. definición del contrato para nuevas pestañas;
-4. procesamiento Python versionado de la nueva data;
-5. aprobación del `NEW_HISTORICAL_GATE`.
-
-## 9. EXP-12
+## 10. EXP-12
 
 Estado: `CONDITIONAL_FROZEN_PENDING_NEW_HISTORICAL_GATE`.
 
-No usar H100 como fallback.
+Mantener HHI primario, volumen 2,950±148, cobertura H100=1.0, TVD≤0.05, 10,000 candidatos/seed, mínimo 30 factibles, cuantiles 0.10/0.50/0.90 y `must_not_fallback_to_h100=true`.
 
-Diseño congelado condicional:
+## 11. Grupo 2B
 
-- HHI como variable primaria de diversidad;
-- volumen 2,950 ±148;
-- cobertura NANDINA H100 = 1.0;
-- TVD ≤ 0.05;
-- 10,000 candidatos por seed;
-- mínimo 30 factibles;
-- cuantiles HHI 0.10 / 0.50 / 0.90;
-- manipulation check obligatorio.
+Después de EXP-11B/EXP-12: manifests, hashes, configs, seeds, scripts, logs, case-level, entorno, clean checkout, matriz end-to-end y nivel final de reproducibilidad.
 
-## 10. Grupo 2B
+## 12. Grupos 3–8
 
-Después de EXP-11B/EXP-12 cerrar:
+Grupo 3 realizará análisis cuantitativo/inferencia y decisión HE2/HE5. Grupos 4–8: interpretación, presentación, figuras, redacción y coherencia documental.
 
-- manifests;
-- hashes;
-- configs;
-- seeds;
-- scripts;
-- logs;
-- outputs por caso;
-- matriz end-to-end;
-- entorno;
-- clean checkout;
-- clasificación de assets;
-- nivel final de reproducibilidad.
-
-## 11. Grupos 3–8
-
-Grupo 3 realizará métricas e inferencia formal, incluida la decisión de HE2/HE5.  
-Grupos 4–8 cubrirán interpretación, presentación, figuras, redacción y coherencia documental.
-
-## 12. Orden maestro actual
+## 13. Orden maestro actual
 
 ```text
-1. Grupo 1
-   ✅ CERRADO
-        ↓
-2. Grupo 2A
-   ✅ CERRADO / APPROVED_WITH_NONBLOCKING_LIMITATIONS
-        ↓
-3. EXP-11A
-   ✅ CLOSED / APPROVED / INTEGRATED TO MAIN
-        ↓
-4. NEW_HISTORICAL_GATE
-   ⏳ AUDITORÍA FORENSE EXCEL → PYTHON → v0.1 → v0.2
-        ↓
-5. Congelar Excel histórico + contrato para nuevas pestañas
-        ↓
-6. Incorporar nueva data mediante Python versionado
-        ↓
-7. EXP-11B H150/H200
-        ↓
-8. EXP-12
-        ↓
-9. Grupo 2B
-        ↓
-10. Grupo 3
-        ↓
-11. Grupos 4–8
-        ↓
-12. Freeze científico final
-        ↓
-13. Repositorio público / artículos / cierre de tesis
+Grupo 1 ✅
+  ↓
+Grupo 2A ✅
+  ↓
+EXP-11A ✅
+  ↓
+NEW_HISTORICAL_GATE — Forensic Audit 01 ✅
+  ↓
+Gate 02: freeze fuente actual + contrato multi-hoja ⏳
+  ↓
+Usuario agrega nueva(s) pestaña(s) según contrato
+  ↓
+Python procesa exclusivamente nueva(s) hoja(s)
+  ↓
+NEW_HISTORICAL_GATE de datos ampliados
+  ↓
+EXP-11B H150/H200
+  ↓
+EXP-12
+  ↓
+Grupo 2B
+  ↓
+Grupo 3
+  ↓
+Grupos 4–8
+  ↓
+Freeze científico
+  ↓
+Repositorio público / artículos / tesis final
 ```
-
-## 13. Estado de publicación y reproducibilidad
-
-Repositorio público: `elVladdi/gci-nandina-rag-reproducibility`.  
-No completar hasta el congelamiento científico final.
-
-Revista científica de referencia actual: **Knowledge-Based Systems**, sujeta a reevaluación.  
-Producto sectorial: orientación WCO/WCO News; World Customs Journal como alternativa.
 
 ## 14. Historial reciente
 
-### 2026-09-01 — EXP-11A cerrado
+### 2026-09-01 — Forensic Audit 01 aprobado
 
-- EXP-11A 30/30 auditado, versionado e integrado.
-- `main = 9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
-- HE2/HE5 permanecen pendientes.
-- Se activa el `NEW_HISTORICAL_GATE`.
-- Nueva data es necesaria para la próxima fase, pero todavía no se procesa.
-- `data/Series - Descripciones.xlsx` permanece intacto.
-- Siguiente hito: reconstrucción forense del pipeline histórico Excel→Python→v0.1→v0.2.
+- Pipeline Excel→Python→v0.1→v0.2 reconstruido parcialmente con reproducción byte-exacta de outputs.
+- Workbook histórico completo no recuperado byte a byte.
+- `Hoja2` fue la fuente funcional procesada mediante selección predeterminada de primera hoja.
+- Workbook actual intacto con SHA `db01d1fc...`.
+- Próximo hito: congelar esa fuente actual reproducente y versionar el contrato de expansión multi-hoja antes de editar el Excel.
