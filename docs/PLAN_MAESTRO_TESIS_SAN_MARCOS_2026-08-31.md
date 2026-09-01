@@ -40,7 +40,7 @@ Debe evitar reabrir trabajo cerrado sin evidencia objetiva, mezclar auditoría c
 | Grupo | Nombre | Qué se revisa | Estado |
 |---|---|---|---|
 | **1** | Diseño y ejecución experimental | Si los experimentos permiten contrastar objetivos e hipótesis | **CERRADO / APPROVED** |
-| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **EN CURSO — G2A CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS; siguiente: EXP-11A** |
+| **2** | Reproducibilidad y trazabilidad experimental | Si otra persona puede reconstruir qué se ejecutó y con qué insumos | **EN CURSO — G2A CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS e integrado a main; siguiente: EXP-11A** |
 | **3** | Métricas y análisis estadístico/cuantitativo | Si se extrae toda la evidencia válida de los resultados | Pendiente |
 | **4** | Análisis e interpretación de resultados | Si los resultados permiten explicar el comportamiento observado | Pendiente |
 | **5** | Presentación de resultados | Si tablas y resultados comunican claramente la evidencia | Pendiente |
@@ -59,10 +59,9 @@ No se reejecuta para mejorar resultados.
 ## 4.1 Registro de avance — Grupo 2A
 
 **Fecha:** 2026-08-31  
-**Hito:** G2A cerrado tras diagnóstico forense, microcierres metodológicos, versionamiento y clean checkout.  
+**Hito:** G2A cerrado tras diagnóstico forense, microcierres metodológicos, versionamiento, clean checkout e integración a `main`.  
 **Gate final:** `APPROVED_WITH_NONBLOCKING_LIMITATIONS`  
-**Rama auditada:** `codex/g2a-reproducibility-v01`  
-**Commit:** `c9751f67165b0bf6e06b54e4e979e7258481ded6`  
+**Commit final G2A / main:** `a6140b66cf2975313be327d6d3d4e18e38f1fdf5`  
 **Grupo 1 requiere reapertura:** `false`  
 **EXP-11 retrieval iniciado durante G2A:** `false`  
 **EXP-12 iniciado:** `false`  
@@ -81,14 +80,15 @@ Estados finales G2A:
 - `G2A-F009`: `VERIFIED_IN_G2` — limitación declarada: tamaño y composición DAM están acoplados en H100; no se permite reclamar efecto causal aislado del tamaño.
 - `G2A-F010`: `VERIFIED_IN_G2` — H50 corregido prospectivamente a 5 D1 / 5 D2 mediante seeds pareados.
 
-Validación final reportada:
+Validación final:
 
-- 28 tests G2A, 0 fallos, 0 errores;
-- suite completa 257 tests, 0 fallos, 0 errores, 0 skips;
-- clean checkout post-commit limpio;
-- 11 artefactos G2A versionados con SHA coincidente entre working tree y clean checkout;
-- rama remota `origin/codex/g2a-reproducibility-v01` = `c9751f67165b0bf6e06b54e4e979e7258481ded6`;
-- comparación contra base `e8a5aa7218df54b2cc309424e85914b7d914df15`: ahead 1, behind 0; 18 archivos cambiados, 17 añadidos y una modificación HE4 autorizada.
+- tests G2A y suite completa aprobados;
+- suite completa final reportada: **257 tests, 0 fallos, 0 errores, 0 skips**;
+- clean checkout final limpio;
+- 11 artefactos G2A versionados con SHA coincidente;
+- `origin/codex/g2a-reproducibility-v01` = `a6140b66cf2975313be327d6d3d4e18e38f1fdf5`;
+- `origin/main` = `a6140b66cf2975313be327d6d3d4e18e38f1fdf5` tras fast-forward sin merge commit;
+- relación base `e8a5aa7218df54b2cc309424e85914b7d914df15...main` = `0 2`.
 
 ## 5. Grupo 2A — auditoría y contratos previos de reproducibilidad
 
@@ -262,7 +262,7 @@ Estado: `LICENSE_DECISION = PENDING`.
 ## 20. Orden maestro actualizado
 
 1. Grupo 1 — cerrado.
-2. Grupo 2A — **cerrado con limitaciones no bloqueantes**.
+2. Grupo 2A — **cerrado con limitaciones no bloqueantes e integrado a main**.
 3. **EXP-11A — siguiente paso.**
 4. Auditar resultados EXP-11A.
 5. Activar `NEW_HISTORICAL_GATE` y solicitar nueva data.
@@ -282,23 +282,47 @@ Estado: `LICENSE_DECISION = PENDING`.
 19. Tesis final/archive.
 20. Extensiones futuras.
 
-## 23. Próximo paso inmediato
+## 21. Próximo paso inmediato
 
 **EXP-11A — ejecución de sensibilidad H25/H50/H75/H100 bajo el contrato congelado.**
 
-Se autoriza avanzar a EXP-11A únicamente con las composiciones, seeds, tolerancias, controles y outputs ya congelados. H100 permanece como referencia única.
+G2A queda `CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS` e integrado a `main` en `a6140b66cf2975313be327d6d3d4e18e38f1fdf5`.
 
-**Nueva data:** todavía no es necesaria. El punto de activación será después de cerrar y auditar EXP-11A, antes de EXP-11B H150/H200 y antes de cualquier ejecución real de EXP-12.
+Se autoriza avanzar a EXP-11A únicamente con las composiciones, seeds, tolerancias, controles y outputs ya congelados. H100 permanece como referencia única. No se autoriza EXP-11B ni EXP-12 todavía.
 
-## 24. Historial de actualización del plan
+**Nueva data:** todavía no es necesaria. El punto de activación será después de cerrar y auditar EXP-11A, antes de EXP-11B H150/H200 y antes de cualquier ejecución real de EXP-12. En ese momento debe ejecutarse el `NEW_HISTORICAL_GATE` sobre el banco ampliado.
 
-### 2026-08-31 — Cierre de G2A
+---
 
-- Rama auditada: `codex/g2a-reproducibility-v01`.
-- Commit candidato remoto: `c9751f67165b0bf6e06b54e4e979e7258481ded6`.
-- Comparación contra `main`/base `e8a5aa7218df54b2cc309424e85914b7d914df15`: ahead 1, behind 0; 18 archivos cambiados.
-- Gate final G2A: **`APPROVED_WITH_NONBLOCKING_LIMITATIONS`**.
+## 22. Historial de actualización del plan
+
+### 2026-08-31 — Inicio formal de Grupo 2A
+
 - Grupo 1 permanece `CLOSED / APPROVED`.
-- EXP-11 y EXP-12 no fueron ejecutados durante G2A.
-- Siguiente paso autorizado: **EXP-11A**.
-- La nueva data no se requiere aún; se solicita después de EXP-11A para el histórico ampliado previo a EXP-11B/EXP-12.
+- Se crearon las fichas `G2-00`, `G2A-01` y `G2B-01`.
+- Se completó la primera auditoría forense G2A en modo `READ-ONLY`.
+- El Gate preliminar G2A quedó en `REQUIRES_MICROCLOSE`.
+
+### 2026-08-31 — Microcierres G2A
+
+- Se completaron los microcierres 1A–1E.
+- Se corrigió la dependencia de rama del test HE4 sin alterar evidencia científica.
+- Se formalizó la procedencia D1a disponible.
+- Se demostró la inviabilidad estructural del nesting EXP-11.
+- Se rediseñó EXP-11 con subconjuntos independientes por condición.
+- Se declaró la limitación tamaño–composición DAM.
+- Se corrigió H50 a 5 D1 / 5 D2 antes de retrieval.
+- Se congeló EXP-12 condicionalmente y fail-closed.
+
+### 2026-08-31 — Cierre operativo final e integración de G2A a main
+
+- Gate final: `APPROVED_WITH_NONBLOCKING_LIMITATIONS`.
+- Commit final G2A: `a6140b66cf2975313be327d6d3d4e18e38f1fdf5`.
+- `origin/codex/g2a-reproducibility-v01` y `origin/main` apuntan al mismo commit final.
+- Integración a `main` por fast-forward, sin merge commit.
+- Suite final reportada sobre rama, clean checkout y `main`: **257 tests, 0 failures, 0 errors, 0 skips**.
+- EXP-11A autorizado únicamente para H25/H50/H75/H100.
+- EXP-11B y EXP-12 continúan bloqueados.
+- `NEW_HISTORICAL_DATA_REQUIRED_NOW=false`.
+- Trigger de nueva data: `AFTER_EXP11A_EXTERNAL_AUDIT`.
+- Próximo paso: **ejecución científica EXP-11A**.
