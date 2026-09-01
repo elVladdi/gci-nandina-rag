@@ -12,6 +12,7 @@ import csv
 import hashlib
 import io
 import json
+import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
@@ -43,6 +44,7 @@ FREEZE_HASHES = GATE_DIR / "real_ingest_01_freeze_hashes_v0.1.csv"
 FEASIBILITY = GATE_DIR / "exp11b_h150_h200_feasibility_v0.1.json"
 COMMON_MASKS = GATE_DIR / "eval_common_clean_masks_v0.1.csv"
 NEW_ELIGIBLE_PATH = INTERIM_DIR / "new_historical_eligible.csv"
+SELECTION_BASELINE_COMMIT = "b3806190cb645d35c2a121c0f1d0c07fbfe21605"
 
 
 def sha256_file(path: Path) -> str:
@@ -183,24 +185,109 @@ def dam_counts_from_rows(rows: Iterable[dict[str, str]]) -> dict[str, int]:
     return dict(counts)
 
 
-def diversity_descriptor(rows: list[dict[str, str]], dams: Iterable[str]) -> dict[str, Any]:
+def rows_for_dams(rows: list[dict[str, str]], dams: Iterable[str]) -> list[dict[str, str]]:
     selected_dams = set(dams)
-    selected_rows = [row for row in rows if row[DAM] in selected_dams]
-    counts = Counter(row[DAM] for row in selected_rows)
-    total = len(selected_rows)
+    return [row for row in rows if row[DAM] in selected_dams]
+
+
+def distribution_descriptor(rows: list[dict[str, str]]) -> dict[str, Any]:
+    counts = Counter(row[DAM] for row in rows)
+    total = len(rows)
     hhi = sum((count / total) ** 2 for count in counts.values()) if total else 0.0
-    nandina_values = {row[NANDINA].strip() for row in selected_rows if row[NANDINA].strip()}
     return {
+        "rows": total,
         "dam_count": len(counts),
-        "new_rows": total,
         "dam_hhi": hhi,
         "effective_dam_count": (1 / hhi) if hhi else 0.0,
-        "unique_nandina_count": len(nandina_values),
+        "largest_dam_rows": max(counts.values(), default=0),
+        "largest_dam_share": (max(counts.values()) / total) if total else 0.0,
+    }
+
+
+def increment_descriptor(
+    new_rows: list[dict[str, str]], dams: Iterable[str], h100_nandina: set[str]
+) -> dict[str, Any]:
+    selected_rows = rows_for_dams(new_rows, dams)
+    selected_nandina = {row[NANDINA].strip() for row in selected_rows if row[NANDINA].strip()}
+    return {
+        **distribution_descriptor(selected_rows),
+        "nandina_count": len(selected_nandina),
+        "nandina_shared_with_h100_count": len(selected_nandina & h100_nandina),
+        "nandina_new_vs_h100_count": len(selected_nandina - h100_nandina),
+    }
+
+
+def total_bank_descriptor(
+    h100_rows: list[dict[str, str]],
+    new_rows: list[dict[str, str]],
+    dams: Iterable[str],
+    h100_nandina: set[str],
+) -> dict[str, Any]:
+    total_rows = [*h100_rows, *rows_for_dams(new_rows, dams)]
+    total_nandina = {row[NANDINA].strip() for row in total_rows if row[NANDINA].strip()}
+    h100_covered = total_nandina & h100_nandina
+    h100_denominator = 66
+    if len(h100_nandina) != h100_denominator:
+        raise RuntimeError("H100 NANDINA coverage denominator no longer matches the frozen contract")
+    return {
+        **distribution_descriptor(total_rows),
+        "nandina_count": len(total_nandina),
+        "H100_nandina_coverage_n": len(h100_covered),
+        "H100_nandina_coverage_denominator": h100_denominator,
+        "H100_nandina_coverage_pct": len(h100_covered) / h100_denominator * 100,
+        "new_nandina_count": len(total_nandina - h100_nandina),
+    }
+
+
+def selection_identity(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "accepted_seed_schedule": payload["accepted_seed_schedule"],
+        "accepted_replicates": [
+            {
+                "replicate_id": replicate["replicate_id"],
+                "H150": {
+                    field: replicate["H150"][field]
+                    for field in ("composition_sha256", "dams", "realized_new_rows", "realized_total_rows")
+                },
+                "H200": {
+                    field: replicate["H200"][field]
+                    for field in ("composition_sha256", "dams", "realized_new_rows", "realized_total_rows")
+                },
+            }
+            for replicate in payload["accepted_replicates"]
+        ],
+    }
+
+
+def verify_selection_identity_against_baseline(root: Path, payload: dict[str, Any]) -> dict[str, Any]:
+    try:
+        baseline_bytes = subprocess.check_output(
+            ["git", "show", f"{SELECTION_BASELINE_COMMIT}:{relative(FEASIBILITY)}"],
+            cwd=root,
+        )
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError("Cannot read the frozen Gate 03 selection baseline") from error
+    baseline = json.loads(baseline_bytes.decode("utf-8"))
+    baseline_identity = selection_identity(baseline)
+    current_identity = selection_identity(payload)
+    if current_identity != baseline_identity:
+        raise RuntimeError("EXP-11B selection identity differs from the approved Gate 03 baseline")
+    return {
+        "baseline_candidate_commit": SELECTION_BASELINE_COMMIT,
+        "accepted_seed_schedule_identical": True,
+        "replicate_fields_identical": {
+            "H150_dams": True,
+            "H150_composition_sha256": True,
+            "H150_realized_rows": True,
+            "H200_dams": True,
+            "H200_composition_sha256": True,
+            "H200_realized_rows": True,
+        },
     }
 
 
 def build_feasibility_evidence(
-    config: dict[str, Any], new_rows: list[dict[str, str]], h100_rows: int
+    config: dict[str, Any], new_rows: list[dict[str, str]], h100_rows: list[dict[str, str]]
 ) -> dict[str, Any]:
     selection = config["selection"]
     policy = config["replicate_policy"]
@@ -208,6 +295,12 @@ def build_feasibility_evidence(
     h200_target = config["conditions"]["H200"]["target_new_rows"]
     tolerance = config["feasibility_contract"]["max_abs_new_row_deviation"]
     dam_counts = dam_counts_from_rows(new_rows)
+    h100_nandina = {row[NANDINA].strip() for row in h100_rows if row[NANDINA].strip()}
+    h100_dams = {row[DAM].strip() for row in h100_rows}
+    new_dams = set(dam_counts)
+    direct_dam_overlap = sorted(h100_dams & new_dams)
+    if direct_dam_overlap:
+        raise RuntimeError("Expanded eligible pool overlaps H100 DAM identifiers")
     accepted: list[dict[str, Any]] = []
     seen_h150: set[str] = set()
     seen_h200: set[str] = set()
@@ -254,13 +347,19 @@ def build_feasibility_evidence(
                 "seed": seed,
                 "H150": {
                     **h150,
-                    "realized_total_rows": h100_rows + h150["realized_new_rows"],
-                    "descriptor": diversity_descriptor(new_rows, h150["dams"]),
+                    "realized_total_rows": len(h100_rows) + h150["realized_new_rows"],
+                    "increment_descriptor": increment_descriptor(new_rows, h150["dams"], h100_nandina),
+                    "total_bank_descriptor": total_bank_descriptor(
+                        h100_rows, new_rows, h150["dams"], h100_nandina
+                    ),
                 },
                 "H200": {
                     **h200,
-                    "realized_total_rows": h100_rows + h200["realized_new_rows"],
-                    "descriptor": diversity_descriptor(new_rows, h200["dams"]),
+                    "realized_total_rows": len(h100_rows) + h200["realized_new_rows"],
+                    "increment_descriptor": increment_descriptor(new_rows, h200["dams"], h100_nandina),
+                    "total_bank_descriptor": total_bank_descriptor(
+                        h100_rows, new_rows, h200["dams"], h100_nandina
+                    ),
                 },
             }
         )
@@ -282,10 +381,12 @@ def build_feasibility_evidence(
         "selection_contract": config["selection"],
         "feasibility_contract": config["feasibility_contract"],
         "pool": {
-            "H100_frozen_rows": h100_rows,
+            "H100_frozen_rows": len(h100_rows),
+            "H100_frozen_dam_count": len(h100_dams),
             "new_eligible_rows": len(new_rows),
-            "maximum_pool_rows": h100_rows + len(new_rows),
+            "maximum_pool_rows": len(h100_rows) + len(new_rows),
             "new_eligible_dam_count": len(dam_counts),
+            "direct_h100_new_dam_overlap_count": len(direct_dam_overlap),
             "new_eligible_composition_sha256": composition_sha256(dam_counts),
         },
         "seeds_evaluated": evaluated,
@@ -341,14 +442,22 @@ def build_common_clean_masks(root: Path) -> tuple[bytes, dict[str, Any]]:
         "near_095_in_max_pool",
         "near_098_in_max_pool",
     ]
+    masked_case_counts = {
+        "exact": sum(bool(row["exact_match_in_max_pool"]) for row in rows),
+        "near090": sum(bool(row["near_090_in_max_pool"]) for row in rows),
+        "near095": sum(bool(row["near_095_in_max_pool"]) for row in rows),
+        "near098": sum(bool(row["near_098_in_max_pool"]) for row in rows),
+    }
     summary = {
         "primary_eval_denominator": len(rows),
         "maximum_pool_rows": len(maximum_pool),
-        "exact_summary": exact_summary,
-        "near_summary": near_summary,
-        "masked_case_counts": {
-            field: sum(bool(row[field]) for row in rows) for field in fieldnames[1:]
+        "masked_case_counts": masked_case_counts,
+        "clean_denominators": {
+            key: len(rows) - value for key, value in masked_case_counts.items()
         },
+        "primary_denominator_affected": False,
+        "selection_affected": False,
+        "duplicate_audit_summary": {"exact": exact_summary, "near": near_summary},
     }
     return write_csv_bytes(fieldnames, rows), summary
 
@@ -417,9 +526,10 @@ def no_overwrite(root: Path) -> None:
 def expected_outputs(root: Path, config: dict[str, Any]) -> dict[Path, bytes]:
     inventory = artifact_inventory(root, REAL_INGEST_ARTIFACTS)
     freeze_manifest = build_freeze_manifest(config, inventory, root)
-    h100_rows = count_rows(root / H100_PATH)
+    h100_rows = read_csv_rows(root / H100_PATH)
     new_rows = read_csv_rows(root / NEW_ELIGIBLE_PATH)
     feasibility = build_feasibility_evidence(config, new_rows, h100_rows)
+    feasibility["selection_identity_comparison"] = verify_selection_identity_against_baseline(root, feasibility)
     masks, mask_summary = build_common_clean_masks(root)
     feasibility["common_clean_mask_summary"] = mask_summary
     return {
@@ -429,7 +539,7 @@ def expected_outputs(root: Path, config: dict[str, Any]) -> dict[Path, bytes]:
     }
 
 
-def run(root: Path, config_path: Path, verify_only: bool) -> None:
+def run(root: Path, config_path: Path, verify_only: bool, refresh_derived_evidence: bool) -> None:
     config = read_json(config_path)
     if config["execution_authorized"] or config["retrieval_executed"]:
         raise RuntimeError("EXP-11B Gate 03 config must remain prospective and non-executing")
@@ -445,6 +555,18 @@ def run(root: Path, config_path: Path, verify_only: bool) -> None:
             raise RuntimeError(f"Gate 03 verification mismatch: {relative(FREEZE_HASHES)}")
         print("RESULT: PASS")
         print("MODE: VERIFY_ONLY")
+        print("RETRIEVAL_EXECUTED: false")
+        return
+    if refresh_derived_evidence:
+        for path in (FREEZE_MANIFEST, COMMON_MASKS):
+            actual_path = root / path
+            if not actual_path.is_file() or actual_path.read_bytes() != outputs[path]:
+                raise RuntimeError(f"Gate 03 refresh requires unchanged frozen artifact: {relative(path)}")
+        if not (root / FEASIBILITY).is_file():
+            raise RuntimeError("Gate 03 refresh requires the existing feasibility evidence")
+        (root / FEASIBILITY).write_bytes(outputs[FEASIBILITY])
+        print("RESULT: PASS")
+        print("MODE: REFRESH_DERIVED_FEASIBILITY_ONLY")
         print("RETRIEVAL_EXECUTED: false")
         return
     no_overwrite(root)
@@ -469,13 +591,20 @@ def parse_args() -> argparse.Namespace:
         default=ROOT / "src/configs/exp11b_historical_size_extension_v0.1.json",
     )
     parser.add_argument("--verify", action="store_true", help="Recompute and compare frozen Gate 03 evidence.")
+    parser.add_argument(
+        "--refresh-derived-evidence",
+        action="store_true",
+        help="Rewrite only the approved derived feasibility evidence after baseline identity verification.",
+    )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     arguments = parse_args()
     try:
-        run(ROOT, arguments.config, arguments.verify)
+        if arguments.verify and arguments.refresh_derived_evidence:
+            raise ValueError("--verify and --refresh-derived-evidence are mutually exclusive")
+        run(ROOT, arguments.config, arguments.verify, arguments.refresh_derived_evidence)
     except Exception as error:
         print(f"RESULT: FAIL\n{error}", file=sys.stderr)
         raise

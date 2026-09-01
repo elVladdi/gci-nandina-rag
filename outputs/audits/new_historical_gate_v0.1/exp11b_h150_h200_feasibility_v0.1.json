@@ -20,16 +20,33 @@
           "118-2026-10-167201-00",
           "118-2026-10-244114-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 14,
           "dam_hhi": 0.26396873935628684,
           "effective_dam_count": 3.788327369515785,
-          "new_rows": 1466,
-          "unique_nandina_count": 45
+          "largest_dam_rows": 704,
+          "largest_dam_share": 0.48021828103683495,
+          "nandina_count": 45,
+          "nandina_new_vs_h100_count": 4,
+          "nandina_shared_with_h100_count": 41,
+          "rows": 1466
         },
         "prefix_length": 14,
         "realized_new_rows": 1466,
-        "realized_total_rows": 4416
+        "realized_total_rows": 4416,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 42,
+          "dam_hhi": 0.13446841032608695,
+          "effective_dam_count": 7.436690874644775,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.2366394927536232,
+          "nandina_count": 70,
+          "new_nandina_count": 4,
+          "rows": 4416
+        }
       },
       "H200": {
         "absolute_deviation": 54,
@@ -62,16 +79,33 @@
           "118-2026-10-254755-00",
           "118-2026-10-181559-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 26,
           "dam_hhi": 0.14531069093849122,
           "effective_dam_count": 6.881806104846693,
-          "new_rows": 3004,
-          "unique_nandina_count": 50
+          "largest_dam_rows": 772,
+          "largest_dam_share": 0.2569906790945406,
+          "nandina_count": 50,
+          "nandina_new_vs_h100_count": 7,
+          "nandina_shared_with_h100_count": 43,
+          "rows": 3004
         },
         "prefix_length": 26,
         "realized_new_rows": 3004,
-        "realized_total_rows": 5954
+        "realized_total_rows": 5954,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 54,
+          "dam_hhi": 0.09495743257934612,
+          "effective_dam_count": 10.531034515538352,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.1755122606650991,
+          "nandina_count": 73,
+          "new_nandina_count": 7,
+          "rows": 5954
+        }
       },
       "replicate_id": "R01",
       "seed": 20261005
@@ -84,16 +118,33 @@
           "118-2026-10-169835-00",
           "118-2026-10-191498-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 2,
           "dam_hhi": 0.5003345639821275,
           "effective_dam_count": 1.9986626389371756,
-          "new_rows": 1585,
-          "unique_nandina_count": 36
+          "largest_dam_rows": 813,
+          "largest_dam_share": 0.5129337539432177,
+          "nandina_count": 36,
+          "nandina_new_vs_h100_count": 1,
+          "nandina_shared_with_h100_count": 35,
+          "rows": 1585
         },
         "prefix_length": 2,
         "realized_new_rows": 1585,
-        "realized_total_rows": 4535
+        "realized_total_rows": 4535,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 30,
+          "dam_hhi": 0.16103679698145867,
+          "effective_dam_count": 6.209760866736174,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.23042998897464168,
+          "nandina_count": 67,
+          "new_nandina_count": 1,
+          "rows": 4535
+        }
       },
       "H200": {
         "absolute_deviation": 3,
@@ -119,16 +170,33 @@
           "118-2026-10-183486-00",
           "118-2026-10-254755-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 19,
           "dam_hhi": 0.1733738761554802,
           "effective_dam_count": 5.767881656537509,
-          "new_rows": 2947,
-          "unique_nandina_count": 51
+          "largest_dam_rows": 813,
+          "largest_dam_share": 0.27587376993552765,
+          "nandina_count": 51,
+          "nandina_new_vs_h100_count": 8,
+          "nandina_shared_with_h100_count": 43,
+          "rows": 2947
         },
         "prefix_length": 19,
         "realized_new_rows": 2947,
-        "realized_total_rows": 5897
+        "realized_total_rows": 5897,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 47,
+          "dam_hhi": 0.10239324330001812,
+          "effective_dam_count": 9.766269411644108,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.1772087502119722,
+          "nandina_count": 74,
+          "new_nandina_count": 8,
+          "rows": 5897
+        }
       },
       "replicate_id": "R02",
       "seed": 20261006
@@ -150,16 +218,33 @@
           "118-2026-10-188192-00",
           "118-2026-10-183486-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 11,
           "dam_hhi": 0.3227920707155662,
           "effective_dam_count": 3.0979695312316617,
-          "new_rows": 1407,
-          "unique_nandina_count": 41
+          "largest_dam_rows": 704,
+          "largest_dam_share": 0.5003553660270078,
+          "nandina_count": 41,
+          "nandina_new_vs_h100_count": 4,
+          "nandina_shared_with_h100_count": 37,
+          "rows": 1407
         },
         "prefix_length": 11,
         "realized_new_rows": 1407,
-        "realized_total_rows": 4357
+        "realized_total_rows": 4357,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 39,
+          "dam_hhi": 0.1419120940562487,
+          "effective_dam_count": 7.0466157704898436,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.23984392930915768,
+          "nandina_count": 70,
+          "new_nandina_count": 4,
+          "rows": 4357
+        }
       },
       "H200": {
         "absolute_deviation": 68,
@@ -190,16 +275,33 @@
           "118-2026-10-154658-00",
           "118-2026-10-201747-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 24,
           "dam_hhi": 0.1577233309623348,
           "effective_dam_count": 6.340216085334931,
-          "new_rows": 2882,
-          "unique_nandina_count": 52
+          "largest_dam_rows": 772,
+          "largest_dam_share": 0.2678695350451076,
+          "nandina_count": 52,
+          "nandina_new_vs_h100_count": 9,
+          "nandina_shared_with_h100_count": 43,
+          "rows": 2882
         },
         "prefix_length": 24,
         "realized_new_rows": 2882,
-        "realized_total_rows": 5832
+        "realized_total_rows": 5832,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 52,
+          "dam_hhi": 0.09893513579117907,
+          "effective_dam_count": 10.107632561506614,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.17918381344307271,
+          "nandina_count": 75,
+          "new_nandina_count": 9,
+          "rows": 5832
+        }
       },
       "replicate_id": "R03",
       "seed": 20261007
@@ -223,16 +325,33 @@
           "118-2026-10-195146-00",
           "118-2026-10-256715-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 13,
           "dam_hhi": 0.2693771045014178,
           "effective_dam_count": 3.712267981537892,
-          "new_rows": 1472,
-          "unique_nandina_count": 41
+          "largest_dam_rows": 704,
+          "largest_dam_share": 0.4782608695652174,
+          "nandina_count": 41,
+          "nandina_new_vs_h100_count": 3,
+          "nandina_shared_with_h100_count": 38,
+          "rows": 1472
         },
         "prefix_length": 13,
         "realized_new_rows": 1472,
-        "realized_total_rows": 4422
+        "realized_total_rows": 4422,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 41,
+          "dam_hhi": 0.1349410179479642,
+          "effective_dam_count": 7.41064514857609,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.236318407960199,
+          "nandina_count": 69,
+          "new_nandina_count": 3,
+          "rows": 4422
+        }
       },
       "H200": {
         "absolute_deviation": 10,
@@ -265,16 +384,33 @@
           "118-2026-10-167201-00",
           "118-2026-10-251847-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 26,
           "dam_hhi": 0.1505928085519922,
           "effective_dam_count": 6.640423335054209,
-          "new_rows": 2940,
-          "unique_nandina_count": 51
+          "largest_dam_rows": 813,
+          "largest_dam_share": 0.27653061224489794,
+          "nandina_count": 51,
+          "nandina_new_vs_h100_count": 7,
+          "nandina_shared_with_h100_count": 44,
+          "rows": 2940
         },
         "prefix_length": 26,
         "realized_new_rows": 2940,
-        "realized_total_rows": 5890
+        "realized_total_rows": 5890,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 54,
+          "dam_hhi": 0.09675488079418662,
+          "effective_dam_count": 10.335395917929585,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.1774193548387097,
+          "nandina_count": 73,
+          "new_nandina_count": 7,
+          "rows": 5890
+        }
       },
       "replicate_id": "R04",
       "seed": 20261010
@@ -297,16 +433,33 @@
           "118-2026-10-181559-00",
           "118-2026-10-218663-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 12,
           "dam_hhi": 0.2674015223924152,
           "effective_dam_count": 3.7396944903420817,
-          "new_rows": 1562,
-          "unique_nandina_count": 38
+          "largest_dam_rows": 704,
+          "largest_dam_share": 0.4507042253521127,
+          "nandina_count": 38,
+          "nandina_new_vs_h100_count": 0,
+          "nandina_shared_with_h100_count": 38,
+          "rows": 1562
         },
         "prefix_length": 12,
         "realized_new_rows": 1562,
-        "realized_total_rows": 4512
+        "realized_total_rows": 4512,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 40,
+          "dam_hhi": 0.13298776155625974,
+          "effective_dam_count": 7.519488923625167,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.23160460992907803,
+          "nandina_count": 66,
+          "new_nandina_count": 0,
+          "rows": 4512
+        }
       },
       "H200": {
         "absolute_deviation": 77,
@@ -335,16 +488,33 @@
           "118-2026-10-169835-00",
           "118-2026-10-221243-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 22,
           "dam_hhi": 0.14816972105144663,
           "effective_dam_count": 6.749017227701913,
-          "new_rows": 3027,
-          "unique_nandina_count": 47
+          "largest_dam_rows": 772,
+          "largest_dam_share": 0.2550379914106376,
+          "nandina_count": 47,
+          "nandina_new_vs_h100_count": 6,
+          "nandina_shared_with_h100_count": 41,
+          "rows": 3027
         },
         "prefix_length": 22,
         "realized_new_rows": 3027,
-        "realized_total_rows": 5977
+        "realized_total_rows": 5977,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 50,
+          "dam_hhi": 0.09552554212821111,
+          "effective_dam_count": 10.46840434213746,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.17483687468629747,
+          "nandina_count": 72,
+          "new_nandina_count": 6,
+          "rows": 5977
+        }
       },
       "replicate_id": "R05",
       "seed": 20261011
@@ -380,16 +550,33 @@
           "118-2026-10-201747-00",
           "118-2026-10-240791-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 25,
           "dam_hhi": 0.09041845678660958,
           "effective_dam_count": 11.059688868170264,
-          "new_rows": 1517,
-          "unique_nandina_count": 43
+          "largest_dam_rows": 316,
+          "largest_dam_share": 0.2083058668424522,
+          "nandina_count": 43,
+          "nandina_new_vs_h100_count": 5,
+          "nandina_shared_with_h100_count": 38,
+          "rows": 1517
         },
         "prefix_length": 25,
         "realized_new_rows": 1517,
-        "realized_total_rows": 4467
+        "realized_total_rows": 4467,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 53,
+          "dam_hhi": 0.11341259428080128,
+          "effective_dam_count": 8.817362889381343,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.23393776583837028,
+          "nandina_count": 71,
+          "new_nandina_count": 5,
+          "rows": 4467
+        }
       },
       "H200": {
         "absolute_deviation": 139,
@@ -425,16 +612,33 @@
           "118-2026-10-169835-00",
           "118-2026-10-218663-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 29,
           "dam_hhi": 0.1370089943104748,
           "effective_dam_count": 7.2987908934935275,
-          "new_rows": 3089,
-          "unique_nandina_count": 47
+          "largest_dam_rows": 772,
+          "largest_dam_share": 0.24991906765943672,
+          "nandina_count": 47,
+          "nandina_new_vs_h100_count": 6,
+          "nandina_shared_with_h100_count": 41,
+          "rows": 3089
         },
         "prefix_length": 29,
         "realized_new_rows": 3089,
-        "realized_total_rows": 6039
+        "realized_total_rows": 6039,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 57,
+          "dam_hhi": 0.09219465756076148,
+          "effective_dam_count": 10.846615481389945,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.17304189435336975,
+          "nandina_count": 72,
+          "new_nandina_count": 6,
+          "rows": 6039
+        }
       },
       "replicate_id": "R06",
       "seed": 20261013
@@ -458,16 +662,33 @@
           "118-2026-10-150563-00",
           "118-2026-10-215112-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 13,
           "dam_hhi": 0.26682673448957367,
           "effective_dam_count": 3.7477503965745806,
-          "new_rows": 1459,
-          "unique_nandina_count": 43
+          "largest_dam_rows": 704,
+          "largest_dam_share": 0.48252227553118576,
+          "nandina_count": 43,
+          "nandina_new_vs_h100_count": 2,
+          "nandina_shared_with_h100_count": 41,
+          "rows": 1459
         },
         "prefix_length": 13,
         "realized_new_rows": 1459,
-        "realized_total_rows": 4409
+        "realized_total_rows": 4409,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 41,
+          "dam_hhi": 0.1349306592152251,
+          "effective_dam_count": 7.411214069627576,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.23701519618961217,
+          "nandina_count": 68,
+          "new_nandina_count": 2,
+          "rows": 4409
+        }
       },
       "H200": {
         "absolute_deviation": 42,
@@ -505,16 +726,33 @@
           "118-2026-10-223403-00",
           "118-2026-10-201747-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 31,
           "dam_hhi": 0.14379231426406244,
           "effective_dam_count": 6.954474619301171,
-          "new_rows": 2992,
-          "unique_nandina_count": 47
+          "largest_dam_rows": 813,
+          "largest_dam_share": 0.2717245989304813,
+          "nandina_count": 47,
+          "nandina_new_vs_h100_count": 4,
+          "nandina_shared_with_h100_count": 43,
+          "rows": 2992
         },
         "prefix_length": 31,
         "realized_new_rows": 2992,
-        "realized_total_rows": 5942
+        "realized_total_rows": 5942,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 59,
+          "dam_hhi": 0.09466025274500807,
+          "effective_dam_count": 10.564096027651217,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.17586671154493436,
+          "nandina_count": 70,
+          "new_nandina_count": 4,
+          "rows": 5942
+        }
       },
       "replicate_id": "R07",
       "seed": 20261017
@@ -536,16 +774,33 @@
           "118-2026-10-150563-00",
           "118-2026-10-155628-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 11,
           "dam_hhi": 0.4604109440090125,
           "effective_dam_count": 2.17197269746139,
-          "new_rows": 1498,
-          "unique_nandina_count": 40
+          "largest_dam_rows": 990,
+          "largest_dam_share": 0.6608811748998665,
+          "nandina_count": 40,
+          "nandina_new_vs_h100_count": 2,
+          "nandina_shared_with_h100_count": 38,
+          "rows": 1498
         },
         "prefix_length": 11,
         "realized_new_rows": 1498,
-        "realized_total_rows": 4448
+        "realized_total_rows": 4448,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 39,
+          "dam_hhi": 0.15608674256637853,
+          "effective_dam_count": 6.406694018710353,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.23493705035971224,
+          "nandina_count": 68,
+          "new_nandina_count": 2,
+          "rows": 4448
+        }
       },
       "H200": {
         "absolute_deviation": 59,
@@ -576,16 +831,33 @@
           "118-2026-10-213081-00",
           "118-2026-10-244114-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 24,
           "dam_hhi": 0.2015751360901166,
           "effective_dam_count": 4.960929306047636,
-          "new_rows": 2891,
-          "unique_nandina_count": 49
+          "largest_dam_rows": 990,
+          "largest_dam_share": 0.34244206157039087,
+          "nandina_count": 49,
+          "nandina_new_vs_h100_count": 5,
+          "nandina_shared_with_h100_count": 44,
+          "rows": 2891
         },
         "prefix_length": 24,
         "realized_new_rows": 2891,
-        "realized_total_rows": 5841
+        "realized_total_rows": 5841,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 52,
+          "dam_hhi": 0.10961327779901332,
+          "effective_dam_count": 9.122982361987185,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.17890772128060264,
+          "nandina_count": 71,
+          "new_nandina_count": 5,
+          "rows": 5841
+        }
       },
       "replicate_id": "R08",
       "seed": 20261021
@@ -611,16 +883,33 @@
           "118-2026-10-256715-00",
           "118-2026-10-257059-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 15,
           "dam_hhi": 0.3261639757144514,
           "effective_dam_count": 3.06594251498662,
-          "new_rows": 1489,
-          "unique_nandina_count": 45
+          "largest_dam_rows": 813,
+          "largest_dam_share": 0.5460040295500336,
+          "nandina_count": 45,
+          "nandina_new_vs_h100_count": 3,
+          "nandina_shared_with_h100_count": 42,
+          "rows": 1489
         },
         "prefix_length": 15,
         "realized_new_rows": 1489,
-        "realized_total_rows": 4439
+        "realized_total_rows": 4439,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 43,
+          "dam_hhi": 0.14098707614281872,
+          "effective_dam_count": 7.092848701869726,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.23541338139220544,
+          "nandina_count": 69,
+          "new_nandina_count": 3,
+          "rows": 4439
+        }
       },
       "H200": {
         "absolute_deviation": 41,
@@ -653,16 +942,33 @@
           "118-2026-10-201747-00",
           "118-2026-10-240791-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 26,
           "dam_hhi": 0.15951691984702465,
           "effective_dam_count": 6.268927465243132,
-          "new_rows": 2909,
-          "unique_nandina_count": 52
+          "largest_dam_rows": 813,
+          "largest_dam_share": 0.2794774836713647,
+          "nandina_count": 52,
+          "nandina_new_vs_h100_count": 8,
+          "nandina_shared_with_h100_count": 44,
+          "rows": 2909
         },
         "prefix_length": 26,
         "realized_new_rows": 2909,
-        "realized_total_rows": 5859
+        "realized_total_rows": 5859,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 54,
+          "dam_hhi": 0.0991859357704019,
+          "effective_dam_count": 10.082074562615663,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.17835808158388802,
+          "nandina_count": 74,
+          "new_nandina_count": 8,
+          "rows": 5859
+        }
       },
       "replicate_id": "R09",
       "seed": 20261023
@@ -685,16 +991,33 @@
           "118-2026-10-218663-00",
           "118-2026-10-183486-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 12,
           "dam_hhi": 0.28143487331756367,
           "effective_dam_count": 3.553219926912279,
-          "new_rows": 1533,
-          "unique_nandina_count": 38
+          "largest_dam_rows": 704,
+          "largest_dam_share": 0.4592302674494455,
+          "nandina_count": 38,
+          "nandina_new_vs_h100_count": 2,
+          "nandina_shared_with_h100_count": 36,
+          "rows": 1533
         },
         "prefix_length": 12,
         "realized_new_rows": 1533,
-        "realized_total_rows": 4483
+        "realized_total_rows": 4483,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 40,
+          "dam_hhi": 0.1351606676900551,
+          "effective_dam_count": 7.398602101412808,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.233102832924381,
+          "nandina_count": 68,
+          "new_nandina_count": 2,
+          "rows": 4483
+        }
       },
       "H200": {
         "absolute_deviation": 32,
@@ -723,16 +1046,33 @@
           "118-2026-10-160133-00",
           "118-2026-10-257754-00"
         ],
-        "descriptor": {
+        "increment_descriptor": {
           "dam_count": 22,
           "dam_hhi": 0.19560986357279464,
           "effective_dam_count": 5.112216642530697,
-          "new_rows": 2918,
-          "unique_nandina_count": 47
+          "largest_dam_rows": 990,
+          "largest_dam_share": 0.339273474982865,
+          "nandina_count": 47,
+          "nandina_new_vs_h100_count": 4,
+          "nandina_shared_with_h100_count": 43,
+          "rows": 2918
         },
         "prefix_length": 22,
         "realized_new_rows": 2918,
-        "realized_total_rows": 5868
+        "realized_total_rows": 5868,
+        "total_bank_descriptor": {
+          "H100_nandina_coverage_denominator": 66,
+          "H100_nandina_coverage_n": 66,
+          "H100_nandina_coverage_pct": 100.0,
+          "dam_count": 50,
+          "dam_hhi": 0.10804995750640424,
+          "effective_dam_count": 9.25497818859141,
+          "largest_dam_rows": 1045,
+          "largest_dam_share": 0.17808452624403545,
+          "nandina_count": 70,
+          "new_nandina_count": 4,
+          "rows": 5868
+        }
       },
       "replicate_id": "R10",
       "seed": 20261024
@@ -752,71 +1092,81 @@
   ],
   "banks_materialized": false,
   "common_clean_mask_summary": {
-    "exact_summary": {
-      "affected_pct": 3.4090909090909087,
-      "affected_rows": 36,
-      "comparison": "maximum_historical_pool-evaluation",
-      "different_dam_rows": 36,
-      "different_nandina_pairs": 1,
-      "different_nandina_rows": 1,
-      "method": "exact_normalized_description",
-      "right_rows": 1056,
-      "same_dam_rows": 0,
-      "same_nandina_pairs": 57,
-      "same_nandina_rows": 35
+    "clean_denominators": {
+      "exact": 1020,
+      "near090": 981,
+      "near095": 1002,
+      "near098": 1010
     },
-    "masked_case_counts": {
-      "exact_match_in_max_pool": 36,
-      "near_090_in_max_pool": 75,
-      "near_095_in_max_pool": 54,
-      "near_098_in_max_pool": 46
-    },
-    "maximum_pool_rows": 8979,
-    "near_summary": [
-      {
-        "affected_pct": 7.1022727272727275,
-        "affected_rows": 75,
+    "duplicate_audit_summary": {
+      "exact": {
+        "affected_pct": 3.4090909090909087,
+        "affected_rows": 36,
         "comparison": "maximum_historical_pool-evaluation",
-        "different_nandina_pairs": 48,
-        "different_nandina_rows": 15,
-        "method": "token_jaccard_rare_block",
-        "pairs": 189,
-        "rare_token_max_df": 2244,
-        "right_rows": 1056,
-        "same_nandina_pairs": 141,
-        "same_nandina_rows": 72,
-        "threshold": 0.9
-      },
-      {
-        "affected_pct": 5.113636363636364,
-        "affected_rows": 54,
-        "comparison": "maximum_historical_pool-evaluation",
-        "different_nandina_pairs": 3,
-        "different_nandina_rows": 3,
-        "method": "token_jaccard_rare_block",
-        "pairs": 92,
-        "rare_token_max_df": 2244,
-        "right_rows": 1056,
-        "same_nandina_pairs": 89,
-        "same_nandina_rows": 52,
-        "threshold": 0.95
-      },
-      {
-        "affected_pct": 4.356060606060606,
-        "affected_rows": 46,
-        "comparison": "maximum_historical_pool-evaluation",
+        "different_dam_rows": 36,
         "different_nandina_pairs": 1,
         "different_nandina_rows": 1,
-        "method": "token_jaccard_rare_block",
-        "pairs": 70,
-        "rare_token_max_df": 2244,
+        "method": "exact_normalized_description",
         "right_rows": 1056,
-        "same_nandina_pairs": 69,
-        "same_nandina_rows": 45,
-        "threshold": 0.98
-      }
-    ],
-    "primary_eval_denominator": 1056
+        "same_dam_rows": 0,
+        "same_nandina_pairs": 57,
+        "same_nandina_rows": 35
+      },
+      "near": [
+        {
+          "affected_pct": 7.1022727272727275,
+          "affected_rows": 75,
+          "comparison": "maximum_historical_pool-evaluation",
+          "different_nandina_pairs": 48,
+          "different_nandina_rows": 15,
+          "method": "token_jaccard_rare_block",
+          "pairs": 189,
+          "rare_token_max_df": 2244,
+          "right_rows": 1056,
+          "same_nandina_pairs": 141,
+          "same_nandina_rows": 72,
+          "threshold": 0.9
+        },
+        {
+          "affected_pct": 5.113636363636364,
+          "affected_rows": 54,
+          "comparison": "maximum_historical_pool-evaluation",
+          "different_nandina_pairs": 3,
+          "different_nandina_rows": 3,
+          "method": "token_jaccard_rare_block",
+          "pairs": 92,
+          "rare_token_max_df": 2244,
+          "right_rows": 1056,
+          "same_nandina_pairs": 89,
+          "same_nandina_rows": 52,
+          "threshold": 0.95
+        },
+        {
+          "affected_pct": 4.356060606060606,
+          "affected_rows": 46,
+          "comparison": "maximum_historical_pool-evaluation",
+          "different_nandina_pairs": 1,
+          "different_nandina_rows": 1,
+          "method": "token_jaccard_rare_block",
+          "pairs": 70,
+          "rare_token_max_df": 2244,
+          "right_rows": 1056,
+          "same_nandina_pairs": 69,
+          "same_nandina_rows": 45,
+          "threshold": 0.98
+        }
+      ]
+    },
+    "masked_case_counts": {
+      "exact": 36,
+      "near090": 75,
+      "near095": 54,
+      "near098": 46
+    },
+    "maximum_pool_rows": 8979,
+    "primary_denominator_affected": false,
+    "primary_eval_denominator": 1056,
+    "selection_affected": false
   },
   "execution_authorized": false,
   "experiment_id": "EXP-11B",
@@ -827,7 +1177,9 @@
   },
   "gate": "NEW_HISTORICAL_GATE_03",
   "pool": {
+    "H100_frozen_dam_count": 28,
     "H100_frozen_rows": 2950,
+    "direct_h100_new_dam_overlap_count": 0,
     "maximum_pool_rows": 8979,
     "new_eligible_composition_sha256": "9b9fe722e8b63ac5b4d8654f549904c9acb8e1f4d9196015b279c60503c23ae2",
     "new_eligible_dam_count": 43,
@@ -856,6 +1208,18 @@
     "uses_eval_labels_for_selection": false,
     "uses_eval_performance_for_selection": false,
     "uses_nandina_for_selection": false
+  },
+  "selection_identity_comparison": {
+    "accepted_seed_schedule_identical": true,
+    "baseline_candidate_commit": "b3806190cb645d35c2a121c0f1d0c07fbfe21605",
+    "replicate_fields_identical": {
+      "H150_composition_sha256": true,
+      "H150_dams": true,
+      "H150_realized_rows": true,
+      "H200_composition_sha256": true,
+      "H200_dams": true,
+      "H200_realized_rows": true
+    }
   },
   "status": "PROSPECTIVE_DESIGN_FEASIBLE_NOT_EXECUTED",
   "version": "v0.1"
