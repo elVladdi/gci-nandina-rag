@@ -68,17 +68,28 @@ class TestG2AReproducibilityV01(unittest.TestCase):
             {"VERSIONED_FROZEN_EVIDENCE", "RECONSTRUCTABLE_ARTIFACT", "RESTRICTED_LOCAL_SOURCE", "RUNTIME_ONLY_DEPENDENCY", "OPTIONAL_DIAGNOSTIC_ASSET", "NOT_REQUIRED_FOR_FROZEN_CONCLUSION", "EXTERNAL_TESIS_GOVERNANCE_DOCUMENT"},
         )
 
-    def test_gate_is_pending_and_records_no_scientific_change(self) -> None:
+    def test_final_gate_authorizes_only_exp11a_and_records_no_scientific_change(self) -> None:
         gate = json.loads((AUDIT / "gate_g2a_reproducibility_manifest_v0.1.json").read_text(encoding="utf-8"))
-        self.assertEqual(gate["status"], "PENDING_EXTERNAL_FINAL_AUDIT")
+        self.assertEqual(gate["status"], "APPROVED_WITH_NONBLOCKING_LIMITATIONS")
         self.assertEqual(gate["recommended_gate"], "APPROVED_WITH_NONBLOCKING_LIMITATIONS")
-        self.assertEqual(gate["closure_state"], "NOT_CLOSED")
+        self.assertEqual(gate["closure_state"], "CLOSED")
+        self.assertEqual(gate["external_final_audit"], "APPROVED")
+        self.assertEqual(gate["external_audit_date"], "2026-08-31")
+        self.assertEqual(gate["audited_candidate_commit"], "c9751f67165b0bf6e06b54e4e979e7258481ded6")
+        self.assertTrue(gate["G2A_CLOSED"])
         self.assertFalse(gate["group1_reopen_required"])
         self.assertEqual(gate["blocking_findings_for_exp11a"], [])
         self.assertFalse(gate["scientific_results_changed"])
         self.assertFalse(gate["scientific_artifacts_regenerated"])
-        self.assertFalse(gate["execution_authorization"]["exp11"])
+        self.assertTrue(gate["execution_authorization"]["exp11"])
+        self.assertTrue(gate["execution_authorization"]["exp11a"])
+        self.assertEqual(gate["execution_authorization"]["exp11a_execution_scope"], "EXP11A_H25_H50_H75_H100_ONLY")
+        self.assertEqual(gate["execution_authorization"]["authorized_conditions"], ["H25", "H50", "H75", "H100"])
+        self.assertFalse(gate["execution_authorization"]["exp11b"])
+        self.assertFalse(gate["execution_authorization"]["expanded_historical_conditions"])
         self.assertFalse(gate["execution_authorization"]["exp12"])
+        self.assertFalse(gate["NEW_HISTORICAL_DATA_REQUIRED_NOW"])
+        self.assertEqual(gate["NEXT_NEW_DATA_TRIGGER"], "AFTER_EXP11A_EXTERNAL_AUDIT")
 
     def test_microclose_1b_records_exp11_fail_closed_evidence(self) -> None:
         gate = json.loads((AUDIT / "gate_g2a_reproducibility_manifest_v0.1.json").read_text(encoding="utf-8"))
@@ -219,7 +230,7 @@ class TestG2AReproducibilityV01(unittest.TestCase):
         self.assertEqual(findings["G2A-F006"]["original_severity"], "S3")
 
         gate = json.loads((AUDIT / "gate_g2a_reproducibility_manifest_v0.1.json").read_text(encoding="utf-8"))
-        self.assertEqual(gate["status"], "PENDING_EXTERNAL_FINAL_AUDIT")
+        self.assertEqual(gate["status"], "APPROVED_WITH_NONBLOCKING_LIMITATIONS")
         self.assertEqual(gate["recommended_gate"], "APPROVED_WITH_NONBLOCKING_LIMITATIONS")
         self.assertEqual(gate["resolved_in_g2"], ["F006", "F008", "F010"])
         self.assertEqual(gate["future_dependencies"], ["F007"])

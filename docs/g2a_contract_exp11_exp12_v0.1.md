@@ -61,6 +61,12 @@ The following external thesis-governance documents are historical administrative
 
 The candidate gate is `PENDING_EXTERNAL_FINAL_AUDIT` with recommendation `APPROVED_WITH_NONBLOCKING_LIMITATIONS`. It is not a final approval and leaves both EXP-11A and EXP-12 execution unauthorized until the external final audit after the versioned clean-checkout review.
 
+## G2A Operational Final Closure
+
+The external final audit approved candidate commit `c9751f67165b0bf6e06b54e4e979e7258481ded6` on `2026-08-31`. `G2A_FINAL_GATE = APPROVED_WITH_NONBLOCKING_LIMITATIONS` and `G2A_CLOSED = true`; the historical limitations F001/F002/F003/F004/F005/F009 remain nonblocking, F007 remains an `OPEN / FUTURE_DEPENDENCY`, and Group 1 is not reopened.
+
+`EXP11A_AUTHORIZED = true` only for `H25`, `H50`, `H75` and `H100`, with `execution_authorized_scope = EXP11A_H25_H50_H75_H100_ONLY`. The frozen compositions, H50 5 D1/5 D2 paired seeds, tolerances, BM25 configuration, metrics, evalset and hashes remain unchanged. `EXP11B_AUTHORIZED = false`: H150 and H200 stay disabled with source `PENDING_NEW_HISTORICAL_GATE`. `EXP12_AUTHORIZED = false` and its conditional freeze remains unchanged. `NEXT_REQUIRED_DATA_GATE = AFTER_EXP11A_BEFORE_EXP11B_AND_EXP12`; `NEW_HISTORICAL_DATA_REQUIRED_NOW = false` and its next trigger is `AFTER_EXP11A_EXTERNAL_AUDIT`.
+
 ## Pending Scientific Decisions
 
 External audit must review the 30 EXP-11 independent compositions and their F009 composition coupling before any EXP-11 retrieval. It must also approve a new historical gate before any EXP-12 execution. The contracts prevent retrospective selection because no performance metric is an input to either selector.

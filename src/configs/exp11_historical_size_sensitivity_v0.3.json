@@ -1,8 +1,15 @@
 {
   "experiment_id": "exp11_historical_size_sensitivity_v0.3",
   "version": "v0.3",
-  "contract_status": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
-  "execution_authorized": false,
+  "contract_status": "FROZEN_APPROVED_FOR_EXP11A",
+  "execution_authorized": true,
+  "execution_authorized_scope": "EXP11A_H25_H50_H75_H100_ONLY",
+  "exp11a_execution_authorized": true,
+  "authorized_conditions": ["H25", "H50", "H75", "H100"],
+  "exp11b_execution_authorized": false,
+  "expanded_historical_conditions_authorized": false,
+  "NEW_HISTORICAL_DATA_REQUIRED_NOW": false,
+  "NEXT_NEW_DATA_TRIGGER": "AFTER_EXP11A_EXTERNAL_AUDIT",
   "fixed_eval": {
     "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
     "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
@@ -40,7 +47,7 @@
     "accepted_seed_schedule_H50_D2": [20261001, 20261002, 20261003, 20261004, 20261005],
     "accepted_seed_schedule_H75": [20261001, 20261002, 20261003, 20261004, 20261005, 20261006, 20261007, 20261008, 20261009, 20261010],
     "initial_candidate_seed_schedule": [20261001, 20261002, 20261003, 20261004, 20261005, 20261006, 20261007, 20261008, 20261009, 20261010],
-    "seed_classification": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "seed_classification": "FROZEN_APPROVED_FOR_EXP11A",
     "seed_stream_start": 20261001,
     "seed_increment": 1,
     "max_seed_candidates": 100000,
@@ -48,7 +55,7 @@
     "planning_feasibility": {
       "nested_design_status": "STRUCTURALLY_INFEASIBLE_UNDER_FROZEN_GROUP_AND_VOLUME_CONSTRAINTS",
       "nested_design_evidence_path": "outputs/audits/g2a_reproducibility_v0.1/exp11_h100_seed_feasibility_v0.1.json",
-      "status": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+      "status": "FROZEN_APPROVED_FOR_EXP11A",
       "evidence_path": "outputs/audits/g2a_reproducibility_v0.1/exp11_independent_condition_feasibility_v0.2.json",
       "candidates_evaluated_per_condition": {
         "H25": 10,
@@ -56,7 +63,7 @@
         "H75": 10
       },
       "accepted_seed_count_per_condition": {"H25": 10, "H50_D1": 5, "H50_D2": 5, "H75": 10},
-      "resolution": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT; H50 has five paired D1/D2 seeds; no EXP-11 retrieval authorization"
+      "resolution": "FROZEN_APPROVED_FOR_EXP11A; H50 has five paired D1/D2 seeds; retrieval remains unstarted pending its separate execution prompt"
     }
   },
   "feasibility_contract": {
@@ -100,7 +107,7 @@
     ]
   },
   "h50_stratification": {
-    "status": "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "status": "FROZEN_APPROVED_FOR_EXP11A",
     "paired_seed_stream_start": 20261001,
     "seed_increment": 1,
     "max_seed_candidates": 100000,

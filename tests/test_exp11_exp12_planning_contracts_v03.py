@@ -130,7 +130,7 @@ class TestExp11Exp12PlanningContractsV03(unittest.TestCase):
         policy = self.exp11["replicate_policy"]
         self.assertEqual(policy["h100_replicates"], 1)
         self.assertEqual(policy["planning_feasibility"]["nested_design_status"], "STRUCTURALLY_INFEASIBLE_UNDER_FROZEN_GROUP_AND_VOLUME_CONSTRAINTS")
-        self.assertEqual(policy["planning_feasibility"]["status"], "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT")
+        self.assertEqual(policy["planning_feasibility"]["status"], "FROZEN_APPROVED_FOR_EXP11A")
         self.assertEqual(policy["seed_schedule"], [])
         for condition in ("H25", "H75"):
             schedule = policy[f"accepted_seed_schedule_{condition}"]
@@ -163,10 +163,18 @@ class TestExp11Exp12PlanningContractsV03(unittest.TestCase):
         self.assertNotIn("mrr", source)
 
     def test_exp11_h150_and_h200_remain_fail_closed(self) -> None:
+        self.assertEqual(self.exp11["contract_status"], "FROZEN_APPROVED_FOR_EXP11A")
+        self.assertTrue(self.exp11["execution_authorized"])
+        self.assertEqual(self.exp11["execution_authorized_scope"], "EXP11A_H25_H50_H75_H100_ONLY")
+        self.assertTrue(self.exp11["exp11a_execution_authorized"])
+        self.assertEqual(self.exp11["authorized_conditions"], ["H25", "H50", "H75", "H100"])
+        self.assertFalse(self.exp11["exp11b_execution_authorized"])
+        self.assertFalse(self.exp11["expanded_historical_conditions_authorized"])
         for condition in ("H150", "H200"):
             pending = self.exp11["target_conditions"][condition]
             self.assertFalse(pending["enabled"])
             self.assertTrue(pending["fail_closed"])
+            self.assertEqual(pending["source"], "PENDING_NEW_HISTORICAL_GATE")
             self.assertIsNone(pending["path"])
             self.assertIsNone(pending["sha256"])
 

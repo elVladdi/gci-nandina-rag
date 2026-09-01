@@ -771,8 +771,20 @@ def assert_expanded_historical_gate(gate_status: str | None) -> None:
 
 def validate_exp11_contract(config: Mapping[str, Any]) -> None:
     """Validate EXP-11 freeze fields without accessing experiment inputs."""
-    if _require(config, "contract_status") != "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT":
-        raise ValueError("EXP-11 must remain a frozen pending candidate")
+    if _require(config, "contract_status") != "FROZEN_APPROVED_FOR_EXP11A":
+        raise ValueError("EXP-11 must remain frozen and approved only for EXP-11A")
+    if _require(config, "execution_authorized") is not True:
+        raise ValueError("EXP-11A authorization must be explicit")
+    if _require(config, "execution_authorized_scope") != "EXP11A_H25_H50_H75_H100_ONLY":
+        raise ValueError("EXP-11 authorization scope must exclude H150 and H200")
+    if _require(config, "exp11a_execution_authorized") is not True:
+        raise ValueError("EXP-11A must be explicitly authorized")
+    if _require(config, "authorized_conditions") != ["H25", "H50", "H75", "H100"]:
+        raise ValueError("EXP-11A authorized conditions must be the frozen H25/H50/H75/H100 set")
+    if _require(config, "exp11b_execution_authorized") is not False:
+        raise ValueError("EXP-11B must remain unauthorized")
+    if _require(config, "expanded_historical_conditions_authorized") is not False:
+        raise ValueError("Expanded historical conditions must remain unauthorized")
     fixed_eval = _require(config, "fixed_eval")
     h100 = _require(config, "h100_frozen_reference")
     selection = _require(config, "selection")
@@ -815,13 +827,13 @@ def validate_exp11_contract(config: Mapping[str, Any]) -> None:
     if h50_paired != h50_d1 or h50_paired != h50_d2:
         raise ValueError("Every H50 D1/D2 replicate must retain its paired seed")
     planning = _require(policy, "planning_feasibility")
-    if planning.get("status") != "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT":
-        raise ValueError("EXP-11 independent schedules must remain pending external audit")
+    if planning.get("status") != "FROZEN_APPROVED_FOR_EXP11A":
+        raise ValueError("EXP-11 independent schedules must retain the approved EXP-11A freeze")
     if planning.get("accepted_seed_count_per_condition") != {"H25": 10, "H50_D1": 5, "H50_D2": 5, "H75": 10}:
         raise ValueError("EXP-11 H50 stratum replicate counts are not frozen")
     h50 = _require(config, "h50_stratification")
-    if h50.get("status") != "FROZEN_CANDIDATE_PENDING_EXTERNAL_AUDIT":
-        raise ValueError("EXP-11 H50 stratification must remain pending external audit")
+    if h50.get("status") != "FROZEN_APPROVED_FOR_EXP11A":
+        raise ValueError("EXP-11 H50 stratification must retain the approved EXP-11A freeze")
     if h50.get("primary_analysis") != "POOLED_EQUAL_WEIGHT_5_D1_5_D2" or h50.get("secondary_diagnostic") != "DOMINANT_STRATUM_COMPARISON":
         raise ValueError("EXP-11 H50 analysis and diagnostic contract are not frozen")
     strata = _require(h50, "strata")

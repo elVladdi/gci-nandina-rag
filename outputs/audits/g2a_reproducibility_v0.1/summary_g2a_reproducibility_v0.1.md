@@ -51,3 +51,7 @@ F001 is `PARTIALLY_RESOLVED`: historical environment completeness is limited but
 F010 is `VERIFIED_IN_G2` with resolution `RESOLVED_PRE_EXECUTION_BY_H50_STRATIFICATION`: v0.1 remains evidence for the prior `2_D1_8_D2` state and v0.2 preserves the final `5_D1_5_D2` paired design. H25/H75 SHA lists remain unchanged. The external v3 thesis fichas are recorded by path and SHA in the candidate gate as `EXTERNAL_TESIS_GOVERNANCE_DOCUMENT`; they are not required for clean-checkout execution.
 
 The candidate gate is `PENDING_EXTERNAL_FINAL_AUDIT` and recommends `APPROVED_WITH_NONBLOCKING_LIMITATIONS`. EXP-11A and EXP-12 remain unauthorized. The external final audit must inspect the versioned commit and clean checkout; this summary does not certify G2A as closed.
+
+## G2A Operational Final Closure
+
+External audit approved candidate commit `c9751f67165b0bf6e06b54e4e979e7258481ded6` on `2026-08-31`. G2A is `CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS`; Group 1 remains closed and the historical limitation taxonomy is unchanged. EXP-11A is authorized only for H25/H50/H75/H100 under the frozen design, including the paired H50 5 D1/5 D2 schedule. EXP-11B H150/H200 and EXP-12 remain fail-closed, and no retrieval, metric computation or scientific-artifact generation occurred in this closure. New historical data are not required now; the next trigger is `AFTER_EXP11A_EXTERNAL_AUDIT` before EXP-11B or EXP-12.
