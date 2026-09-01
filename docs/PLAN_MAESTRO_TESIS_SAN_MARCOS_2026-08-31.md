@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A y EXP-11A cerrados; Forensic Audit 01 y Gate 02 cerrados e integrados; siguiente: incorporación controlada de NUEVA_01 y Gate de datos ampliados** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — Gate 02 cerrado; NUEVA_01 agregada; Real Ingest 01 detenido antes de ingesta por comparación parser demasiado estricta; microauditoría de diferencias en Hoja2 pendiente** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -260,19 +260,24 @@ Repositorio público / artículos / tesis final
 ### 2026-09-01 — Gate 02 candidato auditado externamente
 
 - Rama candidata `codex/new-historical-gate-source-contract-v01` = `7a7153e6e8bebbc00486bd33e32613209b5febda`.
-- `main` permanecía `9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
+- `main` permanece `9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
+- Commit candidato: 1 commit / 4 archivos añadidos.
 - Freeze externo de fuente actual: SHA origen=copia `db01d1fc...`; 7,895,186 bytes; Python `shutil.copy2`.
 - 17/17 tests nuevos y 287/287 suite reportados.
-- Gate 02 requirió cinco correcciones prospectivas antes de autorizar nueva data.
+- Gate 02 **NO cerrado externamente** por cinco hallazgos prospectivos: manifiesto de freeze no versionado, path de ingesta futura no congelado, `NUEVA_02` aceptada sin `NUEVA_01`, masking de razones de overlap y terminología demasiado amplia sobre “historical_sheets”.
+- No se autoriza modificar el Excel ni incorporar nueva data hasta resolver y auditar esos hallazgos.
 
 ### 2026-09-01 — Gate 02 microclose aprobado externamente
 
 - Candidato final: `ad4c630a6a4d442776740b59b9552ba72141ea48`.
+- Relación con main: 2 commits delante, 0 detrás.
 - Cinco archivos versionados en el scope Gate 02.
 - F001–F005: `VERIFIED_RESOLVED`.
 - Manifiesto de freeze versionado y consistente con SHA `db01d1fc...`.
 - Path `--ingest-new-data` congelado y probado sintéticamente.
 - 27/27 tests Gate 02; 297/297 suite completa.
+- Gate 02: **EXTERNAL APPROVAL = true; INTEGRATION TO MAIN = pending**.
+- El Excel sigue intacto; nueva data aún no procesada.
 
 ### 2026-09-01 — Gate 02 cerrado e integrado
 
@@ -287,3 +292,27 @@ Repositorio público / artículos / tesis final
 - `NUEVA_02` es opcional y solo debe agregarse si es necesaria por capacidad física/operativa.
 - Antes de la ingesta real se verificará que `Hoja2` y `Hoja1` no hayan cambiado respecto de la copia congelada.
 - La nueva data se procesará exclusivamente con Python; no se construyen manualmente H150/H200.
+
+### 2026-09-01 — Real Ingest 01 detenido antes de procesar NUEVA_01
+
+- Workbook ampliado: orden corregido `["Hoja2", "Hoja1", "NUEVA_01"]`.
+- `HOJA2_CANONICAL_CONTENT_MATCH=true`.
+- `HOJA1_CANONICAL_CONTENT_MATCH=true`.
+- Coincidencia en `data_only=True` y `data_only=False`; no existen fórmulas.
+- Parser Hoja2: mismas columnas y 11,320 filas, pero la igualdad literal de todos los diccionarios devolvió `false`.
+- No se congeló el workbook ampliado.
+- No se ejecutó `--validate-new-sheets`.
+- No se ejecutaron tests de la pasada.
+- No se ejecutó `--ingest-new-data`.
+- No se generaron outputs de nueva data.
+- Código/config/datasets congelados sin cambios.
+
+#### Diagnóstico externo preliminar
+
+El parser incorpora `__source_file = str(source_file)` en cada fila y `parse_workbook()` pasa el `path` del workbook directamente a `parse_series_block`. Por tanto, comparar literalmente filas obtenidas desde el archivo congelado y desde el workbook ampliado **debe producir una diferencia de procedencia en `__source_file` aunque todo el contenido científico sea idéntico**.
+
+Estado provisional:
+
+`NHG_REAL01-F001 = PARSER_PROVENANCE_PATH_FALSE_MISMATCH / OPEN_FORENSIC_CHECK`.
+
+No se autoriza todavía la ingesta. El siguiente paso es una comparación campo-a-campo READ-ONLY. Solo `__source_file` puede diferir. Si cualquier otro campo, fila, orden, warning o metadato funcional difiere, la ingesta seguirá bloqueada. Si la única diferencia es `__source_file`, el control histórico se considerará PASS y podrá continuar la ejecución real sin modificar código.
