@@ -1,0 +1,67 @@
+{
+  "version": "v0.1",
+  "contract_name": "NEW_HISTORICAL_GATE_02",
+  "source_classification": "CURRENT_H100_REPRODUCING_SOURCE",
+  "source_statement": "El workbook actual reproduce byte a byte los datasets congelados cuando es procesado mediante la cadena reconstruida, pero no se ha demostrado identidad binaria con el workbook historico completo.",
+  "current_source": {
+    "path": "data/Series - Descripciones.xlsx",
+    "sha256": "db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1",
+    "size_bytes": 7895186,
+    "sheet_order": ["Hoja2", "Hoja1"]
+  },
+  "historical_sheets": ["Hoja2", "Hoja1"],
+  "allowed_new_sheets": ["NUEVA_01", "NUEVA_02"],
+  "expanded_workbook_sheet_order": ["Hoja2", "Hoja1", "NUEVA_01", "NUEVA_02"],
+  "frozen_datasets": {
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "rows": 2950
+    },
+    "DEV": {
+      "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+      "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+      "rows": 100
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "rows": 1056
+    }
+  },
+  "future_parser": {
+    "module": "src.ingestion.sunat_series_parser",
+    "entrypoint": "parse_workbook",
+    "sheet_selection": "EXPLICIT_ONLY",
+    "forbidden_pipeline": "src.evaluation.build_evalset_from_sunat_excel"
+  },
+  "future_curation": {
+    "reuse_module": "src.evaluation.build_data_aduanas_splits",
+    "eligible_class": "87",
+    "required_nandina_digits": 8,
+    "exclude_critical_warnings": true,
+    "deduplicate_by": "id_unico",
+    "exclude_fixed_dev_eval_dam": true,
+    "detect_existing_id_unico_overlap": true,
+    "near_duplicate_thresholds": [0.9, 0.95, 0.98]
+  },
+  "capacity": {
+    "H100_rows": 2950,
+    "H150_target": 4425,
+    "H200_target": 5900,
+    "minimum_net_new_eligible_rows_for_H200": 2950,
+    "fail_if_total_eligible_below_H200": true
+  },
+  "prohibitions": {
+    "rebuild_H100_from_expanded_workbook": true,
+    "modify_frozen_splits": true,
+    "manual_excel_historical_csv_construction": true,
+    "model_metric_selection": true
+  },
+  "v02_provenance": {
+    "seed": 2026,
+    "seed_role": "configuration_and_provenance_only",
+    "dam_assignment": "explicit_T5_safe_159_configuration",
+    "selection_mechanism": "not_random_in_group_split_by_dam"
+  }
+}
