@@ -1,0 +1,72 @@
+{
+  "experiment_id": "EXP-11B",
+  "version": "v0.1",
+  "contract_status": "EXP11B_BANK_MATERIALIZATION_ONLY",
+  "gate03_source_commit": "ed470d67315f505cb3bde471177268db6d16a676",
+  "bank_materialization_authorized": true,
+  "retrieval_authorized": false,
+  "retrieval_executed": false,
+  "evaluation_metrics_allowed": false,
+  "evaluation_metrics_computed": false,
+  "inputs": {
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "rows": 2950,
+      "dams": 28,
+      "nandina": 66
+    },
+    "NEW_ELIGIBLE": {
+      "path": "data/interim/new_historical_gate_v0.1/new_historical_eligible.csv",
+      "sha256": "a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4",
+      "rows": 6029,
+      "dams": 43
+    },
+    "DEV": {
+      "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv"
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv"
+    }
+  },
+  "feasibility": {
+    "path": "outputs/audits/new_historical_gate_v0.1/exp11b_h150_h200_feasibility_v0.1.json",
+    "sha256": "fa9eaf906feac264bca9e496557bbc1f17fe1462af412752c2b81a85af78fdf0",
+    "accepted_replicates": 10,
+    "accepted_seed_schedule": [
+      20261005,
+      20261006,
+      20261007,
+      20261010,
+      20261011,
+      20261013,
+      20261017,
+      20261021,
+      20261023,
+      20261024
+    ],
+    "execution_authorized": false,
+    "retrieval_executed": false
+  },
+  "conditions": ["H150", "H200"],
+  "banks_expected": 20,
+  "bank_row_order_policy": "H100_ORIGINAL_ORDER_THEN_NEW_ELIGIBLE_ORIGINAL_ORDER_FILTERED_BY_SELECTED_DAMS",
+  "required_scientific_columns": [
+    "id_unico",
+    "DECLARACION",
+    "NANDINA",
+    "DESCRIPCION DE MERCANCIAS CONCATENADA"
+  ],
+  "serialization": {
+    "encoding": "utf-8",
+    "lineterminator": "\\n",
+    "quoting": "csv.QUOTE_MINIMAL",
+    "header": "H100_EXACT_COLUMN_ORDER"
+  },
+  "output_contract": {
+    "bank_dir": "data/interim/exp11b_historical_banks_v0.1",
+    "audit_dir": "outputs/audits/exp11b_bank_materialization_v0.1",
+    "manifest_filename": "exp11b_bank_materialization_manifest_v0.1.json",
+    "hashes_filename": "exp11b_bank_hashes_v0.1.csv"
+  }
+}

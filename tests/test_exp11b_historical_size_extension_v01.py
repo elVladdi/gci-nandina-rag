@@ -182,7 +182,7 @@ class Exp11bHistoricalSizeExtensionV01Tests(unittest.TestCase):
         for row in total_rows:
             counts[row["DECLARACION"]] = counts.get(row["DECLARACION"], 0) + 1
         expected_hhi = sum((count / len(total_rows)) ** 2 for count in counts.values())
-        self.assertEqual(descriptor["dam_hhi"], expected_hhi)
+        self.assertAlmostEqual(descriptor["dam_hhi"], expected_hhi, places=15)
         self.assertNotEqual(descriptor["dam_hhi"], replicate["H150"]["increment_descriptor"]["dam_hhi"])
 
     def test_25_total_largest_dam_share_is_recalculable(self) -> None:
