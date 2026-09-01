@@ -9,9 +9,16 @@
     "size_bytes": 7895186,
     "sheet_order": ["Hoja2", "Hoja1"]
   },
-  "historical_sheets": ["Hoja2", "Hoja1"],
-  "allowed_new_sheets": ["NUEVA_01", "NUEVA_02"],
-  "expanded_workbook_sheet_order": ["Hoja2", "Hoja1", "NUEVA_01", "NUEVA_02"],
+  "preexisting_source_sheets": ["Hoja2", "Hoja1"],
+  "historically_processed_sheet": "Hoja2",
+  "historically_processed_sheet_index": 0,
+  "historical_sheet_selection": "DEFAULT_FIRST_WORKSHEET",
+  "historically_processed_second_sheet": false,
+  "preexisting_second_sheet_classification": "PREEXISTING_UNPROCESSED_SOURCE_SHEET",
+  "new_sheet_sets": {
+    "NEW_SHEET_SET_1": ["NUEVA_01"],
+    "NEW_SHEET_SET_2": ["NUEVA_01", "NUEVA_02"]
+  },
   "frozen_datasets": {
     "H100": {
       "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
@@ -35,6 +42,34 @@
     "sheet_selection": "EXPLICIT_ONLY",
     "forbidden_pipeline": "src.evaluation.build_evalset_from_sunat_excel"
   },
+  "future_ingestion": {
+    "mode": "--ingest-new-data",
+    "pipeline_order": [
+      "PARSE",
+      "COMBINE_NEW_SHEETS",
+      "CLASSIFY_CURATE",
+      "FROZEN_DAM_ID_AUDIT",
+      "ELIGIBLE_POOL",
+      "EXACT_NEAR_DUPLICATE_AUDIT",
+      "CAPACITY_DESCRIPTORS",
+      "PROSPECTIVE_OUTPUTS_AND_MANIFEST"
+    ],
+    "interim_output_dir": "data/interim/new_historical_gate_v0.1",
+    "audit_output_dir": "outputs/audits/new_historical_gate_v0.1",
+    "outputs": [
+      "new_historical_normalized_all.csv",
+      "new_historical_curated.csv",
+      "new_historical_eligible.csv",
+      "new_historical_exclusions.csv",
+      "new_historical_frozen_overlap_audit.csv",
+      "new_historical_duplicate_nearduplicate_audit.csv",
+      "new_historical_ingestion_manifest.json",
+      "new_historical_artifact_hashes.csv"
+    ],
+    "creates_H150_or_H200": false,
+    "retrieval_executed": false,
+    "model_metric_selection_used": false
+  },
   "future_curation": {
     "reuse_module": "src.evaluation.build_data_aduanas_splits",
     "eligible_class": "87",
@@ -49,6 +84,7 @@
     "H100_rows": 2950,
     "H150_target": 4425,
     "H200_target": 5900,
+    "minimum_net_new_eligible_rows_for_H150": 1475,
     "minimum_net_new_eligible_rows_for_H200": 2950,
     "fail_if_total_eligible_below_H200": true
   },

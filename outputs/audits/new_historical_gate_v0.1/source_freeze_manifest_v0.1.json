@@ -1,0 +1,70 @@
+{
+  "contract": {
+    "H100_rebuild_from_expanded_workbook_forbidden": true,
+    "explicit_sheet_selection_required": true,
+    "historically_processed_second_sheet": false,
+    "historically_processed_sheet": "Hoja2",
+    "historically_processed_sheet_index": 0,
+    "historical_sheet_selection": "DEFAULT_FIRST_WORKSHEET",
+    "new_sheet_sets": {
+      "NEW_SHEET_SET_1": [
+        "NUEVA_01"
+      ],
+      "NEW_SHEET_SET_2": [
+        "NUEVA_01",
+        "NUEVA_02"
+      ]
+    },
+    "preexisting_second_sheet_classification": "PREEXISTING_UNPROCESSED_SOURCE_SHEET",
+    "preexisting_source_sheets": [
+      "Hoja2",
+      "Hoja1"
+    ]
+  },
+  "freeze": {
+    "archive_path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA_source_archive\\Series - Descripciones_CURRENT_H100_REPRODUCING_SOURCE_db01d1fc.xlsx",
+    "archive_sha256": "db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1",
+    "archive_size_bytes": 7895186,
+    "copy_method": "Python shutil.copy2 binary copy",
+    "source_mutated": false,
+    "source_sha256_after": "db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1",
+    "source_sha256_before": "db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1"
+  },
+  "gate": "NEW_HISTORICAL_GATE_02",
+  "generated_at_utc": "2026-09-01T12:49:43.707449+00:00",
+  "preflight": {
+    "CURRENT_SOURCE_FREEZE_READY": true,
+    "NEW_DATA_INGESTION_EXECUTED": false,
+    "NEW_DATA_SHEETS_PRESENT": false,
+    "frozen_datasets": {
+      "DEV": {
+        "path": "data/processed/data_aduanas_devset_clase87_v0.2.csv",
+        "sha256": "434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00",
+        "size_bytes": 135082
+      },
+      "EVAL": {
+        "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+        "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "size_bytes": 1363273
+      },
+      "H100": {
+        "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+        "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+        "size_bytes": 3462862
+      }
+    },
+    "source": {
+      "new_data_sheets_present": false,
+      "path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestr\u00eda UNMSM\\LLM_RGA_NANDINA\\data\\Series - Descripciones.xlsx",
+      "sha256": "db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1",
+      "sheet_order": [
+        "Hoja2",
+        "Hoja1"
+      ],
+      "size_bytes": 7895186
+    }
+  },
+  "source_classification": "CURRENT_H100_REPRODUCING_SOURCE",
+  "source_statement": "El workbook actual reproduce byte a byte los datasets congelados cuando es procesado mediante la cadena reconstruida, pero no se ha demostrado identidad binaria con el workbook historico completo.",
+  "version": "v0.1"
+}
