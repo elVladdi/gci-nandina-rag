@@ -4,18 +4,23 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import tempfile
 import unittest
 from unittest.mock import patch
 
 from src.experiments.run_exp11a_historical_size_sensitivity_v03 import (
     ALLOWED_CONDITIONS,
-    H100_SHA256,
     EVAL_SHA256,
+    H100_MRR_ABS_TOLERANCE,
+    H100_SHA256,
     _canonical_status_lines,
+    _frozen_h100_pass,
+    _load_frozen_h100_reference,
     _source_by_dam,
     _subset_rows,
     _validate_execution_contract,
     load_frozen_run_specs,
+    run_h100_check_only,
 )
 from src.experiments import evaluate_historical_retrieval_data_aduanas_v02 as historical
 
@@ -65,6 +70,51 @@ class TestExp11aHistoricalSizeSensitivityV03(unittest.TestCase):
         self.assertEqual(historical.K_VALUES, [1, 3, 5, 10, 50])
         self.assertEqual(self.config["target_conditions"]["H150"]["enabled"], False)
         self.assertEqual(self.config["target_conditions"]["H200"]["enabled"], False)
+
+    def test_official_h100_reference_passes_against_its_own_full_precision_metrics(self) -> None:
+        frozen = _load_frozen_h100_reference(ROOT)["metrics"]
+        actual = {
+            "Top1_correct_count": frozen["Top1_count"],
+            "Top3_correct_count": frozen["Top3_count"],
+            "Top5_correct_count": frozen["Top5_count"],
+            "Top10_correct_count": frozen["Top10_count"],
+            "Top50_correct_count": frozen["Top50_count"],
+            "MRR": frozen["MRR"],
+        }
+        self.assertEqual(_frozen_h100_pass(actual, frozen)["status"], "PASS")
+
+    def test_full_precision_h100_metrics_pass(self) -> None:
+        frozen = {"Top1_count": 538, "Top3_count": 709, "Top5_count": 806, "Top10_count": 941, "Top50_count": 1047, "MRR": 0.6297077493524843}
+        actual = {"Top1_correct_count": 538, "Top3_correct_count": 709, "Top5_correct_count": 806, "Top10_correct_count": 941, "Top50_correct_count": 1047, "MRR": 0.6297077493524843}
+        self.assertEqual(_frozen_h100_pass(actual, frozen)["status"], "PASS")
+
+    def test_h100_gate_rejects_incorrect_count(self) -> None:
+        frozen = _load_frozen_h100_reference(ROOT)["metrics"]
+        actual = {"Top1_correct_count": 537, "Top3_correct_count": 709, "Top5_correct_count": 806, "Top10_correct_count": 941, "Top50_correct_count": 1047, "MRR": frozen["MRR"]}
+        self.assertEqual(_frozen_h100_pass(actual, frozen)["status"], "FAILED")
+
+    def test_h100_gate_rejects_mrr_delta_above_tolerance(self) -> None:
+        frozen = _load_frozen_h100_reference(ROOT)["metrics"]
+        actual = {"Top1_correct_count": 538, "Top3_correct_count": 709, "Top5_correct_count": 806, "Top10_correct_count": 941, "Top50_correct_count": 1047, "MRR": frozen["MRR"] + (H100_MRR_ABS_TOLERANCE * 1.1)}
+        self.assertEqual(_frozen_h100_pass(actual, frozen)["status"], "FAILED")
+
+    def test_h100_gate_accepts_mrr_delta_within_tolerance(self) -> None:
+        frozen = _load_frozen_h100_reference(ROOT)["metrics"]
+        actual = {"Top1_correct_count": 538, "Top3_correct_count": 709, "Top5_correct_count": 806, "Top10_correct_count": 941, "Top50_correct_count": 1047, "MRR": frozen["MRR"] + (H100_MRR_ABS_TOLERANCE * 0.5)}
+        self.assertEqual(_frozen_h100_pass(actual, frozen)["status"], "PASS")
+
+    def test_h100_failure_persists_diagnostic_before_raise(self) -> None:
+        bad_metrics = {"Top1_correct_count": 537, "Top3_correct_count": 709, "Top5_correct_count": 806, "Top10_correct_count": 941, "Top50_correct_count": 1047, "MRR": 0.6297077493524843}
+        preflight = {"status": "PASS", "git": {"commit": "test-commit"}}
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "attempt02"
+            with patch("src.experiments.run_exp11a_historical_size_sensitivity_v03._run_bm25", return_value=(bad_metrics, [])):
+                with self.assertRaisesRegex(ValueError, "EXP11A_VALIDITY_GATE = FAILED"):
+                    run_h100_check_only(preflight, ROOT, self.historical_path, self.eval_path, AUDIT / "exp11_independent_condition_feasibility_v0.2.json", output)
+            audit = json.loads((output / "audit" / "h100_validity_check.json").read_text(encoding="utf-8"))
+            self.assertEqual(audit["status"], "FAILED")
+            self.assertEqual(audit["H25_runs_executed"], 0)
+            self.assertTrue((output / "audit" / "attempt02_start.json").is_file())
 
     def test_git_status_parser_preserves_permitted_path_with_spaces(self) -> None:
         status = "?? data/Series - Descripciones.xlsx\0?? Referencias/Antecedentes/\0"

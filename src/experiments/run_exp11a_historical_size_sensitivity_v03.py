@@ -36,14 +36,15 @@ EXPERIMENT_VERSION = "historical_size_sensitivity_v0.3"
 BASE_MAIN_COMMIT = "a6140b66cf2975313be327d6d3d4e18e38f1fdf5"
 H100_SHA256 = "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff"
 EVAL_SHA256 = "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
-H100_METRICS = {
-    "Top1_correct_count": 538,
-    "Top3_correct_count": 709,
-    "Top5_correct_count": 806,
-    "Top10_correct_count": 941,
-    "Top50_correct_count": 1047,
-    "MRR": 0.62970774935,
-}
+H100_MRR_ABS_TOLERANCE = 1e-12
+H100_COMPARISON_FIELDS = (
+    ("Top1_count", "Top1_correct_count", "exact_at_1_numerator"),
+    ("Top3_count", "Top3_correct_count", "exact_at_3_numerator"),
+    ("Top5_count", "Top5_correct_count", "exact_at_5_numerator"),
+    ("Top10_count", "Top10_correct_count", "exact_at_10_numerator"),
+    ("Top50_count", "Top50_correct_count", "exact_at_50_numerator"),
+    ("MRR", "MRR", "mrr"),
+)
 K_VALUES = (1, 3, 5, 10, 50)
 ALLOWED_CONDITIONS = ("H25", "H50", "H75", "H100")
 ALLOWED_UNTRACKED = {
@@ -57,6 +58,7 @@ DEFAULT_GATE = Path("outputs/audits/g2a_reproducibility_v0.1/gate_g2a_reproducib
 DEFAULT_HISTORICAL = Path("data/processed/data_aduanas_historico_clase87_v0.2.csv")
 DEFAULT_EVAL = Path("data/processed/data_aduanas_evalset_clase87_v0.2.csv")
 DEFAULT_OUTPUT = Path("outputs/experiments/exp11a_historical_size_sensitivity_v0.3")
+DEFAULT_H100_REFERENCE = Path("outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json")
 QUERY_COLUMN = historical.QUERY_COLUMN
 LABEL_COLUMN = historical.LABEL_COLUMN
 DAM_COLUMN = "DECLARACION"
@@ -442,13 +444,48 @@ def _learning_row(summary: Mapping[str, Any], nominal_fraction: float) -> dict[s
     return row
 
 
-def _frozen_h100_pass(metrics: Mapping[str, Any]) -> dict[str, Any]:
+def _load_frozen_h100_reference(root: Path) -> dict[str, Any]:
+    reference_path = root / DEFAULT_H100_REFERENCE
+    reference_relative = _rel(reference_path, root)
+    _require(_git(root, "ls-files", "--error-unmatch", "--", reference_relative) == reference_relative, "Frozen H100 metrics reference is not tracked")
+    _require(not _git(root, "diff", "--name-only", BASE_MAIN_COMMIT, "--", reference_relative), "Frozen H100 metrics reference differs from the scientific base")
+    payload = _read_json(reference_path)
+    inputs = payload.get("inputs", {})
+    parameters = payload.get("parameters", {})
+    _require(payload.get("version") == "v0.2", "Frozen H100 metrics reference version differs")
+    _require(payload.get("experiment_id") == "exp04_phase_a_historical_bm25_v0.2", "Frozen H100 metrics reference experiment differs")
+    _require(inputs.get("historical_sha256") == H100_SHA256, "Frozen H100 metrics reference historical SHA differs")
+    _require(inputs.get("evalset_sha256") == EVAL_SHA256, "Frozen H100 metrics reference eval SHA differs")
+    _require(parameters.get("history_depth") == 2950 and parameters.get("candidate_depth") == 100, "Frozen H100 depth parameters differ")
+    _require(parameters.get("k1") == 1.5 and parameters.get("b") == 0.75, "Frozen H100 BM25 parameters differ")
+    frozen_metrics = payload.get("metrics", {})
+    return {
+        "path": reference_relative,
+        "git_base": BASE_MAIN_COMMIT,
+        "metrics": {
+            output_name: frozen_metrics[source_name]
+            for output_name, _actual_name, source_name in H100_COMPARISON_FIELDS
+        },
+    }
+
+
+def _actual_h100_metrics(metrics: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        output_name: metrics[actual_name]
+        for output_name, actual_name, _source_name in H100_COMPARISON_FIELDS
+    }
+
+
+def _frozen_h100_pass(metrics: Mapping[str, Any], frozen_metrics: Mapping[str, Any]) -> dict[str, Any]:
     comparisons: dict[str, Any] = {}
     passed = True
-    for key, expected in H100_METRICS.items():
-        actual = metrics[key]
-        match = actual == expected if key.endswith("correct_count") else math.isclose(float(actual), float(expected), rel_tol=0.0, abs_tol=1e-12)
-        comparisons[key] = {"frozen": expected, "check": actual, "match": match}
+    for output_name, actual_name, _source_name in H100_COMPARISON_FIELDS:
+        expected = frozen_metrics[output_name]
+        actual = metrics[actual_name]
+        tolerance = H100_MRR_ABS_TOLERANCE if output_name == "MRR" else 0
+        absolute_delta = abs(float(actual) - float(expected))
+        match = actual == expected if output_name != "MRR" else math.isclose(float(actual), float(expected), rel_tol=0.0, abs_tol=H100_MRR_ABS_TOLERANCE)
+        comparisons[output_name] = {"expected": expected, "actual": actual, "absolute_delta": absolute_delta, "tolerance": tolerance, "match": match}
         passed = passed and match
     return {"status": "PASS" if passed else "FAILED", "comparisons": comparisons}
 
@@ -461,6 +498,7 @@ def build_preflight(root: Path, config_path: Path, evidence_path: Path, gate_pat
     _validate_execution_contract(config, gate, exp12)
     _require(sha256_file(historical_path) == H100_SHA256, "H100 SHA256 mismatch")
     _require(sha256_file(eval_path) == EVAL_SHA256, "Eval SHA256 mismatch")
+    frozen_h100_reference = _load_frozen_h100_reference(root)
     historical_rows = historical._read_csv(historical_path)
     eval_rows = historical._read_csv(eval_path)
     _require(len(historical_rows) == 2950 and len(eval_rows) == 1056, "Frozen input row count mismatch")
@@ -484,6 +522,7 @@ def build_preflight(root: Path, config_path: Path, evidence_path: Path, gate_pat
         "run_counts": {"H25": 10, "H50": 10, "H75": 10, "H100": 1, "variable_runs": 30},
         "h50": {"D1": 5, "D2": 5, "paired_seeds": [20261001, 20261002, 20261003, 20261004, 20261005]},
         "outputs": _rel(output_dir, root),
+        "frozen_h100_reference": frozen_h100_reference,
         "frozen_execution_order": [spec["run_id"] for spec in specs],
     }
 
@@ -526,6 +565,65 @@ def _findings_text(condition_rows: Sequence[Mapping[str, Any]], h50_rows: Sequen
     return "\n".join(lines)
 
 
+def run_h100_check_only(preflight: Mapping[str, Any], root: Path, historical_path: Path, eval_path: Path, evidence_path: Path, output_dir: Path) -> dict[str, Any]:
+    """Revalidate H100 only and persist the audit before a fail-closed raise."""
+    _require(preflight.get("status") == "PASS", "EXP-11A preflight did not pass")
+    output_dir.mkdir(parents=True, exist_ok=False)
+    for name in ("conditions", "runs", "logs", "audit"):
+        (output_dir / name).mkdir()
+    started = datetime.now(timezone.utc)
+    _write_json(
+        output_dir / "audit" / "attempt02_start.json",
+        {
+            "attempt_id": "H100_ATTEMPT_02",
+            "execution_commit": preflight["git"]["commit"],
+            "EXP11A_H100_ATTEMPT_02_STARTED_AT": started.isoformat(),
+            "EXP11_RETRIEVAL_STARTED": True,
+            "variable_runs_executed": 0,
+        },
+    )
+    frozen_reference = _load_frozen_h100_reference(root)
+    historical_rows = historical._read_csv(historical_path)
+    eval_rows = historical._read_csv(eval_path)
+    specs = load_frozen_run_specs(_read_json(evidence_path), _source_by_dam(historical_rows))
+    h100_spec = specs[0]
+    _require(h100_spec["run_id"] == "H100_REEXECUTED_CHECK", "H100 must be the only first attempt-02 spec")
+    subset = _subset_rows(historical_rows, h100_spec)
+    _write_csv(output_dir / "conditions" / "H100_REEXECUTED_CHECK.csv", subset, list(historical_rows[0]))
+    actual_metrics, _case_rows = _run_bm25(h100_spec, subset, eval_rows)
+    comparison = _frozen_h100_pass(actual_metrics, frozen_reference["metrics"])
+    ended = datetime.now(timezone.utc)
+    audit = {
+        "attempt_id": "H100_ATTEMPT_02",
+        "execution_commit": preflight["git"]["commit"],
+        "timestamp_start_utc": started.isoformat(),
+        "timestamp_end_utc": ended.isoformat(),
+        "frozen_reference_path": frozen_reference["path"],
+        "frozen_reference_git_base": frozen_reference["git_base"],
+        "frozen": frozen_reference["metrics"],
+        "actual": _actual_h100_metrics(actual_metrics),
+        "comparison": comparison["comparisons"],
+        "status": comparison["status"],
+        "H25_runs_executed": 0,
+        "H50_runs_executed": 0,
+        "H75_runs_executed": 0,
+        "EXP11A_VARIABLE_RUNS_EXECUTED": 0,
+    }
+    _write_json(output_dir / "audit" / "h100_validity_check.json", audit)
+    _write_text(
+        output_dir / "logs" / "exp11_execution_log.txt",
+        "\n".join((
+            f"EXP11A_H100_ATTEMPT_02_STARTED_AT={started.isoformat()}",
+            f"EXP11A_H100_ATTEMPT_02_ENDED_AT={ended.isoformat()}",
+            f"git_commit={preflight['git']['commit']}",
+            f"H100_REVALIDATION={comparison['status']}",
+            "EXP11A_VARIABLE_RUNS_EXECUTED=0",
+        )),
+    )
+    _require(comparison["status"] == "PASS", "EXP11A_VALIDITY_GATE = FAILED: H100 re-executed check differs from frozen baseline")
+    return audit
+
+
 def execute(preflight: Mapping[str, Any], root: Path, historical_path: Path, eval_path: Path, evidence_path: Path, output_dir: Path) -> dict[str, Any]:
     _require(preflight.get("status") == "PASS", "EXP-11A preflight did not pass")
     output_dir.mkdir(parents=True, exist_ok=False)
@@ -535,6 +633,7 @@ def execute(preflight: Mapping[str, Any], root: Path, historical_path: Path, eva
     historical_rows = historical._read_csv(historical_path)
     eval_rows = historical._read_csv(eval_path)
     evidence = _read_json(evidence_path)
+    frozen_h100_reference = _load_frozen_h100_reference(root)
     specs = load_frozen_run_specs(evidence, _source_by_dam(historical_rows))
     reference_codes = {historical._clean(row.get(LABEL_COLUMN)) for row in historical_rows}
     fields = list(historical_rows[0])
@@ -557,7 +656,7 @@ def execute(preflight: Mapping[str, Any], root: Path, historical_path: Path, eva
             _require(descriptors["nandina_coverage"] == frozen["nandina_coverage"], f"{spec['run_id']} NANDINA coverage differs from frozen evidence")
         result_metrics, result_cases = _run_bm25(spec, subset, eval_rows)
         if spec["condition_id"] == "H100":
-            h100_check = _frozen_h100_pass(result_metrics)
+            h100_check = _frozen_h100_pass(result_metrics, frozen_h100_reference["metrics"])
             _require(h100_check["status"] == "PASS", "EXP11A_VALIDITY_GATE = FAILED: H100 re-executed check differs from frozen baseline")
             result_metrics["h100_reexecuted_check"] = "PASS"
         else:
@@ -637,7 +736,7 @@ def execute(preflight: Mapping[str, Any], root: Path, historical_path: Path, eva
         "runtime": {"python": platform.python_version(), "os": platform.platform(), "architecture": platform.machine(), "packages": {package: importlib.metadata.version(package) for package in ("numpy", "pandas")}},
         "inputs": {"h100_path": _rel(historical_path, root), "h100_sha256": H100_SHA256, "eval_path": _rel(eval_path, root), "eval_sha256": EVAL_SHA256},
         "preflight": preflight,
-        "h100_reexecuted_check": _frozen_h100_pass(h100),
+        "h100_reexecuted_check": _frozen_h100_pass(h100, frozen_h100_reference["metrics"]),
         "runs": run_entries,
         "outputs": {name: _rel(path, root) for name, path in outputs.items()},
         "EXP11_RETRIEVAL_STARTED": True,
@@ -653,6 +752,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run the frozen EXP-11A historical BM25 size-sensitivity protocol.")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--preflight", action="store_true", help="Validate only; do not run retrieval or create outputs.")
+    mode.add_argument("--h100-check-only", action="store_true", help="Run and persist only the H100 revalidation; never start variable runs.")
     mode.add_argument("--execute", action="store_true", help="Run H100 check followed by the 30 frozen variable compositions.")
     parser.add_argument("--config", default=str(DEFAULT_CONFIG))
     parser.add_argument("--evidence", default=str(DEFAULT_EVIDENCE))
@@ -677,6 +777,10 @@ def main() -> int:
     )
     if args.preflight:
         print(json.dumps(preflight, ensure_ascii=False, indent=2))
+        return 0
+    if args.h100_check_only:
+        audit = run_h100_check_only(preflight, root, resolve_project_path(args.historical), resolve_project_path(args.eval), resolve_project_path(args.evidence), resolve_project_path(args.output_dir))
+        print(f"OK: H100 revalidation {audit['status']} at {audit['timestamp_end_utc']}")
         return 0
     manifest = execute(preflight, root, resolve_project_path(args.historical), resolve_project_path(args.eval), resolve_project_path(args.evidence), resolve_project_path(args.output_dir))
     print(f"OK: EXP-11A completed at {manifest['timestamp_end']}")
