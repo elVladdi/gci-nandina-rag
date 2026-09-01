@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A y EXP-11A cerrados; Forensic Audit 01 aprobado; Gate 02 candidato creado pero NO aprobado externamente: microclose correctivo requerido** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A y EXP-11A cerrados; Forensic Audit 01 aprobado; Gate 02 microclose aprobado externamente; integración a main pendiente** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -116,63 +116,72 @@ El parser histórico actual procesa **una sola hoja por invocación**. Si no se 
 
 ## 8. NEW_HISTORICAL_GATE — Gate 02: freeze fuente + contrato multi-hoja
 
-**CANDIDATO CREADO / EXTERNAL AUDIT = CORRECTIVE MICROCLOSE REQUIRED.**
+**MICROCLOSE APPROVED / INTEGRATION TO MAIN PENDING.**
 
-Rama candidata:
+Rama:
 `codex/new-historical-gate-source-contract-v01`
 
-Commit candidato inicial:
-`7a7153e6e8bebbc00486bd33e32613209b5febda`
+Cadena candidata sobre `main=9e8af129...`:
 
-El commit está exactamente un commit sobre `main=9e8af129...` y añade únicamente:
-- `docs/protocolo_expansion_historico_multisheet_v0.1.md`;
-- `src/configs/new_historical_multisheet_contract_v0.1.json`;
-- `src/ingestion/prepare_new_historical_multisheet_v0.1.py`;
-- `tests/test_new_historical_multisheet_contract_v01.py`.
+1. `7a7153e6e8bebbc00486bd33e32613209b5febda` — freeze inicial y contrato candidato.
+2. `ad4c630a6a4d442776740b59b9552ba72141ea48` — microclose correctivo prospectivo.
 
-La fuente actual fue congelada externamente byte-a-byte:
-- SHA origen = SHA copia = `db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1`;
-- tamaño = `7,895,186` bytes;
-- método = Python `shutil.copy2`;
-- clasificación = `CURRENT_H100_REPRODUCING_SOURCE`.
+El candidato final está exactamente **2 commits delante y 0 detrás** de main y añade cinco artefactos versionados:
+- protocolo multi-hoja;
+- contrato JSON;
+- script prospectivo de ingesta;
+- tests Gate 02;
+- manifiesto versionado de freeze de fuente.
 
-### Hallazgos externos Gate 02
+### Hallazgos Gate 02
 
-**NHG02-F001 — SOURCE_FREEZE_MANIFEST_NOT_VERSIONED — S2**
+- `NHG02-F001 = VERIFIED_RESOLVED`
+- `NHG02-F002 = VERIFIED_RESOLVED`
+- `NHG02-F003 = VERIFIED_RESOLVED`
+- `NHG02-F004 = VERIFIED_RESOLVED`
+- `NHG02-F005 = VERIFIED_RESOLVED`
 
-El contrato exigía crear `outputs/audits/new_historical_gate_v0.1/source_freeze_manifest_v0.1.json`, pero el commit remoto contiene solo cuatro archivos y no incluye el manifiesto. Dado que la copia XLSX se conserva fuera de Git, el manifiesto versionado es la evidencia durable del freeze y debe añadirse mediante staging forzado controlado.
+### Contrato prospectivo aprobado
 
-**NHG02-F002 — PROSPECTIVE_INGEST_EXECUTION_PATH_NOT_FROZEN — S2**
+- Fuente clasificada `CURRENT_H100_REPRODUCING_SOURCE`.
+- SHA fuente/copia archivada: `db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1`.
+- `preexisting_source_sheets = ["Hoja2", "Hoja1"]`.
+- `historically_processed_sheet = "Hoja2"`, índice 0.
+- `Hoja1 = PREEXISTING_UNPROCESSED_SOURCE_SHEET`.
+- Conjuntos nuevos válidos:
+  - `["NUEVA_01"]`;
+  - `["NUEVA_01", "NUEVA_02"]`.
+- `NUEVA_02` sola falla.
+- La selección futura es siempre explícita mediante `--sheet`.
+- Pipeline congelado:
+  `PARSE → COMBINE → CLASSIFY/CURATE → FROZEN DAM/ID AUDIT → ELIGIBLE → EXACT/NEAR → CAPACITY → OUTPUTS/MANIFEST`.
+- `classify_rows(..., scope_class="87")` se reutiliza sobre el conjunto combinado.
+- DAM DEV/EVAL e `id_unico` congelado se auditan de forma independiente.
+- Near duplicate 0.90/0.95/0.98 = descriptores, no exclusión automática.
+- Umbrales de capacidad:
+  - H150: 1,475 nuevas filas elegibles netas;
+  - H200: 2,950 nuevas filas elegibles netas.
+- El modo `--ingest-new-data` no construye H150/H200 y no ejecuta retrieval/BM25.
+- Tests Gate 02: 27/27.
+- Suite total: 297/297.
 
-El script candidato solo expone `--preflight`, `--freeze-source` y `--validate-new-sheets`. No existe todavía un path de ejecución futura de ingesta/curación que produzca outputs prospectivos fuera de `data/processed`. El contrato debe congelar ese path con fixtures sintéticos **antes** de que el usuario agregue nueva data, para evitar modificar el pipeline después de observarla.
+### Limitaciones no bloqueantes a vigilar en la ejecución real
 
-**NHG02-F003 — NUEVA_02_WITHOUT_NUEVA_01_ALLOWED — S2**
+1. El path futuro verifica el **orden y nombres** de las hojas preexistentes, pero no calcula por sí mismo una huella semántica de su contenido. Esto no afecta H100 —que nunca se reconstruye desde el workbook ampliado y permanece congelado—, pero la ejecución real debe verificar procedimentalmente que `Hoja2` y `Hoja1` no fueron editadas al añadir nuevas hojas.
+2. `execution_commit` se registra desde Git. En la ejecución real se exigirá además working tree limpio y commit conocido antes de observar/procesar la nueva data.
 
-El protocolo define `NUEVA_01` y, opcionalmente, `NUEVA_02`, en ese orden. Sin embargo, el código/test actual acepta `NUEVA_02` como única hoja nueva. El conjunto permitido debe ser exactamente:
-- `["NUEVA_01"]`, o
-- `["NUEVA_01", "NUEVA_02"]`.
+Estas dos limitaciones no cambian la semántica del pipeline prospectivo ni requieren otro cambio de código antes de integrar Gate 02.
 
-**NHG02-F004 — OVERLAP_REASON_MASKING — S2**
-
-`audit_future_rows()` usa `if ... elif ...`; una fila que pertenezca simultáneamente a una DAM fija DEV/EVAL y tenga un `id_unico` ya congelado solo queda registrada por la primera causa. El solapamiento de `id_unico` debe auditarse independientemente aunque la fila ya esté excluida por DAM.
-
-**NHG02-F005 — HISTORICAL_SHEET_TERMINOLOGY_OVERBROAD — S2**
-
-`Hoja2` fue la única hoja demostrablemente procesada para producir la capa histórica. `Hoja1` es una hoja preexistente del workbook actual, pero no debe denominarse “historical sheet” sin evidencia de participación. El contrato debe distinguir:
-- `preexisting_source_sheets = ["Hoja2", "Hoja1"]`;
-- `historically_processed_sheet = "Hoja2"`.
-
-### Estado Gate 02
+### Estado
 
 - `CURRENT_H100_REPRODUCING_SOURCE_FROZEN=true`.
-- `MULTISHEET_CONTRACT_CANDIDATE_CREATED=true`.
-- `MULTISHEET_CONTRACT_EXTERNAL_APPROVAL=false`.
+- `MULTISHEET_CONTRACT_EXTERNAL_APPROVAL=true`.
 - `NEW_HISTORICAL_DATA_PROCESSED=false`.
 - `NEW_SHEETS_ADDED=false`.
 - `EXP11B_AUTHORIZED=false`.
 - `EXP12_AUTHORIZED=false`.
 
-**El usuario todavía NO debe agregar nuevas pestañas.** Primero se requiere un microclose correctivo del commit candidato y clean-checkout externo.
+**Siguiente paso: integrar por fast-forward el candidato `ad4c630...` a main y validar post-integración. Solo después de esa integración se autoriza al usuario a agregar `NUEVA_01` y, si hace falta, `NUEVA_02`.**
 
 ## 9. EXP-11B
 
@@ -210,11 +219,11 @@ EXP-11A ✅
   ↓
 NEW_HISTORICAL_GATE — Forensic Audit 01 ✅
   ↓
-Gate 02 candidato 7a7153e6... ⚠ microclose correctivo
+Gate 02 microclose ad4c630... ✅ auditoría externa
   ↓
-Gate 02 auditado e integrado
+Integración fast-forward a main ⏳
   ↓
-Usuario agrega nueva(s) pestaña(s) según contrato
+Usuario agrega NUEVA_01 y opcionalmente NUEVA_02 según contrato
   ↓
 Python procesa exclusivamente nueva(s) hoja(s)
   ↓
@@ -254,3 +263,15 @@ Repositorio público / artículos / tesis final
 - 17/17 tests nuevos y 287/287 suite reportados.
 - Gate 02 **NO cerrado externamente** por cinco hallazgos prospectivos: manifiesto de freeze no versionado, path de ingesta futura no congelado, `NUEVA_02` aceptada sin `NUEVA_01`, masking de razones de overlap y terminología demasiado amplia sobre “historical_sheets”.
 - No se autoriza modificar el Excel ni incorporar nueva data hasta resolver y auditar esos hallazgos.
+
+### 2026-09-01 — Gate 02 microclose aprobado externamente
+
+- Candidato final: `ad4c630a6a4d442776740b59b9552ba72141ea48`.
+- Relación con main: 2 commits delante, 0 detrás.
+- Cinco archivos versionados en el scope Gate 02.
+- F001–F005: `VERIFIED_RESOLVED`.
+- Manifiesto de freeze versionado y consistente con SHA `db01d1fc...`.
+- Path `--ingest-new-data` congelado y probado sintéticamente.
+- 27/27 tests Gate 02; 297/297 suite completa.
+- Gate 02: **EXTERNAL APPROVAL = true; INTEGRATION TO MAIN = pending**.
+- El Excel sigue intacto; nueva data aún no procesada.
