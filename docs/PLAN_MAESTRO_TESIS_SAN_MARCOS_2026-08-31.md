@@ -21,7 +21,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — Gate 03 CLOSED e integrado; siguiente: EXP11B_BANK_MATERIALIZATION_GATE sin retrieval** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — Gate 03 CLOSED; EXP11B bank materialization candidato 7a80b1d reproducido 20/20; microclose requerido antes de integrar** |
 | 3. Métricas e inferencia | Pendiente |
 | 4–8 | Pendientes |
 
@@ -30,107 +30,77 @@
 - H100: 2,950 filas / 28 DAM / 66 NANDINA; SHA `0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff`.
 - DEV: 100 filas; SHA `434e08f13ed3d5529165abbd0e139b5a675e7dc164307a624caa95f60a271f00`.
 - EVAL: 1,056 filas; SHA `3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941`.
-- H100: Top-1 0.509470; Top-3 0.671402; Top-5 0.763258; Top-10 0.891098; Top-50 0.991477; MRR 0.629708.
 
 ## 4. Cierres previos
 
 - Grupo 1: **CLOSED / APPROVED**.
 - Grupo 2A: **CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS**.
 - EXP-11A: **CLOSED / APPROVED / INTEGRATED** en `9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
-- Gate 02 multi-hoja: **CLOSED / APPROVED / INTEGRATED** en `ad4c630a6a4d442776740b59b9552ba72141ea48`.
+- Gate 02: **CLOSED / APPROVED / INTEGRATED** en `ad4c630a6a4d442776740b59b9552ba72141ea48`.
+- Gate 03: **CLOSED / APPROVED / INTEGRATED** en `ed470d67315f505cb3bde471177268db6d16a676`.
 
-## 5. Real Ingest 01 — NUEVA_01
+## 5. Real Ingest 01
 
-**APPROVED / FROZEN.**
-
-- Fuente ampliada SHA `087efd97cb17fd166c2e7eb5089690577491e99ab5d415f9e3a8614923ee4ba3`.
-- 15,596 series parseadas.
-- 6,029 Clase 87 y 6,029 elegibles.
-- Pool nuevo: 6,029 filas / 43 DAM / 56 NANDINA.
 - Pool elegible SHA `a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4`.
+- 6,029 filas / 43 DAM / 56 NANDINA.
 - H100/new DAM overlap = 0.
 - Pool máximo H100+new = 8,979 filas / 71 DAM / 77 NANDINA.
-- H150 y H200 son factibles; NUEVA_02 no es necesaria.
+- H150/H200 factibles.
 
-## 6. NEW HISTORICAL GATE 03
+## 6. Diseño EXP-11B congelado en Gate 03
 
-**CLOSED / APPROVED / INTEGRATED TO MAIN.**
+- H100 núcleo fijo.
+- Selección por DAM completa.
+- Selector usa solo DAM id + row count + seed + namespace.
+- H150 estrictamente anidado en H200.
+- Tolerancia ±148.
+- Seeds: `20261005, 20261006, 20261007, 20261010, 20261011, 20261013, 20261017, 20261021, 20261023, 20261024`.
+- 20/20 composiciones preservadas.
+- Common-clean: primary 1056; exact clean 1020; near090 981; near095 1002; near098 1010.
 
-`main = origin/main = ed470d67315f505cb3bde471177268db6d16a676`.
+## 7. EXP11B_BANK_MATERIALIZATION_GATE — candidato
 
-Cadena Gate 03:
+Rama: `codex/exp11b-bank-materialization-v01`  
+Candidato: `7a80b1db657386705d3031559c2861d0a2f88eb2`  
+Base/main: `ed470d67315f505cb3bde471177268db6d16a676`.
 
-1. `b3806190cb645d35c2a121c0f1d0c07fbfe21605` — freeze del pool elegible + diseño EXP-11B.
-2. `ed470d67315f505cb3bde471177268db6d16a676` — descriptores del banco total + denominadores common-clean.
+**AUDITORÍA EXTERNA: APPROVED_WITH_BLOCKING_MICROCLOSE_BEFORE_MAIN.**
 
-### Diseño EXP-11B congelado
+### Lo validado
 
-- H100 es núcleo fijo.
-- Unidad de selección: DAM completa.
-- Selección usa solo DAM id + row count + seed + namespace.
-- No usa NANDINA, descripción, eval, performance, BM25 ni duplicados.
-- H150 estrictamente anidado en H200 por réplica.
-- Tolerancia: ±148 filas del incremento nominal.
-- 24 seeds evaluados; 10 pares aceptados.
-- Seeds exactos: `20261005, 20261006, 20261007, 20261010, 20261011, 20261013, 20261017, 20261021, 20261023, 20261024`.
-- 20/20 composiciones H150/H200 preservadas contra baseline `b380619`.
-- Cada condición tiene `increment_descriptor` y `total_bank_descriptor`.
-- Todos los bancos totales preservan cobertura H100 66/66.
+- 10 H150 + 10 H200 materializados localmente.
+- H100 core 20/20 PASS.
+- selección Gate03 20/20 PASS.
+- descriptores 20/20 PASS.
+- nesting 10/10 PASS.
+- 20 bank SHA congelados.
+- clean checkout reprodujo 20/20 byte exacto.
+- bancos CSV no versionados; manifest/hash inventory sí.
+- no retrieval, BM25 ni métricas.
 
-### Common-clean congelado
+### Hallazgos antes de integrar
 
-- N primary = 1056.
-- Masked: exact 36; near090 75; near095 54; near098 46.
-- Clean: exact 1020; near090 981; near095 1002; near098 1010.
-- La máscara no afecta selección ni denominador primario.
+`EXP11B-MAT-F001 = DEV_EVAL_PROVENANCE_NOT_HASH_FROZEN / S2`
 
-### Validación final Gate 03
+DEV/EVAL son inputs efectivos del control de overlap, pero la config registra solo sus paths; el materializer los lee sin SHA y el manifest no conserva sus hashes. Deben fijarse los SHA DEV/EVAL ya congelados y fallar si cambian, sin alterar ningún bank SHA.
 
-- Real Ingest freeze: 9 artefactos, 0 mismatches.
-- H100/DEV/EVAL sin cambios.
-- Gate 02 tests: 27/27.
-- Gate 03 tests: 29/29.
-- Suite completa: 326/326.
-- Clean checkout post-main: PASS.
-- No retrieval, no BM25, no H150/H200 materializados.
+`EXP11B-MAT-F002 = FROZEN_GATE03_TEST_WEAKENED_OUTSIDE_SCOPE / S2`
 
-Flags:
+El candidato cambió además `tests/test_exp11b_historical_size_extension_v01.py`: `assertEqual` → `assertAlmostEqual(..., places=15)`. Gate03 ya estaba cerrado y este archivo no pertenecía al scope materializador. Debe revertirse exactamente a `ed470d6`. Si el test exacto falla, detener y reportar floats; no debilitar el test.
 
-- `NEW_HISTORICAL_GATE_03_STATUS=CLOSED`
-- `REAL_INGEST_01_FROZEN=true`
-- `NEW_ELIGIBLE_POOL_FROZEN=true`
-- `EXP11B_SELECTION_FROZEN=true`
-- `COMMON_CLEAN_POLICY_FROZEN=true`
-- `H150_MATERIALIZED=false`
-- `H200_MATERIALIZED=false`
-- `RETRIEVAL_EXECUTED=false`
-- `EXP11B_AUTHORIZED=false`
-- `EXP12_AUTHORIZED=false`
-- `GROUP3_STARTED=false`
+`EXP11B-MAT-F003 = HASH_INVENTORY_VERIFY_NOT_FAIL_CLOSED / S2`
 
-## 7. Próximo hito obligatorio — EXP11B_BANK_MATERIALIZATION_GATE
+`verify()` reaudita los bancos y compara el manifest, pero para `exp11b_bank_hashes_v0.1.csv` solo exige 20 filas/bank_id. Debe comparar los valores del inventario con los bancos/manifest por bank_id.
 
-Objetivo: materializar físicamente los 10 bancos H150 y 10 H200 **sin ejecutar retrieval**.
+### Estado
 
-Cada banco debe construirse exactamente como:
-
-`H100_FROZEN + filas NEW_ELIGIBLE de las DAM congeladas para esa réplica/condición`.
-
-El gate debe verificar:
-
-- H100 como núcleo exacto;
-- DAM nuevas exactas, sin extras ni faltantes;
-- row count realizado;
-- composition SHA de DAM;
-- nesting H150⊂H200 por réplica;
-- descriptores incrementales y totales;
-- cobertura H100 66/66;
-- hashes de los 20 CSV;
-- manifest e inventario;
-- clean checkout;
-- no BM25/retrieval.
-
-Solo después de auditoría externa del gate de materialización podrá cambiarse `EXP11B_AUTHORIZED=true`.
+- `EXP11B_BANK_MATERIALIZATION_CANDIDATE_CREATED=true`.
+- `BANKS_BYTE_REPRODUCIBLE=20/20`.
+- `EXP11B_BANK_MATERIALIZATION_EXTERNAL_APPROVAL=false`.
+- `EXP11B_RETRIEVAL_AUTHORIZED=false`.
+- `RETRIEVAL_EXECUTED=false`.
+- `EXP12_AUTHORIZED=false`.
+- `GROUP3_STARTED=false`.
 
 ## 8. Orden maestro
 
@@ -141,15 +111,15 @@ Grupo 2A ✅
   ↓
 EXP-11A ✅
   ↓
-Forensic Audit 01 ✅
-  ↓
 Gate 02 ✅
   ↓
 Real Ingest 01 ✅
   ↓
 Gate 03 ✅ CLOSED / INTEGRATED ed470d6
   ↓
-EXP11B_BANK_MATERIALIZATION_GATE ⏳ sin retrieval
+EXP11B_BANK_MATERIALIZATION candidato 7a80b1d ⚠ microclose F001–F003
+  ↓
+Integración materialization gate
   ↓
 EXP-11B retrieval
   ↓
