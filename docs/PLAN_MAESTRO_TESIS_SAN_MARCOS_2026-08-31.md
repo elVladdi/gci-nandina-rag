@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A y EXP-11A cerrados; Forensic Audit 01 aprobado; Gate 02 microclose aprobado externamente; integración a main pendiente** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A y EXP-11A cerrados; Forensic Audit 01 y Gate 02 cerrados e integrados; siguiente: incorporación controlada de NUEVA_01 y Gate de datos ampliados** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -116,7 +116,7 @@ El parser histórico actual procesa **una sola hoja por invocación**. Si no se 
 
 ## 8. NEW_HISTORICAL_GATE — Gate 02: freeze fuente + contrato multi-hoja
 
-**MICROCLOSE APPROVED / INTEGRATION TO MAIN PENDING.**
+**CLOSED / APPROVED / INTEGRATED TO MAIN.**
 
 Rama:
 `codex/new-historical-gate-source-contract-v01`
@@ -174,14 +174,17 @@ Estas dos limitaciones no cambian la semántica del pipeline prospectivo ni requ
 
 ### Estado
 
+- `NEW_HISTORICAL_GATE_02_STATUS=CLOSED`.
+- `main = origin/main = ad4c630a6a4d442776740b59b9552ba72141ea48`.
 - `CURRENT_H100_REPRODUCING_SOURCE_FROZEN=true`.
-- `MULTISHEET_CONTRACT_EXTERNAL_APPROVAL=true`.
+- `MULTISHEET_CONTRACT_FROZEN=true`.
+- `MULTISHEET_CONTRACT_IN_MAIN=true`.
 - `NEW_HISTORICAL_DATA_PROCESSED=false`.
 - `NEW_SHEETS_ADDED=false`.
 - `EXP11B_AUTHORIZED=false`.
 - `EXP12_AUTHORIZED=false`.
 
-**Siguiente paso: integrar por fast-forward el candidato `ad4c630...` a main y validar post-integración. Solo después de esa integración se autoriza al usuario a agregar `NUEVA_01` y, si hace falta, `NUEVA_02`.**
+**Siguiente paso autorizado: el usuario puede agregar `NUEVA_01` al final del workbook actual, preservando sin cambios `Hoja2` y `Hoja1`. `NUEVA_02` solo se añadirá si la cantidad de nueva data requiere una segunda hoja.**
 
 ## 9. EXP-11B
 
@@ -219,13 +222,13 @@ EXP-11A ✅
   ↓
 NEW_HISTORICAL_GATE — Forensic Audit 01 ✅
   ↓
-Gate 02 microclose ad4c630... ✅ auditoría externa
+Gate 02 ad4c630... ✅ CLOSED / INTEGRATED
   ↓
-Integración fast-forward a main ⏳
+Usuario agrega NUEVA_01 según contrato ⏳
   ↓
-Usuario agrega NUEVA_01 y opcionalmente NUEVA_02 según contrato
+Python valida e ingiere exclusivamente NUEVA_01
   ↓
-Python procesa exclusivamente nueva(s) hoja(s)
+Gate de capacidad / integridad de nueva data
   ↓
 NEW_HISTORICAL_GATE de datos ampliados
   ↓
@@ -257,21 +260,30 @@ Repositorio público / artículos / tesis final
 ### 2026-09-01 — Gate 02 candidato auditado externamente
 
 - Rama candidata `codex/new-historical-gate-source-contract-v01` = `7a7153e6e8bebbc00486bd33e32613209b5febda`.
-- `main` permanece `9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
-- Commit candidato: 1 commit / 4 archivos añadidos.
+- `main` permanecía `9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
 - Freeze externo de fuente actual: SHA origen=copia `db01d1fc...`; 7,895,186 bytes; Python `shutil.copy2`.
 - 17/17 tests nuevos y 287/287 suite reportados.
-- Gate 02 **NO cerrado externamente** por cinco hallazgos prospectivos: manifiesto de freeze no versionado, path de ingesta futura no congelado, `NUEVA_02` aceptada sin `NUEVA_01`, masking de razones de overlap y terminología demasiado amplia sobre “historical_sheets”.
-- No se autoriza modificar el Excel ni incorporar nueva data hasta resolver y auditar esos hallazgos.
+- Gate 02 requirió cinco correcciones prospectivas antes de autorizar nueva data.
 
 ### 2026-09-01 — Gate 02 microclose aprobado externamente
 
 - Candidato final: `ad4c630a6a4d442776740b59b9552ba72141ea48`.
-- Relación con main: 2 commits delante, 0 detrás.
 - Cinco archivos versionados en el scope Gate 02.
 - F001–F005: `VERIFIED_RESOLVED`.
 - Manifiesto de freeze versionado y consistente con SHA `db01d1fc...`.
 - Path `--ingest-new-data` congelado y probado sintéticamente.
 - 27/27 tests Gate 02; 297/297 suite completa.
-- Gate 02: **EXTERNAL APPROVAL = true; INTEGRATION TO MAIN = pending**.
-- El Excel sigue intacto; nueva data aún no procesada.
+
+### 2026-09-01 — Gate 02 cerrado e integrado
+
+- `main = origin/main = ad4c630a6a4d442776740b59b9552ba72141ea48`.
+- Integración fast-forward desde `9e8af129...`, sin merge commit.
+- 27/27 tests Gate 02 y 297/297 suite completa en candidata, main y clean checkout.
+- H100/DEV/EVAL hashes preservados.
+- Fuente congelada `db01d1fc...` preservada.
+- `NEW_HISTORICAL_GATE_02_STATUS=CLOSED`.
+- `MULTISHEET_CONTRACT_IN_MAIN=true`.
+- Se autoriza al usuario a agregar `NUEVA_01` al workbook actual bajo el contrato congelado.
+- `NUEVA_02` es opcional y solo debe agregarse si es necesaria por capacidad física/operativa.
+- Antes de la ingesta real se verificará que `Hoja2` y `Hoja1` no hayan cambiado respecto de la copia congelada.
+- La nueva data se procesará exclusivamente con Python; no se construyen manualmente H150/H200.
