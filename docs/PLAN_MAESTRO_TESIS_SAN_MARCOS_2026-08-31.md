@@ -25,7 +25,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — Real Ingest 01 congelado en candidato Gate 03; selección H150/H200 prospectiva válida; microclose requerido para descriptores del banco total y denominadores common-clean antes de integrar** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — Gate 03 microclose aprobado externamente; integración a main pendiente antes de materialización H150/H200** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -61,66 +61,76 @@
 
 ## 6. Real Ingest 01 — NUEVA_01
 
-**APPROVED_FOR_FREEZE_AND_GATE03_DESIGN.**
+**APPROVED / FROZEN IN GATE 03 CANDIDATE.**
 
 - F001 `VERIFIED_RESOLVED`: única diferencia histórica parser = `__source_file`.
 - F002 `VERIFIED_RESOLVED`: invocación directa por path para archivo `v0.1.py`.
 - Fuente ampliada congelada: SHA `087efd97cb17fd166c2e7eb5089690577491e99ab5d415f9e3a8614923ee4ba3`, 16,060,154 bytes.
 - NUEVA_01: 15,596 parseadas; 6,029 Clase 87; 6,029 elegibles.
 - Pool nuevo: 6,029 filas / 43 DAM / 56 NANDINA.
+- Pool elegible SHA: `a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4`.
+- H100/new DAM overlap = 0.
 - H100+new máximo: 8,979 filas / 71 DAM / 77 NANDINA.
 - Capacidad: `H150_AND_H200_FEASIBLE`; `NUEVA_02_REQUIRED=false`.
 - Sin retrieval; sin H150/H200 materializados.
 
-## 7. Gate 03 candidato
+## 7. NEW HISTORICAL GATE 03
 
 Rama: `codex/new-historical-gate-expanded-pool-v01`  
-Candidato: `b3806190cb645d35c2a121c0f1d0c07fbfe21605`  
-Base `main`: `ad4c630a6a4d442776740b59b9552ba72141ea48`  
-Relación: 1 commit delante / 0 detrás.
+Candidato inicial: `b3806190cb645d35c2a121c0f1d0c07fbfe21605`  
+Microclose corregido: `ed470d67315f505cb3bde471177268db6d16a676`  
+Base `main`: `ad4c630a6a4d442776740b59b9552ba72141ea48`.
 
-### Elementos aprobados
+**AUDITORÍA EXTERNA DEL MICROCLOSE: APPROVED_FOR_MAIN_INTEGRATION.**
 
-- Real Ingest 01 versionado y congelado.
-- `new_historical_eligible.csv` SHA: `a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4`.
-- H100/new DAM overlap = 0.
-- Planner prospectivo usa solo DAM id + row count + seed + namespace.
-- DAM completas, H100 fijo, H150 estrictamente anidado en H200, tolerancia ±148.
-- 24 seeds evaluados; 10 pares válidos.
-- Seeds aceptados exactos: `20261005, 20261006, 20261007, 20261010, 20261011, 20261013, 20261017, 20261021, 20261023, 20261024`.
-- Common-clean sobre máximo pool: afectados exact=36; near90=75; near95=54; near98=46.
-- Primario permanece N=1056.
-- Tests reportados: Gate02 27/27, Gate03 19/19, suite 316/316.
-- No retrieval; H150/H200 no materializados.
+### Diseño prospectivo EXP-11B congelado
 
-### NHG03-F001 — TOTAL_BANK_DESCRIPTORS_MISSING — S2
+- Selección usa solo: DAM id + row count + seed + namespace.
+- No usa NANDINA, descripción, EVAL, performance, BM25 ni duplicados.
+- H100 permanece núcleo fijo de 2,950 filas.
+- Unidad de selección: DAM completa.
+- H150 estrictamente anidado en H200 por réplica.
+- Tolerancia de incremento: ±148.
+- 24 seeds evaluados; 10 pares aceptados.
+- Seeds exactos: `20261005, 20261006, 20261007, 20261010, 20261011, 20261013, 20261017, 20261021, 20261023, 20261024`.
+- Identidad de selección contra `b380619`: 20/20 composiciones H150/H200 intactas.
+- `H150_MATERIALIZED=false`; `H200_MATERIALIZED=false`; `RETRIEVAL_EXECUTED=false`.
 
-El artefacto de factibilidad calcula el `descriptor` solo sobre las DAM incrementales de `NEW_ELIGIBLE`. Los bancos reales serán `H100_FROZEN + selected_new_DAMs`; por tanto, antes de integrar Gate 03 se deben congelar, sin alterar selección ni seeds:
+### Hallazgos del candidato inicial y cierre
 
-- `increment_descriptor`;
-- `total_bank_descriptor`;
-- total DAM count;
-- HHI/effective DAM del banco total;
-- largest DAM share total;
-- NANDINA total;
-- H100 NANDINA coverage;
-- new NANDINA count.
+- `NHG03-F001 = TOTAL_BANK_DESCRIPTORS_MISSING` → **VERIFIED_RESOLVED**.
+  - Cada condición contiene `increment_descriptor`.
+  - Cada condición contiene `total_bank_descriptor = H100_FROZEN + incremento`.
+  - Se registran rows, DAM count, HHI, effective DAM, largest DAM share, NANDINA y cobertura H100.
+  - Todos los bancos totales conservan cobertura H100 `66/66`.
 
-La corrección es descriptiva y no puede cambiar las composiciones aceptadas.
+- `NHG03-F002 = COMMON_CLEAN_DENOMINATORS_NOT_EXPLICIT` → **VERIFIED_RESOLVED**.
+  - `N_PRIMARY=1056`.
+  - masked: exact=36, near090=75, near095=54, near098=46.
+  - clean: exact=1020, near090=981, near095=1002, near098=1010.
+  - La máscara no afecta selección ni denominador primario.
 
-### NHG03-F002 — COMMON_CLEAN_DENOMINATORS_NOT_EXPLICIT — S2
+### Validación
 
-Congelar explícitamente:
+- `eval_common_clean_masks_v0.1.csv` intacto.
+- `new_historical_eligible.csv` intacto.
+- Real Ingest freeze: 9 artefactos, 0 mismatches.
+- H100/DEV/EVAL SHA sin cambios.
+- Tests: Gate 02 27/27; Gate 03 29/29; suite completa 326/326.
+- Clean checkout en `ed470d6` aprobado.
+- No retrieval, no BM25, no materialización H150/H200.
 
-- `N_PRIMARY=1056`
-- `N_EXACT_CLEAN=1020`
-- `N_NEAR090_CLEAN=981`
-- `N_NEAR095_CLEAN=1002`
-- `N_NEAR098_CLEAN=1010`
+### Estado Gate 03
 
-Las máscaras existentes no cambian.
+- `NHG03-F001=VERIFIED_RESOLVED`.
+- `NHG03-F002=VERIFIED_RESOLVED`.
+- `GATE03_CANDIDATE_APPROVED_FOR_MAIN_INTEGRATION=true`.
+- `EXP11B_SELECTION_FROZEN=true`.
+- `EXP11B_AUTHORIZED=false`.
+- `EXP12_AUTHORIZED=false`.
+- `GROUP3_STARTED=false`.
 
-**Gate 03 todavía no se integra a main.**
+**Siguiente paso:** integrar `ed470d67315f505cb3bde471177268db6d16a676` por fast-forward a `main`, validar post-integración y recién después abrir `EXP11B_BANK_MATERIALIZATION_GATE` para materializar los 10 H150 + 10 H200 sin retrieval.
 
 ## 8. EXP-11B
 
@@ -128,7 +138,7 @@ Objetivos nominales:
 - H150 ≈ 4,425 series.
 - H200 ≈ 5,900 series.
 
-Estado: diseño prospectivo candidato existe, pero `EXP11B_AUTHORIZED=false` hasta cerrar Gate 03 y materializar bancos en un gate separado.
+Estado: selección prospectiva congelada en candidato Gate 03. `EXP11B_AUTHORIZED=false` hasta cerrar Gate 03 en main y cerrar un gate separado de materialización/hash de los 20 bancos.
 
 ## 9. EXP-12
 
@@ -149,13 +159,13 @@ Gate 02 ✅
   ↓
 Real Ingest 01 ✅
   ↓
-Gate 03 candidato b380619 ⚠ microclose F001/F002
+Gate 03 microclose ed470d6 ✅ auditoría externa
   ↓
-Gate 03 integración
+Gate 03 fast-forward a main ⏳
   ↓
-Materialización H150/H200 sin retrieval
+EXP11B_BANK_MATERIALIZATION_GATE — 20 bancos, sin retrieval
   ↓
-EXP-11B
+EXP-11B retrieval
   ↓
 EXP-12
   ↓
