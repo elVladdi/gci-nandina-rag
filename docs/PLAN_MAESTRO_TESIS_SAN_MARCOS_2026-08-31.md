@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A cerrado; EXP-11A cerrado; Forensic Audit 01 aprobado; siguiente Gate 02: freeze fuente + contrato multi-hoja** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — G2A y EXP-11A cerrados; Forensic Audit 01 aprobado; Gate 02 candidato creado pero NO aprobado externamente: microclose correctivo requerido** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -72,6 +72,8 @@ F001 `PARTIALLY_RESOLVED`; F002 `NOT_RECOVERABLE`; F003 `PARTIALLY_RESOLVED`; F0
 - Tests finales 13/13 y 270/270.
 - HE2/HE5 permanecen pendientes de Grupo 3.
 
+Resultados descriptivos:
+
 | Condición | Top-3 | MRR |
 |---|---:|---:|
 | H25 | 0.645170 ± 0.051964 | 0.603787 ± 0.047775 |
@@ -83,57 +85,105 @@ F001 `PARTIALLY_RESOLVED`; F002 `NOT_RECOVERABLE`; F003 `PARTIALLY_RESOLVED`; F0
 
 **EXTERNAL AUDIT: APPROVED_WITH_TERMINOLOGY_CORRECTIONS.**
 
+Estado:
+
 - `FORENSIC_EXCEL_PIPELINE_AUDIT_COMPLETED=true`.
 - Excel actual: `data/Series - Descripciones.xlsx`.
 - SHA actual antes/después: `db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1`.
 - Tamaño: `7,895,186` bytes.
 - Hojas: índice 0 `Hoja2` (126,524×9), índice 1 `Hoja1` (41,578×10).
 - Hoja activa actual: `Hoja1`.
-- Hoja procesada históricamente: `Hoja2`, índice 0, por selección predeterminada de primera hoja, sin `--sheet`.
-- Parser: `openpyxl.load_workbook(..., read_only=True, data_only=True)`.
-- `__sheet_name` histórico: únicamente `Hoja2`.
+- Hoja procesada históricamente: `Hoja2`, índice 0, por **default first worksheet**, sin `--sheet`.
+- El parser usa `openpyxl.load_workbook(..., read_only=True, data_only=True)`.
+- `__sheet_name` del intermedio histórico: únicamente `Hoja2`.
 - Intermedio reproducido: 107 DAM / 11,320 series.
 - Clase 87: 4,232 filas; 4,106 curadas.
 - v0.1: split por fila, estratificado por NANDINA, seed 2026, tamaños 3000/100/1006.
-- v0.2: unión de v0.1 y **asignaciones explícitas de DAM** de T5-safe-159.
-- H100/DEV/EVAL v0.2 reproducidos byte a byte.
+- v0.2: unión de v0.1 y **asignaciones explícitas de DAM** de la configuración T5-safe-159.
+- H100/DEV/EVAL v0.2 se reprodujeron byte a byte.
 - Clasificación conservadora: `PIPELINE_PARTIALLY_RECONSTRUCTED`.
 
-### Correcciones terminológicas
+### Correcciones terminológicas de auditoría externa
 
-1. El workbook histórico completo no es byte-identificable con el actual: metadata histórica `cfc85f3d…` vs actual `db01d1fc…`.
+1. El workbook histórico completo **no es byte-identificable** con el workbook actual: la metadata histórica registra SHA `cfc85f3d…`, mientras el actual es `db01d1fc…`.
 2. La reproducción byte-exacta demuestra **equivalencia funcional del contenido procesado para el parser**, no identidad binaria de la hoja ni del workbook histórico completo.
-3. En v0.2, `seed=2026` queda como atributo de configuración/procedencia; el script materializa el split desde **listas explícitas de DAM** y no usa aleatoriedad para decidir la asignación v0.2.
-4. `build_evalset_from_sunat_excel.py` no se reutilizará para la expansión histórica: es un flujo distinto y produce otro esquema, aunque su modo `sunat-block` pueda iterar varias hojas.
+3. En v0.2, el `seed=2026` queda como atributo de configuración/procedencia; el script materializa el split desde **listas explícitas de DAM** y no usa aleatoriedad para decidir la asignación v0.2.
+4. `build_evalset_from_sunat_excel.py` no se reutilizará para la expansión histórica: es un flujo distinto y produce otro esquema, aunque su modo `sunat-block` sea capaz de iterar varias hojas.
 
-El parser histórico procesa una sola hoja por invocación. Si no se pasa `--sheet`, procesa `workbook.worksheets[0]`. Nuevas pestañas no se incorporan automáticamente.
+### Consecuencia para las nuevas pestañas
+
+El parser histórico actual procesa **una sola hoja por invocación**. Si no se pasa `--sheet`, procesa `workbook.worksheets[0]`. Por tanto, nuevas pestañas no se incorporan automáticamente.
 
 ## 8. NEW_HISTORICAL_GATE — Gate 02: freeze fuente + contrato multi-hoja
 
-**SIGUIENTE HITO.**
+**CANDIDATO CREADO / EXTERNAL AUDIT = CORRECTIVE MICROCLOSE REQUIRED.**
 
-Antes de que el usuario modifique el Excel:
+Rama candidata:
+`codex/new-historical-gate-source-contract-v01`
 
-1. congelar localmente una copia byte-a-byte del workbook actual `db01d1fc…`;
-2. denominarla como **fuente actual que reproduce H100**, no como “original histórico”;
-3. verificar SHA origen=copia;
-4. congelar mediante código/config/test el contrato de incorporación de nuevas pestañas;
-5. reutilizar `sunat_series_parser.py` explícitamente por nombre de hoja;
-6. preservar H100 congelado como núcleo, sin reconstruirlo desde el workbook modificado;
-7. procesar únicamente las hojas nuevas con Python;
-8. aplicar las mismas reglas de Clase 87, jerarquía, `id_unico`, warnings y curación;
-9. bloquear DAM de DEV/EVAL y overlaps de `id_unico`;
-10. auditar exact/near duplicates como descriptores;
-11. exigir capacidad posterior suficiente para H150/H200 y factibilidad de EXP-12.
+Commit candidato inicial:
+`7a7153e6e8bebbc00486bd33e32613209b5febda`
 
-**El usuario todavía NO debe agregar las nuevas pestañas hasta cerrar Gate 02.**
+El commit está exactamente un commit sobre `main=9e8af129...` y añade únicamente:
+- `docs/protocolo_expansion_historico_multisheet_v0.1.md`;
+- `src/configs/new_historical_multisheet_contract_v0.1.json`;
+- `src/ingestion/prepare_new_historical_multisheet_v0.1.py`;
+- `tests/test_new_historical_multisheet_contract_v01.py`.
+
+La fuente actual fue congelada externamente byte-a-byte:
+- SHA origen = SHA copia = `db01d1fcdd41d1bd1ed8086fc6c19bcd56ba44b2534391aba7daa4c58f9f52d1`;
+- tamaño = `7,895,186` bytes;
+- método = Python `shutil.copy2`;
+- clasificación = `CURRENT_H100_REPRODUCING_SOURCE`.
+
+### Hallazgos externos Gate 02
+
+**NHG02-F001 — SOURCE_FREEZE_MANIFEST_NOT_VERSIONED — S2**
+
+El contrato exigía crear `outputs/audits/new_historical_gate_v0.1/source_freeze_manifest_v0.1.json`, pero el commit remoto contiene solo cuatro archivos y no incluye el manifiesto. Dado que la copia XLSX se conserva fuera de Git, el manifiesto versionado es la evidencia durable del freeze y debe añadirse mediante staging forzado controlado.
+
+**NHG02-F002 — PROSPECTIVE_INGEST_EXECUTION_PATH_NOT_FROZEN — S2**
+
+El script candidato solo expone `--preflight`, `--freeze-source` y `--validate-new-sheets`. No existe todavía un path de ejecución futura de ingesta/curación que produzca outputs prospectivos fuera de `data/processed`. El contrato debe congelar ese path con fixtures sintéticos **antes** de que el usuario agregue nueva data, para evitar modificar el pipeline después de observarla.
+
+**NHG02-F003 — NUEVA_02_WITHOUT_NUEVA_01_ALLOWED — S2**
+
+El protocolo define `NUEVA_01` y, opcionalmente, `NUEVA_02`, en ese orden. Sin embargo, el código/test actual acepta `NUEVA_02` como única hoja nueva. El conjunto permitido debe ser exactamente:
+- `["NUEVA_01"]`, o
+- `["NUEVA_01", "NUEVA_02"]`.
+
+**NHG02-F004 — OVERLAP_REASON_MASKING — S2**
+
+`audit_future_rows()` usa `if ... elif ...`; una fila que pertenezca simultáneamente a una DAM fija DEV/EVAL y tenga un `id_unico` ya congelado solo queda registrada por la primera causa. El solapamiento de `id_unico` debe auditarse independientemente aunque la fila ya esté excluida por DAM.
+
+**NHG02-F005 — HISTORICAL_SHEET_TERMINOLOGY_OVERBROAD — S2**
+
+`Hoja2` fue la única hoja demostrablemente procesada para producir la capa histórica. `Hoja1` es una hoja preexistente del workbook actual, pero no debe denominarse “historical sheet” sin evidencia de participación. El contrato debe distinguir:
+- `preexisting_source_sheets = ["Hoja2", "Hoja1"]`;
+- `historically_processed_sheet = "Hoja2"`.
+
+### Estado Gate 02
+
+- `CURRENT_H100_REPRODUCING_SOURCE_FROZEN=true`.
+- `MULTISHEET_CONTRACT_CANDIDATE_CREATED=true`.
+- `MULTISHEET_CONTRACT_EXTERNAL_APPROVAL=false`.
+- `NEW_HISTORICAL_DATA_PROCESSED=false`.
+- `NEW_SHEETS_ADDED=false`.
+- `EXP11B_AUTHORIZED=false`.
+- `EXP12_AUTHORIZED=false`.
+
+**El usuario todavía NO debe agregar nuevas pestañas.** Primero se requiere un microclose correctivo del commit candidato y clean-checkout externo.
 
 ## 9. EXP-11B
 
+Objetivos:
+
 - H150 ≈ 4,425 series.
 - H200 ≈ 5,900 series.
-- H100 debe permanecer exactamente preservado como núcleo.
-- Para capacidad H200 se necesitan al menos **2,950 series nuevas elegibles netas** sobre H100; condición post-procesamiento, no número bruto de filas Excel.
+
+H100 debe permanecer exactamente preservado como núcleo del histórico ampliado.
+
+Para capacidad H200 se necesitan al menos **2,950 series nuevas elegibles netas** sobre H100; esta es una condición post-procesamiento, no un número bruto de filas Excel.
 
 ## 10. EXP-12
 
@@ -160,7 +210,9 @@ EXP-11A ✅
   ↓
 NEW_HISTORICAL_GATE — Forensic Audit 01 ✅
   ↓
-Gate 02: freeze fuente actual + contrato multi-hoja ⏳
+Gate 02 candidato 7a7153e6... ⚠ microclose correctivo
+  ↓
+Gate 02 auditado e integrado
   ↓
 Usuario agrega nueva(s) pestaña(s) según contrato
   ↓
@@ -190,5 +242,15 @@ Repositorio público / artículos / tesis final
 - Pipeline Excel→Python→v0.1→v0.2 reconstruido parcialmente con reproducción byte-exacta de outputs.
 - Workbook histórico completo no recuperado byte a byte.
 - `Hoja2` fue la fuente funcional procesada mediante selección predeterminada de primera hoja.
-- Workbook actual intacto con SHA `db01d1fc...`.
+- El workbook actual permanece intacto con SHA `db01d1fc...`.
 - Próximo hito: congelar esa fuente actual reproducente y versionar el contrato de expansión multi-hoja antes de editar el Excel.
+
+### 2026-09-01 — Gate 02 candidato auditado externamente
+
+- Rama candidata `codex/new-historical-gate-source-contract-v01` = `7a7153e6e8bebbc00486bd33e32613209b5febda`.
+- `main` permanece `9e8af129ca586bd1929e6afe6aa1a1c64d8fe667`.
+- Commit candidato: 1 commit / 4 archivos añadidos.
+- Freeze externo de fuente actual: SHA origen=copia `db01d1fc...`; 7,895,186 bytes; Python `shutil.copy2`.
+- 17/17 tests nuevos y 287/287 suite reportados.
+- Gate 02 **NO cerrado externamente** por cinco hallazgos prospectivos: manifiesto de freeze no versionado, path de ingesta futura no congelado, `NUEVA_02` aceptada sin `NUEVA_01`, masking de razones de overlap y terminología demasiado amplia sobre “historical_sheets”.
+- No se autoriza modificar el Excel ni incorporar nueva data hasta resolver y auditar esos hallazgos.
