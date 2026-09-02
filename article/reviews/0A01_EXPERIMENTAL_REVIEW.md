@@ -9,6 +9,7 @@
 - Fecha de revisión: 2026-09-02
 - Dictamen recibido: `PASS WITH CORRECTIONS`
 - Estado editorial posterior al dictamen: `REVISION_REQUIRED`
+- Estado de remediación: `INTEGRATED — PENDING_CLOSING_EXPERIMENTAL_PASS`
 
 ### Correcciones aceptadas
 
@@ -25,9 +26,18 @@ La sugerencia de ampliar automáticamente la admisión de literatura nueva a pro
 
 El Plan Maestro vivo consultado en su ubicación registrada mantiene explícitamente que `HE2/HE5` permanecen pendientes de Grupo 3. La búsqueda efectuada sobre el estado accesible del repositorio no permitió localizar todavía un artefacto versionado de EXP-08 que justifique congelar una formulación histórica `PARTIALLY_SUPPORTED` para HE5. En consecuencia, esa formulación no se incorpora como claim autorizado y permanece pendiente de verificación documental si vuelve a resultar relevante.
 
+### Remediación integrada
+
+- Estados de claims normalizados en `article/CLAIM_EVIDENCE_MATRIX.md`.
+- `995/1006` y `48/59` separados por nivel de proveniencia.
+- Estado final de HE5 preservado como pendiente de Grupo 3.
+- Regla de unicidad, sincronización y autoridad exclusiva de escritura del Plan Maestro congelada en `article/DECISIONS.md` y `article/SOURCE_REGISTRY.md`.
+- Política bibliográfica original preservada sin ampliación automática a proceedings.
+- `article/ARTICLE_STATUS.md` actualizado para solicitar únicamente un pase experimental de cierre.
+
 ### Gate
 
-Las correcciones anteriores deben integrarse en los archivos de gobernanza del artículo y someterse a un pase experimental de cierre. 0A-01 no puede marcarse `APPROVED` ni `FROZEN` hasta recibir dicho pase y la aprobación expresa del autor.
+La remediación está integrada. Corresponde ahora un pase experimental de cierre que verifique que las correcciones fueron aplicadas sin regresiones. 0A-01 no puede marcarse `APPROVED` ni `FROZEN` hasta recibir dicho pase y la aprobación expresa del autor.
 
 ---
 
@@ -40,6 +50,7 @@ Las correcciones anteriores deben integrarse en los archivos de gobernanza del a
 - Review date: 2026-09-02
 - Received verdict: `PASS WITH CORRECTIONS`
 - Editorial state after the verdict: `REVISION_REQUIRED`
+- Remediation status: `INTEGRATED — PENDING_CLOSING_EXPERIMENTAL_PASS`
 
 ### Accepted corrections
 
@@ -56,6 +67,15 @@ The suggestion to automatically broaden admission of new literature to top-tier 
 
 The living Master Plan consulted at its registered location explicitly maintains that `HE2/HE5` remain pending for Group 3. The search performed over the accessible repository state did not yet locate a versioned EXP-08 artifact sufficient to freeze a historical `PARTIALLY_SUPPORTED` formulation for HE5. Accordingly, that formulation is not incorporated as an authorized claim and remains pending documentary verification if it becomes relevant again.
 
+### Integrated remediation
+
+- Claim statuses normalized in `article/CLAIM_EVIDENCE_MATRIX.md`.
+- `995/1006` and `48/59` separated by provenance level.
+- Final HE5 status preserved as pending Group 3.
+- Master Plan uniqueness, synchronization, and exclusive write-authority rule frozen in `article/DECISIONS.md` and `article/SOURCE_REGISTRY.md`.
+- Original bibliographic policy preserved without automatic broadening to proceedings.
+- `article/ARTICLE_STATUS.md` updated to request only a closing experimental pass.
+
 ### Gate
 
-The corrections above must be integrated into the article-governance files and submitted to a closing experimental pass. 0A-01 may not be marked `APPROVED` or `FROZEN` until that pass is received and the author gives express approval.
+Remediation is integrated. A closing experimental pass is now required to verify that the corrections were applied without regressions. 0A-01 may not be marked `APPROVED` or `FROZEN` until that pass is received and the author gives express approval.
