@@ -44,6 +44,12 @@ La auditoría experimental independiente debe comprobar directamente en el repos
 - coherencia entre las formulaciones documentales y el diseño experimental ejecutado;
 - que ninguna conclusión del snapshot 3,000/1,006 se esté heredando como resultado vigente.
 
+### Addendum de supersesión posterior a la auditoría experimental
+
+Esta revisión interna se conserva como registro histórico y no se reescribe retrospectivamente. Sin embargo, la auditoría experimental posterior determinó que la cifra `48/59` no dispone todavía del mismo nivel de trazabilidad congelada que `995/1006`.
+
+Por tanto, el estado vigente de `48/59` se rige por `C20 = REVIEW_REQUIRED` en `CLAIM_EVIDENCE_MATRIX.md`. La mención de `48/59` dentro de los aspectos inicialmente validados documenta lo que la revisión interna consideró aceptable en ese corte, pero **no autoriza su uso actual como hallazgo congelado del manuscrito**.
+
 ### Gate
 
 `0A-01` pasa de `REVISION_REQUIRED` a `EXPERIMENTAL_REVIEW`.
@@ -95,6 +101,12 @@ The independent experimental audit must verify directly against the repository a
 - actual status of EXP-11B retrieval, EXP-12, and Group 3;
 - consistency between documentary formulations and the executed experimental design;
 - that no conclusion from the 3,000/1,006 snapshot is inherited as a current result.
+
+### Supersession addendum after the experimental audit
+
+This internal review is preserved as a historical record and is not retrospectively rewritten. However, the subsequent experimental audit determined that the `48/59` figure does not yet have the same level of frozen traceability as `995/1006`.
+
+Accordingly, the current status of `48/59` is governed by `C20 = REVIEW_REQUIRED` in `CLAIM_EVIDENCE_MATRIX.md`. Its appearance among the initially validated aspects documents what the internal review considered acceptable at that cutoff, but **does not authorize its current use as a frozen manuscript finding**.
 
 ### Gate
 
