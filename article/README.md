@@ -1,10 +1,16 @@
 # Entorno de redacción del artículo / Article Writing Workspace
 
+> **Entrada obligatoria / Mandatory entry point:** antes de trabajar en esta rama, lee [`START_HERE.md`](START_HERE.md) y sigue su protocolo de incorporación. / Before working on this branch, read [`START_HERE.md`](START_HERE.md) and follow its onboarding protocol.
+
 ## Español
 
 Este directorio contiene el entorno de trabajo exclusivo para la redacción del artículo científico principal derivado de la investigación sobre recomendación auditable de subpartidas NANDINA mediante recuperación histórica, evidencia normativa y explicación controlada con LLM local.
 
 La rama `article/main-manuscript` se utiliza exclusivamente para planificar, redactar, revisar y congelar el manuscrito. El repositorio principal continúa siendo la fuente de verdad para desarrollo experimental, ejecución, auditoría y trazabilidad técnica. El repositorio `gci-nandina-rag-reproducibility` se reservará para el paquete final de reproducción y replicación científica.
+
+### Incorporación obligatoria
+
+Toda persona o IA que se incorpore al trabajo debe comenzar por `START_HERE.md`. Ese archivo define el orden obligatorio de lectura, la jerarquía de fuentes, los límites interpretativos, el protocolo previo a la redacción y la información mínima que debe reconstruirse antes de producir trabajo.
 
 ### Regla bilingüe obligatoria
 
@@ -34,6 +40,10 @@ La versión en español sirve como versión de control semántico durante el pro
 This directory contains the dedicated workspace for drafting the main scientific article derived from the research on auditable NANDINA subheading recommendation through historical retrieval, normative evidence, and controlled explanation with a local LLM.
 
 The `article/main-manuscript` branch is used exclusively to plan, draft, review, and freeze the manuscript. The main repository remains the source of truth for experimental development, execution, auditing, and technical traceability. The `gci-nandina-rag-reproducibility` repository will be reserved for the final scientific reproduction and replication package.
+
+### Mandatory onboarding
+
+Any person or AI joining the work must begin with `START_HERE.md`. That file defines the mandatory reading order, source hierarchy, interpretation boundaries, pre-drafting protocol, and the minimum information that must be reconstructed before producing work.
 
 ### Mandatory bilingual rule
 
