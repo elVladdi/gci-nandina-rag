@@ -12,6 +12,8 @@ La rama `article/main-manuscript` se utiliza exclusivamente para planificar, red
 
 Toda persona o IA que se incorpore al trabajo debe comenzar por `START_HERE.md`. Ese archivo define el orden obligatorio de lectura, la jerarquía de fuentes, los límites interpretativos, el protocolo previo a la redacción y la información mínima que debe reconstruirse antes de producir trabajo.
 
+Además, `SOURCE_REGISTRY.md` identifica la ubicación vigente de las fuentes nucleares y las equivalencias operativas entre copias locales y GitHub. Debe consultarse siempre que una tarea dependa de Proyecto, Anexo, Plan Maestro o tesis preliminar.
+
 Cuando la tarea involucre literatura, Related Work, gap, novelty, posicionamiento o incorporación de referencias, también es obligatorio leer `BIBLIOGRAPHIC_FRAMEWORK.md` antes de trabajar.
 
 ### Marco bibliográfico
@@ -52,6 +54,8 @@ The `article/main-manuscript` branch is used exclusively to plan, draft, review,
 ### Mandatory onboarding
 
 Any person or AI joining the work must begin with `START_HERE.md`. That file defines the mandatory reading order, source hierarchy, interpretation boundaries, pre-drafting protocol, and the minimum information that must be reconstructed before producing work.
+
+In addition, `SOURCE_REGISTRY.md` identifies the current locations of the nuclear sources and the operational equivalences between local copies and GitHub. It must be consulted whenever a task depends on the Project, Annex, Master Plan, or preliminary thesis.
 
 When the assigned task involves literature, Related Work, gap identification, novelty, scientific positioning, or adding references, `BIBLIOGRAPHIC_FRAMEWORK.md` must also be read before any work is produced.
 
