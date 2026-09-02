@@ -9,10 +9,12 @@
 - Fase vigente: `0A — Ground truth documental y experimental`.
 - `0A-01 — Ground truth documental`: **`APPROVED / FROZEN`**.
 - Bloque activo: **`0A-02 — Ground truth experimental`**.
-- Estado de `0A-02`: **`EXPERIMENTAL_REVIEW`**.
+- Estado de `0A-02`: **`AUTHOR_APPROVAL_PENDING`**.
 - Prompt del bloque: `article/prompts/0A02_EXPERIMENTAL_GROUND_TRUTH.md`.
 - Revisión interna: `article/reviews/0A02_INTERNAL_REVIEW.md`.
 - Dictamen interno: **`PASS WITH MINOR NORMALIZATION`**.
+- Revisión experimental: `article/reviews/0A02_EXPERIMENTAL_REVIEW.md`.
+- Dictamen experimental: **`PASS WITH MINOR NORMALIZATION — READY FOR AUTHOR APPROVAL`**.
 - Target journal: `PENDING — se decidirá en Fase 0D`.
 - Idioma del chat: español.
 - Artefactos GitHub del entorno del artículo: español + inglés con equivalencia semántica.
@@ -28,51 +30,70 @@ El congelamiento documental no congela el estado experimental completo. `SRC-03`
 
 ### Corte experimental verificado para 0A-02
 
-En la ejecución de la IA de redacción y en la revisión científica/editorial interna se verificó el mismo corte:
+La IA de redacción, la revisión científica/editorial interna y la auditoría experimental independiente verificaron el mismo corte experimental:
 
 - `main = 95ffec45ae5a734545ae7bb2d8d530f42f8f056c`;
 - `SRC-03` blob SHA `0a9a82181c6c3840f74f0272e5c225568474058b`;
-- sin drift material entre la apertura, la ejecución de 0A-02 y la revisión interna.
+- sin drift experimental material durante la ejecución y las revisiones de 0A-02.
 
-### Dictamen interno de 0A-02
-
-La entrega de 0A-02 superó la revisión científica/editorial interna con:
+### Resultado de la revisión interna
 
 ```text
 0A-02 INTERNAL REVIEW = PASS WITH MINOR NORMALIZATION
 READY_FOR_EXPERIMENTAL_REVIEW = true
 ```
 
-Se validaron, entre otros, los siguientes puntos:
+La revisión interna verificó el benchmark v0.2, los resultados finales consolidados de EXP-04, la integración histórico–normativa, HE4, EXP-08, EXP-11A, los gates de expansión histórica y la distinción Bank Materialization ≠ retrieval.
 
-- benchmark v0.2 H100/DEV/EVAL, hashes e independencia entre particiones por DAM e `id_unico`;
-- `SERIE` como unidad de análisis y `DAM` como unidad de agrupamiento cuando existe dependencia;
-- métricas H100 congeladas y su interpretación como recuperación de candidatos;
-- v0.1 como snapshot histórico y `995/1006` como hallazgo histórico autorizado, manteniendo `48/59 = REVIEW_REQUIRED`;
-- duplicados y near-duplicates residuales separados conceptualmente del solapamiento por DAM;
-- valores finales consolidados de EXP-04 para recuperación histórica, baselines normativos y D1a;
-- integración candidato–evidencia con `3168/3168` asociaciones exactas NANDINA-8 y trazabilidad, sin convertir cobertura en corrección normativa;
-- reranker LLM de 20 casos como diagnóstico limitado;
-- HE4 como `PARTIALLY_SUPPORTED` con sus limitaciones reales de auditoría;
-- EXP-08 como artefacto versionado, manteniendo su `HE5 = PARTIALLY_SUPPORTED` como interpretación histórica/intermedia y la decisión final `HE5 = PENDING_GROUP3`;
-- Grupo 1 y Grupo 2A con sus cierres y limitaciones preservadas;
-- EXP-11A cerrado/versionado y exclusivamente descriptivo, sin causalidad aislada del tamaño del banco;
-- Forensic Audit 01, Gate 02, Real Ingest 01/Gate 03 y Bank Materialization como evidencia de procedencia/ingesta/materialización, no como resultados de retrieval;
-- 10 bancos H150 + 10 bancos H200 materializados, con núcleo H100 preservado;
-- `EXP-11B retrieval = PENDING`, H150/H200 sin resultados de retrieval, `EXP-12 = PENDING`, Grupo 2B pendiente y Grupo 3 pendiente;
-- consistencia sustantiva actual de C01–C20.
+### Resultado de la auditoría experimental independiente
 
-### Normalización menor pendiente para el artefacto final
+```text
+0A-02 EXPERIMENTAL AUDIT = PASS WITH MINOR NORMALIZATION
+EXPERIMENTAL_FACTS = VERIFIED
+MATERIAL_EXPERIMENTAL_ERRORS = 0
+MINOR_GOVERNANCE_NORMALIZATION = 1
+READY_FOR_AUTHOR_APPROVAL = true
+0B_AUTHORIZED = false
+```
 
-No se requiere repetir la ejecución de 0A-02. En el artefacto definitivo, cada fila de la matriz experimental deberá contener **un único estado 0A-02** de este vocabulario:
+La auditoría independiente confirmó, entre otros:
+
+- benchmark v0.2 y métricas H100;
+- Top-k como recuperación de candidatos;
+- split sin DAM compartidas;
+- duplicados/near-duplicates como dimensión distinta del solapamiento por DAM;
+- uso de los valores finales de `exp04_final_results_registry_v0.2.csv`;
+- integración histórico–normativa con `3168/3168` asociaciones exactas y preservación del ranking;
+- reranker LLM como diagnóstico de 20 casos, no benchmark;
+- HE4 como `PARTIALLY_SUPPORTED` con limitaciones prompt-schema y modalidad de evaluador IA;
+- EXP-08 `HE5 = PARTIALLY_SUPPORTED` como interpretación histórica/intermedia específica, manteniendo `HE5 final = PENDING_GROUP3`;
+- EXP-11A como descriptivo/no causal;
+- Gate 02, Gate 03, Real Ingest y Bank Materialization separados de retrieval;
+- 10 bancos H150 + 10 bancos H200 materializados sin convertirlos en resultados de retrieval;
+- `EXP-11B retrieval = PENDING`;
+- `EXP-12 = PENDING`;
+- Grupo 2B = `PENDING`;
+- Grupo 3 = `PENDING`.
+
+### Normalización menor obligatoria para el artefacto definitivo
+
+La única corrección pendiente es editorial/de gobernanza y **no modifica resultados ni claims**.
+
+En la matriz experimental definitiva, cada fila deberá contener exactamente **un** estado 0A-02 de este vocabulario:
 
 `FROZEN_CURRENT`, `EXECUTED_LIMITED`, `HISTORICAL_SNAPSHOT`, `PENDING`, `NOT_AUTHORIZED`, `REVIEW_REQUIRED`.
 
-Las filas paraguas que mezclen estados deberán desagregarse, y los calificadores explicativos pasarán a las columnas de alcance o limitaciones. EXP-08 y su interpretación HE5 deben permanecer conceptualmente separados.
+No se admitirán estados combinados. Las filas paraguas con componentes de diferente estado deberán desagregarse.
 
-Esta normalización no modifica resultados ni claims.
+EXP-08 deberá quedar separado explícitamente en tres registros conceptuales:
 
-### Estado científico que debe preservar la auditoría experimental
+- artefacto/análisis EXP-08: `FROZEN_CURRENT`;
+- interpretación `HE5 = PARTIALLY_SUPPORTED` específica de EXP-08: `HISTORICAL_SNAPSHOT`;
+- decisión inferencial final HE5: `PENDING`.
+
+Esta normalización se aplicará durante la consolidación del artefacto definitivo después de la aprobación expresa del autor y antes de marcar `0A-02 = APPROVED / FROZEN`.
+
+### Estado científico que debe conservar el cierre
 
 - H100: `2,950` series / `28` DAM / `66` códigos.
 - DEV: `100` series / `6` DAM / `9` códigos.
@@ -93,21 +114,18 @@ Esta normalización no modifica resultados ni claims.
 
 ### Trabajo autorizado ahora
 
-Realizar exclusivamente la **auditoría experimental independiente de 0A-02**.
+El siguiente gate es **exclusivamente la aprobación expresa del autor de 0A-02**.
 
-La IA experimental debe reconstruir y verificar directamente el estado experimental contra `main`, `SRC-03` y los artefactos versionados; revisar la entrega consolidada a través de este registro interno; comprobar especialmente las métricas finales EXP-04, EXP-11A, HE4, EXP-08, los gates de expansión histórica y la separación Bank Materialization vs EXP-11B retrieval; y reportar cualquier error material o regresión.
-
-No iniciar 0B, no redactar el manuscrito y no modificar el Plan Maestro desde el flujo editorial.
+No se requiere otra ronda con la IA de redacción ni con la IA experimental antes de esa decisión. No iniciar 0B, no redactar el manuscrito y no modificar el Plan Maestro desde el flujo editorial.
 
 ### Próximo gate
 
-1. recibir feedback de la IA experimental sobre 0A-02;
-2. resolver observaciones experimentales, si las hubiera;
-3. obtener `PASS — READY FOR AUTHOR APPROVAL`;
-4. obtener aprobación expresa del autor;
-5. consolidar el artefacto bilingüe definitivo de 0A-02;
-6. marcar `0A-02 = APPROVED / FROZEN`;
-7. solo entonces evaluar el cierre de 0A y la apertura de 0B.
+1. obtener aprobación expresa del autor de 0A-02;
+2. consolidar el artefacto bilingüe definitivo aplicando la normalización de estados;
+3. registrar la aprobación del autor;
+4. marcar `0A-02 = APPROVED / FROZEN`;
+5. verificar que no se haya modificado el Plan Maestro desde el flujo editorial;
+6. solo entonces evaluar el cierre completo de 0A y la apertura de 0B.
 
 ---
 
@@ -120,10 +138,12 @@ No iniciar 0B, no redactar el manuscrito y no modificar el Plan Maestro desde el
 - Current phase: `0A — Documentary and experimental ground truth`.
 - `0A-01 — Documentary ground truth`: **`APPROVED / FROZEN`**.
 - Active block: **`0A-02 — Experimental ground truth`**.
-- `0A-02` status: **`EXPERIMENTAL_REVIEW`**.
+- `0A-02` status: **`AUTHOR_APPROVAL_PENDING`**.
 - Block prompt: `article/prompts/0A02_EXPERIMENTAL_GROUND_TRUTH.md`.
 - Internal review: `article/reviews/0A02_INTERNAL_REVIEW.md`.
 - Internal verdict: **`PASS WITH MINOR NORMALIZATION`**.
+- Experimental review: `article/reviews/0A02_EXPERIMENTAL_REVIEW.md`.
+- Experimental verdict: **`PASS WITH MINOR NORMALIZATION — READY FOR AUTHOR APPROVAL`**.
 - Target journal: `PENDING — to be decided in Phase 0D`.
 - Chat language: Spanish.
 - Article-workspace GitHub artifacts: Spanish + English with semantic equivalence.
@@ -139,51 +159,70 @@ The documentary freeze does not freeze the full experimental state. `SRC-03` rem
 
 ### Experimental cutoff verified for 0A-02
 
-The drafting-AI execution and the internal scientific/editorial review verified the same cutoff:
+The drafting AI, internal scientific/editorial review, and independent experimental audit verified the same experimental cutoff:
 
 - `main = 95ffec45ae5a734545ae7bb2d8d530f42f8f056c`;
 - `SRC-03` blob SHA `0a9a82181c6c3840f74f0272e5c225568474058b`;
-- no material drift between 0A-02 opening, execution, and internal review.
+- no material experimental drift during 0A-02 execution and review.
 
-### Internal verdict for 0A-02
-
-The 0A-02 delivery passed internal scientific/editorial review with:
+### Internal-review result
 
 ```text
 0A-02 INTERNAL REVIEW = PASS WITH MINOR NORMALIZATION
 READY_FOR_EXPERIMENTAL_REVIEW = true
 ```
 
-Validated items include:
+The internal review verified the v0.2 benchmark, final consolidated EXP-04 results, historical–normative integration, HE4, EXP-08, EXP-11A, historical-expansion gates, and the Bank Materialization ≠ retrieval distinction.
 
-- v0.2 H100/DEV/EVAL benchmark, hashes, and cross-partition DAM/`id_unico` independence;
-- `SERIES` as analysis unit and `DAM` as grouping unit when dependence exists;
-- frozen H100 metrics and their candidate-retrieval interpretation;
-- v0.1 as a historical snapshot and `995/1006` as an authorized historical finding, while `48/59 = REVIEW_REQUIRED`;
-- residual duplicates/near-duplicates conceptually separated from DAM overlap;
-- final consolidated EXP-04 values for historical retrieval, normative baselines, and D1a;
-- candidate–evidence integration with `3168/3168` exact NANDINA-8 associations and traceability, without converting coverage into normative correctness;
-- 20-case LLM reranker as a limited diagnostic;
-- HE4 as `PARTIALLY_SUPPORTED` with its actual audit limitations;
-- EXP-08 as a versioned artifact, retaining `HE5 = PARTIALLY_SUPPORTED` as historical/intermediate interpretation and `final HE5 = PENDING_GROUP3`;
-- Group 1 and Group 2A closures with preserved limitations;
-- EXP-11A closed/versioned and descriptive only, without isolated bank-size causality;
-- Forensic Audit 01, Gate 02, Real Ingest 01/Gate 03, and Bank Materialization as provenance/ingestion/materialization evidence rather than retrieval outcomes;
-- 10 H150 + 10 H200 banks materialized with preserved H100 core;
-- `EXP-11B retrieval = PENDING`, no H150/H200 retrieval results, `EXP-12 = PENDING`, Group 2B pending, and Group 3 pending;
-- current substantive consistency of C01–C20.
+### Independent experimental-audit result
 
-### Minor normalization pending for the final artifact
+```text
+0A-02 EXPERIMENTAL AUDIT = PASS WITH MINOR NORMALIZATION
+EXPERIMENTAL_FACTS = VERIFIED
+MATERIAL_EXPERIMENTAL_ERRORS = 0
+MINOR_GOVERNANCE_NORMALIZATION = 1
+READY_FOR_AUTHOR_APPROVAL = true
+0B_AUTHORIZED = false
+```
 
-0A-02 does not need to be rerun. In the final artifact, each experimental-matrix row must contain **exactly one 0A-02 status** from:
+The independent audit confirmed, among other items:
+
+- v0.2 benchmark and H100 metrics;
+- Top-k as candidate retrieval;
+- split without shared DAMs;
+- duplicates/near-duplicates as a dimension distinct from DAM overlap;
+- use of final `exp04_final_results_registry_v0.2.csv` values;
+- historical–normative integration with `3168/3168` exact associations and preserved ranking;
+- LLM reranker as a 20-case diagnostic rather than a benchmark;
+- HE4 as `PARTIALLY_SUPPORTED` with prompt-schema and AI-evaluator modality limitations;
+- EXP-08 `HE5 = PARTIALLY_SUPPORTED` as an experiment-specific historical/intermediate interpretation while keeping `final HE5 = PENDING_GROUP3`;
+- EXP-11A as descriptive/non-causal;
+- Gate 02, Gate 03, Real Ingest, and Bank Materialization separated from retrieval;
+- 10 H150 + 10 H200 banks materialized without treating them as retrieval outcomes;
+- `EXP-11B retrieval = PENDING`;
+- `EXP-12 = PENDING`;
+- Group 2B = `PENDING`;
+- Group 3 = `PENDING`.
+
+### Mandatory minor normalization for the final artifact
+
+The only remaining correction concerns editorial/governance normalization and **does not alter results or claims**.
+
+Each row in the final experimental matrix must contain exactly **one** 0A-02 status from:
 
 `FROZEN_CURRENT`, `EXECUTED_LIMITED`, `HISTORICAL_SNAPSHOT`, `PENDING`, `NOT_AUTHORIZED`, `REVIEW_REQUIRED`.
 
-Umbrella rows mixing statuses must be disaggregated, and explanatory qualifiers must move to scope or limitations fields. EXP-08 and its HE5 interpretation must remain conceptually separate.
+Combined statuses are not permitted. Umbrella rows containing components with different statuses must be disaggregated.
 
-This normalization does not alter results or claims.
+EXP-08 must be explicitly separated into three conceptual records:
 
-### Scientific state the experimental audit must preserve
+- EXP-08 artifact/analysis: `FROZEN_CURRENT`;
+- experiment-specific `HE5 = PARTIALLY_SUPPORTED` interpretation: `HISTORICAL_SNAPSHOT`;
+- final inferential HE5 decision: `PENDING`.
+
+This normalization will be applied during final artifact consolidation after express author approval and before `0A-02 = APPROVED / FROZEN` is recorded.
+
+### Scientific state to preserve at closure
 
 - H100: `2,950` series / `28` DAM / `66` codes.
 - DEV: `100` series / `6` DAM / `9` codes.
@@ -193,29 +232,26 @@ This normalization does not alter results or claims.
 - `48/59`: `REVIEW_REQUIRED`.
 - EXP-08 `HE5 = PARTIALLY_SUPPORTED`: experiment-specific historical/intermediate interpretation.
 - Final inferential HE5 decision: `PENDING_GROUP3`.
-- EXP-11A: descriptive; isolated causal bank-size effect unauthorized.
+- EXP-11A: descriptive; isolated bank-size causality unauthorized.
 - EXP-11B Bank Materialization: closed; retrieval not executed.
 - H150/H200: no authorized retrieval metrics.
 - EXP-12: pending.
 - Group 2B: pending.
-- Group 3 and final HE2/HE5 decision: pending.
+- Group 3 and final HE2/HE5 decisions: pending.
 - HE4 does not demonstrate complete legal correctness.
 - Normative association does not automatically establish substantive normative correctness.
 
 ### Work authorized now
 
-Perform only the **independent experimental audit of 0A-02**.
+The next gate is **exclusively the author's express approval of 0A-02**.
 
-The experimental AI must independently reconstruct and verify the experimental state against `main`, `SRC-03`, and versioned artifacts; review the consolidated delivery through this internal-review record; specifically check final EXP-04 metrics, EXP-11A, HE4, EXP-08, historical-expansion gates, and the Bank Materialization versus EXP-11B retrieval distinction; and report any material error or regression.
-
-Do not start 0B, do not draft the manuscript, and do not modify the Master Plan from the editorial workflow.
+No additional drafting-AI or experimental-AI round is required before that decision. Do not start 0B, do not draft the manuscript, and do not modify the Master Plan from the editorial workflow.
 
 ### Next gate
 
-1. receive experimental-AI feedback on 0A-02;
-2. resolve experimental observations, if any;
-3. obtain `PASS — READY FOR AUTHOR APPROVAL`;
-4. obtain the author's express approval;
-5. consolidate the final bilingual 0A-02 artifact;
-6. mark `0A-02 = APPROVED / FROZEN`;
-7. only then evaluate closure of 0A and opening of 0B.
+1. obtain express author approval of 0A-02;
+2. consolidate the final bilingual artifact while applying status normalization;
+3. record author approval;
+4. mark `0A-02 = APPROVED / FROZEN`;
+5. verify that the editorial workflow did not modify the Master Plan;
+6. only then evaluate full 0A closure and opening of 0B.
