@@ -12,6 +12,14 @@ La rama `article/main-manuscript` se utiliza exclusivamente para planificar, red
 
 Toda persona o IA que se incorpore al trabajo debe comenzar por `START_HERE.md`. Ese archivo define el orden obligatorio de lectura, la jerarquía de fuentes, los límites interpretativos, el protocolo previo a la redacción y la información mínima que debe reconstruirse antes de producir trabajo.
 
+Cuando la tarea involucre literatura, Related Work, gap, novelty, posicionamiento o incorporación de referencias, también es obligatorio leer `BIBLIOGRAPHIC_FRAMEWORK.md` antes de trabajar.
+
+### Marco bibliográfico
+
+El corpus bibliográfico inicial procede del proyecto de investigación aprobado, del Anexo vigente y de la versión preliminar vigente de la tesis. Los PDF originales serán proporcionados por el autor cuando el editor científico abra la Fase 0B y solicite lotes temáticos concretos.
+
+Las referencias heredadas no se descartan por antigüedad. Toda nueva referencia académica debe cumplir las reglas de recencia, impacto, acceso a PDF, trazabilidad y aprobación definidas en `BIBLIOGRAPHIC_FRAMEWORK.md`.
+
 ### Regla bilingüe obligatoria
 
 Todo contenido destinado al artículo y todo artefacto de planificación, revisión, decisión o control editorial creado en este directorio debe existir en español e inglés. Ambas versiones deben transmitir el mismo contenido científico, sin añadir, omitir o reinterpretar información entre idiomas.
@@ -44,6 +52,14 @@ The `article/main-manuscript` branch is used exclusively to plan, draft, review,
 ### Mandatory onboarding
 
 Any person or AI joining the work must begin with `START_HERE.md`. That file defines the mandatory reading order, source hierarchy, interpretation boundaries, pre-drafting protocol, and the minimum information that must be reconstructed before producing work.
+
+When the assigned task involves literature, Related Work, gap identification, novelty, scientific positioning, or adding references, `BIBLIOGRAPHIC_FRAMEWORK.md` must also be read before any work is produced.
+
+### Bibliographic framework
+
+The initial bibliographic corpus comes from the approved research project, the current Annex, and the current preliminary thesis. Original PDFs will be supplied by the author when the scientific editor opens Phase 0B and requests specific thematic batches.
+
+Inherited references are not discarded because of age. Every new academic reference must satisfy the recency, impact, PDF-access, traceability, and approval rules defined in `BIBLIOGRAPHIC_FRAMEWORK.md`.
 
 ### Mandatory bilingual rule
 
