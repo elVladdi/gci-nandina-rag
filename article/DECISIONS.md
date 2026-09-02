@@ -68,6 +68,16 @@ Este archivo conserva decisiones metodológicas y editoriales ya resueltas para 
 
 **Estado:** FROZEN.
 
+### D-009 — Fuente operativa del Plan Maestro experimental
+
+**Decisión:** para el artículo, la copia GitHub ubicada en `elVladdi/gci-nandina-rag`, rama `docs/plan-maestro-temporal-2026-08-31`, ruta `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md`, se considera equivalente operativo de la copia local iterativa `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md`.
+
+**Motivo:** ambas copias representan el mismo corte operativo de estado experimental; la copia GitHub permite a cualquier IA del flujo consultar directamente una fuente versionada y evita exigir al autor que adjunte repetidamente la copia local.
+
+**Regla:** mientras esta equivalencia permanezca vigente en `SOURCE_REGISTRY.md`, el Plan Maestro debe consultarse directamente en GitHub y no solicitarse como adjunto. Cualquier cambio de equivalencia requiere nueva decisión registrada.
+
+**Estado:** FROZEN.
+
 ---
 
 ## English
@@ -135,5 +145,15 @@ This file preserves methodological and editorial decisions that have already bee
 **Decision:** configurability for other chapters, jurisdictions, or tariff levels will be described as a design property, not as empirically demonstrated generalization.
 
 **Rationale:** the current empirical evaluation is bounded by the defined experimental scope.
+
+**Status:** FROZEN.
+
+### D-009 — Operational source of the experimental Master Plan
+
+**Decision:** for the article workflow, the GitHub copy at `elVladdi/gci-nandina-rag`, branch `docs/plan-maestro-temporal-2026-08-31`, path `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md`, is treated as the operational equivalent of the iterative local copy `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md`.
+
+**Rationale:** both copies represent the same operational experimental-status cutoff; the GitHub copy allows any AI in the workflow to consult a directly versioned source and avoids repeatedly requiring the author to attach the local copy.
+
+**Rule:** while this equivalence remains current in `SOURCE_REGISTRY.md`, the Master Plan must be consulted directly on GitHub and must not be requested as an attachment. Any change to the equivalence requires a new recorded decision.
 
 **Status:** FROZEN.
