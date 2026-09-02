@@ -76,6 +76,8 @@ Este archivo conserva decisiones metodológicas y editoriales ya resueltas para 
 
 **Regla:** mientras esta equivalencia permanezca vigente en `SOURCE_REGISTRY.md`, el Plan Maestro debe consultarse directamente en GitHub y no solicitarse como adjunto. El archivo de esa rama es una fuente viva mientras la investigación siga abierta; su blob SHA se registra como snapshot de cada corte de revisión y no como identidad inmutable de la fuente.
 
+**Precedencia:** D-011 supersede a D-009 en todo lo relativo a sincronización, coexistencia y posible divergencia entre la copia local y la copia GitHub. D-009 permanece vigente únicamente para identificar la ubicación operativa y el carácter de fuente viva de `SRC-03`.
+
 **Estado:** FROZEN.
 
 ### D-010 — Idioma del chat y bilingüismo de GitHub
@@ -94,9 +96,13 @@ Este archivo conserva decisiones metodológicas y editoriales ya resueltas para 
 
 **Autoridad:** únicamente la IA experimental está autorizada a modificar el Plan Maestro, tanto en su copia local como en su copia GitHub. La IA editora científica del artículo y la IA de redacción tienen acceso de solo lectura y no deben modificar, fusionar ni reconciliar por su cuenta ninguna de las dos copias.
 
-**Regla de sincronización:** después de cualquier actualización experimental, ambas copias deben volver a representar el mismo contenido científico y documental vigente antes de que el artículo utilice el Plan Maestro actualizado como fuente. Si se detecta divergencia, se declara inconsistencia documental y corresponde exclusivamente al flujo experimental corregirla. Durante ese estado, las IAs del artículo no deben escoger una copia como sustituto de la otra ni inferir una reconciliación.
+**Regla de sincronización exacta:** la copia local vigente y la copia GitHub de `SRC-03` deben contener el mismo contenido textual canónico. No se admite que una copia incorpore líneas, secciones, resultados, decisiones o estados que no estén presentes en la otra. La sincronización no se satisface únicamente mediante equivalencia semántica. Las diferencias exclusivamente atribuibles a representación técnica de fin de línea, por ejemplo CRLF frente a LF, no constituyen divergencia documental si el contenido textual canónico es idéntico.
+
+Después de cualquier actualización experimental, ambas copias deben quedar nuevamente sincronizadas bajo esta regla antes de que el artículo utilice el Plan Maestro actualizado como fuente. Si se detecta divergencia, se declara inconsistencia documental y corresponde exclusivamente al flujo experimental corregirla. Durante ese estado, las IAs del artículo no deben escoger una copia como sustituto de la otra ni inferir una reconciliación.
 
 **Trazabilidad:** GitHub permanece como la fuente viva consumida por el artículo. El SHA registra el snapshot concreto leído en cada corte de revisión; no transforma un snapshot anterior en una segunda versión científica vigente.
+
+**Precedencia:** esta decisión supersede a D-009 en todo lo relativo a sincronización, coexistencia y divergencia entre las dos copias del Plan Maestro.
 
 **Origen de la regla:** decisión expresa del autor, reafirmada el 2026-09-02.
 
@@ -180,6 +186,8 @@ This file preserves methodological and editorial decisions that have already bee
 
 **Rule:** while this equivalence remains current in `SOURCE_REGISTRY.md`, the Master Plan must be consulted directly on GitHub and must not be requested as an attachment. The file on that branch is a living source while the research remains open; its blob SHA is recorded as the snapshot for each review cutoff rather than as the immutable identity of the source.
 
+**Precedence:** D-011 supersedes D-009 for all matters concerning synchronization, coexistence, and possible divergence between the local and GitHub copies. D-009 remains in force only to identify the operational location and living-source character of `SRC-03`.
+
 **Status:** FROZEN.
 
 ### D-010 — Chat language and GitHub bilingualism
@@ -198,9 +206,13 @@ This file preserves methodological and editorial decisions that have already bee
 
 **Authority:** only the experimental AI is authorized to modify the Master Plan, both its local copy and its GitHub copy. The article scientific-editor AI and drafting AI have read-only access and must not independently modify, merge, or reconcile either copy.
 
-**Synchronization rule:** after any experimental update, both copies must again represent the same current scientific and documentary content before the article uses the updated Master Plan as a source. If divergence is detected, it is declared a documentary inconsistency and only the experimental workflow may correct it. While that state persists, article AIs must not select one copy as a substitute for the other or infer a reconciliation.
+**Exact synchronization rule:** the current local copy and the GitHub copy of `SRC-03` must contain the same canonical textual content. One copy may not contain lines, sections, results, decisions, or statuses that are absent from the other. Synchronization is not satisfied merely by semantic equivalence. Differences attributable exclusively to the technical representation of line endings, such as CRLF versus LF, do not constitute documentary divergence when the canonical textual content is otherwise identical.
+
+After any experimental update, both copies must again be synchronized under this rule before the article uses the updated Master Plan as a source. If divergence is detected, it is declared a documentary inconsistency and only the experimental workflow may correct it. While that state persists, article AIs must not select one copy as a substitute for the other or infer a reconciliation.
 
 **Traceability:** GitHub remains the living source consumed by the article. The SHA records the specific snapshot read at each review cutoff; it does not turn an earlier snapshot into a second current scientific version.
+
+**Precedence:** this decision supersedes D-009 for all matters concerning synchronization, coexistence, and divergence between the two Master Plan copies.
 
 **Origin of the rule:** express decision by the author, reaffirmed on 2026-09-02.
 
