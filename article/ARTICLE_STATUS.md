@@ -19,7 +19,7 @@
 |---|---|---|
 | Proyecto de tesis aprobado | REQUIRED_FOR_0A01 | fuente para problema, objetivos, hipótesis, justificación y alcance |
 | Anexo v13 | REQUIRED_FOR_0A01 | fuente para arquitectura y metodología operativa actual |
-| Plan Maestro v20 | REQUIRED_FOR_0A01/0A02 | fuente para estado experimental actual |
+| Plan Maestro experimental | AVAILABLE_IN_GITHUB | fuente para estado experimental actual; usar `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` en rama `docs/plan-maestro-temporal-2026-08-31`; equivalente operativo de la copia local v20 |
 | Tesis preliminar vigente | REQUIRED_FOR_0A01 | fuente secundaria para identificar formulaciones posteriores y discrepancias |
 | Literatura científica | DEFERRED_TO_0B | marco inicial definido; los PDF se incorporarán por lotes en Fase 0B |
 | GitHub desarrollo | ACTIVE | fuente de artefactos y estado técnico congelado |
@@ -34,7 +34,7 @@ Ejecutar exclusivamente `0A-01 — Ground truth documental` mediante el prompt v
 
 Este bloque debe:
 
-1. inventariar las cuatro fuentes nucleares;
+1. inventariar las cuatro fuentes nucleares, considerando el Plan Maestro como fuente GitHub y no como adjunto;
 2. transcribir las formulaciones aprobadas pertinentes;
 3. comparar Proyecto, Anexo, Plan Maestro y tesis preliminar;
 4. identificar discrepancias sin armonizarlas silenciosamente;
@@ -77,7 +77,7 @@ La Fase 0A completa seguirá requiriendo:
 |---|---|---|
 | Approved thesis project | REQUIRED_FOR_0A01 | source for problem, objectives, hypotheses, justification, and scope |
 | Annex v13 | REQUIRED_FOR_0A01 | source for current architecture and operational methodology |
-| Master Plan v20 | REQUIRED_FOR_0A01/0A02 | source for current experimental status |
+| Experimental Master Plan | AVAILABLE_IN_GITHUB | source for current experimental status; use `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` on branch `docs/plan-maestro-temporal-2026-08-31`; operational equivalent of the local v20 copy |
 | Current preliminary thesis | REQUIRED_FOR_0A01 | secondary source for identifying later formulations and discrepancies |
 | Scientific literature | DEFERRED_TO_0B | initial framework defined; PDFs will be incorporated in thematic batches during Phase 0B |
 | Development GitHub | ACTIVE | source for artifacts and frozen technical status |
@@ -92,7 +92,7 @@ Execute only `0A-01 — Documentary ground truth` using the versioned prompt at 
 
 This block must:
 
-1. inventory the four nuclear sources;
+1. inventory the four nuclear sources, treating the Master Plan as a GitHub source rather than an attachment;
 2. transcribe the relevant approved formulations;
 3. compare the Project, Annex, Master Plan, and preliminary thesis;
 4. identify discrepancies without silently harmonizing them;
