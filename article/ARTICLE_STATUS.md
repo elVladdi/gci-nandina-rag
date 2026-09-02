@@ -8,53 +8,51 @@
 - Estado global: `IN_ANALYSIS`
 - Fase activa: `0A — Ground truth documental y experimental`
 - Bloque activo: `0A-01 — Ground truth documental`
+- Estado del bloque: `REVISION_REQUIRED`
 - Prompt activo: `article/prompts/0A01_DOCUMENTARY_GROUND_TRUTH.md`
 - Target journal: `PENDING — se decidirá en Fase 0D`
-- Idiomas obligatorios: español + inglés con equivalencia semántica
+- Idioma del chat: español
+- Artefactos GitHub: español + inglés con equivalencia semántica
 - Manuscrito redactado: no iniciado
 
 ### Dependencias actuales
 
 | Elemento | Estado | Efecto sobre el paper |
 |---|---|---|
-| Proyecto de tesis aprobado | REQUIRED_FOR_0A01 | fuente para problema, objetivos, hipótesis, justificación y alcance |
-| Anexo v13 | REQUIRED_FOR_0A01 | fuente para arquitectura y metodología operativa actual |
-| Plan Maestro experimental | AVAILABLE_IN_GITHUB | fuente para estado experimental actual; usar `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` en rama `docs/plan-maestro-temporal-2026-08-31`; equivalente operativo de la copia local v20 |
-| Tesis preliminar vigente | REQUIRED_FOR_0A01 | fuente secundaria para identificar formulaciones posteriores y discrepancias |
-| Literatura científica | DEFERRED_TO_0B | marco inicial definido; los PDF se incorporarán por lotes en Fase 0B |
-| GitHub desarrollo | ACTIVE | fuente de artefactos y estado técnico congelado |
+| Proyecto de tesis aprobado | AVAILABLE_FOR_0A01 | fuente para problema, objetivos, hipótesis, justificación y alcance |
+| Anexo v13 | AVAILABLE_FOR_0A01 | fuente para arquitectura y metodología operativa actual |
+| Plan Maestro experimental | LIVING_SOURCE_IN_GITHUB | fuente para estado experimental actual; usar `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` en rama `docs/plan-maestro-temporal-2026-08-31`; snapshot actual de revisión `0a9a82181c6c3840f74f0272e5c225568474058b` |
+| Tesis preliminar vigente | AVAILABLE_FOR_0A01 | fuente secundaria para identificar formulaciones posteriores y snapshots obsoletos; no gobierna estado experimental |
+| Literatura científica | DEFERRED_TO_0B | los PDF se incorporarán por lotes en Fase 0B |
+| GitHub desarrollo | ACTIVE | fuente de artefactos y estado técnico |
 | EXP-11B retrieval | PENDING | bloquea resultados de H150/H200 |
 | EXP-12 | PENDING | bloquea parte del análisis definitivo |
 | Grupo 3 | PENDING | bloquea decisión inferencial final de HE2/HE5 |
 | Repositorio de reproducibilidad | STRUCTURAL | se completará tras cierre experimental |
 
+### Revisión interna de 0A-01
+
+La primera ejecución de 0A-01 reconstruyó correctamente las formulaciones aprobadas y detectó la obsolescencia del snapshot experimental presente en la tesis preliminar. Sin embargo, requiere correcciones antes de la auditoría experimental:
+
+1. el cambio de blob SHA del Plan Maestro en la misma rama/ruta no debe tratarse como bloqueo automático; `SRC-03` es una fuente viva y el SHA se registra como snapshot del corte;
+2. los sufijos automáticos de adjuntos como `(3)`/`(4)` no constituyen por sí solos una versión científica distinta;
+3. la discrepancia 3,000/1,006 frente a 2,950/1,056 debe mantenerse como snapshot experimental obsoleto, pero no como bloqueo documental porque la precedencia ya la resuelve;
+4. debe hacerse explícito que el cambio a v0.2 no fue solo de tamaño: la independencia experimental se garantiza agrupando por DAM, y la tesis preliminar no debe inducir a interpretar la ausencia de IDs repetidos como ausencia de dependencia entre DAM compartidas;
+5. el dictamen debe reevaluarse después de esas correcciones.
+
 ### Trabajo autorizado ahora
 
-Ejecutar exclusivamente `0A-01 — Ground truth documental` mediante el prompt versionado en `article/prompts/0A01_DOCUMENTARY_GROUND_TRUTH.md`.
-
-Este bloque debe:
-
-1. inventariar las cuatro fuentes nucleares, considerando el Plan Maestro como fuente GitHub y no como adjunto;
-2. transcribir las formulaciones aprobadas pertinentes;
-3. comparar Proyecto, Anexo, Plan Maestro y tesis preliminar;
-4. identificar discrepancias sin armonizarlas silenciosamente;
-5. separar formulación aprobada, formulación operativa vigente, borrador preliminar y estado experimental;
-6. emitir dictamen `PASS`, `PASS WITH CORRECTIONS` o `BLOCKED`.
-
-No está autorizada todavía la redacción de secciones del manuscrito ni el inicio de Fase 0B.
+Corregir exclusivamente la entrega de `0A-01` conforme al prompt actualizado y a los cinco puntos anteriores. No iniciar 0A-02 ni Fase 0B.
 
 ### Próximo gate
 
-Cerrar `0A-01` y, solo después de su revisión científica/editorial y experimental, abrir `0A-02 — consolidación del estado experimental`.
+Después de recibir la corrección de 0A-01:
 
-La Fase 0A completa seguirá requiriendo:
-
-1. inventario verificable de fuentes nucleares;
-2. formulación exacta de objetivo general, OE1–OE5 y HE1–HE5;
-3. tabla FROZEN / EXECUTED / PENDING;
-4. snapshot GitHub de referencia;
-5. discrepancias documentales identificadas;
-6. claims que ya pueden usarse y claims todavía prohibidos.
+1. revisión científica/editorial interna;
+2. si queda en `PASS` o `PASS WITH CORRECTIONS` sin observaciones críticas pendientes, auditoría experimental independiente;
+3. resolución de observaciones;
+4. aprobación del autor;
+5. generación del artefacto bilingüe de GitHub y cierre de 0A-01.
 
 ---
 
@@ -66,50 +64,48 @@ La Fase 0A completa seguirá requiriendo:
 - Global status: `IN_ANALYSIS`
 - Active phase: `0A — Documentary and experimental ground truth`
 - Active block: `0A-01 — Documentary ground truth`
+- Block status: `REVISION_REQUIRED`
 - Active prompt: `article/prompts/0A01_DOCUMENTARY_GROUND_TRUTH.md`
 - Target journal: `PENDING — to be decided in Phase 0D`
-- Mandatory languages: Spanish + English with semantic equivalence
+- Chat language: Spanish
+- GitHub artifacts: Spanish + English with semantic equivalence
 - Drafted manuscript: not started
 
 ### Current dependencies
 
 | Element | Status | Effect on the paper |
 |---|---|---|
-| Approved thesis project | REQUIRED_FOR_0A01 | source for problem, objectives, hypotheses, justification, and scope |
-| Annex v13 | REQUIRED_FOR_0A01 | source for current architecture and operational methodology |
-| Experimental Master Plan | AVAILABLE_IN_GITHUB | source for current experimental status; use `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` on branch `docs/plan-maestro-temporal-2026-08-31`; operational equivalent of the local v20 copy |
-| Current preliminary thesis | REQUIRED_FOR_0A01 | secondary source for identifying later formulations and discrepancies |
-| Scientific literature | DEFERRED_TO_0B | initial framework defined; PDFs will be incorporated in thematic batches during Phase 0B |
-| Development GitHub | ACTIVE | source for artifacts and frozen technical status |
+| Approved thesis project | AVAILABLE_FOR_0A01 | source for problem, objectives, hypotheses, justification, and scope |
+| Annex v13 | AVAILABLE_FOR_0A01 | source for current architecture and operational methodology |
+| Experimental Master Plan | LIVING_SOURCE_IN_GITHUB | source for current experimental status; use `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` on branch `docs/plan-maestro-temporal-2026-08-31`; current review snapshot `0a9a82181c6c3840f74f0272e5c225568474058b` |
+| Current preliminary thesis | AVAILABLE_FOR_0A01 | secondary source for later formulations and stale snapshots; does not govern experimental status |
+| Scientific literature | DEFERRED_TO_0B | PDFs will be incorporated in thematic batches during Phase 0B |
+| Development GitHub | ACTIVE | source of artifacts and technical status |
 | EXP-11B retrieval | PENDING | blocks H150/H200 results |
 | EXP-12 | PENDING | blocks part of the final analysis |
 | Group 3 | PENDING | blocks final inferential decision for HE2/HE5 |
 | Reproducibility repository | STRUCTURAL | to be completed after experimental closure |
 
+### Internal review of 0A-01
+
+The first 0A-01 execution correctly reconstructed the approved formulations and detected the obsolete experimental snapshot in the preliminary thesis. Corrections are required before experimental audit:
+
+1. a changed Master Plan blob SHA at the same branch/path must not be treated as an automatic blocker; `SRC-03` is a living source and its SHA is recorded as the cutoff snapshot;
+2. automatic attachment suffixes such as `(3)`/`(4)` do not by themselves define distinct scientific versions;
+3. the 3,000/1,006 versus 2,950/1,056 discrepancy must remain identified as a stale experimental snapshot, but it is not a documentary blocker because precedence already resolves it;
+4. the move to v0.2 must explicitly reflect DAM-grouped experimental independence; absence of repeated IDs in the preliminary thesis must not be interpreted as absence of dependence from shared DAMs;
+5. the verdict must be reassessed after these corrections.
+
 ### Work authorized now
 
-Execute only `0A-01 — Documentary ground truth` using the versioned prompt at `article/prompts/0A01_DOCUMENTARY_GROUND_TRUTH.md`.
-
-This block must:
-
-1. inventory the four nuclear sources, treating the Master Plan as a GitHub source rather than an attachment;
-2. transcribe the relevant approved formulations;
-3. compare the Project, Annex, Master Plan, and preliminary thesis;
-4. identify discrepancies without silently harmonizing them;
-5. separate approved formulation, current operational formulation, preliminary draft wording, and experimental status;
-6. issue a `PASS`, `PASS WITH CORRECTIONS`, or `BLOCKED` verdict.
-
-Drafting manuscript sections and starting Phase 0B are not yet authorized.
+Correct only the `0A-01` delivery according to the updated prompt and the five points above. Do not start 0A-02 or Phase 0B.
 
 ### Next gate
 
-Close `0A-01` and, only after its scientific/editorial and experimental review, open `0A-02 — experimental-status consolidation`.
+After the corrected 0A-01 is received:
 
-The complete Phase 0A will still require:
-
-1. verifiable inventory of nuclear sources;
-2. exact wording of the general objective, OE1–OE5, and HE1–HE5;
-3. FROZEN / EXECUTED / PENDING table;
-4. reference GitHub snapshot;
-5. identified documentary discrepancies;
-6. claims that may already be used and claims still prohibited.
+1. internal scientific/editorial review;
+2. if it reaches `PASS` or `PASS WITH CORRECTIONS` with no unresolved critical observations, independent experimental audit;
+3. resolve observations;
+4. author approval;
+5. generate the bilingual GitHub artifact and close 0A-01.
