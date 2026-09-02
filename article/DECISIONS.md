@@ -88,6 +88,20 @@ Este archivo conserva decisiones metodológicas y editoriales ya resueltas para 
 
 **Estado:** FROZEN.
 
+### D-011 — Unicidad, sincronización y autoridad de escritura del Plan Maestro
+
+**Decisión:** el Plan Maestro experimental constituye un único documento lógico representado por dos copias operativas: la copia local gestionada en el flujo experimental y la copia viva versionada en GitHub registrada como `SRC-03`. No se admiten dos versiones vigentes divergentes del Plan Maestro.
+
+**Autoridad:** únicamente la IA experimental está autorizada a modificar el Plan Maestro, tanto en su copia local como en su copia GitHub. La IA editora científica del artículo y la IA de redacción tienen acceso de solo lectura y no deben modificar, fusionar ni reconciliar por su cuenta ninguna de las dos copias.
+
+**Regla de sincronización:** después de cualquier actualización experimental, ambas copias deben volver a representar el mismo contenido científico y documental vigente antes de que el artículo utilice el Plan Maestro actualizado como fuente. Si se detecta divergencia, se declara inconsistencia documental y corresponde exclusivamente al flujo experimental corregirla. Durante ese estado, las IAs del artículo no deben escoger una copia como sustituto de la otra ni inferir una reconciliación.
+
+**Trazabilidad:** GitHub permanece como la fuente viva consumida por el artículo. El SHA registra el snapshot concreto leído en cada corte de revisión; no transforma un snapshot anterior en una segunda versión científica vigente.
+
+**Origen de la regla:** decisión expresa del autor, reafirmada el 2026-09-02.
+
+**Estado:** FROZEN.
+
 ---
 
 ## English
@@ -175,5 +189,19 @@ This file preserves methodological and editorial decisions that have already bee
 **Rationale:** separate operational interaction, which remains in Spanish, from versioned editorial artifacts, which must preserve bilingual semantic equivalence.
 
 **Rule:** a draft, audit, or analysis delivered in chat must be presented in Spanish. If that content is later approved for incorporation into GitHub, the version committed to GitHub must contain Spanish and English with semantic equivalence. Ordinary chat responses do not need to be duplicated in English.
+
+**Status:** FROZEN.
+
+### D-011 — Master Plan uniqueness, synchronization, and write authority
+
+**Decision:** the experimental Master Plan is one logical document represented by two operational copies: the local copy managed within the experimental workflow and the living GitHub copy registered as `SRC-03`. Two divergent current versions of the Master Plan are not permitted.
+
+**Authority:** only the experimental AI is authorized to modify the Master Plan, both its local copy and its GitHub copy. The article scientific-editor AI and drafting AI have read-only access and must not independently modify, merge, or reconcile either copy.
+
+**Synchronization rule:** after any experimental update, both copies must again represent the same current scientific and documentary content before the article uses the updated Master Plan as a source. If divergence is detected, it is declared a documentary inconsistency and only the experimental workflow may correct it. While that state persists, article AIs must not select one copy as a substitute for the other or infer a reconciliation.
+
+**Traceability:** GitHub remains the living source consumed by the article. The SHA records the specific snapshot read at each review cutoff; it does not turn an earlier snapshot into a second current scientific version.
+
+**Origin of the rule:** express decision by the author, reaffirmed on 2026-09-02.
 
 **Status:** FROZEN.
