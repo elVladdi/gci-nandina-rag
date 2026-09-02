@@ -4,86 +4,108 @@
 
 ### Estado general
 
-- Rama de trabajo: `article/main-manuscript`
-- Estado global: `IN_ANALYSIS`
-- Fase activa: `0A — Ground truth documental y experimental`
-- Bloque activo: `0A-01 — Ground truth documental`
-- Estado del bloque: `EXPERIMENTAL_REVIEW`
-- Prompt activo: `article/prompts/0A01_DOCUMENTARY_GROUND_TRUTH.md`
-- Revisión interna: `article/reviews/0A01_INTERNAL_REVIEW.md`
-- Revisión experimental: `article/reviews/0A01_EXPERIMENTAL_REVIEW.md`
-- Último dictamen experimental recibido: `PASS WITH 2 REQUIRED CORRECTIONS`
-- Estado de remediación: `SECOND_REMEDIATION_INTEGRATED — PENDING_FINAL_EXPERIMENTAL_PASS`
-- Target journal: `PENDING — se decidirá en Fase 0D`
-- Idioma del chat: español
-- Artefactos GitHub: español + inglés con equivalencia semántica
-- Manuscrito redactado: no iniciado
+- Rama de trabajo: `article/main-manuscript`.
+- Estado global: `IN_ANALYSIS`.
+- Fase vigente: `0A — Ground truth documental y experimental`.
+- `0A-01 — Ground truth documental`: **`APPROVED / FROZEN`**.
+- Bloque activo: **ninguno**.
+- `0A-02`: **`NOT_STARTED / NOT_YET_OPENED`**.
+- Target journal: `PENDING — se decidirá en Fase 0D`.
+- Idioma del chat: español.
+- Artefactos GitHub del entorno del artículo: español + inglés con equivalencia semántica.
+- Manuscrito redactado: no iniciado.
 
-### Dependencias actuales
+### Cierre formal de 0A-01
 
-| Elemento | Estado | Efecto sobre el paper |
+El bloque 0A-01 completó el ciclo de gobernanza exigido:
+
+1. ejecución documental por la IA de redacción;
+2. revisión científica/editorial interna;
+3. remediación de observaciones internas;
+4. auditoría experimental independiente;
+5. remediación de observaciones experimentales;
+6. pase experimental final `PASS — READY FOR AUTHOR APPROVAL`;
+7. aprobación expresa del autor el 2026-09-02;
+8. generación del artefacto documental definitivo y congelado.
+
+Estado final:
+
+```text
+0A-01 = APPROVED / FROZEN
+INTERNAL_REVIEW = PASS
+EXPERIMENTAL_REVIEW = PASS
+AUTHOR_APPROVAL = RECEIVED
+```
+
+Artefacto congelado:
+
+`article/ground_truth/0A01_DOCUMENTARY_GROUND_TRUTH_FROZEN.md`
+
+Registros del cierre:
+
+- `article/reviews/0A01_INTERNAL_REVIEW.md`;
+- `article/reviews/0A01_EXPERIMENTAL_REVIEW.md`;
+- `article/reviews/0A01_AUTHOR_APPROVAL.md`.
+
+### Ground truth congelado por 0A-01
+
+Quedan fijadas para el flujo editorial posterior las siguientes reglas documentales:
+
+- `SRC-01` gobierna las formulaciones aprobadas del problema, objetivos, hipótesis, justificación y alcance;
+- `SRC-02` gobierna la arquitectura y metodología operativa vigente;
+- `SRC-03` gobierna el estado experimental actual y permanece como fuente viva;
+- `SRC-04` es fuente secundaria de comparación y no puede sustituir silenciosamente formulaciones aprobadas ni estado experimental;
+- `SERIE` es la unidad de análisis;
+- `DAM` es la unidad administrativa original y la unidad de agrupamiento cuando existe dependencia;
+- la recuperación histórica genera y ordena candidatos;
+- la recuperación normativa aporta evidencia documental y no sustituye el ranking histórico;
+- el LLM local explica un Top-3 fijo y no clasifica desde cero ni altera su orden;
+- el reranking con LLM es diagnóstico;
+- la restricción empírica actual es Clase/Capítulo 87;
+- los resultados `3,000/100/1,006` de la tesis preliminar son un snapshot experimental obsoleto;
+- `995/1006` permanece autorizado solo como hallazgo histórico v0.1 sobre el rediseño del split;
+- `48/59` permanece `REVIEW_REQUIRED`;
+- `HE5 = PARTIALLY_SUPPORTED` de EXP-08 es una interpretación histórica/intermedia específica de EXP-08 y no sustituye `HE5 = PENDING_GROUP3`;
+- D-011 exige igualdad de contenido textual canónico entre las dos copias del Plan Maestro y limita su escritura exclusivamente a la IA experimental.
+
+### Dependencias experimentales abiertas
+
+| Elemento | Estado | Efecto sobre el artículo |
 |---|---|---|
-| Proyecto de tesis aprobado | AVAILABLE_FOR_0A01 | fuente para problema, objetivos, hipótesis, justificación y alcance |
-| Anexo v13 | AVAILABLE_FOR_0A01 | fuente para arquitectura y metodología operativa actual |
-| Plan Maestro experimental | LIVING_SOURCE_IN_GITHUB / EXPERIMENTAL_WRITE_ONLY | fuente para estado experimental actual; usar `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` en rama `docs/plan-maestro-temporal-2026-08-31`; snapshot registrado de 0A-01 `0a9a82181c6c3840f74f0272e5c225568474058b`; solo la IA experimental puede modificarlo |
-| Tesis preliminar vigente | AVAILABLE_FOR_0A01 | fuente secundaria para identificar formulaciones posteriores y snapshots obsoletos; no gobierna estado experimental |
-| Literatura científica | DEFERRED_TO_0B | los PDF se incorporarán por lotes en Fase 0B |
-| GitHub desarrollo | ACTIVE | fuente de artefactos y estado técnico |
-| EXP-11B retrieval | PENDING | bloquea resultados de H150/H200 |
-| EXP-12 | PENDING | bloquea parte del análisis definitivo |
-| Grupo 3 | PENDING | bloquea decisión inferencial final de HE2/HE5 |
-| Repositorio de reproducibilidad | STRUCTURAL | se completará tras cierre experimental |
+| Plan Maestro experimental | `LIVING_SOURCE_IN_GITHUB / EXPERIMENTAL_WRITE_ONLY` | fuente de estado experimental; la edición y redacción tienen solo lectura |
+| Snapshot de `SRC-03` utilizado en 0A-01 | `0a9a82181c6c3840f74f0272e5c225568474058b` | snapshot del corte, no identidad inmutable |
+| EXP-11B retrieval | `PENDING` | no existen resultados autorizados de retrieval H150/H200 |
+| H150/H200 retrieval results | `NOT_AVAILABLE` | prohibido anticipar mejora, empeoramiento o estabilidad |
+| EXP-12 | `PENDING` | bloquea parte del análisis definitivo |
+| Grupo 3 | `PENDING` | bloquea decisión inferencial final de HE2/HE5 |
+| Repositorio de reproducibilidad | `STRUCTURAL` | se completará según el cierre experimental/publicación |
 
-### Revisión interna de 0A-01
+### Estado de claims relevante
 
-La segunda ejecución corregida de 0A-01 superó la revisión científica/editorial interna con dictamen `PASS WITH MINOR TERMINOLOGY CORRECTION`.
+La taxonomía válida continúa siendo:
 
-Quedaron validados, entre otros puntos, `SRC-03` como fuente GitHub viva, el carácter obsoleto del snapshot `3,000/100/1,006`, la diferencia entre unicidad de `id_unico` e independencia por DAM, la composición/métricas vigentes de v0.2 y el carácter pendiente de EXP-11B retrieval, EXP-12 y Grupo 3.
+`AUTHORIZED / CONDITIONAL / PENDING / PROHIBITED / REVIEW_REQUIRED`.
 
-La revisión interna conserva históricamente la mención `48/59`, pero un addendum posterior aclara que su estado vigente es `C20 = REVIEW_REQUIRED`; no está autorizado como hallazgo congelado.
+En particular:
 
-### Revisión experimental de 0A-01
+- `C19 — 995/1006 = AUTHORIZED` como hallazgo histórico v0.1;
+- `C20 — 48/59 = REVIEW_REQUIRED`.
 
-La primera auditoría experimental emitió `PASS WITH CORRECTIONS` y condujo a normalizar los estados de claims, separar `995/1006` de `48/59`, preservar `HE5 = PENDING_GROUP3` como estado inferencial final y formalizar la gobernanza del Plan Maestro.
-
-El pase experimental de cierre posterior emitió `PASS WITH 2 REQUIRED CORRECTIONS`. Las dos correcciones requeridas fueron:
-
-1. reconocer expresamente el artefacto versionado `outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/exp08_integrated_findings_v0.2.md`, que registra `HE5 = PARTIALLY_SUPPORTED` como interpretación histórica/intermedia específica de EXP-08, sin confundirla con la decisión inferencial final vigente `HE5 = PENDING_GROUP3`;
-2. reforzar D-011 y `SOURCE_REGISTRY.md` para exigir sincronización por **igualdad del contenido textual canónico** entre la copia local y GitHub del Plan Maestro, no mera equivalencia semántica, admitiendo únicamente diferencias técnicas de fin de línea, y declarar que D-011 supersede a D-009 en materias de sincronización, coexistencia y divergencia.
-
-Ambas correcciones ya están integradas. También se añadió al registro histórico de revisión interna la nota de supersesión correspondiente a `48/59`.
-
-### Estado científico que no cambia
-
-- `995/1006`: autorizado como hallazgo histórico v0.1 con trazabilidad experimental.
-- `48/59`: `REVIEW_REQUIRED`.
-- EXP-08: contiene una interpretación histórica/intermedia `HE5 = PARTIALLY_SUPPORTED`.
-- Decisión inferencial final de HE5: `PENDING_GROUP3`.
-- EXP-11B retrieval: `PENDING`.
-- H150/H200: sin resultados de retrieval autorizados todavía.
-- EXP-12: `PENDING`.
-- Grupo 3: `PENDING`.
-- 0A-02: `NOT_AUTHORIZED`.
+No se autoriza ningún claim nuevo por el mero cierre de 0A-01.
 
 ### Trabajo autorizado ahora
 
-Realizar exclusivamente un **pase experimental final y limitado de 0A-01** sobre la actualización actual de `article/main-manuscript`.
+El cierre de 0A-01 **no abre automáticamente 0A-02**.
 
-El revisor debe verificar únicamente:
-
-1. tratamiento correcto de EXP-08/HE5;
-2. redacción exacta de sincronización del Plan Maestro y precedencia D-011 sobre D-009;
-3. ausencia de regresiones respecto de los puntos ya resueltos.
-
-No reabrir el análisis documental desde cero. No iniciar 0A-02 ni Fase 0B.
+En este corte no está autorizada todavía la ejecución de 0A-02 ni de 0B, ni la redacción de secciones del manuscrito. El siguiente acto editorial será preparar y registrar la apertura formal de `0A-02 — consolidación del ground truth experimental`, con su prompt, fuentes y gate propios.
 
 ### Próximo gate
 
-1. recibir `PASS — READY FOR AUTHOR APPROVAL` de la IA experimental;
-2. obtener aprobación expresa del autor para 0A-01;
-3. consolidar/cerrar el artefacto definitivo de 0A-01 en GitHub;
-4. marcar 0A-01 como `APPROVED/FROZEN` según el protocolo;
-5. solo entonces abrir 0A-02.
+1. preparar el alcance preciso de 0A-02;
+2. versionar su prompt en `article/prompts/`;
+3. actualizar este archivo para declarar 0A-02 como bloque activo;
+4. entregar al autor el prompt operativo y los adjuntos necesarios, si los hubiera;
+5. ejecutar 0A-02 sin avanzar a 0B hasta completar su propio ciclo de revisión y aprobación.
 
 ---
 
@@ -91,83 +113,105 @@ No reabrir el análisis documental desde cero. No iniciar 0A-02 ni Fase 0B.
 
 ### Overall status
 
-- Working branch: `article/main-manuscript`
-- Global status: `IN_ANALYSIS`
-- Active phase: `0A — Documentary and experimental ground truth`
-- Active block: `0A-01 — Documentary ground truth`
-- Block status: `EXPERIMENTAL_REVIEW`
-- Active prompt: `article/prompts/0A01_DOCUMENTARY_GROUND_TRUTH.md`
-- Internal review: `article/reviews/0A01_INTERNAL_REVIEW.md`
-- Experimental review: `article/reviews/0A01_EXPERIMENTAL_REVIEW.md`
-- Latest experimental verdict received: `PASS WITH 2 REQUIRED CORRECTIONS`
-- Remediation status: `SECOND_REMEDIATION_INTEGRATED — PENDING_FINAL_EXPERIMENTAL_PASS`
-- Target journal: `PENDING — to be decided in Phase 0D`
-- Chat language: Spanish
-- GitHub artifacts: Spanish + English with semantic equivalence
-- Drafted manuscript: not started
+- Working branch: `article/main-manuscript`.
+- Global status: `IN_ANALYSIS`.
+- Current phase: `0A — Documentary and experimental ground truth`.
+- `0A-01 — Documentary ground truth`: **`APPROVED / FROZEN`**.
+- Active block: **none**.
+- `0A-02`: **`NOT_STARTED / NOT_YET_OPENED`**.
+- Target journal: `PENDING — to be decided in Phase 0D`.
+- Chat language: Spanish.
+- GitHub artifacts in the article workspace: Spanish + English with semantic equivalence.
+- Manuscript drafting: not started.
 
-### Current dependencies
+### Formal closure of 0A-01
 
-| Element | Status | Effect on the paper |
+Block 0A-01 completed the required governance cycle:
+
+1. documentary execution by the drafting AI;
+2. internal scientific/editorial review;
+3. remediation of internal observations;
+4. independent experimental audit;
+5. remediation of experimental observations;
+6. final experimental pass `PASS — READY FOR AUTHOR APPROVAL`;
+7. explicit author approval on 2026-09-02;
+8. creation of the definitive frozen documentary artifact.
+
+Final status:
+
+```text
+0A-01 = APPROVED / FROZEN
+INTERNAL_REVIEW = PASS
+EXPERIMENTAL_REVIEW = PASS
+AUTHOR_APPROVAL = RECEIVED
+```
+
+Frozen artifact:
+
+`article/ground_truth/0A01_DOCUMENTARY_GROUND_TRUTH_FROZEN.md`
+
+Closure records:
+
+- `article/reviews/0A01_INTERNAL_REVIEW.md`;
+- `article/reviews/0A01_EXPERIMENTAL_REVIEW.md`;
+- `article/reviews/0A01_AUTHOR_APPROVAL.md`.
+
+### Ground truth frozen by 0A-01
+
+The following documentary rules are fixed for the later editorial workflow:
+
+- `SRC-01` governs approved problem, objective, hypothesis, justification, and scope formulations;
+- `SRC-02` governs current operational architecture and methodology;
+- `SRC-03` governs current experimental status and remains a living source;
+- `SRC-04` is a secondary comparison source and may not silently replace approved formulations or experimental status;
+- `SERIES` is the analysis unit;
+- `DAM` is the original administrative unit and the grouping unit when dependence matters;
+- historical retrieval generates and ranks candidates;
+- normative retrieval provides documentary evidence and does not replace the historical ranking;
+- the local LLM explains a fixed Top-3 and does not classify from scratch or alter its order;
+- LLM reranking is diagnostic;
+- current empirical scope is Class/Chapter 87;
+- the preliminary-thesis `3,000/100/1,006` results are a stale experimental snapshot;
+- `995/1006` remains authorized only as a historical v0.1 finding concerning split redesign;
+- `48/59` remains `REVIEW_REQUIRED`;
+- EXP-08's `HE5 = PARTIALLY_SUPPORTED` is a historical/intermediate interpretation specific to EXP-08 and does not replace `HE5 = PENDING_GROUP3`;
+- D-011 requires equality of canonical textual content between the two Master Plan copies and restricts write authority to the experimental AI.
+
+### Open experimental dependencies
+
+| Element | Status | Effect on the article |
 |---|---|---|
-| Approved thesis project | AVAILABLE_FOR_0A01 | source for problem, objectives, hypotheses, justification, and scope |
-| Annex v13 | AVAILABLE_FOR_0A01 | source for current architecture and operational methodology |
-| Experimental Master Plan | LIVING_SOURCE_IN_GITHUB / EXPERIMENTAL_WRITE_ONLY | source for current experimental status; use `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md` on branch `docs/plan-maestro-temporal-2026-08-31`; registered 0A-01 snapshot `0a9a82181c6c3840f74f0272e5c225568474058b`; only the experimental AI may modify it |
-| Current preliminary thesis | AVAILABLE_FOR_0A01 | secondary source for later formulations and stale snapshots; does not govern experimental status |
-| Scientific literature | DEFERRED_TO_0B | PDFs will be incorporated in thematic batches during Phase 0B |
-| Development GitHub | ACTIVE | source of artifacts and technical status |
-| EXP-11B retrieval | PENDING | blocks H150/H200 results |
-| EXP-12 | PENDING | blocks part of the final analysis |
-| Group 3 | PENDING | blocks final inferential decision for HE2/HE5 |
-| Reproducibility repository | STRUCTURAL | to be completed after experimental closure |
+| Experimental Master Plan | `LIVING_SOURCE_IN_GITHUB / EXPERIMENTAL_WRITE_ONLY` | experimental-status source; editing and drafting are read-only |
+| `SRC-03` snapshot used in 0A-01 | `0a9a82181c6c3840f74f0272e5c225568474058b` | cutoff snapshot, not immutable identity |
+| EXP-11B retrieval | `PENDING` | no authorized H150/H200 retrieval results exist |
+| H150/H200 retrieval results | `NOT_AVAILABLE` | improvement, deterioration, or stability claims are prohibited |
+| EXP-12 | `PENDING` | blocks part of the final analysis |
+| Group 3 | `PENDING` | blocks the final inferential HE2/HE5 decision |
+| Reproducibility repository | `STRUCTURAL` | to be completed according to experimental/publication closure |
 
-### Internal review of 0A-01
+### Relevant claim status
 
-The second corrected 0A-01 delivery passed the internal scientific/editorial review with verdict `PASS WITH MINOR TERMINOLOGY CORRECTION`.
+The valid taxonomy remains:
 
-Among other points, it validated `SRC-03` as a living GitHub source, the stale character of the `3,000/100/1,006` snapshot, the distinction between `id_unico` uniqueness and DAM-level independence, the current v0.2 composition/metrics, and the pending character of EXP-11B retrieval, EXP-12, and Group 3.
+`AUTHORIZED / CONDITIONAL / PENDING / PROHIBITED / REVIEW_REQUIRED`.
 
-The internal review historically retains the `48/59` mention, but a later addendum clarifies that its current status is `C20 = REVIEW_REQUIRED`; it is not authorized as a frozen finding.
+In particular:
 
-### Experimental review of 0A-01
+- `C19 — 995/1006 = AUTHORIZED` as a historical v0.1 finding;
+- `C20 — 48/59 = REVIEW_REQUIRED`.
 
-The first experimental audit issued `PASS WITH CORRECTIONS` and led to normalization of claim statuses, separation of `995/1006` from `48/59`, preservation of `HE5 = PENDING_GROUP3` as the final inferential status, and formalization of Master Plan governance.
+Closing 0A-01 does not itself authorize any new claim.
 
-The subsequent closing experimental pass issued `PASS WITH 2 REQUIRED CORRECTIONS`. The two required corrections were:
+### Work currently authorized
 
-1. explicitly acknowledge the versioned artifact `outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/exp08_integrated_findings_v0.2.md`, which records `HE5 = PARTIALLY_SUPPORTED` as a historical/intermediate interpretation specific to EXP-08, without confusing it with the current final inferential decision `HE5 = PENDING_GROUP3`;
-2. strengthen D-011 and `SOURCE_REGISTRY.md` to require synchronization by **equality of canonical textual content** between the local and GitHub Master Plan copies, rather than mere semantic equivalence, allowing only technical line-ending differences, and state that D-011 supersedes D-009 on synchronization, coexistence, and divergence matters.
+Closing 0A-01 **does not automatically open 0A-02**.
 
-Both corrections have now been integrated. The corresponding `48/59` supersession note was also added to the historical internal-review record.
-
-### Scientific status that remains unchanged
-
-- `995/1006`: authorized as a historical v0.1 finding with experimental traceability.
-- `48/59`: `REVIEW_REQUIRED`.
-- EXP-08: contains a historical/intermediate interpretation `HE5 = PARTIALLY_SUPPORTED`.
-- Final inferential HE5 decision: `PENDING_GROUP3`.
-- EXP-11B retrieval: `PENDING`.
-- H150/H200: no authorized retrieval results yet.
-- EXP-12: `PENDING`.
-- Group 3: `PENDING`.
-- 0A-02: `NOT_AUTHORIZED`.
-
-### Work authorized now
-
-Perform only a **final, limited experimental pass for 0A-01** on the current update of `article/main-manuscript`.
-
-The reviewer must verify only:
-
-1. correct EXP-08/HE5 handling;
-2. exact Master Plan synchronization wording and D-011 precedence over D-009;
-3. absence of regressions in previously resolved points.
-
-Do not reopen the documentary analysis from scratch. Do not start 0A-02 or Phase 0B.
+At this cutoff, execution of 0A-02 or 0B and drafting of manuscript sections are not yet authorized. The next editorial action is to prepare and formally register the opening of `0A-02 — experimental ground-truth consolidation`, with its own prompt, sources, and gate.
 
 ### Next gate
 
-1. receive `PASS — READY FOR AUTHOR APPROVAL` from the experimental AI;
-2. obtain the author's express approval of 0A-01;
-3. consolidate/close the final 0A-01 artifact on GitHub;
-4. mark 0A-01 as `APPROVED/FROZEN` according to protocol;
-5. only then open 0A-02.
+1. prepare the precise scope of 0A-02;
+2. version its prompt under `article/prompts/`;
+3. update this file to declare 0A-02 as the active block;
+4. provide the author with the operational prompt and any required attachments;
+5. execute 0A-02 without advancing to 0B until its own review and approval cycle is complete.
