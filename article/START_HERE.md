@@ -20,21 +20,24 @@ Antes de realizar cualquier tarea en esta rama, debes leer los archivos indicado
 Lee, en este orden:
 
 1. `article/START_HERE.md` — protocolo de incorporación y reglas de operación.
-2. `article/README.md` — propósito del entorno, flujo de trabajo y regla bilingüe.
+2. `article/README.md` — propósito del entorno y flujo de trabajo.
 3. `article/ARTICLE_STATUS.md` — **fuente de verdad del estado editorial actual**, fase activa, bloqueos y próximos pasos.
 4. `article/ARTICLE_WRITING_PLAN.md` — plan maestro de redacción, fases, gates, dependencias y orden de construcción del manuscrito.
 5. `article/DECISIONS.md` — decisiones científicas, metodológicas y editoriales ya congeladas.
-6. `article/CLAIM_EVIDENCE_MATRIX.md` — claims autorizados, condicionales, pendientes o prohibidos y su soporte evidencial.
-7. `article/STYLE_GUIDE.md` — reglas de redacción científica, terminología, equivalencia bilingüe y control de overclaiming.
-8. El archivo específico de `article/prompts/`, `article/reviews/` o `article/sections/` relacionado con la tarea asignada.
+6. `article/SOURCE_REGISTRY.md` — fuentes nucleares, ubicación, precedencia y reglas de versionamiento.
+7. `article/CLAIM_EVIDENCE_MATRIX.md` — claims autorizados, condicionales, pendientes o prohibidos y su soporte evidencial.
+8. `article/STYLE_GUIDE.md` — reglas de redacción científica, terminología, equivalencia bilingüe de artefactos y control de overclaiming.
+9. El archivo específico de `article/prompts/`, `article/reviews/` o `article/sections/` relacionado con la tarea asignada.
 
 Si existe contradicción entre una conversación y estos archivos, no la resuelvas silenciosamente. Identifica la contradicción y consulta la fuente de verdad aplicable.
 
-## 3. Regla bilingüe absoluta
+## 3. Idioma del chat y regla bilingüe de GitHub
 
-Todo contenido creado para el artículo debe existir en **español e inglés**.
+Las respuestas al autor dentro del **chat deben emitirse en español**, salvo que el autor solicite expresamente otro idioma.
 
-Ambas versiones deben decir científicamente lo mismo. Deben conservar la misma:
+La obligación de bilingüismo aplica exclusivamente a los **artefactos que se crean o integran en GitHub** dentro del entorno del artículo. Todo artefacto versionado de redacción, planificación, revisión, decisión o control editorial debe existir en español e inglés con equivalencia semántica.
+
+En los artefactos GitHub, ambas versiones deben conservar la misma:
 
 - afirmación;
 - fuerza de la afirmación;
@@ -48,7 +51,7 @@ Ambas versiones deben decir científicamente lo mismo. Deben conservar la misma:
 
 No se permite que una versión sea más fuerte, más general, más completa o más favorable que la otra.
 
-La versión española funciona como control semántico durante el proceso de investigación y revisión. La versión inglesa sirve como base para la futura presentación internacional. Ninguna tiene autorización para introducir contenido científico ausente en la otra.
+La versión española funciona como control semántico. La versión inglesa sirve como base para una futura presentación internacional. **No se debe duplicar en inglés una respuesta ordinaria del chat.** Si esa respuesta se aprueba posteriormente para GitHub, entonces el artefacto versionado debe generarse en ambos idiomas.
 
 ## 4. Jerarquía de fuentes de verdad
 
@@ -56,13 +59,15 @@ Cuando una tarea requiera comprobar hechos científicos o experimentales, no use
 
 La precedencia documental general es:
 
-1. `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md` o su versión posterior expresamente aprobada — estado experimental actual.
-2. `Anexo_1_NANDINA_LLM_RAG_v13.docx` o su versión posterior expresamente aprobada — arquitectura y metodología operativa actual.
-3. Proyecto de tesis aprobado — problema, objetivos, hipótesis, justificación y alcance aprobado.
+1. Plan Maestro experimental definido como `SRC-03` en `SOURCE_REGISTRY.md` — estado experimental actual.
+2. `Anexo_1_NANDINA_LLM_RAG_v13.docx` o versión posterior expresamente aprobada — arquitectura y metodología operativa actual.
+3. Proyecto de tesis aprobado — problema, objetivos, hipótesis, justificación y alcance aprobados.
 4. Otros documentos de tesis vigentes.
 5. Literatura científica utilizada para Related Work, gap y posicionamiento.
 
 Para resultados, artefactos, commits, configuraciones, scripts y trazabilidad experimental, consulta además el repositorio de desarrollo `gci-nandina-rag` y el artefacto congelado correspondiente.
+
+`SRC-03` es una fuente viva mientras la investigación siga abierta. Su rama y ruta determinan la fuente operativa; el blob SHA leído debe registrarse como snapshot de cada corte. Un cambio de blob SHA en la misma rama/ruta no es por sí solo un bloqueo: debe verificarse si cambia hechos, claims, resultados o decisiones ya utilizados.
 
 El repositorio `gci-nandina-rag-reproducibility` es el paquete científico de reproducción y replicación y no sustituye al repositorio de desarrollo mientras la campaña experimental siga abierta.
 
@@ -117,7 +122,7 @@ Para saber dónde está el artículo:
 1. consulta `ARTICLE_STATUS.md`;
 2. contrasta la fase con `ARTICLE_WRITING_PLAN.md`;
 3. revisa si existen dependencias experimentales pendientes;
-4. revisa `DECISIONS.md` y `CLAIM_EVIDENCE_MATRIX.md` antes de redactar;
+4. revisa `DECISIONS.md`, `SOURCE_REGISTRY.md` y `CLAIM_EVIDENCE_MATRIX.md` antes de redactar;
 5. no avances automáticamente a la siguiente fase sin que el gate correspondiente haya sido aprobado.
 
 `ARTICLE_STATUS.md` es la fuente de verdad del progreso editorial y debe actualizarse cuando una fase o bloque cambie de estado.
@@ -132,7 +137,7 @@ Una sección no puede redactarse solo porque exista un archivo para ella. Debe e
 
 ## 9. Protocolo antes de producir trabajo
 
-Antes de redactar, revisar o modificar cualquier contenido, informa explícitamente:
+Antes de redactar, revisar o modificar cualquier contenido, informa explícitamente en español:
 
 ```text
 ARCHIVOS LEÍDOS:
@@ -155,11 +160,12 @@ Cuando la redacción esté autorizada:
 1. trabaja únicamente sobre el bloque asignado;
 2. usa solo fuentes y claims autorizados;
 3. conserva la terminología congelada;
-4. redacta primero una versión científicamente controlada y luego su equivalente en el otro idioma, verificando equivalencia semántica oración por oración o claim por claim;
-5. no introduzcas resultados, métricas, citas o interpretaciones no proporcionadas o no verificadas;
-6. señala cualquier dato que requiera validación en lugar de completarlo por inferencia;
-7. aplica `STYLE_GUIDE.md`;
-8. entrega el bloque para revisión; no lo declares aprobado por cuenta propia.
+4. entrega en chat la versión de trabajo en español, salvo que el prompt específico indique que debe producirse directamente un artefacto GitHub;
+5. si el contenido es aprobado para integración, genera el artefacto GitHub en español e inglés y verifica equivalencia semántica oración por oración o claim por claim;
+6. no introduzcas resultados, métricas, citas o interpretaciones no proporcionadas o no verificadas;
+7. señala cualquier dato que requiera validación en lugar de completarlo por inferencia;
+8. aplica `STYLE_GUIDE.md`;
+9. entrega el bloque para revisión; no lo declares aprobado por cuenta propia.
 
 ## 11. Protocolo de revisión
 
@@ -173,7 +179,7 @@ Toda revisión debe distinguir, como mínimo:
 - coherencia argumental;
 - calidad editorial;
 - consistencia terminológica;
-- equivalencia español-inglés;
+- equivalencia español-inglés cuando se revise un artefacto GitHub bilingüe;
 - contradicciones con decisiones congeladas.
 
 El dictamen debe ser uno de:
@@ -190,12 +196,13 @@ El flujo oficial es:
 planificación del bloque
 → verificación de fuentes y evidencia
 → prompt cerrado de redacción
-→ borrador bilingüe
+→ borrador de trabajo en español
 → auditoría científica/editorial
 → correcciones
-→ auditoría experimental independiente
+→ auditoría experimental independiente cuando corresponda
 → resolución de observaciones
 → aprobación del autor
+→ generación/verificación del artefacto bilingüe
 → integración en la rama
 → actualización de plan, estado, claims y decisiones cuando corresponda
 ```
@@ -232,7 +239,7 @@ Una IA correctamente incorporada a esta rama debe ser capaz de responder, antes 
 - qué claims están autorizados, pendientes o prohibidos;
 - qué decisiones ya están congeladas;
 - cómo debe redactarse y revisarse;
-- qué significa la regla bilingüe;
+- que el chat se responde en español y que el bilingüismo aplica a artefactos GitHub;
 - qué dependencias experimentales siguen abiertas;
 - cuál es el siguiente gate.
 
@@ -248,64 +255,55 @@ This directory manages the planning, drafting, review, and freezing of the main 
 
 It is neither the experimental repository nor the final reproducibility repository. The `article/main-manuscript` branch contains only the editorial and scientific manuscript process.
 
-Before performing any task on this branch, you must read the files listed in Section 2 and reconstruct the current state of the article. You must not assume that the state observed in a previous conversation is still current.
+Before performing any task on this branch, read the files listed in Section 2 and reconstruct the current state of the article. Do not assume that a state observed in a previous conversation is still current.
 
 ## 2. Mandatory reading order
 
 Read, in this order:
 
 1. `article/START_HERE.md` — onboarding protocol and operating rules.
-2. `article/README.md` — workspace purpose, workflow, and bilingual rule.
+2. `article/README.md` — workspace purpose and workflow.
 3. `article/ARTICLE_STATUS.md` — **source of truth for the current editorial state**, active phase, blockers, and next steps.
 4. `article/ARTICLE_WRITING_PLAN.md` — master writing plan, phases, gates, dependencies, and manuscript-construction order.
-5. `article/DECISIONS.md` — already frozen scientific, methodological, and editorial decisions.
-6. `article/CLAIM_EVIDENCE_MATRIX.md` — authorized, conditional, pending, or prohibited claims and their evidential support.
-7. `article/STYLE_GUIDE.md` — scientific writing rules, terminology, bilingual equivalence, and overclaiming control.
-8. The specific file under `article/prompts/`, `article/reviews/`, or `article/sections/` related to the assigned task.
+5. `article/DECISIONS.md` — frozen scientific, methodological, and editorial decisions.
+6. `article/SOURCE_REGISTRY.md` — nuclear sources, location, precedence, and versioning rules.
+7. `article/CLAIM_EVIDENCE_MATRIX.md` — authorized, conditional, pending, or prohibited claims and their evidential support.
+8. `article/STYLE_GUIDE.md` — scientific writing rules, terminology, bilingual artifact equivalence, and overclaiming control.
+9. The specific file under `article/prompts/`, `article/reviews/`, or `article/sections/` related to the assigned task.
 
-If there is a contradiction between a conversation and these files, do not resolve it silently. Identify the contradiction and consult the applicable source of truth.
+If a conversation conflicts with these files, do not resolve the contradiction silently. Identify it and consult the applicable source of truth.
 
-## 3. Absolute bilingual rule
+## 3. Chat language and GitHub bilingual rule
 
-All content created for the article must exist in **Spanish and English**.
+Responses to the author in **chat must be in Spanish**, unless the author expressly requests another language.
 
-Both versions must communicate the same scientific meaning. They must preserve the same:
+The bilingual requirement applies exclusively to **artifacts created or integrated into GitHub** within the article workspace. Every versioned writing, planning, review, decision, or editorial-control artifact must exist in Spanish and English with semantic equivalence.
 
-- claim;
-- claim strength;
-- uncertainty;
-- causal or non-causal relationship;
-- figure and metric;
-- limitation;
-- warning;
-- citation or reference;
-- experimental condition.
+For GitHub artifacts, both versions must preserve the same claim, claim strength, uncertainty, causal status, figures, metrics, limitations, warnings, citations, and experimental conditions. Neither version may be stronger, more general, more complete, or more favorable than the other.
 
-Neither version may be stronger, more general, more complete, or more favorable than the other.
-
-The Spanish version functions as the semantic-control version during the research and review process. The English version serves as the basis for future international submission. Neither version is authorized to introduce scientific content absent from the other.
+The Spanish version is the semantic-control version and the English version is the basis for future international submission. **Ordinary chat responses must not be duplicated in English.** If chat content is later approved for GitHub, the versioned artifact must then be generated in both languages.
 
 ## 4. Source-of-truth hierarchy
 
-When a task requires verification of scientific or experimental facts, do not use the editorial files as a substitute for primary sources.
+Do not use editorial control files as substitutes for primary scientific or experimental sources.
 
-The general documentary precedence is:
+The general precedence is:
 
-1. `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md` or a later version expressly approved — current experimental state.
-2. `Anexo_1_NANDINA_LLM_RAG_v13.docx` or a later version expressly approved — current operational architecture and methodology.
+1. Experimental Master Plan defined as `SRC-03` in `SOURCE_REGISTRY.md` — current experimental status.
+2. `Anexo_1_NANDINA_LLM_RAG_v13.docx` or a later expressly approved version — current operational architecture and methodology.
 3. Approved thesis project — approved problem, objectives, hypotheses, justification, and scope.
 4. Other current thesis documents.
 5. Scientific literature used for Related Work, gap identification, and positioning.
 
 For results, artifacts, commits, configurations, scripts, and experimental traceability, also consult the `gci-nandina-rag` development repository and the corresponding frozen artifact.
 
+`SRC-03` is a living source while the research remains open. Its branch and path define the operational source; the blob SHA actually read is recorded as the snapshot for each cutoff. A changed blob SHA on the same branch/path is not by itself a blocker: determine whether it changes facts, claims, results, or decisions already used.
+
 The `gci-nandina-rag-reproducibility` repository is the scientific reproduction and replication package and does not replace the development repository while the experimental campaign remains open.
 
-If a required source is unavailable, declare it as a blocker. Do not reconstruct its content from memory, general knowledge, or an older version.
+If a required source is unavailable, declare it as a blocker. Do not reconstruct it from memory, general knowledge, or an older version.
 
 ## 5. Scientific architecture that must be preserved
-
-The official conceptual flow is:
 
 ```text
 Commercial description
@@ -319,12 +317,12 @@ Commercial description
 → auditable explanation of the Top-3
 ```
 
-Mandatory functional separation:
+Mandatory separation:
 
 - **Historical retrieval:** generates and ranks candidates.
-- **Normative retrieval:** provides documentary evidence for the candidates; it does not replace or reorder the historical ranking.
-- **Local LLM:** explains the fixed Top-3 using the retrieved context; it does not classify from scratch, introduce external codes, or replace the historical ranking.
-- **LLM reranking:** is diagnostic unless a later experimental decision expressly approves otherwise.
+- **Normative retrieval:** provides documentary evidence; it does not replace or reorder the historical ranking.
+- **Local LLM:** explains the fixed Top-3 using retrieved context; it does not classify from scratch, introduce external codes, or replace the ranking.
+- **LLM reranking:** diagnostic unless a later experimental decision expressly approves otherwise.
 
 Do not reformulate this architecture without a decision recorded in `DECISIONS.md`.
 
@@ -332,56 +330,38 @@ Do not reformulate this architecture without a decision recorded in `DECISIONS.m
 
 Unless expressly approved evidence establishes otherwise:
 
-- `Top-3 candidate retrieval` must not be described as `global RAG accuracy`.
-- Associating normative evidence with a candidate does not by itself demonstrate substantive normative correctness.
-- A structured or auditable explanation does not automatically equal legal correctness of the classification.
-- Framework configurability for other chapters, countries, or HS depths does not demonstrate empirical generalization beyond the performed evaluation.
-- Series belonging to the same DAM must not automatically be treated as independent observations for inference when intra-DAM dependence exists.
-- Metrics from incompatible or contaminated experimental partitions must not be mixed.
-- Results from experiments whose status is `PENDING`, `BLOCKED`, or not yet approved must not be anticipated.
-- A causal effect must not be attributed to historical-bank size when the design only supports sensitivity analysis under natural composition constraints.
+- `Top-3 candidate retrieval` is not `global RAG accuracy`.
+- Candidate-linked normative evidence does not by itself establish substantive normative correctness.
+- An auditable explanation does not automatically equal legal correctness.
+- Configurability does not establish empirical generalization beyond the performed evaluation.
+- Series from the same DAM must not automatically be treated as independent for inference when intra-DAM dependence exists.
+- Metrics from incompatible or contaminated partitions must not be mixed.
+- Pending or blocked results must not be anticipated.
+- Historical-bank size must not be given a causal interpretation when the design supports only sensitivity under natural composition constraints.
 
-The complete and current list of authorized and prohibited claims is in `CLAIM_EVIDENCE_MATRIX.md`.
+See `CLAIM_EVIDENCE_MATRIX.md` for the complete current claim policy.
 
 ## 7. How to determine current progress
 
-Do not infer progress from dates, commit names, or previous conversations.
+1. Consult `ARTICLE_STATUS.md`.
+2. Cross-check the phase against `ARTICLE_WRITING_PLAN.md`.
+3. Inspect pending experimental dependencies.
+4. Review `DECISIONS.md`, `SOURCE_REGISTRY.md`, and `CLAIM_EVIDENCE_MATRIX.md` before drafting.
+5. Do not advance automatically without the corresponding approved gate.
 
-To determine where the article stands:
-
-1. consult `ARTICLE_STATUS.md`;
-2. cross-check the phase against `ARTICLE_WRITING_PLAN.md`;
-3. inspect whether experimental dependencies remain pending;
-4. review `DECISIONS.md` and `CLAIM_EVIDENCE_MATRIX.md` before drafting;
-5. do not advance automatically to the next phase unless the corresponding gate has been approved.
-
-`ARTICLE_STATUS.md` is the source of truth for editorial progress and must be updated whenever a phase or block changes state.
+`ARTICLE_STATUS.md` is the source of truth for editorial progress.
 
 ## 8. Allowed editorial states
 
-The only operating states are:
-
 `NOT_STARTED`, `IN_ANALYSIS`, `READY_FOR_DRAFTING`, `DRAFTING`, `INTERNAL_REVIEW`, `EXPERIMENTAL_REVIEW`, `REVISION_REQUIRED`, `APPROVED`, `FROZEN`, `BLOCKED`.
 
-A section cannot be drafted merely because a file exists for it. It must be in a state that authorizes drafting under `ARTICLE_WRITING_PLAN.md` and `ARTICLE_STATUS.md`.
+A section cannot be drafted merely because a file exists for it.
 
 ## 9. Protocol before producing work
 
-Before drafting, reviewing, or modifying any content, explicitly report:
+Before drafting, reviewing, or modifying content, report the onboarding fields required by the Spanish section. The report itself must be delivered to the author in Spanish.
 
-```text
-FILES READ:
-ACTIVE PHASE:
-ASSIGNED BLOCK STATUS:
-DRAFTING AUTHORIZED: YES / NO
-RELEVANT FROZEN DECISIONS:
-RELEVANT AUTHORIZED CLAIMS:
-RELEVANT PROHIBITED OR PENDING CLAIMS:
-EXTERNAL SOURCES THAT MUST BE VERIFIED:
-DETECTED BLOCKERS OR CONTRADICTIONS:
-```
-
-If you cannot complete these fields reliably, do not draft yet.
+If the fields cannot be completed reliably, do not draft.
 
 ## 10. Drafting protocol
 
@@ -390,85 +370,46 @@ When drafting is authorized:
 1. work only on the assigned block;
 2. use only authorized sources and claims;
 3. preserve frozen terminology;
-4. draft a scientifically controlled version first and then its equivalent in the other language, verifying semantic equivalence sentence by sentence or claim by claim;
-5. do not introduce results, metrics, citations, or interpretations that were not provided or verified;
-6. flag any datum requiring validation instead of completing it by inference;
-7. apply `STYLE_GUIDE.md`;
-8. submit the block for review; do not declare it approved yourself.
+4. deliver the working version in chat in Spanish unless the specific task directly requests a GitHub artifact;
+5. when approved for integration, generate the GitHub artifact in Spanish and English and verify semantic equivalence;
+6. do not introduce unverified results, metrics, citations, or interpretations;
+7. flag data requiring validation rather than inferring it;
+8. apply `STYLE_GUIDE.md`;
+9. submit the block for review and do not self-approve it.
 
 ## 11. Review protocol
 
-Every review must distinguish, at minimum:
+Every review must distinguish source fidelity, experimental consistency, methodological consistency, claim accuracy, overclaiming, argumentative coherence, editorial quality, terminology, contradictions with frozen decisions, and Spanish-English equivalence when a bilingual GitHub artifact is being reviewed.
 
-- source fidelity;
-- experimental consistency;
-- methodological consistency;
-- claim accuracy;
-- overclaiming;
-- argumentative coherence;
-- editorial quality;
-- terminological consistency;
-- Spanish-English equivalence;
-- contradictions with frozen decisions.
+Verdict: `PASS`, `PASS WITH CORRECTIONS`, or `BLOCKED`.
 
-The verdict must be one of:
-
-`PASS`, `PASS WITH CORRECTIONS`, `BLOCKED`.
-
-A stylistic review cannot override an experimental restriction or a frozen decision.
+A stylistic review cannot override an experimental restriction or frozen decision.
 
 ## 12. Approval workflow
-
-The official workflow is:
 
 ```text
 block planning
 → source and evidence verification
 → constrained drafting prompt
-→ bilingual draft
+→ Spanish working draft in chat
 → scientific/editorial audit
 → corrections
-→ independent experimental audit
+→ independent experimental audit when applicable
 → resolution of observations
 → author approval
+→ bilingual artifact generation/verification
 → branch integration
-→ update of plan, status, claims, and decisions when applicable
+→ update plan, status, claims, and decisions when applicable
 ```
 
 Do not skip gates for convenience.
 
 ## 13. Rule for methodological or scope changes
 
-If drafting produces a proposal that changes:
-
-- architecture;
-- analysis unit;
-- grouping unit;
-- partitions;
-- metric;
-- hypothesis;
-- central claim;
-- experimental interpretation;
-- generalization scope;
-- journal strategy;
-
-do not incorporate it silently.
-
-Record it as a pending decision and request evaluation before modifying the manuscript or control files.
+Do not silently incorporate changes to architecture, analysis unit, grouping unit, partitions, metrics, hypotheses, central claims, experimental interpretation, generalization scope, or journal strategy. Record them as pending decisions and request evaluation.
 
 ## 14. Expected onboarding outcome
 
-An AI correctly onboarded to this branch must be able to answer, before working:
+A correctly onboarded AI must be able to state what article is being built, the active phase, what may or may not be drafted, governing sources, authorized/pending/prohibited claims, frozen decisions, drafting and review rules, that chat responses are in Spanish while GitHub artifacts are bilingual, open experimental dependencies, and the next gate.
 
-- what article is being built;
-- what the active editorial phase is;
-- what block may or may not be drafted;
-- what sources govern each type of statement;
-- what claims are authorized, pending, or prohibited;
-- what decisions are already frozen;
-- how content must be drafted and reviewed;
-- what the bilingual rule means;
-- what experimental dependencies remain open;
-- what the next gate is.
-
-If it cannot answer all of the above, onboarding is not complete.
+If it cannot do so, onboarding is incomplete.
