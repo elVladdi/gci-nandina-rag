@@ -14,7 +14,7 @@ Este archivo conserva decisiones metodológicas y editoriales ya resueltas para 
 
 ### D-002 — Bilingüismo obligatorio
 
-**Decisión:** todo artefacto de redacción, planificación, revisión y decisión del artículo debe existir en español e inglés con equivalencia semántica.
+**Decisión:** todo artefacto de redacción, planificación, revisión y decisión que se incorpore a GitHub dentro del entorno del artículo debe existir en español e inglés con equivalencia semántica.
 
 **Motivo:** mantener control semántico en español y una versión inglesa publicable sin divergencias científicas.
 
@@ -72,9 +72,19 @@ Este archivo conserva decisiones metodológicas y editoriales ya resueltas para 
 
 **Decisión:** para el artículo, la copia GitHub ubicada en `elVladdi/gci-nandina-rag`, rama `docs/plan-maestro-temporal-2026-08-31`, ruta `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md`, se considera equivalente operativo de la copia local iterativa `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md`.
 
-**Motivo:** ambas copias representan el mismo corte operativo de estado experimental; la copia GitHub permite a cualquier IA del flujo consultar directamente una fuente versionada y evita exigir al autor que adjunte repetidamente la copia local.
+**Motivo:** la copia GitHub permite a cualquier IA del flujo consultar directamente la fuente operativa vigente y evita exigir al autor que adjunte repetidamente la copia local.
 
-**Regla:** mientras esta equivalencia permanezca vigente en `SOURCE_REGISTRY.md`, el Plan Maestro debe consultarse directamente en GitHub y no solicitarse como adjunto. Cualquier cambio de equivalencia requiere nueva decisión registrada.
+**Regla:** mientras esta equivalencia permanezca vigente en `SOURCE_REGISTRY.md`, el Plan Maestro debe consultarse directamente en GitHub y no solicitarse como adjunto. El archivo de esa rama es una fuente viva mientras la investigación siga abierta; su blob SHA se registra como snapshot de cada corte de revisión y no como identidad inmutable de la fuente.
+
+**Estado:** FROZEN.
+
+### D-010 — Idioma del chat y bilingüismo de GitHub
+
+**Decisión:** todas las respuestas de las IAs al autor dentro del chat deben emitirse en español, salvo solicitud expresa del autor en otro idioma. La obligación español-inglés aplica exclusivamente a los artefactos que se creen o integren en GitHub dentro del entorno del artículo.
+
+**Motivo:** separar la interacción operativa, que se mantiene en español, de los artefactos editoriales versionados, que deben conservar equivalencia semántica bilingüe.
+
+**Regla:** un borrador, auditoría o análisis entregado en chat debe presentarse en español. Si posteriormente ese contenido se aprueba para incorporarse a GitHub, la versión que se versiona debe contener español e inglés con equivalencia semántica. No se exige duplicar en inglés las respuestas ordinarias del chat.
 
 **Estado:** FROZEN.
 
@@ -94,7 +104,7 @@ This file preserves methodological and editorial decisions that have already bee
 
 ### D-002 — Mandatory bilingualism
 
-**Decision:** every article writing, planning, review, and decision artifact must exist in Spanish and English with semantic equivalence.
+**Decision:** every writing, planning, review, and decision artifact incorporated into GitHub within the article workspace must exist in Spanish and English with semantic equivalence.
 
 **Rationale:** preserve semantic control in Spanish and a publication-ready English version without scientific divergence.
 
@@ -152,8 +162,18 @@ This file preserves methodological and editorial decisions that have already bee
 
 **Decision:** for the article workflow, the GitHub copy at `elVladdi/gci-nandina-rag`, branch `docs/plan-maestro-temporal-2026-08-31`, path `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md`, is treated as the operational equivalent of the iterative local copy `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md`.
 
-**Rationale:** both copies represent the same operational experimental-status cutoff; the GitHub copy allows any AI in the workflow to consult a directly versioned source and avoids repeatedly requiring the author to attach the local copy.
+**Rationale:** the GitHub copy allows any AI in the workflow to consult the current operational source directly and avoids repeatedly requiring the author to attach the local copy.
 
-**Rule:** while this equivalence remains current in `SOURCE_REGISTRY.md`, the Master Plan must be consulted directly on GitHub and must not be requested as an attachment. Any change to the equivalence requires a new recorded decision.
+**Rule:** while this equivalence remains current in `SOURCE_REGISTRY.md`, the Master Plan must be consulted directly on GitHub and must not be requested as an attachment. The file on that branch is a living source while the research remains open; its blob SHA is recorded as the snapshot for each review cutoff rather than as the immutable identity of the source.
+
+**Status:** FROZEN.
+
+### D-010 — Chat language and GitHub bilingualism
+
+**Decision:** all AI responses to the author in chat must be produced in Spanish unless the author expressly requests another language. The Spanish-English requirement applies exclusively to artifacts created or integrated into GitHub within the article workspace.
+
+**Rationale:** separate operational interaction, which remains in Spanish, from versioned editorial artifacts, which must preserve bilingual semantic equivalence.
+
+**Rule:** a draft, audit, or analysis delivered in chat must be presented in Spanish. If that content is later approved for incorporation into GitHub, the version committed to GitHub must contain Spanish and English with semantic equivalence. Ordinary chat responses do not need to be duplicated in English.
 
 **Status:** FROZEN.
