@@ -30,7 +30,9 @@ La copia GitHub está ubicada en:
 
 La denominación local `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md` identifica la copia iterativa vigente en el corte inicialmente registrado; el nombre local puede evolucionar dentro del flujo experimental sin crear por ello un segundo Plan Maestro vigente.
 
-No se admiten copias divergentes como versiones simultáneamente válidas. Después de una actualización experimental, ambas copias deben representar el mismo contenido científico y documental vigente antes de que el artículo consuma el nuevo estado. Si se detecta divergencia, esta se registra como inconsistencia documental y debe ser corregida exclusivamente por el flujo experimental.
+No se admiten copias divergentes como versiones simultáneamente válidas. La copia local vigente y la copia GitHub deben contener el **mismo contenido textual canónico**: ninguna puede incorporar líneas, secciones, resultados, decisiones o estados ausentes de la otra. La sincronización no se satisface únicamente mediante equivalencia semántica. Las diferencias exclusivamente atribuibles a la representación técnica de fin de línea, por ejemplo CRLF frente a LF, no constituyen divergencia documental cuando el contenido textual canónico es idéntico.
+
+Después de una actualización experimental, ambas copias deben volver a cumplir esta sincronización exacta antes de que el artículo consuma el nuevo estado. Si se detecta divergencia, esta se registra como inconsistencia documental y debe ser corregida exclusivamente por el flujo experimental.
 
 **Autoridad de escritura:** solo la IA experimental puede modificar el Plan Maestro, tanto localmente como en GitHub. La IA editora científica del artículo y la IA de redacción tienen acceso de solo lectura y no pueden modificar, fusionar, elegir entre copias divergentes ni reconciliarlas por inferencia.
 
@@ -41,6 +43,8 @@ Snapshot verificado durante la revisión de 0A-01 del 2026-09-02:
 - blob SHA: `0a9a82181c6c3840f74f0272e5c225568474058b`.
 
 Las IAs del artículo deben consultar directamente la copia GitHub para el estado experimental y **no deben exigir que el autor adjunte la copia local**.
+
+D-011 supersede a D-009 en todo lo relativo a sincronización, coexistencia y divergencia entre las copias local y GitHub. D-009 conserva únicamente la identificación de la fuente operativa y su carácter de fuente viva.
 
 Un cambio de rama, ruta o regla de gobernanza sí requiere actualización explícita de este registro y, cuando corresponda, una nueva decisión en `DECISIONS.md`.
 
@@ -92,7 +96,9 @@ The GitHub copy is located at:
 
 The local name `PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-09-01_v20.md` identifies the current iterative copy at the initially registered cutoff; the local filename may evolve within the experimental workflow without thereby creating a second current Master Plan.
 
-Divergent copies are not allowed as simultaneously valid versions. After an experimental update, both copies must represent the same current scientific and documentary content before the article consumes the new state. If divergence is detected, it is recorded as a documentary inconsistency and must be corrected exclusively by the experimental workflow.
+Divergent copies are not allowed as simultaneously valid versions. The current local copy and the GitHub copy must contain the **same canonical textual content**: neither may contain lines, sections, results, decisions, or statuses absent from the other. Synchronization is not satisfied merely by semantic equivalence. Differences attributable exclusively to the technical representation of line endings, such as CRLF versus LF, do not constitute documentary divergence when the canonical textual content is identical.
+
+After an experimental update, both copies must again satisfy this exact synchronization before the article consumes the new state. If divergence is detected, it is recorded as a documentary inconsistency and must be corrected exclusively by the experimental workflow.
 
 **Write authority:** only the experimental AI may modify the Master Plan, both locally and on GitHub. The article scientific-editor AI and drafting AI have read-only access and may not modify, merge, choose between divergent copies, or reconcile them by inference.
 
@@ -103,6 +109,8 @@ Snapshot verified during the 0A-01 review on 2026-09-02:
 - blob SHA: `0a9a82181c6c3840f74f0272e5c225568474058b`.
 
 Article AIs must consult the GitHub copy directly for experimental status and **must not require the author to attach the local copy**.
+
+D-011 supersedes D-009 for all matters concerning synchronization, coexistence, and divergence between the local and GitHub copies. D-009 retains only the identification of the operational source and its living-source character.
 
 A change in branch, path, or governance rule does require an explicit update to this registry and, where applicable, a new decision in `DECISIONS.md`.
 
