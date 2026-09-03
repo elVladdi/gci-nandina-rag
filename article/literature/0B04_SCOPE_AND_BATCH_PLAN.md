@@ -14,13 +14,19 @@ El corpus heredado contiene más trabajos IR/RAG de los necesarios. Solo se inco
 
 ### 3. 0B-04A — Fundamentos de ranking y recuperación
 
-Estado: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+Estado: **`APPROVED / FROZEN`**.
 
 Prompt ejecutado:
 `article/prompts/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS.md`.
 
 Revisión interna:
 `article/reviews/0B04A_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`.
+
+Aprobación del autor:
+`article/reviews/0B04A_AUTHOR_APPROVAL.md` — aprobación expresa recibida el `2026-09-03`.
+
+Artefacto canónico:
+`article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
 
 Revisión experimental: `NOT_REQUIRED`.
 
@@ -33,26 +39,30 @@ PDF analizados:
 5. `Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs.pdf`
 6. `Passage Re-Ranking with BERT.pdf`
 
-Hallazgos gobernantes tras revisión primaria:
+Hallazgos congelados:
 
-- BM25 es lexical term-weighting/scoring/ranking dentro del Probabilistic Relevance Framework; su score no es probabilidad calibrada de corrección.
-- SBERT produce representaciones semánticas independientes y habilita semantic search, pero el candidate search/indexing a escala debe especificarse separadamente del encoder.
-- DPR constituye dense bi-encoder retrieval; FAISS es infraestructura de similarity/index search y la búsqueda indexada materializa el Top-k.
-- ColBERT tiene dos modos metodológicamente distintos: `re-ranking` y `full/end-to-end retrieval`.
-- HNSW es `ANN_INDEX_SEARCH / INDEX_ACCELERATION`, no modelo semántico; la metadata editorial final de la copia suministrada queda `REVIEW_REQUIRED_FOR_FINAL_CITATION`.
-- Nogueira–Cho es `CROSS_ENCODER_RERANKING`: BM25 genera Top-1000 y BERT reordena. La copia primaria visible es arXiv v5, 14-Apr-2020; el `27%` del abstract es mejora relativa.
-- ANN recall, Top-k retrieval accuracy, MRR/MAP, STS Spearman y classification metrics no son métricas intercambiables.
-- Los resultados fundacionales de dense retrieval no reinterpretan el D1a experimental; D1a sigue siendo específico de la implementación exploratoria congelada.
+- BM25 = lexical term-weighting/scoring/ranking dentro del Probabilistic Relevance Framework; su score no es probabilidad calibrada de corrección.
+- SBERT = `SENTENCE_EMBEDDING / SEMANTIC_REPRESENTATION`; habilita semantic search, pero candidate search/indexing a escala se especifica separadamente del encoder.
+- DPR = `DENSE_BIENCODER_RETRIEVAL / INDEXED_SIMILARITY_SEARCH / CANDIDATE_GENERATION`; FAISS es infraestructura de búsqueda y la búsqueda indexada materializa el Top-k.
+- ColBERT conserva dos modos metodológicamente distintos: `RERANKING` y `FULL_RETRIEVAL`.
+- HNSW = `ANN_INDEX_SEARCH / INDEX_ACCELERATION`, no modelo semántico; la metadata editorial final de la copia suministrada queda `REVIEW_REQUIRED_FOR_FINAL_CITATION`.
+- Nogueira–Cho = `CROSS_ENCODER_RERANKING` de segunda etapa sobre BM25 Top-1000; la copia primaria visible es arXiv v5 de 2020 y el `27%` del abstract es mejora relativa.
+- ANN recall, Top-k retrieval accuracy, MRR/MAP, STS Spearman y classification metrics no son intercambiables.
+- Los resultados fundacionales de DPR/ColBERT/SBERT no reinterpretan el D1a experimental; D1a sigue siendo específico de la implementación densa exploratoria congelada.
 
-Correcciones C1–C8 para el eventual freeze están registradas en la revisión interna. No se requiere rerun de la IA de redacción.
+Distinción central congelada:
+
+`QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`.
+
+Las funciones pueden estar operacionalmente acopladas; no implican una correspondencia uno-a-uno con algoritmos independientes.
 
 ### 4. 0B-04B — Fundamentos de RAG, query transformation y grounding
 
 Estado: **`NOT_STARTED / CLOSED_BY_GATE`**.
 
-Solo podrá abrirse después de aprobación y freeze de 0B-04A.
+0B-04A ya está congelado, por lo que 0B-04B queda **elegible para definición posterior**, pero no está abierto automáticamente. Su lote definitivo y prompt ejecutable requieren un cambio explícito posterior.
 
-Lote previsto, sujeto a confirmación final antes de abrirlo:
+Lote previsto, sujeto a confirmación antes de apertura:
 
 1. `Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.pdf`
 2. `REALM: Retrieval-Augmented Language Model Pre-Training.pdf`
@@ -93,23 +103,27 @@ G6 permanece eliminado y G7 absorbido en F2. 0B-04A no modifica estos estados; a
 
 ### 7. Gate
 
-Gate vigente:
+0B-04A completó el gate:
 
-`0B-04A INTERNAL_REVIEW_COMPLETE -> aprobación expresa del autor -> integrar C1–C8 -> freeze -> definir/abrir 0B-04B`.
+`IA de redacción -> revisión interna -> aprobación expresa del autor -> freeze`.
 
-No se abre 0B-04B hasta cerrar 0B-04A. La IA experimental solo interviene si una interpretación bibliográfica modifica o amenaza un hecho/claim experimental congelado o una restricción bajo su autoridad; no ocurrió en la revisión 0B-04A.
+Siguiente gate potencial:
 
-### 8. Prohibiciones
+`definir lote final 0B-04B -> crear prompt ejecutable -> READY_FOR_DRAFTING -> IA de redacción -> revisión interna -> aprobación del autor -> freeze`.
 
-Hasta cerrar 0B-04A:
+La IA experimental solo interviene si una interpretación bibliográfica modifica o amenaza un hecho/claim experimental congelado o una restricción bajo su autoridad.
+
+### 8. Prohibiciones vigentes
+
+Mientras 0B permanezca abierto:
 
 - no redactar secciones del manuscrito;
 - no declarar novelty ni gap definitivo;
-- no buscar literatura nueva;
+- no buscar literatura nueva salvo apertura explícita de 0B-06;
 - no comparar benchmarks heterogéneos como superioridad global;
 - no modificar Plan Maestro ni 0A;
 - no reabrir G6/G7;
-- no crear/ejecutar 0B-04B;
+- no ejecutar 0B-04B hasta su apertura explícita;
 - no usar literatura fundacional para reinterpretar resultados experimentales congelados fuera de su alcance.
 
 ---
@@ -122,28 +136,28 @@ Hasta cerrar 0B-04A:
 
 ### 2. 0B-04A — Ranking and retrieval foundations
 
-Status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+Status: **`APPROVED / FROZEN`**.
 
-Internal review: `article/reviews/0B04A_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, no material errors. Experimental review is not required.
+The governing records are the 0B-04A prompt, internal review, author approval, and canonical frozen artifact `article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
 
-Primary verification confirms: BM25 is lexical ranking within PRF rather than a calibrated correctness probability; SBERT supplies semantic representation while scalable candidate search/indexing must be specified separately; DPR is indexed dense bi-encoder retrieval; ColBERT has distinct reranking and full-retrieval modes; HNSW is ANN/index-search infrastructure and its supplied manuscript has unresolved final publication metadata; Nogueira–Cho is second-stage cross-encoder reranking over BM25 candidates; heterogeneous IR/ANN/STS/classification metrics are not interchangeable; and foundational dense-retrieval results do not reinterpret the project's frozen D1a result.
+The frozen method map is: BM25 = lexical ranking within PRF rather than a calibrated correctness probability; SBERT = sentence embedding/semantic representation with candidate search/indexing specified separately; DPR = indexed dense bi-encoder retrieval; ColBERT = late-interaction retrieval with reranking and full-retrieval modes; HNSW = ANN index/search infrastructure with unresolved final publication metadata in the supplied copy; and Nogueira–Cho = second-stage cross-encoder reranking over BM25 candidates. Heterogeneous IR/ANN/STS/classification metrics remain non-interchangeable, and foundational dense-retrieval results do not reinterpret the project's frozen D1a result.
 
-C1–C8 are recorded in the internal review. No drafting-AI rerun is required.
+The central distinction is `QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`, while recognizing that functions can be operationally coupled.
 
 ### 3. 0B-04B — RAG/query transformation/grounding foundations
 
-Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It may open only after author approval and freeze of 0B-04A. The planned six-paper set remains provisional and no executable prompt has been created.
+Status: **`NOT_STARTED / CLOSED_BY_GATE`**. Because 0B-04A is now frozen, 0B-04B is eligible for a later explicit definition, but it has not been opened automatically. The planned six-paper set remains provisional and no executable prompt exists yet.
 
 ### 4. Reserved works
 
-SimCSE, query expansion, ExtractGPT, product-information extraction, and product-attribute extraction/normalization remain `RESERVED_FOR_DIRECTED_USE` and will be analyzed only if a concrete methodological need emerges.
+SimCSE, query expansion, ExtractGPT, product-information extraction, and product-attribute extraction/normalization remain `RESERVED_FOR_DIRECTED_USE`.
 
 ### 5. Gap-candidate governance
 
-0B-04A does not alter the post-0B-03B status of F1–F5. It only constrains terminology and methodological interpretation. G6 remains eliminated and G7 remains merged into F2.
+0B-04A does not alter the post-0B-03B status of F1–F5. It constrains terminology and method interpretation only. G6 remains eliminated and G7 remains merged into F2.
 
 ### 6. Gate
 
-`0B-04A INTERNAL_REVIEW_COMPLETE -> express author approval -> integrate C1-C8 -> freeze -> define/open 0B-04B`.
+0B-04A completed the normal gate: drafting AI -> internal review -> express author approval -> freeze. The next potential gate is: define the final 0B-04B batch -> create executable prompt -> READY_FOR_DRAFTING -> drafting AI -> internal review -> author approval -> freeze.
 
-Until then, 0B-04B and later phases remain closed. Experimental-AI review was not required because no frozen experimental fact/claim or Master-Plan rule was modified.
+No manuscript drafting, final novelty/gap claims, new-literature search outside an explicitly opened 0B-06, Master-Plan modification, or 0B-04B execution is authorized until the corresponding gate is opened.
