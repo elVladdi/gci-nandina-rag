@@ -11,11 +11,10 @@
 - `0A-02`: **`APPROVED / FROZEN`**.
 - Fase activa: **`0B — Mapa crítico de literatura y taxonomía`**.
 - `0B-01 — Clasificación HS directa y aprendizaje supervisado`: **`APPROVED / FROZEN`**.
-- Bloque activo: **`0B-02 — Retrieval, validación, conocimiento y auditabilidad aduanera`**.
-- Estado de 0B-02: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
-- Dictamen interno 0B-02: **`PASS WITH MINOR CORRECTIONS`**.
-- Revisión: `article/reviews/0B02_INTERNAL_REVIEW.md`.
-- Prompt de origen: `article/prompts/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY.md`.
+- `0B-02 — Retrieval, validación, conocimiento y auditabilidad aduanera`: **`APPROVED / FROZEN`**.
+- Bloque activo: **`0B-03A — LLM, RAG y multimodalidad aplicada a clasificación/compliance aduanero`**.
+- Estado de 0B-03A: **`READY_FOR_DRAFTING`**.
+- Prompt activo: `article/prompts/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS.md`.
 - Plan de lotes: `article/literature/0B_LITERATURE_BATCH_PLAN.md`.
 - Corpus PDF consolidado: `62` obras/documentos distintos; acceso primario verificable `62/62`.
 - Target journal: `PENDING — se decidirá en Fase 0D`.
@@ -35,84 +34,108 @@ NOVELTY = NOT_DECLARED
 ```
 
 Artefacto canónico:
-
 `article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md`
 
-Registros:
-
-- `article/reviews/0B01_INTERNAL_REVIEW.md`;
-- `article/reviews/0B01_AUTHOR_APPROVAL.md`.
-
-Correcciones congeladas: P05/UN Comtrade como corpus de referencia para ranking y no evidencia normativa; P02/WCO-HS como conocimiento usado durante selección y no evidencia normativa posterior; claims de terceros sujetos a verificación primaria; metadata P02 `REVIEW_REQUIRED`.
-
-### 0B-02 — revisión interna completada
-
-PDF revisados:
-
-1. `Classification of Goods Using Text Descriptions With Sentences Retrieval.pdf`
-2. `Text2Trade. A semantic search system whith Monte Carlo Droput Uncertainty Quantification For HS Code Retrieval..pdf`
-3. `Explainable Product Classification for Customs.pdf`
-4. `Application of machine learning for assessment of HS code correctness.pdf`
-5. `Customs Tariff Classification and the Use of Assistive Technologies.pdf`
-6. `Attribute knowledge and KBGAT for predicting the accuracy of the harmonized system code for classifying import and export commodities.pdf`
-
-Los otros 56 documentos permanecen `OUT_OF_SCOPE_FOR_0B02`.
-
-Dictamen:
+### 0B-02 — cierre formal
 
 ```text
-0B-02 INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
-AUTHOR_APPROVAL = PENDING
+0B-02 = APPROVED / FROZEN
+INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
+AUTHOR_APPROVAL = RECEIVED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-Correcciones/normalizaciones gobernantes para el futuro freeze:
+Artefacto canónico:
+`article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md`
 
-1. **P01:** distinguir el universo disponible/filtrado del test temporal efectivo. El test final es 1,652 casos y la validación previa 1,835. HS6 Top-3 = 0.955 sin retrieved sentences y 0.937 con retrieved sentences; no atribuir 0.955 al pipeline con sentence retrieval.
-2. **P03:** tabla total = 17,068 coreanos + 209,635 internacionales = 226,703; split descrito = 201,435 train + 5,000 validation + 5,000 test = 211,435; los 15,268 restantes no tienen disposición explícita en el PDF y deben quedar `NO_VERIFICABLE_EN_PDF`.
-3. **P03 encuesta:** helpfulness operativo = 65.7 % con score 4–5; `>85 %` corresponde a accuracy percibida ≥3. La frase introductoria de 85 % helpful es inconsistente con el cuerpo. Reducción de tiempo/esfuerzo = percepción, no medición causal.
-4. **Caveats P02/P04/P06:** Text2Trade sigue `REVIEW_REQUIRED`, su sector analysis no es validación externa y 171,247+37,794=209,041 frente a “≈208,000”; P04 ≈84.23 % de scores 3–4 presupone códigos históricos correctos y no mide detección de misclasificación real; P06 imprime Recall=`TP/(TP+TN)`, por lo que F1 se conserva solo como valor reportado con caveat, y su CV por triples no demuestra independencia por mercancía/declaración ni leakage.
+Registros:
+- `article/reviews/0B02_INTERNAL_REVIEW.md`;
+- `article/reviews/0B02_AUTHOR_APPROVAL.md`.
 
-### Candidatos a gap tras 0B-02
+Correcciones C1–C4 integradas:
 
-Todos continúan **provisionales** y no constituyen novelty:
+1. P01: test temporal final 1,652, validación 1,835; HS6 Top-3 0.955 sin retrieved sentences y 0.937 con retrieved sentences.
+2. P03: 226,703 casos tabulados frente a 211,435 asignados explícitamente a train/validation/test; 15,268 permanecen `NO_VERIFICABLE_EN_PDF`.
+3. P03: helpfulness operativo 65.7% (score 4–5); >85% corresponde a otra distribución de percepción; reducción de tiempo/esfuerzo = percepción, no causalidad.
+4. P02/P04/P06: Text2Trade `REVIEW_REQUIRED` y sin validación externa sectorial; P04 ≈84.23% no es detección adjudicada de misclasificación; P06 imprime Recall=`TP/(TP+TN)` y sus F1 se conservan con caveat; CV por triples no demuestra independencia ni leakage.
 
-- F1: `CANDIDATE_GAP_ONLY — NARROWED` a ranking fijado por precedentes históricos + evidencia normativa solo posterior y no reordenadora.
-- F2: `CANDIDATE_GAP_ONLY — NARROWED` a generador posterior restringido a Top-k fijo, sin códigos externos ni reordenamiento.
-- F3: `CANDIDATE_GAP_ONLY — SURVIVES THIS BATCH`.
-- F4: `CANDIDATE_GAP_ONLY — SUPPORTED AS A METHODOLOGICAL DISTINCTION` entre retrieval/coherence/corrección sustantiva.
-- F5: `CANDIDATE_GAP_ONLY — NARROWED` a evaluación formal y separada de trazabilidad/auditabilidad documental.
-- G6: `CANDIDATE_GAP_ONLY — NEW, METHODOLOGICAL; NOT A NOVELTY CLAIM` sobre ground truth independiente para correctness.
+### Candidatos provisionales después de 0B-02
 
-### Gate vigente de 0B-02
+Todos siguen siendo `CANDIDATE_GAP_ONLY`, no novelty:
+
+- F1: `NARROWED` a ranking fijado por precedentes históricos + evidencia normativa exclusivamente posterior y no reordenadora.
+- F2: `NARROWED` a generador posterior restringido a Top-k fijo, sin códigos externos ni reordenamiento.
+- F3: `SURVIVES THIS BATCH`.
+- F4: `SUPPORTED AS A METHODOLOGICAL DISTINCTION` entre candidate retrieval/coherence y corrección sustantiva.
+- F5: `NARROWED` a evaluación formal y separada de trazabilidad/auditabilidad documental.
+- G6: `NEW, METHODOLOGICAL; NOT A NOVELTY CLAIM` sobre ground truth independiente/adjudicado para correctness.
+
+### 0B-03 — división controlada
+
+Para preservar lectura completa, comparabilidad y auditoría independiente, 0B-03 se divide en `0B-03A` y `0B-03B`.
+
+#### 0B-03A — activo
+
+Objetivo: analizar cómo LLM, RAG y multimodalidad se utilizan realmente en clasificación/compliance aduanero y qué papel causal desempeñan retrieval, generación, reranking, documentos, imágenes y restricciones de salida.
+
+PDF asignados:
+
+1. `Automatic product classification in international trade Machine learning and large language models.pdf`
+2. `Automating Harmonized System (HS) Code Classification from Unstructured Shipping Manifests using Large Language Models.pdf`
+3. `Development of an Automated HS Code Classification System Using LLM Based on an Optimized RAG Framework.pdf`
+4. `ICCA-RAG Intelligent Customs Clearance Assistant Using RAG.pdf`
+5. `LLM-based robust product classification in commerce and compliance.pdf`
+6. `Multimodal approach for Harmonized System code prediction.pdf`
+
+Los otros 56 PDF permanecen `OUT_OF_SCOPE_FOR_0B03A`.
+
+Controles obligatorios:
+- lectura íntegra de 6/6 PDF;
+- no web ni literatura nueva;
+- no completar silenciosamente con tesis/Anexo u otros PDF;
+- usar `REPORTADO_POR_AUTORES`, `INFERENCIA_CRITICA`, `NO_VERIFICABLE_EN_PDF`, `SECONDARY_CLAIM_UNVERIFIED`;
+- distinguir LLM que decide códigos de LLM que solo explica candidatos;
+- distinguir `RAG_CLASSIFICATION` de `RAG_EVIDENCE_SUPPORT`;
+- distinguir reranking de explanation;
+- auditar si existen restricciones `no new codes`, orden fijo, validación de código o guardrails;
+- no convertir robustez, explainability, compliance o multimodalidad en claims más amplios que el protocolo medido;
+- someter F1–F5 y G6 a presión explícita;
+- no declarar novelty ni gap definitivo.
+
+#### 0B-03B — previsto, no abierto
+
+Estado: `NOT_STARTED`.
+
+Se reservará para agentes, benchmarks y razonamiento jerárquico/regulatorio, incluyendo el conjunto previsto de seis trabajos registrado en `0B_LITERATURE_BATCH_PLAN.md`.
+
+### Gate de 0B-03A
 
 ```text
-revisión interna completada
--> aprobación expresa del autor
--> integración C1–C4
--> creación/freeze del artefacto canónico 0B-02
--> apertura de 0B-03
+IA de redacción
+-> revisión científica/editorial interna contra PDF primarios
+-> corrección si aplica
+-> aprobación del autor
+-> freeze de 0B-03A
+-> apertura de 0B-03B
 ```
 
-No es necesaria una nueva ejecución completa de la IA de redacción. No se requiere IA experimental porque la revisión no modifica ground truth ni claims experimentales.
+La IA experimental solo se incorporará si una interpretación bibliográfica afecta directamente un hecho experimental, claim experimental o restricción metodológica bajo su autoridad.
 
 ### Prohibiciones vigentes
 
-Hasta recibir aprobación expresa del autor de 0B-02 no está autorizado:
-
-- marcar 0B-02 `APPROVED / FROZEN`;
-- abrir o ejecutar 0B-03;
+Durante 0B-03A no está autorizado:
 - redactar Introduction/Related Work/Methods/Results/Discussion/Conclusions;
 - declarar novelty, gap definitivo o superioridad;
 - modificar 0A o el Plan Maestro;
+- avanzar a 0B-03B, 0B-04, 0C o fases posteriores;
 - usar resultados experimentales pendientes como cerrados;
 - convertir secondary claims en hechos sin verificación primaria.
 
 ### Fases posteriores
 
-- `0B-03`: `NOT_STARTED`.
+- `0B-03B`: `NOT_STARTED`.
 - `0B-04`: `NOT_STARTED`.
 - `0B-05`: `NOT_STARTED`.
 - `0B-06`: `NOT_STARTED`.
@@ -128,62 +151,45 @@ Hasta recibir aprobación expresa del autor de 0B-02 no está autorizado:
 
 - Working branch: `article/main-manuscript`.
 - Overall state: `IN_ANALYSIS`.
-- Phase `0A`: **`CLOSED / APPROVED`**.
-- `0A-01`: **`APPROVED / FROZEN`**.
-- `0A-02`: **`APPROVED / FROZEN`**.
+- Phase 0A: **`CLOSED / APPROVED`**.
+- 0A-01 and 0A-02: **`APPROVED / FROZEN`**.
 - Active phase: **`0B — Critical literature map and taxonomy`**.
-- `0B-01 — Direct HS classification and supervised learning`: **`APPROVED / FROZEN`**.
-- Active block: **`0B-02 — Retrieval, validation, knowledge, and customs auditability`**.
-- 0B-02 status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
-- Internal verdict: **`PASS WITH MINOR CORRECTIONS`**.
-- Review record: `article/reviews/0B02_INTERNAL_REVIEW.md`.
+- 0B-01: **`APPROVED / FROZEN`**.
+- 0B-02: **`APPROVED / FROZEN`**.
+- Active block: **`0B-03A — LLM, RAG, and multimodality in customs classification/compliance`**.
+- 0B-03A status: **`READY_FOR_DRAFTING`**.
+- Active prompt: `article/prompts/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS.md`.
 - Consolidated corpus: 62 distinct works/documents; primary verifiable access `62/62`.
 - Target journal: pending until Phase 0D.
 - Manuscript drafting: not started.
 
-### Formal 0B-01 closure
+### 0B-02 closure
 
-`0B-01 = APPROVED / FROZEN`; internal review passed with minor corrections; author approval received; no experimental review required. Canonical artifact: `article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md`.
+0B-02 is `APPROVED / FROZEN`; internal review passed with minor corrections; express author approval was received; no experimental review was required. Canonical artifact: `article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md`.
 
-### 0B-02 internal review complete
+The canonical freeze integrates the P01 denominator/variant correction, P03 dataset-accounting and survey corrections, and the governing caveats for Text2Trade, P04 correctness scoring, and P06's printed Recall formula/triple-level CV.
 
-The six PDFs listed in the Spanish section were independently checked against their primary documents. The other 56 documents remain outside 0B-02 scope.
+### Provisional candidate gaps
 
-```text
-0B-02 INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
-AUTHOR_APPROVAL = PENDING
-EXPERIMENTAL_REVIEW = NOT_REQUIRED
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-```
+F1/F2/F5 are narrowed, F3 survives this batch provisionally, F4 survives as a methodological distinction, and G6 remains a new methodological candidate only. None establishes novelty.
 
-Governing corrections for the future freeze:
+### 0B-03 controlled split
 
-1. **P01:** distinguish available/filtered data from the actual temporal test. Final test = 1,652 cases; prior validation = 1,835. HS6 Top-3 is 0.955 without retrieved sentences and 0.937 with retrieved sentences; do not assign 0.955 to the sentence-retrieval pipeline.
-2. **P03:** data table total = 17,068 Korean + 209,635 international = 226,703; explicit split = 201,435 train + 5,000 validation + 5,000 test = 211,435. The disposition of the remaining 15,268 records is not explicitly stated and must remain `NOT_VERIFIABLE_IN_PDF`.
-3. **P03 survey:** operational helpfulness = 65.7% scoring 4–5; `>85%` refers to perceived accuracy ≥3. The introduction's 85% helpfulness wording is internally inconsistent. Time/effort reduction is perceptual rather than causal evidence.
-4. **P02/P04/P06 caveats:** Text2Trade remains `REVIEW_REQUIRED`, its sector analysis is not external validation, and 171,247+37,794=209,041 versus “≈208,000”; P04's ≈84.23% scores 3–4 assume historical labels are correct and do not measure true misclassification detection; P06 prints Recall=`TP/(TP+TN)`, so F1 values remain author-reported with a metric caveat, and triple-level CV does not establish commodity/declaration independence or leakage.
+0B-03 is split into `0B-03A` and `0B-03B` to preserve complete reading and independent verification.
 
-### Candidate-gap status after 0B-02
+0B-03A analyzes the six PDFs listed in the Spanish section and must distinguish direct LLM code determination from explanation of fixed candidates, RAG classification from evidence support, reranking from explanation, and actual output constraints/guardrails from unconstrained generation.
 
-All remain provisional and do not establish novelty:
+0B-03B remains `NOT_STARTED` and will cover agents, benchmarks, and hierarchical/regulatory reasoning after 0B-03A closes.
 
-- F1: `CANDIDATE_GAP_ONLY — NARROWED`.
-- F2: `CANDIDATE_GAP_ONLY — NARROWED`.
-- F3: `CANDIDATE_GAP_ONLY — SURVIVES THIS BATCH`.
-- F4: `CANDIDATE_GAP_ONLY — SUPPORTED AS A METHODOLOGICAL DISTINCTION`.
-- F5: `CANDIDATE_GAP_ONLY — NARROWED`.
-- G6: `CANDIDATE_GAP_ONLY — NEW, METHODOLOGICAL; NOT A NOVELTY CLAIM`.
+### Gate
 
-### Current 0B-02 gate
+`drafting AI -> internal scientific/editorial review against primary PDFs -> correction if needed -> author approval -> freeze -> open 0B-03B`.
 
-`internal review complete -> explicit author approval -> integrate C1–C4 -> freeze canonical 0B-02 artifact -> open 0B-03`.
-
-A full drafting-AI rerun is not required. Experimental-AI review is not required because no frozen experimental ground truth or claim was changed.
+Experimental-AI involvement is required only if literature interpretation directly affects experimental facts, claims, or restrictions under its authority.
 
 ### Later phases
 
-- `0B-03` through `0B-06`: `NOT_STARTED`.
-- `0C`: `BLOCKED` until 0B closes.
-- `0D`: `BLOCKED` until 0C closes.
+- 0B-03B through 0B-06: `NOT_STARTED`.
+- 0C: `BLOCKED` until 0B closes.
+- 0D: `BLOCKED` until 0C closes.
 - Target journal: not selected or frozen; decision occurs in 0D.
