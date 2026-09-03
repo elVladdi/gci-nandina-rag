@@ -16,7 +16,10 @@
 - `0B-03B`: **`APPROVED / FROZEN`**.
 - `0B-04A`: **`APPROVED / FROZEN`**.
 - `0B-04B`: **`APPROVED / FROZEN`**.
-- `0B-05`: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+- Bloque activo: **`0B-05A — Documentación de datos, procedencia, reproducibilidad y audit trail`**.
+- Estado de `0B-05A`: **`READY_FOR_DRAFTING`**.
+- `0B-05B`: **`NOT_STARTED / CLOSED_BY_GATE`**.
+- `0B-05C`: **`NOT_STARTED / CLOSED_BY_GATE`**.
 - `0B-06`: `NOT_STARTED`.
 - `0C — Gap, contribución y Research Questions`: `BLOCKED` hasta cerrar 0B.
 - `0D — Arquitectura editorial y journal fit`: `BLOCKED` hasta cerrar 0C.
@@ -44,6 +47,18 @@ La revisión bibliográfica no modifica el Plan Maestro ni el ground truth 0A. L
 - `0B-04A = APPROVED / FROZEN` — `article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
 - `0B-04B = APPROVED / FROZEN` — `article/literature/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS_FROZEN.md`.
 
+0B-04A congeló:
+
+`QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`.
+
+0B-04B congeló:
+
+`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
+
+`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
+
+Los resultados fundacionales de 0B-04 no reinterpretan D1a fuera de la implementación densa exploratoria específica.
+
 ### Candidatos provisionales
 
 Ninguno constituye novelty ni gap definitivo.
@@ -56,74 +71,84 @@ Ninguno constituye novelty ni gap definitivo.
 - **G6:** `ELIMINATED AS GAP CANDIDATE`; queda solo como principio de calidad del ground truth.
 - **G7:** `MERGED INTO F2 / ELIMINATED AS INDEPENDENT CANDIDATE`.
 
-0B-04A y 0B-04B son fundacionales y no modifican estos estados; solo fijan vocabulario y fronteras metodológicas.
+0B-05 tampoco está autorizado a convertir estos candidatos en novelty.
 
-### 0B-04 — cierre formal
+### 0B-05 — apertura formal
 
-#### 0B-04A
+Alcance:
+
+`article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
+
+#### 0B-05A — bloque activo
+
+Prompt:
+
+`article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.
+
+PDF asignados:
+
+1. `Data statements for natural language processing- Toward mitigating system bias and enabling better science..pdf`
+2. `Datasheets for Datasets.pdf`
+3. `AIR data pipeline-Provenance-driven data management for traceable scientific workflows.pdf`
+4. `Improving Reproducibility in Machine Learning Research(A Report from the NeurIPS 2019 Reproducibility Program).pdf`
+5. `Closing the AI accountability gap - defining an end-to-end framework for internal algorithmic auditing.pdf`
+
+El tercer archivo corresponde científicamente a **FAIR Data Pipeline: provenance-driven data management for traceable scientific workflows**; el nombre físico suministrado se conserva para localizarlo.
+
+Objetivo gobernante:
+
+`DATA/DOCUMENTATION -> VERSION/IDENTITY -> PROVENANCE/LINEAGE -> REPRODUCIBLE WORKFLOW -> AUDIT TRAIL`
+
+sin inferir:
+
+`CORRECTNESS -> LEGAL VALIDITY -> GENERALIZATION`.
+
+Distinciones obligatorias:
+
+- dataset documentation ≠ dataset quality/adequacy;
+- dataset identity/versioning ≠ description;
+- versioning ≠ reproducibility;
+- provenance/lineage ≠ correctness;
+- reproducibility ≠ external replication/generalization;
+- lifecycle/internal audit ≠ output-level auditability evaluation;
+- transparency trail ≠ legal correctness.
+
+0B-05A puede aportar fundamentos metodológicos a F3/F4/F5, pero no es un pressure test de novelty aduanera.
+
+#### 0B-05B y 0B-05C
+
+- `0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado`: **`NOT_STARTED / CLOSED_BY_GATE`**.
+- `0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales`: **`NOT_STARTED / CLOSED_BY_GATE`**.
+
+No se abren hasta completar sus gates previos.
+
+### Gate vigente
 
 ```text
-0B-04A = APPROVED / FROZEN
-INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
-MATERIAL_ERRORS = 0
-AUTHOR_APPROVAL = RECEIVED
-EXPERIMENTAL_REVIEW = NOT_REQUIRED
+0B-05A = READY_FOR_DRAFTING
+-> IA de redacción
+-> revisión científica/editorial interna contra los cinco PDF primarios
+-> corrección si aplica
+-> aprobación expresa del autor
+-> freeze 0B-05A
+-> definir/abrir 0B-05B
 ```
 
-Artefacto canónico:
-`article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
+La IA experimental solo se incorpora si una interpretación bibliográfica afecta directamente hechos/claims experimentales congelados o restricciones bajo su autoridad.
 
-Distinción congelada:
+### Prohibiciones vigentes
 
-`QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`.
-
-#### 0B-04B
-
-```text
-0B-04B = APPROVED / FROZEN
-DRAFTING_DELIVERABLE = ANALYTICALLY_COMPLETE
-INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
-MATERIAL_ERRORS = 0
-AUTHOR_APPROVAL = RECEIVED
-EXPERIMENTAL_REVIEW = NOT_REQUIRED
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-```
-
-Registros:
-
-- Prompt: `article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
-- Revisión interna: `article/reviews/0B04B_INTERNAL_REVIEW.md`.
-- Aprobación del autor: `article/reviews/0B04B_AUTHOR_APPROVAL.md`.
-- Artefacto canónico: `article/literature/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS_FROZEN.md`.
-
-Distinciones congeladas:
-
-`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
-
-`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
-
-Normalizaciones C1–C13 integradas: discrepancia Lewis `17%`/Tabla-4 `11.7%`; RAG-Token sin nuevo retrieval por token; REALM como retrieval-augmented pretraining/span-based Open-QA; FiD fusion sin attribution; Query2doc/query rewriting como transformaciones upstream; resultados OOD y false-claim risk preservados; Asai et al. gobernado por cinco datasets y chequeo humano `95%/96%` limitado a validación de labels; provenance/grounding/evidentiality/auditability/legal correctness permanecen separados; benchmarks no se transfieren como métricas HS/NANDINA.
-
-Contrato del piloto usado únicamente como frontera comparativa:
-
-`ranking histórico Top-k fijado -> evidencia normativa posterior por candidato -> LLM local exclusivamente explicativo -> sin códigos nuevos -> sin reordenamiento -> sin feedback clasificatorio`.
-
-### Gate siguiente
-
-`0B-05 — Datos, documentación, procedencia, reproducibilidad, conocimiento y normativa` queda **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
-
-El freeze de 0B-04B no abre automáticamente 0B-05. Corresponde definir su alcance, lote y prompt mediante un cambio posterior explícito.
-
-Mientras 0B permanezca abierto no está autorizado:
+Durante 0B-05A no está autorizado:
 
 - redactar Introduction/Related Work/Methods/Results/Discussion/Conclusions;
 - declarar novelty o gap definitivo;
-- abrir 0C;
+- buscar literatura nueva;
+- utilizar otros PDF para completar el lote;
+- equiparar documentación, provenance, reproducibility o audit trail con correctness/legal validity;
 - modificar 0A o el Plan Maestro;
+- reinterpretar resultados experimentales congelados fuera de su alcance;
 - reabrir G6/G7;
-- buscar literatura nueva salvo apertura explícita de 0B-06;
-- convertir claims secundarios en hechos sin verificar la fuente primaria.
+- abrir 0B-05B, 0B-05C, 0B-06 o 0C antes del gate correspondiente.
 
 ---
 
@@ -136,36 +161,42 @@ Mientras 0B permanezca abierto no está autorizado:
 - Phase 0A is **`CLOSED / APPROVED`**.
 - Active phase: **`0B — Critical literature map and taxonomy`**.
 - 0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A, and 0B-04B are **`APPROVED / FROZEN`**.
-- 0B-05 is **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**; 0B-06 is not started.
+- Active block: **`0B-05A — Data documentation, provenance, reproducibility, and audit trail`**.
+- 0B-05A status: **`READY_FOR_DRAFTING`**.
+- 0B-05B and 0B-05C are **`NOT_STARTED / CLOSED_BY_GATE`**; 0B-06 is not started.
 - 0C remains blocked until 0B closes; 0D remains blocked until 0C closes.
 - Target journal remains pending until 0D; manuscript drafting has not started.
 
-### Governing ground truth
+### Governing freezes
 
-Frozen 0A documentary and experimental artifacts remain authoritative. Literature review cannot modify the Master Plan; exclusive Master-Plan authority remains with the experimental workflow.
+Frozen 0A artifacts remain authoritative. Literature review cannot modify the Master Plan. 0B-04A/0B-04B methodological distinctions remain frozen and do not reinterpret the project's D1a result beyond its specific exploratory dense implementation.
 
-### Provisional candidates
+F1–F5 remain provisional; G6 remains eliminated and G7 remains merged into F2. 0B-05 cannot convert them into novelty claims.
 
-F1–F5 remain provisional in narrowed/methodological forms; G6 remains eliminated and G7 remains merged into F2. 0B-04A/0B-04B are foundational and do not change those literature statuses.
+### 0B-05 formal opening
 
-### 0B-04 closure
+Scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-0B-04A is approved/frozen and established `QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`.
+Active prompt: `article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.
 
-0B-04B is now approved/frozen. Governing records are the prompt, internal review, author approval, and canonical artifact `article/literature/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS_FROZEN.md`.
+The five assigned inherited PDFs are Bender & Friedman data statements, Gebru et al. datasheets, the supplied FAIR Data Pipeline paper, Pineau et al. reproducibility report, and Raji et al. end-to-end internal algorithmic auditing framework.
 
-Frozen distinctions:
+The governing chain is:
 
-`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
+`DATA/DOCUMENTATION -> VERSION/IDENTITY -> PROVENANCE/LINEAGE -> REPRODUCIBLE WORKFLOW -> AUDIT TRAIL`
 
-`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
+and explicitly not:
 
-C1–C13 are integrated, including the Lewis `17%`/Table-4 `11.7%` discrepancy, no per-token retrieval in RAG-Token, REALM's retrieval-augmented-pretraining/span-based Open-QA characterization, the FiD fusion/attribution distinction, upstream Query2doc/query rewriting causality, preservation of mixed OOD and false-pseudo-document risks, Asai's five-dataset ground truth and limited `95%/96%` label-validation protocol, and strict separation of provenance/grounding/evidentiality/auditability/legal correctness. Benchmark results do not transfer as HS/NANDINA metrics.
+`CORRECTNESS -> LEGAL VALIDITY -> GENERALIZATION`.
 
-The pilot contract remains only a comparison boundary: externally fixed historical ranked Top-k -> candidate-specific downstream normative evidence -> explanation-only local LLM -> no new codes -> no reordering -> no classification feedback.
+Required distinctions include documentation vs dataset adequacy, versioning vs reproducibility, provenance vs correctness, reproducibility vs external replication/generalization, lifecycle/internal audit vs output-level auditability evaluation, and transparency trail vs legal correctness.
 
-### Next gate
+0B-05B (information/documented explicit knowledge) and 0B-05C (official normative-source authority/currency/traceability) remain closed by gate.
 
-0B-05 is now `NOT_STARTED / ELIGIBLE_FOR_DEFINITION`. The 0B-04B freeze does not automatically open it; its scope, batch, and executable prompt require a later explicit definition/opening change.
+### Gate
 
-Manuscript drafting, final novelty/gap claims, 0C opening, Master-Plan modification, reopening G6/G7, and new-literature search outside an explicitly opened 0B-06 remain prohibited while 0B is open.
+`0B-05A READY_FOR_DRAFTING -> drafting AI -> internal review against the five primary PDFs -> correction if needed -> express author approval -> freeze -> define/open 0B-05B`.
+
+Experimental-AI review is triggered only if a literature interpretation affects frozen experimental facts/claims or restrictions under its authority.
+
+No manuscript drafting, final novelty/gap claims, new-literature search, out-of-batch PDF use, conflation of documentation/provenance/reproducibility/audit trail with correctness/legal validity, Master-Plan/0A modification, reopening G6/G7, or opening 0B-05B/0B-05C/0B-06/0C is authorized before the corresponding gate.
