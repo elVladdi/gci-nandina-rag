@@ -49,12 +49,15 @@ Las funciones pueden estar operacionalmente acopladas; no implican una correspon
 
 ### 4. 0B-04B — Fundamentos de RAG, transformación de consultas y grounding
 
-Estado: **`READY_FOR_DRAFTING`**.
+Estado: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 
-Prompt activo:
+Prompt ejecutado:
 `article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
 
-Lote final confirmado:
+Revisión interna:
+`article/reviews/0B04B_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`, revisión experimental `NOT_REQUIRED`.
+
+Lote verificado:
 
 1. `Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.pdf`
 2. `REALM-Retrieval-Augmented Language Model Pre-Training.pdf`
@@ -63,26 +66,34 @@ Lote final confirmado:
 5. `Query Rewriting for Retrieval-Augmented Large Language Models.pdf`
 6. `Evidentiality-guided Generation for Knowledge-Intensive NLP Tasks.pdf`
 
-Los seis están dentro del corpus heredado y fueron localizados por identidad científica; duplicados o pequeñas variaciones ortográficas de nombre no alteran la identidad de la obra.
-
 Objetivo gobernante:
 
 `QUERY -> [QUERY TRANSFORMATION?] -> RETRIEVAL -> [FUSION / EVIDENCE SELECTION?] -> GENERATION -> OUTPUT`
 
-El sub-lote debe distinguir:
+La revisión independiente confirma:
 
-- `RETRIEVAL_AUGMENTED_GENERATION` de `RETRIEVAL_AUGMENTED_PRETRAINING`;
-- retrieve-then-generate de query expansion/query rewriting;
-- retrieval que determina el contexto disponible al generador de evidencia normativa posterior a un ranking histórico ya fijado;
-- passage fusion de evidence attribution;
-- inspectable retrieval/provenance de evaluación formal de auditabilidad;
-- evidentiality/grounding de corrección sustantiva o jurídica.
+- `RETRIEVAL_AUGMENTED_GENERATION` ≠ `RETRIEVAL_AUGMENTED_PRETRAINING`;
+- retrieve-then-generate ≠ query expansion/query rewriting;
+- retrieval que determina el contexto disponible al generador ≠ evidencia normativa posterior a un ranking histórico ya fijado;
+- passage fusion ≠ evidence attribution;
+- inspectable retrieval/provenance ≠ formal auditability;
+- evidentiality/grounding ≠ substantive/legal correctness.
+
+Distinción metodológica congelable tras aprobación del autor:
+
+`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
+
+Y:
+
+`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
+
+Normalizaciones C1–C13 del review interno incluyen: discrepancia RAG `17%`/`11.7%`; RAG-Token sin nuevo retrieval por token; REALM como pretraining aumentado por retrieval y Open-QA span-based; FiD passage fusion sin attribution; Query2doc como expansión upstream, con resultados OOD mixtos, false-claim risk y deltas no reinterpretados automáticamente como porcentajes relativos; Rewrite-Retrieve-Read como query transformation capaz de cambiar retrieval/output; Asai et al. con evidentiality task-relative, labels parcialmente model-dependent, cinco datasets pese al caption `six datasets`, y validación humana `95%/96%` que no constituye auditability/legal-correctness score.
 
 Comparación obligatoria con el contrato del piloto:
 
 `ranking histórico Top-k fijado -> evidencia normativa posterior por candidato -> LLM local exclusivamente explicativo -> sin códigos nuevos -> sin reordenamiento -> sin feedback clasificatorio`.
 
-0B-04B sigue siendo **fundacional**. Para F1–F5 solo se usarán etiquetas de relevancia metodológica; no se utilizarán estos papers para declarar ausencia de prior art aduanero. G6 permanece eliminado y G7 absorbido en F2.
+0B-04B sigue siendo **fundacional**. F1–F5 no cambian de estado por este lote; solo reciben precisión metodológica. G6 permanece eliminado y G7 absorbido en F2.
 
 ### 5. Trabajos reservados
 
@@ -108,7 +119,7 @@ Después de 0B-03B permanecen:
 - F4: rendimiento predictive/retrieval/path validity/evidence grounding ≠ corrección sustantiva adjudicada;
 - F5: evaluación formal y separada de auditabilidad documental por salida.
 
-G6 permanece eliminado y G7 absorbido en F2. 0B-04A no modificó estos estados; 0B-04B deberá mantener el mismo control y aportar únicamente fundamentos/contrastes metodológicos.
+G6 permanece eliminado y G7 absorbido en F2. 0B-04A y la revisión interna de 0B-04B no modifican estos estados.
 
 ### 7. Gate
 
@@ -118,15 +129,15 @@ G6 permanece eliminado y G7 absorbido en F2. 0B-04A no modificó estos estados; 
 
 Gate activo:
 
-`0B-04B READY_FOR_DRAFTING -> IA de redacción -> revisión científica/editorial interna contra los seis PDF primarios -> corrección si aplica -> aprobación expresa del autor -> freeze -> evaluar apertura de 0B-05`.
+`0B-04B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> aprobación expresa del autor -> integrar C1–C13 -> freeze -> evaluar apertura de 0B-05`.
 
 No se abre 0B-05 antes de cerrar 0B-04B.
 
-La IA experimental solo interviene si una interpretación bibliográfica modifica o amenaza un hecho/claim experimental congelado o una restricción bajo su autoridad.
+La IA experimental no intervino porque ninguna interpretación bibliográfica modificó o amenazó un hecho/claim experimental congelado ni una restricción bajo su autoridad.
 
 ### 8. Prohibiciones vigentes
 
-Mientras 0B permanezca abierto:
+Mientras 0B-04B espere aprobación del autor:
 
 - no redactar secciones del manuscrito;
 - no declarar novelty ni gap definitivo;
@@ -135,6 +146,7 @@ Mientras 0B permanezca abierto:
 - no modificar Plan Maestro ni 0A;
 - no reabrir G6/G7;
 - no reinterpretar resultados experimentales congelados fuera de su alcance;
+- no congelar 0B-04B sin aprobación expresa;
 - no avanzar a 0B-05, 0B-06 o 0C antes del gate correspondiente.
 
 ---
@@ -155,22 +167,27 @@ Status: **`APPROVED / FROZEN`**. Its prompt, internal review, author approval, a
 
 ### 4. 0B-04B — RAG, query transformation, and grounding foundations
 
-Status: **`READY_FOR_DRAFTING`**.
+Status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 
-Active prompt:
-`article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
+Executed prompt: `article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
 
-The final six-paper batch is the Lewis et al. RAG paper, REALM, Fusion-in-Decoder, Query2doc, Query Rewriting for Retrieval-Augmented Large Language Models, and Evidentiality-guided Generation listed in the Spanish section.
+Internal review: `article/reviews/0B04B_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`, experimental review `NOT_REQUIRED`.
 
-The governing pipeline is:
+The six assigned primary PDFs were independently verified. The review confirms that retrieval-augmented generation, retrieval-augmented pretraining, retrieve-then-generate, query expansion, query rewriting, passage fusion, and evidentiality-guided generation are distinct methodological functions.
 
-`QUERY -> [QUERY TRANSFORMATION?] -> RETRIEVAL -> [FUSION / EVIDENCE SELECTION?] -> GENERATION -> OUTPUT`.
+The freeze-eligible map after author approval is:
 
-The block must distinguish retrieval-augmented generation from retrieval-augmented pretraining, retrieve-then-generate from query rewriting/expansion, passage fusion from evidence attribution, inspectable retrieval/provenance from formal auditability, and evidentiality/grounding from substantive or legal correctness.
+`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
 
-The present pilot remains a distinct contract to be used only as a comparison boundary: externally fixed historical ranked Top-k -> candidate-specific downstream normative evidence -> explanation-only local LLM -> no new codes -> no reordering -> no classification feedback.
+And:
 
-0B-04B is foundational. F1–F5 may only receive methodological relevance labels; these papers are not proof of missing customs prior art. G6 remains eliminated and G7 remains merged into F2.
+`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
+
+Required C1–C13 normalizations preserve the RAG `17%` vs `11.7%` discrepancy, prevent per-token retrieval misdescription, preserve REALM as retrieval-augmented pretraining/span-based Open-QA, separate FiD fusion from attribution, treat Query2doc and query rewriting as upstream transformations, retain mixed OOD and false-pseudo-document risks, and preserve Asai et al.'s five-dataset ground truth plus the limited `95%/96%` label-validation protocol.
+
+The pilot contract remains a comparison boundary only: externally fixed historical ranked Top-k -> candidate-specific downstream normative evidence -> explanation-only local LLM -> no new codes -> no reordering -> no classification feedback.
+
+0B-04B remains foundational; it does not change F1–F5's customs-prior-art status. G6 stays eliminated and G7 stays merged into F2.
 
 ### 5. Reserved works
 
@@ -178,12 +195,12 @@ SimCSE, Query Expansion by Prompting Large Language Models, ExtractGPT, product-
 
 ### 6. Gate
 
-The active gate is:
+Active gate:
 
-`0B-04B READY_FOR_DRAFTING -> drafting AI -> internal scientific/editorial review against the six primary PDFs -> correction if needed -> express author approval -> freeze -> assess opening 0B-05`.
+`0B-04B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> express author approval -> integrate C1–C13 -> freeze -> assess opening 0B-05`.
 
-0B-05 cannot open before 0B-04B closes. Experimental-AI review is required only if literature interpretation changes or threatens frozen experimental facts/claims or restrictions under its authority.
+0B-05 cannot open before 0B-04B closes. Experimental-AI review was not required because no frozen experimental fact/claim or restriction was affected.
 
 ### 7. Prohibitions
 
-No manuscript drafting, final novelty/gap claims, new-literature search outside an explicitly opened 0B-06, cross-benchmark universal superiority claims, Master-Plan/0A modification, reopening G6/G7, reinterpretation of frozen experiments beyond scope, or advancing to 0B-05/0B-06/0C before the corresponding gate.
+No manuscript drafting, final novelty/gap claims, new-literature search outside an explicitly opened 0B-06, cross-benchmark universal superiority claims, Master-Plan/0A modification, reopening G6/G7, reinterpretation of frozen experiments beyond scope, freezing 0B-04B without author approval, or advancing to 0B-05/0B-06/0C before the corresponding gate.
