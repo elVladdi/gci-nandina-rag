@@ -11,8 +11,10 @@
 - `0A-02 — Ground truth experimental`: **`APPROVED / FROZEN`**.
 - Fase activa: **`0B — Mapa crítico de literatura y taxonomía`**.
 - Bloque activo: **`0B-01 — Clasificación HS directa y aprendizaje supervisado`**.
-- Estado de `0B-01`: **`READY_FOR_DRAFTING`**.
-- Prompt activo: `article/prompts/0B01_HS_CLASSIFICATION_CORE_LITERATURE.md`.
+- Estado de `0B-01`: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- Dictamen interno: **`PASS WITH MINOR CORRECTIONS`**.
+- Revisión: `article/reviews/0B01_INTERNAL_REVIEW.md`.
+- Prompt de origen: `article/prompts/0B01_HS_CLASSIFICATION_CORE_LITERATURE.md`.
 - Plan de lotes: `article/literature/0B_LITERATURE_BATCH_PLAN.md`.
 - Corpus PDF conocido disponible para la IA de redacción: **`62` obras/documentos distintos**.
 - Alcance de análisis de 0B-01: **`8` PDF asignados**.
@@ -35,15 +37,22 @@ El corte experimental congelado de 0A-02 fue:
 
 El Plan Maestro continúa siendo fuente viva bajo autoridad exclusiva del flujo experimental. Ningún bloque bibliográfico puede modificarlo ni reescribir silenciosamente el ground truth histórico congelado.
 
-### Apertura formal de 0B
+### Estado de 0B-01 después de revisión interna
 
-La Fase 0B está abierta para construir un **mapa crítico de literatura y taxonomía** antes de definir gap, contribución o Research Questions.
+La IA de redacción completó el análisis de los ocho PDF asignados y se realizó una verificación científica/editorial independiente contra los documentos primarios.
 
-0B se ejecutará por lotes temáticos controlados. El autor informó que la IA de redacción ya dispone de **62 PDF distintos** para esta fase, después de consolidar duplicados y sufijos automáticos. En el corte informado, `37/62` ya poseen entrada en el índice bibliográfico versionado de GitHub y `25/62` todavía no están indexados allí. La falta de entrada en GitHub no implica invalidez o exclusión; sí obliga a gobernar su procedencia/admisibilidad antes de utilizarlos en el manuscrito.
+El dictamen interno es **`PASS WITH MINOR CORRECTIONS`**. Las correcciones son acotadas y deterministas; no requieren una nueva ejecución analítica completa por la IA de redacción ni revisión de la IA experimental.
 
-La disponibilidad de los 62 PDF no elimina el esquema de lotes. Un documento visible pero no asignado al bloque activo queda `OUT_OF_SCOPE_FOR_CURRENT_BATCH` hasta que se abra su lote correspondiente.
+Correcciones gobernantes para la versión canónica de 0B-01:
 
-El protocolo bibliográfico aplicable es `article/BIBLIOGRAPHIC_FRAMEWORK.md` y el plan operativo actualizado es `article/literature/0B_LITERATURE_BATCH_PLAN.md`.
+1. **P05 — Pain (2021):** las descripciones de commodities del `UN Comtrade sheet` deben tratarse como corpus de referencia/nomenclatura utilizado para ranking por similitud, no como `evidencia normativa` equivalente a la recuperación normativa del proyecto actual.
+2. **P02 — Shubham et al.:** el conocimiento derivado de WCO/HS/KG utilizado durante selección debe distinguirse de la evidencia normativa recuperada después del ranking en el proyecto actual. P02 permanece `REVIEW_REQUIRED` por metadata editorial incompleta y limitaciones de trazabilidad del protocolo.
+3. Las afirmaciones que los papers atribuyan a fuentes terceras no pueden convertirse en hechos independientes del manuscrito sin verificar la fuente primaria correspondiente.
+4. P02 no puede recibir año final, venue o DOI por inferencia o por una fuente secundaria dentro del cierre de 0B-01.
+
+La revisión confirmó además que P08 sí documenta envío de casos rechazados a procesamiento manual; P07 es una tesis de maestría y deben mantenerse separadas `accuracy = 0.62` y `weighted F1 = 0.61`; y el 90 % de P04 no es comparable con una accuracy general de clasificación HS multiclase.
+
+Los cinco elementos F1–F5 permanecen exclusivamente como `CANDIDATE_GAP_ONLY`. No constituyen todavía gap ni novelty.
 
 ### PDF asignados a 0B-01
 
@@ -58,51 +67,34 @@ El protocolo bibliográfico aplicable es `article/BIBLIOGRAPHIC_FRAMEWORK.md` y 
 7. `Application of machine learning for automated HS-6 code assignment.pdf`
 8. `Auto-Categorization of HS Code Using Background Net Approach.pdf`
 
-Si la IA de redacción ya puede acceder íntegramente a estos archivos dentro de su conversación, **no deben volver a adjuntarse**. Si alguno no está disponible o no puede leerse completo, solo debe solicitarse ese archivo específico.
+Los otros PDF del corpus de 62 continúan fuera de alcance para 0B-01 y se reservarán para sus lotes correspondientes.
 
-Los otros PDF del corpus de 62 se conservarán para 0B-02 y lotes posteriores cuando sean pertinentes. No se permite utilizarlos dentro de 0B-01 para completar silenciosamente información de los ocho papers activos.
+### Próximo gate autorizado
 
-### Alcance autorizado de 0B-01
+La única transición autorizada ahora es:
 
-La IA de redacción debe:
+```text
+revisión interna 0B-01 completada
+-> aprobación expresa del autor de 0B-01 con las correcciones registradas
+-> creación/congelamiento del artefacto canónico 0B-01
+-> 0B-01 = APPROVED / FROZEN
+-> apertura de 0B-02
+```
 
-- completar el onboarding de la rama;
-- leer los ocho PDF asignados completos;
-- construir la matriz crítica paper por paper;
-- distinguir `REPORTADO_POR_AUTORES`, `INFERENCIA_CRITICA` y `NO_VERIFICABLE_EN_PDF`;
-- comparar tarea, nivel HS, datasets, método, validación, jerarquía, normativa, precedentes, explicabilidad, auditabilidad, dependencia/leakage y relación con el presente enfoque;
-- proponer únicamente `CANDIDATE_GAP_ONLY`, sin novelty definitiva;
-- recomendar `KEEP_CORE`, `KEEP_SUPPORTING`, `REVIEW_REQUIRED` o `EXCLUDE_FROM_ARTICLE` para cada trabajo;
-- detenerse al finalizar 0B-01.
+No debe iniciarse 0B-02 antes de la aprobación expresa del autor.
 
 ### Prohibiciones vigentes
 
-Durante 0B-01 no está autorizado:
+Mientras 0B-01 permanezca pendiente de aprobación del autor no está autorizado:
 
-- realizar búsqueda web;
-- buscar literatura nueva;
-- analizar los otros PDF del corpus de 62;
 - redactar secciones del manuscrito;
 - declarar novelty, gap definitivo o superioridad;
-- avanzar a 0B-02, 0C o fases posteriores;
-- modificar GitHub desde la IA de redacción;
-- alterar 0A o el Plan Maestro.
+- abrir 0B-02, 0C o fases posteriores;
+- modificar el Plan Maestro desde el flujo del artículo;
+- convertir afirmaciones secundarias de los papers en hechos sin verificación primaria;
+- cerrar silenciosamente la metadata `REVIEW_REQUIRED` de P02.
 
-Las referencias heredadas pueden ser antiguas, proceedings, tesis o preprints; su pertinencia se evalúa en 0B. Las reglas 2022–2026, journal peer-reviewed y Q1/Q2 aplican a literatura académica nueva según `BIBLIOGRAPHIC_FRAMEWORK.md`. La mera disponibilidad de un PDF no convierte automáticamente una referencia nueva en `APPROVED_NEW`.
-
-### Gate de 0B-01
-
-Secuencia obligatoria:
-
-```text
-IA de redacción
--> revisión científica/editorial interna
--> corrección si aplica
--> aprobación del autor
--> cierre de 0B-01
-```
-
-La IA experimental no es revisora obligatoria de literatura. Solo se solicitará su intervención si una interpretación bibliográfica afecta directamente hechos experimentales, claims experimentales o restricciones metodológicas bajo su autoridad.
+Las referencias heredadas pueden ser antiguas, proceedings, tesis o preprints; su pertinencia se evalúa en 0B. Las reglas 2022–2026, journal peer-reviewed y Q1/Q2 aplican a literatura académica nueva según `BIBLIOGRAPHIC_FRAMEWORK.md`.
 
 ### Fases posteriores
 
@@ -124,8 +116,10 @@ La IA experimental no es revisora obligatoria de literatura. Solo se solicitará
 - `0A-02 — Experimental ground truth`: **`APPROVED / FROZEN`**.
 - Active phase: **`0B — Critical literature map and taxonomy`**.
 - Active block: **`0B-01 — Direct HS classification and supervised learning`**.
-- `0B-01` status: **`READY_FOR_DRAFTING`**.
-- Active prompt: `article/prompts/0B01_HS_CLASSIFICATION_CORE_LITERATURE.md`.
+- `0B-01` status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- Internal verdict: **`PASS WITH MINOR CORRECTIONS`**.
+- Review: `article/reviews/0B01_INTERNAL_REVIEW.md`.
+- Source prompt: `article/prompts/0B01_HS_CLASSIFICATION_CORE_LITERATURE.md`.
 - Batch plan: `article/literature/0B_LITERATURE_BATCH_PLAN.md`.
 - Known PDF corpus available to the drafting AI: **`62` distinct works/documents**.
 - 0B-01 analytical scope: **`8` assigned PDFs**.
@@ -148,43 +142,46 @@ The frozen 0A-02 experimental cutoff was:
 
 The Master Plan remains a living source under exclusive experimental-workflow authority. No literature block may modify it or silently rewrite frozen historical ground truth.
 
-### Formal opening of 0B
+### 0B-01 status after internal review
 
-Phase 0B is open to build a **critical literature map and taxonomy** before defining the gap, contribution, or Research Questions.
+The drafting AI completed the analysis of the eight assigned PDFs, followed by an independent scientific/editorial verification against the primary documents.
 
-The author reported that the drafting AI already has access to **62 distinct PDFs** for this phase after duplicate consolidation. At the reported cutoff, `37/62` already have an entry in the versioned GitHub bibliographic index and `25/62` do not yet have one. Missing GitHub indexing does not imply invalidity or exclusion, but provenance/admissibility must be governed before manuscript use.
+The internal verdict is **`PASS WITH MINOR CORRECTIONS`**. The corrections are bounded and deterministic; they do not require a full analytical rerun by the drafting AI or review by the experimental AI.
 
-Availability of all 62 PDFs does not remove controlled batches. A visible document not assigned to the active block remains `OUT_OF_SCOPE_FOR_CURRENT_BATCH` until its corresponding batch is opened.
+Governing corrections for the canonical 0B-01 version:
 
-The governing bibliographic protocol is `article/BIBLIOGRAPHIC_FRAMEWORK.md`, and the updated operational plan is `article/literature/0B_LITERATURE_BATCH_PLAN.md`.
+1. **P05 — Pain (2021):** commodity descriptions from the `UN Comtrade sheet` must be treated as a reference/nomenclature corpus used for similarity ranking, not as `normative evidence` equivalent to the current project's normative retrieval.
+2. **P02 — Shubham et al.:** WCO/HS/KG-derived knowledge used during selection must be distinguished from post-ranking normative evidence retrieval in the current project. P02 remains `REVIEW_REQUIRED` because of incomplete editorial metadata and protocol-traceability limitations.
+3. Statements attributed by the papers to third-party sources may not become independent manuscript facts without verification of the corresponding primary source.
+4. P02 must not be assigned a final year, venue, or DOI by inference or from a secondary source during 0B-01 closure.
+
+The review also confirmed that P08 explicitly sends rejected cases to manual processing; P07 is a Master's thesis and `accuracy = 0.62` must remain distinct from `weighted F1 = 0.61`; and P04's 90% result is not comparable with general multiclass HS-classification accuracy.
+
+All five F1–F5 items remain strictly `CANDIDATE_GAP_ONLY`. They are not yet a gap or novelty claim.
 
 ### PDFs assigned to 0B-01
 
-0B-01 analyzes only the eight works listed in the Spanish section. If the drafting AI can already access them fully in its conversation, they **must not be re-uploaded**. If one is inaccessible or unreadable in full, only that specific file should be requested.
+0B-01 covers only the eight works listed in the Spanish section. The remaining PDFs in the 62-document corpus remain out of scope for 0B-01 and are reserved for their corresponding batches.
 
-The remaining PDFs in the 62-document corpus are reserved for 0B-02 and later batches when relevant. They may not be used inside 0B-01 to silently fill information gaps in the eight active papers.
+### Next authorized gate
 
-### Authorized scope of 0B-01
+The only authorized transition is now:
 
-The drafting AI must complete onboarding, read all eight assigned PDFs, build the critical paper-level matrix, distinguish `REPORTADO_POR_AUTORES`, `INFERENCIA_CRITICA`, and `NO_VERIFICABLE_EN_PDF`, compare the required scientific dimensions, produce only provisional `CANDIDATE_GAP_ONLY` items, recommend a bibliographic role for each paper, and stop after 0B-01.
+```text
+0B-01 internal review complete
+-> explicit author approval of 0B-01 with the recorded corrections
+-> create/freeze canonical 0B-01 artifact
+-> 0B-01 = APPROVED / FROZEN
+-> open 0B-02
+```
+
+0B-02 must not start before explicit author approval.
 
 ### Current prohibitions
 
-During 0B-01, the drafting AI may not perform web search, search for new literature, analyze the other PDFs in the 62-document corpus, draft manuscript sections, declare novelty/final gap/superiority, advance beyond 0B-01, modify GitHub, or alter 0A/Master Plan.
+While 0B-01 is awaiting author approval, the workflow may not draft manuscript sections; declare novelty, final gap, or superiority; open 0B-02, 0C, or later phases; modify the Master Plan from the article workflow; turn papers' secondary statements into facts without primary verification; or silently close P02's `REVIEW_REQUIRED` metadata.
 
-Inherited references may be old, proceedings, theses, or preprints; their relevance is assessed in 0B. The 2022–2026, peer-reviewed-journal, and Q1/Q2 constraints apply to new academic literature under `BIBLIOGRAPHIC_FRAMEWORK.md`. Mere PDF availability does not automatically make a new reference `APPROVED_NEW`.
-
-### 0B-01 gate
-
-```text
-drafting AI
--> internal scientific/editorial review
--> correction if required
--> author approval
--> 0B-01 closure
-```
-
-The experimental AI is not a mandatory literature reviewer. It will be involved only when a bibliographic interpretation directly affects experimental facts, experimental claims, or methodological restrictions under its authority.
+Inherited references may be old, proceedings, theses, or preprints; their relevance is assessed in 0B. The 2022–2026, peer-reviewed-journal, and Q1/Q2 constraints apply to new academic literature under `BIBLIOGRAPHIC_FRAMEWORK.md`.
 
 ### Later phases
 
