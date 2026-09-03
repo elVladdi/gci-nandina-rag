@@ -16,7 +16,8 @@
 - `0B-03B`: **`APPROVED / FROZEN`**.
 - `0B-04A`: **`APPROVED / FROZEN`**.
 - Bloque activo: **`0B-04B — Fundamentos de RAG, transformación de consultas y grounding`**.
-- Estado de `0B-04B`: **`READY_FOR_DRAFTING`**.
+- Estado de `0B-04B`: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- Revisión interna de `0B-04B`: **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`.
 - `0B-05`: `NOT_STARTED / CLOSED_BY_GATE`.
 - `0B-06`: `NOT_STARTED`.
 - `0C — Gap, contribución y Research Questions`: `BLOCKED` hasta cerrar 0B.
@@ -64,17 +65,21 @@ Ninguno constituye novelty ni gap definitivo.
 
 0B-04B es fundacional y no está autorizado a convertir estos candidatos en novelty ni a reabrir G6/G7.
 
-### 0B-04B — apertura formal
+### 0B-04B — revisión interna completada
 
-Alcance actualizado:
+Alcance:
 
 `article/literature/0B04_SCOPE_AND_BATCH_PLAN.md`.
 
-Prompt activo:
+Prompt ejecutado:
 
 `article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
 
-PDF asignados:
+Revisión interna:
+
+`article/reviews/0B04B_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`, revisión experimental `NOT_REQUIRED`.
+
+PDF verificados:
 
 1. `Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.pdf`
 2. `REALM-Retrieval-Augmented Language Model Pre-Training.pdf`
@@ -83,49 +88,48 @@ PDF asignados:
 5. `Query Rewriting for Retrieval-Augmented Large Language Models.pdf`
 6. `Evidentiality-guided Generation for Knowledge-Intensive NLP Tasks.pdf`
 
-Objetivo gobernante:
+La revisión primaria confirma las fronteras:
 
-`QUERY -> [QUERY TRANSFORMATION?] -> RETRIEVAL -> [FUSION / EVIDENCE SELECTION?] -> GENERATION -> OUTPUT`.
+`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
 
-El bloque debe distinguir:
+Y:
 
-1. RAG de retrieval-augmented pretraining.
-2. Retrieve-then-generate de query expansion/query rewriting.
-3. Retrieval que modifica el contexto disponible al generador de evidencia normativa posterior a un ranking histórico ya fijado.
-4. Passage fusion de evidence attribution.
-5. Provenance/inspectable passages de auditabilidad formal.
-6. Evidentiality/grounding de corrección sustantiva o jurídica.
+`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
+
+Normalizaciones obligatorias para el eventual freeze incluyen: gobernar la discrepancia RAG `17%` vs Tabla 4 `11.7%` por la tabla; preservar REALM como retrieval-augmented pretraining/span-based Open-QA; no convertir passage fusion en attribution; tratar Query2doc y query rewriting como transformaciones upstream que pueden cambiar retrieval; preservar resultados OOD mixtos y riesgos de pseudo-documentos; gobernar Asai et al. por cinco datasets pese al caption `six datasets`; interpretar el chequeo humano `95%/96%` como validación de labels bajo su protocolo y no como auditability/legal-correctness score.
 
 Contrato del piloto usado únicamente como frontera comparativa:
 
 `ranking histórico Top-k fijado -> evidencia normativa posterior por candidato -> LLM local exclusivamente explicativo -> sin códigos nuevos -> sin reordenamiento -> sin feedback clasificatorio`.
 
+F1–F5 no cambian de estado por este lote; G6 permanece eliminado y G7 absorbido en F2.
+
 ### Gate vigente
 
 ```text
-0B-04B = READY_FOR_DRAFTING
--> IA de redacción
--> revisión científica/editorial interna contra los seis PDF primarios
--> corrección si aplica
+0B-04B = INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING
 -> aprobación expresa del autor
+-> integrar C1–C13 en artefacto canónico
 -> freeze 0B-04B
 -> evaluar apertura de 0B-05
 ```
 
-La IA experimental solo se incorpora si una interpretación bibliográfica afecta directamente hechos/claims experimentales congelados o restricciones metodológicas bajo su autoridad.
+Hasta aprobación expresa del autor no está autorizado crear el freeze de 0B-04B ni abrir 0B-05.
+
+La IA experimental no fue requerida porque la revisión no modifica hechos/claims experimentales congelados ni restricciones bajo su autoridad.
 
 ### Prohibiciones vigentes
 
-Durante 0B-04B no está autorizado:
+Mientras 0B-04B espere aprobación del autor no está autorizado:
 
 - redactar Introduction/Related Work/Methods/Results/Discussion/Conclusions;
 - declarar novelty, gap definitivo o superioridad general de RAG/métodos;
-- usar otros PDF del corpus;
 - buscar literatura nueva;
 - equiparar provenance/evidentiality/grounding con auditabilidad o legal correctness;
 - modificar 0A o el Plan Maestro;
 - reinterpretar resultados experimentales congelados fuera de su alcance;
 - reabrir G6/G7;
+- congelar 0B-04B sin aprobación expresa;
 - abrir 0B-05, 0B-06 o 0C antes del gate correspondiente.
 
 ---
@@ -140,7 +144,8 @@ Durante 0B-04B no está autorizado:
 - Active phase: **`0B — Critical literature map and taxonomy`**.
 - 0B-01, 0B-02, 0B-03A, 0B-03B, and 0B-04A are **`APPROVED / FROZEN`**.
 - Active block: **`0B-04B — RAG, query-transformation, and grounding foundations`**.
-- 0B-04B status: **`READY_FOR_DRAFTING`**.
+- 0B-04B status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- Internal review verdict: **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`.
 - 0B-05 is `NOT_STARTED / CLOSED_BY_GATE`; 0B-06 is not started.
 - 0C remains blocked until 0B closes; 0D remains blocked until 0C closes.
 - Target journal remains pending until 0D; manuscript drafting has not started.
@@ -151,24 +156,34 @@ Frozen 0A documentary and experimental artifacts remain authoritative. Literatur
 
 ### Closed blocks and provisional candidates
 
-0B-04A froze the distinction `QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING` and does not reinterpret D1a beyond its specific exploratory dense implementation.
+0B-04A froze `QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING` and does not reinterpret D1a beyond its specific exploratory dense implementation.
 
-F1–F5 remain provisional in narrowed/methodological forms; G6 remains eliminated and G7 remains merged into F2. 0B-04B is foundational and cannot convert them into novelty claims.
+F1–F5 remain provisional in narrowed/methodological forms; G6 remains eliminated and G7 remains merged into F2. 0B-04B does not change those candidate states.
 
-### 0B-04B formal opening
+### 0B-04B internal review complete
 
-Active prompt: `article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
+Executed prompt: `article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
 
-The six assigned PDFs are the Lewis et al. RAG paper, REALM, Fusion-in-Decoder, Query2doc, Query Rewriting for Retrieval-Augmented Large Language Models, and Evidentiality-guided Generation listed in the Spanish section.
+Internal review: `article/reviews/0B04B_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`, experimental review `NOT_REQUIRED`.
 
-The governing pipeline is `QUERY -> [QUERY TRANSFORMATION?] -> RETRIEVAL -> [FUSION / EVIDENCE SELECTION?] -> GENERATION -> OUTPUT`.
+The six assigned primary PDFs were independently checked. The review confirms the methodological boundaries:
 
-The block must distinguish RAG from retrieval-augmented pretraining, retrieve-then-generate from query transformation, retrieval-conditioned generation from post-ranking normative evidence, passage fusion from evidence attribution, inspectable provenance from formal auditability, and evidentiality/grounding from substantive or legal correctness.
+`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
 
-The pilot contract is used only as a comparison boundary: externally fixed historical ranked Top-k -> candidate-specific downstream normative evidence -> explanation-only local LLM -> no new codes -> no reordering -> no classification feedback.
+And:
+
+`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
+
+Required freeze normalizations include governing the RAG `17%` prose/Table-4 discrepancy by `11.7%`; preserving REALM as retrieval-augmented pretraining with span-based Open-QA; separating FiD passage fusion from attribution; treating Query2doc and query rewriting as upstream transformations capable of changing retrieval; preserving mixed OOD results and pseudo-document risks; governing Asai et al. by five datasets despite the `six datasets` caption; and interpreting the `95%/96%` human check only as label validation under its stated protocol rather than auditability or legal correctness.
+
+The pilot contract remains only a comparison boundary: externally fixed historical ranked Top-k -> candidate-specific downstream normative evidence -> explanation-only local LLM -> no new codes -> no reordering -> no classification feedback.
 
 ### Gate
 
-`0B-04B READY_FOR_DRAFTING -> drafting AI -> internal primary-PDF review -> correction if needed -> express author approval -> freeze -> assess opening 0B-05`.
+`0B-04B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> express author approval -> integrate C1–C13 into the canonical artifact -> freeze -> assess opening 0B-05`.
 
-Experimental-AI review is required only if literature interpretation affects frozen experimental facts/claims or restrictions under its authority. Manuscript drafting, final novelty/gap claims, new-literature search, reopening G6/G7, and later-phase opening remain prohibited until their gates.
+Until express author approval, 0B-04B cannot be frozen and 0B-05 cannot be opened. Experimental-AI review was not required because no frozen experimental fact/claim or restriction was changed.
+
+### Current prohibitions
+
+Manuscript drafting, final novelty/gap claims, universal RAG superiority claims, new-literature search, conflating provenance/evidentiality/grounding with auditability/legal correctness, modifying 0A or the Master Plan, reopening G6/G7, freezing 0B-04B without author approval, or advancing to 0B-05/0B-06/0C remain prohibited until their gates.
