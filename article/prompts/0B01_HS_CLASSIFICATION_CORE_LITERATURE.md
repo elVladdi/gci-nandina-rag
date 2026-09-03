@@ -6,7 +6,7 @@
 
 Actúa como IA de redacción y análisis bibliográfico del artículo científico principal. Ejecuta exclusivamente el bloque `0B-01 — Clasificación HS directa y aprendizaje supervisado`.
 
-En este bloque **no redactarás ninguna sección del manuscrito**, **no declararás novelty**, **no definirás todavía el gap definitivo** y **no buscarás literatura nueva**. Tu tarea es leer íntegramente el primer lote de PDF heredados y construir una matriz crítica comparable y auditable.
+En este bloque **no redactarás ninguna sección del manuscrito**, **no declararás novelty**, **no definirás todavía el gap definitivo** y **no buscarás literatura nueva**. Tu tarea es leer íntegramente el primer lote temático y construir una matriz crítica comparable y auditable.
 
 ### Onboarding obligatorio
 
@@ -23,9 +23,19 @@ Accede a la rama `article/main-manuscript` del repositorio `elVladdi/gci-nandina
 
 Usa el ground truth 0A solo para comparar correctamente los antecedentes con el trabajo actual. No reabras 0A ni alteres sus hechos congelados.
 
-### PDFs obligatorios del lote
+### Corpus disponible y alcance del lote
 
-El autor debe adjuntar exactamente estos ocho PDF del corpus heredado:
+El autor ha informado que esta conversación/sesión de la IA de redacción ya dispone de **62 obras/documentos PDF distintos** para la Fase 0B. Esos 62 documentos constituyen el corpus disponible general de la fase, pero **no son el alcance de este bloque**.
+
+Para `0B-01` debes analizar exclusivamente los ocho PDF asignados en la sección siguiente. Los demás PDF visibles o accesibles permanecen `OUT_OF_SCOPE_FOR_CURRENT_BATCH` y no deben utilizarse para completar, contrastar o corregir silenciosamente la información de los ocho trabajos activos.
+
+No solicites que el autor vuelva a adjuntar los ocho PDF si ya puedes acceder íntegramente a ellos en esta conversación. Solo si uno de los ocho no está disponible, está corrupto o no puede leerse completo, identifica exactamente cuál falta y solicita únicamente ese archivo.
+
+La existencia de PDF adicionales no implica autorización automática de cita final. Los trabajos no claramente heredados del proyecto/tesis deberán pasar posteriormente por la gobernanza de admisión de `article/BIBLIOGRAPHIC_FRAMEWORK.md`.
+
+### PDFs obligatorios del lote 0B-01
+
+Analiza **exclusivamente** estos ocho PDF del corpus disponible:
 
 1. `Best approaches for HS code prediction.pdf`
 2. `An ensemble-based approach for assigning text to correct Harmonized system code.pdf`
@@ -36,12 +46,13 @@ El autor debe adjuntar exactamente estos ocho PDF del corpus heredado:
 7. `Application of machine learning for automated HS-6 code assignment.pdf`
 8. `Auto-Categorization of HS Code Using Background Net Approach.pdf`
 
-Debes leer **íntegramente** cada PDF. Si falta alguno, si está corrupto o si no puede leerse completamente, identifica el archivo exacto y marca el lote `BLOCKED` o `PASS WITH CORRECTIONS` según la gravedad. No sustituyas un PDF ausente por snippets, conocimiento general, abstracts web ni una referencia secundaria.
+Debes leer **íntegramente** cada uno. Si falta alguno, si está corrupto o si no puede leerse completamente, identifica el archivo exacto y marca el lote `BLOCKED` o `PASS WITH CORRECTIONS` según la gravedad. No sustituyas un PDF ausente por otro trabajo del corpus de 62, snippets, conocimiento general, abstracts web ni una referencia secundaria.
 
 ### Prohibiciones
 
 - No realizar búsqueda web.
 - No buscar literatura nueva.
+- No analizar los demás PDF del corpus de 62 en este bloque.
 - No añadir referencias no incluidas en los ocho PDF, salvo mencionar referencias citadas internamente únicamente como contexto bibliográfico no verificado y claramente etiquetado como tal.
 - No redactar Introduction, Related Work, Methods, Results, Discussion, Conclusions, Abstract ni Title.
 - No declarar que el presente artículo es novedoso o superior.
@@ -103,11 +114,13 @@ No fuerces diferencias artificiales: si un paper comparte una característica, i
 
 ### Estado bibliográfico
 
-Como estos trabajos pertenecen al corpus heredado, su estado inicial es `INHERITED_CORE`. Al final del análisis recomienda para cada uno uno de:
+Los ocho trabajos se analizan como parte del corpus proporcionado por el autor. Cuando conste que son referencias heredadas del proyecto/tesis, conserva `INHERITED_CORE`. Si su procedencia bibliográfica no puede establecerse desde los archivos de gobernanza, marca esa condición como `REVIEW_REQUIRED` sin inventarla.
+
+Al final del análisis recomienda para cada uno uno de:
 
 - `KEEP_CORE`: claramente pertinente para el artículo;
 - `KEEP_SUPPORTING`: útil como apoyo secundario/metodológico;
-- `REVIEW_REQUIRED`: metadata, integridad o interpretación requiere comprobación posterior;
+- `REVIEW_REQUIRED`: metadata, integridad, procedencia o interpretación requiere comprobación posterior;
 - `EXCLUDE_FROM_ARTICLE`: revisado pero no suficientemente pertinente para el artículo principal.
 
 La recomendación no modifica por sí sola el registro bibliográfico ni elimina referencias heredadas de la tesis.
@@ -194,7 +207,7 @@ Responde únicamente en español. El bilingüismo aplica a los artefactos que po
 
 ### Gate
 
-Detente al terminar 0B-01. La entrega debe regresar al editor científico para revisión interna. No avances a 0B-02 y no busques literatura nueva salvo instrucción posterior explícita.
+Detente al terminar 0B-01. La entrega debe regresar al editor científico para revisión interna. No avances a 0B-02, no analices los demás PDF del corpus y no busques literatura nueva salvo instrucción posterior explícita.
 
 ---
 
@@ -204,7 +217,7 @@ Detente al terminar 0B-01. La entrega debe regresar al editor científico para r
 
 Act as the drafting and bibliographic-analysis AI for the main scientific article. Execute only `0B-01 — Direct HS classification and supervised learning`.
 
-In this block, **do not draft any manuscript section**, **do not declare novelty**, **do not define the final gap**, and **do not search for new literature**. Read the complete inherited PDFs in the first batch and build a critical, comparable, auditable matrix.
+In this block, **do not draft any manuscript section**, **do not declare novelty**, **do not define the final gap**, and **do not search for new literature**. Read the complete PDFs assigned to the first thematic batch and build a critical, comparable, auditable matrix.
 
 ### Mandatory onboarding
 
@@ -221,14 +234,25 @@ Access branch `article/main-manuscript` of `elVladdi/gci-nandina-rag` and first 
 
 Use frozen 0A ground truth only to compare prior work correctly against the present study. Do not reopen 0A or alter its frozen facts.
 
-### Required PDFs
+### Available corpus and batch scope
 
-The author must attach exactly the eight inherited-corpus PDFs listed in the Spanish section above. Read each PDF **in full**. If any file is missing, corrupted, or not fully readable, identify it exactly and mark the batch `BLOCKED` or `PASS WITH CORRECTIONS` depending on severity. Do not replace a missing PDF with snippets, general knowledge, web abstracts, or secondary references.
+The author has reported that this drafting-AI conversation/session already contains **62 distinct PDF works/documents** for Phase 0B. Those 62 documents define the general available corpus, but **not the scope of this block**.
+
+For `0B-01`, analyze only the eight PDFs assigned below. All other visible or accessible PDFs remain `OUT_OF_SCOPE_FOR_CURRENT_BATCH` and must not be used to silently complete, contrast, or correct the active eight papers.
+
+Do not ask the author to re-upload the eight PDFs if you can already access them fully. If one of the eight is unavailable, corrupted, or cannot be read completely, identify that exact file and request only that file.
+
+Availability of additional PDFs does not automatically authorize final citation. Works not clearly inherited from the project/thesis must later pass the admission governance in `article/BIBLIOGRAPHIC_FRAMEWORK.md`.
+
+### Required 0B-01 PDFs
+
+Analyze **only** the eight PDFs listed in the Spanish section. Read each PDF **in full**. If any file is missing, corrupted, or not fully readable, identify it exactly and mark the batch `BLOCKED` or `PASS WITH CORRECTIONS` depending on severity. Do not replace a missing PDF with another work from the 62-document corpus, snippets, general knowledge, web abstracts, or secondary references.
 
 ### Prohibitions
 
 - No web search.
 - No search for new literature.
+- Do not analyze the other PDFs in the 62-document corpus in this block.
 - No manuscript drafting.
 - No novelty/superiority claims.
 - No use of pending experiments as closed findings.
@@ -243,7 +267,9 @@ Use `NO_VERIFICABLE_EN_PDF` whenever the PDF does not establish a point.
 
 ### Bibliographic recommendation
 
-All eight start as `INHERITED_CORE`. Recommend one of `KEEP_CORE`, `KEEP_SUPPORTING`, `REVIEW_REQUIRED`, or `EXCLUDE_FROM_ARTICLE`. The recommendation does not itself alter the bibliographic registry or remove inherited thesis references.
+Analyze the eight works as part of the author-provided corpus. Preserve `INHERITED_CORE` when the governance files establish that inherited status. If bibliographic provenance cannot be established, mark that condition `REVIEW_REQUIRED` rather than inventing it.
+
+Recommend one of `KEEP_CORE`, `KEEP_SUPPORTING`, `REVIEW_REQUIRED`, or `EXCLUDE_FROM_ARTICLE`. The recommendation does not itself alter the bibliographic registry or remove inherited thesis references.
 
 ### Mandatory output
 
@@ -251,4 +277,4 @@ Produce sections A–I exactly as defined in the Spanish instructions: batch-int
 
 ### Language and gate
 
-Respond only in Spanish. Stop after 0B-01 and return the delivery to the scientific editor for internal review. Do not advance to 0B-02 or search for new literature unless explicitly instructed later.
+Respond only in Spanish. Stop after 0B-01 and return the delivery to the scientific editor for internal review. Do not advance to 0B-02, analyze other corpus PDFs, or search for new literature unless explicitly instructed later.
