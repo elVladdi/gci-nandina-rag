@@ -10,39 +10,45 @@
 - `0A-01`: **`APPROVED / FROZEN`**.
 - `0A-02`: **`APPROVED / FROZEN`**.
 - Fase activa: **`0B — Mapa crítico de literatura y taxonomía`**.
-- `0B-01 — Clasificación HS directa y aprendizaje supervisado`: **`APPROVED / FROZEN`**.
-- `0B-02 — Retrieval, validación, conocimiento y auditabilidad aduanera`: **`APPROVED / FROZEN`**.
-- Bloque activo: **`0B-03A — LLM, RAG y multimodalidad aplicada a clasificación/compliance aduanero`**.
-- Estado de 0B-03A: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
-- Dictamen interno de 0B-03A: **`PASS WITH MINOR CORRECTIONS`**.
-- Revisión experimental de 0B-03A: **`NOT_REQUIRED`**.
-- Freeze de 0B-03A: **`NOT_YET_AUTHORIZED`**.
-- `0B-03B`: **`NOT_STARTED`**.
+- `0B-01`: **`APPROVED / FROZEN`**.
+- `0B-02`: **`APPROVED / FROZEN`**.
+- `0B-03A — LLM, RAG y multimodalidad aplicada a clasificación/compliance aduanero`: **`APPROVED / FROZEN`**.
+- Bloque activo: **`0B-03B — Agentes, benchmarks y razonamiento jerárquico/regulatorio`**.
+- Estado de `0B-03B`: **`READY_FOR_DRAFTING`**.
+- Prompt activo: `article/prompts/0B03B_AGENTS_HIERARCHICAL_REGULATORY_REASONING.md`.
 - Plan de lotes: `article/literature/0B_LITERATURE_BATCH_PLAN.md`.
-- Corpus PDF consolidado: `62` obras/documentos distintos; acceso primario verificable `62/62`.
+- Corpus consolidado: `62` obras/documentos distintos; acceso primario verificable `62/62`.
 - Target journal: `PENDING — se decidirá en Fase 0D`.
 - Manuscrito redactado: no iniciado.
 - Idioma del chat: español.
 - Artefactos GitHub: español + inglés con equivalencia semántica.
 
+### Ground truth gobernante
+
+Continúan gobernando:
+
+- `article/ground_truth/0A01_DOCUMENTARY_GROUND_TRUTH_FROZEN.md`;
+- `article/ground_truth/0A02_EXPERIMENTAL_GROUND_TRUTH_FROZEN.md`.
+
+Ningún bloque bibliográfico puede modificar el Plan Maestro ni reescribir el ground truth experimental/documental congelado. La IA experimental conserva autoridad exclusiva sobre el Plan Maestro.
+
 ### 0B-01 — cierre formal
 
-```text
-0B-01 = APPROVED / FROZEN
-INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
-AUTHOR_APPROVAL = RECEIVED
-EXPERIMENTAL_REVIEW = NOT_REQUIRED
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-```
+`0B-01 = APPROVED / FROZEN`.
 
-Artefacto canónico:
-`article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md`
+Artefacto: `article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md`.
 
 ### 0B-02 — cierre formal
 
+`0B-02 = APPROVED / FROZEN`.
+
+Artefacto: `article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md`.
+
+### 0B-03A — cierre formal
+
 ```text
-0B-02 = APPROVED / FROZEN
+0B-03A = APPROVED / FROZEN
+DRAFTING_DELIVERABLE = ANALYTICALLY_COMPLETE
 INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
 AUTHOR_APPROVAL = RECEIVED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
@@ -51,97 +57,93 @@ NOVELTY = NOT_DECLARED
 ```
 
 Artefacto canónico:
-`article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md`
+
+`article/literature/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS_FROZEN.md`
 
 Registros:
-- `article/reviews/0B02_INTERNAL_REVIEW.md`;
-- `article/reviews/0B02_AUTHOR_APPROVAL.md`.
 
-Correcciones gobernantes ya congeladas:
+- `article/reviews/0B03A_INTERNAL_REVIEW.md`;
+- `article/reviews/0B03A_AUTHOR_APPROVAL.md`.
 
-1. P01: test temporal final 1,652, validación 1,835; HS6 Top-3 0.955 sin retrieved sentences y 0.937 con retrieved sentences.
-2. P03: 226,703 casos tabulados frente a 211,435 asignados explícitamente a train/validation/test; 15,268 permanecen `NO_VERIFICABLE_EN_PDF`.
-3. P03: helpfulness operativo 65.7% (score 4–5); >85% corresponde a otra distribución de percepción; reducción de tiempo/esfuerzo = percepción, no causalidad.
-4. P02/P04/P06: Text2Trade `REVIEW_REQUIRED` y sin validación externa sectorial; P04 ≈84.23% no es detección adjudicada de misclasificación; P06 imprime Recall=`TP/(TP+TN)` y sus F1 se conservan con caveat; CV por triples no demuestra independencia ni leakage.
+Correcciones C1–C6 congeladas:
 
-### 0B-03A — revisión interna completada
+1. THE-RAG: `.44/.47/.51/.59/.60` HS6 Top-3 corresponde a `gemini_1.5_flash`, no a `gemini_1.5_flash_8b`; preservar el contraejemplo `llama3.1_8b` `.14` no-RAG vs `.11/.09` RAG.
+2. Koch & Power: categoría operacional `FINE_TUNED_TRANSFORMER_CLASSIFIER`; “LLM” solo como terminología de autores cuando corresponda.
+3. ICCA-RAG: evidence support para contexto de QA aduanero, no evidencia normativa posterior a un Top-k fijo; metadata/backtracking = procedencia técnica, no legal correctness/auditabilidad formal por candidato.
+4. Gholamian: Icecat/WDC-222 no son HS; el experimento humano no debe generalizarse a beneficio humano de clasificación HS.
+5. `SUPPORTS_CANDIDATE` = contraste compatible con supervivencia provisional en el lote, nunca evidencia de novelty.
+6. Amel: `.500 -> .582` = +8.2 pp frente a D-only; `.647 -> .653` = +0.6 pp frente al mejor texto enriquecido.
 
-La entrega de la IA de redacción fue contrastada con los seis PDF primarios del lote. Registro de revisión:
+### Candidatos provisionales tras 0B-03A
 
-`article/reviews/0B03A_INTERNAL_REVIEW.md`
+Todos permanecen `CANDIDATE_GAP_ONLY`:
 
-Dictamen:
-
-```text
-0B-03A = INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING
-DRAFTING_DELIVERABLE = ANALYTICALLY_COMPLETE
-INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
-EXPERIMENTAL_REVIEW = NOT_REQUIRED
-AUTHOR_APPROVAL = PENDING
-FREEZE = NOT_YET_AUTHORIZED
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-```
-
-#### Hallazgos gobernantes
-
-- THE-RAG constituye antecedente directo de `RAG + LLM + HS classification`; por sí sola esa combinación no puede convertirse en una diferenciación futura.
-- En THE-RAG el LLM participa en la determinación del código y RAG no mejora universalmente todas las configuraciones.
-- ICCA-RAG es QA/asistencia documental aduanera, no benchmark de clasificación HS; metadata/backtracking es procedencia técnica, no corrección jurídica ni auditabilidad formal por candidato.
-- Koch & Power debe describirse operacionalmente como clasificación mediante transformer encoders fine-tuned con cabeza de clasificación, aunque el paper utilice la etiqueta LLM.
-- Gholamian et al. evalúa taxonomías Icecat/WDC-222, no HS; su uso es supporting para robustez/ICL.
-- Amel et al.: el efecto multimodal depende del baseline exacto.
-
-#### Correcciones C1–C6 a integrar solo después de aprobación del autor
-
-1. **THE-RAG/model identity:** `.44/.47/.51/.59/.60` HS6 Top-3 corresponde a `gemini_1.5_flash`, no a `gemini_1.5_flash_8b`; preservar separadas ambas variantes. El contraejemplo `llama3.1_8b` queda verificado: `.14` CoT/no-RAG frente a `.11/.09` THE-RAG en chunks 250/500.
-2. **Koch & Power:** normalizar como `FINE_TUNED_TRANSFORMER_CLASSIFIER`; si se conserva `FINE_TUNED_LLM`, marcarlo como terminología de autores.
-3. **ICCA-RAG:** `RAG_EVIDENCE_SUPPORT` solo con calificador de contexto para QA documental; no equivale a evidencia normativa posterior a Top-k fijo.
-4. **Gholamian:** el experimento humano 76/72/97 y 72/67/95 valida principalmente perturbaciones/mapeo con ejemplos similares; no generalizar a beneficio humano de clasificación HS.
-5. **Pressure test:** `SUPPORTS_CANDIDATE` significa contraste compatible con supervivencia provisional en este lote, no evidencia de novelty ni prueba de ausencia global.
-6. **Amel multimodal:** `D=.500 -> I+D=.582` = +8.2 puntos porcentuales; `T+D+C=.647 -> mejor multimodal=.653` = +0.6 puntos porcentuales.
-
-No se requiere nueva ejecución de la IA de redacción. Las correcciones son de normalización/alcance y pueden integrarse editorialmente en el artefacto canónico después de la aprobación expresa del autor.
-
-### Candidatos provisionales después de la revisión 0B-03A
-
-Todos permanecen `CANDIDATE_GAP_ONLY`; ninguno establece novelty:
-
-- F1/G1: `SURVIVES IN NARROW FORM` — precedentes históricos generan/fijan ranking y normativa llega después sin reordenar.
-- F2/G2: `SURVIVES IN NARROW FORM` — generador posterior limitado a Top-k fijo, sin introducir/reordenar códigos.
-- F3/G3: `SURVIVES THIS BATCH; METHODOLOGICAL` — control explícito por unidad administrativa/grupo.
+- F1/G1: `SURVIVES IN NARROW FORM` — precedentes históricos generan/fijan ranking; normativa llega después y no reordena.
+- F2/G2: `SURVIVES IN NARROW FORM` — generador posterior restringido a Top-k fijo, sin introducir/reordenar códigos.
+- F3/G3: `SURVIVES THIS BATCH; METHODOLOGICAL` — control explícito de dependencia por unidad administrativa/grupo.
 - F4/G4: `SURVIVES AS METHODOLOGICAL DISTINCTION` — predictive/candidate performance ≠ corrección sustantiva/jurídica adjudicada.
 - F5/G5: `FURTHER NARROWED BY ICCA-RAG` — evaluación formal por caso de trazabilidad/auditabilidad, no mera metadata/faithfulness.
-- G6: `SURVIVES; METHODOLOGICAL` — ground truth independiente/adjudicado para claims de correctness.
-- G7: `NEW/PROVISIONAL` — separación entre papel clasificatorio y explicativo del LLM; debe someterse a presión en 0B-03B.
+- G6: `SURVIVES; METHODOLOGICAL` — ground truth independiente/adjudicado para correctness.
+- G7: `NEW/PROVISIONAL; PRESSURE TEST REQUIRED IN 0B-03B` — separación entre papel clasificatorio y explicativo del LLM.
 
-### Gate vigente de 0B-03A
+Ninguno constituye gap definitivo ni novelty.
+
+### 0B-03B — apertura formal
+
+Objetivo: analizar agentes, benchmarks y razonamiento jerárquico/regulatorio para determinar si ya existen diseños que desacoplan clasificación, búsqueda, reglas, recuperación, explicación y verificación de una forma comparable al presente trabajo.
+
+PDF asignados:
+
+1. `A Deterministic Agentic Workflow for HS Tariff Classification.pdf`
+2. `ATLAS-Benchmarking and Adapting LLMs for Global Trade via Harmonized Tariff Code Classification.pdf`
+3. `Consensus-based Agentic Large Language Model Framework for Harmonized Tariff Schedule Code Classification.pdf`
+4. `Constraint-Aware Hierarchical Search for Regulation-Driven Fine-Grained Classification.pdf`
+5. `HSCodeComp- A Realistic and Expert-level Benchmark for Deep Search Agents in Hierarchical Rule Application.pdf`
+6. `HSGraphAgent: Knowledge-Graph-Guided Large Language Models for Harmonized System Code Classification.pdf`
+
+Los otros 56 PDF permanecen `OUT_OF_SCOPE_FOR_0B03B`.
+
+Controles obligatorios:
+
+- leer íntegramente 6/6 PDF;
+- no usar web ni buscar literatura nueva;
+- distinguir agentic classification, multi-agent consensus, deterministic workflow, deep/hierarchical search, regulation-driven search, KG-guided reasoning y post-hoc explanation;
+- distinguir reglas/normativa usadas para decidir el código de evidencia posterior usada solo para respaldarlo;
+- distinguir consensus/self-consistency de ground truth independiente;
+- distinguir reasoning trace/citations de auditabilidad formal;
+- auditar si candidatos están pre-fijados, si pueden introducirse nuevos códigos y si el orden puede cambiar;
+- auditar validación de códigos, constraints, guardrails y abstención;
+- someter F1–F5/G6/G7 a pressure test explícito;
+- no convertir `SUPPORTS_CANDIDATE` en novelty;
+- mantener separadas función científica y admisibilidad bibliográfica final;
+- no modificar GitHub ni el Plan Maestro.
+
+### Gate de 0B-03B
 
 ```text
-revisión interna completada
--> aprobación expresa del autor
--> integrar C1–C6
--> crear artefacto canónico FROZEN de 0B-03A
--> abrir 0B-03B
+IA de redacción
+-> revisión científica/editorial interna contra PDF primarios
+-> corrección si aplica
+-> aprobación del autor
+-> freeze de 0B-03B
+-> evaluación de apertura de 0B-04
 ```
 
-Hasta recibir aprobación expresa, **no** está autorizado abrir 0B-03B ni avanzar a 0B-04, 0C o fases posteriores.
-
-La IA experimental solo se incorporará si una interpretación bibliográfica afecta directamente un hecho experimental, claim experimental o restricción metodológica bajo su autoridad. En 0B-03A no se detectó esa necesidad.
+La IA experimental solo se incorporará si una interpretación bibliográfica afecta directamente hechos/claims experimentales o restricciones metodológicas bajo su autoridad.
 
 ### Prohibiciones vigentes
 
-No está autorizado:
+Durante 0B-03B no está autorizado:
+
 - redactar Introduction/Related Work/Methods/Results/Discussion/Conclusions;
 - declarar novelty, gap definitivo o superioridad;
 - modificar 0A o el Plan Maestro;
-- abrir 0B-03B antes de freeze de 0B-03A;
+- avanzar a 0B-04, 0B-05, 0B-06, 0C o fases posteriores;
 - usar resultados experimentales pendientes como cerrados;
-- convertir secondary claims en hechos sin verificación primaria.
+- convertir claims secundarios en hechos sin verificar la fuente primaria.
 
 ### Fases posteriores
 
-- `0B-03B`: `NOT_STARTED`.
 - `0B-04`: `NOT_STARTED`.
 - `0B-05`: `NOT_STARTED`.
 - `0B-06`: `NOT_STARTED`.
@@ -156,38 +158,45 @@ No está autorizado:
 ### Overall status
 
 - Working branch: `article/main-manuscript`.
-- Overall state: `IN_ANALYSIS`.
-- Phase 0A: **`CLOSED / APPROVED`**; 0A-01 and 0A-02 are **`APPROVED / FROZEN`**.
-- Active phase: **`0B — Critical literature map and taxonomy`**.
-- 0B-01: **`APPROVED / FROZEN`**.
-- 0B-02: **`APPROVED / FROZEN`**.
-- Active block: **`0B-03A — LLM, RAG, and multimodality in customs classification/compliance`**.
-- 0B-03A: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
-- Internal verdict: **`PASS WITH MINOR CORRECTIONS`**.
-- Experimental review: **`NOT_REQUIRED`**.
-- Freeze: **`NOT_YET_AUTHORIZED`**.
-- 0B-03B: **`NOT_STARTED`**.
+- Global state: `IN_ANALYSIS`.
+- Phase 0A: `CLOSED / APPROVED`; 0A-01 and 0A-02 are `APPROVED / FROZEN`.
+- Active phase: `0B — Critical literature map and taxonomy`.
+- 0B-01, 0B-02, and 0B-03A are `APPROVED / FROZEN`.
+- Active block: `0B-03B — Agents, benchmarks, and hierarchical/regulatory reasoning`.
+- 0B-03B status: `READY_FOR_DRAFTING`.
+- Active prompt: `article/prompts/0B03B_AGENTS_HIERARCHICAL_REGULATORY_REASONING.md`.
 - Consolidated corpus: 62 distinct works/documents with primary verifiable access `62/62`.
 - Target journal: pending until Phase 0D.
 - Manuscript drafting: not started.
 
-### 0B-03A internal review
+### Governing ground truth
 
-The drafting deliverable was checked against all six primary PDFs. Review record:
-`article/reviews/0B03A_INTERNAL_REVIEW.md`.
+The frozen 0A documentary and experimental artifacts remain authoritative. The literature workflow may not modify the Master Plan or rewrite frozen ground truth; exclusive Master-Plan authority remains with the experimental workflow.
 
-The governing findings are retained: THE-RAG is direct prior art for RAG+LLM HS classification and its LLM participates in code determination; its RAG effect is configuration-dependent rather than universal. ICCA-RAG is customs-document QA rather than an HS-classification benchmark. Koch & Power operationally use fine-tuned transformer encoders as closed-label classifiers. Gholamian et al. use Icecat/WDC product taxonomies rather than HS. Amel et al.'s multimodal gain depends on the exact baseline.
+### 0B-03A formal closure
 
-Required freeze corrections C1–C6 are: preserve exact THE-RAG model identity; normalize Koch & Power's operational taxonomy; qualify ICCA-RAG's evidence role; narrow interpretation of Gholamian's human experiment; define pressure-test labels as provisional contrast rather than novelty evidence; and report Amel's multimodal gains against the exact baseline.
+`0B-03A = APPROVED / FROZEN`; internal review passed with minor corrections; express author approval was received; experimental review was not required; no final gap or novelty was declared.
 
-No drafting-AI rerun is needed. These corrections may be editorially integrated only after express author approval.
+Canonical artifact: `article/literature/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS_FROZEN.md`.
 
-### Candidate-gap status
+The freeze incorporates exact THE-RAG model identity, Koch & Power taxonomy normalization, ICCA-RAG evidence-role qualification, the limited interpretation of Gholamian's human study, the provisional meaning of `SUPPORTS_CANDIDATE`, and baseline-specific multimodal gains.
 
-F1/F2 survive only in narrow form; F3 and G6 remain methodological; F4 remains a methodological distinction; F5 is further narrowed by ICCA-RAG; G7 is new/provisional and must be pressure-tested in 0B-03B. All are `CANDIDATE_GAP_ONLY`; none establishes novelty.
+### Provisional candidates after 0B-03A
 
-### Current gate
+F1/F2 survive only narrowly; F3/G6 remain methodological; F4 remains a methodological distinction; F5 is further narrowed by ICCA-RAG; G7 is new/provisional and must be pressure-tested in 0B-03B. All remain `CANDIDATE_GAP_ONLY`; none establishes novelty.
 
-`internal review complete -> express author approval -> integrate C1–C6 -> canonical 0B-03A freeze -> open 0B-03B`.
+### 0B-03B opening
 
-Until express approval, 0B-03B and later phases remain closed. Experimental-AI review is not required for this batch because no literature interpretation changes a frozen experimental fact, claim, or restriction.
+0B-03B analyzes only the six agentic/benchmark/hierarchical-regulatory papers listed in the Spanish section. It must determine whether prior systems already separate or combine code classification, hierarchical/deep search, regulatory rules, knowledge graphs, candidate constraints, explanation, verification, and auditability in ways comparable to the present architecture.
+
+Mandatory controls include full reading, no web/new literature, explicit distinction among agentic classification, consensus, deterministic workflows, hierarchical/regulation-driven search, KG-guided reasoning, and downstream explanation; explicit analysis of candidate fixation/new-code capability/order changes; validation/guardrails; ground-truth quality; auditability versus reasoning traces; dependency controls; and pressure testing of F1–F5/G6/G7 without novelty claims.
+
+### Gate
+
+`drafting AI -> internal scientific/editorial review against primary PDFs -> correction if needed -> author approval -> freeze 0B-03B -> assess opening 0B-04`.
+
+Experimental-AI involvement is required only if a literature interpretation changes experimental facts, claims, or restrictions under its authority.
+
+### Later phases
+
+0B-04 through 0B-06 remain `NOT_STARTED`; 0C is blocked until 0B closes; 0D is blocked until 0C closes; target journal remains undecided until 0D.
