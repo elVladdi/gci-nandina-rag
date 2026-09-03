@@ -30,15 +30,6 @@ Artefacto canónico:
 
 Revisión experimental: `NOT_REQUIRED`.
 
-PDF analizados:
-
-1. `The Probabilistic Relevance Framework: BM25 and Beyond.pdf`
-2. `Sentence-BERT.pdf`
-3. `Dense passage retrieval for open-domain question answering. Proceedings of EMNLP 2020.pdf`
-4. `ColBERT- Efficient and effective passage search via contextualized late interaction over BERT.pdf`
-5. `Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs.pdf`
-6. `Passage Re-Ranking with BERT.pdf`
-
 Hallazgos congelados:
 
 - BM25 = lexical term-weighting/scoring/ranking dentro del Probabilistic Relevance Framework; su score no es probabilidad calibrada de corrección.
@@ -56,24 +47,42 @@ Distinción central congelada:
 
 Las funciones pueden estar operacionalmente acopladas; no implican una correspondencia uno-a-uno con algoritmos independientes.
 
-### 4. 0B-04B — Fundamentos de RAG, query transformation y grounding
+### 4. 0B-04B — Fundamentos de RAG, transformación de consultas y grounding
 
-Estado: **`NOT_STARTED / CLOSED_BY_GATE`**.
+Estado: **`READY_FOR_DRAFTING`**.
 
-0B-04A ya está congelado, por lo que 0B-04B queda **elegible para definición posterior**, pero no está abierto automáticamente. Su lote definitivo y prompt ejecutable requieren un cambio explícito posterior.
+Prompt activo:
+`article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
 
-Lote previsto, sujeto a confirmación antes de apertura:
+Lote final confirmado:
 
 1. `Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.pdf`
-2. `REALM: Retrieval-Augmented Language Model Pre-Training.pdf`
-3. `Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering.pdf`
-4. `Query2doc.pdf`
-5. `Query Rewriting for Retrieval-Augmented LLMs.pdf`
+2. `REALM-Retrieval-Augmented Language Model Pre-Training.pdf`
+3. `Leveraging passage retrieval with generative models for open domain question answering.pdf`
+4. `Query2doc-Query Expansion whit Large Lenguage Models.pdf`
+5. `Query Rewriting for Retrieval-Augmented Large Language Models.pdf`
 6. `Evidentiality-guided Generation for Knowledge-Intensive NLP Tasks.pdf`
 
-Objetivo previsto: distinguir retrieval usado para condicionar generación, retrieval-augmented pretraining, fusión/agregación de pasajes, query rewriting/expansion y mecanismos de grounding/evidentiality. Debe analizar por qué RAG fundacional no equivale automáticamente al contrato `Top-k histórico fijo -> evidencia normativa -> LLM explicativo no reordenador`.
+Los seis están dentro del corpus heredado y fueron localizados por identidad científica; duplicados o pequeñas variaciones ortográficas de nombre no alteran la identidad de la obra.
 
-No existe todavía prompt ejecutable de 0B-04B.
+Objetivo gobernante:
+
+`QUERY -> [QUERY TRANSFORMATION?] -> RETRIEVAL -> [FUSION / EVIDENCE SELECTION?] -> GENERATION -> OUTPUT`
+
+El sub-lote debe distinguir:
+
+- `RETRIEVAL_AUGMENTED_GENERATION` de `RETRIEVAL_AUGMENTED_PRETRAINING`;
+- retrieve-then-generate de query expansion/query rewriting;
+- retrieval que determina el contexto disponible al generador de evidencia normativa posterior a un ranking histórico ya fijado;
+- passage fusion de evidence attribution;
+- inspectable retrieval/provenance de evaluación formal de auditabilidad;
+- evidentiality/grounding de corrección sustantiva o jurídica.
+
+Comparación obligatoria con el contrato del piloto:
+
+`ranking histórico Top-k fijado -> evidencia normativa posterior por candidato -> LLM local exclusivamente explicativo -> sin códigos nuevos -> sin reordenamiento -> sin feedback clasificatorio`.
+
+0B-04B sigue siendo **fundacional**. Para F1–F5 solo se usarán etiquetas de relevancia metodológica; no se utilizarán estos papers para declarar ausencia de prior art aduanero. G6 permanece eliminado y G7 absorbido en F2.
 
 ### 5. Trabajos reservados
 
@@ -99,7 +108,7 @@ Después de 0B-03B permanecen:
 - F4: rendimiento predictive/retrieval/path validity/evidence grounding ≠ corrección sustantiva adjudicada;
 - F5: evaluación formal y separada de auditabilidad documental por salida.
 
-G6 permanece eliminado y G7 absorbido en F2. 0B-04A no modifica estos estados; aporta vocabulario y distinciones metodológicas.
+G6 permanece eliminado y G7 absorbido en F2. 0B-04A no modificó estos estados; 0B-04B deberá mantener el mismo control y aportar únicamente fundamentos/contrastes metodológicos.
 
 ### 7. Gate
 
@@ -107,9 +116,11 @@ G6 permanece eliminado y G7 absorbido en F2. 0B-04A no modifica estos estados; a
 
 `IA de redacción -> revisión interna -> aprobación expresa del autor -> freeze`.
 
-Siguiente gate potencial:
+Gate activo:
 
-`definir lote final 0B-04B -> crear prompt ejecutable -> READY_FOR_DRAFTING -> IA de redacción -> revisión interna -> aprobación del autor -> freeze`.
+`0B-04B READY_FOR_DRAFTING -> IA de redacción -> revisión científica/editorial interna contra los seis PDF primarios -> corrección si aplica -> aprobación expresa del autor -> freeze -> evaluar apertura de 0B-05`.
+
+No se abre 0B-05 antes de cerrar 0B-04B.
 
 La IA experimental solo interviene si una interpretación bibliográfica modifica o amenaza un hecho/claim experimental congelado o una restricción bajo su autoridad.
 
@@ -123,8 +134,8 @@ Mientras 0B permanezca abierto:
 - no comparar benchmarks heterogéneos como superioridad global;
 - no modificar Plan Maestro ni 0A;
 - no reabrir G6/G7;
-- no ejecutar 0B-04B hasta su apertura explícita;
-- no usar literatura fundacional para reinterpretar resultados experimentales congelados fuera de su alcance.
+- no reinterpretar resultados experimentales congelados fuera de su alcance;
+- no avanzar a 0B-05, 0B-06 o 0C antes del gate correspondiente.
 
 ---
 
@@ -134,30 +145,45 @@ Mientras 0B permanezca abierto:
 
 `0B-04 — Information Retrieval and RAG foundations` provides the minimum sufficient methodological basis for lexical BM25 ranking, semantic/dense representation and retrieval, late interaction, reranking, ANN indexing/search, RAG, query transformation, and grounding/evidentiality. It is not a general IR review or novelty-search stage.
 
-### 2. 0B-04A — Ranking and retrieval foundations
+### 2. Controlled selection
 
-Status: **`APPROVED / FROZEN`**.
+Only inherited works that support a concrete methodological decision or a necessary conceptual distinction are included. 0B-04 is divided into two controlled sub-batches.
 
-The governing records are the 0B-04A prompt, internal review, author approval, and canonical frozen artifact `article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
+### 3. 0B-04A — Ranking and retrieval foundations
 
-The frozen method map is: BM25 = lexical ranking within PRF rather than a calibrated correctness probability; SBERT = sentence embedding/semantic representation with candidate search/indexing specified separately; DPR = indexed dense bi-encoder retrieval; ColBERT = late-interaction retrieval with reranking and full-retrieval modes; HNSW = ANN index/search infrastructure with unresolved final publication metadata in the supplied copy; and Nogueira–Cho = second-stage cross-encoder reranking over BM25 candidates. Heterogeneous IR/ANN/STS/classification metrics remain non-interchangeable, and foundational dense-retrieval results do not reinterpret the project's frozen D1a result.
+Status: **`APPROVED / FROZEN`**. Its prompt, internal review, author approval, and canonical artifact are frozen. The governing map distinguishes lexical ranking, semantic representation, indexed dense retrieval, late interaction, ANN/index search, and second-stage cross-encoder reranking. Foundational dense-retrieval results do not reinterpret the project's frozen D1a result.
 
-The central distinction is `QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`, while recognizing that functions can be operationally coupled.
+### 4. 0B-04B — RAG, query transformation, and grounding foundations
 
-### 3. 0B-04B — RAG/query transformation/grounding foundations
+Status: **`READY_FOR_DRAFTING`**.
 
-Status: **`NOT_STARTED / CLOSED_BY_GATE`**. Because 0B-04A is now frozen, 0B-04B is eligible for a later explicit definition, but it has not been opened automatically. The planned six-paper set remains provisional and no executable prompt exists yet.
+Active prompt:
+`article/prompts/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS.md`.
 
-### 4. Reserved works
+The final six-paper batch is the Lewis et al. RAG paper, REALM, Fusion-in-Decoder, Query2doc, Query Rewriting for Retrieval-Augmented Large Language Models, and Evidentiality-guided Generation listed in the Spanish section.
 
-SimCSE, query expansion, ExtractGPT, product-information extraction, and product-attribute extraction/normalization remain `RESERVED_FOR_DIRECTED_USE`.
+The governing pipeline is:
 
-### 5. Gap-candidate governance
+`QUERY -> [QUERY TRANSFORMATION?] -> RETRIEVAL -> [FUSION / EVIDENCE SELECTION?] -> GENERATION -> OUTPUT`.
 
-0B-04A does not alter the post-0B-03B status of F1–F5. It constrains terminology and method interpretation only. G6 remains eliminated and G7 remains merged into F2.
+The block must distinguish retrieval-augmented generation from retrieval-augmented pretraining, retrieve-then-generate from query rewriting/expansion, passage fusion from evidence attribution, inspectable retrieval/provenance from formal auditability, and evidentiality/grounding from substantive or legal correctness.
+
+The present pilot remains a distinct contract to be used only as a comparison boundary: externally fixed historical ranked Top-k -> candidate-specific downstream normative evidence -> explanation-only local LLM -> no new codes -> no reordering -> no classification feedback.
+
+0B-04B is foundational. F1–F5 may only receive methodological relevance labels; these papers are not proof of missing customs prior art. G6 remains eliminated and G7 remains merged into F2.
+
+### 5. Reserved works
+
+SimCSE, Query Expansion by Prompting Large Language Models, ExtractGPT, product-information extraction with ChatGPT, and LLM-based product-attribute extraction/normalization remain `RESERVED_FOR_DIRECTED_USE`. No 0B-04C opens by default.
 
 ### 6. Gate
 
-0B-04A completed the normal gate: drafting AI -> internal review -> express author approval -> freeze. The next potential gate is: define the final 0B-04B batch -> create executable prompt -> READY_FOR_DRAFTING -> drafting AI -> internal review -> author approval -> freeze.
+The active gate is:
 
-No manuscript drafting, final novelty/gap claims, new-literature search outside an explicitly opened 0B-06, Master-Plan modification, or 0B-04B execution is authorized until the corresponding gate is opened.
+`0B-04B READY_FOR_DRAFTING -> drafting AI -> internal scientific/editorial review against the six primary PDFs -> correction if needed -> express author approval -> freeze -> assess opening 0B-05`.
+
+0B-05 cannot open before 0B-04B closes. Experimental-AI review is required only if literature interpretation changes or threatens frozen experimental facts/claims or restrictions under its authority.
+
+### 7. Prohibitions
+
+No manuscript drafting, final novelty/gap claims, new-literature search outside an explicitly opened 0B-06, cross-benchmark universal superiority claims, Master-Plan/0A modification, reopening G6/G7, reinterpretation of frozen experiments beyond scope, or advancing to 0B-05/0B-06/0C before the corresponding gate.
