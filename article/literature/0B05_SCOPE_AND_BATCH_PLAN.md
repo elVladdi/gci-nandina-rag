@@ -76,24 +76,54 @@ Impacto metodológico congelado:
 
 #### 0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado
 
-Estado: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+Estado: **`READY_FOR_DRAFTING`**.
 
-El freeze de 0B-05A habilita ahora únicamente la **definición formal** de 0B-05B. Antes de abrirlo deben confirmarse las fuentes primarias, fijarse el lote final y crearse un prompt ejecutable.
+Prompt activo:
 
-Fuentes candidatas heredadas, sujetas a confirmación primaria:
+`article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
 
-- `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`;
-- `The Duality of Knowledge.pdf`;
-- `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`, si se confirma acceso al PDF primario completo del corpus heredado.
+Lote final controlado:
 
-Objetivo previsto:
+1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
+2. `The Duality of Knowledge.pdf`
+3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
 
-- delimitar `data`, `information`, `documented/explicit knowledge` y conocimiento tácito/no codificado;
-- evitar una transformación automática tipo DIKW si las fuentes no la sostienen;
-- precisar en qué sentido un corpus normativo puede describirse como conocimiento explícito documental;
-- preservar que recuperación/documentación de conocimiento explícito no sustituye conocimiento experto, interpretación o juicio profesional.
+Para el tercer trabajo puede existir un sufijo físico automático de adjunto, como `(2)`. Ese sufijo no constituye una versión científica; la identidad gobernante es el título del trabajo visible en la copia primaria.
 
-0B-05B seguirá siendo fundacional y no podrá declarar novelty ni gap definitivo.
+El corpus consolidado mantiene acceso primario `62/62`. El prompt conserva una regla de seguridad adicional: si la IA de redacción no puede acceder íntegramente a cualquiera de estas tres copias en su entorno de ejecución, debe identificar el faltante y detenerse sin sustituirlo con fuentes secundarias.
+
+Objetivo gobernante:
+
+- delimitar `data`, `information`, `knowledge`, `explicit/codified knowledge`, `tacit/non-codified knowledge`, `information management` y `knowledge management`;
+- preservar la diversidad conceptual documentada en la literatura y **no imponer una secuencia DIKW universal**;
+- distinguir conceptos reportados por los autores de la `OPERACIONALIZACION_DEL_PROYECTO`;
+- precisar en qué sentido el corpus normativo puede tratarse, como operacionalización del proyecto, como fuente de conocimiento explícito/documentado sin afirmar que contiene la totalidad del expertise jurídico;
+- preservar que los precedentes históricos son registros/experiencia documentada y no una reproducción completa del conocimiento tácito del especialista;
+- preservar que la salida del LLM es explicación/información estructurada y no conocimiento experto definitivo ni clasificación oficial;
+- mantener la revisión experta fuera del sistema automatizado.
+
+Fronteras que 0B-05B debe auditar, no asumir:
+
+`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+
+`DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
+
+`DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`
+
+`LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
+
+Estas expresiones serán candidatas a freeze solo después de contrastarlas contra los tres PDF primarios.
+
+0B-05B sigue siendo **fundacional y conceptual**. No es un pressure test de novelty aduanera. Cualquier mapeo desde conceptos generales hacia componentes NANDINA debe etiquetarse `OPERACIONALIZACION_DEL_PROYECTO` y no atribuirse directamente a los autores.
+
+Relación metodológica esperada con F1–F5:
+
+- **F1:** como máximo `METHOD_BOUNDARY_RELEVANT` para distinguir documentos/evidencia de decisión clasificatoria; no novelty.
+- **F2:** `METHOD_BOUNDARY_RELEVANT` para separar explicación organizada de conocimiento/juicio experto; no novelty.
+- **F3:** normalmente `NOT_RELEVANT_TO_GAP_CANDIDATE`.
+- **F4:** `METHOD_BOUNDARY_RELEVANT` para separar disponibilidad/organización documental de correctness sustantiva/jurídica.
+- **F5:** como máximo `METHOD_BOUNDARY_RELEVANT`; conocimiento/documentación no sustituye la evaluación formal de auditabilidad por salida.
+- G6 permanece eliminado y G7 permanece absorbido en F2.
 
 #### 0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales
 
@@ -114,7 +144,7 @@ Su función será una **auditoría de fuente primaria oficial** separada, siguie
 - G6, eliminado;
 - G7, absorbido en F2.
 
-La IA experimental no fue requerida en 0B-05A porque ninguna interpretación bibliográfica modificó hechos/claims experimentales congelados ni restricciones bajo su autoridad.
+La IA experimental no es revisora bibliográfica rutinaria. Solo se activará si una interpretación de 0B-05B modifica o amenaza hechos/claims experimentales congelados o restricciones bajo su autoridad.
 
 ### 4. Gate
 
@@ -122,21 +152,25 @@ La IA experimental no fue requerida en 0B-05A porque ninguna interpretación bib
 
 `IA de redacción -> revisión interna -> aprobación expresa del autor -> freeze`.
 
-Siguiente gate permitido:
+Gate activo:
 
-`confirmar fuentes primarias 0B-05B -> definir lote final -> crear prompt ejecutable -> READY_FOR_DRAFTING -> IA de redacción -> revisión interna -> aprobación expresa del autor -> freeze -> evaluar apertura de 0B-05C`.
+`0B-05B READY_FOR_DRAFTING -> IA de redacción -> revisión científica/editorial interna contra los tres PDF primarios -> corrección si aplica -> aprobación expresa del autor -> freeze -> evaluar definición/apertura de 0B-05C`.
 
 0B-05C permanece cerrado hasta completar ese gate.
 
 ### 5. Prohibiciones vigentes
 
-Mientras 0B permanezca abierto:
+Durante 0B-05B:
 
 - no redactar secciones del manuscrito;
 - no declarar novelty ni gap definitivo;
-- no buscar literatura nueva salvo apertura explícita de 0B-06;
+- no buscar literatura nueva;
+- no usar otros PDF para completar el lote;
+- no imponer una pirámide DIKW universal;
+- no confundir `explicit`, `codified`, `documented` y `stored` sin soporte de fuente;
 - no confundir conocimiento explícito documental con totalidad del conocimiento experto;
-- no convertir fuentes normativas recuperadas en prueba automática de aplicación jurídica correcta;
+- no convertir recuperación documental en comprensión, interpretación o aplicación jurídica correcta;
+- no describir la explicación del LLM como conocimiento experto o clasificación oficial;
 - no modificar 0A ni el Plan Maestro;
 - no reabrir G6/G7;
 - no abrir 0B-05C, 0B-06 o 0C antes del gate correspondiente.
@@ -169,28 +203,50 @@ C1–C7 are integrated. F3 gains documentation foundation only; F4 remains a cor
 
 #### 0B-05B — Information, documented explicit knowledge, and limits of codified knowledge
 
-Status: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+Status: **`READY_FOR_DRAFTING`**.
 
-The 0B-05A freeze only authorizes the formal definition of 0B-05B. Primary-source access must first be confirmed, then a final controlled batch and executable prompt must be created.
+Active prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
 
-Candidate inherited sources are Zins on conceptual approaches to data/information/knowledge; Hildreth & Kimble on the duality of knowledge; and the inherited knowledge-management/tacit-knowledge paper only if complete primary-PDF access is confirmed.
+Final controlled batch:
 
-The planned objective is to distinguish data, information, documented/explicit knowledge, and tacit/non-codified knowledge; reject automatic DIKW transformation unless supported; clarify the legitimate sense in which a normative corpus can be treated as documented explicit knowledge; and preserve that document retrieval does not replace expert interpretation or judgment.
+1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
+2. `The Duality of Knowledge.pdf`
+3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
+
+An automatic physical-file suffix such as `(2)` is not a scientific version identifier; the scientific title visible in the primary copy governs identity. The consolidated corpus remains at primary access `62/62`, while the executable prompt still requires the drafting AI to stop if any of the three full PDFs is unavailable in its execution environment.
+
+The governing objective is to distinguish data, information, knowledge, explicit/codified knowledge, tacit/non-codified knowledge, information management, and knowledge management; preserve conceptual diversity instead of imposing a universal DIKW sequence; distinguish author-reported concepts from `PROJECT_OPERATIONALIZATION`; and bound the project's use of documented explicit knowledge without treating documentary retrieval as complete expert/legal knowledge.
+
+Candidate boundaries to be audited rather than assumed are:
+
+`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+
+`DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
+
+`DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`
+
+`LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
+
+Any mapping from general knowledge-management concepts to NANDINA components must be labeled `PROJECT_OPERATIONALIZATION`. 0B-05B remains foundational and is not a customs novelty pressure test.
+
+Expected methodological relationship to F1–F5: F1/F2/F4/F5 may receive boundary relevance only; F3 is normally not relevant. G6 remains eliminated and G7 remains merged into F2.
 
 #### 0B-05C — Authority, currency, and traceability of normative/official sources
 
-Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It may be defined only after 0B-05B freezes. It will be a separate official-primary-source audit covering issuing authority, version, currency, date, scope, documentary hierarchy, stable identifiers, and evidentiary role for WCO, Andean Community, SUNAT, and other relevant official sources.
+Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It may be defined only after 0B-05B freezes. It will be a separate audit of official primary sources covering issuing authority, version, currency, date, scope, documentary hierarchy, stable identifiers, and evidentiary role.
 
 ### 3. Prior freezes and experimental governance
 
-0B-05 does not reopen 0A, frozen experiments, 0B-01 through 0B-04B, or frozen 0B-05A. G6/G7 remain closed as previously decided. Experimental-AI review was not required in 0B-05A because no frozen experimental fact/claim or authority restriction was changed.
+0B-05 does not reopen 0A, frozen experiments, 0B-01 through 0B-04B, or frozen 0B-05A. G6/G7 remain closed as previously decided. Experimental-AI review is not routine and is triggered only if a 0B-05B interpretation changes or threatens frozen experimental facts/claims or restrictions under its authority.
 
 ### 4. Gate
 
-0B-05A completed the drafting-AI -> internal-review -> author-approval -> freeze cycle.
+0B-05A completed its drafting-AI -> internal-review -> author-approval -> freeze cycle.
 
-Next permitted gate: confirm 0B-05B primary sources -> define final batch -> create executable prompt -> READY_FOR_DRAFTING -> drafting AI -> internal review -> author approval -> freeze -> assess opening 0B-05C.
+Active gate:
+
+`0B-05B READY_FOR_DRAFTING -> drafting AI -> internal scientific/editorial review against the three primary PDFs -> correction if needed -> express author approval -> freeze -> assess definition/opening of 0B-05C`.
 
 ### 5. Prohibitions
 
-While 0B remains open, manuscript drafting, final novelty/gap claims, new-literature search outside an explicitly opened 0B-06, conflating documented explicit knowledge with all expert knowledge, treating retrieved official documents as automatic legal correctness, Master-Plan/0A modification, reopening G6/G7, or opening 0B-05C/0B-06/0C before their gates remain prohibited.
+During 0B-05B: no manuscript drafting; no final novelty/gap claims; no new-literature search; no out-of-batch supplementation; no universal DIKW pyramid; no unsupported conflation of explicit/codified/documented/stored knowledge; no equation of documented knowledge with complete expertise; no conversion of document retrieval into understanding/legal correctness; no description of LLM explanation as expert knowledge or official classification; no Master-Plan/0A modification; no reopening G6/G7; and no opening of 0B-05C/0B-06/0C before their gates.
