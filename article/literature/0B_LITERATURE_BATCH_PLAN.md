@@ -36,6 +36,7 @@ No es necesario volver a cargar un PDF si la IA de redacción ya puede acceder �
 - No se declarará novelty ni gap definitivo antes de 0C.
 - Cada trabajo se mapeará contra: problema, tarea, dataset/corpus, nivel HS, input, método, validación, métricas, jerarquía, evidencia normativa, explicabilidad, auditabilidad, precedentes históricos, LLM, limitaciones y diferencia con el presente trabajo.
 - La existencia de otros PDF visibles en la conversación de la IA de redacción no permite usarlos para completar silenciosamente un lote: solo se analizan los documentos expresamente asignados al bloque activo.
+- Una afirmación que un paper atribuya a una fuente tercera no debe convertirse en un hecho independiente del manuscrito sin verificar la fuente primaria correspondiente.
 
 ### 4. Lotes previstos
 
@@ -56,9 +57,13 @@ PDF asignados al lote:
 
 Estos ocho forman el alcance analítico de 0B-01 aunque la IA de redacción tenga acceso simultáneo a los demás PDF del corpus de 62.
 
+La revisión interna de 0B-01 está registrada en `article/reviews/0B01_INTERNAL_REVIEW.md` con dictamen `PASS WITH MINOR CORRECTIONS`. Las correcciones son terminológicas/de procedencia y no requieren una nueva ejecución analítica completa. El bloque espera aprobación expresa del autor antes de congelarse.
+
 #### 0B-02 — Retrieval, validación, conocimiento y auditabilidad aduanera
 
 Previsto para el segundo lote. Incluirá, entre otros, trabajos sobre sentence retrieval, Text2Trade, explainable product classification, assessment/correction of HS-code correctness, assistive technologies y conocimiento estructurado. La selección concreta se hará a partir del corpus de 62 ya disponible y podrá ampliarse o dividirse si el volumen compromete una lectura completa y comparable.
+
+**Estado: `NOT_STARTED`; no puede abrirse hasta que 0B-01 quede `APPROVED / FROZEN`.**
 
 #### 0B-03 — LLM, multimodalidad y agentes/razonamiento jerárquico
 
@@ -84,14 +89,19 @@ Cada lote sigue la secuencia:
 
 La IA experimental no es revisora obligatoria de literatura; solo se solicitará su intervención si una interpretación bibliográfica afecta directamente un hecho experimental, un claim experimental o una restricción metodológica bajo su autoridad.
 
+Para 0B-01, la revisión interna concluyó que las correcciones pendientes son deterministas y pueden integrarse editorialmente sin devolver el lote completo a la IA de redacción. La siguiente transición requiere aprobación expresa del autor.
+
 ### 6. Estado actual
 
 - Fase 0A: `CLOSED / APPROVED`.
 - Fase 0B: `OPEN`.
 - Corpus PDF conocido disponible para la IA de redacción: `62` obras/documentos distintos.
 - Bloque activo: `0B-01`.
-- Estado 0B-01: `READY_FOR_DRAFTING`.
+- Estado 0B-01: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- Dictamen interno 0B-01: **`PASS WITH MINOR CORRECTIONS`**.
+- Revisión: `article/reviews/0B01_INTERNAL_REVIEW.md`.
 - Alcance de 0B-01: únicamente los ocho PDF asignados en §4.
+- 0B-02: `NOT_STARTED`.
 - 0C y posteriores: bloqueados.
 - Target journal: pendiente hasta 0D.
 
@@ -133,6 +143,7 @@ A PDF need not be uploaded again if the drafting AI can already access it in ful
 - No novelty or definitive gap will be declared before 0C.
 - Each work will be mapped against: problem, task, dataset/corpus, HS level, input, method, validation, metrics, hierarchy, normative evidence, explainability, auditability, historical precedents, LLM use, limitations, and difference from the present work.
 - Visibility of other PDFs in the drafting-AI conversation does not allow them to be used to silently fill gaps in the current batch: only documents explicitly assigned to the active block may be analyzed.
+- A statement that a paper attributes to a third-party source must not become an independent manuscript fact without verification of the corresponding primary source.
 
 ### 4. Planned batches
 
@@ -153,9 +164,13 @@ Assigned PDFs:
 
 These eight define the analytical scope of 0B-01 even if the drafting AI can simultaneously access the remaining PDFs in the 62-document corpus.
 
+The internal 0B-01 review is recorded in `article/reviews/0B01_INTERNAL_REVIEW.md` with verdict `PASS WITH MINOR CORRECTIONS`. The corrections are terminological/provenance-related and do not require a full analytical rerun. The block is awaiting explicit author approval before freezing.
+
 #### 0B-02 — Retrieval, validation, knowledge, and customs auditability
 
 Planned as the second batch. It will include sentence retrieval, Text2Trade, explainable product classification, HS-code correctness assessment/correction, assistive technologies, and structured-knowledge work. The concrete selection will be drawn from the already available 62-document corpus and may be split further if volume would compromise full and comparable reading.
+
+**Status: `NOT_STARTED`; it cannot open until 0B-01 is `APPROVED / FROZEN`.**
 
 #### 0B-03 — LLMs, multimodality, and agents/hierarchical reasoning
 
@@ -181,13 +196,18 @@ Each batch follows:
 
 The experimental AI is not a mandatory literature reviewer; it will only be involved when a bibliographic interpretation directly affects an experimental fact, experimental claim, or methodological restriction under its authority.
 
+For 0B-01, the internal review concluded that the pending corrections are deterministic and can be editorially integrated without returning the full batch to the drafting AI. The next transition requires explicit author approval.
+
 ### 6. Current state
 
 - Phase 0A: `CLOSED / APPROVED`.
 - Phase 0B: `OPEN`.
 - Known PDF corpus available to the drafting AI: `62` distinct works/documents.
 - Active block: `0B-01`.
-- 0B-01 status: `READY_FOR_DRAFTING`.
+- 0B-01 status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- 0B-01 internal verdict: **`PASS WITH MINOR CORRECTIONS`**.
+- Review: `article/reviews/0B01_INTERNAL_REVIEW.md`.
 - 0B-01 scope: only the eight PDFs assigned in §4.
+- 0B-02: `NOT_STARTED`.
 - 0C and later phases: blocked.
 - Target journal: pending until 0D.
