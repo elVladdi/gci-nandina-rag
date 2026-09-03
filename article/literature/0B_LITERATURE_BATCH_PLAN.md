@@ -4,47 +4,37 @@
 
 ### 1. Propósito
 
-La Fase `0B — Mapa crítico de literatura y taxonomía` se ejecutará por lotes temáticos controlados. El objetivo no es redactar Related Work ni declarar novelty, sino leer los PDF completos del corpus disponible, identificar qué problema resuelve realmente cada trabajo y construir un mapa comparable que permita posteriormente definir el gap en 0C.
+La Fase `0B — Mapa crítico de literatura y taxonomía` se ejecuta por lotes temáticos controlados. Su finalidad es leer los PDF completos del corpus disponible, identificar qué problema resuelve realmente cada trabajo y construir un mapa comparable para 0C. Durante 0B no se redacta Related Work ni se declara novelty o gap definitivo.
 
-La literatura heredada conserva elegibilidad aunque incluya proceedings, tesis, preprints o trabajos anteriores a 2022. Las restricciones 2022–2026/Q1-Q2 aplican únicamente a literatura académica **nueva** incorporada después de detectar un vacío bibliográfico real.
+### 2. Corpus y reglas generales
 
-### 2. Corpus PDF disponible para 0B
+- Corpus PDF consolidado disponible: `62` obras/documentos distintos.
+- La disponibilidad de un PDF no autoriza analizarlo fuera del lote activo.
+- Cada PDF debe leerse íntegramente.
+- No se inventan metadatos, resultados, diseños ni DOI.
+- Metadata dudosa: `REVIEW_REQUIRED`.
+- Una afirmación que un paper atribuya a un tercero no se convierte en hecho independiente del manuscrito sin verificar la fuente primaria correspondiente.
+- Se distinguen `REPORTADO_POR_AUTORES`, `INFERENCIA_CRITICA`, `NO_VERIFICABLE_EN_PDF` y, desde 0B-02, `SECONDARY_CLAIM_UNVERIFIED`.
+- No se equiparan clasificación, candidate retrieval, evidence retrieval, validación, explicación ni auditabilidad.
+- La ausencia de group split documentado no demuestra leakage.
+- Las referencias heredadas conservan elegibilidad aunque sean antiguas, proceedings o tesis. Las reglas 2022–2026/Q1-Q2 aplican a literatura académica nueva conforme a `article/BIBLIOGRAPHIC_FRAMEWORK.md`.
 
-El autor ha informado y verificado que la IA de redacción dispone actualmente de un corpus consolidado de **62 obras/documentos distintos en PDF**, después de descontar copias repetidas y sufijos automáticos de adjunto.
-
-El inventario informado se distribuye en tres familias amplias:
-
-- clasificación HS, aduanas y clasificación de productos;
-- recuperación de información, RAG y procesamiento de producto;
-- metodología, reproducibilidad, conocimiento y normativa.
-
-En el corte informado por el autor, `37/62` obras ya tienen entrada en el índice bibliográfico versionado de GitHub y `25/62` todavía no poseen entrada en ese índice. La ausencia de entrada en GitHub **no implica exclusión ni invalidez**: indica únicamente que su metadata/función bibliográfica todavía debe gobernarse y, cuando corresponda, registrarse mediante el flujo de 0B.
-
-La disponibilidad de los 62 PDF **no autoriza analizarlos todos simultáneamente**. 0B mantiene lotes temáticos controlados para preservar trazabilidad, comparabilidad y calidad de lectura. Un PDF disponible pero no asignado al lote activo permanece `OUT_OF_SCOPE_FOR_CURRENT_BATCH` hasta que se abra el lote que le corresponda.
-
-Los documentos adicionales podrán utilizarse en lotes posteriores cuando sean pertinentes. Su disponibilidad para lectura no equivale automáticamente a autorización de cita final: las referencias que no sean claramente heredadas del proyecto/tesis deberán cumplir la gobernanza de admisión definida en `article/BIBLIOGRAPHIC_FRAMEWORK.md` antes de incorporarse al manuscrito.
-
-No es necesario volver a cargar un PDF si la IA de redacción ya puede acceder íntegramente a él en su conversación/sesión. Si un archivo deja de estar accesible o no puede leerse completo, deberá solicitarse únicamente ese archivo.
-
-### 3. Reglas generales
-
-- Cada PDF debe leerse íntegramente antes de clasificarlo como revisado.
-- No se inferirán resultados, metadatos o diseños que el PDF no soporte.
-- No se hará búsqueda abierta de literatura nueva durante los primeros lotes del corpus proporcionado por el autor.
-- Los metadatos dudosos se marcarán `REVIEW_REQUIRED`.
-- No se redactarán secciones del artículo durante 0B.
-- No se declarará novelty ni gap definitivo antes de 0C.
-- Cada trabajo se mapeará contra: problema, tarea, dataset/corpus, nivel HS, input, método, validación, métricas, jerarquía, evidencia normativa, explicabilidad, auditabilidad, precedentes históricos, LLM, limitaciones y diferencia con el presente trabajo.
-- La existencia de otros PDF visibles en la conversación de la IA de redacción no permite usarlos para completar silenciosamente un lote: solo se analizan los documentos expresamente asignados al bloque activo.
-- Una afirmación que un paper atribuya a una fuente tercera no debe convertirse en un hecho independiente del manuscrito sin verificar la fuente primaria correspondiente.
-
-### 4. Lotes previstos
+### 3. Lotes
 
 #### 0B-01 — Clasificación HS directa y aprendizaje supervisado
 
-Primer lote activo. Núcleo histórico de trabajos que tratan la asignación/clasificación de códigos HS mediante ML/DL/transfer learning/representaciones de texto.
+Estado: **`APPROVED / FROZEN`**.
 
-PDF asignados al lote:
+Artefacto canónico:
+
+`article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md`
+
+Revisión y aprobación:
+
+- `article/reviews/0B01_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`;
+- `article/reviews/0B01_AUTHOR_APPROVAL.md` — aprobación expresa recibida.
+
+PDF analizados:
 
 1. `Best approaches for HS code prediction.pdf`
 2. `An ensemble-based approach for assigning text to correct Harmonized system code.pdf`
@@ -55,54 +45,74 @@ PDF asignados al lote:
 7. `Application of machine learning for automated HS-6 code assignment.pdf`
 8. `Auto-Categorization of HS Code Using Background Net Approach.pdf`
 
-Estos ocho forman el alcance analítico de 0B-01 aunque la IA de redacción tenga acceso simultáneo a los demás PDF del corpus de 62.
-
-La revisión interna de 0B-01 está registrada en `article/reviews/0B01_INTERNAL_REVIEW.md` con dictamen `PASS WITH MINOR CORRECTIONS`. Las correcciones son terminológicas/de procedencia y no requieren una nueva ejecución analítica completa. El bloque espera aprobación expresa del autor antes de congelarse.
+F1–F5 permanecen `CANDIDATE_GAP_ONLY` y pueden ser falsados o reformulados por lotes posteriores.
 
 #### 0B-02 — Retrieval, validación, conocimiento y auditabilidad aduanera
 
-Previsto para el segundo lote. Incluirá, entre otros, trabajos sobre sentence retrieval, Text2Trade, explainable product classification, assessment/correction of HS-code correctness, assistive technologies y conocimiento estructurado. La selección concreta se hará a partir del corpus de 62 ya disponible y podrá ampliarse o dividirse si el volumen compromete una lectura completa y comparable.
+Estado: **`READY_FOR_DRAFTING`**.
 
-**Estado: `NOT_STARTED`; no puede abrirse hasta que 0B-01 quede `APPROVED / FROZEN`.**
+Prompt activo:
+
+`article/prompts/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY.md`
+
+PDF asignados:
+
+1. `Classification of Goods Using Text Descriptions With Sentences Retrieval.pdf`
+2. `Text2Trade. A semantic search system whith Monte Carlo Droput Uncertainty Quantification For HS Code Retrieval..pdf`
+3. `Explainable Product Classification for Customs.pdf`
+4. `Application of machine learning for assessment of HS code correctness.pdf`
+5. `Customs Tariff Classification and the Use of Assistive Technologies.pdf`
+6. `Attribute knowledge and KBGAT for predicting the accuracy of the harmonized system code for classifying import and export commodities.pdf`
+
+Objetivos específicos del lote:
+
+- distinguir code retrieval, sentence retrieval, validation/correction, structured knowledge, explainability y auditability;
+- determinar el papel exacto de descripciones HS/WCO/normativa en cada trabajo;
+- separar conocimiento usado para decidir el código de evidencia documental posterior al ranking;
+- auditar incertidumbre, rejection, human support, traceability y controles de dependencia;
+- someter F1–F5 a `SUPPORTS_CANDIDATE`, `WEAKENS_CANDIDATE`, `FALSIFIES_CANDIDATE`, `NOT_RELEVANT` o `UNRESOLVED`;
+- registrar claims secundarios como `SECONDARY_CLAIM_UNVERIFIED` hasta comprobar fuente primaria.
 
 #### 0B-03 — LLM, multimodalidad y agentes/razonamiento jerárquico
 
-Previsto para el tercer lote. Incluirá trabajos disponibles centrados en LLM para clasificación/compliance, RAG aduanero, agentes, multimodalidad y benchmarks/razonamiento jerárquico. La admisibilidad final de trabajos no heredados se resolverá conforme a `BIBLIOGRAPHIC_FRAMEWORK.md`.
+Estado: `NOT_STARTED`.
+
+Incluirá trabajos del corpus sobre LLM para clasificación/compliance, RAG aduanero, agentes, multimodalidad y benchmarks de razonamiento/búsqueda jerárquica.
 
 #### 0B-04 — Fundamentos de Information Retrieval y RAG
 
-Previsto para BM25, DPR, HNSW, ColBERT, SBERT, RAG y otros fundamentos disponibles, únicamente en la medida en que respalden decisiones metodológicas concretas del artículo.
+Estado: `NOT_STARTED`.
+
+Previsto para BM25, DPR, HNSW, ColBERT, SBERT, RAG y fundamentos afines únicamente cuando respalden decisiones metodológicas concretas.
 
 #### 0B-05 — Datos, documentación, procedencia, reproducibilidad, conocimiento y normativa
 
-Previsto para referencias fundacionales/metodológicas y fuentes oficiales sobre documentación de datasets, data statements, trazabilidad, reproducibilidad, gestión del conocimiento y reglas/normativa aduanera cuando resulten necesarias para claims concretos.
+Estado: `NOT_STARTED`.
+
+Previsto para documentación de datasets, data statements, trazabilidad, reproducibilidad, gestión del conocimiento y fuentes normativas/oficiales necesarias para claims concretos.
 
 #### 0B-06 — Búsqueda dirigida de literatura nueva
 
-Solo se abrirá si el corpus proporcionado por el autor revela vacíos concretos. Toda referencia académica realmente nueva deberá cumplir `article/BIBLIOGRAPHIC_FRAMEWORK.md`: ventana 2022–2026, journal peer-reviewed, Q1 preferido/Q2 excepcionalmente justificado, PDF completo legítimo, DOI/identificador estable y relevancia directa, salvo autorización expresa del autor para una excepción documentada.
+Estado: `NOT_STARTED`.
 
-### 5. Gate de cada lote
+Solo se abrirá si los lotes del corpus proporcionado revelan un vacío bibliográfico real. Toda nueva literatura académica deberá cumplir `article/BIBLIOGRAPHIC_FRAMEWORK.md`, salvo excepción expresa y documentada del autor.
 
-Cada lote sigue la secuencia:
+### 4. Gate de cada lote
 
-`IA de redacción -> revisión científica/editorial interna -> corrección si aplica -> aprobación del autor`.
+`IA de redacción -> revisión científica/editorial interna -> corrección si aplica -> aprobación del autor -> freeze`
 
-La IA experimental no es revisora obligatoria de literatura; solo se solicitará su intervención si una interpretación bibliográfica afecta directamente un hecho experimental, un claim experimental o una restricción metodológica bajo su autoridad.
+La IA experimental no es revisora bibliográfica obligatoria. Se solicita únicamente si una interpretación de literatura afecta directamente hechos experimentales, claims experimentales o restricciones metodológicas bajo su autoridad.
 
-Para 0B-01, la revisión interna concluyó que las correcciones pendientes son deterministas y pueden integrarse editorialmente sin devolver el lote completo a la IA de redacción. La siguiente transición requiere aprobación expresa del autor.
-
-### 6. Estado actual
+### 5. Estado actual
 
 - Fase 0A: `CLOSED / APPROVED`.
 - Fase 0B: `OPEN`.
-- Corpus PDF conocido disponible para la IA de redacción: `62` obras/documentos distintos.
-- Bloque activo: `0B-01`.
-- Estado 0B-01: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
-- Dictamen interno 0B-01: **`PASS WITH MINOR CORRECTIONS`**.
-- Revisión: `article/reviews/0B01_INTERNAL_REVIEW.md`.
-- Alcance de 0B-01: únicamente los ocho PDF asignados en §4.
-- 0B-02: `NOT_STARTED`.
-- 0C y posteriores: bloqueados.
+- 0B-01: `APPROVED / FROZEN`.
+- Bloque activo: `0B-02`.
+- Estado 0B-02: `READY_FOR_DRAFTING`.
+- 0B-03 y posteriores: `NOT_STARTED`.
+- 0C: `BLOCKED` hasta cerrar 0B.
+- 0D: `BLOCKED` hasta cerrar 0C.
 - Target journal: pendiente hasta 0D.
 
 ---
@@ -111,103 +121,76 @@ Para 0B-01, la revisión interna concluyó que las correcciones pendientes son d
 
 ### 1. Purpose
 
-Phase `0B — Critical literature map and taxonomy` will be executed through controlled thematic batches. The goal is not to draft Related Work or declare novelty, but to read complete PDFs from the available corpus, identify the actual problem solved by each work, and build a comparable map that can later support gap definition in 0C.
+Phase `0B — Critical literature map and taxonomy` is executed through controlled thematic batches. Its purpose is to read complete PDFs, determine what problem each work actually solves, and build a comparable map for 0C. No Related Work drafting, final novelty claim, or definitive gap is allowed during 0B.
 
-Inherited literature remains eligible even when it includes proceedings, theses, preprints, or works published before 2022. The 2022–2026/Q1-Q2 restrictions apply only to **new** academic literature added after a genuine bibliographic gap has been identified.
+### 2. Corpus and general rules
 
-### 2. PDF corpus available for 0B
+- Consolidated PDF corpus: `62` distinct works/documents.
+- PDF availability does not authorize analysis outside the active batch.
+- Every assigned PDF must be read in full.
+- Metadata, results, designs, and DOI must not be invented.
+- Uncertain metadata: `REVIEW_REQUIRED`.
+- A statement that a paper attributes to a third party does not become an independent manuscript fact without checking the corresponding primary source.
+- Distinguish `REPORTED_BY_AUTHORS`, `CRITICAL_INFERENCE`, `NOT_VERIFIABLE_IN_PDF`, and from 0B-02 onward `SECONDARY_CLAIM_UNVERIFIED`.
+- Do not conflate classification, candidate retrieval, evidence retrieval, validation, explanation, or auditability.
+- Missing group splitting does not prove leakage.
+- Inherited references remain eligible regardless of age or publication type; the 2022–2026/Q1-Q2 rule applies to genuinely new academic literature under `article/BIBLIOGRAPHIC_FRAMEWORK.md`.
 
-The author has reported and verified that the drafting AI currently has access to a consolidated corpus of **62 distinct works/documents in PDF**, after removing duplicate uploads and automatic attachment suffixes.
-
-The reported inventory spans three broad families:
-
-- HS classification, customs, and product classification;
-- information retrieval, RAG, and product processing;
-- methodology, reproducibility, knowledge, and normative sources.
-
-At the author-reported cutoff, `37/62` works already have an entry in the versioned GitHub bibliographic index and `25/62` do not yet have such an entry. Missing GitHub indexing **does not imply exclusion or invalidity**; it only means that metadata/bibliographic function still needs to be governed and, when appropriate, registered through the 0B workflow.
-
-Availability of all 62 PDFs **does not authorize analyzing them all at once**. Phase 0B retains controlled thematic batches to preserve traceability, comparability, and full-reading quality. A PDF that is available but not assigned to the active batch remains `OUT_OF_SCOPE_FOR_CURRENT_BATCH` until its batch is opened.
-
-Additional documents may be used in later batches when relevant. Read availability does not automatically authorize final citation: references that are not clearly inherited from the project/thesis must satisfy the admission governance in `article/BIBLIOGRAPHIC_FRAMEWORK.md` before manuscript use.
-
-A PDF need not be uploaded again if the drafting AI can already access it in full in its current conversation/session. If access is lost or a file cannot be read completely, only that specific file should be requested.
-
-### 3. General rules
-
-- Each PDF must be read in full before being classified as reviewed.
-- Results, metadata, or designs not supported by the PDF must not be inferred.
-- No open-ended search for new literature will be performed during the initial author-provided corpus batches.
-- Uncertain metadata must be marked `REVIEW_REQUIRED`.
-- No manuscript sections will be drafted during 0B.
-- No novelty or definitive gap will be declared before 0C.
-- Each work will be mapped against: problem, task, dataset/corpus, HS level, input, method, validation, metrics, hierarchy, normative evidence, explainability, auditability, historical precedents, LLM use, limitations, and difference from the present work.
-- Visibility of other PDFs in the drafting-AI conversation does not allow them to be used to silently fill gaps in the current batch: only documents explicitly assigned to the active block may be analyzed.
-- A statement that a paper attributes to a third-party source must not become an independent manuscript fact without verification of the corresponding primary source.
-
-### 4. Planned batches
+### 3. Batches
 
 #### 0B-01 — Direct HS classification and supervised learning
 
-First active batch. Historical core of works addressing HS-code assignment/classification through ML/DL/transfer learning/text representations.
+Status: **`APPROVED / FROZEN`**.
 
-Assigned PDFs:
+Canonical artifact: `article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md`.
 
-1. `Best approaches for HS code prediction.pdf`
-2. `An ensemble-based approach for assigning text to correct Harmonized system code.pdf`
-3. `Classifying Short Text for the Hrmonized System with Convolutional Neural Networks.pdf`
-4. `Automatic Tariff Classification System using Deep Learning.pdf`
-5. `HARMONIZED SYSTEM CODE CLASSIFICATION USING TRANSFER LEARNING WITH PRE-TRAINED WEIGHTS.pdf`
-6. `Harmonized System Code Classification using Supervised Contrastive Learning with Sentence BERT and Multiple Negative Reannking Loss.PDF`
-7. `Application of machine learning for automated HS-6 code assignment.pdf`
-8. `Auto-Categorization of HS Code Using Background Net Approach.pdf`
+Review and approval:
 
-These eight define the analytical scope of 0B-01 even if the drafting AI can simultaneously access the remaining PDFs in the 62-document corpus.
+- `article/reviews/0B01_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`;
+- `article/reviews/0B01_AUTHOR_APPROVAL.md` — express author approval received.
 
-The internal 0B-01 review is recorded in `article/reviews/0B01_INTERNAL_REVIEW.md` with verdict `PASS WITH MINOR CORRECTIONS`. The corrections are terminological/provenance-related and do not require a full analytical rerun. The block is awaiting explicit author approval before freezing.
+The eight analyzed PDFs are the same eight listed in the Spanish section. F1–F5 remain `CANDIDATE_GAP_ONLY` and may be falsified or reformulated by later batches.
 
 #### 0B-02 — Retrieval, validation, knowledge, and customs auditability
 
-Planned as the second batch. It will include sentence retrieval, Text2Trade, explainable product classification, HS-code correctness assessment/correction, assistive technologies, and structured-knowledge work. The concrete selection will be drawn from the already available 62-document corpus and may be split further if volume would compromise full and comparable reading.
+Status: **`READY_FOR_DRAFTING`**.
 
-**Status: `NOT_STARTED`; it cannot open until 0B-01 is `APPROVED / FROZEN`.**
+Active prompt: `article/prompts/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY.md`.
+
+Assigned PDFs are the six works listed in the Spanish section: sentence retrieval, Text2Trade, explainable customs classification, HS-code correctness assessment, assistive technologies, and KBGAT/attribute knowledge.
+
+The batch must distinguish retrieval types, validation/correction, structured knowledge, explainability, auditability, the exact role of HS/WCO/normative material, human support, uncertainty, traceability, and dependency controls. It must pressure-test F1–F5 and keep third-party claims as `SECONDARY_CLAIM_UNVERIFIED` until primary verification.
 
 #### 0B-03 — LLMs, multimodality, and agents/hierarchical reasoning
 
-Planned as the third batch. It will include available work on LLM-based classification/compliance, customs RAG, agents, multimodality, and hierarchical-search/reasoning benchmarks. Final admissibility of non-inherited works will be governed by `BIBLIOGRAPHIC_FRAMEWORK.md`.
+Status: `NOT_STARTED`.
 
 #### 0B-04 — Information Retrieval and RAG foundations
 
-Planned for BM25, DPR, HNSW, ColBERT, SBERT, RAG, and other available foundations only insofar as they support concrete methodological decisions in the article.
+Status: `NOT_STARTED`.
 
 #### 0B-05 — Data, documentation, provenance, reproducibility, knowledge, and normative sources
 
-Planned for foundational/methodological references and official sources on dataset documentation, data statements, traceability, reproducibility, knowledge management, and customs rules/normative material when required for concrete claims.
+Status: `NOT_STARTED`.
 
 #### 0B-06 — Directed search for new literature
 
-This will open only if the author-provided corpus reveals concrete gaps. Every genuinely new academic reference must satisfy `article/BIBLIOGRAPHIC_FRAMEWORK.md`: 2022–2026 window, peer-reviewed journal, Q1 preferred/Q2 exceptionally justified, legitimate full PDF, DOI/stable identifier, and direct relevance, unless the author expressly approves a documented exception.
+Status: `NOT_STARTED`. Open only if the author-provided corpus reveals a real bibliographic gap.
 
-### 5. Gate for each batch
+### 4. Batch gate
 
-Each batch follows:
+`drafting AI -> internal scientific/editorial review -> correction if needed -> author approval -> freeze`
 
-`drafting AI -> internal scientific/editorial review -> correction if needed -> author approval`.
+The experimental AI is not a mandatory literature reviewer; it is involved only when literature interpretation directly affects experimental facts, experimental claims, or methodological restrictions under its authority.
 
-The experimental AI is not a mandatory literature reviewer; it will only be involved when a bibliographic interpretation directly affects an experimental fact, experimental claim, or methodological restriction under its authority.
-
-For 0B-01, the internal review concluded that the pending corrections are deterministic and can be editorially integrated without returning the full batch to the drafting AI. The next transition requires explicit author approval.
-
-### 6. Current state
+### 5. Current state
 
 - Phase 0A: `CLOSED / APPROVED`.
 - Phase 0B: `OPEN`.
-- Known PDF corpus available to the drafting AI: `62` distinct works/documents.
-- Active block: `0B-01`.
-- 0B-01 status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
-- 0B-01 internal verdict: **`PASS WITH MINOR CORRECTIONS`**.
-- Review: `article/reviews/0B01_INTERNAL_REVIEW.md`.
-- 0B-01 scope: only the eight PDFs assigned in §4.
-- 0B-02: `NOT_STARTED`.
-- 0C and later phases: blocked.
+- 0B-01: `APPROVED / FROZEN`.
+- Active block: `0B-02`.
+- 0B-02 status: `READY_FOR_DRAFTING`.
+- 0B-03 and later: `NOT_STARTED`.
+- 0C: `BLOCKED` until 0B is closed.
+- 0D: `BLOCKED` until 0C is closed.
 - Target journal: pending until 0D.
