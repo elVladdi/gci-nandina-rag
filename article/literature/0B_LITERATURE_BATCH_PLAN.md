@@ -65,12 +65,17 @@ Por volumen y para preservar lectura completa y auditoría independiente, 0B-03 
 
 ##### 0B-03A — LLM, RAG y multimodalidad aplicada a clasificación/compliance aduanero
 
-Estado: **`READY_FOR_DRAFTING`**.
+Estado: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 
-Prompt activo:
+Prompt ejecutado:
 `article/prompts/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS.md`
 
-PDF asignados:
+Revisión interna:
+`article/reviews/0B03A_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**.
+
+Revisión experimental: `NOT_REQUIRED`.
+
+PDF analizados:
 
 1. `Automatic product classification in international trade Machine learning and large language models.pdf`
 2. `Automating Harmonized System (HS) Code Classification from Unstructured Shipping Manifests using Large Language Models.pdf`
@@ -79,13 +84,39 @@ PDF asignados:
 5. `LLM-based robust product classification in commerce and compliance.pdf`
 6. `Multimodal approach for Harmonized System code prediction.pdf`
 
-Objetivo: distinguir LLM que clasifica directamente, LLM que trabaja con retrieval/RAG, RAG que determina códigos, RAG que aporta contexto/evidencia, reranking, robustez a ruido, multimodalidad, explicación y restricciones de salida. Debe someter F1–F5/G6 a presión sin declarar novelty.
+Hallazgos gobernantes tras revisión primaria:
+
+- THE-RAG constituye antecedente directo de `RAG_CLASSIFICATION` en HS; el LLM participa en la decisión final y RAG no mejora universalmente todas las configuraciones.
+- ICCA-RAG es `customs-document QA/RAG`, no benchmark de clasificación HS. Su metadata/backtracking aporta procedencia técnica, pero no demuestra auditabilidad formal por candidato ni corrección jurídica.
+- Koch & Power debe distinguirse como `FINE_TUNED_TRANSFORMER_CLASSIFIER`, aunque los autores usen la etiqueta LLM.
+- Gholamian et al. estudia Icecat/WDC-222, no HS; su utilidad es supporting para robustez, perturbaciones e ICL.
+- Amel et al. demuestra que el efecto multimodal depende del baseline: +8.2 pp contra `D-only`, pero solo +0.6 pp frente al mejor texto enriquecido en Top-1.
+
+Correcciones editoriales obligatorias para el futuro freeze:
+
+1. separar `gemini_1.5_flash` de `gemini_1.5_flash_8b` en THE-RAG;
+2. normalizar la taxonomía de Koch & Power;
+3. calificar la función de evidencia de ICCA-RAG como contexto de QA y no evidencia post-ranking de candidatos fijos;
+4. no generalizar el estudio humano de Gholamian a beneficio humano de clasificación HS;
+5. interpretar `SUPPORTS_CANDIDATE` como contraste provisional del lote, no como evidencia de novelty;
+6. mantener siempre el baseline exacto de los efectos multimodales.
+
+Candidatos tras revisión 0B-03A:
+- F1/G1: `CANDIDATE_GAP_ONLY — SURVIVES IN NARROW FORM`.
+- F2/G2: `CANDIDATE_GAP_ONLY — SURVIVES IN NARROW FORM`.
+- F3/G3: `CANDIDATE_GAP_ONLY — SURVIVES THIS BATCH; METHODOLOGICAL`.
+- F4/G4: `CANDIDATE_GAP_ONLY — SURVIVES AS METHODOLOGICAL DISTINCTION`.
+- F5/G5: `CANDIDATE_GAP_ONLY — FURTHER NARROWED BY ICCA-RAG`.
+- G6: `CANDIDATE_GAP_ONLY — SURVIVES; METHODOLOGICAL`.
+- G7: `CANDIDATE_GAP_ONLY — NEW/PROVISIONAL; PRESSURE TEST REQUIRED IN 0B-03B`.
+
+No se requiere rerun de la IA de redacción. La aprobación expresa del autor es el único gate pendiente antes de integrar las correcciones y congelar 0B-03A.
 
 ##### 0B-03B — Agentes, benchmarks y razonamiento jerárquico/regulatorio
 
 Estado: `NOT_STARTED`.
 
-Se abrirá solo después de cerrar 0B-03A. Lote previsto:
+Se abrirá solo después de aprobar y congelar 0B-03A. Lote previsto:
 
 1. `A Deterministic Agentic Workflow for HS Tariff Classification.pdf`
 2. `ATLAS-Benchmarking and Adapting LLMs for Global Trade via Harmonized Tariff Code Classification.pdf`
@@ -116,7 +147,11 @@ Solo se abrirá si los lotes del corpus heredado revelan un vacío bibliográfic
 
 ### 4. Gate de cada lote/sub-lote
 
-`IA de redacción -> revisión científica/editorial interna contra PDF primarios -> corrección si aplica -> aprobación del autor -> freeze`
+`IA de redacción -> revisión científica/editorial interna contra PDF primarios -> corrección si aplica -> aprobación del autor -> freeze`.
+
+Para 0B-03A, la revisión interna ya terminó. Gate vigente:
+
+`AUTHOR_APPROVAL_PENDING -> aprobación expresa -> integrar C1–C6 -> freeze -> abrir 0B-03B`.
 
 La IA experimental no es revisora bibliográfica obligatoria. Se solicita únicamente si una interpretación bibliográfica afecta directamente hechos experimentales, claims experimentales o restricciones metodológicas bajo su autoridad.
 
@@ -127,7 +162,7 @@ La IA experimental no es revisora bibliográfica obligatoria. Se solicita única
 - 0B-01: `APPROVED / FROZEN`.
 - 0B-02: `APPROVED / FROZEN`.
 - Bloque activo: `0B-03A`.
-- 0B-03A: `READY_FOR_DRAFTING`.
+- 0B-03A: `INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`.
 - 0B-03B y posteriores: `NOT_STARTED`.
 - 0C: `BLOCKED` hasta cerrar 0B.
 - 0D: `BLOCKED` hasta cerrar 0C.
@@ -162,19 +197,24 @@ Status: **`APPROVED / FROZEN`**. Canonical artifact: `article/literature/0B01_HS
 #### 0B-02
 Status: **`APPROVED / FROZEN`**. Canonical artifact: `article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md`. Internal review passed with minor corrections and express author approval was received.
 
-Candidate status after 0B-02 remains provisional: F1/F2/F5 narrowed; F3 survives this batch; F4 survives as a methodological distinction; G6 is a new methodological candidate only. None establishes novelty.
+#### 0B-03A — LLM, RAG, and multimodality in customs classification/compliance
 
-#### 0B-03
-Split into two controlled sub-batches to preserve full reading and independent verification.
+Status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 
-##### 0B-03A — LLM, RAG, and multimodality in customs classification/compliance
-Status: **`READY_FOR_DRAFTING`**.
-Active prompt: `article/prompts/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS.md`.
-Assigned PDFs are the six works listed in the Spanish section.
+Internal review: `article/reviews/0B03A_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**.
 
-##### 0B-03B — Agents, benchmarks, and hierarchical/regulatory reasoning
-Status: `NOT_STARTED`.
-Planned six-paper set is listed in the Spanish section and opens only after 0B-03A closes.
+Experimental review: `NOT_REQUIRED`.
+
+The six assigned PDFs were analyzed. Governing findings after primary verification: THE-RAG is direct prior art for RAG-based HS classification and its LLM participates in code determination; ICCA-RAG is customs-document QA rather than an HS-classification benchmark; Koch & Power operationally use fine-tuned transformer encoders as closed-label classifiers; Gholamian et al. do not evaluate HS codes; and Amel et al.'s multimodal effect is baseline-dependent.
+
+Required freeze corrections: preserve exact THE-RAG model identity; normalize Koch & Power's operational taxonomy; qualify ICCA-RAG's evidence role; narrow interpretation of Gholamian's human experiment; define pressure-test labels as provisional contrast rather than novelty evidence; and always state the exact multimodal baseline.
+
+Candidate status remains provisional: F1/F2 survive only narrowly; F3/G6 remain methodological; F4 remains a methodological distinction; F5 is further narrowed by ICCA-RAG; and G7 is new/provisional and must be pressure-tested in 0B-03B. All remain `CANDIDATE_GAP_ONLY`.
+
+No drafting-AI rerun is required. Express author approval is the only pending gate before editorially integrating C1–C6 and creating the canonical freeze.
+
+#### 0B-03B — Agents, benchmarks, and hierarchical/regulatory reasoning
+Status: `NOT_STARTED`; it opens only after 0B-03A is approved and frozen.
 
 #### 0B-04 — Information Retrieval and RAG foundations
 Status: `NOT_STARTED`.
@@ -187,7 +227,9 @@ Status: `NOT_STARTED`. Open only if the inherited corpus reveals a real bibliogr
 
 ### 4. Gate
 
-`drafting AI -> internal scientific/editorial review against primary PDFs -> correction if needed -> author approval -> freeze`.
+General gate: `drafting AI -> internal scientific/editorial review against primary PDFs -> correction if needed -> author approval -> freeze`.
+
+Current 0B-03A gate: `AUTHOR_APPROVAL_PENDING -> express approval -> integrate C1–C6 -> freeze -> open 0B-03B`.
 
 The experimental AI is involved only when a literature interpretation directly affects experimental facts, claims, or restrictions under its authority.
 
@@ -198,7 +240,7 @@ The experimental AI is involved only when a literature interpretation directly a
 - 0B-01: `APPROVED / FROZEN`.
 - 0B-02: `APPROVED / FROZEN`.
 - Active block: `0B-03A`.
-- 0B-03A: `READY_FOR_DRAFTING`.
+- 0B-03A: `INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`.
 - 0B-03B and later: `NOT_STARTED`.
 - 0C: `BLOCKED` until 0B closes.
 - 0D: `BLOCKED` until 0C closes.
