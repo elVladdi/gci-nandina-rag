@@ -17,7 +17,8 @@
 - `0B-04A`: **`APPROVED / FROZEN`**.
 - `0B-04B`: **`APPROVED / FROZEN`**.
 - Bloque activo: **`0B-05A — Documentación de datos, procedencia, reproducibilidad y audit trail`**.
-- Estado de `0B-05A`: **`READY_FOR_DRAFTING`**.
+- Estado de `0B-05A`: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- Revisión interna 0B-05A: **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`, `EXPERIMENTAL_REVIEW = NOT_REQUIRED`.
 - `0B-05B`: **`NOT_STARTED / CLOSED_BY_GATE`**.
 - `0B-05C`: **`NOT_STARTED / CLOSED_BY_GATE`**.
 - `0B-06`: `NOT_STARTED`.
@@ -73,19 +74,21 @@ Ninguno constituye novelty ni gap definitivo.
 
 0B-05 tampoco está autorizado a convertir estos candidatos en novelty.
 
-### 0B-05 — apertura formal
+### 0B-05A — revisión interna completada
 
 Alcance:
 
 `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-#### 0B-05A — bloque activo
-
 Prompt:
 
 `article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.
 
-PDF asignados:
+Revisión interna:
+
+`article/reviews/0B05A_INTERNAL_REVIEW.md`.
+
+PDF auditados:
 
 1. `Data statements for natural language processing- Toward mitigating system bias and enabling better science..pdf`
 2. `Datasheets for Datasets.pdf`
@@ -93,62 +96,58 @@ PDF asignados:
 4. `Improving Reproducibility in Machine Learning Research(A Report from the NeurIPS 2019 Reproducibility Program).pdf`
 5. `Closing the AI accountability gap - defining an end-to-end framework for internal algorithmic auditing.pdf`
 
-El tercer archivo corresponde científicamente a **FAIR Data Pipeline: provenance-driven data management for traceable scientific workflows**; el nombre físico suministrado se conserva para localizarlo.
+La identidad científica del tercer archivo es **FAIR Data Pipeline: provenance-driven data management for traceable scientific workflows**.
 
-Objetivo gobernante:
+La revisión primaria acepta, con correcciones menores, las fronteras:
 
-`DATA/DOCUMENTATION -> VERSION/IDENTITY -> PROVENANCE/LINEAGE -> REPRODUCIBLE WORKFLOW -> AUDIT TRAIL`
+`DATASET DOCUMENTATION ≠ DATASET IDENTITY / VERSIONING ≠ DATA PROVENANCE / LINEAGE ≠ WORKFLOW PROVENANCE ≠ REPRODUCIBILITY ≠ REPLICATION ≠ GENERALIZATION`
 
-sin inferir:
+Y:
 
-`CORRECTNESS -> LEGAL VALIDITY -> GENERALIZATION`.
+`DOCUMENTATION / PROVENANCE ≠ TRANSPARENCY TRAIL ≠ INTERNAL LIFECYCLE AUDIT ≠ FORMAL OUTPUT-LEVEL AUDITABILITY ≠ SUBSTANTIVE / LEGAL CORRECTNESS`.
 
-Distinciones obligatorias:
+Correcciones obligatorias C1–C7 para el freeze:
 
-- dataset documentation ≠ dataset quality/adequacy;
-- dataset identity/versioning ≠ description;
-- versioning ≠ reproducibility;
-- provenance/lineage ≠ correctness;
-- reproducibility ≠ external replication/generalization;
-- lifecycle/internal audit ≠ output-level auditability evaluation;
-- transparency trail ≠ legal correctness.
+- Bender & Friedman: casos retrospectivos/value scenarios no constituyen validación causal de beneficios.
+- Gebru et al.: la copia analizada gobierna como arXiv v8; metadata editorial final queda `REVIEW_REQUIRED_FOR_FINAL_CITATION`, sin reconstrucción silenciosa.
+- Gebru vs Pineau: no homogeneizar silenciosamente el término reproducibility.
+- FAIR Data Pipeline: provenance/lineage y version identification son el núcleo; full reproducibility no es core requirement.
+- Pineau: preservar `reproducible ≠ replicable ≠ robust ≠ generalisable` como convención del paper y no causalizar asociaciones.
+- Raji: SMACTR tiene cinco etapas; Post-Audit no es una sexta etapa; lifecycle audit trail no equivale a output-level auditability, external audit o legal correctness.
+- La taxonomía cruzada es una frontera metodológica, no una escala lineal de madurez o implicación.
 
-0B-05A puede aportar fundamentos metodológicos a F3/F4/F5, pero no es un pressure test de novelty aduanera.
+Impacto provisional:
 
-#### 0B-05B y 0B-05C
-
-- `0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado`: **`NOT_STARTED / CLOSED_BY_GATE`**.
-- `0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales`: **`NOT_STARTED / CLOSED_BY_GATE`**.
-
-No se abren hasta completar sus gates previos.
+- F3 recibe solo fundamento documental/metodológico; documentación no equivale a control de dependencia.
+- F4 refuerza `provenance/reproducibility/auditability ≠ substantive/legal correctness`.
+- F5 queda aún más restringido: existe prior art fuerte en provenance, transparency trails e internal audit; solo permanece como candidato estrecho la evaluación formal, explícita y separada de auditabilidad documental por salida, todavía sin novelty.
+- G6 y G7 no se reabren.
 
 ### Gate vigente
 
 ```text
-0B-05A = READY_FOR_DRAFTING
--> IA de redacción
--> revisión científica/editorial interna contra los cinco PDF primarios
--> corrección si aplica
+0B-05A = INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING
 -> aprobación expresa del autor
+-> integrar C1–C7 en el artefacto canónico
 -> freeze 0B-05A
--> definir/abrir 0B-05B
+-> recién entonces definir/abrir 0B-05B
 ```
 
-La IA experimental solo se incorpora si una interpretación bibliográfica afecta directamente hechos/claims experimentales congelados o restricciones bajo su autoridad.
+No es necesario devolver el bloque a la IA de redacción porque `MATERIAL_ERRORS = 0`.
 
 ### Prohibiciones vigentes
 
-Durante 0B-05A no está autorizado:
+Mientras la aprobación del autor permanezca pendiente no está autorizado:
 
+- congelar 0B-05A;
+- abrir 0B-05B, 0B-05C, 0B-06 o 0C;
 - redactar Introduction/Related Work/Methods/Results/Discussion/Conclusions;
 - declarar novelty o gap definitivo;
 - buscar literatura nueva;
-- utilizar otros PDF para completar el lote;
 - equiparar documentación, provenance, reproducibility o audit trail con correctness/legal validity;
 - modificar 0A o el Plan Maestro;
-- reinterpretar resultados experimentales congelados fuera de su alcance;
-- reabrir G6/G7;
-- abrir 0B-05B, 0B-05C, 0B-06 o 0C antes del gate correspondiente.
+- reinterpretar resultados experimentales congelados;
+- reabrir G6/G7.
 
 ---
 
@@ -162,41 +161,36 @@ Durante 0B-05A no está autorizado:
 - Active phase: **`0B — Critical literature map and taxonomy`**.
 - 0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A, and 0B-04B are **`APPROVED / FROZEN`**.
 - Active block: **`0B-05A — Data documentation, provenance, reproducibility, and audit trail`**.
-- 0B-05A status: **`READY_FOR_DRAFTING`**.
-- 0B-05B and 0B-05C are **`NOT_STARTED / CLOSED_BY_GATE`**; 0B-06 is not started.
+- 0B-05A status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+- Internal review: **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`, `EXPERIMENTAL_REVIEW = NOT_REQUIRED`.
+- 0B-05B and 0B-05C remain **`NOT_STARTED / CLOSED_BY_GATE`**; 0B-06 is not started.
 - 0C remains blocked until 0B closes; 0D remains blocked until 0C closes.
 - Target journal remains pending until 0D; manuscript drafting has not started.
 
 ### Governing freezes
 
-Frozen 0A artifacts remain authoritative. Literature review cannot modify the Master Plan. 0B-04A/0B-04B methodological distinctions remain frozen and do not reinterpret the project's D1a result beyond its specific exploratory dense implementation.
+Frozen 0A artifacts remain authoritative. Literature review cannot modify the Master Plan. F1–F5 remain provisional; G6 remains eliminated and G7 remains merged into F2.
 
-F1–F5 remain provisional; G6 remains eliminated and G7 remains merged into F2. 0B-05 cannot convert them into novelty claims.
+### 0B-05A internal review
 
-### 0B-05 formal opening
+Scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.  
+Prompt: `article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.  
+Internal review: `article/reviews/0B05A_INTERNAL_REVIEW.md`.
 
-Scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
+The primary-PDF review accepts, subject to C1–C7, the following boundaries:
 
-Active prompt: `article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.
+`DATASET DOCUMENTATION ≠ DATASET IDENTITY / VERSIONING ≠ DATA PROVENANCE / LINEAGE ≠ WORKFLOW PROVENANCE ≠ REPRODUCIBILITY ≠ REPLICATION ≠ GENERALIZATION`
 
-The five assigned inherited PDFs are Bender & Friedman data statements, Gebru et al. datasheets, the supplied FAIR Data Pipeline paper, Pineau et al. reproducibility report, and Raji et al. end-to-end internal algorithmic auditing framework.
+and
 
-The governing chain is:
+`DOCUMENTATION / PROVENANCE ≠ TRANSPARENCY TRAIL ≠ INTERNAL LIFECYCLE AUDIT ≠ FORMAL OUTPUT-LEVEL AUDITABILITY ≠ SUBSTANTIVE / LEGAL CORRECTNESS`.
 
-`DATA/DOCUMENTATION -> VERSION/IDENTITY -> PROVENANCE/LINEAGE -> REPRODUCIBLE WORKFLOW -> AUDIT TRAIL`
+Mandatory freeze corrections preserve Bender & Friedman as documentation rather than causal validation; keep the analyzed Gebru copy as arXiv v8 with final-citation metadata review pending; preserve Gebru/Pineau terminology differences; keep FAIR Data Pipeline centered on provenance rather than full reproducibility; preserve Pineau's 2×2 terminology and non-causal interpretation; keep SMACTR at five stages and separate lifecycle audit from output-level/legal auditability; and treat the cross-paper taxonomy as methodological boundaries rather than a linear maturity ladder.
 
-and explicitly not:
-
-`CORRECTNESS -> LEGAL VALIDITY -> GENERALIZATION`.
-
-Required distinctions include documentation vs dataset adequacy, versioning vs reproducibility, provenance vs correctness, reproducibility vs external replication/generalization, lifecycle/internal audit vs output-level auditability evaluation, and transparency trail vs legal correctness.
-
-0B-05B (information/documented explicit knowledge) and 0B-05C (official normative-source authority/currency/traceability) remain closed by gate.
+F3 gains documentation/dependency-reporting foundation only; F4 is reinforced as a correctness boundary; F5 is further narrowed because provenance, transparency trails, and internal auditing have strong prior art. Only the narrow candidate of a formal, explicit, separate documentary auditability evaluation at output level remains, without novelty status.
 
 ### Gate
 
-`0B-05A READY_FOR_DRAFTING -> drafting AI -> internal review against the five primary PDFs -> correction if needed -> express author approval -> freeze -> define/open 0B-05B`.
+`0B-05A INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> express author approval -> integrate C1–C7 -> freeze 0B-05A -> only then define/open 0B-05B`.
 
-Experimental-AI review is triggered only if a literature interpretation affects frozen experimental facts/claims or restrictions under its authority.
-
-No manuscript drafting, final novelty/gap claims, new-literature search, out-of-batch PDF use, conflation of documentation/provenance/reproducibility/audit trail with correctness/legal validity, Master-Plan/0A modification, reopening G6/G7, or opening 0B-05B/0B-05C/0B-06/0C is authorized before the corresponding gate.
+No return to the drafting AI is required because no material errors were found. Until author approval, no 0B-05A freeze, 0B-05B/05C/06/0C opening, manuscript drafting, final novelty/gap declaration, new-literature search, Master-Plan/0A modification, experimental reinterpretation, or reopening of G6/G7 is authorized.
