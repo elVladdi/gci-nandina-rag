@@ -17,7 +17,8 @@
 - `0B-04A`: **`APPROVED / FROZEN`**.
 - `0B-04B`: **`APPROVED / FROZEN`**.
 - `0B-05A`: **`APPROVED / FROZEN`**.
-- `0B-05B`: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+- Bloque activo: **`0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado`**.
+- Estado de `0B-05B`: **`READY_FOR_DRAFTING`**.
 - `0B-05C`: **`NOT_STARTED / CLOSED_BY_GATE`**.
 - `0B-06`: `NOT_STARTED`.
 - `0C — Gap, contribución y Research Questions`: `BLOCKED` hasta cerrar 0B.
@@ -81,7 +82,7 @@ Ninguno constituye novelty ni gap definitivo.
 
 ### 0B-05A — cierre formal
 
-Registros:
+Registros gobernantes:
 
 - Prompt: `article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.
 - Revisión interna: `article/reviews/0B05A_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`.
@@ -102,31 +103,74 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-Normalizaciones C1–C7 integradas: Bender & Friedman como documentación no causal; Gebru v8 con metadata editorial final pendiente y terminología de reproducibility no homogeneizada con Pineau; FAIR Data Pipeline centrado en provenance/lineage y version identification; Pineau como convención operacional no universal y sin causalizar asociaciones; SMACTR con cinco etapas y lifecycle audit separado de output-level/external/legal auditability; taxonomía cruzada como frontera y no escalera.
+### 0B-05B — apertura formal
 
-Impacto metodológico congelado:
+Alcance:
 
-- F3: documentar relaciones/particiones/dependencia no equivale a controlarla ni demostrar independencia.
-- F4: `provenance/reproducibility/auditability ≠ substantive/legal correctness`.
-- F5: prior art fuerte en provenance, transparency trails e internal audit; solo sobrevive el candidato estrecho de evaluación formal, explícita y separada de auditabilidad documental por salida, todavía sin novelty.
+`article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-### Gate siguiente
+Prompt activo:
 
-`0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado` queda **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+`article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
 
-El freeze de 0B-05A no abre automáticamente 0B-05B. Corresponde confirmar las fuentes primarias, definir el lote final y crear su prompt mediante un cambio posterior explícito.
+Lote final:
 
-`0B-05C` permanece `NOT_STARTED / CLOSED_BY_GATE` hasta cerrar 0B-05B.
+1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
+2. `The Duality of Knowledge.pdf`
+3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
 
-Mientras 0B permanezca abierto no está autorizado:
+Un sufijo automático de adjunto como `(2)` no constituye versión científica; gobierna la identidad del trabajo visible en el PDF. Si la IA de redacción no puede leer íntegramente cualquiera de las tres copias, debe identificar el faltante y detenerse sin suplementar con fuentes secundarias.
+
+Objetivos/controles de 0B-05B:
+
+- reconstruir la diversidad conceptual de `data`, `information` y `knowledge` sin imponer DIKW universal;
+- separar `explicit/codified/documented knowledge` de conocimiento tácito/no codificado y de expertise total;
+- distinguir `information management` de `knowledge management` según las fuentes;
+- separar conceptos reportados por autores de `OPERACIONALIZACION_DEL_PROYECTO`;
+- auditar, no asumir, las fronteras:
+
+`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+
+`DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
+
+`DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`
+
+`LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
+
+Cualquier aplicación al piloto —por ejemplo corpus normativo como fuente de conocimiento explícito documental o banco histórico como experiencia registrada— debe etiquetarse `OPERACIONALIZACION_DEL_PROYECTO`; no puede atribuirse a los autores como resultado sobre NANDINA/customs/LLM.
+
+0B-05B es fundacional y no puede declarar novelty. No modifica por sí mismo los estados F1–F5; F1/F2/F4/F5 pueden recibir solo relevancia de frontera metodológica y F3 es normalmente no relevante. G6/G7 no se reabren.
+
+### Gate vigente
+
+```text
+0B-05B = READY_FOR_DRAFTING
+-> IA de redacción
+-> revisión científica/editorial interna contra los tres PDF primarios
+-> corrección si aplica
+-> aprobación expresa del autor
+-> freeze 0B-05B
+-> recién entonces evaluar definición/apertura de 0B-05C
+```
+
+La IA experimental solo interviene si una interpretación bibliográfica afecta directamente hechos/claims experimentales congelados o restricciones bajo su autoridad.
+
+### Prohibiciones vigentes
+
+Durante 0B-05B no está autorizado:
 
 - redactar Introduction/Related Work/Methods/Results/Discussion/Conclusions;
 - declarar novelty o gap definitivo;
-- abrir 0C;
+- buscar literatura nueva;
+- usar otros PDF para completar el lote;
+- imponer una pirámide DIKW universal;
+- equiparar explícito/codificado/documentado/almacenado sin soporte;
+- confundir conocimiento explícito documental con totalidad de expertise;
+- convertir retrieval documental en comprensión, juicio experto o corrección jurídica;
+- describir la explicación del LLM como conocimiento experto o clasificación oficial;
 - modificar 0A o el Plan Maestro;
 - reabrir G6/G7;
-- buscar literatura nueva salvo apertura explícita de 0B-06;
-- convertir claims secundarios en hechos sin verificar la fuente primaria.
+- abrir 0B-05C, 0B-06 o 0C antes del gate correspondiente.
 
 ---
 
@@ -138,51 +182,55 @@ Mientras 0B permanezca abierto no está autorizado:
 - Global state: `IN_ANALYSIS`.
 - Phase 0A is **`CLOSED / APPROVED`**.
 - Active phase: **`0B — Critical literature map and taxonomy`**.
-- 0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A, 0B-04B, and 0B-05A are **`APPROVED / FROZEN`**.
-- 0B-05B is **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+- 0B-01 through 0B-05A are **`APPROVED / FROZEN`**.
+- Active block: **`0B-05B — Information, documented explicit knowledge, and limits of codified knowledge`**.
+- 0B-05B status: **`READY_FOR_DRAFTING`**.
 - 0B-05C remains `NOT_STARTED / CLOSED_BY_GATE`; 0B-06 is not started.
 - 0C remains blocked until 0B closes; 0D remains blocked until 0C closes.
 - Target journal remains pending until 0D; manuscript drafting has not started.
 
-### Governing ground truth
+### Governing ground truth and prior freezes
 
-Frozen 0A documentary and experimental artifacts remain authoritative. Literature review cannot modify the Master Plan; exclusive Master-Plan authority remains with the experimental workflow.
+Frozen 0A artifacts remain authoritative. Literature review cannot modify the Master Plan. 0B-04A/0B-04B/0B-05A foundational distinctions remain frozen, including strict separation of retrieval/reranking/generation concepts, provenance/auditability/legal-correctness concepts, and documentation/versioning/provenance/reproducibility/replication/generalization concepts.
 
-### Closed blocks and foundational boundaries
-
-0B-04A freezes representation vs candidate generation vs ANN/index search vs reranking vs final ranking. 0B-04B freezes the distinctions among RAG, retrieval-augmented pretraining, retrieve-then-generate, query expansion, query rewriting, passage fusion, and evidentiality-guided generation, and separately between retrieved passages, evidence attribution, evidentiality, grounding guarantees, provenance verification, formal auditability, and legal correctness.
-
-0B-05A now freezes:
-
-`DATASET DOCUMENTATION ≠ DATASET IDENTITY / VERSIONING ≠ DATA PROVENANCE / LINEAGE ≠ WORKFLOW PROVENANCE ≠ REPRODUCIBILITY ≠ REPLICATION ≠ GENERALIZATION`
-
-and
-
-`DOCUMENTATION / PROVENANCE ≠ TRANSPARENCY TRAIL ≠ INTERNAL LIFECYCLE AUDIT ≠ FORMAL OUTPUT-LEVEL AUDITABILITY ≠ SUBSTANTIVE / LEGAL CORRECTNESS`.
-
-These are boundaries, not a linear maturity/implication ladder.
+F1–F5 remain provisional. G6 remains eliminated and G7 remains merged into F2.
 
 ### 0B-05A closure
 
-Governing records are the prompt, internal review, author approval, and canonical frozen artifact `article/literature/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY_FROZEN.md`.
+0B-05A is approved/frozen. Its governing prompt, internal review, author approval, and canonical artifact remain authoritative; experimental review was not required.
 
-```text
-0B-05A = APPROVED / FROZEN
-DRAFTING_DELIVERABLE = ANALYTICALLY_COMPLETE
-INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
-MATERIAL_ERRORS = 0
-AUTHOR_APPROVAL = RECEIVED
-EXPERIMENTAL_REVIEW = NOT_REQUIRED
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-```
+### 0B-05B formal opening
 
-C1–C7 are integrated: Bender & Friedman remain documentation rather than causal validation; the analyzed Gebru v8 copy remains the governed source and final editorial metadata is pending; Gebru/Pineau reproducibility usage remains source-specific; FAIR Data Pipeline is centered on provenance/lineage and version identification; Pineau's terminology remains a paper-specific convention and associations remain non-causal; SMACTR remains five-stage and lifecycle audit remains distinct from per-output/external/legal auditability; and the cross-paper taxonomy is not an implication ladder.
+Formal scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-F3 receives documentation/dependency-reporting foundation only; F4 remains a correctness boundary; F5 is further narrowed by strong prior art on provenance, transparency trails, and internal auditing, leaving only the narrow candidate of formal, explicit, separate documentary auditability evaluation at output level, without novelty status. G6 remains eliminated and G7 remains merged into F2.
+Active prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
 
-### Next gate
+Final controlled batch:
 
-0B-05B is now `NOT_STARTED / ELIGIBLE_FOR_DEFINITION`. It requires confirmation of primary sources, a final controlled batch, and its own executable prompt before opening. 0B-05C remains closed until 0B-05B freezes.
+1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
+2. `The Duality of Knowledge.pdf`
+3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
 
-Manuscript drafting, final novelty/gap claims, 0C opening, Master-Plan/0A modification, reopening G6/G7, and new-literature search outside an explicitly opened 0B-06 remain prohibited while 0B is open.
+Automatic physical attachment suffixes such as `(2)` are not scientific version identifiers. The drafting AI must stop if any full source is unavailable rather than substituting secondary material.
+
+0B-05B must reconstruct conceptual diversity without imposing a universal DIKW sequence; separate explicit/codified/documented knowledge from tacit/non-codified knowledge and complete expertise; distinguish information management from knowledge management; and label every mapping onto pilot components as `PROJECT_OPERATIONALIZATION` rather than an author-reported customs result.
+
+Candidate boundaries to audit rather than assume are:
+
+`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+
+`DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
+
+`DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`
+
+`LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
+
+This remains a foundational conceptual batch and cannot establish novelty. F1/F2/F4/F5 may receive boundary relevance only; F3 is normally not relevant. G6/G7 remain closed.
+
+### Gate
+
+`0B-05B READY_FOR_DRAFTING -> drafting AI -> internal scientific/editorial review against the three primary PDFs -> correction if needed -> express author approval -> freeze -> only then assess definition/opening of 0B-05C`.
+
+Experimental-AI review is triggered only if literature interpretation affects frozen experimental facts/claims or restrictions under its authority.
+
+No manuscript drafting, final novelty/gap claims, new-literature search, out-of-batch supplementation, universal DIKW framing, unsupported conflation of explicit/codified/documented/stored knowledge, conversion of retrieval into expert/legal correctness, Master-Plan/0A modification, reopening G6/G7, or opening 0B-05C/0B-06/0C is authorized before the corresponding gate.
