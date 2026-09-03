@@ -77,15 +77,72 @@ Permanecen `RESERVED_FOR_DIRECTED_USE`: SimCSE, `Query Expansion by Prompting La
 
 ### 4. 0B-05 — Datos, documentación, procedencia, reproducibilidad, conocimiento y normativa
 
-Estado: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+Alcance formal:
+`article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-0B-04B ya está congelado. 0B-05 puede definirse y abrirse mediante un cambio posterior explícito. Antes de ejecutarlo deben fijarse su alcance, lote y prompt.
+Por heterogeneidad conceptual, 0B-05 se ejecutará en tres sub-lotes controlados y solo uno podrá estar abierto a la vez.
+
+#### 0B-05A — Documentación de datos, procedencia, reproducibilidad y audit trail
+
+Estado: **`READY_FOR_DRAFTING`**.
+
+Prompt activo:
+`article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.
+
+Lote final:
+
+1. `Data statements for natural language processing- Toward mitigating system bias and enabling better science..pdf`
+2. `Datasheets for Datasets.pdf`
+3. `AIR data pipeline-Provenance-driven data management for traceable scientific workflows.pdf`
+4. `Improving Reproducibility in Machine Learning Research(A Report from the NeurIPS 2019 Reproducibility Program).pdf`
+5. `Closing the AI accountability gap - defining an end-to-end framework for internal algorithmic auditing.pdf`
+
+La identidad científica del tercer archivo es **FAIR Data Pipeline: provenance-driven data management for traceable scientific workflows**; el nombre físico se conserva para localizar la copia suministrada.
+
+Cadena metodológica gobernante:
+
+`DATA/DOCUMENTATION -> VERSION/IDENTITY -> PROVENANCE/LINEAGE -> REPRODUCIBLE WORKFLOW -> AUDIT TRAIL`
+
+sin inferir:
+
+`CORRECTNESS -> LEGAL VALIDITY -> GENERALIZATION`.
+
+Controles obligatorios:
+
+- dataset documentation ≠ dataset quality/adequacy;
+- dataset description ≠ dataset identity/version;
+- versioning ≠ reproducibility;
+- provenance/lineage ≠ correctness;
+- code/data availability ≠ automatic reproducibility;
+- reproducibility ≠ external replication/generalization;
+- lifecycle/internal audit ≠ output-level formal auditability evaluation;
+- transparency trail ≠ legal correctness.
+
+En relación con F1–F5, 0B-05A es metodológico y de gobernanza, no un pressure test de prior art aduanero. F1/F2 son normalmente `NOT_RELEVANT_TO_GAP_CANDIDATE`; F3 puede recibir fundamento metodológico sobre documentación de composición/curación/particiones sin inferir leakage; F4 puede recibir frontera metodológica entre provenance/reproducibility y correctness; F5 puede recibir frontera metodológica entre lifecycle audit trail y evaluación formal de auditabilidad por salida. G6 permanece eliminado y G7 absorbido en F2.
+
+#### 0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado
+
+Estado: **`NOT_STARTED / CLOSED_BY_GATE`**.
+
+Solo podrá definirse/abrirse después del freeze de 0B-05A. Fuentes candidatas heredadas, sujetas a confirmación primaria antes de apertura:
+
+- `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`;
+- `The Duality of Knowledge.pdf`;
+- Al-Hawamdeh, únicamente si se confirma acceso al PDF primario completo.
+
+Objetivo previsto: delimitar data, information, documented/explicit knowledge y conocimiento tácito/no codificado, sin convertir retrieval documental en sustituto del conocimiento experto.
+
+#### 0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales
+
+Estado: **`NOT_STARTED / CLOSED_BY_GATE`**.
+
+Solo podrá definirse después del freeze de 0B-05B y de verificar qué fuentes oficiales primarias del corpus vigente requieren auditoría documental adicional. Será una auditoría separada de fuentes oficiales, no un lote de literatura académica. Se revisarán autoridad emisora, versión, vigencia, fecha, jerarquía documental, identificador/enlace estable y función evidencial. WCO/OMA, Comunidad Andina y SUNAT se tratarán como fuentes primarias oficiales y no como artículos científicos.
 
 ### 5. 0B-06 — Búsqueda dirigida de literatura nueva
 
 Estado: `NOT_STARTED`.
 
-Solo se abrirá si, después de completar el corpus heredado relevante, persiste un vacío bibliográfico real y bajo las reglas de `article/BIBLIOGRAPHIC_FRAMEWORK.md`.
+Solo se abrirá si, después de completar el corpus heredado relevante y cerrar 0B-05, persiste un vacío bibliográfico real y bajo las reglas de `article/BIBLIOGRAPHIC_FRAMEWORK.md`. 0B-06 no es obligatorio.
 
 ### 6. Gate
 
@@ -95,18 +152,21 @@ Gate general:
 
 0B-04A y 0B-04B completaron el gate.
 
-Siguiente gate potencial:
+Gate activo:
 
-`definir lote final 0B-05 -> crear prompt ejecutable -> READY_FOR_DRAFTING -> IA de redacción -> revisión interna -> aprobación del autor -> freeze -> evaluar necesidad real de 0B-06`.
+`0B-05A READY_FOR_DRAFTING -> IA de redacción -> revisión interna contra los cinco PDF primarios -> aprobación del autor -> freeze -> definir/abrir 0B-05B`.
 
-La IA experimental no es revisora bibliográfica obligatoria. Se incorpora solo si una interpretación bibliográfica modifica hechos/claims experimentales o restricciones bajo su autoridad.
+0B-05B y 0B-05C permanecen cerrados hasta sus gates respectivos. La IA experimental no es revisora bibliográfica obligatoria y se incorpora solo si una interpretación bibliográfica modifica hechos/claims experimentales o restricciones bajo su autoridad.
 
 ### 7. Estado actual
 
 - Fase 0A: `CLOSED / APPROVED`.
 - Fase 0B: `OPEN`.
 - 0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A y 0B-04B: `APPROVED / FROZEN`.
-- 0B-05: `NOT_STARTED / ELIGIBLE_FOR_DEFINITION`.
+- Bloque activo: `0B-05A`.
+- 0B-05A: `READY_FOR_DRAFTING`.
+- 0B-05B: `NOT_STARTED / CLOSED_BY_GATE`.
+- 0B-05C: `NOT_STARTED / CLOSED_BY_GATE`.
 - 0B-06: `NOT_STARTED`.
 - 0C: `BLOCKED` hasta cerrar 0B.
 - 0D: `BLOCKED` hasta cerrar 0C.
@@ -128,26 +188,56 @@ Phase `0B — Critical literature map and taxonomy` uses controlled thematic bat
 
 0B-04A is approved/frozen and established the distinction between representation, candidate generation, ANN/index search, reranking, and final ranking.
 
-0B-04B is approved/frozen. Governing records are its prompt, internal review, author approval, and canonical frozen artifact. The six-paper batch covers RAG, REALM, Fusion-in-Decoder, Query2doc, query rewriting, and evidentiality-guided generation.
-
-Frozen distinctions:
-
-`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
-
-`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
-
-Integrated C1–C13 preserve the Lewis `11.7%` table value over the narrative `17%`, reject per-token re-retrieval wording for RAG-Token, preserve REALM as retrieval-augmented pretraining/span-based Open-QA, separate FiD fusion from attribution, treat Query2doc/query rewriting as upstream transformations, preserve mixed OOD and pseudo-document risks, govern Asai by five datasets and its limited `95%/96%` label-validation protocol, keep provenance/grounding/evidentiality/auditability/legal correctness separate, and prevent transfer of benchmark scores as HS/NANDINA metrics.
+0B-04B is approved/frozen. Its frozen distinctions separate retrieval-augmented generation, retrieval-augmented pretraining, retrieve-then-generate, query expansion, query rewriting, passage fusion, and evidentiality-guided generation; and separately distinguish retrieved passages, evidence attribution, evidentiality, grounding guarantees, provenance verification, formal auditability, and legal correctness.
 
 The pilot remains only a comparison boundary: externally fixed historical ranked Top-k -> candidate-specific downstream normative evidence -> explanation-only local LLM -> no new codes -> no reordering -> no classification feedback.
 
 Reserved IR/product-processing works remain `RESERVED_FOR_DIRECTED_USE`; no 0B-04C opens by default.
 
-### 4. 0B-05 and later gate
+### 4. 0B-05 — Data, documentation, provenance, reproducibility, knowledge, and normative sources
 
-0B-05 is now **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**. It may be explicitly defined/opened after the 0B-04B freeze, but its scope, batch, and executable prompt must be fixed before execution.
+Formal scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-0B-06 remains `NOT_STARTED` and opens only if a genuine bibliographic gap remains after the relevant inherited corpus is exhausted.
+0B-05 is divided into three controlled sub-batches.
 
-Next potential gate: define final 0B-05 batch -> create executable prompt -> READY_FOR_DRAFTING -> drafting AI -> internal review -> author approval -> freeze -> assess whether 0B-06 is actually needed.
+#### 0B-05A — Data documentation, provenance, reproducibility, and audit trail
 
-0C remains blocked until 0B closes; 0D remains blocked until 0C closes; target journal remains pending until 0D.
+Status: **`READY_FOR_DRAFTING`**.
+
+Active prompt: `article/prompts/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY.md`.
+
+The final inherited set contains Bender & Friedman data statements, Gebru et al. datasheets, the supplied FAIR Data Pipeline paper, Pineau et al. reproducibility report, and Raji et al. end-to-end internal algorithmic auditing framework.
+
+The governing chain is:
+
+`DATA/DOCUMENTATION -> VERSION/IDENTITY -> PROVENANCE/LINEAGE -> REPRODUCIBLE WORKFLOW -> AUDIT TRAIL`
+
+and explicitly not:
+
+`CORRECTNESS -> LEGAL VALIDITY -> GENERALIZATION`.
+
+Required boundaries include documentation vs dataset adequacy, description vs identity/version, versioning vs reproducibility, provenance vs correctness, code/data availability vs automatic reproducibility, reproducibility vs external replication/generalization, lifecycle/internal audit vs formal output-level auditability, and transparency trail vs legal correctness.
+
+F1/F2 are normally not relevant in this sub-batch; F3/F4/F5 may receive methodological foundation/boundary labels only, never novelty evidence. G6 remains eliminated and G7 remains merged into F2.
+
+#### 0B-05B — Information, documented explicit knowledge, and limits of codified knowledge
+
+Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It may open only after 0B-05A is frozen. Candidate inherited primary sources are Zins, Hildreth & Kimble, and Al-Hawamdeh only if complete primary-PDF access is confirmed.
+
+#### 0B-05C — Authority, currency, and traceability of normative/official sources
+
+Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It will be a separate primary-official-source audit after 0B-05B, covering issuing authority, version, currency, documentary hierarchy, stable identifiers, and evidentiary role for WCO, Andean Community, SUNAT, and other relevant official sources. These are official primary sources, not academic articles.
+
+### 5. 0B-06 and gate
+
+0B-06 remains `NOT_STARTED` and will open only if a genuine bibliographic gap remains after the relevant inherited corpus and 0B-05 are completed. It is not mandatory.
+
+Active gate:
+
+`0B-05A READY_FOR_DRAFTING -> drafting AI -> internal review against the five primary PDFs -> express author approval -> freeze -> define/open 0B-05B`.
+
+0B-05B and 0B-05C remain closed by their gates. Experimental-AI review is only triggered if a literature interpretation affects frozen experimental facts/claims or restrictions under its authority.
+
+### 6. Current status
+
+Phase 0A is closed/approved. Phase 0B is open. 0B-01 through 0B-04B are approved/frozen. 0B-05A is the active block and is ready for drafting; 0B-05B/05C are closed by gate; 0B-06 is not started; 0C and 0D remain blocked; target journal remains pending until 0D.
