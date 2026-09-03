@@ -25,8 +25,9 @@ Reglas gobernantes:
 - `0B-02`: **`APPROVED / FROZEN`** — `article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md`.
 - `0B-03A`: **`APPROVED / FROZEN`** — `article/literature/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS_FROZEN.md`.
 - `0B-03B`: **`APPROVED / FROZEN`** — `article/literature/0B03B_AGENTS_HIERARCHICAL_REGULATORY_REASONING_FROZEN.md`.
+- `0B-04A`: **`APPROVED / FROZEN`** — `article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
 
-Después de 0B-03B permanecen provisionalmente F1–F5 en formas estrechas/metodológicas; G6 está eliminado como candidato a gap y G7 absorbido en F2. Ninguno constituye novelty ni gap definitivo.
+Después de 0B-03B permanecen provisionalmente F1–F5 en formas estrechas/metodológicas; G6 está eliminado como candidato a gap y G7 absorbido en F2. Ninguno constituye novelty ni gap definitivo. 0B-04A no modifica esos estados.
 
 ### 3. 0B-04 — Fundamentos de Information Retrieval y RAG
 
@@ -35,7 +36,7 @@ Alcance formal:
 
 #### 0B-04A — Fundamentos de ranking y recuperación de información
 
-Estado: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+Estado: **`APPROVED / FROZEN`**.
 
 Prompt ejecutado:
 `article/prompts/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS.md`.
@@ -43,33 +44,45 @@ Prompt ejecutado:
 Revisión interna:
 `article/reviews/0B04A_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, `MATERIAL_ERRORS = 0`.
 
-PDF analizados:
+Aprobación del autor:
+`article/reviews/0B04A_AUTHOR_APPROVAL.md`.
 
-1. `The Probabilistic Relevance Framework: BM25 and Beyond.pdf`
-2. `Sentence-BERT.pdf`
-3. `Dense passage retrieval for open-domain question answering. Proceedings of EMNLP 2020.pdf`
-4. `ColBERT- Efficient and effective passage search via contextualized late interaction over BERT.pdf`
-5. `Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs.pdf`
-6. `Passage Re-Ranking with BERT.pdf`
+Artefacto canónico:
+`article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
 
-Hallazgos gobernantes tras auditoría primaria:
+Hallazgos gobernantes congelados:
 
-- BM25 = `SPARSE_LEXICAL_RETRIEVAL / CANDIDATE_GENERATION / RANKING`; score de ranking, no probabilidad calibrada de correctness.
-- SBERT = `SENTENCE_EMBEDDING / SEMANTIC_REPRESENTATION`; habilita semantic search, pero candidate search/indexing debe especificarse separadamente.
-- DPR = `DENSE_BIENCODER_RETRIEVAL / INDEXED_SIMILARITY_SEARCH / CANDIDATE_GENERATION`; FAISS es infraestructura de búsqueda.
+- BM25 = `SPARSE_LEXICAL_RETRIEVAL / CANDIDATE_GENERATION / RANKING`; su score de ranking no es probabilidad calibrada de correctness.
+- SBERT = `SENTENCE_EMBEDDING / SEMANTIC_REPRESENTATION`; habilita semantic search, pero candidate search/indexing se especifica separadamente.
+- DPR = `DENSE_BIENCODER_RETRIEVAL / INDEXED_SIMILARITY_SEARCH / CANDIDATE_GENERATION`; FAISS es infraestructura de búsqueda y la búsqueda indexada materializa el Top-k.
 - ColBERT = `LATE_INTERACTION_RETRIEVAL` con modos distintos de `RERANKING` y `FULL_RETRIEVAL`.
 - HNSW = `ANN_INDEX_SEARCH / INDEX_ACCELERATION`, no modelo semántico; metadata editorial final `REVIEW_REQUIRED_FOR_FINAL_CITATION` en la copia suministrada.
-- Nogueira–Cho = `CROSS_ENCODER_RERANKING` de segunda etapa sobre BM25 Top-1000; la copia primaria es arXiv v5 del 14-Apr-2020.
+- Nogueira–Cho = `CROSS_ENCODER_RERANKING` de segunda etapa sobre BM25 Top-1000; la copia primaria visible es arXiv v5 de 2020.
 - ANN recall, Top-k retrieval accuracy, MRR/MAP, STS Spearman y classification metrics no se mezclan ni ordenan globalmente.
-- Los resultados fundacionales de dense retrieval no reinterpretan el D1a experimental, que permanece específico de la implementación exploratoria congelada.
+- Los resultados fundacionales de dense retrieval no reinterpretan D1a, que permanece específico de la implementación exploratoria congelada.
 
-Correcciones C1–C8 están registradas y pueden integrarse editorialmente después de aprobación del autor. No se requiere rerun de la IA de redacción ni revisión experimental.
+Distinción metodológica central:
+
+`QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`.
+
+No se requirió rerun de la IA de redacción ni revisión experimental.
 
 #### 0B-04B — Fundamentos de RAG, query transformation y grounding
 
 Estado: **`NOT_STARTED / CLOSED_BY_GATE`**.
 
-Se abrirá solo después de aprobación y freeze de 0B-04A. El lote previsto sigue sujeto a confirmación final y no existe prompt ejecutable todavía.
+0B-04A ya está congelado. 0B-04B puede definirse y abrirse en un cambio posterior explícito, pero no se abre automáticamente.
+
+Lote previsto, aún sujeto a confirmación final:
+
+1. `Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.pdf`
+2. `REALM: Retrieval-Augmented Language Model Pre-Training.pdf`
+3. `Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering.pdf`
+4. `Query2doc.pdf`
+5. `Query Rewriting for Retrieval-Augmented LLMs.pdf`
+6. `Evidentiality-guided Generation for Knowledge-Intensive NLP Tasks.pdf`
+
+No existe todavía prompt ejecutable.
 
 #### Trabajos reservados para uso dirigido
 
@@ -89,9 +102,11 @@ Gate general:
 
 `IA de redacción -> revisión científica/editorial interna contra PDF primarios -> corrección si aplica -> aprobación del autor -> freeze`.
 
-Gate activo:
+0B-04A completó el gate.
 
-`0B-04A INTERNAL_REVIEW_COMPLETE -> aprobación expresa del autor -> integrar C1–C8 -> freeze -> definir/abrir 0B-04B`.
+Siguiente gate potencial:
+
+`definir lote final 0B-04B -> crear prompt ejecutable -> READY_FOR_DRAFTING -> IA de redacción -> revisión interna -> aprobación del autor -> freeze`.
 
 La IA experimental no es revisora bibliográfica obligatoria. Se incorpora solo si una interpretación bibliográfica modifica hechos/claims experimentales o restricciones bajo su autoridad.
 
@@ -99,9 +114,7 @@ La IA experimental no es revisora bibliográfica obligatoria. Se incorpora solo 
 
 - Fase 0A: `CLOSED / APPROVED`.
 - Fase 0B: `OPEN`.
-- 0B-01, 0B-02, 0B-03A y 0B-03B: `APPROVED / FROZEN`.
-- Bloque activo: `0B-04A`.
-- 0B-04A: `INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`.
+- 0B-01, 0B-02, 0B-03A, 0B-03B y 0B-04A: `APPROVED / FROZEN`.
 - 0B-04B: `NOT_STARTED / CLOSED_BY_GATE`.
 - 0B-05/0B-06: `NOT_STARTED`.
 - 0C: `BLOCKED` hasta cerrar 0B.
@@ -118,28 +131,28 @@ Phase `0B — Critical literature map and taxonomy` uses controlled thematic bat
 
 ### 2. Closed blocks
 
-0B-01, 0B-02, 0B-03A, and 0B-03B are **`APPROVED / FROZEN`**. F1–F5 remain provisional after 0B-03B; G6 is eliminated as a gap candidate and G7 is merged into F2.
+0B-01, 0B-02, 0B-03A, 0B-03B, and 0B-04A are **`APPROVED / FROZEN`**. F1–F5 remain provisional after 0B-03B; G6 is eliminated as a gap candidate and G7 is merged into F2. 0B-04A does not alter those statuses.
 
 ### 3. 0B-04 — IR/RAG foundations
 
 #### 0B-04A
 
-Status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+Status: **`APPROVED / FROZEN`**.
 
-Internal review: `article/reviews/0B04A_INTERNAL_REVIEW.md` — **`PASS WITH MINOR CORRECTIONS`**, no material errors.
+Canonical artifact: `article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`; the internal review passed with minor corrections and express author approval was received.
 
-Primary verification establishes the governing taxonomy: BM25 = sparse lexical retrieval/ranking; SBERT = sentence embedding/semantic representation with search/indexing specified separately; DPR = dense bi-encoder indexed retrieval; ColBERT = late-interaction retrieval with reranking and full-retrieval modes; HNSW = ANN index/search acceleration with unresolved final publication metadata in the supplied manuscript; and Nogueira–Cho = second-stage cross-encoder reranking over BM25 candidates. Heterogeneous IR/ANN/STS/classification metrics are non-interchangeable, and foundational dense-retrieval results do not reinterpret the project's frozen D1a result.
+The frozen taxonomy is: BM25 = sparse lexical retrieval/ranking; SBERT = sentence embedding/semantic representation with search/indexing specified separately; DPR = indexed dense bi-encoder candidate retrieval; ColBERT = late-interaction retrieval with reranking and full-retrieval modes; HNSW = ANN index/search acceleration with unresolved final publication metadata in the supplied manuscript; and Nogueira–Cho = second-stage cross-encoder reranking over BM25 candidates. Heterogeneous IR/ANN/STS/classification metrics are non-interchangeable, and foundational dense-retrieval results do not reinterpret the project's frozen D1a result.
 
-C1–C8 may be integrated after express author approval. No drafting-AI rerun or experimental-AI review is required.
+The central distinction is `QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`, while recognizing that these functions may be operationally coupled.
 
 #### 0B-04B
 
-Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It opens only after 0B-04A author approval and freeze. No executable prompt exists yet.
+Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It may be explicitly defined and opened after the 0B-04A freeze, but it does not open automatically. The planned six-paper set remains provisional and no executable prompt exists yet.
 
 Reserved IR/product-processing works remain `RESERVED_FOR_DIRECTED_USE` and no 0B-04C opens by default.
 
 ### 4. Later blocks and gate
 
-0B-05 and 0B-06 remain not started. The active gate is `0B-04A INTERNAL_REVIEW_COMPLETE -> express author approval -> integrate C1-C8 -> freeze -> define/open 0B-04B`.
+0B-05 and 0B-06 remain not started. The next potential gate is: define the final 0B-04B batch -> create executable prompt -> READY_FOR_DRAFTING -> drafting AI -> internal review -> author approval -> freeze.
 
 0C remains blocked until 0B closes; 0D remains blocked until 0C closes; target journal remains pending until 0D.
