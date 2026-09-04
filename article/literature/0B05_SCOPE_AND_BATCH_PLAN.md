@@ -4,11 +4,11 @@
 
 ### 1. Propósito
 
-`0B-05` completa el mapa bibliográfico de Fase 0B en tres dimensiones que no deben confundirse:
+`0B-05` completa el mapa de Fase 0B en tres dimensiones que no deben confundirse:
 
 1. documentación/gobernanza de datos;
 2. procedencia, trazabilidad, reproducibilidad y auditoría del ciclo de vida;
-3. fundamentos de información/conocimiento y autoridad documental de fuentes normativas oficiales.
+3. fundamentos de información/conocimiento y autoridad, vigencia y trazabilidad de fuentes normativas/oficiales.
 
 El bloque no declara novelty. Su función es fijar fronteras científicas para describir banco histórico, corpus normativo, versionamiento, provenance, reproducibilidad, conocimiento explícito documental y autoridad normativa sin convertir documentación en correctness ni retrieval en juicio jurídico.
 
@@ -42,62 +42,144 @@ Registros:
 - Artefacto canónico: `article/literature/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE_FROZEN.md`.
 - Revisión experimental: `NOT_REQUIRED`.
 
-Lote congelado:
-
-1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
-2. `The Duality of Knowledge.pdf`
-3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
+Lote congelado: Zins; Hildreth & Kimble; Al-Hawamdeh.
 
 Fronteras congeladas:
 
-- `data`, `information` y `knowledge` no son sinónimos universales ni etapas lineales necesarias; sus definiciones/relaciones dependen del marco conceptual.
-- `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`.
-- `DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`.
+- `data`, `information` y `knowledge` no son sinónimos universales ni etapas lineales necesarias; sus definiciones/relaciones dependen del marco conceptual;
+- `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`;
+- `DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`;
 - `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
 
-`DOCUMENTED_EXPLICIT_KNOWLEDGE` queda autorizado solo como `OPERACIONALIZACION_DEL_PROYECTO`. El corpus normativo puede describirse bajo esa operacionalización como fuente documental formalizada/versionada/recuperable sin inferir totalidad del expertise jurídico ni corrección automática de aplicación. El banco histórico conserva precedentes/experiencia registrada, no la totalidad del knowing experto. La revisión experta permanece fuera del sistema automatizado.
+`DOCUMENTED_EXPLICIT_KNOWLEDGE` queda autorizado solo como `OPERACIONALIZACION_DEL_PROYECTO`. C1–C8 están integradas. La autoridad, vigencia, jerarquía y suficiencia jurídica de fuentes oficiales se reservan a 0B-05C.
 
-Normalizaciones C1–C8 integradas:
-
-- D-I-K no se congela como disyunción ontológica rígida;
-- Zins: 44 panel contributors + Zins = 45 scholars, ≈130 definiciones; atribuciones separadas;
-- Hildreth & Kimble: duality, no dicotomía rígida;
-- fuentes anidadas continúan secundarias si se usan independientemente;
-- Al-Hawamdeh: explicit/externalized knowledge → information es posición del autor, no consenso universal;
-- implicit/know-how permanece distinto de tacit estricto;
-- documented explicit knowledge es operacionalización del proyecto;
-- autoridad, vigencia, jerarquía y suficiencia jurídica de fuentes oficiales quedan para 0B-05C.
-
-Impacto metodológico:
-
-- F1/F2/F4/F5: solo `METHOD_BOUNDARY_RELEVANT`; no cambia su estado provisional.
-- F3: `NOT_RELEVANT_TO_GAP_CANDIDATE` en este lote.
-- G6/G7 permanecen cerrados.
-- No novelty ni gap definitivo.
+Impacto metodológico: F1/F2/F4/F5 solo `METHOD_BOUNDARY_RELEVANT`; F3 `NOT_RELEVANT_TO_GAP_CANDIDATE`; ningún estado provisional cambia.
 
 #### 0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales
 
-Estado: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+Estado: **`READY_FOR_DRAFTING`**.
 
-0B-05C será una auditoría de **fuentes oficiales primarias**, separada de la literatura académica. Antes de abrirlo debe definirse el conjunto exacto de fuentes y el prompt ejecutable.
+Prompt activo:
 
-Objetivo previsto:
+`article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
 
-- verificar autoridad emisora;
-- identificar documento/instrumento exacto;
-- registrar versión/edición y fecha;
-- verificar vigencia aplicable al alcance del estudio;
-- distinguir jerarquía y función documental;
-- registrar identificador/enlace estable cuando exista;
-- separar `autoridad documental` de `corrección jurídica de una clasificación`;
-- separar `fuente oficial` de `evidencia suficiente para un caso`;
-- evitar que WCO/OMA, Comunidad Andina, SUNAT u otras fuentes oficiales sean tratadas como artículos científicos.
+##### 2.1 Naturaleza del bloque
 
-Fuentes candidatas a auditar deberán derivarse del corpus/documentación gobernante del proyecto y confirmarse antes de crear el prompt. El freeze de 0B-05B **no abre automáticamente 0B-05C**.
+0B-05C es una auditoría de **fuentes primarias oficiales**, no un lote de literatura académica. Su eje gobernante es separar:
 
-### 3. Relación con freezes previos
+`EXPERIMENTAL_SOURCE_SNAPSHOT`
 
-0B-05 no reabre 0A, resultados experimentales congelados, 0B-01–0B-04B, 0B-05A ni 0B-05B. La IA experimental no es revisora bibliográfica rutinaria y conserva autoridad exclusiva sobre el Plan Maestro.
+versus
+
+`CURRENT_OFFICIAL_SOURCE_STATE`.
+
+Una modificación normativa posterior no reemplaza retroactivamente la fuente usada por el experimento; a la vez, una fuente experimental identificable no prueba por sí sola que el corpus representara toda la normativa vigente en la fecha de ejecución.
+
+##### 2.2 Snapshot experimental confirmado para auditar
+
+Ref de desarrollo congelado por 0A-02:
+
+`95ffec45ae5a734545ae7bb2d8d530f42f8f056c`.
+
+Fuentes efectivamente procesadas documentadas en GitHub:
+
+1. `data/external/Arancel 2022.pdf`;
+2. `data/processed/corpus/arancel/arancel2022_run_metadata.json`;
+3. `data/external/CAN Desición 885 - Nanadina Gaceta 4359.pdf`;
+4. `data/processed/corpus/nandina/run_metadata.json`.
+
+SHA-256 de fuente registrados por los metadatos del pipeline:
+
+- `Arancel 2022.pdf`: `a01a029e1ca29b6debc61d219c17dfc086354e00669246cc24a91ad9f454c7d0`;
+- `CAN Desición 885 - Nanadina Gaceta 4359.pdf`: `8c4a30fb0328f151089ac4c7857ac447d3dd353de97122a11bde4550d594f0c6`.
+
+Estos son hashes de los archivos fuente procesados, no blob SHA de GitHub.
+
+##### 2.3 Conjunto oficial primario controlado
+
+La auditoría debe cubrir, como mínimo:
+
+**WCO/OMA — nivel HS**
+
+- Convenio Internacional del Sistema Armonizado, en lo necesario para definir qué integra el HS y el papel de GIR/notas;
+- HS Nomenclature 2022 edition;
+- General Rules for the Interpretation of the Harmonized System — edición 2022;
+- enmiendas complementarias de HS 2022 cuando sean necesarias para determinar vigencia;
+- estatus de Explanatory Notes solo para claims que lo requieran.
+
+**Comunidad Andina — nivel NANDINA**
+
+- Decisión 885 — Gaceta Oficial 4359;
+- Decisión 906 — Gaceta Oficial 5062;
+- Resolución 2592 — Gaceta Oficial 5761, `2026-05-18`, Notas Explicativas Complementarias de la NANDINA;
+- solo otros instrumentos oficiales estrictamente necesarios para establecer vigencia/impacto de Capítulo 87.
+
+**Perú — nivel nacional/procedimental**
+
+- Decreto Supremo N.° 404-2021-EF — Arancel de Aduanas 2022;
+- modificaciones posteriores del Arancel de Aduanas 2022 cuando sean materialmente necesarias para determinar afectación de Capítulo 87;
+- SUNAT/gob.pe `Nomenclatura común Nandina` como orientación institucional, no sustituto de la norma comunitaria;
+- `DESPA-PG.01 — Importación para el consumo (versión 8)` solo para claims de procedencia/contexto de DAM;
+- `DESPA-PE.00.03 — Reconocimiento físico - extracción y análisis de muestras (versión 4)` solo para claims de reconocimiento físico/muestras.
+
+Las fuentes estadísticas/anuarios quedan fuera del núcleo salvo necesidad documental explícita.
+
+##### 2.4 Web oficial autorizada
+
+A diferencia de 0B-01–0B-05B, 0B-05C **requiere consulta web actual**. La evidencia final debe proceder de fuentes oficiales:
+
+- `wcoomd.org` / infraestructura oficial WCO;
+- `comunidadandina.org`;
+- `sunat.gob.pe`;
+- `gob.pe`;
+- `mef.gob.pe`;
+- `elperuano.pe`.
+
+Buscadores pueden utilizarse solo para descubrimiento. Agregadores, blogs, bases jurídicas de terceros y papers no son autoridad final de este bloque.
+
+##### 2.5 Hallazgo preliminar que debe auditarse, no asumirse como impacto
+
+Durante la definición del lote se verificó en fuente oficial que **Decisión 906** modifica la Decisión 885, entró en vigencia el `2023-01-01` e incluye modificaciones de descripción en subpartidas del **Capítulo 87**, entre ellas `8704.41.10` y `8704.51.10`.
+
+También se verificó que las 42 etiquetas de referencia EVAL v0.2 listadas en `historical_support_by_code_v0.2.csv` no incluyen esos dos códigos. Esto **no permite concluir impacto cero**, porque los códigos podrían aparecer como candidatos, en el banco histórico o en evidencia normativa.
+
+Por tanto, al abrir 0B-05C se registra únicamente:
+
+`PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`
+
+No se modifica ningún resultado experimental ni 0A. El entregable debe comprobar el solapamiento concreto y, si corresponde, devolver `EXPERIMENTAL_IMPACT_REVIEW_REQUIRED` para que la IA experimental determine materialidad y acciones.
+
+La Resolución 2592 de 2026 se identificó preliminarmente como notas complementarias para capítulos 1–22; su presencia en el estado oficial actual no implica por sí misma afectación directa del Capítulo 87.
+
+##### 2.6 Distinciones obligatorias
+
+`OFFICIAL_SOURCE ≠ LEGALLY_SUFFICIENT_FOR_CASE ≠ CORRECT_CLASSIFICATION`
+
+`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`
+
+`HS-6 ≠ NANDINA-8 ≠ PERU_NATIONAL_SUBHEADING-10`
+
+`INSTITUTIONAL_ORIENTATION_PAGE ≠ SUPRANATIONAL_LEGAL_INSTRUMENT`
+
+`TEXT_AUXILIARY_FOR_INTERPRETATION ≠ BINDING_NORM`, salvo soporte oficial expreso sobre su estatus.
+
+##### 2.7 Relación con F1–F5
+
+0B-05C no es un pressure test de novelty:
+
+- F1: como máximo `METHOD_BOUNDARY_RELEVANT`;
+- F2: normalmente `NOT_RELEVANT_TO_GAP_CANDIDATE`, salvo frontera explanation ≠ official decision;
+- F3: normalmente `NOT_RELEVANT_TO_GAP_CANDIDATE`;
+- F4: `METHOD_BOUNDARY_RELEVANT`;
+- F5: `METHOD_BOUNDARY_RELEVANT`.
+
+G6 permanece eliminado; G7 absorbido en F2.
+
+### 3. Relación con freezes previos y trigger experimental
+
+0B-05C no reabre 0A ni los resultados experimentales congelados. La auditoría documental puede detectar drift; no puede resolverlo mediante modificación del corpus, rerun, recalculo o reinterpretación de resultados.
+
+La IA experimental se vuelve obligatoria **solo si** el análisis confirma o deja razonablemente abierto un solapamiento material entre drift normativo y componentes experimentales congelados. La IA experimental conserva autoridad exclusiva sobre el Plan Maestro y sobre cualquier decisión experimental correctiva.
 
 ### 4. Gate
 
@@ -107,16 +189,17 @@ Completados:
 
 `0B-05B -> APPROVED / FROZEN`
 
-Siguiente gate permitido:
+Gate activo:
 
-`definir fuentes y alcance 0B-05C -> crear prompt ejecutable -> READY_FOR_DRAFTING -> ejecución/auditoría de fuentes oficiales -> revisión interna -> aprobación del autor -> freeze`.
+`0B-05C READY_FOR_DRAFTING -> IA de análisis -> auditoría de fuentes oficiales -> revisión científica/editorial interna -> [IA experimental si trigger confirmado] -> corrección/normalización si aplica -> aprobación expresa del autor -> freeze -> evaluar necesidad real de 0B-06`.
 
-Hasta esa apertura:
+Mientras 0B-05C esté abierto:
 
-- 0B-05C no está activo;
-- 0B-06 no inicia;
-- 0C sigue bloqueado;
-- no se redacta el manuscrito ni se declara novelty/gap definitivo.
+- no se redacta el manuscrito;
+- no se declara novelty/gap definitivo;
+- no se modifica 0A ni el Plan Maestro;
+- no se actualiza el corpus ni se rerun experimentos;
+- no se abre 0B-06 ni 0C.
 
 ---
 
@@ -124,68 +207,58 @@ Hasta esa apertura:
 
 ### 1. Purpose
 
-`0B-05` completes Phase 0B across three distinct dimensions: data documentation/governance; provenance, traceability, reproducibility, and lifecycle audit; and information/knowledge foundations plus authority of official normative sources.
-
-The block does not establish novelty. It sets scientific boundaries for describing historical data, normative corpora, versioning, provenance, reproducibility, documented explicit knowledge, and normative authority without turning documentation into correctness or retrieval into legal judgment.
+`0B-05` completes Phase 0B across data documentation/governance; provenance/reproducibility/lifecycle audit; and information/knowledge foundations plus official normative-source authority, currency, and traceability. It does not establish novelty.
 
 ### 2. Sub-batches
 
 #### 0B-05A
 
-Status: **`APPROVED / FROZEN`**.
-
-Canonical artifact: `article/literature/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY_FROZEN.md`.
-
-Frozen boundaries distinguish dataset documentation, identity/versioning, data/workflow provenance, reproducibility, replication, generalization, transparency trails, lifecycle audit, output-level auditability, and substantive/legal correctness.
+Status: **`APPROVED / FROZEN`**. Frozen distinctions separate documentation, identity/versioning, provenance, reproducibility, replication, generalization, lifecycle audit, output-level auditability, and substantive/legal correctness.
 
 #### 0B-05B
 
-Status: **`APPROVED / FROZEN`**.
+Status: **`APPROVED / FROZEN`**. Frozen boundaries reject universal DIKW sequencing, distinguish documented knowledge from total expertise, document retrieval from expert/legal interpretation, and LLM explanation from expert knowledge/official classification. `DOCUMENTED_EXPLICIT_KNOWLEDGE` is project operationalization only.
 
-Governing records:
+#### 0B-05C — Authority, currency, and traceability of normative/official sources
 
-- `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`;
-- `article/reviews/0B05B_INTERNAL_REVIEW.md`;
-- `article/reviews/0B05B_AUTHOR_APPROVAL.md`;
-- `article/literature/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE_FROZEN.md`.
+Status: **`READY_FOR_DRAFTING`**.
 
-Frozen corpus: Zins; Hildreth & Kimble; Al-Hawamdeh.
+Active prompt:
 
-Frozen boundaries:
+`article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
 
-- data, information, and knowledge are not universal synonyms or necessary linear stages; definitions and relationships are framework-dependent;
-- `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`;
-- `DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`;
-- `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
+0B-05C is a primary official-source audit, not an academic-literature batch. It separates the exact experimental normative-source snapshot at development ref `95ffec45ae5a734545ae7bb2d8d530f42f8f056c` from the current official-source state.
 
-`DOCUMENTED_EXPLICIT_KNOWLEDGE` is authorized only as `PROJECT_OPERATIONALIZATION`. C1–C8 are integrated, including non-rigid D-I-K interpretation, normalized Zins attribution/counting, Hildreth & Kimble duality, nested-source controls, Al-Hawamdeh-specific consensus limits, preservation of implicit/know-how vs strict tacit knowledge, and reservation of official-source authority/currency/hierarchy for 0B-05C.
+The frozen experimental source snapshot includes `Arancel 2022.pdf` and the CAN Decision 885/Gazette 4359 PDF, with recorded source-file SHA-256 values `a01a029e...454c7d0` and `8c4a30fb...594f0c6`, respectively, plus their run metadata and processed artifacts.
 
-F1/F2/F4/F5 receive methodological boundary relevance only; F3 is not relevant to the gap candidate in this batch. No provisional candidate state changes and no final novelty/gap is declared.
+The controlled official set covers WCO HS 2022/GIR/necessary amendments; Andean Decision 885, Decision 906, Resolution 2592 and only other Chapter-87-relevant official instruments; Peru DS 404-2021-EF and material tariff modifications; the SUNAT NANDINA orientation page; and DESPA-PG.01 v8 / DESPA-PE.00.03 v4 only for administrative-data provenance claims.
 
-#### 0B-05C
+Current web verification is required, but final evidence must come from official WCO, Andean Community, SUNAT, gob.pe, MEF or El Peruano sources.
 
-Status: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
+A preliminary definition-stage finding is recorded only as `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`: Decision 906, effective 2023-01-01, modifies Decision 885 and contains Chapter-87 modifications including 8704.41.10 and 8704.51.10. Those codes are not among the 42 EVAL reference labels in the frozen support-by-code table, but zero experimental impact cannot be inferred because they may occur as candidates, historical labels, or evidence. The 0B-05C deliverable must test concrete overlap and trigger experimental-AI review if warranted.
 
-0B-05C will be a separate audit of **official primary sources**, not academic literature. Before opening, the exact source set and executable prompt must be defined.
+Resolution 2592 (2026) was preliminarily identified as complementary explanatory notes for Chapters 1–22, so its current existence does not itself establish direct Chapter-87 impact.
 
-Planned checks include issuing authority, exact instrument/document identity, version/edition and date, applicable currency, documentary hierarchy/function, stable identifiers/links, separation of documentary authority from legal correctness, and separation of official-source status from evidentiary sufficiency for a particular case.
+Mandatory boundaries:
 
-Candidate sources must be derived from governing project documentation and confirmed before prompt creation. The 0B-05B freeze does **not** automatically open 0B-05C.
+`OFFICIAL_SOURCE ≠ LEGALLY_SUFFICIENT_FOR_CASE ≠ CORRECT_CLASSIFICATION`
 
-### 3. Prior freezes and governance
+`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`
 
-0B-05 does not reopen 0A, frozen experiments, 0B-01–0B-04B, 0B-05A, or 0B-05B. Experimental-AI review is not routine and the experimental AI retains exclusive authority over the Master Plan.
+`HS-6 ≠ NANDINA-8 ≠ PERU_NATIONAL_SUBHEADING-10`
+
+`INSTITUTIONAL_ORIENTATION_PAGE ≠ SUPRANATIONAL_LEGAL_INSTRUMENT`.
+
+### 3. Prior freezes and experimental trigger
+
+0B-05C does not reopen frozen experimental facts. It may detect source drift but cannot update the corpus, rerun experiments, recalculate results, or modify 0A/Master Plan.
+
+Experimental-AI review becomes required only if the official-source audit confirms or reasonably leaves open a material overlap between normative drift and frozen experimental components. The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions.
 
 ### 4. Gate
 
-Completed:
+Active gate:
 
-`0B-05A -> APPROVED / FROZEN`
+`0B-05C READY_FOR_DRAFTING -> official-source analysis AI -> official-source audit -> internal review -> [experimental AI if triggered] -> correction/normalization if needed -> express author approval -> freeze -> assess genuine need for 0B-06`.
 
-`0B-05B -> APPROVED / FROZEN`
-
-Next allowed gate:
-
-`define 0B-05C source set and scope -> create executable prompt -> READY_FOR_DRAFTING -> official-source audit -> internal review -> author approval -> freeze`.
-
-Until then, 0B-05C is not active, 0B-06 is not started, 0C remains blocked, and manuscript drafting/final novelty-gap claims remain prohibited.
+No manuscript drafting, final novelty/gap declaration, 0A/Master-Plan modification, corpus update/rerun, 0B-06, or 0C is authorized while 0B-05C remains open.
