@@ -18,7 +18,7 @@
 - `0B-04B`: **`APPROVED / FROZEN`**.
 - `0B-05A`: **`APPROVED / FROZEN`**.
 - Bloque activo: **`0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado`**.
-- Estado de `0B-05B`: **`READY_FOR_DRAFTING`**.
+- Estado de `0B-05B`: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 - `0B-05C`: **`NOT_STARTED / CLOSED_BY_GATE`**.
 - `0B-06`: `NOT_STARTED`.
 - `0C — Gap, contribución y Research Questions`: `BLOCKED` hasta cerrar 0B.
@@ -103,33 +103,38 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-### 0B-05B — apertura formal
+### 0B-05B — revisión interna completada
 
 Alcance:
 
 `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-Prompt activo:
+Prompt:
 
 `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
 
-Lote final:
+Revisión interna:
+
+`article/reviews/0B05B_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`, `EXPERIMENTAL_REVIEW = NOT_REQUIRED`.
+
+Lote revisado:
 
 1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
 2. `The Duality of Knowledge.pdf`
 3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
 
-Un sufijo automático de adjunto como `(2)` no constituye versión científica; gobierna la identidad del trabajo visible en el PDF. Si la IA de redacción no puede leer íntegramente cualquiera de las tres copias, debe identificar el faltante y detenerse sin suplementar con fuentes secundarias.
+La revisión primaria confirmó la diversidad conceptual del lote y la improcedencia de imponer una ontología DIKW universal. La notación `DATA ≠ INFORMATION ≠ KNOWLEDGE` no puede congelarse como disyunción ontológica rígida: solo puede usarse como abreviatura de no equivalencia automática/no sinonimia universal, porque Zins admite concepciones en las que `information` es un tipo de `knowledge`.
 
-Objetivos/controles de 0B-05B:
+Queda además normalizado que:
 
-- reconstruir la diversidad conceptual de `data`, `information` y `knowledge` sin imponer DIKW universal;
-- separar `explicit/codified/documented knowledge` de conocimiento tácito/no codificado y de expertise total;
-- distinguir `information management` de `knowledge management` según las fuentes;
-- separar conceptos reportados por autores de `OPERACIONALIZACION_DEL_PROYECTO`;
-- auditar, no asumir, las fronteras:
+- Zins: `44 panel contributors + researcher = 45 scholars`, aproximadamente `130` definiciones; posiciones de participantes, síntesis de Zins y posición propia de Zins deben permanecer separadas.
+- Hildreth & Kimble: gobierna `duality`, no una dicotomía rígida; `hard/soft` coexisten en proporciones variables y parte de lo tácito puede hacerse explícito según el contexto sin que la externalización agote necesariamente todo el knowing.
+- Al-Hawamdeh: la aproximación `explicit/externalized knowledge -> information` es una posición del autor, no consenso universal; `implicit/know-how` no debe colapsarse con `tacit` estricto.
+- `DOCUMENTED_EXPLICIT_KNOWLEDGE` queda permitido únicamente como `OPERACIONALIZACION_DEL_PROYECTO`, no como ontología compartida por los tres autores.
+- La condición de fuente normativa `autoritativa` pertenece a la gobernanza/documentación del proyecto; P01–P03 no verifican autoridad, vigencia, jerarquía o suficiencia jurídica de WCO/OMA, Comunidad Andina o SUNAT. Esa auditoría primaria corresponde a 0B-05C.
+- Claims anidados de Polanyi, Nonaka, Wenger, Lave, Cook & Brown u otros permanecen `SECONDARY_CLAIM_UNVERIFIED` si se quieren usar como afirmaciones independientes.
 
-`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+Fronteras candidatas aceptadas para el eventual freeze, con las normalizaciones anteriores:
 
 `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
 
@@ -137,18 +142,35 @@ Objetivos/controles de 0B-05B:
 
 `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
 
-Cualquier aplicación al piloto —por ejemplo corpus normativo como fuente de conocimiento explícito documental o banco histórico como experiencia registrada— debe etiquetarse `OPERACIONALIZACION_DEL_PROYECTO`; no puede atribuirse a los autores como resultado sobre NANDINA/customs/LLM.
+Estas son fronteras metodológicas, no una ontología universal ni una cadena de implicación.
 
-0B-05B es fundacional y no puede declarar novelty. No modifica por sí mismo los estados F1–F5; F1/F2/F4/F5 pueden recibir solo relevancia de frontera metodológica y F3 es normalmente no relevante. G6/G7 no se reabren.
+Impacto metodológico:
+
+- F1/F2/F4/F5: solo `METHOD_BOUNDARY_RELEVANT`; no cambia su estado provisional.
+- F3: `NOT_RELEVANT_TO_GAP_CANDIDATE` en este lote.
+- G6 permanece eliminado; G7 permanece absorbido en F2.
+- No se declara novelty ni gap definitivo.
+- No se modifica ningún hecho experimental congelado.
+
+Estado:
+
+```text
+0B-05B = INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING
+DRAFTING_DELIVERABLE = ANALYTICALLY_COMPLETE
+INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
+MATERIAL_ERRORS = 0
+AUTHOR_APPROVAL = PENDING
+EXPERIMENTAL_REVIEW = NOT_REQUIRED
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
 
 ### Gate vigente
 
 ```text
-0B-05B = READY_FOR_DRAFTING
--> IA de redacción
--> revisión científica/editorial interna contra los tres PDF primarios
--> corrección si aplica
+0B-05B = INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING
 -> aprobación expresa del autor
+-> incorporar C1–C8 al artefacto canónico
 -> freeze 0B-05B
 -> recién entonces evaluar definición/apertura de 0B-05C
 ```
@@ -157,7 +179,7 @@ La IA experimental solo interviene si una interpretación bibliográfica afecta 
 
 ### Prohibiciones vigentes
 
-Durante 0B-05B no está autorizado:
+Mientras 0B-05B no esté congelado no está autorizado:
 
 - redactar Introduction/Related Work/Methods/Results/Discussion/Conclusions;
 - declarar novelty o gap definitivo;
@@ -184,7 +206,7 @@ Durante 0B-05B no está autorizado:
 - Active phase: **`0B — Critical literature map and taxonomy`**.
 - 0B-01 through 0B-05A are **`APPROVED / FROZEN`**.
 - Active block: **`0B-05B — Information, documented explicit knowledge, and limits of codified knowledge`**.
-- 0B-05B status: **`READY_FOR_DRAFTING`**.
+- 0B-05B status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 - 0B-05C remains `NOT_STARTED / CLOSED_BY_GATE`; 0B-06 is not started.
 - 0C remains blocked until 0B closes; 0D remains blocked until 0C closes.
 - Target journal remains pending until 0D; manuscript drafting has not started.
@@ -199,25 +221,21 @@ F1–F5 remain provisional. G6 remains eliminated and G7 remains merged into F2.
 
 0B-05A is approved/frozen. Its governing prompt, internal review, author approval, and canonical artifact remain authoritative; experimental review was not required.
 
-### 0B-05B formal opening
+### 0B-05B internal review complete
 
 Formal scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-Active prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
+Prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
 
-Final controlled batch:
+Internal review: `article/reviews/0B05B_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`, `EXPERIMENTAL_REVIEW = NOT_REQUIRED`.
 
-1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
-2. `The Duality of Knowledge.pdf`
-3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
+The three-paper primary-source review confirms conceptual plurality and rejects a universal DIKW ontology. `DATA ≠ INFORMATION ≠ KNOWLEDGE` may not be frozen as a rigid ontological disjunction; it can only function as shorthand for non-automatic equivalence/non-universal synonymy because Zins explicitly allows conceptions in which information is a type of knowledge.
 
-Automatic physical attachment suffixes such as `(2)` are not scientific version identifiers. The drafting AI must stop if any full source is unavailable rather than substituting secondary material.
+Required normalizations include: Zins's 44 panel contributors plus researcher = 45 scholars and approximately 130 definitions; strict attribution separation between participants, Zins's synthesis, and Zins's own position; Hildreth & Kimble's `duality` rather than rigid dichotomy; Al-Hawamdeh's explicit/externalized-knowledge-to-information mapping as his conceptual position rather than field consensus; preservation of implicit/know-how as distinct from strict tacit knowledge; `DOCUMENTED_EXPLICIT_KNOWLEDGE` as project operationalization only; and secondary-source treatment of nested Polanyi/Nonaka/Wenger/Lave/Cook & Brown claims when used independently.
 
-0B-05B must reconstruct conceptual diversity without imposing a universal DIKW sequence; separate explicit/codified/documented knowledge from tacit/non-codified knowledge and complete expertise; distinguish information management from knowledge management; and label every mapping onto pilot components as `PROJECT_OPERATIONALIZATION` rather than an author-reported customs result.
+The project may preserve its existing treatment of normative documents as authoritative, but P01–P03 do not verify issuing authority, currency, hierarchy, or legal sufficiency of WCO/OMA, Andean Community, or SUNAT sources. That primary-source audit belongs to 0B-05C.
 
-Candidate boundaries to audit rather than assume are:
-
-`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+Accepted methodological boundaries for the eventual freeze are:
 
 `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
 
@@ -225,11 +243,26 @@ Candidate boundaries to audit rather than assume are:
 
 `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
 
-This remains a foundational conceptual batch and cannot establish novelty. F1/F2/F4/F5 may receive boundary relevance only; F3 is normally not relevant. G6/G7 remain closed.
+These are methodological boundaries, not a universal ontology or implication chain.
+
+F1/F2/F4/F5 receive `METHOD_BOUNDARY_RELEVANT` only; F3 is `NOT_RELEVANT_TO_GAP_CANDIDATE`. No provisional gap-candidate state changes, G6/G7 remain closed, no novelty/final gap is declared, and no frozen experimental fact is modified.
+
+Current state:
+
+```text
+0B-05B = INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING
+DRAFTING_DELIVERABLE = ANALYTICALLY_COMPLETE
+INTERNAL_REVIEW = PASS WITH MINOR CORRECTIONS
+MATERIAL_ERRORS = 0
+AUTHOR_APPROVAL = PENDING
+EXPERIMENTAL_REVIEW = NOT_REQUIRED
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
 
 ### Gate
 
-`0B-05B READY_FOR_DRAFTING -> drafting AI -> internal scientific/editorial review against the three primary PDFs -> correction if needed -> express author approval -> freeze -> only then assess definition/opening of 0B-05C`.
+`0B-05B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> express author approval -> incorporate C1–C8 into the canonical artifact -> freeze -> only then assess definition/opening of 0B-05C`.
 
 Experimental-AI review is triggered only if literature interpretation affects frozen experimental facts/claims or restrictions under its authority.
 
