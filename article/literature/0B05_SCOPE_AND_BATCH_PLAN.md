@@ -76,11 +76,14 @@ Impacto metodológico congelado:
 
 #### 0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado
 
-Estado: **`READY_FOR_DRAFTING`**.
+Estado: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 
-Prompt activo:
+Registros actuales:
 
-`article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
+- Prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
+- Revisión interna: `article/reviews/0B05B_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`.
+- Revisión experimental: `NOT_REQUIRED`.
+- Aprobación del autor: `PENDING`.
 
 Lote final controlado:
 
@@ -90,21 +93,18 @@ Lote final controlado:
 
 Para el tercer trabajo puede existir un sufijo físico automático de adjunto, como `(2)`. Ese sufijo no constituye una versión científica; la identidad gobernante es el título del trabajo visible en la copia primaria.
 
-El corpus consolidado mantiene acceso primario `62/62`. El prompt conserva una regla de seguridad adicional: si la IA de redacción no puede acceder íntegramente a cualquiera de estas tres copias en su entorno de ejecución, debe identificar el faltante y detenerse sin sustituirlo con fuentes secundarias.
+La revisión interna confirmó que el lote no permite imponer una ontología DIKW universal. La notación `DATA ≠ INFORMATION ≠ KNOWLEDGE` solo puede sobrevivir como abreviatura de **no equivalencia automática/no sinonimia universal**, no como afirmación de conjuntos ontológicamente disjuntos, porque Zins admite concepciones en las que `information` es un tipo de `knowledge`.
 
-Objetivo gobernante:
+Normalizaciones obligatorias para el freeze:
 
-- delimitar `data`, `information`, `knowledge`, `explicit/codified knowledge`, `tacit/non-codified knowledge`, `information management` y `knowledge management`;
-- preservar la diversidad conceptual documentada en la literatura y **no imponer una secuencia DIKW universal**;
-- distinguir conceptos reportados por los autores de la `OPERACIONALIZACION_DEL_PROYECTO`;
-- precisar en qué sentido el corpus normativo puede tratarse, como operacionalización del proyecto, como fuente de conocimiento explícito/documentado sin afirmar que contiene la totalidad del expertise jurídico;
-- preservar que los precedentes históricos son registros/experiencia documentada y no una reproducción completa del conocimiento tácito del especialista;
-- preservar que la salida del LLM es explicación/información estructurada y no conocimiento experto definitivo ni clasificación oficial;
-- mantener la revisión experta fuera del sistema automatizado.
+- Zins: `44 panel contributors + researcher = 45 scholars`, aproximadamente 130 definiciones; distinguir posiciones de participantes, síntesis de Zins y posición propia de Zins.
+- Hildreth & Kimble: `duality`, no dicotomía rígida; hard/soft coexisten en proporciones variables y la frontera es contextual.
+- Al-Hawamdeh: externalized/explicit knowledge como `information` es posición del autor, no consenso universal; conservar `implicit/know-how` distinto de `tacit` estricto.
+- `DOCUMENTED_EXPLICIT_KNOWLEDGE`: solo `OPERACIONALIZACION_DEL_PROYECTO`, no ontología compartida por P01–P03.
+- Claims anidados de Polanyi, Nonaka, Wenger, Lave, Cook & Brown y otros: `SECONDARY_CLAIM_UNVERIFIED` si se usan como proposiciones independientes.
+- El carácter `autoritativo` de fuentes normativas pertenece a la documentación/gobernanza del proyecto; P01–P03 no verifican autoridad, vigencia, jerarquía o suficiencia jurídica de WCO/OMA, Comunidad Andina o SUNAT. Esa auditoría primaria corresponde a 0B-05C.
 
-Fronteras que 0B-05B debe auditar, no asumir:
-
-`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+Fronteras aceptadas para el eventual freeze, sujetas a esas normalizaciones:
 
 `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
 
@@ -112,17 +112,18 @@ Fronteras que 0B-05B debe auditar, no asumir:
 
 `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
 
-Estas expresiones serán candidatas a freeze solo después de contrastarlas contra los tres PDF primarios.
+Estas expresiones son fronteras metodológicas, no una ontología universal ni una cadena de implicación.
 
 0B-05B sigue siendo **fundacional y conceptual**. No es un pressure test de novelty aduanera. Cualquier mapeo desde conceptos generales hacia componentes NANDINA debe etiquetarse `OPERACIONALIZACION_DEL_PROYECTO` y no atribuirse directamente a los autores.
 
-Relación metodológica esperada con F1–F5:
+Relación metodológica resultante con F1–F5:
 
-- **F1:** como máximo `METHOD_BOUNDARY_RELEVANT` para distinguir documentos/evidencia de decisión clasificatoria; no novelty.
-- **F2:** `METHOD_BOUNDARY_RELEVANT` para separar explicación organizada de conocimiento/juicio experto; no novelty.
-- **F3:** normalmente `NOT_RELEVANT_TO_GAP_CANDIDATE`.
-- **F4:** `METHOD_BOUNDARY_RELEVANT` para separar disponibilidad/organización documental de correctness sustantiva/jurídica.
-- **F5:** como máximo `METHOD_BOUNDARY_RELEVANT`; conocimiento/documentación no sustituye la evaluación formal de auditabilidad por salida.
+- **F1:** `METHOD_BOUNDARY_RELEVANT`; no novelty.
+- **F2:** `METHOD_BOUNDARY_RELEVANT`; no novelty.
+- **F3:** `NOT_RELEVANT_TO_GAP_CANDIDATE`.
+- **F4:** `METHOD_BOUNDARY_RELEVANT`.
+- **F5:** `METHOD_BOUNDARY_RELEVANT` como máximo.
+- Los estados provisionales F1–F5 no cambian.
 - G6 permanece eliminado y G7 permanece absorbido en F2.
 
 #### 0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales
@@ -154,13 +155,13 @@ La IA experimental no es revisora bibliográfica rutinaria. Solo se activará si
 
 Gate activo:
 
-`0B-05B READY_FOR_DRAFTING -> IA de redacción -> revisión científica/editorial interna contra los tres PDF primarios -> corrección si aplica -> aprobación expresa del autor -> freeze -> evaluar definición/apertura de 0B-05C`.
+`0B-05B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> aprobación expresa del autor -> incorporar C1–C8 al artefacto canónico -> freeze -> evaluar definición/apertura de 0B-05C`.
 
 0B-05C permanece cerrado hasta completar ese gate.
 
 ### 5. Prohibiciones vigentes
 
-Durante 0B-05B:
+Mientras 0B-05B no esté congelado:
 
 - no redactar secciones del manuscrito;
 - no declarar novelty ni gap definitivo;
@@ -203,9 +204,14 @@ C1–C7 are integrated. F3 gains documentation foundation only; F4 remains a cor
 
 #### 0B-05B — Information, documented explicit knowledge, and limits of codified knowledge
 
-Status: **`READY_FOR_DRAFTING`**.
+Status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
 
-Active prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
+Current records:
+
+- Prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
+- Internal review: `article/reviews/0B05B_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`.
+- Experimental review: `NOT_REQUIRED`.
+- Author approval: `PENDING`.
 
 Final controlled batch:
 
@@ -213,13 +219,13 @@ Final controlled batch:
 2. `The Duality of Knowledge.pdf`
 3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
 
-An automatic physical-file suffix such as `(2)` is not a scientific version identifier; the scientific title visible in the primary copy governs identity. The consolidated corpus remains at primary access `62/62`, while the executable prompt still requires the drafting AI to stop if any of the three full PDFs is unavailable in its execution environment.
+The internal review confirms that the batch does not support a universal DIKW ontology. `DATA ≠ INFORMATION ≠ KNOWLEDGE` may survive only as shorthand for non-automatic equivalence/non-universal synonymy, not ontological disjunction, because Zins explicitly allows conceptions in which information is a type of knowledge.
 
-The governing objective is to distinguish data, information, knowledge, explicit/codified knowledge, tacit/non-codified knowledge, information management, and knowledge management; preserve conceptual diversity instead of imposing a universal DIKW sequence; distinguish author-reported concepts from `PROJECT_OPERATIONALIZATION`; and bound the project's use of documented explicit knowledge without treating documentary retrieval as complete expert/legal knowledge.
+Mandatory freeze normalizations include: Zins's 44 panel contributors plus researcher = 45 scholars and approximately 130 definitions; separation of participant positions, Zins's synthesis, and Zins's own position; Hildreth & Kimble's `duality` rather than rigid dichotomy; Al-Hawamdeh's externalized/explicit-knowledge-to-information mapping as his conceptual position rather than universal consensus; preservation of implicit/know-how as distinct from strict tacit knowledge; `DOCUMENTED_EXPLICIT_KNOWLEDGE` as `PROJECT_OPERATIONALIZATION` only; and secondary-source status for nested claims when used independently.
 
-Candidate boundaries to be audited rather than assumed are:
+The project's existing `authoritative` treatment of normative documents belongs to project governance/documentation; P01–P03 do not verify issuing authority, currency, hierarchy, or legal sufficiency of WCO/OMA, Andean Community, or SUNAT sources. That primary-source audit belongs to 0B-05C.
 
-`DATA ≠ INFORMATION ≠ KNOWLEDGE`
+Accepted methodological boundaries for the eventual freeze are:
 
 `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
 
@@ -227,9 +233,9 @@ Candidate boundaries to be audited rather than assumed are:
 
 `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
 
-Any mapping from general knowledge-management concepts to NANDINA components must be labeled `PROJECT_OPERATIONALIZATION`. 0B-05B remains foundational and is not a customs novelty pressure test.
+These are methodological boundaries, not a universal ontology or implication chain.
 
-Expected methodological relationship to F1–F5: F1/F2/F4/F5 may receive boundary relevance only; F3 is normally not relevant. G6 remains eliminated and G7 remains merged into F2.
+F1/F2/F4/F5 receive `METHOD_BOUNDARY_RELEVANT` only; F3 is `NOT_RELEVANT_TO_GAP_CANDIDATE`. No provisional gap-candidate state changes. G6 remains eliminated and G7 remains merged into F2.
 
 #### 0B-05C — Authority, currency, and traceability of normative/official sources
 
@@ -245,8 +251,8 @@ Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It may be defined only after 0B-05B 
 
 Active gate:
 
-`0B-05B READY_FOR_DRAFTING -> drafting AI -> internal scientific/editorial review against the three primary PDFs -> correction if needed -> express author approval -> freeze -> assess definition/opening of 0B-05C`.
+`0B-05B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> express author approval -> incorporate C1–C8 into the canonical artifact -> freeze -> assess definition/opening of 0B-05C`.
 
 ### 5. Prohibitions
 
-During 0B-05B: no manuscript drafting; no final novelty/gap claims; no new-literature search; no out-of-batch supplementation; no universal DIKW pyramid; no unsupported conflation of explicit/codified/documented/stored knowledge; no equation of documented knowledge with complete expertise; no conversion of document retrieval into understanding/legal correctness; no description of LLM explanation as expert knowledge or official classification; no Master-Plan/0A modification; no reopening G6/G7; and no opening of 0B-05C/0B-06/0C before their gates.
+Until 0B-05B is frozen: no manuscript drafting; no final novelty/gap claims; no new-literature search; no out-of-batch supplementation; no universal DIKW pyramid; no unsupported conflation of explicit/codified/documented/stored knowledge; no equation of documented knowledge with complete expertise; no conversion of document retrieval into understanding/legal correctness; no description of LLM explanation as expert knowledge or official classification; no Master-Plan/0A modification; no reopening G6/G7; and no opening of 0B-05C/0B-06/0C before their gates.
