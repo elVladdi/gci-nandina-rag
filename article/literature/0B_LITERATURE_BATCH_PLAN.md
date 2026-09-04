@@ -4,39 +4,38 @@
 
 ### 1. Propósito y reglas generales
 
-La Fase `0B — Mapa crítico de literatura y taxonomía` se ejecuta mediante lotes temáticos controlados. Su finalidad es leer PDF completos, identificar qué problema resuelve realmente cada trabajo y construir un mapa comparable para 0C. Durante 0B no se redacta el manuscrito ni se declara novelty o gap definitivo.
+La Fase `0B — Mapa crítico de literatura y taxonomía` se ejecuta mediante lotes temáticos controlados. Su finalidad es leer fuentes primarias completas, identificar qué problema resuelve realmente cada trabajo y construir un mapa comparable para 0C. Durante 0B no se redacta el manuscrito ni se declara novelty o gap definitivo.
 
 Reglas gobernantes:
 
-- corpus consolidado: `62` obras/documentos distintos, con acceso primario verificable `62/62`;
-- solo se analizan los PDF del lote activo;
+- corpus consolidado: `62` obras/documentos distintos, acceso primario verificable `62/62`;
 - lectura íntegra y auditoría claim-source-scope obligatorias;
 - no inventar metadata, DOI, resultados, indexación o estado editorial;
-- distinguir `REPORTADO_POR_AUTORES`, `INFERENCIA_CRITICA`, `OPERACIONALIZACION_DEL_PROYECTO` cuando aplique, `NO_VERIFICABLE_EN_PDF` y `SECONDARY_CLAIM_UNVERIFIED`;
+- distinguir `REPORTADO_POR_AUTORES`, `INFERENCIA_CRITICA`, `OPERACIONALIZACION_DEL_PROYECTO`, `NO_VERIFICABLE_EN_PDF` y `SECONDARY_CLAIM_UNVERIFIED` cuando corresponda;
 - una afirmación secundaria no se convierte en hecho independiente sin verificar su fuente primaria;
-- ausencia de group split documentado no demuestra leakage;
 - no equiparar classification, candidate retrieval, evidence retrieval, reranking, explanation, provenance, reproducibility, auditability ni correctness;
-- no imponer una pirámide DIKW o una transformación data→information→knowledge como universal si las fuentes no la sostienen;
-- `SUPPORTS_CANDIDATE` significa solo supervivencia provisional, nunca novelty;
-- las referencias heredadas conservan elegibilidad aunque sean antiguas/proceedings/preprints; nuevas referencias académicas se rigen por `article/BIBLIOGRAPHIC_FRAMEWORK.md`.
+- no imponer DIKW universal ni transformar automáticamente data→information→knowledge;
+- `SUPPORTS_CANDIDATE` nunca significa novelty;
+- fuentes heredadas conservan elegibilidad; literatura académica nueva se rige por `article/BIBLIOGRAPHIC_FRAMEWORK.md`.
 
 ### 2. Bloques cerrados
 
-- `0B-01`: **`APPROVED / FROZEN`** — `article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md`.
-- `0B-02`: **`APPROVED / FROZEN`** — `article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md`.
-- `0B-03A`: **`APPROVED / FROZEN`** — `article/literature/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS_FROZEN.md`.
-- `0B-03B`: **`APPROVED / FROZEN`** — `article/literature/0B03B_AGENTS_HIERARCHICAL_REGULATORY_REASONING_FROZEN.md`.
-- `0B-04A`: **`APPROVED / FROZEN`** — `article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md`.
-- `0B-04B`: **`APPROVED / FROZEN`** — `article/literature/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS_FROZEN.md`.
-- `0B-05A`: **`APPROVED / FROZEN`** — `article/literature/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY_FROZEN.md`.
+- `0B-01`: **`APPROVED / FROZEN`**.
+- `0B-02`: **`APPROVED / FROZEN`**.
+- `0B-03A`: **`APPROVED / FROZEN`**.
+- `0B-03B`: **`APPROVED / FROZEN`**.
+- `0B-04A`: **`APPROVED / FROZEN`**.
+- `0B-04B`: **`APPROVED / FROZEN`**.
+- `0B-05A`: **`APPROVED / FROZEN`**.
+- `0B-05B`: **`APPROVED / FROZEN`**.
 
-Después de los lotes de prior art aduanero permanecen provisionalmente F1–F5 en formas estrechas/metodológicas; G6 está eliminado como candidato a gap y G7 absorbido en F2. Ninguno constituye novelty ni gap definitivo.
+F1–F5 permanecen provisionales; G6 está eliminado y G7 absorbido en F2. Ninguno constituye novelty ni gap definitivo.
 
-### 3. 0B-04 — Fundamentos de Information Retrieval y RAG
+### 3. 0B-04 — Fundamentos de IR y RAG
 
-0B-04A y 0B-04B están `APPROVED / FROZEN`.
+0B-04A y 0B-04B están congelados.
 
-Distinciones gobernantes:
+Fronteras gobernantes:
 
 `QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`.
 
@@ -46,104 +45,95 @@ Distinciones gobernantes:
 
 Trabajos adicionales de 0B-04 permanecen `RESERVED_FOR_DIRECTED_USE`; no se abre 0B-04C por defecto.
 
-### 4. 0B-05 — Datos, documentación, procedencia, reproducibilidad, conocimiento y normativa
+### 4. 0B-05 — Datos, procedencia, reproducibilidad, conocimiento y normativa
 
 Alcance formal: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-#### 0B-05A — Documentación de datos, procedencia, reproducibilidad y audit trail
+#### 0B-05A
 
 Estado: **`APPROVED / FROZEN`**.
 
-Registros gobernantes: prompt 0B05A, revisión interna, aprobación del autor y artefacto canónico `article/literature/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY_FROZEN.md`. Revisión experimental: `NOT_REQUIRED`.
+Artefacto canónico:
 
-Distinciones congeladas:
+`article/literature/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY_FROZEN.md`.
+
+Fronteras congeladas:
 
 `DATASET DOCUMENTATION ≠ DATASET IDENTITY / VERSIONING ≠ DATA PROVENANCE / LINEAGE ≠ WORKFLOW PROVENANCE ≠ REPRODUCIBILITY ≠ REPLICATION ≠ GENERALIZATION`.
 
 `DOCUMENTATION / PROVENANCE ≠ TRANSPARENCY TRAIL ≠ INTERNAL LIFECYCLE AUDIT ≠ FORMAL OUTPUT-LEVEL AUDITABILITY ≠ SUBSTANTIVE / LEGAL CORRECTNESS`.
 
-Efecto congelado sobre candidatos:
-
-- F1/F2: sin evidencia de novelty.
-- F3: fundamento documental sobre relaciones/particiones, sin convertir documentación en control de dependencia.
-- F4: `provenance/reproducibility/auditability ≠ substantive/legal correctness`.
-- F5: prior art fuerte en provenance, transparency trails e internal audit elimina formulaciones amplias de ausencia de trazabilidad/auditabilidad; solo permanece como candidato estrecho la evaluación formal, explícita y separada de auditabilidad documental por salida.
-- G6 permanece eliminado; G7 permanece absorbido en F2.
+F5 permanece únicamente como candidato estrecho de evaluación formal, explícita y separada de auditabilidad documental por salida.
 
 #### 0B-05B — Información, conocimiento explícito documental y límites del conocimiento codificado
 
-Estado: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+Estado: **`APPROVED / FROZEN`**.
 
-Registros:
+Registros gobernantes:
 
 - Prompt: `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`.
-- Revisión interna: `article/reviews/0B05B_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`.
+- Revisión: `article/reviews/0B05B_INTERNAL_REVIEW.md` — `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`.
+- Aprobación: `article/reviews/0B05B_AUTHOR_APPROVAL.md`.
+- Artefacto canónico: `article/literature/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE_FROZEN.md`.
 - Revisión experimental: `NOT_REQUIRED`.
-- Aprobación del autor: `PENDING`.
 
-Lote final controlado:
+Corpus congelado: Zins; Hildreth & Kimble; Al-Hawamdeh.
 
-1. `Conceptual Approaches for Deﬁning Data, Information,and Knowledge.pdf`
-2. `The Duality of Knowledge.pdf`
-3. `Knowledge management - re-thinking information management and facing the challenge of managing tacit knowledge.pdf`
+Fronteras congeladas:
 
-La revisión interna contra los tres PDF primarios confirmó la diversidad conceptual del lote y que no procede seleccionar una secuencia DIKW universal. La notación `DATA ≠ INFORMATION ≠ KNOWLEDGE` solo puede utilizarse como abreviatura de no equivalencia automática/no sinonimia universal, no como disyunción ontológica rígida, porque Zins admite concepciones en las que `information` es un tipo de `knowledge`.
+- data, information y knowledge no son sinónimos universales ni etapas lineales necesarias; sus relaciones dependen del marco conceptual;
+- `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`;
+- `DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`;
+- `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
 
-Normalizaciones obligatorias para el freeze:
+`DOCUMENTED_EXPLICIT_KNOWLEDGE` es únicamente `OPERACIONALIZACION_DEL_PROYECTO`.
 
-- Zins: `44 panel contributors + researcher = 45 scholars`, aproximadamente 130 definiciones; distinguir posiciones de participantes, síntesis de Zins y posición propia de Zins.
-- Hildreth & Kimble: `duality`, no dicotomía rígida; hard/soft coexisten en proporciones variables y la frontera es contextual.
-- Al-Hawamdeh: externalized/explicit knowledge como `information` es posición del autor, no consenso universal; `implicit/know-how` se conserva distinto de `tacit` estricto.
-- `DOCUMENTED_EXPLICIT_KNOWLEDGE`: solo `OPERACIONALIZACION_DEL_PROYECTO`.
-- Claims anidados de otros autores permanecen `SECONDARY_CLAIM_UNVERIFIED` si se usan como afirmaciones independientes.
-- La autoridad/vigencia/jerarquía/suficiencia jurídica de las fuentes normativas no es verificada por P01–P03; esa auditoría primaria corresponde a 0B-05C.
+C1–C8 integradas: interpretación no rígida de D-I-K; contabilidad/atribución de Zins normalizada; duality de Hildreth & Kimble; control de fuentes anidadas; posición de Al-Hawamdeh no tratada como consenso; implicit/know-how separado de tacit estricto; conocimiento explícito documental restringido a operacionalización del proyecto; autoridad/vigencia/jerarquía de fuentes oficiales reservadas a 0B-05C.
 
-Fronteras aceptadas para el eventual freeze:
-
-`DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
-
-`DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`
-
-`LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
-
-Estas son fronteras metodológicas, no una ontología universal ni una cadena de implicación.
-
-Relación resultante con F1–F5: F1/F2/F4/F5 reciben solo `METHOD_BOUNDARY_RELEVANT`; F3 es `NOT_RELEVANT_TO_GAP_CANDIDATE`. Los estados provisionales F1–F5 no cambian. 0B-05B no es un pressure test de novelty. G6/G7 no se reabren.
+Impacto metodológico: F1/F2/F4/F5 reciben solo `METHOD_BOUNDARY_RELEVANT`; F3 es `NOT_RELEVANT_TO_GAP_CANDIDATE`. No cambia ningún estado provisional de F1–F5. G6/G7 permanecen cerrados.
 
 #### 0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales
 
-Estado: **`NOT_STARTED / CLOSED_BY_GATE`**.
+Estado: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
 
-Solo podrá definirse después del freeze de 0B-05B. Será una auditoría separada de fuentes oficiales primarias —WCO/OMA, Comunidad Andina, SUNAT y otras pertinentes— según autoridad emisora, versión, vigencia, fecha, jerarquía documental, identificador/enlace estable y función evidencial.
+No está activo todavía.
+
+Antes de abrirlo se requiere:
+
+1. identificar el conjunto exacto de fuentes oficiales primarias relevantes;
+2. definir criterios de autoridad emisora, instrumento/documento exacto, versión/edición, fecha, vigencia, alcance, jerarquía documental, identificador/enlace estable y función evidencial;
+3. separar `fuente oficial/autoritativa` de `evidencia suficiente para un caso` y de `corrección jurídica`;
+4. crear un prompt ejecutable propio;
+5. mantener las fuentes oficiales separadas de la literatura académica.
+
+WCO/OMA, Comunidad Andina, SUNAT y otras fuentes solo entrarán si su presencia/función está sustentada por la documentación gobernante del proyecto. No se inventará ni completará una lista desde memoria.
 
 ### 5. 0B-06 — Búsqueda dirigida de literatura nueva
 
 Estado: `NOT_STARTED`.
 
-Solo se abrirá si, después de cerrar 0B-05 y agotar el corpus heredado relevante, persiste un vacío bibliográfico real bajo `article/BIBLIOGRAPHIC_FRAMEWORK.md`. 0B-06 no es obligatorio.
+0B-06 solo se abrirá si, después de cerrar 0B-05 y agotar el corpus heredado pertinente, persiste una necesidad bibliográfica real bajo `article/BIBLIOGRAPHIC_FRAMEWORK.md`. No es obligatorio.
 
 ### 6. Gate
 
 Gate general:
 
-`IA de redacción -> revisión científica/editorial interna contra PDF primarios -> corrección si aplica -> aprobación del autor -> freeze`.
+`IA de redacción/análisis -> revisión científica/editorial contra fuentes primarias -> corrección si aplica -> aprobación del autor -> freeze`.
 
-0B-01 a 0B-05A completaron el gate correspondiente.
+0B-01 a 0B-05B completaron su gate.
 
-Gate activo:
+Siguiente gate permitido:
 
-`0B-05B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> aprobación expresa del autor -> incorporar C1–C8 al artefacto canónico -> freeze -> evaluar definición/apertura de 0B-05C`.
+`definir 0B-05C -> fijar fuentes oficiales -> crear prompt ejecutable -> READY_FOR_DRAFTING -> auditoría de fuentes oficiales -> revisión interna -> aprobación del autor -> freeze -> evaluar necesidad real de 0B-06`.
 
-La IA experimental no es revisora bibliográfica obligatoria; se incorpora solo si una interpretación bibliográfica modifica o amenaza hechos/claims experimentales o restricciones bajo su autoridad.
+La IA experimental no es revisora bibliográfica rutinaria; se incorpora solo si una interpretación afecta hechos/claims experimentales o restricciones bajo su autoridad. El Plan Maestro sigue bajo autoridad exclusiva de la IA experimental.
 
 ### 7. Estado actual
 
 - Fase 0A: `CLOSED / APPROVED`.
 - Fase 0B: `OPEN`.
-- 0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A, 0B-04B y 0B-05A: `APPROVED / FROZEN`.
-- Bloque activo: `0B-05B`.
-- 0B-05B: `INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`.
-- 0B-05C: `NOT_STARTED / CLOSED_BY_GATE`.
+- 0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A, 0B-04B, 0B-05A y 0B-05B: `APPROVED / FROZEN`.
+- 0B-05C: `NOT_STARTED / ELIGIBLE_FOR_DEFINITION`.
 - 0B-06: `NOT_STARTED`.
 - 0C: `BLOCKED` hasta cerrar 0B.
 - 0D: `BLOCKED` hasta cerrar 0C.
@@ -155,17 +145,17 @@ La IA experimental no es revisora bibliográfica obligatoria; se incorpora solo 
 
 ### 1. Purpose and rules
 
-Phase `0B — Critical literature map and taxonomy` uses controlled thematic batches with full-PDF and claim-source-scope verification. No manuscript drafting, final novelty, or definitive gap is allowed during 0B. The inherited corpus contains 62 distinct works/documents with primary access `62/62`.
+Phase `0B — Critical literature map and taxonomy` uses controlled thematic batches with full primary-source and claim-source-scope verification. No manuscript drafting, final novelty, or definitive gap is allowed during 0B.
 
-Governing rules include strict separation of retrieval/classification/explanation/provenance/auditability/correctness concepts, source-level provenance labels, and rejection of a universal DIKW transformation unless the primary sources support it.
+The consolidated corpus contains 62 distinct works/documents with primary access `62/62`. Governing rules preserve source provenance labels, prevent unsupported metadata/results, reject universal DIKW assumptions, and keep classification/retrieval/explanation/provenance/auditability/correctness concepts distinct.
 
 ### 2. Closed blocks
 
-0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A, 0B-04B, and 0B-05A are **`APPROVED / FROZEN`**. F1–F5 remain provisional; G6 is eliminated and G7 is merged into F2.
+0B-01, 0B-02, 0B-03A, 0B-03B, 0B-04A, 0B-04B, 0B-05A, and 0B-05B are **`APPROVED / FROZEN`**. F1–F5 remain provisional; G6 is eliminated and G7 is merged into F2.
 
-### 3. 0B-04 — IR/RAG foundations
+### 3. 0B-04
 
-Frozen boundaries distinguish representation, candidate generation, ANN/index search, reranking, final ranking, RAG variants, query transformation, passage fusion, evidentiality, provenance, formal auditability, and legal correctness. Additional 0B-04 works remain reserved for directed use.
+Frozen boundaries distinguish query/document representation, candidate generation, ANN/index search, reranking, final ranking, RAG variants, query transformation, passage fusion, evidentiality, provenance, formal auditability, and legal correctness.
 
 ### 4. 0B-05
 
@@ -173,40 +163,58 @@ Frozen boundaries distinguish representation, candidate generation, ANN/index se
 
 Status: **`APPROVED / FROZEN`**.
 
-Frozen boundaries distinguish dataset documentation, identity/versioning, data/workflow provenance, reproducibility, replication, generalization, transparency trails, lifecycle audit, output-level auditability, and substantive/legal correctness. F5 remains only as the narrow provisional candidate of formal, explicit, separate documentary auditability evaluation at output level.
+Canonical artifact: `article/literature/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY_FROZEN.md`.
 
-#### 0B-05B — Information, documented explicit knowledge, and limits of codified knowledge
+Frozen boundaries distinguish dataset documentation, identity/versioning, data/workflow provenance, reproducibility, replication, generalization, transparency trails, lifecycle audit, output-level auditability, and substantive/legal correctness.
 
-Status: **`INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING`**.
+#### 0B-05B
 
-Records: active prompt `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`; internal review `article/reviews/0B05B_INTERNAL_REVIEW.md` with `PASS WITH MINOR CORRECTIONS`, `MATERIAL_ERRORS = 0`; experimental review `NOT_REQUIRED`; author approval `PENDING`.
+Status: **`APPROVED / FROZEN`**.
 
-The primary-source review confirms conceptual diversity and rejects a universal DIKW ontology. `DATA ≠ INFORMATION ≠ KNOWLEDGE` may be used only as shorthand for non-automatic equivalence/non-universal synonymy, not as rigid ontological disjunction, because Zins allows conceptions in which information is a type of knowledge.
+Governing records:
 
-Mandatory freeze normalizations preserve Zins attribution/counting, Hildreth & Kimble's duality rather than rigid dichotomy, Al-Hawamdeh's externalized-knowledge-to-information mapping as his own conceptual position, implicit/know-how as distinct from strict tacit knowledge, `DOCUMENTED_EXPLICIT_KNOWLEDGE` as `PROJECT_OPERATIONALIZATION` only, and nested-source claims as secondary unless independently verified. Authority/currency/hierarchy/legal sufficiency of official normative sources is deferred to 0B-05C.
+- `article/prompts/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE.md`;
+- `article/reviews/0B05B_INTERNAL_REVIEW.md`;
+- `article/reviews/0B05B_AUTHOR_APPROVAL.md`;
+- `article/literature/0B05B_INFORMATION_EXPLICIT_TACIT_KNOWLEDGE_FROZEN.md`.
 
-Accepted methodological boundaries for the eventual freeze are:
+Frozen corpus: Zins; Hildreth & Kimble; Al-Hawamdeh.
 
-`DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`
+Frozen boundaries state that data/information/knowledge are not universal synonyms or necessary linear stages; documented/explicit knowledge is not total expert knowledge; document retrieval is not expert interpretation/legal correctness; and LLM-generated explanation is not expert knowledge/official classification.
 
-`DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`
+`DOCUMENTED_EXPLICIT_KNOWLEDGE` is project operationalization only. C1–C8 are integrated, including non-rigid D-I-K interpretation, normalized Zins attribution/counting, Hildreth & Kimble duality, nested-source control, author-specific treatment of Al-Hawamdeh, preservation of implicit/know-how vs strict tacit knowledge, and reservation of official-source authority/currency/hierarchy for 0B-05C.
 
-`LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`.
-
-F1/F2/F4/F5 receive methodological boundary relevance only; F3 is not relevant to the gap candidate in this batch. No provisional gap-candidate state changes. G6/G7 remain closed.
+F1/F2/F4/F5 receive methodological boundary relevance only; F3 is not relevant to the gap candidate in this batch. No provisional candidate state changes.
 
 #### 0B-05C
 
-Status: **`NOT_STARTED / CLOSED_BY_GATE`**. It may be defined only after 0B-05B freezes and will be a separate audit of official primary normative sources.
+Status: **`NOT_STARTED / ELIGIBLE_FOR_DEFINITION`**.
 
-### 5. 0B-06 and gate
+It is not active yet. Before opening, the workflow must identify the exact official primary-source set, define checks for issuing authority, exact instrument identity, version/edition/date, applicable currency, scope, documentary hierarchy, stable identifiers/links, and evidentiary role, and create a dedicated executable prompt.
 
-0B-06 remains `NOT_STARTED` and opens only if a genuine bibliographic gap remains after 0B-05 and the relevant inherited corpus are exhausted.
+Official/authoritative status must remain distinct from evidentiary sufficiency for a case and from legal correctness. WCO/OMA, Andean Community, SUNAT, and other sources enter only when supported by governing project documentation; the list will not be completed from memory.
 
-Active gate:
+### 5. 0B-06
 
-`0B-05B INTERNAL_REVIEW_COMPLETE / AUTHOR_APPROVAL_PENDING -> express author approval -> incorporate C1–C8 into the canonical artifact -> freeze -> assess definition/opening of 0B-05C`.
+Status: `NOT_STARTED`. It opens only if a genuine bibliographic need remains after 0B-05 and the relevant inherited corpus are exhausted.
 
-Experimental-AI review is not routine and is triggered only if literature interpretation changes or threatens frozen experimental facts/claims or restrictions under its authority.
+### 6. Gate
 
-0C remains blocked until 0B closes; 0D remains blocked until 0C closes; target journal remains pending until 0D.
+0B-01 through 0B-05B have completed their gates.
+
+Next allowed gate:
+
+`define 0B-05C -> fix official source set -> create executable prompt -> READY_FOR_DRAFTING -> official-source audit -> internal review -> author approval -> freeze -> assess genuine need for 0B-06`.
+
+Experimental-AI review is not routine; the experimental AI retains exclusive authority over the Master Plan and is invoked only when literature interpretation affects frozen experimental facts/claims or restrictions under its authority.
+
+### 7. Current state
+
+- Phase 0A: `CLOSED / APPROVED`.
+- Phase 0B: `OPEN`.
+- 0B-01 through 0B-05B: `APPROVED / FROZEN`.
+- 0B-05C: `NOT_STARTED / ELIGIBLE_FOR_DEFINITION`.
+- 0B-06: `NOT_STARTED`.
+- 0C: `BLOCKED` until 0B closes.
+- 0D: `BLOCKED` until 0C closes.
+- Target journal: `PENDING — to be decided in Phase 0D`.
