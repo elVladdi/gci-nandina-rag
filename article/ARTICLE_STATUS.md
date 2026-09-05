@@ -17,8 +17,10 @@
 - `0B-05A`: **`APPROVED / FROZEN`**.
 - `0B-05B`: **`APPROVED / FROZEN`**.
 - Bloque activo: **`0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales`**.
-- Estado de `0B-05C`: **`READY_FOR_DRAFTING`**.
-- `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG`: **`OPEN_FOR_AUDIT`**.
+- Estado de `0B-05C`: **`INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED`**.
+- `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG`: **`CLOSED — DRIFT_CONFIRMED`**.
+- `EXPERIMENTAL_REVIEW`: **`REQUIRED`**.
+- `TRIGGER`: **`EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`**.
 - `0B-06`: **`NOT_STARTED / CLOSED_BY_GATE`**.
 - `0C — Gap, contribución y Research Questions`: `BLOCKED` hasta cerrar 0B.
 - `0D — Arquitectura editorial y journal fit`: `BLOCKED` hasta cerrar 0C.
@@ -37,7 +39,7 @@ Continúan gobernando:
 
 La Fase 0B no modifica el Plan Maestro ni 0A. La IA experimental conserva autoridad exclusiva sobre el Plan Maestro y sobre decisiones experimentales correctivas.
 
-0B-05C puede detectar `SOURCE_VERSION_DRIFT`, pero no puede actualizar el corpus, rerun experimentos, recalcular resultados ni reinterpretar claims congelados. Si el audit confirma o deja razonablemente abierta una afectación material del experimento, debe activarse revisión de la IA experimental.
+0B-05C puede detectar `SOURCE_VERSION_DRIFT`, pero no puede actualizar el corpus, rerun experimentos, recalcular resultados ni reinterpretar claims congelados. La revisión interna confirmó un trigger de afectación experimental y activó revisión de la IA experimental.
 
 ### Distinciones fundacionales congeladas
 
@@ -90,15 +92,19 @@ Registros gobernantes:
 
 Estado: **`APPROVED / FROZEN`**; `EXPERIMENTAL_REVIEW = NOT_REQUIRED`.
 
-### 0B-05C — apertura formal
+### 0B-05C — estado vigente
 
 Alcance:
 
 `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-Prompt activo:
+Prompt de análisis:
 
 `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
+
+Revisión interna gobernante del gate actual:
+
+`article/reviews/0B05C_INTERNAL_REVIEW.md`.
 
 #### Snapshot experimental que debe preservarse
 
@@ -118,41 +124,40 @@ SHA-256 fuente registrados:
 - Arancel 2022: `a01a029e1ca29b6debc61d219c17dfc086354e00669246cc24a91ad9f454c7d0`;
 - Decisión 885/Gaceta 4359: `8c4a30fb0328f151089ac4c7857ac447d3dd353de97122a11bde4550d594f0c6`.
 
-#### Fuentes oficiales a auditar
+#### Fuentes oficiales auditadas
 
-- WCO/OMA: HS Convention cuando sea necesario, HS Nomenclature 2022, GIR 2022, enmiendas complementarias relevantes y estatus de Explanatory Notes solo para claims que lo requieran.
-- Comunidad Andina: Decisión 885/Gaceta 4359; Decisión 906/Gaceta 5062; Resolución 2592/Gaceta 5761; otros instrumentos solo si son necesarios para Capítulo 87/vigencia.
+- WCO/OMA: HS Convention cuando fue necesario, HS Nomenclature 2022, GIR 2022, enmiendas complementarias pertinentes y estatus de Explanatory Notes para claims específicos.
+- Comunidad Andina: Decisión 885/Gaceta 4359; Decisión 906/Gaceta 5062; Resolución 2592/Gaceta 5761.
 - Perú: DS 404-2021-EF/Arancel de Aduanas 2022; modificaciones materialmente pertinentes; SUNAT/gob.pe NANDINA como orientación institucional; DESPA-PG.01 v8 y DESPA-PE.00.03 v4 únicamente para claims de procedencia/contexto administrativo.
 
-La consulta web oficial está autorizada y exigida. La evidencia final debe proceder de WCO/OMA, Comunidad Andina, SUNAT, gob.pe, MEF o El Peruano.
+#### Resultado de revisión interna
 
-#### Flag preliminar de drift
+La revisión científica/editorial de 0B-05C emitió:
 
-Durante la definición de 0B-05C se comprobó en la Gaceta Oficial de la Comunidad Andina que la **Decisión 906** modifica la Decisión 885, entra en vigencia `2023-01-01` e incluye cambios en el **Capítulo 87**, entre ellos las subpartidas `8704.41.10` y `8704.51.10`.
+`0B-05C_INTERNAL_REVIEW = PASS WITH CORRECTIONS`.
 
-La lista congelada de 42 labels EVAL v0.2 no contiene esos dos códigos. Esto no permite declarar impacto cero porque queda por comprobar si aparecen como candidatos, históricos o evidencia.
+Estados:
 
-Estado:
+- `SOURCE_VERSION_DRIFT = PRESENT`;
+- `SCOPE_OVERLAP = CONFIRMED`;
+- `RETRIEVAL_OUTPUT_OVERLAP = CONFIRMED_FOR_87044110_FLAT_BM25`;
+- `EXPERIMENTAL_METRIC_IMPACT = NOT_DETERMINED`;
+- `EXPERIMENTAL_REVIEW = REQUIRED`;
+- `TRIGGER = EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`.
 
-`PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`.
+Hallazgo material registrado: `87044110` aparece efectivamente en `outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv`, caso `DA-EVAL-V02-00060`, `candidate_rank = 100`, con la descripción derivada del snapshot Decisión 885. No se identificó `87045110` en ese mismo output plano Top-100.
 
-0B-05C debe separar:
+La revisión interna también dejó registradas las correcciones C1–C6 y mantiene la separación obligatoria:
 
-`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
-
-Si el solapamiento experimental se confirma o permanece razonablemente posible, el entregable debe devolver `EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`. No debe intentar resolverlo.
-
-La Resolución 2592 de 2026 se identificó preliminarmente como Notas Explicativas Complementarias para capítulos 1–22 y no constituye por sí sola evidencia de afectación directa a Capítulo 87.
+`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
 
 ### Gate vigente
 
 ```text
-0B-05C = READY_FOR_DRAFTING
--> IA de análisis documental
--> auditoría de fuentes oficiales
--> revisión científica/editorial interna
--> IA experimental SI el trigger de impacto queda confirmado/abierto materialmente
--> corrección/normalización si aplica
+0B-05C = INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED
+-> IA experimental
+-> corrección/normalización de 0B-05C si el dictamen experimental lo requiere
+-> revisión científica/editorial final
 -> aprobación expresa del autor
 -> freeze 0B-05C
 -> evaluar necesidad de 0B-06
@@ -160,18 +165,16 @@ La Resolución 2592 de 2026 se identificó preliminarmente como Notas Explicativ
 
 ### Prohibiciones vigentes
 
-Durante 0B-05C no está autorizado:
+Mientras 0B-05C permanezca abierto no está autorizado:
 
-- modificar Plan Maestro o 0A;
+- que el editor científico o la IA de Redacción modifiquen el Plan Maestro o 0A;
 - sustituir retrospectivamente las fuentes usadas por el experimento;
-- modificar/actualizar el corpus normativo;
-- rerun experimentos o recalcular resultados;
+- modificar/actualizar el snapshot normativo original;
 - inferir legal correctness desde oficialidad o trazabilidad;
 - confundir HS-6, NANDINA-8 y subpartida nacional de 10 dígitos;
-- tratar una página institucional de orientación como sustituto del instrumento comunitario;
 - redactar el manuscrito;
 - declarar novelty/gap definitivo;
-- abrir 0B-06 o 0C.
+- abrir 0B-06, 0C o 0D.
 
 ---
 
@@ -184,40 +187,49 @@ Durante 0B-05C no está autorizado:
 - Active phase: **`0B — Critical literature map and taxonomy`**.
 - 0B-01 through 0B-05B: **`APPROVED / FROZEN`**.
 - Active block: **`0B-05C — Authority, currency, and traceability of normative/official sources`**.
-- 0B-05C: **`READY_FOR_DRAFTING`**.
-- `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`.
+- 0B-05C: **`INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED`**.
+- `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = CLOSED — DRIFT_CONFIRMED`.
+- `EXPERIMENTAL_REVIEW = REQUIRED`.
+- `TRIGGER = EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`.
 - 0B-06: `NOT_STARTED / CLOSED_BY_GATE`.
 - 0C/0D remain blocked.
 - Target journal remains pending until 0D; manuscript drafting has not started.
 
 ### Governance
 
-Frozen 0A artifacts remain authoritative. 0B-05C may detect source-version drift but cannot update the corpus, rerun experiments, recalculate results, reinterpret frozen claims, or modify the Master Plan. The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions.
+Frozen 0A artifacts remain authoritative. 0B-05C may identify source-version drift but cannot update the corpus, rerun experiments, recalculate results, reinterpret frozen claims, or modify the Master Plan. The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions. The internal review confirmed an experimental-impact trigger and therefore activated experimental-AI review.
 
-### 0B-05C formal opening
+### 0B-05C current state
 
 Scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
-Active prompt: `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
+Analysis prompt: `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
 
-The batch compares `EXPERIMENTAL_SOURCE_SNAPSHOT` with `CURRENT_OFFICIAL_SOURCE_STATE`.
+Current gate review: `article/reviews/0B05C_INTERNAL_REVIEW.md`.
 
 The frozen development snapshot at `95ffec45ae5a734545ae7bb2d8d530f42f8f056c` identifies Arancel 2022 and CAN Decision 885/Gazette 4359 as ingested normative sources, together with their pipeline run metadata and recorded source-file SHA-256 values.
 
-The controlled official set covers WCO HS 2022/GIR and needed amendments; Andean Decision 885, Decision 906, Resolution 2592 and only other instruments necessary for Chapter-87 currency; Peru DS 404-2021-EF/material amendments; and SUNAT sources only for specific institutional/administrative provenance claims.
+The internal scientific/editorial review returned:
 
-Current official web verification is required and final evidence is limited to official WCO/Andean Community/SUNAT/gob.pe/MEF/El Peruano sources.
+`0B-05C_INTERNAL_REVIEW = PASS WITH CORRECTIONS`.
 
-A preliminary flag is open: Decision 906, effective 2023-01-01, modifies Decision 885 and includes Chapter-87 changes, including 8704.41.10 and 8704.51.10. Those codes are absent from the frozen 42 EVAL reference labels, but zero experimental impact cannot be inferred until candidate/historical/evidence overlap is checked.
+Current states:
 
-`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
+- `SOURCE_VERSION_DRIFT = PRESENT`;
+- `SCOPE_OVERLAP = CONFIRMED`;
+- `RETRIEVAL_OUTPUT_OVERLAP = CONFIRMED_FOR_87044110_FLAT_BM25`;
+- `EXPERIMENTAL_METRIC_IMPACT = NOT_DETERMINED`;
+- `EXPERIMENTAL_REVIEW = REQUIRED`;
+- `TRIGGER = EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`.
 
-If material overlap is confirmed or reasonably remains open, the deliverable must return `EXPERIMENTAL_IMPACT_REVIEW_REQUIRED` without altering frozen experimental artifacts.
+The recorded material finding is that `87044110` appears in `outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv`, case `DA-EVAL-V02-00060`, `candidate_rank = 100`, using the description derived from the Decision 885 snapshot. `87045110` was not identified in that same flat Top-100 output.
 
-Resolution 2592 was preliminarily identified as complementary explanatory notes for Chapters 1–22 and therefore does not by itself establish Chapter-87 impact.
+Corrections C1–C6 are recorded in `article/reviews/0B05C_INTERNAL_REVIEW.md`. The following separation remains mandatory:
+
+`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
 
 ### Gate
 
-`0B-05C READY_FOR_DRAFTING -> official-source analysis -> internal scientific/editorial review -> experimental AI if impact trigger is confirmed/materially open -> correction/normalization if needed -> express author approval -> freeze -> assess 0B-06 need`.
+`0B-05C INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED -> experimental AI -> 0B-05C correction/normalization if required by the experimental decision -> final internal scientific/editorial review -> express author approval -> freeze -> assess 0B-06 need`.
 
-No Master-Plan/0A changes, corpus updates, reruns, manuscript drafting, final novelty/gap declarations, 0B-06, or 0C are authorized while 0B-05C remains open.
+While 0B-05C remains open, no scientific-editor/writing-AI Master-Plan or 0A changes, retrospective replacement of the original normative snapshot, manuscript drafting, final novelty/gap declarations, 0B-06, 0C, or 0D are authorized.
