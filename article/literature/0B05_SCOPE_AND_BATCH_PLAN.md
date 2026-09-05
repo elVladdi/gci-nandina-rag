@@ -57,7 +57,9 @@ Impacto metodológico: F1/F2/F4/F5 solo `METHOD_BOUNDARY_RELEVANT`; F3 `NOT_RELE
 
 #### 0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales
 
-Estado: **`READY_FOR_DRAFTING`**.
+Estado inicial del sublote: **`READY_FOR_DRAFTING`**.
+
+Estado operativo vigente: **`EXPERIMENTAL_REVIEW`**. `ARTICLE_STATUS.md` es la fuente de verdad para el subestado correctivo, bloqueos y siguiente gate. El estado inicial anterior se conserva solo como registro histórico de apertura del sublote; fue superado operacionalmente por el trigger experimental confirmado durante la auditoría.
 
 Prompt activo:
 
@@ -143,9 +145,11 @@ Durante la definición del lote se verificó en fuente oficial que **Decisión 9
 
 También se verificó que las 42 etiquetas de referencia EVAL v0.2 listadas en `historical_support_by_code_v0.2.csv` no incluyen esos dos códigos. Esto **no permite concluir impacto cero**, porque los códigos podrían aparecer como candidatos, en el banco histórico o en evidencia normativa.
 
-Por tanto, al abrir 0B-05C se registra únicamente:
+Por tanto, al abrir 0B-05C se registró inicialmente:
 
 `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`
+
+Ese valor describe el estado histórico de apertura del sublote. El resultado vigente de la auditoría y del trigger experimental se mantiene exclusivamente en `ARTICLE_STATUS.md`; este plan no debe utilizarse como fuente de verdad para inferir que el flag continúa abierto.
 
 No se modifica ningún resultado experimental ni 0A. El entregable debe comprobar el solapamiento concreto y, si corresponde, devolver `EXPERIMENTAL_IMPACT_REVIEW_REQUIRED` para que la IA experimental determine materialidad y acciones.
 
@@ -189,16 +193,22 @@ Completados:
 
 `0B-05B -> APPROVED / FROZEN`
 
-Gate activo:
+Flujo inicial registrado al abrir 0B-05C:
 
 `0B-05C READY_FOR_DRAFTING -> IA de análisis -> auditoría de fuentes oficiales -> revisión científica/editorial interna -> [IA experimental si trigger confirmado] -> corrección/normalización si aplica -> aprobación expresa del autor -> freeze -> evaluar necesidad real de 0B-06`.
+
+Gate operativo vigente:
+
+`0B-05C STATUS = EXPERIMENTAL_REVIEW -> IA experimental resuelve la exposición efectiva y especificación pre-ejecución D1a -> sensibilidad correctiva acotada cuando quede autorizada -> revisión científica/editorial final -> corrección/normalización si corresponde -> aprobación expresa del autor -> freeze -> evaluar necesidad real de 0B-06`.
+
+Los flags y bloqueos concretos deben consultarse en `ARTICLE_STATUS.md`.
 
 Mientras 0B-05C esté abierto:
 
 - no se redacta el manuscrito;
 - no se declara novelty/gap definitivo;
 - no se modifica 0A ni el Plan Maestro;
-- no se actualiza el corpus ni se rerun experimentos;
+- no se actualiza el corpus ni se rerun experimentos desde la rama editorial;
 - no se abre 0B-06 ni 0C.
 
 ---
@@ -221,7 +231,9 @@ Status: **`APPROVED / FROZEN`**. Frozen boundaries reject universal DIKW sequenc
 
 #### 0B-05C — Authority, currency, and traceability of normative/official sources
 
-Status: **`READY_FOR_DRAFTING`**.
+Initial sub-batch status: **`READY_FOR_DRAFTING`**.
+
+Current operational status: **`EXPERIMENTAL_REVIEW`**. `ARTICLE_STATUS.md` is the source of truth for the corrective substate, blockers, and next gate. The former initial state is preserved only as the historical opening state of the sub-batch; it was operationally superseded by the experimental trigger confirmed during the audit.
 
 Active prompt:
 
@@ -235,7 +247,7 @@ The controlled official set covers WCO HS 2022/GIR/necessary amendments; Andean 
 
 Current web verification is required, but final evidence must come from official WCO, Andean Community, SUNAT, gob.pe, MEF or El Peruano sources.
 
-A preliminary definition-stage finding is recorded only as `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`: Decision 906, effective 2023-01-01, modifies Decision 885 and contains Chapter-87 modifications including 8704.41.10 and 8704.51.10. Those codes are not among the 42 EVAL reference labels in the frozen support-by-code table, but zero experimental impact cannot be inferred because they may occur as candidates, historical labels, or evidence. The 0B-05C deliverable must test concrete overlap and trigger experimental-AI review if warranted.
+The definition-stage finding was initially recorded as `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`: Decision 906, effective 2023-01-01, modifies Decision 885 and contains Chapter-87 modifications including 8704.41.10 and 8704.51.10. Those codes are not among the 42 EVAL reference labels in the frozen support-by-code table, but zero experimental impact cannot be inferred because they may occur as candidates, historical labels, or evidence. That flag represents the historical opening state only; the current audit outcome and experimental trigger are governed by `ARTICLE_STATUS.md`.
 
 Resolution 2592 (2026) was preliminarily identified as complementary explanatory notes for Chapters 1–22, so its current existence does not itself establish direct Chapter-87 impact.
 
@@ -251,14 +263,20 @@ Mandatory boundaries:
 
 ### 3. Prior freezes and experimental trigger
 
-0B-05C does not reopen frozen experimental facts. It may detect source drift but cannot update the corpus, rerun experiments, recalculate results, or modify 0A/Master Plan.
+0B-05C does not reopen frozen experimental facts. It may detect source drift but cannot update the corpus, rerun experiments, recalculate results, or modify 0A/Master Plan from the editorial branch.
 
 Experimental-AI review becomes required only if the official-source audit confirms or reasonably leaves open a material overlap between normative drift and frozen experimental components. The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions.
 
 ### 4. Gate
 
-Active gate:
+Initial flow recorded when 0B-05C was opened:
 
 `0B-05C READY_FOR_DRAFTING -> official-source analysis AI -> official-source audit -> internal review -> [experimental AI if triggered] -> correction/normalization if needed -> express author approval -> freeze -> assess genuine need for 0B-06`.
 
-No manuscript drafting, final novelty/gap declaration, 0A/Master-Plan modification, corpus update/rerun, 0B-06, or 0C is authorized while 0B-05C remains open.
+Current operational gate:
+
+`0B-05C STATUS = EXPERIMENTAL_REVIEW -> experimental AI resolves effective D1a exposure and pre-execution specification -> bounded corrective sensitivity when authorized -> final scientific/editorial review -> correction/normalization if needed -> express author approval -> freeze -> assess genuine need for 0B-06`.
+
+Concrete flags and blockers must be read from `ARTICLE_STATUS.md`.
+
+No manuscript drafting, final novelty/gap declaration, editorial-branch 0A/Master-Plan modification, editorial-branch corpus update/rerun, 0B-06, or 0C is authorized while 0B-05C remains open.
