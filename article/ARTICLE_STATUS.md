@@ -17,10 +17,15 @@
 - `0B-05A`: **`APPROVED / FROZEN`**.
 - `0B-05B`: **`APPROVED / FROZEN`**.
 - Bloque activo: **`0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales`**.
-- Estado de `0B-05C`: **`INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED`**.
+- Estado de `0B-05C`: **`CORRECTIVE_EXPERIMENTAL_REVIEWED / CORRECTIVE_NUMERICAL_RERUN_REQUIRED`**.
 - `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG`: **`CLOSED — DRIFT_CONFIRMED`**.
 - `EXPERIMENTAL_REVIEW`: **`REQUIRED`**.
 - `TRIGGER`: **`EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`**.
+- `CORRECTIVE_GATE_SCOPING`: **`INCOMPLETE`**.
+- `EV03_METRIC_IMPACT`: **`NOT_DETERMINED`**.
+- `EV04_METRIC_IMPACT`: **`NOT_DETERMINED`**.
+- `EV05_D1A_STATUS`: **`REQUIRES_EXPLICIT_INCLUSION_OR_EXCLUSION_JUSTIFICATION`**.
+- `DOWNSTREAM_REEXECUTION`: **`CONDITIONAL_ON_PROPAGATION`**.
 - `0B-06`: **`NOT_STARTED / CLOSED_BY_GATE`**.
 - `0C — Gap, contribución y Research Questions`: `BLOCKED` hasta cerrar 0B.
 - `0D — Arquitectura editorial y journal fit`: `BLOCKED` hasta cerrar 0C.
@@ -102,9 +107,10 @@ Prompt de análisis:
 
 `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
 
-Revisión interna gobernante del gate actual:
+Revisiones gobernantes del gate actual:
 
-`article/reviews/0B05C_INTERNAL_REVIEW.md`.
+- `article/reviews/0B05C_INTERNAL_REVIEW.md`;
+- `article/reviews/0B05C_CORRECTIVE_EXPERIMENTAL_FEEDBACK_EDITORIAL_REVIEW.md`.
 
 #### Snapshot experimental que debe preservarse
 
@@ -136,7 +142,7 @@ La revisión científica/editorial de 0B-05C emitió:
 
 `0B-05C_INTERNAL_REVIEW = PASS WITH CORRECTIONS`.
 
-Estados:
+Estados confirmados:
 
 - `SOURCE_VERSION_DRIFT = PRESENT`;
 - `SCOPE_OVERLAP = CONFIRMED`;
@@ -151,13 +157,40 @@ La revisión interna también dejó registradas las correcciones C1–C6 y manti
 
 `SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
 
+#### Revisión editorial del corrective experimental gate
+
+El feedback experimental posterior mantiene abierto el gate y concluye que se requiere una reejecución numérica correctiva acotada. La revisión editorial acepta que:
+
+- el drift y el solapamiento de alcance en Capítulo 87 están confirmados;
+- no se observa afectación de labels EVAL ni del ranking histórico por este hallazgo;
+- EV-03 presenta overlap real y `EV03_METRIC_IMPACT = NOT_DETERMINED`;
+- `EV04_METRIC_IMPACT = NOT_DETERMINED`;
+- no se justifica reconstrucción completa del benchmark, de los splits ni remapeo de labels;
+- cualquier sensibilidad debe preservar íntegramente el snapshot original;
+- downstream solo debe reabrirse ante propagación demostrada.
+
+Corrección material pendiente: el feedback actual acota la reejecución a EV-03/EV-04, pero una revisión experimental previa había identificado EV-05/D1a como potencialmente expuesto por dependencia directa de `corpus_rag_v1_index.jsonl`. El feedback actual no documenta por qué D1a deja de formar parte de ese alcance. Por ello, antes del cierre, la IA experimental debe **incluir EV-05/D1a en la sensibilidad correctiva o excluirlo explícitamente con evidencia trazable suficiente**. Esto no implica un rerun automático de D1a.
+
+Dictamen:
+
+```text
+0B05C_CORRECTIVE_EXPERIMENTAL_REVIEW = PASS_WITH_MATERIAL_CORRECTION
+CORRECTIVE_GATE_SCOPING = INCOMPLETE
+EV03_METRIC_IMPACT = NOT_DETERMINED
+EV04_METRIC_IMPACT = NOT_DETERMINED
+EV05_D1A_STATUS = REQUIRES_EXPLICIT_INCLUSION_OR_EXCLUSION_JUSTIFICATION
+DOWNSTREAM_REEXECUTION = CONDITIONAL_ON_PROPAGATION
+CORRECTIVE_NUMERICAL_RERUN = REQUIRED
+0B05C_CLOSURE = NOT_AUTHORIZED
+```
+
 ### Gate vigente
 
 ```text
-0B-05C = INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED
--> IA experimental
--> corrección/normalización de 0B-05C si el dictamen experimental lo requiere
+0B-05C = CORRECTIVE_EXPERIMENTAL_REVIEWED / CORRECTIVE_NUMERICAL_RERUN_REQUIRED
+-> IA experimental: completar comprobación numérica correctiva y resolver explícitamente EV-05/D1a
 -> revisión científica/editorial final
+-> corrección/normalización de 0B-05C por IA de Redacción, si corresponde
 -> aprobación expresa del autor
 -> freeze 0B-05C
 -> evaluar necesidad de 0B-06
@@ -187,17 +220,22 @@ Mientras 0B-05C permanezca abierto no está autorizado:
 - Active phase: **`0B — Critical literature map and taxonomy`**.
 - 0B-01 through 0B-05B: **`APPROVED / FROZEN`**.
 - Active block: **`0B-05C — Authority, currency, and traceability of normative/official sources`**.
-- 0B-05C: **`INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED`**.
+- 0B-05C: **`CORRECTIVE_EXPERIMENTAL_REVIEWED / CORRECTIVE_NUMERICAL_RERUN_REQUIRED`**.
 - `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = CLOSED — DRIFT_CONFIRMED`.
 - `EXPERIMENTAL_REVIEW = REQUIRED`.
 - `TRIGGER = EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`.
+- `CORRECTIVE_GATE_SCOPING = INCOMPLETE`.
+- `EV03_METRIC_IMPACT = NOT_DETERMINED`.
+- `EV04_METRIC_IMPACT = NOT_DETERMINED`.
+- `EV05_D1A_STATUS = REQUIRES_EXPLICIT_INCLUSION_OR_EXCLUSION_JUSTIFICATION`.
+- `DOWNSTREAM_REEXECUTION = CONDITIONAL_ON_PROPAGATION`.
 - 0B-06: `NOT_STARTED / CLOSED_BY_GATE`.
 - 0C/0D remain blocked.
 - Target journal remains pending until 0D; manuscript drafting has not started.
 
 ### Governance
 
-Frozen 0A artifacts remain authoritative. 0B-05C may identify source-version drift but cannot update the corpus, rerun experiments, recalculate results, reinterpret frozen claims, or modify the Master Plan. The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions. The internal review confirmed an experimental-impact trigger and therefore activated experimental-AI review.
+Frozen 0A artifacts remain authoritative. 0B-05C may identify source-version drift but cannot update the corpus, rerun experiments, recalculate results, reinterpret frozen claims, or modify the Master Plan. The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions.
 
 ### 0B-05C current state
 
@@ -205,7 +243,10 @@ Scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
 
 Analysis prompt: `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
 
-Current gate review: `article/reviews/0B05C_INTERNAL_REVIEW.md`.
+Current gate reviews:
+
+- `article/reviews/0B05C_INTERNAL_REVIEW.md`;
+- `article/reviews/0B05C_CORRECTIVE_EXPERIMENTAL_FEEDBACK_EDITORIAL_REVIEW.md`.
 
 The frozen development snapshot at `95ffec45ae5a734545ae7bb2d8d530f42f8f056c` identifies Arancel 2022 and CAN Decision 885/Gazette 4359 as ingested normative sources, together with their pipeline run metadata and recorded source-file SHA-256 values.
 
@@ -213,7 +254,7 @@ The internal scientific/editorial review returned:
 
 `0B-05C_INTERNAL_REVIEW = PASS WITH CORRECTIONS`.
 
-Current states:
+Confirmed states:
 
 - `SOURCE_VERSION_DRIFT = PRESENT`;
 - `SCOPE_OVERLAP = CONFIRMED`;
@@ -228,8 +269,35 @@ Corrections C1–C6 are recorded in `article/reviews/0B05C_INTERNAL_REVIEW.md`. 
 
 `SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
 
-### Gate
+### Editorial review of the corrective experimental gate
 
-`0B-05C INTERNAL_REVIEW_COMPLETED / EXPERIMENTAL_REVIEW_REQUIRED -> experimental AI -> 0B-05C correction/normalization if required by the experimental decision -> final internal scientific/editorial review -> express author approval -> freeze -> assess 0B-06 need`.
+Subsequent experimental feedback keeps the gate open and concludes that bounded corrective numerical re-execution is required. The editorial review accepts that:
+
+- drift and Chapter-87 scope overlap are confirmed;
+- no EVAL-label or historical-ranking impact is observed from this finding;
+- EV-03 has a real overlap and `EV03_METRIC_IMPACT = NOT_DETERMINED`;
+- `EV04_METRIC_IMPACT = NOT_DETERMINED`;
+- no full benchmark rebuild, split rebuild, or label remap is justified;
+- any sensitivity analysis must fully preserve the original snapshot;
+- downstream components should be reopened only upon demonstrated propagation.
+
+Material correction pending: the current feedback limits re-execution to EV-03/EV-04, but an earlier experimental review had identified EV-05/D1a as potentially exposed through a direct dependency on `corpus_rag_v1_index.jsonl`. The current feedback does not document why D1a is removed from that scope. Therefore, before closure, the experimental AI must **include EV-05/D1a in the corrective sensitivity analysis or explicitly exclude it with sufficient traceable evidence**. This does not imply an automatic D1a rerun.
+
+Verdict:
+
+```text
+0B05C_CORRECTIVE_EXPERIMENTAL_REVIEW = PASS_WITH_MATERIAL_CORRECTION
+CORRECTIVE_GATE_SCOPING = INCOMPLETE
+EV03_METRIC_IMPACT = NOT_DETERMINED
+EV04_METRIC_IMPACT = NOT_DETERMINED
+EV05_D1A_STATUS = REQUIRES_EXPLICIT_INCLUSION_OR_EXCLUSION_JUSTIFICATION
+DOWNSTREAM_REEXECUTION = CONDITIONAL_ON_PROPAGATION
+CORRECTIVE_NUMERICAL_RERUN = REQUIRED
+0B05C_CLOSURE = NOT_AUTHORIZED
+```
+
+### Current gate
+
+`0B-05C CORRECTIVE_EXPERIMENTAL_REVIEWED / CORRECTIVE_NUMERICAL_RERUN_REQUIRED -> experimental AI completes the corrective numerical check and explicitly resolves EV-05/D1a -> final scientific/editorial review -> writing-AI correction/normalization if required -> express author approval -> freeze -> assess 0B-06 need`.
 
 While 0B-05C remains open, no scientific-editor/writing-AI Master-Plan or 0A changes, retrospective replacement of the original normative snapshot, manuscript drafting, final novelty/gap declarations, 0B-06, 0C, or 0D are authorized.
