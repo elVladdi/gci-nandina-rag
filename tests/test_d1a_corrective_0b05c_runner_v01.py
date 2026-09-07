@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import csv
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -24,7 +25,9 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     diff_paths,
     execute_authorized,
     expected_paths,
-    git_hash_object,
+    git_blob_sha256,
+    git_head_blob_sha,
+    git_path_is_tracked,
     load_json,
     patched_corpus_bytes,
     preflight,
@@ -32,8 +35,8 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     preflight_provenance,
     relative_path,
     require_numerical_authorization,
-    sha256_file,
     validate_contract_inputs,
+    validate_code_identity,
     write_hash_ledger,
     write_json,
 )
@@ -118,10 +121,14 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
             self.spec["evaluation"]["code_identity"],
         )
         for identity in identities:
-            path = project_path(ROOT, identity["path"])
-            self.assertEqual(git_hash_object(ROOT, identity["path"]), identity["git_blob_sha"])
-            if identity["revision"] == "MICROCLOSE_WORKTREE_CONTENT":
-                self.assertEqual(sha256_file(path), identity["sha256"])
+            validate_code_identity(ROOT, identity)
+            blob_sha = git_head_blob_sha(ROOT, identity["path"])
+            self.assertEqual(blob_sha, identity["git_blob_sha"])
+            expected_sha = identity["canonical_blob_sha256"] if "canonical_blob_sha256" in identity else identity["sha256"]
+            self.assertEqual(git_blob_sha256(ROOT, blob_sha), expected_sha)
+        runner = self.spec["orchestration"]["runner"]
+        self.assertEqual(runner["revision"], "COMMITTED_GIT_BLOB")
+        self.assertIn("canonical_blob_sha256", runner)
 
     def test_09_existing_prospective_root_fails_closed(self) -> None:
         modified = copy.deepcopy(self.spec)
@@ -250,6 +257,60 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
         self.assertNotIn("sentence_transformers", sys.modules)
         for relative in self.spec["orchestration"]["future_roots"]:
             self.assertFalse(project_path(ROOT, relative).exists())
+
+    @staticmethod
+    def _git_identity_fixture(root: Path) -> tuple[Path, dict[str, str]]:
+        source = root / "tracked_code.py"
+        subprocess.run(["git", "init"], cwd=root, check=True, capture_output=True)
+        source.write_bytes(b"value = 1\n")
+        subprocess.run(["git", "add", "tracked_code.py"], cwd=root, check=True, capture_output=True)
+        subprocess.run(
+            ["git", "-c", "user.name=Codex", "-c", "user.email=codex@example.invalid", "commit", "-m", "fixture"],
+            cwd=root,
+            check=True,
+            capture_output=True,
+        )
+        blob_sha = git_head_blob_sha(root, "tracked_code.py")
+        return source, {
+            "path": "tracked_code.py",
+            "revision": "COMMITTED_GIT_BLOB",
+            "git_blob_sha": blob_sha,
+            "canonical_blob_sha256": git_blob_sha256(root, blob_sha),
+        }
+
+    def test_18_semantic_local_code_modification_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            source, identity = self._git_identity_fixture(root)
+            validate_code_identity(root, identity)
+            source.write_bytes(b"value = 2\n")
+            with self.assertRaisesRegex(ContractViolation, "local modifications"):
+                validate_code_identity(root, identity)
+
+    def test_19_crlf_worktree_representation_preserves_canonical_identity(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            source, identity = self._git_identity_fixture(root)
+            source.write_bytes(b"value = 1\r\n")
+            self.assertEqual(git_head_blob_sha(root, "tracked_code.py"), identity["git_blob_sha"])
+            self.assertEqual(git_blob_sha256(root, identity["git_blob_sha"]), identity["canonical_blob_sha256"])
+            validate_code_identity(root, identity)
+
+    def test_20_untracked_code_path_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            self._git_identity_fixture(root)
+            untracked = root / "untracked_code.py"
+            untracked.write_bytes(b"value = 1\n")
+            identity = {
+                "path": "untracked_code.py",
+                "revision": "COMMITTED_GIT_BLOB",
+                "git_blob_sha": "0" * 40,
+                "canonical_blob_sha256": "0" * 64,
+            }
+            self.assertFalse(git_path_is_tracked(root, "untracked_code.py"))
+            with self.assertRaisesRegex(ContractViolation, "not tracked"):
+                validate_code_identity(root, identity)
 
 
 if __name__ == "__main__":

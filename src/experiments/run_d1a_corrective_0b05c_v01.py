@@ -106,15 +106,47 @@ def relative_path(root: Path, path: Path) -> str:
     return path.resolve().relative_to(root.resolve()).as_posix()
 
 
-def git_hash_object(root: Path, relative: str) -> str:
+def git_path_is_tracked(root: Path, relative: str) -> bool:
     result = subprocess.run(
-        ["git", "-c", f"safe.directory={root}", "-C", str(root), "hash-object", relative],
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "ls-files", "--error-unmatch", "--", relative],
         check=False,
         capture_output=True,
         text=True,
     )
-    require(result.returncode == 0, f"Cannot hash code identity {relative}: {result.stderr.strip()}")
+    return result.returncode == 0
+
+
+def git_head_blob_sha(root: Path, relative: str) -> str:
+    require(git_path_is_tracked(root, relative), f"Required code path is not tracked: {relative}")
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "rev-parse", f"HEAD:{relative}"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    require(result.returncode == 0, f"Cannot resolve HEAD code blob {relative}: {result.stderr.strip()}")
     return result.stdout.strip()
+
+
+def git_blob_sha256(root: Path, blob_sha: str) -> str:
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "cat-file", "blob", blob_sha],
+        check=False,
+        capture_output=True,
+    )
+    require(result.returncode == 0, f"Cannot read canonical Git blob: {blob_sha}")
+    return sha256_bytes(result.stdout)
+
+
+def git_worktree_semantically_clean(root: Path, relative: str) -> bool:
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "diff", "--quiet", "--ignore-space-at-eol", "HEAD", "--", relative],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    require(result.returncode in (0, 1), f"Cannot inspect local code changes {relative}: {result.stderr.strip()}")
+    return result.returncode == 0
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -131,9 +163,13 @@ def validate_code_identity(root: Path, identity: Mapping[str, Any]) -> None:
     relative = str(identity["path"])
     path = project_path(root, relative)
     require(path.is_file(), f"Required code path is missing: {relative}")
-    require(git_hash_object(root, relative) == identity["git_blob_sha"], f"Git blob identity changed: {relative}")
-    if identity["revision"] == "MICROCLOSE_WORKTREE_CONTENT":
-        require(sha256_file(path) == identity["sha256"], f"Runner worktree SHA changed: {relative}")
+    require(git_path_is_tracked(root, relative), f"Required code path is not tracked: {relative}")
+    require(git_worktree_semantically_clean(root, relative), f"Tracked code path has local modifications: {relative}")
+    blob_sha = git_head_blob_sha(root, relative)
+    require(blob_sha == identity["git_blob_sha"], f"Git blob identity changed: {relative}")
+    canonical_sha = identity.get("canonical_blob_sha256", identity.get("sha256"))
+    require(isinstance(canonical_sha, str), f"Canonical blob SHA is missing: {relative}")
+    require(git_blob_sha256(root, blob_sha) == canonical_sha, f"Canonical Git blob SHA changed: {relative}")
 
 
 def validate_patch_contract(spec: Mapping[str, Any]) -> None:

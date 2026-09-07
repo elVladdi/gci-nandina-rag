@@ -113,20 +113,20 @@ def git_identity(root: Path, relative_path: str) -> dict[str, str]:
     }
 
 
-def worktree_identity(root: Path, relative_path: str) -> dict[str, str]:
-    path = project_path(root, relative_path)
-    result = subprocess.run(
-        ["git", "-c", f"safe.directory={root}", "-C", str(root), "hash-object", relative_path],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    require(result.returncode == 0, f"Cannot hash working-tree code: {relative_path}")
+def committed_git_blob_identity(root: Path, relative_path: str) -> dict[str, str]:
+    require(project_path(root, relative_path).is_file(), f"Missing committed runner path: {relative_path}")
+    tracked = git_command(root, ["ls-files", "--error-unmatch", "--", relative_path])
+    require(tracked.returncode == 0, f"Runner path is not tracked: {relative_path}")
+    result = git_command(root, ["rev-parse", f":{relative_path}"], text=True)
+    require(result.returncode == 0, f"Cannot resolve staged Git blob: {relative_path}")
+    blob_sha = result.stdout.strip()
+    content = git_command(root, ["cat-file", "blob", blob_sha])
+    require(content.returncode == 0, f"Cannot read canonical Git blob: {blob_sha}")
     return {
         "path": relative_path,
-        "revision": "MICROCLOSE_WORKTREE_CONTENT",
-        "git_blob_sha": result.stdout.strip(),
-        "sha256": sha256_file(path),
+        "revision": "COMMITTED_GIT_BLOB",
+        "git_blob_sha": blob_sha,
+        "canonical_blob_sha256": sha256_bytes(content.stdout),
     }
 
 
@@ -421,7 +421,7 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
             },
         },
         "orchestration": {
-            "runner": worktree_identity(root, CORRECTIVE_RUNNER_PATH),
+            "runner": committed_git_blob_identity(root, CORRECTIVE_RUNNER_PATH),
             "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --preflight",
             "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
             "future_roots": [corpus, index_root, output_root, runtime_root],

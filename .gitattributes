@@ -46,3 +46,10 @@ src/experiments/freeze_exp11b_retrieval_execution_gate_v01.py text eol=lf
 tests/test_exp11b_retrieval_execution_gate_v01.py text eol=lf
 docs/exp11b_retrieval_execution_gate_v0.1.md text eol=lf
 outputs/audits/exp11b_retrieval_execution_gate_v0.1/** text eol=lf
+
+# D1a 0B-05C textual contracts must check out with canonical LF bytes.
+src/experiments/audit_d1a_preexecution_0b05c_v01.py text eol=lf
+src/experiments/run_d1a_corrective_0b05c_v01.py text eol=lf
+tests/test_d1a_preexecution_0b05c_v01.py text eol=lf
+tests/test_d1a_corrective_0b05c_runner_v01.py text eol=lf
+outputs/audits/d1a_preexecution_0b05c_v0.1/** text eol=lf

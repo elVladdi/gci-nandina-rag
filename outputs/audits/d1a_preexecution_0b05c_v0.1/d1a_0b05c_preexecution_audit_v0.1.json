@@ -445,9 +445,9 @@
     "orchestration": {
       "runner": {
         "path": "src/experiments/run_d1a_corrective_0b05c_v01.py",
-        "revision": "MICROCLOSE_WORKTREE_CONTENT",
-        "git_blob_sha": "43bb8c47782de88a74c8a1ff0ff9c7c657833f65",
-        "sha256": "965aec2367ae9c0dd0cd0eab87d70e2bfe3c7a8960d7d26e26452904c4cfbfdc"
+        "revision": "COMMITTED_GIT_BLOB",
+        "git_blob_sha": "c7e57a35bd9ce7f09b50596f76ce8c2602fc0e11",
+        "canonical_blob_sha256": "3079db69c21f2e14c7b111728fab1d3cdacbc47e6ac3c6ebf195da4b21305030"
       },
       "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --preflight",
       "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
@@ -606,7 +606,7 @@
     },
     "corrective_execution_spec": {
       "path": "d1a_0b05c_corrective_execution_spec_v0.1.json",
-      "sha256": "5f3019f3ec4fba0409ed1d5a1246eedfd38165c3a67b885f619eec7881adbd85"
+      "sha256": "faf8fc2c1f6100bc2407219df3f71fea00fc6284206f90280e98e4ed79f0a0fd"
     }
   },
   "actions_not_executed": [
