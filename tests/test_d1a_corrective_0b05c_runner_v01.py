@@ -22,6 +22,7 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     contractual_ledger_paths,
     derive_runtime_config,
     diff_paths,
+    execute_authorized,
     expected_paths,
     git_hash_object,
     load_json,
@@ -30,6 +31,7 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     project_path,
     preflight_provenance,
     relative_path,
+    require_numerical_authorization,
     sha256_file,
     validate_contract_inputs,
     write_hash_ledger,
@@ -230,6 +232,24 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
         self.assertEqual(manifest["execution_mode"], "AUTHORIZED_EXECUTION")
         self.assertTrue(manifest["numerical_execution_occurred"])
         self.assertIsNone(manifest["hash_ledger"]["sha256"])
+
+    def test_16_numerical_authorization_guard_rejects_current_spec_and_accepts_synthetic_authorization(self) -> None:
+        with self.assertRaisesRegex(ContractViolation, "Numerical execution is not authorized"):
+            require_numerical_authorization(self.spec)
+        with self.assertRaisesRegex(ContractViolation, "Numerical execution is not authorized"):
+            require_numerical_authorization({})
+        authorized = copy.deepcopy(self.spec)
+        authorized["authorization"]["D1A_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        self.assertIsNone(require_numerical_authorization(authorized))
+
+    def test_17_unauthorized_execution_rejects_before_any_prospective_side_effect(self) -> None:
+        for relative in self.spec["orchestration"]["future_roots"]:
+            self.assertFalse(project_path(ROOT, relative).exists())
+        with self.assertRaisesRegex(ContractViolation, "Numerical execution is not authorized"):
+            execute_authorized(ROOT)
+        self.assertNotIn("sentence_transformers", sys.modules)
+        for relative in self.spec["orchestration"]["future_roots"]:
+            self.assertFalse(project_path(ROOT, relative).exists())
 
 
 if __name__ == "__main__":

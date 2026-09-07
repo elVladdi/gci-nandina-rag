@@ -260,6 +260,14 @@ def preflight(root: Path = ROOT) -> dict[str, Any]:
     )
 
 
+def require_numerical_authorization(spec: Mapping[str, Any]) -> None:
+    """Fail closed unless a separately approved future commit authorizes execution."""
+
+    authorization = spec.get("authorization")
+    state = authorization.get("D1A_NUMERICAL_EXECUTION") if isinstance(authorization, Mapping) else None
+    require(state == "AUTHORIZED", f"Numerical execution is not authorized: {state!r}")
+
+
 def expected_paths(root: Path, spec: Mapping[str, Any]) -> dict[str, list[Path]]:
     derivation = spec["orchestration"]["config_derivation"]
     index_root = project_path(root, derivation["corrected_index_root"])
@@ -398,8 +406,9 @@ def build_execution_manifest(root: Path, spec: Mapping[str, Any], preflight_proo
 def execute_authorized(root: Path = ROOT) -> dict[str, Any]:
     """Perform the pre-frozen numerical sequence only after separate authorization."""
 
-    proof = preflight(root)
     spec = load_json(project_path(root, AUDIT_SPEC_PATH))
+    require_numerical_authorization(spec)
+    proof = preflight(root)
     derivation = spec["orchestration"]["config_derivation"]
     corrected_path = project_path(root, spec["corrected_normative_corpus"]["prospective_path"])
     runtime_root = project_path(root, spec["orchestration"]["runtime_root"])

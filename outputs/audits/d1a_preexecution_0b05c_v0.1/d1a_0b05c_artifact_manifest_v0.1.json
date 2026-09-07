@@ -8,11 +8,11 @@
     },
     {
       "path": "d1a_0b05c_corrective_execution_spec_v0.1.json",
-      "sha256": "7d6deb6857464716ab6c716e1c301abc3df803964a3e10b6a98b4add3dfbd0c7"
+      "sha256": "5f3019f3ec4fba0409ed1d5a1246eedfd38165c3a67b885f619eec7881adbd85"
     },
     {
       "path": "d1a_0b05c_preexecution_audit_v0.1.json",
-      "sha256": "2bd06cc004ab4601ff2259e67b44a2c075b3ae933e8fc4d239200468f5554385"
+      "sha256": "7a063815b1ca6f398ab029fe1bc7fe3ed634acbbf9ebf499fc56762918bd7719"
     },
     {
       "path": "d1a_0b05c_top200_affected_occurrences_v0.1.csv",
