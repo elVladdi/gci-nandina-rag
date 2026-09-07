@@ -217,6 +217,35 @@ def compare_control_reproduction(expected_ranking: Path, actual_ranking: Path, e
     return {**result, "status": "PASS"}
 
 
+def reproduce_ev04_decision885_control(
+    corpus_path: Path,
+    index_path: Path,
+    metadata_path: Path,
+    output_dir: Path,
+    *,
+    frozen_ranking: Path,
+    frozen_case_summary: Path,
+    frozen_metrics: Mapping[str, Any],
+    root: Path = ROOT,
+) -> dict[str, Any]:
+    """Run and cryptographically compare the mandatory EV04 Decision885 control.
+
+    The caller must invoke this before materializing either corrected corpus.
+    A mismatch raises ``ContractViolation`` through ``compare_control_reproduction``
+    and therefore cannot be ignored by a later corrected-arm invocation.
+    """
+
+    result = evaluate_arm("EV04", corpus_path, index_path, metadata_path, output_dir, root=root)
+    return compare_control_reproduction(
+        frozen_ranking,
+        output_dir / "normative_hierarchical_results.csv",
+        frozen_case_summary,
+        output_dir / "normative_hierarchical_case_summary.csv",
+        frozen_metrics,
+        result["metrics"],
+    )
+
+
 def produce_case_level_comparison(original: Sequence[Mapping[str, Any]], corrective: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     original_by_case = {str(row["case_id"]): dict(row) for row in original}
     corrective_by_case = {str(row["case_id"]): dict(row) for row in corrective}

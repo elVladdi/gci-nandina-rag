@@ -32,6 +32,7 @@ from src.experiments.prepare_0b05c_corrective_numerical_gate_v01 import (
     validate_current_text_identity,
 )
 from src.experiments.run_0b05c_corrective_numerical_v01 import execute_authorized, preflight as runner_preflight
+from src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 import compare_control_reproduction
 from src.experiments.run_d1a_corrective_0b05c_v01 import git_blob_sha256, git_head_blob_sha, sha256_bytes
 
 
@@ -51,6 +52,7 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
         cls.ev04 = load_json(str(AUDIT_ROOT / ARMS["EV04"]["spec_name"]))
         cls.ev03_overlap = load_json(str(AUDIT_ROOT / ARMS["EV03"]["overlap_name"]))
         cls.ev04_overlap = load_json(str(AUDIT_ROOT / ARMS["EV04"]["overlap_name"]))
+        cls.manifest = load_json(str(AUDIT_ROOT / "0b05c_corrective_numerical_gate_artifact_manifest_v0.1.json"))
 
     def test_01_ev03_original_inputs_and_outputs_are_linked(self) -> None:
         identity = self.ev03["original_run_identity"]
@@ -189,7 +191,7 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
         self.assertIn("ev04_control_reproduction_evaluate_command", self.ev04["prospective_execution"]["commands"])
 
     def test_18_all_static_contract_paths_are_posix(self) -> None:
-        for payload in (self.gate, self.ev03, self.ev04, self.ev03_overlap, self.ev04_overlap):
+        for payload in (self.gate, self.ev03, self.ev04, self.ev03_overlap, self.ev04_overlap, self.manifest):
             require_posix_serialization(payload, "fixture")
 
     def test_19_ev04_reproduction_stays_mandatory_and_original_stays_unverified(self) -> None:
@@ -218,14 +220,28 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
             base = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True).stdout.strip()
             self.assertTrue(integrated_base_is_ancestor(root, base))
             (root / "README.md").write_text("descendant\n", encoding="utf-8")
-            subprocess.run(["git", "commit", "-am", "descendant"], cwd=root, check=True, capture_output=True)
+            subprocess.run(["git", "-c", "user.name=Codex", "-c", "user.email=codex@example.invalid", "commit", "-am", "descendant"], cwd=root, check=True, capture_output=True)
             self.assertTrue(integrated_base_is_ancestor(root, base))
             subprocess.run(["git", "checkout", "--orphan", "unrelated"], cwd=root, check=True, capture_output=True)
             subprocess.run(["git", "rm", "-f", "README.md"], cwd=root, check=True, capture_output=True)
             (root / "README.md").write_text("unrelated\n", encoding="utf-8")
             subprocess.run(["git", "add", "README.md"], cwd=root, check=True, capture_output=True)
-            subprocess.run(["git", "commit", "-m", "unrelated"], cwd=root, check=True, capture_output=True)
+            subprocess.run(["git", "-c", "user.name=Codex", "-c", "user.email=codex@example.invalid", "commit", "-m", "unrelated"], cwd=root, check=True, capture_output=True)
             self.assertFalse(integrated_base_is_ancestor(root, base))
+
+    def test_22_control_reproduction_requires_an_exact_fixture_and_blocks_a_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            expected_ranking = root / "expected_ranking.csv"
+            actual_ranking = root / "actual_ranking.csv"
+            expected_summary = root / "expected_summary.csv"
+            actual_summary = root / "actual_summary.csv"
+            for path, text in ((expected_ranking, "case_id,candidate_rank\nA,1\n"), (actual_ranking, "case_id,candidate_rank\nA,1\n"), (expected_summary, "case_id,rank_ref\nA,1\n"), (actual_summary, "case_id,rank_ref\nA,1\n")):
+                path.write_text(text, encoding="utf-8", newline="\n")
+            self.assertEqual(compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, {"top_1": 1}, {"top_1": 1})["status"], "PASS")
+            actual_ranking.write_text("case_id,candidate_rank\nA,2\n", encoding="utf-8", newline="\n")
+            with self.assertRaisesRegex(ContractViolation, "not exact"):
+                compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, {"top_1": 1}, {"top_1": 1})
 
 
 if __name__ == "__main__":

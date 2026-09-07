@@ -420,10 +420,13 @@ def execution_commands(arm_name: str, arm: Mapping[str, Any]) -> dict[str, str]:
         "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v01 --execute-authorized",
     }
     if arm_name == "EV04":
+        control_corpus = posix_relative(str(arm["corpus"]))
+        control_index = f"{output_root}/decision885_control_index"
+        control_output = f"{output_root}/decision885_control"
         commands.update(
             {
-                "ev04_control_reproduction_build_command": build.replace(corpus, posix_relative(str(arm["corpus"]))).replace(index_root, f"{output_root}/decision885_control_index"),
-                "ev04_control_reproduction_evaluate_command": evaluate.replace(corpus, posix_relative(str(arm["corpus"]))).replace(index_root, f"{output_root}/decision885_control_index").replace(output_root, f"{output_root}/decision885_control"),
+                "ev04_control_reproduction_build_command": f"python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV04 --corpus {control_corpus} --output {control_index}/index.json --metadata {control_index}/index_metadata.json",
+                "ev04_control_reproduction_evaluate_command": f"python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm EV04 --corpus {control_corpus} --index {control_index}/index.json --index-metadata {control_index}/index_metadata.json --output-dir {control_output}",
                 "ev04_corrected_build_command": build,
                 "ev04_corrected_evaluate_command": evaluate,
             }
@@ -556,6 +559,7 @@ def frozen_artifact_paths(root: Path) -> dict[str, Path]:
     for arm_name, arm in ARMS.items():
         paths[f"{arm_name}_spec"] = project_path(root, str(AUDIT_ROOT / arm["spec_name"]))
         paths[f"{arm_name}_overlap"] = project_path(root, str(AUDIT_ROOT / arm["overlap_name"]))
+    paths["manifest"] = project_path(root, str(AUDIT_ROOT / "0b05c_corrective_numerical_gate_artifact_manifest_v0.1.json"))
     return paths
 
 
@@ -589,6 +593,9 @@ def require_frozen_bundle_matches(root: Path, bundle: Mapping[str, Any]) -> None
             canonical_json_bytes(actual_payload) == canonical_json_bytes(expected_payload),
             f"Frozen gate artifact no longer matches live canonical inputs: {path.relative_to(root).as_posix()}",
         )
+    manifest_path = paths["manifest"]
+    require(manifest_path.is_file(), f"Frozen gate artifact manifest is missing: {manifest_path.relative_to(root).as_posix()}")
+    require_posix_serialization(read_json(manifest_path), manifest_path.relative_to(root).as_posix())
 
 
 def preflight(root: Path = ROOT, *, require_frozen_artifacts: bool = True) -> dict[str, Any]:
