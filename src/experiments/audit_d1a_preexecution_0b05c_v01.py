@@ -25,6 +25,7 @@ TRAINING_RUNNER_PATH = "src/experiments/train_text2trade_mnrl_v02.py"
 SELECTOR_PATH = "src/retrieval/text2trade_mnrl_v02.py"
 INDEX_BUILDER_PATH = "src/experiments/build_text2trade_mnrl_index_v02.py"
 EVALUATOR_PATH = "src/experiments/evaluate_text2trade_mnrl_data_aduanas_v02.py"
+CORRECTIVE_RUNNER_PATH = "src/experiments/run_d1a_corrective_0b05c_v01.py"
 REPRODUCIBILITY_MANIFEST_PATH = "docs/exp04_text2trade_mnrl_d1a_v02_reproducibility_manifest.json"
 TRAINING_METADATA_PATH = "outputs/training/text2trade_mnrl_v0.2/training_metadata.json"
 TOP200_PATH = "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl"
@@ -42,7 +43,7 @@ CANONICAL_MASTER_PLAN = {
     "path": "docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md",
     "local_and_github_text_must_match": True,
     "governance": "D-011",
-    "canonical_markdown_blob_sha": "06cf639af9330f5a57930c9efffb5504595cfc4b",
+    "canonical_markdown_blob_sha": "b5eaf686c6b0ae7e2dec4639d047d80abe912923",
     "legacy_xlsx_status": "SECONDARY_HISTORICAL_TRACKER_NOT_CANONICAL_MASTER_PLAN",
 }
 
@@ -109,6 +110,23 @@ def git_identity(root: Path, relative_path: str) -> dict[str, str]:
         "revision": INPUT_MAIN,
         "git_blob_sha": git_blob_sha(root, INPUT_MAIN, relative_path),
         "sha256": sha256_bytes(content),
+    }
+
+
+def worktree_identity(root: Path, relative_path: str) -> dict[str, str]:
+    path = project_path(root, relative_path)
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "hash-object", relative_path],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    require(result.returncode == 0, f"Cannot hash working-tree code: {relative_path}")
+    return {
+        "path": relative_path,
+        "revision": "MICROCLOSE_WORKTREE_CONTENT",
+        "git_blob_sha": result.stdout.strip(),
+        "sha256": sha256_file(path),
     }
 
 
@@ -311,14 +329,16 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
     corpus = "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.1.jsonl"
     index_root = "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1"
     output_root = "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1"
-    for relative in (corpus, index_root, output_root):
+    runtime_root = "outputs/audits/d1a_corrective_0b05c_runtime_v0.1"
+    runtime_config = f"{runtime_root}/text2trade_mnrl_v0.2_0b05c_runtime.json"
+    for relative in (corpus, index_root, output_root, runtime_root):
         require(not project_path(root, relative).exists(), f"Prospective D1a path already exists and must remain absent: {relative}")
     patches = []
     for code in AFFECTED_CODES:
         patches.append({
             "code": code,
             "match": {"doc_id": originals[code]["doc_id"], "codigo": code, "version": "Decision_885", "original_jsonl_line_sha256": originals[code]["original_jsonl_line_sha256"]},
-            "replacement": {"titulo": "Inferior a 4,537 t", "texto": "Inferior a 4,537 t. Contexto: Seccion XVII / Capitulo 87.", "texto_index": "Inferior a 4,537 t.", "version": "Decision_906"},
+            "replacement": {"titulo": "Inferior a 4,537 t", "texto": "Inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.", "texto_index": "Inferior a 4,537 t.", "version": "Decision_906"},
         })
     return {
         "specification_id": "d1a_corrective_execution_spec_v0.1", "specification_status": "CLOSED_PROSPECTIVELY",
@@ -348,7 +368,15 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
             "embedding_normalization": config["index"]["normalize_embeddings"], "similarity": config["training"]["similarity"],
             "retrieval_semantics": config["index"]["retrieval"],
             "ranking_unit": config["index"]["ranking_unit"], "hnsw": config["index"]["hnsw"], "prospective_output_root": index_root,
-            "prospective_outputs": {"vectors": f"{index_root}/index/vectors.npy", "id_map": f"{index_root}/index/id_map.json", "docstore": f"{index_root}/store/nandina8_docstore.jsonl", "index_metadata": f"{index_root}/text2trade_mnrl_nandina8_d1a_corrective_run_metadata.json"},
+            "prospective_outputs": {
+                "vectors": f"{index_root}/index/vectors.npy",
+                "id_map": f"{index_root}/index/id_map.json",
+                "docstore": f"{index_root}/store/nandina8_docstore.jsonl",
+                "retrieval_config": f"{index_root}/retrieval_config.json",
+                "vector_integrity_sample": f"{index_root}/vector_integrity_sample_v0.2.csv",
+                "vector_integrity_gate": f"{index_root}/vector_integrity_gate_v0.2.json",
+                "index_metadata": f"{index_root}/text2trade_mnrl_nandina8_v02_run_metadata.json",
+            },
         },
         "evaluation": {
             "code_identity": git_identity(root, EVALUATOR_PATH),
@@ -361,12 +389,75 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
             "primary_control_case_summary": manifest["small_local_outputs_not_committed"]["case_summary"],
             "primary_control_ranking_trace": manifest["small_local_outputs_not_committed"]["ranking_trace"],
             "prospective_output_root": output_root,
-            "prospective_outputs": {"metrics": f"{output_root}/d1a_corrective_metrics.json", "case_summary": f"{output_root}/d1a_corrective_case_summary.csv", "ranking_trace_top200": f"{output_root}/d1a_corrective_ranked_codes_top200.jsonl", "comparison": f"{output_root}/d1a_corrective_vs_original_comparison.json", "hash_ledger": f"{output_root}/d1a_corrective_output_hashes_v0.1.csv"},
+            "required_index_contract": {
+                "metadata_filename": "text2trade_mnrl_nandina8_v02_run_metadata.json",
+                "vector_integrity_filename": "vector_integrity_gate_v0.2.json",
+            },
+            "prospective_outputs": {
+                "metrics": f"{output_root}/d1a_metrics.json",
+                "case_summary": f"{output_root}/d1a_case_summary.csv",
+                "ranking_trace_top200": f"{output_root}/d1a_ranked_codes_top200.jsonl",
+                "strategy_comparison": f"{output_root}/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+                "summary": f"{output_root}/summary.md",
+            },
+        },
+        "orchestration": {
+            "runner": worktree_identity(root, CORRECTIVE_RUNNER_PATH),
+            "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --preflight",
+            "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
+            "future_roots": [corpus, index_root, output_root, runtime_root],
+            "runtime_root": runtime_root,
+            "runtime_config_path": runtime_config,
+            "original_config": {
+                "path": CONFIG_PATH,
+                "sha256": sha256_bytes(git_bytes(root, CONFIG_COMMIT, CONFIG_PATH)),
+            },
+            "config_derivation": {
+                "original_config_path": CONFIG_PATH,
+                "corrected_normative_corpus_path": corpus,
+                "corrected_index_root": index_root,
+                "corrected_evaluation_root": output_root,
+                "allowed_changes_only": [
+                    "frozen_inputs.normative_corpus",
+                    "frozen_inputs.normative_corpus_sha256",
+                    "index.output_dir",
+                    "outputs.evaluation_dir",
+                ],
+                "deterministic_sequence": [
+                    "Validate frozen original corpus SHA and both original JSONL line SHA values.",
+                    "Apply exactly two UTF-8 LF JSONL patches in memory.",
+                    "Calculate and record the derived corrected corpus SHA-256.",
+                    "Derive the runtime config mechanically and validate its allowed diff before any index build.",
+                    "Create the corpus, runtime config, builder outputs, evaluator outputs, comparisons, and ledger only after a separately authorized command.",
+                ],
+            },
+            "runner_outputs": {
+                "aggregate_comparison": f"{output_root}/d1a_corrective_vs_original_comparison_v0.1.json",
+                "case_level_comparison": f"{output_root}/d1a_corrective_case_level_comparison_v0.1.jsonl",
+                "hash_ledger": f"{output_root}/d1a_corrective_output_hash_ledger_v0.1.csv",
+                "execution_manifest": f"{output_root}/d1a_corrective_execution_manifest_v0.1.json",
+            },
+            "comparison_contract": {
+                "primary_control_only": "FROZEN_ORIGINAL_D1A_OUTPUTS_FROM_DECISION_885_SNAPSHOT",
+                "rank_convention": "0=NOT_FOUND_AT_200",
+                "case_fields": [
+                    "case_id", "nandina_ref", "original_rank_ref", "corrected_rank_ref",
+                    "original_found_at_200", "corrected_found_at_200",
+                    "original_hit_1", "corrected_hit_1", "original_hit_3", "corrected_hit_3",
+                    "original_hit_5", "corrected_hit_5", "original_hit_10", "corrected_hit_10",
+                    "original_hit_50", "corrected_hit_50", "original_hit_100", "corrected_hit_100",
+                    "original_hit_200", "corrected_hit_200", "ranking_changed",
+                    "original_rank_87044110", "corrected_rank_87044110",
+                    "original_rank_87045110", "corrected_rank_87045110",
+                ],
+                "aggregate_metrics": ["Top@1", "Top@3", "Top@5", "Top@10", "Top@50", "Recall@100", "Recall@200", "MRR@100", "MRR@200", "Exact@100", "Exact@200", "HS6@100", "HS6@200", "HS4@100", "HS4@200", "Chapter@100", "Chapter@200"],
+            },
         },
         "fail_closed_execution_rules": [
-            "All prospective corpus, index, and evaluation output paths must be absent before execution.",
+            "All prospective corpus, index, evaluation, and runtime roots must be absent before execution.",
             "Refuse partial roots, existing files, and overwrite attempts.",
-            "Write the output hash ledger only after every required artifact is present.",
+            "Refuse silent resume; preserve a failed run as failed and require a new prospective authorization for a rerun.",
+            "Write the output hash ledger only after every required contractual artifact is present.",
             "Do not interpret metrics until all integrity and acceptance criteria pass.",
         ],
         "acceptance_and_integrity_criteria": [
@@ -376,7 +467,9 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
             "Vectors, docstore, and id-map cardinalities are coherent and map all 7644 documents.",
             "Normalized embeddings use exact brute-force dot-product retrieval and unique NANDINA-8 ranking.",
             "Evaluation covers exactly N=1056 cases, emits a unique Top-200 trace and a case-level record for each case.",
-            "Index-builder and evaluator code identities match this specification.",
+            "Runner, index-builder, and evaluator code identities match this specification.",
+            "Builder and evaluator fixed filenames exist under the separate corrected roots before comparison.",
+            "Aggregate and case-level comparisons use frozen Decision 885 primary controls only.",
             "A complete output hash ledger is emitted without overwrite.",
         ],
     }
@@ -385,6 +478,7 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
 def bilingual_record(audit: Mapping[str, Any]) -> str:
     evidence, exposure = audit["training_evidence"], audit["training_exposure"]
     overlap, decisions, specification = audit["retrieval_output_overlap"], audit["prospective_decisions"], audit["corrective_execution_spec"]
+    orchestration = specification["orchestration"]
     pool = audit["historical_training_code_pool"]
     return f"""# D1a 0B-05C Pre-execution Audit v0.1
 
@@ -402,6 +496,7 @@ D1A_TRAINING_EXPOSURE={exposure['D1A_TRAINING_EXPOSURE']}
 D1A_RETRIEVAL_OUTPUT_OVERLAP={overlap['D1A_RETRIEVAL_OUTPUT_OVERLAP']}
 MODEL_POLICY={decisions['MODEL_POLICY']}
 D1A_EXECUTION_SPECIFICATION={specification['specification_status']}
+CORRECTIVE_PREFLIGHT_COMMAND={orchestration['preflight_command']}
 D1A_METRIC_IMPACT={decisions['D1A_METRIC_IMPACT']}
 D1A_NUMERICAL_EXECUTION={decisions['D1A_NUMERICAL_EXECUTION']}
 0B05C_CLOSURE={decisions['0B05C_CLOSURE']}
@@ -424,6 +519,7 @@ D1A_TRAINING_EXPOSURE={exposure['D1A_TRAINING_EXPOSURE']}
 D1A_RETRIEVAL_OUTPUT_OVERLAP={overlap['D1A_RETRIEVAL_OUTPUT_OVERLAP']}
 MODEL_POLICY={decisions['MODEL_POLICY']}
 D1A_EXECUTION_SPECIFICATION={specification['specification_status']}
+CORRECTIVE_PREFLIGHT_COMMAND={orchestration['preflight_command']}
 D1A_METRIC_IMPACT={decisions['D1A_METRIC_IMPACT']}
 D1A_NUMERICAL_EXECUTION={decisions['D1A_NUMERICAL_EXECUTION']}
 0B05C_CLOSURE={decisions['0B05C_CLOSURE']}

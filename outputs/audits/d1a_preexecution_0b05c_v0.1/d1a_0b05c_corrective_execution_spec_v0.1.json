@@ -76,7 +76,7 @@
           },
           "replacement": {
             "titulo": "Inferior a 4,537 t",
-            "texto": "Inferior a 4,537 t. Contexto: Seccion XVII / Capitulo 87.",
+            "texto": "Inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
             "texto_index": "Inferior a 4,537 t.",
             "version": "Decision_906"
           }
@@ -91,7 +91,7 @@
           },
           "replacement": {
             "titulo": "Inferior a 4,537 t",
-            "texto": "Inferior a 4,537 t. Contexto: Seccion XVII / Capitulo 87.",
+            "texto": "Inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
             "texto_index": "Inferior a 4,537 t.",
             "version": "Decision_906"
           }
@@ -132,7 +132,10 @@
       "vectors": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/vectors.npy",
       "id_map": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/id_map.json",
       "docstore": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/store/nandina8_docstore.jsonl",
-      "index_metadata": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/text2trade_mnrl_nandina8_d1a_corrective_run_metadata.json"
+      "retrieval_config": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/retrieval_config.json",
+      "vector_integrity_sample": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/vector_integrity_sample_v0.2.csv",
+      "vector_integrity_gate": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/vector_integrity_gate_v0.2.json",
+      "index_metadata": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/text2trade_mnrl_nandina8_v02_run_metadata.json"
     }
   },
   "evaluation": {
@@ -187,18 +190,120 @@
       "sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c"
     },
     "prospective_output_root": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1",
+    "required_index_contract": {
+      "metadata_filename": "text2trade_mnrl_nandina8_v02_run_metadata.json",
+      "vector_integrity_filename": "vector_integrity_gate_v0.2.json"
+    },
     "prospective_outputs": {
-      "metrics": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_metrics.json",
-      "case_summary": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_case_summary.csv",
-      "ranking_trace_top200": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_ranked_codes_top200.jsonl",
-      "comparison": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_vs_original_comparison.json",
-      "hash_ledger": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_output_hashes_v0.1.csv"
+      "metrics": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_metrics.json",
+      "case_summary": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_case_summary.csv",
+      "ranking_trace_top200": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_ranked_codes_top200.jsonl",
+      "strategy_comparison": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+      "summary": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/summary.md"
+    }
+  },
+  "orchestration": {
+    "runner": {
+      "path": "src/experiments/run_d1a_corrective_0b05c_v01.py",
+      "revision": "MICROCLOSE_WORKTREE_CONTENT",
+      "git_blob_sha": "15ccfd2c8c484d1574b5f03f43cd4b520f600685",
+      "sha256": "d6963d2445833be1bf40efca0da30b7eea691c3abb8738518c4b168ffa1773f6"
+    },
+    "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --preflight",
+    "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
+    "future_roots": [
+      "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.1.jsonl",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1",
+      "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1",
+      "outputs/audits/d1a_corrective_0b05c_runtime_v0.1"
+    ],
+    "runtime_root": "outputs/audits/d1a_corrective_0b05c_runtime_v0.1",
+    "runtime_config_path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.1/text2trade_mnrl_v0.2_0b05c_runtime.json",
+    "original_config": {
+      "path": "src/configs/text2trade_mnrl_v0.2.json",
+      "sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
+    },
+    "config_derivation": {
+      "original_config_path": "src/configs/text2trade_mnrl_v0.2.json",
+      "corrected_normative_corpus_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.1.jsonl",
+      "corrected_index_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1",
+      "corrected_evaluation_root": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1",
+      "allowed_changes_only": [
+        "frozen_inputs.normative_corpus",
+        "frozen_inputs.normative_corpus_sha256",
+        "index.output_dir",
+        "outputs.evaluation_dir"
+      ],
+      "deterministic_sequence": [
+        "Validate frozen original corpus SHA and both original JSONL line SHA values.",
+        "Apply exactly two UTF-8 LF JSONL patches in memory.",
+        "Calculate and record the derived corrected corpus SHA-256.",
+        "Derive the runtime config mechanically and validate its allowed diff before any index build.",
+        "Create the corpus, runtime config, builder outputs, evaluator outputs, comparisons, and ledger only after a separately authorized command."
+      ]
+    },
+    "runner_outputs": {
+      "aggregate_comparison": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_vs_original_comparison_v0.1.json",
+      "case_level_comparison": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_case_level_comparison_v0.1.jsonl",
+      "hash_ledger": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_output_hash_ledger_v0.1.csv",
+      "execution_manifest": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_execution_manifest_v0.1.json"
+    },
+    "comparison_contract": {
+      "primary_control_only": "FROZEN_ORIGINAL_D1A_OUTPUTS_FROM_DECISION_885_SNAPSHOT",
+      "rank_convention": "0=NOT_FOUND_AT_200",
+      "case_fields": [
+        "case_id",
+        "nandina_ref",
+        "original_rank_ref",
+        "corrected_rank_ref",
+        "original_found_at_200",
+        "corrected_found_at_200",
+        "original_hit_1",
+        "corrected_hit_1",
+        "original_hit_3",
+        "corrected_hit_3",
+        "original_hit_5",
+        "corrected_hit_5",
+        "original_hit_10",
+        "corrected_hit_10",
+        "original_hit_50",
+        "corrected_hit_50",
+        "original_hit_100",
+        "corrected_hit_100",
+        "original_hit_200",
+        "corrected_hit_200",
+        "ranking_changed",
+        "original_rank_87044110",
+        "corrected_rank_87044110",
+        "original_rank_87045110",
+        "corrected_rank_87045110"
+      ],
+      "aggregate_metrics": [
+        "Top@1",
+        "Top@3",
+        "Top@5",
+        "Top@10",
+        "Top@50",
+        "Recall@100",
+        "Recall@200",
+        "MRR@100",
+        "MRR@200",
+        "Exact@100",
+        "Exact@200",
+        "HS6@100",
+        "HS6@200",
+        "HS4@100",
+        "HS4@200",
+        "Chapter@100",
+        "Chapter@200"
+      ]
     }
   },
   "fail_closed_execution_rules": [
-    "All prospective corpus, index, and evaluation output paths must be absent before execution.",
+    "All prospective corpus, index, evaluation, and runtime roots must be absent before execution.",
     "Refuse partial roots, existing files, and overwrite attempts.",
-    "Write the output hash ledger only after every required artifact is present.",
+    "Refuse silent resume; preserve a failed run as failed and require a new prospective authorization for a rerun.",
+    "Write the output hash ledger only after every required contractual artifact is present.",
     "Do not interpret metrics until all integrity and acceptance criteria pass."
   ],
   "acceptance_and_integrity_criteria": [
@@ -208,7 +313,9 @@
     "Vectors, docstore, and id-map cardinalities are coherent and map all 7644 documents.",
     "Normalized embeddings use exact brute-force dot-product retrieval and unique NANDINA-8 ranking.",
     "Evaluation covers exactly N=1056 cases, emits a unique Top-200 trace and a case-level record for each case.",
-    "Index-builder and evaluator code identities match this specification.",
+    "Runner, index-builder, and evaluator code identities match this specification.",
+    "Builder and evaluator fixed filenames exist under the separate corrected roots before comparison.",
+    "Aggregate and case-level comparisons use frozen Decision 885 primary controls only.",
     "A complete output hash ledger is emitted without overwrite."
   ]
 }
