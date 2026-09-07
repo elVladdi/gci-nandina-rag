@@ -5,14 +5,14 @@
       "original_ranking_overlap_sha256": "90fcc8eb3d853673f22f6ac6adbbf232edd5dbc573e54562fbfe72bc6fd4caff",
       "original_run_identity": "FULLY_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
       "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "b3958e130d636c5f7edff5fad198f1d76bb2023b67ea6fc6ab8a2dee58aa5e11"
+      "specification_sha256": "14e0efa820a6e40a2c58e610771374270cff939b3670fc63fdc00a6ec938e938"
     },
     "EV04": {
       "original_ranking_overlap_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_original_ranking_overlap_v0.1.json",
       "original_ranking_overlap_sha256": "491ef925f674b312570ea55907c462aa9622ba7ed8a0ada2917905345a75f364",
       "original_run_identity": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
       "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "79ffd67aed3d0c476ee8c6e69b64433ec87b209371e2fbadbabd33597f07bdf8"
+      "specification_sha256": "29e063f148bde3ee335bd0f383ce4c7ff8c32222f244901551652c625b38a760"
     }
   },
   "authorization": {
@@ -23,6 +23,45 @@
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false
   },
+  "authorization_transition_contract": {
+    "allowed_authorization_fields": [
+      "EV03_NUMERICAL_EXECUTION",
+      "EV04_NUMERICAL_EXECUTION",
+      "UNIFIED_0B05C_NUMERICAL_EXECUTION"
+    ],
+    "allowed_companion_changes": [
+      "mechanically-derived runtime hashes",
+      "execution manifests"
+    ],
+    "allowed_transition": "NOT_AUTHORIZED -> AUTHORIZED",
+    "canonical_sha256": "da18f4d05d841d12430dfb8fb6a81cce9c189eac54b9cb791a99aee4030d1eca",
+    "d1a_authorization": "D1a remains independently governed by its own authorization contract.",
+    "forbidden_changes": [
+      "patches",
+      "queries",
+      "base corpora",
+      "model weights",
+      "BM25 parameters",
+      "ranking semantics",
+      "metric contracts",
+      "control reproduction rules",
+      "runners",
+      "builders",
+      "evaluators",
+      "output paths",
+      "execution order",
+      "comparison schema"
+    ],
+    "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/0b05c_corrective_numerical_execution_gate_v0.1.json#/authorization"
+  },
+  "comparison_producers": {
+    "EV03_aggregate": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_aggregate_comparison",
+    "EV03_case_level": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_case_level_comparison",
+    "EV04_aggregate": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_aggregate_comparison",
+    "EV04_case_level": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_case_level_comparison",
+    "unified_execution_manifest": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:write_execution_manifest",
+    "unified_sensitivity_summary": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_unified_sensitivity_summary"
+  },
   "corrective_execution_binding": {
     "corrective_builder": {
       "canonical_blob_sha256": "d3bd2cd72d62f08b1f0bb52b126c6719c04b57b89ec7fdaaa1377e0677830fbe",
@@ -32,9 +71,9 @@
       "path": "src/experiments/build_bm25_corrective_0b05c_v01.py"
     },
     "corrective_evaluator": {
-      "canonical_blob_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
-      "git_blob_sha": "124d6ac5e2ef357d72a320d919f08c75ddc7915a",
-      "historical_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
+      "canonical_blob_sha256": "853eae4202adcea70008cc67dcefae68b20337194632a8b836a782ae30265ecd",
+      "git_blob_sha": "f786d9429b1e287fa23a0a2fca3d9338244e599b",
+      "historical_sha256": "853eae4202adcea70008cc67dcefae68b20337194632a8b836a782ae30265ecd",
       "identity_authority": "COMMITTED_GIT_BLOB",
       "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
     },
@@ -75,9 +114,9 @@
         "path": "src/experiments/build_bm25_index.py"
       },
       "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py": {
-        "canonical_blob_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
-        "git_blob_sha": "124d6ac5e2ef357d72a320d919f08c75ddc7915a",
-        "historical_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
+        "canonical_blob_sha256": "853eae4202adcea70008cc67dcefae68b20337194632a8b836a782ae30265ecd",
+        "git_blob_sha": "f786d9429b1e287fa23a0a2fca3d9338244e599b",
+        "historical_sha256": "853eae4202adcea70008cc67dcefae68b20337194632a8b836a782ae30265ecd",
         "identity_authority": "COMMITTED_GIT_BLOB",
         "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
       },
@@ -96,9 +135,9 @@
         "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py"
       },
       "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py": {
-        "canonical_blob_sha256": "df5ce66f9d0bd75f68fc3dd62d3e8f2ac760e4f09bf3c99486c43538d06593e6",
-        "git_blob_sha": "51b6c6e1b637ef2889c2921b6969a04d08034cd5",
-        "historical_sha256": "df5ce66f9d0bd75f68fc3dd62d3e8f2ac760e4f09bf3c99486c43538d06593e6",
+        "canonical_blob_sha256": "1007665a9d54abe28ff6c41079d690f894d3ee0b4ffaa19121ecc430a764521d",
+        "git_blob_sha": "342d5d50d9e8bb1490aef96d46fd476dc3ab97f6",
+        "historical_sha256": "1007665a9d54abe28ff6c41079d690f894d3ee0b4ffaa19121ecc430a764521d",
         "identity_authority": "COMMITTED_GIT_BLOB",
         "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py"
       },
@@ -165,47 +204,42 @@
     "reject execution while authorization remains NOT_AUTHORIZED",
     "reject EV04 corrected execution unless mandatory Decision885 reproduction is PASS"
   ],
-  "future_authorization_transition_contract": {
-    "allowed_mutations": [
-      "authorization state fields from NOT_AUTHORIZED to AUTHORIZED",
-      "mechanically-derived runtime hashes",
-      "execution manifests"
-    ],
-    "d1a_authorization": "D1a remains independently governed by its own authorization contract.",
-    "forbidden_mutations": [
-      "patches",
-      "queries",
-      "base corpora",
-      "weights",
-      "BM25 semantics",
-      "metric contracts",
-      "reproduction rules",
-      "runners",
-      "builders",
-      "evaluators",
-      "output paths",
-      "execution order",
-      "comparison schema"
-    ]
-  },
   "future_execution_order": [
     "01_unified_preflight",
     "02_EV03_control_reproduction",
-    "03_EV03_control_comparison",
-    "04_EV03_corrected_corpus_and_index",
-    "05_EV03_corrected_evaluation",
-    "06_EV04_Decision885_control_reproduction",
-    "07_EV04_control_comparison_must_pass",
-    "08_EV04_corrected_corpus_and_index",
-    "09_EV04_corrected_evaluation",
+    "03_EV03_corrected_corpus_and_index",
+    "04_EV03_corrected_evaluation",
+    "05_EV04_Decision885_control_reproduction",
+    "06_EV04_corrected_corpus_and_index",
+    "07_EV04_corrected_evaluation",
+    "08_D1a_corrected_execution_under_its_own_authorization",
+    "09_integrity_validation",
     "10_case_level_comparisons",
     "11_aggregate_comparisons",
-    "12_unified_sensitivity_summary",
-    "13_manifest_and_hash_ledger",
-    "14_D1a_execute_only_under_its_own_authorization"
+    "12_unified_execution_manifest",
+    "13_unified_hash_ledger",
+    "14_interpretation"
   ],
   "gate_id": "0B05C_CORRECTIVE_NUMERICAL_EXECUTION_GATE_v0.1",
   "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "hash_ledger_contract": {
+    "covers": [
+      "EV03 corrected corpus",
+      "EV04 corrected corpus",
+      "runtime and config artifacts",
+      "EV03 and EV04 indexes plus metadata",
+      "EV03 and EV04 control-reproduction outputs",
+      "EV03 and EV04 corrected retrieval outputs",
+      "EV03 and EV04 case-level comparisons",
+      "EV03 and EV04 aggregate comparisons",
+      "D1a corrected outputs",
+      "unified execution manifest",
+      "unified sensitivity summary"
+    ],
+    "path": "outputs/evaluation/0b05c_corrective_numerical_v0.1/unified_output_hash_ledger.json",
+    "producer": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:write_hash_ledger",
+    "self_exclusion": "Only the ledger file itself is excluded to avoid a circular hash."
+  },
   "integrated_base_ancestry_requirement": "INTEGRATED_BASE_COMMIT must be an ancestor of candidate HEAD; main is not required to remain byte-identical after approved integrations.",
   "integrated_base_commit": "7ff504c4a5a763705f198ca41753db75e938a87d"
 }

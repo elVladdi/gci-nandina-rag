@@ -350,8 +350,14 @@
     "commands": {
       "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
       "ev03_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV03 --corpus data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.1.jsonl --output data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.1/index.json --metadata data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.1/index_metadata.json",
+      "ev03_control_reproduction_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV03 --corpus data/processed/corpus_rag_v1_index.jsonl --output outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.1/decision885_control_index/index.json --metadata outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.1/decision885_control_index/index_metadata.json",
+      "ev03_control_reproduction_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm EV03 --corpus data/processed/corpus_rag_v1_index.jsonl --index outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.1/decision885_control_index/index.json --index-metadata outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.1/decision885_control_index/index_metadata.json --output-dir outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.1/decision885_control",
       "ev03_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm EV03 --corpus data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.1.jsonl --index data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.1/index.json --index-metadata data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.1/index_metadata.json --output-dir outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.1",
       "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v01 --execute-authorized"
+    },
+    "comparison_producers": {
+      "aggregate_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_aggregate_comparison",
+      "case_level_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_case_level_comparison"
     },
     "derived_identity_policy": "The future evaluator validates the SHA-256 values derived by its own corrective corpus and corrective index build; it never substitutes historic fixed corpus or index hashes.",
     "execution_order": [
