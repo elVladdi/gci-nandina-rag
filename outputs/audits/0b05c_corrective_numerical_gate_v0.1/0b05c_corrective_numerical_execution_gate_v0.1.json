@@ -135,9 +135,9 @@
         "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py"
       },
       "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py": {
-        "canonical_blob_sha256": "1007665a9d54abe28ff6c41079d690f894d3ee0b4ffaa19121ecc430a764521d",
-        "git_blob_sha": "342d5d50d9e8bb1490aef96d46fd476dc3ab97f6",
-        "historical_sha256": "1007665a9d54abe28ff6c41079d690f894d3ee0b4ffaa19121ecc430a764521d",
+        "canonical_blob_sha256": "dc8a53eaefef3f0d7414ad1083ba05621aa8b57a8e91793a9fdc139f9f49e632",
+        "git_blob_sha": "b4ea4b4ff5b1b585e92c3768ef9aa7bee4b6a5b0",
+        "historical_sha256": "dc8a53eaefef3f0d7414ad1083ba05621aa8b57a8e91793a9fdc139f9f49e632",
         "identity_authority": "COMMITTED_GIT_BLOB",
         "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py"
       },
@@ -241,5 +241,23 @@
     "self_exclusion": "Only the ledger file itself is excluded to avoid a circular hash."
   },
   "integrated_base_ancestry_requirement": "INTEGRATED_BASE_COMMIT must be an ancestor of candidate HEAD; main is not required to remain byte-identical after approved integrations.",
-  "integrated_base_commit": "7ff504c4a5a763705f198ca41753db75e938a87d"
+  "integrated_base_commit": "7ff504c4a5a763705f198ca41753db75e938a87d",
+  "microclose_findings": {
+    "0B05C-GATE-F001": {
+      "evidence": "integrated_base_is_ancestor() requires 7ff504c4a5a763705f198ca41753db75e938a87d to be an ancestor of HEAD, not an immutable main ref.",
+      "status": "CLOSED_PENDING_EXTERNAL_AUDIT"
+    },
+    "0B05C-GATE-F002": {
+      "evidence": "posix_relative() and recursive persisted-payload validation reject backslash serialization.",
+      "status": "CLOSED_PENDING_EXTERNAL_AUDIT"
+    },
+    "0B05C-GATE-F003": {
+      "evidence": "Committed runner, corrective builder/evaluator, exact commands, blob identities, comparison producers, and ledger contract are frozen.",
+      "status": "CLOSED_PENDING_EXTERNAL_AUDIT"
+    },
+    "0B05C-GATE-F004": {
+      "evidence": "EV04 original provenance remains NOT_VERIFIABLE; a mandatory same-evaluator Decision885 exact reproduction gate blocks corrected execution.",
+      "status": "CLOSED_PENDING_EXTERNAL_AUDIT"
+    }
+  }
 }
