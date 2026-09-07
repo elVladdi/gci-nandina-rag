@@ -720,6 +720,12 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
             "EV04_ORIGINAL_HISTORICAL_EXECUTION": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
             "EV04_DECISION885_REPRODUCTION_GATE": "MANDATORY/NOT_EXECUTED",
         },
+        "microclose_findings": {
+            "0B05C-GATE-F001": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "integrated_base_is_ancestor() requires 7ff504c4a5a763705f198ca41753db75e938a87d to be an ancestor of HEAD, not an immutable main ref."},
+            "0B05C-GATE-F002": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "posix_relative() and recursive persisted-payload validation reject backslash serialization."},
+            "0B05C-GATE-F003": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "Committed runner, corrective builder/evaluator, exact commands, blob identities, comparison producers, and ledger contract are frozen."},
+            "0B05C-GATE-F004": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "EV04 original provenance remains NOT_VERIFIABLE; a mandatory same-evaluator Decision885 exact reproduction gate blocks corrected execution."},
+        },
         "authorization_transition_contract": {**authorization_transition_contract, "canonical_sha256": sha256_bytes(canonical_json_bytes(authorization_transition_contract))},
         "comparison_producers": {
             "EV03_case_level": f"{EVALUATOR_PATH}:produce_case_level_comparison",
