@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 37eaa712bd12914b97e8fc108b96dc6e68c4e460; EXP11B Bank Materialization CLOSED / APPROVED / INTEGRATED; EXP11B Retrieval Gate APPROVED / INTEGRATED; Retrieval Execution NOT_AUTHORIZED / NOT_EXECUTED; H150/H200 results not observed; 0B05C D1a Corrective Gate IN_EXTERNAL_MICROCLOSE / NOT_CLOSED. D1a: training exposure NO_EFFECTIVE_EXPOSURE_IDENTIFIED, retrieval overlap NONE_IDENTIFIED, MODEL_POLICY FREEZE_ORIGINAL_D1A_WEIGHTS, execution specification CLOSED_PROSPECTIVELY / PENDING_EXTERNAL_AUDIT, metric impact NOT_DETERMINED, numerical execution NOT_AUTHORIZED, downstream NOT_YET_JUSTIFIED, EXP12_AUTHORIZED=false.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 7ff504c4a5a763705f198ca41753db75e938a87d; D1A_PREEXECUTION_AUDIT=APPROVED; D1A_PREEXECUTION_INTEGRATION=PASS; D1A_POSTINT_F001=CLOSED/PASS; D1A_POSTINT_F002=CLOSED/PASS; D1A_EXECUTION_SPECIFICATION=CLOSED_PROSPECTIVELY; D1A_NUMERICAL_EXECUTION=NOT_AUTHORIZED; D1A_METRIC_IMPACT=NOT_DETERMINED; 0B05C_CLOSURE=NOT_AUTHORIZED; 0B05C_CORRECTIVE_NUMERICAL_GATE=IN_PREEXECUTION_FREEZE/PENDING_EXTERNAL_AUDIT. EXP11B_PORTABILITY_DEBT=OPEN; EXP11B_PORTABILITY_DEBT_BLOCKS_D1A=false; EXP11B_PORTABILITY_DEBT_BLOCKS_EXP11B_RETRIEVAL_AUTHORIZATION=true. EXP11B Retrieval Execution NOT_AUTHORIZED / NOT_EXECUTED; H150/H200 results not observed; EXP12_AUTHORIZED=false.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -240,15 +240,19 @@ EXP11B Retrieval Execution Gate ✅ APPROVED / INTEGRATED
   ↓
 EXP11B Retrieval Execution ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
-0B-05C D1a Corrective Gate ⏳ IN_EXTERNAL_MICROCLOSE / NOT_CLOSED
+0B-05C Corrective Numerical Gate ⏳ IN_PREEXECUTION_FREEZE / PENDING_EXTERNAL_AUDIT
   - D1a training exposure: NO_EFFECTIVE_EXPOSURE_IDENTIFIED
   - D1a Top-200 overlap: NONE_IDENTIFIED
   - frozen original D1a weights
-  - execution specification CLOSED_PROSPECTIVELY / PENDING_EXTERNAL_AUDIT
-  - numerical execution: NOT_AUTHORIZED
+  - D1A_PREEXECUTION_AUDIT=APPROVED / D1A_PREEXECUTION_INTEGRATION=PASS
+  - D1A_POSTINT_F001=CLOSED/PASS / D1A_POSTINT_F002=CLOSED/PASS
+  - D1a execution specification CLOSED_PROSPECTIVELY; D1A_METRIC_IMPACT=NOT_DETERMINED
+  - EV03/EV04 corrective execution specifications CLOSED_PROSPECTIVELY / PENDING_EXTERNAL_AUDIT
+  - numerical execution: NOT_AUTHORIZED for EV03, EV04, D1a, and the unified 0B-05C gate
+  - EXP11B_PORTABILITY_DEBT=OPEN; blocks D1a=false; blocks EXP11B retrieval authorization=true
   ↓
-Solo tras autorización prospectiva independiente:
-  D1a corrective numerical execution
+Solo tras auditoría externa y autorización prospectiva independiente:
+  EV03 corrective, EV04 corrective, and D1a corrective numerical execution
   ↓
 EXP11B H150/H200 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
