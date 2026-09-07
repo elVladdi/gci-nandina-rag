@@ -1,0 +1,159 @@
+{
+  "audit_id": "d1a_0b05c_preexecution_audit_v0.1",
+  "gate": "0B-05C",
+  "input_main": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+  "scope": "D1a effective optimizer exposure and frozen Top-200 overlap only",
+  "D1A_INDEX_EXPOSURE": "CONFIRMED",
+  "training_evidence": {
+    "status": "DETERMINISTIC_RECONSTRUCTION_MATCHES_TRAINING_METADATA",
+    "execution_repository_head": "UNKNOWN",
+    "limitation": "The full repository HEAD at execution was not versioned; the runner, selector, config, frozen inputs, seed, pair counts, negative-level counts, batch count, and model metadata are evidenced.",
+    "reproducibility_manifest": {
+      "path": "docs/exp04_text2trade_mnrl_d1a_v02_reproducibility_manifest.json",
+      "sha256": "efed7f1c0b3c0552862fd6f26efb75e3e7549d00593548b383c71d5931c70a2e"
+    },
+    "training_metadata": {
+      "path": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
+      "sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075",
+      "started_at_utc": "2026-08-30T05:06:12.903099+00:00",
+      "finished_at_utc": "2026-08-30T05:17:30.522426+00:00",
+      "command": "python -B -m src.experiments.train_text2trade_mnrl_v02"
+    },
+    "runner": {
+      "path": "src/experiments/train_text2trade_mnrl_v02.py",
+      "commit": "a91269ed3b5c52d08511063465be130adf185f0a",
+      "blob_sha": "0c8bd086c4c2a1774737e603232ddf169430d386",
+      "sha256": "ce3ae23cb084dbbe248f48b640f3169c999b1a04ccf931ac2d00521a46b5296f"
+    },
+    "selector": {
+      "path": "src/retrieval/text2trade_mnrl_v02.py",
+      "commit": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b",
+      "blob_sha": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
+      "sha256": "47358c8b7242235e1908c219f72509c6822b9cb67be89afb1ce978ccadd00d2b"
+    },
+    "config": {
+      "path": "src/configs/text2trade_mnrl_v0.2.json",
+      "commit": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
+      "blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7",
+      "sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
+    },
+    "frozen_inputs": {
+      "historical": {
+        "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+        "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff"
+      },
+      "eval": {
+        "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+        "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+      },
+      "corpus": {
+        "path": "data/processed/corpus_rag_v1_index.jsonl",
+        "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0"
+      }
+    },
+    "reconstruction": {
+      "records": 2950,
+      "batches": 608,
+      "seed": 2026,
+      "negative_level_counts": {
+        "same_chapter_different_code": 75,
+        "same_hs4_different_code": 2875
+      }
+    }
+  },
+  "training_exposure": {
+    "by_code": {
+      "87044110": {
+        "code": "87044110",
+        "positive_training_occurrences": 0,
+        "explicit_hard_negative_occurrences": 0,
+        "implicit_in_batch_exposure": {
+          "status": "NOT_IDENTIFIED",
+          "batches_with_positive_document": 0,
+          "co_batch_negative_opportunities": 0,
+          "interpretation": "Positive-document co-batch opportunities under MNRL; this is not reclassified as an explicit hard negative."
+        },
+        "effective_optimizer_exposure": "NO_EFFECTIVE_EXPOSURE_IDENTIFIED",
+        "evidence_artifact": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
+        "artifact_hash_or_run_metadata": {
+          "training_metadata_sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075",
+          "command": "python -B -m src.experiments.train_text2trade_mnrl_v02",
+          "runner_commit": "a91269ed3b5c52d08511063465be130adf185f0a",
+          "runner_blob_sha": "0c8bd086c4c2a1774737e603232ddf169430d386",
+          "selector_commit": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b",
+          "selector_blob_sha": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
+          "config_commit": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
+          "config_blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7"
+        }
+      },
+      "87045110": {
+        "code": "87045110",
+        "positive_training_occurrences": 0,
+        "explicit_hard_negative_occurrences": 0,
+        "implicit_in_batch_exposure": {
+          "status": "NOT_IDENTIFIED",
+          "batches_with_positive_document": 0,
+          "co_batch_negative_opportunities": 0,
+          "interpretation": "Positive-document co-batch opportunities under MNRL; this is not reclassified as an explicit hard negative."
+        },
+        "effective_optimizer_exposure": "NO_EFFECTIVE_EXPOSURE_IDENTIFIED",
+        "evidence_artifact": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
+        "artifact_hash_or_run_metadata": {
+          "training_metadata_sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075",
+          "command": "python -B -m src.experiments.train_text2trade_mnrl_v02",
+          "runner_commit": "a91269ed3b5c52d08511063465be130adf185f0a",
+          "runner_blob_sha": "0c8bd086c4c2a1774737e603232ddf169430d386",
+          "selector_commit": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b",
+          "selector_blob_sha": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
+          "config_commit": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
+          "config_blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7"
+        }
+      }
+    },
+    "D1A_TRAINING_EXPOSURE": "NO_EFFECTIVE_EXPOSURE_IDENTIFIED",
+    "POSITIVE_EXPOSURE": "NONE_IDENTIFIED",
+    "EXPLICIT_HARD_NEGATIVE_EXPOSURE": "NONE_IDENTIFIED",
+    "IMPLICIT_IN_BATCH_EXPOSURE": "NOT_IDENTIFIED",
+    "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS"
+  },
+  "retrieval_output_overlap": {
+    "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
+    "sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c",
+    "cases_scanned": 1056,
+    "candidates_per_case": 200,
+    "occurrences": [],
+    "total_occurrences_87044110": 0,
+    "total_occurrences_87045110": 0,
+    "cases_with_affected_code": 0,
+    "minimum_rank": null,
+    "maximum_rank": null,
+    "D1A_RETRIEVAL_OUTPUT_OVERLAP": "NONE_IDENTIFIED"
+  },
+  "prospective_decisions": {
+    "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS",
+    "CORRECTED_INDEX_POLICY": "FULL_ATOMIC_INDEX_AND_MAPPING_REBUILD",
+    "PRIMARY_CONTROL": "FROZEN_ORIGINAL_D1A_OUTPUTS_FROM_DECISION_885_SNAPSHOT",
+    "OPTIONAL_CONTROL_REPRODUCTION": "REPRODUCIBILITY_CHECK_ONLY",
+    "D1A_EXECUTION_SPECIFICATION": "CLOSED_PROSPECTIVELY",
+    "D1A_METRIC_IMPACT": "NOT_DETERMINED",
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "DOWNSTREAM_REEXECUTION": "NOT_YET_JUSTIFIED",
+    "0B05C_CLOSURE": "NOT_AUTHORIZED",
+    "EXP11B_RETRIEVAL_GATE": "APPROVED_AND_INTEGRATED",
+    "EXP11B_RETRIEVAL_EXECUTION": "NOT_AUTHORIZED",
+    "RETRIEVAL_EXECUTED": false,
+    "EVALUATION_METRICS_COMPUTED": false,
+    "H150_H200_RESULTS_OBSERVED": false,
+    "EXP12_AUTHORIZED": false
+  },
+  "actions_not_executed": [
+    "EV-03 corrective",
+    "EV-04 corrective",
+    "D1a corrective numerical execution",
+    "corrected index rebuild",
+    "H150/H200 retrieval",
+    "new evaluation metrics",
+    "EXP-12",
+    "editorial modification"
+  ]
+}

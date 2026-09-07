@@ -1,0 +1,21 @@
+{
+  "audit_id": "d1a_0b05c_preexecution_audit_v0.1",
+  "input_main": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+  "artifacts": [
+    {
+      "path": "d1a_0b05c_preexecution_audit_v0.1.json",
+      "sha256": "9d3ae1a85e59cab407a2bd612067f98ba8eaf77c6a2d93d166327c4ae86b18ff"
+    },
+    {
+      "path": "d1a_0b05c_top200_affected_occurrences_v0.1.csv",
+      "sha256": "799e4e2b7205ee41f5be2679cff44b654259e3c669fe1ed699cab1dab3d71386"
+    },
+    {
+      "path": "d1a_0b05c_bilingual_gate_record_v0.1.md",
+      "sha256": "656581157687b15a8791193d93a899f23498aaf90eb1e358b53d1cf402b0c2ab"
+    }
+  ],
+  "retrieval_executed": false,
+  "evaluation_metrics_computed": false,
+  "new_d1a_metrics_computed": false
+}
