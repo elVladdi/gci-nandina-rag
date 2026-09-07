@@ -204,7 +204,28 @@
   },
   "primary_original_control": {
     "comparison_policy": "Use only frozen original definitions and aligned case_ids; no original result is a target and no prospective metric is calculated by this gate.",
+    "control_reproduction": {
+      "comparison": {
+        "case_summary": {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+          "scope": "EXACT_CASE_LEVEL",
+          "sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634"
+        },
+        "metrics": "EXACT_NUMERATORS_DENOMINATORS_AND_VALUES; timestamps and runtime metadata are excluded",
+        "ranking": {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+          "scope": "EXACT_EFFECTIVE_FULL_TOP200_CASE_LEVEL",
+          "sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662"
+        }
+      },
+      "current_state": "NOT_EXECUTED",
+      "failure_policy": "A non-PASS reproduction blocks EV04 corrected execution and the unified gate.",
+      "gate": "EV04_DECISION885_REPRODUCTION_GATE",
+      "historical_source_status": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+      "requirement": "MANDATORY"
+    },
     "decision": "Decision_885",
+    "historical_execution_verification": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
     "metric_definitions": [
       {
         "denominator": 1056,
@@ -445,8 +466,20 @@
     }
   },
   "prospective_execution": {
+    "commands": {
+      "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
+      "ev04_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_ev04_corrective_decision906_v0.1.jsonl --output data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index.json --metadata data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index_metadata.json",
+      "ev04_control_reproduction_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_v0.1.jsonl --output outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1/decision885_control_index/index.json --metadata outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1/decision885_control_index/index_metadata.json",
+      "ev04_control_reproduction_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_v0.1.jsonl --index outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1/decision885_control_index/index.json --index-metadata outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1/decision885_control_index/index_metadata.json --output-dir outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1/decision885_control",
+      "ev04_corrected_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_ev04_corrective_decision906_v0.1.jsonl --output data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index.json --metadata data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index_metadata.json",
+      "ev04_corrected_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_ev04_corrective_decision906_v0.1.jsonl --index data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index.json --index-metadata data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index_metadata.json --output-dir outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1",
+      "ev04_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_ev04_corrective_decision906_v0.1.jsonl --index data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index.json --index-metadata data/processed/indexes/bm25_nandina8_hierarchical_ev04_corrective_decision906_v0.1/index_metadata.json --output-dir outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1",
+      "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v01 --execute-authorized"
+    },
+    "derived_identity_policy": "The future evaluator validates the SHA-256 values derived by its own corrective corpus and corrective index build; it never substitutes historic fixed corpus or index hashes.",
     "execution_order": [
       "unified_preflight",
+      "control_reproduction",
       "corrected_retrieval",
       "validation",
       "comparison",
@@ -459,6 +492,7 @@
     "prospective_output_root": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.1",
     "required_outputs": [
       "case_level_output",
+      "aggregate_output",
       "original_vs_corrective_comparison",
       "execution_manifest",
       "output_hash_ledger",

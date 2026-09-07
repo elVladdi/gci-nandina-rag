@@ -1,18 +1,18 @@
 {
   "arms": {
     "EV03": {
-      "original_ranking_overlap_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev03_original_ranking_overlap_v0.1.json",
+      "original_ranking_overlap_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_original_ranking_overlap_v0.1.json",
       "original_ranking_overlap_sha256": "90fcc8eb3d853673f22f6ac6adbbf232edd5dbc573e54562fbfe72bc6fd4caff",
       "original_run_identity": "FULLY_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
-      "specification_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev03_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "ae8d285b91631dc5a70c55cb5272441bb8cfa0c0d9ccdb287600d1cbf85ff677"
+      "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_corrective_execution_spec_v0.1.json",
+      "specification_sha256": "b3958e130d636c5f7edff5fad198f1d76bb2023b67ea6fc6ab8a2dee58aa5e11"
     },
     "EV04": {
-      "original_ranking_overlap_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev04_original_ranking_overlap_v0.1.json",
+      "original_ranking_overlap_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_original_ranking_overlap_v0.1.json",
       "original_ranking_overlap_sha256": "491ef925f674b312570ea55907c462aa9622ba7ed8a0ada2917905345a75f364",
       "original_run_identity": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
-      "specification_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev04_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "d24cb7d77a3103ebd51186dab07747b3aa620b8da785b7920d9e4388bca9749f"
+      "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_corrective_execution_spec_v0.1.json",
+      "specification_sha256": "79ffd67aed3d0c476ee8c6e69b64433ec87b209371e2fbadbabd33597f07bdf8"
     }
   },
   "authorization": {
@@ -23,7 +23,114 @@
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false
   },
-  "base_main": "7ff504c4a5a763705f198ca41753db75e938a87d",
+  "corrective_execution_binding": {
+    "corrective_builder": {
+      "canonical_blob_sha256": "d3bd2cd72d62f08b1f0bb52b126c6719c04b57b89ec7fdaaa1377e0677830fbe",
+      "git_blob_sha": "72362d95f940f7c4982e136eed3c3ec74378c88d",
+      "historical_sha256": "d3bd2cd72d62f08b1f0bb52b126c6719c04b57b89ec7fdaaa1377e0677830fbe",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/experiments/build_bm25_corrective_0b05c_v01.py"
+    },
+    "corrective_evaluator": {
+      "canonical_blob_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
+      "git_blob_sha": "124d6ac5e2ef357d72a320d919f08c75ddc7915a",
+      "historical_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
+    },
+    "frozen_dependencies": {
+      "src/bm25_index.py": {
+        "canonical_blob_sha256": "1be4319cdc2a5d14fdbf95253902b23f355eccfdb24f421942e1a52514f2e6c2",
+        "git_blob_sha": "718895e0658a55cc1590c84ef807f901b75e7c7f",
+        "historical_sha256": "1be4319cdc2a5d14fdbf95253902b23f355eccfdb24f421942e1a52514f2e6c2",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/bm25_index.py"
+      },
+      "src/evaluation/metrics.py": {
+        "canonical_blob_sha256": "9c9c3309a609f4d46d81fafee55f6e7226dda91868b27438016d4bce6725d33f",
+        "git_blob_sha": "f96611b243cb5b5a7ab031bfba4731d7a9c8eaf4",
+        "historical_sha256": "9c9c3309a609f4d46d81fafee55f6e7226dda91868b27438016d4bce6725d33f",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/evaluation/metrics.py"
+      },
+      "src/experiments/build_bm25_corrective_0b05c_v01.py": {
+        "canonical_blob_sha256": "d3bd2cd72d62f08b1f0bb52b126c6719c04b57b89ec7fdaaa1377e0677830fbe",
+        "git_blob_sha": "72362d95f940f7c4982e136eed3c3ec74378c88d",
+        "historical_sha256": "d3bd2cd72d62f08b1f0bb52b126c6719c04b57b89ec7fdaaa1377e0677830fbe",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/build_bm25_corrective_0b05c_v01.py"
+      },
+      "src/experiments/build_bm25_hierarchical_index.py": {
+        "canonical_blob_sha256": "7206d2b7c4a938b23620c75222bd32a194036ea13d833e7858a12e80cc3d8c33",
+        "git_blob_sha": "c9a9a5bc7912953a947c82064e9327e0827ba009",
+        "historical_sha256": "7206d2b7c4a938b23620c75222bd32a194036ea13d833e7858a12e80cc3d8c33",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/build_bm25_hierarchical_index.py"
+      },
+      "src/experiments/build_bm25_index.py": {
+        "canonical_blob_sha256": "3758fb1bf73c9ffec20497cd8fe9833cdf2badbf9a9819ee7b01436ab3d04c08",
+        "git_blob_sha": "5ebad35484c2e42ca036adab41b827b69094e0bb",
+        "historical_sha256": "3758fb1bf73c9ffec20497cd8fe9833cdf2badbf9a9819ee7b01436ab3d04c08",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/build_bm25_index.py"
+      },
+      "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py": {
+        "canonical_blob_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
+        "git_blob_sha": "124d6ac5e2ef357d72a320d919f08c75ddc7915a",
+        "historical_sha256": "162aa2a5fc0ecdc406ef8ae5070ed2b94567e240391fb46464ef3e27f5ad9633",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
+      },
+      "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py": {
+        "canonical_blob_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+        "git_blob_sha": "2ce009165108280e5db5640a46055e59c28a1454",
+        "historical_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py"
+      },
+      "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py": {
+        "canonical_blob_sha256": "3d97fa1c5afa66dedbe23858be69123e9cee8284f50a66bb0ea4fe9c95582495",
+        "git_blob_sha": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d",
+        "historical_sha256": "3d97fa1c5afa66dedbe23858be69123e9cee8284f50a66bb0ea4fe9c95582495",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py"
+      },
+      "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py": {
+        "canonical_blob_sha256": "df5ce66f9d0bd75f68fc3dd62d3e8f2ac760e4f09bf3c99486c43538d06593e6",
+        "git_blob_sha": "51b6c6e1b637ef2889c2921b6969a04d08034cd5",
+        "historical_sha256": "df5ce66f9d0bd75f68fc3dd62d3e8f2ac760e4f09bf3c99486c43538d06593e6",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py"
+      },
+      "src/experiments/run_0b05c_corrective_numerical_v01.py": {
+        "canonical_blob_sha256": "e190e55a1eaae28d542ce99af206f3a83da9a54b692dcf8470bea677e4d702a4",
+        "git_blob_sha": "471c1dc7ba52f569fdb2ede141a0b2298eb32cf1",
+        "historical_sha256": "e190e55a1eaae28d542ce99af206f3a83da9a54b692dcf8470bea677e4d702a4",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/run_0b05c_corrective_numerical_v01.py"
+      },
+      "src/retrieval/bm25.py": {
+        "canonical_blob_sha256": "1d19b2ace176ba45dc48e0143386e69a9529e0aea6c5ad537fe5d5f97cea8748",
+        "git_blob_sha": "b089b02968a5146377fb26718cfaaa48f3ae4897",
+        "historical_sha256": "1d19b2ace176ba45dc48e0143386e69a9529e0aea6c5ad537fe5d5f97cea8748",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/retrieval/bm25.py"
+      }
+    },
+    "identity_authority": "COMMITTED_GIT_BLOB",
+    "orchestration_runner": {
+      "canonical_blob_sha256": "e190e55a1eaae28d542ce99af206f3a83da9a54b692dcf8470bea677e4d702a4",
+      "git_blob_sha": "471c1dc7ba52f569fdb2ede141a0b2298eb32cf1",
+      "historical_sha256": "e190e55a1eaae28d542ce99af206f3a83da9a54b692dcf8470bea677e4d702a4",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/experiments/run_0b05c_corrective_numerical_v01.py"
+    },
+    "semantic_reuse": {
+      "bm25": "Corrective indexes use build_bm25_from_corpus from src/bm25_index.py with k1=1.5, b=0.75 and the frozen stopword policy.",
+      "flat": "Versioned helpers are imported from evaluate_normative_bm25_flat_data_aduanas_v02.py; its fixed historical SHA assertions are not used for a derived corrective corpus.",
+      "hierarchical": "Versioned helpers are imported from evaluate_normative_bm25_hierarchical_data_aduanas_v02.py, including duplicate-code collapse where the first BM25 occurrence by score order wins."
+    }
+  },
   "d1a_existing_specification": {
     "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
     "reference": {
@@ -42,30 +149,63 @@
     "D1A_EXECUTION_SPECIFICATION": "CLOSED_PROSPECTIVELY",
     "D1A_PREEXECUTION": "APPROVED/INTEGRATED",
     "DOWNSTREAM_REEXECUTION": "NOT_YET_JUSTIFIED",
+    "EV04_DECISION885_REPRODUCTION_GATE": "MANDATORY/NOT_EXECUTED",
+    "EV04_ORIGINAL_HISTORICAL_EXECUTION": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
     "EXP11B_PORTABILITY_DEBT": "OPEN",
     "EXP11B_PORTABILITY_DEBT_BLOCKS_D1A": false,
     "EXP11B_PORTABILITY_DEBT_BLOCKS_EXP11B_RETRIEVAL_AUTHORIZATION": true
   },
   "fail_closed_preflight": [
-    "reject unexpected main",
+    "reject an unrelated candidate that does not descend from the integrated base",
     "reject frozen control/output/code/config/EVAL/corpus identity changes",
     "reject Decision 906 or exactly-two-entry changes",
     "reject an existing prospective root, partial output, overwrite, or resume",
     "reject D1a specification change",
     "reject an already-executed arm or pre-existing corrective metric",
-    "reject --execute while authorization remains NOT_AUTHORIZED"
+    "reject execution while authorization remains NOT_AUTHORIZED",
+    "reject EV04 corrected execution unless mandatory Decision885 reproduction is PASS"
   ],
+  "future_authorization_transition_contract": {
+    "allowed_mutations": [
+      "authorization state fields from NOT_AUTHORIZED to AUTHORIZED",
+      "mechanically-derived runtime hashes",
+      "execution manifests"
+    ],
+    "d1a_authorization": "D1a remains independently governed by its own authorization contract.",
+    "forbidden_mutations": [
+      "patches",
+      "queries",
+      "base corpora",
+      "weights",
+      "BM25 semantics",
+      "metric contracts",
+      "reproduction rules",
+      "runners",
+      "builders",
+      "evaluators",
+      "output paths",
+      "execution order",
+      "comparison schema"
+    ]
+  },
   "future_execution_order": [
-    "unified_preflight",
-    "EV03_corrected_flat_normative_BM25",
-    "EV04_corrected_hierarchical_normative_BM25",
-    "D1a_corrected_dense_retrieval",
-    "validation",
-    "comparisons",
-    "manifest",
-    "ledger",
-    "interpretation"
+    "01_unified_preflight",
+    "02_EV03_control_reproduction",
+    "03_EV03_control_comparison",
+    "04_EV03_corrected_corpus_and_index",
+    "05_EV03_corrected_evaluation",
+    "06_EV04_Decision885_control_reproduction",
+    "07_EV04_control_comparison_must_pass",
+    "08_EV04_corrected_corpus_and_index",
+    "09_EV04_corrected_evaluation",
+    "10_case_level_comparisons",
+    "11_aggregate_comparisons",
+    "12_unified_sensitivity_summary",
+    "13_manifest_and_hash_ledger",
+    "14_D1a_execute_only_under_its_own_authorization"
   ],
   "gate_id": "0B05C_CORRECTIVE_NUMERICAL_EXECUTION_GATE_v0.1",
-  "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT"
+  "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "integrated_base_ancestry_requirement": "INTEGRATED_BASE_COMMIT must be an ancestor of candidate HEAD; main is not required to remain byte-identical after approved integrations.",
+  "integrated_base_commit": "7ff504c4a5a763705f198ca41753db75e938a87d"
 }
