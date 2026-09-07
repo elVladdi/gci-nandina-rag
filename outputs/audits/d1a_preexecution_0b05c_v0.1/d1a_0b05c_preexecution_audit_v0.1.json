@@ -2,12 +2,23 @@
   "audit_id": "d1a_0b05c_preexecution_audit_v0.1",
   "gate": "0B-05C",
   "input_main": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
-  "scope": "D1a effective optimizer exposure and frozen Top-200 overlap only",
+  "scope": "D1a F001 canonical-plan reconciliation, F002 frozen-pool exposure proof, and F003 prospective execution specification",
+  "canonical_master_plan": {
+    "source_id": "SRC-03",
+    "repository": "elVladdi/gci-nandina-rag",
+    "branch": "docs/plan-maestro-temporal-2026-08-31",
+    "path": "docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md",
+    "local_and_github_text_must_match": true,
+    "governance": "D-011",
+    "canonical_markdown_blob_sha": "06cf639af9330f5a57930c9efffb5504595cfc4b",
+    "legacy_xlsx_status": "SECONDARY_HISTORICAL_TRACKER_NOT_CANONICAL_MASTER_PLAN"
+  },
   "D1A_INDEX_EXPOSURE": "CONFIRMED",
   "training_evidence": {
-    "status": "DETERMINISTIC_RECONSTRUCTION_MATCHES_TRAINING_METADATA",
-    "execution_repository_head": "UNKNOWN",
-    "limitation": "The full repository HEAD at execution was not versioned; the runner, selector, config, frozen inputs, seed, pair counts, negative-level counts, batch count, and model metadata are evidenced.",
+    "TRAINING_EXPOSURE_EVIDENCE": "POOL_EXCLUSION_PROOF_SUPPORTED_BY_FROZEN_RUN_METADATA",
+    "RECONSTRUCTION_STATUS": "DETERMINISTIC_RECONSTRUCTION_CONSISTENT_WITH_TRAINING_METADATA",
+    "EXECUTION_REPOSITORY_HEAD": "UNKNOWN / HISTORICAL_PROVENANCE_LIMITATION",
+    "limitation": "The full historical checkout was not versioned. Runner, selector, and config snapshots are corroborative only, not a cryptographic link to the execution checkout.",
     "reproducibility_manifest": {
       "path": "docs/exp04_text2trade_mnrl_d1a_v02_reproducibility_manifest.json",
       "sha256": "efed7f1c0b3c0552862fd6f26efb75e3e7549d00593548b383c71d5931c70a2e"
@@ -17,25 +28,29 @@
       "sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075",
       "started_at_utc": "2026-08-30T05:06:12.903099+00:00",
       "finished_at_utc": "2026-08-30T05:17:30.522426+00:00",
-      "command": "python -B -m src.experiments.train_text2trade_mnrl_v02"
+      "command": "python -B -m src.experiments.train_text2trade_mnrl_v02",
+      "negative_source": "historical training codes + frozen normative corpus only"
     },
-    "runner": {
-      "path": "src/experiments/train_text2trade_mnrl_v02.py",
-      "commit": "a91269ed3b5c52d08511063465be130adf185f0a",
-      "blob_sha": "0c8bd086c4c2a1774737e603232ddf169430d386",
-      "sha256": "ce3ae23cb084dbbe248f48b640f3169c999b1a04ccf931ac2d00521a46b5296f"
-    },
-    "selector": {
-      "path": "src/retrieval/text2trade_mnrl_v02.py",
-      "commit": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b",
-      "blob_sha": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
-      "sha256": "47358c8b7242235e1908c219f72509c6822b9cb67be89afb1ce978ccadd00d2b"
-    },
-    "config": {
-      "path": "src/configs/text2trade_mnrl_v0.2.json",
-      "commit": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
-      "blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7",
-      "sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
+    "historical_code_snapshots": {
+      "scope": "CORROBORATIVE_ONLY_NOT_A_CRYPTOGRAPHIC_EXECUTION_CHECKOUT_LINK",
+      "runner": {
+        "path": "src/experiments/train_text2trade_mnrl_v02.py",
+        "commit": "a91269ed3b5c52d08511063465be130adf185f0a",
+        "blob_sha": "0c8bd086c4c2a1774737e603232ddf169430d386",
+        "sha256": "ce3ae23cb084dbbe248f48b640f3169c999b1a04ccf931ac2d00521a46b5296f"
+      },
+      "selector": {
+        "path": "src/retrieval/text2trade_mnrl_v02.py",
+        "commit": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b",
+        "blob_sha": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
+        "sha256": "47358c8b7242235e1908c219f72509c6822b9cb67be89afb1ce978ccadd00d2b"
+      },
+      "config": {
+        "path": "src/configs/text2trade_mnrl_v0.2.json",
+        "commit": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
+        "blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7",
+        "sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
+      }
     },
     "frozen_inputs": {
       "historical": {
@@ -61,60 +76,154 @@
       }
     }
   },
+  "historical_training_code_pool": {
+    "evidence_type": "DIRECT_FROZEN_H100_POOL",
+    "source": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "label_column": "NANDINA",
+      "row_count": 2950
+    },
+    "historical_training_code_count": 66,
+    "historical_training_codes": [
+      "87011000",
+      "87024090",
+      "87031000",
+      "87032100",
+      "87032290",
+      "87032310",
+      "87032390",
+      "87032410",
+      "87034090",
+      "87038090",
+      "87042110",
+      "87042220",
+      "87046010",
+      "87046090",
+      "87079090",
+      "87081000",
+      "87082100",
+      "87082910",
+      "87082920",
+      "87082930",
+      "87082940",
+      "87082990",
+      "87083010",
+      "87083021",
+      "87083022",
+      "87083023",
+      "87083024",
+      "87083025",
+      "87083029",
+      "87084010",
+      "87084090",
+      "87085011",
+      "87085019",
+      "87085021",
+      "87087010",
+      "87087020",
+      "87088010",
+      "87088020",
+      "87088090",
+      "87089100",
+      "87089200",
+      "87089310",
+      "87089391",
+      "87089399",
+      "87089400",
+      "87089500",
+      "87089911",
+      "87089919",
+      "87089921",
+      "87089929",
+      "87089931",
+      "87089932",
+      "87089933",
+      "87089939",
+      "87089950",
+      "87089999",
+      "87099000",
+      "87116000",
+      "87141090",
+      "87142000",
+      "87149290",
+      "87149300",
+      "87149400",
+      "87149900",
+      "87168090",
+      "87169000"
+    ],
+    "affected_code_membership": {
+      "87044110": false,
+      "87045110": false
+    },
+    "affected_code_positive_row_counts": {
+      "87044110": 0,
+      "87045110": 0
+    },
+    "normalization": "digits-only representation normalization for NANDINA-8 equality"
+  },
   "training_exposure": {
     "by_code": {
       "87044110": {
         "code": "87044110",
         "positive_training_occurrences": 0,
         "explicit_hard_negative_occurrences": 0,
+        "pool_membership": false,
+        "positive_exposure_basis": "DIRECT_FROZEN_H100_POOL_EXCLUSION",
+        "explicit_hard_negative_basis": "DIRECT_FROZEN_H100_POOL_EXCLUSION_PLUS_METADATA_NEGATIVE_SOURCE_RESTRICTION",
         "implicit_in_batch_exposure": {
           "status": "NOT_IDENTIFIED",
           "batches_with_positive_document": 0,
-          "co_batch_negative_opportunities": 0,
-          "interpretation": "Positive-document co-batch opportunities under MNRL; this is not reclassified as an explicit hard negative."
+          "co_batch_negative_opportunities": 0
+        },
+        "corroborative_reconstruction": {
+          "positive_training_occurrences": 0,
+          "explicit_hard_negative_occurrences": 0,
+          "records": 2950,
+          "batches": 608
         },
         "effective_optimizer_exposure": "NO_EFFECTIVE_EXPOSURE_IDENTIFIED",
-        "evidence_artifact": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
-        "artifact_hash_or_run_metadata": {
-          "training_metadata_sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075",
-          "command": "python -B -m src.experiments.train_text2trade_mnrl_v02",
-          "runner_commit": "a91269ed3b5c52d08511063465be130adf185f0a",
-          "runner_blob_sha": "0c8bd086c4c2a1774737e603232ddf169430d386",
-          "selector_commit": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b",
-          "selector_blob_sha": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
-          "config_commit": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
-          "config_blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7"
-        }
+        "evidence_artifacts": {
+          "historical_training_code_pool": "d1a_0b05c_historical_training_code_pool_v0.1.json",
+          "training_metadata": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
+          "training_metadata_sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075"
+        },
+        "execution_repository_head_required_for_conclusion": false
       },
       "87045110": {
         "code": "87045110",
         "positive_training_occurrences": 0,
         "explicit_hard_negative_occurrences": 0,
+        "pool_membership": false,
+        "positive_exposure_basis": "DIRECT_FROZEN_H100_POOL_EXCLUSION",
+        "explicit_hard_negative_basis": "DIRECT_FROZEN_H100_POOL_EXCLUSION_PLUS_METADATA_NEGATIVE_SOURCE_RESTRICTION",
         "implicit_in_batch_exposure": {
           "status": "NOT_IDENTIFIED",
           "batches_with_positive_document": 0,
-          "co_batch_negative_opportunities": 0,
-          "interpretation": "Positive-document co-batch opportunities under MNRL; this is not reclassified as an explicit hard negative."
+          "co_batch_negative_opportunities": 0
+        },
+        "corroborative_reconstruction": {
+          "positive_training_occurrences": 0,
+          "explicit_hard_negative_occurrences": 0,
+          "records": 2950,
+          "batches": 608
         },
         "effective_optimizer_exposure": "NO_EFFECTIVE_EXPOSURE_IDENTIFIED",
-        "evidence_artifact": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
-        "artifact_hash_or_run_metadata": {
-          "training_metadata_sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075",
-          "command": "python -B -m src.experiments.train_text2trade_mnrl_v02",
-          "runner_commit": "a91269ed3b5c52d08511063465be130adf185f0a",
-          "runner_blob_sha": "0c8bd086c4c2a1774737e603232ddf169430d386",
-          "selector_commit": "3f30db4d65faac2e8d8b7ab75aad33119d3bca0b",
-          "selector_blob_sha": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
-          "config_commit": "c82e6232ef5f0678c3b10fbdb9c3850910aacee0",
-          "config_blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7"
-        }
+        "evidence_artifacts": {
+          "historical_training_code_pool": "d1a_0b05c_historical_training_code_pool_v0.1.json",
+          "training_metadata": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
+          "training_metadata_sha256": "3d1c5f3b0a3d0f9bd72e9ab61b60710acd8ff22cb5e8797465cafc217ceff075"
+        },
+        "execution_repository_head_required_for_conclusion": false
       }
     },
     "D1A_TRAINING_EXPOSURE": "NO_EFFECTIVE_EXPOSURE_IDENTIFIED",
     "POSITIVE_EXPOSURE": "NONE_IDENTIFIED",
     "EXPLICIT_HARD_NEGATIVE_EXPOSURE": "NONE_IDENTIFIED",
     "IMPLICIT_IN_BATCH_EXPOSURE": "NOT_IDENTIFIED",
-    "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS"
+    "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS",
+    "conclusion_dependency": "FROZEN_H100_POOL_EXCLUSION_AND_RESTRICTED_NEGATIVE_SOURCE_NOT_EXECUTION_REPOSITORY_HEAD"
   },
   "retrieval_output_overlap": {
     "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
@@ -128,6 +237,220 @@
     "minimum_rank": null,
     "maximum_rank": null,
     "D1A_RETRIEVAL_OUTPUT_OVERLAP": "NONE_IDENTIFIED"
+  },
+  "corrective_execution_spec": {
+    "specification_id": "d1a_corrective_execution_spec_v0.1",
+    "specification_status": "CLOSED_PROSPECTIVELY",
+    "authorization": {
+      "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+      "D1A_CORRECTIVE_CORPUS_CREATED": false,
+      "D1A_CORRECTIVE_INDEX_CREATED": false,
+      "D1A_CORRECTIVE_METRICS_COMPUTED": false
+    },
+    "original_normative_corpus": {
+      "path": "data/processed/corpus_rag_v1_index.jsonl",
+      "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+      "document_count": 7644,
+      "affected_documents": {
+        "87044110": {
+          "doc_id": "NANDINA_87044110",
+          "original_jsonl_line_sha256": "6a736cf4b8deb85ef31d7e88900c2ecf395b6ce64dd11308af22c0a7f5390a80",
+          "original_values": {
+            "codigo": "87044110",
+            "titulo": "De peso total con carga máxima inferior a 4,537 t",
+            "texto": "De peso total con carga máxima inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+            "texto_index": "De peso total con carga máxima inferior a 4,537 t.",
+            "version": "Decision_885",
+            "fuente": "NANDINA",
+            "section": "XVII",
+            "chapter": "87"
+          }
+        },
+        "87045110": {
+          "doc_id": "NANDINA_87045110",
+          "original_jsonl_line_sha256": "bc2995aa6fa917e71beae99fb923f98abdace4fc7a7bd930c3a9da412d05793a",
+          "original_values": {
+            "codigo": "87045110",
+            "titulo": "De peso total con carga máxima inferior a 4,537 t",
+            "texto": "De peso total con carga máxima inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+            "texto_index": "De peso total con carga máxima inferior a 4,537 t.",
+            "version": "Decision_885",
+            "fuente": "NANDINA",
+            "section": "XVII",
+            "chapter": "87"
+          }
+        }
+      }
+    },
+    "corrected_normative_corpus": {
+      "prospective_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.1.jsonl",
+      "must_be_absent_before_authorized_execution": true,
+      "definition": {
+        "authoritative_normative_source": {
+          "authority": "Comision de la Comunidad Andina",
+          "decision": "Decision 906",
+          "official_gazette": "Gaceta Oficial 5062",
+          "official_url": "https://www.comunidadandina.org/DocOficialesFiles/Gacetas/GACETA%205062.pdf",
+          "published_on": "2022-10-25",
+          "effective_on": "2023-01-01",
+          "annex_entries": {
+            "87044110": {
+              "item": 25,
+              "text": "Inferior a 4,537 t"
+            },
+            "87045110": {
+              "item": 26,
+              "text": "Inferior a 4,537 t"
+            }
+          }
+        },
+        "patch_scope": "EXACTLY_TWO_NANDINA8_DOCUMENTS",
+        "patches": [
+          {
+            "code": "87044110",
+            "match": {
+              "doc_id": "NANDINA_87044110",
+              "codigo": "87044110",
+              "version": "Decision_885",
+              "original_jsonl_line_sha256": "6a736cf4b8deb85ef31d7e88900c2ecf395b6ce64dd11308af22c0a7f5390a80"
+            },
+            "replacement": {
+              "titulo": "Inferior a 4,537 t",
+              "texto": "Inferior a 4,537 t. Contexto: Seccion XVII / Capitulo 87.",
+              "texto_index": "Inferior a 4,537 t.",
+              "version": "Decision_906"
+            }
+          },
+          {
+            "code": "87045110",
+            "match": {
+              "doc_id": "NANDINA_87045110",
+              "codigo": "87045110",
+              "version": "Decision_885",
+              "original_jsonl_line_sha256": "bc2995aa6fa917e71beae99fb923f98abdace4fc7a7bd930c3a9da412d05793a"
+            },
+            "replacement": {
+              "titulo": "Inferior a 4,537 t",
+              "texto": "Inferior a 4,537 t. Contexto: Seccion XVII / Capitulo 87.",
+              "texto_index": "Inferior a 4,537 t.",
+              "version": "Decision_906"
+            }
+          }
+        ],
+        "preservation_invariants": [
+          "Preserve JSONL row order and corpus cardinality of 7644 documents.",
+          "Change only the two matched documents and declared replacement fields.",
+          "Preserve all unpatched document bytes, fields, and values.",
+          "Serialize UTF-8 JSONL with LF line endings and one terminal newline."
+        ]
+      }
+    },
+    "model_policy": {
+      "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS",
+      "weights": {
+        "path": "models/text2trade_mnrl_v0.2/model.safetensors",
+        "bytes": 470637416,
+        "sha256": "ef9b92b2fb0239e46c0d81e403f00b3255d3822dfa25e0ce354d03828f7a8c87"
+      },
+      "must_not_retrain": true
+    },
+    "index_builder": {
+      "code_identity": {
+        "path": "src/experiments/build_text2trade_mnrl_index_v02.py",
+        "revision": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+        "git_blob_sha": "0684eae0f951bc9889769b05680fe7b675ca31fd",
+        "sha256": "be37f33a652239ead835806d8af470db933607308ecbfadfcd6ab8f5d5e78e50"
+      },
+      "policy": "FULL_ATOMIC_INDEX_AND_MAPPING_REBUILD",
+      "embedding_normalization": true,
+      "similarity": "cosine",
+      "retrieval_semantics": "exact brute-force dot product over normalized vectors",
+      "ranking_unit": "unique NANDINA-8 code",
+      "hnsw": false,
+      "prospective_output_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1",
+      "prospective_outputs": {
+        "vectors": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/vectors.npy",
+        "id_map": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/id_map.json",
+        "docstore": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/store/nandina8_docstore.jsonl",
+        "index_metadata": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/text2trade_mnrl_nandina8_d1a_corrective_run_metadata.json"
+      }
+    },
+    "evaluation": {
+      "code_identity": {
+        "path": "src/experiments/evaluate_text2trade_mnrl_data_aduanas_v02.py",
+        "revision": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+        "git_blob_sha": "47b2cf6cfafe681a1e64223cd3f048000942e4d0",
+        "sha256": "eddd4f1b611519c52c846d61152c96a8c16e13588c5b798b1b8244bd81e7aaf9"
+      },
+      "eval_input": {
+        "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+        "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "N": 1056
+      },
+      "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+      "label_column": "NANDINA",
+      "query_construction": "clean(row[query_column]) using the frozen evaluator",
+      "ranking_depth": 200,
+      "metrics_to_compare": [
+        "Top@1",
+        "Top@3",
+        "Top@5",
+        "Top@10",
+        "Top@50",
+        "Recall@100",
+        "Recall@200",
+        "MRR@100",
+        "MRR@200",
+        "Exact@100",
+        "Exact@200",
+        "HS6@100",
+        "HS6@200",
+        "HS4@100",
+        "HS4@200",
+        "Chapter@100",
+        "Chapter@200"
+      ],
+      "case_level_output_required": true,
+      "primary_control": {
+        "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json",
+        "bytes": 4083,
+        "sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c"
+      },
+      "primary_control_case_summary": {
+        "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+        "bytes": 138163,
+        "sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd"
+      },
+      "primary_control_ranking_trace": {
+        "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
+        "bytes": 2619936,
+        "sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c"
+      },
+      "prospective_output_root": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1",
+      "prospective_outputs": {
+        "metrics": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_metrics.json",
+        "case_summary": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_case_summary.csv",
+        "ranking_trace_top200": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_ranked_codes_top200.jsonl",
+        "comparison": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_vs_original_comparison.json",
+        "hash_ledger": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_output_hashes_v0.1.csv"
+      }
+    },
+    "fail_closed_execution_rules": [
+      "All prospective corpus, index, and evaluation output paths must be absent before execution.",
+      "Refuse partial roots, existing files, and overwrite attempts.",
+      "Write the output hash ledger only after every required artifact is present.",
+      "Do not interpret metrics until all integrity and acceptance criteria pass."
+    ],
+    "acceptance_and_integrity_criteria": [
+      "Original corpus, model weight, evaluation input, and primary-control hashes match this specification.",
+      "The Decision 906 source and both exact annex entries are recorded.",
+      "Exactly two targeted documents change; order, cardinality, and every unpatched document are preserved.",
+      "Vectors, docstore, and id-map cardinalities are coherent and map all 7644 documents.",
+      "Normalized embeddings use exact brute-force dot-product retrieval and unique NANDINA-8 ranking.",
+      "Evaluation covers exactly N=1056 cases, emits a unique Top-200 trace and a case-level record for each case.",
+      "Index-builder and evaluator code identities match this specification.",
+      "A complete output hash ledger is emitted without overwrite."
+    ]
   },
   "prospective_decisions": {
     "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS",
@@ -146,14 +469,25 @@
     "H150_H200_RESULTS_OBSERVED": false,
     "EXP12_AUTHORIZED": false
   },
+  "artifacts": {
+    "historical_training_code_pool": {
+      "path": "d1a_0b05c_historical_training_code_pool_v0.1.json",
+      "sha256": "4cb6efc8a045642de947d705219da0e8b472b356609eb553eaad86956e794fef"
+    },
+    "corrective_execution_spec": {
+      "path": "d1a_0b05c_corrective_execution_spec_v0.1.json",
+      "sha256": "8edfb03aeb697fc9bcd382bf6913aec724d38145f35ae9d9e626c69f6a0b6507"
+    }
+  },
   "actions_not_executed": [
     "EV-03 corrective",
     "EV-04 corrective",
     "D1a corrective numerical execution",
+    "corrected corpus generation",
     "corrected index rebuild",
     "H150/H200 retrieval",
     "new evaluation metrics",
     "EXP-12",
-    "editorial modification"
+    "article modification"
   ]
 }

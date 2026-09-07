@@ -3,8 +3,16 @@
   "input_main": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
   "artifacts": [
     {
+      "path": "d1a_0b05c_historical_training_code_pool_v0.1.json",
+      "sha256": "4cb6efc8a045642de947d705219da0e8b472b356609eb553eaad86956e794fef"
+    },
+    {
+      "path": "d1a_0b05c_corrective_execution_spec_v0.1.json",
+      "sha256": "8edfb03aeb697fc9bcd382bf6913aec724d38145f35ae9d9e626c69f6a0b6507"
+    },
+    {
       "path": "d1a_0b05c_preexecution_audit_v0.1.json",
-      "sha256": "9d3ae1a85e59cab407a2bd612067f98ba8eaf77c6a2d93d166327c4ae86b18ff"
+      "sha256": "b066b9f777af4a61c8271319c54be38f769f4689bed8719bbe199383df89f87d"
     },
     {
       "path": "d1a_0b05c_top200_affected_occurrences_v0.1.csv",
@@ -12,7 +20,7 @@
     },
     {
       "path": "d1a_0b05c_bilingual_gate_record_v0.1.md",
-      "sha256": "656581157687b15a8791193d93a899f23498aaf90eb1e358b53d1cf402b0c2ab"
+      "sha256": "242cf980b24dd6de6a06125f25148da7f31cde7ea4277d9a1246ca8e6cab6018"
     }
   ],
   "retrieval_executed": false,

@@ -1,0 +1,214 @@
+{
+  "specification_id": "d1a_corrective_execution_spec_v0.1",
+  "specification_status": "CLOSED_PROSPECTIVELY",
+  "authorization": {
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "D1A_CORRECTIVE_CORPUS_CREATED": false,
+    "D1A_CORRECTIVE_INDEX_CREATED": false,
+    "D1A_CORRECTIVE_METRICS_COMPUTED": false
+  },
+  "original_normative_corpus": {
+    "path": "data/processed/corpus_rag_v1_index.jsonl",
+    "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "document_count": 7644,
+    "affected_documents": {
+      "87044110": {
+        "doc_id": "NANDINA_87044110",
+        "original_jsonl_line_sha256": "6a736cf4b8deb85ef31d7e88900c2ecf395b6ce64dd11308af22c0a7f5390a80",
+        "original_values": {
+          "codigo": "87044110",
+          "titulo": "De peso total con carga máxima inferior a 4,537 t",
+          "texto": "De peso total con carga máxima inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+          "texto_index": "De peso total con carga máxima inferior a 4,537 t.",
+          "version": "Decision_885",
+          "fuente": "NANDINA",
+          "section": "XVII",
+          "chapter": "87"
+        }
+      },
+      "87045110": {
+        "doc_id": "NANDINA_87045110",
+        "original_jsonl_line_sha256": "bc2995aa6fa917e71beae99fb923f98abdace4fc7a7bd930c3a9da412d05793a",
+        "original_values": {
+          "codigo": "87045110",
+          "titulo": "De peso total con carga máxima inferior a 4,537 t",
+          "texto": "De peso total con carga máxima inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+          "texto_index": "De peso total con carga máxima inferior a 4,537 t.",
+          "version": "Decision_885",
+          "fuente": "NANDINA",
+          "section": "XVII",
+          "chapter": "87"
+        }
+      }
+    }
+  },
+  "corrected_normative_corpus": {
+    "prospective_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.1.jsonl",
+    "must_be_absent_before_authorized_execution": true,
+    "definition": {
+      "authoritative_normative_source": {
+        "authority": "Comision de la Comunidad Andina",
+        "decision": "Decision 906",
+        "official_gazette": "Gaceta Oficial 5062",
+        "official_url": "https://www.comunidadandina.org/DocOficialesFiles/Gacetas/GACETA%205062.pdf",
+        "published_on": "2022-10-25",
+        "effective_on": "2023-01-01",
+        "annex_entries": {
+          "87044110": {
+            "item": 25,
+            "text": "Inferior a 4,537 t"
+          },
+          "87045110": {
+            "item": 26,
+            "text": "Inferior a 4,537 t"
+          }
+        }
+      },
+      "patch_scope": "EXACTLY_TWO_NANDINA8_DOCUMENTS",
+      "patches": [
+        {
+          "code": "87044110",
+          "match": {
+            "doc_id": "NANDINA_87044110",
+            "codigo": "87044110",
+            "version": "Decision_885",
+            "original_jsonl_line_sha256": "6a736cf4b8deb85ef31d7e88900c2ecf395b6ce64dd11308af22c0a7f5390a80"
+          },
+          "replacement": {
+            "titulo": "Inferior a 4,537 t",
+            "texto": "Inferior a 4,537 t. Contexto: Seccion XVII / Capitulo 87.",
+            "texto_index": "Inferior a 4,537 t.",
+            "version": "Decision_906"
+          }
+        },
+        {
+          "code": "87045110",
+          "match": {
+            "doc_id": "NANDINA_87045110",
+            "codigo": "87045110",
+            "version": "Decision_885",
+            "original_jsonl_line_sha256": "bc2995aa6fa917e71beae99fb923f98abdace4fc7a7bd930c3a9da412d05793a"
+          },
+          "replacement": {
+            "titulo": "Inferior a 4,537 t",
+            "texto": "Inferior a 4,537 t. Contexto: Seccion XVII / Capitulo 87.",
+            "texto_index": "Inferior a 4,537 t.",
+            "version": "Decision_906"
+          }
+        }
+      ],
+      "preservation_invariants": [
+        "Preserve JSONL row order and corpus cardinality of 7644 documents.",
+        "Change only the two matched documents and declared replacement fields.",
+        "Preserve all unpatched document bytes, fields, and values.",
+        "Serialize UTF-8 JSONL with LF line endings and one terminal newline."
+      ]
+    }
+  },
+  "model_policy": {
+    "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS",
+    "weights": {
+      "path": "models/text2trade_mnrl_v0.2/model.safetensors",
+      "bytes": 470637416,
+      "sha256": "ef9b92b2fb0239e46c0d81e403f00b3255d3822dfa25e0ce354d03828f7a8c87"
+    },
+    "must_not_retrain": true
+  },
+  "index_builder": {
+    "code_identity": {
+      "path": "src/experiments/build_text2trade_mnrl_index_v02.py",
+      "revision": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+      "git_blob_sha": "0684eae0f951bc9889769b05680fe7b675ca31fd",
+      "sha256": "be37f33a652239ead835806d8af470db933607308ecbfadfcd6ab8f5d5e78e50"
+    },
+    "policy": "FULL_ATOMIC_INDEX_AND_MAPPING_REBUILD",
+    "embedding_normalization": true,
+    "similarity": "cosine",
+    "retrieval_semantics": "exact brute-force dot product over normalized vectors",
+    "ranking_unit": "unique NANDINA-8 code",
+    "hnsw": false,
+    "prospective_output_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1",
+    "prospective_outputs": {
+      "vectors": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/vectors.npy",
+      "id_map": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/id_map.json",
+      "docstore": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/store/nandina8_docstore.jsonl",
+      "index_metadata": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/text2trade_mnrl_nandina8_d1a_corrective_run_metadata.json"
+    }
+  },
+  "evaluation": {
+    "code_identity": {
+      "path": "src/experiments/evaluate_text2trade_mnrl_data_aduanas_v02.py",
+      "revision": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+      "git_blob_sha": "47b2cf6cfafe681a1e64223cd3f048000942e4d0",
+      "sha256": "eddd4f1b611519c52c846d61152c96a8c16e13588c5b798b1b8244bd81e7aaf9"
+    },
+    "eval_input": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "N": 1056
+    },
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label_column": "NANDINA",
+    "query_construction": "clean(row[query_column]) using the frozen evaluator",
+    "ranking_depth": 200,
+    "metrics_to_compare": [
+      "Top@1",
+      "Top@3",
+      "Top@5",
+      "Top@10",
+      "Top@50",
+      "Recall@100",
+      "Recall@200",
+      "MRR@100",
+      "MRR@200",
+      "Exact@100",
+      "Exact@200",
+      "HS6@100",
+      "HS6@200",
+      "HS4@100",
+      "HS4@200",
+      "Chapter@100",
+      "Chapter@200"
+    ],
+    "case_level_output_required": true,
+    "primary_control": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json",
+      "bytes": 4083,
+      "sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c"
+    },
+    "primary_control_case_summary": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+      "bytes": 138163,
+      "sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd"
+    },
+    "primary_control_ranking_trace": {
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
+      "bytes": 2619936,
+      "sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c"
+    },
+    "prospective_output_root": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1",
+    "prospective_outputs": {
+      "metrics": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_metrics.json",
+      "case_summary": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_case_summary.csv",
+      "ranking_trace_top200": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_ranked_codes_top200.jsonl",
+      "comparison": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_vs_original_comparison.json",
+      "hash_ledger": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_output_hashes_v0.1.csv"
+    }
+  },
+  "fail_closed_execution_rules": [
+    "All prospective corpus, index, and evaluation output paths must be absent before execution.",
+    "Refuse partial roots, existing files, and overwrite attempts.",
+    "Write the output hash ledger only after every required artifact is present.",
+    "Do not interpret metrics until all integrity and acceptance criteria pass."
+  ],
+  "acceptance_and_integrity_criteria": [
+    "Original corpus, model weight, evaluation input, and primary-control hashes match this specification.",
+    "The Decision 906 source and both exact annex entries are recorded.",
+    "Exactly two targeted documents change; order, cardinality, and every unpatched document are preserved.",
+    "Vectors, docstore, and id-map cardinalities are coherent and map all 7644 documents.",
+    "Normalized embeddings use exact brute-force dot-product retrieval and unique NANDINA-8 ranking.",
+    "Evaluation covers exactly N=1056 cases, emits a unique Top-200 trace and a case-level record for each case.",
+    "Index-builder and evaluator code identities match this specification.",
+    "A complete output hash ledger is emitted without overwrite."
+  ]
+}
