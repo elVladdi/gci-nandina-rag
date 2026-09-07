@@ -1,0 +1,364 @@
+{
+  "authorization": {
+    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "corrective_metrics_computed": false,
+    "corrective_retrieval_executed": false
+  },
+  "corrective_corpus": {
+    "authoritative_normative_source": {
+      "annex_entries": {
+        "87044110": "Inferior a 4,537 t",
+        "87045110": "Inferior a 4,537 t"
+      },
+      "decision": "Decision 906",
+      "effective_on": "2023-01-01",
+      "official_gazette": "Gaceta Oficial 5062",
+      "published_on": "2022-10-25"
+    },
+    "must_be_absent_before_authorized_execution": true,
+    "patch_scope": "EXACTLY_TWO_NANDINA8_DOCUMENTS",
+    "patches": [
+      {
+        "code": "87044110",
+        "match": {
+          "codigo": "87044110",
+          "doc_id": "NANDINA_87044110",
+          "original_jsonl_line_sha256": "6a736cf4b8deb85ef31d7e88900c2ecf395b6ce64dd11308af22c0a7f5390a80",
+          "version": "Decision_885"
+        },
+        "replacement": {
+          "texto": "Inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+          "texto_index": "Inferior a 4,537 t.",
+          "titulo": "Inferior a 4,537 t",
+          "version": "Decision_906"
+        }
+      },
+      {
+        "code": "87045110",
+        "match": {
+          "codigo": "87045110",
+          "doc_id": "NANDINA_87045110",
+          "original_jsonl_line_sha256": "bc2995aa6fa917e71beae99fb923f98abdace4fc7a7bd930c3a9da412d05793a",
+          "version": "Decision_885"
+        },
+        "replacement": {
+          "texto": "Inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+          "texto_index": "Inferior a 4,537 t.",
+          "titulo": "Inferior a 4,537 t",
+          "version": "Decision_906"
+        }
+      }
+    ],
+    "preservation_invariants": [
+      "Preserve cardinality, JSONL row order, doc_id, codigo, and all unpatched bytes.",
+      "Apply only the two matched documents using their canonical Git JSONL line SHA-256 identities.",
+      "Serialize a future derived corpus in UTF-8 with LF and exactly one terminal newline.",
+      "For EV04 preserve hierarchy node identifiers, parent fields, source-page lineage, and deterministic ordering; change only declared leaf/derived representations."
+    ],
+    "prospective_path": "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.1.jsonl"
+  },
+  "frozen_inputs": {
+    "bm25_parameters": {
+      "b": 0.75,
+      "configured_top_n": 100,
+      "hierarchical_k_values": [
+        10,
+        50,
+        100
+      ],
+      "k1": 1.5,
+      "k_values": [
+        1,
+        3,
+        5,
+        10,
+        50
+      ],
+      "recall_k_values": [
+        50,
+        100
+      ],
+      "retrieval_depth": 100,
+      "use_stopwords_in_index_build": true
+    },
+    "config": {
+      "canonical_blob_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+      "git_blob_sha": "09e715ce30b789805644aa87b16df78e04d0352a",
+      "historical_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/configs/experiment_config.json"
+    },
+    "corpus": {
+      "canonical_blob_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+      "git_blob_sha": "a74d44f27e77d5c652c497a4f20fc786855daf8a",
+      "historical_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "data/processed/corpus_rag_v1_index.jsonl"
+    },
+    "eval": {
+      "canonical_blob_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "git_blob_sha": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+      "historical_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv"
+    },
+    "eval_cases": 1056,
+    "index_identity_from_frozen_run_metadata": {
+      "current_checkout_presence_required": false,
+      "path": "data/processed/indexes/bm25_nandina8.pkl",
+      "sha256": "fd5eb111f95dc4de09f1a47fdb1117f455a5caeed96548a25219664a28857b6b"
+    },
+    "label_column": "NANDINA",
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "runner": {
+      "canonical_blob_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+      "git_blob_sha": "2ce009165108280e5db5640a46055e59c28a1454",
+      "historical_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py"
+    }
+  },
+  "original_run_identity": {
+    "historical_execution_commit": "df60c77287c8fd5f128b136625dc149bc5aaaeb2",
+    "historical_git_identities": {
+      "data/processed/corpus_rag_v1_index.jsonl": {
+        "canonical_blob_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+        "git_blob_sha": "a74d44f27e77d5c652c497a4f20fc786855daf8a",
+        "path": "data/processed/corpus_rag_v1_index.jsonl",
+        "revision": "df60c77287c8fd5f128b136625dc149bc5aaaeb2"
+      },
+      "data/processed/data_aduanas_evalset_clase87_v0.2.csv": {
+        "canonical_blob_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "git_blob_sha": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+        "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+        "revision": "df60c77287c8fd5f128b136625dc149bc5aaaeb2"
+      },
+      "src/configs/experiment_config.json": {
+        "canonical_blob_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+        "git_blob_sha": "09e715ce30b789805644aa87b16df78e04d0352a",
+        "path": "src/configs/experiment_config.json",
+        "revision": "df60c77287c8fd5f128b136625dc149bc5aaaeb2"
+      },
+      "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py": {
+        "canonical_blob_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+        "git_blob_sha": "2ce009165108280e5db5640a46055e59c28a1454",
+        "path": "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py",
+        "revision": "df60c77287c8fd5f128b136625dc149bc5aaaeb2"
+      }
+    },
+    "historical_missing_tracked_paths": [],
+    "prospective_current_git_identities": {
+      "data/processed/corpus_rag_v1_index.jsonl": {
+        "canonical_blob_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+        "git_blob_sha": "a74d44f27e77d5c652c497a4f20fc786855daf8a",
+        "historical_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "data/processed/corpus_rag_v1_index.jsonl"
+      },
+      "data/processed/data_aduanas_evalset_clase87_v0.2.csv": {
+        "canonical_blob_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "git_blob_sha": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+        "historical_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv"
+      },
+      "src/configs/experiment_config.json": {
+        "canonical_blob_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+        "git_blob_sha": "09e715ce30b789805644aa87b16df78e04d0352a",
+        "historical_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/configs/experiment_config.json"
+      },
+      "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py": {
+        "canonical_blob_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+        "git_blob_sha": "2ce009165108280e5db5640a46055e59c28a1454",
+        "historical_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py"
+      }
+    },
+    "reason": "Historical metadata, outputs, runner, configuration, corpus, and EVAL resolve to committed Git identities.",
+    "status": "FULLY_VERIFIABLE_FROM_FROZEN_ARTIFACTS"
+  },
+  "primary_original_control": {
+    "comparison_policy": "Use only frozen original definitions and aligned case_ids; no original result is a target and no prospective metric is calculated by this gate.",
+    "decision": "Decision_885",
+    "metric_definitions": [
+      {
+        "denominator": 1056,
+        "metric": "mrr",
+        "numerator": 44.66596703438809,
+        "value": 0.04229731726741296
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_1",
+        "numerator": 29,
+        "value": 0.027462121212121212
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_3",
+        "numerator": 54,
+        "value": 0.05113636363636364
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_5",
+        "numerator": 65,
+        "value": 0.061553030303030304
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_10",
+        "numerator": 69,
+        "value": 0.06534090909090909
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_50",
+        "numerator": 74,
+        "value": 0.07007575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_50",
+        "numerator": 74,
+        "value": 0.07007575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_100",
+        "numerator": 75,
+        "value": 0.07102272727272728
+      },
+      {
+        "denominator": 1056,
+        "metric": "partida_at_10",
+        "numerator": 104,
+        "value": 0.09848484848484848
+      },
+      {
+        "denominator": 1056,
+        "metric": "sub_partida_at_10",
+        "numerator": 76,
+        "value": 0.07196969696969698
+      },
+      {
+        "denominator": 1056,
+        "metric": "clase_at_10",
+        "numerator": 420,
+        "value": 0.3977272727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "partida_at_50",
+        "numerator": 185,
+        "value": 0.17518939393939395
+      },
+      {
+        "denominator": 1056,
+        "metric": "sub_partida_at_50",
+        "numerator": 89,
+        "value": 0.08428030303030302
+      },
+      {
+        "denominator": 1056,
+        "metric": "clase_at_50",
+        "numerator": 770,
+        "value": 0.7291666666666666
+      },
+      {
+        "denominator": 1056,
+        "metric": "partida_at_100",
+        "numerator": 220,
+        "value": 0.20833333333333334
+      },
+      {
+        "denominator": 1056,
+        "metric": "sub_partida_at_100",
+        "numerator": 99,
+        "value": 0.09375
+      },
+      {
+        "denominator": 1056,
+        "metric": "clase_at_100",
+        "numerator": 806,
+        "value": 0.7632575757575758
+      }
+    ],
+    "outputs": {
+      "historical_vs_normative_flat_compatibility_json": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/historical_vs_normative_flat_compatibility_v0.2.json",
+        "sha256": "7911fc06f3025559ead02317bac2998b0a94f623cf5fc85ab1972939f2af6a9b"
+      },
+      "historical_vs_normative_flat_metrics_comparison_csv": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/historical_vs_normative_flat_metrics_comparison_v0.2.csv",
+        "sha256": "5f65b4cec45070bdd20065d604305c805895af49d306398232f0f141b9a50ab3"
+      },
+      "normative_case_summary_csv": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv",
+        "sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0"
+      },
+      "normative_coverage_summary_csv": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_coverage_summary.csv",
+        "sha256": "ae396568b2f270e87b947bb88d5626c61e676c9dcf53a143b0e22da07bfc4225"
+      },
+      "normative_coverage_summary_json": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_coverage_summary.json",
+        "sha256": "ca5521eb2745ba0ae53ef24ec84f9532374d7bcab22d7616aacdf9d76b33c3a9"
+      },
+      "normative_failure_cases_csv": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_failure_cases.csv",
+        "sha256": "b83786c2c1f9065384df47968e09907365293b177226bf5b0c4d66c7b3e490fb"
+      },
+      "normative_metrics_json": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json",
+        "sha256": "56a702398d3b9d1483ecd1be3ca79587682ad8fd3afd84858917f248b5ae0460"
+      },
+      "normative_results_csv": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv",
+        "sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015"
+      },
+      "position_distribution_csv": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/position_distribution.csv",
+        "sha256": "190344412d20c09bf40755ac138e29a7b99dc4e36b9dea8697828a44c6caed9e"
+      },
+      "summary_md": {
+        "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/summary.md",
+        "sha256": "9e446e64e759c47a2722d6392009ba8aa46af61384b70cc4f0e5886244179ddc"
+      }
+    },
+    "run_metadata": {
+      "artifact_sha256": "e57d1ebd360790c64b485f5fb4d7aa34be500e48f4ebf48ab7c0437874caba44",
+      "canonical_blob_sha256": "e57d1ebd360790c64b485f5fb4d7aa34be500e48f4ebf48ab7c0437874caba44",
+      "git_blob_sha": "1e23a522b406245274b33318ba2983d68e5f0c27",
+      "historical_sha256": "e57d1ebd360790c64b485f5fb4d7aa34be500e48f4ebf48ab7c0437874caba44",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/run_metadata.json"
+    }
+  },
+  "prospective_execution": {
+    "execution_order": [
+      "unified_preflight",
+      "corrected_retrieval",
+      "validation",
+      "comparison",
+      "manifest",
+      "ledger",
+      "interpretation"
+    ],
+    "full_rebuild_policy": "FULL_NON_DESTRUCTIVE_REBUILD_NO_OVERWRITE_NO_RESUME",
+    "prospective_index_root": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.1",
+    "prospective_output_root": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.1",
+    "required_outputs": [
+      "case_level_output",
+      "original_vs_corrective_comparison",
+      "execution_manifest",
+      "output_hash_ledger",
+      "summary"
+    ]
+  },
+  "specification_id": "ev03_corrective_execution_spec_v0.1",
+  "specification_status": "CLOSED_PROSPECTIVELY/PENDING_EXTERNAL_AUDIT"
+}

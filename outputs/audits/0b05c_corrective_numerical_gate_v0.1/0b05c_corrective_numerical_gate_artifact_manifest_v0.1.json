@@ -1,0 +1,36 @@
+{
+  "artifact_id": "0b05c_corrective_numerical_gate_artifact_manifest_v0.1",
+  "evaluation_metrics_computed": false,
+  "files": [
+    {
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_corrective_execution_spec_v0.1.json",
+      "sha256": "ae8d285b91631dc5a70c55cb5272441bb8cfa0c0d9ccdb287600d1cbf85ff677"
+    },
+    {
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_original_ranking_overlap_v0.1.json",
+      "sha256": "90fcc8eb3d853673f22f6ac6adbbf232edd5dbc573e54562fbfe72bc6fd4caff"
+    },
+    {
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_original_ranking_overlap_v0.1.csv",
+      "sha256": "5294cfd68464dc2ab5cc7325f99223dfd4ef8d39d7cb0032cb205739e912e523"
+    },
+    {
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_corrective_execution_spec_v0.1.json",
+      "sha256": "d24cb7d77a3103ebd51186dab07747b3aa620b8da785b7920d9e4388bca9749f"
+    },
+    {
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_original_ranking_overlap_v0.1.json",
+      "sha256": "491ef925f674b312570ea55907c462aa9622ba7ed8a0ada2917905345a75f364"
+    },
+    {
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_original_ranking_overlap_v0.1.csv",
+      "sha256": "b9dc9746b79b7be7440599b0ef1e8ee220ccd8369cdd0a72fa6f79fc8454e2b1"
+    },
+    {
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/0b05c_corrective_numerical_execution_gate_v0.1.json",
+      "sha256": "2af7289843bb27deb1a6b04bfa3db69815904f0a9f9a5366ec9bb3846eb34514"
+    }
+  ],
+  "generation_mode": "STATIC_AUDIT_AND_PROSPECTIVE_FREEZE_ONLY",
+  "retrieval_executed": false
+}

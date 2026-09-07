@@ -1,0 +1,71 @@
+{
+  "arms": {
+    "EV03": {
+      "original_ranking_overlap_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev03_original_ranking_overlap_v0.1.json",
+      "original_ranking_overlap_sha256": "90fcc8eb3d853673f22f6ac6adbbf232edd5dbc573e54562fbfe72bc6fd4caff",
+      "original_run_identity": "FULLY_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+      "specification_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev03_corrective_execution_spec_v0.1.json",
+      "specification_sha256": "ae8d285b91631dc5a70c55cb5272441bb8cfa0c0d9ccdb287600d1cbf85ff677"
+    },
+    "EV04": {
+      "original_ranking_overlap_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev04_original_ranking_overlap_v0.1.json",
+      "original_ranking_overlap_sha256": "491ef925f674b312570ea55907c462aa9622ba7ed8a0ada2917905345a75f364",
+      "original_run_identity": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+      "specification_path": "outputs\\audits\\0b05c_corrective_numerical_gate_v0.1\\ev04_corrective_execution_spec_v0.1.json",
+      "specification_sha256": "d24cb7d77a3103ebd51186dab07747b3aa620b8da785b7920d9e4388bca9749f"
+    }
+  },
+  "authorization": {
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "corrective_metrics_computed": false,
+    "corrective_retrieval_executed": false
+  },
+  "base_main": "7ff504c4a5a763705f198ca41753db75e938a87d",
+  "d1a_existing_specification": {
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "reference": {
+      "artifact_sha256": "4868a53060a2d3e5faff535281e4c60375b9de55a1b8e1c666755526ffb0cd11",
+      "canonical_blob_sha256": "4868a53060a2d3e5faff535281e4c60375b9de55a1b8e1c666755526ffb0cd11",
+      "git_blob_sha": "c0d221e7c7fa00cb0573faef5812dfb7e3944cc3",
+      "historical_sha256": "4868a53060a2d3e5faff535281e4c60375b9de55a1b8e1c666755526ffb0cd11",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "outputs/audits/d1a_preexecution_0b05c_v0.1/d1a_0b05c_corrective_execution_spec_v0.1.json"
+    },
+    "specification_status": "CLOSED_PROSPECTIVELY"
+  },
+  "decisions": {
+    "0B05C_CLOSURE": "NOT_AUTHORIZED",
+    "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+    "D1A_EXECUTION_SPECIFICATION": "CLOSED_PROSPECTIVELY",
+    "D1A_PREEXECUTION": "APPROVED/INTEGRATED",
+    "DOWNSTREAM_REEXECUTION": "NOT_YET_JUSTIFIED",
+    "EXP11B_PORTABILITY_DEBT": "OPEN",
+    "EXP11B_PORTABILITY_DEBT_BLOCKS_D1A": false,
+    "EXP11B_PORTABILITY_DEBT_BLOCKS_EXP11B_RETRIEVAL_AUTHORIZATION": true
+  },
+  "fail_closed_preflight": [
+    "reject unexpected main",
+    "reject frozen control/output/code/config/EVAL/corpus identity changes",
+    "reject Decision 906 or exactly-two-entry changes",
+    "reject an existing prospective root, partial output, overwrite, or resume",
+    "reject D1a specification change",
+    "reject an already-executed arm or pre-existing corrective metric",
+    "reject --execute while authorization remains NOT_AUTHORIZED"
+  ],
+  "future_execution_order": [
+    "unified_preflight",
+    "EV03_corrected_flat_normative_BM25",
+    "EV04_corrected_hierarchical_normative_BM25",
+    "D1a_corrected_dense_retrieval",
+    "validation",
+    "comparisons",
+    "manifest",
+    "ledger",
+    "interpretation"
+  ],
+  "gate_id": "0B05C_CORRECTIVE_NUMERICAL_EXECUTION_GATE_v0.1",
+  "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT"
+}

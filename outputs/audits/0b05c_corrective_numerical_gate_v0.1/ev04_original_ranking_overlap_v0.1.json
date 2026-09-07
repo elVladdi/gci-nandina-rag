@@ -1,0 +1,1370 @@
+{
+  "affected_cases": 74,
+  "artifact_id": "ev04_original_full_ranking_overlap_v0.1",
+  "case_summary_path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+  "case_summary_sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+  "cases_scanned": 1056,
+  "cases_with_ranked_rows": 1056,
+  "cases_without_ranked_rows": 0,
+  "complete_case_universe_verified": true,
+  "evaluation_metrics_computed": false,
+  "occurrences": [
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 30,
+      "candidate_raw_rank": 32,
+      "case_id": "DA-EVAL-V02-00001",
+      "nandina_ref": "87032410",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 31,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00001",
+      "nandina_ref": "87032410",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 121,
+      "case_id": "DA-EVAL-V02-00002",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 122,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00002",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 60,
+      "candidate_raw_rank": 60,
+      "case_id": "DA-EVAL-V02-00003",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 61,
+      "candidate_raw_rank": 61,
+      "case_id": "DA-EVAL-V02-00003",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 122,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00004",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 123,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00004",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 13,
+      "candidate_raw_rank": 13,
+      "case_id": "DA-EVAL-V02-00017",
+      "nandina_ref": "87089929",
+      "score": "23.953870899510424"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 14,
+      "candidate_raw_rank": 14,
+      "case_id": "DA-EVAL-V02-00017",
+      "nandina_ref": "87089929",
+      "score": "23.953870899510424"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 175,
+      "candidate_raw_rank": 175,
+      "case_id": "DA-EVAL-V02-00026",
+      "nandina_ref": "87089100",
+      "score": "5.42241684577523"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 176,
+      "candidate_raw_rank": 176,
+      "case_id": "DA-EVAL-V02-00026",
+      "nandina_ref": "87089100",
+      "score": "5.42241684577523"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 185,
+      "candidate_raw_rank": 185,
+      "case_id": "DA-EVAL-V02-00027",
+      "nandina_ref": "87089999",
+      "score": "5.42241684577523"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 186,
+      "candidate_raw_rank": 186,
+      "case_id": "DA-EVAL-V02-00027",
+      "nandina_ref": "87089999",
+      "score": "5.42241684577523"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 63,
+      "candidate_raw_rank": 63,
+      "case_id": "DA-EVAL-V02-00029",
+      "nandina_ref": "87089999",
+      "score": "9.303980677919919"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 64,
+      "candidate_raw_rank": 64,
+      "case_id": "DA-EVAL-V02-00029",
+      "nandina_ref": "87089999",
+      "score": "9.303980677919919"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 25,
+      "candidate_raw_rank": 25,
+      "case_id": "DA-EVAL-V02-00095",
+      "nandina_ref": "87082920",
+      "score": "15.605055500138604"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 26,
+      "candidate_raw_rank": 26,
+      "case_id": "DA-EVAL-V02-00095",
+      "nandina_ref": "87082920",
+      "score": "15.605055500138604"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 66,
+      "candidate_raw_rank": 68,
+      "case_id": "DA-EVAL-V02-00106",
+      "nandina_ref": "87032390",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 67,
+      "candidate_raw_rank": 69,
+      "case_id": "DA-EVAL-V02-00106",
+      "nandina_ref": "87032390",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 40,
+      "candidate_raw_rank": 40,
+      "case_id": "DA-EVAL-V02-00107",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 41,
+      "candidate_raw_rank": 41,
+      "case_id": "DA-EVAL-V02-00107",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 32,
+      "candidate_raw_rank": 32,
+      "case_id": "DA-EVAL-V02-00112",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00112",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 32,
+      "candidate_raw_rank": 32,
+      "case_id": "DA-EVAL-V02-00113",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00113",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 132,
+      "candidate_raw_rank": 132,
+      "case_id": "DA-EVAL-V02-00126",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 133,
+      "candidate_raw_rank": 133,
+      "case_id": "DA-EVAL-V02-00126",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 131,
+      "candidate_raw_rank": 131,
+      "case_id": "DA-EVAL-V02-00134",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 132,
+      "candidate_raw_rank": 132,
+      "case_id": "DA-EVAL-V02-00134",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 147,
+      "candidate_raw_rank": 147,
+      "case_id": "DA-EVAL-V02-00135",
+      "nandina_ref": "87089999",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 148,
+      "candidate_raw_rank": 148,
+      "case_id": "DA-EVAL-V02-00135",
+      "nandina_ref": "87089999",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 131,
+      "candidate_raw_rank": 131,
+      "case_id": "DA-EVAL-V02-00136",
+      "nandina_ref": "87082990",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 132,
+      "candidate_raw_rank": 132,
+      "case_id": "DA-EVAL-V02-00136",
+      "nandina_ref": "87082990",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 134,
+      "candidate_raw_rank": 134,
+      "case_id": "DA-EVAL-V02-00137",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 135,
+      "candidate_raw_rank": 135,
+      "case_id": "DA-EVAL-V02-00137",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 135,
+      "candidate_raw_rank": 135,
+      "case_id": "DA-EVAL-V02-00140",
+      "nandina_ref": "87082100",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 136,
+      "candidate_raw_rank": 136,
+      "case_id": "DA-EVAL-V02-00140",
+      "nandina_ref": "87082100",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 131,
+      "candidate_raw_rank": 131,
+      "case_id": "DA-EVAL-V02-00155",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 132,
+      "candidate_raw_rank": 132,
+      "case_id": "DA-EVAL-V02-00155",
+      "nandina_ref": "87082920",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 134,
+      "candidate_raw_rank": 134,
+      "case_id": "DA-EVAL-V02-00156",
+      "nandina_ref": "87082100",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 135,
+      "candidate_raw_rank": 135,
+      "case_id": "DA-EVAL-V02-00156",
+      "nandina_ref": "87082100",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 131,
+      "candidate_raw_rank": 131,
+      "case_id": "DA-EVAL-V02-00157",
+      "nandina_ref": "87089999",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 132,
+      "candidate_raw_rank": 132,
+      "case_id": "DA-EVAL-V02-00157",
+      "nandina_ref": "87089999",
+      "score": "16.267250537325694"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 121,
+      "case_id": "DA-EVAL-V02-00169",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 122,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00169",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 122,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00170",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 123,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00170",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 121,
+      "case_id": "DA-EVAL-V02-00171",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 122,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00171",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 122,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00172",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 123,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00172",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 63,
+      "candidate_raw_rank": 63,
+      "case_id": "DA-EVAL-V02-00173",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 64,
+      "candidate_raw_rank": 64,
+      "case_id": "DA-EVAL-V02-00173",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 149,
+      "candidate_raw_rank": 149,
+      "case_id": "DA-EVAL-V02-00221",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 150,
+      "candidate_raw_rank": 150,
+      "case_id": "DA-EVAL-V02-00221",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 149,
+      "candidate_raw_rank": 149,
+      "case_id": "DA-EVAL-V02-00223",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 150,
+      "candidate_raw_rank": 150,
+      "case_id": "DA-EVAL-V02-00223",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 177,
+      "candidate_raw_rank": 177,
+      "case_id": "DA-EVAL-V02-00225",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 178,
+      "candidate_raw_rank": 178,
+      "case_id": "DA-EVAL-V02-00225",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 154,
+      "candidate_raw_rank": 154,
+      "case_id": "DA-EVAL-V02-00227",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 155,
+      "candidate_raw_rank": 155,
+      "case_id": "DA-EVAL-V02-00227",
+      "nandina_ref": "87087010",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 122,
+      "candidate_raw_rank": 124,
+      "case_id": "DA-EVAL-V02-00246",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 123,
+      "candidate_raw_rank": 125,
+      "case_id": "DA-EVAL-V02-00246",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 120,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00247",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00247",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 120,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00248",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00248",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 120,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00249",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00249",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 120,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00250",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00250",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 120,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00251",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00251",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 120,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00252",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00252",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 120,
+      "candidate_raw_rank": 122,
+      "case_id": "DA-EVAL-V02-00253",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 121,
+      "candidate_raw_rank": 123,
+      "case_id": "DA-EVAL-V02-00253",
+      "nandina_ref": "87032290",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 63,
+      "candidate_raw_rank": 63,
+      "case_id": "DA-EVAL-V02-00284",
+      "nandina_ref": "87038090",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 64,
+      "candidate_raw_rank": 64,
+      "case_id": "DA-EVAL-V02-00284",
+      "nandina_ref": "87038090",
+      "score": "10.84483369155046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 22,
+      "candidate_raw_rank": 22,
+      "case_id": "DA-EVAL-V02-00285",
+      "nandina_ref": "87038090",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 23,
+      "candidate_raw_rank": 23,
+      "case_id": "DA-EVAL-V02-00285",
+      "nandina_ref": "87038090",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 32,
+      "candidate_raw_rank": 32,
+      "case_id": "DA-EVAL-V02-00286",
+      "nandina_ref": "87032290",
+      "score": "21.706463639103134"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00286",
+      "nandina_ref": "87032290",
+      "score": "21.706463639103134"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 26,
+      "candidate_raw_rank": 28,
+      "case_id": "DA-EVAL-V02-00287",
+      "nandina_ref": "87032310",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 27,
+      "candidate_raw_rank": 29,
+      "case_id": "DA-EVAL-V02-00287",
+      "nandina_ref": "87032310",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 42,
+      "candidate_raw_rank": 42,
+      "case_id": "DA-EVAL-V02-00326",
+      "nandina_ref": "87082920",
+      "score": "10.199434910365582"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 43,
+      "candidate_raw_rank": 43,
+      "case_id": "DA-EVAL-V02-00326",
+      "nandina_ref": "87082920",
+      "score": "10.199434910365582"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 42,
+      "candidate_raw_rank": 42,
+      "case_id": "DA-EVAL-V02-00342",
+      "nandina_ref": "87082910",
+      "score": "10.199434910365582"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 43,
+      "candidate_raw_rank": 43,
+      "case_id": "DA-EVAL-V02-00342",
+      "nandina_ref": "87082910",
+      "score": "10.199434910365582"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 146,
+      "candidate_raw_rank": 146,
+      "case_id": "DA-EVAL-V02-00450",
+      "nandina_ref": "87089999",
+      "score": "7.763127664289375"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 147,
+      "candidate_raw_rank": 147,
+      "case_id": "DA-EVAL-V02-00450",
+      "nandina_ref": "87089999",
+      "score": "7.763127664289375"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 55,
+      "candidate_raw_rank": 55,
+      "case_id": "DA-EVAL-V02-00500",
+      "nandina_ref": "87032390",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 56,
+      "candidate_raw_rank": 56,
+      "case_id": "DA-EVAL-V02-00500",
+      "nandina_ref": "87032390",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 48,
+      "candidate_raw_rank": 50,
+      "case_id": "DA-EVAL-V02-00501",
+      "nandina_ref": "87032390",
+      "score": "18.8294573247206"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 49,
+      "candidate_raw_rank": 51,
+      "case_id": "DA-EVAL-V02-00501",
+      "nandina_ref": "87032390",
+      "score": "18.8294573247206"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 191,
+      "candidate_raw_rank": 191,
+      "case_id": "DA-EVAL-V02-00637",
+      "nandina_ref": "87082990",
+      "score": "11.644691496434064"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 192,
+      "candidate_raw_rank": 192,
+      "case_id": "DA-EVAL-V02-00637",
+      "nandina_ref": "87082990",
+      "score": "11.644691496434064"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 97,
+      "candidate_raw_rank": 97,
+      "case_id": "DA-EVAL-V02-00660",
+      "nandina_ref": "87082990",
+      "score": "7.479828359476863"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 98,
+      "candidate_raw_rank": 98,
+      "case_id": "DA-EVAL-V02-00660",
+      "nandina_ref": "87082990",
+      "score": "7.479828359476863"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 53,
+      "candidate_raw_rank": 53,
+      "case_id": "DA-EVAL-V02-00671",
+      "nandina_ref": "87032390",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 54,
+      "candidate_raw_rank": 54,
+      "case_id": "DA-EVAL-V02-00671",
+      "nandina_ref": "87032390",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 35,
+      "candidate_raw_rank": 35,
+      "case_id": "DA-EVAL-V02-00672",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 36,
+      "candidate_raw_rank": 36,
+      "case_id": "DA-EVAL-V02-00672",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 35,
+      "candidate_raw_rank": 35,
+      "case_id": "DA-EVAL-V02-00673",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 36,
+      "candidate_raw_rank": 36,
+      "case_id": "DA-EVAL-V02-00673",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 60,
+      "candidate_raw_rank": 60,
+      "case_id": "DA-EVAL-V02-00674",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 61,
+      "candidate_raw_rank": 61,
+      "case_id": "DA-EVAL-V02-00674",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 34,
+      "candidate_raw_rank": 34,
+      "case_id": "DA-EVAL-V02-00676",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 35,
+      "candidate_raw_rank": 35,
+      "case_id": "DA-EVAL-V02-00676",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00677",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 34,
+      "candidate_raw_rank": 34,
+      "case_id": "DA-EVAL-V02-00677",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 32,
+      "candidate_raw_rank": 32,
+      "case_id": "DA-EVAL-V02-00678",
+      "nandina_ref": "87032290",
+      "score": "21.706463639103134"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00678",
+      "nandina_ref": "87032290",
+      "score": "21.706463639103134"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 70,
+      "candidate_raw_rank": 72,
+      "case_id": "DA-EVAL-V02-00679",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 71,
+      "candidate_raw_rank": 73,
+      "case_id": "DA-EVAL-V02-00679",
+      "nandina_ref": "87032290",
+      "score": "13.564440242439181"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 165,
+      "candidate_raw_rank": 167,
+      "case_id": "DA-EVAL-V02-00681",
+      "nandina_ref": "87032390",
+      "score": "8.142023396663951"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 166,
+      "candidate_raw_rank": 168,
+      "case_id": "DA-EVAL-V02-00681",
+      "nandina_ref": "87032390",
+      "score": "8.142023396663951"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 31,
+      "candidate_raw_rank": 31,
+      "case_id": "DA-EVAL-V02-00682",
+      "nandina_ref": "87032390",
+      "score": "21.706463639103134"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 32,
+      "candidate_raw_rank": 32,
+      "case_id": "DA-EVAL-V02-00682",
+      "nandina_ref": "87032390",
+      "score": "21.706463639103134"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 27,
+      "candidate_raw_rank": 27,
+      "case_id": "DA-EVAL-V02-00683",
+      "nandina_ref": "87032290",
+      "score": "16.284046793327903"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 28,
+      "candidate_raw_rank": 28,
+      "case_id": "DA-EVAL-V02-00683",
+      "nandina_ref": "87032290",
+      "score": "16.284046793327903"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 17,
+      "candidate_raw_rank": 17,
+      "case_id": "DA-EVAL-V02-00684",
+      "nandina_ref": "87032290",
+      "score": "24.251874170495835"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 18,
+      "candidate_raw_rank": 18,
+      "case_id": "DA-EVAL-V02-00684",
+      "nandina_ref": "87032290",
+      "score": "24.251874170495835"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00685",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 34,
+      "candidate_raw_rank": 34,
+      "case_id": "DA-EVAL-V02-00685",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00686",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 34,
+      "candidate_raw_rank": 34,
+      "case_id": "DA-EVAL-V02-00686",
+      "nandina_ref": "87042110",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 32,
+      "candidate_raw_rank": 32,
+      "case_id": "DA-EVAL-V02-00687",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 33,
+      "candidate_raw_rank": 33,
+      "case_id": "DA-EVAL-V02-00687",
+      "nandina_ref": "87032290",
+      "score": "18.986857088214414"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 151,
+      "candidate_raw_rank": 151,
+      "case_id": "DA-EVAL-V02-00723",
+      "nandina_ref": "87084090",
+      "score": "7.98462363317014"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 152,
+      "candidate_raw_rank": 152,
+      "case_id": "DA-EVAL-V02-00723",
+      "nandina_ref": "87084090",
+      "score": "7.98462363317014"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 186,
+      "candidate_raw_rank": 186,
+      "case_id": "DA-EVAL-V02-00739",
+      "nandina_ref": "87082920",
+      "score": "9.352743887010657"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 187,
+      "candidate_raw_rank": 187,
+      "case_id": "DA-EVAL-V02-00739",
+      "nandina_ref": "87082920",
+      "score": "9.352743887010657"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 186,
+      "candidate_raw_rank": 186,
+      "case_id": "DA-EVAL-V02-00745",
+      "nandina_ref": "87082920",
+      "score": "9.352743887010657"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 187,
+      "candidate_raw_rank": 187,
+      "case_id": "DA-EVAL-V02-00745",
+      "nandina_ref": "87082920",
+      "score": "9.352743887010657"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 51,
+      "candidate_raw_rank": 51,
+      "case_id": "DA-EVAL-V02-00747",
+      "nandina_ref": "87088090",
+      "score": "12.434449914271742"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 52,
+      "candidate_raw_rank": 52,
+      "case_id": "DA-EVAL-V02-00747",
+      "nandina_ref": "87088090",
+      "score": "12.434449914271742"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 51,
+      "candidate_raw_rank": 51,
+      "case_id": "DA-EVAL-V02-00748",
+      "nandina_ref": "87088090",
+      "score": "12.434449914271742"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 52,
+      "candidate_raw_rank": 52,
+      "case_id": "DA-EVAL-V02-00748",
+      "nandina_ref": "87088090",
+      "score": "12.434449914271742"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 12,
+      "candidate_raw_rank": 12,
+      "case_id": "DA-EVAL-V02-00754",
+      "nandina_ref": "87089999",
+      "score": "18.624757611842046"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 13,
+      "candidate_raw_rank": 13,
+      "case_id": "DA-EVAL-V02-00754",
+      "nandina_ref": "87089999",
+      "score": "18.624757611842046"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 133,
+      "candidate_raw_rank": 133,
+      "case_id": "DA-EVAL-V02-00755",
+      "nandina_ref": "87089999",
+      "score": "10.861629947552672"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 134,
+      "candidate_raw_rank": 134,
+      "case_id": "DA-EVAL-V02-00755",
+      "nandina_ref": "87089999",
+      "score": "10.861629947552672"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 51,
+      "candidate_raw_rank": 51,
+      "case_id": "DA-EVAL-V02-00773",
+      "nandina_ref": "87087020",
+      "score": "8.142023396663951"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 52,
+      "candidate_raw_rank": 52,
+      "case_id": "DA-EVAL-V02-00773",
+      "nandina_ref": "87087020",
+      "score": "8.142023396663951"
+    },
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 134,
+      "candidate_raw_rank": 134,
+      "case_id": "DA-EVAL-V02-00846",
+      "nandina_ref": "87081000",
+      "score": "5.42241684577523"
+    },
+    {
+      "candidate_code": "87045110",
+      "candidate_doc_id": "NANDINA_87045110",
+      "candidate_rank": 135,
+      "candidate_raw_rank": 135,
+      "case_id": "DA-EVAL-V02-00846",
+      "nandina_ref": "87081000",
+      "score": "5.42241684577523"
+    }
+  ],
+  "per_code": {
+    "87044110": {
+      "distinct_cases": 74,
+      "maximum_rank": 191,
+      "minimum_rank": 12,
+      "occurrences": 74
+    },
+    "87045110": {
+      "distinct_cases": 74,
+      "maximum_rank": 192,
+      "minimum_rank": 13,
+      "occurrences": 74
+    }
+  },
+  "ranking_depth": 200,
+  "ranking_path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+  "ranking_rows_scanned": 202863,
+  "ranking_sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662",
+  "retrieval_executed": false,
+  "scan_scope": "FULL_FROZEN_RANKING_ARTIFACT_NO_RERETRIEVAL",
+  "target_codes": [
+    "87044110",
+    "87045110"
+  ],
+  "total_occurrences": 148
+}

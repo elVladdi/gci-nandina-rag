@@ -1,0 +1,47 @@
+{
+  "affected_cases": 1,
+  "artifact_id": "ev03_original_full_ranking_overlap_v0.1",
+  "case_summary_path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv",
+  "case_summary_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+  "cases_scanned": 1056,
+  "cases_with_ranked_rows": 1046,
+  "cases_without_ranked_rows": 10,
+  "complete_case_universe_verified": true,
+  "evaluation_metrics_computed": false,
+  "occurrences": [
+    {
+      "candidate_code": "87044110",
+      "candidate_doc_id": "NANDINA_87044110",
+      "candidate_rank": 100,
+      "candidate_raw_rank": null,
+      "case_id": "DA-EVAL-V02-00060",
+      "nandina_ref": "87088020",
+      "score": "6.589374826277376"
+    }
+  ],
+  "per_code": {
+    "87044110": {
+      "distinct_cases": 1,
+      "maximum_rank": 100,
+      "minimum_rank": 100,
+      "occurrences": 1
+    },
+    "87045110": {
+      "distinct_cases": 0,
+      "maximum_rank": null,
+      "minimum_rank": null,
+      "occurrences": 0
+    }
+  },
+  "ranking_depth": 100,
+  "ranking_path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv",
+  "ranking_rows_scanned": 50327,
+  "ranking_sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+  "retrieval_executed": false,
+  "scan_scope": "FULL_FROZEN_RANKING_ARTIFACT_NO_RERETRIEVAL",
+  "target_codes": [
+    "87044110",
+    "87045110"
+  ],
+  "total_occurrences": 1
+}
