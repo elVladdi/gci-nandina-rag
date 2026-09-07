@@ -20,21 +20,26 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     authorized_execution_provenance,
     build_case_comparison,
     build_execution_manifest,
+    canonical_frozen_text_bytes,
     contractual_ledger_paths,
     derive_runtime_config,
     diff_paths,
     execute_authorized,
     expected_paths,
+    git_blob_bytes,
     git_blob_sha256,
     git_head_blob_sha,
     git_path_is_tracked,
     load_json,
+    load_json_bytes,
     patched_corpus_bytes,
     preflight,
     project_path,
     preflight_provenance,
     relative_path,
     require_numerical_authorization,
+    sha256_bytes,
+    validate_binary_file_identity,
     validate_contract_inputs,
     validate_code_identity,
     write_hash_ledger,
@@ -50,11 +55,26 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.spec = load_json(project_path(ROOT, AUDIT_SPEC_PATH))
 
-    def test_01_preflight_is_read_only_and_fails_closed_when_the_frozen_model_is_unavailable(self) -> None:
+    def test_01_real_preflight_is_read_only_with_or_without_the_local_model(self) -> None:
+        for relative in self.spec["orchestration"]["future_roots"]:
+            self.assertFalse(project_path(ROOT, relative).exists())
+        try:
+            proof = preflight(ROOT)
+        except ContractViolation as error:
+            self.assertIn("Frozen D1a model SHA changed", str(error))
+        else:
+            self.assertEqual(proof["mode"], "PREFLIGHT_ONLY")
+        self.assertNotIn("sentence_transformers", sys.modules)
+        for relative in self.spec["orchestration"]["future_roots"]:
+            self.assertFalse(project_path(ROOT, relative).exists())
+
+    def test_01a_synthetic_missing_model_fails_closed_without_creating_roots(self) -> None:
+        modified = copy.deepcopy(self.spec)
+        modified["model_policy"]["weights"]["path"] = "fixture/missing-model.safetensors"
         for relative in self.spec["orchestration"]["future_roots"]:
             self.assertFalse(project_path(ROOT, relative).exists())
         with self.assertRaisesRegex(ContractViolation, "Frozen D1a model SHA changed"):
-            preflight(ROOT)
+            validate_contract_inputs(ROOT, modified)
         self.assertNotIn("sentence_transformers", sys.modules)
         for relative in self.spec["orchestration"]["future_roots"]:
             self.assertFalse(project_path(ROOT, relative).exists())
@@ -68,15 +88,16 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
             self.assertEqual(patch["replacement"]["version"], "Decision_906")
 
     def test_03_patch_derivation_is_in_memory_and_does_not_create_the_corrected_corpus(self) -> None:
-        original = project_path(ROOT, self.spec["original_normative_corpus"]["path"])
-        before = original.read_bytes()
+        identity = self.spec["original_normative_corpus"]
+        before = canonical_frozen_text_bytes(ROOT, identity, "Original normative corpus")
         corrected = patched_corpus_bytes(before, self.spec)
-        self.assertEqual(original.read_bytes(), before)
+        self.assertEqual(canonical_frozen_text_bytes(ROOT, identity, "Original normative corpus"), before)
         self.assertNotEqual(corrected, before)
         self.assertFalse(project_path(ROOT, self.spec["corrected_normative_corpus"]["prospective_path"]).exists())
 
     def test_04_runtime_config_derivation_is_deterministic_and_limited(self) -> None:
-        original_config = load_json(project_path(ROOT, self.spec["orchestration"]["original_config"]["path"]))
+        identity = self.spec["orchestration"]["original_config"]
+        original_config = load_json_bytes(canonical_frozen_text_bytes(ROOT, identity, "Original frozen config"), identity["path"])
         first = derive_runtime_config(original_config, self.spec, "a" * 64)
         second = derive_runtime_config(original_config, self.spec, "a" * 64)
         self.assertEqual(first, second)
@@ -129,6 +150,26 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
         runner = self.spec["orchestration"]["runner"]
         self.assertEqual(runner["revision"], "COMMITTED_GIT_BLOB")
         self.assertIn("canonical_blob_sha256", runner)
+
+    def test_08a_config_and_corpus_bind_to_committed_git_blobs(self) -> None:
+        for label, identity in (
+            ("Original frozen config", self.spec["orchestration"]["original_config"]),
+            ("Original normative corpus", self.spec["original_normative_corpus"]),
+        ):
+            self.assertEqual(identity["identity_authority"], "COMMITTED_GIT_BLOB")
+            blob_sha = git_head_blob_sha(ROOT, identity["path"])
+            self.assertEqual(blob_sha, identity["git_blob_sha"])
+            self.assertEqual(git_blob_sha256(ROOT, blob_sha), identity["canonical_blob_sha256"])
+            self.assertEqual(identity["canonical_blob_sha256"], identity["historical_sha256"])
+            self.assertEqual(canonical_frozen_text_bytes(ROOT, identity, label), git_blob_bytes(ROOT, blob_sha))
+
+    def test_08b_canonical_corpus_derivation_is_deterministic(self) -> None:
+        identity = self.spec["original_normative_corpus"]
+        original = canonical_frozen_text_bytes(ROOT, identity, "Original normative corpus")
+        first = patched_corpus_bytes(original, self.spec)
+        second = patched_corpus_bytes(canonical_frozen_text_bytes(ROOT, identity, "Original normative corpus"), self.spec)
+        self.assertEqual(first, second)
+        self.assertEqual(sha256_bytes(first), sha256_bytes(second))
 
     def test_09_existing_prospective_root_fails_closed(self) -> None:
         modified = copy.deepcopy(self.spec)
@@ -259,23 +300,27 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
             self.assertFalse(project_path(ROOT, relative).exists())
 
     @staticmethod
-    def _git_identity_fixture(root: Path) -> tuple[Path, dict[str, str]]:
-        source = root / "tracked_code.py"
+    def _git_identity_fixture(root: Path, relative: str = "tracked_code.py", content: bytes = b"value = 1\n") -> tuple[Path, dict[str, str]]:
+        source = root / relative
         subprocess.run(["git", "init"], cwd=root, check=True, capture_output=True)
-        source.write_bytes(b"value = 1\n")
-        subprocess.run(["git", "add", "tracked_code.py"], cwd=root, check=True, capture_output=True)
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_bytes(content)
+        subprocess.run(["git", "add", relative], cwd=root, check=True, capture_output=True)
         subprocess.run(
             ["git", "-c", "user.name=Codex", "-c", "user.email=codex@example.invalid", "commit", "-m", "fixture"],
             cwd=root,
             check=True,
             capture_output=True,
         )
-        blob_sha = git_head_blob_sha(root, "tracked_code.py")
+        blob_sha = git_head_blob_sha(root, relative)
+        canonical_sha = git_blob_sha256(root, blob_sha)
         return source, {
-            "path": "tracked_code.py",
+            "path": relative,
             "revision": "COMMITTED_GIT_BLOB",
             "git_blob_sha": blob_sha,
-            "canonical_blob_sha256": git_blob_sha256(root, blob_sha),
+            "canonical_blob_sha256": canonical_sha,
+            "identity_authority": "COMMITTED_GIT_BLOB",
+            "historical_sha256": canonical_sha,
         }
 
     def test_18_semantic_local_code_modification_is_rejected(self) -> None:
@@ -311,6 +356,39 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
             self.assertFalse(git_path_is_tracked(root, "untracked_code.py"))
             with self.assertRaisesRegex(ContractViolation, "not tracked"):
                 validate_code_identity(root, identity)
+
+    def test_21_config_crlf_representation_preserves_canonical_identity_and_semantic_changes_reject(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            source, identity = self._git_identity_fixture(root, "frozen_config.json", b'{"value": 1}\n')
+            canonical_frozen_text_bytes(root, identity, "Frozen config")
+            source.write_bytes(b'{"value": 1}\r\n')
+            self.assertEqual(canonical_frozen_text_bytes(root, identity, "Frozen config"), b'{"value": 1}\n')
+            source.write_bytes(b'{"value": 2}\n')
+            with self.assertRaisesRegex(ContractViolation, "local modifications"):
+                canonical_frozen_text_bytes(root, identity, "Frozen config")
+
+    def test_22_corpus_crlf_representation_preserves_canonical_identity_and_semantic_changes_reject(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            source, identity = self._git_identity_fixture(root, "frozen_corpus.jsonl", b'{"codigo": "87044110"}\n')
+            canonical_frozen_text_bytes(root, identity, "Frozen corpus")
+            source.write_bytes(b'{"codigo": "87044110"}\r\n')
+            self.assertEqual(canonical_frozen_text_bytes(root, identity, "Frozen corpus"), b'{"codigo": "87044110"}\n')
+            source.write_bytes(b'{"codigo": "87045110"}\n')
+            with self.assertRaisesRegex(ContractViolation, "local modifications"):
+                canonical_frozen_text_bytes(root, identity, "Frozen corpus")
+
+    def test_23_binary_model_identity_remains_raw_byte_sha256(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            model = root / "model.safetensors"
+            model.write_bytes(b"\x00model-bytes\xff")
+            identity = {"path": "model.safetensors", "sha256": sha256_bytes(model.read_bytes())}
+            validate_binary_file_identity(root, identity, "Synthetic frozen model")
+            model.write_bytes(b"\x00model-bytes\x00")
+            with self.assertRaisesRegex(ContractViolation, "Synthetic frozen model SHA changed"):
+                validate_binary_file_identity(root, identity, "Synthetic frozen model")
 
 
 if __name__ == "__main__":

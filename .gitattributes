@@ -53,3 +53,5 @@ src/experiments/run_d1a_corrective_0b05c_v01.py text eol=lf
 tests/test_d1a_preexecution_0b05c_v01.py text eol=lf
 tests/test_d1a_corrective_0b05c_runner_v01.py text eol=lf
 outputs/audits/d1a_preexecution_0b05c_v0.1/** text eol=lf
+src/configs/text2trade_mnrl_v0.2.json text eol=lf
+data/processed/corpus_rag_v1_index.jsonl text eol=lf

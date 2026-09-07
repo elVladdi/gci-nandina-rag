@@ -78,6 +78,12 @@ def load_json(path: Path) -> dict[str, Any]:
     return payload
 
 
+def load_json_bytes(content: bytes, label: str) -> dict[str, Any]:
+    payload = json.loads(content.decode("utf-8"))
+    require(isinstance(payload, dict), f"Expected JSON object: {label}")
+    return payload
+
+
 def write_json(path: Path, payload: Mapping[str, Any]) -> None:
     require(not path.exists(), f"Refusing to overwrite contractual artifact: {path}")
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
@@ -128,14 +134,18 @@ def git_head_blob_sha(root: Path, relative: str) -> str:
     return result.stdout.strip()
 
 
-def git_blob_sha256(root: Path, blob_sha: str) -> str:
+def git_blob_bytes(root: Path, blob_sha: str) -> bytes:
     result = subprocess.run(
         ["git", "-c", f"safe.directory={root}", "-C", str(root), "cat-file", "blob", blob_sha],
         check=False,
         capture_output=True,
     )
     require(result.returncode == 0, f"Cannot read canonical Git blob: {blob_sha}")
-    return sha256_bytes(result.stdout)
+    return result.stdout
+
+
+def git_blob_sha256(root: Path, blob_sha: str) -> str:
+    return sha256_bytes(git_blob_bytes(root, blob_sha))
 
 
 def git_worktree_semantically_clean(root: Path, relative: str) -> bool:
@@ -170,6 +180,35 @@ def validate_code_identity(root: Path, identity: Mapping[str, Any]) -> None:
     canonical_sha = identity.get("canonical_blob_sha256", identity.get("sha256"))
     require(isinstance(canonical_sha, str), f"Canonical blob SHA is missing: {relative}")
     require(git_blob_sha256(root, blob_sha) == canonical_sha, f"Canonical Git blob SHA changed: {relative}")
+
+
+def canonical_frozen_text_bytes(root: Path, identity: Mapping[str, Any], label: str) -> bytes:
+    """Validate a frozen text input against its committed Git blob, not checkout bytes."""
+
+    relative = str(identity["path"])
+    path = project_path(root, relative)
+    require(identity.get("identity_authority") == "COMMITTED_GIT_BLOB", f"Frozen text authority changed: {label}")
+    require(path.is_file(), f"Required frozen text path is missing: {relative}")
+    require(git_path_is_tracked(root, relative), f"Frozen text path is not tracked: {relative}")
+    require(git_worktree_semantically_clean(root, relative), f"Frozen text path has local modifications: {relative}")
+    blob_sha = git_head_blob_sha(root, relative)
+    require(blob_sha == identity["git_blob_sha"], f"Frozen text Git blob changed: {label}")
+    canonical_sha = identity.get("canonical_blob_sha256")
+    historical_sha = identity.get("historical_sha256")
+    require(isinstance(canonical_sha, str), f"Canonical blob SHA is missing: {label}")
+    require(isinstance(historical_sha, str), f"Historical SHA provenance is missing: {label}")
+    canonical_bytes = git_blob_bytes(root, blob_sha)
+    require(sha256_bytes(canonical_bytes) == canonical_sha, f"Frozen text canonical SHA changed: {label}")
+    require(canonical_sha == historical_sha, f"Frozen text historical SHA does not match canonical blob: {label}")
+    return canonical_bytes
+
+
+def validate_binary_file_identity(root: Path, identity: Mapping[str, Any], label: str) -> Path:
+    """Retain raw-byte SHA validation for frozen binary inputs."""
+
+    path = project_path(root, str(identity["path"]))
+    require(path.is_file() and sha256_file(path) == identity["sha256"], f"{label} SHA changed")
+    return path
 
 
 def validate_patch_contract(spec: Mapping[str, Any]) -> None:
@@ -240,13 +279,12 @@ def derive_runtime_config(original: Mapping[str, Any], spec: Mapping[str, Any], 
     return runtime
 
 
-def validate_contract_inputs(root: Path, spec: Mapping[str, Any]) -> dict[str, Path]:
+def validate_contract_inputs(root: Path, spec: Mapping[str, Any]) -> dict[str, Any]:
     original = spec["original_normative_corpus"]
     corpus_path = project_path(root, str(original["path"]))
-    require(sha256_file(corpus_path) == original["sha256"], "Original normative corpus SHA changed")
+    corpus_bytes = canonical_frozen_text_bytes(root, original, "Original normative corpus")
     model = spec["model_policy"]["weights"]
-    model_path = project_path(root, str(model["path"]))
-    require(model_path.is_file() and sha256_file(model_path) == model["sha256"], "Frozen D1a model SHA changed")
+    validate_binary_file_identity(root, model, "Frozen D1a model")
     evaluation = spec["evaluation"]["eval_input"]
     eval_path = project_path(root, str(evaluation["path"]))
     require(sha256_file(eval_path) == evaluation["sha256"], "Frozen EVAL SHA changed")
@@ -261,7 +299,7 @@ def validate_contract_inputs(root: Path, spec: Mapping[str, Any]) -> dict[str, P
         validate_code_identity(root, identity)
     for prospective_root in future_roots(spec):
         require(not project_path(root, prospective_root).exists(), f"Prospective root already exists: {prospective_root}")
-    return {"corpus": corpus_path, "eval": eval_path}
+    return {"corpus": corpus_path, "corpus_bytes": corpus_bytes, "eval": eval_path}
 
 
 def preflight_provenance(corrected_sha: str, derived_config_sha: str, prospective_roots: Iterable[str]) -> dict[str, Any]:
@@ -284,11 +322,10 @@ def preflight(root: Path = ROOT) -> dict[str, Any]:
     require(spec["specification_status"] == "CLOSED_PROSPECTIVELY", "Execution specification is not closed prospectively")
     inputs = validate_contract_inputs(root, spec)
     validate_patch_contract(spec)
-    corrected_sha = sha256_bytes(patched_corpus_bytes(inputs["corpus"].read_bytes(), spec))
+    corrected_sha = sha256_bytes(patched_corpus_bytes(inputs["corpus_bytes"], spec))
     config_identity = spec["orchestration"]["original_config"]
-    config_path = project_path(root, str(config_identity["path"]))
-    require(sha256_file(config_path) == config_identity["sha256"], "Original frozen config SHA changed")
-    runtime = derive_runtime_config(load_json(config_path), spec, corrected_sha)
+    config_bytes = canonical_frozen_text_bytes(root, config_identity, "Original frozen config")
+    runtime = derive_runtime_config(load_json_bytes(config_bytes, str(config_identity["path"])), spec, corrected_sha)
     return preflight_provenance(
         corrected_sha,
         sha256_bytes((json.dumps(runtime, ensure_ascii=False, indent=2) + "\n").encode("utf-8")),
@@ -451,9 +488,10 @@ def execute_authorized(root: Path = ROOT) -> dict[str, Any]:
     runtime_config = project_path(root, spec["orchestration"]["runtime_config_path"])
     try:
         with corrected_path.open("xb") as handle:
-            handle.write(patched_corpus_bytes(project_path(root, spec["original_normative_corpus"]["path"]).read_bytes(), spec))
+            handle.write(patched_corpus_bytes(canonical_frozen_text_bytes(root, spec["original_normative_corpus"], "Original normative corpus"), spec))
         runtime_root.mkdir(parents=True)
-        runtime = derive_runtime_config(load_json(project_path(root, derivation["original_config_path"])), spec, proof["corrected_corpus_sha256"])
+        config_bytes = canonical_frozen_text_bytes(root, spec["orchestration"]["original_config"], "Original frozen config")
+        runtime = derive_runtime_config(load_json_bytes(config_bytes, derivation["original_config_path"]), spec, proof["corrected_corpus_sha256"])
         write_json(runtime_config, runtime)
         config_arg = relative_path(root, runtime_config)
         for module in ("src.experiments.build_text2trade_mnrl_index_v02", "src.experiments.evaluate_text2trade_mnrl_data_aduanas_v02"):

@@ -8,8 +8,11 @@
     "D1A_CORRECTIVE_METRICS_COMPUTED": false
   },
   "original_normative_corpus": {
+    "identity_authority": "COMMITTED_GIT_BLOB",
     "path": "data/processed/corpus_rag_v1_index.jsonl",
-    "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "git_blob_sha": "a74d44f27e77d5c652c497a4f20fc786855daf8a",
+    "canonical_blob_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "historical_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
     "document_count": 7644,
     "affected_documents": {
       "87044110": {
@@ -206,8 +209,8 @@
     "runner": {
       "path": "src/experiments/run_d1a_corrective_0b05c_v01.py",
       "revision": "COMMITTED_GIT_BLOB",
-      "git_blob_sha": "c7e57a35bd9ce7f09b50596f76ce8c2602fc0e11",
-      "canonical_blob_sha256": "3079db69c21f2e14c7b111728fab1d3cdacbc47e6ac3c6ebf195da4b21305030"
+      "git_blob_sha": "74697c8f9370f2b098629a79f3829b4bfab80ddc",
+      "canonical_blob_sha256": "785c4eafddd9b2e1f5aeb4bdcf13acdf2b36b0d4407d0a65c6850070b4ccece1"
     },
     "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --preflight",
     "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
@@ -220,8 +223,11 @@
     "runtime_root": "outputs/audits/d1a_corrective_0b05c_runtime_v0.1",
     "runtime_config_path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.1/text2trade_mnrl_v0.2_0b05c_runtime.json",
     "original_config": {
+      "identity_authority": "COMMITTED_GIT_BLOB",
       "path": "src/configs/text2trade_mnrl_v0.2.json",
-      "sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
+      "git_blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7",
+      "canonical_blob_sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254",
+      "historical_sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254"
     },
     "config_derivation": {
       "original_config_path": "src/configs/text2trade_mnrl_v0.2.json",

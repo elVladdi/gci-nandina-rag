@@ -71,6 +71,12 @@ def load_json(path: Path) -> dict[str, Any]:
     return payload
 
 
+def load_json_bytes(content: bytes, label: str) -> dict[str, Any]:
+    payload = json.loads(content.decode("utf-8"))
+    require(isinstance(payload, dict), f"Expected JSON object: {label}")
+    return payload
+
+
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
@@ -127,6 +133,22 @@ def committed_git_blob_identity(root: Path, relative_path: str) -> dict[str, str
         "revision": "COMMITTED_GIT_BLOB",
         "git_blob_sha": blob_sha,
         "canonical_blob_sha256": sha256_bytes(content.stdout),
+    }
+
+
+def frozen_text_input_identity(root: Path, relative_path: str, historical_sha256: str) -> dict[str, str]:
+    require(project_path(root, relative_path).is_file(), f"Missing frozen text input: {relative_path}")
+    tracked = git_command(root, ["ls-files", "--error-unmatch", "--", relative_path])
+    require(tracked.returncode == 0, f"Frozen text input is not tracked: {relative_path}")
+    blob_sha = git_blob_sha(root, "HEAD", relative_path)
+    canonical_sha256 = sha256_bytes(git_bytes(root, "HEAD", relative_path))
+    require(canonical_sha256 == historical_sha256, f"Frozen text historical SHA differs from canonical Git blob: {relative_path}")
+    return {
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": relative_path,
+        "git_blob_sha": blob_sha,
+        "canonical_blob_sha256": canonical_sha256,
+        "historical_sha256": historical_sha256,
     }
 
 
@@ -305,11 +327,14 @@ def scan_top200(root: Path) -> dict[str, Any]:
     }
 
 
-def original_affected_documents(root: Path, config: Mapping[str, Any]) -> dict[str, Any]:
-    path = project_path(root, str(config["frozen_inputs"]["normative_corpus"]))
-    require(sha256_file(path) == config["frozen_inputs"]["normative_corpus_sha256"], "Original normative corpus hash differs from frozen D1a config")
+def original_affected_documents(root: Path, config: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, str]]:
+    corpus_identity = frozen_text_input_identity(
+        root,
+        str(config["frozen_inputs"]["normative_corpus"]),
+        str(config["frozen_inputs"]["normative_corpus_sha256"]),
+    )
     documents: dict[str, Any] = {}
-    for line in path.read_bytes().splitlines():
+    for line in git_bytes(root, "HEAD", corpus_identity["path"]).splitlines():
         if line.strip():
             payload = json.loads(line)
             code = normalize_nandina(payload.get("codigo", ""))
@@ -320,12 +345,12 @@ def original_affected_documents(root: Path, config: Mapping[str, Any]) -> dict[s
                     "original_values": {key: payload.get(key) for key in ("codigo", "titulo", "texto", "texto_index", "version", "fuente", "section", "chapter")},
                 }
     require(set(documents) == set(AFFECTED_CODES), "Original corpus lacks an affected D1a document")
-    return documents
+    return documents, corpus_identity
 
 
 def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str, Any]:
     manifest = load_json(project_path(root, REPRODUCIBILITY_MANIFEST_PATH))
-    originals = original_affected_documents(root, config)
+    originals, corpus_identity = original_affected_documents(root, config)
     corpus = "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.1.jsonl"
     index_root = "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1"
     output_root = "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1"
@@ -362,7 +387,7 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
     return {
         "specification_id": "d1a_corrective_execution_spec_v0.1", "specification_status": "CLOSED_PROSPECTIVELY",
         "authorization": {"D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED", "D1A_CORRECTIVE_CORPUS_CREATED": False, "D1A_CORRECTIVE_INDEX_CREATED": False, "D1A_CORRECTIVE_METRICS_COMPUTED": False},
-        "original_normative_corpus": {"path": config["frozen_inputs"]["normative_corpus"], "sha256": config["frozen_inputs"]["normative_corpus_sha256"], "document_count": 7644, "affected_documents": originals},
+        "original_normative_corpus": {**corpus_identity, "document_count": 7644, "affected_documents": originals},
         "corrected_normative_corpus": {
             "prospective_path": corpus, "must_be_absent_before_authorized_execution": True,
             "definition": {
@@ -427,10 +452,11 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
             "future_roots": [corpus, index_root, output_root, runtime_root],
             "runtime_root": runtime_root,
             "runtime_config_path": runtime_config,
-            "original_config": {
-                "path": CONFIG_PATH,
-                "sha256": sha256_bytes(git_bytes(root, CONFIG_COMMIT, CONFIG_PATH)),
-            },
+            "original_config": frozen_text_input_identity(
+                root,
+                CONFIG_PATH,
+                sha256_bytes(git_bytes(root, CONFIG_COMMIT, CONFIG_PATH)),
+            ),
             "config_derivation": {
                 "original_config_path": CONFIG_PATH,
                 "corrected_normative_corpus_path": corpus,
@@ -566,8 +592,7 @@ def write_occurrences(path: Path, rows: Iterable[Mapping[str, Any]]) -> None:
 
 
 def audit(root: Path = ROOT, output_dir: Path | None = None) -> dict[str, Any]:
-    config = json.loads(git_bytes(root, CONFIG_COMMIT, CONFIG_PATH).decode("utf-8"))
-    require(isinstance(config, dict), "Frozen D1a config is not a JSON object")
+    config = load_json_bytes(git_bytes(root, "HEAD", CONFIG_PATH), CONFIG_PATH)
     rows, pool = build_training_pool(root, config)
     records, batches, levels = reconstruct_training_records(config, rows, pool["historical_training_codes"])
     evidence = validate_training_evidence(root, config, pool, records, batches, levels)
@@ -579,6 +604,8 @@ def audit(root: Path = ROOT, output_dir: Path | None = None) -> dict[str, Any]:
         "D1A_EXECUTION_SPECIFICATION": specification["specification_status"], "D1A_METRIC_IMPACT": "NOT_DETERMINED",
         "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED", "DOWNSTREAM_REEXECUTION": "NOT_YET_JUSTIFIED", "0B05C_CLOSURE": "NOT_AUTHORIZED",
         "EXP11B_RETRIEVAL_GATE": "APPROVED_AND_INTEGRATED", "EXP11B_RETRIEVAL_EXECUTION": "NOT_AUTHORIZED",
+        "EXP11B_PORTABILITY_DEBT": "OPEN", "EXP11B_PORTABILITY_DEBT_BLOCKS_D1A": False,
+        "EXP11B_PORTABILITY_DEBT_BLOCKS_EXP11B_RETRIEVAL_AUTHORIZATION": True,
         "RETRIEVAL_EXECUTED": False, "EVALUATION_METRICS_COMPUTED": False, "H150_H200_RESULTS_OBSERVED": False, "EXP12_AUTHORIZED": False,
     }
     target = output_dir or root / "outputs/audits/d1a_preexecution_0b05c_v0.1"
