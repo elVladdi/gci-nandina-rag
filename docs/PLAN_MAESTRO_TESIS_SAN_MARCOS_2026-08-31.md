@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — EXP11B Bank Materialization CLOSED e integrado en `main` (`95ffec45`); reproducción post-push 20/20 y 368/368; solo limpieza local de worktree pendiente, no científica** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 37eaa712bd12914b97e8fc108b96dc6e68c4e460; EXP11B Bank Materialization CLOSED / APPROVED / INTEGRATED; EXP11B Retrieval Gate APPROVED / INTEGRATED; Retrieval Execution NOT_AUTHORIZED / NOT_EXECUTED; H150/H200 results not observed; 0B05C D1a Corrective Gate IN_EXTERNAL_MICROCLOSE / NOT_CLOSED. D1a: training exposure NO_EFFECTIVE_EXPOSURE_IDENTIFIED, retrieval overlap NONE_IDENTIFIED, MODEL_POLICY FREEZE_ORIGINAL_D1A_WEIGHTS, execution specification pending F003 binding, metric impact NOT_DETERMINED, numerical execution NOT_AUTHORIZED, downstream NOT_YET_JUSTIFIED, EXP12_AUTHORIZED=false.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -234,9 +234,25 @@ Python procesa exclusivamente nueva(s) hoja(s)
   ↓
 NEW_HISTORICAL_GATE de datos ampliados
   ↓
-EXP-11B H150/H200
+EXP11B Bank Materialization ✅ CLOSED / APPROVED / INTEGRATED
   ↓
-EXP-12
+EXP11B Retrieval Execution Gate ✅ APPROVED / INTEGRATED
+  ↓
+EXP11B Retrieval Execution ⛔ NOT_AUTHORIZED / NOT_EXECUTED
+  ↓
+0B-05C D1a Corrective Gate ⏳ IN_EXTERNAL_MICROCLOSE / NOT_CLOSED
+  - D1a training exposure: NO_EFFECTIVE_EXPOSURE_IDENTIFIED
+  - D1a Top-200 overlap: NONE_IDENTIFIED
+  - frozen original D1a weights
+  - execution specification pending F003 executable binding
+  - numerical execution: NOT_AUTHORIZED
+  ↓
+Solo tras autorización prospectiva independiente:
+  D1a corrective numerical execution
+  ↓
+EXP11B H150/H200 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
+  ↓
+EXP-12 ⛔ NOT_AUTHORIZED
   ↓
 Grupo 2B
   ↓
