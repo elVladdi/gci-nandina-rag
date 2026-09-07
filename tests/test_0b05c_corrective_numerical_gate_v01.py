@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,20 +12,26 @@ from pathlib import Path
 from src.experiments.prepare_0b05c_corrective_numerical_gate_v01 import (
     ARMS,
     AUDIT_ROOT,
-    BASE_MAIN,
     ContractViolation,
     D1A_SPEC_PATH,
+    EVALUATOR_PATH,
+    FROZEN_EXECUTION_DEPENDENCIES,
+    INTEGRATED_BASE_COMMIT,
+    RUNNER_PATH,
     TARGET_CODES,
     build_bundle,
     canonical_json_bytes,
     execute,
     future_roots,
     head_text_identity,
+    integrated_base_is_ancestor,
     preflight,
+    require_posix_serialization,
     require_frozen_bundle_matches,
     require_absent,
     validate_current_text_identity,
 )
+from src.experiments.run_0b05c_corrective_numerical_v01 import execute_authorized, preflight as runner_preflight
 from src.experiments.run_d1a_corrective_0b05c_v01 import git_blob_sha256, git_head_blob_sha, sha256_bytes
 
 
@@ -163,7 +170,8 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
     def test_15_bundle_is_deterministic(self) -> None:
         second = build_bundle(ROOT)
         self.assertEqual(sha256_bytes(canonical_json_bytes(self.bundle["gate"])), sha256_bytes(canonical_json_bytes(second["gate"])))
-        self.assertEqual(self.gate["base_main"], BASE_MAIN)
+        self.assertEqual(self.gate["integrated_base_commit"], INTEGRATED_BASE_COMMIT)
+        self.assertTrue(integrated_base_is_ancestor(ROOT))
 
     def test_16_frozen_artifacts_reject_post_freeze_identity_drift(self) -> None:
         require_frozen_bundle_matches(ROOT, self.bundle)
@@ -171,6 +179,53 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
         changed["specifications"]["EV03"]["frozen_inputs"]["runner"]["git_blob_sha"] = "0" * 40
         with self.assertRaisesRegex(ContractViolation, "no longer matches live canonical inputs"):
             require_frozen_bundle_matches(ROOT, changed)
+
+    def test_17_execution_binding_is_committed_and_commands_are_bound(self) -> None:
+        binding = self.gate["corrective_execution_binding"]
+        self.assertEqual(binding["orchestration_runner"]["path"], RUNNER_PATH)
+        self.assertEqual(binding["corrective_evaluator"]["path"], EVALUATOR_PATH)
+        self.assertEqual(set(binding["frozen_dependencies"]), set(FROZEN_EXECUTION_DEPENDENCIES))
+        self.assertIn("ev03_build_command", self.ev03["prospective_execution"]["commands"])
+        self.assertIn("ev04_control_reproduction_evaluate_command", self.ev04["prospective_execution"]["commands"])
+
+    def test_18_all_static_contract_paths_are_posix(self) -> None:
+        for payload in (self.gate, self.ev03, self.ev04, self.ev03_overlap, self.ev04_overlap):
+            require_posix_serialization(payload, "fixture")
+
+    def test_19_ev04_reproduction_stays_mandatory_and_original_stays_unverified(self) -> None:
+        control = self.ev04["primary_original_control"]["control_reproduction"]
+        self.assertEqual(self.ev04["original_run_identity"]["status"], "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS")
+        self.assertEqual(control["gate"], "EV04_DECISION885_REPRODUCTION_GATE")
+        self.assertEqual(control["requirement"], "MANDATORY")
+        self.assertEqual(control["current_state"], "NOT_EXECUTED")
+        self.assertEqual(control["comparison"]["ranking"]["scope"], "EXACT_EFFECTIVE_FULL_TOP200_CASE_LEVEL")
+
+    def test_20_runner_preflight_and_execute_authorized_have_no_side_effects(self) -> None:
+        roots = future_roots(load_json(D1A_SPEC_PATH))
+        result = runner_preflight(ROOT)
+        self.assertEqual(result["mode"], "PREFLIGHT_ONLY")
+        with self.assertRaisesRegex(ContractViolation, "not authorized"):
+            execute_authorized(ROOT)
+        self.assertTrue(all(not (ROOT / relative).exists() for relative in roots))
+
+    def test_21_integrated_base_ancestry_accepts_descendants_and_rejects_unrelated_history(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            subprocess.run(["git", "init"], cwd=root, check=True, capture_output=True)
+            (root / "README.md").write_text("base\n", encoding="utf-8")
+            subprocess.run(["git", "add", "README.md"], cwd=root, check=True, capture_output=True)
+            subprocess.run(["git", "-c", "user.name=Codex", "-c", "user.email=codex@example.invalid", "commit", "-m", "base"], cwd=root, check=True, capture_output=True)
+            base = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True).stdout.strip()
+            self.assertTrue(integrated_base_is_ancestor(root, base))
+            (root / "README.md").write_text("descendant\n", encoding="utf-8")
+            subprocess.run(["git", "commit", "-am", "descendant"], cwd=root, check=True, capture_output=True)
+            self.assertTrue(integrated_base_is_ancestor(root, base))
+            subprocess.run(["git", "checkout", "--orphan", "unrelated"], cwd=root, check=True, capture_output=True)
+            subprocess.run(["git", "rm", "-f", "README.md"], cwd=root, check=True, capture_output=True)
+            (root / "README.md").write_text("unrelated\n", encoding="utf-8")
+            subprocess.run(["git", "add", "README.md"], cwd=root, check=True, capture_output=True)
+            subprocess.run(["git", "commit", "-m", "unrelated"], cwd=root, check=True, capture_output=True)
+            self.assertFalse(integrated_base_is_ancestor(root, base))
 
 
 if __name__ == "__main__":

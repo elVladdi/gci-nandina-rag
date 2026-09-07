@@ -1,8 +1,8 @@
-"""Freeze the non-executing 0B-05C corrective numerical sensitivity gate.
+"""Freeze and validate the prospective 0B-05C corrective numerical gate.
 
-This module audits frozen EV-03/EV-04 outputs and links the already-integrated
-D1a specification.  It deliberately contains no retrieval, indexing, or metric
-calculation path.  ``--execute`` is an explicit fail-closed guard.
+The module audits only frozen EV-03/EV-04 outputs.  It records the committed
+implementation that a separately authorized future execution must use, but it
+does not create a corpus, index, retrieval output, or metric in this state.
 """
 
 from __future__ import annotations
@@ -33,13 +33,33 @@ from .run_d1a_corrective_0b05c_v01 import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-BASE_MAIN = "7ff504c4a5a763705f198ca41753db75e938a87d"
+INTEGRATED_BASE_COMMIT = "7ff504c4a5a763705f198ca41753db75e938a87d"
 AUDIT_ROOT = Path("outputs/audits/0b05c_corrective_numerical_gate_v0.1")
 TARGET_CODES = ("87044110", "87045110")
 DECISION_906_TEXT = "Inferior a 4,537 t"
 EVAL_PATH = "data/processed/data_aduanas_evalset_clase87_v0.2.csv"
 CONFIG_PATH = "src/configs/experiment_config.json"
 D1A_SPEC_PATH = "outputs/audits/d1a_preexecution_0b05c_v0.1/d1a_0b05c_corrective_execution_spec_v0.1.json"
+PREPARE_PATH = "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py"
+RUNNER_PATH = "src/experiments/run_0b05c_corrective_numerical_v01.py"
+EVALUATOR_PATH = "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
+BUILDER_PATH = "src/experiments/build_bm25_corrective_0b05c_v01.py"
+
+# These are identities, not an invitation to execute their historical CLIs.
+# The new prospective evaluator reuses their versioned helper semantics.
+FROZEN_EXECUTION_DEPENDENCIES = (
+    PREPARE_PATH,
+    RUNNER_PATH,
+    EVALUATOR_PATH,
+    BUILDER_PATH,
+    "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py",
+    "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+    "src/experiments/build_bm25_index.py",
+    "src/experiments/build_bm25_hierarchical_index.py",
+    "src/bm25_index.py",
+    "src/retrieval/bm25.py",
+    "src/evaluation/metrics.py",
+)
 
 ARMS: dict[str, dict[str, Any]] = {
     "EV03": {
@@ -81,6 +101,16 @@ def canonical_json_bytes(payload: Mapping[str, Any]) -> bytes:
     return (json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
+def posix_relative(value: str | Path) -> str:
+    """Return a repository-relative serialization independent of the host OS."""
+
+    candidate = Path(value)
+    require(not candidate.is_absolute(), f"Persistent path must be repository-relative: {value}")
+    normalized = candidate.as_posix()
+    require("\\" not in normalized, f"Persistent path must use POSIX separators: {value}")
+    return normalized
+
+
 def read_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
@@ -101,6 +131,18 @@ def git_revision_blob(root: Path, revision: str, relative: str) -> str | None:
         text=True,
     )
     return result.stdout.strip() if result.returncode == 0 else None
+
+
+def integrated_base_is_ancestor(root: Path, base_commit: str = INTEGRATED_BASE_COMMIT) -> bool:
+    """Return whether the approved integration remains in the candidate ancestry."""
+
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "merge-base", "--is-ancestor", base_commit, "HEAD"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0
 
 
 def head_text_identity(root: Path, relative: str) -> dict[str, str]:
@@ -230,9 +272,9 @@ def scan_overlap(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: Ma
     summary = {
         "artifact_id": f"{arm_name.lower()}_original_full_ranking_overlap_v0.1",
         "scan_scope": "FULL_FROZEN_RANKING_ARTIFACT_NO_RERETRIEVAL",
-        "ranking_path": str(outputs[arm["results_key"]]),
+        "ranking_path": posix_relative(str(outputs[arm["results_key"]])),
         "ranking_sha256": sha256_file(result_path),
-        "case_summary_path": str(outputs[arm["summary_key"]]),
+        "case_summary_path": posix_relative(str(outputs[arm["summary_key"]])),
         "case_summary_sha256": sha256_file(summary_path),
         "ranking_depth": int(arm["depth"]),
         "ranking_rows_scanned": len(rows),
@@ -326,10 +368,10 @@ def hierarchical_patches(canonical_bytes: bytes) -> list[dict[str, Any]]:
 
 
 def future_roots(d1a_spec: Mapping[str, Any]) -> list[str]:
-    roots = [str(arm["prospective_corpus"]) for arm in ARMS.values()]
-    roots += [str(arm["prospective_index_root"]) for arm in ARMS.values()]
-    roots += [str(arm["prospective_output_root"]) for arm in ARMS.values()]
-    roots += [str(path) for path in d1a_spec["orchestration"]["future_roots"]]
+    roots = [posix_relative(str(arm["prospective_corpus"])) for arm in ARMS.values()]
+    roots += [posix_relative(str(arm["prospective_index_root"])) for arm in ARMS.values()]
+    roots += [posix_relative(str(arm["prospective_output_root"])) for arm in ARMS.values()]
+    roots += [posix_relative(str(path)) for path in d1a_spec["orchestration"]["future_roots"]]
     require(len(roots) == len(set(roots)), "Prospective root contract contains duplicates")
     return roots
 
@@ -353,6 +395,91 @@ def validate_d1a_reference(root: Path) -> dict[str, Any]:
         "specification_status": spec["specification_status"],
         "D1A_NUMERICAL_EXECUTION": spec["authorization"]["D1A_NUMERICAL_EXECUTION"],
         "spec": spec,
+    }
+
+
+def execution_commands(arm_name: str, arm: Mapping[str, Any]) -> dict[str, str]:
+    """Freeze the exact, already-versioned commands for a future authorization."""
+
+    corpus = posix_relative(str(arm["prospective_corpus"]))
+    index_root = posix_relative(str(arm["prospective_index_root"]))
+    output_root = posix_relative(str(arm["prospective_output_root"]))
+    build = (
+        f"python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm {arm_name} "
+        f"--corpus {corpus} --output {index_root}/index.json --metadata {index_root}/index_metadata.json"
+    )
+    evaluate = (
+        f"python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm {arm_name} "
+        f"--corpus {corpus} --index {index_root}/index.json --index-metadata {index_root}/index_metadata.json "
+        f"--output-dir {output_root}"
+    )
+    commands = {
+        f"{arm_name.lower()}_build_command": build,
+        f"{arm_name.lower()}_evaluate_command": evaluate,
+        "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
+        "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v01 --execute-authorized",
+    }
+    if arm_name == "EV04":
+        commands.update(
+            {
+                "ev04_control_reproduction_build_command": build.replace(corpus, posix_relative(str(arm["corpus"]))).replace(index_root, f"{output_root}/decision885_control_index"),
+                "ev04_control_reproduction_evaluate_command": evaluate.replace(corpus, posix_relative(str(arm["corpus"]))).replace(index_root, f"{output_root}/decision885_control_index").replace(output_root, f"{output_root}/decision885_control"),
+                "ev04_corrected_build_command": build,
+                "ev04_corrected_evaluate_command": evaluate,
+            }
+        )
+    return commands
+
+
+def execution_binding(root: Path) -> dict[str, Any]:
+    identities = {path: head_text_identity(root, path) for path in FROZEN_EXECUTION_DEPENDENCIES}
+    for path, identity in identities.items():
+        validate_current_text_identity(root, identity, f"Prospective execution dependency {path}")
+    return {
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "orchestration_runner": identities[RUNNER_PATH],
+        "corrective_builder": identities[BUILDER_PATH],
+        "corrective_evaluator": identities[EVALUATOR_PATH],
+        "frozen_dependencies": identities,
+        "semantic_reuse": {
+            "flat": "Versioned helpers are imported from evaluate_normative_bm25_flat_data_aduanas_v02.py; its fixed historical SHA assertions are not used for a derived corrective corpus.",
+            "hierarchical": "Versioned helpers are imported from evaluate_normative_bm25_hierarchical_data_aduanas_v02.py, including duplicate-code collapse where the first BM25 occurrence by score order wins.",
+            "bm25": "Corrective indexes use build_bm25_from_corpus from src/bm25_index.py with k1=1.5, b=0.75 and the frozen stopword policy.",
+        },
+    }
+
+
+def control_reproduction_contract(arm_name: str, arm: Mapping[str, Any], metadata: Mapping[str, Any]) -> dict[str, Any]:
+    """Describe the mandatory, future control run without performing it now."""
+
+    outputs = metadata["outputs"]
+    if arm_name == "EV04":
+        return {
+            "gate": "EV04_DECISION885_REPRODUCTION_GATE",
+            "requirement": "MANDATORY",
+            "current_state": "NOT_EXECUTED",
+            "historical_source_status": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+            "comparison": {
+                "ranking": {
+                    "path": posix_relative(str(outputs[arm["results_key"]])),
+                    "sha256": metadata["output_sha256"][arm["results_key"]],
+                    "scope": "EXACT_EFFECTIVE_FULL_TOP200_CASE_LEVEL",
+                },
+                "case_summary": {
+                    "path": posix_relative(str(outputs[arm["summary_key"]])),
+                    "sha256": metadata["output_sha256"][arm["summary_key"]],
+                    "scope": "EXACT_CASE_LEVEL",
+                },
+                "metrics": "EXACT_NUMERATORS_DENOMINATORS_AND_VALUES; timestamps and runtime metadata are excluded",
+            },
+            "failure_policy": "A non-PASS reproduction blocks EV04 corrected execution and the unified gate.",
+        }
+    return {
+        "gate": "EV03_CONTROL_REPRODUCTION_GATE",
+        "requirement": "MANDATORY_INTEGRITY_CHECK",
+        "current_state": "NOT_EXECUTED",
+        "comparison": "Verify frozen full TOP100 ranking, case summary, and metric contract before corrected execution.",
+        "failure_policy": "A non-PASS reproduction blocks EV03 corrected execution and the unified gate.",
     }
 
 
@@ -386,6 +513,7 @@ def build_arm_spec(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: 
         },
         "primary_original_control": {
             "decision": "Decision_885",
+            "historical_execution_verification": provenance["status"],
             "run_metadata": {**head_text_identity(root, str(arm["metadata"])), "artifact_sha256": sha256_file(project_path(root, str(arm["metadata"])))},
             "outputs": {
                 key: {"path": path, "sha256": metadata["output_sha256"][key]}
@@ -393,6 +521,7 @@ def build_arm_spec(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: 
             },
             "metric_definitions": metadata.get("metrics", {}).get("metric_table", []),
             "comparison_policy": "Use only frozen original definitions and aligned case_ids; no original result is a target and no prospective metric is calculated by this gate.",
+            "control_reproduction": control_reproduction_contract(arm_name, arm, metadata),
         },
         "corrective_corpus": {
             "prospective_path": arm["prospective_corpus"],
@@ -412,10 +541,12 @@ def build_arm_spec(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: 
         },
         "prospective_execution": {
             "full_rebuild_policy": "FULL_NON_DESTRUCTIVE_REBUILD_NO_OVERWRITE_NO_RESUME",
-            "prospective_index_root": arm["prospective_index_root"],
-            "prospective_output_root": arm["prospective_output_root"],
-            "required_outputs": ["case_level_output", "original_vs_corrective_comparison", "execution_manifest", "output_hash_ledger", "summary"],
-            "execution_order": ["unified_preflight", "corrected_retrieval", "validation", "comparison", "manifest", "ledger", "interpretation"],
+            "prospective_index_root": posix_relative(str(arm["prospective_index_root"])),
+            "prospective_output_root": posix_relative(str(arm["prospective_output_root"])),
+            "required_outputs": ["case_level_output", "aggregate_output", "original_vs_corrective_comparison", "execution_manifest", "output_hash_ledger", "summary"],
+            "execution_order": ["unified_preflight", "control_reproduction", "corrected_retrieval", "validation", "comparison", "manifest", "ledger", "interpretation"],
+            "commands": execution_commands(arm_name, arm),
+            "derived_identity_policy": "The future evaluator validates the SHA-256 values derived by its own corrective corpus and corrective index build; it never substitutes historic fixed corpus or index hashes.",
         },
     }
 
@@ -426,6 +557,19 @@ def frozen_artifact_paths(root: Path) -> dict[str, Path]:
         paths[f"{arm_name}_spec"] = project_path(root, str(AUDIT_ROOT / arm["spec_name"]))
         paths[f"{arm_name}_overlap"] = project_path(root, str(AUDIT_ROOT / arm["overlap_name"]))
     return paths
+
+
+def require_posix_serialization(payload: Any, label: str) -> None:
+    """Fail on an OS-dependent separator anywhere in persisted gate payloads."""
+
+    if isinstance(payload, Mapping):
+        for key, value in payload.items():
+            require_posix_serialization(value, f"{label}.{key}")
+    elif isinstance(payload, list):
+        for index, value in enumerate(payload):
+            require_posix_serialization(value, f"{label}[{index}]")
+    elif isinstance(payload, str):
+        require("\\" not in payload, f"OS-dependent serialized repository path: {label}")
 
 
 def require_frozen_bundle_matches(root: Path, bundle: Mapping[str, Any]) -> None:
@@ -440,6 +584,7 @@ def require_frozen_bundle_matches(root: Path, bundle: Mapping[str, Any]) -> None
         path = paths[key]
         require(path.is_file(), f"Frozen gate artifact is missing: {path.relative_to(root).as_posix()}")
         actual_payload = read_json(path)
+        require_posix_serialization(actual_payload, path.relative_to(root).as_posix())
         require(
             canonical_json_bytes(actual_payload) == canonical_json_bytes(expected_payload),
             f"Frozen gate artifact no longer matches live canonical inputs: {path.relative_to(root).as_posix()}",
@@ -448,8 +593,10 @@ def require_frozen_bundle_matches(root: Path, bundle: Mapping[str, Any]) -> None
 
 def preflight(root: Path = ROOT, *, require_frozen_artifacts: bool = True) -> dict[str, Any]:
     require(git_revision_blob(root, "HEAD", "README.md") is not None, "Repository HEAD cannot be resolved")
-    main = subprocess.run(["git", "-c", f"safe.directory={root}", "-C", str(root), "rev-parse", "main"], check=False, capture_output=True, text=True)
-    require(main.returncode == 0 and main.stdout.strip() == BASE_MAIN, "main unexpected for 0B-05C numerical gate")
+    require(
+        integrated_base_is_ancestor(root),
+        "Integrated base commit is not an ancestor of the candidate HEAD for 0B-05C numerical gate",
+    )
     for arm_name, arm in ARMS.items():
         metadata = validate_run_metadata(root, arm)
         provenance = source_provenance(root, arm)
@@ -462,6 +609,7 @@ def preflight(root: Path = ROOT, *, require_frozen_artifacts: bool = True) -> di
     roots = future_roots(d1a["spec"])
     require_absent(root, roots, "Prospective numerical root")
     bundle = build_bundle(root, d1a)
+    require_posix_serialization(bundle, "live_bundle")
     if require_frozen_artifacts:
         require_frozen_bundle_matches(root, bundle)
     return {"status": "PASS", "mode": "PREFLIGHT_ONLY", "numerical_execution_occurred": False, "bundle": bundle}
@@ -480,7 +628,8 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
     gate = {
         "gate_id": "0B05C_CORRECTIVE_NUMERICAL_EXECUTION_GATE_v0.1",
         "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
-        "base_main": BASE_MAIN,
+        "integrated_base_commit": INTEGRATED_BASE_COMMIT,
+        "integrated_base_ancestry_requirement": "INTEGRATED_BASE_COMMIT must be an ancestor of candidate HEAD; main is not required to remain byte-identical after approved integrations.",
         "authorization": {
             "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
             "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
@@ -491,9 +640,9 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         },
         "arms": {
             arm_name: {
-                "specification_path": str(AUDIT_ROOT / ARMS[arm_name]["spec_name"]),
+                "specification_path": posix_relative(AUDIT_ROOT / ARMS[arm_name]["spec_name"]),
                 "specification_sha256": sha256_bytes(canonical_json_bytes(spec)),
-                "original_ranking_overlap_path": str(AUDIT_ROOT / ARMS[arm_name]["overlap_name"]),
+                "original_ranking_overlap_path": posix_relative(AUDIT_ROOT / ARMS[arm_name]["overlap_name"]),
                 "original_ranking_overlap_sha256": sha256_bytes(canonical_json_bytes(overlaps[arm_name])),
                 "original_run_identity": spec["original_run_identity"]["status"],
             }
@@ -502,14 +651,27 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         "d1a_existing_specification": {
             key: value for key, value in d1a.items() if key != "spec"
         },
+        "corrective_execution_binding": execution_binding(root),
         "future_execution_order": [
-            "unified_preflight", "EV03_corrected_flat_normative_BM25", "EV04_corrected_hierarchical_normative_BM25", "D1a_corrected_dense_retrieval",
-            "validation", "comparisons", "manifest", "ledger", "interpretation",
+            "01_unified_preflight",
+            "02_EV03_control_reproduction",
+            "03_EV03_control_comparison",
+            "04_EV03_corrected_corpus_and_index",
+            "05_EV03_corrected_evaluation",
+            "06_EV04_Decision885_control_reproduction",
+            "07_EV04_control_comparison_must_pass",
+            "08_EV04_corrected_corpus_and_index",
+            "09_EV04_corrected_evaluation",
+            "10_case_level_comparisons",
+            "11_aggregate_comparisons",
+            "12_unified_sensitivity_summary",
+            "13_manifest_and_hash_ledger",
+            "14_D1a_execute_only_under_its_own_authorization",
         ],
         "fail_closed_preflight": [
-            "reject unexpected main", "reject frozen control/output/code/config/EVAL/corpus identity changes", "reject Decision 906 or exactly-two-entry changes",
+            "reject an unrelated candidate that does not descend from the integrated base", "reject frozen control/output/code/config/EVAL/corpus identity changes", "reject Decision 906 or exactly-two-entry changes",
             "reject an existing prospective root, partial output, overwrite, or resume", "reject D1a specification change", "reject an already-executed arm or pre-existing corrective metric",
-            "reject --execute while authorization remains NOT_AUTHORIZED",
+            "reject execution while authorization remains NOT_AUTHORIZED", "reject EV04 corrected execution unless mandatory Decision885 reproduction is PASS",
         ],
         "decisions": {
             "D1A_PREEXECUTION": "APPROVED/INTEGRATED",
@@ -520,14 +682,22 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
             "EXP11B_PORTABILITY_DEBT": "OPEN",
             "EXP11B_PORTABILITY_DEBT_BLOCKS_D1A": False,
             "EXP11B_PORTABILITY_DEBT_BLOCKS_EXP11B_RETRIEVAL_AUTHORIZATION": True,
+            "EV04_ORIGINAL_HISTORICAL_EXECUTION": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+            "EV04_DECISION885_REPRODUCTION_GATE": "MANDATORY/NOT_EXECUTED",
+        },
+        "future_authorization_transition_contract": {
+            "allowed_mutations": ["authorization state fields from NOT_AUTHORIZED to AUTHORIZED", "mechanically-derived runtime hashes", "execution manifests"],
+            "forbidden_mutations": ["patches", "queries", "base corpora", "weights", "BM25 semantics", "metric contracts", "reproduction rules", "runners", "builders", "evaluators", "output paths", "execution order", "comparison schema"],
+            "d1a_authorization": "D1a remains independently governed by its own authorization contract.",
         },
     }
     return {"specifications": arm_specs, "overlaps": overlaps, "overlap_rows": overlap_rows, "gate": gate}
 
 
-def write_new(path: Path, data: bytes) -> None:
+def write_new(path: Path, data: bytes, *, replace_existing: bool = False) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("xb") as handle:
+    mode = "wb" if replace_existing else "xb"
+    with path.open(mode) as handle:
         handle.write(data)
 
 
@@ -543,7 +713,14 @@ def csv_bytes(rows: list[dict[str, Any]]) -> bytes:
     return buffer.getvalue().encode("utf-8")
 
 
-def write_frozen_artifacts(root: Path = ROOT) -> dict[str, Any]:
+def write_frozen_artifacts(root: Path = ROOT, *, replace_existing: bool = False) -> dict[str, Any]:
+    """Create or deliberately refresh only static audit/freeze artifacts.
+
+    This function never touches prospective corpus, index, or evaluation roots.
+    A refresh is needed only after a reviewed contract microclose changes the
+    immutable static description of the future execution.
+    """
+
     result = preflight(root, require_frozen_artifacts=False)
     bundle = result["bundle"]
     written: list[Path] = []
@@ -551,12 +728,12 @@ def write_frozen_artifacts(root: Path = ROOT) -> dict[str, Any]:
         spec_path = project_path(root, str(AUDIT_ROOT / arm["spec_name"]))
         overlap_path = project_path(root, str(AUDIT_ROOT / arm["overlap_name"]))
         csv_path = project_path(root, str(AUDIT_ROOT / arm["overlap_csv_name"]))
-        write_new(spec_path, canonical_json_bytes(bundle["specifications"][arm_name]))
-        write_new(overlap_path, canonical_json_bytes(bundle["overlaps"][arm_name]))
-        write_new(csv_path, csv_bytes(bundle["overlap_rows"][arm_name]))
+        write_new(spec_path, canonical_json_bytes(bundle["specifications"][arm_name]), replace_existing=replace_existing)
+        write_new(overlap_path, canonical_json_bytes(bundle["overlaps"][arm_name]), replace_existing=replace_existing)
+        write_new(csv_path, csv_bytes(bundle["overlap_rows"][arm_name]), replace_existing=replace_existing)
         written.extend((spec_path, overlap_path, csv_path))
     gate_path = project_path(root, str(AUDIT_ROOT / "0b05c_corrective_numerical_execution_gate_v0.1.json"))
-    write_new(gate_path, canonical_json_bytes(bundle["gate"]))
+    write_new(gate_path, canonical_json_bytes(bundle["gate"]), replace_existing=replace_existing)
     written.append(gate_path)
     manifest = {
         "artifact_id": "0b05c_corrective_numerical_gate_artifact_manifest_v0.1",
@@ -566,13 +743,15 @@ def write_frozen_artifacts(root: Path = ROOT) -> dict[str, Any]:
         "files": [{"path": path.relative_to(root).as_posix(), "sha256": sha256_file(path)} for path in written],
     }
     manifest_path = project_path(root, str(AUDIT_ROOT / "0b05c_corrective_numerical_gate_artifact_manifest_v0.1.json"))
-    write_new(manifest_path, canonical_json_bytes(manifest))
+    write_new(manifest_path, canonical_json_bytes(manifest), replace_existing=replace_existing)
     return {"written": [path.relative_to(root).as_posix() for path in [*written, manifest_path]], **result}
 
 
 def execute(root: Path = ROOT) -> None:
+    """Compatibility guard; the bound runner owns prospective execution."""
+
     preflight(root)
-    raise ContractViolation("Numerical execution is not authorized; this prospective gate has no executable numerical path and requires a separately authorized commit.")
+    raise ContractViolation("Numerical execution is not authorized; use of the bound runner remains fail-closed until a separate authorization.")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -580,12 +759,15 @@ def main(argv: list[str] | None = None) -> int:
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--preflight", action="store_true")
     group.add_argument("--write-frozen-artifacts", action="store_true")
+    group.add_argument("--refresh-frozen-artifacts", action="store_true")
     group.add_argument("--execute", action="store_true")
     args = parser.parse_args(argv)
     if args.execute:
         execute(ROOT)
     elif args.write_frozen_artifacts:
         print(json.dumps(write_frozen_artifacts(ROOT), ensure_ascii=False, indent=2, default=str))
+    elif args.refresh_frozen_artifacts:
+        print(json.dumps(write_frozen_artifacts(ROOT, replace_existing=True), ensure_ascii=False, indent=2, default=str))
     else:
         print(json.dumps(preflight(ROOT), ensure_ascii=False, indent=2, default=str))
     return 0
