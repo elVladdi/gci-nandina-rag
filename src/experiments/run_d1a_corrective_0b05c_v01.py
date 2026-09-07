@@ -228,6 +228,19 @@ def validate_contract_inputs(root: Path, spec: Mapping[str, Any]) -> dict[str, P
     return {"corpus": corpus_path, "eval": eval_path}
 
 
+def preflight_provenance(corrected_sha: str, derived_config_sha: str, prospective_roots: Iterable[str]) -> dict[str, Any]:
+    """Construct the immutable read-only provenance returned by preflight."""
+
+    return {
+        "status": "PASS", "preflight_status": "PASS", "mode": "PREFLIGHT_ONLY",
+        "execution_mode": "PREFLIGHT_ONLY", "numerical_execution_occurred": False,
+        "corrected_corpus_sha256": corrected_sha,
+        "derived_config_sha256": derived_config_sha,
+        "prospective_roots_absent": list(prospective_roots), "retrieval_executed": False,
+        "corrected_corpus_created": False, "corrected_index_created": False, "new_metrics_computed": False,
+    }
+
+
 def preflight(root: Path = ROOT) -> dict[str, Any]:
     """Validate all bindings without creating any file or loading any model."""
 
@@ -240,12 +253,11 @@ def preflight(root: Path = ROOT) -> dict[str, Any]:
     config_path = project_path(root, str(config_identity["path"]))
     require(sha256_file(config_path) == config_identity["sha256"], "Original frozen config SHA changed")
     runtime = derive_runtime_config(load_json(config_path), spec, corrected_sha)
-    return {
-        "status": "PASS", "mode": "PREFLIGHT_ONLY", "corrected_corpus_sha256": corrected_sha,
-        "derived_config_sha256": sha256_bytes((json.dumps(runtime, ensure_ascii=False, indent=2) + "\n").encode("utf-8")),
-        "prospective_roots_absent": list(future_roots(spec)), "retrieval_executed": False,
-        "corrected_corpus_created": False, "corrected_index_created": False, "new_metrics_computed": False,
-    }
+    return preflight_provenance(
+        corrected_sha,
+        sha256_bytes((json.dumps(runtime, ensure_ascii=False, indent=2) + "\n").encode("utf-8")),
+        future_roots(spec),
+    )
 
 
 def expected_paths(root: Path, spec: Mapping[str, Any]) -> dict[str, list[Path]]:
@@ -293,13 +305,14 @@ def build_case_comparison(root: Path, spec: Mapping[str, Any]) -> list[dict[str,
         for k in (1, 3, 5, 10, 50, 100, 200):
             row[f"original_found_at_{k}"] = int(1 <= row["original_rank_ref"] <= k)
             row[f"corrected_found_at_{k}"] = int(1 <= row["corrected_rank_ref"] <= k)
-            if k <= 50:
-                row[f"original_hit_{k}"] = row[f"original_found_at_{k}"]
-                row[f"corrected_hit_{k}"] = row[f"corrected_found_at_{k}"]
+            row[f"original_hit_{k}"] = row[f"original_found_at_{k}"]
+            row[f"corrected_hit_{k}"] = row[f"corrected_found_at_{k}"]
         for code in ("87044110", "87045110"):
             row[f"original_rank_{code}"] = rank_of(before_codes, code)
             row[f"corrected_rank_{code}"] = rank_of(after_codes, code)
             row[f"corrected_contains_{code}"] = row[f"corrected_rank_{code}"] > 0
+        required_fields = set(spec["orchestration"]["comparison_contract"]["case_fields"])
+        require(required_fields <= set(row), f"Case-level producer omitted contractual fields: {sorted(required_fields - set(row))}")
         rows.append(row)
     return rows
 
@@ -323,16 +336,63 @@ def build_aggregate_comparison(root: Path, spec: Mapping[str, Any]) -> dict[str,
     }
 
 
+def contractual_ledger_paths(root: Path, spec: Mapping[str, Any]) -> list[Path]:
+    paths = expected_paths(root, spec)
+    expected = [
+        project_path(root, spec["corrected_normative_corpus"]["prospective_path"]),
+        project_path(root, spec["orchestration"]["runtime_config_path"]),
+        *paths["index"], *paths["evaluation"], paths["runner"][0], paths["runner"][1], paths["runner"][3],
+    ]
+    contract = spec["orchestration"]["hash_ledger_contract"]
+    ledger = paths["runner"][2]
+    declared = [project_path(root, relative) for relative in contract["included_paths"]]
+    require(declared == expected, "Frozen hash-ledger contract differs from actual orchestration paths")
+    require(project_path(root, contract["excluded_self_path"]) == ledger, "Hash ledger self-exclusion is not frozen")
+    require(ledger not in declared and len(declared) == len(set(declared)), "Hash-ledger contract is not unique or excludes more than itself")
+    return declared
+
+
 def write_hash_ledger(root: Path, spec: Mapping[str, Any]) -> Path:
     paths = expected_paths(root, spec)
-    contractual = [
-        project_path(root, spec["corrected_normative_corpus"]["prospective_path"]),
-        *paths["index"], *paths["evaluation"], paths["runner"][0], paths["runner"][1],
-    ]
+    contractual = contractual_ledger_paths(root, spec)
+    require_all(contractual, "hash ledger")
     ledger = paths["runner"][2]
+    require(not ledger.exists(), f"Refusing to overwrite contractual artifact: {ledger}")
     rows = [{"path": relative_path(root, path), "sha256": sha256_file(path), "size_bytes": path.stat().st_size} for path in contractual]
     write_csv(ledger, rows, ["path", "sha256", "size_bytes"])
     return ledger
+
+
+def authorized_execution_provenance(preflight_proof: Mapping[str, Any]) -> dict[str, Any]:
+    """Return the distinct, future-only state after an authorized numerical run."""
+
+    require(preflight_proof["mode"] == "PREFLIGHT_ONLY", "Authorized execution must start from preflight proof")
+    return {
+        **preflight_proof,
+        "status": "PASS",
+        "preflight_status": preflight_proof["status"],
+        "mode": "AUTHORIZED_EXECUTION",
+        "execution_mode": "AUTHORIZED_EXECUTION",
+        "numerical_execution_occurred": True,
+        "retrieval_executed": True,
+        "corrected_corpus_created": True,
+        "corrected_index_created": True,
+        "new_metrics_computed": True,
+    }
+
+
+def build_execution_manifest(root: Path, spec: Mapping[str, Any], preflight_proof: Mapping[str, Any]) -> dict[str, Any]:
+    """Describe an authorized run without creating a circular ledger hash dependency."""
+
+    execution = authorized_execution_provenance(preflight_proof)
+    ledger = expected_paths(root, spec)["runner"][2]
+    return {
+        "status": execution["status"],
+        "preflight_status": execution["preflight_status"],
+        "execution_mode": execution["execution_mode"],
+        "numerical_execution_occurred": execution["numerical_execution_occurred"],
+        "hash_ledger": {"path": relative_path(root, ledger), "sha256": None},
+    }
 
 
 def execute_authorized(root: Path = ROOT) -> dict[str, Any]:
@@ -358,9 +418,10 @@ def execute_authorized(root: Path = ROOT) -> dict[str, Any]:
         require_all(paths["evaluation"], "evaluator")
         write_json(paths["runner"][0], build_aggregate_comparison(root, spec))
         write_jsonl(paths["runner"][1], build_case_comparison(root, spec))
+        write_json(paths["runner"][3], build_execution_manifest(root, spec, proof))
         ledger = write_hash_ledger(root, spec)
-        write_json(paths["runner"][3], {"status": "PASS", "preflight": proof, "hash_ledger": {"path": relative_path(root, ledger), "sha256": sha256_file(ledger)}})
-        return {"status": "PASS", **proof}
+        require(ledger.is_file(), "Hash ledger was not materialized")
+        return authorized_execution_provenance(proof)
     except Exception as error:
         if runtime_root.exists():
             (runtime_root / "execution_failed.json").write_text(json.dumps({"status": "FAILED", "error": str(error)}, ensure_ascii=False) + "\n", encoding="utf-8")

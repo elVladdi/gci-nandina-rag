@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import copy
+import csv
+import json
 import sys
 import tempfile
 import unittest
@@ -14,6 +16,10 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     EVALUATOR_FILENAMES,
     RUNNER_FILENAMES,
     ContractViolation,
+    authorized_execution_provenance,
+    build_case_comparison,
+    build_execution_manifest,
+    contractual_ledger_paths,
     derive_runtime_config,
     diff_paths,
     expected_paths,
@@ -22,8 +28,11 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     patched_corpus_bytes,
     preflight,
     project_path,
+    preflight_provenance,
+    relative_path,
     sha256_file,
     validate_contract_inputs,
+    write_hash_ledger,
     write_json,
 )
 
@@ -143,6 +152,84 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
 
     def test_12_numerical_execution_remains_not_authorized(self) -> None:
         self.assertEqual(self.spec["authorization"]["D1A_NUMERICAL_EXECUTION"], "NOT_AUTHORIZED")
+
+    def test_13_case_level_producer_materializes_every_contractual_field_and_rank_zero(self) -> None:
+        spec = copy.deepcopy(self.spec)
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            original_case = root / "fixture/original_case.csv"
+            original_trace = root / "fixture/original_trace.jsonl"
+            corrected_root = root / "fixture/corrected"
+            original_case.parent.mkdir(parents=True)
+            corrected_root.mkdir(parents=True)
+            original_case.write_text("case_id,nandina_ref,rank_ref\ncase-1,87044110,101\n", encoding="utf-8", newline="\n")
+            (corrected_root / "d1a_case_summary.csv").write_text(
+                "case_id,nandina_ref,rank_ref\ncase-1,87044110,100\n", encoding="utf-8", newline="\n"
+            )
+            original_codes = [f"8704{i:04d}" for i in range(1, 201)]
+            corrected_codes = list(reversed(original_codes))
+            original_trace.write_text(
+                json.dumps({"case_id": "case-1", "candidate_codes": original_codes}) + "\n", encoding="utf-8", newline="\n"
+            )
+            (corrected_root / "d1a_ranked_codes_top200.jsonl").write_text(
+                json.dumps({"case_id": "case-1", "candidate_codes": corrected_codes}) + "\n", encoding="utf-8", newline="\n"
+            )
+            spec["evaluation"]["primary_control_case_summary"]["path"] = "fixture/original_case.csv"
+            spec["evaluation"]["primary_control_ranking_trace"]["path"] = "fixture/original_trace.jsonl"
+            spec["evaluation"]["prospective_output_root"] = "fixture/corrected"
+            row = build_case_comparison(root, spec)[0]
+        required_case_fields = set(spec["orchestration"]["comparison_contract"]["case_fields"])
+        self.assertLessEqual(required_case_fields, set(row))
+        self.assertEqual(row["original_hit_100"], 0)
+        self.assertEqual(row["corrected_hit_100"], 1)
+        self.assertEqual(row["original_hit_200"], 1)
+        self.assertEqual(row["corrected_hit_200"], 1)
+        self.assertEqual(row["original_rank_87045110"], 0)
+        self.assertEqual(row["corrected_rank_87045110"], 0)
+        self.assertEqual(row["rank_convention"], "0=NOT_FOUND_AT_200")
+
+    def test_14_hash_ledger_covers_exactly_the_frozen_contract_excluding_only_itself(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            contractual = contractual_ledger_paths(root, self.spec)
+            paths = expected_paths(root, self.spec)
+            expected_contractual_paths = [
+                project_path(root, self.spec["corrected_normative_corpus"]["prospective_path"]),
+                project_path(root, self.spec["orchestration"]["runtime_config_path"]),
+                *paths["index"],
+                *paths["evaluation"],
+                paths["runner"][0],
+                paths["runner"][1],
+                paths["runner"][3],
+            ]
+            self.assertEqual(contractual, expected_contractual_paths)
+            for index, path in enumerate(expected_contractual_paths):
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(f"contractual-{index}\n", encoding="utf-8", newline="\n")
+            ledger = write_hash_ledger(root, self.spec)
+            with ledger.open("r", encoding="utf-8", newline="") as handle:
+                ledger_paths = [row["path"] for row in csv.DictReader(handle)]
+            expected = [relative_path(root, path) for path in expected_contractual_paths]
+            self.assertEqual(ledger_paths, expected)
+            self.assertEqual(len(ledger_paths), 17)
+            self.assertNotIn(relative_path(root, ledger), ledger_paths)
+            self.assertIn(self.spec["orchestration"]["runtime_config_path"], ledger_paths)
+            self.assertIn(self.spec["orchestration"]["runner_outputs"]["execution_manifest"], ledger_paths)
+
+    def test_15_preflight_and_authorized_execution_provenance_are_distinct_without_execution(self) -> None:
+        proof = preflight_provenance("a" * 64, "b" * 64, ["future/root"])
+        self.assertEqual(proof["mode"], "PREFLIGHT_ONLY")
+        self.assertEqual(proof["execution_mode"], "PREFLIGHT_ONLY")
+        self.assertFalse(proof["numerical_execution_occurred"])
+        future = authorized_execution_provenance(proof)
+        self.assertEqual(future["mode"], "AUTHORIZED_EXECUTION")
+        self.assertEqual(future["execution_mode"], "AUTHORIZED_EXECUTION")
+        self.assertTrue(future["numerical_execution_occurred"])
+        manifest = build_execution_manifest(ROOT, self.spec, proof)
+        self.assertEqual(manifest["preflight_status"], "PASS")
+        self.assertEqual(manifest["execution_mode"], "AUTHORIZED_EXECUTION")
+        self.assertTrue(manifest["numerical_execution_occurred"])
+        self.assertIsNone(manifest["hash_ledger"]["sha256"])
 
 
 if __name__ == "__main__":

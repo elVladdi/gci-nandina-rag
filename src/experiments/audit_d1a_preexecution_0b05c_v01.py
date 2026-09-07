@@ -331,6 +331,25 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
     output_root = "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1"
     runtime_root = "outputs/audits/d1a_corrective_0b05c_runtime_v0.1"
     runtime_config = f"{runtime_root}/text2trade_mnrl_v0.2_0b05c_runtime.json"
+    hash_ledger_included_paths = [
+        corpus,
+        runtime_config,
+        f"{index_root}/index/vectors.npy",
+        f"{index_root}/index/id_map.json",
+        f"{index_root}/store/nandina8_docstore.jsonl",
+        f"{index_root}/retrieval_config.json",
+        f"{index_root}/vector_integrity_sample_v0.2.csv",
+        f"{index_root}/vector_integrity_gate_v0.2.json",
+        f"{index_root}/text2trade_mnrl_nandina8_v02_run_metadata.json",
+        f"{output_root}/d1a_metrics.json",
+        f"{output_root}/d1a_case_summary.csv",
+        f"{output_root}/d1a_ranked_codes_top200.jsonl",
+        f"{output_root}/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+        f"{output_root}/summary.md",
+        f"{output_root}/d1a_corrective_vs_original_comparison_v0.1.json",
+        f"{output_root}/d1a_corrective_case_level_comparison_v0.1.jsonl",
+        f"{output_root}/d1a_corrective_execution_manifest_v0.1.json",
+    ]
     for relative in (corpus, index_root, output_root, runtime_root):
         require(not project_path(root, relative).exists(), f"Prospective D1a path already exists and must remain absent: {relative}")
     patches = []
@@ -428,7 +447,8 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
                     "Apply exactly two UTF-8 LF JSONL patches in memory.",
                     "Calculate and record the derived corrected corpus SHA-256.",
                     "Derive the runtime config mechanically and validate its allowed diff before any index build.",
-                    "Create the corpus, runtime config, builder outputs, evaluator outputs, comparisons, and ledger only after a separately authorized command.",
+                    "Create the corpus, runtime config, builder outputs, evaluator outputs, comparisons, execution manifest, and ledger only after a separately authorized command.",
+                    "Materialize the execution manifest before the ledger; the ledger hashes that manifest and excludes only itself to avoid a circular dependency.",
                 ],
             },
             "runner_outputs": {
@@ -436,6 +456,10 @@ def corrective_execution_spec(root: Path, config: Mapping[str, Any]) -> dict[str
                 "case_level_comparison": f"{output_root}/d1a_corrective_case_level_comparison_v0.1.jsonl",
                 "hash_ledger": f"{output_root}/d1a_corrective_output_hash_ledger_v0.1.csv",
                 "execution_manifest": f"{output_root}/d1a_corrective_execution_manifest_v0.1.json",
+            },
+            "hash_ledger_contract": {
+                "included_paths": hash_ledger_included_paths,
+                "excluded_self_path": f"{output_root}/d1a_corrective_output_hash_ledger_v0.1.csv",
             },
             "comparison_contract": {
                 "primary_control_only": "FROZEN_ORIGINAL_D1A_OUTPUTS_FROM_DECISION_885_SNAPSHOT",

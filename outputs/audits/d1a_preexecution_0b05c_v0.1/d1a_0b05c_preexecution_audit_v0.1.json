@@ -446,8 +446,8 @@
       "runner": {
         "path": "src/experiments/run_d1a_corrective_0b05c_v01.py",
         "revision": "MICROCLOSE_WORKTREE_CONTENT",
-        "git_blob_sha": "15ccfd2c8c484d1574b5f03f43cd4b520f600685",
-        "sha256": "d6963d2445833be1bf40efca0da30b7eea691c3abb8738518c4b168ffa1773f6"
+        "git_blob_sha": "ebecf76efa48e0f9adbd762f99ebcc3ee310938f",
+        "sha256": "c2d409cf3fd23f1189cd7fc02c306e86837cd6f3d7febfecb380655106d8e200"
       },
       "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --preflight",
       "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
@@ -479,7 +479,8 @@
           "Apply exactly two UTF-8 LF JSONL patches in memory.",
           "Calculate and record the derived corrected corpus SHA-256.",
           "Derive the runtime config mechanically and validate its allowed diff before any index build.",
-          "Create the corpus, runtime config, builder outputs, evaluator outputs, comparisons, and ledger only after a separately authorized command."
+          "Create the corpus, runtime config, builder outputs, evaluator outputs, comparisons, execution manifest, and ledger only after a separately authorized command.",
+          "Materialize the execution manifest before the ledger; the ledger hashes that manifest and excludes only itself to avoid a circular dependency."
         ]
       },
       "runner_outputs": {
@@ -487,6 +488,28 @@
         "case_level_comparison": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_case_level_comparison_v0.1.jsonl",
         "hash_ledger": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_output_hash_ledger_v0.1.csv",
         "execution_manifest": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_execution_manifest_v0.1.json"
+      },
+      "hash_ledger_contract": {
+        "included_paths": [
+          "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.1.jsonl",
+          "outputs/audits/d1a_corrective_0b05c_runtime_v0.1/text2trade_mnrl_v0.2_0b05c_runtime.json",
+          "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/vectors.npy",
+          "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/index/id_map.json",
+          "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/store/nandina8_docstore.jsonl",
+          "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/retrieval_config.json",
+          "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/vector_integrity_sample_v0.2.csv",
+          "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/vector_integrity_gate_v0.2.json",
+          "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.1/text2trade_mnrl_nandina8_v02_run_metadata.json",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_metrics.json",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_case_summary.csv",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_ranked_codes_top200.jsonl",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/summary.md",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_vs_original_comparison_v0.1.json",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_case_level_comparison_v0.1.jsonl",
+          "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_execution_manifest_v0.1.json"
+        ],
+        "excluded_self_path": "outputs/evaluation/text2trade_mnrl_d1a_corrective_sensitivity_v0.1/d1a_corrective_output_hash_ledger_v0.1.csv"
       },
       "comparison_contract": {
         "primary_control_only": "FROZEN_ORIGINAL_D1A_OUTPUTS_FROM_DECISION_885_SNAPSHOT",
@@ -583,7 +606,7 @@
     },
     "corrective_execution_spec": {
       "path": "d1a_0b05c_corrective_execution_spec_v0.1.json",
-      "sha256": "fbfea1617151bccfe2ebe6f83ef05c76346076c618f15a8fa5cd0eadc1a784e9"
+      "sha256": "7d6deb6857464716ab6c716e1c301abc3df803964a3e10b6a98b4add3dfbd0c7"
     }
   },
   "actions_not_executed": [
