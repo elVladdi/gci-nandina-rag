@@ -153,6 +153,7 @@ def validate_bank_identity_contract(
 ) -> list[dict[str, Any]]:
     contract = config["materialization_contract"]
     require(len(ledger_rows) == 20, f"Expected 20 ledger rows, found {len(ledger_rows)}")
+    require(len(manifest_banks) == 20, f"Expected 20 materialization manifest banks, found {len(manifest_banks)}")
     required_fields = list(contract["required_ledger_fields"])
     require(required_fields == list(REQUIRED_LEDGER_FIELDS), "Ledger field contract differs from F003")
     for row in ledger_rows:
@@ -172,10 +173,12 @@ def validate_bank_identity_contract(
     for row in ledger_rows:
         bank_id = str(row["bank_id"])
         manifest_bank = manifest_by_id[bank_id]
-        require(str(manifest_bank["bank_csv_sha256"]) == str(row["bank_csv_sha256"]), f"Bank hash mismatch for {bank_id}")
-        require(str(manifest_bank["composition_sha256"]) == str(row["composition_sha256"]), f"Composition hash mismatch for {bank_id}")
-        require(int(manifest_bank["row_count"]) == int(row["row_count"]), f"Row count mismatch for {bank_id}")
-        require(int(manifest_bank["total_dam_count"]) == int(row["total_dam_count"]), f"DAM count mismatch for {bank_id}")
+        for field in required_fields:
+            require(field in manifest_bank, f"Materialization manifest misses F003 field for {bank_id}: {field}")
+            require(
+                str(manifest_bank[field]) == str(row[field]),
+                f"F003 identity mismatch for {bank_id}: {field}",
+            )
         identity_rows.append({
             "bank_id": bank_id,
             "filename": row["filename"],
@@ -185,6 +188,7 @@ def validate_bank_identity_contract(
             "new_row_count": int(row["new_row_count"]),
             "total_dam_count": int(row["total_dam_count"]),
             "new_dam_count": int(row["new_dam_count"]),
+            "size_bytes": int(row["size_bytes"]),
             "code_count": int(manifest_bank["total_bank_descriptor"]["nandina_count"]),
             "bank_csv_sha256": row["bank_csv_sha256"],
             "composition_sha256": row["composition_sha256"],
@@ -217,10 +221,20 @@ def validate_inputs(root: Path, config: Mapping[str, Any]) -> tuple[list[dict[st
     return checks, identities, common_clean
 
 
+def validate_future_output_root_absent(root: Path, config: Mapping[str, Any]) -> None:
+    if config["exp11b_retrieval_authorized"] is False:
+        future_root = project_path(root, config["future_output_contract"]["official_output_root"])
+        require(
+            not future_root.exists(),
+            f"Official H150/H200 output root must be absent while retrieval is unauthorized: {future_root}",
+        )
+
+
 def preflight(root: Path = ROOT, config_path: Path | None = None) -> dict[str, Any]:
     config_file = config_path or root / CONFIG_RELATIVE_PATH
     config = load_json(config_file)
     validate_static_contract(config)
+    validate_future_output_root_absent(root, config)
     base = validate_base_commit(root, config)
     checks, identities, common_clean = validate_inputs(root, config)
     return {

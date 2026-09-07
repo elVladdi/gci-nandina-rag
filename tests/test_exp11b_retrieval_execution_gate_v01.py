@@ -8,7 +8,9 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+from src.experiments import freeze_exp11b_retrieval_execution_gate_v01 as retrieval_gate
 from src.experiments.freeze_exp11b_retrieval_execution_gate_v01 import (
     ContractViolation,
     freeze_gate,
@@ -65,11 +67,24 @@ class Exp11bRetrievalExecutionGateV01Tests(unittest.TestCase):
         identities = validate_bank_identity_contract(self.config, self.ledger_rows, self.manifest["banks"])
         self.assertEqual([row["bank_id"] for row in identities], self.materialization["expected_bank_ids"])
         self.assertTrue(all(len(row["bank_csv_sha256"]) == 64 for row in identities))
+        self.assertTrue(all("size_bytes" in row for row in identities))
 
     def test_07_altered_bank_hash_is_rejected(self) -> None:
         altered = copy.deepcopy(self.ledger_rows)
         altered[0]["bank_csv_sha256"] = "0" * 64
-        with self.assertRaisesRegex(ContractViolation, "Bank hash mismatch"):
+        with self.assertRaisesRegex(ContractViolation, "F003 identity mismatch.*bank_csv_sha256"):
+            validate_bank_identity_contract(self.config, altered, self.manifest["banks"])
+
+    def test_08_altered_bank_size_bytes_is_rejected(self) -> None:
+        altered = copy.deepcopy(self.ledger_rows)
+        altered[0]["size_bytes"] = str(int(altered[0]["size_bytes"]) + 1)
+        with self.assertRaisesRegex(ContractViolation, "F003 identity mismatch.*size_bytes"):
+            validate_bank_identity_contract(self.config, altered, self.manifest["banks"])
+
+    def test_09_altered_bank_order_hash_is_rejected(self) -> None:
+        altered = copy.deepcopy(self.ledger_rows)
+        altered[0]["total_bank_id_order_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ContractViolation, "F003 identity mismatch.*total_bank_id_order_sha256"):
             validate_bank_identity_contract(self.config, altered, self.manifest["banks"])
 
     def test_08_altered_evalset_hash_is_rejected(self) -> None:
@@ -125,9 +140,33 @@ class Exp11bRetrievalExecutionGateV01Tests(unittest.TestCase):
         with self.assertRaisesRegex(ContractViolation, "Expected 20 ledger rows"):
             validate_bank_identity_contract(self.config, self.ledger_rows[:-1], self.manifest["banks"])
 
-    def test_17_future_result_directory_is_absent(self) -> None:
-        future = ROOT / self.config["future_output_contract"]["official_output_root"]
-        self.assertFalse(future.exists())
+    def _preflight_at_isolated_root(self, root: Path) -> dict[str, object]:
+        with patch.object(retrieval_gate, "validate_base_commit", return_value=self.config["integrated_base_commit"]), patch.object(
+            retrieval_gate, "validate_inputs", return_value=([], [], {})
+        ):
+            return preflight(root, CONFIG_PATH)
+
+    def test_future_output_root_absent_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            report = self._preflight_at_isolated_root(Path(temporary_directory))
+        self.assertEqual(report["status"], "PREFLIGHT_PASS_CANDIDATE_PENDING_EXTERNAL_AUDIT")
+
+    def test_empty_future_output_root_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            future = root / self.config["future_output_contract"]["official_output_root"]
+            future.mkdir(parents=True)
+            with self.assertRaisesRegex(ContractViolation, "Official H150/H200 output root must be absent"):
+                self._preflight_at_isolated_root(root)
+
+    def test_partial_future_output_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            future = root / self.config["future_output_contract"]["official_output_root"]
+            future.mkdir(parents=True)
+            (future / "partial.json").write_text("{}\n", encoding="utf-8")
+            with self.assertRaisesRegex(ContractViolation, "Official H150/H200 output root must be absent"):
+                self._preflight_at_isolated_root(root)
 
     def test_18_preflight_does_not_import_or_call_retrieval(self) -> None:
         source = inspect.getsource(__import__("src.experiments.freeze_exp11b_retrieval_execution_gate_v01", fromlist=["*"]))

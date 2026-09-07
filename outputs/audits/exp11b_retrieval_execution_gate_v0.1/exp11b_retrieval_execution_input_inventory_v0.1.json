@@ -13,6 +13,7 @@
       "new_row_count": 1466,
       "row_count": 4416,
       "seed": 20261005,
+      "size_bytes": 5337882,
       "total_bank_id_order_sha256": "00fca5ca294a7702515d183d4fd18c8106bec4db4d51b88dcc388d8e161da883",
       "total_dam_count": 42
     },
@@ -29,6 +30,7 @@
       "new_row_count": 3004,
       "row_count": 5954,
       "seed": 20261005,
+      "size_bytes": 7265669,
       "total_bank_id_order_sha256": "78597b0ed65959ce0437105ebf95c467f35233e5226aef095dd917b2da6bd18e",
       "total_dam_count": 54
     },
@@ -45,6 +47,7 @@
       "new_row_count": 1585,
       "row_count": 4535,
       "seed": 20261006,
+      "size_bytes": 5415360,
       "total_bank_id_order_sha256": "f96e4fac9a59ed904eee1bcc038db2f39ef90676b1732a9d5161aca839fa1aed",
       "total_dam_count": 30
     },
@@ -61,6 +64,7 @@
       "new_row_count": 2947,
       "row_count": 5897,
       "seed": 20261006,
+      "size_bytes": 7121941,
       "total_bank_id_order_sha256": "4596851ea675f822501a96817400d1caffd18eac2caf699351a962e9f448f68f",
       "total_dam_count": 47
     },
@@ -77,6 +81,7 @@
       "new_row_count": 1407,
       "row_count": 4357,
       "seed": 20261007,
+      "size_bytes": 5235342,
       "total_bank_id_order_sha256": "dff1990152cce3cf38aa2b8e479a189f458fa83cccca37bb5a0f257c8ad71e97",
       "total_dam_count": 39
     },
@@ -93,6 +98,7 @@
       "new_row_count": 2882,
       "row_count": 5832,
       "seed": 20261007,
+      "size_bytes": 7113741,
       "total_bank_id_order_sha256": "a07c8285ecc47a00a695a386fbecd83a5b6c15501840c637172f6ff158352261",
       "total_dam_count": 52
     },
@@ -109,6 +115,7 @@
       "new_row_count": 1472,
       "row_count": 4422,
       "seed": 20261010,
+      "size_bytes": 5364067,
       "total_bank_id_order_sha256": "543a70fbb5e0bbced1b2460af9469e890f37d7b0822667dc6f71101bc0ac2791",
       "total_dam_count": 41
     },
@@ -125,6 +132,7 @@
       "new_row_count": 2940,
       "row_count": 5890,
       "seed": 20261010,
+      "size_bytes": 7189470,
       "total_bank_id_order_sha256": "5fa5443e4ebd27535e614711cea324a8b9ce6fe429027acb48f4b15681389f96",
       "total_dam_count": 54
     },
@@ -141,6 +149,7 @@
       "new_row_count": 1562,
       "row_count": 4512,
       "seed": 20261011,
+      "size_bytes": 5417826,
       "total_bank_id_order_sha256": "a1b3d3587829119fe714af6de4a8c8e958b96348fc5a116f27d5ebd702fd3150",
       "total_dam_count": 40
     },
@@ -157,6 +166,7 @@
       "new_row_count": 3027,
       "row_count": 5977,
       "seed": 20261011,
+      "size_bytes": 7258140,
       "total_bank_id_order_sha256": "78c494cb216076f3db2756a315c96b2fc62da7550821072042f2bb62c23682ab",
       "total_dam_count": 50
     },
@@ -173,6 +183,7 @@
       "new_row_count": 1517,
       "row_count": 4467,
       "seed": 20261013,
+      "size_bytes": 5408676,
       "total_bank_id_order_sha256": "ee20af807d70901fd49b6dca71561cee798cb5edadbb1f7cffdaabc7a880d065",
       "total_dam_count": 53
     },
@@ -189,6 +200,7 @@
       "new_row_count": 3089,
       "row_count": 6039,
       "seed": 20261013,
+      "size_bytes": 7370152,
       "total_bank_id_order_sha256": "874be1632bcc7c59b726a10dd4577ad44fa613689acf17c13b5bf3e5b5b5ea7c",
       "total_dam_count": 57
     },
@@ -205,6 +217,7 @@
       "new_row_count": 1459,
       "row_count": 4409,
       "seed": 20261017,
+      "size_bytes": 5323182,
       "total_bank_id_order_sha256": "756f1aea6f9ca2c2cbe38df9c3fd93e7746f21033b89ffac2a1a5c48adc30a7a",
       "total_dam_count": 41
     },
@@ -221,6 +234,7 @@
       "new_row_count": 2992,
       "row_count": 5942,
       "seed": 20261017,
+      "size_bytes": 7240818,
       "total_bank_id_order_sha256": "0583fcf5f37939040bb95f4f4a472d18d90a3c2e2baec1c1cc74321630baa45e",
       "total_dam_count": 59
     },
@@ -237,6 +251,7 @@
       "new_row_count": 1498,
       "row_count": 4448,
       "seed": 20261021,
+      "size_bytes": 5366465,
       "total_bank_id_order_sha256": "48e60c04f6b24ea0725a22b884f150c5fee25ee90bbe15f5949917dfc1dcbe14",
       "total_dam_count": 39
     },
@@ -253,6 +268,7 @@
       "new_row_count": 2891,
       "row_count": 5841,
       "seed": 20261021,
+      "size_bytes": 7142238,
       "total_bank_id_order_sha256": "e9db8c0a9233ab67f50715f8fa550c83b255cc765c821db07273f9e302409a1f",
       "total_dam_count": 52
     },
@@ -269,6 +285,7 @@
       "new_row_count": 1489,
       "row_count": 4439,
       "seed": 20261023,
+      "size_bytes": 5294727,
       "total_bank_id_order_sha256": "0eba89561d930e5a8a36c1e51c7ab3618cb81cf2bc4775712cfd38277d367303",
       "total_dam_count": 43
     },
@@ -285,6 +302,7 @@
       "new_row_count": 2909,
       "row_count": 5859,
       "seed": 20261023,
+      "size_bytes": 7075401,
       "total_bank_id_order_sha256": "a7e776d92c91e714eceaf6f93ff095ad3c9690c8de191be8506086f776e4cae4",
       "total_dam_count": 54
     },
@@ -301,6 +319,7 @@
       "new_row_count": 1533,
       "row_count": 4483,
       "seed": 20261024,
+      "size_bytes": 5393797,
       "total_bank_id_order_sha256": "da48cffb3215c2bae9caaaa33f8f3103550d5d635f7fe7f6f0932b25c19feba6",
       "total_dam_count": 40
     },
@@ -317,6 +336,7 @@
       "new_row_count": 2918,
       "row_count": 5868,
       "seed": 20261024,
+      "size_bytes": 7149970,
       "total_bank_id_order_sha256": "41d1347daa41072fa8e96fb29f24083d0ccb43109fb666f41299cbd0d1e19553",
       "total_dam_count": 50
     }

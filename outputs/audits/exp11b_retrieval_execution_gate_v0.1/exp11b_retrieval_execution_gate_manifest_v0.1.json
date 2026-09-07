@@ -151,7 +151,7 @@
   "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
   "h150_h200_results_observed": false,
   "input_inventory": "exp11b_retrieval_execution_input_inventory_v0.1.json",
-  "input_inventory_sha256": "d0cd38ad5504cf9058a4540d50d406aeed30d2a09192f01d264ec740bd8f18f1",
+  "input_inventory_sha256": "419085e8aa032dc9c1ac19239915141d2e6d2eb24bc3c0c1286e066f53ba9100",
   "known_provenance_notice": {
     "current_config_sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17",
     "manifest_embedded_config_sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c",
