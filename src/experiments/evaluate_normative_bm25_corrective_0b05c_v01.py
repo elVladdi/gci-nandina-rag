@@ -246,6 +246,12 @@ def reproduce_ev04_decision885_control(
     )
 
 
+def ev04_corrected_execution_permitted(*, authorized: bool, reproduction_status: str) -> bool:
+    """Keep the control-reproduction and authorization gates independently closed."""
+
+    return authorized and reproduction_status == "PASS"
+
+
 def produce_case_level_comparison(original: Sequence[Mapping[str, Any]], corrective: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     original_by_case = {str(row["case_id"]): dict(row) for row in original}
     corrective_by_case = {str(row["case_id"]): dict(row) for row in corrective}

@@ -25,6 +25,7 @@ from src.experiments.prepare_0b05c_corrective_numerical_gate_v01 import (
     future_roots,
     head_text_identity,
     integrated_base_is_ancestor,
+    posix_relative,
     preflight,
     require_posix_serialization,
     require_frozen_bundle_matches,
@@ -32,7 +33,9 @@ from src.experiments.prepare_0b05c_corrective_numerical_gate_v01 import (
     validate_current_text_identity,
 )
 from src.experiments.run_0b05c_corrective_numerical_v01 import execute_authorized, preflight as runner_preflight
-from src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 import compare_control_reproduction
+from src.experiments import evaluate_normative_bm25_flat_data_aduanas_v02 as frozen_flat_runner
+from src.experiments import evaluate_normative_bm25_hierarchical_data_aduanas_v02 as frozen_hierarchical_runner
+from src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 import compare_control_reproduction, ev04_corrected_execution_permitted
 from src.experiments.run_d1a_corrective_0b05c_v01 import git_blob_sha256, git_head_blob_sha, sha256_bytes
 
 
@@ -242,6 +245,29 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
             actual_ranking.write_text("case_id,candidate_rank\nA,2\n", encoding="utf-8", newline="\n")
             with self.assertRaisesRegex(ContractViolation, "not exact"):
                 compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, {"top_1": 1}, {"top_1": 1})
+
+    def test_23_posix_serialization_is_stable_for_windows_style_repository_input(self) -> None:
+        self.assertEqual(posix_relative("outputs\\audits\\0b05c\\gate.json"), "outputs/audits/0b05c/gate.json")
+
+    def test_24_execution_contract_includes_builders_producers_and_full_ledger(self) -> None:
+        commands = self.ev03["prospective_execution"]["commands"]
+        self.assertIn("build_bm25_corrective_0b05c_v01", commands["ev03_build_command"])
+        self.assertIn("build_bm25_corrective_0b05c_v01", self.ev04["prospective_execution"]["commands"]["ev04_corrected_build_command"])
+        self.assertIn("produce_case_level_comparison", self.gate["comparison_producers"]["EV03_case_level"])
+        self.assertIn("D1a corrected outputs", self.gate["hash_ledger_contract"]["covers"])
+        self.assertEqual(self.gate["hash_ledger_contract"]["self_exclusion"], "Only the ledger file itself is excluded to avoid a circular hash.")
+
+    def test_25_historical_fixed_hash_guards_reject_a_derived_corpus_and_ev04_needs_both_gates(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            derived = Path(temporary_directory) / "corrected.jsonl"
+            derived.write_text('{"codigo":"87044110"}\n', encoding="utf-8", newline="\n")
+            with self.assertRaises(ValueError):
+                frozen_flat_runner._validate_hash(derived, "0" * 64, "historical flat corpus")
+            with self.assertRaises(ValueError):
+                frozen_hierarchical_runner.validate_hash(derived, "0" * 64, "historical hierarchical corpus")
+        self.assertFalse(ev04_corrected_execution_permitted(authorized=False, reproduction_status="PASS"))
+        self.assertFalse(ev04_corrected_execution_permitted(authorized=True, reproduction_status="FAIL"))
+        self.assertTrue(ev04_corrected_execution_permitted(authorized=True, reproduction_status="PASS"))
 
 
 if __name__ == "__main__":

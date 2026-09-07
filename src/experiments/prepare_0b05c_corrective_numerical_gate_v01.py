@@ -419,6 +419,16 @@ def execution_commands(arm_name: str, arm: Mapping[str, Any]) -> dict[str, str]:
         "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
         "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v01 --execute-authorized",
     }
+    if arm_name == "EV03":
+        control_corpus = posix_relative(str(arm["corpus"]))
+        control_index = f"{output_root}/decision885_control_index"
+        control_output = f"{output_root}/decision885_control"
+        commands.update(
+            {
+                "ev03_control_reproduction_build_command": f"python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV03 --corpus {control_corpus} --output {control_index}/index.json --metadata {control_index}/index_metadata.json",
+                "ev03_control_reproduction_evaluate_command": f"python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm EV03 --corpus {control_corpus} --index {control_index}/index.json --index-metadata {control_index}/index_metadata.json --output-dir {control_output}",
+            }
+        )
     if arm_name == "EV04":
         control_corpus = posix_relative(str(arm["corpus"]))
         control_index = f"{output_root}/decision885_control_index"
@@ -550,6 +560,10 @@ def build_arm_spec(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: 
             "execution_order": ["unified_preflight", "control_reproduction", "corrected_retrieval", "validation", "comparison", "manifest", "ledger", "interpretation"],
             "commands": execution_commands(arm_name, arm),
             "derived_identity_policy": "The future evaluator validates the SHA-256 values derived by its own corrective corpus and corrective index build; it never substitutes historic fixed corpus or index hashes.",
+            "comparison_producers": {
+                "case_level_original_vs_corrective": f"{EVALUATOR_PATH}:produce_case_level_comparison",
+                "aggregate_original_vs_corrective": f"{EVALUATOR_PATH}:produce_aggregate_comparison",
+            },
         },
     }
 
@@ -632,6 +646,20 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         provenance = source_provenance(root, arm)
         arm_specs[arm_name] = build_arm_spec(root, arm_name, arm, metadata, provenance)
         overlaps[arm_name], overlap_rows[arm_name] = scan_overlap(root, arm_name, arm, metadata)
+    authorization_transition_contract = {
+        "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/0b05c_corrective_numerical_execution_gate_v0.1.json#/authorization",
+        "allowed_authorization_fields": ["EV03_NUMERICAL_EXECUTION", "EV04_NUMERICAL_EXECUTION", "UNIFIED_0B05C_NUMERICAL_EXECUTION"],
+        "allowed_transition": "NOT_AUTHORIZED -> AUTHORIZED",
+        "allowed_companion_changes": ["mechanically-derived runtime hashes", "execution manifests"],
+        "forbidden_changes": ["patches", "queries", "base corpora", "model weights", "BM25 parameters", "ranking semantics", "metric contracts", "control reproduction rules", "runners", "builders", "evaluators", "output paths", "execution order", "comparison schema"],
+        "d1a_authorization": "D1a remains independently governed by its own authorization contract.",
+    }
+    hash_ledger_contract = {
+        "path": "outputs/evaluation/0b05c_corrective_numerical_v0.1/unified_output_hash_ledger.json",
+        "producer": f"{EVALUATOR_PATH}:write_hash_ledger",
+        "covers": ["EV03 corrected corpus", "EV04 corrected corpus", "runtime and config artifacts", "EV03 and EV04 indexes plus metadata", "EV03 and EV04 control-reproduction outputs", "EV03 and EV04 corrected retrieval outputs", "EV03 and EV04 case-level comparisons", "EV03 and EV04 aggregate comparisons", "D1a corrected outputs", "unified execution manifest", "unified sensitivity summary"],
+        "self_exclusion": "Only the ledger file itself is excluded to avoid a circular hash.",
+    }
     gate = {
         "gate_id": "0B05C_CORRECTIVE_NUMERICAL_EXECUTION_GATE_v0.1",
         "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
@@ -662,18 +690,18 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         "future_execution_order": [
             "01_unified_preflight",
             "02_EV03_control_reproduction",
-            "03_EV03_control_comparison",
-            "04_EV03_corrected_corpus_and_index",
-            "05_EV03_corrected_evaluation",
-            "06_EV04_Decision885_control_reproduction",
-            "07_EV04_control_comparison_must_pass",
-            "08_EV04_corrected_corpus_and_index",
-            "09_EV04_corrected_evaluation",
+            "03_EV03_corrected_corpus_and_index",
+            "04_EV03_corrected_evaluation",
+            "05_EV04_Decision885_control_reproduction",
+            "06_EV04_corrected_corpus_and_index",
+            "07_EV04_corrected_evaluation",
+            "08_D1a_corrected_execution_under_its_own_authorization",
+            "09_integrity_validation",
             "10_case_level_comparisons",
             "11_aggregate_comparisons",
-            "12_unified_sensitivity_summary",
-            "13_manifest_and_hash_ledger",
-            "14_D1a_execute_only_under_its_own_authorization",
+            "12_unified_execution_manifest",
+            "13_unified_hash_ledger",
+            "14_interpretation",
         ],
         "fail_closed_preflight": [
             "reject an unrelated candidate that does not descend from the integrated base", "reject frozen control/output/code/config/EVAL/corpus identity changes", "reject Decision 906 or exactly-two-entry changes",
@@ -692,11 +720,16 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
             "EV04_ORIGINAL_HISTORICAL_EXECUTION": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
             "EV04_DECISION885_REPRODUCTION_GATE": "MANDATORY/NOT_EXECUTED",
         },
-        "future_authorization_transition_contract": {
-            "allowed_mutations": ["authorization state fields from NOT_AUTHORIZED to AUTHORIZED", "mechanically-derived runtime hashes", "execution manifests"],
-            "forbidden_mutations": ["patches", "queries", "base corpora", "weights", "BM25 semantics", "metric contracts", "reproduction rules", "runners", "builders", "evaluators", "output paths", "execution order", "comparison schema"],
-            "d1a_authorization": "D1a remains independently governed by its own authorization contract.",
+        "authorization_transition_contract": {**authorization_transition_contract, "canonical_sha256": sha256_bytes(canonical_json_bytes(authorization_transition_contract))},
+        "comparison_producers": {
+            "EV03_case_level": f"{EVALUATOR_PATH}:produce_case_level_comparison",
+            "EV03_aggregate": f"{EVALUATOR_PATH}:produce_aggregate_comparison",
+            "EV04_case_level": f"{EVALUATOR_PATH}:produce_case_level_comparison",
+            "EV04_aggregate": f"{EVALUATOR_PATH}:produce_aggregate_comparison",
+            "unified_sensitivity_summary": f"{EVALUATOR_PATH}:produce_unified_sensitivity_summary",
+            "unified_execution_manifest": f"{EVALUATOR_PATH}:write_execution_manifest",
         },
+        "hash_ledger_contract": hash_ledger_contract,
     }
     return {"specifications": arm_specs, "overlaps": overlaps, "overlap_rows": overlap_rows, "gate": gate}
 
