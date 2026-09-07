@@ -3,7 +3,7 @@
 **Proyecto:** Framework RAG explicativo y auditable para recomendación de subpartidas NANDINA  
 **Repositorio principal:** `elVladdi/gci-nandina-rag`  
 **Repositorio público de reproducibilidad:** `elVladdi/gci-nandina-rag-reproducibility`  
-**Fecha de actualización:** 2026-09-01
+**Fecha de actualización:** 2026-09-06
 
 ## 1. Principios congelados
 
@@ -746,3 +746,34 @@ Debe congelar prospectivamente, antes de BM25:
 - common-clean solo como sensibilidad complementaria.
 
 No ejecutar retrieval hasta aprobar externamente ese gate.
+
+### 2026-09-06 — EXP-04-D1a / 0B-05C: auditoría pre-ejecución y microclose F001–F003
+
+**Estado:** `CANDIDATE_FOR_EXTERNAL_AUDIT`.
+
+- Conforme a `D-011`, este Markdown es el Plan Maestro canónico SRC-03. El libro
+  `docs/plan_fases_proyecto_investigacion_v0.1.xlsx` es un tracker histórico
+  secundario y no gobierna la planificación experimental.
+- `EXP11B_RETRIEVAL_GATE=APPROVED_AND_INTEGRATED` en
+  `main = origin/main = 37eaa712bd12914b97e8fc108b96dc6e68c4e460`.
+  `EXP11B_RETRIEVAL_EXECUTION=NOT_AUTHORIZED`, `RETRIEVAL_EXECUTED=false`,
+  `EVALUATION_METRICS_COMPUTED=false`, `H150_H200_RESULTS_OBSERVED=false` y
+  `EXP12_AUTHORIZED=false`.
+- Se abre el microclose `0B-05C` para los hallazgos F001–F003 de la auditoría
+  pre-ejecución D1a. No autoriza ni ejecuta una corrida correctiva D1a,
+  reconstrucción de índice, retrieval H150/H200, ni cálculo de métricas nuevas.
+- El Top-200 original D1a permanece congelado con 1,056 consultas y 200 rangos
+  por consulta; no registra ocurrencias de `87044110` ni `87045110`.
+- La exposición de entrenamiento se demuestra desde el H100 congelado
+  `data/processed/data_aduanas_historico_clase87_v0.2.csv`, SHA-256
+  `0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff`:
+  2,950 filas, 66 códigos históricos y ausencia de ambos códigos afectados.
+  La fuente de negativos registrada es exclusivamente `historical training codes
+  + frozen normative corpus only`. La reconstrucción determinista es
+  corroborativa y no identifica el checkout histórico de ejecución.
+- `D1A_EXECUTION_SPECIFICATION=CLOSED_PROSPECTIVELY`: se congela una definición
+  correctiva de dos códigos basada en la Decisión 906, Gaceta Oficial 5062, con
+  pesos D1a originales, reconstrucción atómica de índice y mapping, evaluación
+  NANDINA-8 y un root de salida nuevo fail-closed. La métrica correctiva sigue
+  `NOT_DETERMINED`, la ejecución numérica no está autorizada, no se justifican
+  pasos posteriores y el cierre de 0B-05C no está autorizado.
