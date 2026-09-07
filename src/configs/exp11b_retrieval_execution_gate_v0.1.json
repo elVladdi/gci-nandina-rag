@@ -1,0 +1,152 @@
+{
+  "experiment_id": "EXP-11B",
+  "version": "v0.1",
+  "gate": "EXP11B_RETRIEVAL_EXECUTION_GATE",
+  "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "integrated_base_commit": "95ffec45ae5a734545ae7bb2d8d530f42f8f056c",
+  "retrieval_executed": false,
+  "evaluation_metrics_computed": false,
+  "h150_h200_results_observed": false,
+  "exp11b_retrieval_authorized": false,
+  "execution_mode": "PREFLIGHT_AND_FREEZE_ONLY",
+  "future_execution": {
+    "expected_banks": 20,
+    "official_runs_per_bank": 1,
+    "automatic_retries": false,
+    "silent_resume": false,
+    "silent_overwrite": false,
+    "partial_recomputation_is_official": false,
+    "replace_failed_outputs": false,
+    "rerun_for_unexpected_results": false,
+    "configuration_mutable_after_start": false,
+    "failure_policy": "FAIL_CLOSED_PRESERVE_FAILURE_AND_REQUIRE_SEPARATE_PROSPECTIVE_AUTHORIZATION"
+  },
+  "frozen_inputs": {
+    "evalset": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "rows": 1056,
+      "case_id_prefix": "DA-EVAL-V02-"
+    },
+    "h100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "rows": 2950,
+      "dams": 28,
+      "codes": 66
+    },
+    "h100_reference_metrics": {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json",
+      "sha256": "5334e64ab2b3f812f939b652fe1ee8ad8db24b673ebb48fd4d7b1ddb0dd444fa",
+      "top_1": {"numerator": 538, "denominator": 1056, "value": 0.509469696969697},
+      "top_3": {"numerator": 709, "denominator": 1056, "value": 0.6714015151515151},
+      "top_5": {"numerator": 806, "denominator": 1056, "value": 0.7632575757575758},
+      "top_10": {"numerator": 941, "denominator": 1056, "value": 0.8910984848484849},
+      "top_50": {"numerator": 1047, "denominator": 1056, "value": 0.9914772727272727},
+      "mrr": 0.6297077493524843
+    },
+    "h100_run_metadata": {
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/run_metadata.json",
+      "sha256": "edb8bd3343418714fb6736f896c8831aeebe8ecec2f31599bb84ad32722a3a32"
+    },
+    "split_metadata": {
+      "path": "data/processed/data_aduanas_splits_clase87_v0.2_metadata.json",
+      "sha256": "e3946d946a417afaa71b77ca23d18cf5db20ed9b584941f0e78a2768340c1ef7"
+    },
+    "split_config": {
+      "path": "src/configs/data_aduanas_split_clase87_v0.2.json",
+      "sha256": "5d65dca7f2d31e5bb61ffaa6acbdac5ac57e64ebc6a1653fdf5a2e93267be3b9"
+    },
+    "support_by_eval_row": {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/historical_support_by_eval_row_v0.2.csv",
+      "sha256": "4fed0fe48a8d36718bb65e1adbb5eecce2ca671fbb5aa846bd22a2dc2762f385"
+    },
+    "exact_duplicates": {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/exact_duplicates_cross_split_details_v0.2.csv",
+      "sha256": "691b094fbd4e6a142b235226abea27ba20897418b5929fa7dedcee48bc295525"
+    },
+    "near_duplicates": {
+      "path": "outputs/audits/data_aduanas_splits_clase87_v0.2/near_duplicates_hist_eval_details_v0.2.csv",
+      "sha256": "0f1f0283c993dd57ab3e02ba064b8c964fd688777726f7ae80c04c47e9c9b955"
+    }
+  },
+  "canonical_retrieval_semantics": {
+    "canonical_implementation": "EXP04_HISTORICAL_BM25_V02_REUSED_DIRECTLY_BY_EXP11A_V03",
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "label_column": "NANDINA",
+    "normalization": "unicode_NFKD_lowercase_remove_combining_marks",
+    "tokenizer": "regex_[a-z0-9]+",
+    "bm25_formula": "BM25_IDF_log_1_plus_N_minus_df_plus_0_5_over_df_plus_0_5_with_query_tf",
+    "k1": 1.5,
+    "b": 0.75,
+    "history_depth": "bank_row_count",
+    "candidate_depth": 100,
+    "k_values": [1, 3, 5, 10, 50],
+    "ranking_order": "descending_score_then_ascending_historical_case_id",
+    "candidate_deduplication": "first_ranked_historical_row_per_NANDINA",
+    "reference_rank": "one_based_rank_after_NANDINA_deduplication_or_zero_when_absent",
+    "reciprocal_rank": "zero_when_rank_is_zero_else_1_over_rank",
+    "top_k_hit": "one_when_0_less_than_reference_rank_less_than_or_equal_to_k_else_zero",
+    "exp11a_reuse": "run_exp11a_historical_size_sensitivity_v03._run_bm25 calls historical _build_bm25_index, _bm25_scores, _dedup_candidates, _rank_of and mrr_from_rank"
+  },
+  "canonical_source_files": [
+    {"path": "src/experiments/evaluate_historical_retrieval_data_aduanas_v02.py", "sha256": "251b8f60d6591bbdfadaf3aa1d69103d55fbc1bfe63169df42f4150c3113e836", "role": "canonical_historical_bm25_implementation"},
+    {"path": "src/experiments/run_exp11a_historical_size_sensitivity_v03.py", "sha256": "e9f9ee27d869692d73e6414542a9d61c426f9e1a3613812db2915dd83462089f", "role": "direct_exp11a_reuse_proof"},
+    {"path": "src/evaluation/metrics.py", "sha256": "69889887d511ee1fdda760f490c703fefd3ea15d6c392b5863c6fffea94d13e4", "role": "rank_and_mrr_helpers"},
+    {"path": "src/bm25_index.py", "sha256": "31562c7a1e6b1e0fd7b01ef0fb556ecb3e33a33072c51421fa15915d8117e2f5", "role": "sha256_input_helper"},
+    {"path": "src/utils/paths.py", "sha256": "2bf513a29e93b8f5582240ea0dcff050428011f2bda9bcb3fd1bfa13b92d11cb", "role": "project_path_resolution"},
+    {"path": "src/configs/exp11_historical_size_sensitivity_v0.3.json", "sha256": "51faf2d21967017ace40cddc62c01f58c8ee31e41fe394a24a0667168336491e", "role": "exp11a_frozen_execution_contract"}
+  ],
+  "materialization_contract": {
+    "manifest": {"path": "outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_materialization_manifest_v0.1.json", "sha256": "67512d88a46dcd85427d9eca4be07eeea3f6ec2821bf77e7acfec5a09a706cf4"},
+    "ledger": {"path": "outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_hashes_v0.1.csv", "sha256": "9686c2f642ec47c36079a3085c4d68a3f1b555588a8623ecca59333e12e0f56c"},
+    "current_materialization_config": {"path": "src/configs/exp11b_bank_materialization_v0.1.json", "sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17"},
+    "gate03_feasibility": {"path": "outputs/audits/new_historical_gate_v0.1/exp11b_h150_h200_feasibility_v0.1.json", "sha256": "fa9eaf906feac264bca9e496557bbc1f17fe1462af412752c2b81a85af78fdf0"},
+    "gate03_common_clean_mask": {"path": "outputs/audits/new_historical_gate_v0.1/eval_common_clean_masks_v0.1.csv", "sha256": "3fbcd6e57eee19d230e8bcaeb634307ca6b8f5855734e393b321b1d073552b84"},
+    "gate03_config": {"path": "src/configs/exp11b_historical_size_extension_v0.1.json", "sha256": "2a1fd4c7b0bfa36042d2e503471fcc9d6ef1ff88c941a4665eb53862b1901100"},
+    "expected_bank_ids": [
+      "EXP11B_R01_H150", "EXP11B_R01_H200", "EXP11B_R02_H150", "EXP11B_R02_H200", "EXP11B_R03_H150", "EXP11B_R03_H200", "EXP11B_R04_H150", "EXP11B_R04_H200", "EXP11B_R05_H150", "EXP11B_R05_H200",
+      "EXP11B_R06_H150", "EXP11B_R06_H200", "EXP11B_R07_H150", "EXP11B_R07_H200", "EXP11B_R08_H150", "EXP11B_R08_H200", "EXP11B_R09_H150", "EXP11B_R09_H200", "EXP11B_R10_H150", "EXP11B_R10_H200"
+    ],
+    "expected_seed_schedule": [20261005, 20261006, 20261007, 20261010, 20261011, 20261013, 20261017, 20261021, 20261023, 20261024],
+    "required_ledger_fields": ["bank_id", "filename", "seed", "condition", "row_count", "new_row_count", "total_dam_count", "new_dam_count", "bank_csv_sha256", "size_bytes", "composition_sha256", "H100_core_id_order_sha256", "increment_id_order_sha256", "total_bank_id_order_sha256"],
+    "known_provenance_notice": {
+      "status": "EXTERNAL_AUDIT_NOTICE",
+      "manifest_embedded_config_sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c",
+      "current_config_sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17",
+      "meaning": "The materialization manifest retains its embedded historical config fingerprint while this gate freezes the current tracked materialization configuration separately. Bank identity is governed by the verified manifest and ledger hashes.",
+      "retrieval_authorization_blocked_pending_external_audit": true
+    }
+  },
+  "common_clean": {
+    "primary_denominator": 1056,
+    "complementary_only": true,
+    "selection_affected": false,
+    "primary_denominator_affected": false,
+    "sets": {
+      "exact": {"affected": 36, "clean_denominator": 1020, "mask_column": "exact_match_in_max_pool"},
+      "near090": {"affected": 75, "clean_denominator": 981, "mask_column": "near_090_in_max_pool"},
+      "near095": {"affected": 54, "clean_denominator": 1002, "mask_column": "near_095_in_max_pool"},
+      "near098": {"affected": 46, "clean_denominator": 1010, "mask_column": "near_098_in_max_pool"}
+    }
+  },
+  "future_output_contract": {
+    "official_output_root": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1",
+    "must_not_exist_until_authorized_execution": true,
+    "files": {
+      "run_manifest_json": {"filename": "exp11b_retrieval_run_manifest_v0.1.json", "required_fields": ["run_id", "bank_id", "condition", "seed", "base_commit", "retrieval_config_sha256", "bank_csv_sha256", "evalset_sha256", "environment", "status"]},
+      "metrics_by_bank_csv": {"filename": "exp11b_retrieval_metrics_by_bank_v0.1.csv", "columns": ["run_id", "bank_id", "condition", "seed", "primary_n", "top_1_numerator", "top_1", "top_3_numerator", "top_3", "top_5_numerator", "top_5", "top_10_numerator", "top_10", "top_50_numerator", "top_50", "mrr_numerator", "mrr"]},
+      "case_level_csv": {"filename": "exp11b_retrieval_case_level_v0.1.csv", "columns": ["run_id", "bank_id", "condition", "seed", "case_id", "id_unico", "reference_nandina", "reference_rank", "reciprocal_rank", "hit_at_1", "hit_at_3", "hit_at_5", "hit_at_10", "hit_at_50", "top1_nandina", "candidate_count", "ranking_depth", "method"]},
+      "candidate_ranking_csv": {"filename": "exp11b_retrieval_candidates_v0.1.csv", "columns": ["run_id", "bank_id", "condition", "seed", "case_id", "candidate_rank", "candidate_nandina", "candidate_history_rank", "candidate_case_id", "candidate_id_unico", "score", "method"]},
+      "condition_summary_csv": {"filename": "exp11b_retrieval_condition_summary_v0.1.csv", "columns": ["condition", "expected_runs", "completed_runs", "primary_n", "top_1_mean", "top_3_mean", "top_5_mean", "top_10_mean", "top_50_mean", "mrr_mean", "status"]},
+      "output_hash_ledger_csv": {"filename": "exp11b_retrieval_output_hashes_v0.1.csv", "columns": ["artifact", "sha256", "size_bytes", "role"]},
+      "failure_ledger_json": {"filename": "exp11b_retrieval_failures_v0.1.json", "required_fields": ["run_id", "bank_id", "status", "failure_stage", "error", "preserved_at_utc"]},
+      "environment_json": {"filename": "exp11b_retrieval_environment_v0.1.json", "required_fields": ["python", "platform", "packages", "git_commit", "command"]}
+    }
+  },
+  "freeze_artifacts": {
+    "directory": "outputs/audits/exp11b_retrieval_execution_gate_v0.1",
+    "manifest_filename": "exp11b_retrieval_execution_gate_manifest_v0.1.json",
+    "input_inventory_filename": "exp11b_retrieval_execution_input_inventory_v0.1.json"
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "bank_count": 20,
+  "base_commit": "95ffec45ae5a734545ae7bb2d8d530f42f8f056c",
+  "config_path": "src/configs/exp11b_retrieval_execution_gate_v0.1.json",
+  "config_sha256": "c0c8a7fba01332899a819ca0b975a239ab2ce00ff53af05de7eb045261a46a79",
+  "evaluation_metrics_computed": false,
+  "execution_mode": "PREFLIGHT_AND_FREEZE_ONLY",
+  "exp11b_retrieval_authorized": false,
+  "future_execution": {
+    "automatic_retries": false,
+    "configuration_mutable_after_start": false,
+    "expected_banks": 20,
+    "failure_policy": "FAIL_CLOSED_PRESERVE_FAILURE_AND_REQUIRE_SEPARATE_PROSPECTIVE_AUTHORIZATION",
+    "official_runs_per_bank": 1,
+    "partial_recomputation_is_official": false,
+    "replace_failed_outputs": false,
+    "rerun_for_unexpected_results": false,
+    "silent_overwrite": false,
+    "silent_resume": false
+  },
+  "future_output_contract": {
+    "files": {
+      "candidate_ranking_csv": {
+        "columns": [
+          "run_id",
+          "bank_id",
+          "condition",
+          "seed",
+          "case_id",
+          "candidate_rank",
+          "candidate_nandina",
+          "candidate_history_rank",
+          "candidate_case_id",
+          "candidate_id_unico",
+          "score",
+          "method"
+        ],
+        "filename": "exp11b_retrieval_candidates_v0.1.csv"
+      },
+      "case_level_csv": {
+        "columns": [
+          "run_id",
+          "bank_id",
+          "condition",
+          "seed",
+          "case_id",
+          "id_unico",
+          "reference_nandina",
+          "reference_rank",
+          "reciprocal_rank",
+          "hit_at_1",
+          "hit_at_3",
+          "hit_at_5",
+          "hit_at_10",
+          "hit_at_50",
+          "top1_nandina",
+          "candidate_count",
+          "ranking_depth",
+          "method"
+        ],
+        "filename": "exp11b_retrieval_case_level_v0.1.csv"
+      },
+      "condition_summary_csv": {
+        "columns": [
+          "condition",
+          "expected_runs",
+          "completed_runs",
+          "primary_n",
+          "top_1_mean",
+          "top_3_mean",
+          "top_5_mean",
+          "top_10_mean",
+          "top_50_mean",
+          "mrr_mean",
+          "status"
+        ],
+        "filename": "exp11b_retrieval_condition_summary_v0.1.csv"
+      },
+      "environment_json": {
+        "filename": "exp11b_retrieval_environment_v0.1.json",
+        "required_fields": [
+          "python",
+          "platform",
+          "packages",
+          "git_commit",
+          "command"
+        ]
+      },
+      "failure_ledger_json": {
+        "filename": "exp11b_retrieval_failures_v0.1.json",
+        "required_fields": [
+          "run_id",
+          "bank_id",
+          "status",
+          "failure_stage",
+          "error",
+          "preserved_at_utc"
+        ]
+      },
+      "metrics_by_bank_csv": {
+        "columns": [
+          "run_id",
+          "bank_id",
+          "condition",
+          "seed",
+          "primary_n",
+          "top_1_numerator",
+          "top_1",
+          "top_3_numerator",
+          "top_3",
+          "top_5_numerator",
+          "top_5",
+          "top_10_numerator",
+          "top_10",
+          "top_50_numerator",
+          "top_50",
+          "mrr_numerator",
+          "mrr"
+        ],
+        "filename": "exp11b_retrieval_metrics_by_bank_v0.1.csv"
+      },
+      "output_hash_ledger_csv": {
+        "columns": [
+          "artifact",
+          "sha256",
+          "size_bytes",
+          "role"
+        ],
+        "filename": "exp11b_retrieval_output_hashes_v0.1.csv"
+      },
+      "run_manifest_json": {
+        "filename": "exp11b_retrieval_run_manifest_v0.1.json",
+        "required_fields": [
+          "run_id",
+          "bank_id",
+          "condition",
+          "seed",
+          "base_commit",
+          "retrieval_config_sha256",
+          "bank_csv_sha256",
+          "evalset_sha256",
+          "environment",
+          "status"
+        ]
+      }
+    },
+    "must_not_exist_until_authorized_execution": true,
+    "official_output_root": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1"
+  },
+  "gate": "EXP11B_RETRIEVAL_EXECUTION_GATE",
+  "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "h150_h200_results_observed": false,
+  "input_inventory": "exp11b_retrieval_execution_input_inventory_v0.1.json",
+  "input_inventory_sha256": "d0cd38ad5504cf9058a4540d50d406aeed30d2a09192f01d264ec740bd8f18f1",
+  "known_provenance_notice": {
+    "current_config_sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17",
+    "manifest_embedded_config_sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c",
+    "meaning": "The materialization manifest retains its embedded historical config fingerprint while this gate freezes the current tracked materialization configuration separately. Bank identity is governed by the verified manifest and ledger hashes.",
+    "retrieval_authorization_blocked_pending_external_audit": true,
+    "status": "EXTERNAL_AUDIT_NOTICE"
+  },
+  "retrieval_executed": false
+}

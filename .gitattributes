@@ -39,3 +39,10 @@ data/processed/indexes/text2trade_mnrl_nandina8_v0.2/vector_integrity_sample_v0.
 data/processed/corpus_nandina_hierarchical_v0.1.jsonl text eol=lf
 data/processed/data_aduanas_splits_clase87_v0.2_metadata.json text eol=lf
 src/configs/data_aduanas_split_clase87_v0.2.json text eol=lf
+
+# EXP-11B retrieval execution gate freezes text hashes before any retrieval.
+src/configs/exp11b_retrieval_execution_gate_v0.1.json text eol=lf
+src/experiments/freeze_exp11b_retrieval_execution_gate_v01.py text eol=lf
+tests/test_exp11b_retrieval_execution_gate_v01.py text eol=lf
+docs/exp11b_retrieval_execution_gate_v0.1.md text eol=lf
+outputs/audits/exp11b_retrieval_execution_gate_v0.1/** text eol=lf
