@@ -1,0 +1,87 @@
+La única invocación falló de forma cerrada antes de crear archivos. No se reintentó, no hubo commit ni push.
+
+```makefile
+execution_branch = codex/0b05c-corrective-numerical-execution-v01
+execution_base_commit = 06cc75ec173eb6c4b134a45eeb88fe25999f396e
+execution_candidate_commit = NOT_CREATED
+execution_candidate_tree = NOT_CREATED; branch tree remains c84da63249619e94ae69fb2a6f080dd3f84cbcf4
+
+authorized_preflight_status = PASS
+authorized_preflight_mode = AUTHORIZED_PREFLIGHT_ONLY
+
+pipeline_status = FAIL_CLOSED
+final_completion_state = FAILED_AT_01_UNIFIED_PREFLIGHT
+execution_invocations = 1
+
+EV03_control_reproduction_status = NOT_STARTED
+EV03_control_exact_match = NOT_EVALUATED
+EV03_original_metrics = NOT_EMITTED
+EV03_corrected_metrics = NOT_EMITTED
+EV03_metric_deltas = NOT_COMPUTED
+EV03_ranking_changed_cases = NOT_COMPUTED
+
+EV04_control_reproduction_status = NOT_STARTED
+EV04_control_exact_match = NOT_EVALUATED
+EV04_original_metrics = NOT_EMITTED
+EV04_corrected_metrics = NOT_EMITTED
+EV04_metric_deltas = NOT_COMPUTED
+EV04_ranking_changed_cases = NOT_COMPUTED
+
+D1A_execution_status = NOT_STARTED
+D1A_original_metrics = NOT_EMITTED
+D1A_corrected_metrics = NOT_EMITTED
+D1A_metric_deltas = NOT_COMPUTED
+D1A_ranking_changed_cases = NOT_COMPUTED
+
+corrective_documents_changed = 0
+corrective_codes = NONE_MATERIALIZED; contractual targets 87044110, 87045110
+unexpected_corpus_changes = 0
+
+runtime_authorization_record_path = outputs/evaluation/0b05c_corrective_numerical_v0.1/runtime_authorization_record.json
+runtime_authorization_record_status = NOT_CREATED
+authorization_baseline_commit = 0e074db638f6b7163d98d34f08f76e1efde07b7f
+authorization_commit = 06cc75ec173eb6c4b134a45eeb88fe25999f396e
+
+unified_summary_path = outputs/evaluation/0b05c_corrective_numerical_v0.1/unified_sensitivity_summary.json
+unified_summary_status = NOT_CREATED
+unified_summary_sha256 = NOT_AVAILABLE
+
+execution_manifest_path = outputs/evaluation/0b05c_corrective_numerical_v0.1/execution_manifest.json
+execution_manifest_status = NOT_CREATED
+execution_manifest_sha256 = NOT_AVAILABLE
+
+hash_ledger_path = outputs/evaluation/0b05c_corrective_numerical_v0.1/unified_output_hash_ledger.json
+hash_ledger_expected_paths = 47
+hash_ledger_actual_paths = 0
+hash_ledger_missing_paths = 47
+hash_ledger_unexpected_paths = 0
+hash_ledger_status = NOT_CREATED / FAIL_CLOSED
+
+generated_contractual_files = 0
+unexpected_repository_changes = 0
+
+0B05C_METRIC_IMPACT = NOT_DETERMINED
+DOWNSTREAM_REEXECUTION = NOT_YET_JUSTIFIED
+0B05C_CLOSURE = NOT_AUTHORIZED
+
+main = 06cc75ec173eb6c4b134a45eeb88fe25999f396e
+origin/main = 06cc75ec173eb6c4b134a45eeb88fe25999f396e
+canonical_plan_head = f8b37c7f2b5d612ccf2cf9c4779cab7008362fc6
+article_head = 254b1e6df736fa9938ac86a515d65b36f4d361c5
+
+main_modified = false
+canonical_plan_modified = false
+article_modified = false
+exp11b_modified = false
+legacy_xlsx_modified = false
+
+working_tree_clean = TRACKED_CLEAN; 3 pre-existing unrelated untracked paths preserved
+BLOCKERS = WinError 5 while creating outputs/evaluation/0b05c_corrective_numerical_v0.1; command was not repeated
+```
+
+```text
+unified_sensitivity_summary.json: NOT_CREATED
+EV03 aggregate comparison: NOT_CREATED
+EV04 aggregate comparison: NOT_CREATED
+D1a aggregate comparison: NOT_CREATED
+```
