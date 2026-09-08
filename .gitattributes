@@ -63,3 +63,10 @@ tests/test_0b05c_corrective_numerical_gate_v01.py text eol=lf
 outputs/audits/0b05c_corrective_numerical_gate_v0.1/** text eol=lf
 src/configs/text2trade_mnrl_v0.2.json text eol=lf
 data/processed/corpus_rag_v1_index.jsonl text eol=lf
+
+# EV03 historical recovery v0.2 replay and contracts are portable Git text blobs.
+src/experiments/build_bm25_ev03_historical_recovered_v02.py text eol=lf
+src/experiments/verify_ev03_historical_builder_recovery_v02.py text eol=lf
+tests/test_0b05c_ev03_historical_builder_recovery_v02.py text eol=lf
+docs/0B05C_EV03_HISTORICAL_BUILDER_RECOVERY_V02.md text eol=lf
+outputs/audits/0b05c_ev03_historical_builder_recovery_v0.2/** text eol=lf

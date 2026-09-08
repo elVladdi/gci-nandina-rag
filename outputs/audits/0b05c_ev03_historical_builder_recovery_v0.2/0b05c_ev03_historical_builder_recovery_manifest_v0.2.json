@@ -1,6 +1,8 @@
 {
   "artifact_id": "0b05c_ev03_historical_builder_recovery_manifest_v0.2",
+  "authorization_readiness": "NOT_AUTHORIZATION_READY",
   "base_commit": "06cc75ec173eb6c4b134a45eeb88fe25999f396e",
+  "committed_replay_mode": "COMMITTED_REPLAY_READONLY",
   "future_roots_absent": [
     "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.2.jsonl",
     "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.2",
@@ -12,12 +14,14 @@
     "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.2",
     "outputs/evaluation/d1a_corrective_0b05c_v0.2"
   ],
-  "preexecution_generated_paths": [
-    "data/processed/indexes/bm25_nandina8_ev03_decision885_preexecution_v0.2/index.pkl",
-    "data/processed/indexes/bm25_nandina8_ev03_decision885_preexecution_v0.2/index_metadata.json",
-    "outputs/evaluation/0b05c_ev03_decision885_preexecution_v0.2/normative_flat_results.csv",
-    "outputs/evaluation/0b05c_ev03_decision885_preexecution_v0.2/normative_flat_case_summary.csv",
-    "outputs/evaluation/0b05c_ev03_decision885_preexecution_v0.2/normative_flat_metrics.json"
+  "gate_scope": "EV03_HISTORICAL_RECOVERY_PREEXECUTION_ONLY",
+  "repository_generated_paths": [],
+  "temporary_generated_paths": [
+    "TEMPORARY_REPLAY/index/index.pkl",
+    "TEMPORARY_REPLAY/index/index_metadata.json",
+    "TEMPORARY_REPLAY/evaluation/normative_flat_results.csv",
+    "TEMPORARY_REPLAY/evaluation/normative_flat_case_summary.csv",
+    "TEMPORARY_REPLAY/evaluation/normative_flat_metrics.json"
   ],
   "v01_evidence_roots_not_outputs_of_v02": [
     "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.1",

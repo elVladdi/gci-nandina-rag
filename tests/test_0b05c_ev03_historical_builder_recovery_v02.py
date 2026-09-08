@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import copy
+import hashlib
 import json
 import pickle
 import subprocess
+import sys
 import unittest
 from pathlib import Path
 
@@ -17,13 +20,16 @@ from src.experiments.build_bm25_ev03_historical_recovered_v02 import (
 )
 from src.experiments.verify_ev03_historical_builder_recovery_v02 import (
     AUDIT_ROOT,
+    CONFIG,
     CORPUS,
     EVALSET,
     FUTURE_EXECUTION_ROOTS,
     HISTORICAL_INDEX,
     FROZEN_OUTPUT_ROOT,
     V01_EVIDENCE_ROOTS,
+    VerificationError,
     logical_identity,
+    verify_canonical_bindings,
 )
 from src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 import _flat_rows, _normalize_rows
 from src.experiments import evaluate_normative_bm25_flat_data_aduanas_v02 as flat
@@ -35,6 +41,10 @@ GLOBAL_BM25_BLOB = "718895e0658a55cc1590c84ef807f901b75e7c7f"
 
 def load_json(path: Path) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 class HistoricalBuilderRecoveryTests(unittest.TestCase):
@@ -127,6 +137,78 @@ class HistoricalBuilderRecoveryTests(unittest.TestCase):
         self.assertEqual(self.provenance["AUTHENTIC_HISTORICAL_SOURCE_PY"], "NOT_VERSIONED_AT_INDEX_CREATION")
         self.assertEqual(self.provenance["versioned_bytecode"]["classification"], "DERIVED_BYTECODE_EVIDENCE_NOT_AUTHENTIC_SOURCE_PY")
         self.assertEqual(self.provenance["conclusion"], "HISTORICAL_SEMANTICS_RECOVERED_AND_EXACTLY_VALIDATED")
+
+    def test_13_gate_is_preexecution_only_and_not_authorization_ready(self) -> None:
+        for contract in (self.gate, self.spec):
+            self.assertEqual(contract["gate_scope"], "EV03_HISTORICAL_RECOVERY_PREEXECUTION_ONLY")
+            self.assertEqual(contract["authorization_readiness"], "NOT_AUTHORIZATION_READY")
+        self.assertEqual(self.gate["gate_status"], "CANDIDATE_PENDING_EXTERNAL_AUDIT")
+
+    def test_14_canonical_git_bindings_are_complete_and_portable(self) -> None:
+        bindings = self.spec["dependency_bindings"]
+        required = {
+            "src/experiments/build_bm25_ev03_historical_recovered_v02.py",
+            "src/experiments/verify_ev03_historical_builder_recovery_v02.py",
+            "src/bm25_index.py",
+            "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py",
+            "src/retrieval/bm25.py",
+            CONFIG.as_posix(),
+            CORPUS.as_posix(),
+            EVALSET.as_posix(),
+            HISTORICAL_INDEX.as_posix(),
+            (FROZEN_OUTPUT_ROOT / "normative_results.csv").as_posix(),
+            (FROZEN_OUTPUT_ROOT / "normative_case_summary.csv").as_posix(),
+            (FROZEN_OUTPUT_ROOT / "run_metadata.json").as_posix(),
+        }
+        self.assertTrue(required.issubset({item["path"] for item in bindings}))
+        config = next(item for item in bindings if item["path"] == CONFIG.as_posix())
+        self.assertEqual(config["canonical_git_blob_sha256"], "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d")
+        self.assertEqual(config["classification"], "VERSIONED_GIT_BLOB")
+        self.assertEqual(verify_canonical_bindings(bindings, revision="INDEX")["mismatch_count"], 0)
+        self.assertFalse(self.provenance["config_worktree_observation"]["authoritative"])
+
+    def test_15_mutated_dependency_identity_fails_closed(self) -> None:
+        mutated = copy.deepcopy(self.spec["dependency_bindings"])
+        builder = next(item for item in mutated if item["path"].endswith("build_bm25_ev03_historical_recovered_v02.py"))
+        builder["canonical_git_blob_sha256"] = "0" * 64
+        with self.assertRaises(VerificationError):
+            verify_canonical_bindings(mutated, revision="INDEX")
+
+    def test_16_committed_replay_cli_is_end_to_end_and_read_only(self) -> None:
+        tracked_before = subprocess.run(
+            ["git", "status", "--porcelain", "--untracked-files=no"], cwd=ROOT, check=True, capture_output=True, text=True
+        ).stdout
+        if tracked_before:
+            self.skipTest("committed replay subprocess requires a clean post-commit checkout")
+        artifact_hashes_before = {path.name: sha256(path) for path in (ROOT / AUDIT_ROOT).glob("*.json")}
+        result = subprocess.run(
+            [sys.executable, "-B", "-m", "src.experiments.verify_ev03_historical_builder_recovery_v02", "--verify-committed"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        payload = json.loads(result.stdout.strip().splitlines()[-1])
+        self.assertEqual(payload["status"], "PASS")
+        self.assertEqual(payload["mode"], "COMMITTED_REPLAY_READONLY")
+        self.assertEqual(payload["LOGICAL_INDEX_IDENTITY"], "EXACT")
+        self.assertEqual(payload["EV03_DECISION885_CONTROL_REPRODUCTION"], "PASS_EXACT")
+        self.assertTrue(payload["ranking_bytes_exact"])
+        self.assertTrue(payload["case_summary_bytes_exact"])
+        self.assertTrue(payload["full_metrics_exact"])
+        self.assertEqual(payload["repo_files_created"], 0)
+        self.assertEqual(payload["repo_files_modified"], 0)
+        self.assertEqual(payload["repo_files_deleted"], 0)
+        self.assertFalse(payload["future_numerical_roots_present"])
+        self.assertEqual(
+            subprocess.run(
+                ["git", "status", "--porcelain", "--untracked-files=no"], cwd=ROOT, check=True, capture_output=True, text=True
+            ).stdout,
+            tracked_before,
+        )
+        self.assertEqual({path.name: sha256(path) for path in (ROOT / AUDIT_ROOT).glob("*.json")}, artifact_hashes_before)
+        for relative in FUTURE_EXECUTION_ROOTS:
+            self.assertFalse((ROOT / relative).exists(), relative)
 
 
 if __name__ == "__main__":

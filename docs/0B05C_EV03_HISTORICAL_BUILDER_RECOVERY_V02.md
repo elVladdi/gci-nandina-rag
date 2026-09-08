@@ -18,7 +18,15 @@ The EV03-only builder retains lowercase/NFKD normalization, alphanumeric token e
 
 ## Gate behavior
 
-The v0.2 preexecution verifier builds only the frozen Decision885 control in dedicated preexecution roots. It requires exact logical index identity and exact full ranking, case-summary, and metric reproduction before producing the candidate gate bundle. Corrected EV03, corrected EV04, D1a, and unified numerical execution remain unauthorized and unexecuted.
+The v0.2 bundle is limited to `EV03_HISTORICAL_RECOVERY_PREEXECUTION_ONLY` and its authorization readiness is `NOT_AUTHORIZATION_READY`. Corrected EV03, corrected EV04, D1a, and unified numerical execution remain unauthorized and unexecuted. A separate prospective numerical gate would be required before any authorization can be considered.
+
+The committed verifier runs with:
+
+`python -B -m src.experiments.verify_ev03_historical_builder_recovery_v02 --verify-committed`
+
+This mode requires the immutable base commit to be an ancestor of `HEAD`, verifies the frozen Git blob bindings fail-closed, and reconstructs the Decision885 control only in an operating-system temporary directory. It compares the temporary logical index, full ranking, case summary, and metrics against the frozen evidence without creating or modifying repository outputs or versioned audit artifacts.
+
+Textual dependency identities use the Git blob SHA-1 and SHA-256 over `git cat-file blob` bytes. A Windows CRLF worktree hash may be retained only as non-authoritative diagnostic provenance; it is not a frozen identity.
 
 The historical source limitation remains explicit:
 
@@ -27,3 +35,5 @@ The historical source limitation remains explicit:
 The allowed conclusion after all exact checks pass is:
 
 `HISTORICAL_SEMANTICS_RECOVERED_AND_EXACTLY_VALIDATED`
+
+The candidate remains `CANDIDATE_PENDING_EXTERNAL_AUDIT`. This recovery bundle does not include a v0.2 numerical runner or runtime authorization record.
