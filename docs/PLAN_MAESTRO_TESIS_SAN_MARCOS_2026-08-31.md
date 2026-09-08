@@ -3,7 +3,7 @@
 **Proyecto:** Framework RAG explicativo y auditable para recomendación de subpartidas NANDINA  
 **Repositorio principal:** `elVladdi/gci-nandina-rag`  
 **Repositorio público de reproducibilidad:** `elVladdi/gci-nandina-rag-reproducibility`  
-**Fecha de actualización:** 2026-09-07
+**Fecha de actualización:** 2026-09-08
 
 ## 1. Principios congelados
 
@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 06cc75ec173eb6c4b134a45eeb88fe25999f396e; D1A_PREEXECUTION=APPROVED/INTEGRATED; D1A_EXECUTION_SPECIFICATION=CLOSED_PROSPECTIVELY; 0B05C_CORRECTIVE_NUMERICAL_GATE=APPROVED/INTEGRATED; 0B05C-GATE-F001=CLOSED/PASS; F002=CLOSED/PASS; F003=CLOSED/PASS; F004=CLOSED/PASS; 0B05C_AUTHORIZATION_TEST_HARNESS=APPROVED/INTEGRATED; 0B05C-AUTH-F001=CLOSED/PASS; 0B05C_NUMERICAL_AUTHORIZATION_GATE=APPROVED/INTEGRATED; EV03_NUMERICAL_EXECUTION=AUTHORIZED/NOT_EXECUTED; EV04_NUMERICAL_EXECUTION=AUTHORIZED/NOT_EXECUTED; D1A_NUMERICAL_EXECUTION=AUTHORIZED/NOT_EXECUTED; UNIFIED_0B05C_NUMERICAL_EXECUTION=AUTHORIZED/NOT_EXECUTED; authorization_record_present=true; runtime_authorization_record_present=false; corrective_retrieval_executed=false; corrective_metrics_computed=false; 0B05C_METRIC_IMPACT=NOT_DETERMINED; DOWNSTREAM_REEXECUTION=NOT_YET_JUSTIFIED; 0B05C_CLOSURE=NOT_AUTHORIZED. EXP11B_PORTABILITY_DEBT=OPEN; EXP11B_PORTABILITY_DEBT_BLOCKS_D1A=false; EXP11B_PORTABILITY_DEBT_BLOCKS_EXP11B_RETRIEVAL_AUTHORIZATION=true. EXP11B Retrieval Execution NOT_AUTHORIZED / NOT_EXECUTED; H150/H200 results not observed; EXP12_AUTHORIZED=false.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 43291c312c2934aae03f3c087dd0a1ae594341b7; D1A_PREEXECUTION=APPROVED/INTEGRATED; el gate y la autorización 0B-05C v0.1 quedan como HISTORICAL/INTEGRATED/SUPERSEDED_FOR_NEW_EXECUTION; Attempt01 y Attempt02=FAIL_CLOSED/SCIENTIFIC_STATE_PRESERVED; EV03_HISTORICAL_RECOVERY_V02=APPROVED/VERSIONED/INTEGRATED; 0B05C_V02_AUTHORIZATION_READINESS=NOT_AUTHORIZATION_READY; EV03/EV04/D1a/unified v0.2=NOT_AUTHORIZED/NOT_EXECUTED; corrective_retrieval_executed=false; corrective_metrics_computed=false; 0B05C_METRIC_IMPACT=NOT_DETERMINED; DOWNSTREAM_REEXECUTION=NOT_YET_JUSTIFIED; 0B05C_CLOSURE=NOT_AUTHORIZED. EXP11B_PORTABILITY_DEBT=OPEN; bloquea EXP11B retrieval authorization, no D1a/0B-05C; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -240,24 +240,36 @@ EXP11B Retrieval Execution Gate ✅ APPROVED / INTEGRATED
   ↓
 EXP11B Retrieval Execution ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
-0B-05C Corrective Numerical Gate ✅ APPROVED / INTEGRATED
+0B-05C v0.1 Corrective Numerical Gate and Authorization ✅ HISTORICAL / INTEGRATED / SUPERSEDED FOR NEW EXECUTION
   - D1a training exposure: NO_EFFECTIVE_EXPOSURE_IDENTIFIED
   - D1a Top-200 overlap: NONE_IDENTIFIED
   - frozen original D1a weights
   - D1A_PREEXECUTION=APPROVED / INTEGRATED
   - 0B05C-GATE-F001/F002/F003/F004=CLOSED/PASS
   - D1a execution specification CLOSED_PROSPECTIVELY; D1A_METRIC_IMPACT=NOT_DETERMINED
-  - 0B05C Numerical Authorization Gate: APPROVED / INTEGRATED
-  - numerical execution: AUTHORIZED / NOT_EXECUTED for EV03, EV04, D1a, and the unified 0B-05C gate
-  - authorization record present; runtime authorization record absent; retrieval and metrics not executed
+  - authorization baseline=0e074db638f6b7163d98d34f08f76e1efde07b7f
+  - authorization integration=06cc75ec173eb6c4b134a45eeb88fe25999f396e
+  - Attempt01 and Attempt02=FAIL_CLOSED / SCIENTIFIC_STATE_PRESERVED
+  - the historical v0.1 authorization is not operationally valid for a new attempt
+  ↓
+EV03 Historical Recovery v0.2 ✅ APPROVED / VERSIONED / INTEGRATED
+  - candidate=cef8d7ad58d877e933f8c86b9f721cb214d9058d
+  - microclose and current main=43291c312c2934aae03f3c087dd0a1ae594341b7
+  - LOGICAL_INDEX_IDENTITY=EXACT
+  - EV03_DECISION885_CONTROL_REPRODUCTION=PASS_EXACT
+  - gate_scope=EV03_HISTORICAL_RECOVERY_PREEXECUTION_ONLY
+  - authorization_readiness=NOT_AUTHORIZATION_READY
+  - EV03/EV04/D1a/unified v0.2=NOT_AUTHORIZED / NOT_EXECUTED
+  - corrective retrieval and metrics not executed; runtime authorization record v0.2 absent
   - EXP11B_PORTABILITY_DEBT=OPEN; blocks D1a=false; blocks EXP11B retrieval authorization=true
   ↓
-Solo tras una instrucción prospectiva independiente de ejecución:
-  EV03 corrective, EV04 corrective, and D1a corrective numerical execution
+0B-05C Numerical Gate/Runner v0.2 ⏳ NEXT / NOT_YET_BUILT / NOT_AUTHORIZATION_READY
+  - construct and audit a separate prospective v0.2 numerical gate/runner
+  - the integrated recovery does not constitute numerical authorization
   ↓
 EXP11B H150/H200 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
-EXP-12 ⛔ NOT_AUTHORIZED
+EXP-12 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
 Grupo 2B
   ↓
@@ -861,3 +873,68 @@ No ejecutar retrieval hasta aprobar externamente ese gate.
   `0B05C_CLOSURE=NOT_AUTHORIZED`.
 - `EXP11B_PORTABILITY_DEBT=OPEN`. Esta reconciliación registra únicamente la
   autorización integrada; no registra ejecución numérica ni resultados nuevos.
+
+### 2026-09-08 — Intentos fail-closed y recuperación histórica EV03 v0.2
+
+**Estado consolidado:** `main = origin/main =
+43291c312c2934aae03f3c087dd0a1ae594341b7`.
+
+- La autorización v0.1 se conserva como antecedente histórico:
+  `authorization_baseline_commit=0e074db638f6b7163d98d34f08f76e1efde07b7f`
+  y
+  `authorization_integration_commit=06cc75ec173eb6c4b134a45eeb88fe25999f396e`.
+  Autorizó prospectivamente EV03, EV04, D1a y unified 0B-05C, pero quedó
+  metodológicamente superada para futuros intentos tras detectarse el defecto de
+  reproducción EV03.
+- `0B05C_NUMERICAL_EXECUTION_ATTEMPT_01=FAIL_CLOSED /
+  SCIENTIFIC_STATE_PRESERVED`: authorized preflight PASS; fallo en
+  `FAILED_AT_01_UNIFIED_PREFLIGHT`, antes de iniciar EV03, EV04 o D1a, con
+  `SANDBOX_WRITE_BOUNDARY_ON_ONEDRIVE_CHECKOUT` y WinError 5 al crear el root
+  de runtime. No se calcularon métricas, no hubo decisión downstream y 0B-05C
+  no se cerró. La atribución operacional detallada procede de diagnóstico local
+  read-only, consistente con GitHub pero no reconstruible íntegramente solo
+  desde artefactos remotos.
+- `0B05C_NUMERICAL_EXECUTION_ATTEMPT_02=FAIL_CLOSED /
+  SCIENTIFIC_STATE_PRESERVED`: authorized preflight PASS; una invocación del
+  runner reportada; step 01 alcanzado; fallo en
+  `02_EV03_control_reproduction` con `ContractViolation: Mandatory control
+  reproduction is not exact`. EV04, D1a y corrected arms no se iniciaron y no
+  se calcularon métricas correctivas. El mismatch reportado fue 50,327 filas
+  congeladas frente a 79,912 observadas; primer witness
+  `DA-EVAL-V02-00001`; top-1 congelado
+  `39173210 / 21.311974833146948`; top-1 observado
+  `29314600 / 21.825923130489294`. Los outputs locales ignorados del intento no
+  son artefactos gobernantes.
+- `EV03_REPRODUCTION_ROOT_CAUSE=CURRENT_BUILDER_SEMANTICS_MISMATCH`: el builder
+  global/current conserva tokens alfanuméricos de longitud 1; la semántica
+  histórica EV03 recuperada aplica `DROP_SINGLE_CHARACTER_TOKENS`.
+  `AUTHENTIC_HISTORICAL_SOURCE_PY=NOT_VERSIONED_AT_INDEX_CREATION`: se recuperó
+  y validó la semántica funcional relevante, no el código fuente histórico
+  auténtico.
+- `EV03_HISTORICAL_RECOVERY_V02=APPROVED / VERSIONED / INTEGRATED`: candidate
+  `cef8d7ad58d877e933f8c86b9f721cb214d9058d`; microclose
+  `43291c312c2934aae03f3c087dd0a1ae594341b7`;
+  `LOGICAL_INDEX_IDENTITY=EXACT`;
+  `EV03_DECISION885_CONTROL_REPRODUCTION=PASS_EXACT`; 50,327 filas de ranking,
+  SHA-256
+  `d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015`;
+  1,056 filas de case summary, SHA-256
+  `f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0`;
+  metric table y full metrics exactos; F001–F004 cerrados; reglas LF y bindings
+  canónicos incorporados.
+  `HISTORICAL_SEMANTICS_RECOVERED_AND_EXACTLY_VALIDATED`.
+- El bundle v0.2 integrado tiene
+  `gate_scope=EV03_HISTORICAL_RECOVERY_PREEXECUTION_ONLY` y
+  `authorization_readiness=NOT_AUTHORIZATION_READY`.
+  `EV03_V02_NUMERICAL_EXECUTION=NOT_AUTHORIZED / NOT_EXECUTED`,
+  `EV04_V02_NUMERICAL_EXECUTION=NOT_AUTHORIZED / NOT_EXECUTED`,
+  `D1A_V02_NUMERICAL_EXECUTION=NOT_AUTHORIZED / NOT_EXECUTED` y
+  `UNIFIED_0B05C_V02_NUMERICAL_EXECUTION=NOT_AUTHORIZED / NOT_EXECUTED`.
+  `corrective_retrieval_executed=false`, `corrective_metrics_computed=false`,
+  `runtime_authorization_record_v02_present=false`,
+  `0B05C_METRIC_IMPACT=NOT_DETERMINED`,
+  `DOWNSTREAM_REEXECUTION=NOT_YET_JUSTIFIED` y
+  `0B05C_CLOSURE=NOT_AUTHORIZED`.
+- El siguiente paso es construir y auditar prospectivamente un gate/runner
+  numérico v0.2 separado. La recuperación integrada no constituye autorización
+  numérica.
