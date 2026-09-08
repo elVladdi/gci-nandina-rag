@@ -1,0 +1,36 @@
+{
+  "authorization": {
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "corrective_metrics_computed": false,
+    "corrective_retrieval_executed": false,
+    "runtime_authorization_record_present": false
+  },
+  "base_commit": "06cc75ec173eb6c4b134a45eeb88fe25999f396e",
+  "ev03_recovery": {
+    "control_reproduction": "PASS_EXACT",
+    "logical_index_identity": "EXACT",
+    "token_policy": "DROP_SINGLE_CHARACTER_TOKENS"
+  },
+  "ev04_policy": "UNCHANGED_AND_NOT_ASSUMED_TO_USE_EV03_RECOVERED_TOKEN_POLICY",
+  "future_roots": [
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.2.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.2",
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.2",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.2",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.2",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.2",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.2",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.2",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.2"
+  ],
+  "gate_id": "0b05c_corrective_numerical_gate_v0.2",
+  "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "scientific_state": {
+    "0B05C_CLOSURE": "NOT_AUTHORIZED",
+    "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+    "DOWNSTREAM_REEXECUTION": "NOT_YET_JUSTIFIED"
+  }
+}

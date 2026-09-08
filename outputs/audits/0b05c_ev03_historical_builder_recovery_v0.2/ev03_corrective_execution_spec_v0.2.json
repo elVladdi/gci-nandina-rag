@@ -1,0 +1,54 @@
+{
+  "authorization": {
+    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "corrective_metrics_computed": false,
+    "corrective_retrieval_executed": false
+  },
+  "corrected_arm_executed": false,
+  "future_roots": [
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.2.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.2",
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.2",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.2",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.2",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.2",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.2",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.2",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.2"
+  ],
+  "historical_control": {
+    "corpus": {
+      "path": "data/processed/corpus_rag_v1_index.jsonl",
+      "sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+      "size_bytes": 3622401
+    },
+    "eval": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "size_bytes": 1363273
+    },
+    "index": {
+      "path": "data/processed/indexes/bm25_nandina8.pkl",
+      "sha256": "fd5eb111f95dc4de09f1a47fdb1117f455a5caeed96548a25219664a28857b6b",
+      "size_bytes": 918503
+    }
+  },
+  "methodology": "RECOVERED_HISTORICAL_EV03_SEMANTICS_WITH_EXACT_CONTROL_GATE",
+  "precondition": {
+    "EV03_DECISION885_CONTROL_REPRODUCTION": "PASS_EXACT",
+    "LOGICAL_INDEX_IDENTITY": "EXACT"
+  },
+  "recovered_builder": {
+    "b": 0.75,
+    "k1": 1.5,
+    "path": "src/experiments/build_bm25_ev03_historical_recovered_v02.py",
+    "scope": "EV03_ONLY",
+    "token_policy": "DROP_SINGLE_CHARACTER_TOKENS"
+  },
+  "specification_id": "ev03_corrective_execution_spec_v0.2",
+  "v01_evidence_roots_excluded": [
+    "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.1",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.1",
+    "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.1"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "AUTHENTIC_HISTORICAL_SOURCE_PY": "NOT_VERSIONED_AT_INDEX_CREATION",
+  "artifact_id": "ev03_historical_builder_provenance_v0.2",
+  "conclusion": "HISTORICAL_SEMANTICS_RECOVERED_AND_EXACTLY_VALIDATED",
+  "current_divergent_source": {
+    "git_blob_sha1": "718895e0658a55cc1590c84ef807f901b75e7c7f",
+    "keeps_single_character_tokens": true,
+    "path": "src/bm25_index.py"
+  },
+  "frozen_inputs": {
+    "config_sha256": "ee23e112fb553a355d9787403eb7fa8688295737f76c7acaff052cc9d0ecb2d3",
+    "corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "eval_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+  },
+  "historical_commits": {
+    "bytecode_first_observed": "689f7436a8e2011b3399140c90c7eb6e777b2026",
+    "historical_ev03_run": "df60c77287c8fd5f128b136625dc149bc5aaaeb2",
+    "index_and_metadata_first_observed": "975bc9879ec89cc945d5432ef0bac3b37598f72c",
+    "source_and_notebook_first_observed": "d73ff147b02d69c65218de4b4bd08d501ff9f5d7"
+  },
+  "historical_index": {
+    "git_blob_sha1": "5bf6be9c0a5622bb53b8c2d64fb714ccf0020807",
+    "path": "data/processed/indexes/bm25_nandina8.pkl",
+    "sha256": "fd5eb111f95dc4de09f1a47fdb1117f455a5caeed96548a25219664a28857b6b",
+    "size_bytes": 918503
+  },
+  "historical_metadata": {
+    "git_blob_sha1": "f456e9f85df0f9a2aa58882bed27211aa1d11a30",
+    "path": "data/processed/indexes/bm25_nandina8_run_metadata.json",
+    "sha256": "89d9e87e8c099ecf1ab7a4bca898ed5cdceef1bead21563527756dfe01a3dce0",
+    "size_bytes": 1545
+  },
+  "index_intro_presence": {
+    "historical_index": true,
+    "historical_metadata": true,
+    "notebook": false,
+    "source_py": false,
+    "versioned_bytecode": true
+  },
+  "policy": "RECOVERED_HISTORICAL_EV03_SEMANTICS_WITH_EXACT_CONTROL_GATE",
+  "recovered_rule": "DROP_SINGLE_CHARACTER_TOKENS",
+  "versioned_bytecode": {
+    "classification": "DERIVED_BYTECODE_EVIDENCE_NOT_AUTHENTIC_SOURCE_PY",
+    "git_blob_sha1": "f4d270b38c596abfeb1ee9c312a51d633556bd1a",
+    "path": "src/__pycache__/bm25_index.cpython-311.pyc",
+    "sha256": "2c2082f44891dc5a16fd9b8aae7c6e69fd10faf86f6f1a798d31d916e7532c0a"
+  }
+}

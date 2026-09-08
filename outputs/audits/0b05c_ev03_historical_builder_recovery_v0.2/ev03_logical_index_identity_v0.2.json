@@ -1,0 +1,52 @@
+{
+  "LOGICAL_INDEX_IDENTITY": "EXACT",
+  "PICKLE_BYTE_IDENTITY": "NOT_REQUIRED",
+  "artifact_id": "ev03_logical_index_identity_v0.2",
+  "canonical_hash_method": "JSON_UTF8_SORTED_FLOAT_HEX; doc_lens=dtype|shape|contiguous_bytes",
+  "checks": {
+    "avgdl_exact": true,
+    "b_exact": true,
+    "doc_ids_and_order_exact": true,
+    "doc_lens_exact": true,
+    "doc_texts_and_order_exact": true,
+    "idf_mapping_exact": true,
+    "inverted_index_exact": true,
+    "k1_exact": true
+  },
+  "historical_index": {
+    "avgdl": 5.793302059173584,
+    "b": 0.75,
+    "doc_ids_count": 7644,
+    "doc_ids_sha256": "2cfff892b1c6f8d5193a0542a1ded4b551f9a2fdf8e68f2b6858030a3da2f4f1",
+    "doc_lens_count": 7644,
+    "doc_lens_max": 24.0,
+    "doc_lens_mean": 5.793302059173584,
+    "doc_lens_min": 2.0,
+    "doc_lens_sha256": "b25e18913d58145cb248c0a465bfe68afb0bc6e7d2f9286c03d1df52c7069ecd",
+    "doc_texts_count": 7644,
+    "doc_texts_sha256": "43a0ecb872c3cca2834141643bf9e9db2a89ac85ea4ffc2341986f14edf938b1",
+    "idf_sha256": "3625597ae8bad7133da7a3428e9fc48f2724c92222925f1973d34e7061910a8f",
+    "inverted_index_sha256": "10f8870d6326634a5bd8a73c473ee441986fb5698b88ea69195abd58ed511ee9",
+    "k1": 1.5,
+    "postings_count": 21541,
+    "vocabulary_size": 5646
+  },
+  "recovered_index": {
+    "avgdl": 5.793302059173584,
+    "b": 0.75,
+    "doc_ids_count": 7644,
+    "doc_ids_sha256": "2cfff892b1c6f8d5193a0542a1ded4b551f9a2fdf8e68f2b6858030a3da2f4f1",
+    "doc_lens_count": 7644,
+    "doc_lens_max": 24.0,
+    "doc_lens_mean": 5.793302059173584,
+    "doc_lens_min": 2.0,
+    "doc_lens_sha256": "b25e18913d58145cb248c0a465bfe68afb0bc6e7d2f9286c03d1df52c7069ecd",
+    "doc_texts_count": 7644,
+    "doc_texts_sha256": "43a0ecb872c3cca2834141643bf9e9db2a89ac85ea4ffc2341986f14edf938b1",
+    "idf_sha256": "3625597ae8bad7133da7a3428e9fc48f2724c92222925f1973d34e7061910a8f",
+    "inverted_index_sha256": "10f8870d6326634a5bd8a73c473ee441986fb5698b88ea69195abd58ed511ee9",
+    "k1": 1.5,
+    "postings_count": 21541,
+    "vocabulary_size": 5646
+  }
+}

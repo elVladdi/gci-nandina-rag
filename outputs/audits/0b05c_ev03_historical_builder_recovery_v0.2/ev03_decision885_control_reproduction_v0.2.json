@@ -1,0 +1,42 @@
+{
+  "EV03_DECISION885_CONTROL_REPRODUCTION": "PASS_EXACT",
+  "artifact_id": "ev03_decision885_control_reproduction_v0.2",
+  "case_summary": {
+    "bytes_exact": true,
+    "frozen_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+    "path": "outputs/evaluation/0b05c_ev03_decision885_preexecution_v0.2/normative_flat_case_summary.csv",
+    "rows": 1056,
+    "sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+    "size_bytes": 497448
+  },
+  "comparison": {
+    "case_summary_exact": true,
+    "case_summary_schema_exact": true,
+    "comparison_scope": "EFFECTIVE_FULL_RANKING_CASE_LEVEL_AND_METRICS_EXCLUDING_RUNTIME_TIMESTAMPS",
+    "metrics_exact": true,
+    "ranking_exact": true,
+    "ranking_schema_exact": true,
+    "status": "PASS"
+  },
+  "metrics": {
+    "full_metrics_exact": true,
+    "metric_table_exact": true,
+    "path": "outputs/evaluation/0b05c_ev03_decision885_preexecution_v0.2/normative_flat_metrics.json",
+    "sha256": "7ebba51b3d692a420294a7be7878a83d66df830b4215ab26148b5d1128ec2239",
+    "size_bytes": 5263
+  },
+  "ranking": {
+    "bytes_exact": true,
+    "frozen_sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+    "path": "outputs/evaluation/0b05c_ev03_decision885_preexecution_v0.2/normative_flat_results.csv",
+    "rows": 50327,
+    "sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+    "size_bytes": 13145709
+  },
+  "status": "PASS_EXACT",
+  "witness_DA-EVAL-V02-00001": {
+    "retrieved_count": 38,
+    "top1_code": "39173210",
+    "top1_score": "21.311974833146948"
+  }
+}
