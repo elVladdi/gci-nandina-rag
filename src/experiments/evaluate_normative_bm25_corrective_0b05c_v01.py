@@ -40,8 +40,8 @@ def _read_json(path: Path) -> dict[str, Any]:
         return json.load(handle)
 
 
-def _write_json_new(path: Path, payload: Mapping[str, Any]) -> None:
-    require(not path.exists(), f"Corrective evaluator refuses overwrite or resume: {_relative(path)}")
+def _write_json_new(path: Path, payload: Mapping[str, Any], *, root: Path = ROOT) -> None:
+    require(not path.exists(), f"Corrective evaluator refuses overwrite or resume: {_relative(path, root)}")
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x", encoding="utf-8", newline="\n") as handle:
         json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
@@ -246,7 +246,7 @@ def _csv_schema(path: Path) -> list[str]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.reader(handle)
         header = next(reader, None)
-    require(header is not None, f"CSV has no deterministic header: {_relative(path)}")
+    require(header is not None, f"CSV has no deterministic header: {path}")
     return header
 
 
@@ -366,7 +366,7 @@ def write_hash_ledger(path: Path, files: Sequence[Path], contract: Mapping[str, 
     require(ledger_relative not in actual, "Only the ledger itself may be excluded from the exact ledger set")
     require(actual == expected, "Actual ledger paths do not equal the frozen exact contract")
     require(all((root / item).is_file() for item in actual), "Ledger contract includes a missing file")
-    _write_json_new(path, {"artifact_id": "0b05c_corrective_execution_hash_ledger_v0.1", "files": [{"path": item, "sha256": sha256_file(root / item)} for item in sorted(actual)]})
+    _write_json_new(path, {"artifact_id": "0b05c_corrective_execution_hash_ledger_v0.1", "files": [{"path": item, "sha256": sha256_file(root / item)} for item in sorted(actual)]}, root=root)
 
 
 def build_parser() -> argparse.ArgumentParser:

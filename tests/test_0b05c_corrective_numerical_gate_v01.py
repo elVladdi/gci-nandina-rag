@@ -208,7 +208,7 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
         self.assertEqual(binding["orchestration_runner"]["path"], RUNNER_PATH)
         self.assertEqual(binding["corrective_evaluator"]["path"], EVALUATOR_PATH)
         self.assertEqual(set(binding["frozen_dependencies"]), set(FROZEN_EXECUTION_DEPENDENCIES))
-        self.assertIn("ev03_build_command", self.ev03["prospective_execution"]["commands"])
+        self.assertIn("ev03_corrected_build_command", self.ev03["prospective_execution"]["commands"])
         self.assertIn("ev04_control_reproduction_evaluate_command", self.ev04["prospective_execution"]["commands"])
 
     def test_18_all_static_contract_paths_are_posix(self) -> None:
@@ -227,7 +227,7 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
         roots = future_roots(load_json(D1A_SPEC_PATH))
         result = runner_preflight(ROOT)
         self.assertEqual(result["mode"], "PREFLIGHT_ONLY")
-        with self.assertRaisesRegex(ContractViolation, "not authorized"):
+        with self.assertRaisesRegex(ContractViolation, "required state: AUTHORIZED"):
             execute_authorized(ROOT)
         self.assertTrue(all(not (ROOT / relative).exists() for relative in roots))
 
