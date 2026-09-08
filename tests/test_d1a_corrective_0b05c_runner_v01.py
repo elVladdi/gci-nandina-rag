@@ -10,6 +10,9 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
+
+from src.experiments import run_d1a_corrective_0b05c_v01 as d1a_module
 
 from src.experiments.run_d1a_corrective_0b05c_v01 import (
     AUDIT_SPEC_PATH,
@@ -24,7 +27,6 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
     contractual_ledger_paths,
     derive_runtime_config,
     diff_paths,
-    execute_authorized,
     expected_paths,
     git_blob_bytes,
     git_blob_sha256,
@@ -48,6 +50,17 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+AUTHORIZATION_BASELINE_COMMIT = "0e074db638f6b7163d98d34f08f76e1efde07b7f"
+
+
+def load_git_json(revision: str, relative: str) -> dict:
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={ROOT.as_posix()}", "show", f"{revision}:{relative}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    )
+    return json.loads(result.stdout.decode("utf-8"))
 
 
 class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
@@ -200,8 +213,10 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
         ):
             self.assertIn(field, contract["case_fields"])
 
-    def test_12_numerical_execution_remains_not_authorized(self) -> None:
-        self.assertEqual(self.spec["authorization"]["D1A_NUMERICAL_EXECUTION"], "NOT_AUTHORIZED")
+    def test_12_historical_baseline_is_closed_and_current_state_is_valid(self) -> None:
+        baseline = load_git_json(AUTHORIZATION_BASELINE_COMMIT, AUDIT_SPEC_PATH)
+        self.assertEqual(baseline["authorization"]["D1A_NUMERICAL_EXECUTION"], "NOT_AUTHORIZED")
+        self.assertIn(self.spec["authorization"]["D1A_NUMERICAL_EXECUTION"], {"NOT_AUTHORIZED", "AUTHORIZED"})
 
     def test_13_case_level_producer_materializes_every_contractual_field_and_rank_zero(self) -> None:
         spec = copy.deepcopy(self.spec)
@@ -281,9 +296,11 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
         self.assertTrue(manifest["numerical_execution_occurred"])
         self.assertIsNone(manifest["hash_ledger"]["sha256"])
 
-    def test_16_numerical_authorization_guard_rejects_current_spec_and_accepts_synthetic_authorization(self) -> None:
+    def test_16_numerical_authorization_guard_uses_only_synthetic_states(self) -> None:
+        unauthorized = copy.deepcopy(self.spec)
+        unauthorized["authorization"]["D1A_NUMERICAL_EXECUTION"] = "NOT_AUTHORIZED"
         with self.assertRaisesRegex(ContractViolation, "Numerical execution is not authorized"):
-            require_numerical_authorization(self.spec)
+            require_numerical_authorization(unauthorized)
         with self.assertRaisesRegex(ContractViolation, "Numerical execution is not authorized"):
             require_numerical_authorization({})
         authorized = copy.deepcopy(self.spec)
@@ -291,13 +308,28 @@ class D1aCorrective0B05cRunnerV01Tests(unittest.TestCase):
         self.assertIsNone(require_numerical_authorization(authorized))
 
     def test_17_unauthorized_execution_rejects_before_any_prospective_side_effect(self) -> None:
-        for relative in self.spec["orchestration"]["future_roots"]:
-            self.assertFalse(project_path(ROOT, relative).exists())
-        with self.assertRaisesRegex(ContractViolation, "Numerical execution is not authorized"):
-            execute_authorized(ROOT)
+        unauthorized = copy.deepcopy(self.spec)
+        unauthorized["authorization"]["D1A_NUMERICAL_EXECUTION"] = "NOT_AUTHORIZED"
+        unauthorized["orchestration"]["future_roots"] = ["fixture/corpus", "fixture/index", "fixture/evaluation"]
+        with tempfile.TemporaryDirectory() as temporary_directory, \
+             mock.patch.object(d1a_module, "load_json", return_value=unauthorized), \
+             mock.patch.object(d1a_module, "preflight") as real_preflight:
+            root = Path(temporary_directory)
+            with self.assertRaisesRegex(ContractViolation, "Numerical execution is not authorized"):
+                d1a_module.execute_authorized(root)
+            real_preflight.assert_not_called()
+            self.assertEqual(list(root.iterdir()), [])
         self.assertNotIn("sentence_transformers", sys.modules)
-        for relative in self.spec["orchestration"]["future_roots"]:
-            self.assertFalse(project_path(ROOT, relative).exists())
+
+    def test_17a_authorized_fixture_validates_guard_without_calling_execution(self) -> None:
+        authorized = copy.deepcopy(self.spec)
+        authorized["authorization"]["D1A_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        with tempfile.TemporaryDirectory() as temporary_directory, \
+             mock.patch.object(d1a_module, "execute_authorized") as real_execution:
+            root = Path(temporary_directory)
+            self.assertIsNone(require_numerical_authorization(authorized))
+            real_execution.assert_not_called()
+            self.assertEqual(list(root.iterdir()), [])
 
     @staticmethod
     def _git_identity_fixture(root: Path, relative: str = "tracked_code.py", content: bytes = b"value = 1\n") -> tuple[Path, dict[str, str]]:

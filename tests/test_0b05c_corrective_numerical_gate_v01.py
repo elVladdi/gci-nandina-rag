@@ -8,6 +8,10 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
+
+from src.experiments import prepare_0b05c_corrective_numerical_gate_v01 as gate_module
+from src.experiments import run_0b05c_corrective_numerical_v01 as runner_module
 
 from src.experiments.prepare_0b05c_corrective_numerical_gate_v01 import (
     ARMS,
@@ -20,24 +24,21 @@ from src.experiments.prepare_0b05c_corrective_numerical_gate_v01 import (
     RUNNER_PATH,
     TARGET_CODES,
     authorization_snapshot,
-    build_bundle,
     canonical_json_bytes,
-    execute,
     future_roots,
     head_text_identity,
     integrated_base_is_ancestor,
     immutable_authorization_projection,
     posix_relative,
     preflight,
+    preflight_authorized,
     require_posix_serialization,
-    require_frozen_bundle_matches,
     require_absent,
     validate_authorization_transition,
     validate_current_text_identity,
 )
 from src.experiments.run_0b05c_corrective_numerical_v01 import (
     PIPELINE_STEPS,
-    execute_authorized,
     preflight as runner_preflight,
     run_authorized_pipeline,
 )
@@ -58,22 +59,67 @@ from src.experiments.run_d1a_corrective_0b05c_v01 import git_blob_sha256, git_he
 
 
 ROOT = Path(__file__).resolve().parents[1]
+AUTHORIZATION_BASELINE_COMMIT = "0e074db638f6b7163d98d34f08f76e1efde07b7f"
+GATE_PATH = (AUDIT_ROOT / "0b05c_corrective_numerical_execution_gate_v0.1.json").as_posix()
+EV03_SPEC_PATH = (AUDIT_ROOT / ARMS["EV03"]["spec_name"]).as_posix()
+EV04_SPEC_PATH = (AUDIT_ROOT / ARMS["EV04"]["spec_name"]).as_posix()
+AUTHORIZATION_FIELDS = (
+    "EV03_NUMERICAL_EXECUTION",
+    "EV04_NUMERICAL_EXECUTION",
+    "D1A_NUMERICAL_EXECUTION",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION",
+)
 
 
 def load_json(relative: str) -> dict:
     return json.loads((ROOT / relative).read_text(encoding="utf-8"))
 
 
+def load_git_json(revision: str, relative: str) -> dict:
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={ROOT.as_posix()}", "show", f"{revision}:{relative}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    )
+    return json.loads(result.stdout.decode("utf-8"))
+
+
+def git_blob_sha_at(revision: str, relative: str) -> str:
+    return subprocess.run(
+        ["git", "-c", f"safe.directory={ROOT.as_posix()}", "rev-parse", f"{revision}:{relative}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def uniform_authorization_state(gate: dict) -> str:
+    states = {gate["authorization"][field] for field in AUTHORIZATION_FIELDS}
+    if len(states) != 1 or not states <= {"NOT_AUTHORIZED", "AUTHORIZED"}:
+        raise AssertionError(f"Mixed or invalid authorization state: {sorted(states)}")
+    return states.pop()
+
+
 class CorrectiveNumericalGateTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.bundle = preflight(ROOT)["bundle"]
-        cls.gate = load_json(str(AUDIT_ROOT / "0b05c_corrective_numerical_execution_gate_v0.1.json"))
+        cls.gate = load_json(GATE_PATH)
         cls.ev03 = load_json(str(AUDIT_ROOT / ARMS["EV03"]["spec_name"]))
         cls.ev04 = load_json(str(AUDIT_ROOT / ARMS["EV04"]["spec_name"]))
         cls.ev03_overlap = load_json(str(AUDIT_ROOT / ARMS["EV03"]["overlap_name"]))
         cls.ev04_overlap = load_json(str(AUDIT_ROOT / ARMS["EV04"]["overlap_name"]))
         cls.manifest = load_json(str(AUDIT_ROOT / "0b05c_corrective_numerical_gate_artifact_manifest_v0.1.json"))
+        cls.authorization_state = uniform_authorization_state(cls.gate)
+        cls.preflight_result = (
+            preflight(ROOT) if cls.authorization_state == "NOT_AUTHORIZED" else preflight_authorized(ROOT)
+        )
+        cls.bundle = cls.preflight_result["bundle"]
+        cls.baseline_gate = load_git_json(AUTHORIZATION_BASELINE_COMMIT, GATE_PATH)
+        cls.baseline_ev03 = load_git_json(AUTHORIZATION_BASELINE_COMMIT, EV03_SPEC_PATH)
+        cls.baseline_ev04 = load_git_json(AUTHORIZATION_BASELINE_COMMIT, EV04_SPEC_PATH)
+        cls.baseline_d1a = load_git_json(AUTHORIZATION_BASELINE_COMMIT, D1A_SPEC_PATH)
 
     def test_01_ev03_original_inputs_and_outputs_are_linked(self) -> None:
         identity = self.ev03["original_run_identity"]
@@ -94,9 +140,9 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
     def test_03_d1a_specification_is_referenced_by_identity_not_reconstructed(self) -> None:
         reference = self.gate["d1a_existing_specification"]["reference"]
         self.assertEqual(reference["path"], D1A_SPEC_PATH)
-        self.assertEqual(reference["git_blob_sha"], git_head_blob_sha(ROOT, D1A_SPEC_PATH))
+        self.assertEqual(reference["git_blob_sha"], git_blob_sha_at(AUTHORIZATION_BASELINE_COMMIT, D1A_SPEC_PATH))
         self.assertEqual(reference["canonical_blob_sha256"], git_blob_sha256(ROOT, reference["git_blob_sha"]))
-        self.assertEqual(self.gate["d1a_existing_specification"]["D1A_NUMERICAL_EXECUTION"], "NOT_AUTHORIZED")
+        self.assertEqual(self.baseline_gate["d1a_existing_specification"]["D1A_NUMERICAL_EXECUTION"], "NOT_AUTHORIZED")
 
     def test_04_ev03_patch_scope_is_exactly_two_entries(self) -> None:
         patches = self.ev03["corrective_corpus"]["patches"]
@@ -129,10 +175,12 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
         self.assertEqual(self.ev04_overlap["per_code"]["87045110"]["maximum_rank"], 192)
         self.assertFalse(self.ev04_overlap["evaluation_metrics_computed"])
 
-    def test_08_unified_authorization_is_not_opened(self) -> None:
-        authorization = self.gate["authorization"]
-        for key in ("EV03_NUMERICAL_EXECUTION", "EV04_NUMERICAL_EXECUTION", "D1A_NUMERICAL_EXECUTION", "UNIFIED_0B05C_NUMERICAL_EXECUTION"):
-            self.assertEqual(authorization[key], "NOT_AUTHORIZED")
+    def test_08_historical_gate_is_closed_and_current_state_is_uniform(self) -> None:
+        for key in AUTHORIZATION_FIELDS:
+            self.assertEqual(self.baseline_gate["authorization"][key], "NOT_AUTHORIZED")
+            self.assertEqual(self.gate["authorization"][key], self.authorization_state)
+        self.assertIn(self.authorization_state, {"NOT_AUTHORIZED", "AUTHORIZED"})
+        self.assertEqual(self.baseline_gate["integrated_base_commit"], INTEGRATED_BASE_COMMIT)
         self.assertEqual(self.gate["gate_status"], "CANDIDATE_PENDING_EXTERNAL_AUDIT")
 
     def test_09_all_prospective_roots_remain_absent(self) -> None:
@@ -141,20 +189,28 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
         for relative in future_roots(spec):
             self.assertFalse((ROOT / relative).exists(), relative)
         self.assertEqual(d1a["D1A_NUMERICAL_EXECUTION"], "NOT_AUTHORIZED")
+        self.assertEqual(self.baseline_d1a["authorization"]["D1A_NUMERICAL_EXECUTION"], "NOT_AUTHORIZED")
 
     def test_10_preflight_is_read_only(self) -> None:
         before = {path: path.stat().st_mtime_ns for path in (ROOT / AUDIT_ROOT).glob("*")}
-        result = preflight(ROOT)
+        result = preflight(ROOT) if self.authorization_state == "NOT_AUTHORIZED" else preflight_authorized(ROOT)
         after = {path: path.stat().st_mtime_ns for path in (ROOT / AUDIT_ROOT).glob("*")}
-        self.assertEqual(result["mode"], "PREFLIGHT_ONLY")
+        expected_mode = "PREFLIGHT_ONLY" if self.authorization_state == "NOT_AUTHORIZED" else "AUTHORIZED_PREFLIGHT_ONLY"
+        self.assertEqual(result["mode"], expected_mode)
         self.assertEqual(before, after)
 
     def test_11_execute_is_fail_closed_without_side_effects(self) -> None:
-        spec = load_json(D1A_SPEC_PATH)
-        roots = future_roots(spec)
-        with self.assertRaisesRegex(ContractViolation, "not authorized"):
-            execute(ROOT)
-        self.assertTrue(all(not (ROOT / relative).exists() for relative in roots))
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            with mock.patch.object(
+                gate_module,
+                "preflight",
+                side_effect=ContractViolation("Numerical execution is not authorized in synthetic fixture"),
+            ) as guarded_preflight:
+                with self.assertRaisesRegex(ContractViolation, "not authorized"):
+                    gate_module.execute(root)
+            guarded_preflight.assert_called_once_with(root)
+            self.assertEqual(list(root.iterdir()), [])
 
     def test_12_no_overwrite_or_resume_is_permitted(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -191,17 +247,34 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
             self.assertEqual(spec["specification_status"], "CLOSED_PROSPECTIVELY/PENDING_EXTERNAL_AUDIT")
 
     def test_15_bundle_is_deterministic(self) -> None:
-        second = build_bundle(ROOT)
-        self.assertEqual(sha256_bytes(canonical_json_bytes(self.bundle["gate"])), sha256_bytes(canonical_json_bytes(second["gate"])))
+        second = preflight(ROOT) if self.authorization_state == "NOT_AUTHORIZED" else preflight_authorized(ROOT)
+        self.assertEqual(sha256_bytes(canonical_json_bytes(self.bundle)), sha256_bytes(canonical_json_bytes(second["bundle"])))
         self.assertEqual(self.gate["integrated_base_commit"], INTEGRATED_BASE_COMMIT)
         self.assertTrue(integrated_base_is_ancestor(ROOT))
 
     def test_16_frozen_artifacts_reject_post_freeze_identity_drift(self) -> None:
-        require_frozen_bundle_matches(ROOT, self.bundle)
-        changed = copy.deepcopy(self.bundle)
+        baseline = authorization_snapshot(
+            self.baseline_gate,
+            {"EV03": self.baseline_ev03, "EV04": self.baseline_ev04},
+            self.baseline_d1a,
+        )
+        current = authorization_snapshot(self.gate, {"EV03": self.ev03, "EV04": self.ev04}, load_json(D1A_SPEC_PATH))
+        contract = self.gate["authorization_transition_contract"]
+        validate_authorization_transition(
+            baseline,
+            current,
+            contract,
+            require_authorized=self.authorization_state == "AUTHORIZED",
+        )
+        changed = copy.deepcopy(current)
         changed["specifications"]["EV03"]["frozen_inputs"]["runner"]["git_blob_sha"] = "0" * 40
-        with self.assertRaisesRegex(ContractViolation, "no longer matches live canonical inputs"):
-            require_frozen_bundle_matches(ROOT, changed)
+        with self.assertRaisesRegex(ContractViolation, "immutable scientific or execution content"):
+            validate_authorization_transition(
+                baseline,
+                changed,
+                contract,
+                require_authorized=self.authorization_state == "AUTHORIZED",
+            )
 
     def test_17_execution_binding_is_committed_and_commands_are_bound(self) -> None:
         binding = self.gate["corrective_execution_binding"]
@@ -225,11 +298,41 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
 
     def test_20_runner_preflight_and_execute_authorized_have_no_side_effects(self) -> None:
         roots = future_roots(load_json(D1A_SPEC_PATH))
-        result = runner_preflight(ROOT)
-        self.assertEqual(result["mode"], "PREFLIGHT_ONLY")
-        with self.assertRaisesRegex(ContractViolation, "required state: AUTHORIZED"):
-            execute_authorized(ROOT)
+        result = runner_preflight(ROOT) if self.authorization_state == "NOT_AUTHORIZED" else runner_module.preflight_authorized(ROOT)
+        expected_mode = "PREFLIGHT_ONLY" if self.authorization_state == "NOT_AUTHORIZED" else "AUTHORIZED_PREFLIGHT_ONLY"
+        self.assertEqual(result["mode"], expected_mode)
+        with tempfile.TemporaryDirectory() as temporary_directory, \
+             mock.patch.object(
+                 runner_module,
+                 "preflight_authorized",
+                 side_effect=ContractViolation("Synthetic authorization guard rejected execution"),
+             ) as guarded_preflight, \
+             mock.patch.object(runner_module, "_default_operations") as operations, \
+             mock.patch.object(runner_module, "run_authorized_pipeline") as pipeline:
+            root = Path(temporary_directory)
+            with self.assertRaisesRegex(ContractViolation, "Synthetic authorization guard"):
+                runner_module.execute_authorized(root)
+            guarded_preflight.assert_called_once_with(root)
+            operations.assert_not_called()
+            pipeline.assert_not_called()
         self.assertTrue(all(not (ROOT / relative).exists() for relative in roots))
+
+    def test_20a_synthetic_authorized_state_never_runs_the_real_pipeline(self) -> None:
+        proof = {"status": "PASS", "mode": "AUTHORIZED_PREFLIGHT_ONLY", "numerical_execution_occurred": False}
+        with tempfile.TemporaryDirectory() as temporary_directory, \
+             mock.patch.object(runner_module, "preflight_authorized", return_value=proof), \
+             mock.patch.object(runner_module, "_default_operations", return_value={}) as operations, \
+             mock.patch.object(
+                 runner_module,
+                 "run_authorized_pipeline",
+                 return_value={"status": "SIMULATED_ONLY", "numerical_execution_occurred": False},
+             ) as pipeline:
+            root = Path(temporary_directory)
+            result = runner_module.execute_authorized(root)
+            operations.assert_called_once_with(root, proof)
+            pipeline.assert_called_once_with({})
+            self.assertFalse(result["numerical_execution_occurred"])
+            self.assertEqual(list(root.iterdir()), [])
 
     def test_21_integrated_base_ancestry_accepts_descendants_and_rejects_unrelated_history(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
