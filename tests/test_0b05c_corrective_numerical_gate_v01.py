@@ -353,12 +353,16 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
             first.parent.mkdir(parents=True)
             first.write_text("a\n", encoding="utf-8", newline="\n")
             second.write_text("b\n", encoding="utf-8", newline="\n")
-            contract = {"expected_paths": ["runtime/a.json", "runtime/b.json"], "excluded_self_path": "runtime/ledger.json"}
-            self.assertEqual(expected_ledger_paths(contract), {"runtime/a.json", "runtime/b.json"})
-            self.assertEqual(actual_ledger_paths([first, second], root=root), {"runtime/a.json", "runtime/b.json"})
-            write_hash_ledger(root / "runtime/ledger.json", [first, second], contract, root=root)
+            contract = {
+                "expected_paths": ["runtime/a.json", "runtime/b.json"],
+                "discovery_roots": [{"path": "runtime", "kind": "DIRECTORY"}],
+                "excluded_self_path": "runtime/ledger.json",
+            }
+            self.assertEqual(expected_ledger_paths(contract), ["runtime/a.json", "runtime/b.json"])
+            self.assertEqual(actual_ledger_paths(contract, root=root), ["runtime/a.json", "runtime/b.json"])
+            write_hash_ledger(root / "runtime/ledger.json", contract, root=root)
             with self.assertRaises(ContractViolation):
-                write_hash_ledger(root / "runtime/extra-ledger.json", [first], contract, root=root)
+                write_hash_ledger(root / "runtime/extra-ledger.json", contract, root=root)
 
     def test_24d_authorization_transition_accepts_only_the_four_declared_fields(self) -> None:
         contract = {
@@ -457,4 +461,3 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    authorization_snapshot,

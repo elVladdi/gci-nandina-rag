@@ -135,6 +135,21 @@ def _flat_rows(evalset: Path, corpus_path: Path, index: Any, depth: int) -> tupl
     return cases, candidates, flat._metrics(cases)
 
 
+EV03_CANDIDATE_FIELDS = [
+    "case_id", "id_unico", "nandina_ref", "candidate_rank", "candidate_doc_id", "candidate_code",
+    "candidate_partida", "candidate_sub_partida", "candidate_clase", "score", "candidate_text",
+    "is_reference_code", "method",
+]
+
+EV03_CASE_FIELDS = [
+    "case_id", "id_unico", "declaracion", "serie", "query", "nandina_ref", "partida_ref", "sub_partida_ref",
+    "clase_ref", "reference_code_in_corpus", "reference_doc_id", "rank_ref", "position_bucket",
+    "coverage_class", "retrieved_count", "top1_code", "top1_doc_id", "top1_score", "reciprocal_rank", "method",
+    "hit_top_1", "hit_top_3", "hit_top_5", "hit_top_10", "hit_top_50", "hit_recall_50", "hit_recall_100",
+    "partida_at_10", "partida_at_50", "partida_at_100", "sub_partida_at_10", "sub_partida_at_50",
+    "sub_partida_at_100", "clase_at_10", "clase_at_50", "clase_at_100",
+]
+
 EV04_CASE_FIELDS = [
     "case_id", "id_unico", "declaracion", "serie", "query", "nandina_ref", "partida_ref", "sub_partida_ref", "clase_ref",
     "reference_code_in_corpus", "reference_doc_id", "rank_ref", "position_bucket", "coverage_class", "retrieved_count",
@@ -224,8 +239,8 @@ def evaluate_arm(arm: str, corpus_path: Path, index_path: Path, metadata_path: P
     if arm == "EV03":
         cases, candidates, metrics = _flat_rows(evalset, corpus_path, inputs["index"], depth)
         prefix = "normative_flat"
-        case_fields = sorted({key for row in cases for key in row})
-        candidate_fields = sorted({key for row in candidates for key in row})
+        case_fields = EV03_CASE_FIELDS
+        candidate_fields = EV03_CANDIDATE_FIELDS
     else:
         cases, candidates, metrics = _hierarchical_rows(evalset, corpus_path, inputs["index"], depth)
         prefix = "normative_hierarchical"
@@ -333,9 +348,50 @@ def produce_case_level_comparison(original: Sequence[Mapping[str, Any]], correct
     return [{"case_id": case_id, "original": original_by_case[case_id], "corrective": corrective_by_case[case_id]} for case_id in sorted(original_by_case)]
 
 
-def produce_aggregate_comparison(original_metrics: Mapping[str, Any], corrective_metrics: Mapping[str, Any]) -> dict[str, Any]:
-    names = [row["metric"] for row in original_metrics.get("metric_table", [])]
-    return {name: {"original": original_metrics[name], "corrective": corrective_metrics[name], "delta": float(corrective_metrics[name]) - float(original_metrics[name])} for name in names}
+def _metric_table(metrics: Mapping[str, Any], label: str) -> list[dict[str, Any]]:
+    table = metrics.get("metric_table")
+    require(isinstance(table, list) and table, f"{label} metric_table is missing")
+    normalized: list[dict[str, Any]] = []
+    required = {"metric", "numerator", "denominator", "value"}
+    for row in table:
+        require(isinstance(row, Mapping) and set(row) == required, f"{label} metric_table row schema changed")
+        metric = row.get("metric")
+        require(isinstance(metric, str) and metric, f"{label} metric_table metric is malformed")
+        for field in ("numerator", "denominator", "value"):
+            value = row.get(field)
+            require(isinstance(value, (int, float)) and not isinstance(value, bool), f"{label} metric_table {field} is not numeric: {metric}")
+        normalized.append(dict(row))
+    names = [str(row["metric"]) for row in normalized]
+    require(len(names) == len(set(names)), f"{label} metric_table contains duplicate metrics")
+    return normalized
+
+
+def produce_aggregate_comparison(original_metrics: Mapping[str, Any], corrective_metrics: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Compare only the frozen metric tables with matched denominators."""
+
+    original_table = _metric_table(original_metrics, "Original")
+    corrected_table = _metric_table(corrective_metrics, "Corrective")
+    original_names = [str(row["metric"]) for row in original_table]
+    corrected_names = [str(row["metric"]) for row in corrected_table]
+    require(corrected_names == original_names, "Corrective metric_table names or order changed")
+    comparison: list[dict[str, Any]] = []
+    for original, corrected in zip(original_table, corrected_table, strict=True):
+        require(
+            float(original["denominator"]) == float(corrected["denominator"]),
+            f"Aggregate denominator mismatch: {original['metric']}",
+        )
+        comparison.append(
+            {
+                "metric": original["metric"],
+                "original_numerator": original["numerator"],
+                "corrected_numerator": corrected["numerator"],
+                "denominator": original["denominator"],
+                "original_value": original["value"],
+                "corrected_value": corrected["value"],
+                "absolute_delta": float(corrected["value"]) - float(original["value"]),
+            }
+        )
+    return comparison
 
 
 def produce_unified_sensitivity_summary(ev03: Mapping[str, Any], ev04: Mapping[str, Any]) -> dict[str, Any]:
@@ -346,23 +402,60 @@ def write_execution_manifest(path: Path, payload: Mapping[str, Any]) -> None:
     _write_json_new(path, payload)
 
 
-def expected_ledger_paths(contract: Mapping[str, Any]) -> set[str]:
+def expected_ledger_paths(contract: Mapping[str, Any]) -> list[str]:
     expected = contract.get("expected_paths")
     require(isinstance(expected, list) and expected, "Ledger contract has no exact expected paths")
-    return {str(item) for item in expected}
+    normalized = [str(item) for item in expected]
+    require(all(item and Path(item).as_posix() == item for item in normalized), "Ledger expected path is not normalized")
+    require(len(normalized) == len(set(normalized)), "Ledger contract contains duplicate expected paths")
+    require(normalized == sorted(normalized), "Ledger expected paths are not deterministically ordered")
+    return normalized
 
 
-def actual_ledger_paths(files: Sequence[Path], *, root: Path = ROOT) -> set[str]:
-    return {_relative(item, root) for item in files}
+def actual_ledger_paths(contract: Mapping[str, Any], *, root: Path = ROOT) -> list[str]:
+    """Discover contractual files independently of the expected file list."""
+
+    entries = contract.get("discovery_roots")
+    require(isinstance(entries, list) and entries, "Ledger discovery roots are missing")
+    roots: list[tuple[str, str]] = []
+    for entry in entries:
+        require(isinstance(entry, Mapping) and set(entry) == {"path", "kind"}, "Ledger discovery root schema changed")
+        relative = str(entry["path"])
+        kind = str(entry["kind"])
+        require(relative and Path(relative).as_posix() == relative, "Ledger discovery root is not normalized")
+        require(kind in {"FILE", "DIRECTORY"}, "Ledger discovery root kind is invalid")
+        roots.append((relative, kind))
+    root_paths = [relative for relative, _ in roots]
+    require(len(root_paths) == len(set(root_paths)), "Ledger discovery roots contain duplicates")
+    for index, (relative, kind) in enumerate(roots):
+        for other, other_kind in roots[index + 1:]:
+            require(
+                not (kind == "DIRECTORY" and other.startswith(f"{relative}/"))
+                and not (other_kind == "DIRECTORY" and relative.startswith(f"{other}/")),
+                "Ledger discovery roots overlap",
+            )
+    discovered: list[str] = []
+    for relative, kind in roots:
+        path = root / relative
+        if not path.exists():
+            continue
+        if kind == "FILE":
+            require(path.is_file(), f"Ledger file discovery root is not a file: {relative}")
+            discovered.append(_relative(path, root))
+            continue
+        require(path.is_dir(), f"Ledger directory discovery root is not a directory: {relative}")
+        discovered.extend(_relative(item, root) for item in sorted(path.rglob("*")) if item.is_file())
+    require(len(discovered) == len(set(discovered)), "Ledger filesystem discovery contains duplicate paths")
+    return sorted(discovered)
 
 
-def write_hash_ledger(path: Path, files: Sequence[Path], contract: Mapping[str, Any], *, root: Path = ROOT) -> None:
+def write_hash_ledger(path: Path, contract: Mapping[str, Any], *, root: Path = ROOT) -> None:
     """Write a ledger only when its contractual file universe is exact."""
 
     ledger_relative = _relative(path, root)
     require(ledger_relative == contract.get("excluded_self_path"), "Ledger self-exclusion path changed")
     expected = expected_ledger_paths(contract)
-    actual = actual_ledger_paths(files, root=root)
+    actual = actual_ledger_paths(contract, root=root)
     require(ledger_relative not in actual, "Only the ledger itself may be excluded from the exact ledger set")
     require(actual == expected, "Actual ledger paths do not equal the frozen exact contract")
     require(all((root / item).is_file() for item in actual), "Ledger contract includes a missing file")

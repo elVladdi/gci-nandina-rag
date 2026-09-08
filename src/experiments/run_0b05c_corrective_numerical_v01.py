@@ -206,13 +206,17 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
         metadata_path = root / spec["primary_original_control"]["run_metadata"]["path"]
         frozen_metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
         outputs = spec["primary_original_control"]["outputs"]
-        kwargs: dict[str, Any] = {}
-        if arm_name == "EV04":
-            kwargs = {"expected_candidate_schema": evaluator.EV04_CANDIDATE_FIELDS, "expected_case_schema": evaluator.EV04_CASE_FIELDS}
+        schemas = {
+            "EV03": (evaluator.EV03_CANDIDATE_FIELDS, evaluator.EV03_CASE_FIELDS),
+            "EV04": (evaluator.EV04_CANDIDATE_FIELDS, evaluator.EV04_CASE_FIELDS),
+        }
+        expected_candidate_schema, expected_case_schema = schemas[arm_name]
         comparison = evaluator.compare_control_reproduction(
             root / outputs[arm["results_key"]]["path"], path["control_output"] / path["results_name"],
             root / outputs[arm["summary_key"]]["path"], path["control_output"] / path["summary_name"],
-            frozen_metadata["metrics"], result["metrics"], **kwargs,
+            frozen_metadata["metrics"], result["metrics"],
+            expected_candidate_schema=expected_candidate_schema,
+            expected_case_schema=expected_case_schema,
         )
         control[arm_name] = comparison
         return comparison
@@ -290,7 +294,7 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
     def ledger() -> Mapping[str, Any]:
         contract = gate_payload["hash_ledger_contract"]
         expected = evaluator.expected_ledger_paths(contract)
-        evaluator.write_hash_ledger(ledger_path, [root / relative for relative in sorted(expected)], contract, root=root)
+        evaluator.write_hash_ledger(ledger_path, contract, root=root)
         return {"status": "PASS", "expected_ledger_paths": len(expected)}
 
     return {

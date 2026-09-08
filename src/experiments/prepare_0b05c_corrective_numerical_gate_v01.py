@@ -47,6 +47,14 @@ RUNNER_PATH = "src/experiments/run_0b05c_corrective_numerical_v01.py"
 EVALUATOR_PATH = "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
 BUILDER_PATH = "src/experiments/build_bm25_corrective_0b05c_v01.py"
 UNIFIED_RUNTIME_ROOT = "outputs/evaluation/0b05c_corrective_numerical_v0.1"
+GATE_ARTIFACT_PATH = (AUDIT_ROOT / "0b05c_corrective_numerical_execution_gate_v0.1.json").as_posix()
+AUTHORIZATION_RECORD_PATH = (AUDIT_ROOT / "0b05c_authorization_record_v0.1.json").as_posix()
+AUTHORIZATION_BASELINE_ARTIFACTS = {
+    "unified_gate": GATE_ARTIFACT_PATH,
+    "ev03_spec": (AUDIT_ROOT / "ev03_corrective_execution_spec_v0.1.json").as_posix(),
+    "ev04_spec": (AUDIT_ROOT / "ev04_corrective_execution_spec_v0.1.json").as_posix(),
+    "d1a_spec": D1A_SPEC_PATH,
+}
 
 # These are identities, not an invitation to execute their historical CLIs.
 # The new prospective evaluator reuses their versioned helper semantics.
@@ -153,6 +161,37 @@ def git_revision_blob(root: Path, revision: str, relative: str) -> str | None:
     return result.stdout.strip() if result.returncode == 0 else None
 
 
+def git_revision_bytes(root: Path, revision: str, relative: str) -> bytes:
+    """Read a tracked artifact from a declared Git revision, never from disk."""
+
+    relative = posix_relative(relative)
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "show", f"{revision}:{relative}"],
+        check=False,
+        capture_output=True,
+    )
+    require(result.returncode == 0, f"Cannot read authorization baseline artifact from Git: {relative}")
+    return result.stdout
+
+
+def git_commit_is_proper_ancestor(root: Path, ancestor: str, descendant: str = "HEAD") -> bool:
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "merge-base", "--is-ancestor", ancestor, descendant],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return False
+    head = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "rev-parse", descendant],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return head.returncode == 0 and head.stdout.strip() != ancestor
+
+
 def integrated_base_is_ancestor(root: Path, base_commit: str = INTEGRATED_BASE_COMMIT) -> bool:
     """Return whether the approved integration remains in the candidate ancestry."""
 
@@ -177,6 +216,28 @@ def head_text_identity(root: Path, relative: str) -> dict[str, str]:
         "canonical_blob_sha256": digest,
         "historical_sha256": digest,
     }
+
+
+def _read_git_json(root: Path, revision: str, relative: str, label: str) -> dict[str, Any]:
+    try:
+        payload = json.loads(git_revision_bytes(root, revision, relative).decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ContractViolation(f"Authorization baseline artifact is not valid UTF-8 JSON: {label}") from exc
+    require(isinstance(payload, dict), f"Authorization baseline artifact is not a JSON object: {label}")
+    require_posix_serialization(payload, f"authorization_baseline.{label}")
+    return payload
+
+
+def _read_head_json(root: Path, relative: str, label: str) -> dict[str, Any]:
+    identity = head_text_identity(root, relative)
+    canonical = validate_current_text_identity(root, identity, label)
+    try:
+        payload = json.loads(canonical.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ContractViolation(f"Current authorization artifact is not valid UTF-8 JSON: {label}") from exc
+    require(isinstance(payload, dict), f"Current authorization artifact is not a JSON object: {label}")
+    require_posix_serialization(payload, f"authorization_candidate.{label}")
+    return payload
 
 
 def historical_identity(root: Path, revision: str, relative: str) -> dict[str, str] | None:
@@ -409,19 +470,33 @@ def prospective_execution_layout(d1a_spec: Mapping[str, Any]) -> dict[str, Any]:
     """Freeze every future output location before any authorization exists."""
 
     paths: list[str] = []
+    discovery_roots: list[dict[str, str]] = []
+
+    def register_discovery_root(path: str, kind: str) -> None:
+        require(kind in {"FILE", "DIRECTORY"}, f"Unsupported ledger discovery root kind: {kind}")
+        discovery_roots.append({"path": posix_relative(path), "kind": kind})
+
     for arm_name, arm in ARMS.items():
         prefix = "normative_flat" if arm_name == "EV03" else "normative_hierarchical"
-        paths.append(posix_relative(str(arm["prospective_corpus"])))
+        prospective_corpus = posix_relative(str(arm["prospective_corpus"]))
+        paths.append(prospective_corpus)
+        register_discovery_root(prospective_corpus, "FILE")
         for root_key in ("control_reproduction_index_root", "corrected_index_root"):
             index_root = posix_relative(str(arm[root_key]))
+            register_discovery_root(index_root, "DIRECTORY")
             paths.extend((f"{index_root}/index.pkl", f"{index_root}/index_metadata.json"))
         for root_key in ("control_reproduction_output_root", "corrected_output_root"):
             output_root = posix_relative(str(arm[root_key]))
+            register_discovery_root(output_root, "DIRECTORY")
             paths.extend((f"{output_root}/{prefix}_results.csv", f"{output_root}/{prefix}_case_summary.csv", f"{output_root}/{prefix}_metrics.json"))
     d1_contract = d1a_spec["orchestration"]["hash_ledger_contract"]
     d1_paths = [posix_relative(str(path)) for path in d1_contract["included_paths"]]
     d1_paths.append(posix_relative(str(d1_contract["excluded_self_path"])))
+    for path in d1a_spec["orchestration"]["future_roots"]:
+        normalized = posix_relative(str(path))
+        register_discovery_root(normalized, "FILE" if normalized.endswith(".jsonl") else "DIRECTORY")
     unified = posix_relative(UNIFIED_RUNTIME_ROOT)
+    register_discovery_root(unified, "DIRECTORY")
     paths.extend(d1_paths)
     paths.extend(
         (
@@ -435,8 +510,11 @@ def prospective_execution_layout(d1a_spec: Mapping[str, Any]) -> dict[str, Any]:
         )
     )
     require(len(paths) == len(set(paths)), "Exact ledger contract has duplicate paths")
+    discovery_paths = [entry["path"] for entry in discovery_roots]
+    require(len(discovery_paths) == len(set(discovery_paths)), "Ledger discovery root contract contains duplicates")
     return {
-        "expected_paths": paths,
+        "expected_paths": sorted(paths),
+        "discovery_roots": sorted(discovery_roots, key=lambda entry: entry["path"]),
         "excluded_self_path": f"{unified}/unified_output_hash_ledger.json",
         "runtime_root": unified,
     }
@@ -550,6 +628,98 @@ def validate_authorization_transition(
     for name in fields["d1a_spec"]:
         require(baseline["d1a_spec"]["authorization"].get(name) == "NOT_AUTHORIZED", f"Baseline authorization is not closed: {name}")
         require(candidate["d1a_spec"]["authorization"].get(name) == target, f"Authorization transition is invalid: {name}")
+
+
+def authorization_record_contract() -> dict[str, Any]:
+    """Freeze the future record that anchors authorization to a prior commit."""
+
+    return {
+        "record_path": AUTHORIZATION_RECORD_PATH,
+        "artifact_id": "0b05c_authorization_record_v0.1",
+        "schema_version": 1,
+        "required_keys": [
+            "artifact_id",
+            "schema_version",
+            "authorization_baseline_commit",
+            "baseline_artifacts",
+        ],
+        "baseline_artifacts": AUTHORIZATION_BASELINE_ARTIFACTS,
+        "authorization_baseline_commit_policy": "MUST_BE_A_PROPER_ANCESTOR_OF_HEAD_AND_EXTERNALLY_APPROVED_INTEGRATED_GATE",
+        "baseline_source": "COMMITTED_GIT_BLOBS_FROM_authorization_baseline_commit",
+    }
+
+
+def load_authorization_transition_from_git(root: Path, contract: Mapping[str, Any]) -> dict[str, Any]:
+    """Load the two authorization snapshots from separate committed revisions.
+
+    The record is intentionally absent from the closed candidate.  It is a
+    required, tracked artifact only in a later authorization commit, and that
+    commit must point to a proper ancestor rather than deriving a baseline from
+    its own current working tree.
+    """
+
+    expected_keys = {"record_path", "artifact_id", "schema_version", "required_keys", "baseline_artifacts", "authorization_baseline_commit_policy", "baseline_source"}
+    require(set(contract) == expected_keys, "Authorization record contract schema changed")
+    record_path = posix_relative(str(contract["record_path"]))
+    record = _read_head_json(root, record_path, "future authorization record")
+    required_keys = [str(item) for item in contract["required_keys"]]
+    require(set(record) == set(required_keys), "Authorization record schema changed or contains undeclared fields")
+    require(record.get("artifact_id") == contract["artifact_id"], "Authorization record artifact identity changed")
+    require(record.get("schema_version") == contract["schema_version"], "Authorization record schema version changed")
+    baseline_commit = record.get("authorization_baseline_commit")
+    require(isinstance(baseline_commit, str) and re.fullmatch(r"[0-9a-f]{40}", baseline_commit) is not None, "Authorization baseline commit is malformed")
+    require(
+        git_commit_is_proper_ancestor(root, baseline_commit),
+        "Authorization baseline commit must be a resolvable proper ancestor of HEAD",
+    )
+    baseline_artifacts = contract["baseline_artifacts"]
+    require(record.get("baseline_artifacts") == baseline_artifacts, "Authorization baseline artifact paths changed")
+    require(isinstance(baseline_artifacts, Mapping), "Authorization baseline artifact contract is malformed")
+    required_artifacts = {"unified_gate", "ev03_spec", "ev04_spec", "d1a_spec"}
+    require(set(baseline_artifacts) == required_artifacts, "Authorization baseline artifact set changed")
+
+    def revision_snapshot(revision: str, label: str) -> dict[str, Any]:
+        return authorization_snapshot(
+            _read_git_json(root, revision, str(baseline_artifacts["unified_gate"]), f"{label}.unified_gate"),
+            {
+                "EV03": _read_git_json(root, revision, str(baseline_artifacts["ev03_spec"]), f"{label}.ev03_spec"),
+                "EV04": _read_git_json(root, revision, str(baseline_artifacts["ev04_spec"]), f"{label}.ev04_spec"),
+            },
+            _read_git_json(root, revision, str(baseline_artifacts["d1a_spec"]), f"{label}.d1a_spec"),
+        )
+
+    def head_snapshot() -> dict[str, Any]:
+        return authorization_snapshot(
+            _read_head_json(root, str(baseline_artifacts["unified_gate"]), "authorization candidate unified gate"),
+            {
+                "EV03": _read_head_json(root, str(baseline_artifacts["ev03_spec"]), "authorization candidate EV03 spec"),
+                "EV04": _read_head_json(root, str(baseline_artifacts["ev04_spec"]), "authorization candidate EV04 spec"),
+            },
+            _read_head_json(root, str(baseline_artifacts["d1a_spec"]), "authorization candidate D1a spec"),
+        )
+
+    return {
+        "record": record,
+        "baseline_commit": baseline_commit,
+        "baseline": revision_snapshot(baseline_commit, "baseline"),
+        "candidate": head_snapshot(),
+    }
+
+
+def validate_execution_binding(root: Path, gate_payload: Mapping[str, Any]) -> None:
+    """Bind the future authorization to the committed runner, builder and evaluator."""
+
+    binding = gate_payload.get("corrective_execution_binding")
+    require(isinstance(binding, Mapping), "Corrective execution binding is malformed")
+    required = {
+        "orchestration_runner": RUNNER_PATH,
+        "corrective_builder": BUILDER_PATH,
+        "corrective_evaluator": EVALUATOR_PATH,
+    }
+    for key, expected_path in required.items():
+        identity = binding.get(key)
+        require(isinstance(identity, Mapping) and identity.get("path") == expected_path, f"Corrective execution binding changed: {key}")
+        validate_code_identity(root, identity)
 
 
 def frozen_overlap(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: Mapping[str, Any]) -> tuple[dict[str, Any], list[dict[str, str]]]:
@@ -834,26 +1004,24 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
         frozen_overlap(root, arm_name, arm, metadata)
     d1a = validate_d1a_reference(root, required_authorization="AUTHORIZED")
     require_absent(root, future_roots(d1a["spec"]), "Prospective numerical root")
-    expected_bundle = build_bundle(root, d1a)
-    paths = frozen_artifact_paths(root)
-    actual_gate = read_json(paths["gate"])
-    actual_specs = {arm_name: read_json(paths[f"{arm_name}_spec"]) for arm_name in ARMS}
-    for payload, label in ((actual_gate, "gate"), *( (actual_specs[name], name) for name in ARMS )):
-        require_posix_serialization(payload, label)
-    baseline_gate = copy.deepcopy(expected_bundle["gate"])
-    for name in ("EV03_NUMERICAL_EXECUTION", "EV04_NUMERICAL_EXECUTION", "D1A_NUMERICAL_EXECUTION", "UNIFIED_0B05C_NUMERICAL_EXECUTION"):
-        baseline_gate["authorization"][name] = "NOT_AUTHORIZED"
-    baseline_d1a = copy.deepcopy(d1a["spec"])
-    baseline_d1a["authorization"]["D1A_NUMERICAL_EXECUTION"] = "NOT_AUTHORIZED"
-    baseline = authorization_snapshot(baseline_gate, expected_bundle["specifications"], baseline_d1a)
-    candidate = authorization_snapshot(actual_gate, actual_specs, d1a["spec"])
-    validate_authorization_transition(baseline, candidate, actual_gate["authorization_transition_contract"], require_authorized=True)
+    actual_gate = _read_head_json(root, GATE_ARTIFACT_PATH, "authorization candidate unified gate")
+    transition_contract = actual_gate.get("authorization_transition_contract")
+    require(isinstance(transition_contract, Mapping), "Authorization transition contract is malformed")
+    record_contract = transition_contract.get("authorization_record")
+    require(isinstance(record_contract, Mapping), "Authorization baseline record contract is missing")
+    transition = load_authorization_transition_from_git(root, record_contract)
+    baseline = transition["baseline"]
+    candidate = transition["candidate"]
+    require(candidate["gate"] == actual_gate, "Authorization candidate gate is not the committed gate artifact")
+    require(candidate["d1a_spec"] == d1a["spec"], "Authorization candidate D1a artifact is not the validated specification")
+    validate_execution_binding(root, actual_gate)
+    validate_authorization_transition(baseline, candidate, transition_contract, require_authorized=True)
     require(
         not actual_gate["authorization"].get("corrective_retrieval_executed")
         and not actual_gate["authorization"].get("corrective_metrics_computed"),
         "Authorization preflight rejects a previously executed numerical gate",
     )
-    for arm_name, spec in actual_specs.items():
+    for arm_name, spec in candidate["specifications"].items():
         authorization = spec.get("authorization", {})
         require(
             authorization.get(f"{arm_name}_NUMERICAL_EXECUTION") == "AUTHORIZED"
@@ -865,8 +1033,9 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
         "status": "PASS",
         "mode": "AUTHORIZED_PREFLIGHT_ONLY",
         "numerical_execution_occurred": False,
-        "bundle": expected_bundle,
+        "bundle": {"gate": actual_gate, "specifications": candidate["specifications"]},
         "authorization": dict(actual_gate["authorization"]),
+        "authorization_baseline_commit": transition["baseline_commit"],
     }
 
 
@@ -895,12 +1064,14 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         "allowed_companion_fields": ["runtime_authorization_record", "mechanically-derived runtime hashes", "execution manifests"],
         "forbidden_changes": ["patches", "queries", "base corpora", "model weights", "BM25 parameters", "ranking semantics", "metric contracts", "control reproduction rules", "runners", "builders", "evaluators", "output paths", "execution order", "comparison schema"],
         "d1a_precondition": "A unified operation may begin only if EV03, EV04, D1a in its own spec, and the unified gate are all AUTHORIZED before the first side effect.",
+        "authorization_record": authorization_record_contract(),
     }
     layout = prospective_execution_layout(d1a["spec"])
     hash_ledger_contract = {
         "path": layout["excluded_self_path"],
         "producer": f"{EVALUATOR_PATH}:write_hash_ledger",
         "expected_paths": layout["expected_paths"],
+        "discovery_roots": layout["discovery_roots"],
         "covers": ["EV03 and EV04 control-reproduction indexes/metadata/outputs", "corrected corpora", "EV03 and EV04 corrected indexes/metadata/outputs", "runtime authorization record", "EV03 and EV04 case-level comparisons", "EV03 and EV04 aggregate comparisons", "D1a corrected outputs", "unified execution manifest", "unified sensitivity summary"],
         "self_exclusion": "Only the ledger file itself is excluded to avoid a circular hash.",
         "excluded_self_path": layout["excluded_self_path"],
@@ -973,7 +1144,7 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         "microclose_findings": {
             "0B05C-GATE-F001": {"status": "CLOSED/PASS", "evidence": "integrated_base_is_ancestor() requires 7ff504c4a5a763705f198ca41753db75e938a87d to be an ancestor of HEAD, not an immutable main ref."},
             "0B05C-GATE-F002": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "posix_relative() normalizes backslashes before host-independent POSIX validation, and recursive persisted-payload validation rejects backslash serialization."},
-            "0B05C-GATE-F003": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "Committed runner implements the 19-step authorized sequence; immutable authorization transitions, canonical Git blob corpus bytes, disjoint roots, and exact ledger paths are frozen."},
+            "0B05C-GATE-F003": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "A future authorization must name a proper-ancestor Git baseline and is compared against its four committed artifacts; EV03 historical schemas, independently discovered exact ledger paths, and numerator/denominator aggregates are frozen."},
             "0B05C-GATE-F004": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "EV04 remains MANDATORY/NOT_EXECUTED until runtime reproduction; raw duplicate documents collapse by first BM25 occurrence and the full historical schemas are exact-compared."},
         },
         "authorization_transition_contract": {**authorization_transition_contract, "canonical_sha256": sha256_bytes(canonical_json_bytes(authorization_transition_contract))},
