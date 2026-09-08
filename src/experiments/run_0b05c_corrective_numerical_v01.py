@@ -73,15 +73,15 @@ def preflight_not_authorized(root: Path = ROOT) -> dict[str, Any]:
 def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
     """Read-only validation for a future all-four-authorized commit."""
 
-    proof = gate.preflight_authorized(root)
+    payload = _read_gate(root)
     require(
-        proof["authorization"].get("EV03_NUMERICAL_EXECUTION") == "AUTHORIZED"
-        and proof["authorization"].get("EV04_NUMERICAL_EXECUTION") == "AUTHORIZED"
-        and proof["authorization"].get("D1A_NUMERICAL_EXECUTION") == "AUTHORIZED"
-        and proof["authorization"].get("UNIFIED_0B05C_NUMERICAL_EXECUTION") == "AUTHORIZED",
-        "All four numerical authorizations are required before the first side effect",
+        payload["authorization"].get("EV03_NUMERICAL_EXECUTION") == "AUTHORIZED"
+        and payload["authorization"].get("EV04_NUMERICAL_EXECUTION") == "AUTHORIZED"
+        and payload["authorization"].get("D1A_NUMERICAL_EXECUTION") == "AUTHORIZED"
+        and payload["authorization"].get("UNIFIED_0B05C_NUMERICAL_EXECUTION") == "AUTHORIZED",
+        "Unified numerical authorization is not in required state: AUTHORIZED before the first side effect",
     )
-    return proof
+    return gate.preflight_authorized(root)
 
 
 # Preserve the original CLI/API meaning: --preflight proves the closed state.
@@ -158,6 +158,31 @@ def _arm_paths(root: Path, arm_name: str, spec: Mapping[str, Any]) -> dict[str, 
     }
 
 
+def _d1a_summary_reference(root: Path, spec: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str, Any]:
+    """Reference D1a's already-produced contractual outputs without recomputing them."""
+
+    require(result.get("status") == "PASS", "D1a execution did not PASS")
+    outputs = spec.get("orchestration", {}).get("runner_outputs")
+    require(isinstance(outputs, Mapping), "D1a runner output contract is malformed")
+    required = ("aggregate_comparison", "case_level_comparison", "execution_manifest")
+    references: dict[str, dict[str, str]] = {}
+    for key in required:
+        relative = outputs.get(key)
+        require(isinstance(relative, str) and relative, f"D1a runner output contract is missing: {key}")
+        path = root / relative
+        require(path.is_file(), f"D1a contractual output is missing: {relative}")
+        references[key] = {"path": relative, "sha256": gate.sha256_file(path)}
+    manifest = json.loads((root / references["execution_manifest"]["path"]).read_text(encoding="utf-8"))
+    require(manifest.get("status") == "PASS", "D1a execution manifest did not PASS")
+    return {
+        "status": "PASS",
+        "comparison": references["aggregate_comparison"],
+        "case_level_comparison": references["case_level_comparison"],
+        "execution_manifest": references["execution_manifest"],
+        "integrity_status": manifest["status"],
+    }
+
+
 def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Callable[[], Mapping[str, Any]]]:
     """Bind the frozen pipeline to the versioned modules for a future run.
 
@@ -187,6 +212,7 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
     case_outputs: dict[str, Mapping[str, Any]] = {}
     aggregate_outputs: dict[str, Mapping[str, Any]] = {}
     d1a_result: Mapping[str, Any] = {}
+    d1a_summary: Mapping[str, Any] = {}
 
     def authorized_preflight() -> Mapping[str, Any]:
         return _write_json_new(runtime_auth, {
@@ -194,6 +220,7 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
             "authorization": proof["authorization"],
             "all_four_authorizations_required_before_side_effects": True,
             "execution_order": list(PIPELINE_STEPS),
+            **proof["runtime_authorization_provenance"],
         })
 
     def reproduce(arm_name: str) -> Mapping[str, Any]:
@@ -238,8 +265,9 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
         return result
 
     def d1a_execute() -> Mapping[str, Any]:
-        nonlocal d1a_result
+        nonlocal d1a_result, d1a_summary
         d1a_result = d1a_runner.execute_authorized(root)
+        d1a_summary = _d1a_summary_reference(root, bundle["d1a_spec"], d1a_result)
         return {"status": "PASS", "result": d1a_result}
 
     def integrity() -> Mapping[str, Any]:
@@ -255,11 +283,20 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
     def case_comparisons() -> Mapping[str, Any]:
         for arm_name, arm in gate.ARMS.items():
             spec = specs[arm_name]
-            original_path = root / spec["primary_original_control"]["outputs"][arm["summary_key"]]["path"]
-            corrective_path = paths[arm_name]["corrected_output"] / paths[arm_name]["summary_name"]
+            original_summary = root / spec["primary_original_control"]["outputs"][arm["summary_key"]]["path"]
+            corrected_summary = paths[arm_name]["corrected_output"] / paths[arm_name]["summary_name"]
+            original_ranking = root / spec["primary_original_control"]["outputs"][arm["results_key"]]["path"]
+            corrected_ranking = paths[arm_name]["corrected_output"] / paths[arm_name]["results_name"]
             case_outputs[arm_name] = _write_json_new(comparisons[arm_name][0], {
                 "arm": arm_name,
-                "rows": evaluator.produce_case_level_comparison(_read_csv(original_path), _read_csv(corrective_path)),
+                "schema": spec["prospective_execution"]["case_level_comparison_contract"],
+                "rows": evaluator.produce_case_level_comparison(
+                    arm_name,
+                    _read_csv(original_summary),
+                    _read_csv(corrected_summary),
+                    _read_csv(original_ranking),
+                    _read_csv(corrected_ranking),
+                ),
             })
         return {"status": "PASS", "arms": sorted(case_outputs)}
 
@@ -275,9 +312,11 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
         return {"status": "PASS", "arms": sorted(aggregate_outputs)}
 
     def summary() -> Mapping[str, Any]:
+        require(d1a_summary.get("status") == "PASS", "D1a summary reference is missing before unified summary")
         return _write_json_new(summary_path, evaluator.produce_unified_sensitivity_summary(
-            {"control": control["EV03"], "corrective": corrected["EV03"], "case_comparison": case_outputs["EV03"], "aggregate_comparison": aggregate_outputs["EV03"]},
-            {"control": control["EV04"], "corrective": corrected["EV04"], "case_comparison": case_outputs["EV04"], "aggregate_comparison": aggregate_outputs["EV04"]},
+            {"status": "PASS", "control": control["EV03"], "corrective": corrected["EV03"], "case_comparison": case_outputs["EV03"], "aggregate_comparison": aggregate_outputs["EV03"]},
+            {"status": "PASS", "control": control["EV04"], "corrective": corrected["EV04"], "case_comparison": case_outputs["EV04"], "aggregate_comparison": aggregate_outputs["EV04"]},
+            d1a_summary,
         ))
 
     def manifest() -> Mapping[str, Any]:
@@ -285,9 +324,10 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
             "status": "PASS",
             "execution_mode": "AUTHORIZED_UNIFIED_0B05C",
             "all_four_authorizations_required_before_side_effects": True,
+            **proof["runtime_authorization_provenance"],
             "control_reproductions": control,
             "corrected_arms": corrected,
-            "d1a": {"status": "PASS", "result": d1a_result},
+            "d1a": {"status": "PASS", "result": d1a_result, "summary_reference": d1a_summary},
             "execution_order": list(PIPELINE_STEPS),
         })
 

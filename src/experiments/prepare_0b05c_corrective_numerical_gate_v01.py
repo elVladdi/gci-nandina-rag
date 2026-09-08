@@ -111,6 +111,45 @@ ARMS: dict[str, dict[str, Any]] = {
     },
 }
 
+CASE_LEVEL_COMPARISON_K_VALUES = {
+    "EV03": (1, 3, 5, 10, 50, 100),
+    "EV04": (1, 3, 5, 10, 50, 100, 200),
+}
+
+
+def case_level_comparison_contract(arm_name: str) -> dict[str, Any]:
+    """Freeze the complete effective-ranking comparison schema per arm."""
+
+    require(arm_name in CASE_LEVEL_COMPARISON_K_VALUES, f"Unsupported case-level comparison arm: {arm_name}")
+    k_values = CASE_LEVEL_COMPARISON_K_VALUES[arm_name]
+    fields = [
+        "case_id",
+        "nandina_ref",
+        "original_rank_ref",
+        "corrected_rank_ref",
+        "ranking_changed",
+        "rank_convention",
+    ]
+    for k in k_values:
+        fields.extend((f"original_hit_{k}", f"corrected_hit_{k}"))
+    for code in TARGET_CODES:
+        fields.extend(
+            (
+                f"original_rank_{code}",
+                f"corrected_rank_{code}",
+                f"original_contains_{code}",
+                f"corrected_contains_{code}",
+            )
+        )
+    return {
+        "field_order": fields,
+        "k_values": list(k_values),
+        "rank_convention": "0=NOT_FOUND_AT_RETRIEVAL_DEPTH",
+        "retrieval_depth": ARMS[arm_name]["depth"],
+        "ranking_scope": "FULL_EFFECTIVE_CANDIDATE_CODE_SEQUENCE_ORDERED_BY_candidate_rank",
+        "ev04_duplicate_policy": "EFFECTIVE_COLLAPSED_CODE_RANKING" if arm_name == "EV04" else "NOT_APPLICABLE",
+    }
+
 
 def canonical_json_bytes(payload: Mapping[str, Any]) -> bytes:
     return (json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
@@ -706,20 +745,155 @@ def load_authorization_transition_from_git(root: Path, contract: Mapping[str, An
     }
 
 
-def validate_execution_binding(root: Path, gate_payload: Mapping[str, Any]) -> None:
-    """Bind the future authorization to the committed runner, builder and evaluator."""
+def validate_authorized_static_bindings(
+    root: Path,
+    gate_payload: Mapping[str, Any],
+    arm_specs: Mapping[str, Mapping[str, Any]],
+    *,
+    arms: Mapping[str, Mapping[str, Any]] = ARMS,
+    frozen_dependency_paths: Iterable[str] = FROZEN_EXECUTION_DEPENDENCIES,
+    execution_roles: Mapping[str, str] | None = None,
+    run_metadata_validator: Any | None = None,
+    overlap_validator: Any | None = None,
+) -> dict[str, Any]:
+    """Validate every persisted static identity before any future side effect.
+
+    This deliberately compares the checked-out HEAD against identities embedded
+    in the authorized candidate artifacts.  It never constructs an identity
+    from the current HEAD and validates that value against itself.
+    """
+
+    run_metadata_validator = run_metadata_validator or validate_run_metadata
+    overlap_validator = overlap_validator or frozen_overlap
+    require(set(arm_specs) == set(arms), "Authorized static binding arm set changed")
+    validated_inputs: list[str] = []
+    for arm_name, arm in arms.items():
+        spec = arm_specs[arm_name]
+        frozen_inputs = spec.get("frozen_inputs")
+        primary = spec.get("primary_original_control")
+        require(isinstance(frozen_inputs, Mapping), f"{arm_name} frozen inputs are malformed")
+        require(isinstance(primary, Mapping), f"{arm_name} primary original control is malformed")
+        expected_paths = {
+            "runner": str(arm["runner"]),
+            "config": str(arm.get("config_path", CONFIG_PATH)),
+            "corpus": str(arm["corpus"]),
+            "eval": str(arm.get("eval_path", EVAL_PATH)),
+        }
+        for key, expected_path in expected_paths.items():
+            identity = frozen_inputs.get(key)
+            require(isinstance(identity, Mapping) and identity.get("path") == expected_path, f"{arm_name} persisted frozen identity changed: {key}")
+            validate_current_text_identity(root, identity, f"{arm_name} authorized frozen {key}")
+            validated_inputs.append(f"{arm_name}.{key}")
+        metadata_identity = primary.get("run_metadata")
+        require(
+            isinstance(metadata_identity, Mapping) and metadata_identity.get("path") == str(arm["metadata"]),
+            f"{arm_name} persisted run metadata identity changed",
+        )
+        validate_current_text_identity(root, metadata_identity, f"{arm_name} authorized frozen run metadata")
+        metadata_path = project_path(root, str(arm["metadata"]))
+        require(metadata_identity.get("artifact_sha256") == sha256_file(metadata_path), f"{arm_name} persisted run metadata SHA changed")
+        metadata = run_metadata_validator(root, arm)
+        overlap_validator(root, arm_name, arm, metadata)
+        persisted_outputs = primary.get("outputs")
+        require(isinstance(persisted_outputs, Mapping), f"{arm_name} persisted original output contract is malformed")
+        output_hashes = metadata.get("output_sha256")
+        output_paths = metadata.get("outputs")
+        require(isinstance(output_hashes, Mapping) and isinstance(output_paths, Mapping), f"{arm_name} run metadata output contract is malformed")
+        require(set(persisted_outputs) == set(output_hashes), f"{arm_name} persisted original output set changed")
+        for key, expected_hash in output_hashes.items():
+            persisted = persisted_outputs.get(key)
+            require(
+                isinstance(persisted, Mapping)
+                and persisted.get("path") == output_paths.get(key)
+                and persisted.get("sha256") == expected_hash,
+                f"{arm_name} persisted original output binding changed: {key}",
+            )
+        validated_inputs.append(f"{arm_name}.primary_original_control.run_metadata")
 
     binding = gate_payload.get("corrective_execution_binding")
     require(isinstance(binding, Mapping), "Corrective execution binding is malformed")
-    required = {
+    frozen_dependencies = binding.get("frozen_dependencies")
+    require(isinstance(frozen_dependencies, Mapping), "Corrective execution frozen dependencies are malformed")
+    dependency_paths = tuple(str(path) for path in frozen_dependency_paths)
+    require(len(dependency_paths) == len(set(dependency_paths)), "Frozen dependency contract contains duplicates")
+    require(set(frozen_dependencies) == set(dependency_paths), "Authorized frozen dependency set changed")
+    for path in dependency_paths:
+        identity = frozen_dependencies[path]
+        require(isinstance(identity, Mapping) and identity.get("path") == path, f"Persisted frozen dependency identity changed: {path}")
+        validate_code_identity(root, identity)
+
+    roles = execution_roles or {
         "orchestration_runner": RUNNER_PATH,
         "corrective_builder": BUILDER_PATH,
         "corrective_evaluator": EVALUATOR_PATH,
     }
-    for key, expected_path in required.items():
+    for key, expected_path in roles.items():
         identity = binding.get(key)
         require(isinstance(identity, Mapping) and identity.get("path") == expected_path, f"Corrective execution binding changed: {key}")
-        validate_code_identity(root, identity)
+        require(identity == frozen_dependencies[expected_path], f"Corrective execution binding diverges from frozen dependency: {key}")
+    return {
+        "status": "PASS",
+        "validated_arm_inputs": validated_inputs,
+        "frozen_dependency_count": len(dependency_paths),
+    }
+
+
+def validate_d1a_read_only_preflight(root: Path, *, preflight_callable: Any | None = None) -> dict[str, Any]:
+    """Require D1a's versioned read-only proof before any unified side effect."""
+
+    if preflight_callable is None:
+        from . import run_d1a_corrective_0b05c_v01 as d1a_runner
+
+        preflight_callable = d1a_runner.preflight
+    proof = preflight_callable(root)
+    require(isinstance(proof, Mapping) and proof.get("status") == "PASS", "D1a read-only preflight did not PASS")
+    require(proof.get("mode") == "PREFLIGHT_ONLY", "D1a preflight is not read-only")
+    for field in ("numerical_execution_occurred", "retrieval_executed", "corrected_corpus_created", "corrected_index_created", "new_metrics_computed"):
+        require(proof.get(field) is False, f"D1a preflight is not read-only: {field}")
+    return dict(proof)
+
+
+def _head_commit(root: Path) -> str:
+    result = subprocess.run(
+        ["git", "-c", f"safe.directory={root}", "-C", str(root), "rev-parse", "HEAD"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    require(result.returncode == 0, "Cannot resolve authorization commit HEAD")
+    return result.stdout.strip()
+
+
+def authorization_runtime_provenance(root: Path, transition: Mapping[str, Any]) -> dict[str, str]:
+    """Derive runtime authorization provenance only from validated HEAD blobs."""
+
+    record = transition.get("record")
+    baseline_commit = transition.get("baseline_commit")
+    require(isinstance(record, Mapping) and isinstance(baseline_commit, str), "Authorization transition proof is malformed")
+    record_path = record.get("baseline_artifacts")
+    require(isinstance(record_path, Mapping), "Authorization record baseline artifact mapping is malformed")
+
+    def identity(path: str, label: str) -> dict[str, str]:
+        current = head_text_identity(root, path)
+        validate_current_text_identity(root, current, label)
+        return current
+
+    authorization_record = identity(AUTHORIZATION_RECORD_PATH, "authorization runtime record source")
+    unified_gate = identity(str(record_path["unified_gate"]), "authorized unified gate")
+    ev03_spec = identity(str(record_path["ev03_spec"]), "authorized EV03 specification")
+    ev04_spec = identity(str(record_path["ev04_spec"]), "authorized EV04 specification")
+    d1a_spec = identity(str(record_path["d1a_spec"]), "authorized D1a specification")
+    return {
+        "authorization_baseline_commit": baseline_commit,
+        "authorization_commit": _head_commit(root),
+        "authorization_record_path": AUTHORIZATION_RECORD_PATH,
+        "authorization_record_git_blob_sha": authorization_record["git_blob_sha"],
+        "authorization_record_canonical_sha256": authorization_record["canonical_blob_sha256"],
+        "unified_gate_git_blob_sha": unified_gate["git_blob_sha"],
+        "EV03_authorized_spec_git_blob_sha": ev03_spec["git_blob_sha"],
+        "EV04_authorized_spec_git_blob_sha": ev04_spec["git_blob_sha"],
+        "D1a_authorized_spec_git_blob_sha": d1a_spec["git_blob_sha"],
+    }
 
 
 def frozen_overlap(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: Mapping[str, Any]) -> tuple[dict[str, Any], list[dict[str, str]]]:
@@ -910,6 +1084,7 @@ def build_arm_spec(root: Path, arm_name: str, arm: Mapping[str, Any], metadata: 
                 "case_level_original_vs_corrective": f"{EVALUATOR_PATH}:produce_case_level_comparison",
                 "aggregate_original_vs_corrective": f"{EVALUATOR_PATH}:produce_aggregate_comparison",
             },
+            "case_level_comparison_contract": case_level_comparison_contract(arm_name),
         },
     }
 
@@ -995,15 +1170,6 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
 
     require(git_revision_blob(root, "HEAD", "README.md") is not None, "Repository HEAD cannot be resolved")
     require(integrated_base_is_ancestor(root), "Integrated base commit is not an ancestor of the authorization candidate")
-    for arm_name, arm in ARMS.items():
-        metadata = validate_run_metadata(root, arm)
-        provenance = source_provenance(root, arm)
-        expected_status = "FULLY_VERIFIABLE_FROM_FROZEN_ARTIFACTS" if arm_name == "EV03" else "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS"
-        require(provenance["status"] == expected_status, f"{arm_name} original provenance changed")
-        validate_code_identity(root, provenance["prospective_current_git_identities"][str(arm["runner"])])
-        frozen_overlap(root, arm_name, arm, metadata)
-    d1a = validate_d1a_reference(root, required_authorization="AUTHORIZED")
-    require_absent(root, future_roots(d1a["spec"]), "Prospective numerical root")
     actual_gate = _read_head_json(root, GATE_ARTIFACT_PATH, "authorization candidate unified gate")
     transition_contract = actual_gate.get("authorization_transition_contract")
     require(isinstance(transition_contract, Mapping), "Authorization transition contract is malformed")
@@ -1013,9 +1179,12 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
     baseline = transition["baseline"]
     candidate = transition["candidate"]
     require(candidate["gate"] == actual_gate, "Authorization candidate gate is not the committed gate artifact")
-    require(candidate["d1a_spec"] == d1a["spec"], "Authorization candidate D1a artifact is not the validated specification")
-    validate_execution_binding(root, actual_gate)
     validate_authorization_transition(baseline, candidate, transition_contract, require_authorized=True)
+    static_bindings = validate_authorized_static_bindings(root, actual_gate, candidate["specifications"])
+    d1a = validate_d1a_reference(root, required_authorization="AUTHORIZED")
+    require(candidate["d1a_spec"] == d1a["spec"], "Authorization candidate D1a artifact is not the validated specification")
+    d1a_preflight = validate_d1a_read_only_preflight(root)
+    require_absent(root, future_roots(d1a["spec"]), "Prospective numerical root")
     require(
         not actual_gate["authorization"].get("corrective_retrieval_executed")
         and not actual_gate["authorization"].get("corrective_metrics_computed"),
@@ -1033,9 +1202,12 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
         "status": "PASS",
         "mode": "AUTHORIZED_PREFLIGHT_ONLY",
         "numerical_execution_occurred": False,
-        "bundle": {"gate": actual_gate, "specifications": candidate["specifications"]},
+        "bundle": {"gate": actual_gate, "specifications": candidate["specifications"], "d1a_spec": candidate["d1a_spec"]},
         "authorization": dict(actual_gate["authorization"]),
         "authorization_baseline_commit": transition["baseline_commit"],
+        "authorized_static_bindings": static_bindings,
+        "d1a_preflight": d1a_preflight,
+        "runtime_authorization_provenance": authorization_runtime_provenance(root, transition),
     }
 
 
@@ -1075,6 +1247,21 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         "covers": ["EV03 and EV04 control-reproduction indexes/metadata/outputs", "corrected corpora", "EV03 and EV04 corrected indexes/metadata/outputs", "runtime authorization record", "EV03 and EV04 case-level comparisons", "EV03 and EV04 aggregate comparisons", "D1a corrected outputs", "unified execution manifest", "unified sensitivity summary"],
         "self_exclusion": "Only the ledger file itself is excluded to avoid a circular hash.",
         "excluded_self_path": layout["excluded_self_path"],
+    }
+    runtime_authorization_provenance_contract = {
+        "producer": f"{PREPARE_PATH}:authorization_runtime_provenance",
+        "required_fields": [
+            "authorization_baseline_commit",
+            "authorization_commit",
+            "authorization_record_path",
+            "authorization_record_git_blob_sha",
+            "authorization_record_canonical_sha256",
+            "unified_gate_git_blob_sha",
+            "EV03_authorized_spec_git_blob_sha",
+            "EV04_authorized_spec_git_blob_sha",
+            "D1a_authorized_spec_git_blob_sha",
+        ],
+        "source": "VALIDATED_COMMITTED_GIT_BLOBS_AT_AUTHORIZATION_HEAD",
     }
     gate = {
         "gate_id": "0B05C_CORRECTIVE_NUMERICAL_EXECUTION_GATE_v0.1",
@@ -1144,7 +1331,7 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         "microclose_findings": {
             "0B05C-GATE-F001": {"status": "CLOSED/PASS", "evidence": "integrated_base_is_ancestor() requires 7ff504c4a5a763705f198ca41753db75e938a87d to be an ancestor of HEAD, not an immutable main ref."},
             "0B05C-GATE-F002": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "posix_relative() normalizes backslashes before host-independent POSIX validation, and recursive persisted-payload validation rejects backslash serialization."},
-            "0B05C-GATE-F003": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "A future authorization must name a proper-ancestor Git baseline and is compared against its four committed artifacts; EV03 historical schemas, independently discovered exact ledger paths, and numerator/denominator aggregates are frozen."},
+            "0B05C-GATE-F003": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "A future authorization must name a proper-ancestor Git baseline, validate every persisted static referent and D1a read-only preflight before side effects, compare full effective rankings by case, and preserve Git-derived runtime provenance."},
             "0B05C-GATE-F004": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "EV04 remains MANDATORY/NOT_EXECUTED until runtime reproduction; raw duplicate documents collapse by first BM25 occurrence and the full historical schemas are exact-compared."},
         },
         "authorization_transition_contract": {**authorization_transition_contract, "canonical_sha256": sha256_bytes(canonical_json_bytes(authorization_transition_contract))},
@@ -1156,6 +1343,11 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
             "unified_sensitivity_summary": f"{EVALUATOR_PATH}:produce_unified_sensitivity_summary",
             "unified_execution_manifest": f"{EVALUATOR_PATH}:write_execution_manifest",
         },
+        "case_level_comparison_contracts": {
+            arm_name: arm_specs[arm_name]["prospective_execution"]["case_level_comparison_contract"]
+            for arm_name in ARMS
+        },
+        "runtime_authorization_provenance_contract": runtime_authorization_provenance_contract,
         "hash_ledger_contract": hash_ledger_contract,
     }
     return {"specifications": arm_specs, "overlaps": overlaps, "overlap_rows": overlap_rows, "gate": gate}

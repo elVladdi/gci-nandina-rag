@@ -466,6 +466,51 @@
     }
   },
   "prospective_execution": {
+    "case_level_comparison_contract": {
+      "ev04_duplicate_policy": "EFFECTIVE_COLLAPSED_CODE_RANKING",
+      "field_order": [
+        "case_id",
+        "nandina_ref",
+        "original_rank_ref",
+        "corrected_rank_ref",
+        "ranking_changed",
+        "rank_convention",
+        "original_hit_1",
+        "corrected_hit_1",
+        "original_hit_3",
+        "corrected_hit_3",
+        "original_hit_5",
+        "corrected_hit_5",
+        "original_hit_10",
+        "corrected_hit_10",
+        "original_hit_50",
+        "corrected_hit_50",
+        "original_hit_100",
+        "corrected_hit_100",
+        "original_hit_200",
+        "corrected_hit_200",
+        "original_rank_87044110",
+        "corrected_rank_87044110",
+        "original_contains_87044110",
+        "corrected_contains_87044110",
+        "original_rank_87045110",
+        "corrected_rank_87045110",
+        "original_contains_87045110",
+        "corrected_contains_87045110"
+      ],
+      "k_values": [
+        1,
+        3,
+        5,
+        10,
+        50,
+        100,
+        200
+      ],
+      "rank_convention": "0=NOT_FOUND_AT_RETRIEVAL_DEPTH",
+      "ranking_scope": "FULL_EFFECTIVE_CANDIDATE_CODE_SEQUENCE_ORDERED_BY_candidate_rank",
+      "retrieval_depth": 200
+    },
     "commands": {
       "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v01 --execute-authorized",
       "ev04_control_reproduction_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v01 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_v0.1.jsonl --output data/processed/indexes/bm25_nandina8_hierarchical_ev04_decision885_control_v0.1/index.pkl --metadata data/processed/indexes/bm25_nandina8_hierarchical_ev04_decision885_control_v0.1/index_metadata.json",

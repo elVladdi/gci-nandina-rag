@@ -20,6 +20,7 @@ from ..evaluation.metrics import acc_at_k, mrr_from_rank, rank_of_true
 from ..retrieval.bm25 import load_bm25_index, retrieve
 from . import evaluate_normative_bm25_flat_data_aduanas_v02 as flat
 from . import evaluate_normative_bm25_hierarchical_data_aduanas_v02 as hierarchical
+from .prepare_0b05c_corrective_numerical_gate_v01 import case_level_comparison_contract
 from .run_d1a_corrective_0b05c_v01 import ContractViolation, require
 
 
@@ -341,11 +342,111 @@ def ev04_corrected_execution_permitted(*, authorized: bool, reproduction_status:
     return authorized and reproduction_status == "PASS"
 
 
-def produce_case_level_comparison(original: Sequence[Mapping[str, Any]], corrective: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    original_by_case = {str(row["case_id"]): dict(row) for row in original}
-    corrective_by_case = {str(row["case_id"]): dict(row) for row in corrective}
-    require(set(original_by_case) == set(corrective_by_case), "Case-level comparison requires identical frozen case IDs")
-    return [{"case_id": case_id, "original": original_by_case[case_id], "corrective": corrective_by_case[case_id]} for case_id in sorted(original_by_case)]
+def _case_summary_by_id(rows: Sequence[Mapping[str, Any]], label: str) -> dict[str, dict[str, Any]]:
+    by_case: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        case_id = str(row.get("case_id", "")).strip()
+        require(case_id, f"{label} case summary has a missing case_id")
+        require(case_id not in by_case, f"{label} case summary has a duplicate case_id: {case_id}")
+        nandina_ref = str(row.get("nandina_ref", "")).strip()
+        require(nandina_ref, f"{label} case summary has a missing nandina_ref: {case_id}")
+        by_case[case_id] = dict(row)
+    require(by_case, f"{label} case summary is empty")
+    return by_case
+
+
+def _rank_value(value: Any, label: str) -> int:
+    text = str(value).strip()
+    require(text.isdigit(), f"{label} candidate_rank is malformed: {value!r}")
+    rank = int(text)
+    require(rank >= 1, f"{label} candidate_rank must begin at one")
+    return rank
+
+
+def _effective_ranking_by_case(
+    rows: Sequence[Mapping[str, Any]],
+    case_ids: set[str],
+    label: str,
+    *,
+    require_unique_codes: bool,
+) -> dict[str, tuple[str, ...]]:
+    grouped: dict[str, list[tuple[int, str]]] = {case_id: [] for case_id in case_ids}
+    for row in rows:
+        case_id = str(row.get("case_id", "")).strip()
+        require(case_id in grouped, f"{label} candidate ranking references an unknown case_id: {case_id!r}")
+        code = str(row.get("candidate_code", "")).strip()
+        require(code, f"{label} candidate ranking has a missing candidate_code: {case_id}")
+        grouped[case_id].append((_rank_value(row.get("candidate_rank"), f"{label} {case_id}"), code))
+
+    rankings: dict[str, tuple[str, ...]] = {}
+    for case_id, ranked in grouped.items():
+        require(ranked, f"{label} candidate ranking is missing case_id: {case_id}")
+        ranked.sort(key=lambda item: item[0])
+        ranks = [rank for rank, _ in ranked]
+        require(ranks == list(range(1, len(ranks) + 1)), f"{label} candidate ranks are not an effective contiguous sequence: {case_id}")
+        codes = tuple(code for _, code in ranked)
+        if require_unique_codes:
+            require(len(codes) == len(set(codes)), f"{label} effective candidate ranking contains duplicate codes: {case_id}")
+        rankings[case_id] = codes
+    return rankings
+
+
+def _rank_of(codes: Sequence[str], code: str) -> int:
+    try:
+        return list(codes).index(code) + 1
+    except ValueError:
+        return 0
+
+
+def produce_case_level_comparison(
+    arm_name: str,
+    original_cases: Sequence[Mapping[str, Any]],
+    corrective_cases: Sequence[Mapping[str, Any]],
+    original_candidates: Sequence[Mapping[str, Any]],
+    corrective_candidates: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Build the frozen full-effective-ranking comparison for one BM25 arm."""
+
+    contract = case_level_comparison_contract(arm_name)
+    original_by_case = _case_summary_by_id(original_cases, f"{arm_name} original")
+    corrective_by_case = _case_summary_by_id(corrective_cases, f"{arm_name} corrective")
+    case_ids = set(original_by_case)
+    require(case_ids == set(corrective_by_case), "Case-level comparison requires identical original and corrective case IDs")
+    unique_codes = arm_name == "EV04"
+    original_rankings = _effective_ranking_by_case(original_candidates, case_ids, f"{arm_name} original", require_unique_codes=unique_codes)
+    corrective_rankings = _effective_ranking_by_case(corrective_candidates, case_ids, f"{arm_name} corrective", require_unique_codes=unique_codes)
+
+    rows: list[dict[str, Any]] = []
+    for case_id in sorted(case_ids):
+        original_summary = original_by_case[case_id]
+        corrective_summary = corrective_by_case[case_id]
+        nandina_ref = str(original_summary["nandina_ref"]).strip()
+        require(nandina_ref == str(corrective_summary["nandina_ref"]).strip(), f"Case reference changed during corrective comparison: {case_id}")
+        original_codes = original_rankings[case_id]
+        corrected_codes = corrective_rankings[case_id]
+        original_rank_ref = _rank_of(original_codes, nandina_ref)
+        corrected_rank_ref = _rank_of(corrected_codes, nandina_ref)
+        row: dict[str, Any] = {
+            "case_id": case_id,
+            "nandina_ref": nandina_ref,
+            "original_rank_ref": original_rank_ref,
+            "corrected_rank_ref": corrected_rank_ref,
+            "ranking_changed": original_codes != corrected_codes,
+            "rank_convention": contract["rank_convention"],
+        }
+        for k in contract["k_values"]:
+            row[f"original_hit_{k}"] = int(1 <= original_rank_ref <= k)
+            row[f"corrected_hit_{k}"] = int(1 <= corrected_rank_ref <= k)
+        for code in ("87044110", "87045110"):
+            original_rank = _rank_of(original_codes, code)
+            corrected_rank = _rank_of(corrected_codes, code)
+            row[f"original_rank_{code}"] = original_rank
+            row[f"corrected_rank_{code}"] = corrected_rank
+            row[f"original_contains_{code}"] = original_rank > 0
+            row[f"corrected_contains_{code}"] = corrected_rank > 0
+        require(list(row) == contract["field_order"], f"{arm_name} case-level comparison schema drifted")
+        rows.append(row)
+    return rows
 
 
 def _metric_table(metrics: Mapping[str, Any], label: str) -> list[dict[str, Any]]:
@@ -394,8 +495,19 @@ def produce_aggregate_comparison(original_metrics: Mapping[str, Any], corrective
     return comparison
 
 
-def produce_unified_sensitivity_summary(ev03: Mapping[str, Any], ev04: Mapping[str, Any]) -> dict[str, Any]:
-    return {"artifact_id": "0b05c_unified_corrective_sensitivity_summary_v0.1", "ev03": dict(ev03), "ev04": dict(ev04), "interpretation_status": "PENDING_AUTHORIZED_EXECUTION"}
+def produce_unified_sensitivity_summary(
+    ev03: Mapping[str, Any], ev04: Mapping[str, Any], d1a: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Combine only the three already-produced contractual arm artifacts."""
+
+    arms = {"EV03": ev03, "EV04": ev04, "D1a": d1a}
+    for name, payload in arms.items():
+        require(isinstance(payload, Mapping) and payload.get("status") == "PASS", f"Unified sensitivity summary requires a PASS {name} artifact")
+    return {
+        "artifact_id": "0b05c_unified_corrective_sensitivity_summary_v0.1",
+        "arms": {name: dict(payload) for name, payload in arms.items()},
+        "interpretation_status": "AUTHORIZED_EXECUTION_COMPLETED_PENDING_INTERPRETATION",
+    }
 
 
 def write_execution_manifest(path: Path, payload: Mapping[str, Any]) -> None:

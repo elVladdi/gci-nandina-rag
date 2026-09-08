@@ -5,14 +5,14 @@
       "original_ranking_overlap_sha256": "90fcc8eb3d853673f22f6ac6adbbf232edd5dbc573e54562fbfe72bc6fd4caff",
       "original_run_identity": "FULLY_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
       "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "87fc1edff7f77d4c2e9d66a092108be79f46ad28847ca7fd71afaaf49d66d62d"
+      "specification_sha256": "e21ad19165434aba2bef9bb856824b63821393dda854e62d5af617b0b91035cd"
     },
     "EV04": {
       "original_ranking_overlap_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_original_ranking_overlap_v0.1.json",
       "original_ranking_overlap_sha256": "491ef925f674b312570ea55907c462aa9622ba7ed8a0ada2917905345a75f364",
       "original_run_identity": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
       "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "ac123dcf21cbae608714ef89d04fb235bd88b0a8174d0e618de24eafba0fae99"
+      "specification_sha256": "dbfd4e3968a1054ad959fbfa272eb8c5153b42981c9f487b396e8362cdf7b7a4"
     }
   },
   "authorization": {
@@ -84,6 +84,95 @@
     ],
     "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/0b05c_corrective_numerical_execution_gate_v0.1.json#/authorization"
   },
+  "case_level_comparison_contracts": {
+    "EV03": {
+      "ev04_duplicate_policy": "NOT_APPLICABLE",
+      "field_order": [
+        "case_id",
+        "nandina_ref",
+        "original_rank_ref",
+        "corrected_rank_ref",
+        "ranking_changed",
+        "rank_convention",
+        "original_hit_1",
+        "corrected_hit_1",
+        "original_hit_3",
+        "corrected_hit_3",
+        "original_hit_5",
+        "corrected_hit_5",
+        "original_hit_10",
+        "corrected_hit_10",
+        "original_hit_50",
+        "corrected_hit_50",
+        "original_hit_100",
+        "corrected_hit_100",
+        "original_rank_87044110",
+        "corrected_rank_87044110",
+        "original_contains_87044110",
+        "corrected_contains_87044110",
+        "original_rank_87045110",
+        "corrected_rank_87045110",
+        "original_contains_87045110",
+        "corrected_contains_87045110"
+      ],
+      "k_values": [
+        1,
+        3,
+        5,
+        10,
+        50,
+        100
+      ],
+      "rank_convention": "0=NOT_FOUND_AT_RETRIEVAL_DEPTH",
+      "ranking_scope": "FULL_EFFECTIVE_CANDIDATE_CODE_SEQUENCE_ORDERED_BY_candidate_rank",
+      "retrieval_depth": 100
+    },
+    "EV04": {
+      "ev04_duplicate_policy": "EFFECTIVE_COLLAPSED_CODE_RANKING",
+      "field_order": [
+        "case_id",
+        "nandina_ref",
+        "original_rank_ref",
+        "corrected_rank_ref",
+        "ranking_changed",
+        "rank_convention",
+        "original_hit_1",
+        "corrected_hit_1",
+        "original_hit_3",
+        "corrected_hit_3",
+        "original_hit_5",
+        "corrected_hit_5",
+        "original_hit_10",
+        "corrected_hit_10",
+        "original_hit_50",
+        "corrected_hit_50",
+        "original_hit_100",
+        "corrected_hit_100",
+        "original_hit_200",
+        "corrected_hit_200",
+        "original_rank_87044110",
+        "corrected_rank_87044110",
+        "original_contains_87044110",
+        "corrected_contains_87044110",
+        "original_rank_87045110",
+        "corrected_rank_87045110",
+        "original_contains_87045110",
+        "corrected_contains_87045110"
+      ],
+      "k_values": [
+        1,
+        3,
+        5,
+        10,
+        50,
+        100,
+        200
+      ],
+      "rank_convention": "0=NOT_FOUND_AT_RETRIEVAL_DEPTH",
+      "ranking_scope": "FULL_EFFECTIVE_CANDIDATE_CODE_SEQUENCE_ORDERED_BY_candidate_rank",
+      "retrieval_depth": 200
+    }
+  },
   "comparison_producers": {
     "EV03_aggregate": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_aggregate_comparison",
     "EV03_case_level": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py:produce_case_level_comparison",
@@ -101,9 +190,9 @@
       "path": "src/experiments/build_bm25_corrective_0b05c_v01.py"
     },
     "corrective_evaluator": {
-      "canonical_blob_sha256": "f4f598a77e86ece38d1f08ce4868f604ea7e8246f79971015915b336b874f0bd",
-      "git_blob_sha": "733a91c83fdc57586cc62e74017666547d99f772",
-      "historical_sha256": "f4f598a77e86ece38d1f08ce4868f604ea7e8246f79971015915b336b874f0bd",
+      "canonical_blob_sha256": "7e34b5f8fabb901aeded1fcb76c8a48d2963a80d4d2fdceb767a8084b1bc1b16",
+      "git_blob_sha": "c6f4121fe5f5f50e71e27eb4cf1e28eb8986d062",
+      "historical_sha256": "7e34b5f8fabb901aeded1fcb76c8a48d2963a80d4d2fdceb767a8084b1bc1b16",
       "identity_authority": "COMMITTED_GIT_BLOB",
       "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
     },
@@ -144,9 +233,9 @@
         "path": "src/experiments/build_bm25_index.py"
       },
       "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py": {
-        "canonical_blob_sha256": "f4f598a77e86ece38d1f08ce4868f604ea7e8246f79971015915b336b874f0bd",
-        "git_blob_sha": "733a91c83fdc57586cc62e74017666547d99f772",
-        "historical_sha256": "f4f598a77e86ece38d1f08ce4868f604ea7e8246f79971015915b336b874f0bd",
+        "canonical_blob_sha256": "7e34b5f8fabb901aeded1fcb76c8a48d2963a80d4d2fdceb767a8084b1bc1b16",
+        "git_blob_sha": "c6f4121fe5f5f50e71e27eb4cf1e28eb8986d062",
+        "historical_sha256": "7e34b5f8fabb901aeded1fcb76c8a48d2963a80d4d2fdceb767a8084b1bc1b16",
         "identity_authority": "COMMITTED_GIT_BLOB",
         "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
       },
@@ -165,16 +254,16 @@
         "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py"
       },
       "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py": {
-        "canonical_blob_sha256": "af518b405c026274dffb15e94ef1428d983396a3859606899b431d606e1deb99",
-        "git_blob_sha": "765abcb0d972ce58bcbe9c7ded2847e026dff6d4",
-        "historical_sha256": "af518b405c026274dffb15e94ef1428d983396a3859606899b431d606e1deb99",
+        "canonical_blob_sha256": "76376062359659af151f0a312dc1eee6f8f8bd60c7681851ab5c217610f0d0c9",
+        "git_blob_sha": "cfd52b456ad4750e879c34c1ac33757cd014e49a",
+        "historical_sha256": "76376062359659af151f0a312dc1eee6f8f8bd60c7681851ab5c217610f0d0c9",
         "identity_authority": "COMMITTED_GIT_BLOB",
         "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py"
       },
       "src/experiments/run_0b05c_corrective_numerical_v01.py": {
-        "canonical_blob_sha256": "87cd726a9b99cc2f83613963f696013007acc822c67974a33a555baa73c19938",
-        "git_blob_sha": "98b3909a65efe1e1b4ddf679a3d9a8dd02f3c6be",
-        "historical_sha256": "87cd726a9b99cc2f83613963f696013007acc822c67974a33a555baa73c19938",
+        "canonical_blob_sha256": "67c1c6af04b151678f36f3ab0d8d4c305848ce0963caf75f9b0e7c5840b54dc8",
+        "git_blob_sha": "e1b232528405603c2554b2e97f2724ad110bf4f0",
+        "historical_sha256": "67c1c6af04b151678f36f3ab0d8d4c305848ce0963caf75f9b0e7c5840b54dc8",
         "identity_authority": "COMMITTED_GIT_BLOB",
         "path": "src/experiments/run_0b05c_corrective_numerical_v01.py"
       },
@@ -188,9 +277,9 @@
     },
     "identity_authority": "COMMITTED_GIT_BLOB",
     "orchestration_runner": {
-      "canonical_blob_sha256": "87cd726a9b99cc2f83613963f696013007acc822c67974a33a555baa73c19938",
-      "git_blob_sha": "98b3909a65efe1e1b4ddf679a3d9a8dd02f3c6be",
-      "historical_sha256": "87cd726a9b99cc2f83613963f696013007acc822c67974a33a555baa73c19938",
+      "canonical_blob_sha256": "67c1c6af04b151678f36f3ab0d8d4c305848ce0963caf75f9b0e7c5840b54dc8",
+      "git_blob_sha": "e1b232528405603c2554b2e97f2724ad110bf4f0",
+      "historical_sha256": "67c1c6af04b151678f36f3ab0d8d4c305848ce0963caf75f9b0e7c5840b54dc8",
       "identity_authority": "COMMITTED_GIT_BLOB",
       "path": "src/experiments/run_0b05c_corrective_numerical_v01.py"
     },
@@ -397,12 +486,27 @@
       "status": "CLOSED_PENDING_EXTERNAL_AUDIT"
     },
     "0B05C-GATE-F003": {
-      "evidence": "A future authorization must name a proper-ancestor Git baseline and is compared against its four committed artifacts; EV03 historical schemas, independently discovered exact ledger paths, and numerator/denominator aggregates are frozen.",
+      "evidence": "A future authorization must name a proper-ancestor Git baseline, validate every persisted static referent and D1a read-only preflight before side effects, compare full effective rankings by case, and preserve Git-derived runtime provenance.",
       "status": "CLOSED_PENDING_EXTERNAL_AUDIT"
     },
     "0B05C-GATE-F004": {
       "evidence": "EV04 remains MANDATORY/NOT_EXECUTED until runtime reproduction; raw duplicate documents collapse by first BM25 occurrence and the full historical schemas are exact-compared.",
       "status": "CLOSED_PENDING_EXTERNAL_AUDIT"
     }
+  },
+  "runtime_authorization_provenance_contract": {
+    "producer": "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py:authorization_runtime_provenance",
+    "required_fields": [
+      "authorization_baseline_commit",
+      "authorization_commit",
+      "authorization_record_path",
+      "authorization_record_git_blob_sha",
+      "authorization_record_canonical_sha256",
+      "unified_gate_git_blob_sha",
+      "EV03_authorized_spec_git_blob_sha",
+      "EV04_authorized_spec_git_blob_sha",
+      "D1a_authorized_spec_git_blob_sha"
+    ],
+    "source": "VALIDATED_COMMITTED_GIT_BLOBS_AT_AUTHORIZATION_HEAD"
   }
 }
