@@ -88,16 +88,21 @@ def validate_dynamic_inputs(arm: str, corpus_path: Path, index_path: Path, metad
     return {"corpus_sha256": corpus_sha, "index_sha256": index_sha, "index_metadata_sha256": sha256_file(metadata_path), "config_sha256": sha256_file(config_path), "metadata": metadata, "index": index}
 
 
-def materialize_corrective_corpus(source: Path, destination: Path, patches: Sequence[Mapping[str, Any]], *, root: Path = ROOT) -> str:
-    """Apply the frozen two-record patch without rewriting unpatched JSONL bytes."""
+def materialize_corrective_corpus(canonical_source_bytes: bytes, destination: Path, patches: Sequence[Mapping[str, Any]], *, root: Path = ROOT) -> str:
+    """Apply the frozen two-record patch to canonical committed Git blob bytes.
 
-    require(source.is_file(), f"Frozen corrective source is missing: {_relative(source, root)}")
+    The caller must obtain and verify ``canonical_source_bytes`` from the
+    frozen Git identity before invoking this function.  The working-tree corpus
+    is intentionally not read here, so checkout CRLF/LF conversion cannot
+    affect the derived corrective corpus.
+    """
+
     require(not destination.exists(), f"Corrective corpus refuses overwrite or resume: {_relative(destination, root)}")
     patch_by_code = {str(item["code"]): item for item in patches}
     require(len(patch_by_code) == 2, "Corrective corpus patch contract must contain exactly two codes")
     changed: set[str] = set()
     lines: list[bytes] = []
-    for raw in source.read_bytes().splitlines():
+    for raw in canonical_source_bytes.splitlines():
         payload = json.loads(raw)
         code = str(payload.get("codigo", "")).strip()
         patch = patch_by_code.get(code)
@@ -130,17 +135,36 @@ def _flat_rows(evalset: Path, corpus_path: Path, index: Any, depth: int) -> tupl
     return cases, candidates, flat._metrics(cases)
 
 
+EV04_CASE_FIELDS = [
+    "case_id", "id_unico", "declaracion", "serie", "query", "nandina_ref", "partida_ref", "sub_partida_ref", "clase_ref",
+    "reference_code_in_corpus", "reference_doc_id", "rank_ref", "position_bucket", "coverage_class", "retrieved_count",
+    "raw_retrieved_count", "raw_repeated_code_count", "effective_ranking_has_repeated_codes", "top1_code", "top1_doc_id",
+    "top1_score", "reciprocal_rank", "method", "flag_missing_parent_4d", "flag_missing_parent_hs6", "flag_missing_both_parents",
+    "flag_duplicate_code_documents", "flag_generic_or_short_leaf_description",
+    *[f"hit_top_{k}" for k in hierarchical.K_VALUES],
+    *[f"hit_recall_{k}" for k in hierarchical.RECALL_K_VALUES],
+    *[item for k in hierarchical.HIERARCHICAL_K_VALUES for item in (f"exact_at_{k}", f"hs6_at_{k}", f"hs4_at_{k}", f"chapter_at_{k}")],
+    "hierarchical_evidence_class_at_100", "hierarchical_evidence_class_at_200",
+]
+
+EV04_CANDIDATE_FIELDS = [
+    "case_id", "id_unico", "nandina_ref", "candidate_rank", "candidate_raw_rank", "candidate_doc_id", "candidate_code",
+    "candidate_partida", "candidate_sub_partida", "candidate_clase", "score", "candidate_text", "is_reference_code", "method",
+]
+
+
 def _hierarchical_rows(evalset: Path, corpus_path: Path, index: Any, depth: int) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
-    """Reuse the frozen hierarchical query, collapse, rank, and metric helpers."""
+    """Reproduce the full EV04 schema with raw-document duplicate collapse.
+
+    ``corpus_maps`` is the frozen historical helper: it keeps the first source
+    document for metadata/flags while allowing several raw documents per code.
+    Retrieval remains raw BM25 over every document; ``collapse_hits`` applies
+    the historical first-score-occurrence rule before any rank or metric.
+    """
 
     eval_rows = hierarchical.read_csv(evalset)
     hierarchical.validate_eval(eval_rows)
-    corpus_by_code: dict[str, Mapping[str, Any]] = {}
-    for row in read_jsonl(corpus_path):
-        code = hierarchical.code8(row.get("codigo"))
-        if code and str(row.get("tipo", "")) == "nandina_8":
-            require(code not in corpus_by_code, f"Corrective EV04 corpus has duplicate NANDINA-8 code: {code}")
-            corpus_by_code[code] = row
+    corpus_by_code, code_flags, _ = hierarchical.corpus_maps(read_jsonl(corpus_path), {}, {})
     cases: list[dict[str, Any]] = []
     candidates: list[dict[str, Any]] = []
     for eval_row in eval_rows:
@@ -150,13 +174,21 @@ def _hierarchical_rows(evalset: Path, corpus_path: Path, index: Any, depth: int)
         hits, collapse = hierarchical.collapse_hits(raw_hits, depth)
         rank = rank_of_true(hits, expected)
         top = hits[0] if hits else {}
+        flags = code_flags.get(expected, {})
         row: dict[str, Any] = {
             "case_id": hierarchical.clean(eval_row.get("case_id")), "id_unico": hierarchical.clean(eval_row.get("id_unico")),
             "declaracion": hierarchical.clean(eval_row.get("DECLARACION")), "serie": hierarchical.clean(eval_row.get("SERIE")),
-            "query": query, "nandina_ref": expected, "rank_ref": rank, "retrieved_count": len(hits),
-            "raw_retrieved_count": collapse["raw_retrieved_count"], "raw_repeated_code_count": collapse["raw_repeated_code_count"],
+            "query": query, "nandina_ref": expected, "partida_ref": expected[:4], "sub_partida_ref": expected[:6], "clase_ref": expected[:2],
+            "reference_code_in_corpus": expected in corpus_by_code, "reference_doc_id": hierarchical.clean(corpus_by_code.get(expected, {}).get("doc_id")),
+            "rank_ref": rank, "position_bucket": hierarchical.position_bucket(rank),
+            "coverage_class": "reference_code_absent_from_corpus" if expected not in corpus_by_code else (hierarchical.position_bucket(rank) if rank > 0 else f"present_not_recovered_top_{depth}"),
+            "retrieved_count": len(hits), "raw_retrieved_count": collapse["raw_retrieved_count"], "raw_repeated_code_count": collapse["raw_repeated_code_count"],
             "effective_ranking_has_repeated_codes": int(collapse["effective_has_repeated_codes"]), "top1_code": hierarchical.clean(top.get("code")),
+            "top1_doc_id": hierarchical.clean(corpus_by_code.get(hierarchical.clean(top.get("code")), {}).get("doc_id")) if top else "",
             "top1_score": top.get("score", "") if top else "", "reciprocal_rank": mrr_from_rank(rank), "method": hierarchical.METHOD,
+            "flag_missing_parent_4d": bool(flags.get("missing_parent_4d", False)), "flag_missing_parent_hs6": bool(flags.get("missing_parent_hs6", False)),
+            "flag_missing_both_parents": bool(flags.get("missing_both_parents", False)), "flag_duplicate_code_documents": bool(flags.get("duplicate_code_documents", False)),
+            "flag_generic_or_short_leaf_description": bool(flags.get("generic_or_short_leaf_description", False)),
         }
         for k in hierarchical.K_VALUES:
             row[f"hit_top_{k}"] = int(acc_at_k(rank, k))
@@ -167,10 +199,17 @@ def _hierarchical_rows(evalset: Path, corpus_path: Path, index: Any, depth: int)
             row[f"hs6_at_{k}"] = hierarchical.family_hit(hits, expected, 6, k)
             row[f"hs4_at_{k}"] = hierarchical.family_hit(hits, expected, 4, k)
             row[f"chapter_at_{k}"] = hierarchical.family_hit(hits, expected, 2, k)
+        row["hierarchical_evidence_class_at_100"] = hierarchical.evidence_class(row, 100)
+        row["hierarchical_evidence_class_at_200"] = hierarchical.evidence_class(row, 200)
         cases.append(row)
         for hit in hits:
             code = hierarchical.clean(hit.get("code"))
-            candidates.append({"case_id": row["case_id"], "id_unico": row["id_unico"], "nandina_ref": expected, "candidate_rank": int(hit["rank"]), "candidate_raw_rank": int(hit.get("raw_rank", hit["rank"])), "candidate_code": code, "candidate_doc_id": hierarchical.clean(corpus_by_code.get(code, {}).get("doc_id")), "score": float(hit["score"]), "is_reference_code": int(code == expected), "method": hierarchical.METHOD})
+            candidates.append({
+                "case_id": row["case_id"], "id_unico": row["id_unico"], "nandina_ref": expected, "candidate_rank": int(hit["rank"]),
+                "candidate_raw_rank": int(hit.get("raw_rank", hit["rank"])), "candidate_doc_id": hierarchical.clean(corpus_by_code.get(code, {}).get("doc_id")) or f"NANDINA_{code}",
+                "candidate_code": code, "candidate_partida": code[:4], "candidate_sub_partida": code[:6], "candidate_clase": code[:2],
+                "score": float(hit["score"]), "candidate_text": hierarchical.clean(hit.get("text"))[:240], "is_reference_code": int(code == expected), "method": hierarchical.METHOD,
+            })
     return cases, candidates, hierarchical.metrics_from_cases(cases)
 
 
@@ -185,21 +224,43 @@ def evaluate_arm(arm: str, corpus_path: Path, index_path: Path, metadata_path: P
     if arm == "EV03":
         cases, candidates, metrics = _flat_rows(evalset, corpus_path, inputs["index"], depth)
         prefix = "normative_flat"
+        case_fields = sorted({key for row in cases for key in row})
+        candidate_fields = sorted({key for row in candidates for key in row})
     else:
         cases, candidates, metrics = _hierarchical_rows(evalset, corpus_path, inputs["index"], depth)
         prefix = "normative_hierarchical"
+        case_fields = EV04_CASE_FIELDS
+        candidate_fields = EV04_CANDIDATE_FIELDS
     output_dir.mkdir(parents=True, exist_ok=False)
     ranking = output_dir / f"{prefix}_results.csv"
     summary = output_dir / f"{prefix}_case_summary.csv"
     metric_file = output_dir / f"{prefix}_metrics.json"
-    _write_csv_new(ranking, _normalize_rows(candidates), sorted({key for row in candidates for key in row}))
-    _write_csv_new(summary, _normalize_rows(cases), sorted({key for row in cases for key in row}))
+    _write_csv_new(ranking, _normalize_rows(candidates), candidate_fields)
+    _write_csv_new(summary, _normalize_rows(cases), case_fields)
     payload = {"arm": arm, "dynamic_inputs": {key: value for key, value in inputs.items() if key not in {"metadata", "index"}}, "evalset": _relative(evalset, root), "evalset_sha256": sha256_file(evalset), "retrieval_depth": depth, "metrics": metrics, "outputs": {"ranking": _relative(ranking, root), "case_summary": _relative(summary, root)}}
     _write_json_new(metric_file, payload)
     return payload
 
 
-def compare_control_reproduction(expected_ranking: Path, actual_ranking: Path, expected_summary: Path, actual_summary: Path, expected_metrics: Mapping[str, Any], actual_metrics: Mapping[str, Any]) -> dict[str, Any]:
+def _csv_schema(path: Path) -> list[str]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.reader(handle)
+        header = next(reader, None)
+    require(header is not None, f"CSV has no deterministic header: {_relative(path)}")
+    return header
+
+
+def compare_control_reproduction(
+    expected_ranking: Path,
+    actual_ranking: Path,
+    expected_summary: Path,
+    actual_summary: Path,
+    expected_metrics: Mapping[str, Any],
+    actual_metrics: Mapping[str, Any],
+    *,
+    expected_candidate_schema: Sequence[str] | None = None,
+    expected_case_schema: Sequence[str] | None = None,
+) -> dict[str, Any]:
     """Require exact effective ranking, case summary, and metric evidence.
 
     Runtime/platform/timestamp metadata are intentionally outside this strict
@@ -207,13 +268,24 @@ def compare_control_reproduction(expected_ranking: Path, actual_ranking: Path, e
     evidence remains in scope.
     """
 
+    expected_candidate_schema = list(expected_candidate_schema or _csv_schema(expected_ranking))
+    expected_case_schema = list(expected_case_schema or _csv_schema(expected_summary))
+    require(_csv_schema(expected_ranking) == expected_candidate_schema, "Frozen control candidate schema drifted")
+    require(_csv_schema(expected_summary) == expected_case_schema, "Frozen control case schema drifted")
     expected_rank = flat._read_csv(expected_ranking)
     actual_rank = flat._read_csv(actual_ranking)
     expected_cases = flat._read_csv(expected_summary)
     actual_cases = flat._read_csv(actual_summary)
     metrics_equal = expected_metrics == actual_metrics
-    result = {"ranking_exact": expected_rank == actual_rank, "case_summary_exact": expected_cases == actual_cases, "metrics_exact": metrics_equal, "comparison_scope": "EFFECTIVE_FULL_RANKING_CASE_LEVEL_AND_METRICS_EXCLUDING_RUNTIME_TIMESTAMPS"}
-    require(all(result[key] for key in ("ranking_exact", "case_summary_exact", "metrics_exact")), "Mandatory control reproduction is not exact")
+    result = {
+        "ranking_schema_exact": _csv_schema(actual_ranking) == expected_candidate_schema,
+        "case_summary_schema_exact": _csv_schema(actual_summary) == expected_case_schema,
+        "ranking_exact": expected_rank == actual_rank,
+        "case_summary_exact": expected_cases == actual_cases,
+        "metrics_exact": metrics_equal,
+        "comparison_scope": "EFFECTIVE_FULL_RANKING_CASE_LEVEL_AND_METRICS_EXCLUDING_RUNTIME_TIMESTAMPS",
+    }
+    require(all(result[key] for key in ("ranking_schema_exact", "case_summary_schema_exact", "ranking_exact", "case_summary_exact", "metrics_exact")), "Mandatory control reproduction is not exact")
     return {**result, "status": "PASS"}
 
 
@@ -243,6 +315,8 @@ def reproduce_ev04_decision885_control(
         output_dir / "normative_hierarchical_case_summary.csv",
         frozen_metrics,
         result["metrics"],
+        expected_candidate_schema=EV04_CANDIDATE_FIELDS,
+        expected_case_schema=EV04_CASE_FIELDS,
     )
 
 
@@ -272,9 +346,27 @@ def write_execution_manifest(path: Path, payload: Mapping[str, Any]) -> None:
     _write_json_new(path, payload)
 
 
-def write_hash_ledger(path: Path, files: Sequence[Path], *, root: Path = ROOT) -> None:
-    require(path not in files, "Future hash ledger must exclude only itself")
-    _write_json_new(path, {"artifact_id": "0b05c_corrective_execution_hash_ledger_v0.1", "files": [{"path": _relative(item, root), "sha256": sha256_file(item)} for item in files]})
+def expected_ledger_paths(contract: Mapping[str, Any]) -> set[str]:
+    expected = contract.get("expected_paths")
+    require(isinstance(expected, list) and expected, "Ledger contract has no exact expected paths")
+    return {str(item) for item in expected}
+
+
+def actual_ledger_paths(files: Sequence[Path], *, root: Path = ROOT) -> set[str]:
+    return {_relative(item, root) for item in files}
+
+
+def write_hash_ledger(path: Path, files: Sequence[Path], contract: Mapping[str, Any], *, root: Path = ROOT) -> None:
+    """Write a ledger only when its contractual file universe is exact."""
+
+    ledger_relative = _relative(path, root)
+    require(ledger_relative == contract.get("excluded_self_path"), "Ledger self-exclusion path changed")
+    expected = expected_ledger_paths(contract)
+    actual = actual_ledger_paths(files, root=root)
+    require(ledger_relative not in actual, "Only the ledger itself may be excluded from the exact ledger set")
+    require(actual == expected, "Actual ledger paths do not equal the frozen exact contract")
+    require(all((root / item).is_file() for item in actual), "Ledger contract includes a missing file")
+    _write_json_new(path, {"artifact_id": "0b05c_corrective_execution_hash_ledger_v0.1", "files": [{"path": item, "sha256": sha256_file(root / item)} for item in sorted(actual)]})
 
 
 def build_parser() -> argparse.ArgumentParser:

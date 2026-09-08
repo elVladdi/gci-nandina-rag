@@ -19,23 +19,41 @@ from src.experiments.prepare_0b05c_corrective_numerical_gate_v01 import (
     INTEGRATED_BASE_COMMIT,
     RUNNER_PATH,
     TARGET_CODES,
+    authorization_snapshot,
     build_bundle,
     canonical_json_bytes,
     execute,
     future_roots,
     head_text_identity,
     integrated_base_is_ancestor,
+    immutable_authorization_projection,
     posix_relative,
     preflight,
     require_posix_serialization,
     require_frozen_bundle_matches,
     require_absent,
+    validate_authorization_transition,
     validate_current_text_identity,
 )
-from src.experiments.run_0b05c_corrective_numerical_v01 import execute_authorized, preflight as runner_preflight
+from src.experiments.run_0b05c_corrective_numerical_v01 import (
+    PIPELINE_STEPS,
+    execute_authorized,
+    preflight as runner_preflight,
+    run_authorized_pipeline,
+)
 from src.experiments import evaluate_normative_bm25_flat_data_aduanas_v02 as frozen_flat_runner
 from src.experiments import evaluate_normative_bm25_hierarchical_data_aduanas_v02 as frozen_hierarchical_runner
-from src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 import compare_control_reproduction, ev04_corrected_execution_permitted
+from src.experiments import evaluate_normative_bm25_hierarchical_data_aduanas_v02 as hierarchical
+from src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 import (
+    EV04_CANDIDATE_FIELDS,
+    EV04_CASE_FIELDS,
+    actual_ledger_paths,
+    compare_control_reproduction,
+    ev04_corrected_execution_permitted,
+    expected_ledger_paths,
+    materialize_corrective_corpus,
+    write_hash_ledger,
+)
 from src.experiments.run_d1a_corrective_0b05c_v01 import git_blob_sha256, git_head_blob_sha, sha256_bytes
 
 
@@ -249,13 +267,174 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
     def test_23_posix_serialization_is_stable_for_windows_style_repository_input(self) -> None:
         self.assertEqual(posix_relative("outputs\\audits\\0b05c\\gate.json"), "outputs/audits/0b05c/gate.json")
 
+    def test_23a_posix_relative_rejects_host_independent_escape_forms(self) -> None:
+        for value in ("", "/tmp/gate.json", r"C:\\audit\\gate.json", r"\\server\\share\\gate.json", "../gate.json", "outputs/../gate.json"):
+            with self.subTest(value=value), self.assertRaises(ContractViolation):
+                posix_relative(value)
+
     def test_24_execution_contract_includes_builders_producers_and_full_ledger(self) -> None:
         commands = self.ev03["prospective_execution"]["commands"]
-        self.assertIn("build_bm25_corrective_0b05c_v01", commands["ev03_build_command"])
+        self.assertIn("build_bm25_corrective_0b05c_v01", commands["ev03_control_reproduction_build_command"])
+        self.assertIn("index.pkl", commands["ev03_control_reproduction_build_command"])
         self.assertIn("build_bm25_corrective_0b05c_v01", self.ev04["prospective_execution"]["commands"]["ev04_corrected_build_command"])
         self.assertIn("produce_case_level_comparison", self.gate["comparison_producers"]["EV03_case_level"])
         self.assertIn("D1a corrected outputs", self.gate["hash_ledger_contract"]["covers"])
         self.assertEqual(self.gate["hash_ledger_contract"]["self_exclusion"], "Only the ledger file itself is excluded to avoid a circular hash.")
+
+    def test_24a_ev04_full_historical_schemas_and_duplicate_collapse_are_preserved(self) -> None:
+        expected_case = (ROOT / "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv").read_text(encoding="utf-8-sig").splitlines()[0].split(",")
+        expected_candidates = (ROOT / "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv").read_text(encoding="utf-8-sig").splitlines()[0].split(",")
+        self.assertEqual(EV04_CASE_FIELDS, expected_case)
+        self.assertEqual(EV04_CANDIDATE_FIELDS, expected_candidates)
+        raw_hits = [
+            {"code": "87044110", "rank": 1, "score": 9.0, "text": "first"},
+            {"code": "87044110", "rank": 2, "score": 8.0, "text": "second"},
+            {"code": "87045110", "rank": 3, "score": 7.0, "text": "third"},
+        ]
+        effective, details = hierarchical.collapse_hits(raw_hits, 200)
+        self.assertEqual(details["raw_retrieved_count"], 3)
+        self.assertEqual(details["raw_repeated_code_count"], 1)
+        self.assertEqual([(row["code"], row["raw_rank"], row["rank"]) for row in effective], [("87044110", 1, 1), ("87045110", 3, 2)])
+        corpus_by_code, flags, _ = hierarchical.corpus_maps([
+            {"tipo": "nandina_8", "codigo": "87044110", "doc_id": "first", "titulo": "first", "texto_index_jerarquico": "first", "descripcion_nandina_8d": "first"},
+            {"tipo": "nandina_8", "codigo": "87044110", "doc_id": "second", "titulo": "second", "texto_index_jerarquico": "second", "descripcion_nandina_8d": "second"},
+        ], {}, {})
+        self.assertEqual(corpus_by_code["87044110"]["doc_id"], "first")
+        self.assertTrue(flags["87044110"]["duplicate_code_documents"])
+
+    def test_24b_full_ev04_control_fixture_rejects_each_mismatch_type(self) -> None:
+        def row(fields: list[str], values: dict[str, object]) -> str:
+            return ",".join(str(values.get(field, "")) for field in fields)
+
+        metrics = {
+            "top_1": 1.0,
+            "top_1_numerator": 1,
+            "top_1_denominator": 1,
+            "metric_table": [{"metric": "top_1", "numerator": 1, "denominator": 1, "value": 1.0}],
+        }
+        candidate = {"case_id": "A", "id_unico": "1", "nandina_ref": "87044110", "candidate_rank": 1, "candidate_raw_rank": 1, "candidate_doc_id": "first", "candidate_code": "87044110", "score": 9.0, "is_reference_code": 1, "method": "fixture"}
+        case = {"case_id": "A", "id_unico": "1", "nandina_ref": "87044110", "rank_ref": 1, "retrieved_count": 1, "raw_retrieved_count": 2, "raw_repeated_code_count": 1, "top1_code": "87044110", "reciprocal_rank": 1.0, "method": "fixture", "hit_top_1": 1, "hit_recall_200": 1, "exact_at_200": 1, "hierarchical_evidence_class_at_100": "exact_recovered", "hierarchical_evidence_class_at_200": "exact_recovered"}
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            expected_ranking, actual_ranking = root / "expected_ranking.csv", root / "actual_ranking.csv"
+            expected_summary, actual_summary = root / "expected_summary.csv", root / "actual_summary.csv"
+            candidate_csv = ",".join(EV04_CANDIDATE_FIELDS) + "\n" + row(EV04_CANDIDATE_FIELDS, candidate) + "\n"
+            case_csv = ",".join(EV04_CASE_FIELDS) + "\n" + row(EV04_CASE_FIELDS, case) + "\n"
+            for path, text in ((expected_ranking, candidate_csv), (actual_ranking, candidate_csv), (expected_summary, case_csv), (actual_summary, case_csv)):
+                path.write_text(text, encoding="utf-8", newline="\n")
+            self.assertEqual(compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, metrics, dict(metrics), expected_candidate_schema=EV04_CANDIDATE_FIELDS, expected_case_schema=EV04_CASE_FIELDS)["status"], "PASS")
+            actual_ranking.write_text(candidate_csv.replace(",9.0,", ",8.0,"), encoding="utf-8", newline="\n")
+            with self.assertRaisesRegex(ContractViolation, "not exact"):
+                compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, metrics, dict(metrics), expected_candidate_schema=EV04_CANDIDATE_FIELDS, expected_case_schema=EV04_CASE_FIELDS)
+            actual_ranking.write_text(candidate_csv, encoding="utf-8", newline="\n")
+            actual_summary.write_text(case_csv.replace(",1.0,fixture,", ",0.5,fixture,"), encoding="utf-8", newline="\n")
+            with self.assertRaisesRegex(ContractViolation, "not exact"):
+                compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, metrics, dict(metrics), expected_candidate_schema=EV04_CANDIDATE_FIELDS, expected_case_schema=EV04_CASE_FIELDS)
+            actual_summary.write_text(case_csv, encoding="utf-8", newline="\n")
+            with self.assertRaisesRegex(ContractViolation, "not exact"):
+                compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, metrics, {**metrics, "top_1": 0.0}, expected_candidate_schema=EV04_CANDIDATE_FIELDS, expected_case_schema=EV04_CASE_FIELDS)
+            actual_ranking.write_text("case_id\nA\n", encoding="utf-8", newline="\n")
+            with self.assertRaisesRegex(ContractViolation, "not exact"):
+                compare_control_reproduction(expected_ranking, actual_ranking, expected_summary, actual_summary, metrics, dict(metrics), expected_candidate_schema=EV04_CANDIDATE_FIELDS, expected_case_schema=EV04_CASE_FIELDS)
+
+    def test_24c_corrective_corpus_uses_canonical_blob_bytes_and_exact_ledger_set(self) -> None:
+        source = b'{"codigo":"87044110","version":"Decision_885","texto":"old"}\n{"codigo":"87045110","version":"Decision_885","texto":"old"}\n'
+        patches = [
+            {"code": "87044110", "match": {"original_jsonl_line_sha256": sha256_bytes(source.splitlines()[0])}, "replacement": {"texto": "new"}},
+            {"code": "87045110", "match": {"original_jsonl_line_sha256": sha256_bytes(source.splitlines()[1])}, "replacement": {"texto": "new"}},
+        ]
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            corrected = root / "derived/corrected.jsonl"
+            materialize_corrective_corpus(source, corrected, patches, root=root)
+            self.assertIn(b'"texto":"new"', corrected.read_bytes())
+            first = root / "runtime/a.json"
+            second = root / "runtime/b.json"
+            first.parent.mkdir(parents=True)
+            first.write_text("a\n", encoding="utf-8", newline="\n")
+            second.write_text("b\n", encoding="utf-8", newline="\n")
+            contract = {"expected_paths": ["runtime/a.json", "runtime/b.json"], "excluded_self_path": "runtime/ledger.json"}
+            self.assertEqual(expected_ledger_paths(contract), {"runtime/a.json", "runtime/b.json"})
+            self.assertEqual(actual_ledger_paths([first, second], root=root), {"runtime/a.json", "runtime/b.json"})
+            write_hash_ledger(root / "runtime/ledger.json", [first, second], contract, root=root)
+            with self.assertRaises(ContractViolation):
+                write_hash_ledger(root / "runtime/extra-ledger.json", [first], contract, root=root)
+
+    def test_24d_authorization_transition_accepts_only_the_four_declared_fields(self) -> None:
+        contract = {
+            "allowed_transition": "NOT_AUTHORIZED -> AUTHORIZED",
+            "allowed_authorization_fields": {
+                "gate": ["EV03_NUMERICAL_EXECUTION", "EV04_NUMERICAL_EXECUTION", "D1A_NUMERICAL_EXECUTION", "UNIFIED_0B05C_NUMERICAL_EXECUTION"],
+                "arm_specs": ["EV03_NUMERICAL_EXECUTION", "EV04_NUMERICAL_EXECUTION"],
+                "d1a_spec": ["D1A_NUMERICAL_EXECUTION"],
+            },
+        }
+        baseline = authorization_snapshot(
+            {
+                "authorization": {name: "NOT_AUTHORIZED" for name in contract["allowed_authorization_fields"]["gate"]},
+                "arms": {"EV03": {"specification_sha256": "a"}, "EV04": {"specification_sha256": "b"}},
+                "corrective_execution_binding": {"runner": "frozen-runner"},
+            },
+            {
+                "EV03": {"authorization": {"EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED"}, "corrective_corpus": {"patches": ["fixed"]}, "frozen_inputs": {"bm25_parameters": {"k1": 1.5, "b": 0.75}}, "prospective_execution": {"corrected_output_root": "outputs/ev03"}, "primary_original_control": {"metric_definitions": ["mrr"]}},
+                "EV04": {"authorization": {"EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED"}, "corrective_corpus": {"patches": ["fixed"]}, "frozen_inputs": {"bm25_parameters": {"k1": 1.5, "b": 0.75}}, "prospective_execution": {"corrected_output_root": "outputs/ev04"}, "primary_original_control": {"metric_definitions": ["mrr"]}},
+            },
+            {"authorization": {"D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED"}, "specification_status": "CLOSED_PROSPECTIVELY"},
+        )
+        validate_authorization_transition(baseline, copy.deepcopy(baseline), contract, require_authorized=False)
+        candidate = copy.deepcopy(baseline)
+        for name in contract["allowed_authorization_fields"]["gate"]:
+            candidate["gate"]["authorization"][name] = "AUTHORIZED"
+        for arm_name in ("EV03", "EV04"):
+            candidate["specifications"][arm_name]["authorization"][f"{arm_name}_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+            candidate["gate"]["arms"][arm_name]["specification_sha256"] = "derived"
+        candidate["d1a_spec"]["authorization"]["D1A_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        validate_authorization_transition(baseline, candidate, contract, require_authorized=True)
+        self.assertEqual(
+            immutable_authorization_projection(baseline, contract),
+            immutable_authorization_projection(candidate, contract),
+        )
+        mutations = {
+            "patch": ("specifications", "EV03", "corrective_corpus", "patches"),
+            "runner": ("gate", "corrective_execution_binding", "runner"),
+            "bm25": ("specifications", "EV04", "frozen_inputs", "bm25_parameters", "k1"),
+            "output": ("specifications", "EV03", "prospective_execution", "corrected_output_root"),
+            "metrics": ("specifications", "EV04", "primary_original_control", "metric_definitions"),
+        }
+        for label, path in mutations.items():
+            changed = copy.deepcopy(candidate)
+            cursor = changed
+            for key in path[:-1]:
+                cursor = cursor[key]
+            cursor[path[-1]] = f"changed-{label}"
+            with self.subTest(label=label), self.assertRaises(ContractViolation):
+                validate_authorization_transition(baseline, changed, contract, require_authorized=True)
+        incomplete = copy.deepcopy(candidate)
+        incomplete["d1a_spec"]["authorization"]["D1A_NUMERICAL_EXECUTION"] = "NOT_AUTHORIZED"
+        with self.assertRaises(ContractViolation):
+            validate_authorization_transition(baseline, incomplete, contract, require_authorized=True)
+
+    def test_24e_authorized_pipeline_fake_has_exact_order_and_runtime_control_gates(self) -> None:
+        calls: list[str] = []
+        names = (
+            "authorized_preflight", "ev03_control", "verify_ev03", "ev03_materialize", "ev03_build", "ev03_evaluate",
+            "ev04_control", "verify_ev04", "ev04_materialize", "ev04_build", "ev04_evaluate", "d1a_execute",
+            "integrity", "case_comparisons", "aggregate_comparisons", "summary", "manifest", "ledger", "final_state",
+        )
+
+        def operation(name: str):
+            def invoke() -> dict[str, str]:
+                calls.append(name)
+                return {"status": "PASS"}
+            return invoke
+
+        result = run_authorized_pipeline({name: operation(name) for name in names})
+        self.assertEqual(result["execution_order"], list(PIPELINE_STEPS))
+        self.assertEqual(calls, list(names))
+        self.assertLess(calls.index("ev03_control"), calls.index("ev03_materialize"))
+        self.assertLess(calls.index("verify_ev04"), calls.index("ev04_materialize"))
+        self.assertLess(calls.index("ev04_evaluate"), calls.index("d1a_execute"))
+        self.assertEqual(calls[-2], "ledger")
 
     def test_25_historical_fixed_hash_guards_reject_a_derived_corpus_and_ev04_needs_both_gates(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -277,3 +456,4 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+    authorization_snapshot,
