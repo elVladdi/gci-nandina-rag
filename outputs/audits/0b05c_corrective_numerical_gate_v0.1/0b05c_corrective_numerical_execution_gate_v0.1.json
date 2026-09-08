@@ -5,21 +5,21 @@
       "original_ranking_overlap_sha256": "90fcc8eb3d853673f22f6ac6adbbf232edd5dbc573e54562fbfe72bc6fd4caff",
       "original_run_identity": "FULLY_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
       "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "e21ad19165434aba2bef9bb856824b63821393dda854e62d5af617b0b91035cd"
+      "specification_sha256": "fca1852345991faab33b7b148427bc4eedc8b94984f205f3774ea18be822ee72"
     },
     "EV04": {
       "original_ranking_overlap_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_original_ranking_overlap_v0.1.json",
       "original_ranking_overlap_sha256": "491ef925f674b312570ea55907c462aa9622ba7ed8a0ada2917905345a75f364",
       "original_run_identity": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
       "specification_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_corrective_execution_spec_v0.1.json",
-      "specification_sha256": "dbfd4e3968a1054ad959fbfa272eb8c5153b42981c9f487b396e8362cdf7b7a4"
+      "specification_sha256": "a026d23e2e77fb01b25b9b0c3315438782ee3540f18499b3684bc4785510d6e0"
     }
   },
   "authorization": {
-    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV04_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "AUTHORIZED",
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false
   },

@@ -1,0 +1,11 @@
+{
+  "artifact_id": "0b05c_authorization_record_v0.1",
+  "schema_version": 1,
+  "authorization_baseline_commit": "0e074db638f6b7163d98d34f08f76e1efde07b7f",
+  "baseline_artifacts": {
+    "unified_gate": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/0b05c_corrective_numerical_execution_gate_v0.1.json",
+    "ev03_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev03_corrective_execution_spec_v0.1.json",
+    "ev04_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.1/ev04_corrective_execution_spec_v0.1.json",
+    "d1a_spec": "outputs/audits/d1a_preexecution_0b05c_v0.1/d1a_0b05c_corrective_execution_spec_v0.1.json"
+  }
+}

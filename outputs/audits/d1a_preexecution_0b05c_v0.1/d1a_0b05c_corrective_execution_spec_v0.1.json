@@ -2,7 +2,7 @@
   "specification_id": "d1a_corrective_execution_spec_v0.1",
   "specification_status": "CLOSED_PROSPECTIVELY",
   "authorization": {
-    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
     "D1A_CORRECTIVE_CORPUS_CREATED": false,
     "D1A_CORRECTIVE_INDEX_CREATED": false,
     "D1A_CORRECTIVE_METRICS_COMPUTED": false
