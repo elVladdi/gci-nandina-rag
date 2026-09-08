@@ -222,23 +222,20 @@ EXP-11A ✅
   ↓
 NEW_HISTORICAL_GATE — Forensic Audit 01 ✅
   ↓
-Gate 02 ad4c630... ✅ CLOSED / INTEGRATED
+Gate 02 ad4c630... ✅ CLOSED / APPROVED / INTEGRATED
   ↓
-Usuario agrega NUEVA_01 según contrato ⏳
+Real Ingest 01 — NUEVA_01 ✅ COMPLETED / APPROVED
+  - eligible pool: 6,029 rows / 43 DAM / 56 NANDINA
+  - H150/H200 feasible
   ↓
-Python valida e ingiere exclusivamente NUEVA_01
-  ↓
-Gate de capacidad / integridad de nueva data
-  ↓
-Python procesa exclusivamente nueva(s) hoja(s)
-  ↓
-NEW_HISTORICAL_GATE de datos ampliados
+NEW_HISTORICAL_GATE 03 ✅ CLOSED / APPROVED / INTEGRATED
   ↓
 EXP11B Bank Materialization ✅ CLOSED / APPROVED / INTEGRATED
   ↓
 EXP11B Retrieval Execution Gate ✅ APPROVED / INTEGRATED
   ↓
 EXP11B Retrieval Execution ⛔ NOT_AUTHORIZED / NOT_EXECUTED
+  - EXP11B_PORTABILITY_DEBT=OPEN
   ↓
 0B-05C v0.1 Corrective Numerical Gate and Authorization ✅ HISTORICAL / INTEGRATED / SUPERSEDED FOR NEW EXECUTION
   - D1a training exposure: NO_EFFECTIVE_EXPOSURE_IDENTIFIED
@@ -261,7 +258,6 @@ EV03 Historical Recovery v0.2 ✅ APPROVED / VERSIONED / INTEGRATED
   - authorization_readiness=NOT_AUTHORIZATION_READY
   - EV03/EV04/D1a/unified v0.2=NOT_AUTHORIZED / NOT_EXECUTED
   - corrective retrieval and metrics not executed; runtime authorization record v0.2 absent
-  - EXP11B_PORTABILITY_DEBT=OPEN; blocks D1a=false; blocks EXP11B retrieval authorization=true
   ↓
 0B-05C Numerical Gate/Runner v0.2 ⏳ NEXT / NOT_YET_BUILT / NOT_AUTHORIZATION_READY
   - construct and audit a separate prospective v0.2 numerical gate/runner
