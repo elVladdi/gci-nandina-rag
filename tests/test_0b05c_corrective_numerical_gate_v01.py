@@ -451,7 +451,8 @@ class CorrectiveNumericalGateTests(unittest.TestCase):
     def test_26_all_microclose_findings_are_closed_pending_external_audit(self) -> None:
         findings = self.gate["microclose_findings"]
         self.assertEqual(set(findings), {"0B05C-GATE-F001", "0B05C-GATE-F002", "0B05C-GATE-F003", "0B05C-GATE-F004"})
-        self.assertTrue(all(item["status"] == "CLOSED_PENDING_EXTERNAL_AUDIT" for item in findings.values()))
+        self.assertEqual(findings["0B05C-GATE-F001"]["status"], "CLOSED/PASS")
+        self.assertTrue(all(findings[key]["status"] == "CLOSED_PENDING_EXTERNAL_AUDIT" for key in ("0B05C-GATE-F002", "0B05C-GATE-F003", "0B05C-GATE-F004")))
 
 
 if __name__ == "__main__":

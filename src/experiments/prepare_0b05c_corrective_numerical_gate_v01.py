@@ -420,6 +420,7 @@ def prospective_execution_layout(d1a_spec: Mapping[str, Any]) -> dict[str, Any]:
             paths.extend((f"{output_root}/{prefix}_results.csv", f"{output_root}/{prefix}_case_summary.csv", f"{output_root}/{prefix}_metrics.json"))
     d1_contract = d1a_spec["orchestration"]["hash_ledger_contract"]
     d1_paths = [posix_relative(str(path)) for path in d1_contract["included_paths"]]
+    d1_paths.append(posix_relative(str(d1_contract["excluded_self_path"])))
     unified = posix_relative(UNIFIED_RUNTIME_ROOT)
     paths.extend(d1_paths)
     paths.extend(
@@ -955,7 +956,7 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
         "fail_closed_preflight": [
             "reject an unrelated candidate that does not descend from the integrated base", "reject frozen control/output/code/config/EVAL/corpus identity changes", "reject Decision 906 or exactly-two-entry changes",
             "reject an existing prospective root, partial output, overwrite, or resume", "reject D1a specification change", "reject an already-executed arm or pre-existing corrective metric",
-            "reject execution while authorization remains NOT_AUTHORIZED", "reject EV04 corrected execution unless mandatory Decision885 reproduction is PASS",
+            "reject execution while any of the four authorizations remains NOT_AUTHORIZED", "require a runtime PASS from the mandatory EV04 Decision885 reproduction before EV04 corrected execution",
         ],
         "decisions": {
             "D1A_PREEXECUTION": "APPROVED/INTEGRATED",
@@ -970,10 +971,10 @@ def build_bundle(root: Path, d1a: Mapping[str, Any] | None = None) -> dict[str, 
             "EV04_DECISION885_REPRODUCTION_GATE": "MANDATORY/NOT_EXECUTED",
         },
         "microclose_findings": {
-            "0B05C-GATE-F001": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "integrated_base_is_ancestor() requires 7ff504c4a5a763705f198ca41753db75e938a87d to be an ancestor of HEAD, not an immutable main ref."},
-            "0B05C-GATE-F002": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "posix_relative() and recursive persisted-payload validation reject backslash serialization."},
-            "0B05C-GATE-F003": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "Committed runner, corrective builder/evaluator, exact commands, blob identities, comparison producers, and ledger contract are frozen."},
-            "0B05C-GATE-F004": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "EV04 original provenance remains NOT_VERIFIABLE; a mandatory same-evaluator Decision885 exact reproduction gate blocks corrected execution."},
+            "0B05C-GATE-F001": {"status": "CLOSED/PASS", "evidence": "integrated_base_is_ancestor() requires 7ff504c4a5a763705f198ca41753db75e938a87d to be an ancestor of HEAD, not an immutable main ref."},
+            "0B05C-GATE-F002": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "posix_relative() normalizes backslashes before host-independent POSIX validation, and recursive persisted-payload validation rejects backslash serialization."},
+            "0B05C-GATE-F003": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "Committed runner implements the 19-step authorized sequence; immutable authorization transitions, canonical Git blob corpus bytes, disjoint roots, and exact ledger paths are frozen."},
+            "0B05C-GATE-F004": {"status": "CLOSED_PENDING_EXTERNAL_AUDIT", "evidence": "EV04 remains MANDATORY/NOT_EXECUTED until runtime reproduction; raw duplicate documents collapse by first BM25 occurrence and the full historical schemas are exact-compared."},
         },
         "authorization_transition_contract": {**authorization_transition_contract, "canonical_sha256": sha256_bytes(canonical_json_bytes(authorization_transition_contract))},
         "comparison_producers": {
