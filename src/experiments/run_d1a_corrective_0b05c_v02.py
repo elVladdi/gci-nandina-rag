@@ -7,10 +7,11 @@ import json
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 from .prepare_0b05c_corrective_numerical_gate_v02 import (
     AUDIT_ROOT,
+    AUTHORIZATION_RECORD,
     ContractViolation,
     D1A_ROOTS,
     ROOT,
@@ -22,6 +23,29 @@ from . import run_d1a_corrective_0b05c_v01 as legacy
 
 
 SPEC_PATH = AUDIT_ROOT / "d1a_numerical_execution_spec_v0.2.json"
+REQUIRED_UNIFIED_AUTHORIZATIONS = {
+    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV04_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "AUTHORIZED",
+}
+
+
+def validate_unified_authorization_proof(proof: Mapping[str, Any]) -> None:
+    require(proof.get("status") == "PASS", "Unified authorization proof did not PASS")
+    require(proof.get("mode") == "AUTHORIZED_PREFLIGHT_ONLY", "Unified authorization proof mode is invalid")
+    require(proof.get("authorization") == REQUIRED_UNIFIED_AUTHORIZATIONS, "Unified authorization proof does not contain all four authorizations")
+    baseline = proof.get("authorization_baseline_commit")
+    require(isinstance(baseline, str) and len(baseline) == 40, "Unified authorization baseline is missing")
+    record = proof.get("authorization_record")
+    require(isinstance(record, Mapping), "Unified authorization record proof is missing")
+    require(record.get("authorization_baseline_commit") == baseline, "Unified authorization record baseline mismatch")
+    binding = proof.get("authorization_record_binding")
+    require(isinstance(binding, Mapping), "Unified authorization record binding is missing")
+    require(binding.get("path") == AUTHORIZATION_RECORD.as_posix(), "Unified authorization record path mismatch")
+    require(all(binding.get(key) for key in ("path", "git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes")), "Unified authorization record binding is incomplete")
+    authorized_artifacts = proof.get("authorized_artifact_bindings")
+    require(isinstance(authorized_artifacts, Mapping) and set(authorized_artifacts) == {"unified_gate", "ev03_spec", "ev04_spec", "d1a_spec"}, "Unified authorized artifact bindings are incomplete")
 
 
 def preflight(root: Path = ROOT, *, revision: str = "HEAD") -> dict[str, Any]:
@@ -53,7 +77,12 @@ def preflight(root: Path = ROOT, *, revision: str = "HEAD") -> dict[str, Any]:
     }
 
 
-def execute_authorized(root: Path = ROOT) -> dict[str, Any]:
+def execute_authorized(root: Path = ROOT, *, authorization_proof: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    if authorization_proof is None:
+        from .run_0b05c_corrective_numerical_v02 import preflight_authorized
+
+        authorization_proof = preflight_authorized(root)
+    validate_unified_authorization_proof(authorization_proof)
     spec = read_json(root, SPEC_PATH)
     require(spec["authorization"]["D1A_NUMERICAL_EXECUTION"] == "AUTHORIZED", "D1a v0.2 numerical execution is NOT_AUTHORIZED")
     proof = preflight(root)

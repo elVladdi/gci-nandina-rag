@@ -60,13 +60,27 @@ def build(arm: str, corpus_path: Path, output_path: Path, metadata_path: Path, *
     output_path.parent.mkdir(parents=True, exist_ok=False)
     with output_path.open("xb") as handle:
         pickle.dump(index, handle)
+    corpus_sha = sha256_file(corpus_path)
+    index_sha = sha256_file(output_path)
+    config_path = root / CONFIG_PATH
     metadata = {
         "artifact_id": f"0b05c_{arm.lower()}_corrective_bm25_index_v0.2",
         "arm": arm,
         "semantics": ARM_SEMANTICS[arm],
         "bm25_params": {"k1": k1, "b": b},
-        "input_sha256": sha256_file(corpus_path),
-        "index_sha256": sha256_file(output_path),
+        "input": {
+            "corpus_path": corpus_path.relative_to(root).as_posix(),
+            "corpus_sha256": corpus_sha,
+            "config_path": CONFIG_PATH.as_posix(),
+            "config_sha256": sha256_file(config_path),
+        },
+        "output": {
+            "bm25_index_path": output_path.relative_to(root).as_posix(),
+            "bm25_index_sha256": index_sha,
+            "metadata_path": metadata_path.relative_to(root).as_posix(),
+        },
+        "input_sha256": corpus_sha,
+        "index_sha256": index_sha,
         "index_stats": stats,
         "identity_policy": "DERIVED_ONLY_AT_FUTURE_AUTHORIZED_EXECUTION",
     }

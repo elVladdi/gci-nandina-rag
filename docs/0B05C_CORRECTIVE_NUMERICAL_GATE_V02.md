@@ -28,6 +28,12 @@ EV03 can report `PASS_EXACT` only after executable checks of logical index ident
 
 The future exact runtime ledger has an explicit allowlist. It includes the three corrected corpus file roots, all control/corrected indexes and evaluation outputs, D1a outputs and comparisons, unified comparisons, summary, manifest, and runtime authorization record. It excludes only its own file and fails closed on either missing or unexpected contractual output. The unified summary references the D1a aggregate comparison, case-level evidence, execution manifest, and D1a ledger by path, SHA-256, and size.
 
+The v0.2 BM25 builder emits the nested `input` and `output` identity schema consumed by the frozen evaluator, while retaining its additional provenance fields. A synthetic builder-to-evaluator test loads the produced index and verifies the corpus and index identities without using the real EVAL dataset.
+
+D1a cannot execute from its standalone authorization string. Direct use first obtains the same unified authorization proof, while step 12 receives the proof validated at step 1 so it does not repeat the all-roots-absent check after EV03/EV04 have run. The proof must bind all four authorizations, the baseline, authorization record, and four authorized gate/spec artifacts.
+
+Future runtime provenance preserves the authorization commit, baseline commit, externally approved authorization record binding, all four authorization states, and current gate/spec bindings. The execution manifest binds the runtime authorization record by path, SHA-256, and size. D1a aggregate evidence is accepted only when its 17 metrics appear in the frozen order with complete numeric row fields.
+
 ## Isolation and persistence
 
 All prospective roots use the v0.2 namespace and must be absent before execution. Creation is single-shot: overwrite, resume, retry, and reuse of v0.1 evidence roots are forbidden. The v0.1 gate remains historical, integrated, and superseded for new execution; its artifacts are not modified.

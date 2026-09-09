@@ -6,12 +6,14 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import subprocess
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from .prepare_0b05c_corrective_numerical_gate_v02 import (
     AUTHORIZATION,
+    AUTHORIZATION_BASELINE_ARTIFACTS,
     AUTHORIZATION_RECORD,
     AUTHORIZED_GATE_STATUS,
     AUTHORIZED_READINESS,
@@ -67,6 +69,12 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
         require(not (root / relative).exists(), f"Prospective v0.2 root already exists: {relative}")
     validate_dependency_bindings(root, gate["dependency_bindings"])
     candidate = transition["candidate"]
+    authorization_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True).stdout.strip()
+    authorization_record_binding = git_binding(root, AUTHORIZATION_RECORD.as_posix(), "HEAD")
+    authorized_artifact_bindings = {
+        key: git_binding(root, path, "HEAD")
+        for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+    }
     return {
         "status": "PASS",
         "mode": "AUTHORIZED_PREFLIGHT_ONLY",
@@ -74,6 +82,10 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
         "authorization": current,
         "authorization_baseline_commit": transition["baseline_commit"],
         "authorization_record": transition["record"],
+        "authorization_record_binding": authorization_record_binding,
+        "execution_authorization_commit": authorization_commit,
+        "baseline_external_audit": transition["record"]["baseline_external_audit"],
+        "authorized_artifact_bindings": authorized_artifact_bindings,
         "bundle": {
             "gate": gate,
             "EV03": candidate["EV03"],
@@ -110,6 +122,66 @@ def _write_json_new(path: Path, payload: Mapping[str, Any]) -> dict[str, Any]:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     return dict(payload)
+
+
+def build_runtime_authorization_provenance(proof: Mapping[str, Any]) -> dict[str, Any]:
+    required_authorization = {key: "AUTHORIZED" for key in AUTHORIZATION if key.endswith("NUMERICAL_EXECUTION")}
+    require(proof.get("status") == "PASS" and proof.get("mode") == "AUTHORIZED_PREFLIGHT_ONLY", "Runtime authorization proof is invalid")
+    require(proof.get("authorization") == required_authorization, "Runtime authorization proof lacks four authorized states")
+    authorization_commit = proof.get("execution_authorization_commit")
+    baseline_commit = proof.get("authorization_baseline_commit")
+    require(isinstance(authorization_commit, str) and len(authorization_commit) == 40, "Execution authorization commit is missing")
+    require(isinstance(baseline_commit, str) and len(baseline_commit) == 40, "Authorization baseline commit is missing")
+    record = proof.get("authorization_record")
+    binding = proof.get("authorization_record_binding")
+    require(isinstance(record, Mapping), "Authorization record proof is missing")
+    require(record.get("authorization_baseline_commit") == baseline_commit, "Authorization record baseline mismatch")
+    require(isinstance(binding, Mapping) and binding.get("path") == AUTHORIZATION_RECORD.as_posix(), "Authorization record binding is missing")
+    require(all(binding.get(key) is not None for key in ("git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes")), "Authorization record binding is incomplete")
+    authorized_artifacts = proof.get("authorized_artifact_bindings")
+    require(isinstance(authorized_artifacts, Mapping) and set(authorized_artifacts) == set(AUTHORIZATION_BASELINE_ARTIFACTS), "Authorized artifact bindings are incomplete")
+    require(proof.get("baseline_external_audit") == "PASS / APPROVED_FOR_INTEGRATION", "Authorization baseline external audit is invalid")
+    return {
+        "status": "PASS",
+        "mode": "AUTHORIZED_PREFLIGHT_ONLY",
+        "execution_authorization_commit": authorization_commit,
+        "authorization_baseline_commit": baseline_commit,
+        "authorization": dict(required_authorization),
+        "authorization_record": {
+            "path": binding["path"],
+            "git_blob_sha1": binding["git_blob_sha1"],
+            "canonical_git_blob_sha256": binding["canonical_git_blob_sha256"],
+            "canonical_size_bytes": binding["canonical_size_bytes"],
+        },
+        "baseline_external_audit": proof["baseline_external_audit"],
+        "authorized_artifacts": {key: dict(value) for key, value in authorized_artifacts.items()},
+    }
+
+
+def file_reference(root: Path, path: Path) -> dict[str, Any]:
+    require(path.is_file(), f"Runtime provenance file is missing: {path}")
+    return {"path": path.relative_to(root).as_posix(), "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "size_bytes": path.stat().st_size}
+
+
+def build_execution_manifest_payload(
+    root: Path,
+    runtime_authorization_record: Path,
+    proof: Mapping[str, Any],
+    control: Mapping[str, Any],
+    corrected: Mapping[str, Any],
+    d1a_result: Mapping[str, Any],
+) -> dict[str, Any]:
+    provenance = build_runtime_authorization_provenance(proof)
+    return {
+        "status": "PASS",
+        "execution_order": list(PIPELINE_STEPS),
+        "execution_authorization_commit": provenance["execution_authorization_commit"],
+        "authorization_baseline_commit": provenance["authorization_baseline_commit"],
+        "runtime_authorization_record": file_reference(root, runtime_authorization_record),
+        "control_reproductions": dict(control),
+        "corrected_arms": dict(corrected),
+        "d1a": dict(d1a_result),
+    }
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:
@@ -188,7 +260,20 @@ def _d1a_summary_reference(root: Path, spec: Mapping[str, Any], result: Mapping[
         require(path.is_file(), f"D1a contractual output is missing: {relative}")
         references[key] = {"path": relative, "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "size_bytes": path.stat().st_size}
     aggregate = json.loads((root / references["aggregate_comparison"]["path"]).read_text(encoding="utf-8"))
-    require(isinstance(aggregate.get("metrics"), list), "D1a aggregate comparison is malformed")
+    metrics = aggregate.get("metrics")
+    expected_metrics = spec.get("orchestration", {}).get("comparison_contract", {}).get("aggregate_metrics")
+    require(isinstance(expected_metrics, list) and len(expected_metrics) == 17, "D1a aggregate metric contract is malformed")
+    require(isinstance(metrics, list) and len(metrics) == len(expected_metrics), "D1a aggregate comparison metric count is invalid")
+    names = [row.get("metric") if isinstance(row, Mapping) else None for row in metrics]
+    require(names == expected_metrics and len(set(names)) == len(names), "D1a aggregate metric names or order changed")
+    row_fields = {"metric", "original_numerator", "corrected_numerator", "denominator", "original_value", "corrected_value", "absolute_delta"}
+    numeric_fields = row_fields - {"metric"}
+    for row in metrics:
+        require(isinstance(row, Mapping) and row_fields <= set(row), "D1a aggregate metric row schema is incomplete")
+        require(
+            all(isinstance(row[field], (int, float)) and not isinstance(row[field], bool) and math.isfinite(float(row[field])) for field in numeric_fields),
+            "D1a aggregate metric row contains a non-numeric value",
+        )
     manifest = json.loads((root / references["execution_manifest"]["path"]).read_text(encoding="utf-8"))
     require(manifest.get("status") == "PASS", "D1a execution manifest did not PASS")
     require(references["case_level_comparison"]["size_bytes"] > 0, "D1a case-level comparison is empty")
@@ -230,12 +315,16 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
     paths = {name: _arm_paths(root, name, specs[name]) for name in specs}
     runtime_root = root / proof["bundle"]["gate"]["future_roots"][-1]
     evaluation_root = root / proof["bundle"]["gate"]["future_roots"][-2]
+    runtime_authorization_record = runtime_root / "runtime_authorization_record_v0.2.json"
     control: dict[str, Mapping[str, Any]] = {}
     corrected: dict[str, Mapping[str, Any]] = {}
     case_comparisons: dict[str, Mapping[str, Any]] = {}
     aggregate_comparisons: dict[str, Mapping[str, Any]] = {}
     d1a_result: Mapping[str, Any] = {}
     d1a_summary: Mapping[str, Any] = {}
+
+    def unified_preflight() -> Mapping[str, Any]:
+        return _write_json_new(runtime_authorization_record, build_runtime_authorization_provenance(proof))
 
     def reproduce(arm: str) -> Mapping[str, Any]:
         spec, item = specs[arm], paths[arm]
@@ -293,7 +382,7 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
 
     def execute_d1a() -> Mapping[str, Any]:
         nonlocal d1a_result, d1a_summary
-        d1a_result = d1a_runner.execute_authorized(root)
+        d1a_result = d1a_runner.execute_authorized(root, authorization_proof=proof)
         d1a_summary = _d1a_summary_reference(root, proof["bundle"]["d1a"], d1a_result)
         return {"status": "PASS", "result": d1a_result}
 
@@ -325,7 +414,8 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
         return _write_json_new(evaluation_root / "unified_sensitivity_summary_v0.2.json", build_unified_summary(aggregate_comparisons["EV03"], aggregate_comparisons["EV04"], d1a_summary))
 
     def manifest() -> Mapping[str, Any]:
-        return _write_json_new(runtime_root / "execution_manifest_v0.2.json", {"status": "PASS", "execution_order": list(PIPELINE_STEPS), "control_reproductions": control, "corrected_arms": corrected, "d1a": d1a_result})
+        payload = build_execution_manifest_payload(root, runtime_authorization_record, proof, control, corrected, d1a_result)
+        return _write_json_new(runtime_root / "execution_manifest_v0.2.json", payload)
 
     def ledger() -> Mapping[str, Any]:
         ledger_path = runtime_root / "exact_hash_ledger_v0.2.json"
@@ -333,7 +423,7 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
         return _write_json_new(ledger_path, {"status": "PASS", "entries": entries, "mismatch_count": 0})
 
     return {
-        "unified_preflight": lambda: _write_json_new(runtime_root / "runtime_authorization_record_v0.2.json", {"status": "PASS", "mode": proof["mode"], "authorization": proof["authorization"]}),
+        "unified_preflight": unified_preflight,
         "ev03_control": lambda: reproduce("EV03"),
         "verify_ev03": lambda: control["EV03"],
         "ev03_materialize": lambda: materialize("EV03"),

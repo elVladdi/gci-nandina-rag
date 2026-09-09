@@ -13,8 +13,10 @@ from pathlib import Path
 from unittest import mock
 
 from src.experiments import build_bm25_corrective_0b05c_v02 as builder
+from src.experiments import evaluate_normative_bm25_corrective_0b05c_v01 as evaluator
 from src.experiments import prepare_0b05c_corrective_numerical_gate_v02 as gate
 from src.experiments import run_0b05c_corrective_numerical_v02 as runner
+from src.experiments import run_d1a_corrective_0b05c_v02 as d1a_runner
 from src.experiments.run_d1a_corrective_0b05c_v02 import preflight as d1a_preflight
 
 
@@ -344,11 +346,13 @@ class CorrectiveNumericalGateV02Tests(unittest.TestCase):
             outputs = {"aggregate_comparison": "d1a/aggregate.json", "case_level_comparison": "d1a/cases.jsonl", "execution_manifest": "d1a/manifest.json", "hash_ledger": "d1a/ledger.csv"}
             for relative in outputs.values():
                 (root / relative).parent.mkdir(parents=True, exist_ok=True)
-            (root / outputs["aggregate_comparison"]).write_text(json.dumps({"metrics": []}), encoding="utf-8")
+            spec = copy.deepcopy(self.bundle["d1a"])
+            (root / outputs["aggregate_comparison"]).write_text(json.dumps({"metrics": self._d1a_metric_rows(spec)}), encoding="utf-8")
             (root / outputs["case_level_comparison"]).write_text("{}\n", encoding="utf-8")
             (root / outputs["execution_manifest"]).write_text(json.dumps({"status": "PASS"}), encoding="utf-8")
             (root / outputs["hash_ledger"]).write_text("path,sha256,size_bytes\n", encoding="utf-8")
-            result = runner._d1a_summary_reference(root, {"orchestration": {"runner_outputs": outputs}}, {"status": "PASS"})
+            spec["orchestration"]["runner_outputs"] = outputs
+            result = runner._d1a_summary_reference(root, spec, {"status": "PASS"})
             self.assertEqual(result["status"], "PASS")
             self.assertEqual(set(result) - {"status"}, set(outputs))
 
@@ -392,6 +396,185 @@ class CorrectiveNumericalGateV02Tests(unittest.TestCase):
             runner.build_unified_summary({}, {}, {"status": "PASS"})
         d1a = {"status": "PASS", "aggregate_comparison": {"path": "aggregate.json", "sha256": "a" * 64}}
         self.assertEqual(runner.build_unified_summary({}, {}, d1a)["D1a"], d1a)
+
+    @staticmethod
+    def _d1a_metric_rows(spec: dict) -> list[dict]:
+        return [
+            {
+                "metric": name,
+                "original_numerator": 1,
+                "corrected_numerator": 1,
+                "denominator": 1056,
+                "original_value": 0.1,
+                "corrected_value": 0.1,
+                "absolute_delta": 0.0,
+            }
+            for name in spec["orchestration"]["comparison_contract"]["aggregate_metrics"]
+        ]
+
+    @staticmethod
+    def _authorization_proof() -> dict:
+        binding = {
+            "path": gate.AUTHORIZATION_RECORD.as_posix(),
+            "classification": "VERSIONED_GIT_BLOB",
+            "git_blob_sha1": "a" * 40,
+            "canonical_git_blob_sha256": "b" * 64,
+            "canonical_size_bytes": 100,
+        }
+        return {
+            "status": "PASS",
+            "mode": "AUTHORIZED_PREFLIGHT_ONLY",
+            "authorization": dict(d1a_runner.REQUIRED_UNIFIED_AUTHORIZATIONS),
+            "execution_authorization_commit": "c" * 40,
+            "authorization_baseline_commit": "d" * 40,
+            "authorization_record": {
+                "authorization_baseline_commit": "d" * 40,
+                "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+            },
+            "authorization_record_binding": binding,
+            "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+            "authorized_artifact_bindings": {
+                key: {**binding, "path": path}
+                for key, path in gate.AUTHORIZATION_BASELINE_ARTIFACTS.items()
+            },
+        }
+
+    def test_44_builder_metadata_is_consumable_by_evaluator(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
+            root = Path(temporary)
+            config = root / Path("src/configs/experiment_config.json")
+            config.parent.mkdir(parents=True)
+            config.write_text(json.dumps({"bm25": {"k1": 1.5, "b": 0.75}}), encoding="utf-8")
+            corpus = root / "corpus.jsonl"
+            corpus.write_text(json.dumps({"tipo": "nandina_8", "codigo": "87044110", "titulo": "vehiculo", "texto_index": "vehiculo carga inferior"}) + "\n", encoding="utf-8")
+            index = root / "built/index.pkl"
+            metadata = root / "built/index_metadata.json"
+            produced = builder.build("EV03", corpus, index, metadata, root=root)
+            validated = evaluator.validate_dynamic_inputs("EV03", corpus, index, metadata, config_path=config)
+            self.assertEqual(validated["corpus_sha256"], produced["input"]["corpus_sha256"])
+            self.assertEqual(validated["index_sha256"], produced["output"]["bm25_index_sha256"])
+            self.assertEqual(validated["index"].doc_ids, ["87044110"])
+
+    def test_45_mutated_builder_metadata_is_rejected_by_evaluator(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
+            root = Path(temporary)
+            config = root / "src/configs/experiment_config.json"
+            config.parent.mkdir(parents=True)
+            config.write_text(json.dumps({"bm25": {"k1": 1.5, "b": 0.75}}), encoding="utf-8")
+            corpus = root / "corpus.jsonl"
+            corpus.write_text(json.dumps({"tipo": "nandina_8", "codigo": "87044110", "titulo": "vehiculo", "texto_index": "vehiculo carga inferior"}) + "\n", encoding="utf-8")
+            index = root / "built/index.pkl"
+            metadata = root / "built/index_metadata.json"
+            payload = builder.build("EV03", corpus, index, metadata, root=root)
+            payload["input"]["corpus_sha256"] = "0" * 64
+            metadata.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(evaluator.ContractViolation, "corpus SHA"):
+                evaluator.validate_dynamic_inputs("EV03", corpus, index, metadata, config_path=config)
+
+    def test_46_d1a_partial_authorization_proof_is_rejected(self) -> None:
+        proof = self._authorization_proof()
+        proof["authorization"]["EV03_NUMERICAL_EXECUTION"] = "NOT_AUTHORIZED"
+        with self.assertRaisesRegex(gate.ContractViolation, "four authorizations"):
+            d1a_runner.validate_unified_authorization_proof(proof)
+
+    def test_47_direct_d1a_execution_requires_unified_preflight(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary, \
+             mock.patch.object(runner, "preflight_authorized", side_effect=gate.ContractViolation("unified gate closed")) as unified:
+            with self.assertRaisesRegex(gate.ContractViolation, "unified gate closed"):
+                d1a_runner.execute_authorized(Path(temporary))
+            unified.assert_called_once()
+            self.assertEqual(list(Path(temporary).iterdir()), [])
+
+    def test_48_d1a_accepts_validated_proof_without_rechecking_unified_roots(self) -> None:
+        proof = self._authorization_proof()
+        spec = copy.deepcopy(self.bundle["d1a"])
+        spec["authorization"]["D1A_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        with tempfile.TemporaryDirectory() as temporary, \
+             mock.patch.object(d1a_runner, "read_json", return_value=spec), \
+             mock.patch.object(d1a_runner, "preflight", return_value={"corrected_corpus_sha256": "e" * 64}), \
+             mock.patch.object(d1a_runner.legacy, "validate_binary_file_identity", side_effect=gate.ContractViolation("stop before side effect")), \
+             mock.patch.object(runner, "preflight_authorized", side_effect=AssertionError("must not rerun unified preflight")):
+            with self.assertRaisesRegex(gate.ContractViolation, "stop before side effect"):
+                d1a_runner.execute_authorized(Path(temporary), authorization_proof=proof)
+            self.assertEqual(list(Path(temporary).iterdir()), [])
+
+    def test_49_runtime_provenance_preserves_authorization_evidence(self) -> None:
+        proof = self._authorization_proof()
+        payload = runner.build_runtime_authorization_provenance(proof)
+        self.assertEqual(payload["execution_authorization_commit"], proof["execution_authorization_commit"])
+        self.assertEqual(payload["authorization_baseline_commit"], proof["authorization_baseline_commit"])
+        self.assertEqual(payload["authorization_record"]["git_blob_sha1"], proof["authorization_record_binding"]["git_blob_sha1"])
+        self.assertEqual(set(payload["authorized_artifacts"]), set(gate.AUTHORIZATION_BASELINE_ARTIFACTS))
+
+    def test_50_manifest_binds_runtime_authorization_record(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            runtime = root / "runtime_authorization_record_v0.2.json"
+            runtime.write_text(json.dumps(runner.build_runtime_authorization_provenance(self._authorization_proof())), encoding="utf-8")
+            manifest = runner.build_execution_manifest_payload(root, runtime, self._authorization_proof(), {}, {}, {})
+            self.assertEqual(manifest["runtime_authorization_record"]["path"], "runtime_authorization_record_v0.2.json")
+            self.assertEqual(manifest["runtime_authorization_record"]["sha256"], hashlib.sha256(runtime.read_bytes()).hexdigest())
+            self.assertEqual(manifest["runtime_authorization_record"]["size_bytes"], runtime.stat().st_size)
+
+    def test_51_runtime_provenance_missing_baseline_or_record_fails(self) -> None:
+        for field in ("authorization_baseline_commit", "authorization_record_binding"):
+            proof = self._authorization_proof()
+            proof.pop(field)
+            with self.assertRaises(gate.ContractViolation):
+                runner.build_runtime_authorization_provenance(proof)
+
+    def _write_d1a_summary_fixture(self, root: Path, metrics: list[dict]) -> tuple[dict, dict]:
+        spec = copy.deepcopy(self.bundle["d1a"])
+        outputs = {"aggregate_comparison": "d1a/aggregate.json", "case_level_comparison": "d1a/cases.jsonl", "execution_manifest": "d1a/manifest.json", "hash_ledger": "d1a/ledger.csv"}
+        spec["orchestration"]["runner_outputs"] = outputs
+        for relative in outputs.values():
+            (root / relative).parent.mkdir(parents=True, exist_ok=True)
+        (root / outputs["aggregate_comparison"]).write_text(json.dumps({"metrics": metrics}), encoding="utf-8")
+        (root / outputs["case_level_comparison"]).write_text("{}\n", encoding="utf-8")
+        (root / outputs["execution_manifest"]).write_text(json.dumps({"status": "PASS"}), encoding="utf-8")
+        (root / outputs["hash_ledger"]).write_text("path,sha256,size_bytes\n", encoding="utf-8")
+        return spec, {"status": "PASS"}
+
+    def test_52_d1a_empty_metric_table_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            spec, result = self._write_d1a_summary_fixture(Path(temporary), [])
+            with self.assertRaisesRegex(gate.ContractViolation, "metric count"):
+                runner._d1a_summary_reference(Path(temporary), spec, result)
+
+    def test_53_d1a_missing_metric_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            spec = copy.deepcopy(self.bundle["d1a"])
+            spec, result = self._write_d1a_summary_fixture(root, self._d1a_metric_rows(spec)[:-1])
+            with self.assertRaisesRegex(gate.ContractViolation, "metric count"):
+                runner._d1a_summary_reference(root, spec, result)
+
+    def test_54_d1a_metric_order_or_name_change_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            spec = copy.deepcopy(self.bundle["d1a"])
+            rows = self._d1a_metric_rows(spec)
+            rows[0], rows[1] = rows[1], rows[0]
+            spec, result = self._write_d1a_summary_fixture(root, rows)
+            with self.assertRaisesRegex(gate.ContractViolation, "names or order"):
+                runner._d1a_summary_reference(root, spec, result)
+
+    def test_55_d1a_incomplete_metric_row_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            spec = copy.deepcopy(self.bundle["d1a"])
+            rows = self._d1a_metric_rows(spec)
+            rows[0].pop("absolute_delta")
+            spec, result = self._write_d1a_summary_fixture(root, rows)
+            with self.assertRaisesRegex(gate.ContractViolation, "schema"):
+                runner._d1a_summary_reference(root, spec, result)
+
+    def test_56_d1a_complete_17_metric_table_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            spec = copy.deepcopy(self.bundle["d1a"])
+            spec, result = self._write_d1a_summary_fixture(root, self._d1a_metric_rows(spec))
+            self.assertEqual(runner._d1a_summary_reference(root, spec, result)["status"], "PASS")
 
 
 if __name__ == "__main__":

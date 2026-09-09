@@ -2,31 +2,31 @@
   "artifact_id": "0b05c_corrective_numerical_gate_manifest_v0.2",
   "code_bindings": [
     {
-      "canonical_git_blob_sha256": "7aba9c7bec6adfc3489faed8d882a4ee0af7448c69bf848a66fd012b091b9b50",
-      "canonical_size_bytes": 35948,
+      "canonical_git_blob_sha256": "d13e1ec6e5aee850eddcbccdaae18c0b74fa106a60e3f2b48640efd78ef67cfa",
+      "canonical_size_bytes": 36844,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "451d10871716315a2ac5b7bb1d1f7d0cff4acd2c",
+      "git_blob_sha1": "ae90c19b9c650caf315439af89f3a33b364a9832",
       "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v02.py"
     },
     {
-      "canonical_git_blob_sha256": "519482bf3d42584f95d5924e7b51c493b51d8ff3e652c2985b1a6e6bafc57095",
-      "canonical_size_bytes": 3688,
+      "canonical_git_blob_sha256": "58618292823154799007bba15ef6bfdad9a8ed4634984b9ececde149d68709d4",
+      "canonical_size_bytes": 4246,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "6e7d0bf6719703814f0e0a7d5488de82cc8d6919",
+      "git_blob_sha1": "a5baa9e7365c830b71dd4e4a760c8b9c3b12e778",
       "path": "src/experiments/build_bm25_corrective_0b05c_v02.py"
     },
     {
-      "canonical_git_blob_sha256": "cecb945953af579d860cf6c325f50595e0b8584f204be2a438d067896a102246",
-      "canonical_size_bytes": 20759,
+      "canonical_git_blob_sha256": "9a0cf5a51de93ce1886ff3558a7577de22cb83e0b05e52f32ac34293a9d60bf3",
+      "canonical_size_bytes": 26370,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "3d1eba673facc0e0c17309741ee2dff4e9f6fec3",
+      "git_blob_sha1": "7a60fa97da2787d23460e81f5fcfb65957dfbd2c",
       "path": "src/experiments/run_0b05c_corrective_numerical_v02.py"
     },
     {
-      "canonical_git_blob_sha256": "4ea2a4bf9430f1c3b75d380171305c3b71f4576d18c918fbc2e7dee92ca0e681",
-      "canonical_size_bytes": 5806,
+      "canonical_git_blob_sha256": "4b35a932d7285c1287477ec01bbfcb6cd21aef9bbcf78043852bbc90ed0f6180",
+      "canonical_size_bytes": 7913,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "905623171fef20d7d9a2be4ee0ad26583a0bf508",
+      "git_blob_sha1": "c618e171270c01abebfeebf07f3ca72b80940c02",
       "path": "src/experiments/run_d1a_corrective_0b05c_v02.py"
     },
     {

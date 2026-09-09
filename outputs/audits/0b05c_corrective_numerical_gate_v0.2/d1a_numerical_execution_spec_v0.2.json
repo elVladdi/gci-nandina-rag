@@ -293,8 +293,8 @@
     },
     "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v02 --preflight",
     "runner": {
-      "canonical_blob_sha256": "4ea2a4bf9430f1c3b75d380171305c3b71f4576d18c918fbc2e7dee92ca0e681",
-      "git_blob_sha": "905623171fef20d7d9a2be4ee0ad26583a0bf508",
+      "canonical_blob_sha256": "4b35a932d7285c1287477ec01bbfcb6cd21aef9bbcf78043852bbc90ed0f6180",
+      "git_blob_sha": "c618e171270c01abebfeebf07f3ca72b80940c02",
       "path": "src/experiments/run_d1a_corrective_0b05c_v02.py",
       "revision": "COMMITTED_GIT_BLOB"
     },

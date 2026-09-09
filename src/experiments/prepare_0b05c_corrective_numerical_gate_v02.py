@@ -574,6 +574,23 @@ def build_bundle(root: Path = ROOT, revision: str = "HEAD") -> dict[str, Any]:
             "missing_or_unexpected_policy": "FAIL_CLOSED",
             "entry_fields": ["path", "sha256", "size_bytes"],
         },
+        "runtime_authorization_provenance_contract": {
+            "record_path": f"{UNIFIED_ROOTS[1]}/runtime_authorization_record_v0.2.json",
+            "record_required_fields": [
+                "status",
+                "mode",
+                "execution_authorization_commit",
+                "authorization_baseline_commit",
+                "authorization",
+                "authorization_record",
+                "baseline_external_audit",
+                "authorized_artifacts",
+            ],
+            "authorization_record_reference_fields": ["path", "git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes"],
+            "authorized_artifact_keys": ["unified_gate", "ev03_spec", "ev04_spec", "d1a_spec"],
+            "manifest_reference_fields": ["path", "sha256", "size_bytes"],
+            "source": "VALIDATED_COMMITTED_GIT_BLOBS_AT_AUTHORIZATION_HEAD",
+        },
         "dependency_bindings": bindings,
         "authorization_record_path": AUTHORIZATION_RECORD.as_posix(),
     }
