@@ -1,6 +1,6 @@
 {
   "authorization": {
-    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false
   },

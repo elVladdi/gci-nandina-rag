@@ -1,15 +1,15 @@
 {
   "authorization": {
-    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "authorization_record_present": false,
+    "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV04_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "authorization_record_present": true,
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false,
     "runtime_authorization_record_present": false
   },
-  "authorization_readiness": "NOT_AUTHORIZATION_READY",
+  "authorization_readiness": "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION",
   "authorization_record_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.2/0b05c_numerical_authorization_record_v0.2.json",
   "authorization_transition_schema": {
     "allowed_gate_fields": [
@@ -357,7 +357,7 @@
   ],
   "gate_id": "0b05c_corrective_numerical_execution_gate_v0.2",
   "gate_scope": "UNIFIED_0B05C_NUMERICAL_PREEXECUTION",
-  "gate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "gate_status": "APPROVED / INTEGRATED",
   "gate_version": "v0.2",
   "pipeline_steps": [
     "01_unified_preflight",
