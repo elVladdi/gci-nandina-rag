@@ -1,7 +1,7 @@
 {
-  "attempt04": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "attempt04": "AUTHORIZED / NOT_EXECUTED",
   "authorization": {
-    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false
   },
