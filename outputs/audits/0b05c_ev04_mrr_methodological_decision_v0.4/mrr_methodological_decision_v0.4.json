@@ -1,0 +1,289 @@
+{
+  "artifact_id": "0b05c_ev04_mrr_methodological_decision_v0.4",
+  "schema_version": 1,
+  "baseline_commit": "ecb34a8372b4f8f91f0dc2e8329bf68ecb1f1fc6",
+  "decision_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "corrects_rejected_candidate_commit": "0298a6a51181ba992e981063be87a9742ba266ef",
+  "external_audit_finding": "MRR200_CONTRACT_COLLATERAL_DRIFT",
+  "historical_arithmetic_path_mrr100": "NOT_RECOVERED",
+  "v04_build_authorized": false,
+  "attempt05_authorized": false,
+  "metric_impact": "NOT_DETERMINED",
+  "closure": "NOT_AUTHORIZED",
+  "mrr_at_100_decision": {
+    "historical_literal": {
+      "mrr_at_100_numerator": {
+        "repr": "44.33224687474574",
+        "float_hex": "0x1.62a8710ca9d97p+5"
+      },
+      "mrr_at_100": {
+        "repr": "0.04198129438896377",
+        "float_hex": "0x1.57e927ce3818bp-5"
+      },
+      "role": "IMMUTABLE_HISTORICAL_REPORTED_LITERAL / NOT_PROSPECTIVE_COMPUTATIONAL_ORACLE",
+      "historical_provenance": "NOT_RECOVERED"
+    },
+    "prospective_reference": {
+      "mrr_at_100_numerator_binary64": {
+        "repr": "44.33224687474575",
+        "float_hex": "0x1.62a8710ca9d98p+5"
+      },
+      "mrr_at_100_binary64": {
+        "repr": "0.04198129438896378",
+        "float_hex": "0x1.57e927ce3818cp-5"
+      },
+      "role": "PROSPECTIVE_CANONICAL_CASE_DERIVED_REFERENCE",
+      "historical_provenance_claimed": false
+    },
+    "prospective_reducer_contract": {
+      "scope": "MRR_AT_100_ONLY",
+      "contribution_source": "INTEGER_RANK_REF_FROM_CASE_SUMMARY",
+      "cutoff_semantics": "EXACT_1_OVER_RANK_REF_IF_1_LE_RANK_REF_LE_100_ELSE_ZERO",
+      "accumulation": "EXACT_RATIONAL_WITH_NO_INTERMEDIATE_FLOAT_ACCUMULATION",
+      "denominator": "EXACT_CASE_COUNT_N",
+      "numerator_conversion": "ONE_FINAL_IEEE754_BINARY64_CONVERSION_OF_EXACT_RATIONAL_NUMERATOR",
+      "mrr_conversion": "ONE_FINAL_IEEE754_BINARY64_CONVERSION_OF_EXACT_RATIONAL_NUMERATOR_DIVIDED_BY_N",
+      "row_order_mathematically_invariant": true,
+      "tolerance_allowed": false,
+      "decimal_convenience_rounding_allowed": false,
+      "nextafter_allowed": false,
+      "hardcoded_output_scalars_allowed": false,
+      "manual_dot77_or_dot78_correction_allowed": false
+    },
+    "mrr_at_100_uses_prospective_exact_rational_rule": true
+  },
+  "mrr_at_200_legacy_contract": {
+    "role": "STABLE_LEGACY_CONTRACT / ENRICHED_ALIAS_OF_LEGACY_MRR",
+    "historical_definition": "Legacy mrr is MRR@200 because EXP-04 Phase C retrieval depth is 200.",
+    "stable_historical_producer": {
+      "numerator_expression": "sum(float(row[\"reciprocal_rank\"]) for row in case_rows)",
+      "row_order": "CASE_SUMMARY_ORDER",
+      "value_expression": "float(numerator / N)"
+    },
+    "frozen_valid_control": {
+      "mrr_numerator": {
+        "repr": "45.76874185264425",
+        "float_hex": "0x1.6e266220e1635p+5"
+      },
+      "mrr_denominator": 1056,
+      "mrr": {
+        "repr": "0.04334161160288281",
+        "float_hex": "0x1.630df28c7d779p-5"
+      }
+    },
+    "enriched_alias_contract": {
+      "mrr_at_200_numerator": "BIT_EXACT_ALIAS_OF_MRR_NUMERATOR",
+      "mrr_at_200_denominator": "ALIAS_OF_MRR_DENOMINATOR",
+      "mrr_at_200": "BIT_EXACT_ALIAS_OF_MRR"
+    },
+    "negative_control_not_output": {
+      "exact_rational_s200_over_n_binary64": {
+        "repr": "0.043341611602882815",
+        "float_hex": "0x1.630df28c7d77ap-5"
+      },
+      "ulp_distance_from_legacy_mrr": 1,
+      "use_as_mrr_at_200_output": false
+    },
+    "mrr_at_200_equals_legacy_mrr_required": true,
+    "mrr_at_200_rational_ratio_redefinition_forbidden": true,
+    "generic_exact_rational_cutoff_rule_applies_to_mrr_at_200_output": false
+  },
+  "contribution_101_200_decision": {
+    "historical_literal": {
+      "mrr_101_200_contribution_numerator": {
+        "repr": "1.436494977898505",
+        "float_hex": "0x1.6fbe2286f13c0p+0"
+      },
+      "mrr_101_200_contribution": {
+        "repr": "0.0013603172139190387",
+        "float_hex": "0x1.649957c8abdd1p-10"
+      },
+      "role": "IMMUTABLE_HISTORICAL_REPORTED_LITERAL / NOT_PROSPECTIVE_COMPUTATIONAL_ORACLE",
+      "historical_producer_provenance": "NOT_VERSIONED"
+    },
+    "prospective_reducer_contract": {
+      "s100": "EXACT_RATIONAL_SUM_OF_1_OVER_INTEGER_RANK_REF_FOR_1_LE_RANK_REF_LE_100",
+      "s200": "EXACT_RATIONAL_SUM_OF_1_OVER_INTEGER_RANK_REF_FOR_1_LE_RANK_REF_LE_200",
+      "c101_200": "EXACT_RATIONAL_S200_MINUS_S100",
+      "contribution_numerator_binary64": "ONE_FINAL_BINARY64_CONVERSION_OF_C101_200",
+      "contribution_binary64": "ONE_FINAL_BINARY64_CONVERSION_OF_C101_200_DIVIDED_BY_EXACT_N",
+      "rounded_float_subtraction_forbidden": true,
+      "row_order_mathematically_invariant": true,
+      "tolerance_allowed": false,
+      "decimal_convenience_rounding_allowed": false,
+      "nextafter_allowed": false,
+      "hardcoded_output_scalars_allowed": false
+    },
+    "prospective_reference_from_frozen_cases": {
+      "c101_200_rational": {
+        "numerator": "4221638972662797829869925972156161758832328316869",
+        "denominator": "2938847011382373982458217544917517734717582104000"
+      },
+      "contribution_numerator_binary64": {
+        "repr": "1.4364949778985006",
+        "float_hex": "0x1.6fbe2286f13acp+0"
+      },
+      "contribution_rational": {
+        "numerator": "4221638972662797829869925972156161758832328316869",
+        "denominator": "3103422444019786925475877727432898727861766701824000"
+      },
+      "contribution_binary64": {
+        "repr": "0.0013603172139190346",
+        "float_hex": "0x1.649957c8abdbep-10"
+      }
+    },
+    "contribution_101_200_uses_prospective_exact_rational_rule": true
+  },
+  "semantic_consistency": {
+    "mrr_at_200_equals_legacy_mrr_required": true,
+    "mrr_at_200_rational_ratio_redefinition_forbidden": true,
+    "mrr_at_100_uses_prospective_exact_rational_rule": true,
+    "contribution_101_200_uses_prospective_exact_rational_rule": true,
+    "generic_rule_redefining_all_mrr_cutoff_outputs_as_exact_rational_ratios_present": false,
+    "mrr200_contract_collateral_drift_removed": true
+  },
+  "pass_exact_contract": {
+    "pass_exact_required": true,
+    "rules": [
+      "Historical ranking versus reproduced ranking must be exact.",
+      "Historical case summary versus reproduced case summary must be exact.",
+      "Legacy metrics with a stable historical producer retain their exact historical contract.",
+      "mrr_at_200 must be an exact alias of legacy mrr, including numerator and denominator aliases.",
+      "Expected and actual mrr_at_100 are derived independently from frozen and reproduced case summaries with the MRR@100 exact-rational rule.",
+      "Expected and actual 101-200 contribution are derived independently with exact-rational difference and exact-rational division.",
+      "Expected versus actual comparisons are exact.",
+      "Historical .77 and historical 101-200 contribution literals are not prospective computational oracles.",
+      "No check is removed or weakened to permit Attempt05."
+    ],
+    "tolerances_allowed": false
+  },
+  "source_bindings": {
+    "attempt04_static_diagnosis": {
+      "path": "outputs/audits/0b05c_ev04_attempt04_static_diagnosis_v0.3/ev04_metric_mismatch_diagnosis_v0.3.json",
+      "ref": "main",
+      "git_blob_sha1": "fca5712c615960b41cb2741c2164f19fc00df9dd"
+    },
+    "arithmetic_provenance_prompt28": {
+      "path": "outputs/audits/0b05c_ev04_gatec_mrr100_arithmetic_provenance_v0.3/ev04_gatec_mrr100_arithmetic_provenance_v0.3.json",
+      "ref": "main",
+      "git_blob_sha1": "c3667f85b4f8ec51f026e2e3b706062da586a7f1"
+    },
+    "frozen_case_summary": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+      "ref": "main",
+      "git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58"
+    },
+    "frozen_metrics_artifact": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+      "ref": "main",
+      "git_blob_sha1": "bc3b34cae7d8832426e6b2b56cb3d2d1541cdd57"
+    },
+    "frozen_run_metadata": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
+      "ref": "main",
+      "git_blob_sha1": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1"
+    },
+    "gate_c_microaudit": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.json",
+      "ref": "main",
+      "git_blob_sha1": "098bc50f382a54c9dca7025d0e2d4364ac27ad3b"
+    },
+    "limitation_stratified_metrics": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/limitation_stratified_metrics_v0.2.csv",
+      "ref": "main",
+      "git_blob_sha1": "3e13cd52e8fac58bf4452c1c83a1fb11e233508b"
+    },
+    "historical_gate_c_test": {
+      "path": "tests/test_normative_bm25_hierarchical_v02.py",
+      "ref": "ef9faefbe9ddc0262e6e2e2f5b34feb915a69f97",
+      "git_blob_sha1": "1d3e45c19b29ce7f1a38a4721f01b7e70d270e3c"
+    },
+    "historical_hierarchical_runner": {
+      "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+      "ref": "ce239059d748a4baf8a2113df5398f50c0e14a58",
+      "git_blob_sha1": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d"
+    },
+    "current_v0_3_producer": {
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v03.py",
+      "ref": "main",
+      "git_blob_sha1": "3fb1346dcee357d7b1d2d430e3ca98c0bba1d1a0"
+    },
+    "rejected_prompt30_candidate": {
+      "path": "outputs/audits/0b05c_ev04_mrr100_methodological_decision_v0.4/mrr100_methodological_decision_v0.4.json",
+      "ref": "0298a6a51181ba992e981063be87a9742ba266ef",
+      "git_blob_sha1": "60a146e101c77f9c9ffaa679cec5b6eeca94c36c"
+    }
+  },
+  "source_bindings_verified_from_git": true,
+  "read_only_checks": {
+    "classification": "CODEX_LOCAL_PURE_READ_ONLY_COMPUTATION",
+    "github_ci_evidence": "NONE_USED",
+    "input_case_summary_blob": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58",
+    "case_count": 1056,
+    "mrr_at_100_prospective": {
+      "repr": "0.04198129438896378",
+      "float_hex": "0x1.57e927ce3818cp-5",
+      "status": "PASS"
+    },
+    "mrr_at_200_legacy": {
+      "numerator_repr": "45.76874185264425",
+      "numerator_float_hex": "0x1.6e266220e1635p+5",
+      "repr": "0.04334161160288281",
+      "float_hex": "0x1.630df28c7d779p-5",
+      "status": "PASS"
+    },
+    "mrr_at_200_exact_rational_negative_control": {
+      "repr": "0.043341611602882815",
+      "float_hex": "0x1.630df28c7d77ap-5",
+      "ulp_distance_from_legacy": 1,
+      "selected_as_output": false,
+      "status": "EXPECTED_ONE_ULP_DRIFT_CONFIRMED"
+    },
+    "contribution_101_200_prospective": {
+      "numerator_repr": "1.4364949778985006",
+      "numerator_float_hex": "0x1.6fbe2286f13acp+0",
+      "repr": "0.0013603172139190346",
+      "float_hex": "0x1.649957c8abdbep-10",
+      "status": "PASS"
+    },
+    "retrieval_or_evaluator_invoked": false
+  },
+  "governance": {
+    "main_modified": false,
+    "rejected_prompt30_candidate_modified": false,
+    "candidate_integrated": false,
+    "historical_artifacts_mutated": false,
+    "v03_artifacts_mutated": false,
+    "v03_producer_modified": false,
+    "historical_tests_modified": false,
+    "v04_code_built": false,
+    "v04_gate_or_specs_built": false,
+    "v04_authorization_created": false,
+    "attempt05_authorized": false,
+    "attempt05_executed": false,
+    "retrieval_executed": false,
+    "ev03_executed": false,
+    "ev04_real_executed": false,
+    "d1a_executed": false,
+    "eval_real_executed": false,
+    "model_inference_executed": false,
+    "canonical_plan_modified": false,
+    "article_modified": false,
+    "exp11b_or_exp12_touched": false,
+    "tolerance_round_nextafter_or_code_hardcoding_introduced": false
+  },
+  "scientific_state": {
+    "group_2": "EN_CURSO",
+    "prompt30_candidate": "REJECTED_BY_EXTERNAL_AUDIT / NOT_INTEGRATED",
+    "prompt30_blocking_finding": "MRR200_CONTRACT_COLLATERAL_DRIFT",
+    "corrected_methodological_decision_candidate": "BUILT / PENDING_EXTERNAL_AUDIT",
+    "dot77_role": "IMMUTABLE_HISTORICAL_REPORTED_LITERAL / NOT_PROSPECTIVE_COMPUTATIONAL_ORACLE",
+    "dot78_role": "PROSPECTIVE_CANONICAL_CASE_DERIVED_REFERENCE",
+    "mrr200_role": "STABLE_LEGACY_CONTRACT / ENRICHED_ALIAS_OF_LEGACY_MRR",
+    "v04_build": "NOT_AUTHORIZED / NOT_BUILT",
+    "attempt05": "NOT_AUTHORIZED / NOT_EXECUTED",
+    "metric_impact": "NOT_DETERMINED",
+    "downstream_reexecution": "NOT_YET_JUSTIFIED",
+    "closure": "NOT_AUTHORIZED"
+  }
+}
