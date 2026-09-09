@@ -1,0 +1,2062 @@
+{
+  "actual_microaudit_environment": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.14",
+    "python_implementation": "CPython",
+    "sys_platform": "win32"
+  },
+  "arithmetic_route_count": 48,
+  "arithmetic_routes": [
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.python_builtin_sum",
+      "route_id": "mrr_at_100.rank_ref.filtered_nonzero.python_builtin_sum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": [
+        "GATE_C_TEST_FORMULA_WITH_ASSERT_ALMOST_EQUAL"
+      ]
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.math_fsum",
+      "route_id": "mrr_at_100.rank_ref.filtered_nonzero.math_fsum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.numpy_sum_float64",
+      "route_id": "mrr_at_100.rank_ref.filtered_nonzero.numpy_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_100.rank_ref.filtered_nonzero.numpy_add_reduce_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.pandas_series_sum_float64",
+      "route_id": "mrr_at_100.rank_ref.filtered_nonzero.pandas_series_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.python_builtin_sum",
+      "route_id": "mrr_at_100.rank_ref.full_zero.python_builtin_sum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.math_fsum",
+      "route_id": "mrr_at_100.rank_ref.full_zero.math_fsum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.numpy_sum_float64",
+      "route_id": "mrr_at_100.rank_ref.full_zero.numpy_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_100.rank_ref.full_zero.numpy_add_reduce_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.pandas_series_sum_float64",
+      "route_id": "mrr_at_100.rank_ref.full_zero.pandas_series_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "rank_ref.full_zero.numpy_mean_float64",
+      "route_id": "mrr_at_100.rank_ref.full_zero.numpy_mean_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "rank_ref.full_zero.pandas_series_mean_float64",
+      "route_id": "mrr_at_100.rank_ref.full_zero.pandas_series_mean_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.python_builtin_sum",
+      "route_id": "mrr_at_100.reciprocal_rank.filtered_nonzero.python_builtin_sum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.math_fsum",
+      "route_id": "mrr_at_100.reciprocal_rank.filtered_nonzero.math_fsum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.numpy_sum_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.filtered_nonzero.numpy_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.filtered_nonzero.numpy_add_reduce_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 107,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.pandas_series_sum_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.filtered_nonzero.pandas_series_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.python_builtin_sum",
+      "route_id": "mrr_at_100.reciprocal_rank.full_zero.python_builtin_sum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.math_fsum",
+      "route_id": "mrr_at_100.reciprocal_rank.full_zero.math_fsum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.numpy_sum_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.full_zero.numpy_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.full_zero.numpy_add_reduce_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.pandas_series_sum_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.full_zero.pandas_series_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "reciprocal_rank.full_zero.numpy_mean_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.full_zero.numpy_mean_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 100,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.62a8710ca9d98p+5",
+        "repr": "44.33224687474575",
+        "value": 44.33224687474575
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "reciprocal_rank.full_zero.pandas_series_mean_float64",
+      "route_id": "mrr_at_100.reciprocal_rank.full_zero.pandas_series_mean_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.57e927ce3818cp-5",
+        "repr": "0.04198129438896378",
+        "value": 0.04198129438896378
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.python_builtin_sum",
+      "route_id": "mrr_at_200.rank_ref.filtered_nonzero.python_builtin_sum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": [
+        "GATE_C_TEST_FORMULA_WITH_ASSERT_ALMOST_EQUAL"
+      ]
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.math_fsum",
+      "route_id": "mrr_at_200.rank_ref.filtered_nonzero.math_fsum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.numpy_sum_float64",
+      "route_id": "mrr_at_200.rank_ref.filtered_nonzero.numpy_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_200.rank_ref.filtered_nonzero.numpy_add_reduce_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.filtered_nonzero.pandas_series_sum_float64",
+      "route_id": "mrr_at_200.rank_ref.filtered_nonzero.pandas_series_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.python_builtin_sum",
+      "route_id": "mrr_at_200.rank_ref.full_zero.python_builtin_sum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.math_fsum",
+      "route_id": "mrr_at_200.rank_ref.full_zero.math_fsum",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.numpy_sum_float64",
+      "route_id": "mrr_at_200.rank_ref.full_zero.numpy_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_200.rank_ref.full_zero.numpy_add_reduce_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "rank_ref.full_zero.pandas_series_sum_float64",
+      "route_id": "mrr_at_200.rank_ref.full_zero.pandas_series_sum_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "rank_ref.full_zero.numpy_mean_float64",
+      "route_id": "mrr_at_200.rank_ref.full_zero.numpy_mean_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "rank_ref.full_zero.pandas_series_mean_float64",
+      "route_id": "mrr_at_200.rank_ref.full_zero.pandas_series_mean_float64",
+      "source_of_contributions": "rank_ref",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.python_builtin_sum",
+      "route_id": "mrr_at_200.reciprocal_rank.filtered_nonzero.python_builtin_sum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.math_fsum",
+      "route_id": "mrr_at_200.reciprocal_rank.filtered_nonzero.math_fsum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.numpy_sum_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.filtered_nonzero.numpy_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.filtered_nonzero.numpy_add_reduce_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_FILTER_STABLE",
+      "reduced_vector_length": 321,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.filtered_nonzero.pandas_series_sum_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.filtered_nonzero.pandas_series_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "filtered_nonzero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python builtins",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "python_builtin_sum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.python_builtin_sum",
+      "route_id": "mrr_at_200.reciprocal_rank.full_zero.python_builtin_sum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": [
+        "HISTORICAL_RUNNER_METRICS_FROM_CASES_MRR_FORMULA"
+      ]
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": true,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "Python math",
+      "library_version": "3.12.14",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "math_fsum",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.math_fsum",
+      "route_id": "mrr_at_200.reciprocal_rank.full_zero.math_fsum",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 0.0,
+        "equal_python": true,
+        "ulp_distance": 0
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.numpy_sum_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.full_zero.numpy_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_add_reduce_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.numpy_add_reduce_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.full_zero.numpy_add_reduce_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_sum_float64",
+      "reducer_output_role": "NUMERATOR_THEN_DIVIDE_BY_1056",
+      "route_family": "reciprocal_rank.full_zero.pandas_series_sum_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.full_zero.pandas_series_sum_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "NumPy",
+      "library_version": "2.3.5",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "numpy_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "reciprocal_rank.full_zero.numpy_mean_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.full_zero.numpy_mean_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    },
+    {
+      "bit_exact_frozen_numerator_and_value": false,
+      "cutoff": 200,
+      "denominator": 1056,
+      "library": "pandas",
+      "library_version": "3.0.1",
+      "numerator": {
+        "float_hex": "0x1.6e266220e1636p+5",
+        "repr": "45.768741852644254",
+        "value": 45.768741852644254
+      },
+      "numerator_vs_frozen": {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "order": "FROZEN_CSV_ROW_ORDER_WITH_ZERO_AT_NONCONTRIBUTING_POSITIONS",
+      "reduced_vector_length": 1056,
+      "reducer": "pandas_series_mean_float64",
+      "reducer_output_role": "DIRECT_MRR_MEAN_THEN_NUMERATOR_DERIVED_AS_MEAN_TIMES_1056",
+      "route_family": "reciprocal_rank.full_zero.pandas_series_mean_float64",
+      "route_id": "mrr_at_200.reciprocal_rank.full_zero.pandas_series_mean_float64",
+      "source_of_contributions": "reciprocal_rank",
+      "source_parser": "Python csv.DictReader utf-8-sig; float conversion after string preservation",
+      "value_divided_by_1056": {
+        "float_hex": "0x1.630df28c7d77ap-5",
+        "repr": "0.043341611602882815",
+        "value": 0.043341611602882815
+      },
+      "value_vs_frozen": {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "ulp_distance": 1
+      },
+      "vector_form": "full_zero",
+      "versioned_route_evidence": []
+    }
+  ],
+  "artifact_id": "0b05c_ev04_gatec_mrr100_arithmetic_provenance_v0.3",
+  "attempt05_authorized": false,
+  "baseline_commit": "6187ca29357c42c43675fb8e5ffdacbb4705ee83",
+  "case_count": 1056,
+  "causal_classification": "HISTORICAL_ARITHMETIC_PATH_NOT_RECOVERED",
+  "closure": "NOT_AUTHORIZED",
+  "environment_caveat": "Python patch version differs (historical 3.12.13, actual 3.12.14); NumPy, pandas, and documented Windows platform match. No numerical coincidence is treated as historical provenance by itself.",
+  "environment_component_matches": {
+    "numpy": true,
+    "pandas": true,
+    "platform": true,
+    "python": false
+  },
+  "environment_exact_match": false,
+  "frozen_values": {
+    "mrr_at_100": {
+      "float_hex": "0x1.57e927ce3818bp-5",
+      "repr": "0.04198129438896377",
+      "value": 0.04198129438896377
+    },
+    "mrr_at_100_numerator": {
+      "float_hex": "0x1.62a8710ca9d97p+5",
+      "repr": "44.33224687474574",
+      "value": 44.33224687474574
+    },
+    "mrr_at_200": {
+      "float_hex": "0x1.630df28c7d779p-5",
+      "repr": "0.04334161160288281",
+      "value": 0.04334161160288281
+    },
+    "mrr_at_200_numerator": {
+      "float_hex": "0x1.6e266220e1635p+5",
+      "repr": "45.76874185264425",
+      "value": 45.76874185264425
+    }
+  },
+  "historical_environment_documented": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13"
+  },
+  "historical_provenance": {
+    "conclusion": "NO_ROUTE_HAS_SUFFICIENT_VERSIONED_HISTORICAL_PROVENANCE_FOR_FROZEN_MRR100_BITS",
+    "gate_c_changed_path_count": 10,
+    "gate_c_changed_paths": [
+      "docs/exp04_bm25_normative_hierarchical_v02_inventory.md",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/flat_vs_hierarchical_comparison_v0.2.csv",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.json",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.md",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/historical_flat_vs_normative_hierarchical_compatibility_v0.2.json",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/limitation_stratified_metrics_v0.2.csv",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
+      "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/summary.md",
+      "tests/test_normative_bm25_hierarchical_v02.py"
+    ],
+    "gate_c_changed_producer_code": false,
+    "gate_c_commit": "ef9faefbe9ddc0262e6e2e2f5b34feb915a69f97",
+    "gate_c_microaudit_declares_mrr_source": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+    "gate_c_microaudit_declares_source_artifacts_only": true,
+    "gate_c_microaudit_records_reducer_or_executable_microaudit_script": false,
+    "gate_c_parent": "13d317630bbe59e91bc1058800d4593ba6ace66a",
+    "gate_c_test_python_sum_rank_ref_formula": true,
+    "gate_c_test_uses_assert_almost_equal_for_mrr_at_100": true,
+    "gate_c_test_uses_bit_exact_equality_for_mrr_at_100": false,
+    "gate_c_test_uses_csv_dict_reader": true,
+    "historical_runner_commit": "ce239059d748a4baf8a2113df5398f50c0e14a58",
+    "initial_outputs_commit": "001580944b417e81634dd6d11a9d2facc9ed29be",
+    "missing_evidence": [
+      "No versioned producer script in the Gate C commit writes the added MRR@100 fields.",
+      "The historical test uses assertAlmostEqual rather than bit-exact equality.",
+      "The documented test formula produces the .78 value in the executed environment, not the frozen .77 value.",
+      "No versioned record binds the frozen .77 literal to a reducer implementation and exact runtime execution."
+    ],
+    "parent_run_metadata_contains_mrr_at_100": false,
+    "positive_evidence": [
+      "Gate C commit records that MRR was recomputed from the frozen case summary.",
+      "Gate C test documents Python sum(1 / int(rank_ref)) in CSV row order for both cutoffs.",
+      "Historical runner documents Python sum(float(reciprocal_rank)) for legacy MRR@200."
+    ]
+  },
+  "historical_provenance_supported_routes": [],
+  "metric_impact": "NOT_DETERMINED",
+  "mrr100_numeric_matching_routes": [],
+  "mrr200_numeric_matching_routes": [
+    "mrr_at_200.rank_ref.filtered_nonzero.python_builtin_sum",
+    "mrr_at_200.rank_ref.filtered_nonzero.math_fsum",
+    "mrr_at_200.rank_ref.full_zero.python_builtin_sum",
+    "mrr_at_200.rank_ref.full_zero.math_fsum",
+    "mrr_at_200.reciprocal_rank.filtered_nonzero.python_builtin_sum",
+    "mrr_at_200.reciprocal_rank.filtered_nonzero.math_fsum",
+    "mrr_at_200.reciprocal_rank.full_zero.python_builtin_sum",
+    "mrr_at_200.reciprocal_rank.full_zero.math_fsum"
+  ],
+  "numeric_matching_routes": [],
+  "prohibitions_preserved": {
+    "article_modified": false,
+    "attempt04_failure_record_modified": false,
+    "attempt05_authorized": false,
+    "attempt05_executed": false,
+    "candidate_integrated": false,
+    "canonical_plan_modified": false,
+    "d1a_executed": false,
+    "ev03_executed": false,
+    "ev04_real_executed": false,
+    "eval_real_executed": false,
+    "exp11b_or_exp12_touched": false,
+    "historical_tests_modified": false,
+    "indexes_built": false,
+    "main_modified": false,
+    "model_inference_executed": false,
+    "pass_exact_weakened": false,
+    "retrieval_executed": false,
+    "tolerance_or_rounding_introduced": false,
+    "v0_3_evaluator_modified": false,
+    "v0_3_gate_specs_authorization_modified": false,
+    "v0_4_authorization_created": false,
+    "v0_4_built": false
+  },
+  "proof_strength": {
+    "git_versioned_facts": "INDEPENDENTLY_REPRODUCIBLE_FROM_GIT_OBJECTS",
+    "github_ci": "NO_VERSIONED_GITHUB_ACTIONS_WORKFLOW / NO_GITHUB_CI_EVIDENCE_USED",
+    "historical_provenance_inference": "INSUFFICIENT_TO_ATTRIBUTE_FROZEN_DOT77_TO_AN_EXECUTED_REDUCER",
+    "local_arithmetic_reproduction": "CODEX_LOCAL_PURE_READ_ONLY_COMPUTATION"
+  },
+  "prospective_recommendation_max_10_lines": [
+    "Make an explicit methodological decision about preserving the frozen .77 literal versus adopting case-derived .78.",
+    "If a future gate is built, bind parser, contribution source, CSV order, vector form, reducer, dtype, and runtime versions.",
+    "Use a prospective deterministic recomputation rule; do not copy the six frozen scalars into observed metrics.",
+    "Keep historical Gate C artifacts immutable and preserve PASS_EXACT without tolerance or rounding.",
+    "Require separate external audit and authorization before any Attempt05 execution."
+  ],
+  "rank_ref_vs_reciprocal_rank_source_mismatch_count": {
+    "100": 0,
+    "200": 0
+  },
+  "schema_version": 1,
+  "source_bindings": {
+    "attempt04_static_diagnosis": {
+      "expected_git_blob_sha1": "fca5712c615960b41cb2741c2164f19fc00df9dd",
+      "git_blob_sha1": "fca5712c615960b41cb2741c2164f19fc00df9dd",
+      "matches_expected": true,
+      "path": "outputs/audits/0b05c_ev04_attempt04_static_diagnosis_v0.3/ev04_metric_mismatch_diagnosis_v0.3.json",
+      "ref": "HEAD"
+    },
+    "current_v0_3_producer": {
+      "expected_git_blob_sha1": "3fb1346dcee357d7b1d2d430e3ca98c0bba1d1a0",
+      "git_blob_sha1": "3fb1346dcee357d7b1d2d430e3ca98c0bba1d1a0",
+      "matches_expected": true,
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v03.py",
+      "ref": "HEAD"
+    },
+    "frozen_case_summary": {
+      "expected_git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58",
+      "git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+      "ref": "HEAD"
+    },
+    "frozen_metrics_artifact": {
+      "expected_git_blob_sha1": "bc3b34cae7d8832426e6b2b56cb3d2d1541cdd57",
+      "git_blob_sha1": "bc3b34cae7d8832426e6b2b56cb3d2d1541cdd57",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+      "ref": "HEAD"
+    },
+    "frozen_run_metadata": {
+      "expected_git_blob_sha1": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1",
+      "git_blob_sha1": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
+      "ref": "HEAD"
+    },
+    "gate_c_flat_comparison": {
+      "expected_git_blob_sha1": "e1c34db96121f88f05d3371e41256cd470626a4f",
+      "git_blob_sha1": "e1c34db96121f88f05d3371e41256cd470626a4f",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/flat_vs_hierarchical_comparison_v0.2.csv",
+      "ref": "HEAD"
+    },
+    "gate_c_historical_test": {
+      "expected_git_blob_sha1": "1d3e45c19b29ce7f1a38a4721f01b7e70d270e3c",
+      "git_blob_sha1": "1d3e45c19b29ce7f1a38a4721f01b7e70d270e3c",
+      "matches_expected": true,
+      "path": "tests/test_normative_bm25_hierarchical_v02.py",
+      "ref": "ef9faefbe9ddc0262e6e2e2f5b34feb915a69f97"
+    },
+    "gate_c_inventory": {
+      "expected_git_blob_sha1": "adcd8da4b3f6c48d84535a0068cdd83d5bf7806a",
+      "git_blob_sha1": "adcd8da4b3f6c48d84535a0068cdd83d5bf7806a",
+      "matches_expected": true,
+      "path": "docs/exp04_bm25_normative_hierarchical_v02_inventory.md",
+      "ref": "HEAD"
+    },
+    "gate_c_microaudit_json": {
+      "expected_git_blob_sha1": "098bc50f382a54c9dca7025d0e2d4364ac27ad3b",
+      "git_blob_sha1": "098bc50f382a54c9dca7025d0e2d4364ac27ad3b",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.json",
+      "ref": "HEAD"
+    },
+    "gate_c_microaudit_md": {
+      "expected_git_blob_sha1": "2749d3328a0f72c43e0f69a89d36293a7b86f042",
+      "git_blob_sha1": "2749d3328a0f72c43e0f69a89d36293a7b86f042",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.md",
+      "ref": "HEAD"
+    },
+    "gate_c_parent_run_metadata": {
+      "expected_git_blob_sha1": "305ad5c29d2a37b584c5f892cc5ac4a0c8a70e17",
+      "git_blob_sha1": "305ad5c29d2a37b584c5f892cc5ac4a0c8a70e17",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
+      "ref": "13d317630bbe59e91bc1058800d4593ba6ace66a"
+    },
+    "gate_c_summary": {
+      "expected_git_blob_sha1": "dac91901821349ace513468fc8db5de88e68f1c3",
+      "git_blob_sha1": "dac91901821349ace513468fc8db5de88e68f1c3",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/summary.md",
+      "ref": "HEAD"
+    },
+    "historical_hierarchical_runner": {
+      "expected_git_blob_sha1": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d",
+      "git_blob_sha1": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d",
+      "matches_expected": true,
+      "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+      "ref": "ce239059d748a4baf8a2113df5398f50c0e14a58"
+    },
+    "limitation_stratified_metrics": {
+      "expected_git_blob_sha1": "3e13cd52e8fac58bf4452c1c83a1fb11e233508b",
+      "git_blob_sha1": "3e13cd52e8fac58bf4452c1c83a1fb11e233508b",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/limitation_stratified_metrics_v0.2.csv",
+      "ref": "HEAD"
+    }
+  },
+  "source_bindings_all_match_expected": true,
+  "v04_recovery_readiness": "NOT_READY_NEEDS_METHODOLOGICAL_DECISION",
+  "versioned_77_78_coexistence": {
+    "coexistence_bit_exact_equal": false,
+    "coexistence_ulp_distance": 1,
+    "gate_c_frozen_mrr_at_100": {
+      "float_hex": "0x1.57e927ce3818bp-5",
+      "repr": "0.04198129438896377",
+      "value": 0.04198129438896377
+    },
+    "gate_c_frozen_mrr_at_100_numerator": {
+      "float_hex": "0x1.62a8710ca9d97p+5",
+      "repr": "44.33224687474574",
+      "value": 44.33224687474574
+    },
+    "interpretation": "VERSIONED_INTERNAL_ONE_ULP_COEXISTENCE_WITHOUT_RETROSPECTIVE_NORMALIZATION",
+    "not_both_parents_missing_mrr_at_100": {
+      "float_hex": "0x1.57e927ce3818cp-5",
+      "repr": "0.04198129438896378",
+      "value": 0.04198129438896378
+    },
+    "not_both_parents_missing_n": 1056,
+    "parent_hs4_present_mrr_at_100": {
+      "float_hex": "0x1.57e927ce3818cp-5",
+      "repr": "0.04198129438896378",
+      "value": 0.04198129438896378
+    },
+    "parent_hs4_present_n": 1056
+  }
+}
