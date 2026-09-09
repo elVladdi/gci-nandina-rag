@@ -1,0 +1,254 @@
+{
+  "artifact_id": "0b05c_ev04_mrr100_methodological_decision_v0.4",
+  "schema_version": 1,
+  "baseline_commit": "ecb34a8372b4f8f91f0dc2e8329bf68ecb1f1fc6",
+  "decision_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "methodological_decision": "ADOPT_CASE_DERIVED_DOT78_AS_PROSPECTIVE_REFERENCE_PRESERVE_DOT77_AS_HISTORICAL_LITERAL",
+  "historical_arithmetic_path": "NOT_RECOVERED",
+  "v04_build_authorized": false,
+  "attempt05_authorized": false,
+  "metric_impact": "NOT_DETERMINED",
+  "closure": "NOT_AUTHORIZED",
+  "historical_literal": {
+    "mrr_at_100_numerator": {
+      "repr": "44.33224687474574",
+      "float_hex": "0x1.62a8710ca9d97p+5"
+    },
+    "mrr_at_100": {
+      "repr": "0.04198129438896377",
+      "float_hex": "0x1.57e927ce3818bp-5"
+    },
+    "role": "IMMUTABLE_HISTORICAL_REPORTED_LITERAL / NOT_PROSPECTIVE_COMPUTATIONAL_ORACLE",
+    "provenance": "NOT_RECOVERED",
+    "historical_artifacts_mutated": false
+  },
+  "prospective_reference": {
+    "mrr_at_100_numerator_binary64": {
+      "repr": "44.33224687474575",
+      "float_hex": "0x1.62a8710ca9d98p+5"
+    },
+    "mrr_at_100_binary64": {
+      "repr": "0.04198129438896378",
+      "float_hex": "0x1.57e927ce3818cp-5"
+    },
+    "role": "PROSPECTIVE_CANONICAL_CASE_DERIVED_REFERENCE",
+    "historical_provenance_claimed": false,
+    "clarification": "The prospective reference is selected because it is reproducibly case-derived under the canonical exact-rational rule; it is not asserted to be the historically true Gate C value."
+  },
+  "canonical_reducer_contract": {
+    "contract_status": "PROSPECTIVE_METHODOLOGICAL_DECISION_PENDING_EXTERNAL_AUDIT",
+    "rules": [
+      {
+        "rule_number": 1,
+        "rule": "For every cutoff K, the contribution source is the integer rank_ref field from the case summary."
+      },
+      {
+        "rule_number": 2,
+        "rule": "Each case contributes exactly 1/rank_ref when 1 <= rank_ref <= K and exactly 0 otherwise."
+      },
+      {
+        "rule_number": 3,
+        "rule": "Accumulate contributions as exact rational numbers, conceptually Fraction(1, rank_ref), with no intermediate floating-point accumulation."
+      },
+      {
+        "rule_number": 4,
+        "rule": "The mathematical result is invariant to case-summary row order."
+      },
+      {
+        "rule_number": 5,
+        "rule": "The denominator is the exact number of cases N."
+      },
+      {
+        "rule_number": 6,
+        "rule": "Convert the exact rational numerator to IEEE-754 binary64 exactly once to obtain numerator_binary64."
+      },
+      {
+        "rule_number": 7,
+        "rule": "Convert the exact rational ratio numerator_rational/N to IEEE-754 binary64 exactly once to obtain mrr_binary64."
+      },
+      {
+        "rule_number": 8,
+        "rule": "Compute the 101-200 contribution rationally as S_200 - S_100 and convert exactly once; subtracting two already-rounded floats is prohibited."
+      },
+      {
+        "rule_number": 9,
+        "rule": "No tolerances are permitted."
+      },
+      {
+        "rule_number": 10,
+        "rule": "No decimal convenience rounding is permitted."
+      },
+      {
+        "rule_number": 11,
+        "rule": "No nextafter adjustment is permitted."
+      },
+      {
+        "rule_number": 12,
+        "rule": "No hardcoded output scalars are permitted in the producer."
+      },
+      {
+        "rule_number": 13,
+        "rule": "No manual correction may be applied to force agreement with either the historical .77 literal or the prospective .78 reference."
+      }
+    ],
+    "implementation_note": "A future implementation may use fractions.Fraction or an equivalent exact-rational representation; the scientific contract is the rule, not a specific library."
+  },
+  "pass_exact_contract": {
+    "pass_exact_required": true,
+    "ranking_historical_control": "FROZEN / EXACT",
+    "case_summary_historical_control": "FROZEN / EXACT",
+    "enriched_mrr_expected_derivation": "DERIVE_INDEPENDENTLY_FROM_FROZEN_CASE_SUMMARY_WITH_CANONICAL_EXACT_RATIONAL_RULE",
+    "enriched_mrr_actual_derivation": "DERIVE_INDEPENDENTLY_FROM_REPRODUCED_CASE_SUMMARY_WITH_CANONICAL_EXACT_RATIONAL_RULE",
+    "expected_actual_comparison": "EXACT_EQUALITY",
+    "historical_dot77_used_as_prospective_expected": false,
+    "legacy_metrics_contract": "PRESERVE_THE_APPLICABLE_CONTRACT_WHERE_A_STABLE_HISTORICAL_PRODUCER_EXISTS",
+    "controls_weakened_for_attempt05": false,
+    "tolerances_introduced": false
+  },
+  "read_only_rational_check": {
+    "classification": "CODEX_LOCAL_PURE_READ_ONLY_COMPUTATION",
+    "input": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+      "git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58",
+      "case_count": 1056
+    },
+    "mrr_at_100": {
+      "numerator_rational": {
+        "numerator": "1934200815516088018",
+        "denominator": "43629659037605025"
+      },
+      "mrr_rational": {
+        "numerator": "967100407758044009",
+        "denominator": "23036459971855453200"
+      },
+      "numerator_binary64": {
+        "repr": "44.33224687474575",
+        "float_hex": "0x1.62a8710ca9d98p+5"
+      },
+      "mrr_binary64": {
+        "repr": "0.04198129438896378",
+        "float_hex": "0x1.57e927ce3818cp-5"
+      },
+      "matches_declared_prospective_reference": true
+    },
+    "mrr_at_200_control": {
+      "numerator_rational": {
+        "numerator": "541930033409542605714417802343096476523631054751252721",
+        "denominator": "11840614608859584775324158488472678953177138297016000"
+      },
+      "mrr_rational": {
+        "numerator": "541930033409542605714417802343096476523631054751252721",
+        "denominator": "12503689026955721522742311363827148974555058041648896000"
+      },
+      "mrr_binary64": {
+        "repr": "0.043341611602882815",
+        "float_hex": "0x1.630df28c7d77ap-5"
+      }
+    },
+    "contribution_101_200": {
+      "rational": {
+        "numerator": "4221638972662797829869925972156161758832328316869",
+        "denominator": "2938847011382373982458217544917517734717582104000"
+      },
+      "binary64_single_final_conversion": {
+        "repr": "1.4364949778985006",
+        "float_hex": "0x1.6fbe2286f13acp+0"
+      },
+      "computed_by_subtracting_rounded_floats": false
+    },
+    "retrieval_or_evaluator_invoked": false,
+    "github_ci_evidence": "NONE_USED"
+  },
+  "source_bindings": {
+    "attempt04_static_diagnosis": {
+      "path": "outputs/audits/0b05c_ev04_attempt04_static_diagnosis_v0.3/ev04_metric_mismatch_diagnosis_v0.3.json",
+      "ref": "main",
+      "git_blob_sha1": "fca5712c615960b41cb2741c2164f19fc00df9dd"
+    },
+    "arithmetic_provenance_prompt28": {
+      "path": "outputs/audits/0b05c_ev04_gatec_mrr100_arithmetic_provenance_v0.3/ev04_gatec_mrr100_arithmetic_provenance_v0.3.json",
+      "ref": "main",
+      "git_blob_sha1": "c3667f85b4f8ec51f026e2e3b706062da586a7f1"
+    },
+    "frozen_case_summary": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+      "ref": "main",
+      "git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58"
+    },
+    "frozen_run_metadata": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
+      "ref": "main",
+      "git_blob_sha1": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1"
+    },
+    "frozen_metrics_artifact": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+      "ref": "main",
+      "git_blob_sha1": "bc3b34cae7d8832426e6b2b56cb3d2d1541cdd57"
+    },
+    "gate_c_microaudit": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.json",
+      "ref": "main",
+      "git_blob_sha1": "098bc50f382a54c9dca7025d0e2d4364ac27ad3b"
+    },
+    "limitation_stratified_metrics": {
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/limitation_stratified_metrics_v0.2.csv",
+      "ref": "main",
+      "git_blob_sha1": "3e13cd52e8fac58bf4452c1c83a1fb11e233508b"
+    },
+    "historical_gate_c_test": {
+      "path": "tests/test_normative_bm25_hierarchical_v02.py",
+      "ref": "ef9faefbe9ddc0262e6e2e2f5b34feb915a69f97",
+      "git_blob_sha1": "1d3e45c19b29ce7f1a38a4721f01b7e70d270e3c"
+    },
+    "historical_hierarchical_runner": {
+      "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+      "ref": "ce239059d748a4baf8a2113df5398f50c0e14a58",
+      "git_blob_sha1": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d"
+    },
+    "current_v0_3_producer": {
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v03.py",
+      "ref": "main",
+      "git_blob_sha1": "3fb1346dcee357d7b1d2d430e3ca98c0bba1d1a0"
+    }
+  },
+  "source_bindings_verified_from_git": true,
+  "decision_scope": {
+    "dot77_role": "IMMUTABLE_HISTORICAL_REPORTED_LITERAL / NOT_PROSPECTIVE_COMPUTATIONAL_ORACLE",
+    "dot78_role": "PROSPECTIVE_CANONICAL_CASE_DERIVED_REFERENCE",
+    "dot78_declared_historically_true": false,
+    "dot77_vs_dot78_historical_truth_decided": false,
+    "prospective_computational_reference_decided": true
+  },
+  "governance": {
+    "historical_artifacts_mutated": false,
+    "v03_artifacts_mutated": false,
+    "v04_code_built": false,
+    "v04_gate_built": false,
+    "v04_authorization_created": false,
+    "attempt05_authorized": false,
+    "attempt05_executed": false,
+    "retrieval_executed": false,
+    "ev03_executed": false,
+    "ev04_real_executed": false,
+    "d1a_executed": false,
+    "eval_real_executed": false,
+    "model_inference_executed": false,
+    "canonical_plan_modified": false,
+    "article_modified": false,
+    "exp11b_or_exp12_touched": false,
+    "main_modified": false,
+    "candidate_integrated": false
+  },
+  "scientific_state": {
+    "group_2": "EN_CURSO",
+    "attempt04": "FAIL_CLOSED / SCIENTIFIC_STATE_PRESERVED / FAILURE_RECORD_INTEGRATED",
+    "v03_authorization": "CONSUMED_BY_ATTEMPT04",
+    "arithmetic_provenance_audit": "VERSIONED / INTEGRATED",
+    "methodological_decision_candidate": "BUILT / PENDING_EXTERNAL_AUDIT",
+    "v04_build": "NOT_AUTHORIZED / NOT_BUILT",
+    "attempt05": "NOT_AUTHORIZED / NOT_EXECUTED",
+    "metric_impact": "NOT_DETERMINED",
+    "downstream_reexecution": "NOT_YET_JUSTIFIED",
+    "closure": "NOT_AUTHORIZED"
+  }
+}
