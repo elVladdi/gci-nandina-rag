@@ -1,0 +1,38 @@
+{
+  "administrative_execution_report": {
+    "branch": "codex/prompts-temporary",
+    "commit": "a449a3127a52e4b17948fd7fe6a3040a24f02ebd",
+    "evidence_classification": "CODEX_LOCAL_EXECUTION_REPORT_NOT_INDEPENDENTLY_VERSIONED_RUNTIME_OUTPUTS",
+    "git_blob_sha1": "c83b7d9004433ee1f369989dd6a5c7b9800c8e0d",
+    "path": "codex_prompts_tmp/15_RESPUESTA_EJECUTAR_ATTEMPT03_NUMERICO_0B05C_V02.md"
+  },
+  "artifact_id": "0b05c_attempt03_failure_record_v0.2",
+  "attempt04_authorized": false,
+  "attempt_id": "ATTEMPT03",
+  "authorization_baseline_commit": "c44f447cb941c512cd70712cf7c3e4bc670ab05a",
+  "authorization_commit": "41d3259ff09d8a63cc3a12a7f11a146a603ee3ef",
+  "authorization_consumed": true,
+  "automatic_reuse_authorized": false,
+  "closure": "NOT_AUTHORIZED",
+  "completed_steps_reported": 6,
+  "downstream_reexecution": "NOT_YET_JUSTIFIED",
+  "exception_reported": "src.experiments.run_d1a_corrective_0b05c_v01.ContractViolation: Mandatory control reproduction is not exact",
+  "exit_code_reported": 1,
+  "failure_class": "EV04_FROZEN_METRIC_SCHEMA_PRODUCER_MISMATCH_AFTER_GATE_C_MRR_MICROAUDIT",
+  "last_completed_step_reported": "06_EV03_corrected_evaluation",
+  "last_started_step_reported": "07_EV04_Decision885_control_reproduction",
+  "metric_impact": "NOT_DETERMINED",
+  "runtime_partial_outputs": "LOCAL_PRESERVED_NOT_VERSIONED",
+  "schema_version": 1,
+  "static_root_cause_evidence": {
+    "corrective_evaluator_git_blob_sha1": "c6f4121fe5f5f50e71e27eb4cf1e28eb8986d062",
+    "current_hierarchical_runner_git_blob_sha1": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d",
+    "gate_c_mrr_microaudit_commit": "ef9faefbe9ddc0262e6e2e2f5b34feb915a69f97",
+    "initial_outputs_commit": "001580944b417e81634dd6d11a9d2facc9ed29be",
+    "metric_schema_drift_established": true,
+    "original_runner_commit": "ce239059d748a4baf8a2113df5398f50c0e14a58",
+    "ranking_or_case_drift_established": false
+  },
+  "status": "FAIL_CLOSED / SCIENTIFIC_STATE_PRESERVED",
+  "total_pipeline_steps": 19
+}
