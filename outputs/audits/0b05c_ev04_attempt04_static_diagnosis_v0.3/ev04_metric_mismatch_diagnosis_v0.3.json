@@ -1,0 +1,1215 @@
+{
+  "article_ref": "254b1e6df736fa9938ac86a515d65b36f4d361c5",
+  "artifact_id": "0b05c_ev04_attempt04_metric_mismatch_diagnosis_v0.3",
+  "attempt04_runtime_outputs_used": false,
+  "attempt05_authorized": false,
+  "baseline_commit": "58ecf012d7c4ed609c3b10787fb583f69700ab02",
+  "baseline_parent": "e3476d952bb025011ba1ac3ffeab6b51b85ffaa7",
+  "canonical_plan_ref": "fe847f708d4d1ded92b5a50a38d4913bb69ed311",
+  "closure": "NOT_AUTHORIZED",
+  "deep_diff": {
+    "comparison": "EXACT_PYTHON_NO_TOLERANCE_WITH_TYPE_AUDIT",
+    "mismatch_count": 6,
+    "mismatches": [
+      {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "expected_float_hex": "0x1.62a8710ca9d97p+5",
+        "expected_repr": "44.33224687474574",
+        "expected_type": "float",
+        "json_path": "$.metric_table[0].numerator",
+        "mismatch_kind": "metric_table_field_mismatch",
+        "observed_float_hex": "0x1.62a8710ca9d98p+5",
+        "observed_repr": "44.33224687474575",
+        "observed_type": "float",
+        "ulp_distance": 1
+      },
+      {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "expected_float_hex": "0x1.57e927ce3818bp-5",
+        "expected_repr": "0.04198129438896377",
+        "expected_type": "float",
+        "json_path": "$.metric_table[0].value",
+        "mismatch_kind": "metric_table_field_mismatch",
+        "observed_float_hex": "0x1.57e927ce3818cp-5",
+        "observed_repr": "0.04198129438896378",
+        "observed_type": "float",
+        "ulp_distance": 1
+      },
+      {
+        "absolute_delta": 6.7220534694101275e-18,
+        "equal_python": false,
+        "expected_float_hex": "0x1.649957c8abdd1p-10",
+        "expected_repr": "0.0013603172139190387",
+        "expected_type": "float",
+        "json_path": "$.mrr_101_200_contribution",
+        "mismatch_kind": "top_level_scalar_mismatch",
+        "observed_float_hex": "0x1.649957c8abdb2p-10",
+        "observed_repr": "0.001360317213919032",
+        "observed_type": "float",
+        "ulp_distance": 31
+      },
+      {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "expected_float_hex": "0x1.6fbe2286f13c0p+0",
+        "expected_repr": "1.436494977898505",
+        "expected_type": "float",
+        "json_path": "$.mrr_101_200_contribution_numerator",
+        "mismatch_kind": "top_level_scalar_mismatch",
+        "observed_float_hex": "0x1.6fbe2286f13a0p+0",
+        "observed_repr": "1.436494977898498",
+        "observed_type": "float",
+        "ulp_distance": 32
+      },
+      {
+        "absolute_delta": 6.938893903907228e-18,
+        "equal_python": false,
+        "expected_float_hex": "0x1.57e927ce3818bp-5",
+        "expected_repr": "0.04198129438896377",
+        "expected_type": "float",
+        "json_path": "$.mrr_at_100",
+        "mismatch_kind": "top_level_scalar_mismatch",
+        "observed_float_hex": "0x1.57e927ce3818cp-5",
+        "observed_repr": "0.04198129438896378",
+        "observed_type": "float",
+        "ulp_distance": 1
+      },
+      {
+        "absolute_delta": 7.105427357601002e-15,
+        "equal_python": false,
+        "expected_float_hex": "0x1.62a8710ca9d97p+5",
+        "expected_repr": "44.33224687474574",
+        "expected_type": "float",
+        "json_path": "$.mrr_at_100_numerator",
+        "mismatch_kind": "top_level_scalar_mismatch",
+        "observed_float_hex": "0x1.62a8710ca9d98p+5",
+        "observed_repr": "44.33224687474575",
+        "observed_type": "float",
+        "ulp_distance": 1
+      }
+    ]
+  },
+  "evaluation_runner_executed": false,
+  "evidence_scope": "VERSIONED_FROZEN_ARTIFACTS_AND_PURE_READ_ONLY_COMPUTATION",
+  "expected_metrics_equal_reconstructed_v03": false,
+  "expected_metrics_source": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json#metrics",
+  "historical_secondary_control": {
+    "deep_diff": [],
+    "exact_python_equality": true,
+    "mismatch_count": 0,
+    "mismatch_paths": [],
+    "runner_v0_3_expected_source_remains": "run_metadata.json#metrics"
+  },
+  "metric_impact": "NOT_DETERMINED",
+  "model_inference_executed": false,
+  "mrr_microaudit": {
+    "calculation_variants": {
+      "fsum_rank_ref_reciprocal": {
+        "100": {
+          "numerator": {
+            "float_hex": "0x1.62a8710ca9d98p+5",
+            "repr": "44.33224687474575",
+            "value": 44.33224687474575
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.57e927ce3818cp-5",
+            "repr": "0.04198129438896378",
+            "value": 0.04198129438896378
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          }
+        },
+        "200": {
+          "numerator": {
+            "float_hex": "0x1.6e266220e1635p+5",
+            "repr": "45.76874185264425",
+            "value": 45.76874185264425
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.630df28c7d779p-5",
+            "repr": "0.04334161160288281",
+            "value": 0.04334161160288281
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          }
+        }
+      },
+      "fsum_reciprocal_rank_field": {
+        "100": {
+          "numerator": {
+            "float_hex": "0x1.62a8710ca9d98p+5",
+            "repr": "44.33224687474575",
+            "value": 44.33224687474575
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.57e927ce3818cp-5",
+            "repr": "0.04198129438896378",
+            "value": 0.04198129438896378
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          }
+        },
+        "200": {
+          "numerator": {
+            "float_hex": "0x1.6e266220e1635p+5",
+            "repr": "45.76874185264425",
+            "value": 45.76874185264425
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.630df28c7d779p-5",
+            "repr": "0.04334161160288281",
+            "value": 0.04334161160288281
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          }
+        }
+      },
+      "sum_rank_ref_reciprocal": {
+        "100": {
+          "numerator": {
+            "float_hex": "0x1.62a8710ca9d98p+5",
+            "repr": "44.33224687474575",
+            "value": 44.33224687474575
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.57e927ce3818cp-5",
+            "repr": "0.04198129438896378",
+            "value": 0.04198129438896378
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          }
+        },
+        "200": {
+          "numerator": {
+            "float_hex": "0x1.6e266220e1635p+5",
+            "repr": "45.76874185264425",
+            "value": 45.76874185264425
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.630df28c7d779p-5",
+            "repr": "0.04334161160288281",
+            "value": 0.04334161160288281
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          }
+        }
+      },
+      "sum_reciprocal_rank_field": {
+        "100": {
+          "numerator": {
+            "float_hex": "0x1.62a8710ca9d98p+5",
+            "repr": "44.33224687474575",
+            "value": 44.33224687474575
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.57e927ce3818cp-5",
+            "repr": "0.04198129438896378",
+            "value": 0.04198129438896378
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 7.105427357601002e-15,
+            "equal_python": false,
+            "ulp_distance": 1
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 6.938893903907228e-18,
+            "equal_python": false,
+            "ulp_distance": 1
+          }
+        },
+        "200": {
+          "numerator": {
+            "float_hex": "0x1.6e266220e1635p+5",
+            "repr": "45.76874185264425",
+            "value": 45.76874185264425
+          },
+          "value_after_division_by_1056": {
+            "float_hex": "0x1.630df28c7d779p-5",
+            "repr": "0.04334161160288281",
+            "value": 0.04334161160288281
+          },
+          "vs_frozen_metric_table_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_metric_table_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_numerator": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          },
+          "vs_frozen_top_level_value": {
+            "absolute_delta": 0.0,
+            "equal_python": true,
+            "ulp_distance": 0
+          }
+        }
+      }
+    },
+    "contribution_101_200_variants": {
+      "fsum_rank_ref_reciprocal": {
+        "numerator_200_minus_numerator_100": {
+          "float_hex": "0x1.6fbe2286f13a0p+0",
+          "repr": "1.436494977898498",
+          "value": 1.436494977898498
+        },
+        "value_after_division_by_1056": {
+          "float_hex": "0x1.649957c8abdb2p-10",
+          "repr": "0.001360317213919032",
+          "value": 0.001360317213919032
+        },
+        "vs_frozen_contribution_numerator": {
+          "absolute_delta": 7.105427357601002e-15,
+          "equal_python": false,
+          "ulp_distance": 32
+        },
+        "vs_frozen_contribution_value": {
+          "absolute_delta": 6.7220534694101275e-18,
+          "equal_python": false,
+          "ulp_distance": 31
+        }
+      },
+      "fsum_reciprocal_rank_field": {
+        "numerator_200_minus_numerator_100": {
+          "float_hex": "0x1.6fbe2286f13a0p+0",
+          "repr": "1.436494977898498",
+          "value": 1.436494977898498
+        },
+        "value_after_division_by_1056": {
+          "float_hex": "0x1.649957c8abdb2p-10",
+          "repr": "0.001360317213919032",
+          "value": 0.001360317213919032
+        },
+        "vs_frozen_contribution_numerator": {
+          "absolute_delta": 7.105427357601002e-15,
+          "equal_python": false,
+          "ulp_distance": 32
+        },
+        "vs_frozen_contribution_value": {
+          "absolute_delta": 6.7220534694101275e-18,
+          "equal_python": false,
+          "ulp_distance": 31
+        }
+      },
+      "sum_rank_ref_reciprocal": {
+        "numerator_200_minus_numerator_100": {
+          "float_hex": "0x1.6fbe2286f13a0p+0",
+          "repr": "1.436494977898498",
+          "value": 1.436494977898498
+        },
+        "value_after_division_by_1056": {
+          "float_hex": "0x1.649957c8abdb2p-10",
+          "repr": "0.001360317213919032",
+          "value": 0.001360317213919032
+        },
+        "vs_frozen_contribution_numerator": {
+          "absolute_delta": 7.105427357601002e-15,
+          "equal_python": false,
+          "ulp_distance": 32
+        },
+        "vs_frozen_contribution_value": {
+          "absolute_delta": 6.7220534694101275e-18,
+          "equal_python": false,
+          "ulp_distance": 31
+        }
+      },
+      "sum_reciprocal_rank_field": {
+        "numerator_200_minus_numerator_100": {
+          "float_hex": "0x1.6fbe2286f13a0p+0",
+          "repr": "1.436494977898498",
+          "value": 1.436494977898498
+        },
+        "value_after_division_by_1056": {
+          "float_hex": "0x1.649957c8abdb2p-10",
+          "repr": "0.001360317213919032",
+          "value": 0.001360317213919032
+        },
+        "vs_frozen_contribution_numerator": {
+          "absolute_delta": 7.105427357601002e-15,
+          "equal_python": false,
+          "ulp_distance": 32
+        },
+        "vs_frozen_contribution_value": {
+          "absolute_delta": 6.7220534694101275e-18,
+          "equal_python": false,
+          "ulp_distance": 31
+        }
+      }
+    },
+    "denominator": 1056,
+    "frozen_fields": {
+      "metric_table_mrr_at_100": {
+        "numerator": {
+          "float_hex": "0x1.62a8710ca9d97p+5",
+          "repr": "44.33224687474574",
+          "value": 44.33224687474574
+        },
+        "value": {
+          "float_hex": "0x1.57e927ce3818bp-5",
+          "repr": "0.04198129438896377",
+          "value": 0.04198129438896377
+        }
+      },
+      "metric_table_mrr_at_200": {
+        "numerator": {
+          "float_hex": "0x1.6e266220e1635p+5",
+          "repr": "45.76874185264425",
+          "value": 45.76874185264425
+        },
+        "value": {
+          "float_hex": "0x1.630df28c7d779p-5",
+          "repr": "0.04334161160288281",
+          "value": 0.04334161160288281
+        }
+      },
+      "mrr": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "mrr_101_200_contribution": {
+        "float_hex": "0x1.649957c8abdd1p-10",
+        "repr": "0.0013603172139190387",
+        "value": 0.0013603172139190387
+      },
+      "mrr_101_200_contribution_numerator": {
+        "float_hex": "0x1.6fbe2286f13c0p+0",
+        "repr": "1.436494977898505",
+        "value": 1.436494977898505
+      },
+      "mrr_at_100": {
+        "float_hex": "0x1.57e927ce3818bp-5",
+        "repr": "0.04198129438896377",
+        "value": 0.04198129438896377
+      },
+      "mrr_at_100_numerator": {
+        "float_hex": "0x1.62a8710ca9d97p+5",
+        "repr": "44.33224687474574",
+        "value": 44.33224687474574
+      },
+      "mrr_at_200": {
+        "float_hex": "0x1.630df28c7d779p-5",
+        "repr": "0.04334161160288281",
+        "value": 0.04334161160288281
+      },
+      "mrr_at_200_numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      },
+      "mrr_numerator": {
+        "float_hex": "0x1.6e266220e1635p+5",
+        "repr": "45.76874185264425",
+        "value": 45.76874185264425
+      }
+    },
+    "mechanism": "All four required read-only routes (sum/fsum over 1.0 / rank_ref or float(reciprocal_rank)) converge bit-exactly to the v0.3 reconstructed MRR@100, while none reproduces the frozen expected MRR@100, which is one ULP lower. The v0.3-versus-frozen accumulation difference propagates through numerator_200 - numerator_100 into both 101-200 contribution fields and the mrr_at_100 metric_table row. MRR@200 remains bit-exact. Versioned evidence does not establish which historical arithmetic route produced the frozen one-ULP-lower value.",
+    "routes_matching_frozen_values_bit_exact": {
+      "mrr_101_200_contribution": [],
+      "mrr_101_200_contribution_numerator": [],
+      "mrr_at_100": [],
+      "mrr_at_100_numerator": [],
+      "mrr_at_200": [
+        "sum_rank_ref_reciprocal",
+        "sum_reciprocal_rank_field",
+        "fsum_rank_ref_reciprocal",
+        "fsum_reciprocal_rank_field"
+      ],
+      "mrr_at_200_numerator": [
+        "sum_rank_ref_reciprocal",
+        "sum_reciprocal_rank_field",
+        "fsum_rank_ref_reciprocal",
+        "fsum_reciprocal_rank_field"
+      ]
+    }
+  },
+  "reconstruction": {
+    "base_metrics_function": "hierarchical.metrics_from_cases(case_rows)",
+    "case_count": 1056,
+    "enriched_metrics_function": "build_ev04_enriched_metrics(case_rows, base_metrics, require_real_case_count=True)",
+    "expected_metric_table_names": [
+      "mrr_at_100",
+      "mrr_at_200",
+      "top_1",
+      "top_3",
+      "top_5",
+      "top_10",
+      "top_50",
+      "recall_at_50",
+      "recall_at_100",
+      "recall_at_200",
+      "pool_recall_at_200",
+      "exact_at_10",
+      "hs6_at_10",
+      "hs4_at_10",
+      "chapter_at_10",
+      "exact_at_50",
+      "hs6_at_50",
+      "hs4_at_50",
+      "chapter_at_50",
+      "exact_at_100",
+      "hs6_at_100",
+      "hs4_at_100",
+      "chapter_at_100",
+      "exact_at_200",
+      "hs6_at_200",
+      "hs4_at_200",
+      "chapter_at_200"
+    ],
+    "expected_metric_table_row_schemas": [
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ]
+    ],
+    "expected_metrics_equal_reconstructed_v0_3": false,
+    "expected_top_level_key_count": 92,
+    "expected_top_level_keys": [
+      "mrr",
+      "top_1",
+      "top_3",
+      "top_5",
+      "top_10",
+      "top_50",
+      "recall_at_50",
+      "recall_at_100",
+      "recall_at_200",
+      "pool_recall_at_200",
+      "exact_at_10",
+      "hs6_at_10",
+      "hs4_at_10",
+      "chapter_at_10",
+      "exact_at_50",
+      "hs6_at_50",
+      "hs4_at_50",
+      "chapter_at_50",
+      "exact_at_100",
+      "hs6_at_100",
+      "hs4_at_100",
+      "chapter_at_100",
+      "exact_at_200",
+      "hs6_at_200",
+      "hs4_at_200",
+      "chapter_at_200",
+      "mrr_numerator",
+      "mrr_denominator",
+      "top_1_numerator",
+      "top_1_denominator",
+      "top_3_numerator",
+      "top_3_denominator",
+      "top_5_numerator",
+      "top_5_denominator",
+      "top_10_numerator",
+      "top_10_denominator",
+      "top_50_numerator",
+      "top_50_denominator",
+      "recall_at_50_numerator",
+      "recall_at_50_denominator",
+      "recall_at_100_numerator",
+      "recall_at_100_denominator",
+      "recall_at_200_numerator",
+      "recall_at_200_denominator",
+      "pool_recall_at_200_numerator",
+      "pool_recall_at_200_denominator",
+      "exact_at_10_numerator",
+      "exact_at_10_denominator",
+      "hs6_at_10_numerator",
+      "hs6_at_10_denominator",
+      "hs4_at_10_numerator",
+      "hs4_at_10_denominator",
+      "chapter_at_10_numerator",
+      "chapter_at_10_denominator",
+      "exact_at_50_numerator",
+      "exact_at_50_denominator",
+      "hs6_at_50_numerator",
+      "hs6_at_50_denominator",
+      "hs4_at_50_numerator",
+      "hs4_at_50_denominator",
+      "chapter_at_50_numerator",
+      "chapter_at_50_denominator",
+      "exact_at_100_numerator",
+      "exact_at_100_denominator",
+      "hs6_at_100_numerator",
+      "hs6_at_100_denominator",
+      "hs4_at_100_numerator",
+      "hs4_at_100_denominator",
+      "chapter_at_100_numerator",
+      "chapter_at_100_denominator",
+      "exact_at_200_numerator",
+      "exact_at_200_denominator",
+      "hs6_at_200_numerator",
+      "hs6_at_200_denominator",
+      "hs4_at_200_numerator",
+      "hs4_at_200_denominator",
+      "chapter_at_200_numerator",
+      "chapter_at_200_denominator",
+      "cases_evaluated",
+      "cases_with_retrieval",
+      "zero_retrieval_cases",
+      "not_found_at_depth",
+      "metric_table",
+      "mrr_at_100",
+      "mrr_at_200",
+      "mrr_at_100_numerator",
+      "mrr_at_200_numerator",
+      "mrr_at_100_denominator",
+      "mrr_at_200_denominator",
+      "mrr_definition",
+      "mrr_101_200_contribution_numerator",
+      "mrr_101_200_contribution"
+    ],
+    "extra_keys_in_reconstructed": [],
+    "metric_table_equal": false,
+    "metric_table_names_and_order_equal": true,
+    "metric_table_row_schemas_equal": true,
+    "missing_keys_in_reconstructed": [],
+    "reconstructed_metric_table_names": [
+      "mrr_at_100",
+      "mrr_at_200",
+      "top_1",
+      "top_3",
+      "top_5",
+      "top_10",
+      "top_50",
+      "recall_at_50",
+      "recall_at_100",
+      "recall_at_200",
+      "pool_recall_at_200",
+      "exact_at_10",
+      "hs6_at_10",
+      "hs4_at_10",
+      "chapter_at_10",
+      "exact_at_50",
+      "hs6_at_50",
+      "hs4_at_50",
+      "chapter_at_50",
+      "exact_at_100",
+      "hs6_at_100",
+      "hs4_at_100",
+      "chapter_at_100",
+      "exact_at_200",
+      "hs6_at_200",
+      "hs4_at_200",
+      "chapter_at_200"
+    ],
+    "reconstructed_metric_table_row_schemas": [
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ],
+      [
+        "metric",
+        "numerator",
+        "denominator",
+        "value"
+      ]
+    ],
+    "reconstructed_top_level_key_count": 92,
+    "reconstructed_top_level_keys": [
+      "mrr",
+      "top_1",
+      "top_3",
+      "top_5",
+      "top_10",
+      "top_50",
+      "recall_at_50",
+      "recall_at_100",
+      "recall_at_200",
+      "pool_recall_at_200",
+      "exact_at_10",
+      "hs6_at_10",
+      "hs4_at_10",
+      "chapter_at_10",
+      "exact_at_50",
+      "hs6_at_50",
+      "hs4_at_50",
+      "chapter_at_50",
+      "exact_at_100",
+      "hs6_at_100",
+      "hs4_at_100",
+      "chapter_at_100",
+      "exact_at_200",
+      "hs6_at_200",
+      "hs4_at_200",
+      "chapter_at_200",
+      "mrr_numerator",
+      "mrr_denominator",
+      "top_1_numerator",
+      "top_1_denominator",
+      "top_3_numerator",
+      "top_3_denominator",
+      "top_5_numerator",
+      "top_5_denominator",
+      "top_10_numerator",
+      "top_10_denominator",
+      "top_50_numerator",
+      "top_50_denominator",
+      "recall_at_50_numerator",
+      "recall_at_50_denominator",
+      "recall_at_100_numerator",
+      "recall_at_100_denominator",
+      "recall_at_200_numerator",
+      "recall_at_200_denominator",
+      "pool_recall_at_200_numerator",
+      "pool_recall_at_200_denominator",
+      "exact_at_10_numerator",
+      "exact_at_10_denominator",
+      "hs6_at_10_numerator",
+      "hs6_at_10_denominator",
+      "hs4_at_10_numerator",
+      "hs4_at_10_denominator",
+      "chapter_at_10_numerator",
+      "chapter_at_10_denominator",
+      "exact_at_50_numerator",
+      "exact_at_50_denominator",
+      "hs6_at_50_numerator",
+      "hs6_at_50_denominator",
+      "hs4_at_50_numerator",
+      "hs4_at_50_denominator",
+      "chapter_at_50_numerator",
+      "chapter_at_50_denominator",
+      "exact_at_100_numerator",
+      "exact_at_100_denominator",
+      "hs6_at_100_numerator",
+      "hs6_at_100_denominator",
+      "hs4_at_100_numerator",
+      "hs4_at_100_denominator",
+      "chapter_at_100_numerator",
+      "chapter_at_100_denominator",
+      "exact_at_200_numerator",
+      "exact_at_200_denominator",
+      "hs6_at_200_numerator",
+      "hs6_at_200_denominator",
+      "hs4_at_200_numerator",
+      "hs4_at_200_denominator",
+      "chapter_at_200_numerator",
+      "chapter_at_200_denominator",
+      "cases_evaluated",
+      "cases_with_retrieval",
+      "zero_retrieval_cases",
+      "not_found_at_depth",
+      "metric_table",
+      "mrr_at_100",
+      "mrr_at_200",
+      "mrr_at_100_numerator",
+      "mrr_at_200_numerator",
+      "mrr_at_100_denominator",
+      "mrr_at_200_denominator",
+      "mrr_definition",
+      "mrr_101_200_contribution_numerator",
+      "mrr_101_200_contribution"
+    ]
+  },
+  "retrieval_executed": false,
+  "root_cause_class": "FLOAT_ACCUMULATION_PATH_MISMATCH",
+  "root_cause_field_status": "ISOLATED_FROM_VERSIONED_FROZEN_ARTIFACTS",
+  "root_cause_json_paths": [
+    "$.metric_table[0].numerator",
+    "$.metric_table[0].value",
+    "$.mrr_101_200_contribution",
+    "$.mrr_101_200_contribution_numerator",
+    "$.mrr_at_100",
+    "$.mrr_at_100_numerator"
+  ],
+  "run_metadata_metrics_equal_metrics_artifact": true,
+  "schema_version": 1,
+  "secondary_metrics_source": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json#metrics",
+  "source_bindings": {
+    "comparator_legacy": {
+      "expected_git_blob_sha1": "c6f4121fe5f5f50e71e27eb4cf1e28eb8986d062",
+      "git_blob_sha1": "c6f4121fe5f5f50e71e27eb4cf1e28eb8986d062",
+      "matches_expected": true,
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
+    },
+    "evaluator_v0_3": {
+      "expected_git_blob_sha1": "3fb1346dcee357d7b1d2d430e3ca98c0bba1d1a0",
+      "git_blob_sha1": "3fb1346dcee357d7b1d2d430e3ca98c0bba1d1a0",
+      "matches_expected": true,
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v03.py"
+    },
+    "failure_record": {
+      "expected_git_blob_sha1": "31f1cea387b8630191371f767c03cf13990646b0",
+      "git_blob_sha1": "31f1cea387b8630191371f767c03cf13990646b0",
+      "matches_expected": true,
+      "path": "outputs/audits/0b05c_attempt04_failclosed_v0.3/attempt04_failure_record_v0.3.json"
+    },
+    "frozen_ev04_case_summary": {
+      "expected_git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58",
+      "git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv"
+    },
+    "frozen_ev04_metrics_artifact": {
+      "expected_git_blob_sha1": "bc3b34cae7d8832426e6b2b56cb3d2d1541cdd57",
+      "git_blob_sha1": "bc3b34cae7d8832426e6b2b56cb3d2d1541cdd57",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json"
+    },
+    "frozen_ev04_ranking": {
+      "expected_git_blob_sha1": "9a1543570c18e3cba32f6cf20506d166fd238896",
+      "git_blob_sha1": "9a1543570c18e3cba32f6cf20506d166fd238896",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv"
+    },
+    "frozen_ev04_run_metadata": {
+      "expected_git_blob_sha1": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1",
+      "git_blob_sha1": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1",
+      "matches_expected": true,
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json"
+    },
+    "gate_v0_3": {
+      "expected_git_blob_sha1": "58152fd4806d8efd54ae752cb2790c383417aa37",
+      "git_blob_sha1": "58152fd4806d8efd54ae752cb2790c383417aa37",
+      "matches_expected": true,
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/0b05c_corrective_numerical_execution_gate_v0.3.json"
+    }
+  },
+  "source_bindings_all_match_expected": true,
+  "static_comparator": {
+    "case_summary_expected_and_actual_same_frozen_path": true,
+    "evaluation_runner_executed": false,
+    "exception": "src.experiments.run_d1a_corrective_0b05c_v01.ContractViolation: Mandatory control reproduction is not exact",
+    "frozen_case_schema_matches_ev04_contract": true,
+    "frozen_ranking_schema_matches_ev04_contract": true,
+    "metrics_exact_before_call": false,
+    "outcome": "RAISED_CONTRACT_VIOLATION",
+    "ranking_expected_and_actual_same_frozen_path": true,
+    "result": null,
+    "retrieval_executed": false
+  }
+}
