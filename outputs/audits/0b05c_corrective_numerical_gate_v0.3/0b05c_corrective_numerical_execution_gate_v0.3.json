@@ -1,5 +1,5 @@
 {
-  "attempt04": "AUTHORIZED / NOT_EXECUTED",
+  "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
   "authorization": {
     "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
     "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
@@ -10,7 +10,7 @@
     "corrective_retrieval_executed": false,
     "runtime_authorization_record_present": false
   },
-  "authorization_readiness": "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION",
+  "authorization_readiness": "ATTEMPT04_CONSUMED / REAUTHORIZATION_REQUIRED",
   "authorization_record_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/0b05c_numerical_authorization_record_v0.3.json",
   "authorization_transition": {
     "authorization_record_contract": {

@@ -1,5 +1,5 @@
 {
-  "attempt04": "AUTHORIZED / NOT_EXECUTED",
+  "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
   "authorization": {
     "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
     "corrective_metrics_computed": false,

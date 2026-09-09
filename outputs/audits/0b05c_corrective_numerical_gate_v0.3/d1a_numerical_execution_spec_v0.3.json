@@ -11,7 +11,7 @@
     "Aggregate and case-level comparisons use frozen Decision 885 primary controls only.",
     "A complete output hash ledger is emitted without overwrite."
   ],
-  "attempt04": "AUTHORIZED / NOT_EXECUTED",
+  "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
   "authorization": {
     "D1A_CORRECTIVE_CORPUS_CREATED": false,
     "D1A_CORRECTIVE_INDEX_CREATED": false,
