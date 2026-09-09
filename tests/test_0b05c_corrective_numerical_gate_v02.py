@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import copy
+import hashlib
+import json
+import shlex
 import subprocess
 import tempfile
 import unittest
@@ -55,8 +58,9 @@ class CorrectiveNumericalGateV02Tests(unittest.TestCase):
     def test_03_execute_authorized_stops_before_side_effects(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            with mock.patch.object(runner, "read_json", return_value=self.bundle["gate"]):
-                with self.assertRaisesRegex(gate.ContractViolation, "four.*AUTHORIZED"):
+            with mock.patch.object(runner, "read_json", return_value=self.bundle["gate"]), \
+                 mock.patch.object(runner.subprocess, "run", return_value=mock.Mock(stdout="")):
+                with self.assertRaises(gate.ContractViolation):
                     runner.execute_authorized(root)
             self.assertEqual(list(root.iterdir()), [])
 
@@ -183,6 +187,211 @@ class CorrectiveNumericalGateV02Tests(unittest.TestCase):
     def test_20_d1a_closed_preflight_is_read_only(self) -> None:
         revision, _ = candidate_revision()
         self.assertEqual(d1a_preflight(ROOT, revision=revision)["mode"], "PREEXECUTION_CLOSED_READONLY")
+
+    def _authorized_snapshot(self) -> tuple[dict, dict]:
+        baseline = gate.authorization_snapshot(self.bundle["gate"], self.bundle["ev03"], self.bundle["ev04"], self.bundle["d1a"])
+        candidate = copy.deepcopy(baseline)
+        candidate["gate"]["gate_status"] = gate.AUTHORIZED_GATE_STATUS
+        candidate["gate"]["authorization_readiness"] = gate.AUTHORIZED_READINESS
+        for name in ("EV03", "EV04", "D1A", "UNIFIED_0B05C"):
+            candidate["gate"]["authorization"][f"{name}_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        candidate["gate"]["authorization"]["authorization_record_present"] = True
+        candidate["EV03"]["authorization"]["EV03_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        candidate["EV04"]["authorization"]["EV04_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        candidate["D1a"]["authorization"]["D1A_NUMERICAL_EXECUTION"] = "AUTHORIZED"
+        return baseline, candidate
+
+    def test_21_gate_strings_alone_cannot_authorize(self) -> None:
+        baseline, candidate = self._authorized_snapshot()
+        candidate["gate"]["gate_status"] = baseline["gate"]["gate_status"]
+        candidate["gate"]["authorization_readiness"] = baseline["gate"]["authorization_readiness"]
+        candidate["gate"]["authorization"]["authorization_record_present"] = False
+        candidate["EV03"] = baseline["EV03"]
+        candidate["EV04"] = baseline["EV04"]
+        candidate["D1a"] = baseline["D1a"]
+        with self.assertRaises(gate.ContractViolation):
+            gate.validate_authorization_transition(baseline, candidate)
+
+    def test_22_complete_authorization_transition_is_accepted(self) -> None:
+        baseline, candidate = self._authorized_snapshot()
+        gate.validate_authorization_transition(baseline, candidate)
+
+    def test_23_unauthorized_baseline_mutation_is_rejected(self) -> None:
+        baseline, candidate = self._authorized_snapshot()
+        candidate["EV03"]["methodology"]["k1"] = 1.6
+        with self.assertRaisesRegex(gate.ContractViolation, "immutable"):
+            gate.validate_authorization_transition(baseline, candidate)
+
+    def test_24_authorization_record_schema_binds_four_git_artifacts(self) -> None:
+        contract = gate.authorization_record_contract()
+        self.assertEqual(contract["schema_version"], 2)
+        self.assertEqual(contract["baseline_artifact_paths"], gate.AUTHORIZATION_BASELINE_ARTIFACTS)
+        self.assertEqual(set(contract["baseline_identity_fields"]), {"path", "git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes"})
+
+    def test_25_frozen_file_identity_is_checked_before_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            model = root / "models/model.bin"
+            model.parent.mkdir()
+            model.write_bytes(b"frozen")
+            binding = {"path": "models/model.bin", "classification": "FROZEN_FILE_IDENTITY", "size_bytes": 6, "sha256": hashlib.sha256(b"frozen").hexdigest()}
+            runner.validate_dependency_bindings(root, [binding])
+            model.write_bytes(b"changed")
+            with self.assertRaisesRegex(gate.ContractViolation, "size mismatch|SHA mismatch"):
+                runner.validate_dependency_bindings(root, [binding])
+
+    @staticmethod
+    def _control_fixture(root: Path, *, crlf_ranking: bool = False) -> tuple[dict, dict, Path, Path, dict, dict]:
+        ranking = root / "ranking.csv"
+        summary = root / "summary.csv"
+        ranking_bytes = b"case_id,rank\n1,1\n2,2\n"
+        ranking.write_bytes(ranking_bytes.replace(b"\n", b"\r\n") if crlf_ranking else ranking_bytes)
+        summary.write_bytes(b"case_id,rank\n1,1\n2,2\n")
+        required = {"ranking_rows": 2, "cases": 2, "ranking_sha256": hashlib.sha256(ranking_bytes).hexdigest(), "case_summary_sha256": hashlib.sha256(summary.read_bytes()).hexdigest()}
+        comparison = {"status": "PASS", "ranking_schema_exact": True, "case_summary_schema_exact": True, "ranking_exact": True, "case_summary_exact": True, "metrics_exact": True}
+        return required, comparison, ranking, summary, {"m": 1}, {"m": 1}
+
+    def test_26_ev03_full_pass_exact(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            args = self._control_fixture(Path(temporary))
+            result = runner.validate_control_exact("EV03", *args, logical_index_identity="EXACT")
+            self.assertEqual(result["status"], "PASS_EXACT")
+            self.assertTrue(all(result["checks"].values()))
+
+    def test_27_ev03_ranking_byte_mismatch_fails_with_logical_rows_equal(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            args = self._control_fixture(Path(temporary), crlf_ranking=True)
+            with self.assertRaisesRegex(gate.ContractViolation, "PASS_EXACT"):
+                runner.validate_control_exact("EV03", *args, logical_index_identity="EXACT")
+
+    def test_28_ev03_case_summary_byte_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            args = list(self._control_fixture(Path(temporary)))
+            args[0]["case_summary_sha256"] = "0" * 64
+            with self.assertRaises(gate.ContractViolation):
+                runner.validate_control_exact("EV03", *args, logical_index_identity="EXACT")
+
+    def test_29_ev03_row_count_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            args = list(self._control_fixture(Path(temporary)))
+            args[0]["ranking_rows"] = 3
+            with self.assertRaises(gate.ContractViolation):
+                runner.validate_control_exact("EV03", *args, logical_index_identity="EXACT")
+
+    def test_30_ev03_logical_index_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            with self.assertRaises(gate.ContractViolation):
+                runner.validate_control_exact("EV03", *self._control_fixture(Path(temporary)), logical_index_identity="FAIL")
+
+    def test_31_ev03_metrics_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            args = list(self._control_fixture(Path(temporary)))
+            args[-1] = {"m": 2}
+            with self.assertRaises(gate.ContractViolation):
+                runner.validate_control_exact("EV03", *args, logical_index_identity="EXACT")
+
+    def test_32_ev04_requires_both_frozen_shas(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            required, comparison, ranking, summary, expected, actual = self._control_fixture(Path(temporary))
+            required.pop("ranking_rows")
+            required.pop("cases")
+            self.assertEqual(runner.validate_control_exact("EV04", required, comparison, ranking, summary, expected, actual)["status"], "PASS_EXACT")
+            required["ranking_sha256"] = "0" * 64
+            with self.assertRaises(gate.ContractViolation):
+                runner.validate_control_exact("EV04", required, comparison, ranking, summary, expected, actual)
+
+    def test_33_commands_use_only_canonical_v02_roots(self) -> None:
+        for arm, roots in (("ev03", gate.EV03_ROOTS), ("ev04", gate.EV04_ROOTS)):
+            commands = self.bundle[arm]["prospective_execution"]["commands"]
+            tokens = [token for command in commands.values() for token in shlex.split(command)]
+            for root in roots:
+                self.assertTrue(any(token == root or token.startswith(root + "/") for token in tokens), root)
+            self.assertFalse(any("bm25_nandina8_hierarchical_ev04_decision885_control_v0.2" in token for token in tokens))
+            self.assertFalse(any("corpus_nandina_hierarchical_ev04_corrective" in token for token in tokens))
+
+    def test_34_exact_ledger_includes_three_file_roots(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            corpora = [gate.EV03_ROOTS[2], gate.EV04_ROOTS[2], gate.D1A_ROOTS[0]]
+            for relative in corpora:
+                path = root / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("{}\n", encoding="utf-8")
+            contract = {"expected_paths": corpora, "discovery_roots": corpora, "excluded_self_path": "ledger.json"}
+            entries = runner.validate_runtime_ledger_contract(root, contract)
+            self.assertEqual({item["path"] for item in entries}, set(corpora))
+
+    def test_35_exact_ledger_missing_output_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            contract = {"expected_paths": ["missing.jsonl"], "discovery_roots": ["missing.jsonl"], "excluded_self_path": "ledger.json"}
+            with self.assertRaisesRegex(gate.ContractViolation, "missing"):
+                runner.validate_runtime_ledger_contract(Path(temporary), contract)
+
+    def test_36_exact_ledger_unexpected_output_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            directory = root / "output"
+            directory.mkdir()
+            (directory / "expected.json").write_text("{}", encoding="utf-8")
+            (directory / "extra.json").write_text("{}", encoding="utf-8")
+            contract = {"expected_paths": ["output/expected.json"], "discovery_roots": ["output"], "excluded_self_path": "ledger.json"}
+            with self.assertRaisesRegex(gate.ContractViolation, "unexpected"):
+                runner.validate_runtime_ledger_contract(root, contract)
+
+    def test_37_d1a_summary_requires_aggregate_and_integrity_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            outputs = {"aggregate_comparison": "d1a/aggregate.json", "case_level_comparison": "d1a/cases.jsonl", "execution_manifest": "d1a/manifest.json", "hash_ledger": "d1a/ledger.csv"}
+            for relative in outputs.values():
+                (root / relative).parent.mkdir(parents=True, exist_ok=True)
+            (root / outputs["aggregate_comparison"]).write_text(json.dumps({"metrics": []}), encoding="utf-8")
+            (root / outputs["case_level_comparison"]).write_text("{}\n", encoding="utf-8")
+            (root / outputs["execution_manifest"]).write_text(json.dumps({"status": "PASS"}), encoding="utf-8")
+            (root / outputs["hash_ledger"]).write_text("path,sha256,size_bytes\n", encoding="utf-8")
+            result = runner._d1a_summary_reference(root, {"orchestration": {"runner_outputs": outputs}}, {"status": "PASS"})
+            self.assertEqual(result["status"], "PASS")
+            self.assertEqual(set(result) - {"status"}, set(outputs))
+
+    def test_38_d1a_summary_missing_aggregate_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            outputs = {"aggregate_comparison": "missing.json", "case_level_comparison": "missing2", "execution_manifest": "missing3", "hash_ledger": "missing4"}
+            with self.assertRaisesRegex(gate.ContractViolation, "missing"):
+                runner._d1a_summary_reference(Path(temporary), {"orchestration": {"runner_outputs": outputs}}, {"status": "PASS"})
+
+    def test_39_frozen_runtime_ledger_contract_is_explicit(self) -> None:
+        contract = self.bundle["gate"]["runtime_hash_ledger_contract"]
+        self.assertEqual(contract["missing_or_unexpected_policy"], "FAIL_CLOSED")
+        for corpus in (gate.EV03_ROOTS[2], gate.EV04_ROOTS[2], gate.D1A_ROOTS[0]):
+            self.assertIn(corpus, contract["expected_paths"])
+
+    def test_40_candidate_remains_closed_and_without_real_roots(self) -> None:
+        self.assertEqual(self.bundle["gate"]["authorization_readiness"], "NOT_AUTHORIZATION_READY")
+        self.assertFalse(self.bundle["gate"]["authorization"]["authorization_record_present"])
+        self.assertFalse((ROOT / gate.AUTHORIZATION_RECORD).exists())
+        self.assertTrue(all(not (ROOT / relative).exists() for relative in gate.FUTURE_ROOTS))
+
+    def test_41_authorization_record_is_mandatory_before_static_inputs(self) -> None:
+        _, candidate = self._authorized_snapshot()
+        with tempfile.TemporaryDirectory() as temporary, \
+             mock.patch.object(runner, "read_json", return_value=candidate["gate"]), \
+             mock.patch.object(runner.subprocess, "run", return_value=mock.Mock(stdout="")):
+            with self.assertRaisesRegex(gate.ContractViolation, "record v0.2 is required"):
+                runner.preflight_authorized(Path(temporary))
+
+    def test_42_ev04_case_summary_sha_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            required, comparison, ranking, summary, expected, actual = self._control_fixture(Path(temporary))
+            required.pop("ranking_rows")
+            required.pop("cases")
+            required["case_summary_sha256"] = "0" * 64
+            with self.assertRaises(gate.ContractViolation):
+                runner.validate_control_exact("EV04", required, comparison, ranking, summary, expected, actual)
+
+    def test_43_unified_summary_requires_d1a_aggregate_reference(self) -> None:
+        with self.assertRaisesRegex(gate.ContractViolation, "aggregate comparison"):
+            runner.build_unified_summary({}, {}, {"status": "PASS"})
+        d1a = {"status": "PASS", "aggregate_comparison": {"path": "aggregate.json", "sha256": "a" * 64}}
+        self.assertEqual(runner.build_unified_summary({}, {}, d1a)["D1a"], d1a)
 
 
 if __name__ == "__main__":

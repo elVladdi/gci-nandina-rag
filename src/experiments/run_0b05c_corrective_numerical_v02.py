@@ -6,17 +6,22 @@ import argparse
 import csv
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from .prepare_0b05c_corrective_numerical_gate_v02 import (
     AUTHORIZATION,
+    AUTHORIZATION_RECORD,
+    AUTHORIZED_GATE_STATUS,
+    AUTHORIZED_READINESS,
     ContractViolation,
     FUTURE_ROOTS,
     GATE_PATH,
     PIPELINE_STEPS,
     ROOT,
     git_binding,
+    load_authorization_transition_from_git,
     preflight as gate_preflight,
     read_json,
     require,
@@ -34,29 +39,46 @@ def preflight(root: Path = ROOT) -> dict[str, Any]:
     return gate_preflight(root)
 
 
+def validate_dependency_bindings(root: Path, bindings: list[Mapping[str, Any]], *, revision: str = "HEAD") -> None:
+    for binding in bindings:
+        if binding["classification"] == "FROZEN_FILE_IDENTITY":
+            path = root / str(binding["path"])
+            require(path.is_file(), f"Frozen file is missing: {binding['path']}")
+            require(path.stat().st_size == binding["size_bytes"], f"Frozen file size mismatch: {binding['path']}")
+            require(hashlib.sha256(path.read_bytes()).hexdigest() == binding["sha256"], f"Frozen file SHA mismatch: {binding['path']}")
+        else:
+            require(git_binding(root, str(binding["path"]), revision, str(binding["classification"])) == binding, f"Canonical binding mismatch: {binding['path']}")
+
+
 def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
     gate = read_json(root, GATE_PATH)
+    require(subprocess.run(["git", "status", "--short", "--untracked-files=no"], cwd=root, check=True, capture_output=True, text=True).stdout.strip() == "", "Tracked working tree is not clean")
+    require(gate.get("gate_status") == AUTHORIZED_GATE_STATUS, "Authorized gate is not approved and integrated")
+    require(gate.get("authorization_readiness") == AUTHORIZED_READINESS, "Authorized gate readiness is invalid")
     required = {key: "AUTHORIZED" for key in AUTHORIZATION if key.endswith("NUMERICAL_EXECUTION")}
     current = {key: gate["authorization"].get(key) for key in required}
     require(current == required, "All four 0B-05C v0.2 numerical components must be AUTHORIZED before any side effect")
+    require(gate["authorization"].get("authorization_record_present") is True, "Authorization record state is not present")
+    require((root / AUTHORIZATION_RECORD).is_file(), "Authorization record v0.2 is required")
+    transition = load_authorization_transition_from_git(root, gate)
     require(gate["authorization"].get("corrective_retrieval_executed") is False, "Corrective retrieval was already executed")
     require(gate["authorization"].get("corrective_metrics_computed") is False, "Corrective metrics were already computed")
     for relative in FUTURE_ROOTS:
         require(not (root / relative).exists(), f"Prospective v0.2 root already exists: {relative}")
-    for binding in gate["dependency_bindings"]:
-        if binding["classification"] == "FROZEN_FILE_IDENTITY":
-            continue
-        require(git_binding(root, binding["path"], "HEAD", binding["classification"]) == binding, f"Canonical binding mismatch: {binding['path']}")
+    validate_dependency_bindings(root, gate["dependency_bindings"])
+    candidate = transition["candidate"]
     return {
         "status": "PASS",
         "mode": "AUTHORIZED_PREFLIGHT_ONLY",
         "numerical_execution_occurred": False,
         "authorization": current,
+        "authorization_baseline_commit": transition["baseline_commit"],
+        "authorization_record": transition["record"],
         "bundle": {
             "gate": gate,
-            "EV03": read_json(root, GATE_PATH.parent / "ev03_numerical_execution_spec_v0.2.json"),
-            "EV04": read_json(root, GATE_PATH.parent / "ev04_numerical_execution_spec_v0.2.json"),
-            "d1a": read_json(root, GATE_PATH.parent / "d1a_numerical_execution_spec_v0.2.json"),
+            "EV03": candidate["EV03"],
+            "EV04": candidate["EV04"],
+            "d1a": candidate["D1a"],
         },
     }
 
@@ -95,9 +117,94 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def validate_control_exact(
+    arm: str,
+    required: Mapping[str, Any],
+    comparison: Mapping[str, Any],
+    ranking_path: Path,
+    summary_path: Path,
+    expected_metrics: Mapping[str, Any],
+    actual_metrics: Mapping[str, Any],
+    *,
+    logical_index_identity: str | None = None,
+) -> dict[str, Any]:
+    checks = {
+        "ranking_schema_exact": comparison.get("ranking_schema_exact") is True,
+        "case_summary_schema_exact": comparison.get("case_summary_schema_exact") is True,
+        "ranking_rows_content_exact": comparison.get("ranking_exact") is True,
+        "case_summary_rows_content_exact": comparison.get("case_summary_exact") is True,
+        "metric_table_exact": comparison.get("metrics_exact") is True,
+        "full_metrics_exact": expected_metrics == actual_metrics,
+        "ranking_sha256_exact": hashlib.sha256(ranking_path.read_bytes()).hexdigest() == required.get("ranking_sha256"),
+        "case_summary_sha256_exact": hashlib.sha256(summary_path.read_bytes()).hexdigest() == required.get("case_summary_sha256"),
+    }
+    if "ranking_rows" in required:
+        checks["ranking_row_count_exact"] = len(_read_csv(ranking_path)) == int(required["ranking_rows"])
+    if "cases" in required:
+        checks["case_summary_row_count_exact"] = len(_read_csv(summary_path)) == int(required["cases"])
+    if arm == "EV03":
+        checks["logical_index_identity_exact"] = logical_index_identity == "EXACT"
+    require(all(checks.values()), f"{arm} full PASS_EXACT contract failed")
+    return {**dict(comparison), "status": "PASS_EXACT", "checks": checks, "required_contract": dict(required)}
+
+
+def _contractual_runtime_files(root: Path, contract: Mapping[str, Any]) -> list[Path]:
+    excluded = root / str(contract["excluded_self_path"])
+    files: set[Path] = set()
+    for relative in contract["discovery_roots"]:
+        path = root / str(relative)
+        if path.is_file():
+            files.add(path)
+        elif path.is_dir():
+            files.update(item for item in path.rglob("*") if item.is_file())
+    files.discard(excluded)
+    return sorted(files)
+
+
+def validate_runtime_ledger_contract(root: Path, contract: Mapping[str, Any]) -> list[dict[str, Any]]:
+    expected = {str(item) for item in contract["expected_paths"]}
+    observed_files = _contractual_runtime_files(root, contract)
+    observed = {path.relative_to(root).as_posix() for path in observed_files}
+    missing = sorted(expected - observed)
+    unexpected = sorted(observed - expected)
+    require(not missing, f"Runtime ledger is missing contractual outputs: {missing}")
+    require(not unexpected, f"Runtime ledger found unexpected contractual outputs: {unexpected}")
+    return [
+        {"path": path.relative_to(root).as_posix(), "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "size_bytes": path.stat().st_size}
+        for path in observed_files
+    ]
+
+
+def _d1a_summary_reference(root: Path, spec: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str, Any]:
+    require(result.get("status") == "PASS", "D1a execution did not PASS")
+    outputs = spec.get("orchestration", {}).get("runner_outputs")
+    require(isinstance(outputs, Mapping), "D1a runner output contract is malformed")
+    required = ("aggregate_comparison", "case_level_comparison", "execution_manifest", "hash_ledger")
+    references: dict[str, dict[str, Any]] = {}
+    for key in required:
+        relative = outputs.get(key)
+        require(isinstance(relative, str) and relative, f"D1a runner output contract is missing: {key}")
+        path = root / relative
+        require(path.is_file(), f"D1a contractual output is missing: {relative}")
+        references[key] = {"path": relative, "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "size_bytes": path.stat().st_size}
+    aggregate = json.loads((root / references["aggregate_comparison"]["path"]).read_text(encoding="utf-8"))
+    require(isinstance(aggregate.get("metrics"), list), "D1a aggregate comparison is malformed")
+    manifest = json.loads((root / references["execution_manifest"]["path"]).read_text(encoding="utf-8"))
+    require(manifest.get("status") == "PASS", "D1a execution manifest did not PASS")
+    require(references["case_level_comparison"]["size_bytes"] > 0, "D1a case-level comparison is empty")
+    require(references["hash_ledger"]["size_bytes"] > 0, "D1a hash ledger is empty")
+    return {"status": "PASS", "aggregate_comparison": references["aggregate_comparison"], "case_level_comparison": references["case_level_comparison"], "execution_manifest": references["execution_manifest"], "hash_ledger": references["hash_ledger"]}
+
+
+def build_unified_summary(ev03: Mapping[str, Any], ev04: Mapping[str, Any], d1a: Mapping[str, Any]) -> dict[str, Any]:
+    require(d1a.get("status") == "PASS", "D1a aggregate evidence is missing before unified summary")
+    require(isinstance(d1a.get("aggregate_comparison"), Mapping), "D1a aggregate comparison is not incorporated")
+    return {"status": "PASS", "EV03": dict(ev03), "EV04": dict(ev04), "D1a": dict(d1a)}
+
+
 def _arm_paths(root: Path, arm: str, spec: Mapping[str, Any]) -> dict[str, Path]:
     execution = spec["prospective_execution"]
-    names = ("normative_results.csv", "normative_case_summary.csv") if arm == "EV03" else ("normative_hierarchical_results.csv", "normative_hierarchical_case_summary.csv")
+    names = ("normative_flat_results.csv", "normative_flat_case_summary.csv") if arm == "EV03" else ("normative_hierarchical_results.csv", "normative_hierarchical_case_summary.csv")
     return {
         "control_index": root / execution["control_reproduction_index_root"] / "index.pkl",
         "control_metadata": root / execution["control_reproduction_index_root"] / "index_metadata.json",
@@ -116,6 +223,8 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
     from . import evaluate_normative_bm25_corrective_0b05c_v01 as evaluator
     from . import prepare_0b05c_corrective_numerical_gate_v01 as v01_gate
     from . import run_d1a_corrective_0b05c_v02 as d1a_runner
+    from . import verify_ev03_historical_builder_recovery_v02 as ev03_recovery
+    from ..retrieval.bm25 import load_bm25_index
 
     specs = {name: proof["bundle"][name] for name in ("EV03", "EV04")}
     paths = {name: _arm_paths(root, name, specs[name]) for name in specs}
@@ -126,6 +235,7 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
     case_comparisons: dict[str, Mapping[str, Any]] = {}
     aggregate_comparisons: dict[str, Mapping[str, Any]] = {}
     d1a_result: Mapping[str, Any] = {}
+    d1a_summary: Mapping[str, Any] = {}
 
     def reproduce(arm: str) -> Mapping[str, Any]:
         spec, item = specs[arm], paths[arm]
@@ -149,9 +259,21 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
             expected_candidate_schema=schemas[0], expected_case_schema=schemas[1],
         )
         required = spec["required_control"]
-        require(comparison.get("status") == "PASS", f"{arm} control comparison did not pass")
-        require(item["control_output"].joinpath(item["ranking_name"]).stat().st_size > 0, f"{arm} ranking is empty")
-        control[arm] = {**comparison, "status": "PASS_EXACT", "required_contract": required}
+        logical_status = None
+        if arm == "EV03":
+            historical_index = load_bm25_index(root / spec["frozen_inputs"]["index_identity_from_frozen_run_metadata"]["path"])
+            recovered_index = load_bm25_index(item["control_index"])
+            logical_status = ev03_recovery.logical_identity(historical_index, recovered_index)["LOGICAL_INDEX_IDENTITY"]
+        control[arm] = validate_control_exact(
+            arm,
+            required,
+            comparison,
+            item["control_output"] / item["ranking_name"],
+            item["control_output"] / item["summary_name"],
+            original_metrics,
+            evaluated["metrics"],
+            logical_index_identity=logical_status,
+        )
         return control[arm]
 
     def materialize(arm: str) -> Mapping[str, Any]:
@@ -170,8 +292,9 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
         return {"status": "PASS", **corrected[arm]}
 
     def execute_d1a() -> Mapping[str, Any]:
-        nonlocal d1a_result
+        nonlocal d1a_result, d1a_summary
         d1a_result = d1a_runner.execute_authorized(root)
+        d1a_summary = _d1a_summary_reference(root, proof["bundle"]["d1a"], d1a_result)
         return {"status": "PASS", "result": d1a_result}
 
     def integrity() -> Mapping[str, Any]:
@@ -199,15 +322,14 @@ def _default_operations(root: Path, proof: Mapping[str, Any]) -> dict[str, Calla
         return {"status": "PASS"}
 
     def summary() -> Mapping[str, Any]:
-        return _write_json_new(evaluation_root / "unified_sensitivity_summary_v0.2.json", {"status": "PASS", "EV03": aggregate_comparisons["EV03"], "EV04": aggregate_comparisons["EV04"], "D1a": d1a_result})
+        return _write_json_new(evaluation_root / "unified_sensitivity_summary_v0.2.json", build_unified_summary(aggregate_comparisons["EV03"], aggregate_comparisons["EV04"], d1a_summary))
 
     def manifest() -> Mapping[str, Any]:
         return _write_json_new(runtime_root / "execution_manifest_v0.2.json", {"status": "PASS", "execution_order": list(PIPELINE_STEPS), "control_reproductions": control, "corrected_arms": corrected, "d1a": d1a_result})
 
     def ledger() -> Mapping[str, Any]:
         ledger_path = runtime_root / "exact_hash_ledger_v0.2.json"
-        files = sorted(path for base in FUTURE_ROOTS for path in (root / base).rglob("*") if path.is_file() and path != ledger_path)
-        entries = [{"path": path.relative_to(root).as_posix(), "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "size_bytes": path.stat().st_size} for path in files]
+        entries = validate_runtime_ledger_contract(root, proof["bundle"]["gate"]["runtime_hash_ledger_contract"])
         return _write_json_new(ledger_path, {"status": "PASS", "entries": entries, "mismatch_count": 0})
 
     return {

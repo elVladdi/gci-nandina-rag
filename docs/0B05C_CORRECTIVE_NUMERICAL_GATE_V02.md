@@ -22,7 +22,11 @@ The read-only command is:
 python -B -m src.experiments.run_0b05c_corrective_numerical_v02 --preflight
 ```
 
-The future `--execute-authorized` entry point validates all four authorizations before any operation. In this candidate it fails closed. A later authorization requires a separate, auditable transition.
+The future `--execute-authorized` entry point validates all four gate authorizations, the three matching specification authorizations, approved/integrated gate status, explicit readiness, and a committed authorization record before any operation. The record must bind an externally approved proper-ancestor baseline for the gate and three specs by Git blob SHA-1, canonical SHA-256, and size. Only the declared authorization, readiness, record-presence, and gate-status fields may differ from that baseline; scientific and execution content remains byte-bound. All Git dependencies and the frozen local model size/SHA are then checked before the first side effect. In this candidate the entry point fails closed because no authorization record exists and every state remains `NOT_AUTHORIZED`.
+
+EV03 can report `PASS_EXACT` only after executable checks of logical index identity, the 50,327 ranking rows, 1,056 case rows, both frozen byte SHA-256 values, both schemas and row contents, the metric table, and full metrics. EV04 similarly requires both frozen output SHA-256 values in addition to full schema, row, and metric equality. Its commands are generated from the canonical v0.2 roots rather than inherited by textual version replacement.
+
+The future exact runtime ledger has an explicit allowlist. It includes the three corrected corpus file roots, all control/corrected indexes and evaluation outputs, D1a outputs and comparisons, unified comparisons, summary, manifest, and runtime authorization record. It excludes only its own file and fails closed on either missing or unexpected contractual output. The unified summary references the D1a aggregate comparison, case-level evidence, execution manifest, and D1a ledger by path, SHA-256, and size.
 
 ## Isolation and persistence
 

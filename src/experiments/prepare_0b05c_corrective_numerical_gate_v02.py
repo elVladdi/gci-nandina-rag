@@ -6,6 +6,7 @@ import argparse
 import copy
 import hashlib
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any, Mapping
@@ -28,6 +29,14 @@ ARTIFACT_NAMES = (
 )
 GATE_PATH = AUDIT_ROOT / ARTIFACT_NAMES[3]
 AUTHORIZATION_RECORD = AUDIT_ROOT / "0b05c_numerical_authorization_record_v0.2.json"
+AUTHORIZED_GATE_STATUS = "APPROVED / INTEGRATED"
+AUTHORIZED_READINESS = "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION"
+AUTHORIZATION_BASELINE_ARTIFACTS = {
+    "unified_gate": (AUDIT_ROOT / ARTIFACT_NAMES[3]).as_posix(),
+    "ev03_spec": (AUDIT_ROOT / ARTIFACT_NAMES[0]).as_posix(),
+    "ev04_spec": (AUDIT_ROOT / ARTIFACT_NAMES[1]).as_posix(),
+    "d1a_spec": (AUDIT_ROOT / ARTIFACT_NAMES[2]).as_posix(),
+}
 
 AUTHORIZATION = {
     "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
@@ -36,6 +45,7 @@ AUTHORIZATION = {
     "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
     "corrective_retrieval_executed": False,
     "corrective_metrics_computed": False,
+    "authorization_record_present": False,
     "runtime_authorization_record_present": False,
 }
 SCIENTIFIC_STATE = {
@@ -211,6 +221,139 @@ def dependency_bindings(root: Path, revision: str) -> list[dict[str, Any]]:
     return bindings
 
 
+def authorization_record_contract() -> dict[str, Any]:
+    return {
+        "record_path": AUTHORIZATION_RECORD.as_posix(),
+        "artifact_id": "0b05c_numerical_authorization_record_v0.2",
+        "schema_version": 2,
+        "required_keys": [
+            "artifact_id",
+            "schema_version",
+            "authorization_baseline_commit",
+            "baseline_external_audit",
+            "baseline_artifacts",
+        ],
+        "baseline_artifact_paths": dict(AUTHORIZATION_BASELINE_ARTIFACTS),
+        "baseline_identity_fields": [
+            "path",
+            "git_blob_sha1",
+            "canonical_git_blob_sha256",
+            "canonical_size_bytes",
+        ],
+        "required_baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+        "baseline_commit_policy": "MUST_BE_A_PROPER_ANCESTOR_OF_HEAD",
+    }
+
+
+def authorization_snapshot(
+    gate_payload: Mapping[str, Any],
+    ev03_spec: Mapping[str, Any],
+    ev04_spec: Mapping[str, Any],
+    d1a_spec: Mapping[str, Any],
+) -> dict[str, Any]:
+    return {
+        "gate": copy.deepcopy(dict(gate_payload)),
+        "EV03": copy.deepcopy(dict(ev03_spec)),
+        "EV04": copy.deepcopy(dict(ev04_spec)),
+        "D1a": copy.deepcopy(dict(d1a_spec)),
+    }
+
+
+def immutable_authorization_projection(snapshot: Mapping[str, Any]) -> dict[str, Any]:
+    payload = copy.deepcopy(dict(snapshot))
+    payload["gate"]["gate_status"] = "__AUTHORIZED_TRANSITION__"
+    payload["gate"]["authorization_readiness"] = "__AUTHORIZED_TRANSITION__"
+    for name in ("EV03", "EV04", "D1A", "UNIFIED_0B05C"):
+        field = f"{name}_NUMERICAL_EXECUTION"
+        require(field in payload["gate"]["authorization"], f"Missing gate authorization field: {field}")
+        payload["gate"]["authorization"][field] = "__AUTHORIZED_TRANSITION__"
+    require("authorization_record_present" in payload["gate"]["authorization"], "Missing authorization record state")
+    payload["gate"]["authorization"]["authorization_record_present"] = "__AUTHORIZED_TRANSITION__"
+    for arm in ("EV03", "EV04"):
+        field = f"{arm}_NUMERICAL_EXECUTION"
+        require(field in payload[arm]["authorization"], f"Missing {arm} authorization field")
+        payload[arm]["authorization"][field] = "__AUTHORIZED_TRANSITION__"
+    require("D1A_NUMERICAL_EXECUTION" in payload["D1a"]["authorization"], "Missing D1a authorization field")
+    payload["D1a"]["authorization"]["D1A_NUMERICAL_EXECUTION"] = "__AUTHORIZED_TRANSITION__"
+    return payload
+
+
+def validate_authorization_transition(
+    baseline: Mapping[str, Any],
+    candidate: Mapping[str, Any],
+    *,
+    require_authorized: bool = True,
+) -> None:
+    require(
+        immutable_authorization_projection(baseline) == immutable_authorization_projection(candidate),
+        "Authorization candidate changed immutable scientific or execution content",
+    )
+    baseline_gate = baseline["gate"]
+    candidate_gate = candidate["gate"]
+    require(baseline_gate["gate_status"] == "CANDIDATE_PENDING_EXTERNAL_AUDIT", "Authorization baseline gate status changed")
+    require(baseline_gate["authorization_readiness"] == "NOT_AUTHORIZATION_READY", "Authorization baseline readiness changed")
+    target = "AUTHORIZED" if require_authorized else "NOT_AUTHORIZED"
+    if require_authorized:
+        require(candidate_gate["gate_status"] == AUTHORIZED_GATE_STATUS, "Authorized gate is not approved and integrated")
+        require(candidate_gate["authorization_readiness"] == AUTHORIZED_READINESS, "Authorized gate readiness is invalid")
+    for name in ("EV03", "EV04", "D1A", "UNIFIED_0B05C"):
+        field = f"{name}_NUMERICAL_EXECUTION"
+        require(baseline_gate["authorization"].get(field) == "NOT_AUTHORIZED", f"Baseline is not closed: {field}")
+        require(candidate_gate["authorization"].get(field) == target, f"Authorization transition is invalid: {field}")
+    for arm in ("EV03", "EV04"):
+        field = f"{arm}_NUMERICAL_EXECUTION"
+        require(baseline[arm]["authorization"].get(field) == "NOT_AUTHORIZED", f"Baseline spec is not closed: {field}")
+        require(candidate[arm]["authorization"].get(field) == target, f"Authorized spec state is invalid: {field}")
+    require(baseline["D1a"]["authorization"].get("D1A_NUMERICAL_EXECUTION") == "NOT_AUTHORIZED", "Baseline D1a spec is not closed")
+    require(candidate["D1a"]["authorization"].get("D1A_NUMERICAL_EXECUTION") == target, "Authorized D1a spec state is invalid")
+    require(baseline_gate["authorization"].get("authorization_record_present") is False, "Baseline authorization record state is not closed")
+    require(candidate_gate["authorization"].get("authorization_record_present") is require_authorized, "Authorization record state is invalid")
+
+
+def _git_json(root: Path, revision: str, path: str) -> dict[str, Any]:
+    raw = _git(root, "show", f"{revision}:{path}", binary=True)
+    assert isinstance(raw, bytes)
+    payload = json.loads(raw.decode("utf-8"))
+    require(isinstance(payload, dict), f"Git JSON is not an object: {revision}:{path}")
+    return payload
+
+
+def load_authorization_transition_from_git(root: Path, gate_payload: Mapping[str, Any]) -> dict[str, Any]:
+    contract = gate_payload.get("authorization_transition_schema", {}).get("authorization_record")
+    require(isinstance(contract, Mapping), "Authorization record contract is missing")
+    record_path = str(contract.get("record_path", ""))
+    require(record_path == AUTHORIZATION_RECORD.as_posix(), "Authorization record path changed")
+    record = _git_json(root, "HEAD", record_path)
+    require(set(record) == set(contract["required_keys"]), "Authorization record schema changed")
+    require(record.get("artifact_id") == contract["artifact_id"], "Authorization record identity changed")
+    require(record.get("schema_version") == contract["schema_version"], "Authorization record version changed")
+    require(record.get("baseline_external_audit") == contract["required_baseline_external_audit"], "Authorization baseline is not externally approved")
+    baseline_commit = record.get("authorization_baseline_commit")
+    require(isinstance(baseline_commit, str) and re.fullmatch(r"[0-9a-f]{40}", baseline_commit) is not None, "Authorization baseline commit is malformed")
+    ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", baseline_commit, "HEAD"], cwd=root).returncode == 0
+    require(ancestor and baseline_commit != str(_git(root, "rev-parse", "HEAD")), "Authorization baseline must be a proper ancestor of HEAD")
+    identities = record.get("baseline_artifacts")
+    require(isinstance(identities, Mapping) and set(identities) == set(AUTHORIZATION_BASELINE_ARTIFACTS), "Authorization baseline artifact set changed")
+    for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items():
+        expected = git_binding(root, path, baseline_commit)
+        expected.pop("classification")
+        require(identities.get(key) == expected, f"Authorization baseline binding mismatch: {key}")
+
+    def snapshot(revision: str) -> dict[str, Any]:
+        return authorization_snapshot(
+            _git_json(root, revision, AUTHORIZATION_BASELINE_ARTIFACTS["unified_gate"]),
+            _git_json(root, revision, AUTHORIZATION_BASELINE_ARTIFACTS["ev03_spec"]),
+            _git_json(root, revision, AUTHORIZATION_BASELINE_ARTIFACTS["ev04_spec"]),
+            _git_json(root, revision, AUTHORIZATION_BASELINE_ARTIFACTS["d1a_spec"]),
+        )
+
+    baseline = snapshot(baseline_commit)
+    candidate = snapshot("HEAD")
+    require(candidate["gate"] == gate_payload, "Authorized gate is not the committed HEAD artifact")
+    validate_authorization_transition(baseline, candidate)
+    return {"record": record, "baseline_commit": baseline_commit, "baseline": baseline, "candidate": candidate}
+
+
 def _patch_spec(spec: dict[str, Any], arm: str) -> dict[str, Any]:
     result = copy.deepcopy(spec)
     result["specification_id"] = f"{arm.lower()}_numerical_execution_spec_v0.2"
@@ -271,12 +414,27 @@ def _patch_spec(spec: dict[str, Any], arm: str) -> dict[str, Any]:
     execution["unified_runner"] = "src/experiments/run_0b05c_corrective_numerical_v02.py"
     execution["future_roots"] = list(roots)
     execution["control_must_pass_before_corrected_arm"] = "PASS_EXACT"
+    prefix = arm.lower()
+    corpus = result["frozen_inputs"]["corpus"]["path"]
     execution["commands"] = {
-        key: value.replace("run_d1a_corrective_0b05c_v01", "run_d1a_corrective_0b05c_v02")
-        .replace("build_bm25_corrective_0b05c_v01", "build_bm25_corrective_0b05c_v02")
-        .replace("run_0b05c_corrective_numerical_v01", "run_0b05c_corrective_numerical_v02")
-        .replace("v0.1", "v0.2")
-        for key, value in execution["commands"].items()
+        "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v02 --execute-authorized",
+        f"{prefix}_control_reproduction_build_command": (
+            f"python -m src.experiments.build_bm25_corrective_0b05c_v02 --arm {arm} --corpus {corpus} "
+            f"--output {roots[0]}/index.pkl --metadata {roots[0]}/index_metadata.json"
+        ),
+        f"{prefix}_control_reproduction_evaluate_command": (
+            f"python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm {arm} --corpus {corpus} "
+            f"--index {roots[0]}/index.pkl --index-metadata {roots[0]}/index_metadata.json --output-dir {roots[1]}"
+        ),
+        f"{prefix}_corrected_build_command": (
+            f"python -m src.experiments.build_bm25_corrective_0b05c_v02 --arm {arm} --corpus {roots[2]} "
+            f"--output {roots[3]}/index.pkl --metadata {roots[3]}/index_metadata.json"
+        ),
+        f"{prefix}_corrected_evaluate_command": (
+            f"python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v01 --arm {arm} --corpus {roots[2]} "
+            f"--index {roots[3]}/index.pkl --index-metadata {roots[3]}/index_metadata.json --output-dir {roots[4]}"
+        ),
+        "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v02 --execute-authorized",
     }
     return result
 
@@ -334,6 +492,36 @@ def _d1a_spec(root: Path, revision: str) -> dict[str, Any]:
     return result
 
 
+def expected_runtime_ledger_paths(ev03: Mapping[str, Any], ev04: Mapping[str, Any], d1a: Mapping[str, Any]) -> list[str]:
+    expected: set[str] = set()
+    for arm, spec in (("EV03", ev03), ("EV04", ev04)):
+        execution = spec["prospective_execution"]
+        prefix = "normative_flat" if arm == "EV03" else "normative_hierarchical"
+        for index_root in (execution["control_reproduction_index_root"], execution["corrected_index_root"]):
+            expected.update({f"{index_root}/index.pkl", f"{index_root}/index_metadata.json"})
+        for output_root in (execution["control_reproduction_output_root"], execution["corrected_output_root"]):
+            expected.update({
+                f"{output_root}/{prefix}_results.csv",
+                f"{output_root}/{prefix}_case_summary.csv",
+                f"{output_root}/{prefix}_metrics.json",
+            })
+        expected.add(spec["corrective_corpus"]["prospective_path"])
+    d1a_contract = d1a["orchestration"]["hash_ledger_contract"]
+    expected.update(d1a_contract["included_paths"])
+    expected.add(d1a_contract["excluded_self_path"])
+    evaluation_root, runtime_root = UNIFIED_ROOTS
+    expected.update({
+        f"{evaluation_root}/ev03_case_level_comparison_v0.2.json",
+        f"{evaluation_root}/ev03_aggregate_comparison_v0.2.json",
+        f"{evaluation_root}/ev04_case_level_comparison_v0.2.json",
+        f"{evaluation_root}/ev04_aggregate_comparison_v0.2.json",
+        f"{evaluation_root}/unified_sensitivity_summary_v0.2.json",
+        f"{runtime_root}/runtime_authorization_record_v0.2.json",
+        f"{runtime_root}/execution_manifest_v0.2.json",
+    })
+    return sorted(expected)
+
+
 def build_bundle(root: Path = ROOT, revision: str = "HEAD") -> dict[str, Any]:
     ev03_v01 = read_json(root, V01_ROOT / "ev03_corrective_execution_spec_v0.1.json")
     ev04_v01 = read_json(root, V01_ROOT / "ev04_corrective_execution_spec_v0.1.json")
@@ -341,6 +529,7 @@ def build_bundle(root: Path = ROOT, revision: str = "HEAD") -> dict[str, Any]:
     ev04 = _patch_spec(ev04_v01, "EV04")
     d1a = _d1a_spec(root, revision)
     bindings = dependency_bindings(root, revision)
+    runtime_ledger_path = f"{UNIFIED_ROOTS[1]}/exact_hash_ledger_v0.2.json"
     gate = {
         "gate_id": "0b05c_corrective_numerical_execution_gate_v0.2",
         "gate_version": "v0.2",
@@ -370,9 +559,20 @@ def build_bundle(root: Path = ROOT, revision: str = "HEAD") -> dict[str, Any]:
         },
         "authorization_transition_schema": {
             "future_separate_audited_block_required": True,
-            "required_current_gate_status": "APPROVED / INTEGRATED",
-            "required_four_state_transition": "NOT_AUTHORIZED -> AUTHORIZED / NOT_EXECUTED",
+            "required_authorized_gate_status": AUTHORIZED_GATE_STATUS,
+            "required_authorized_readiness": AUTHORIZED_READINESS,
+            "allowed_gate_fields": ["gate_status", "authorization_readiness", "authorization.*_NUMERICAL_EXECUTION", "authorization.authorization_record_present"],
+            "allowed_spec_fields": ["authorization.EV03_NUMERICAL_EXECUTION", "authorization.EV04_NUMERICAL_EXECUTION", "authorization.D1A_NUMERICAL_EXECUTION"],
+            "forbidden_changes": ["patches", "roots", "commands", "ranking_semantics", "metric_contracts", "builders", "evaluators", "model_policy", "code_bindings", "execution_order", "comparison_schema"],
+            "authorization_record": authorization_record_contract(),
             "runtime_authorization_record_created_only_by_future_authorized_execution": True,
+        },
+        "runtime_hash_ledger_contract": {
+            "expected_paths": expected_runtime_ledger_paths(ev03, ev04, d1a),
+            "discovery_roots": list(FUTURE_ROOTS),
+            "excluded_self_path": runtime_ledger_path,
+            "missing_or_unexpected_policy": "FAIL_CLOSED",
+            "entry_fields": ["path", "sha256", "size_bytes"],
         },
         "dependency_bindings": bindings,
         "authorization_record_path": AUTHORIZATION_RECORD.as_posix(),

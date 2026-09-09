@@ -4,6 +4,7 @@
     "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
     "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
     "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "authorization_record_present": false,
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false,
     "runtime_authorization_record_present": false
@@ -11,18 +12,68 @@
   "authorization_readiness": "NOT_AUTHORIZATION_READY",
   "authorization_record_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.2/0b05c_numerical_authorization_record_v0.2.json",
   "authorization_transition_schema": {
+    "allowed_gate_fields": [
+      "gate_status",
+      "authorization_readiness",
+      "authorization.*_NUMERICAL_EXECUTION",
+      "authorization.authorization_record_present"
+    ],
+    "allowed_spec_fields": [
+      "authorization.EV03_NUMERICAL_EXECUTION",
+      "authorization.EV04_NUMERICAL_EXECUTION",
+      "authorization.D1A_NUMERICAL_EXECUTION"
+    ],
+    "authorization_record": {
+      "artifact_id": "0b05c_numerical_authorization_record_v0.2",
+      "baseline_artifact_paths": {
+        "d1a_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.2/d1a_numerical_execution_spec_v0.2.json",
+        "ev03_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.2/ev03_numerical_execution_spec_v0.2.json",
+        "ev04_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.2/ev04_numerical_execution_spec_v0.2.json",
+        "unified_gate": "outputs/audits/0b05c_corrective_numerical_gate_v0.2/0b05c_corrective_numerical_execution_gate_v0.2.json"
+      },
+      "baseline_commit_policy": "MUST_BE_A_PROPER_ANCESTOR_OF_HEAD",
+      "baseline_identity_fields": [
+        "path",
+        "git_blob_sha1",
+        "canonical_git_blob_sha256",
+        "canonical_size_bytes"
+      ],
+      "record_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.2/0b05c_numerical_authorization_record_v0.2.json",
+      "required_baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+      "required_keys": [
+        "artifact_id",
+        "schema_version",
+        "authorization_baseline_commit",
+        "baseline_external_audit",
+        "baseline_artifacts"
+      ],
+      "schema_version": 2
+    },
+    "forbidden_changes": [
+      "patches",
+      "roots",
+      "commands",
+      "ranking_semantics",
+      "metric_contracts",
+      "builders",
+      "evaluators",
+      "model_policy",
+      "code_bindings",
+      "execution_order",
+      "comparison_schema"
+    ],
     "future_separate_audited_block_required": true,
-    "required_current_gate_status": "APPROVED / INTEGRATED",
-    "required_four_state_transition": "NOT_AUTHORIZED -> AUTHORIZED / NOT_EXECUTED",
+    "required_authorized_gate_status": "APPROVED / INTEGRATED",
+    "required_authorized_readiness": "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION",
     "runtime_authorization_record_created_only_by_future_authorized_execution": true
   },
   "base_commit": "43291c312c2934aae03f3c087dd0a1ae594341b7",
   "dependency_bindings": [
     {
-      "canonical_git_blob_sha256": "91ab405d6912341b85f3112a6390e851d374eb58fb32f78d91a6bae9a064655e",
-      "canonical_size_bytes": 23969,
+      "canonical_git_blob_sha256": "7aba9c7bec6adfc3489faed8d882a4ee0af7448c69bf848a66fd012b091b9b50",
+      "canonical_size_bytes": 35948,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "e27e861923db2d947ec72084a096ca87e01cf5c2",
+      "git_blob_sha1": "451d10871716315a2ac5b7bb1d1f7d0cff4acd2c",
       "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v02.py"
     },
     {
@@ -33,10 +84,10 @@
       "path": "src/experiments/build_bm25_corrective_0b05c_v02.py"
     },
     {
-      "canonical_git_blob_sha256": "fa2e897c8efe6343e6acada25ade5dd0042bd9a31c2760ec088f9af1cc57e57b",
-      "canonical_size_bytes": 13835,
+      "canonical_git_blob_sha256": "cecb945953af579d860cf6c325f50595e0b8584f204be2a438d067896a102246",
+      "canonical_size_bytes": 20759,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "17d375d8f0caf5602c04047f1e39a3e463ff5764",
+      "git_blob_sha1": "3d1eba673facc0e0c17309741ee2dff4e9f6fec3",
       "path": "src/experiments/run_0b05c_corrective_numerical_v02.py"
     },
     {
@@ -329,6 +380,82 @@
     "18_exact_hash_ledger",
     "19_final_completion_state"
   ],
+  "runtime_hash_ledger_contract": {
+    "discovery_roots": [
+      "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.2",
+      "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.2",
+      "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.2.jsonl",
+      "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.2",
+      "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.2",
+      "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.2",
+      "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.2",
+      "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.2.jsonl",
+      "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.2",
+      "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.2",
+      "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.2.jsonl",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2",
+      "outputs/audits/d1a_corrective_0b05c_runtime_v0.2",
+      "outputs/evaluation/0b05c_corrective_numerical_v0.2",
+      "outputs/audits/0b05c_corrective_numerical_runtime_v0.2"
+    ],
+    "entry_fields": [
+      "path",
+      "sha256",
+      "size_bytes"
+    ],
+    "excluded_self_path": "outputs/audits/0b05c_corrective_numerical_runtime_v0.2/exact_hash_ledger_v0.2.json",
+    "expected_paths": [
+      "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.2.jsonl",
+      "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.2.jsonl",
+      "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.2.jsonl",
+      "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.2/index.pkl",
+      "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.2/index_metadata.json",
+      "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.2/index.pkl",
+      "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.2/index_metadata.json",
+      "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.2/index.pkl",
+      "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.2/index_metadata.json",
+      "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.2/index.pkl",
+      "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.2/index_metadata.json",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2/index/id_map.json",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2/index/vectors.npy",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2/retrieval_config.json",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2/store/nandina8_docstore.jsonl",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2/text2trade_mnrl_nandina8_v02_run_metadata.json",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2/vector_integrity_gate_v0.2.json",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.2/vector_integrity_sample_v0.2.csv",
+      "outputs/audits/0b05c_corrective_numerical_runtime_v0.2/execution_manifest_v0.2.json",
+      "outputs/audits/0b05c_corrective_numerical_runtime_v0.2/runtime_authorization_record_v0.2.json",
+      "outputs/audits/d1a_corrective_0b05c_runtime_v0.2/text2trade_mnrl_v0.2_0b05c_runtime.json",
+      "outputs/evaluation/0b05c_corrective_numerical_v0.2/ev03_aggregate_comparison_v0.2.json",
+      "outputs/evaluation/0b05c_corrective_numerical_v0.2/ev03_case_level_comparison_v0.2.json",
+      "outputs/evaluation/0b05c_corrective_numerical_v0.2/ev04_aggregate_comparison_v0.2.json",
+      "outputs/evaluation/0b05c_corrective_numerical_v0.2/ev04_case_level_comparison_v0.2.json",
+      "outputs/evaluation/0b05c_corrective_numerical_v0.2/unified_sensitivity_summary_v0.2.json",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/d1a_case_summary.csv",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/d1a_corrective_case_level_comparison_v0.2.jsonl",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/d1a_corrective_execution_manifest_v0.2.json",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/d1a_corrective_output_hash_ledger_v0.2.csv",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/d1a_corrective_vs_original_comparison_v0.2.json",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/d1a_metrics.json",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/d1a_ranked_codes_top200.jsonl",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.2/summary.md",
+      "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.2/normative_flat_case_summary.csv",
+      "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.2/normative_flat_metrics.json",
+      "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.2/normative_flat_results.csv",
+      "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.2/normative_flat_case_summary.csv",
+      "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.2/normative_flat_metrics.json",
+      "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.2/normative_flat_results.csv",
+      "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.2/normative_hierarchical_case_summary.csv",
+      "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.2/normative_hierarchical_metrics.json",
+      "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.2/normative_hierarchical_results.csv",
+      "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.2/normative_hierarchical_case_summary.csv",
+      "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.2/normative_hierarchical_metrics.json",
+      "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.2/normative_hierarchical_results.csv"
+    ],
+    "missing_or_unexpected_policy": "FAIL_CLOSED"
+  },
   "scientific_state": {
     "0B05C_CLOSURE": "NOT_AUTHORIZED",
     "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
