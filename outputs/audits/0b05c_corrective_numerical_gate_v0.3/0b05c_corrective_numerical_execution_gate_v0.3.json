@@ -13,11 +13,59 @@
   "authorization_readiness": "NOT_AUTHORIZATION_READY",
   "authorization_record_path": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/0b05c_numerical_authorization_record_v0.3.json",
   "authorization_transition": {
+    "authorization_record_contract": {
+      "artifact_id": "0b05c_numerical_authorization_record_v0.3",
+      "baseline_artifacts": {
+        "d1a_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/d1a_numerical_execution_spec_v0.3.json",
+        "ev03_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/ev03_numerical_execution_spec_v0.3.json",
+        "ev04_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/ev04_numerical_execution_spec_v0.3.json",
+        "unified_gate": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/0b05c_corrective_numerical_execution_gate_v0.3.json"
+      },
+      "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+      "baseline_relationship": "PROPER_ANCESTOR_OF_AUTHORIZATION_COMMIT",
+      "binding_fields": [
+        "path",
+        "git_blob_sha1",
+        "canonical_git_blob_sha256",
+        "canonical_size_bytes"
+      ],
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/0b05c_numerical_authorization_record_v0.3.json",
+      "required_fields": [
+        "artifact_id",
+        "schema_version",
+        "authorization_baseline_commit",
+        "baseline_external_audit",
+        "baseline_artifacts"
+      ],
+      "schema_version": 3
+    },
     "authorization_record_must_be_committed": true,
+    "baseline_artifacts": {
+      "d1a_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/d1a_numerical_execution_spec_v0.3.json",
+      "ev03_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/ev03_numerical_execution_spec_v0.3.json",
+      "ev04_spec": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/ev04_numerical_execution_spec_v0.3.json",
+      "unified_gate": "outputs/audits/0b05c_corrective_numerical_gate_v0.3/0b05c_corrective_numerical_execution_gate_v0.3.json"
+    },
+    "baseline_must_be_proper_ancestor": true,
+    "gate_mutable_fields": [
+      "gate_status",
+      "authorization_readiness",
+      "authorization.EV03_NUMERICAL_EXECUTION",
+      "authorization.EV04_NUMERICAL_EXECUTION",
+      "authorization.D1A_NUMERICAL_EXECUTION",
+      "authorization.UNIFIED_0B05C_NUMERICAL_EXECUTION",
+      "authorization.authorization_record_present",
+      "attempt04"
+    ],
+    "immutable_projection_required": true,
     "required_gate_status": "APPROVED / INTEGRATED",
     "required_readiness": "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION",
     "runtime_record_created_only_by_future_authorized_execution": true,
-    "separate_external_audit_required": true
+    "separate_external_audit_required": true,
+    "spec_mutable_fields": [
+      "authorization.<OWN_NUMERICAL_EXECUTION>",
+      "attempt04"
+    ]
   },
   "base_commit": "60aa7dd8715962f3c3e8b617e8797532529f39ed",
   "d1a_invariants": {
@@ -29,10 +77,10 @@
   },
   "dependency_bindings": [
     {
-      "canonical_git_blob_sha256": "ffb68127e064bac4ffed99744390d70ec134d234a6418f6de27ea1be04da966c",
-      "canonical_size_bytes": 25065,
+      "canonical_git_blob_sha256": "4a7c37f6e7f586efc7d864ef6fd0c2c3481c1a4cdf87a4a6cff81753b5ba2a50",
+      "canonical_size_bytes": 36482,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "b00a5a41bb95b15157b171c27077ed79818a3ff4",
+      "git_blob_sha1": "6747e3bc7d8663183b72c69bb5194adf6577aa82",
       "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v03.py"
     },
     {
@@ -50,10 +98,10 @@
       "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v03.py"
     },
     {
-      "canonical_git_blob_sha256": "c816a6ffc320962757168c410cf573c88f29aa6d5d85a13fbcf9f8301ee2ed9e",
-      "canonical_size_bytes": 17384,
+      "canonical_git_blob_sha256": "938699d1285d43c26cb55a800a68a01230e47745318acfb30a8d2bc81c0f01fa",
+      "canonical_size_bytes": 18168,
       "classification": "VERSIONED_GIT_BLOB",
-      "git_blob_sha1": "788b551f5035b278bba6e2a59d37e2158f7995b7",
+      "git_blob_sha1": "b4c7e6a596b6b6870cc487e68997dae4c1f67e1e",
       "path": "src/experiments/run_0b05c_corrective_numerical_v03.py"
     },
     {

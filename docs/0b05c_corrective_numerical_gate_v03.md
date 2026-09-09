@@ -10,6 +10,14 @@ The historical hierarchical producer emits a legacy `mrr` row. The frozen EXP-04
 
 The v0.3 evaluator derives the enriched MRR payload from the reproduced case rows. It never copies expected control metrics into observed output. Control acceptance remains fail-closed and requires exact ranking, exact case summary, and exact enriched metrics.
 
+## Authorization microclose F011-F014
+
+The prospective authorization transition is bound to an exact schema-v3 record and to recalculated Git bindings for the unified gate plus the EV03, EV04, and D1a specs at a proper-ancestor baseline. A baseline-to-authorized immutable projection permits only the enumerated authorization fields; scientific state, roots, patches, retrieval semantics, code bindings, pipeline order, runtime ledger, and execution flags must remain identical.
+
+Before any prospective side effect, the unified authorized preflight requires coherent `AUTHORIZED` states in the gate and all three specs, with Attempt04 consistently represented as `AUTHORIZED / NOT_EXECUTED`. The 19-step orchestrator requires `PASS_EXACT` at both EV03 and EV04 verification steps and allows the final state only after the preceding 18 steps have passed.
+
+Synthetic tests exercise the real exact-control validator with observed file hashes and enriched metrics. They also fail closed on a non-proper baseline, record schema or artifact-id drift, baseline binding mismatch, simultaneous scientific mutation, any single unauthorized spec, and a plain `PASS` at either exact-verification step.
+
 ## Isolation
 
 All sixteen prospective roots use the v0.3 namespace and are disjoint from v0.2. Local v0.2 partial roots may remain as historical evidence, but v0.3 neither rejects nor reads them as execution inputs. The v0.2 gate, Attempt03 failure record, historical runner, Plan Maestro, article, EXP11B, EXP12, and every v0.1 artifact remain unchanged.

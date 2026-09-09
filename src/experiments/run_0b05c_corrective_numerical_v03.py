@@ -15,7 +15,9 @@ from .prepare_0b05c_corrective_numerical_gate_v03 import (
     ARTIFACT_NAMES,
     AUDIT_ROOT,
     AUTHORIZATION,
+    AUTHORIZATION_BASELINE_ARTIFACTS,
     AUTHORIZATION_RECORD,
+    AUTHORIZED_ATTEMPT04,
     AUTHORIZED_GATE_STATUS,
     AUTHORIZED_READINESS,
     ContractViolation,
@@ -24,6 +26,7 @@ from .prepare_0b05c_corrective_numerical_gate_v03 import (
     PIPELINE_STEPS,
     ROOT,
     git_binding,
+    load_authorization_transition_from_git,
     preflight as gate_preflight,
     read_json,
     require,
@@ -40,14 +43,6 @@ SPEC_PATHS = {
     "EV04": AUDIT_ROOT / ARTIFACT_NAMES[1],
     "d1a": AUDIT_ROOT / ARTIFACT_NAMES[2],
 }
-AUTHORIZATION_BASELINE_ARTIFACTS = {
-    "unified_gate": GATE_PATH.as_posix(),
-    "ev03_spec": SPEC_PATHS["EV03"].as_posix(),
-    "ev04_spec": SPEC_PATHS["EV04"].as_posix(),
-    "d1a_spec": SPEC_PATHS["d1a"].as_posix(),
-}
-
-
 def preflight(root: Path = ROOT) -> dict[str, Any]:
     return gate_preflight(root)
 
@@ -61,8 +56,18 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
     required = {key: "AUTHORIZED" for key in AUTHORIZATION if key.endswith("NUMERICAL_EXECUTION")}
     current = {key: gate["authorization"].get(key) for key in required}
     require(current == required, "All four 0B-05C v0.3 numerical components must be AUTHORIZED before any side effect")
+    specs = {name: read_json(root, path) for name, path in SPEC_PATHS.items()}
+    for name, authorization_key in (("EV03", "EV03_NUMERICAL_EXECUTION"), ("EV04", "EV04_NUMERICAL_EXECUTION"), ("d1a", "D1A_NUMERICAL_EXECUTION")):
+        require(specs[name].get("authorization", {}).get(authorization_key) == "AUTHORIZED", f"{name} v0.3 spec is not AUTHORIZED")
+    attempt_states = {gate.get("attempt04"), *(spec.get("attempt04") for spec in specs.values())}
+    require(attempt_states == {AUTHORIZED_ATTEMPT04}, "Attempt04 authorization state is not coherent across gate and specs")
     require(gate["authorization"].get("authorization_record_present") is True, "Authorization record v0.3 state is not present")
     require((root / AUTHORIZATION_RECORD).is_file(), "Authorization record v0.3 is required")
+    transition = load_authorization_transition_from_git(root, gate)
+    committed_specs = transition["artifacts"]
+    require(committed_specs["ev03_spec"] == specs["EV03"], "Filesystem EV03 spec differs from committed authorization spec")
+    require(committed_specs["ev04_spec"] == specs["EV04"], "Filesystem EV04 spec differs from committed authorization spec")
+    require(committed_specs["d1a_spec"] == specs["d1a"], "Filesystem D1a spec differs from committed authorization spec")
     for relative in FUTURE_ROOTS:
         require(not (root / relative).exists(), f"Prospective v0.3 root already exists: {relative}")
     for binding in gate["dependency_bindings"]:
@@ -73,25 +78,21 @@ def preflight_authorized(root: Path = ROOT) -> dict[str, Any]:
             require(hashlib.sha256(path.read_bytes()).hexdigest() == binding["sha256"], f"Frozen file SHA mismatch: {binding['path']}")
         else:
             require(git_binding(root, binding["path"], "HEAD", binding["classification"]) == binding, f"Canonical binding mismatch: {binding['path']}")
-    record = read_json(root, AUTHORIZATION_RECORD)
-    baseline = record.get("authorization_baseline_commit")
-    require(isinstance(baseline, str) and len(baseline) == 40, "Authorization baseline commit is missing")
-    require(record.get("baseline_external_audit") == "PASS / APPROVED_FOR_INTEGRATION", "Authorization baseline external audit is invalid")
-    require(subprocess.run(["git", "merge-base", "--is-ancestor", baseline, "HEAD"], cwd=root).returncode == 0, "Authorization baseline is not an ancestor")
     record_binding = git_binding(root, AUTHORIZATION_RECORD.as_posix(), "HEAD")
-    artifacts = {key: git_binding(root, path, "HEAD") for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()}
     return {
         "status": "PASS",
         "mode": "AUTHORIZED_PREFLIGHT_ONLY",
         "numerical_execution_occurred": False,
         "authorization": current,
-        "authorization_baseline_commit": baseline,
-        "authorization_record": record,
+        "authorization_baseline_commit": transition["authorization_baseline_commit"],
+        "authorization_record": transition["record"],
         "authorization_record_binding": record_binding,
-        "baseline_external_audit": record["baseline_external_audit"],
-        "authorized_artifact_bindings": artifacts,
-        "execution_authorization_commit": subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True).stdout.strip(),
-        "bundle": {"gate": gate, "EV03": read_json(root, SPEC_PATHS["EV03"]), "EV04": read_json(root, SPEC_PATHS["EV04"]), "d1a": read_json(root, SPEC_PATHS["d1a"])},
+        "baseline_external_audit": transition["baseline_external_audit"],
+        "baseline_artifact_bindings": transition["baseline_artifact_bindings"],
+        "authorized_artifact_bindings": transition["authorized_artifact_bindings"],
+        "authorization_transition_proof": transition["transition"],
+        "execution_authorization_commit": transition["execution_authorization_commit"],
+        "bundle": {"gate": gate, **specs},
     }
 
 
@@ -100,7 +101,13 @@ def run_authorized_pipeline(operations: Mapping[str, Callable[[], Mapping[str, A
     state: dict[str, Mapping[str, Any]] = {}
     for step, key in zip(PIPELINE_STEPS, OPERATION_KEYS, strict=True):
         result = operations[key]()
-        require(result.get("status") in {"PASS", "PASS_EXACT"}, f"Pipeline step failed closed: {step}")
+        if key in {"verify_ev03", "verify_ev04"}:
+            require(result.get("status") == "PASS_EXACT", f"Pipeline control verification requires PASS_EXACT: {step}")
+        elif key == "final_state":
+            require(len(state) == 18, "Final state cannot pass before the preceding 18 steps")
+            require(result.get("status") == "PASS", f"Final completion state must be PASS: {step}")
+        else:
+            require(result.get("status") in {"PASS", "PASS_EXACT"}, f"Pipeline step failed closed: {step}")
         state[step] = dict(result)
     return {"status": "PASS", "mode": "AUTHORIZED_EXECUTION", "steps": state}
 

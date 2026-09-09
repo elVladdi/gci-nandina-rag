@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import csv
+import hashlib
 import json
 import tempfile
 import unittest
@@ -76,12 +77,20 @@ class TestCorrectiveNumericalGateV03(unittest.TestCase):
                     writer = csv.DictWriter(handle, fieldnames=["case_id", "value"], lineterminator="\n")
                     writer.writeheader()
                     writer.writerow({"case_id": "A", "value": "1"})
-            result = evaluator.compare_control_reproduction(
+            comparison = evaluator.compare_control_reproduction(
                 paths[0], paths[1], paths[2], paths[3], metrics, copy.deepcopy(metrics),
                 expected_candidate_schema=["case_id", "value"], expected_case_schema=["case_id", "value"],
             )
+            required = {
+                "ranking_sha256": hashlib.sha256(paths[1].read_bytes()).hexdigest(),
+                "case_summary_sha256": hashlib.sha256(paths[3].read_bytes()).hexdigest(),
+                "enriched_mrr_metrics_exact": True,
+            }
+            result = runner.common.validate_control_exact(
+                "EV04", required, comparison, paths[1], paths[3], metrics, copy.deepcopy(metrics)
+            )
             self.assertTrue(result["metrics_exact"])
-            self.assertEqual(result["status"], "PASS")
+            self.assertEqual(result["status"], "PASS_EXACT")
 
     def test_05_missing_mrr_field_fails_closed(self) -> None:
         metrics = evaluator.build_ev04_enriched_metrics([synthetic_case(1)])
@@ -174,6 +183,109 @@ class TestCorrectiveNumericalGateV03(unittest.TestCase):
         self.assertEqual(candidate["authorization"], gate.AUTHORIZATION)
         self.assertFalse((ROOT / gate.AUTHORIZATION_RECORD).exists())
         self.assertTrue(all(not (ROOT / path).exists() for path in gate.FUTURE_ROOTS))
+
+    def _authorization_transition(self) -> tuple[dict[str, dict[str, object]], dict[str, dict[str, object]]]:
+        baseline = {
+            "unified_gate": copy.deepcopy(self.bundle["gate"]),
+            "ev03_spec": copy.deepcopy(self.bundle["ev03"]),
+            "ev04_spec": copy.deepcopy(self.bundle["ev04"]),
+            "d1a_spec": copy.deepcopy(self.bundle["d1a"]),
+        }
+        authorized = copy.deepcopy(baseline)
+        authorized["unified_gate"]["gate_status"] = gate.AUTHORIZED_GATE_STATUS
+        authorized["unified_gate"]["authorization_readiness"] = gate.AUTHORIZED_READINESS
+        authorized["unified_gate"]["attempt04"] = gate.AUTHORIZED_ATTEMPT04
+        for key in gate.AUTHORIZATION:
+            if key.endswith("NUMERICAL_EXECUTION"):
+                authorized["unified_gate"]["authorization"][key] = "AUTHORIZED"
+        authorized["unified_gate"]["authorization"]["authorization_record_present"] = True
+        for artifact, key in gate.AUTHORIZATION_SPEC_KEYS.items():
+            authorized[artifact]["authorization"][key] = "AUTHORIZED"
+            authorized[artifact]["attempt04"] = gate.AUTHORIZED_ATTEMPT04
+        return baseline, authorized
+
+    def test_19_authorization_transition_allows_only_contractual_fields(self) -> None:
+        baseline, authorized = self._authorization_transition()
+        proof = gate.validate_authorization_transition(baseline, authorized)
+        self.assertEqual(proof["status"], "PASS")
+        self.assertTrue(proof["allowed_fields_only"])
+        self.assertEqual(proof["baseline_projection_sha256"], proof["authorized_projection_sha256"])
+
+    def test_20_scientific_change_during_authorization_is_rejected(self) -> None:
+        baseline, authorized = self._authorization_transition()
+        authorized["unified_gate"]["scientific_state"]["0B05C_METRIC_IMPACT"] = "DETERMINED"
+        with self.assertRaisesRegex(gate.ContractViolation, "immutable scientific or technical"):
+            gate.validate_authorization_transition(baseline, authorized)
+
+    def test_21_each_spec_must_be_authorized(self) -> None:
+        for artifact, key in gate.AUTHORIZATION_SPEC_KEYS.items():
+            with self.subTest(artifact=artifact):
+                baseline, authorized = self._authorization_transition()
+                authorized[artifact]["authorization"][key] = "NOT_AUTHORIZED"
+                with self.assertRaisesRegex(gate.ContractViolation, f"Authorized {artifact} state is invalid"):
+                    gate.validate_authorization_transition(baseline, authorized)
+
+    def test_22_authorization_baseline_must_be_a_proper_ancestor(self) -> None:
+        current = gate._git(ROOT, "rev-parse", "HEAD")
+        with self.assertRaisesRegex(gate.ContractViolation, "proper ancestor"):
+            gate.validate_authorization_baseline_ancestry(ROOT, str(current))
+
+    def test_23_authorization_record_schema_and_artifact_id_are_exact(self) -> None:
+        baseline = str(gate._git(ROOT, "rev-parse", "HEAD"))
+        bindings = {
+            key: gate.authorization_artifact_binding(ROOT, path, baseline)
+            for key, path in gate.AUTHORIZATION_BASELINE_ARTIFACTS.items()
+        }
+        record = {
+            "artifact_id": gate.AUTHORIZATION_RECORD_ID,
+            "schema_version": gate.AUTHORIZATION_RECORD_SCHEMA_VERSION,
+            "authorization_baseline_commit": baseline,
+            "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+            "baseline_artifacts": bindings,
+        }
+        gate.validate_authorization_record_schema(record)
+        for field, value in (("artifact_id", "wrong"), ("schema_version", 2)):
+            with self.subTest(field=field):
+                invalid = copy.deepcopy(record)
+                invalid[field] = value
+                with self.assertRaises(gate.ContractViolation):
+                    gate.validate_authorization_record_schema(invalid)
+
+    def test_24_baseline_artifact_binding_mismatch_is_rejected(self) -> None:
+        baseline = str(gate._git(ROOT, "rev-parse", "HEAD"))
+        bindings = {
+            key: gate.authorization_artifact_binding(ROOT, path, baseline)
+            for key, path in gate.AUTHORIZATION_BASELINE_ARTIFACTS.items()
+        }
+        record = {
+            "artifact_id": gate.AUTHORIZATION_RECORD_ID,
+            "schema_version": gate.AUTHORIZATION_RECORD_SCHEMA_VERSION,
+            "authorization_baseline_commit": baseline,
+            "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+            "baseline_artifacts": bindings,
+        }
+        record["baseline_artifacts"]["ev04_spec"]["canonical_git_blob_sha256"] = "0" * 64
+        with self.assertRaisesRegex(gate.ContractViolation, "binding mismatch"):
+            gate.validate_authorization_record_bindings(ROOT, record)
+
+    def test_25_verify_steps_require_pass_exact(self) -> None:
+        for failing_key in ("verify_ev03", "verify_ev04"):
+            with self.subTest(failing_key=failing_key):
+                operations = {
+                    key: (lambda status=("PASS" if key == failing_key else "PASS_EXACT" if key.startswith("verify_") else "PASS"): {"status": status})
+                    for key in runner.OPERATION_KEYS
+                }
+                with self.assertRaisesRegex(gate.ContractViolation, "requires PASS_EXACT"):
+                    runner.run_authorized_pipeline(operations)
+
+    def test_26_exact_19_step_pipeline_accepts_both_exact_verifications(self) -> None:
+        operations = {
+            key: (lambda status=("PASS_EXACT" if key.startswith("verify_") else "PASS"): {"status": status})
+            for key in runner.OPERATION_KEYS
+        }
+        result = runner.run_authorized_pipeline(operations)
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(tuple(result["steps"]), gate.PIPELINE_STEPS)
 
 
 if __name__ == "__main__":

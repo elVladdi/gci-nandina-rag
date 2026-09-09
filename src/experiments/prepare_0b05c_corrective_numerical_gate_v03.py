@@ -26,8 +26,23 @@ ARTIFACT_NAMES = (
 )
 GATE_PATH = AUDIT_ROOT / ARTIFACT_NAMES[3]
 AUTHORIZATION_RECORD = AUDIT_ROOT / "0b05c_numerical_authorization_record_v0.3.json"
+AUTHORIZATION_RECORD_ID = "0b05c_numerical_authorization_record_v0.3"
+AUTHORIZATION_RECORD_SCHEMA_VERSION = 3
 AUTHORIZED_GATE_STATUS = "APPROVED / INTEGRATED"
 AUTHORIZED_READINESS = "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION"
+AUTHORIZED_ATTEMPT04 = "AUTHORIZED / NOT_EXECUTED"
+
+AUTHORIZATION_BASELINE_ARTIFACTS = {
+    "unified_gate": GATE_PATH.as_posix(),
+    "ev03_spec": (AUDIT_ROOT / ARTIFACT_NAMES[0]).as_posix(),
+    "ev04_spec": (AUDIT_ROOT / ARTIFACT_NAMES[1]).as_posix(),
+    "d1a_spec": (AUDIT_ROOT / ARTIFACT_NAMES[2]).as_posix(),
+}
+AUTHORIZATION_SPEC_KEYS = {
+    "ev03_spec": "EV03_NUMERICAL_EXECUTION",
+    "ev04_spec": "EV04_NUMERICAL_EXECUTION",
+    "d1a_spec": "D1A_NUMERICAL_EXECUTION",
+}
 
 AUTHORIZATION = {
     "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
@@ -202,6 +217,168 @@ def git_binding(root: Path, path: str, revision: str = "HEAD", classification: s
     }
 
 
+def authorization_artifact_binding(root: Path, path: str, revision: str) -> dict[str, Any]:
+    binding = git_binding(root, path, revision)
+    return {key: binding[key] for key in ("path", "git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes")}
+
+
+def authorization_record_contract() -> dict[str, Any]:
+    return {
+        "artifact_id": AUTHORIZATION_RECORD_ID,
+        "schema_version": AUTHORIZATION_RECORD_SCHEMA_VERSION,
+        "path": AUTHORIZATION_RECORD.as_posix(),
+        "required_fields": [
+            "artifact_id",
+            "schema_version",
+            "authorization_baseline_commit",
+            "baseline_external_audit",
+            "baseline_artifacts",
+        ],
+        "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+        "baseline_artifacts": dict(AUTHORIZATION_BASELINE_ARTIFACTS),
+        "baseline_relationship": "PROPER_ANCESTOR_OF_AUTHORIZATION_COMMIT",
+        "binding_fields": ["path", "git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes"],
+    }
+
+
+def validate_authorization_record_schema(record: Mapping[str, Any]) -> None:
+    contract = authorization_record_contract()
+    require(set(record) == set(contract["required_fields"]), "Authorization record v0.3 fields are not exact")
+    require(record.get("artifact_id") == AUTHORIZATION_RECORD_ID, "Authorization record v0.3 artifact_id is invalid")
+    require(record.get("schema_version") == AUTHORIZATION_RECORD_SCHEMA_VERSION, "Authorization record v0.3 schema_version is invalid")
+    baseline = record.get("authorization_baseline_commit")
+    require(isinstance(baseline, str) and len(baseline) == 40 and all(char in "0123456789abcdef" for char in baseline), "Authorization baseline commit is not a full lowercase SHA")
+    require(record.get("baseline_external_audit") == contract["baseline_external_audit"], "Authorization baseline external audit is invalid")
+    artifacts = record.get("baseline_artifacts")
+    require(isinstance(artifacts, Mapping) and set(artifacts) == set(AUTHORIZATION_BASELINE_ARTIFACTS), "Authorization baseline artifact set is not exact")
+    binding_fields = set(contract["binding_fields"])
+    for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items():
+        binding = artifacts[key]
+        require(isinstance(binding, Mapping) and set(binding) == binding_fields, f"Authorization baseline binding fields are invalid: {key}")
+        require(binding.get("path") == path, f"Authorization baseline binding path is invalid: {key}")
+
+
+def validate_authorization_baseline_ancestry(root: Path, baseline: str, revision: str = "HEAD") -> str:
+    current = str(_git(root, "rev-parse", revision))
+    require(baseline != current, "Authorization baseline must be a proper ancestor, not HEAD")
+    ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", baseline, current], cwd=root).returncode == 0
+    require(ancestor, "Authorization baseline is not a proper ancestor of the authorization commit")
+    return current
+
+
+def validate_authorization_record_bindings(root: Path, record: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
+    baseline = str(record["authorization_baseline_commit"])
+    expected = {
+        key: authorization_artifact_binding(root, path, baseline)
+        for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+    }
+    require(record["baseline_artifacts"] == expected, "Authorization baseline artifact binding mismatch")
+    return expected
+
+
+def _git_json(root: Path, path: str, revision: str) -> dict[str, Any]:
+    raw = _git(root, "show", f"{revision}:{path}", binary=True)
+    assert isinstance(raw, bytes)
+    payload = json.loads(raw.decode("utf-8"))
+    require(isinstance(payload, dict), f"Authorization artifact is not a JSON object: {path}")
+    return payload
+
+
+def _authorization_projection(payload: Mapping[str, Any], artifact: str) -> dict[str, Any]:
+    projected = copy.deepcopy(dict(payload))
+    if artifact == "unified_gate":
+        projected["gate_status"] = "<AUTHORIZED_TRANSITION_FIELD>"
+        projected["authorization_readiness"] = "<AUTHORIZED_TRANSITION_FIELD>"
+        projected["attempt04"] = "<AUTHORIZED_TRANSITION_FIELD>"
+        for key in (
+            "EV03_NUMERICAL_EXECUTION",
+            "EV04_NUMERICAL_EXECUTION",
+            "D1A_NUMERICAL_EXECUTION",
+            "UNIFIED_0B05C_NUMERICAL_EXECUTION",
+            "authorization_record_present",
+        ):
+            projected["authorization"][key] = "<AUTHORIZED_TRANSITION_FIELD>"
+    else:
+        projected["authorization"][AUTHORIZATION_SPEC_KEYS[artifact]] = "<AUTHORIZED_TRANSITION_FIELD>"
+        projected["attempt04"] = "<AUTHORIZED_TRANSITION_FIELD>"
+    return projected
+
+
+def validate_authorization_transition(
+    baseline_artifacts: Mapping[str, Mapping[str, Any]],
+    authorized_artifacts: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    expected_keys = set(AUTHORIZATION_BASELINE_ARTIFACTS)
+    require(set(baseline_artifacts) == expected_keys and set(authorized_artifacts) == expected_keys, "Authorization transition artifact set is not exact")
+    baseline_gate = baseline_artifacts["unified_gate"]
+    authorized_gate = authorized_artifacts["unified_gate"]
+    require(baseline_gate.get("gate_status") == "CANDIDATE_PENDING_EXTERNAL_AUDIT", "Authorization baseline gate status is invalid")
+    require(baseline_gate.get("authorization_readiness") == "NOT_AUTHORIZATION_READY", "Authorization baseline readiness is invalid")
+    require(baseline_gate.get("authorization") == AUTHORIZATION, "Authorization baseline gate is not closed")
+    require(baseline_gate.get("attempt04") == "NOT_AUTHORIZED / NOT_EXECUTED", "Authorization baseline Attempt04 state is invalid")
+    require(authorized_gate.get("gate_status") == AUTHORIZED_GATE_STATUS, "Authorized gate status is invalid")
+    require(authorized_gate.get("authorization_readiness") == AUTHORIZED_READINESS, "Authorized gate readiness is invalid")
+    required_gate_authorizations = {key: "AUTHORIZED" for key in AUTHORIZATION if key.endswith("NUMERICAL_EXECUTION")}
+    require(
+        {key: authorized_gate.get("authorization", {}).get(key) for key in required_gate_authorizations} == required_gate_authorizations,
+        "Authorized gate does not contain all four numerical authorizations",
+    )
+    require(authorized_gate.get("authorization", {}).get("authorization_record_present") is True, "Authorized gate does not declare its authorization record")
+    require(authorized_gate.get("authorization", {}).get("corrective_retrieval_executed") is False, "Authorization transition changed retrieval state")
+    require(authorized_gate.get("authorization", {}).get("corrective_metrics_computed") is False, "Authorization transition changed metric state")
+    require(authorized_gate.get("authorization", {}).get("runtime_authorization_record_present") is False, "Authorization transition changed runtime record state")
+    require(authorized_gate.get("attempt04") == AUTHORIZED_ATTEMPT04, "Authorized gate Attempt04 state is invalid")
+    for artifact, authorization_key in AUTHORIZATION_SPEC_KEYS.items():
+        baseline_spec = baseline_artifacts[artifact]
+        authorized_spec = authorized_artifacts[artifact]
+        require(baseline_spec.get("authorization", {}).get(authorization_key) == "NOT_AUTHORIZED", f"Authorization baseline {artifact} is not closed")
+        require(authorized_spec.get("authorization", {}).get(authorization_key) == "AUTHORIZED", f"Authorized {artifact} state is invalid")
+        require(baseline_spec.get("attempt04") == "NOT_AUTHORIZED / NOT_EXECUTED", f"Authorization baseline {artifact} Attempt04 state is invalid")
+        require(authorized_spec.get("attempt04") == AUTHORIZED_ATTEMPT04, f"Authorized {artifact} Attempt04 state is invalid")
+    baseline_projection = {key: _authorization_projection(value, key) for key, value in baseline_artifacts.items()}
+    authorized_projection = {key: _authorization_projection(value, key) for key, value in authorized_artifacts.items()}
+    require(baseline_projection == authorized_projection, "Authorization transition changed immutable scientific or technical content")
+    return {
+        "status": "PASS",
+        "mode": "BASELINE_TO_AUTHORIZED_IMMUTABLE_PROJECTION",
+        "allowed_fields_only": True,
+        "baseline_projection_sha256": hashlib.sha256(canonical_json_bytes(baseline_projection)).hexdigest(),
+        "authorized_projection_sha256": hashlib.sha256(canonical_json_bytes(authorized_projection)).hexdigest(),
+    }
+
+
+def load_authorization_transition_from_git(root: Path, current_gate: Mapping[str, Any]) -> dict[str, Any]:
+    record = read_json(root, AUTHORIZATION_RECORD)
+    validate_authorization_record_schema(record)
+    baseline = str(record["authorization_baseline_commit"])
+    current = validate_authorization_baseline_ancestry(root, baseline)
+    baseline_bindings = validate_authorization_record_bindings(root, record)
+    baseline_artifacts = {
+        key: _git_json(root, path, baseline)
+        for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+    }
+    authorized_artifacts = {
+        key: _git_json(root, path, current)
+        for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+    }
+    require(authorized_artifacts["unified_gate"] == dict(current_gate), "Filesystem gate differs from committed authorization gate")
+    transition = validate_authorization_transition(baseline_artifacts, authorized_artifacts)
+    return {
+        "status": "PASS",
+        "authorization_baseline_commit": baseline,
+        "execution_authorization_commit": current,
+        "baseline_external_audit": record["baseline_external_audit"],
+        "baseline_artifact_bindings": baseline_bindings,
+        "authorized_artifact_bindings": {
+            key: authorization_artifact_binding(root, path, current)
+            for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+        },
+        "record": record,
+        "transition": transition,
+        "artifacts": authorized_artifacts,
+    }
+
+
 def dependency_bindings(root: Path, revision: str) -> list[dict[str, Any]]:
     bindings = [git_binding(root, path, revision) for path in VERSIONED_PATHS]
     bindings.extend(git_binding(root, path, revision, "FROZEN_BINARY_GIT_BLOB") for path in BINARY_PATHS)
@@ -356,6 +533,21 @@ def build_bundle(root: Path = ROOT, revision: str = "HEAD") -> dict[str, Any]:
             "required_gate_status": AUTHORIZED_GATE_STATUS,
             "required_readiness": AUTHORIZED_READINESS,
             "authorization_record_must_be_committed": True,
+            "authorization_record_contract": authorization_record_contract(),
+            "baseline_artifacts": dict(AUTHORIZATION_BASELINE_ARTIFACTS),
+            "baseline_must_be_proper_ancestor": True,
+            "immutable_projection_required": True,
+            "gate_mutable_fields": [
+                "gate_status",
+                "authorization_readiness",
+                "authorization.EV03_NUMERICAL_EXECUTION",
+                "authorization.EV04_NUMERICAL_EXECUTION",
+                "authorization.D1A_NUMERICAL_EXECUTION",
+                "authorization.UNIFIED_0B05C_NUMERICAL_EXECUTION",
+                "authorization.authorization_record_present",
+                "attempt04",
+            ],
+            "spec_mutable_fields": ["authorization.<OWN_NUMERICAL_EXECUTION>", "attempt04"],
             "runtime_record_created_only_by_future_authorized_execution": True,
         },
         "runtime_hash_ledger_contract": {
