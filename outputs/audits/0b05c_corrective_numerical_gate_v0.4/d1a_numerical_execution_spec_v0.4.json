@@ -1,0 +1,361 @@
+{
+  "acceptance_and_integrity_criteria": [
+    "Original corpus, model weight, evaluation input, and primary-control hashes match this specification.",
+    "The Decision 906 source and both exact annex entries are recorded.",
+    "Exactly two targeted documents change; order, cardinality, and every unpatched document are preserved.",
+    "Vectors, docstore, and id-map cardinalities are coherent and map all 7644 documents.",
+    "Normalized embeddings use exact brute-force dot-product retrieval and unique NANDINA-8 ranking.",
+    "Evaluation covers exactly N=1056 cases, emits a unique Top-200 trace and a case-level record for each case.",
+    "Runner, index-builder, and evaluator code identities match this specification.",
+    "Builder and evaluator fixed filenames exist under the separate corrected roots before comparison.",
+    "Aggregate and case-level comparisons use frozen Decision 885 primary controls only.",
+    "A complete output hash ledger is emitted without overwrite."
+  ],
+  "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "attempt05": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "authorization": {
+    "D1A_CORRECTIVE_CORPUS_CREATED": false,
+    "D1A_CORRECTIVE_INDEX_CREATED": false,
+    "D1A_CORRECTIVE_METRICS_COMPUTED": false,
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED"
+  },
+  "corrected_normative_corpus": {
+    "definition": {
+      "authoritative_normative_source": {
+        "annex_entries": {
+          "87044110": {
+            "item": 25,
+            "text": "Inferior a 4,537 t"
+          },
+          "87045110": {
+            "item": 26,
+            "text": "Inferior a 4,537 t"
+          }
+        },
+        "authority": "Comision de la Comunidad Andina",
+        "decision": "Decision 906",
+        "effective_on": "2023-01-01",
+        "official_gazette": "Gaceta Oficial 5062",
+        "official_url": "https://www.comunidadandina.org/DocOficialesFiles/Gacetas/GACETA%205062.pdf",
+        "published_on": "2022-10-25"
+      },
+      "patch_scope": "EXACTLY_TWO_NANDINA8_DOCUMENTS",
+      "patches": [
+        {
+          "code": "87044110",
+          "match": {
+            "codigo": "87044110",
+            "doc_id": "NANDINA_87044110",
+            "original_jsonl_line_sha256": "6a736cf4b8deb85ef31d7e88900c2ecf395b6ce64dd11308af22c0a7f5390a80",
+            "version": "Decision_885"
+          },
+          "replacement": {
+            "texto": "Inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+            "texto_index": "Inferior a 4,537 t.",
+            "titulo": "Inferior a 4,537 t",
+            "version": "Decision_906"
+          }
+        },
+        {
+          "code": "87045110",
+          "match": {
+            "codigo": "87045110",
+            "doc_id": "NANDINA_87045110",
+            "original_jsonl_line_sha256": "bc2995aa6fa917e71beae99fb923f98abdace4fc7a7bd930c3a9da412d05793a",
+            "version": "Decision_885"
+          },
+          "replacement": {
+            "texto": "Inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+            "texto_index": "Inferior a 4,537 t.",
+            "titulo": "Inferior a 4,537 t",
+            "version": "Decision_906"
+          }
+        }
+      ],
+      "preservation_invariants": [
+        "Preserve JSONL row order and corpus cardinality of 7644 documents.",
+        "Change only the two matched documents and declared replacement fields.",
+        "Preserve all unpatched document bytes, fields, and values.",
+        "Serialize UTF-8 JSONL with LF line endings and one terminal newline."
+      ]
+    },
+    "must_be_absent_before_authorized_execution": true,
+    "prospective_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl"
+  },
+  "evaluation": {
+    "case_level_output_required": true,
+    "code_identity": {
+      "git_blob_sha": "47b2cf6cfafe681a1e64223cd3f048000942e4d0",
+      "path": "src/experiments/evaluate_text2trade_mnrl_data_aduanas_v02.py",
+      "revision": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+      "sha256": "eddd4f1b611519c52c846d61152c96a8c16e13588c5b798b1b8244bd81e7aaf9"
+    },
+    "eval_input": {
+      "N": 1056,
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+    },
+    "label_column": "NANDINA",
+    "metrics_to_compare": [
+      "Top@1",
+      "Top@3",
+      "Top@5",
+      "Top@10",
+      "Top@50",
+      "Recall@100",
+      "Recall@200",
+      "MRR@100",
+      "MRR@200",
+      "Exact@100",
+      "Exact@200",
+      "HS6@100",
+      "HS6@200",
+      "HS4@100",
+      "HS4@200",
+      "Chapter@100",
+      "Chapter@200"
+    ],
+    "primary_control": {
+      "bytes": 4083,
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json",
+      "sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c"
+    },
+    "primary_control_case_summary": {
+      "bytes": 138163,
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+      "sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd"
+    },
+    "primary_control_ranking_trace": {
+      "bytes": 2619936,
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
+      "sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c"
+    },
+    "prospective_output_root": "outputs/evaluation/d1a_corrective_0b05c_v0.4",
+    "prospective_outputs": {
+      "case_summary": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_case_summary.csv",
+      "metrics": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_metrics.json",
+      "ranking_trace_top200": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_ranked_codes_top200.jsonl",
+      "strategy_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.4/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+      "summary": "outputs/evaluation/d1a_corrective_0b05c_v0.4/summary.md"
+    },
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "query_construction": "clean(row[query_column]) using the frozen evaluator",
+    "ranking_depth": 200,
+    "required_index_contract": {
+      "metadata_filename": "text2trade_mnrl_nandina8_v02_run_metadata.json",
+      "vector_integrity_filename": "vector_integrity_gate_v0.2.json"
+    }
+  },
+  "fail_closed_execution_rules": [
+    "All prospective corpus, index, evaluation, and runtime roots must be absent before execution.",
+    "Refuse partial roots, existing files, and overwrite attempts.",
+    "Refuse silent resume; preserve a failed run as failed and require a new prospective authorization for a rerun.",
+    "Write the output hash ledger only after every required contractual artifact is present.",
+    "Do not interpret metrics until all integrity and acceptance criteria pass."
+  ],
+  "index_builder": {
+    "code_identity": {
+      "git_blob_sha": "0684eae0f951bc9889769b05680fe7b675ca31fd",
+      "path": "src/experiments/build_text2trade_mnrl_index_v02.py",
+      "revision": "37eaa712bd12914b97e8fc108b96dc6e68c4e460",
+      "sha256": "be37f33a652239ead835806d8af470db933607308ecbfadfcd6ab8f5d5e78e50"
+    },
+    "embedding_normalization": true,
+    "hnsw": false,
+    "policy": "FULL_ATOMIC_INDEX_AND_MAPPING_REBUILD",
+    "prospective_output_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
+    "prospective_outputs": {
+      "docstore": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/store/nandina8_docstore.jsonl",
+      "id_map": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/id_map.json",
+      "index_metadata": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/text2trade_mnrl_nandina8_v02_run_metadata.json",
+      "retrieval_config": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/retrieval_config.json",
+      "vector_integrity_gate": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_gate_v0.2.json",
+      "vector_integrity_sample": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_sample_v0.2.csv",
+      "vectors": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/vectors.npy"
+    },
+    "ranking_unit": "unique NANDINA-8 code",
+    "retrieval_semantics": "exact brute-force dot product over normalized vectors",
+    "similarity": "cosine"
+  },
+  "model_policy": {
+    "MODEL_POLICY": "FREEZE_ORIGINAL_D1A_WEIGHTS",
+    "must_not_retrain": true,
+    "weights": {
+      "bytes": 470637416,
+      "path": "models/text2trade_mnrl_v0.2/model.safetensors",
+      "sha256": "ef9b92b2fb0239e46c0d81e403f00b3255d3822dfa25e0ce354d03828f7a8c87"
+    }
+  },
+  "orchestration": {
+    "comparison_contract": {
+      "aggregate_metrics": [
+        "Top@1",
+        "Top@3",
+        "Top@5",
+        "Top@10",
+        "Top@50",
+        "Recall@100",
+        "Recall@200",
+        "MRR@100",
+        "MRR@200",
+        "Exact@100",
+        "Exact@200",
+        "HS6@100",
+        "HS6@200",
+        "HS4@100",
+        "HS4@200",
+        "Chapter@100",
+        "Chapter@200"
+      ],
+      "case_fields": [
+        "case_id",
+        "nandina_ref",
+        "original_rank_ref",
+        "corrected_rank_ref",
+        "original_found_at_200",
+        "corrected_found_at_200",
+        "original_hit_1",
+        "corrected_hit_1",
+        "original_hit_3",
+        "corrected_hit_3",
+        "original_hit_5",
+        "corrected_hit_5",
+        "original_hit_10",
+        "corrected_hit_10",
+        "original_hit_50",
+        "corrected_hit_50",
+        "original_hit_100",
+        "corrected_hit_100",
+        "original_hit_200",
+        "corrected_hit_200",
+        "ranking_changed",
+        "original_rank_87044110",
+        "corrected_rank_87044110",
+        "original_rank_87045110",
+        "corrected_rank_87045110"
+      ],
+      "primary_control_only": "FROZEN_ORIGINAL_D1A_OUTPUTS_FROM_DECISION_885_SNAPSHOT",
+      "rank_convention": "0=NOT_FOUND_AT_200"
+    },
+    "config_derivation": {
+      "allowed_changes_only": [
+        "frozen_inputs.normative_corpus",
+        "frozen_inputs.normative_corpus_sha256",
+        "index.output_dir",
+        "outputs.evaluation_dir"
+      ],
+      "corrected_evaluation_root": "outputs/evaluation/d1a_corrective_0b05c_v0.4",
+      "corrected_index_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
+      "corrected_normative_corpus_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+      "deterministic_sequence": [
+        "Validate frozen original corpus SHA and both original JSONL line SHA values.",
+        "Apply exactly two UTF-8 LF JSONL patches in memory.",
+        "Calculate and record the derived corrected corpus SHA-256.",
+        "Derive the runtime config mechanically and validate its allowed diff before any index build.",
+        "Create the corpus, runtime config, builder outputs, evaluator outputs, comparisons, execution manifest, and ledger only after a separately authorized command.",
+        "Materialize the execution manifest before the ledger; the ledger hashes that manifest and excludes only itself to avoid a circular dependency."
+      ],
+      "original_config_path": "src/configs/text2trade_mnrl_v0.2.json"
+    },
+    "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v03 --execute-authorized",
+    "future_roots": [
+      "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.4",
+      "outputs/audits/d1a_corrective_0b05c_runtime_v0.4"
+    ],
+    "hash_ledger_contract": {
+      "excluded_self_path": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_output_hash_ledger_v0.4.csv",
+      "included_paths": [
+        "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+        "outputs/audits/d1a_corrective_0b05c_runtime_v0.4/text2trade_mnrl_v0.2_0b05c_runtime.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/vectors.npy",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/id_map.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/store/nandina8_docstore.jsonl",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/retrieval_config.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_sample_v0.2.csv",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_gate_v0.2.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/text2trade_mnrl_nandina8_v02_run_metadata.json",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_metrics.json",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_case_summary.csv",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_ranked_codes_top200.jsonl",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/summary.md",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_vs_original_comparison_v0.4.json",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_case_level_comparison_v0.4.jsonl",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_execution_manifest_v0.4.json"
+      ]
+    },
+    "original_config": {
+      "canonical_blob_sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254",
+      "git_blob_sha": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7",
+      "historical_sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/configs/text2trade_mnrl_v0.2.json"
+    },
+    "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v03 --preflight",
+    "runner": {
+      "canonical_blob_sha256": "2a55d201a3a35c477ed71e64dff5eeff02faba1c0a426a26835b4732b3827121",
+      "git_blob_sha": "f3245b598295169ac3b8a4c4324f15fee8204237",
+      "path": "src/experiments/run_d1a_corrective_0b05c_v03.py",
+      "revision": "COMMITTED_GIT_BLOB"
+    },
+    "runner_outputs": {
+      "aggregate_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_vs_original_comparison_v0.4.json",
+      "case_level_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_case_level_comparison_v0.4.jsonl",
+      "execution_manifest": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_execution_manifest_v0.4.json",
+      "hash_ledger": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_output_hash_ledger_v0.4.csv"
+    },
+    "runtime_config_path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.4/text2trade_mnrl_v0.2_0b05c_runtime.json",
+    "runtime_root": "outputs/audits/d1a_corrective_0b05c_runtime_v0.4"
+  },
+  "original_normative_corpus": {
+    "affected_documents": {
+      "87044110": {
+        "doc_id": "NANDINA_87044110",
+        "original_jsonl_line_sha256": "6a736cf4b8deb85ef31d7e88900c2ecf395b6ce64dd11308af22c0a7f5390a80",
+        "original_values": {
+          "chapter": "87",
+          "codigo": "87044110",
+          "fuente": "NANDINA",
+          "section": "XVII",
+          "texto": "De peso total con carga máxima inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+          "texto_index": "De peso total con carga máxima inferior a 4,537 t.",
+          "titulo": "De peso total con carga máxima inferior a 4,537 t",
+          "version": "Decision_885"
+        }
+      },
+      "87045110": {
+        "doc_id": "NANDINA_87045110",
+        "original_jsonl_line_sha256": "bc2995aa6fa917e71beae99fb923f98abdace4fc7a7bd930c3a9da412d05793a",
+        "original_values": {
+          "chapter": "87",
+          "codigo": "87045110",
+          "fuente": "NANDINA",
+          "section": "XVII",
+          "texto": "De peso total con carga máxima inferior a 4,537 t. Contexto: Sección XVII / Capítulo 87.",
+          "texto_index": "De peso total con carga máxima inferior a 4,537 t.",
+          "titulo": "De peso total con carga máxima inferior a 4,537 t",
+          "version": "Decision_885"
+        }
+      }
+    },
+    "canonical_blob_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "document_count": 7644,
+    "git_blob_sha": "a74d44f27e77d5c652c497a4f20fc786855daf8a",
+    "historical_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "identity_authority": "COMMITTED_GIT_BLOB",
+    "path": "data/processed/corpus_rag_v1_index.jsonl"
+  },
+  "specification_id": "d1a_numerical_execution_spec_v0.4",
+  "specification_status": "CLOSED_PROSPECTIVELY / NOT_AUTHORIZED / PENDING_EXTERNAL_AUDIT",
+  "v01_classification": "HISTORICAL / INTEGRATED / SUPERSEDED_FOR_NEW_EXECUTION",
+  "v02_attempt03_provenance": {
+    "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
+    "failure_record": "outputs/audits/0b05c_attempt03_failclosed_v0.2/attempt03_failure_record_v0.2.json"
+  },
+  "v03_attempt04_provenance": {
+    "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
+    "failure_record": "outputs/audits/0b05c_attempt04_failclosed_v0.3/attempt04_failure_record_v0.3.json"
+  }
+}

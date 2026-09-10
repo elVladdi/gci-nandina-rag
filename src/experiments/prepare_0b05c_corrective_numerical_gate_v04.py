@@ -1,0 +1,679 @@
+"""Build and validate the closed 0B-05C recovery gate v0.4."""
+
+from __future__ import annotations
+
+import copy
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+from typing import Any, Mapping
+
+
+ROOT = Path(__file__).resolve().parents[2]
+BASE_COMMIT = "ba4bd2936bbf1930b87aa5f3abe028df1dbdf6a9"
+AUDIT_ROOT = Path("outputs/audits/0b05c_corrective_numerical_gate_v0.4")
+V03_AUDIT_ROOT = Path("outputs/audits/0b05c_corrective_numerical_gate_v0.3")
+FAILURE_RECORD = Path("outputs/audits/0b05c_attempt04_failclosed_v0.3/attempt04_failure_record_v0.3.json")
+METHODOLOGICAL_DECISION = Path("outputs/audits/0b05c_ev04_mrr_methodological_decision_v0.4/mrr_methodological_decision_v0.4.json")
+METHODOLOGICAL_DECISION_BLOB = "26b4310979e042bc7bb4fa0594d1ef450bf0032e"
+
+ARTIFACT_NAMES = (
+    "ev03_numerical_execution_spec_v0.4.json",
+    "ev04_numerical_execution_spec_v0.4.json",
+    "d1a_numerical_execution_spec_v0.4.json",
+    "0b05c_corrective_numerical_execution_gate_v0.4.json",
+    "0b05c_corrective_numerical_gate_manifest_v0.4.json",
+    "0b05c_corrective_numerical_gate_hash_ledger_v0.4.json",
+)
+GATE_PATH = AUDIT_ROOT / ARTIFACT_NAMES[3]
+AUTHORIZATION_RECORD = AUDIT_ROOT / "0b05c_numerical_authorization_record_v0.4.json"
+AUTHORIZATION_RECORD_ID = "0b05c_numerical_authorization_record_v0.4"
+AUTHORIZATION_RECORD_SCHEMA_VERSION = 3
+AUTHORIZED_GATE_STATUS = "APPROVED / INTEGRATED"
+AUTHORIZED_READINESS = "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION"
+AUTHORIZED_ATTEMPT05 = "AUTHORIZED / NOT_EXECUTED"
+
+AUTHORIZATION_BASELINE_ARTIFACTS = {
+    "unified_gate": GATE_PATH.as_posix(),
+    "ev03_spec": (AUDIT_ROOT / ARTIFACT_NAMES[0]).as_posix(),
+    "ev04_spec": (AUDIT_ROOT / ARTIFACT_NAMES[1]).as_posix(),
+    "d1a_spec": (AUDIT_ROOT / ARTIFACT_NAMES[2]).as_posix(),
+}
+AUTHORIZATION_SPEC_KEYS = {
+    "ev03_spec": "EV03_NUMERICAL_EXECUTION",
+    "ev04_spec": "EV04_NUMERICAL_EXECUTION",
+    "d1a_spec": "D1A_NUMERICAL_EXECUTION",
+}
+
+AUTHORIZATION = {
+    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "corrective_retrieval_executed": False,
+    "corrective_metrics_computed": False,
+    "authorization_record_present": False,
+    "runtime_authorization_record_present": False,
+}
+SCIENTIFIC_STATE = {
+    "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+    "DOWNSTREAM_REEXECUTION": "NOT_YET_JUSTIFIED",
+    "0B05C_CLOSURE": "NOT_AUTHORIZED",
+}
+
+V03_ROOTS = (
+    "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.3",
+    "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.3",
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.3.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.3",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.3",
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.3",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.3",
+    "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.3.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.3",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.3",
+    "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.3.jsonl",
+    "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.3",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.3",
+    "outputs/audits/d1a_corrective_0b05c_runtime_v0.3",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.3",
+    "outputs/audits/0b05c_corrective_numerical_runtime_v0.3",
+)
+
+EV03_ROOTS = (
+    "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4",
+    "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4",
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4",
+)
+EV04_ROOTS = (
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4",
+    "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4",
+)
+D1A_ROOTS = (
+    "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+    "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.4",
+    "outputs/audits/d1a_corrective_0b05c_runtime_v0.4",
+)
+UNIFIED_ROOTS = (
+    "outputs/evaluation/0b05c_corrective_numerical_v0.4",
+    "outputs/audits/0b05c_corrective_numerical_runtime_v0.4",
+)
+FUTURE_ROOTS = EV03_ROOTS + EV04_ROOTS + D1A_ROOTS + UNIFIED_ROOTS
+
+PIPELINE_STEPS = (
+    "01_unified_preflight",
+    "02_EV03_Decision885_control_reproduction",
+    "03_EV03_control_reproduction_verification",
+    "04_EV03_corrected_corpus_materialization",
+    "05_EV03_corrected_index_build_RECOVERED_HISTORICAL_SEMANTICS",
+    "06_EV03_corrected_evaluation",
+    "07_EV04_Decision885_control_reproduction_ENRICHED_MRR",
+    "08_EV04_control_reproduction_verification_PASS_EXACT",
+    "09_EV04_corrected_corpus_materialization",
+    "10_EV04_corrected_index_build",
+    "11_EV04_corrected_evaluation_ENRICHED_MRR",
+    "12_D1a_corrected_execution_under_future_v04_authorization",
+    "13_integrity_validation",
+    "14_case_level_comparisons",
+    "15_aggregate_comparisons",
+    "16_unified_sensitivity_summary",
+    "17_execution_manifest",
+    "18_exact_hash_ledger",
+    "19_final_completion_state",
+)
+
+VERSIONED_PATHS = (
+    "src/experiments/prepare_0b05c_corrective_numerical_gate_v04.py",
+    "src/experiments/build_bm25_corrective_0b05c_v03.py",
+    "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py",
+    "src/experiments/run_0b05c_corrective_numerical_v04.py",
+    "src/experiments/run_d1a_corrective_0b05c_v03.py",
+    "src/experiments/run_0b05c_corrective_numerical_v02.py",
+    "src/experiments/run_d1a_corrective_0b05c_v01.py",
+    "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py",
+    "src/experiments/build_bm25_ev03_historical_recovered_v02.py",
+    "src/experiments/verify_ev03_historical_builder_recovery_v02.py",
+    "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py",
+    "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+    "src/experiments/build_bm25_index.py",
+    "src/retrieval/bm25.py",
+    "src/retrieval/text2trade_mnrl_v02.py",
+    "src/bm25_index.py",
+    "src/experiments/build_text2trade_mnrl_index_v02.py",
+    "src/experiments/evaluate_text2trade_mnrl_data_aduanas_v02.py",
+    "src/configs/experiment_config.json",
+    "src/configs/text2trade_mnrl_v0.2.json",
+    "data/processed/corpus_rag_v1_index.jsonl",
+    "data/processed/corpus_nandina_hierarchical_v0.1.jsonl",
+    "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "data/processed/indexes/bm25_nandina8_run_metadata.json",
+    "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/retrieval_config.json",
+    "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/text2trade_mnrl_nandina8_v02_run_metadata.json",
+    "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/vector_integrity_gate_v0.2.json",
+    "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv",
+    "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv",
+    "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/run_metadata.json",
+    "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+    "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+    "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json",
+    "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json",
+    "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv",
+    "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
+    FAILURE_RECORD.as_posix(),
+    METHODOLOGICAL_DECISION.as_posix(),
+    (V03_AUDIT_ROOT / "0b05c_corrective_numerical_execution_gate_v0.3.json").as_posix(),
+)
+BINARY_PATHS = ("data/processed/indexes/bm25_nandina8.pkl",)
+MODEL_IDENTITY = {
+    "path": "models/text2trade_mnrl_v0.2/model.safetensors",
+    "classification": "FROZEN_FILE_IDENTITY",
+    "size_bytes": 470637416,
+    "sha256": "ef9b92b2fb0239e46c0d81e403f00b3255d3822dfa25e0ce354d03828f7a8c87",
+    "current_checkout_presence_required": False,
+}
+
+MRR_DEFINITION = (
+    "MRR@100 uses an exact rational sum derived from rank_ref and one final float conversion; "
+    "MRR@200 preserves legacy sum(float(reciprocal_rank)) in frozen CSV order"
+)
+
+
+class ContractViolation(RuntimeError):
+    """Raised before side effects when the frozen contract is not satisfied."""
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ContractViolation(message)
+
+
+def _git(root: Path, *args: str, binary: bool = False) -> bytes | str:
+    result = subprocess.run(["git", *args], cwd=root, check=True, capture_output=True, text=not binary)
+    return result.stdout if binary else result.stdout.strip()
+
+
+def canonical_json_bytes(payload: Mapping[str, Any]) -> bytes:
+    return (json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+
+
+def read_json(root: Path, relative: Path | str) -> dict[str, Any]:
+    return json.loads((root / relative).read_text(encoding="utf-8"))
+
+
+def git_binding(root: Path, path: str, revision: str = "HEAD", classification: str = "VERSIONED_GIT_BLOB") -> dict[str, Any]:
+    spec = f":{path}" if revision == "INDEX" else f"{revision}:{path}"
+    raw = _git(root, "show", spec, binary=True)
+    assert isinstance(raw, bytes)
+    return {
+        "path": path,
+        "classification": classification,
+        "git_blob_sha1": str(_git(root, "rev-parse", spec)),
+        "canonical_git_blob_sha256": hashlib.sha256(raw).hexdigest(),
+        "canonical_size_bytes": len(raw),
+    }
+
+
+def authorization_artifact_binding(root: Path, path: str, revision: str) -> dict[str, Any]:
+    binding = git_binding(root, path, revision)
+    return {key: binding[key] for key in ("path", "git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes")}
+
+
+def authorization_record_contract() -> dict[str, Any]:
+    return {
+        "artifact_id": AUTHORIZATION_RECORD_ID,
+        "schema_version": AUTHORIZATION_RECORD_SCHEMA_VERSION,
+        "path": AUTHORIZATION_RECORD.as_posix(),
+        "required_fields": [
+            "artifact_id",
+            "schema_version",
+            "authorization_baseline_commit",
+            "baseline_external_audit",
+            "baseline_artifacts",
+        ],
+        "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+        "baseline_artifacts": dict(AUTHORIZATION_BASELINE_ARTIFACTS),
+        "baseline_relationship": "PROPER_ANCESTOR_OF_AUTHORIZATION_COMMIT",
+        "binding_fields": ["path", "git_blob_sha1", "canonical_git_blob_sha256", "canonical_size_bytes"],
+    }
+
+
+def validate_authorization_record_schema(record: Mapping[str, Any]) -> None:
+    contract = authorization_record_contract()
+    require(set(record) == set(contract["required_fields"]), "Authorization record v0.4 fields are not exact")
+    require(record.get("artifact_id") == AUTHORIZATION_RECORD_ID, "Authorization record v0.4 artifact_id is invalid")
+    require(record.get("schema_version") == AUTHORIZATION_RECORD_SCHEMA_VERSION, "Authorization record v0.4 schema_version is invalid")
+    baseline = record.get("authorization_baseline_commit")
+    require(isinstance(baseline, str) and len(baseline) == 40 and all(char in "0123456789abcdef" for char in baseline), "Authorization baseline commit is not a full lowercase SHA")
+    require(record.get("baseline_external_audit") == contract["baseline_external_audit"], "Authorization baseline external audit is invalid")
+    artifacts = record.get("baseline_artifacts")
+    require(isinstance(artifacts, Mapping) and set(artifacts) == set(AUTHORIZATION_BASELINE_ARTIFACTS), "Authorization baseline artifact set is not exact")
+    binding_fields = set(contract["binding_fields"])
+    for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items():
+        binding = artifacts[key]
+        require(isinstance(binding, Mapping) and set(binding) == binding_fields, f"Authorization baseline binding fields are invalid: {key}")
+        require(binding.get("path") == path, f"Authorization baseline binding path is invalid: {key}")
+
+
+def validate_authorization_baseline_ancestry(root: Path, baseline: str, revision: str = "HEAD") -> str:
+    current = str(_git(root, "rev-parse", revision))
+    require(baseline != current, "Authorization baseline must be a proper ancestor, not HEAD")
+    ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", baseline, current], cwd=root).returncode == 0
+    require(ancestor, "Authorization baseline is not a proper ancestor of the authorization commit")
+    return current
+
+
+def validate_authorization_record_bindings(root: Path, record: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
+    baseline = str(record["authorization_baseline_commit"])
+    expected = {
+        key: authorization_artifact_binding(root, path, baseline)
+        for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+    }
+    require(record["baseline_artifacts"] == expected, "Authorization baseline artifact binding mismatch")
+    return expected
+
+
+def _git_json(root: Path, path: str, revision: str) -> dict[str, Any]:
+    raw = _git(root, "show", f"{revision}:{path}", binary=True)
+    assert isinstance(raw, bytes)
+    payload = json.loads(raw.decode("utf-8"))
+    require(isinstance(payload, dict), f"Authorization artifact is not a JSON object: {path}")
+    return payload
+
+
+def _authorization_projection(payload: Mapping[str, Any], artifact: str) -> dict[str, Any]:
+    projected = copy.deepcopy(dict(payload))
+    if artifact == "unified_gate":
+        projected["gate_status"] = "<AUTHORIZED_TRANSITION_FIELD>"
+        projected["authorization_readiness"] = "<AUTHORIZED_TRANSITION_FIELD>"
+        projected["attempt05"] = "<AUTHORIZED_TRANSITION_FIELD>"
+        for key in (
+            "EV03_NUMERICAL_EXECUTION",
+            "EV04_NUMERICAL_EXECUTION",
+            "D1A_NUMERICAL_EXECUTION",
+            "UNIFIED_0B05C_NUMERICAL_EXECUTION",
+            "authorization_record_present",
+        ):
+            projected["authorization"][key] = "<AUTHORIZED_TRANSITION_FIELD>"
+    else:
+        projected["authorization"][AUTHORIZATION_SPEC_KEYS[artifact]] = "<AUTHORIZED_TRANSITION_FIELD>"
+        projected["attempt05"] = "<AUTHORIZED_TRANSITION_FIELD>"
+    return projected
+
+
+def validate_authorization_transition(
+    baseline_artifacts: Mapping[str, Mapping[str, Any]],
+    authorized_artifacts: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    expected_keys = set(AUTHORIZATION_BASELINE_ARTIFACTS)
+    require(set(baseline_artifacts) == expected_keys and set(authorized_artifacts) == expected_keys, "Authorization transition artifact set is not exact")
+    baseline_gate = baseline_artifacts["unified_gate"]
+    authorized_gate = authorized_artifacts["unified_gate"]
+    require(baseline_gate.get("gate_status") == "CANDIDATE_PENDING_EXTERNAL_AUDIT", "Authorization baseline gate status is invalid")
+    require(baseline_gate.get("authorization_readiness") == "NOT_AUTHORIZATION_READY", "Authorization baseline readiness is invalid")
+    require(baseline_gate.get("authorization") == AUTHORIZATION, "Authorization baseline gate is not closed")
+    require(baseline_gate.get("attempt05") == "NOT_AUTHORIZED / NOT_EXECUTED", "Authorization baseline Attempt05 state is invalid")
+    require(authorized_gate.get("gate_status") == AUTHORIZED_GATE_STATUS, "Authorized gate status is invalid")
+    require(authorized_gate.get("authorization_readiness") == AUTHORIZED_READINESS, "Authorized gate readiness is invalid")
+    required_gate_authorizations = {key: "AUTHORIZED" for key in AUTHORIZATION if key.endswith("NUMERICAL_EXECUTION")}
+    require(
+        {key: authorized_gate.get("authorization", {}).get(key) for key in required_gate_authorizations} == required_gate_authorizations,
+        "Authorized gate does not contain all four numerical authorizations",
+    )
+    require(authorized_gate.get("authorization", {}).get("authorization_record_present") is True, "Authorized gate does not declare its authorization record")
+    require(authorized_gate.get("authorization", {}).get("corrective_retrieval_executed") is False, "Authorization transition changed retrieval state")
+    require(authorized_gate.get("authorization", {}).get("corrective_metrics_computed") is False, "Authorization transition changed metric state")
+    require(authorized_gate.get("authorization", {}).get("runtime_authorization_record_present") is False, "Authorization transition changed runtime record state")
+    require(authorized_gate.get("attempt05") == AUTHORIZED_ATTEMPT05, "Authorized gate Attempt05 state is invalid")
+    for artifact, authorization_key in AUTHORIZATION_SPEC_KEYS.items():
+        baseline_spec = baseline_artifacts[artifact]
+        authorized_spec = authorized_artifacts[artifact]
+        require(baseline_spec.get("authorization", {}).get(authorization_key) == "NOT_AUTHORIZED", f"Authorization baseline {artifact} is not closed")
+        require(authorized_spec.get("authorization", {}).get(authorization_key) == "AUTHORIZED", f"Authorized {artifact} state is invalid")
+        require(baseline_spec.get("attempt05") == "NOT_AUTHORIZED / NOT_EXECUTED", f"Authorization baseline {artifact} Attempt05 state is invalid")
+        require(authorized_spec.get("attempt05") == AUTHORIZED_ATTEMPT05, f"Authorized {artifact} Attempt05 state is invalid")
+    baseline_projection = {key: _authorization_projection(value, key) for key, value in baseline_artifacts.items()}
+    authorized_projection = {key: _authorization_projection(value, key) for key, value in authorized_artifacts.items()}
+    require(baseline_projection == authorized_projection, "Authorization transition changed immutable scientific or technical content")
+    return {
+        "status": "PASS",
+        "mode": "BASELINE_TO_AUTHORIZED_IMMUTABLE_PROJECTION",
+        "allowed_fields_only": True,
+        "baseline_projection_sha256": hashlib.sha256(canonical_json_bytes(baseline_projection)).hexdigest(),
+        "authorized_projection_sha256": hashlib.sha256(canonical_json_bytes(authorized_projection)).hexdigest(),
+    }
+
+
+def load_authorization_transition_from_git(root: Path, current_gate: Mapping[str, Any]) -> dict[str, Any]:
+    record = read_json(root, AUTHORIZATION_RECORD)
+    validate_authorization_record_schema(record)
+    baseline = str(record["authorization_baseline_commit"])
+    current = validate_authorization_baseline_ancestry(root, baseline)
+    baseline_bindings = validate_authorization_record_bindings(root, record)
+    baseline_artifacts = {
+        key: _git_json(root, path, baseline)
+        for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+    }
+    authorized_artifacts = {
+        key: _git_json(root, path, current)
+        for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+    }
+    require(authorized_artifacts["unified_gate"] == dict(current_gate), "Filesystem gate differs from committed authorization gate")
+    transition = validate_authorization_transition(baseline_artifacts, authorized_artifacts)
+    return {
+        "status": "PASS",
+        "authorization_baseline_commit": baseline,
+        "execution_authorization_commit": current,
+        "baseline_external_audit": record["baseline_external_audit"],
+        "baseline_artifact_bindings": baseline_bindings,
+        "authorized_artifact_bindings": {
+            key: authorization_artifact_binding(root, path, current)
+            for key, path in AUTHORIZATION_BASELINE_ARTIFACTS.items()
+        },
+        "record": record,
+        "transition": transition,
+        "artifacts": authorized_artifacts,
+    }
+
+
+def dependency_bindings(root: Path, revision: str) -> list[dict[str, Any]]:
+    bindings = [git_binding(root, path, revision) for path in VERSIONED_PATHS]
+    bindings.extend(git_binding(root, path, revision, "FROZEN_BINARY_GIT_BLOB") for path in BINARY_PATHS)
+    bindings.append(dict(MODEL_IDENTITY))
+    return bindings
+
+
+def _replace_strings(value: Any, replacements: Mapping[str, str]) -> Any:
+    if isinstance(value, str):
+        for old, new in replacements.items():
+            value = value.replace(old, new)
+        return value
+    if isinstance(value, list):
+        return [_replace_strings(item, replacements) for item in value]
+    if isinstance(value, dict):
+        return {key: _replace_strings(item, replacements) for key, item in value.items()}
+    return value
+
+
+def _spec(root: Path, arm: str, revision: str) -> dict[str, Any]:
+    names = {
+        "EV03": "ev03_numerical_execution_spec_v0.3.json",
+        "EV04": "ev04_numerical_execution_spec_v0.3.json",
+        "D1a": "d1a_numerical_execution_spec_v0.3.json",
+    }
+    source = read_json(root, V03_AUDIT_ROOT / names[arm])
+    replacements = dict(zip(V03_ROOTS, FUTURE_ROOTS, strict=True))
+    replacements.update({
+        "evaluate_normative_bm25_corrective_0b05c_v03": "evaluate_normative_bm25_corrective_0b05c_v04",
+        "run_0b05c_corrective_numerical_v03": "run_0b05c_corrective_numerical_v04",
+        "d1a_corrective_vs_original_comparison_v0.3.json": "d1a_corrective_vs_original_comparison_v0.4.json",
+        "d1a_corrective_case_level_comparison_v0.3.jsonl": "d1a_corrective_case_level_comparison_v0.4.jsonl",
+        "d1a_corrective_output_hash_ledger_v0.3.csv": "d1a_corrective_output_hash_ledger_v0.4.csv",
+        "d1a_corrective_execution_manifest_v0.3.json": "d1a_corrective_execution_manifest_v0.4.json",
+    })
+    result = _replace_strings(copy.deepcopy(source), replacements)
+    result["specification_id"] = f"{arm.lower()}_numerical_execution_spec_v0.4"
+    result["specification_status"] = "CLOSED_PROSPECTIVELY / NOT_AUTHORIZED / PENDING_EXTERNAL_AUDIT"
+    key = "D1A_NUMERICAL_EXECUTION" if arm == "D1a" else f"{arm}_NUMERICAL_EXECUTION"
+    result["authorization"][key] = "NOT_AUTHORIZED"
+    for flag in tuple(result["authorization"]):
+        if flag != key:
+            result["authorization"][flag] = False
+    result["attempt05"] = "NOT_AUTHORIZED / NOT_EXECUTED"
+    result["v03_attempt04_provenance"] = {
+        "failure_record": FAILURE_RECORD.as_posix(),
+        "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
+    }
+    if arm == "EV04":
+        result["enriched_mrr_contract_v0.4"] = {
+            "producer": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py:build_ev04_enriched_metrics",
+            "source": "EXPECTED_AND_ACTUAL_CASE_ROWS_BUILT_INDEPENDENTLY",
+            "mrr_at_100": "EXACT_RATIONAL_FROM_RANK_REF_THEN_FINAL_FLOAT_CONVERSION",
+            "mrr_at_200": "LEGACY_SUM_FLOAT_RECIPROCAL_RANK_IN_FROZEN_CSV_ORDER",
+            "contribution": "EXACT_RATIONAL_S200_MINUS_S100_THEN_FINAL_FLOAT_CONVERSION",
+            "denominator": "len(case_rows); REQUIRED_1056_IN_REAL_EXECUTION",
+            "metric_table_prefix": ["mrr_at_100", "mrr_at_200"],
+            "legacy_mrr_equals": "mrr_at_200",
+            "mrr_definition": MRR_DEFINITION,
+            "control_policy": "RANKING_EXACT + CASE_SUMMARY_EXACT + ENRICHED_METRICS_EXACT",
+            "expected_case_count": 1056,
+        }
+        result["required_control"]["enriched_mrr_metrics_exact"] = True
+    if arm == "D1a":
+        binding = git_binding(root, "src/experiments/run_d1a_corrective_0b05c_v03.py", revision)
+        result["orchestration"]["runner"] = {
+            "path": binding["path"],
+            "revision": "COMMITTED_GIT_BLOB",
+            "git_blob_sha": binding["git_blob_sha1"],
+            "canonical_blob_sha256": binding["canonical_git_blob_sha256"],
+        }
+    return result
+
+
+def expected_runtime_paths(ev03: Mapping[str, Any], ev04: Mapping[str, Any], d1a: Mapping[str, Any]) -> list[str]:
+    expected: set[str] = set()
+    for arm, spec in (("EV03", ev03), ("EV04", ev04)):
+        execution = spec["prospective_execution"]
+        prefix = "normative_flat" if arm == "EV03" else "normative_hierarchical"
+        for root in (execution["control_reproduction_index_root"], execution["corrected_index_root"]):
+            expected.update({f"{root}/index.pkl", f"{root}/index_metadata.json"})
+        for root in (execution["control_reproduction_output_root"], execution["corrected_output_root"]):
+            expected.update({f"{root}/{prefix}_results.csv", f"{root}/{prefix}_case_summary.csv", f"{root}/{prefix}_metrics.json"})
+        expected.add(spec["corrective_corpus"]["prospective_path"])
+    expected.update(d1a["orchestration"]["hash_ledger_contract"]["included_paths"])
+    expected.add(d1a["orchestration"]["hash_ledger_contract"]["excluded_self_path"])
+    evaluation_root, runtime_root = UNIFIED_ROOTS
+    expected.update({
+        f"{evaluation_root}/ev03_case_level_comparison_v0.4.json",
+        f"{evaluation_root}/ev03_aggregate_comparison_v0.4.json",
+        f"{evaluation_root}/ev04_case_level_comparison_v0.4.json",
+        f"{evaluation_root}/ev04_aggregate_comparison_v0.4.json",
+        f"{evaluation_root}/unified_sensitivity_summary_v0.4.json",
+        f"{runtime_root}/runtime_authorization_record_v0.4.json",
+        f"{runtime_root}/execution_manifest_v0.4.json",
+    })
+    return sorted(expected)
+
+
+def build_bundle(root: Path = ROOT, revision: str = "HEAD") -> dict[str, Any]:
+    ev03 = _spec(root, "EV03", revision)
+    ev04 = _spec(root, "EV04", revision)
+    d1a = _spec(root, "D1a", revision)
+    bindings = dependency_bindings(root, revision)
+    gate = {
+        "gate_id": "0b05c_corrective_numerical_execution_gate_v0.4",
+        "gate_version": "v0.4",
+        "gate_status": "CANDIDATE_READY_FOR_EXTERNAL_AUDIT / NOT_AUTHORIZED",
+        "gate_scope": "UNIFIED_0B05C_NUMERICAL_RECOVERY_PREEXECUTION",
+        "base_commit": BASE_COMMIT,
+        "authorization_readiness": "NOT_AUTHORIZED",
+        "authorization": dict(AUTHORIZATION),
+        "attempt05": "NOT_AUTHORIZED / NOT_EXECUTED",
+        "scientific_state": dict(SCIENTIFIC_STATE),
+        "pipeline_steps": list(PIPELINE_STEPS),
+        "future_roots": list(FUTURE_ROOTS),
+        "v03_attempt04": {
+            "failure_record": FAILURE_RECORD.as_posix(),
+            "failure_class": "EV04_DECISION885_CONTROL_REPRODUCTION_NOT_EXACT_AFTER_V03_MRR_RECOVERY",
+            "authorization_consumed": True,
+            "automatic_reuse_authorized": False,
+            "partial_roots_policy": "MAY_EXIST_AS_LOCAL_EVIDENCE / NEVER_ERROR / NEVER_INPUT / NEVER_REUSED",
+            "roots": list(V03_ROOTS),
+        },
+        "root_isolation": {
+            "v04_disjoint_from_v03": True,
+            "v04_roots_must_be_absent_before_authorization_or_execution": True,
+            "v03_partial_roots_are_never_inputs": True,
+        },
+        "ev03_invariants": {"token_policy": "DROP_SINGLE_CHARACTER_TOKENS", "k1": 1.5, "b": 0.75, "depth": 100, "eval_n": 1056},
+        "ev04_invariants": {
+            "token_policy": "ORIGINAL_HIERARCHICAL_V0.1",
+            "k1": 1.5,
+            "b": 0.75,
+            "effective_depth": 200,
+            "ranking": "UNIQUE_NANDINA8_FIRST_BM25_SCORE_OCCURRENCE",
+            "eval_n": 1056,
+            "only_change": "ENRICHED_MRR_METRIC_PRODUCER_CONTRACT",
+            "mrr_definition": MRR_DEFINITION,
+            "methodological_decision_path": METHODOLOGICAL_DECISION.as_posix(),
+            "methodological_decision_blob": METHODOLOGICAL_DECISION_BLOB,
+        },
+        "d1a_invariants": {
+            "model_size_bytes": 470637416,
+            "model_sha256": MODEL_IDENTITY["sha256"],
+            "metric_count": 17,
+            "full_corrective_index_rebuild": True,
+            "eval_n": 1056,
+        },
+        "patch_codes": ["87044110", "87045110"],
+        "dependency_bindings": bindings,
+        "authorization_record_path": AUTHORIZATION_RECORD.as_posix(),
+        "authorization_transition": {
+            "separate_external_audit_required": True,
+            "required_gate_status": AUTHORIZED_GATE_STATUS,
+            "required_readiness": AUTHORIZED_READINESS,
+            "authorization_record_must_be_committed": True,
+            "authorization_record_contract": authorization_record_contract(),
+            "baseline_artifacts": dict(AUTHORIZATION_BASELINE_ARTIFACTS),
+            "baseline_must_be_proper_ancestor": True,
+            "immutable_projection_required": True,
+            "gate_mutable_fields": [
+                "gate_status",
+                "authorization_readiness",
+                "authorization.EV03_NUMERICAL_EXECUTION",
+                "authorization.EV04_NUMERICAL_EXECUTION",
+                "authorization.D1A_NUMERICAL_EXECUTION",
+                "authorization.UNIFIED_0B05C_NUMERICAL_EXECUTION",
+                "authorization.authorization_record_present",
+                "attempt05",
+            ],
+            "spec_mutable_fields": ["authorization.<OWN_NUMERICAL_EXECUTION>", "attempt05"],
+            "runtime_record_created_only_by_future_authorized_execution": True,
+        },
+        "runtime_hash_ledger_contract": {
+            "expected_paths": expected_runtime_paths(ev03, ev04, d1a),
+            "discovery_roots": list(FUTURE_ROOTS),
+            "excluded_self_path": f"{UNIFIED_ROOTS[1]}/exact_hash_ledger_v0.4.json",
+            "missing_or_unexpected_policy": "FAIL_CLOSED",
+            "entry_fields": ["path", "sha256", "size_bytes"],
+        },
+    }
+    manifest = {
+        "artifact_id": "0b05c_corrective_numerical_gate_manifest_v0.4",
+        "gate": GATE_PATH.as_posix(),
+        "explicit_non_executed_state": dict(AUTHORIZATION),
+        "attempt05": "NOT_AUTHORIZED / NOT_EXECUTED",
+        "root_cause": gate["v03_attempt04"]["failure_class"],
+        "future_execution_roots": list(FUTURE_ROOTS),
+        "v03_partial_roots": {"classification": "HISTORICAL_LOCAL_EVIDENCE_ONLY", "paths": list(V03_ROOTS)},
+        "code_bindings": [item for item in bindings if item["path"].startswith("src/")],
+        "frozen_inputs": [item for item in bindings if item["path"].startswith(("data/", "outputs/evaluation/", "models/"))],
+        "generated_at_future_runtime": {"classification": "ABSENT / NOT_GENERATED", "paths": list(FUTURE_ROOTS)},
+        "no_circular_dependency": True,
+    }
+    ledger = {
+        "artifact_id": "0b05c_corrective_numerical_gate_hash_ledger_v0.4",
+        "canonical_hash_method": "SHA256_OF_GIT_CAT_FILE_BLOB_BYTES",
+        "entries": bindings + [
+            {"path": path, "classification": "FUTURE_GENERATED_OUTPUT_NOT_PRESENT", "status": "ABSENT / NOT_GENERATED"}
+            for path in FUTURE_ROOTS
+        ],
+        "mismatch_count": 0,
+        "future_hashes_invented": False,
+    }
+    return {"ev03": ev03, "ev04": ev04, "d1a": d1a, "gate": gate, "manifest": manifest, "ledger": ledger}
+
+
+def write_artifacts(root: Path = ROOT, revision: str = "INDEX") -> dict[str, Any]:
+    target = root / AUDIT_ROOT
+    require(not target.exists(), f"Gate audit root already exists: {AUDIT_ROOT.as_posix()}")
+    bundle = build_bundle(root, revision)
+    target.mkdir(parents=True)
+    payloads = (bundle["ev03"], bundle["ev04"], bundle["d1a"], bundle["gate"], bundle["manifest"], bundle["ledger"])
+    for name, payload in zip(ARTIFACT_NAMES, payloads, strict=True):
+        (target / name).write_bytes(canonical_json_bytes(payload))
+    return {"status": "PASS", "created": [str(AUDIT_ROOT / name) for name in ARTIFACT_NAMES]}
+
+
+def _validate_v03_state(root: Path) -> None:
+    failure = read_json(root, FAILURE_RECORD)
+    require(failure["status"] == "FAIL_CLOSED / SCIENTIFIC_STATE_PRESERVED", "Attempt04 failure state drift")
+    require(failure["authorization_consumed"] is True, "Attempt04 authorization is not consumed")
+    require(failure["automatic_reuse_authorized"] is False, "Attempt04 reuse unexpectedly authorized")
+    require(failure["attempt05_authorized"] is False, "Attempt05 unexpectedly authorized")
+    require(failure["failure_class"] == "EV04_DECISION885_CONTROL_REPRODUCTION_NOT_EXACT_AFTER_V03_MRR_RECOVERY", "Attempt04 failure class drift")
+    v02 = read_json(root, V03_AUDIT_ROOT / "0b05c_corrective_numerical_execution_gate_v0.3.json")
+    require(v02["authorization_readiness"] == "ATTEMPT04_CONSUMED / REAUTHORIZATION_REQUIRED", "v0.3 readiness is not consumed")
+    required = {key: "AUTHORIZED" for key in AUTHORIZATION if key.endswith("NUMERICAL_EXECUTION")}
+    require({key: v02["authorization"].get(key) for key in required} == required, "v0.3 historical authorizations drifted")
+    require(v02["authorization"]["corrective_retrieval_executed"] is False, "v0.3 retrieval state drift")
+    require(v02["authorization"]["corrective_metrics_computed"] is False, "v0.3 metric state drift")
+
+
+def preflight(root: Path = ROOT, *, revision: str = "HEAD", require_clean: bool = True) -> dict[str, Any]:
+    ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", BASE_COMMIT, "HEAD"], cwd=root).returncode == 0
+    require(ancestor, f"Required base {BASE_COMMIT} is not an ancestor of HEAD")
+    if require_clean:
+        require(str(_git(root, "status", "--short", "--untracked-files=no")) == "", "Tracked working tree is not clean")
+    _validate_v03_state(root)
+    require(str(_git(root, "rev-parse", f"HEAD:{METHODOLOGICAL_DECISION.as_posix()}")) == METHODOLOGICAL_DECISION_BLOB, "Methodological decision blob drift")
+    require(set(FUTURE_ROOTS).isdisjoint(V03_ROOTS), "v0.4 roots collide with v0.3 Attempt04 roots")
+    require(not (root / AUTHORIZATION_RECORD).exists(), "Authorization record v0.4 must be absent")
+    for relative in FUTURE_ROOTS:
+        require(not (root / relative).exists(), f"Future v0.4 numerical root already exists: {relative}")
+    for name in ARTIFACT_NAMES:
+        require((root / AUDIT_ROOT / name).is_file(), f"Missing v0.4 gate artifact: {name}")
+    actual = {key: read_json(root, AUDIT_ROOT / name) for key, name in zip(("ev03", "ev04", "d1a", "gate", "manifest", "ledger"), ARTIFACT_NAMES, strict=True)}
+    expected = build_bundle(root, revision)
+    require(actual == expected, "v0.4 gate artifacts differ from canonical generated contract")
+    gate = actual["gate"]
+    require(gate["gate_status"] == "CANDIDATE_READY_FOR_EXTERNAL_AUDIT / NOT_AUTHORIZED", "v0.4 gate status drift")
+    require(gate["authorization_readiness"] == "NOT_AUTHORIZED", "v0.4 candidate unexpectedly authorization-ready")
+    require(gate["authorization"] == AUTHORIZATION, "v0.4 candidate authorization state is not closed")
+    require(gate["attempt05"] == "NOT_AUTHORIZED / NOT_EXECUTED", "Attempt05 state drift")
+    serialized_specs = json.dumps([actual["ev03"], actual["ev04"], actual["d1a"]], sort_keys=True)
+    require(all(path not in serialized_specs for path in V03_ROOTS), "A v0.3 partial root is referenced by a v0.4 spec")
+    bound_paths = {item["path"] for item in gate["dependency_bindings"]}
+    artifact_paths = {(AUDIT_ROOT / name).as_posix() for name in ARTIFACT_NAMES}
+    require(bound_paths.isdisjoint(artifact_paths), "Circular gate artifact dependency introduced")
+    for binding in gate["dependency_bindings"]:
+        if binding["classification"] == "FROZEN_FILE_IDENTITY":
+            continue
+        require(git_binding(root, binding["path"], revision, binding["classification"]) == binding, f"Canonical binding mismatch: {binding['path']}")
+    observed_v03 = [path for path in V03_ROOTS if (root / path).exists()]
+    return {
+        "status": "PASS",
+        "mode": "PREEXECUTION_CLOSED_READONLY",
+        "gate_status": gate["gate_status"],
+        "authorization_readiness": gate["authorization_readiness"],
+        "attempt05": gate["attempt05"],
+        "numerical_execution_occurred": False,
+        "corrective_retrieval_executed": False,
+        "corrective_metrics_computed": False,
+        "future_v04_roots_present": False,
+        "v03_partial_roots_observed_and_ignored": observed_v03,
+        "binding_count": len(gate["dependency_bindings"]),
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--write-artifacts", action="store_true")
+    group.add_argument("--preflight", action="store_true")
+    args = parser.parse_args(argv)
+    result = write_artifacts(ROOT) if args.write_artifacts else preflight(ROOT)
+    print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
