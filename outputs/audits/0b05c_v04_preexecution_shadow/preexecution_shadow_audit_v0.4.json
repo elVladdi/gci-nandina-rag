@@ -1,0 +1,132 @@
+{
+  "artifact_id": "0b05c_v04_preexecution_shadow_audit_v0.4",
+  "baseline": {
+    "main": "ba4bd2936bbf1930b87aa5f3abe028df1dbdf6a9",
+    "origin_main": "ba4bd2936bbf1930b87aa5f3abe028df1dbdf6a9",
+    "methodological_decision_blob": "26b4310979e042bc7bb4fa0594d1ef450bf0032e",
+    "methodological_decision_path": "outputs/audits/0b05c_ev04_mrr_methodological_decision_v0.4/mrr_methodological_decision_v0.4.json",
+    "plan_head": "fe847f708d4d1ded92b5a50a38d4913bb69ed311",
+    "article_head": "254b1e6df736fa9938ac86a515d65b36f4d361c5",
+    "rejected_prompt30_candidate": "0298a6a51181ba992e981063be87a9742ba266ef",
+    "rejected_prompt31_candidate": "69a05710295556e365086c52f93933c5b3a2ad1c",
+    "rejected_prompt31_status": "REJECTED / NOT_ANCESTOR_OF_V02"
+  },
+  "pre_mortem_invariants": [
+    {"id": 1, "name": "MRR100_PROSPECTIVE_RATIONAL", "status": "PASS", "evidence": "Fraction(1, rank_ref), ranks 1..100, one final binary64 conversion; historical .77 is not an oracle."},
+    {"id": 2, "name": "MRR200_LEGACY", "status": "PASS", "evidence": "sum(float(reciprocal_rank)) in frozen case-summary order; aliases preserve legacy mrr."},
+    {"id": 3, "name": "CONTRIBUTION_101_200_RATIONAL", "status": "PASS", "evidence": "Exact S200-S100 before one final conversion; no subtraction of rounded outputs."},
+    {"id": 4, "name": "CANONICAL_METRIC_DICT", "status": "PASS", "evidence": "92 ordered keys and 27 ordered metric-table rows are built from case rows."},
+    {"id": 5, "name": "NO_LEGACY_DRIFT", "status": "PASS", "evidence": "All stable scalar fields equal the frozen hierarchical metric contract."},
+    {"id": 6, "name": "RANKING_AND_CASE_SUMMARY_EXACT", "status": "PASS", "evidence": "Existing exact file comparator is retained; v0.4 adds independent canonical metric derivation."},
+    {"id": 7, "name": "INDEPENDENT_EXACT_COMPARATOR", "status": "PASS", "evidence": "Expected and actual dicts are constructed by separate calls; key, type, order and value equality are exact."},
+    {"id": 8, "name": "EV03_UNCHANGED", "status": "PASS", "evidence": "The recovered v0.3 builder and v0.2 verification component are reused without edits."},
+    {"id": 9, "name": "D1A_V04_ADAPTER", "status": "PASS", "evidence": "The isolated v0.4 adapter binds v0.4 spec, authorization proof and future roots while preserving the original model, config, builder and evaluator."},
+    {"id": 10, "name": "NINETEEN_STEP_ORCHESTRATION", "status": "PASS", "evidence": "The existing ordered 19-operation fail-closed pipeline is preserved."},
+    {"id": 11, "name": "AUTHORIZATION_BOUNDARY", "status": "PASS", "evidence": "Every v0.4 component is NOT_AUTHORIZED; Attempt05 is NOT_AUTHORIZED / NOT_EXECUTED."},
+    {"id": 12, "name": "SIDE_EFFECT_BOUNDARY", "status": "PASS", "evidence": "preflight_authorized rejects gate status/readiness before operations or writes."},
+    {"id": 13, "name": "FUTURE_ROOT_ISOLATION", "status": "PASS", "evidence": "Sixteen v0.4 roots are disjoint from v0.3 and absent."},
+    {"id": 14, "name": "HISTORICAL_IMMUTABILITY", "status": "PASS", "evidence": "No v0.3, Gate C, Attempt04 or historical path is modified."},
+    {"id": 15, "name": "NO_ORACLE_LEAKAGE", "status": "PASS", "evidence": "Known result scalars occur only in tests/audit evidence, never producer logic."},
+    {"id": 16, "name": "NO_TOLERANCE", "status": "PASS", "evidence": "No isclose, nextafter, convenience rounding or tolerant comparator in production."},
+    {"id": 17, "name": "CROSS_FIELD_ALIASES", "status": "PASS", "evidence": "mrr_at_200, numerator and denominator are exact type/value aliases of legacy mrr fields."},
+    {"id": 18, "name": "ROW_ORDER_SEMANTICS", "status": "PASS", "evidence": "Rational MRR100/contribution are order invariant; MRR200 intentionally retains historical row-order accumulation."},
+    {"id": 19, "name": "SCHEMA_BLAST_RADIUS", "status": "PASS", "evidence": "Runner comparator, aggregate inputs, manifest and ledger paths were reviewed and bound."},
+    {"id": 20, "name": "GOVERNANCE_BLAST_RADIUS", "status": "PASS", "evidence": "Plan, article, EXP11B and EXP12 are untouched; metric impact remains NOT_DETERMINED."}
+  ],
+  "canonical_metrics_v0.4": {
+    "case_count": 1056,
+    "key_count": 92,
+    "metric_table_row_count": 27,
+    "metric_table_row_fields": ["metric", "numerator", "denominator", "value"],
+    "metric_table_prefix": ["mrr_at_100", "mrr_at_200"],
+    "mrr_at_100": {"value": 0.04198129438896378, "hex": "0x1.57e927ce3818cp-5", "numerator": 44.33224687474575, "denominator": 1056},
+    "mrr_at_200": {"value": 0.04334161160288281, "hex": "0x1.630df28c7d779p-5", "numerator": 45.76874185264425, "denominator": 1056, "legacy_alias": true},
+    "mrr_101_200_contribution": {"value": 0.0013603172139190346, "hex": "0x1.649957c8abdbep-10", "numerator": 1.4364949778985006, "denominator": 1056},
+    "known_historical_difference": "Gate C stored MRR@100 .77 is immutable provenance but not a prospective v0.4 oracle; rational derivation yields .78."
+  },
+  "shadow_controls": {
+    "A": {"status": "PASS", "evidence": "Frozen 1056-row case summary produced all specified binary64 values and exact legacy aliases."},
+    "B": {"status": "PASS", "evidence": "Independent loads/calls produced equal complete Python dicts."},
+    "C": {"status": "PASS", "evidence": "Frozen ranking/case-summary self-control plus independently derived metrics yields PASS_EXACT."},
+    "D": {"status": "PASS", "evidence": "All eight required mutations fail closed."},
+    "E": {"status": "PASS", "evidence": "Static producer scan found no known scalar literals, tolerance or nextafter."},
+    "F": {"status": "PASS", "evidence": "Synthetic permutation preserves rational fields; legacy MRR200 row-order semantics remain explicitly frozen."},
+    "G": {"status": "PASS", "evidence": "A disposable child commit changed only the four authorization artifacts plus the v0.4 record; preflight_authorized and D1a v0.4 proof validation passed read-only with no prospective roots, then the local worktree and branch were deleted."}
+  },
+  "f31a_findings": {
+    "F31A-01": {"status": "CORRECTED", "evidence": "Transition baseline uses the exact materialized closed gate status/readiness; positive and immutable-mutation controls are covered."},
+    "F31A-02": {"status": "CORRECTED", "evidence": "D1a v0.4 has an isolated adapter, v0.4 proof/root bindings and dedicated contract tests."},
+    "F31A-03": {"status": "CORRECTED", "evidence": "EV04 aggregate original baseline is the canonical case-derived expected control; EV03 historical behavior and MRR200 legacy semantics remain unchanged."},
+    "F31A-04": {"status": "CORRECTED", "evidence": "All three specifications use neutral PREEXECUTION_SPEC_DEFINED status; authorization and audit states remain separate."}
+  },
+  "positive_path_blast_radius": [
+    {"id": 1, "check": "closed_materialized_baseline_matches_transition_contract", "status": "PASS"},
+    {"id": 2, "check": "positive_in_memory_authorization_transition", "status": "PASS"},
+    {"id": 3, "check": "immutable_scientific_mutation_rejected", "status": "PASS"},
+    {"id": 4, "check": "d1a_v04_spec_binding", "status": "PASS"},
+    {"id": 5, "check": "d1a_v04_authorization_proof_binding", "status": "PASS"},
+    {"id": 6, "check": "d1a_v03_authorization_path_rejected", "status": "PASS"},
+    {"id": 7, "check": "all_d1a_future_roots_are_v04", "status": "PASS"},
+    {"id": 8, "check": "ev04_canonical_aggregate_zero_delta", "status": "PASS"},
+    {"id": 9, "check": "ev03_and_mrr200_legacy_semantics_preserved", "status": "PASS"},
+    {"id": 10, "check": "specification_status_is_authorization_neutral", "status": "PASS"}
+  ],
+  "negative_controls": {
+    "mrr_at_100_one_ulp": "FAIL_CLOSED",
+    "mrr_at_200_alias_mismatch": "FAIL_CLOSED",
+    "contribution_one_ulp": "FAIL_CLOSED",
+    "missing_key": "FAIL_CLOSED",
+    "extra_key": "FAIL_CLOSED",
+    "metric_table_order_or_schema": "FAIL_CLOSED",
+    "ranking_changed": "FAIL_CLOSED",
+    "case_summary_changed": "FAIL_CLOSED"
+  },
+  "future_roots": {
+    "paths": [
+      "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4",
+      "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4",
+      "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl",
+      "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4",
+      "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4",
+      "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4",
+      "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4",
+      "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl",
+      "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4",
+      "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4",
+      "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.4",
+      "outputs/audits/d1a_corrective_0b05c_runtime_v0.4",
+      "outputs/evaluation/0b05c_corrective_numerical_v0.4",
+      "outputs/audits/0b05c_corrective_numerical_runtime_v0.4"
+    ],
+    "existence_before_static_build": false,
+    "existence_after_static_build": false,
+    "runtime_output_roots_created": false,
+    "authorization_record_v0.4_present": false,
+    "attempt05_executed": false
+  },
+  "test_execution": {
+    "classification": "CODEX_LOCAL_TEST_EXECUTION / NOT_INDEPENDENT_GITHUB_CI",
+    "commands": [
+      {"scope": "v0.4 corrected candidate", "command": "python -B -m unittest tests.test_0b05c_ev04_mrr_contract_v04 tests.test_0b05c_corrective_numerical_gate_v04 tests.test_d1a_corrective_0b05c_runner_v04", "result": "38/38 PASS"},
+      {"scope": "positive authorization shadow G2", "command": "disposable child commit: preflight_authorized() + D1a v0.4 proof/preflight only", "result": "PASS / AUTHORIZED_PREFLIGHT_ONLY / NO_ROOTS / NO_EXECUTION / DISPOSABLE_BRANCH_DELETED"},
+      {"scope": "v0.3 preauthorization baseline 8b1444aed67d322714189846f98a3169145ea3d4", "command": "python -B -m unittest tests.test_0b05c_corrective_numerical_gate_v03", "result": "26/26 PASS"},
+      {"scope": "current EV03 recovery", "command": "python -B -m unittest tests.test_0b05c_ev03_historical_builder_recovery_v02", "result": "15 PASS / 1 SKIP"},
+      {"scope": "v0.2 preauthorization baseline c44f447cb941c512cd70712cf7c3e4bc670ab05a", "command": "python -B -m unittest tests.test_0b05c_corrective_numerical_gate_v02", "result": "56/56 PASS"},
+      {"scope": "v0.1 preauthorization baseline 0e074db638f6b7163d98d34f08f76e1efde07b7f", "command": "python -B -m unittest tests.test_0b05c_corrective_numerical_gate_v01 tests.test_0b05c_f003_microclose_v01 tests.test_0b05c_f003_residual_v01", "result": "49/49 PASS"}
+    ],
+    "state_context_observation": "Direct runs of historical v0.3/v0.2 candidate-state suites against current consumed authorization artifacts produced expected state-assumption failures; valid regression runs were therefore made read-only at each frozen preauthorization baseline.",
+    "result": "PASS"
+  },
+  "state": {
+    "V04_CANDIDATE": "BUILT / TESTED_CODEX_LOCAL / PENDING_EXTERNAL_AUDIT",
+    "V04_GATE": "DEFINED / UNAUTHORIZED",
+    "V04_AUTHORIZATION": "NOT_CREATED",
+    "ATTEMPT05": "NOT_AUTHORIZED / NOT_EXECUTED",
+    "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+    "0B05C_CLOSURE": "NOT_AUTHORIZED",
+    "retrieval_executed": false,
+    "numerical_execution_occurred": false
+  }
+}

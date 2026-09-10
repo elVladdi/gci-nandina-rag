@@ -1,0 +1,619 @@
+{
+  "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "attempt05": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "authorization": {
+    "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "corrective_metrics_computed": false,
+    "corrective_retrieval_executed": false
+  },
+  "corrective_corpus": {
+    "authoritative_normative_source": {
+      "annex_entries": {
+        "87044110": "Inferior a 4,537 t",
+        "87045110": "Inferior a 4,537 t"
+      },
+      "decision": "Decision 906",
+      "effective_on": "2023-01-01",
+      "official_gazette": "Gaceta Oficial 5062",
+      "published_on": "2022-10-25"
+    },
+    "must_be_absent_before_authorized_execution": true,
+    "patch_scope": "EXACTLY_TWO_NANDINA8_DOCUMENTS",
+    "patches": [
+      {
+        "code": "87044110",
+        "match": {
+          "codigo": "87044110",
+          "doc_id": "NANDINA_87044110",
+          "original_jsonl_line_sha256": "632f5f703b2ea06c2b081747d5cad40776972a54b05269349fe3656b46102484",
+          "preserved_node_fields": {
+            "chapter": "87",
+            "hs_6d": "870441",
+            "nandina_8d": "87044110",
+            "partida_4d": "8704",
+            "section": "XVII",
+            "source_line_no": 42,
+            "source_page": 404,
+            "unidad_fisica": "u"
+          },
+          "version": "hierarchical_v0.1"
+        },
+        "replacement": {
+          "descripcion_nandina_8d": "Inferior a 4,537 t",
+          "source_line_text": "8704.41.10 - - - Inferior a 4,537 t u",
+          "texto": "Seccion XVII: MATERIAL DE TRANSPORTE. Capitulo 87: Vehículos automóviles, tractores, velocípedos y demás vehículos terrestres,. Partida 8704: y no en la partida 87.06.. Subpartida HS 870441: De peso total con carga máxima inferior o igual a 5 t. NANDINA 87044110: Inferior a 4,537 t. Unidad fisica: u",
+          "texto_index": "Seccion XVII: MATERIAL DE TRANSPORTE. Capitulo 87: Vehículos automóviles, tractores, velocípedos y demás vehículos terrestres,. Partida 8704: y no en la partida 87.06.. Subpartida HS 870441: De peso total con carga máxima inferior o igual a 5 t. NANDINA 87044110: Inferior a 4,537 t. Unidad fisica: u",
+          "texto_index_jerarquico": "Seccion XVII: MATERIAL DE TRANSPORTE. Capitulo 87: Vehículos automóviles, tractores, velocípedos y demás vehículos terrestres,. Partida 8704: y no en la partida 87.06.. Subpartida HS 870441: De peso total con carga máxima inferior o igual a 5 t. NANDINA 87044110: Inferior a 4,537 t. Unidad fisica: u",
+          "titulo": "Inferior a 4,537 t"
+        }
+      },
+      {
+        "code": "87045110",
+        "match": {
+          "codigo": "87045110",
+          "doc_id": "NANDINA_87045110",
+          "original_jsonl_line_sha256": "a40960e796aa93704b696afa84467de4033041cb36739ddad920669c6b9fb3d1",
+          "preserved_node_fields": {
+            "chapter": "87",
+            "hs_6d": "870451",
+            "nandina_8d": "87045110",
+            "partida_4d": "8704",
+            "section": "XVII",
+            "source_line_no": 49,
+            "source_page": 404,
+            "unidad_fisica": "u"
+          },
+          "version": "hierarchical_v0.1"
+        },
+        "replacement": {
+          "descripcion_nandina_8d": "Inferior a 4,537 t",
+          "source_line_text": "8704.51.10 - - - Inferior a 4,537 t u",
+          "texto": "Seccion XVII: MATERIAL DE TRANSPORTE. Capitulo 87: Vehículos automóviles, tractores, velocípedos y demás vehículos terrestres,. Partida 8704: y no en la partida 87.06.. Subpartida HS 870451: De peso total con carga máxima inferior o igual a 5 t. NANDINA 87045110: Inferior a 4,537 t. Unidad fisica: u",
+          "texto_index": "Seccion XVII: MATERIAL DE TRANSPORTE. Capitulo 87: Vehículos automóviles, tractores, velocípedos y demás vehículos terrestres,. Partida 8704: y no en la partida 87.06.. Subpartida HS 870451: De peso total con carga máxima inferior o igual a 5 t. NANDINA 87045110: Inferior a 4,537 t. Unidad fisica: u",
+          "texto_index_jerarquico": "Seccion XVII: MATERIAL DE TRANSPORTE. Capitulo 87: Vehículos automóviles, tractores, velocípedos y demás vehículos terrestres,. Partida 8704: y no en la partida 87.06.. Subpartida HS 870451: De peso total con carga máxima inferior o igual a 5 t. NANDINA 87045110: Inferior a 4,537 t. Unidad fisica: u",
+          "titulo": "Inferior a 4,537 t"
+        }
+      }
+    ],
+    "preservation_invariants": [
+      "Preserve cardinality, JSONL row order, doc_id, codigo, and all unpatched bytes.",
+      "Apply only the two matched documents using their canonical Git JSONL line SHA-256 identities.",
+      "Serialize a future derived corpus in UTF-8 with LF and exactly one terminal newline.",
+      "For EV04 preserve hierarchy node identifiers, parent fields, source-page lineage, and deterministic ordering; change only declared leaf/derived representations."
+    ],
+    "prospective_path": "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl"
+  },
+  "enriched_mrr_contract_v0.3": {
+    "control_policy": "RANKING_EXACT + CASE_SUMMARY_EXACT + ENRICHED_METRICS_EXACT",
+    "denominator": "len(case_rows); REQUIRED_1056_IN_REAL_EXECUTION",
+    "expected_case_count": 1056,
+    "legacy_mrr_equals": "mrr_at_200",
+    "metric_table_prefix": [
+      "mrr_at_100",
+      "mrr_at_200"
+    ],
+    "mrr_definition": "legacy mrr field is MRR@200 because EXP-04 Fase C retrieval_depth=200; comparable flat-vs-hierarchical value is mrr_at_100",
+    "producer": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py:build_ev04_enriched_metrics",
+    "source": "OBSERVED_REPRODUCED_CASE_ROWS"
+  },
+  "enriched_mrr_contract_v0.4": {
+    "contribution": "EXACT_RATIONAL_S200_MINUS_S100_THEN_FINAL_FLOAT_CONVERSION",
+    "control_policy": "RANKING_EXACT + CASE_SUMMARY_EXACT + ENRICHED_METRICS_EXACT",
+    "denominator": "len(case_rows); REQUIRED_1056_IN_REAL_EXECUTION",
+    "expected_case_count": 1056,
+    "legacy_mrr_equals": "mrr_at_200",
+    "metric_table_prefix": [
+      "mrr_at_100",
+      "mrr_at_200"
+    ],
+    "mrr_at_100": "EXACT_RATIONAL_FROM_RANK_REF_THEN_FINAL_FLOAT_CONVERSION",
+    "mrr_at_200": "LEGACY_SUM_FLOAT_RECIPROCAL_RANK_IN_FROZEN_CSV_ORDER",
+    "mrr_definition": "MRR@100 uses an exact rational sum derived from rank_ref and one final float conversion; MRR@200 preserves legacy sum(float(reciprocal_rank)) in frozen CSV order",
+    "producer": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py:build_ev04_enriched_metrics",
+    "source": "EXPECTED_AND_ACTUAL_CASE_ROWS_BUILT_INDEPENDENTLY"
+  },
+  "frozen_inputs": {
+    "bm25_parameters": {
+      "b": 0.75,
+      "configured_top_n": 100,
+      "duplicate_code_collapse_rule": "first BM25 occurrence by score order wins",
+      "hierarchical_k_values": [
+        10,
+        50,
+        100,
+        200
+      ],
+      "k1": 1.5,
+      "k_values": [
+        1,
+        3,
+        5,
+        10,
+        50
+      ],
+      "ranking_unit": "unique NANDINA-8 code",
+      "raw_retrieval_depth": 7648,
+      "recall_k_values": [
+        50,
+        100,
+        200
+      ],
+      "retrieval_depth": 200,
+      "use_stopwords_in_index_build": true
+    },
+    "config": {
+      "canonical_blob_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+      "git_blob_sha": "09e715ce30b789805644aa87b16df78e04d0352a",
+      "historical_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/configs/experiment_config.json"
+    },
+    "corpus": {
+      "canonical_blob_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+      "git_blob_sha": "57e0dce322a4311bff5ef13e6dd90020fb1277e7",
+      "historical_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl"
+    },
+    "eval": {
+      "canonical_blob_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "git_blob_sha": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+      "historical_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv"
+    },
+    "eval_cases": 1056,
+    "index_identity_from_frozen_run_metadata": {
+      "current_checkout_presence_required": false,
+      "path": "data/processed/indexes/bm25_nandina8_hierarchical_v0.1.pkl",
+      "sha256": "f828736ea700471c95d2b985bdd969d751cd36c3ca01c407049209010bdbe60b"
+    },
+    "label_column": "NANDINA",
+    "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
+    "runner": {
+      "canonical_blob_sha256": "3d97fa1c5afa66dedbe23858be69123e9cee8284f50a66bb0ea4fe9c95582495",
+      "git_blob_sha": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d",
+      "historical_sha256": "3d97fa1c5afa66dedbe23858be69123e9cee8284f50a66bb0ea4fe9c95582495",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py"
+    }
+  },
+  "methodology": {
+    "b": 0.75,
+    "collapse": "FIRST_OCCURRENCE_PER_UNIQUE_NANDINA8_CODE",
+    "fallback_text_field": "texto_index",
+    "inherits_ev03_drop_single_character_tokens": false,
+    "k1": 1.5,
+    "ranking_depth": 200,
+    "text_field": "texto_index_jerarquico",
+    "token_policy": "ORIGINAL_HIERARCHICAL_V0.1"
+  },
+  "original_run_identity": {
+    "historical_execution_commit": "e3590cf8ea07d0cbcec97a5a41931220c56a3ce0",
+    "historical_git_identities": {
+      "data/processed/corpus_nandina_hierarchical_v0.1.jsonl": null,
+      "data/processed/data_aduanas_evalset_clase87_v0.2.csv": {
+        "canonical_blob_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "git_blob_sha": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+        "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+        "revision": "e3590cf8ea07d0cbcec97a5a41931220c56a3ce0"
+      },
+      "src/configs/experiment_config.json": {
+        "canonical_blob_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+        "git_blob_sha": "09e715ce30b789805644aa87b16df78e04d0352a",
+        "path": "src/configs/experiment_config.json",
+        "revision": "e3590cf8ea07d0cbcec97a5a41931220c56a3ce0"
+      },
+      "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py": null
+    },
+    "historical_missing_tracked_paths": [
+      "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py",
+      "data/processed/corpus_nandina_hierarchical_v0.1.jsonl"
+    ],
+    "prospective_current_git_identities": {
+      "data/processed/corpus_nandina_hierarchical_v0.1.jsonl": {
+        "canonical_blob_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+        "git_blob_sha": "57e0dce322a4311bff5ef13e6dd90020fb1277e7",
+        "historical_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl"
+      },
+      "data/processed/data_aduanas_evalset_clase87_v0.2.csv": {
+        "canonical_blob_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "git_blob_sha": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+        "historical_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv"
+      },
+      "src/configs/experiment_config.json": {
+        "canonical_blob_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+        "git_blob_sha": "09e715ce30b789805644aa87b16df78e04d0352a",
+        "historical_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/configs/experiment_config.json"
+      },
+      "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py": {
+        "canonical_blob_sha256": "3d97fa1c5afa66dedbe23858be69123e9cee8284f50a66bb0ea4fe9c95582495",
+        "git_blob_sha": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d",
+        "historical_sha256": "3d97fa1c5afa66dedbe23858be69123e9cee8284f50a66bb0ea4fe9c95582495",
+        "identity_authority": "COMMITTED_GIT_BLOB",
+        "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py"
+      }
+    },
+    "reason": "Historical execution commit lacks required tracked source paths; frozen output hashes remain available but do not cryptographically bind the original executable source.",
+    "status": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS"
+  },
+  "primary_original_control": {
+    "comparison_policy": "Use only frozen original definitions and aligned case_ids; no original result is a target and no prospective metric is calculated by this gate.",
+    "control_reproduction": {
+      "comparison": {
+        "case_summary": {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+          "scope": "EXACT_CASE_LEVEL",
+          "sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634"
+        },
+        "metrics": "EXACT_NUMERATORS_DENOMINATORS_AND_VALUES; timestamps and runtime metadata are excluded",
+        "ranking": {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+          "scope": "EXACT_EFFECTIVE_FULL_TOP200_CASE_LEVEL",
+          "sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662"
+        }
+      },
+      "current_state": "NOT_EXECUTED",
+      "failure_policy": "A non-PASS reproduction blocks EV04 corrected execution and the unified gate.",
+      "gate": "EV04_DECISION885_REPRODUCTION_GATE",
+      "historical_source_status": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+      "requirement": "MANDATORY"
+    },
+    "decision": "Decision_885",
+    "historical_execution_verification": "NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+    "metric_definitions": [
+      {
+        "denominator": 1056,
+        "metric": "mrr_at_100",
+        "numerator": 44.33224687474574,
+        "value": 0.04198129438896377
+      },
+      {
+        "denominator": 1056,
+        "metric": "mrr_at_200",
+        "numerator": 45.76874185264425,
+        "value": 0.04334161160288281
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_1",
+        "numerator": 28,
+        "value": 0.026515151515151516
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_3",
+        "numerator": 55,
+        "value": 0.052083333333333336
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_5",
+        "numerator": 66,
+        "value": 0.0625
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_10",
+        "numerator": 69,
+        "value": 0.06534090909090909
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_50",
+        "numerator": 96,
+        "value": 0.09090909090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_50",
+        "numerator": 96,
+        "value": 0.09090909090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_100",
+        "numerator": 107,
+        "value": 0.10132575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_200",
+        "numerator": 321,
+        "value": 0.3039772727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "pool_recall_at_200",
+        "numerator": 321,
+        "value": 0.3039772727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_10",
+        "numerator": 69,
+        "value": 0.06534090909090909
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_10",
+        "numerator": 75,
+        "value": 0.07102272727272728
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_10",
+        "numerator": 100,
+        "value": 0.0946969696969697
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_10",
+        "numerator": 236,
+        "value": 0.22348484848484848
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_50",
+        "numerator": 96,
+        "value": 0.09090909090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_50",
+        "numerator": 106,
+        "value": 0.10037878787878787
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_50",
+        "numerator": 192,
+        "value": 0.18181818181818182
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_50",
+        "numerator": 399,
+        "value": 0.3778409090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_100",
+        "numerator": 107,
+        "value": 0.10132575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_100",
+        "numerator": 118,
+        "value": 0.11174242424242424
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_100",
+        "numerator": 264,
+        "value": 0.25
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_100",
+        "numerator": 538,
+        "value": 0.509469696969697
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_200",
+        "numerator": 321,
+        "value": 0.3039772727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_200",
+        "numerator": 363,
+        "value": 0.34375
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_200",
+        "numerator": 529,
+        "value": 0.5009469696969697
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_200",
+        "numerator": 810,
+        "value": 0.7670454545454546
+      }
+    ],
+    "outputs": {
+      "corpus_hierarchical_audit_json": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/corpus_hierarchical_audit.json",
+        "sha256": "5ad5a59d71a62c947f726dde08a7d77c1412ee5020728c85d6800ac5b7e1880e"
+      },
+      "flat_vs_hierarchical_comparison_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/flat_vs_hierarchical_comparison_v0.2.csv",
+        "sha256": "5ff2e300709d5e538578e722c8e3eb620c203bf82570fefa3475ab166ab61bac"
+      },
+      "gate_c_microaudit_json": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.json",
+        "sha256": "4b665d66b6f1d2e289069c5a62568a10fd6510f1a053c433f82c2d7f96416896"
+      },
+      "gate_c_microaudit_md": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/gate_c_microaudit_v0.2.md",
+        "sha256": "b2029b248d422f96edeb4348faf58d4d01684316a44c096e07a0c988217c0159"
+      },
+      "hierarchical_coverage_comparison_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/hierarchical_coverage_comparison_v0.2.csv",
+        "sha256": "2907fdc0491442b97a8931930b283f7ea5a2540c87e629a6dc4199e2a13697a8"
+      },
+      "hierarchical_coverage_summary_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/hierarchical_coverage_summary.csv",
+        "sha256": "9324ce372497138f78021c2d5db3ec06ab5ac3293fcc77adc9a2edc88ebf5401"
+      },
+      "hierarchical_coverage_summary_json": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/hierarchical_coverage_summary.json",
+        "sha256": "d5284c97bcb517ce7080e8f14a1b852f69c613e807c9f780ba0d65f5c65fbdd6"
+      },
+      "historical_flat_vs_normative_hierarchical_compatibility_json": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/historical_flat_vs_normative_hierarchical_compatibility_v0.2.json",
+        "sha256": "07d49be7240d8ea861853c4b166cacd8ae59c9e1a2756c262b8fc5f0a0b20bae"
+      },
+      "limitation_stratified_metrics_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/limitation_stratified_metrics_v0.2.csv",
+        "sha256": "db84e04fe9bf35b9a4809956e7a209d0f363e41944ad2118ba1270818e3c4352"
+      },
+      "normative_hierarchical_case_summary_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv",
+        "sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634"
+      },
+      "normative_hierarchical_failure_cases_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_failure_cases.csv",
+        "sha256": "b80d49bc678d43416b0054f8ca5850656b2698b10b8fcacc834d0769ae96407d"
+      },
+      "normative_hierarchical_metrics_json": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json",
+        "sha256": "557c46668cfd51fbeabba0ecdb9bf3ca4a2a34a7f2850384252c5d963a26fd9f"
+      },
+      "normative_hierarchical_results_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv",
+        "sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662"
+      },
+      "position_distribution_csv": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/position_distribution.csv",
+        "sha256": "39e7cb7884c777df21ada1fadf1b9edb054350ee073c4f77053d8943efae8b6d"
+      },
+      "position_distribution_json": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/position_distribution.json",
+        "sha256": "82b3a5afbe7bc377d2e26fdcd04660a91a08b6073a0fa008c82b335e0ea13142"
+      },
+      "summary_md": {
+        "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/summary.md",
+        "sha256": "770b405bd82d3fa648864a344326be5bfaf765b6009ac161c5ffbbddc510fe0f"
+      }
+    },
+    "run_metadata": {
+      "artifact_sha256": "43218151297fe8130d67772e0a695d86dd1facd01ecd831dfdf6fe8aaf30a5aa",
+      "canonical_blob_sha256": "43218151297fe8130d67772e0a695d86dd1facd01ecd831dfdf6fe8aaf30a5aa",
+      "git_blob_sha": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1",
+      "historical_sha256": "43218151297fe8130d67772e0a695d86dd1facd01ecd831dfdf6fe8aaf30a5aa",
+      "identity_authority": "COMMITTED_GIT_BLOB",
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json"
+    }
+  },
+  "prospective_execution": {
+    "case_level_comparison_contract": {
+      "ev04_duplicate_policy": "EFFECTIVE_COLLAPSED_CODE_RANKING",
+      "field_order": [
+        "case_id",
+        "nandina_ref",
+        "original_rank_ref",
+        "corrected_rank_ref",
+        "ranking_changed",
+        "rank_convention",
+        "original_hit_1",
+        "corrected_hit_1",
+        "original_hit_3",
+        "corrected_hit_3",
+        "original_hit_5",
+        "corrected_hit_5",
+        "original_hit_10",
+        "corrected_hit_10",
+        "original_hit_50",
+        "corrected_hit_50",
+        "original_hit_100",
+        "corrected_hit_100",
+        "original_hit_200",
+        "corrected_hit_200",
+        "original_rank_87044110",
+        "corrected_rank_87044110",
+        "original_contains_87044110",
+        "corrected_contains_87044110",
+        "original_rank_87045110",
+        "corrected_rank_87045110",
+        "original_contains_87045110",
+        "corrected_contains_87045110"
+      ],
+      "k_values": [
+        1,
+        3,
+        5,
+        10,
+        50,
+        100,
+        200
+      ],
+      "rank_convention": "0=NOT_FOUND_AT_RETRIEVAL_DEPTH",
+      "ranking_scope": "FULL_EFFECTIVE_CANDIDATE_CODE_SEQUENCE_ORDERED_BY_candidate_rank",
+      "retrieval_depth": 200
+    },
+    "commands": {
+      "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v04 --execute-authorized",
+      "ev04_control_reproduction_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v03 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_v0.1.jsonl --output data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4/index.pkl --metadata data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4/index_metadata.json",
+      "ev04_control_reproduction_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v04 --arm EV04 --corpus data/processed/corpus_nandina_hierarchical_v0.1.jsonl --index data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4/index.pkl --index-metadata data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4/index_metadata.json --output-dir outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4",
+      "ev04_corrected_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v03 --arm EV04 --corpus data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl --output data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4/index.pkl --metadata data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4/index_metadata.json",
+      "ev04_corrected_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v04 --arm EV04 --corpus data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl --index data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4/index.pkl --index-metadata data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4/index_metadata.json --output-dir outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4",
+      "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v04 --execute-authorized"
+    },
+    "comparison_producers": {
+      "aggregate_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py:produce_aggregate_comparison",
+      "case_level_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py:produce_case_level_comparison"
+    },
+    "control_must_pass_before_corrected_arm": "PASS_EXACT",
+    "control_reproduction_index_root": "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4",
+    "control_reproduction_output_root": "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4",
+    "corrected_index_root": "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4",
+    "corrected_output_root": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4",
+    "derived_identity_policy": "The future evaluator validates the SHA-256 values derived by its own corrective corpus and corrective index build; it never substitutes historic fixed corpus or index hashes.",
+    "execution_order": [
+      "unified_preflight",
+      "control_reproduction",
+      "corrected_retrieval",
+      "validation",
+      "comparison",
+      "manifest",
+      "ledger",
+      "interpretation"
+    ],
+    "full_rebuild_policy": "FULL_NON_DESTRUCTIVE_REBUILD_NO_OVERWRITE_NO_RESUME",
+    "future_roots": [
+      "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4",
+      "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4",
+      "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl",
+      "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4",
+      "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4"
+    ],
+    "required_outputs": [
+      "case_level_output",
+      "aggregate_output",
+      "original_vs_corrective_comparison",
+      "execution_manifest",
+      "output_hash_ledger",
+      "summary"
+    ],
+    "unified_runner": "src/experiments/run_0b05c_corrective_numerical_v04.py"
+  },
+  "required_control": {
+    "case_summary_sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+    "enriched_mrr_metrics_exact": true,
+    "mandatory": true,
+    "ranking_sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662",
+    "reason": "ORIGINAL_IDENTITY_NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+    "status": "PASS_EXACT"
+  },
+  "specification_id": "ev04_numerical_execution_spec_v0.4",
+  "specification_status": "PREEXECUTION_SPEC_DEFINED",
+  "v02_attempt03_provenance": {
+    "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
+    "failure_record": "outputs/audits/0b05c_attempt03_failclosed_v0.2/attempt03_failure_record_v0.2.json"
+  },
+  "v03_attempt04_provenance": {
+    "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
+    "failure_record": "outputs/audits/0b05c_attempt04_failclosed_v0.3/attempt04_failure_record_v0.3.json"
+  }
+}
