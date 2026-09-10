@@ -1,0 +1,342 @@
+{
+  "0B05C_CLOSURE": "NOT_AUTHORIZED",
+  "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+  "artifact_id": "0b05c_attempt05_execution_record_v0.4",
+  "authorization_commit": "812cb69a498d0da1aaf4a363b52e1a8ff3c2b9ea",
+  "authorization_operationally_consumed": true,
+  "authorized_preflight": {
+    "authorization": {
+      "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
+      "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
+      "EV04_NUMERICAL_EXECUTION": "AUTHORIZED",
+      "UNIFIED_0B05C_NUMERICAL_EXECUTION": "AUTHORIZED"
+    },
+    "authorization_baseline_commit": "588962100362174df6486a3c6446276d8749743c",
+    "d1a_authorization_proof": "PASS",
+    "d1a_preflight": {
+      "mode": "PREEXECUTION_CLOSED_READONLY",
+      "status": "PASS"
+    },
+    "execution_authorization_commit": "812cb69a498d0da1aaf4a363b52e1a8ff3c2b9ea",
+    "future_roots_present_before_execution": false,
+    "mode": "AUTHORIZED_PREFLIGHT_ONLY",
+    "numerical_execution_occurred": false,
+    "status": "PASS"
+  },
+  "classification": "CODEX_LOCAL_RUNTIME_EXECUTION_REPORT / NOT_INDEPENDENT_GITHUB_CI",
+  "command": "python -B -m src.experiments.run_0b05c_corrective_numerical_v04 --execute-authorized",
+  "execution_branch": "codex/0b05c-v04-attempt05-execution-result",
+  "execution_status": "FAIL_CLOSED_PENDING_EXTERNAL_AUDIT",
+  "exit_code": 1,
+  "future_root_file_count": 26,
+  "future_root_inventory": [
+    {
+      "exists": true,
+      "file_count": 2,
+      "files": [
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4/index.pkl",
+          "sha256": "b1421f526994b7df001b3d55e4990f92bc4a4c8b8d367a6c37e444b025461557",
+          "size_bytes": 918504
+        },
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4/index_metadata.json",
+          "sha256": "3eafc393dbe25ab4c2253fbf38308702058c55c745d5fdddc6aac5dd0e46e361",
+          "size_bytes": 1488
+        }
+      ],
+      "kind": "directory",
+      "path": "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4",
+      "total_size_bytes": 919992
+    },
+    {
+      "exists": true,
+      "file_count": 3,
+      "files": [
+        {
+          "path": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4/normative_flat_case_summary.csv",
+          "sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+          "size_bytes": 497448
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4/normative_flat_metrics.json",
+          "sha256": "955ae2792ee32edb41bfbddd1868afc8873cbe1eb8abb1915f38dcbceeb98c15",
+          "size_bytes": 5322
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4/normative_flat_results.csv",
+          "sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+          "size_bytes": 13145709
+        }
+      ],
+      "kind": "directory",
+      "path": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4",
+      "total_size_bytes": 13648479
+    },
+    {
+      "exists": true,
+      "file_count": 1,
+      "files": [
+        {
+          "path": "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl",
+          "sha256": "6ecb82fe594853ec8cdd4ffa1c25e198612c988e13b5bd5332afbdfff6a8e0f3",
+          "size_bytes": 3614411
+        }
+      ],
+      "kind": "file",
+      "path": "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl",
+      "total_size_bytes": 3614411
+    },
+    {
+      "exists": true,
+      "file_count": 2,
+      "files": [
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4/index.pkl",
+          "sha256": "8f729ab4d841f2c4e52078d4dab6a2dc49049de3a71491d0424595aeaad3ce75",
+          "size_bytes": 918320
+        },
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4/index_metadata.json",
+          "sha256": "15ea8c71d4d1ce0d3b76bfcff2d65c902479acf7eaf27e50bc850ca9f7406d2b",
+          "size_bytes": 1527
+        }
+      ],
+      "kind": "directory",
+      "path": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4",
+      "total_size_bytes": 919847
+    },
+    {
+      "exists": true,
+      "file_count": 3,
+      "files": [
+        {
+          "path": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4/normative_flat_case_summary.csv",
+          "sha256": "7c51c5fc56c5b969191fe2587625d979d5e1d954d5f45ffb76102c5062d29bff",
+          "size_bytes": 497252
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4/normative_flat_metrics.json",
+          "sha256": "e3e1ebe7299ed03d47628e9ace7e26578d3d27ea31a7516d537c43f7c61ff3f0",
+          "size_bytes": 5318
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4/normative_flat_results.csv",
+          "sha256": "37577911c843ea97510f0696bdbeb3aa21a993d630772ce3c511dbb546264618",
+          "size_bytes": 13135996
+        }
+      ],
+      "kind": "directory",
+      "path": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4",
+      "total_size_bytes": 13638566
+    },
+    {
+      "exists": true,
+      "file_count": 2,
+      "files": [
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4/index.pkl",
+          "sha256": "f828736ea700471c95d2b985bdd969d751cd36c3ca01c407049209010bdbe60b",
+          "size_bytes": 6019545
+        },
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4/index_metadata.json",
+          "sha256": "4591907d86338936d7101b68488656a93b491a813870c1d490057c9854de7202",
+          "size_bytes": 1723
+        }
+      ],
+      "kind": "directory",
+      "path": "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.4",
+      "total_size_bytes": 6021268
+    },
+    {
+      "exists": true,
+      "file_count": 3,
+      "files": [
+        {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4/normative_hierarchical_case_summary.csv",
+          "sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+          "size_bytes": 607072
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4/normative_hierarchical_metrics.json",
+          "sha256": "d41f5ad0c7a40f62fa66b2db98f4000f2812c7657f0cc4c0e8f6fb908c2e0c68",
+          "size_bytes": 8265
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4/normative_hierarchical_results.csv",
+          "sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662",
+          "size_bytes": 85426164
+        }
+      ],
+      "kind": "directory",
+      "path": "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.4",
+      "total_size_bytes": 86041501
+    },
+    {
+      "exists": true,
+      "file_count": 1,
+      "files": [
+        {
+          "path": "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl",
+          "sha256": "452fe12aa0c2f91c6d970fbf048ba4a4f3d6c158781e24bb8ce6fb9905b43825",
+          "size_bytes": 17447898
+        }
+      ],
+      "kind": "file",
+      "path": "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.4.jsonl",
+      "total_size_bytes": 17447898
+    },
+    {
+      "exists": true,
+      "file_count": 2,
+      "files": [
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4/index.pkl",
+          "sha256": "e208042089b42a477fe3364e9f0933a6d3ee9d346bc2c213a105b3890f47a662",
+          "size_bytes": 6019417
+        },
+        {
+          "path": "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4/index_metadata.json",
+          "sha256": "faf5aa85ccef875f74ca48f081b53a4b52949001a74bc38c950dea7db370deec",
+          "size_bytes": 1751
+        }
+      ],
+      "kind": "directory",
+      "path": "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.4",
+      "total_size_bytes": 6021168
+    },
+    {
+      "exists": true,
+      "file_count": 3,
+      "files": [
+        {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4/normative_hierarchical_case_summary.csv",
+          "sha256": "253665d8987f477d29e8f45fb2dc73947d519508b6c85c4789f7f42a109e5fa3",
+          "size_bytes": 607129
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4/normative_hierarchical_metrics.json",
+          "sha256": "1d8b7912ffbaac7f1b5e582c9763dbf7918616d87ee0dfd96201f1b3f55f8bbf",
+          "size_bytes": 8263
+        },
+        {
+          "path": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4/normative_hierarchical_results.csv",
+          "sha256": "2195e04804a9907e907e14d28083290c01e013873a883bd5249231f1bd7b77cc",
+          "size_bytes": 85420083
+        }
+      ],
+      "kind": "directory",
+      "path": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.4",
+      "total_size_bytes": 86035475
+    },
+    {
+      "exists": true,
+      "file_count": 1,
+      "files": [
+        {
+          "path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+          "sha256": "f88be1245d3779f3f36ff437c70efe98b1c4c3376978f946cd19669f96b19162",
+          "size_bytes": 3614461
+        }
+      ],
+      "kind": "file",
+      "path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+      "total_size_bytes": 3614461
+    },
+    {
+      "exists": false,
+      "file_count": 0,
+      "files": [],
+      "kind": "absent",
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
+      "total_size_bytes": 0
+    },
+    {
+      "exists": false,
+      "file_count": 0,
+      "files": [],
+      "kind": "absent",
+      "path": "outputs/evaluation/d1a_corrective_0b05c_v0.4",
+      "total_size_bytes": 0
+    },
+    {
+      "exists": true,
+      "file_count": 2,
+      "files": [
+        {
+          "path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.4/execution_failed.json",
+          "sha256": "b25bf5041890559ddc89b3148b024acc515356b15e18ab7a46c0a5c0050bfec2",
+          "size_bytes": 365
+        },
+        {
+          "path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.4/text2trade_mnrl_v0.2_0b05c_runtime.json",
+          "sha256": "65831f83106bfc9481cf8f0e68e1e0fdc76952d2530f6ec4bdfb9d1d96c5c126",
+          "size_bytes": 3671
+        }
+      ],
+      "kind": "directory",
+      "path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.4",
+      "total_size_bytes": 4036
+    },
+    {
+      "exists": false,
+      "file_count": 0,
+      "files": [],
+      "kind": "absent",
+      "path": "outputs/evaluation/0b05c_corrective_numerical_v0.4",
+      "total_size_bytes": 0
+    },
+    {
+      "exists": true,
+      "file_count": 1,
+      "files": [
+        {
+          "path": "outputs/audits/0b05c_corrective_numerical_runtime_v0.4/runtime_authorization_record_v0.4.json",
+          "sha256": "cbf55d874194b275e35dd70aeb0f00948a86d0f6768346e9ba16d9dccfe49a88",
+          "size_bytes": 2301
+        }
+      ],
+      "kind": "directory",
+      "path": "outputs/audits/0b05c_corrective_numerical_runtime_v0.4",
+      "total_size_bytes": 2301
+    }
+  ],
+  "future_roots_absent_count": 3,
+  "future_roots_existing_count": 13,
+  "invocation_count": 1,
+  "last_completed_step": {
+    "name": "11_EV04_corrected_evaluation_ENRICHED_MRR",
+    "ordinal": 11
+  },
+  "last_started_step": {
+    "name": "12_D1a_corrected_execution_under_future_v04_authorization",
+    "ordinal": 12
+  },
+  "observed_terminal_error": "ModuleNotFoundError: No module named 'sentence_transformers'",
+  "result_versioning": {
+    "changed_path_count": 29,
+    "invalid_path_count": 0,
+    "local_commit_created": true,
+    "local_commit_parent": "812cb69a498d0da1aaf4a363b52e1a8ff3c2b9ea",
+    "remote_publication_status": "BLOCKED_BY_HOST_SECURITY_REVIEW",
+    "security_review_reason": "El push exporta a un repositorio remoto no verificado multiples corpus, indices y metricas generados, cuyo contenido puede ser sensible; se requiere aprobacion explicita posterior tras informar el riesgo."
+  },
+  "resume_count": 0,
+  "resume_performed": false,
+  "retry_count": 0,
+  "retry_performed": false,
+  "schema_version": 1,
+  "stderr": {
+    "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_stderr.txt",
+    "sha256": "2c28ad49f530ef7a77b2c72a9ecfada3442969337dd6542cf2c46360c7620e4a",
+    "size_bytes": 2705
+  },
+  "stdout": {
+    "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_stdout.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size_bytes": 0
+  },
+  "utc_end": "2026-09-10T04:07:16.4564691Z",
+  "utc_start": "2026-09-10T04:06:49.7613856Z"
+}

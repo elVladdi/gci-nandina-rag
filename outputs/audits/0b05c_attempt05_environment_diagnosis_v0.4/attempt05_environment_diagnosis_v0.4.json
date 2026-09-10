@@ -1,0 +1,224 @@
+{
+  "artifact_id": "0b05c_attempt05_environment_diagnosis_v0.4",
+  "schema_version": 1,
+  "classification": "CODEX_LOCAL_READ_ONLY_ENVIRONMENT_DIAGNOSIS / NOT_INDEPENDENT_GITHUB_CI",
+  "generated_at_utc": "2026-09-10T04:31:08.5553352Z",
+  "repository": "elVladdi/gci-nandina-rag",
+  "main_commit": "812cb69a498d0da1aaf4a363b52e1a8ff3c2b9ea",
+  "authorization_commit": "812cb69a498d0da1aaf4a363b52e1a8ff3c2b9ea",
+  "attempt05_local_result": {
+    "branch": "codex/0b05c-v04-attempt05-execution-result",
+    "commit": "525261c0d25d8286e25b1f618655115719540c8b",
+    "parent": "812cb69a498d0da1aaf4a363b52e1a8ff3c2b9ea",
+    "remote_branch_present": false,
+    "invocation_count": 1,
+    "retry_count": 0,
+    "resume_count": 0,
+    "exit_code": 1,
+    "terminal_error": "ModuleNotFoundError: No module named 'sentence_transformers'"
+  },
+  "execution_evidence": {
+    "record": {
+      "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_execution_record_v0.4.json",
+      "size_bytes": 13064,
+      "sha256": "4ab2d26c1dbfdb0cb4bff620db079e123fff9db1a5935343459ce7b5eea4eceb"
+    },
+    "stdout": {
+      "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_stdout.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_stderr.txt",
+      "size_bytes": 2705,
+      "sha256": "2c28ad49f530ef7a77b2c72a9ecfada3442969337dd6542cf2c46360c7620e4a"
+    },
+    "hash_verification": "PASS_EXACT"
+  },
+  "static_evidence": {
+    "requirements": {
+      "path": "requirements.txt",
+      "size_bytes": 89,
+      "sha256": "5d063a971db0a2d88826f4dd2a6239ae482bdbf1554fe468b0b8b7918d5fb50b",
+      "sentence_transformers_declared_at_line": 6,
+      "requirements_declared_dependency": true
+    },
+    "builder": {
+      "path": "src/experiments/build_text2trade_mnrl_index_v02.py",
+      "size_bytes": 8595,
+      "sha256": "d80d8bc6c55781d4aa2cb186da93a0006f5aa31d1dfadf1745accdf375a162af",
+      "module_level_import_line": 12,
+      "module_level_import": "from sentence_transformers import SentenceTransformer"
+    },
+    "evaluator": {
+      "path": "src/experiments/evaluate_text2trade_mnrl_data_aduanas_v02.py",
+      "size_bytes": 11900,
+      "sha256": "955130eb3a89cfaf2acddcc9dd99c29a9daa9279154b2f0cc77a102f899c09bb",
+      "module_level_import_line": 13,
+      "module_level_import": "from sentence_transformers import SentenceTransformer"
+    },
+    "d1a_runner": {
+      "path": "src/experiments/run_d1a_corrective_0b05c_v04.py",
+      "size_bytes": 7557,
+      "sha256": "40b6a7af08bf113be98c49b8b813ae3582d8d70764181285de3fefe708e420df",
+      "execute_authorized_line": 74,
+      "subprocess_module_loop_line": 97,
+      "subprocess_invocation_line": 98,
+      "subprocess_uses_sys_executable": true
+    }
+  },
+  "interpreter_probe": {
+    "sys_executable": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "sys_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pip_version": "pip 26.2.1 from C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\site-packages\\pip (python 3.12)",
+    "packages_installed_or_changed": false
+  },
+  "dependency_probe": [
+    {
+      "requirement": "numpy",
+      "module": "numpy",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": true,
+      "status": "PASS",
+      "version": "2.3.5",
+      "module_path": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\site-packages\\numpy\\__init__.py",
+      "exception": null
+    },
+    {
+      "requirement": "pandas",
+      "module": "pandas",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": true,
+      "status": "PASS",
+      "version": "3.0.1",
+      "module_path": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\site-packages\\pandas\\__init__.py",
+      "exception": null
+    },
+    {
+      "requirement": "pdfplumber",
+      "module": "pdfplumber",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": true,
+      "status": "PASS",
+      "version": "0.11.9",
+      "module_path": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\site-packages\\pdfplumber\\__init__.py",
+      "exception": null
+    },
+    {
+      "requirement": "pypdf",
+      "module": "pypdf",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": true,
+      "status": "PASS",
+      "version": "6.10.0",
+      "module_path": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\site-packages\\pypdf\\__init__.py",
+      "exception": null
+    },
+    {
+      "requirement": "tqdm",
+      "module": "tqdm",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": false,
+      "status": "FAIL",
+      "version": null,
+      "module_path": null,
+      "exception": "ModuleNotFoundError: No module named 'tqdm'"
+    },
+    {
+      "requirement": "sentence-transformers",
+      "module": "sentence_transformers",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": false,
+      "status": "FAIL",
+      "version": null,
+      "module_path": null,
+      "exception": "ModuleNotFoundError: No module named 'sentence_transformers'"
+    },
+    {
+      "requirement": "hnswlib",
+      "module": "hnswlib",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": false,
+      "status": "FAIL",
+      "version": null,
+      "module_path": null,
+      "exception": "ModuleNotFoundError: No module named 'hnswlib'"
+    },
+    {
+      "requirement": "torch",
+      "module": "torch",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": false,
+      "status": "FAIL",
+      "version": null,
+      "module_path": null,
+      "exception": "ModuleNotFoundError: No module named 'torch'"
+    },
+    {
+      "requirement": "openpyxl",
+      "module": "openpyxl",
+      "requirements_declared_dependency": true,
+      "runtime_import_available": true,
+      "status": "PASS",
+      "version": "3.1.5",
+      "module_path": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\site-packages\\openpyxl\\__init__.py",
+      "exception": null
+    }
+  ],
+  "d1a_module_import_probe": [
+    {
+      "module": "src.experiments.build_text2trade_mnrl_index_v02",
+      "command": "python -B -c \"import src.experiments.build_text2trade_mnrl_index_v02\"",
+      "module_import_available": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\n  File \"C:\\Users\\Vladimir\\Documents\\LLM-RAG NANDINA\\ev03-main-integration\\src\\experiments\\build_text2trade_mnrl_index_v02.py\", line 12, in <module>\r\n    from sentence_transformers import SentenceTransformer\r\nModuleNotFoundError: No module named 'sentence_transformers'\r\n"
+    },
+    {
+      "module": "src.experiments.evaluate_text2trade_mnrl_data_aduanas_v02",
+      "command": "python -B -c \"import src.experiments.evaluate_text2trade_mnrl_data_aduanas_v02\"",
+      "module_import_available": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\n  File \"C:\\Users\\Vladimir\\Documents\\LLM-RAG NANDINA\\ev03-main-integration\\src\\experiments\\evaluate_text2trade_mnrl_data_aduanas_v02.py\", line 13, in <module>\r\n    from sentence_transformers import SentenceTransformer\r\nModuleNotFoundError: No module named 'sentence_transformers'\r\n"
+    }
+  ],
+  "frozen_model_probe": {
+    "path": "models/text2trade_mnrl_v0.2/model.safetensors",
+    "exists": true,
+    "size_bytes": 470637416,
+    "sha256": "ef9b92b2fb0239e46c0d81e403f00b3255d3822dfa25e0ce354d03828f7a8c87",
+    "identity": "PASS_EXACT"
+  },
+  "failure_class": "MISSING_RUNTIME_PYTHON_DEPENDENCY",
+  "causal_closure": {
+    "requirements_declared_dependency": true,
+    "runtime_import_available": false,
+    "module_import_available": false,
+    "supported_conclusion": "The Attempt05 terminal failure is consistent with the same interpreter being unable to import the declared sentence_transformers runtime dependency and both real D1a modules failing at that module-level import.",
+    "version_specific_cause_attributed": false
+  },
+  "ENVIRONMENT_READINESS_CONTRACT": [
+    "Use the same interpreter identified by sys.executable for the environment probe, preflight and execution.",
+    "Require every D1a runtime dependency to be importable.",
+    "Require direct import of src.experiments.build_text2trade_mnrl_index_v02 to PASS.",
+    "Require direct import of src.experiments.evaluate_text2trade_mnrl_data_aduanas_v02 to PASS.",
+    "Require the exact frozen model to be present with the governed byte size and SHA-256.",
+    "Require every Git binding of the future runner and gate to match exactly.",
+    "Require every root of the new attempt to be absent in a clean worktree.",
+    "Run the environment probe before integrating any new authorization.",
+    "If any import fails, do not integrate the authorization.",
+    "Record the actual package and interpreter versions of the environment that passes."
+  ],
+  "ATTEMPT05_AUTHORIZATION": "OPERATIONALLY_CONSUMED",
+  "ATTEMPT05_RETRY": "FORBIDDEN",
+  "ATTEMPT06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+  "0B05C_CLOSURE": "NOT_AUTHORIZED",
+  "attempt05_reexecuted": false,
+  "dependencies_installed": false,
+  "sensitive_runtime_outputs_included": false
+}

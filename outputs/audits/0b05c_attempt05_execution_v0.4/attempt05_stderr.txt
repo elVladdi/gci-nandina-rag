@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\0b05c-v04-attempt05-auth\src\experiments\build_text2trade_mnrl_index_v02.py", line 12, in <module>
+    from sentence_transformers import SentenceTransformer
+ModuleNotFoundError: No module named 'sentence_transformers'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\0b05c-v04-attempt05-auth\src\experiments\run_0b05c_corrective_numerical_v04.py", line 362, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\0b05c-v04-attempt05-auth\src\experiments\run_0b05c_corrective_numerical_v04.py", line 356, in main
+    result = execute_authorized(ROOT) if args.execute_authorized else preflight(ROOT)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\0b05c-v04-attempt05-auth\src\experiments\run_0b05c_corrective_numerical_v04.py", line 347, in execute_authorized
+    return run_authorized_pipeline(_default_operations(root, proof))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\0b05c-v04-attempt05-auth\src\experiments\run_0b05c_corrective_numerical_v04.py", line 103, in run_authorized_pipeline
+    result = operations[key]()
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\0b05c-v04-attempt05-auth\src\experiments\run_0b05c_corrective_numerical_v04.py", line 267, in execute_d1a
+    d1a_result = d1a_runner.execute_authorized(root, authorization_proof=proof)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\0b05c-v04-attempt05-auth\src\experiments\run_d1a_corrective_0b05c_v04.py", line 98, in execute_authorized
+    subprocess.run([sys.executable, "-B", "-m", module, "--config", config_arg], cwd=root, check=True)
+  File "C:\Users\Vladimir\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe', '-B', '-m', 'src.experiments.build_text2trade_mnrl_index_v02', '--config', 'outputs/audits/d1a_corrective_0b05c_runtime_v0.4/text2trade_mnrl_v0.2_0b05c_runtime.json']' returned non-zero exit status 1.
