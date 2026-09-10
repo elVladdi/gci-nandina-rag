@@ -1,0 +1,124 @@
+{
+  "artifact_id": "0b05c_v05_preauthorization_readiness",
+  "classification": "CODEX_LOCAL_TEST_EXECUTION / NOT_INDEPENDENT_GITHUB_CI",
+  "status": "BUILT / TESTED_CODEX_LOCAL / PENDING_EXTERNAL_AUDIT",
+  "closure_matrix": {
+    "R12": "CLOSED_BY_CODE_TEST_AND_SHADOW",
+    "R13": "CLOSED_BY_CODE_TEST_AND_SHADOW",
+    "R14": "CLOSED_BY_CODE_TEST_AND_SHADOW",
+    "R15": "CLOSED_BY_CODE_TEST_AND_SHADOW",
+    "R16": "CLOSED_BY_CODE_TEST_AND_SHADOW",
+    "R17": "CLOSED_BY_CODE_TEST_AND_SHADOW",
+    "R18": "CLOSED_BY_CODE_TEST_AND_SHADOW",
+    "R19": "CLOSED_BY_CODE_TEST_AND_SHADOW"
+  },
+  "blocking_findings_closed": [
+    "R12-02_INTERPRETER_READINESS_NOT_GATED",
+    "R12-03_COMPLETE_MODEL_DIRECTORY_NOT_GATED",
+    "R14-01_EV03_EMPTY_RANKING_CASES_BREAK_COMPARISON",
+    "R15-02_NONFINITE_NONCONTRIBUTION_METRICS_NOT_REJECTED",
+    "R16-01_UNIFIED_SUMMARY_SCHEMA_UNDERVALIDATED"
+  ],
+  "environment": {
+    "status": "PASS",
+    "mode": "PREAUTHORIZATION_ENVIRONMENT_READINESS_ONLY",
+    "classification": "TESTED_EXECUTION_ENVIRONMENT / NOT_HISTORICAL_PROVENANCE",
+    "interpreter": {
+      "python_version": "3.10.11",
+      "executable_sha256": "b2c836c52cdf063180b9ee76f67ac42946101b79ac457f3494035a67c090d961",
+      "packages": {
+        "huggingface_hub": "1.19.0",
+        "numpy": "2.2.6",
+        "safetensors": "0.8.0",
+        "sentence_transformers": "5.5.1",
+        "tokenizers": "0.22.2",
+        "torch": "2.12.0+cpu",
+        "tqdm": "4.68.2",
+        "transformers": "5.12.1"
+      },
+      "d1a_builder_import": "PASS",
+      "d1a_evaluator_import": "PASS"
+    },
+    "historical_provenance": {
+      "source": "outputs/training/text2trade_mnrl_v0.2/training_metadata.json",
+      "python_version": "3.10.11",
+      "torch_version": "2.12.0+cpu",
+      "sentence_transformers_version": "NOT_CLAIMED / NO_VERSIONED_HISTORICAL_EVIDENCE"
+    },
+    "complete_model_directory": {
+      "status": "PASS_EXACT",
+      "governed_file_count": 9,
+      "missing_count": 0,
+      "mismatch_count": 0,
+      "extra_count": 0
+    },
+    "offline_synthetic_smoke": {
+      "status": "PASS",
+      "input": "32_SYNTHETIC_STRINGS",
+      "device": "CPU",
+      "batch_size": 32,
+      "max_seq_length": 128,
+      "shape": [32, 384],
+      "dtype": "float32",
+      "all_finite": true,
+      "norm_min": 0.9999999403953552,
+      "norm_max": 1.0000001192092896,
+      "tolerance": 9.5367431640625e-07,
+      "network_used": false
+    },
+    "historical_vector_replay": {
+      "status": "PASS",
+      "classification": "ENVIRONMENT_PARITY_EVIDENCE / NOT_NEW_SCIENTIFIC_RESULT",
+      "sample_count": 21,
+      "cosine_min": 0.9999999948279137,
+      "max_absolute_difference": 1.1920928955078125e-07,
+      "tolerance": 9.5367431640625e-07
+    },
+    "capacity": {
+      "disk_free_bytes": 462320009216,
+      "disk_required_margin_bytes": 1466744014,
+      "memory_total_bytes": 34070192128,
+      "memory_available_bytes": 16895401984,
+      "memory_required_margin_bytes": 955233974,
+      "status": "PASS_WITH_OBSERVED_FOOTPRINT_DERIVED_MARGINS"
+    }
+  },
+  "shadow": {
+    "input_patch_config": "PASS / TWO_CODES_ONLY / FOUR_CONFIG_FIELDS_ONLY",
+    "ev03_original_vs_original": "PASS / 1056_CASES / 10_VALID_EMPTY_RANKINGS",
+    "ev04_frozen_structure": "PASS / 1056_CASES",
+    "aggregate_positive": "PASS / EV03_17 / EV04_28",
+    "aggregate_nan_inf_negatives": "PASS_FAIL_CLOSED",
+    "unified_summary_positive_and_negatives": "PASS",
+    "manifest_round_trip_and_negatives": "PASS",
+    "ledger_expected_vs_producer": "PASS / 47_EQUALS_47",
+    "ledger_negatives": "PASS_FAIL_CLOSED",
+    "synthetic_19_step_pipeline": "PASS / NEGATIVES_FAIL_CLOSED",
+    "focused_tests": "31/31 PASS",
+    "scientific_retrieval_executed": false,
+    "scientific_eval_executed": false,
+    "full_d1a_executed": false
+  },
+  "v04_partial_roots_policy": "NEVER_INPUT / NEVER_REUSED / NEVER_CLEANED_BY_V05",
+  "authorization_record_v0.5_present": false,
+  "residual_risks": [
+    "FULL_7644_DOCUMENT_ENCODE",
+    "FULL_1056_QUERY_ENCODE_AND_EVALUATION",
+    "RUNTIME_MEMORY_CPU_IO_PEAK",
+    "FUTURE_OUTPUT_HASHES",
+    "EXTRAORDINARY_HOST_FAILURE_AFTER_SIDE_EFFECTS"
+  ],
+  "mandatory_future_mitigations": [
+    "REPEAT_ENVIRONMENT_AND_CAPACITY_PREFLIGHT_BEFORE_AUTHORIZATION",
+    "USE_THE_FINGERPRINTED_INTERPRETER",
+    "REQUIRE_ALL_V05_ROOTS_ABSENT",
+    "ONE_FUTURE_INVOCATION / NO_RETRY / NO_RESUME",
+    "PRESERVE_FAIL_CLOSED_EVIDENCE"
+  ],
+  "attempt05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "attempt06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+  "0B05C_CLOSURE": "NOT_AUTHORIZED",
+  "numerical_execution_occurred": false,
+  "risk_zero_claimed": false
+}

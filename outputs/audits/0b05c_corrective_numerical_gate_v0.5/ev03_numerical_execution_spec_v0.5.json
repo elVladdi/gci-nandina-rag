@@ -1,8 +1,9 @@
 {
   "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
   "attempt05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "attempt06": "NOT_AUTHORIZED / NOT_EXECUTED",
   "authorization": {
-    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false
   },
@@ -57,7 +58,7 @@
       "Serialize a future derived corpus in UTF-8 with LF and exactly one terminal newline.",
       "For EV04 preserve hierarchy node identifiers, parent fields, source-page lineage, and deterministic ordering; change only declared leaf/derived representations."
     ],
-    "prospective_path": "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl"
+    "prospective_path": "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl"
   },
   "frozen_inputs": {
     "bm25_parameters": {
@@ -358,6 +359,7 @@
   },
   "prospective_execution": {
     "case_level_comparison_contract": {
+      "empty_ranking_contract": "VALID_ONLY_WHEN_SUMMARY_RETRIEVED_COUNT_AND_RANK_REF_ARE_ZERO_AND_TOP1_FIELDS_EMPTY",
       "ev04_duplicate_policy": "NOT_APPLICABLE",
       "field_order": [
         "case_id",
@@ -395,27 +397,27 @@
         50,
         100
       ],
-      "rank_convention": "0=NOT_FOUND_AT_RETRIEVAL_DEPTH",
+      "rank_convention": "0=NOT_FOUND/EMPTY",
       "ranking_scope": "FULL_EFFECTIVE_CANDIDATE_CODE_SEQUENCE_ORDERED_BY_candidate_rank",
       "retrieval_depth": 100
     },
     "commands": {
-      "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v04 --execute-authorized",
-      "ev03_control_reproduction_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v03 --arm EV03 --corpus data/processed/corpus_rag_v1_index.jsonl --output data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4/index.pkl --metadata data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4/index_metadata.json",
-      "ev03_control_reproduction_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v04 --arm EV03 --corpus data/processed/corpus_rag_v1_index.jsonl --index data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4/index.pkl --index-metadata data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4/index_metadata.json --output-dir outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4",
-      "ev03_corrected_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v03 --arm EV03 --corpus data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl --output data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4/index.pkl --metadata data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4/index_metadata.json",
-      "ev03_corrected_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v04 --arm EV03 --corpus data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl --index data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4/index.pkl --index-metadata data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4/index_metadata.json --output-dir outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4",
-      "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v04 --execute-authorized"
+      "d1a_execute_command": "python -m src.experiments.run_d1a_corrective_0b05c_v05 --execute-authorized",
+      "ev03_control_reproduction_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v03 --arm EV03 --corpus data/processed/corpus_rag_v1_index.jsonl --output data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5/index.pkl --metadata data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5/index_metadata.json",
+      "ev03_control_reproduction_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v05 --arm EV03 --corpus data/processed/corpus_rag_v1_index.jsonl --index data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5/index.pkl --index-metadata data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5/index_metadata.json --output-dir outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5",
+      "ev03_corrected_build_command": "python -m src.experiments.build_bm25_corrective_0b05c_v03 --arm EV03 --corpus data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl --output data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5/index.pkl --metadata data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5/index_metadata.json",
+      "ev03_corrected_evaluate_command": "python -m src.experiments.evaluate_normative_bm25_corrective_0b05c_v05 --arm EV03 --corpus data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl --index data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5/index.pkl --index-metadata data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5/index_metadata.json --output-dir outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5",
+      "unified_execution_command": "python -m src.experiments.run_0b05c_corrective_numerical_v05 --execute-authorized"
     },
     "comparison_producers": {
-      "aggregate_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py:produce_aggregate_comparison",
-      "case_level_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py:produce_case_level_comparison"
+      "aggregate_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v05.py:produce_aggregate_comparison",
+      "case_level_original_vs_corrective": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v05.py:produce_case_level_comparison"
     },
     "control_must_pass_before_corrected_arm": "PASS_EXACT",
-    "control_reproduction_index_root": "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4",
-    "control_reproduction_output_root": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4",
-    "corrected_index_root": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4",
-    "corrected_output_root": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4",
+    "control_reproduction_index_root": "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5",
+    "control_reproduction_output_root": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5",
+    "corrected_index_root": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5",
+    "corrected_output_root": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5",
     "derived_identity_policy": "The future evaluator validates the SHA-256 values derived by its own corrective corpus and corrective index build; it never substitutes historic fixed corpus or index hashes.",
     "execution_order": [
       "unified_preflight",
@@ -429,11 +431,11 @@
     ],
     "full_rebuild_policy": "FULL_NON_DESTRUCTIVE_REBUILD_NO_OVERWRITE_NO_RESUME",
     "future_roots": [
-      "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.4",
-      "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.4",
-      "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.4.jsonl",
-      "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.4",
-      "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.4"
+      "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5",
+      "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5",
+      "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl",
+      "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5",
+      "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5"
     ],
     "required_outputs": [
       "case_level_output",
@@ -443,7 +445,7 @@
       "output_hash_ledger",
       "summary"
     ],
-    "unified_runner": "src/experiments/run_0b05c_corrective_numerical_v04.py"
+    "unified_runner": "src/experiments/run_0b05c_corrective_numerical_v05.py"
   },
   "required_control": {
     "case_summary_bytes_exact": true,
@@ -458,7 +460,7 @@
     "status": "PASS_EXACT"
   },
   "specification_id": "ev03_numerical_execution_spec_v0.4",
-  "specification_status": "PREEXECUTION_SPEC_DEFINED",
+  "specification_status": "PREAUTHORIZATION_SPEC_DEFINED / PENDING_EXTERNAL_AUDIT",
   "v02_attempt03_provenance": {
     "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
     "failure_record": "outputs/audits/0b05c_attempt03_failclosed_v0.2/attempt03_failure_record_v0.2.json"
@@ -466,5 +468,6 @@
   "v03_attempt04_provenance": {
     "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
     "failure_record": "outputs/audits/0b05c_attempt04_failclosed_v0.3/attempt04_failure_record_v0.3.json"
-  }
+  },
+  "v04_partial_roots_policy": "NEVER_INPUT / NEVER_REUSED / NEVER_CLEANED_BY_V05"
 }

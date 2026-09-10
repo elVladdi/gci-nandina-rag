@@ -1,0 +1,74 @@
+{
+  "artifact_id": "0b05c_corrective_numerical_gate_manifest_v0.5",
+  "attempt05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "attempt06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "authorization_readiness": "NOT_AUTHORIZED",
+  "authorization_record_v05_present": false,
+  "candidate_source_bindings": [
+    {
+      "classification": "CANDIDATE_WORKTREE_BYTES",
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v05.py",
+      "sha256": "0d7d563b13316ab2e3923b2e5fd94545698295975f5bb850bcb4e1dbcc2e7ffc",
+      "size_bytes": 12634
+    },
+    {
+      "classification": "CANDIDATE_WORKTREE_BYTES",
+      "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v05.py",
+      "sha256": "79e93ca153f40c7fbe6ae050dd546822c1d7a3ce115adac3cf8f4ceb568eb88c",
+      "size_bytes": 26286
+    },
+    {
+      "classification": "CANDIDATE_WORKTREE_BYTES",
+      "path": "src/experiments/run_d1a_corrective_0b05c_v05.py",
+      "sha256": "ce1ea5702e086e31622eca7e74344aabc867a928a4c84a16b7fe5ad3c3b86864",
+      "size_bytes": 7530
+    },
+    {
+      "classification": "CANDIDATE_WORKTREE_BYTES",
+      "path": "src/experiments/run_0b05c_corrective_numerical_v05.py",
+      "sha256": "fec143542d74afaddedf292df9d6e02af5e51fb7307e1c40473ac1b9a9887b8e",
+      "size_bytes": 20640
+    }
+  ],
+  "future_roots": [
+    "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5",
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.5",
+    "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.5",
+    "outputs/audits/d1a_corrective_0b05c_runtime_v0.5",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.5",
+    "outputs/audits/0b05c_corrective_numerical_runtime_v0.5"
+  ],
+  "gate_status": "CANDIDATE_READY_FOR_EXTERNAL_AUDIT / NOT_AUTHORIZED",
+  "pipeline_steps": [
+    "01_unified_preflight",
+    "02_EV03_Decision885_control_reproduction",
+    "03_EV03_control_reproduction_verification",
+    "04_EV03_corrected_corpus_materialization",
+    "05_EV03_corrected_index_build_RECOVERED_HISTORICAL_SEMANTICS",
+    "06_EV03_corrected_evaluation",
+    "07_EV04_Decision885_control_reproduction_ENRICHED_MRR",
+    "08_EV04_control_reproduction_verification_PASS_EXACT",
+    "09_EV04_corrected_corpus_materialization",
+    "10_EV04_corrected_index_build",
+    "11_EV04_corrected_evaluation_ENRICHED_MRR",
+    "12_D1a_corrected_execution_under_future_v05_authorization",
+    "13_integrity_validation",
+    "14_case_level_comparisons",
+    "15_aggregate_comparisons",
+    "16_unified_sensitivity_summary",
+    "17_execution_manifest",
+    "18_exact_hash_ledger",
+    "19_final_completion_state"
+  ],
+  "v04_partial_roots_policy": "NEVER_INPUT / NEVER_REUSED / NEVER_CLEANED_BY_V05"
+}
