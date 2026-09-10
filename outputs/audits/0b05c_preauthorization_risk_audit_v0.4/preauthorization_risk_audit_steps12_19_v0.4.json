@@ -1,0 +1,578 @@
+{
+  "artifact_id": "0b05c_preauthorization_risk_audit_steps12_19_v0.4",
+  "schema_version": 1,
+  "classification": "CODEX_LOCAL_PREAUTHORIZATION_RISK_AUDIT / NOT_INDEPENDENT_GITHUB_CI",
+  "generated_at_utc": "2026-09-10T19:42:17.9643360Z",
+  "status": "PREAUTH_RISK_AUDIT_COMPLETED / V05_NOT_BUILT / ATTEMPT06_NOT_AUTHORIZED",
+  "baseline_bindings": {
+    "main": "812cb69a498d0da1aaf4a363b52e1a8ff3c2b9ea",
+    "attempt05_audit_evidence": "5144bbdfc3b36e6172ecdd604a3e71d256ab248b",
+    "attempt05_local_raw_evidence_available": true,
+    "canonical_plan": "fe847f708d4d1ded92b5a50a38d4913bb69ed311",
+    "article": "254b1e6df736fa9938ac86a515d65b36f4d361c5"
+  },
+  "diagnostic_data_policy": "DIAGNOSTIC_ONLY / NOT_SCIENTIFIC_RESULT / NEVER_REUSED_FOR_ATTEMPT06",
+  "environment_candidates": [
+    {
+      "id": "PROJECT_VENV_PY310",
+      "python_version": "3.10.11",
+      "executable_sha256": "b2c836c52cdf063180b9ee76f67ac42946101b79ac457f3494035a67c090d961",
+      "imports": {
+        "numpy": "PASS / 2.2.6",
+        "sentence_transformers": "PASS / 5.5.1",
+        "torch": "PASS / 2.12.0+cpu",
+        "tqdm": "PASS / 4.68.2",
+        "hnswlib": "FAIL / NOT_REQUIRED_BY_CURRENT_EXACT_BRUTE_FORCE_PATH"
+      },
+      "d1a_builder_import": "PASS",
+      "d1a_evaluator_import": "PASS",
+      "current_d1a_path_usable": true
+    },
+    {
+      "id": "SYSTEM_PYTHON310",
+      "python_version": "3.10.11",
+      "executable_sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+      "imports": {
+        "numpy": "FAIL",
+        "sentence_transformers": "FAIL",
+        "torch": "FAIL",
+        "tqdm": "FAIL",
+        "hnswlib": "FAIL / NOT_REQUIRED_BY_CURRENT_EXACT_BRUTE_FORCE_PATH"
+      },
+      "d1a_builder_import": "FAIL_AT_NUMPY_IMPORT",
+      "d1a_evaluator_import": "FAIL_AT_NUMPY_IMPORT",
+      "current_d1a_path_usable": false
+    },
+    {
+      "id": "CODEX_PRIMARY_RUNTIME_PY312",
+      "python_version": "3.12.14",
+      "executable_sha256": "372c2eae555b344520bf147be0096e009069aeca4e7f78d6aecea6d53158056a",
+      "imports": {
+        "numpy": "PASS / 2.3.5",
+        "sentence_transformers": "FAIL",
+        "torch": "FAIL",
+        "tqdm": "FAIL",
+        "hnswlib": "FAIL / NOT_REQUIRED_BY_CURRENT_EXACT_BRUTE_FORCE_PATH"
+      },
+      "d1a_builder_import": "FAIL_AT_SENTENCE_TRANSFORMERS_IMPORT",
+      "d1a_evaluator_import": "FAIL_AT_SENTENCE_TRANSFORMERS_IMPORT",
+      "current_d1a_path_usable": false
+    }
+  ],
+  "dependency_scope": {
+    "direct_d1a_imports": [
+      "numpy",
+      "sentence_transformers"
+    ],
+    "sentence_transformer_runtime_verified_by_direct_import_and_smoke": true,
+    "hnsw_configured": false,
+    "retrieval_mode": "EXACT_BRUTE_FORCE_DOT_PRODUCT_OVER_NORMALIZED_VECTORS",
+    "hnswlib_is_current_path_blocker": false
+  },
+  "model_manifest_verification": {
+    "historical_manifest": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/text2trade_mnrl_nandina8_v02_run_metadata.json",
+    "governed_file_count": 9,
+    "pass_exact_count": 9,
+    "missing_count": 0,
+    "mismatch_count": 0,
+    "extra_count": 0,
+    "complete_directory_identity": "PASS_EXACT",
+    "placement_requirement": "THE_EXECUTION_CHECKOUT_MUST_EXPOSE_THE_COMPLETE_GOVERNED_DIRECTORY"
+  },
+  "offline_model_smoke": {
+    "status": "PASS",
+    "interpreter_id": "PROJECT_VENV_PY310",
+    "offline_flags": true,
+    "device": "cpu",
+    "input_classification": "32_SYNTHETIC_TRIVIAL_STRINGS",
+    "batch_size": 32,
+    "max_seq_length": 128,
+    "shape": [
+      32,
+      384
+    ],
+    "dtype": "float32",
+    "all_finite": true,
+    "normalization_tolerance": "8_FLOAT32_EPSILON",
+    "all_norms_within_tolerance": true,
+    "network_used": false,
+    "scientific_input_used": false
+  },
+  "d1a_input_and_patch_shadow": {
+    "status": "PASS",
+    "original_corpus_sha_exact": true,
+    "eval_sha_exact": true,
+    "eval_row_count": 1056,
+    "eval_case_ids_nonempty": true,
+    "eval_case_ids_unique": true,
+    "corpus_total_rows_preserved": true,
+    "nandina8_document_count": 7644,
+    "nandina8_codes_unique": true,
+    "nandina8_order_preserved": true,
+    "changed_document_count": 2,
+    "changed_codes": [
+      "87044110",
+      "87045110"
+    ],
+    "unpatched_documents_identical": true,
+    "runtime_config_changed_field_count": 4,
+    "runtime_config_allowed_diff_exact": true,
+    "corpus_embeddings_built": false
+  },
+  "host_capacity": {
+    "checkout_volume_free_bytes": 463415988224,
+    "host_total_visible_memory_bytes": 34070192128,
+    "host_free_physical_memory_bytes_at_probe": 17817530368,
+    "attempt05_partial_output_bytes": 237929403,
+    "historical_d1a_index_bytes": 15055856,
+    "historical_d1a_evaluation_bytes": 2769761,
+    "complete_model_directory_bytes": 477616987,
+    "reference_footprint_bytes": 733372007,
+    "conservative_two_copy_disk_margin_bytes": 1466744014,
+    "disk_capacity_status": "PASS_WITH_LARGE_OBSERVED_MARGIN",
+    "memory_capacity_status": "REDUCED_RISK_BY_SUCCESSFUL_MODEL_SMOKE / FULL_RUN_PEAK_REMAINS_RUNTIME_ONLY"
+  },
+  "shadow_steps": {
+    "12": {
+      "status": "PASS_WITH_MANDATORY_INTERPRETER_BINDING_REMEDIATION",
+      "real_d1a_executed": false
+    },
+    "13": {
+      "status": "PASS",
+      "current_integrity_scope": "EXISTENCE_OF_14_EV03_EV04_FILES_ONLY",
+      "attempt05_inventory_files_checked": 26,
+      "hashes_pass_exact": 26,
+      "mismatch_count": 0
+    },
+    "14": {
+      "status": "BLOCKED_FOR_EV03 / PASS_FOR_EV04",
+      "EV03": {
+        "case_summary_count": 1056,
+        "candidate_case_count": 1046,
+        "failure": "CURRENT_COMPARATOR_REQUIRES_A_NONEMPTY_CANDIDATE_RANKING_FOR_ALL_CASES",
+        "full_rows_constructed": false
+      },
+      "EV04": {
+        "case_count": 1056,
+        "case_ids_unique": true,
+        "nandina_ref_stable": true,
+        "schema_order_exact": true,
+        "full_rows_constructed": true
+      },
+      "negative_controls": {
+        "missing_or_extra_case_id": "FAIL_CLOSED_PASS",
+        "duplicate_case_id": "FAIL_CLOSED_PASS",
+        "rank_gap": "FAIL_CLOSED_PASS",
+        "duplicate_ev04_code": "FAIL_CLOSED_PASS",
+        "changed_nandina_ref": "FAIL_CLOSED_PASS"
+      }
+    },
+    "15": {
+      "status": "POSITIVE_IN_MEMORY_PASS / NEGATIVE_FINITE_VALIDATION_BLOCKER",
+      "EV03": {
+        "metric_table_count": 17,
+        "aggregate_count": 17
+      },
+      "EV04": {
+        "canonical_metric_key_count": 92,
+        "metric_table_count": 27,
+        "aggregate_count": 28,
+        "order_exact": true,
+        "mrr_101_200_contribution_third": true,
+        "observed_values_finite": true,
+        "live_in_memory_path": "PASS"
+      },
+      "negative_controls": {
+        "missing_metric": "FAIL_CLOSED_PASS",
+        "extra_metric": "FAIL_CLOSED_PASS",
+        "reordered_metric": "FAIL_CLOSED_PASS",
+        "denominator_mismatch": "FAIL_CLOSED_PASS",
+        "nan_noncontribution_metric": "NOT_REJECTED",
+        "inf_noncontribution_metric": "NOT_REJECTED"
+      },
+      "persisted_sorted_json_reload": "FAIL_CLOSED_ON_METRIC_ROW_KEY_ORDER / LIVE_RUNNER_USES_IN_MEMORY_OBJECT"
+    },
+    "16": {
+      "status": "POSITIVE_PASS / SCHEMA_VALIDATION_BLOCKER",
+      "positive_with_synthetic_d1a": "PASS",
+      "missing_d1a": "FAIL_CLOSED_PASS",
+      "malformed_d1a_type": "FAIL_CLOSED_PASS",
+      "empty_d1a_mapping": "NOT_REJECTED",
+      "malformed_ev03_ev04": "NOT_REJECTED"
+    },
+    "17": {
+      "status": "PASS_WITH_RESIDUAL_RUNTIME_OBJECT_RISK",
+      "json_serialization": "PASS",
+      "authorization_provenance_present": true,
+      "execution_order_count": 19,
+      "execution_order_exact": true,
+      "v04_partial_reference_in_v05_projection": false,
+      "preexisting_path": "FAIL_CLOSED_PASS"
+    },
+    "18": {
+      "status": "PASS",
+      "expected_set_count": 47,
+      "producer_set_count": 47,
+      "missing_in_producer": [],
+      "unexpected_producer_outputs": [],
+      "path_collision_count": 0,
+      "failure_only_record_in_success_set": false,
+      "exact_set": "PASS",
+      "remove_one": "FAIL_CLOSED_PASS",
+      "add_unexpected": "FAIL_CLOSED_PASS"
+    },
+    "19": {
+      "status": "PASS",
+      "synthetic_positive_step_count": 19,
+      "synthetic_positive": "PASS",
+      "prior_step_failure": "FAIL_CLOSED_PASS",
+      "missing_operation": "FAIL_CLOSED_PASS",
+      "reordered_operation": "FAIL_CLOSED_PASS",
+      "early_final": "FAIL_CLOSED_PASS"
+    }
+  },
+  "risk_register": [
+    {
+      "risk_id": "R12-01",
+      "step": 12,
+      "failure_mechanism": "Execution under an interpreter lacking D1a runtime dependencies",
+      "static_evidence": "The D1a subprocess inherits sys.executable and directly imports numpy and sentence_transformers",
+      "probe": "Three existing interpreters plus direct D1a module imports",
+      "result": "One preexisting project interpreter passes required imports; two candidates fail",
+      "category": "REDUCED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Bind and verify the passing interpreter identity before authorization and execution",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R12-02",
+      "step": 12,
+      "failure_mechanism": "v0.4 preflight does not gate interpreter/package readiness",
+      "static_evidence": "Current preflight validates files and Git bindings but does not import D1a runtime modules",
+      "probe": "Cross-interpreter import matrix",
+      "result": "Interpreter choice determines PASS versus deterministic import failure",
+      "category": "BLOCKING_RISK_REQUIRES_REMEDIATION_BEFORE_V05",
+      "mitigation": "Add a read-only environment gate before any future authorization integration",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R12-03",
+      "step": 12,
+      "failure_mechanism": "Execution checkout may expose weights without the remaining governed model files",
+      "static_evidence": "SentenceTransformer loads a directory, while v0.4 binds only model.safetensors",
+      "probe": "Nine-file historical model manifest audit across available project-local model directory",
+      "result": "A complete exact directory exists, but checkout placement must be gated",
+      "category": "BLOCKING_RISK_REQUIRES_REMEDIATION_BEFORE_V05",
+      "mitigation": "Gate all nine governed files and execute only where the complete directory is present",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R12-04",
+      "step": 12,
+      "failure_mechanism": "Offline model load or encode may fail despite successful imports",
+      "static_evidence": "D1a requires local CPU SentenceTransformer inference",
+      "probe": "Offline CPU load and normalized encode of 32 synthetic strings",
+      "result": "PASS with shape 32x384, float32, finite values and normalized vectors",
+      "category": "REDUCED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Repeat the same smoke as a mandatory preauthorization gate; full-corpus runtime remains untested",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R12-05",
+      "step": 12,
+      "failure_mechanism": "Frozen input, patch or runtime config drift",
+      "static_evidence": "Two-code patch and four-field config derivation are contractually frozen",
+      "probe": "Git-blob input hashes, 1056-case EVAL, in-memory patch and config diff",
+      "result": "All identities, counts, uniqueness, two-document scope and four-field diff pass",
+      "category": "ELIMINATED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Retain exact bindings in v0.5",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R12-06",
+      "step": 12,
+      "failure_mechanism": "Disk or RAM exhaustion during model/index/evaluation runtime",
+      "static_evidence": "D1a coexists with frozen inputs and creates a full vector/index/evaluation set",
+      "probe": "Host free disk/RAM and observed historical/partial footprints plus synthetic model smoke",
+      "result": "No current capacity blocker; full-run peak allocation is not preauth-provable",
+      "category": "RESIDUAL_RUNTIME_RISK_CANNOT_BE_ELIMINATED_PREAUTH",
+      "mitigation": "Recheck capacity immediately before execution and fail before authorization if degraded",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R13-01",
+      "step": 13,
+      "failure_mechanism": "Existence-only integrity can accept corrupted or semantically malformed runtime files",
+      "static_evidence": "Current integrity checks only 14 EV03/EV04 paths with is_file",
+      "probe": "Current integrity plus independent verification of 26 Prompt33 inventory hashes",
+      "result": "Observed partials pass exactly, but the current step does not itself enforce those hashes",
+      "category": "REDUCED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Add hash/schema/cardinality checks to v0.5 integrity before comparisons",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R14-01",
+      "step": 14,
+      "failure_mechanism": "EV03 case comparison requires candidate rows for cases with empty effective retrieval",
+      "static_evidence": "Case summaries contain 1056 cases while EV03 candidate rows cover 1046 cases",
+      "probe": "Current full case-level comparator over Prompt33 partial outputs",
+      "result": "EV03 fails closed before constructing comparison rows; EV04 passes all 1056",
+      "category": "BLOCKING_RISK_REQUIRES_REMEDIATION_BEFORE_V05",
+      "mitigation": "Define and test an empty-ranking representation consistent with rank 0, without changing retrieval",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R14-02",
+      "step": 14,
+      "failure_mechanism": "Case/rank/code schema corruption",
+      "static_evidence": "Comparator has explicit identity, contiguity and EV04 uniqueness guards",
+      "probe": "Five synthetic negative controls",
+      "result": "Missing/extra case, duplicate, rank gap, duplicate EV04 code and changed reference all rejected",
+      "category": "ELIMINATED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Preserve negative controls in v0.5",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R15-01",
+      "step": 15,
+      "failure_mechanism": "Aggregate schema, order, contribution or denominator drift",
+      "static_evidence": "EV04 contract requires 92 keys, 27 metric rows and 28 aggregate rows",
+      "probe": "Current in-memory aggregate path and missing/extra/reorder/denominator negatives",
+      "result": "Positive path and four structural negative controls pass",
+      "category": "ELIMINATED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Retain the exact in-memory contract",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R15-02",
+      "step": 15,
+      "failure_mechanism": "NaN or Infinity in a non-contribution metric is accepted",
+      "static_evidence": "Legacy metric-table validation checks numeric type but not finiteness",
+      "probe": "Synthetic NaN and Infinity mutations",
+      "result": "Both nonfinite mutations were not rejected",
+      "category": "BLOCKING_RISK_REQUIRES_REMEDIATION_BEFORE_V05",
+      "mitigation": "Require math.isfinite for every metric-table and aggregate numeric field",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R15-03",
+      "step": 15,
+      "failure_mechanism": "Sorted JSON serialization changes metric row key order and cannot be reloaded by the exact-order validator",
+      "static_evidence": "Persisted rows order denominator, metric, numerator, value while the in-memory contract uses metric, numerator, denominator, value",
+      "probe": "Reloaded Prompt33 EV04 metrics versus current aggregate validator",
+      "result": "Reload is rejected; the live runner path passes because it retains the in-memory object",
+      "category": "REDUCED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Freeze a serialization/reload contract in v0.5; never use this as resume permission",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R16-01",
+      "step": 16,
+      "failure_mechanism": "Unified summary accepts empty D1a aggregate mappings and malformed EV03/EV04 payloads",
+      "static_evidence": "Current function checks only D1a status and Mapping type",
+      "probe": "Positive synthetic D1a, missing/type-malformed/empty D1a and malformed arm controls",
+      "result": "Positive, missing and wrong-type behavior is correct; empty D1a and malformed arms are accepted",
+      "category": "BLOCKING_RISK_REQUIRES_REMEDIATION_BEFORE_V05",
+      "mitigation": "Validate all three arm statuses, schemas, exact counts, references and nonempty D1a evidence",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R16-02",
+      "step": 16,
+      "failure_mechanism": "No valid unified summary exists unless step 12 produces complete D1a outputs",
+      "static_evidence": "Summary consumes D1a references produced only after model runtime",
+      "probe": "Positive synthetic D1a reference object",
+      "result": "Summary logic can pass, but actual D1a availability remains runtime-dependent",
+      "category": "RESIDUAL_RUNTIME_RISK_CANNOT_BE_ELIMINATED_PREAUTH",
+      "mitigation": "Require complete D1a validation before summary invocation",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R17-01",
+      "step": 17,
+      "failure_mechanism": "Manifest serialization, provenance/order drift or overwrite",
+      "static_evidence": "Manifest is written after prior runtime objects and uses create-new semantics",
+      "probe": "Synthetic v0.5 manifest serialization, order/provenance checks and preexisting-path negative",
+      "result": "All tested controls pass; actual runtime object serializability remains future-dependent",
+      "category": "REDUCED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Validate the complete manifest object in memory immediately before write",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R18-01",
+      "step": 18,
+      "failure_mechanism": "Expected and producer output sets diverge or collide",
+      "static_evidence": "Ledger contract declares an exact success set and excludes only its own ledger",
+      "probe": "Independent expected/producer derivations plus exact/remove/add tempdir validator",
+      "result": "47 equals 47, no missing/unexpected/collision, and both negative controls reject",
+      "category": "ELIMINATED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Regenerate both independent sets for v0.5 and compare before authorization",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R18-02",
+      "step": 18,
+      "failure_mechanism": "Future bytes may be missing, corrupted or differ at hashing time",
+      "static_evidence": "Preauthorization can validate names but cannot know hashes of future outputs",
+      "probe": "Placeholder exact-set validation only",
+      "result": "Set design is closed; future content identity remains runtime-only",
+      "category": "RESIDUAL_RUNTIME_RISK_CANNOT_BE_ELIMINATED_PREAUTH",
+      "mitigation": "Hash every actual output only after all producers and reject any set mismatch",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R19-01",
+      "step": 19,
+      "failure_mechanism": "Missing/reordered steps, prior failure or premature final state",
+      "static_evidence": "Runner freezes 19 operation keys and checks 18 prior states before final PASS",
+      "probe": "All-PASS synthetic pipeline and four fail-closed controls",
+      "result": "All orchestration controls behave as required",
+      "category": "ELIMINATED_BY_PREAUTH_VERIFICATION",
+      "mitigation": "Preserve the synthetic harness in v0.5",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "risk_id": "R19-02",
+      "step": 19,
+      "failure_mechanism": "A real producer can still raise after prior side effects",
+      "static_evidence": "Pipeline is sequential and real components create outputs before final completion",
+      "probe": "Synthetic prior-step failure",
+      "result": "Fail-closed propagation works, but real side effects and host faults cannot be eliminated preauthorization",
+      "category": "RESIDUAL_RUNTIME_RISK_CANNOT_BE_ELIMINATED_PREAUTH",
+      "mitigation": "Use new isolated roots, no resume, one invocation and post-failure evidence preservation",
+      "V05_GATE_REQUIRED": true
+    }
+  ],
+  "step_risk_matrix": [
+    {
+      "step": 12,
+      "initial_risk": "HIGH",
+      "tests": "interpreter inventory, direct imports, full model manifest, offline smoke, input/patch/config and capacity probes",
+      "evidence": "A usable preexisting interpreter and complete exact model directory exist",
+      "risk_eliminated": false,
+      "residual_risk": "Interpreter/check-out binding and full-run capacity",
+      "mandatory_mitigation": "Environment and complete-model gate before authorization",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "step": 13,
+      "initial_risk": "MEDIUM",
+      "tests": "current integrity plus 26 inventory hashes",
+      "evidence": "Observed partials pass; current function is existence-only",
+      "risk_eliminated": false,
+      "residual_risk": "Semantic corruption not detected at step 13",
+      "mandatory_mitigation": "Hash/schema/cardinality validation",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "step": 14,
+      "initial_risk": "HIGH",
+      "tests": "full Prompt33 partial comparison plus five negative controls",
+      "evidence": "EV03 blocks on 10 empty-ranking cases; EV04 and negatives pass",
+      "risk_eliminated": false,
+      "residual_risk": "Deterministic EV03 comparator failure",
+      "mandatory_mitigation": "Contractual empty-ranking handling before v0.5",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "step": 15,
+      "initial_risk": "HIGH",
+      "tests": "positive aggregate contracts and six negative controls",
+      "evidence": "Canonical path passes; NaN/Inf are accepted outside contribution fields",
+      "risk_eliminated": false,
+      "residual_risk": "Nonfinite aggregate acceptance and persisted row-order incompatibility",
+      "mandatory_mitigation": "Finite checks and serialization/reload contract",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "step": 16,
+      "initial_risk": "HIGH",
+      "tests": "positive synthetic D1a and malformed-input controls",
+      "evidence": "Empty D1a mapping and malformed EV arms are accepted",
+      "risk_eliminated": false,
+      "residual_risk": "Under-validated unified summary",
+      "mandatory_mitigation": "Strict three-arm schema and evidence validation",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "step": 17,
+      "initial_risk": "MEDIUM",
+      "tests": "tempdir serialization, provenance/order/path projection and overwrite guard",
+      "evidence": "All synthetic controls pass",
+      "risk_eliminated": false,
+      "residual_risk": "Actual runtime object serialization",
+      "mandatory_mitigation": "Pre-write in-memory manifest validation",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "step": 18,
+      "initial_risk": "HIGH",
+      "tests": "independent 47-path sets and exact/remove/add ledger validation",
+      "evidence": "Set design matches exactly and negatives fail closed",
+      "risk_eliminated": false,
+      "residual_risk": "Future content hashes are intrinsically runtime",
+      "mandatory_mitigation": "Post-producer exact hash validation",
+      "V05_GATE_REQUIRED": true
+    },
+    {
+      "step": 19,
+      "initial_risk": "MEDIUM",
+      "tests": "19-step synthetic positive and fail/reorder/missing/early-final negatives",
+      "evidence": "Orchestration logic passes every synthetic control",
+      "risk_eliminated": false,
+      "residual_risk": "Real component/host faults after side effects",
+      "mandatory_mitigation": "Isolated roots, no resume and evidence preservation",
+      "V05_GATE_REQUIRED": true
+    }
+  ],
+  "blocking_findings": [
+    "R12-02_INTERPRETER_READINESS_NOT_GATED",
+    "R12-03_COMPLETE_MODEL_DIRECTORY_NOT_GATED",
+    "R14-01_EV03_EMPTY_RANKING_CASES_BREAK_COMPARISON",
+    "R15-02_NONFINITE_NONCONTRIBUTION_METRICS_NOT_REJECTED",
+    "R16-01_UNIFIED_SUMMARY_SCHEMA_UNDERVALIDATED"
+  ],
+  "mandatory_v05_controls": [
+    "Bind one exact interpreter and rerun imports plus offline synthetic smoke before authorization integration",
+    "Validate every file in the frozen model manifest in the execution checkout",
+    "Define fail-closed EV03 empty-ranking representation without changing retrieval semantics",
+    "Reject NaN and Infinity in every metric and aggregate numeric field",
+    "Validate complete EV03, EV04 and D1a summary schemas and nonempty references",
+    "Strengthen step 13 beyond existence to hashes, schemas and cardinalities",
+    "Freeze serialization/reload behavior for metric-table row order",
+    "Re-derive and compare expected versus producer sets for v0.5",
+    "Preserve isolated roots, one invocation, no retry/resume and failure evidence rules"
+  ],
+  "preauthorization_answers": {
+    "risks_eliminated_before_real_execution": [
+      "D1a frozen input/patch/config drift",
+      "Case/rank/code negative-control behavior",
+      "Canonical aggregate structure and denominator behavior",
+      "Ledger success-set cardinality/naming design",
+      "Nineteen-step orchestration ordering logic"
+    ],
+    "risks_only_reduced": [
+      "Interpreter availability and model loading",
+      "Integrity of future files",
+      "Manifest serialization of future runtime objects",
+      "Host capacity"
+    ],
+    "intrinsic_runtime_risks": [
+      "Full-corpus embedding/model execution",
+      "Future output byte/hash identity",
+      "Host/resource failure after side effects",
+      "Actual D1a availability for downstream summary"
+    ],
+    "current_blocker_exists": true,
+    "blocker_scope": "DOES_NOT_BLOCK_BUILDING_REMEDIATIONS / BLOCKS_ANY_FUTURE_AUTHORIZATION_UNTIL_CLOSED",
+    "preexisting_interpreter_resolves_environment_without_install": true,
+    "ready_for_attempt06": false
+  },
+  "ATTEMPT05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "ATTEMPT06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "V05": "NOT_BUILT",
+  "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+  "0B05C_CLOSURE": "NOT_AUTHORIZED",
+  "dependencies_installed_or_modified": false,
+  "scientific_execution_performed": false,
+  "sensitive_partial_outputs_published": false
+}
