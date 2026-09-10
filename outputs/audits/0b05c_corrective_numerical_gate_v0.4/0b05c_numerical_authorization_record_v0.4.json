@@ -1,0 +1,32 @@
+{
+  "artifact_id": "0b05c_numerical_authorization_record_v0.4",
+  "authorization_baseline_commit": "588962100362174df6486a3c6446276d8749743c",
+  "baseline_artifacts": {
+    "d1a_spec": {
+      "canonical_git_blob_sha256": "9e7d69f8ee353248da1601ea53efb4c1594cdb6322b78a1d15ee60310282bc71",
+      "canonical_size_bytes": 17469,
+      "git_blob_sha1": "805f0d60c16fcbead5af1d1929b6be963a692bd8",
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.4/d1a_numerical_execution_spec_v0.4.json"
+    },
+    "ev03_spec": {
+      "canonical_git_blob_sha256": "ac77bb6058b4a722a1c7fa860f70e413661f9987077143061354f58afc745bf5",
+      "canonical_size_bytes": 21130,
+      "git_blob_sha1": "053533ff9ea78404848c69790a8c46839444c1f3",
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.4/ev03_numerical_execution_spec_v0.4.json"
+    },
+    "ev04_spec": {
+      "canonical_git_blob_sha256": "8b80daf254d1b73f2182a85599db42317fcb3b2c59088d0f32dafe62eacbb58e",
+      "canonical_size_bytes": 29149,
+      "git_blob_sha1": "5c3d7d83c447b542049bf290819b4eb790780b43",
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.4/ev04_numerical_execution_spec_v0.4.json"
+    },
+    "unified_gate": {
+      "canonical_git_blob_sha256": "a5dede786f625b7e3eda6473d808dc6538262540d1ec96d2702bb9167eca002a",
+      "canonical_size_bytes": 29108,
+      "git_blob_sha1": "82032bbc7d8bc1997f734f0e7565892e795e398e",
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.4/0b05c_corrective_numerical_execution_gate_v0.4.json"
+    }
+  },
+  "baseline_external_audit": "PASS / APPROVED_FOR_INTEGRATION",
+  "schema_version": 3
+}

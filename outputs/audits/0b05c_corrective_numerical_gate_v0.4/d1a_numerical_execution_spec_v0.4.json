@@ -12,12 +12,12 @@
     "A complete output hash ledger is emitted without overwrite."
   ],
   "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
-  "attempt05": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "attempt05": "AUTHORIZED / NOT_EXECUTED",
   "authorization": {
     "D1A_CORRECTIVE_CORPUS_CREATED": false,
     "D1A_CORRECTIVE_INDEX_CREATED": false,
     "D1A_CORRECTIVE_METRICS_COMPUTED": false,
-    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED"
+    "D1A_NUMERICAL_EXECUTION": "AUTHORIZED"
   },
   "corrected_normative_corpus": {
     "definition": {
