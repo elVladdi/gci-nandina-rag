@@ -1,9 +1,9 @@
 {
   "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
   "attempt05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
-  "attempt06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "attempt06": "AUTHORIZED / NOT_EXECUTED",
   "authorization": {
-    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false
   },

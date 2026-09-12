@@ -1,17 +1,17 @@
 {
   "attempt05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
-  "attempt06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "attempt06": "AUTHORIZED / NOT_EXECUTED",
   "authorization": {
-    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "EV03_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "EV04_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "NOT_AUTHORIZED",
-    "authorization_record_present": false,
+    "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "EV04_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "UNIFIED_0B05C_NUMERICAL_EXECUTION": "AUTHORIZED",
+    "authorization_record_present": true,
     "corrective_metrics_computed": false,
     "corrective_retrieval_executed": false,
     "runtime_authorization_record_present": false
   },
-  "authorization_readiness": "NOT_AUTHORIZED",
+  "authorization_readiness": "AUTHORIZATION_APPROVED / READY_FOR_SINGLE_EXECUTION",
   "authorization_record_contract": {
     "artifact_id": "0b05c_numerical_authorization_record_v0.5",
     "authorization_commit_path_status": {
@@ -510,7 +510,7 @@
     "outputs/audits/0b05c_corrective_numerical_runtime_v0.5"
   ],
   "gate_id": "0b05c_corrective_numerical_execution_gate_v0.5",
-  "gate_status": "CANDIDATE_READY_FOR_EXTERNAL_AUDIT / NOT_AUTHORIZED",
+  "gate_status": "APPROVED / INTEGRATED",
   "gate_version": "v0.5",
   "historical_vector_replay_required": true,
   "methodological_invariants": {
