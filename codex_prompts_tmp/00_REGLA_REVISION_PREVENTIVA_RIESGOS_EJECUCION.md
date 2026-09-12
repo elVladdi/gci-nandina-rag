@@ -34,6 +34,30 @@ Deben permanecer siempre separados:
 
 La RPRE es un **gate preventivo previo**. La autorización y la ejecución oficial conservan las reglas específicas del bloque experimental correspondiente.
 
+## 1.1 Regla de transparencia hacia Codex
+
+La RPRE es una **regla interna de gestión de IA Experimental**.
+
+Por tanto:
+
+- el usuario **no debe recibir ni reenviar a Codex un prompt separado denominado RPRE**;
+- Codex **no necesita conocer que existe una regla llamada RPRE**;
+- IA Experimental debe aplicar la RPRE internamente al diseñar el siguiente bloque operativo;
+- si para cerrar riesgos hacen falta checks técnicos, IA Experimental los incorpora de manera natural dentro del prompt técnico que ya corresponda ejecutar;
+- Codex solo ve y ejecuta las instrucciones técnicas concretas del bloque que IA Experimental le entregue;
+- la existencia, evaluación y estado de la RPRE son responsabilidad de IA Experimental, no de Codex;
+- no se debe crear interacción adicional con el usuario solo para comunicar que la RPRE existe.
+
+En términos operativos:
+
+`RPRE = REGLA INTERNA DE IA EXPERIMENTAL`
+
+`CODEX = EJECUTOR DE CHECKS/ACCIONES QUE IA EXPERIMENTAL HAYA INCORPORADO EN EL PROMPT OPERATIVO`
+
+`USUARIO = NO NECESITA GESTIONAR NI TRANSMITIR LA RPRE`
+
+La regla debe ser **transparente para Codex y para el usuario**, salvo cuando IA Experimental necesite explicar por qué aún no autoriza una ejecución oficial.
+
 ---
 
 # 2. Cuándo es obligatoria
@@ -60,7 +84,7 @@ No se exige una RPRE completa para tareas puramente administrativas o de bajo ri
 - corrección textual o metadata sin efecto experimental;
 - creación de un artefacto de cierre que no ejecuta el experimento.
 
-La exención debe ser explícita cuando pueda existir duda:
+La exención debe quedar registrada internamente por IA Experimental cuando pueda existir duda:
 
 `RPRE_APPLICABILITY = NOT_REQUIRED / LOW_RISK_NON_EXECUTION_BLOCK`
 
@@ -178,7 +202,7 @@ Para cada ejecución sometida a RPRE, IA Experimental debe revisar como mínimo 
 
 # 5. Registro de riesgos
 
-La RPRE debe producir un registro explícito. No es obligatorio usar una tabla en el chat, pero la evidencia versionada debe permitir reconstruir cada riesgo relevante.
+La RPRE debe producir un registro explícito para uso de IA Experimental. No es obligatorio exponer ese registro al usuario ni enviarlo a Codex como documento independiente, salvo que sea necesario para trazabilidad o auditoría.
 
 Cada riesgo debe contener al menos:
 
@@ -281,7 +305,7 @@ El preflight debe validar **capacidad de ejecución**, no anticipar y optimizar 
 
 # 9. Criterio de PASS de la RPRE
 
-Solo puede declararse:
+Solo puede declararse internamente:
 
 ```text
 PRE_EXECUTION_RISK_REVIEW = PASS
@@ -305,6 +329,8 @@ PRE_EXECUTION_RISK_REVIEW = FAIL / BLOCKED
 OFFICIAL_EXECUTION = NOT_AUTHORIZED
 ```
 
+IA Experimental no debe trasladar este estado como una tarea adicional al usuario; simplemente no debe emitir todavía el prompt que autorice la ejecución oficial.
+
 ---
 
 # 10. Eficiencia: evitar idas y venidas innecesarias
@@ -313,15 +339,16 @@ La RPRE existe para **reducir** ciclos, no para crear una nueva cadena burocrát
 
 Por defecto:
 
-1. IA Experimental debe consolidar en **un único bloque preventivo** todos los riesgos previsibles relevantes;
-2. Codex debe ejecutar en ese bloque todas las verificaciones estáticas/preflight permitidas;
-3. IA Experimental debe auditar el paquete completo una sola vez;
-4. solo si aparece un hallazgo bloqueante concreto se crea un bloque correctivo;
-5. no se fragmenta un mismo mapa de riesgo en múltiples prompts sin necesidad técnica.
+1. IA Experimental consolida internamente en **un único mapa preventivo** todos los riesgos previsibles relevantes;
+2. cuando necesita comprobaciones técnicas de Codex, las incorpora en el prompt operativo normal que corresponda, sin convertir la RPRE en una tarea separada para el usuario;
+3. Codex ejecuta únicamente esas comprobaciones técnicas concretas, sin necesidad de gestionar ni conocer la regla metodológica RPRE;
+4. IA Experimental audita el paquete completo;
+5. solo si aparece un hallazgo bloqueante concreto se crea un bloque correctivo;
+6. no se fragmenta un mismo mapa de riesgo en múltiples prompts sin necesidad técnica.
 
-Cuando sea seguro y compatible con la gobernanza, la RPRE puede incorporarse al gate inmediatamente anterior a la autorización en vez de crear un metabloque adicional.
+Cuando sea seguro y compatible con la gobernanza, la RPRE puede resolverse íntegramente mediante auditoría de IA Experimental y checks ya disponibles, sin enviar ninguna instrucción adicional a Codex.
 
-No obstante, para ejecuciones `one-shot` o de alto costo, la autorización oficial solo puede emitirse **después** de que la RPRE haya sido auditada como PASS.
+Para ejecuciones `one-shot` o de alto costo, la autorización oficial solo puede emitirse **después** de que IA Experimental haya concluido internamente que la RPRE está en PASS.
 
 ---
 
@@ -368,7 +395,7 @@ La RPRE evoluciona con evidencia real del proyecto, no con especulación.
 
 La integración/cierre documental de la deuda de portabilidad puede tratarse como bloque no científico de bajo riesgo si se limita estrictamente a integración auditada y reconciliación documental.
 
-Sin embargo, **antes de autorizar la ejecución oficial de EXP11B Retrieval H150/H200**, debe completarse una RPRE específica para ese retrieval.
+Sin embargo, **antes de que IA Experimental emita una autorización oficial de EXP11B Retrieval H150/H200**, debe completar internamente una RPRE específica para ese retrieval.
 
 Como mínimo debe cubrir:
 
@@ -385,9 +412,11 @@ Como mínimo debe cubrir:
 - ausencia de autorización de EXP12/Grupo 2B;
 - trazabilidad de cada una de las 20 ejecuciones y consolidación final.
 
-Hasta que esa RPRE quede auditada como PASS:
+Hasta que IA Experimental concluya que esa RPRE está en PASS:
 
 `EXP11B_RETRIEVAL_H150_H200 = NOT_AUTHORIZED / NOT_EXECUTED`
+
+Esto **no crea un prompt adicional para Codex**. La RPRE se gestiona por IA Experimental; cualquier check técnico necesario se incorporará de forma transparente en el bloque operativo que corresponda.
 
 ---
 
@@ -395,7 +424,13 @@ Hasta que esa RPRE quede auditada como PASS:
 
 Esta regla debe ser leída y aplicada por cualquier futura IA Experimental durante su onboarding.
 
-El prompt maestro de continuidad debe referenciarla expresamente y además contener su principio rector, triggers, estados y criterio de PASS para que la regla no dependa de memoria del chat.
+El prompt maestro de continuidad debe referenciarla expresamente y además contener:
+
+- su principio rector;
+- triggers;
+- estados;
+- criterio de PASS;
+- la regla de que RPRE es gestión interna de IA Experimental y no una tarea que el usuario deba reenviar a Codex.
 
 Archivo canónico administrativo de esta regla:
 
