@@ -1,0 +1,119 @@
+{
+  "artifact_id": "exp11b_portability_debt_external_closure_v0.1",
+  "schema_version": 1,
+  "baseline_commit": "7d7267f8224e56ea5e945625a7e3955ddc15eadb",
+  "status": "CANDIDATE_CLOSURE_RECORD / EXTERNAL_DECISION_ALREADY_PASS / PENDING_GIT_AUDIT_AND_INTEGRATION",
+  "external_audit_verdict": "PASS / APPROVED_FOR_PORTABILITY_DEBT_CLOSURE",
+  "prompt40_candidate_status": "REJECTED_BY_EXTERNAL_AUDIT / NOT_INTEGRATED",
+  "prompt41_replay_proof_status": "APPROVED_BY_EXTERNAL_AUDIT / INTEGRATED",
+  "EXP11B_PORTABILITY_DEBT": "CLOSED_BY_EXTERNAL_AUDIT / NOT_YET_INTEGRATED_AS_CLOSURE_RECORD",
+  "EXP11B_RETRIEVAL": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "EXP12": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "bindings": {
+    "prompt41_replay_proof": {
+      "path": "outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_portability_replay_proof_v0.1.json",
+      "git_blob": "ab3ed6aadaaebbfc3d23c725d3ad53e9518b1ead"
+    },
+    "materializer": {
+      "path": "src/experiments/materialize_exp11b_banks_v01.py",
+      "git_blob": "ba64a85b4bb8bfa9f163a4f1115440486b7d8d2c"
+    },
+    "materialization_config": {
+      "path": "src/configs/exp11b_bank_materialization_v0.1.json",
+      "git_blob": "cda209dc1ab8d6f623c6bb1c2b818c48e09d1bf8"
+    },
+    "frozen_bank_ledger": {
+      "path": "outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_hashes_v0.1.csv",
+      "git_blob": "a375c02e8364bc131a358646ba1c4401acef94d1"
+    },
+    "frozen_materialization_manifest": {
+      "path": "outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_materialization_manifest_v0.1.json",
+      "git_blob": "f06227780137a7977521a01226e0775ac4187b86"
+    },
+    "retrieval_execution_gate_config": {
+      "path": "src/configs/exp11b_retrieval_execution_gate_v0.1.json",
+      "git_blob": "905645027df16d80fb99c3ba090c185f6c730c80"
+    },
+    "retrieval_execution_gate_manifest": {
+      "path": "outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_retrieval_execution_gate_manifest_v0.1.json",
+      "git_blob": "6ea8ad94e7188180f35aa845d18b3476a22f5ab8"
+    },
+    "retrieval_execution_input_inventory": {
+      "path": "outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_retrieval_execution_input_inventory_v0.1.json",
+      "git_blob": "95416679b939f7f719d5e18508bd628d9c4ef08d"
+    },
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff"
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941"
+    }
+  },
+  "governed_bank_identity_contract": {
+    "fields": [
+      "bank_id",
+      "filename",
+      "seed",
+      "condition",
+      "row_count",
+      "new_row_count",
+      "total_dam_count",
+      "new_dam_count",
+      "bank_csv_sha256",
+      "size_bytes",
+      "composition_sha256",
+      "H100_core_id_order_sha256",
+      "increment_id_order_sha256",
+      "total_bank_id_order_sha256"
+    ],
+    "triple_comparison_status": "PASS_EXACT_20_OF_20",
+    "frozen_official_match_count": 20,
+    "frozen_official_mismatch_count": 0,
+    "frozen_replay_match_count": 20,
+    "frozen_replay_mismatch_count": 0,
+    "official_replay_match_count": 20,
+    "official_replay_mismatch_count": 0,
+    "bank_identity_mismatch_count": 0
+  },
+  "runtime_evidence_classification": {
+    "classification": "CODEX_LOCAL_RUNTIME_EVIDENCE / NOT_INDEPENDENTLY_REEXECUTED_BY_EXTERNAL_AUDITOR",
+    "external_auditor_reexecuted_replay": false,
+    "runtime_evidence_promoted_to_github_ci": false
+  },
+  "process_return_code_assessment": {
+    "observed_return_code": 2,
+    "blocking_for_governed_bank_identity": false,
+    "failure_field": "total_bank_descriptor",
+    "failure_field_is_part_of_required_14_identity_contract": false,
+    "max_absolute_delta": 5.329070518200751e-15,
+    "historical_descriptor_tolerance": 1e-12,
+    "within_historical_descriptor_tolerance": true,
+    "bank_csv_content_affected": false,
+    "assessment_basis": "All 20 CSVs were produced before exact manifest descriptor comparison; the 14 governed identity fields, including bank_csv_sha256 and size_bytes, passed all three 20-of-20 comparisons."
+  },
+  "config_provenance_resolution": {
+    "canonical_lf_sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c",
+    "windows_crlf_sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17",
+    "git_blob": "cda209dc1ab8d6f623c6bb1c2b818c48e09d1bf8",
+    "semantic_json_equal": true,
+    "classification": "SAME_GIT_BLOB_EQUIVALENT_JSON_LF_VS_CRLF_CHECKOUT_REPRESENTATION",
+    "semantic_config_drift": false
+  },
+  "historical_notice_resolution": {
+    "historical_notice": "retrieval_authorization_blocked_pending_external_audit = true",
+    "historical_notice_mutated": false,
+    "blocking_condition_status": "SUPERSEDED_FOR_PORTABILITY_DEBT_BY_PROMPT41_EXTERNAL_AUDIT",
+    "retrieval_authorization_requires_separate_future_block": true
+  },
+  "retrieval_executed": false,
+  "evaluation_metrics_computed": false,
+  "h150_h200_results_created": false,
+  "exp11b_retrieval_authorized": false,
+  "exp12_authorized": false,
+  "historical_gate_artifacts_mutated": false,
+  "canonical_plan_modified": false,
+  "article_modified": false,
+  "external_git_audit_required": true
+}
