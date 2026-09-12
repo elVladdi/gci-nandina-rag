@@ -1,0 +1,235 @@
+{
+  "artifact": "EXP11B_RETRIEVAL_PREEXECUTION_READINESS",
+  "version": "v0.3",
+  "status": "CANDIDATE_PREEXECUTION_READY_V03_PENDING_EXTERNAL_AUDIT",
+  "baseline_main": "09ff184854659110f7711b3eee65fc18927649da",
+  "candidate": {
+    "branch": "codex/exp11b-retrieval-execution-package-v03",
+    "commit": "BRANCH_HEAD_AFTER_SINGLE_CANDIDATE_COMMIT",
+    "expected_parent": "09ff184854659110f7711b3eee65fc18927649da"
+  },
+  "rejected_candidates": [
+    {
+      "branch": "codex/exp11b-retrieval-execution-package-v01",
+      "commit": "26b9e2bcf6dad74231f208f9137ffb0e39caf2e1",
+      "parent": "09ff184854659110f7711b3eee65fc18927649da",
+      "status": "DO_NOT_INTEGRATE",
+      "integrated_into_main": false,
+      "used_as_parent": false,
+      "cherry_picked": false
+    },
+    {
+      "branch": "codex/exp11b-retrieval-execution-package-v02",
+      "commit": "f5dddac0d296e74e5f92af3f863cbb3c74e757b9",
+      "parent": "09ff184854659110f7711b3eee65fc18927649da",
+      "status": "DO_NOT_INTEGRATE",
+      "integrated_into_main": false,
+      "used_as_parent": false,
+      "cherry_picked": false
+    }
+  ],
+  "findings": {
+    "F005": {
+      "status": "CLOSED",
+      "claim": "AUTHORIZATION_PATH_NOT_CANONICALLY_BOUND_TO_EXECUTION_HEAD",
+      "resolution": "Only the canonical v0.3 authorization path is accepted; it must be versioned at execution HEAD, and its working Git blob and raw SHA-256 must match the HEAD blob and bytes exactly."
+    },
+    "F006": {
+      "status": "CLOSED",
+      "claim": "ONE_SHOT_MARKER_CONSUMPTION_BOUNDARY_NOT_EXACT",
+      "resolution": "The exclusive marker is created exactly once after the first bank SHA, row and index validations and immediately before the first BM25 scoring call."
+    },
+    "F003_NO_REGRESSION": {
+      "status": "PASS",
+      "claim": "STREAMING_AND_BOUNDED_MEMORY_PRESERVED",
+      "resolution": "Case-level and candidate rows remain streamed directly to staging CSV writers and flushed per bank; no global case or candidate accumulator is introduced."
+    },
+    "F004_NO_REGRESSION": {
+      "status": "PASS",
+      "claim": "FAILURE_CONTEXT_PRESERVED",
+      "resolution": "Explicit current run, bank, condition and stage continue to identify the active operation; pre-bank and output-finalization failures remain unambiguously classified."
+    }
+  },
+  "package_files": {
+    "runner": {
+      "path": "src/experiments/run_exp11b_historical_retrieval_h150_h200_v03.py",
+      "git_blob": "90bbeba27e4890613cb463fffc1cfc07252292c5",
+      "sha256": "32f495996b8f1486cc6ef5f3906e84eb417e480208a721fb8b1c3f6820e65e06"
+    },
+    "config": {
+      "path": "src/configs/exp11b_historical_retrieval_h150_h200_execution_v0.3.json",
+      "git_blob": "08cc58f95b2d6989bf75e64b16c0d9aa8158f642",
+      "sha256": "2b91c06762409d10478cbf112bb25486ef3ffa410e5819fb0704f61fe64aa6af"
+    }
+  },
+  "input_bindings": {
+    "eval": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "rows": 1056,
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "status": "PASS_EXACT"
+    },
+    "h100_control": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "rows": 2950,
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "status": "PASS_EXACT"
+    },
+    "bank_directory": "data/interim/exp11b_historical_banks_v0.1",
+    "official_output_root": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1",
+    "future_authorization": "outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_retrieval_execution_authorization_v0.3.json",
+    "attempt_marker_root": "outputs/audits/exp11b_retrieval_execution_attempts"
+  },
+  "source_bindings": [
+    {"path":"src/configs/exp11b_retrieval_execution_gate_v0.1.json","git_blob":"905645027df16d80fb99c3ba090c185f6c730c80","status":"PASS"},
+    {"path":"outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_retrieval_execution_gate_manifest_v0.1.json","git_blob":"6ea8ad94e7188180f35aa845d18b3476a22f5ab8","status":"PASS"},
+    {"path":"outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_retrieval_execution_input_inventory_v0.1.json","git_blob":"95416679b939f7f719d5e18508bd628d9c4ef08d","status":"PASS"},
+    {"path":"outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_materialization_manifest_v0.1.json","git_blob":"f06227780137a7977521a01226e0775ac4187b86","sha256":"67512d88a46dcd85427d9eca4be07eeea3f6ec2821bf77e7acfec5a09a706cf4","status":"PASS"},
+    {"path":"outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_hashes_v0.1.csv","git_blob":"a375c02e8364bc131a358646ba1c4401acef94d1","sha256":"9686c2f642ec47c36079a3085c4d68a3f1b555588a8623ecca59333e12e0f56c","status":"PASS"},
+    {"path":"outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_portability_replay_proof_v0.1.json","git_blob":"ab3ed6aadaaebbfc3d23c725d3ad53e9518b1ead","status":"PASS"},
+    {"path":"outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_portability_debt_external_closure_v0.1.json","git_blob":"bfbeedff9025ae928a85ab8b65a261ff475422cb","status":"PASS"},
+    {"path":"src/experiments/evaluate_historical_retrieval_data_aduanas_v02.py","git_blob":"71092fa49364e941ad56fa11f146970ba90b7207","status":"PASS"},
+    {"path":"src/experiments/run_exp11a_historical_size_sensitivity_v03.py","git_blob":"2af422c4330e7c42bc354ddb5c8329085f8ce64c","status":"PASS"},
+    {"path":"src/experiments/materialize_exp11b_banks_v01.py","git_blob":"ba64a85b4bb8bfa9f163a4f1115440486b7d8d2c","status":"PASS"},
+    {"path":"src/evaluation/metrics.py","git_blob":"f96611b243cb5b5a7ab031bfba4731d7a9c8eaf4","status":"PASS"},
+    {"path":"src/bm25_index.py","git_blob":"718895e0658a55cc1590c84ef807f901b75e7c7f","status":"PASS"},
+    {"path":"src/utils/paths.py","git_blob":"6fb7053f73e3409e0ca38414b0358734260470d9","status":"PASS"},
+    {"path":"outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json","git_blob":"a43893eca3dd756a1ff11935a9cf55afb728e8f4","status":"PASS"}
+  ],
+  "bank_validation": {
+    "classification": "CODEX_LOCAL_BANK_PREFLIGHT / NOT_INDEPENDENT_GITHUB_RUNTIME_OBSERVATION",
+    "status": "PASS_EXACT_20_OF_20",
+    "bank_count": 20,
+    "h150_count": 10,
+    "h200_count": 10,
+    "governed_identity_field_count": 14,
+    "bank_identity_mismatch_count": 0,
+    "official_bank_write_count": 0,
+    "official_bank_content_mutated": false,
+    "bank_identities": [
+      {"bank_id":"EXP11B_R01_H150","filename":"EXP11B_R01_H150.csv","seed":20261005,"condition":"H150","row_count":4416,"new_row_count":1466,"total_dam_count":42,"new_dam_count":14,"bank_csv_sha256":"a95ccaa947994e9e01392c1f519f7a19ef015b560a2c3aa77f6bf3ee7a5961db","size_bytes":5337882,"composition_sha256":"433ccab6703241c436b0be35f774095374b353a5233f29e92c41dc0dc56f061d","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"97c19e7ec2c584086238e4762c39b112f84d5e7491330ad18ef7a7b84495b100","total_bank_id_order_sha256":"00fca5ca294a7702515d183d4fd18c8106bec4db4d51b88dcc388d8e161da883","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R01_H200","filename":"EXP11B_R01_H200.csv","seed":20261005,"condition":"H200","row_count":5954,"new_row_count":3004,"total_dam_count":54,"new_dam_count":26,"bank_csv_sha256":"20c987e52f0d6a221ffaa756527b1b4b571117a57c839909908cd7e7441abe49","size_bytes":7265669,"composition_sha256":"caada4e972c3b39b380960dc7c3e45fd81766c408be416f69b05a80c2094f381","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"1efb447df659359ba857d2782d14f1505153c1e543fdebaefa0c686494f3ea03","total_bank_id_order_sha256":"78597b0ed65959ce0437105ebf95c467f35233e5226aef095dd917b2da6bd18e","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R02_H150","filename":"EXP11B_R02_H150.csv","seed":20261006,"condition":"H150","row_count":4535,"new_row_count":1585,"total_dam_count":30,"new_dam_count":2,"bank_csv_sha256":"331762d93446c575abaf59c76c38eb55e106431c811dda48c99d489cff279000","size_bytes":5415360,"composition_sha256":"eb4625d8a01e58e88c0185d8be11d623a3227b1ba3888ccba95d4fe080152b1a","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"452f2151e5fa61c1f416de5053b1b1d83fe7e95fdcbf941fa6a8314a830b4e72","total_bank_id_order_sha256":"f96e4fac9a59ed904eee1bcc038db2f39ef90676b1732a9d5161aca839fa1aed","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R02_H200","filename":"EXP11B_R02_H200.csv","seed":20261006,"condition":"H200","row_count":5897,"new_row_count":2947,"total_dam_count":47,"new_dam_count":19,"bank_csv_sha256":"0b6772d0ead99f352ffde4170bceb6e443da0b84a3b652bee845f05c765cb468","size_bytes":7121941,"composition_sha256":"9eea2e84c5294308945bd294fe3b33231bce16ce956c707d475d740188b15b9b","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"39270eb7d89ea005ab7d86b387905206359f214e21508e2498b54be488fbd867","total_bank_id_order_sha256":"4596851ea675f822501a96817400d1caffd18eac2caf699351a962e9f448f68f","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R03_H150","filename":"EXP11B_R03_H150.csv","seed":20261007,"condition":"H150","row_count":4357,"new_row_count":1407,"total_dam_count":39,"new_dam_count":11,"bank_csv_sha256":"1001a3821aec92b1f7c785ba620100bb68acee0a2e4312bb041f75578eb13fb2","size_bytes":5235342,"composition_sha256":"9ddc54ef1ef382feb20672e42d923950a9e654a05dafd0ef8d14b4716416d7f2","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"a7274472348900657177d316e0c40b1572fb2c182a7d5a4b300c0a3c04aef1d7","total_bank_id_order_sha256":"dff1990152cce3cf38aa2b8e479a189f458fa83cccca37bb5a0f257c8ad71e97","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R03_H200","filename":"EXP11B_R03_H200.csv","seed":20261007,"condition":"H200","row_count":5832,"new_row_count":2882,"total_dam_count":52,"new_dam_count":24,"bank_csv_sha256":"d27fcc4a9711cbc4d9126fc337518d09430a988fae554ee12246b1fec4205b77","size_bytes":7113741,"composition_sha256":"36a95b4c55d17a45518aedc1210e071236bf4e476f76fd6f75fd1c6573b38bb8","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"6ecab009dd8b72a6ceaadbbf17010ab001a4979c1a0e42d5e97211afbe1554e7","total_bank_id_order_sha256":"a07c8285ecc47a00a695a386fbecd83a5b6c15501840c637172f6ff158352261","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R04_H150","filename":"EXP11B_R04_H150.csv","seed":20261010,"condition":"H150","row_count":4422,"new_row_count":1472,"total_dam_count":41,"new_dam_count":13,"bank_csv_sha256":"2f21215da09a2e9bdb0fe72b9dae56a88f03109cbab901a0b236633aa7410850","size_bytes":5364067,"composition_sha256":"b27b10ee8f9b45eb81cd0b2059666c3c024a814aad56ca425a0061c6937d4b4f","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"5fe9228d9472b2e1050bfdf9d993642cab14eda12e0b0456bf1a524ea206c2ba","total_bank_id_order_sha256":"543a70fbb5e0bbced1b2460af9469e890f37d7b0822667dc6f71101bc0ac2791","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R04_H200","filename":"EXP11B_R04_H200.csv","seed":20261010,"condition":"H200","row_count":5890,"new_row_count":2940,"total_dam_count":54,"new_dam_count":26,"bank_csv_sha256":"b2488c0b0a0525f0d6a98dd54071fd715afefbab719d526e4779283d9bf67887","size_bytes":7189470,"composition_sha256":"431d968f81bba0efa1d51121d5af63827adf273f4bf68a29d6e0f3f64356b886","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"550656c9fb024577c910c874fb8665ce34f06dfe01a3a6bdf1ef5b2a574abb98","total_bank_id_order_sha256":"5fa5443e4ebd27535e614711cea324a8b9ce6fe429027acb48f4b15681389f96","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R05_H150","filename":"EXP11B_R05_H150.csv","seed":20261011,"condition":"H150","row_count":4512,"new_row_count":1562,"total_dam_count":40,"new_dam_count":12,"bank_csv_sha256":"74524582ec2158d2e87ac46d06a2259b7d03a674212678d39713345517d08f11","size_bytes":5417826,"composition_sha256":"a2161056fb428321524824106f93bc18b211c8ad4373c7219ca807de69e9b658","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"030df1390526db2c427f4026a5acbaff1a84aa3af68ebdfb982c17dbd5711ad9","total_bank_id_order_sha256":"a1b3d3587829119fe714af6de4a8c8e958b96348fc5a116f27d5ebd702fd3150","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R05_H200","filename":"EXP11B_R05_H200.csv","seed":20261011,"condition":"H200","row_count":5977,"new_row_count":3027,"total_dam_count":50,"new_dam_count":22,"bank_csv_sha256":"80ac01f63c184237c8ff36a5ecd1fef38d18562114bd60842cb2bdc8f9ee5cae","size_bytes":7258140,"composition_sha256":"2e235076c2ee27b0a5a430a556870318adcf87e12b75c0882c4c091dc2b6a30c","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"fe8d86d66dc1d1ba3326dcdb3a796805c89b5cc723a46a8ede779ba392c901d9","total_bank_id_order_sha256":"78c494cb216076f3db2756a315c96b2fc62da7550821072042f2bb62c23682ab","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R06_H150","filename":"EXP11B_R06_H150.csv","seed":20261013,"condition":"H150","row_count":4467,"new_row_count":1517,"total_dam_count":53,"new_dam_count":25,"bank_csv_sha256":"66259a5fa9058b1f3c58601541aee4637f758878f18d8757e4c1bfc21de397a8","size_bytes":5408676,"composition_sha256":"18790eac178c9a9cc87e2cd798617218f621a424f3c39f6fbb7f1d76d36c78fc","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"8725e4e73d686b41a80a071a5e3124b0e56699d4ed2b3b0d9cf263d0c58d2e64","total_bank_id_order_sha256":"ee20af807d70901fd49b6dca71561cee798cb5edadbb1f7cffdaabc7a880d065","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R06_H200","filename":"EXP11B_R06_H200.csv","seed":20261013,"condition":"H200","row_count":6039,"new_row_count":3089,"total_dam_count":57,"new_dam_count":29,"bank_csv_sha256":"548159b34b19be379d7e1e54f170985466189c77796883fa4c8a2429c0d926fd","size_bytes":7370152,"composition_sha256":"398549fc6ac1c1e28248bbc63d8c807a651d6de287a220e621111b6d3cf6448b","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"81002fabd2cffa25016046a2594e49a21e67dd02ef8da1e72481a35e08b084d3","total_bank_id_order_sha256":"874be1632bcc7c59b726a10dd4577ad44fa613689acf17c13b5bf3e5b5b5ea7c","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R07_H150","filename":"EXP11B_R07_H150.csv","seed":20261017,"condition":"H150","row_count":4409,"new_row_count":1459,"total_dam_count":41,"new_dam_count":13,"bank_csv_sha256":"f00e9625b0684200e2a2fe91b3bcec1abeb05e3d444244177371ff7489b51345","size_bytes":5323182,"composition_sha256":"0afeb4da328cc21a164baf2f161cd329b23f253784ba03d565cc701613168009","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"1ff6a18c9440a634a5bcb2cdfd0ad9755b284d80da29fd7c9a2397cdffe63b04","total_bank_id_order_sha256":"756f1aea6f9ca2c2cbe38df9c3fd93e7746f21033b89ffac2a1a5c48adc30a7a","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R07_H200","filename":"EXP11B_R07_H200.csv","seed":20261017,"condition":"H200","row_count":5942,"new_row_count":2992,"total_dam_count":59,"new_dam_count":31,"bank_csv_sha256":"221030d48308566f7e79f1ee7a37b1f9c9d6f7d4aadaba709a691fd417e1aa57","size_bytes":7240818,"composition_sha256":"d141dde532f566ebc1b11c5a816891bb64bedbb92d60732d23e357ab8eee4050","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"79dc4f28c68094086cbdc2f5851d22e33b4e169997f1cd69b29c68317e62aaf3","total_bank_id_order_sha256":"0583fcf5f37939040bb95f4f4a472d18d90a3c2e2baec1c1cc74321630baa45e","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R08_H150","filename":"EXP11B_R08_H150.csv","seed":20261021,"condition":"H150","row_count":4448,"new_row_count":1498,"total_dam_count":39,"new_dam_count":11,"bank_csv_sha256":"d7bf195592c749333820cb1c1bc8c3202a446a1d5a6ebc2ef051593f52356bb8","size_bytes":5366465,"composition_sha256":"f06d3b6fed1d05019e0e057417758bbdf79d40e252aa197554f07bf82cce3d77","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"11eb1f0235755123e61691ee70f4e2dbffec1cd6d1d2c1ccb224c44f7e03aa1d","total_bank_id_order_sha256":"48e60c04f6b24ea0725a22b884f150c5fee25ee90bbe15f5949917dfc1dcbe14","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R08_H200","filename":"EXP11B_R08_H200.csv","seed":20261021,"condition":"H200","row_count":5841,"new_row_count":2891,"total_dam_count":52,"new_dam_count":24,"bank_csv_sha256":"7005a43687d80bd4454389fb34f96577911b75558618ab4b63104341ae85875a","size_bytes":7142238,"composition_sha256":"db2b2c17d8d3bf24a18b4f431251d086da1197eeea141bf01ebc55663a4cf521","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"a8dce9d38539fed2c6e1a75b4e85d4306593a85cc9deef17d2fe1d571df59abe","total_bank_id_order_sha256":"e9db8c0a9233ab67f50715f8fa550c83b255cc765c821db07273f9e302409a1f","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R09_H150","filename":"EXP11B_R09_H150.csv","seed":20261023,"condition":"H150","row_count":4439,"new_row_count":1489,"total_dam_count":43,"new_dam_count":15,"bank_csv_sha256":"6353eb3081c31e829f978958ab0ab5d000633e1c678ef7aaf691444b33245f9d","size_bytes":5294727,"composition_sha256":"bdb8790cd6d1929832a3df1fae98469b3bce88ee961d57bd1b1b918847def884","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"96430a6b3aae84688f26cb9a3ecb1cf7d2c7a869dc3b664d1a75018c87729f9c","total_bank_id_order_sha256":"0eba89561d930e5a8a36c1e51c7ab3618cb81cf2bc4775712cfd38277d367303","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R09_H200","filename":"EXP11B_R09_H200.csv","seed":20261023,"condition":"H200","row_count":5859,"new_row_count":2909,"total_dam_count":54,"new_dam_count":26,"bank_csv_sha256":"2c72fb62deb0cecfe90b49b991bf6918ab4177a35aebb8e88bf74b08058fd841","size_bytes":7075401,"composition_sha256":"97df218d02eabe68140a1e7a343cc4cfa48ccca6231252b25cd0e8b68050a85c","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"853520b62b2e66d7b0730979fd08dcebb9ae0e4e6b996ee0e4bcf685d33052a3","total_bank_id_order_sha256":"a7e776d92c91e714eceaf6f93ff095ad3c9690c8de191be8506086f776e4cae4","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R10_H150","filename":"EXP11B_R10_H150.csv","seed":20261024,"condition":"H150","row_count":4483,"new_row_count":1533,"total_dam_count":40,"new_dam_count":12,"bank_csv_sha256":"163f5b9f6284a40b21da405b958cccb571df7b4932381ecb832a2c771ca850b9","size_bytes":5393797,"composition_sha256":"6ff6218d3b24ad840c92b0f484a33e5290786abdbaa967aa11165e71a30fd3df","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"52d04653b36c1d055c586159eab15f18a5f03d5ed9028b9989b8b670126f5dde","total_bank_id_order_sha256":"da48cffb3215c2bae9caaaa33f8f3103550d5d635f7fe7f6f0932b25c19feba6","validation_status":"PASS_EXACT"},
+      {"bank_id":"EXP11B_R10_H200","filename":"EXP11B_R10_H200.csv","seed":20261024,"condition":"H200","row_count":5868,"new_row_count":2918,"total_dam_count":50,"new_dam_count":22,"bank_csv_sha256":"ed570fccf8913fbd3416157013f152697dc1ed6358313e379e6b9e93af11cdf2","size_bytes":7149970,"composition_sha256":"f94b4816a65c1bd08ad777212d5f8745ffb5eb0c1ca55686944e40f6db5678aa","H100_core_id_order_sha256":"162199bb9707b5027c280dfc05d34470eecebfb459323591a7c14938bf6a394d","increment_id_order_sha256":"a13a8ecfe0fe2c4b659ce81029b8eea4be560b10ee98f2e53b1072c974a8bd2e","total_bank_id_order_sha256":"41d1347daa41072fa8e96fb29f24083d0ccb43109fb666f41299cbd0d1e19553","validation_status":"PASS_EXACT"}
+    ]
+  },
+  "environment": {
+    "python_implementation": "CPython",
+    "python_version": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "numpy_version": "2.3.5",
+    "pandas_version": "3.0.1"
+  },
+  "static_validation": {
+    "config_json": "PASS",
+    "py_compile": "PASS",
+    "import": "PASS",
+    "cli_help": "PASS",
+    "source_binding_count": 14,
+    "source_binding_mismatch_count": 0
+  },
+  "preflight": {
+    "invocation_count": 1,
+    "status": "PASS",
+    "mode": "PREFLIGHT_ONLY",
+    "bank_count": 20,
+    "h150_count": 10,
+    "h200_count": 10,
+    "bank_identity_mismatch_count": 0,
+    "eval_sha_match": true,
+    "h100_sha_match": true,
+    "canonical_source_binding_mismatch_count": 0,
+    "official_output_root_exists": false,
+    "official_authorization_exists": false,
+    "real_consumption_marker_root_exists": false,
+    "retrieval_executed": false,
+    "metrics_computed": false
+  },
+  "h100_full_output_shadow": {
+    "invocation_count": 1,
+    "status": "PASS",
+    "mode": "SELF_TEST_H100_FULL_OUTPUT_SHADOW_ONLY",
+    "top_numerators": {"1":538,"3":709,"5":806,"10":941,"50":1047},
+    "all_numerator_deltas": 0,
+    "mrr": 0.6297077493524843,
+    "mrr_expected": 0.6297077493524843,
+    "mrr_delta": 0.0,
+    "mrr_abs_tolerance": 1e-12,
+    "schema_validation": {
+      "run_manifest_json":"PASS",
+      "metrics_by_bank_csv":"PASS",
+      "case_level_csv":"PASS",
+      "candidate_ranking_csv":"PASS",
+      "condition_summary_csv":"PASS",
+      "output_hash_ledger_csv":"PASS",
+      "failure_ledger_json":"PASS",
+      "environment_json":"PASS"
+    },
+    "h150_h200_banks_opened": 0,
+    "temporary_cleanup": "PASS"
+  },
+  "preventive_tests": {
+    "no_authorization_guard": "PASS_BLOCKED_BEFORE_SCORING",
+    "no_authorization_guard_exit_code": 2,
+    "canonical_authorization_path_required": true,
+    "authorization_versioned_at_execution_head": "PASS_CONTRACT_MODEL",
+    "authorization_head_worktree_blob_identity": "PASS_EXACT",
+    "authorization_head_worktree_sha256_identity": "PASS_EXACT",
+    "noncanonical_authorization_path_guard": "PASS_BLOCKED_BEFORE_MARKER",
+    "unversioned_authorization_guard": "PASS_BLOCKED_BEFORE_MARKER",
+    "dirty_authorization_worktree_guard": "PASS_BLOCKED_BEFORE_MARKER",
+    "invalid_package_binding_guard": "PASS_BLOCKED_BEFORE_SCORING",
+    "consumed_authorization_guard": "PASS_BLOCKED_BEFORE_SCORING",
+    "exclusive_marker_creation": "PASS_OPEN_MODE_X_EXACTLY_ONCE",
+    "consumption_boundary": "PASS_AFTER_FIRST_BANK_VALIDATION_IMMEDIATELY_BEFORE_FIRST_BM25_SCORE",
+    "synthetic_score_call_count": 2,
+    "synthetic_marker_creation_count": 1,
+    "failure_before_scoring_marker_absent": "PASS",
+    "descendant_authorization_model": "PASS_CONTRACT_MODEL",
+    "descendant_model_scoring_count": 0,
+    "failure_context_active_bank_run_stage": "PASS_EXACT",
+    "failure_context_output_finalization": "PASS_NOT_MISATTRIBUTED",
+    "streaming_output_model": "PASS_BOUNDED_PER_BANK",
+    "global_case_accumulator": false,
+    "global_candidate_accumulator": false,
+    "F003_no_regression": "PASS",
+    "F004_no_regression": "PASS",
+    "synthetic_artifact_cleanup": "PASS"
+  },
+  "non_contamination": {
+    "official_output_root_exists": false,
+    "official_authorization_exists": false,
+    "real_consumption_marker_exists": false,
+    "h150_h200_scoring_count": 0,
+    "h150_h200_metrics_observed": false,
+    "h150_h200_case_rankings_observed": false,
+    "official_bank_write_count": 0,
+    "official_bank_content_mutated": false,
+    "EXP12_authorized": false,
+    "EXP12_executed": false
+  },
+  "runtime_check_classification": "CODEX_LOCAL_PREEXECUTION_CHECKS / NOT_INDEPENDENT_GITHUB_RUNTIME_OBSERVATION",
+  "execution_package_ready": true,
+  "execution_authorized": false,
+  "retrieval_executed": false,
+  "h150_h200_results_observed": false,
+  "future_authorization_required": true,
+  "EXP12_authorized": false
+}
