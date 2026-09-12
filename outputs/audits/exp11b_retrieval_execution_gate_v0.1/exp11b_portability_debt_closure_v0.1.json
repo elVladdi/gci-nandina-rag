@@ -1,0 +1,152 @@
+{
+  "artifact_id": "exp11b_portability_debt_closure_v0.1",
+  "status": "CANDIDATE_CLOSED_PENDING_EXTERNAL_AUDIT",
+  "main_baseline_commit": "6846537602539506c8e90426daad05252cc982b9",
+  "scope": "EXP11B_PORTABILITY_DEBT_ONLY",
+  "config_fingerprints": {
+    "manifest_embedded_config_sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c",
+    "current_config_sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17"
+  },
+  "discrepancy_classification": "PROVENANCE_CONFIG_HISTORY_MISMATCH_WITHOUT_BANK_CONTENT_MUTATION",
+  "discrepancy_detail": {
+    "subtype": "CHECKOUT_EOL_REPRESENTATION_LF_VS_CRLF_SAME_GIT_BLOB",
+    "historical_config_state_recovered": true,
+    "historical_config_commit": "95ffec45ae5a734545ae7bb2d8d530f42f8f056c",
+    "historical_config_git_blob": "cda209dc1ab8d6f623c6bb1c2b818c48e09d1bf8",
+    "current_config_git_blob": "cda209dc1ab8d6f623c6bb1c2b818c48e09d1bf8",
+    "same_git_blob": true,
+    "canonical_git_blob_content_sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c",
+    "windows_checkout_content_sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17",
+    "core_autocrlf": true,
+    "semantic_config_change": false,
+    "bank_content_mutation": false
+  },
+  "source_references": {
+    "retrieval_gate_config": {
+      "path": "src/configs/exp11b_retrieval_execution_gate_v0.1.json",
+      "sha256": "c0c8a7fba01332899a819ca0b975a239ab2ce00ff53af05de7eb045261a46a79",
+      "git_blob": "905645027df16d80fb99c3ba090c185f6c730c80"
+    },
+    "retrieval_gate_manifest": {
+      "path": "outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_retrieval_execution_gate_manifest_v0.1.json",
+      "sha256": "12ebb946b3dce810a8cf602d59e13b67bdfcf520932a9ede878e5520a879677d",
+      "git_blob": "6ea8ad94e7188180f35aa845d18b3476a22f5ab8"
+    },
+    "retrieval_input_inventory": {
+      "path": "outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_retrieval_execution_input_inventory_v0.1.json",
+      "sha256": "419085e8aa032dc9c1ac19239915141d2e6d2eb24bc3c0c1286e066f53ba9100",
+      "git_blob": "95416679b939f7f719d5e18508bd628d9c4ef08d"
+    },
+    "materialization_manifest": {
+      "path": "outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_materialization_manifest_v0.1.json",
+      "sha256": "67512d88a46dcd85427d9eca4be07eeea3f6ec2821bf77e7acfec5a09a706cf4",
+      "git_blob": "f06227780137a7977521a01226e0775ac4187b86"
+    },
+    "materialization_ledger": {
+      "path": "outputs/audits/exp11b_bank_materialization_v0.1/exp11b_bank_hashes_v0.1.csv",
+      "sha256": "9686c2f642ec47c36079a3085c4d68a3f1b555588a8623ecca59333e12e0f56c",
+      "git_blob": "a375c02e8364bc131a358646ba1c4401acef94d1"
+    },
+    "current_materialization_config": {
+      "path": "src/configs/exp11b_bank_materialization_v0.1.json",
+      "checkout_sha256": "39c27e6791bcc5d574a2c132af59bbe99a4793ee0506d95724ad8f2d632a5e17",
+      "canonical_git_content_sha256": "a7fa158dcf13e4b293e3de51351f814305cf5208b08395d5de8994f2d69c710c",
+      "git_blob": "cda209dc1ab8d6f623c6bb1c2b818c48e09d1bf8"
+    }
+  },
+  "bank_identity_evidence": {
+    "bank_count_expected": 20,
+    "bank_count_observed": 20,
+    "identity_fields_compared": [
+      "bank_id",
+      "filename",
+      "seed",
+      "condition",
+      "row_count",
+      "new_row_count",
+      "total_dam_count",
+      "new_dam_count",
+      "bank_csv_sha256",
+      "size_bytes",
+      "composition_sha256",
+      "H100_core_id_order_sha256",
+      "increment_id_order_sha256",
+      "total_bank_id_order_sha256"
+    ],
+    "identity_field_count": 14,
+    "ledger_manifest_inventory_match_count": 20,
+    "bank_identity_mismatch_count": 0,
+    "bank_csv_present_count": 20,
+    "bank_csv_sha256_match_count": 20,
+    "bank_csv_size_match_count": 20,
+    "bank_csv_missing_count": 0,
+    "bank_csv_sha256_mismatch_count": 0,
+    "bank_csv_size_mismatch_count": 0,
+    "banks_versioned_in_git": false,
+    "banks_regenerable_from_versioned_inputs": true,
+    "bank_identity_governance": "VERSIONED_MANIFEST_LEDGER_INVENTORY_AND_OBSERVED_CSV_SHA256",
+    "banks": [
+      {"bank_id": "EXP11B_R01_H150", "filename": "EXP11B_R01_H150.csv", "bank_csv_sha256": "a95ccaa947994e9e01392c1f519f7a19ef015b560a2c3aa77f6bf3ee7a5961db", "size_bytes": 5337882, "identity_match": true},
+      {"bank_id": "EXP11B_R01_H200", "filename": "EXP11B_R01_H200.csv", "bank_csv_sha256": "20c987e52f0d6a221ffaa756527b1b4b571117a57c839909908cd7e7441abe49", "size_bytes": 7265669, "identity_match": true},
+      {"bank_id": "EXP11B_R02_H150", "filename": "EXP11B_R02_H150.csv", "bank_csv_sha256": "331762d93446c575abaf59c76c38eb55e106431c811dda48c99d489cff279000", "size_bytes": 5415360, "identity_match": true},
+      {"bank_id": "EXP11B_R02_H200", "filename": "EXP11B_R02_H200.csv", "bank_csv_sha256": "0b6772d0ead99f352ffde4170bceb6e443da0b84a3b652bee845f05c765cb468", "size_bytes": 7121941, "identity_match": true},
+      {"bank_id": "EXP11B_R03_H150", "filename": "EXP11B_R03_H150.csv", "bank_csv_sha256": "1001a3821aec92b1f7c785ba620100bb68acee0a2e4312bb041f75578eb13fb2", "size_bytes": 5235342, "identity_match": true},
+      {"bank_id": "EXP11B_R03_H200", "filename": "EXP11B_R03_H200.csv", "bank_csv_sha256": "d27fcc4a9711cbc4d9126fc337518d09430a988fae554ee12246b1fec4205b77", "size_bytes": 7113741, "identity_match": true},
+      {"bank_id": "EXP11B_R04_H150", "filename": "EXP11B_R04_H150.csv", "bank_csv_sha256": "2f21215da09a2e9bdb0fe72b9dae56a88f03109cbab901a0b236633aa7410850", "size_bytes": 5364067, "identity_match": true},
+      {"bank_id": "EXP11B_R04_H200", "filename": "EXP11B_R04_H200.csv", "bank_csv_sha256": "b2488c0b0a0525f0d6a98dd54071fd715afefbab719d526e4779283d9bf67887", "size_bytes": 7189470, "identity_match": true},
+      {"bank_id": "EXP11B_R05_H150", "filename": "EXP11B_R05_H150.csv", "bank_csv_sha256": "74524582ec2158d2e87ac46d06a2259b7d03a674212678d39713345517d08f11", "size_bytes": 5417826, "identity_match": true},
+      {"bank_id": "EXP11B_R05_H200", "filename": "EXP11B_R05_H200.csv", "bank_csv_sha256": "80ac01f63c184237c8ff36a5ecd1fef38d18562114bd60842cb2bdc8f9ee5cae", "size_bytes": 7258140, "identity_match": true},
+      {"bank_id": "EXP11B_R06_H150", "filename": "EXP11B_R06_H150.csv", "bank_csv_sha256": "66259a5fa9058b1f3c58601541aee4637f758878f18d8757e4c1bfc21de397a8", "size_bytes": 5408676, "identity_match": true},
+      {"bank_id": "EXP11B_R06_H200", "filename": "EXP11B_R06_H200.csv", "bank_csv_sha256": "548159b34b19be379d7e1e54f170985466189c77796883fa4c8a2429c0d926fd", "size_bytes": 7370152, "identity_match": true},
+      {"bank_id": "EXP11B_R07_H150", "filename": "EXP11B_R07_H150.csv", "bank_csv_sha256": "f00e9625b0684200e2a2fe91b3bcec1abeb05e3d444244177371ff7489b51345", "size_bytes": 5323182, "identity_match": true},
+      {"bank_id": "EXP11B_R07_H200", "filename": "EXP11B_R07_H200.csv", "bank_csv_sha256": "221030d48308566f7e79f1ee7a37b1f9c9d6f7d4aadaba709a691fd417e1aa57", "size_bytes": 7240818, "identity_match": true},
+      {"bank_id": "EXP11B_R08_H150", "filename": "EXP11B_R08_H150.csv", "bank_csv_sha256": "d7bf195592c749333820cb1c1bc8c3202a446a1d5a6ebc2ef051593f52356bb8", "size_bytes": 5366465, "identity_match": true},
+      {"bank_id": "EXP11B_R08_H200", "filename": "EXP11B_R08_H200.csv", "bank_csv_sha256": "7005a43687d80bd4454389fb34f96577911b75558618ab4b63104341ae85875a", "size_bytes": 7142238, "identity_match": true},
+      {"bank_id": "EXP11B_R09_H150", "filename": "EXP11B_R09_H150.csv", "bank_csv_sha256": "6353eb3081c31e829f978958ab0ab5d000633e1c678ef7aaf691444b33245f9d", "size_bytes": 5294727, "identity_match": true},
+      {"bank_id": "EXP11B_R09_H200", "filename": "EXP11B_R09_H200.csv", "bank_csv_sha256": "2c72fb62deb0cecfe90b49b991bf6918ab4177a35aebb8e88bf74b08058fd841", "size_bytes": 7075401, "identity_match": true},
+      {"bank_id": "EXP11B_R10_H150", "filename": "EXP11B_R10_H150.csv", "bank_csv_sha256": "163f5b9f6284a40b21da405b958cccb571df7b4932381ecb832a2c771ca850b9", "size_bytes": 5393797, "identity_match": true},
+      {"bank_id": "EXP11B_R10_H200", "filename": "EXP11B_R10_H200.csv", "bank_csv_sha256": "ed570fccf8913fbd3416157013f152697dc1ed6358313e379e6b9e93af11cdf2", "size_bytes": 7149970, "identity_match": true}
+    ]
+  },
+  "frozen_input_evidence": {
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "expected_sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "observed_sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "match": true
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "expected_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "observed_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "match": true
+    }
+  },
+  "bm25_semantics_evidence": {
+    "preserved": true,
+    "gate_inventory_semantic_field_mismatch_count": 0,
+    "canonical_implementation": "EXP04_HISTORICAL_BM25_V02_REUSED_DIRECTLY_BY_EXP11A_V03",
+    "normalization": "unicode_NFKD_lowercase_remove_combining_marks",
+    "tokenizer": "regex_[a-z0-9]+",
+    "k1": 1.5,
+    "b": 0.75,
+    "candidate_depth": 100,
+    "k_values": [1, 3, 5, 10, 50],
+    "ranking_order": "descending_score_then_ascending_historical_case_id",
+    "code_binding_count": 6,
+    "code_binding_mismatch_count": 0
+  },
+  "closure_criteria": {
+    "banks_match_frozen_ledger_and_manifest": true,
+    "bank_identity_mismatch_count": 0,
+    "H100_and_EVAL_hashes_match": true,
+    "bm25_semantics_preserved": true,
+    "config_difference_is_provenance_only": true,
+    "bank_rematerialization_required": false
+  },
+  "retrieval_executed": false,
+  "evaluation_metrics_computed": false,
+  "exp11b_retrieval_authorized": false,
+  "exp12_authorized": false,
+  "external_audit_required": true
+}
