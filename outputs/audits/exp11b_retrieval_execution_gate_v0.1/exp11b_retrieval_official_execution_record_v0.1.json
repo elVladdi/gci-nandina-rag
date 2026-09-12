@@ -1,0 +1,127 @@
+{
+  "artifact": "EXP11B_RETRIEVAL_OFFICIAL_EXECUTION_RECORD",
+  "version": "v0.1",
+  "status": "CANDIDATE_OFFICIAL_EXECUTION_COMPLETED_PENDING_EXTERNAL_AUDIT",
+  "experiment_id": "EXP-11B",
+  "scope": "H150_H200_HISTORICAL_RETRIEVAL_ONLY",
+  "package_commit": "50d90a356a0fac0267c270568f3926430a246026",
+  "authorization_commit": "ea4bc0bde3246b40a25453dabeef5d571cf7c021",
+  "authorization_blob": "7a23c64857b8f28302be7ce75d1269cbe60cc25b",
+  "authorization_sha256": "f9a9b468b3d856492dd6a272ad8cf73932dba91b02e34a42d715352f3dd45fd0",
+  "authorization_id": "EXP11B_H150_H200_AUTH_001",
+  "attempt_id": "EXP11B_H150_H200_ATTEMPT_001",
+  "execution_head": "ea4bc0bde3246b40a25453dabeef5d571cf7c021",
+  "official_execute_invocation_count": 1,
+  "exact_command": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -m src.experiments.run_exp11b_historical_retrieval_h150_h200_v03 --execute-official",
+  "exit_code": 0,
+  "execution_started_at_utc": "2026-09-12T21:36:59.5137212Z",
+  "execution_completed_at_utc": "2026-09-12T21:40:22.6301415Z",
+  "python_executable": "C:\\Users\\Vladimir\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "python_version": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "free_disk_bytes_before_execution": 456541753344,
+  "marker_path": "outputs/audits/exp11b_retrieval_execution_attempts/EXP11B_H150_H200_AUTH_001--EXP11B_H150_H200_ATTEMPT_001.json",
+  "marker_sha256": "6f6174ea61018d37e41bae2a69761680600fdc0f412a23781e8027d78c21940d",
+  "marker_size_bytes": 332,
+  "marker_status": "CONSUMED_EXECUTION_STARTED",
+  "official_output_root": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1",
+  "output_artifacts": [
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_candidates_v0.1.csv",
+      "sha256": "1dde84b65d8fb060211120ac73a04f1d5a5f7593e6381ed601fbdfb3f4bc9024",
+      "size_bytes": 264935868,
+      "row_count": 1350992,
+      "versioning_status": "LOCAL_OFFICIAL_ARTIFACT_NOT_VERSIONED_DUE_TO_GIT_BLOB_LIMIT_GUARD"
+    },
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_case_level_v0.1.csv",
+      "sha256": "b121a64ee19ea08733f85c6b93034b040bf0cb6b91a423df1d2c7cc89c4f9a35",
+      "size_bytes": 4135216,
+      "row_count": 21120,
+      "versioning_status": "VERSIONED_IN_RESULTS_CANDIDATE"
+    },
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_condition_summary_v0.1.csv",
+      "sha256": "42754c29326800a3f10c38bf22fa6b37dfab7b635dfda9fa1108100591ec2905",
+      "size_bytes": 401,
+      "row_count": 2,
+      "versioning_status": "VERSIONED_IN_RESULTS_CANDIDATE"
+    },
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_environment_v0.1.json",
+      "sha256": "1351374ee48b0d4ad60da351863870d4fb16fcf065f9d6a43d43e5b79ec10e1c",
+      "size_bytes": 431,
+      "versioning_status": "VERSIONED_IN_RESULTS_CANDIDATE"
+    },
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_failures_v0.1.json",
+      "sha256": "6d485227c61d11ca027978ffb6fcd21cfbb7a05d436239572a55d08363efed40",
+      "size_bytes": 210,
+      "versioning_status": "VERSIONED_IN_RESULTS_CANDIDATE"
+    },
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_metrics_by_bank_v0.1.csv",
+      "sha256": "919e602bd5a728185ec8aecc02127758d98319a16911f89d07eecde050525ef8",
+      "size_bytes": 4490,
+      "row_count": 20,
+      "versioning_status": "VERSIONED_IN_RESULTS_CANDIDATE"
+    },
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_output_hashes_v0.1.csv",
+      "sha256": "c766968016e2d699fe5fb6221fdd2486d67c27a61b68348d6eb696ce0b115aec",
+      "size_bytes": 964,
+      "row_count": 7,
+      "versioning_status": "VERSIONED_IN_RESULTS_CANDIDATE"
+    },
+    {
+      "path": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_run_manifest_v0.1.json",
+      "sha256": "70cdf4e9362b47cd6e9f263577cb0c8173aef5ce24df49b352b0c2ebc447163e",
+      "size_bytes": 13868,
+      "versioning_status": "VERSIONED_IN_RESULTS_CANDIDATE"
+    }
+  ],
+  "metrics_by_bank_row_count": 20,
+  "case_level_row_count": 21120,
+  "candidate_ranking_row_count": 1350992,
+  "condition_summary_row_count": 2,
+  "hash_ledger_row_count": 7,
+  "candidate_rank_min": 1,
+  "candidate_rank_max": 75,
+  "bank_identity_postcheck": "PASS_EXACT_20_OF_20",
+  "staging_sibling_count": 0,
+  "failed_sibling_count": 0,
+  "condition_summary_observed": {
+    "H150": {
+      "top_1_mean": 0.512689393939394,
+      "top_3_mean": 0.6899621212121212,
+      "top_5_mean": 0.7833333333333333,
+      "top_10_mean": 0.8915719696969697,
+      "top_50_mean": 0.9895833333333334,
+      "mrr_mean": 0.6332675214603809
+    },
+    "H200": {
+      "top_1_mean": 0.5141098484848485,
+      "top_3_mean": 0.6894886363636363,
+      "top_5_mean": 0.7820075757575757,
+      "top_10_mean": 0.8952651515151515,
+      "top_50_mean": 0.9852272727272726,
+      "mrr_mean": 0.6333104425906166
+    }
+  },
+  "stdout_sha256": "35e6d5235df6ad7b14be1a2195c9c2a03e26e307117b2cb772d8ce96cfecb00d",
+  "stdout_size_bytes": 467,
+  "stdout_summary": {
+    "status": "COMPLETED",
+    "authorization_consumed": true,
+    "bank_count": 20
+  },
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_size_bytes": 0,
+  "retry_count": 0,
+  "resume_used": false,
+  "overwrite_used": false,
+  "partial_recomputation_used": false,
+  "EXP12_authorized": false,
+  "EXP12_executed": false,
+  "runtime_evidence_classification": "CODEX_LOCAL_OFFICIAL_EXECUTION_EVIDENCE / PENDING_EXTERNAL_AUDIT"
+}

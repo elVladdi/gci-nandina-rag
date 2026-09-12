@@ -1,0 +1,8 @@
+{
+  "approved_package_commit": "50d90a356a0fac0267c270568f3926430a246026",
+  "attempt_id": "EXP11B_H150_H200_ATTEMPT_001",
+  "authorization_id": "EXP11B_H150_H200_AUTH_001",
+  "execution_head": "ea4bc0bde3246b40a25453dabeef5d571cf7c021",
+  "started_at_utc": "2026-09-12T21:37:04.837890Z",
+  "status": "CONSUMED_EXECUTION_STARTED"
+}
