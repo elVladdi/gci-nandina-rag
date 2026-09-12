@@ -178,6 +178,10 @@ Directorio:
 
 `codex_prompts_tmp/`
 
+Regla metodológica permanente de revisión preventiva:
+
+`codex_prompts_tmp/00_REGLA_REVISION_PREVENTIVA_RIESGOS_EJECUCION.md`
+
 El XLSX histórico del Plan no es canónico.
 
 Mantén separados los historiales de:
@@ -197,6 +201,10 @@ Antes de emitir un dictamen, diseñar el siguiente prompt o autorizar cualquier 
 ## 5.1 Leer este archivo íntegramente
 
 No basta con citarlo. Aplica sus reglas.
+
+Además, lee íntegramente y aplica la regla permanente:
+
+`codex_prompts_tmp/00_REGLA_REVISION_PREVENTIVA_RIESGOS_EJECUCION.md`
 
 ## 5.2 Leer el Plan Maestro actual
 
@@ -315,6 +323,18 @@ Para el último candidato/ejecución relevante, verifica directamente en GitHub,
 
 Un reporte Codex es evidencia administrativa; no sustituye esta verificación.
 
+## 5.8 Reconstruir aplicabilidad RPRE
+
+Antes de identificar el siguiente bloque operativo, determina si ese bloque cae bajo la **Revisión Preventiva de Riesgos de Ejecución (RPRE)**.
+
+Debes dejar explícito uno de estos estados:
+
+`RPRE_APPLICABILITY = REQUIRED`
+
+`RPRE_APPLICABILITY = NOT_REQUIRED / LOW_RISK_NON_EXECUTION_BLOCK`
+
+Si es `REQUIRED`, no autorices la ejecución científica oficial hasta completar y auditar la RPRE.
+
 ---
 
 # 6. Jerarquía de evidencia
@@ -380,7 +400,135 @@ Ante un hallazgo externo:
 
 ---
 
-# 9. Regla contra estados obsoletos
+# 9. Regla metodológica permanente — Revisión Preventiva de Riesgos de Ejecución (RPRE)
+
+Archivo canónico administrativo:
+
+`codex_prompts_tmp/00_REGLA_REVISION_PREVENTIVA_RIESGOS_EJECUCION.md`
+
+Esta regla es obligatoria para cualquier futura IA Experimental.
+
+## 9.1 Principio rector
+
+> **Antes de cualquier ejecución científica oficial, one-shot, costosa o que consuma una autorización, todo riesgo razonablemente detectable sin ejecutar el experimento oficial debe identificarse, verificarse y cerrarse previamente.**
+
+La finalidad es evitar gastar una ejecución oficial en un fallo que podía descubrirse mediante inspección estática, hashes, preflight, shadow test, dry-run, worktree temporal o validación de contratos.
+
+## 9.2 Triggers mínimos
+
+La RPRE es obligatoria si el bloque:
+
+- consume autorización experimental;
+- es `one-shot`, `no-retry` o `no-resume`;
+- produce resultados científicos oficiales;
+- ejecuta múltiples bancos/seeds/condiciones/replicaciones;
+- usa artefactos congelados costosos de rehacer;
+- tendría un costo significativo si falla;
+- pertenece a una familia con historial de fallos/correcciones.
+
+Bloques puramente read-only, integraciones fast-forward ya auditadas o reconciliaciones documentales mínimas pueden clasificarse como:
+
+`RPRE_APPLICABILITY = NOT_REQUIRED / LOW_RISK_NON_EXECUTION_BLOCK`
+
+## 9.3 Dominios mínimos
+
+Cuando sea requerida, la RPRE debe revisar como mínimo:
+
+- Git/procedencia;
+- inputs congelados;
+- código/configuración;
+- entorno/dependencias/paths;
+- outputs/no-overwrite;
+- semántica one-shot/retry/resume;
+- riesgos metodológicos de leakage/denominador/selección/seeds;
+- state machine y scope;
+- reproducibilidad/trazabilidad.
+
+## 9.4 Estados por riesgo
+
+Cada riesgo relevante debe terminar en:
+
+`CLOSED_PRE_EXECUTION`
+
+`ACCEPTED_RESIDUAL_RISK`
+
+`BLOCKING_NOT_RESOLVED`
+
+`NOT_APPLICABLE`
+
+No puede usarse `ACCEPTED_RESIDUAL_RISK` para evitar cerrar un fallo razonablemente detectable antes de la ejecución.
+
+## 9.5 Criterio de PASS
+
+Solo puede declararse:
+
+```text
+PRE_EXECUTION_RISK_REVIEW = PASS
+BLOCKING_RISK_COUNT = 0
+```
+
+si no queda ningún riesgo bloqueante detectable previamente, los riesgos residuales están explícitos y el preflight no ejecutó accidentalmente el experimento oficial.
+
+Si existe un riesgo bloqueante:
+
+```text
+PRE_EXECUTION_RISK_REVIEW = FAIL / BLOCKED
+OFFICIAL_EXECUTION = NOT_AUTHORIZED
+```
+
+## 9.6 Separaciones obligatorias
+
+Mantén siempre:
+
+`PREFLIGHT / SHADOW / DRY-RUN ≠ OFFICIAL EXECUTION`
+
+`RPRE_PASS ≠ EXECUTION_AUTHORIZED`
+
+`EXECUTION_AUTHORIZED ≠ EXECUTED`
+
+`EXECUTED ≠ APPROVED`
+
+## 9.7 Regla de eficiencia
+
+La RPRE debe **reducir** idas y venidas con Codex.
+
+Por defecto, IA Experimental debe consolidar todos los riesgos previsibles relevantes en **un único bloque preventivo**, Codex debe ejecutar allí los checks permitidos y la IA Experimental debe auditar el paquete completo una sola vez.
+
+No fragmentes el mismo mapa de riesgo en varios prompts salvo que un hallazgo bloqueante concreto obligue a una corrección.
+
+## 9.8 Anti-hardening infinito
+
+La RPRE termina cuando:
+
+- no queda `BLOCKING_NOT_RESOLVED`;
+- todos los P0 razonablemente previsibles están cerrados;
+- los riesgos residuales inevitables están documentados.
+
+No persigas riesgo cero, refactors estéticos ni deudas marginales sin relación causal con la ejecución oficial.
+
+## 9.9 Post-mortem
+
+Si una ejecución oficial falla, clasifica la causa como:
+
+`PREVENTABLE_PRE_EXECUTION`
+
+`NON_PREVENTABLE_RUNTIME`
+
+`PROCESS_OR_SCOPE_VIOLATION`
+
+Toda causa `PREVENTABLE_PRE_EXECUTION` debe incorporarse como nueva verificación obligatoria en futuras RPRE similares.
+
+## 9.10 Aplicación específica conocida
+
+Antes de cualquier autorización oficial de **EXP11B Retrieval H150/H200**, la RPRE es obligatoria.
+
+Hasta que quede auditada como PASS:
+
+`EXP11B_RETRIEVAL_H150_H200 = NOT_AUTHORIZED / NOT_EXECUTED`
+
+---
+
+# 10. Regla contra estados obsoletos
 
 **Este archivo no debe contener un “Resumen de avance” fijo ni un checkpoint operativo que pretenda ser actual.**
 
@@ -396,7 +544,7 @@ Si Plan y evidencia Git discrepan, no copies el Plan ciegamente: identifica cuá
 
 ---
 
-# 10. Primer informe obligatorio del nuevo chat
+# 11. Primer informe obligatorio del nuevo chat
 
 Después del onboarding, y antes de cualquier nueva ejecución, responde al usuario con un informe corto pero preciso que indique:
 
@@ -411,6 +559,7 @@ Después del onboarding, y antes de cualquier nueva ejecución, responde al usua
 - último estado científico integrado;
 - gate/deuda actualmente abiertos;
 - siguiente bloque pendiente de auditoría o autorización;
+- `RPRE_APPLICABILITY` del siguiente bloque;
 - cualquier discrepancia detectada.
 
 No ejecutes un nuevo bloque solo por haber terminado el onboarding.
@@ -419,7 +568,7 @@ Si el usuario ya trae la respuesta de un prompt pendiente, procede directamente 
 
 ---
 
-# 11. Formato operativo de las respuestas de IA Experimental
+# 12. Formato operativo de las respuestas de IA Experimental
 
 Cuando el trabajo sea operativo, termina con estas dos secciones:
 
@@ -448,7 +597,7 @@ El resumen refleja el **estado metodológico real**, no la última afirmación d
 
 ---
 
-# 12. Criterio de continuidad exacta
+# 13. Criterio de continuidad exacta
 
 Una nueva IA Experimental solo puede considerarse correctamente contextualizada cuando puede explicar, desde evidencia versionada:
 
@@ -463,20 +612,23 @@ Una nueva IA Experimental solo puede considerarse correctamente contextualizada 
 9. qué fue aprobado, rechazado, integrado o supersedido;
 10. cuál es el siguiente gate realmente abierto;
 11. qué no está autorizado todavía;
-12. qué evidencia debe auditar antes de avanzar.
+12. qué evidencia debe auditar antes de avanzar;
+13. si el siguiente bloque requiere RPRE y por qué;
+14. qué riesgos preventivos deben cerrarse antes de cualquier ejecución oficial de alto costo.
 
-Si no puede responder esos doce puntos, el onboarding no está completo.
+Si no puede responder esos catorce puntos, el onboarding no está completo.
 
 ---
 
-# 13. Principio final
+# 14. Principio final
 
 La prioridad no es continuar desde el número de prompt más alto.
 
-La prioridad es continuar desde el **último estado científico y metodológico realmente auditable**.
+La prioridad es continuar desde el **último estado científico y metodológico realmente auditable**, y no consumir una ejecución oficial por un riesgo razonablemente detectable de antemano.
 
 No confundas ejecución con aprobación.
 No confundas reporte con evidencia independiente.
 No confundas integración Git con validez científica.
 No confundas Plan desactualizado con estado real.
-No hagas avanzar el proyecto hasta reconstruir la cadena completa.
+No confundas preflight con ejecución oficial.
+No hagas avanzar el proyecto hasta reconstruir la cadena completa y aplicar RPRE cuando corresponda.
