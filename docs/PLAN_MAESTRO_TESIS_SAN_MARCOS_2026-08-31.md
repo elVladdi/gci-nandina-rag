@@ -3,7 +3,7 @@
 **Proyecto:** Framework RAG explicativo y auditable para recomendación de subpartidas NANDINA  
 **Repositorio principal:** `elVladdi/gci-nandina-rag`  
 **Repositorio público de reproducibilidad:** `elVladdi/gci-nandina-rag-reproducibility`  
-**Fecha de actualización:** 2026-09-08
+**Fecha de actualización:** 2026-09-12
 
 ## 1. Principios congelados
 
@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 6846537602539506c8e90426daad05252cc982b9; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=OPEN; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 09ff184854659110f7711b3eee65fc18927649da; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=CLOSED/APPROVED/INTEGRATED; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -234,9 +234,6 @@ EXP11B Bank Materialization ✅ CLOSED / APPROVED / INTEGRATED
   ↓
 EXP11B Retrieval Execution Gate ✅ APPROVED / INTEGRATED
   ↓
-EXP11B Retrieval Execution ⛔ NOT_AUTHORIZED / NOT_EXECUTED
-  - EXP11B_PORTABILITY_DEBT=OPEN
-  ↓
 0B-05C v0.1 Corrective Numerical Gate and Authorization ✅ HISTORICAL / INTEGRATED / SUPERSEDED FOR NEW EXECUTION
   - D1a training exposure: NO_EFFECTIVE_EXPOSURE_IDENTIFIED
   - D1a Top-200 overlap: NONE_IDENTIFIED
@@ -273,7 +270,13 @@ EV03 Historical Recovery v0.2 ✅ APPROVED / VERSIONED / INTEGRATED
   - 0B05C_CLOSURE=CLOSED / APPROVED_AFTER_CORRECTIVE_RECONCILIATION
   - prior fail-closed attempts remain preserved as historical evidence
   ↓
-EXP11B H150/H200 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
+EXP11B Portability Replay / Debt Closure ✅ CLOSED / APPROVED / INTEGRATED
+  - Prompt41 proof integrated in main=7d7267f8224e56ea5e945625a7e3955ddc15eadb
+  - closure record integrated in main=09ff184854659110f7711b3eee65fc18927649da
+  - closure of portability debt does not authorize retrieval
+  ↓
+EXP11B Retrieval H150/H200 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
+  - next eligible block: separate prospective retrieval authorization
   ↓
 EXP-12 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
@@ -1064,3 +1067,36 @@ la entrada cronológica posterior.
   abre otra ejecución 0B-05C ni se autoriza otra corrida.
 - `EXP11B_PORTABILITY_DEBT=OPEN`; EXP11B Retrieval y EXP12 permanecen
   `NOT_AUTHORIZED / NOT_EXECUTED`.
+
+### 2026-09-12 — Cierre de deuda de portabilidad EXP11B
+
+**Estado canónico:** `main = origin/main =
+09ff184854659110f7711b3eee65fc18927649da`.
+
+- El candidato Prompt40 `799156b3c98858fbe081de73f381030426174ce1`
+  permanece `REJECTED_BY_EXTERNAL_AUDIT / NOT_INTEGRATED`.
+- `PROMPT41_EXTERNAL_AUDIT=PASS / APPROVED_FOR_INTEGRATION` y
+  `PROMPT41_REPLAY_PROOF=APPROVED / INTEGRATED_IN_MAIN` como
+  `7d7267f8224e56ea5e945625a7e3955ddc15eadb`.
+- La evidencia runtime de Prompt41 permanece clasificada como
+  `CODEX_LOCAL_RUNTIME_EVIDENCE /
+  NOT_INDEPENDENTLY_REEXECUTED_BY_EXTERNAL_AUDITOR`.
+- El `process_return_code=2` fue aceptado como no bloqueante exclusivamente
+  para la identidad bancaria gobernada: los 14 campos contractuales y las
+  tres comparaciones FROZEN/OFFICIAL/REPLAY pasaron `20/20`, con cero
+  mismatches. El campo terminal `total_bank_descriptor` no forma parte de los
+  14 campos; el delta máximo `5.329070518200751e-15` quedó dentro de la
+  tolerancia histórica `1e-12`, sin afectar el contenido de los CSV.
+- `PROMPT42_EXTERNAL_GIT_AUDIT=PASS / APPROVED_FOR_INTEGRATION`. El closure
+  record quedó integrado en `main` como
+  `09ff184854659110f7711b3eee65fc18927649da` en
+  `outputs/audits/exp11b_retrieval_execution_gate_v0.1/exp11b_portability_debt_external_closure_v0.1.json`.
+- `EXP11B_PORTABILITY_DEBT=CLOSED / APPROVED / INTEGRATED`. El notice
+  histórico del retrieval gate permanece inmutable; su condición de bloqueo
+  por deuda de portabilidad fue superada prospectivamente por el cierre
+  aprobado.
+- Cierre de deuda no equivale a autorización de retrieval. EXP11B Retrieval
+  H150/H200 requiere un bloque prospectivo separado de autorización y
+  permanece `NOT_AUTHORIZED / NOT_EXECUTED`.
+- `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`. Grupo 2B y los bloques posteriores no
+  fueron abiertos.
