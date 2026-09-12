@@ -1,0 +1,178 @@
+{
+  "arm": "EV03",
+  "dynamic_inputs": {
+    "config_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+    "corpus_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+    "index_metadata_sha256": "603edb72c70a108b5dcd5a8f57a1dcd70f23ff5b40a91e1b6b079cd54f7d2243",
+    "index_sha256": "b1421f526994b7df001b3d55e4990f92bc4a4c8b8d367a6c37e444b025461557"
+  },
+  "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+  "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "metric_contract": "EV03_FROZEN_V0.2",
+  "metrics": {
+    "cases_evaluated": 1056,
+    "cases_with_retrieval": 1046,
+    "clase_at_10": 0.3977272727272727,
+    "clase_at_100": 0.7632575757575758,
+    "clase_at_100_denominator": 1056,
+    "clase_at_100_numerator": 806,
+    "clase_at_10_denominator": 1056,
+    "clase_at_10_numerator": 420,
+    "clase_at_50": 0.7291666666666666,
+    "clase_at_50_denominator": 1056,
+    "clase_at_50_numerator": 770,
+    "metric_table": [
+      {
+        "denominator": 1056,
+        "metric": "mrr",
+        "numerator": 44.66596703438809,
+        "value": 0.04229731726741296
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_1",
+        "numerator": 29,
+        "value": 0.027462121212121212
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_3",
+        "numerator": 54,
+        "value": 0.05113636363636364
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_5",
+        "numerator": 65,
+        "value": 0.061553030303030304
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_10",
+        "numerator": 69,
+        "value": 0.06534090909090909
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_50",
+        "numerator": 74,
+        "value": 0.07007575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_50",
+        "numerator": 74,
+        "value": 0.07007575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_100",
+        "numerator": 75,
+        "value": 0.07102272727272728
+      },
+      {
+        "denominator": 1056,
+        "metric": "partida_at_10",
+        "numerator": 104,
+        "value": 0.09848484848484848
+      },
+      {
+        "denominator": 1056,
+        "metric": "sub_partida_at_10",
+        "numerator": 76,
+        "value": 0.07196969696969698
+      },
+      {
+        "denominator": 1056,
+        "metric": "clase_at_10",
+        "numerator": 420,
+        "value": 0.3977272727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "partida_at_50",
+        "numerator": 185,
+        "value": 0.17518939393939395
+      },
+      {
+        "denominator": 1056,
+        "metric": "sub_partida_at_50",
+        "numerator": 89,
+        "value": 0.08428030303030302
+      },
+      {
+        "denominator": 1056,
+        "metric": "clase_at_50",
+        "numerator": 770,
+        "value": 0.7291666666666666
+      },
+      {
+        "denominator": 1056,
+        "metric": "partida_at_100",
+        "numerator": 220,
+        "value": 0.20833333333333334
+      },
+      {
+        "denominator": 1056,
+        "metric": "sub_partida_at_100",
+        "numerator": 99,
+        "value": 0.09375
+      },
+      {
+        "denominator": 1056,
+        "metric": "clase_at_100",
+        "numerator": 806,
+        "value": 0.7632575757575758
+      }
+    ],
+    "mrr": 0.04229731726741296,
+    "mrr_denominator": 1056,
+    "mrr_numerator": 44.66596703438809,
+    "not_found_at_depth": 981,
+    "partida_at_10": 0.09848484848484848,
+    "partida_at_100": 0.20833333333333334,
+    "partida_at_100_denominator": 1056,
+    "partida_at_100_numerator": 220,
+    "partida_at_10_denominator": 1056,
+    "partida_at_10_numerator": 104,
+    "partida_at_50": 0.17518939393939395,
+    "partida_at_50_denominator": 1056,
+    "partida_at_50_numerator": 185,
+    "recall_at_100": 0.07102272727272728,
+    "recall_at_100_denominator": 1056,
+    "recall_at_100_numerator": 75,
+    "recall_at_50": 0.07007575757575757,
+    "recall_at_50_denominator": 1056,
+    "recall_at_50_numerator": 74,
+    "sub_partida_at_10": 0.07196969696969698,
+    "sub_partida_at_100": 0.09375,
+    "sub_partida_at_100_denominator": 1056,
+    "sub_partida_at_100_numerator": 99,
+    "sub_partida_at_10_denominator": 1056,
+    "sub_partida_at_10_numerator": 76,
+    "sub_partida_at_50": 0.08428030303030302,
+    "sub_partida_at_50_denominator": 1056,
+    "sub_partida_at_50_numerator": 89,
+    "top_1": 0.027462121212121212,
+    "top_10": 0.06534090909090909,
+    "top_10_denominator": 1056,
+    "top_10_numerator": 69,
+    "top_1_denominator": 1056,
+    "top_1_numerator": 29,
+    "top_3": 0.05113636363636364,
+    "top_3_denominator": 1056,
+    "top_3_numerator": 54,
+    "top_5": 0.061553030303030304,
+    "top_50": 0.07007575757575757,
+    "top_50_denominator": 1056,
+    "top_50_numerator": 74,
+    "top_5_denominator": 1056,
+    "top_5_numerator": 65,
+    "zero_retrieval_cases": 10
+  },
+  "outputs": {
+    "case_summary": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5/normative_flat_case_summary.csv",
+    "ranking": "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5/normative_flat_results.csv"
+  },
+  "retrieval_depth": 100
+}

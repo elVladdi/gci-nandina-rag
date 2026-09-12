@@ -1,0 +1,158 @@
+{
+  "metrics": [
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 44.66596703438809,
+      "corrected_value": 0.04229731726741296,
+      "denominator": 1056,
+      "metric": "mrr",
+      "original_numerator": 44.66596703438809,
+      "original_value": 0.04229731726741296
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 29,
+      "corrected_value": 0.027462121212121212,
+      "denominator": 1056,
+      "metric": "top_1",
+      "original_numerator": 29,
+      "original_value": 0.027462121212121212
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 54,
+      "corrected_value": 0.05113636363636364,
+      "denominator": 1056,
+      "metric": "top_3",
+      "original_numerator": 54,
+      "original_value": 0.05113636363636364
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 65,
+      "corrected_value": 0.061553030303030304,
+      "denominator": 1056,
+      "metric": "top_5",
+      "original_numerator": 65,
+      "original_value": 0.061553030303030304
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 69,
+      "corrected_value": 0.06534090909090909,
+      "denominator": 1056,
+      "metric": "top_10",
+      "original_numerator": 69,
+      "original_value": 0.06534090909090909
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 74,
+      "corrected_value": 0.07007575757575757,
+      "denominator": 1056,
+      "metric": "top_50",
+      "original_numerator": 74,
+      "original_value": 0.07007575757575757
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 74,
+      "corrected_value": 0.07007575757575757,
+      "denominator": 1056,
+      "metric": "recall_at_50",
+      "original_numerator": 74,
+      "original_value": 0.07007575757575757
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 75,
+      "corrected_value": 0.07102272727272728,
+      "denominator": 1056,
+      "metric": "recall_at_100",
+      "original_numerator": 75,
+      "original_value": 0.07102272727272728
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 104,
+      "corrected_value": 0.09848484848484848,
+      "denominator": 1056,
+      "metric": "partida_at_10",
+      "original_numerator": 104,
+      "original_value": 0.09848484848484848
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 76,
+      "corrected_value": 0.07196969696969698,
+      "denominator": 1056,
+      "metric": "sub_partida_at_10",
+      "original_numerator": 76,
+      "original_value": 0.07196969696969698
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 420,
+      "corrected_value": 0.3977272727272727,
+      "denominator": 1056,
+      "metric": "clase_at_10",
+      "original_numerator": 420,
+      "original_value": 0.3977272727272727
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 185,
+      "corrected_value": 0.17518939393939395,
+      "denominator": 1056,
+      "metric": "partida_at_50",
+      "original_numerator": 185,
+      "original_value": 0.17518939393939395
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 89,
+      "corrected_value": 0.08428030303030302,
+      "denominator": 1056,
+      "metric": "sub_partida_at_50",
+      "original_numerator": 89,
+      "original_value": 0.08428030303030302
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 770,
+      "corrected_value": 0.7291666666666666,
+      "denominator": 1056,
+      "metric": "clase_at_50",
+      "original_numerator": 770,
+      "original_value": 0.7291666666666666
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 220,
+      "corrected_value": 0.20833333333333334,
+      "denominator": 1056,
+      "metric": "partida_at_100",
+      "original_numerator": 220,
+      "original_value": 0.20833333333333334
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 99,
+      "corrected_value": 0.09375,
+      "denominator": 1056,
+      "metric": "sub_partida_at_100",
+      "original_numerator": 99,
+      "original_value": 0.09375
+    },
+    {
+      "absolute_delta": 0.0,
+      "corrected_numerator": 806,
+      "corrected_value": 0.7632575757575758,
+      "denominator": 1056,
+      "metric": "clase_at_100",
+      "original_numerator": 806,
+      "original_value": 0.7632575757575758
+    }
+  ],
+  "status": "PASS"
+}

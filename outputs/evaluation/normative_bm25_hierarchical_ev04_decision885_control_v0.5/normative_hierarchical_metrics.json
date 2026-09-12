@@ -1,0 +1,274 @@
+{
+  "arm": "EV04",
+  "dynamic_inputs": {
+    "config_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+    "corpus_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+    "index_metadata_sha256": "a4c50cb6fafdc049ddba0b29acba05c475ef05c24d42684f6918130c9bef9da3",
+    "index_sha256": "f828736ea700471c95d2b985bdd969d751cd36c3ca01c407049209010bdbe60b"
+  },
+  "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+  "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "metric_contract": "EV04_CANONICAL_MRR_V0.4",
+  "metrics": {
+    "cases_evaluated": 1056,
+    "cases_with_retrieval": 1056,
+    "chapter_at_10": 0.22348484848484848,
+    "chapter_at_100": 0.509469696969697,
+    "chapter_at_100_denominator": 1056,
+    "chapter_at_100_numerator": 538,
+    "chapter_at_10_denominator": 1056,
+    "chapter_at_10_numerator": 236,
+    "chapter_at_200": 0.7670454545454546,
+    "chapter_at_200_denominator": 1056,
+    "chapter_at_200_numerator": 810,
+    "chapter_at_50": 0.3778409090909091,
+    "chapter_at_50_denominator": 1056,
+    "chapter_at_50_numerator": 399,
+    "exact_at_10": 0.06534090909090909,
+    "exact_at_100": 0.10132575757575757,
+    "exact_at_100_denominator": 1056,
+    "exact_at_100_numerator": 107,
+    "exact_at_10_denominator": 1056,
+    "exact_at_10_numerator": 69,
+    "exact_at_200": 0.3039772727272727,
+    "exact_at_200_denominator": 1056,
+    "exact_at_200_numerator": 321,
+    "exact_at_50": 0.09090909090909091,
+    "exact_at_50_denominator": 1056,
+    "exact_at_50_numerator": 96,
+    "hs4_at_10": 0.0946969696969697,
+    "hs4_at_100": 0.25,
+    "hs4_at_100_denominator": 1056,
+    "hs4_at_100_numerator": 264,
+    "hs4_at_10_denominator": 1056,
+    "hs4_at_10_numerator": 100,
+    "hs4_at_200": 0.5009469696969697,
+    "hs4_at_200_denominator": 1056,
+    "hs4_at_200_numerator": 529,
+    "hs4_at_50": 0.18181818181818182,
+    "hs4_at_50_denominator": 1056,
+    "hs4_at_50_numerator": 192,
+    "hs6_at_10": 0.07102272727272728,
+    "hs6_at_100": 0.11174242424242424,
+    "hs6_at_100_denominator": 1056,
+    "hs6_at_100_numerator": 118,
+    "hs6_at_10_denominator": 1056,
+    "hs6_at_10_numerator": 75,
+    "hs6_at_200": 0.34375,
+    "hs6_at_200_denominator": 1056,
+    "hs6_at_200_numerator": 363,
+    "hs6_at_50": 0.10037878787878787,
+    "hs6_at_50_denominator": 1056,
+    "hs6_at_50_numerator": 106,
+    "metric_table": [
+      {
+        "denominator": 1056,
+        "metric": "mrr_at_100",
+        "numerator": 44.33224687474575,
+        "value": 0.04198129438896378
+      },
+      {
+        "denominator": 1056,
+        "metric": "mrr_at_200",
+        "numerator": 45.76874185264425,
+        "value": 0.04334161160288281
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_1",
+        "numerator": 28,
+        "value": 0.026515151515151516
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_3",
+        "numerator": 55,
+        "value": 0.052083333333333336
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_5",
+        "numerator": 66,
+        "value": 0.0625
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_10",
+        "numerator": 69,
+        "value": 0.06534090909090909
+      },
+      {
+        "denominator": 1056,
+        "metric": "top_50",
+        "numerator": 96,
+        "value": 0.09090909090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_50",
+        "numerator": 96,
+        "value": 0.09090909090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_100",
+        "numerator": 107,
+        "value": 0.10132575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "recall_at_200",
+        "numerator": 321,
+        "value": 0.3039772727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "pool_recall_at_200",
+        "numerator": 321,
+        "value": 0.3039772727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_10",
+        "numerator": 69,
+        "value": 0.06534090909090909
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_10",
+        "numerator": 75,
+        "value": 0.07102272727272728
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_10",
+        "numerator": 100,
+        "value": 0.0946969696969697
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_10",
+        "numerator": 236,
+        "value": 0.22348484848484848
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_50",
+        "numerator": 96,
+        "value": 0.09090909090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_50",
+        "numerator": 106,
+        "value": 0.10037878787878787
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_50",
+        "numerator": 192,
+        "value": 0.18181818181818182
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_50",
+        "numerator": 399,
+        "value": 0.3778409090909091
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_100",
+        "numerator": 107,
+        "value": 0.10132575757575757
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_100",
+        "numerator": 118,
+        "value": 0.11174242424242424
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_100",
+        "numerator": 264,
+        "value": 0.25
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_100",
+        "numerator": 538,
+        "value": 0.509469696969697
+      },
+      {
+        "denominator": 1056,
+        "metric": "exact_at_200",
+        "numerator": 321,
+        "value": 0.3039772727272727
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs6_at_200",
+        "numerator": 363,
+        "value": 0.34375
+      },
+      {
+        "denominator": 1056,
+        "metric": "hs4_at_200",
+        "numerator": 529,
+        "value": 0.5009469696969697
+      },
+      {
+        "denominator": 1056,
+        "metric": "chapter_at_200",
+        "numerator": 810,
+        "value": 0.7670454545454546
+      }
+    ],
+    "mrr": 0.04334161160288281,
+    "mrr_101_200_contribution": 0.0013603172139190346,
+    "mrr_101_200_contribution_numerator": 1.4364949778985006,
+    "mrr_at_100": 0.04198129438896378,
+    "mrr_at_100_denominator": 1056,
+    "mrr_at_100_numerator": 44.33224687474575,
+    "mrr_at_200": 0.04334161160288281,
+    "mrr_at_200_denominator": 1056,
+    "mrr_at_200_numerator": 45.76874185264425,
+    "mrr_definition": "MRR@100 is the arithmetic mean of 1/rank_ref for ranks 1..100 and zero otherwise; MRR@200 preserves the legacy hierarchical evaluator exactly: sum(float(reciprocal_rank)) in frozen CSV row order divided by case count.",
+    "mrr_denominator": 1056,
+    "mrr_numerator": 45.76874185264425,
+    "not_found_at_depth": 735,
+    "pool_recall_at_200": 0.3039772727272727,
+    "pool_recall_at_200_denominator": 1056,
+    "pool_recall_at_200_numerator": 321,
+    "recall_at_100": 0.10132575757575757,
+    "recall_at_100_denominator": 1056,
+    "recall_at_100_numerator": 107,
+    "recall_at_200": 0.3039772727272727,
+    "recall_at_200_denominator": 1056,
+    "recall_at_200_numerator": 321,
+    "recall_at_50": 0.09090909090909091,
+    "recall_at_50_denominator": 1056,
+    "recall_at_50_numerator": 96,
+    "top_1": 0.026515151515151516,
+    "top_10": 0.06534090909090909,
+    "top_10_denominator": 1056,
+    "top_10_numerator": 69,
+    "top_1_denominator": 1056,
+    "top_1_numerator": 28,
+    "top_3": 0.052083333333333336,
+    "top_3_denominator": 1056,
+    "top_3_numerator": 55,
+    "top_5": 0.0625,
+    "top_50": 0.09090909090909091,
+    "top_50_denominator": 1056,
+    "top_50_numerator": 96,
+    "top_5_denominator": 1056,
+    "top_5_numerator": 66,
+    "zero_retrieval_cases": 0
+  },
+  "outputs": {
+    "case_summary": "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.5/normative_hierarchical_case_summary.csv",
+    "ranking": "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.5/normative_hierarchical_results.csv"
+  },
+  "retrieval_depth": 200
+}

@@ -1,0 +1,49 @@
+{
+  "arm": "EV04",
+  "artifact_id": "0b05c_ev04_corrective_bm25_index_v0.3",
+  "bm25_params": {
+    "b": 0.75,
+    "k1": 1.5
+  },
+  "identity_policy": "DERIVED_ONLY_AT_FUTURE_AUTHORIZED_V03_EXECUTION",
+  "index_sha256": "e208042089b42a477fe3364e9f0933a6d3ee9d346bc2c213a105b3890f47a662",
+  "index_stats": {
+    "avg_doc_len": 47.075313568115234,
+    "docs_indexed": 7648,
+    "max_doc_len": 1535.0,
+    "min_doc_len": 18.0,
+    "rows_input": 7648,
+    "skipped": {
+      "empty_text": 0,
+      "invalid_code": 0,
+      "wrong_type": 0
+    },
+    "vocab_size": 17423
+  },
+  "input": {
+    "config_path": "src/configs/experiment_config.json",
+    "config_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+    "corpus_path": "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.5.jsonl",
+    "corpus_sha256": "452fe12aa0c2f91c6d970fbf048ba4a4f3d6c158781e24bb8ce6fb9905b43825"
+  },
+  "input_sha256": "452fe12aa0c2f91c6d970fbf048ba4a4f3d6c158781e24bb8ce6fb9905b43825",
+  "output": {
+    "bm25_index_path": "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.5/index.pkl",
+    "bm25_index_sha256": "e208042089b42a477fe3364e9f0933a6d3ee9d346bc2c213a105b3890f47a662",
+    "metadata_path": "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.5/index_metadata.json"
+  },
+  "semantics": {
+    "builder": "build_bm25_from_corpus",
+    "inherits_ev03_policy": false,
+    "kwargs": {
+      "code_field": "codigo",
+      "enforce_8_digits": true,
+      "fallback_text_field": "texto_index",
+      "target_type": "nandina_8",
+      "text_field": "texto_index_jerarquico",
+      "title_field": "titulo",
+      "type_field": "tipo"
+    },
+    "token_policy": "ORIGINAL_HIERARCHICAL_V0.1"
+  }
+}

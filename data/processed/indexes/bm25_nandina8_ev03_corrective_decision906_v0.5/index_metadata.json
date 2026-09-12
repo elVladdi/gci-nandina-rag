@@ -1,0 +1,41 @@
+{
+  "arm": "EV03",
+  "artifact_id": "0b05c_ev03_corrective_bm25_index_v0.3",
+  "bm25_params": {
+    "b": 0.75,
+    "k1": 1.5
+  },
+  "identity_policy": "DERIVED_ONLY_AT_FUTURE_AUTHORIZED_V03_EXECUTION",
+  "index_sha256": "8f729ab4d841f2c4e52078d4dab6a2dc49049de3a71491d0424595aeaad3ce75",
+  "index_stats": {
+    "avg_doc_len": 5.791208744049072,
+    "docs_indexed": 7644,
+    "max_doc_len": 24.0,
+    "min_doc_len": 2.0,
+    "rows_input": 7748,
+    "skipped": {
+      "empty_text": 0,
+      "invalid_code": 0,
+      "wrong_type": 104
+    },
+    "vocab_size": 5646
+  },
+  "input": {
+    "config_path": "src/configs/experiment_config.json",
+    "config_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+    "corpus_path": "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl",
+    "corpus_sha256": "6ecb82fe594853ec8cdd4ffa1c25e198612c988e13b5bd5332afbdfff6a8e0f3"
+  },
+  "input_sha256": "6ecb82fe594853ec8cdd4ffa1c25e198612c988e13b5bd5332afbdfff6a8e0f3",
+  "output": {
+    "bm25_index_path": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5/index.pkl",
+    "bm25_index_sha256": "8f729ab4d841f2c4e52078d4dab6a2dc49049de3a71491d0424595aeaad3ce75",
+    "metadata_path": "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5/index_metadata.json"
+  },
+  "semantics": {
+    "builder": "build_ev03_recovered_historical_from_corpus",
+    "global_builder_direct_use": false,
+    "kwargs": {},
+    "token_policy": "DROP_SINGLE_CHARACTER_TOKENS"
+  }
+}

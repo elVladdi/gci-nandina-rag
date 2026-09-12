@@ -1,0 +1,164 @@
+{
+  "comparison_id": "d1a_corrective_vs_original_v0.5",
+  "primary_control": {
+    "bytes": 4083,
+    "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json",
+    "sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c"
+  },
+  "rank_convention": "0=NOT_FOUND_AT_200",
+  "metrics": [
+    {
+      "metric": "Top@1",
+      "original_numerator": 0,
+      "corrected_numerator": 1,
+      "denominator": 1056,
+      "original_value": 0.0,
+      "corrected_value": 0.000946969696969697,
+      "absolute_delta": 0.000946969696969697
+    },
+    {
+      "metric": "Top@3",
+      "original_numerator": 4,
+      "corrected_numerator": 11,
+      "denominator": 1056,
+      "original_value": 0.003787878787878788,
+      "corrected_value": 0.010416666666666666,
+      "absolute_delta": 0.006628787878787878
+    },
+    {
+      "metric": "Top@5",
+      "original_numerator": 36,
+      "corrected_numerator": 54,
+      "denominator": 1056,
+      "original_value": 0.03409090909090909,
+      "corrected_value": 0.05113636363636364,
+      "absolute_delta": 0.01704545454545455
+    },
+    {
+      "metric": "Top@10",
+      "original_numerator": 165,
+      "corrected_numerator": 188,
+      "denominator": 1056,
+      "original_value": 0.15625,
+      "corrected_value": 0.17803030303030304,
+      "absolute_delta": 0.02178030303030304
+    },
+    {
+      "metric": "Top@50",
+      "original_numerator": 323,
+      "corrected_numerator": 331,
+      "denominator": 1056,
+      "original_value": 0.3058712121212121,
+      "corrected_value": 0.3134469696969697,
+      "absolute_delta": 0.0075757575757576245
+    },
+    {
+      "metric": "Recall@100",
+      "original_numerator": 365,
+      "corrected_numerator": 365,
+      "denominator": 1056,
+      "original_value": 0.3456439393939394,
+      "corrected_value": 0.3456439393939394,
+      "absolute_delta": 0.0
+    },
+    {
+      "metric": "Recall@200",
+      "original_numerator": 383,
+      "corrected_numerator": 384,
+      "denominator": 1056,
+      "original_value": 0.3626893939393939,
+      "corrected_value": 0.36363636363636365,
+      "absolute_delta": 0.0009469696969697239
+    },
+    {
+      "metric": "MRR@100",
+      "original_numerator": 34.240088668205736,
+      "corrected_numerator": 40.22001955684377,
+      "denominator": 1056,
+      "original_value": 0.03242432639034634,
+      "corrected_value": 0.038087139731859634,
+      "absolute_delta": 0.0056628133415132925
+    },
+    {
+      "metric": "MRR@200",
+      "original_numerator": 34.37125272378151,
+      "corrected_numerator": 40.35734344838877,
+      "denominator": 1056,
+      "original_value": 0.03254853477630825,
+      "corrected_value": 0.038217181295822696,
+      "absolute_delta": 0.005668646519514445
+    },
+    {
+      "metric": "Exact@100",
+      "original_numerator": 365,
+      "corrected_numerator": 365,
+      "denominator": 1056,
+      "original_value": 0.3456439393939394,
+      "corrected_value": 0.3456439393939394,
+      "absolute_delta": 0.0
+    },
+    {
+      "metric": "Exact@200",
+      "original_numerator": 383,
+      "corrected_numerator": 384,
+      "denominator": 1056,
+      "original_value": 0.3626893939393939,
+      "corrected_value": 0.36363636363636365,
+      "absolute_delta": 0.0009469696969697239
+    },
+    {
+      "metric": "HS6@100",
+      "original_numerator": 386,
+      "corrected_numerator": 386,
+      "denominator": 1056,
+      "original_value": 0.36553030303030304,
+      "corrected_value": 0.36553030303030304,
+      "absolute_delta": 0.0
+    },
+    {
+      "metric": "HS6@200",
+      "original_numerator": 410,
+      "corrected_numerator": 410,
+      "denominator": 1056,
+      "original_value": 0.38825757575757575,
+      "corrected_value": 0.38825757575757575,
+      "absolute_delta": 0.0
+    },
+    {
+      "metric": "HS4@100",
+      "original_numerator": 922,
+      "corrected_numerator": 929,
+      "denominator": 1056,
+      "original_value": 0.8731060606060606,
+      "corrected_value": 0.8797348484848485,
+      "absolute_delta": 0.006628787878787956
+    },
+    {
+      "metric": "HS4@200",
+      "original_numerator": 1018,
+      "corrected_numerator": 1017,
+      "denominator": 1056,
+      "original_value": 0.9640151515151515,
+      "corrected_value": 0.9630681818181818,
+      "absolute_delta": -0.0009469696969697239
+    },
+    {
+      "metric": "Chapter@100",
+      "original_numerator": 1035,
+      "corrected_numerator": 1035,
+      "denominator": 1056,
+      "original_value": 0.9801136363636364,
+      "corrected_value": 0.9801136363636364,
+      "absolute_delta": 0.0
+    },
+    {
+      "metric": "Chapter@200",
+      "original_numerator": 1056,
+      "corrected_numerator": 1056,
+      "denominator": 1056,
+      "original_value": 1.0,
+      "corrected_value": 1.0,
+      "absolute_delta": 0.0
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "attempt": "Attempt06",
+  "authorization_commit": "a9b06b8748316d7f3c403eaa9d55b735e12d96c3",
+  "baseline_commit": "e7cab327f0ef12b1e8ae21cddd01d215cd42db31",
+  "command": ".venv\\Scripts\\python.exe -B -m src.experiments.run_0b05c_corrective_numerical_v05 --execute-authorized",
+  "completed_at": "2026-09-11T23:55:55.6747234-05:00",
+  "execution_references": {
+    "exact_hash_ledger": "outputs/audits/0b05c_corrective_numerical_runtime_v0.5/exact_hash_ledger_v0.5.json",
+    "execution_manifest": "outputs/audits/0b05c_corrective_numerical_runtime_v0.5/execution_manifest_v0.5.json",
+    "unified_sensitivity_summary": "outputs/evaluation/0b05c_corrective_numerical_v0.5/unified_sensitivity_summary_v0.5.json"
+  },
+  "invocation_count": 1,
+  "pipeline_steps_completed": 19,
+  "pipeline_steps_expected": 19,
+  "produced_roots": [
+    "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5",
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.5",
+    "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.5",
+    "outputs/audits/d1a_corrective_0b05c_runtime_v0.5",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.5",
+    "outputs/audits/0b05c_corrective_numerical_runtime_v0.5"
+  ],
+  "resume_performed": false,
+  "retry_performed": false,
+  "started_at": "2026-09-11T23:50:57.0069945-05:00",
+  "status": "COMPLETED / PENDING_EXTERNAL_RESULT_AUDIT"
+}

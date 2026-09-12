@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "preflight_status": "PASS",
+  "execution_mode": "AUTHORIZED_EXECUTION",
+  "numerical_execution_occurred": true,
+  "hash_ledger": {
+    "path": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_output_hash_ledger_v0.1.csv",
+    "sha256": null
+  },
+  "runner_version": "v0.5",
+  "runner_outputs": {
+    "aggregate_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_vs_original_comparison_v0.5.json",
+    "case_level_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_case_level_comparison_v0.5.jsonl",
+    "execution_manifest": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_execution_manifest_v0.5.json",
+    "hash_ledger": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_output_hash_ledger_v0.5.csv"
+  }
+}

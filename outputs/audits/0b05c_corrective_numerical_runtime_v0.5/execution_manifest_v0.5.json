@@ -1,0 +1,1367 @@
+{
+  "artifact_id": "0b05c_corrective_execution_manifest_v0.5",
+  "authorization_provenance": {
+    "authorization_baseline_commit": "e7cab327f0ef12b1e8ae21cddd01d215cd42db31",
+    "authorization_commit_shape": {
+      "authorization_commit": "a9b06b8748316d7f3c403eaa9d55b735e12d96c3",
+      "baseline": "e7cab327f0ef12b1e8ae21cddd01d215cd42db31",
+      "mode": "DIRECT_PARENT_EXACT_FIVE_PATH_AUTHORIZATION_DIFF",
+      "path_status": {
+        "outputs/audits/0b05c_corrective_numerical_gate_v0.5/0b05c_corrective_numerical_execution_gate_v0.5.json": "M",
+        "outputs/audits/0b05c_corrective_numerical_gate_v0.5/0b05c_numerical_authorization_record_v0.5.json": "A",
+        "outputs/audits/0b05c_corrective_numerical_gate_v0.5/d1a_numerical_execution_spec_v0.5.json": "M",
+        "outputs/audits/0b05c_corrective_numerical_gate_v0.5/ev03_numerical_execution_spec_v0.5.json": "M",
+        "outputs/audits/0b05c_corrective_numerical_gate_v0.5/ev04_numerical_execution_spec_v0.5.json": "M"
+      },
+      "status": "PASS"
+    },
+    "authorization_flags": {
+      "D1A_NUMERICAL_EXECUTION": "AUTHORIZED",
+      "EV03_NUMERICAL_EXECUTION": "AUTHORIZED",
+      "EV04_NUMERICAL_EXECUTION": "AUTHORIZED",
+      "UNIFIED_0B05C_NUMERICAL_EXECUTION": "AUTHORIZED"
+    },
+    "authorization_record_binding": {
+      "canonical_git_blob_sha256": "4c5a5a3bd6a5369ef57bde7046b43ee4b3598b1923f72ef95b841919d871291f",
+      "canonical_size_bytes": 1638,
+      "git_blob_sha1": "b7a4b5d44d1ad4aa733be87c71c95099bc7616e4",
+      "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.5/0b05c_numerical_authorization_record_v0.5.json"
+    },
+    "authorization_transition_proof": {
+      "allowed_fields_only": true,
+      "mode": "BASELINE_TO_AUTHORIZED_IMMUTABLE_PROJECTION",
+      "projection_sha256": "5d30c806d05f2f8d040b44442dc4d15aa99d20e8aeba905134e58d8fefa3bff1",
+      "status": "PASS"
+    },
+    "authorized_artifact_bindings": {
+      "d1a_spec": {
+        "canonical_git_blob_sha256": "b98c0d6ec86e85426b7c1dace7d979fd47687ff6f7f1ca39aff3d358183ccdf3",
+        "canonical_size_bytes": 17686,
+        "git_blob_sha1": "10b15e87a6d3aa75e2f5137d465573c7fc25a17e",
+        "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.5/d1a_numerical_execution_spec_v0.5.json"
+      },
+      "ev03_spec": {
+        "canonical_git_blob_sha256": "e031685906caca722ac94ef16f5ce2176ae005c984f8cd81f40d32091aa46125",
+        "canonical_size_bytes": 21395,
+        "git_blob_sha1": "66b3a7528208f28ae27857154940930e87df28b5",
+        "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.5/ev03_numerical_execution_spec_v0.5.json"
+      },
+      "ev04_spec": {
+        "canonical_git_blob_sha256": "475176cc6729a74b180f8bbe5c3069303b63766a88bd23f650fc04ebe7b680b0",
+        "canonical_size_bytes": 29308,
+        "git_blob_sha1": "cbc9314604ec44c35720788256df8ab4fcb1ded4",
+        "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.5/ev04_numerical_execution_spec_v0.5.json"
+      },
+      "unified_gate": {
+        "canonical_git_blob_sha256": "f0a4258f28d06b999a7bc3c4df6b5d4a545ddda1432a23f43a5d12265add95ef",
+        "canonical_size_bytes": 36241,
+        "git_blob_sha1": "a4dbba4711b8f0a9d0bda79dfd1ce6b74730fe42",
+        "path": "outputs/audits/0b05c_corrective_numerical_gate_v0.5/0b05c_corrective_numerical_execution_gate_v0.5.json"
+      }
+    },
+    "current_dependency_bindings_equal_baseline": true,
+    "execution_authorization_commit": "a9b06b8748316d7f3c403eaa9d55b735e12d96c3",
+    "status": "PASS"
+  },
+  "environment_fingerprint": {
+    "architecture": "64bit",
+    "distributions": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.3",
+      "Pillow": "12.3.0",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.20.0",
+      "annotated-doc": "0.0.4",
+      "anyio": "4.13.0",
+      "certifi": "2026.5.20",
+      "click": "8.4.1",
+      "colorama": "0.4.6",
+      "exceptiongroup": "1.3.1",
+      "filelock": "3.29.4",
+      "fsspec": "2026.4.0",
+      "h11": "0.16.0",
+      "hf-xet": "1.5.1",
+      "httpcore": "1.0.9",
+      "httpx": "0.28.1",
+      "huggingface_hub": "1.19.0",
+      "idna": "3.18",
+      "joblib": "1.5.3",
+      "markdown-it-py": "4.2.0",
+      "mdurl": "0.1.2",
+      "mpmath": "1.3.0",
+      "networkx": "3.4.2",
+      "numpy": "2.2.6",
+      "packaging": "26.2",
+      "regex": "2026.5.9",
+      "rich": "15.0.0",
+      "safetensors": "0.8.0",
+      "scikit-learn": "1.7.2",
+      "scipy": "1.15.3",
+      "sentence-transformers": "5.5.1",
+      "setuptools": "65.5.0",
+      "shellingham": "1.5.4",
+      "sympy": "1.14.0",
+      "threadpoolctl": "3.6.0",
+      "tokenizers": "0.22.2",
+      "torch": "2.12.0",
+      "tqdm": "4.68.2",
+      "transformers": "5.12.1",
+      "typer": "0.25.1",
+      "typing_extensions": "4.15.0"
+    },
+    "executable_sha256": "b2c836c52cdf063180b9ee76f67ac42946101b79ac457f3494035a67c090d961",
+    "historical_vector_replay": {
+      "classification": "ENVIRONMENT_PARITY_EVIDENCE / NOT_NEW_SCIENTIFIC_RESULT",
+      "cosine_min": 0.9999999948279137,
+      "max_absolute_difference": 1.1920928955078125e-07,
+      "required": true,
+      "sample_count": 21,
+      "status": "PASS",
+      "tolerance": 9.5367431640625e-07
+    },
+    "historical_vector_replay_required": true,
+    "machine": "AMD64",
+    "packages": {
+      "huggingface_hub": "1.19.0",
+      "numpy": "2.2.6",
+      "safetensors": "0.8.0",
+      "sentence_transformers": "5.5.1",
+      "tokenizers": "0.22.2",
+      "torch": "2.12.0+cpu",
+      "tqdm": "4.68.2",
+      "transformers": "5.12.1"
+    },
+    "platform_system": "Windows",
+    "project_imports": {
+      "count": 31,
+      "modules": [
+        "src",
+        "src.bm25_index",
+        "src.evaluation",
+        "src.evaluation.metrics",
+        "src.experiments",
+        "src.experiments.build_bm25_corrective_0b05c_v02",
+        "src.experiments.build_bm25_corrective_0b05c_v03",
+        "src.experiments.build_bm25_ev03_historical_recovered_v02",
+        "src.experiments.build_text2trade_mnrl_index_v02",
+        "src.experiments.evaluate_normative_bm25_corrective_0b05c_v01",
+        "src.experiments.evaluate_normative_bm25_corrective_0b05c_v04",
+        "src.experiments.evaluate_normative_bm25_corrective_0b05c_v05",
+        "src.experiments.evaluate_normative_bm25_flat_data_aduanas_v02",
+        "src.experiments.evaluate_normative_bm25_hierarchical_data_aduanas_v02",
+        "src.experiments.evaluate_text2trade_mnrl_data_aduanas_v02",
+        "src.experiments.prepare_0b05c_corrective_numerical_gate_v01",
+        "src.experiments.prepare_0b05c_corrective_numerical_gate_v02",
+        "src.experiments.prepare_0b05c_corrective_numerical_gate_v03",
+        "src.experiments.prepare_0b05c_corrective_numerical_gate_v04",
+        "src.experiments.prepare_0b05c_corrective_numerical_gate_v05",
+        "src.experiments.run_0b05c_corrective_numerical_v02",
+        "src.experiments.run_0b05c_corrective_numerical_v05",
+        "src.experiments.run_d1a_corrective_0b05c_v01",
+        "src.experiments.run_d1a_corrective_0b05c_v02",
+        "src.experiments.run_d1a_corrective_0b05c_v05",
+        "src.experiments.verify_ev03_historical_builder_recovery_v02",
+        "src.retrieval",
+        "src.retrieval.bm25",
+        "src.retrieval.text2trade_mnrl_v02",
+        "src.utils",
+        "src.utils.paths"
+      ],
+      "status": "PASS"
+    },
+    "python_implementation": "CPython",
+    "python_version": "3.10.11"
+  },
+  "future_roots": [
+    "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5",
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.5",
+    "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.5",
+    "outputs/audits/d1a_corrective_0b05c_runtime_v0.5",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.5",
+    "outputs/audits/0b05c_corrective_numerical_runtime_v0.5"
+  ],
+  "pipeline_steps": [
+    "01_unified_preflight",
+    "02_EV03_Decision885_control_reproduction",
+    "03_EV03_control_reproduction_verification",
+    "04_EV03_corrected_corpus_materialization",
+    "05_EV03_corrected_index_build_RECOVERED_HISTORICAL_SEMANTICS",
+    "06_EV03_corrected_evaluation",
+    "07_EV04_Decision885_control_reproduction_ENRICHED_MRR",
+    "08_EV04_control_reproduction_verification_PASS_EXACT",
+    "09_EV04_corrected_corpus_materialization",
+    "10_EV04_corrected_index_build",
+    "11_EV04_corrected_evaluation_ENRICHED_MRR",
+    "12_D1a_corrected_execution_under_future_v05_authorization",
+    "13_integrity_validation",
+    "14_case_level_comparisons",
+    "15_aggregate_comparisons",
+    "16_unified_sensitivity_summary",
+    "17_execution_manifest",
+    "18_exact_hash_ledger",
+    "19_final_completion_state"
+  ],
+  "results": {
+    "control": {
+      "EV03": {
+        "case_summary_exact": true,
+        "case_summary_schema_exact": true,
+        "checks": {
+          "case_summary_row_count_exact": true,
+          "case_summary_rows_content_exact": true,
+          "case_summary_schema_exact": true,
+          "case_summary_sha256_exact": true,
+          "full_metrics_exact": true,
+          "logical_index_identity_exact": true,
+          "metric_table_exact": true,
+          "ranking_row_count_exact": true,
+          "ranking_rows_content_exact": true,
+          "ranking_schema_exact": true,
+          "ranking_sha256_exact": true
+        },
+        "comparison_scope": "EFFECTIVE_FULL_RANKING_CASE_LEVEL_AND_METRICS_EXCLUDING_RUNTIME_TIMESTAMPS",
+        "metrics_exact": true,
+        "ranking_exact": true,
+        "ranking_schema_exact": true,
+        "required_contract": {
+          "case_summary_bytes_exact": true,
+          "case_summary_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+          "cases": 1056,
+          "full_metrics_exact": true,
+          "logical_index_identity": "EXACT",
+          "metric_table_exact": true,
+          "ranking_bytes_exact": true,
+          "ranking_rows": 50327,
+          "ranking_sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+          "status": "PASS_EXACT"
+        },
+        "status": "PASS_EXACT"
+      },
+      "EV04": {
+        "actual_metrics": {
+          "cases_evaluated": 1056,
+          "cases_with_retrieval": 1056,
+          "chapter_at_10": 0.22348484848484848,
+          "chapter_at_100": 0.509469696969697,
+          "chapter_at_100_denominator": 1056,
+          "chapter_at_100_numerator": 538,
+          "chapter_at_10_denominator": 1056,
+          "chapter_at_10_numerator": 236,
+          "chapter_at_200": 0.7670454545454546,
+          "chapter_at_200_denominator": 1056,
+          "chapter_at_200_numerator": 810,
+          "chapter_at_50": 0.3778409090909091,
+          "chapter_at_50_denominator": 1056,
+          "chapter_at_50_numerator": 399,
+          "exact_at_10": 0.06534090909090909,
+          "exact_at_100": 0.10132575757575757,
+          "exact_at_100_denominator": 1056,
+          "exact_at_100_numerator": 107,
+          "exact_at_10_denominator": 1056,
+          "exact_at_10_numerator": 69,
+          "exact_at_200": 0.3039772727272727,
+          "exact_at_200_denominator": 1056,
+          "exact_at_200_numerator": 321,
+          "exact_at_50": 0.09090909090909091,
+          "exact_at_50_denominator": 1056,
+          "exact_at_50_numerator": 96,
+          "hs4_at_10": 0.0946969696969697,
+          "hs4_at_100": 0.25,
+          "hs4_at_100_denominator": 1056,
+          "hs4_at_100_numerator": 264,
+          "hs4_at_10_denominator": 1056,
+          "hs4_at_10_numerator": 100,
+          "hs4_at_200": 0.5009469696969697,
+          "hs4_at_200_denominator": 1056,
+          "hs4_at_200_numerator": 529,
+          "hs4_at_50": 0.18181818181818182,
+          "hs4_at_50_denominator": 1056,
+          "hs4_at_50_numerator": 192,
+          "hs6_at_10": 0.07102272727272728,
+          "hs6_at_100": 0.11174242424242424,
+          "hs6_at_100_denominator": 1056,
+          "hs6_at_100_numerator": 118,
+          "hs6_at_10_denominator": 1056,
+          "hs6_at_10_numerator": 75,
+          "hs6_at_200": 0.34375,
+          "hs6_at_200_denominator": 1056,
+          "hs6_at_200_numerator": 363,
+          "hs6_at_50": 0.10037878787878787,
+          "hs6_at_50_denominator": 1056,
+          "hs6_at_50_numerator": 106,
+          "metric_table": [
+            {
+              "denominator": 1056,
+              "metric": "mrr_at_100",
+              "numerator": 44.33224687474575,
+              "value": 0.04198129438896378
+            },
+            {
+              "denominator": 1056,
+              "metric": "mrr_at_200",
+              "numerator": 45.76874185264425,
+              "value": 0.04334161160288281
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_1",
+              "numerator": 28,
+              "value": 0.026515151515151516
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_3",
+              "numerator": 55,
+              "value": 0.052083333333333336
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_5",
+              "numerator": 66,
+              "value": 0.0625
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_10",
+              "numerator": 69,
+              "value": 0.06534090909090909
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_100",
+              "numerator": 107,
+              "value": 0.10132575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "pool_recall_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_10",
+              "numerator": 69,
+              "value": 0.06534090909090909
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_10",
+              "numerator": 75,
+              "value": 0.07102272727272728
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_10",
+              "numerator": 100,
+              "value": 0.0946969696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_10",
+              "numerator": 236,
+              "value": 0.22348484848484848
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_50",
+              "numerator": 106,
+              "value": 0.10037878787878787
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_50",
+              "numerator": 192,
+              "value": 0.18181818181818182
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_50",
+              "numerator": 399,
+              "value": 0.3778409090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_100",
+              "numerator": 107,
+              "value": 0.10132575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_100",
+              "numerator": 118,
+              "value": 0.11174242424242424
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_100",
+              "numerator": 264,
+              "value": 0.25
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_100",
+              "numerator": 538,
+              "value": 0.509469696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_200",
+              "numerator": 363,
+              "value": 0.34375
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_200",
+              "numerator": 529,
+              "value": 0.5009469696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_200",
+              "numerator": 810,
+              "value": 0.7670454545454546
+            }
+          ],
+          "mrr": 0.04334161160288281,
+          "mrr_101_200_contribution": 0.0013603172139190346,
+          "mrr_101_200_contribution_numerator": 1.4364949778985006,
+          "mrr_at_100": 0.04198129438896378,
+          "mrr_at_100_denominator": 1056,
+          "mrr_at_100_numerator": 44.33224687474575,
+          "mrr_at_200": 0.04334161160288281,
+          "mrr_at_200_denominator": 1056,
+          "mrr_at_200_numerator": 45.76874185264425,
+          "mrr_definition": "MRR@100 is the arithmetic mean of 1/rank_ref for ranks 1..100 and zero otherwise; MRR@200 preserves the legacy hierarchical evaluator exactly: sum(float(reciprocal_rank)) in frozen CSV row order divided by case count.",
+          "mrr_denominator": 1056,
+          "mrr_numerator": 45.76874185264425,
+          "not_found_at_depth": 735,
+          "pool_recall_at_200": 0.3039772727272727,
+          "pool_recall_at_200_denominator": 1056,
+          "pool_recall_at_200_numerator": 321,
+          "recall_at_100": 0.10132575757575757,
+          "recall_at_100_denominator": 1056,
+          "recall_at_100_numerator": 107,
+          "recall_at_200": 0.3039772727272727,
+          "recall_at_200_denominator": 1056,
+          "recall_at_200_numerator": 321,
+          "recall_at_50": 0.09090909090909091,
+          "recall_at_50_denominator": 1056,
+          "recall_at_50_numerator": 96,
+          "top_1": 0.026515151515151516,
+          "top_10": 0.06534090909090909,
+          "top_10_denominator": 1056,
+          "top_10_numerator": 69,
+          "top_1_denominator": 1056,
+          "top_1_numerator": 28,
+          "top_3": 0.052083333333333336,
+          "top_3_denominator": 1056,
+          "top_3_numerator": 55,
+          "top_5": 0.0625,
+          "top_50": 0.09090909090909091,
+          "top_50_denominator": 1056,
+          "top_50_numerator": 96,
+          "top_5_denominator": 1056,
+          "top_5_numerator": 66,
+          "zero_retrieval_cases": 0
+        },
+        "case_summary_exact": true,
+        "case_summary_schema_exact": true,
+        "checks": {
+          "case_summary_rows_content_exact": true,
+          "case_summary_schema_exact": true,
+          "case_summary_sha256_exact": true,
+          "full_metrics_exact": true,
+          "metric_table_exact": true,
+          "ranking_rows_content_exact": true,
+          "ranking_schema_exact": true,
+          "ranking_sha256_exact": true
+        },
+        "comparison_scope": "EFFECTIVE_FULL_RANKING_CASE_LEVEL_AND_METRICS_EXCLUDING_RUNTIME_TIMESTAMPS",
+        "expected_metrics": {
+          "cases_evaluated": 1056,
+          "cases_with_retrieval": 1056,
+          "chapter_at_10": 0.22348484848484848,
+          "chapter_at_100": 0.509469696969697,
+          "chapter_at_100_denominator": 1056,
+          "chapter_at_100_numerator": 538,
+          "chapter_at_10_denominator": 1056,
+          "chapter_at_10_numerator": 236,
+          "chapter_at_200": 0.7670454545454546,
+          "chapter_at_200_denominator": 1056,
+          "chapter_at_200_numerator": 810,
+          "chapter_at_50": 0.3778409090909091,
+          "chapter_at_50_denominator": 1056,
+          "chapter_at_50_numerator": 399,
+          "exact_at_10": 0.06534090909090909,
+          "exact_at_100": 0.10132575757575757,
+          "exact_at_100_denominator": 1056,
+          "exact_at_100_numerator": 107,
+          "exact_at_10_denominator": 1056,
+          "exact_at_10_numerator": 69,
+          "exact_at_200": 0.3039772727272727,
+          "exact_at_200_denominator": 1056,
+          "exact_at_200_numerator": 321,
+          "exact_at_50": 0.09090909090909091,
+          "exact_at_50_denominator": 1056,
+          "exact_at_50_numerator": 96,
+          "hs4_at_10": 0.0946969696969697,
+          "hs4_at_100": 0.25,
+          "hs4_at_100_denominator": 1056,
+          "hs4_at_100_numerator": 264,
+          "hs4_at_10_denominator": 1056,
+          "hs4_at_10_numerator": 100,
+          "hs4_at_200": 0.5009469696969697,
+          "hs4_at_200_denominator": 1056,
+          "hs4_at_200_numerator": 529,
+          "hs4_at_50": 0.18181818181818182,
+          "hs4_at_50_denominator": 1056,
+          "hs4_at_50_numerator": 192,
+          "hs6_at_10": 0.07102272727272728,
+          "hs6_at_100": 0.11174242424242424,
+          "hs6_at_100_denominator": 1056,
+          "hs6_at_100_numerator": 118,
+          "hs6_at_10_denominator": 1056,
+          "hs6_at_10_numerator": 75,
+          "hs6_at_200": 0.34375,
+          "hs6_at_200_denominator": 1056,
+          "hs6_at_200_numerator": 363,
+          "hs6_at_50": 0.10037878787878787,
+          "hs6_at_50_denominator": 1056,
+          "hs6_at_50_numerator": 106,
+          "metric_table": [
+            {
+              "denominator": 1056,
+              "metric": "mrr_at_100",
+              "numerator": 44.33224687474575,
+              "value": 0.04198129438896378
+            },
+            {
+              "denominator": 1056,
+              "metric": "mrr_at_200",
+              "numerator": 45.76874185264425,
+              "value": 0.04334161160288281
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_1",
+              "numerator": 28,
+              "value": 0.026515151515151516
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_3",
+              "numerator": 55,
+              "value": 0.052083333333333336
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_5",
+              "numerator": 66,
+              "value": 0.0625
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_10",
+              "numerator": 69,
+              "value": 0.06534090909090909
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_100",
+              "numerator": 107,
+              "value": 0.10132575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "pool_recall_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_10",
+              "numerator": 69,
+              "value": 0.06534090909090909
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_10",
+              "numerator": 75,
+              "value": 0.07102272727272728
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_10",
+              "numerator": 100,
+              "value": 0.0946969696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_10",
+              "numerator": 236,
+              "value": 0.22348484848484848
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_50",
+              "numerator": 106,
+              "value": 0.10037878787878787
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_50",
+              "numerator": 192,
+              "value": 0.18181818181818182
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_50",
+              "numerator": 399,
+              "value": 0.3778409090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_100",
+              "numerator": 107,
+              "value": 0.10132575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_100",
+              "numerator": 118,
+              "value": 0.11174242424242424
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_100",
+              "numerator": 264,
+              "value": 0.25
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_100",
+              "numerator": 538,
+              "value": 0.509469696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_200",
+              "numerator": 363,
+              "value": 0.34375
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_200",
+              "numerator": 529,
+              "value": 0.5009469696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_200",
+              "numerator": 810,
+              "value": 0.7670454545454546
+            }
+          ],
+          "mrr": 0.04334161160288281,
+          "mrr_101_200_contribution": 0.0013603172139190346,
+          "mrr_101_200_contribution_numerator": 1.4364949778985006,
+          "mrr_at_100": 0.04198129438896378,
+          "mrr_at_100_denominator": 1056,
+          "mrr_at_100_numerator": 44.33224687474575,
+          "mrr_at_200": 0.04334161160288281,
+          "mrr_at_200_denominator": 1056,
+          "mrr_at_200_numerator": 45.76874185264425,
+          "mrr_definition": "MRR@100 is the arithmetic mean of 1/rank_ref for ranks 1..100 and zero otherwise; MRR@200 preserves the legacy hierarchical evaluator exactly: sum(float(reciprocal_rank)) in frozen CSV row order divided by case count.",
+          "mrr_denominator": 1056,
+          "mrr_numerator": 45.76874185264425,
+          "not_found_at_depth": 735,
+          "pool_recall_at_200": 0.3039772727272727,
+          "pool_recall_at_200_denominator": 1056,
+          "pool_recall_at_200_numerator": 321,
+          "recall_at_100": 0.10132575757575757,
+          "recall_at_100_denominator": 1056,
+          "recall_at_100_numerator": 107,
+          "recall_at_200": 0.3039772727272727,
+          "recall_at_200_denominator": 1056,
+          "recall_at_200_numerator": 321,
+          "recall_at_50": 0.09090909090909091,
+          "recall_at_50_denominator": 1056,
+          "recall_at_50_numerator": 96,
+          "top_1": 0.026515151515151516,
+          "top_10": 0.06534090909090909,
+          "top_10_denominator": 1056,
+          "top_10_numerator": 69,
+          "top_1_denominator": 1056,
+          "top_1_numerator": 28,
+          "top_3": 0.052083333333333336,
+          "top_3_denominator": 1056,
+          "top_3_numerator": 55,
+          "top_5": 0.0625,
+          "top_50": 0.09090909090909091,
+          "top_50_denominator": 1056,
+          "top_50_numerator": 96,
+          "top_5_denominator": 1056,
+          "top_5_numerator": 66,
+          "zero_retrieval_cases": 0
+        },
+        "metrics_exact": true,
+        "ranking_exact": true,
+        "ranking_schema_exact": true,
+        "required_contract": {
+          "case_summary_sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+          "enriched_mrr_metrics_exact": true,
+          "mandatory": true,
+          "ranking_sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662",
+          "reason": "ORIGINAL_IDENTITY_NOT_VERIFIABLE_FROM_FROZEN_ARTIFACTS",
+          "status": "PASS_EXACT"
+        },
+        "status": "PASS_EXACT"
+      }
+    },
+    "corrected": {
+      "EV03": {
+        "arm": "EV03",
+        "dynamic_inputs": {
+          "config_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+          "corpus_sha256": "6ecb82fe594853ec8cdd4ffa1c25e198612c988e13b5bd5332afbdfff6a8e0f3",
+          "index_metadata_sha256": "e95d54c834258ab1ba641933445b9e4aa0b9ac1d0068a5a1f03e6175c54cbc5e",
+          "index_sha256": "8f729ab4d841f2c4e52078d4dab6a2dc49049de3a71491d0424595aeaad3ce75"
+        },
+        "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+        "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "metric_contract": "EV03_FROZEN_V0.2",
+        "metrics": {
+          "cases_evaluated": 1056,
+          "cases_with_retrieval": 1046,
+          "clase_at_10": 0.3977272727272727,
+          "clase_at_100": 0.7632575757575758,
+          "clase_at_100_denominator": 1056,
+          "clase_at_100_numerator": 806,
+          "clase_at_10_denominator": 1056,
+          "clase_at_10_numerator": 420,
+          "clase_at_50": 0.7291666666666666,
+          "clase_at_50_denominator": 1056,
+          "clase_at_50_numerator": 770,
+          "metric_table": [
+            {
+              "denominator": 1056,
+              "metric": "mrr",
+              "numerator": 44.66596703438809,
+              "value": 0.04229731726741296
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_1",
+              "numerator": 29,
+              "value": 0.027462121212121212
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_3",
+              "numerator": 54,
+              "value": 0.05113636363636364
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_5",
+              "numerator": 65,
+              "value": 0.061553030303030304
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_10",
+              "numerator": 69,
+              "value": 0.06534090909090909
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_50",
+              "numerator": 74,
+              "value": 0.07007575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_50",
+              "numerator": 74,
+              "value": 0.07007575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_100",
+              "numerator": 75,
+              "value": 0.07102272727272728
+            },
+            {
+              "denominator": 1056,
+              "metric": "partida_at_10",
+              "numerator": 104,
+              "value": 0.09848484848484848
+            },
+            {
+              "denominator": 1056,
+              "metric": "sub_partida_at_10",
+              "numerator": 76,
+              "value": 0.07196969696969698
+            },
+            {
+              "denominator": 1056,
+              "metric": "clase_at_10",
+              "numerator": 420,
+              "value": 0.3977272727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "partida_at_50",
+              "numerator": 185,
+              "value": 0.17518939393939395
+            },
+            {
+              "denominator": 1056,
+              "metric": "sub_partida_at_50",
+              "numerator": 89,
+              "value": 0.08428030303030302
+            },
+            {
+              "denominator": 1056,
+              "metric": "clase_at_50",
+              "numerator": 770,
+              "value": 0.7291666666666666
+            },
+            {
+              "denominator": 1056,
+              "metric": "partida_at_100",
+              "numerator": 220,
+              "value": 0.20833333333333334
+            },
+            {
+              "denominator": 1056,
+              "metric": "sub_partida_at_100",
+              "numerator": 99,
+              "value": 0.09375
+            },
+            {
+              "denominator": 1056,
+              "metric": "clase_at_100",
+              "numerator": 806,
+              "value": 0.7632575757575758
+            }
+          ],
+          "mrr": 0.04229731726741296,
+          "mrr_denominator": 1056,
+          "mrr_numerator": 44.66596703438809,
+          "not_found_at_depth": 981,
+          "partida_at_10": 0.09848484848484848,
+          "partida_at_100": 0.20833333333333334,
+          "partida_at_100_denominator": 1056,
+          "partida_at_100_numerator": 220,
+          "partida_at_10_denominator": 1056,
+          "partida_at_10_numerator": 104,
+          "partida_at_50": 0.17518939393939395,
+          "partida_at_50_denominator": 1056,
+          "partida_at_50_numerator": 185,
+          "recall_at_100": 0.07102272727272728,
+          "recall_at_100_denominator": 1056,
+          "recall_at_100_numerator": 75,
+          "recall_at_50": 0.07007575757575757,
+          "recall_at_50_denominator": 1056,
+          "recall_at_50_numerator": 74,
+          "sub_partida_at_10": 0.07196969696969698,
+          "sub_partida_at_100": 0.09375,
+          "sub_partida_at_100_denominator": 1056,
+          "sub_partida_at_100_numerator": 99,
+          "sub_partida_at_10_denominator": 1056,
+          "sub_partida_at_10_numerator": 76,
+          "sub_partida_at_50": 0.08428030303030302,
+          "sub_partida_at_50_denominator": 1056,
+          "sub_partida_at_50_numerator": 89,
+          "top_1": 0.027462121212121212,
+          "top_10": 0.06534090909090909,
+          "top_10_denominator": 1056,
+          "top_10_numerator": 69,
+          "top_1_denominator": 1056,
+          "top_1_numerator": 29,
+          "top_3": 0.05113636363636364,
+          "top_3_denominator": 1056,
+          "top_3_numerator": 54,
+          "top_5": 0.061553030303030304,
+          "top_50": 0.07007575757575757,
+          "top_50_denominator": 1056,
+          "top_50_numerator": 74,
+          "top_5_denominator": 1056,
+          "top_5_numerator": 65,
+          "zero_retrieval_cases": 10
+        },
+        "outputs": {
+          "case_summary": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5/normative_flat_case_summary.csv",
+          "ranking": "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5/normative_flat_results.csv"
+        },
+        "retrieval_depth": 100
+      },
+      "EV04": {
+        "arm": "EV04",
+        "dynamic_inputs": {
+          "config_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+          "corpus_sha256": "452fe12aa0c2f91c6d970fbf048ba4a4f3d6c158781e24bb8ce6fb9905b43825",
+          "index_metadata_sha256": "9633a5b19d532dd541cc20ecf9765a62a64bf4b35422095e099512034c100827",
+          "index_sha256": "e208042089b42a477fe3364e9f0933a6d3ee9d346bc2c213a105b3890f47a662"
+        },
+        "evalset": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+        "evalset_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+        "metric_contract": "EV04_CANONICAL_MRR_V0.4",
+        "metrics": {
+          "cases_evaluated": 1056,
+          "cases_with_retrieval": 1056,
+          "chapter_at_10": 0.22348484848484848,
+          "chapter_at_100": 0.509469696969697,
+          "chapter_at_100_denominator": 1056,
+          "chapter_at_100_numerator": 538,
+          "chapter_at_10_denominator": 1056,
+          "chapter_at_10_numerator": 236,
+          "chapter_at_200": 0.7670454545454546,
+          "chapter_at_200_denominator": 1056,
+          "chapter_at_200_numerator": 810,
+          "chapter_at_50": 0.3778409090909091,
+          "chapter_at_50_denominator": 1056,
+          "chapter_at_50_numerator": 399,
+          "exact_at_10": 0.06534090909090909,
+          "exact_at_100": 0.10132575757575757,
+          "exact_at_100_denominator": 1056,
+          "exact_at_100_numerator": 107,
+          "exact_at_10_denominator": 1056,
+          "exact_at_10_numerator": 69,
+          "exact_at_200": 0.3039772727272727,
+          "exact_at_200_denominator": 1056,
+          "exact_at_200_numerator": 321,
+          "exact_at_50": 0.09090909090909091,
+          "exact_at_50_denominator": 1056,
+          "exact_at_50_numerator": 96,
+          "hs4_at_10": 0.0946969696969697,
+          "hs4_at_100": 0.25,
+          "hs4_at_100_denominator": 1056,
+          "hs4_at_100_numerator": 264,
+          "hs4_at_10_denominator": 1056,
+          "hs4_at_10_numerator": 100,
+          "hs4_at_200": 0.5009469696969697,
+          "hs4_at_200_denominator": 1056,
+          "hs4_at_200_numerator": 529,
+          "hs4_at_50": 0.18181818181818182,
+          "hs4_at_50_denominator": 1056,
+          "hs4_at_50_numerator": 192,
+          "hs6_at_10": 0.07102272727272728,
+          "hs6_at_100": 0.11174242424242424,
+          "hs6_at_100_denominator": 1056,
+          "hs6_at_100_numerator": 118,
+          "hs6_at_10_denominator": 1056,
+          "hs6_at_10_numerator": 75,
+          "hs6_at_200": 0.34375,
+          "hs6_at_200_denominator": 1056,
+          "hs6_at_200_numerator": 363,
+          "hs6_at_50": 0.10037878787878787,
+          "hs6_at_50_denominator": 1056,
+          "hs6_at_50_numerator": 106,
+          "metric_table": [
+            {
+              "denominator": 1056,
+              "metric": "mrr_at_100",
+              "numerator": 44.32220308711575,
+              "value": 0.041971783226435376
+            },
+            {
+              "denominator": 1056,
+              "metric": "mrr_at_200",
+              "numerator": 45.75869806501425,
+              "value": 0.043332100440354404
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_1",
+              "numerator": 28,
+              "value": 0.026515151515151516
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_3",
+              "numerator": 55,
+              "value": 0.052083333333333336
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_5",
+              "numerator": 66,
+              "value": 0.0625
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_10",
+              "numerator": 69,
+              "value": 0.06534090909090909
+            },
+            {
+              "denominator": 1056,
+              "metric": "top_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_100",
+              "numerator": 107,
+              "value": 0.10132575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "recall_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "pool_recall_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_10",
+              "numerator": 69,
+              "value": 0.06534090909090909
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_10",
+              "numerator": 75,
+              "value": 0.07102272727272728
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_10",
+              "numerator": 100,
+              "value": 0.0946969696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_10",
+              "numerator": 236,
+              "value": 0.22348484848484848
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_50",
+              "numerator": 96,
+              "value": 0.09090909090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_50",
+              "numerator": 106,
+              "value": 0.10037878787878787
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_50",
+              "numerator": 192,
+              "value": 0.18181818181818182
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_50",
+              "numerator": 399,
+              "value": 0.3778409090909091
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_100",
+              "numerator": 107,
+              "value": 0.10132575757575757
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_100",
+              "numerator": 118,
+              "value": 0.11174242424242424
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_100",
+              "numerator": 264,
+              "value": 0.25
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_100",
+              "numerator": 538,
+              "value": 0.509469696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "exact_at_200",
+              "numerator": 321,
+              "value": 0.3039772727272727
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs6_at_200",
+              "numerator": 363,
+              "value": 0.34375
+            },
+            {
+              "denominator": 1056,
+              "metric": "hs4_at_200",
+              "numerator": 529,
+              "value": 0.5009469696969697
+            },
+            {
+              "denominator": 1056,
+              "metric": "chapter_at_200",
+              "numerator": 810,
+              "value": 0.7670454545454546
+            }
+          ],
+          "mrr": 0.043332100440354404,
+          "mrr_101_200_contribution": 0.0013603172139190346,
+          "mrr_101_200_contribution_numerator": 1.4364949778985006,
+          "mrr_at_100": 0.041971783226435376,
+          "mrr_at_100_denominator": 1056,
+          "mrr_at_100_numerator": 44.32220308711575,
+          "mrr_at_200": 0.043332100440354404,
+          "mrr_at_200_denominator": 1056,
+          "mrr_at_200_numerator": 45.75869806501425,
+          "mrr_definition": "MRR@100 is the arithmetic mean of 1/rank_ref for ranks 1..100 and zero otherwise; MRR@200 preserves the legacy hierarchical evaluator exactly: sum(float(reciprocal_rank)) in frozen CSV row order divided by case count.",
+          "mrr_denominator": 1056,
+          "mrr_numerator": 45.75869806501425,
+          "not_found_at_depth": 735,
+          "pool_recall_at_200": 0.3039772727272727,
+          "pool_recall_at_200_denominator": 1056,
+          "pool_recall_at_200_numerator": 321,
+          "recall_at_100": 0.10132575757575757,
+          "recall_at_100_denominator": 1056,
+          "recall_at_100_numerator": 107,
+          "recall_at_200": 0.3039772727272727,
+          "recall_at_200_denominator": 1056,
+          "recall_at_200_numerator": 321,
+          "recall_at_50": 0.09090909090909091,
+          "recall_at_50_denominator": 1056,
+          "recall_at_50_numerator": 96,
+          "top_1": 0.026515151515151516,
+          "top_10": 0.06534090909090909,
+          "top_10_denominator": 1056,
+          "top_10_numerator": 69,
+          "top_1_denominator": 1056,
+          "top_1_numerator": 28,
+          "top_3": 0.052083333333333336,
+          "top_3_denominator": 1056,
+          "top_3_numerator": 55,
+          "top_5": 0.0625,
+          "top_50": 0.09090909090909091,
+          "top_50_denominator": 1056,
+          "top_50_numerator": 96,
+          "top_5_denominator": 1056,
+          "top_5_numerator": 66,
+          "zero_retrieval_cases": 0
+        },
+        "outputs": {
+          "case_summary": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.5/normative_hierarchical_case_summary.csv",
+          "ranking": "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.5/normative_hierarchical_results.csv"
+        },
+        "retrieval_depth": 200
+      }
+    },
+    "d1a": {
+      "corrected_corpus_created": true,
+      "corrected_corpus_sha256": "f88be1245d3779f3f36ff437c70efe98b1c4c3376978f946cd19669f96b19162",
+      "corrected_index_created": true,
+      "environment": {
+        "architecture": "64bit",
+        "distributions": {
+          "Jinja2": "3.1.6",
+          "MarkupSafe": "3.0.3",
+          "Pillow": "12.3.0",
+          "PyYAML": "6.0.3",
+          "Pygments": "2.20.0",
+          "annotated-doc": "0.0.4",
+          "anyio": "4.13.0",
+          "certifi": "2026.5.20",
+          "click": "8.4.1",
+          "colorama": "0.4.6",
+          "exceptiongroup": "1.3.1",
+          "filelock": "3.29.4",
+          "fsspec": "2026.4.0",
+          "h11": "0.16.0",
+          "hf-xet": "1.5.1",
+          "httpcore": "1.0.9",
+          "httpx": "0.28.1",
+          "huggingface_hub": "1.19.0",
+          "idna": "3.18",
+          "joblib": "1.5.3",
+          "markdown-it-py": "4.2.0",
+          "mdurl": "0.1.2",
+          "mpmath": "1.3.0",
+          "networkx": "3.4.2",
+          "numpy": "2.2.6",
+          "packaging": "26.2",
+          "regex": "2026.5.9",
+          "rich": "15.0.0",
+          "safetensors": "0.8.0",
+          "scikit-learn": "1.7.2",
+          "scipy": "1.15.3",
+          "sentence-transformers": "5.5.1",
+          "setuptools": "65.5.0",
+          "shellingham": "1.5.4",
+          "sympy": "1.14.0",
+          "threadpoolctl": "3.6.0",
+          "tokenizers": "0.22.2",
+          "torch": "2.12.0",
+          "tqdm": "4.68.2",
+          "transformers": "5.12.1",
+          "typer": "0.25.1",
+          "typing_extensions": "4.15.0"
+        },
+        "executable_sha256": "b2c836c52cdf063180b9ee76f67ac42946101b79ac457f3494035a67c090d961",
+        "machine": "AMD64",
+        "packages": {
+          "huggingface_hub": "1.19.0",
+          "numpy": "2.2.6",
+          "safetensors": "0.8.0",
+          "sentence_transformers": "5.5.1",
+          "tokenizers": "0.22.2",
+          "torch": "2.12.0+cpu",
+          "tqdm": "4.68.2",
+          "transformers": "5.12.1"
+        },
+        "platform_system": "Windows",
+        "project_imports": {
+          "count": 31,
+          "modules": [
+            "src",
+            "src.bm25_index",
+            "src.evaluation",
+            "src.evaluation.metrics",
+            "src.experiments",
+            "src.experiments.build_bm25_corrective_0b05c_v02",
+            "src.experiments.build_bm25_corrective_0b05c_v03",
+            "src.experiments.build_bm25_ev03_historical_recovered_v02",
+            "src.experiments.build_text2trade_mnrl_index_v02",
+            "src.experiments.evaluate_normative_bm25_corrective_0b05c_v01",
+            "src.experiments.evaluate_normative_bm25_corrective_0b05c_v04",
+            "src.experiments.evaluate_normative_bm25_corrective_0b05c_v05",
+            "src.experiments.evaluate_normative_bm25_flat_data_aduanas_v02",
+            "src.experiments.evaluate_normative_bm25_hierarchical_data_aduanas_v02",
+            "src.experiments.evaluate_text2trade_mnrl_data_aduanas_v02",
+            "src.experiments.prepare_0b05c_corrective_numerical_gate_v01",
+            "src.experiments.prepare_0b05c_corrective_numerical_gate_v02",
+            "src.experiments.prepare_0b05c_corrective_numerical_gate_v03",
+            "src.experiments.prepare_0b05c_corrective_numerical_gate_v04",
+            "src.experiments.prepare_0b05c_corrective_numerical_gate_v05",
+            "src.experiments.run_0b05c_corrective_numerical_v02",
+            "src.experiments.run_0b05c_corrective_numerical_v05",
+            "src.experiments.run_d1a_corrective_0b05c_v01",
+            "src.experiments.run_d1a_corrective_0b05c_v02",
+            "src.experiments.run_d1a_corrective_0b05c_v05",
+            "src.experiments.verify_ev03_historical_builder_recovery_v02",
+            "src.retrieval",
+            "src.retrieval.bm25",
+            "src.retrieval.text2trade_mnrl_v02",
+            "src.utils",
+            "src.utils.paths"
+          ],
+          "status": "PASS"
+        },
+        "python_implementation": "CPython",
+        "python_version": "3.10.11"
+      },
+      "eval_identity": "PASS_EXACT",
+      "execution_mode": "AUTHORIZED_EXECUTION",
+      "mode": "AUTHORIZED_EXECUTION",
+      "new_metrics_computed": true,
+      "numerical_execution_occurred": true,
+      "preflight_status": "PASS",
+      "prospective_roots_present": false,
+      "retrieval_executed": true,
+      "runtime_config_changed_fields": [
+        "frozen_inputs.normative_corpus",
+        "frozen_inputs.normative_corpus_sha256",
+        "index.output_dir",
+        "outputs.evaluation_dir"
+      ],
+      "status": "PASS"
+    }
+  },
+  "status": "PASS"
+}
