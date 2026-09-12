@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 6846537602539506c8e90426daad05252cc982b9; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED/INTEGRATED con 19/19 pasos PASS; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EARLY_RANK_CHANGE; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_ONLY_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_D1A_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=OPEN; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 6846537602539506c8e90426daad05252cc982b9; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=OPEN; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -262,14 +262,15 @@ EV03 Historical Recovery v0.2 ✅ APPROVED / VERSIONED / INTEGRATED
 0B-05C v0.2-v0.5 and Attempt06 ✅ CLOSED / APPROVED
   - v0.5=APPROVED / INTEGRATED
   - Attempt06 authorization=AUDITED / INTEGRATED
-  - ATTEMPT06=COMPLETED / AUDITED / INTEGRATED; 19/19 steps PASS
+  - ATTEMPT06=COMPLETED / AUDITED_EXECUTION / INTEGRATED; 19/19 steps PASS
+  - PROMPT38_RESULT_INTERPRETATION=REJECTED / SUPERSEDED_BY_PROMPT39
   - EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE
-  - EV04_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE
-  - D1A_METRIC_IMPACT=POSITIVE_NONZERO_EARLY_RANK_CHANGE
-  - 0B05C_METRIC_IMPACT=METHOD_DEPENDENT / NONZERO_ONLY_D1A
+  - EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY
+  - D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT
+  - 0B05C_METRIC_IMPACT=METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A
   - DOWNSTREAM_REEXECUTION=NOT_REQUIRED
-  - FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_D1A_RESULTS
-  - 0B05C_CLOSURE=CLOSED / APPROVED
+  - FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS
+  - 0B05C_CLOSURE=CLOSED / APPROVED_AFTER_CORRECTIVE_RECONCILIATION
   - prior fail-closed attempts remain preserved as historical evidence
   ↓
 EXP11B H150/H200 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
@@ -946,6 +947,12 @@ No ejecutar retrieval hasta aprobar externamente ese gate.
 
 ### 2026-09-12 — Integración de Attempt06 y cierre de 0B-05C
 
+**Interpretación numérica y clasificaciones de esta entrada:**
+`SUPERSEDED_BY_POST_PROMPT38_EXTERNAL_AUDIT`. Los valores que siguen se
+preservan exclusivamente como registro histórico de Prompt38 y no son el estado
+canónico. La corrección vinculada a los comparadores versionados se registra en
+la entrada cronológica posterior.
+
 **Estado canónico:** `main = origin/main =
 6846537602539506c8e90426daad05252cc982b9`.
 
@@ -994,3 +1001,66 @@ No ejecutar retrieval hasta aprobar externamente ese gate.
   Attempts fail-closed previos y sus evidencias se conservan sin reescritura.
 - `EXP11B_PORTABILITY_DEBT=OPEN`; este cierre no autoriza EXP11B Retrieval ni
   EXP12, que permanecen `NOT_AUTHORIZED / NOT_EXECUTED`.
+
+### 2026-09-12 — Corrección de interpretación Attempt06 posterior a Prompt38
+
+**Estado canónico:** `main = origin/main =
+6846537602539506c8e90426daad05252cc982b9`.
+
+- Fuentes contractuales verificadas directamente en `main`:
+  `outputs/evaluation/0b05c_corrective_numerical_v0.5/ev03_aggregate_comparison_v0.5.json`
+  (blob Git `1fa1aed2584c5612bbc5be16173e93d80c2dd92e`),
+  `outputs/evaluation/0b05c_corrective_numerical_v0.5/ev04_aggregate_comparison_v0.5.json`
+  (blob Git `3bf28c036b0a0af5dd54d88c3b0050c60365b7f1`) y
+  `outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_vs_original_comparison_v0.5.json`
+  (blob Git `6a26777395630722a18bca7826b7df96613ea4ea`).
+- `EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE`: original y corrected son
+  exactamente iguales para MRR `0.04229731726741296`, Top-1
+  `0.027462121212121212`, Top-3 `0.05113636363636364`, Top-5
+  `0.061553030303030304`, Top-10 `0.06534090909090909`, Top-50/Recall@50
+  `0.07007575757575757` y Recall@100 `0.07102272727272728`.
+- `EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY`: MRR@100 cambia de
+  `0.04198129438896378` a `0.041971783226435376` y MRR@200 de
+  `0.04334161160288281` a `0.043332100440354404`, ambos con delta
+  `-9.511162528404171e-06`. La contribución MRR 101-200 permanece en
+  `0.0013603172139190346`; Top-1 `0.026515151515151516`, Top-3
+  `0.052083333333333336`, Top-5 `0.0625`, Top-10 `0.06534090909090909`,
+  Top-50/Recall@50 `0.09090909090909091`, Recall@100
+  `0.10132575757575757` y Recall@200 `0.3039772727272727` también permanecen
+  iguales. Los demás indicadores discretos y jerárquicos del agregado tienen
+  delta cero; el cambio no nulo de MRR ocurre dentro de los primeros 100 rangos.
+- `D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT`.
+  El comparador contractual no contiene MRR@10. Top@1 cambia de `0.0` a
+  `0.000946969696969697` (delta `+0.000946969696969697`), Top@3 de
+  `0.003787878787878788` a `0.010416666666666666` (delta
+  `+0.006628787878787878`), Top@5 de `0.03409090909090909` a
+  `0.05113636363636364` (delta `+0.01704545454545455`), Top@10 de `0.15625`
+  a `0.17803030303030304` (delta `+0.02178030303030304`) y Top@50 de
+  `0.3058712121212121` a `0.3134469696969697` (delta
+  `+0.0075757575757576245`). Recall@100 y Exact@100 permanecen en
+  `0.3456439393939394`; Recall@200 y Exact@200 cambian de
+  `0.3626893939393939` a `0.36363636363636365` (delta
+  `+0.0009469696969697239`). MRR@100 cambia de `0.03242432639034634` a
+  `0.038087139731859634` (delta `+0.0056628133415132925`) y MRR@200 de
+  `0.03254853477630825` a `0.038217181295822696` (delta
+  `+0.005668646519514445`). HS6@100 permanece en `0.36553030303030304` y
+  HS6@200 en `0.38825757575757575`; HS4@100 cambia de `0.8731060606060606` a
+  `0.8797348484848485` (delta `+0.006628787878787956`), mientras HS4@200
+  cambia de `0.9640151515151515` a `0.9630681818181818` (delta
+  `-0.0009469696969697239`, equivalente a `1/1056`). Chapter@100 permanece
+  en `0.9801136363636364` y Chapter@200 en `1.0`.
+- No se declara significancia estadística, efecto causal ni generalización.
+  `0B05C_METRIC_IMPACT=METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A`: EV03 no
+  cambia; EV04 presenta una disminución muy pequeña restringida a MRR@100 y
+  MRR@200; D1a mejora predominantemente en ranking exacto y MRR, con un efecto
+  jerárquico menor mixto en HS4. El efecto no es uniforme entre métodos.
+- `ATTEMPT06=COMPLETED / AUDITED_EXECUTION / INTEGRATED` y
+  `PROMPT38_RESULT_INTERPRETATION=REJECTED / SUPERSEDED_BY_PROMPT39`.
+- `DOWNSTREAM_REEXECUTION=NOT_REQUIRED` y
+  `FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS`. No existe resultado
+  downstream completado que deba repetirse: EXP11B Retrieval y EXP12 siguen no
+  ejecutados, y Grupo 3 y Grupos 4-8 permanecen pendientes.
+- `0B05C_CLOSURE=CLOSED / APPROVED_AFTER_CORRECTIVE_RECONCILIATION`. No se
+  abre otra ejecución 0B-05C ni se autoriza otra corrida.
+- `EXP11B_PORTABILITY_DEBT=OPEN`; EXP11B Retrieval y EXP12 permanecen
+  `NOT_AUTHORIZED / NOT_EXECUTED`.
