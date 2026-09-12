@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 43291c312c2934aae03f3c087dd0a1ae594341b7; D1A_PREEXECUTION=APPROVED/INTEGRATED; el gate y la autorización 0B-05C v0.1 quedan como HISTORICAL/INTEGRATED/SUPERSEDED_FOR_NEW_EXECUTION; Attempt01 y Attempt02=FAIL_CLOSED/SCIENTIFIC_STATE_PRESERVED; EV03_HISTORICAL_RECOVERY_V02=APPROVED/VERSIONED/INTEGRATED; 0B05C_V02_AUTHORIZATION_READINESS=NOT_AUTHORIZATION_READY; EV03/EV04/D1a/unified v0.2=NOT_AUTHORIZED/NOT_EXECUTED; corrective_retrieval_executed=false; corrective_metrics_computed=false; 0B05C_METRIC_IMPACT=NOT_DETERMINED; DOWNSTREAM_REEXECUTION=NOT_YET_JUSTIFIED; 0B05C_CLOSURE=NOT_AUTHORIZED. EXP11B_PORTABILITY_DEBT=OPEN; bloquea EXP11B retrieval authorization, no D1a/0B-05C; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 6846537602539506c8e90426daad05252cc982b9; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED/INTEGRATED con 19/19 pasos PASS; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EARLY_RANK_CHANGE; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_ONLY_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_D1A_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=OPEN; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -259,9 +259,18 @@ EV03 Historical Recovery v0.2 ✅ APPROVED / VERSIONED / INTEGRATED
   - EV03/EV04/D1a/unified v0.2=NOT_AUTHORIZED / NOT_EXECUTED
   - corrective retrieval and metrics not executed; runtime authorization record v0.2 absent
   ↓
-0B-05C Numerical Gate/Runner v0.2 ⏳ NEXT / NOT_YET_BUILT / NOT_AUTHORIZATION_READY
-  - construct and audit a separate prospective v0.2 numerical gate/runner
-  - the integrated recovery does not constitute numerical authorization
+0B-05C v0.2-v0.5 and Attempt06 ✅ CLOSED / APPROVED
+  - v0.5=APPROVED / INTEGRATED
+  - Attempt06 authorization=AUDITED / INTEGRATED
+  - ATTEMPT06=COMPLETED / AUDITED / INTEGRATED; 19/19 steps PASS
+  - EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE
+  - EV04_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE
+  - D1A_METRIC_IMPACT=POSITIVE_NONZERO_EARLY_RANK_CHANGE
+  - 0B05C_METRIC_IMPACT=METHOD_DEPENDENT / NONZERO_ONLY_D1A
+  - DOWNSTREAM_REEXECUTION=NOT_REQUIRED
+  - FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_D1A_RESULTS
+  - 0B05C_CLOSURE=CLOSED / APPROVED
+  - prior fail-closed attempts remain preserved as historical evidence
   ↓
 EXP11B H150/H200 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
@@ -934,3 +943,54 @@ No ejecutar retrieval hasta aprobar externamente ese gate.
 - El siguiente paso es construir y auditar prospectivamente un gate/runner
   numérico v0.2 separado. La recuperación integrada no constituye autorización
   numérica.
+
+### 2026-09-12 — Integración de Attempt06 y cierre de 0B-05C
+
+**Estado canónico:** `main = origin/main =
+6846537602539506c8e90426daad05252cc982b9`.
+
+- El candidato técnico `0B-05C v0.5` quedó `APPROVED / INTEGRATED`; su
+  autorización Attempt06 fue auditada y
+  `ATTEMPT06=COMPLETED / AUDITED / INTEGRATED`, con `19/19` pasos `PASS`.
+- `EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE`: original y corrected son
+  exactamente iguales para MRR `0.40223149245938034`, Top-1
+  `0.3494318181818182`, Top-3 `0.4431818181818182`, Top-5
+  `0.47632575757575757`, Top-10 `0.5208333333333334`, Top-50/Recall@50
+  `0.5928030303030303` y Recall@100 `0.6401515151515151`.
+- `EV04_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE`: original y corrected son
+  exactamente iguales para MRR `0.41801769149469725`, MRR@100
+  `0.4209029085295853`, MRR@200 `0.42114657818747986`, contribución 101-200
+  `0.00024366965789453498`, Top-1 `0.36742424242424243`, Top-3
+  `0.45738636363636365`, Top-5 `0.48295454545454547`, Top-10
+  `0.5265151515151515`, Top-50/Recall@50 `0.6742424242424242` y Recall@100
+  `0.740530303030303`.
+- `D1A_METRIC_IMPACT=POSITIVE_NONZERO_EARLY_RANK_CHANGE`: la corrección
+  Decision 906 mejora MRR@10 de `0.06823809523809526` a
+  `0.08020006613756614` (delta `+0.011961970899470875`), Top-1 de
+  `0.032196969696969696` a `0.038825757575757576` (delta
+  `+0.006628787878787879`), Top-3 de `0.06723484848484848` a
+  `0.08238636363636363` (delta `+0.015151515151515152`), Top-5 de
+  `0.08712121212121213` a `0.10321969696969698` (delta
+  `+0.01609848484848485`) y Top-10 de `0.16287878787878787` a
+  `0.17897727272727273` (delta `+0.016098484848484862`). En jerarquía,
+  partida@10 cambia de `0.42045454545454547` a `0.4393939393939394`,
+  sub_partida@10 de `0.3494318181818182` a `0.3683712121212121` y clase@10
+  de `0.2774621212121212` a `0.29640151515151514`, con delta común
+  `+0.018939393939393923`; partida@50 cambia de `0.7367424242424242` a
+  `0.7414772727272727` (delta `+0.004734848484848509`), sub_partida@50 de
+  `0.6676136363636364` a `0.6714015151515151` y clase@50 de
+  `0.6136363636363636` a `0.6174242424242424`, ambos con delta
+  `+0.0037878787878787845`. Las jerarquías @100 y @200 permanecen sin cambio.
+  Este resultado no declara significancia estadística, efecto causal ni
+  generalización fuera de la sensibilidad determinista.
+- `0B05C_METRIC_IMPACT=METHOD_DEPENDENT / NONZERO_ONLY_D1A`: la actualización
+  normativa no altera las métricas agregadas de EV03/EV04 y sí mejora las
+  posiciones tempranas de D1a; el efecto no es uniforme entre métodos.
+- `DOWNSTREAM_REEXECUTION=NOT_REQUIRED` y
+  `FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_D1A_RESULTS`. EXP11B Retrieval
+  y EXP12 no se ejecutaron; Grupo 3 y Grupos 4-8 permanecen pendientes y pueden
+  consumir prospectivamente los resultados D1a corregidos.
+- `0B05C_CLOSURE=CLOSED / APPROVED`. No se abre otra remediación 0B-05C. Los
+  Attempts fail-closed previos y sus evidencias se conservan sin reescritura.
+- `EXP11B_PORTABILITY_DEBT=OPEN`; este cierre no autoriza EXP11B Retrieval ni
+  EXP12, que permanecen `NOT_AUTHORIZED / NOT_EXECUTED`.
