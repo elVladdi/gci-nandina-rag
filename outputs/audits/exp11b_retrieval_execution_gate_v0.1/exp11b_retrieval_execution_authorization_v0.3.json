@@ -1,0 +1,23 @@
+{
+  "experiment_id": "EXP-11B",
+  "scope": "H150_H200_HISTORICAL_RETRIEVAL_ONLY",
+  "authorization_kind": "PROSPECTIVE_ONE_SHOT",
+  "authorization_candidate_status": "PENDING_EXTERNAL_AUDIT_NOT_EFFECTIVE_ON_MAIN",
+  "issued_after_external_audit": "PROMPT46_EXTERNAL_AUDIT_PASS",
+  "authorization_id": "EXP11B_H150_H200_AUTH_001",
+  "attempt_id": "EXP11B_H150_H200_ATTEMPT_001",
+  "authorization_status": "AUTHORIZED_ONE_SHOT",
+  "approved_package_commit": "50d90a356a0fac0267c270568f3926430a246026",
+  "runner_path": "src/experiments/run_exp11b_historical_retrieval_h150_h200_v03.py",
+  "runner_git_blob": "90bbeba27e4890613cb463fffc1cfc07252292c5",
+  "runner_sha256": "32f495996b8f1486cc6ef5f3906e84eb417e480208a721fb8b1c3f6820e65e06",
+  "config_path": "src/configs/exp11b_historical_retrieval_h150_h200_execution_v0.3.json",
+  "config_git_blob": "08cc58f95b2d6989bf75e64b16c0d9aa8158f642",
+  "config_sha256": "2b91c06762409d10478cbf112bb25486ef3ffa410e5819fb0704f61fe64aa6af",
+  "eval_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+  "bank_manifest_sha256": "67512d88a46dcd85427d9eca4be07eeea3f6ec2821bf77e7acfec5a09a706cf4",
+  "bank_ledger_sha256": "9686c2f642ec47c36079a3085c4d68a3f1b555588a8623ecca59333e12e0f56c",
+  "portability_closure_blob": "bfbeedff9025ae928a85ab8b65a261ff475422cb",
+  "expected_banks": 20,
+  "official_output_root": "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1"
+}
