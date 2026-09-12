@@ -13,11 +13,12 @@
   ],
   "attempt04": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
   "attempt05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "attempt06": "NOT_AUTHORIZED / NOT_EXECUTED",
   "authorization": {
     "D1A_CORRECTIVE_CORPUS_CREATED": false,
     "D1A_CORRECTIVE_INDEX_CREATED": false,
     "D1A_CORRECTIVE_METRICS_COMPUTED": false,
-    "D1A_NUMERICAL_EXECUTION": "AUTHORIZED"
+    "D1A_NUMERICAL_EXECUTION": "NOT_AUTHORIZED"
   },
   "corrected_normative_corpus": {
     "definition": {
@@ -80,7 +81,7 @@
       ]
     },
     "must_be_absent_before_authorized_execution": true,
-    "prospective_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl"
+    "prospective_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl"
   },
   "evaluation": {
     "case_level_output_required": true,
@@ -130,13 +131,13 @@
       "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl",
       "sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c"
     },
-    "prospective_output_root": "outputs/evaluation/d1a_corrective_0b05c_v0.4",
+    "prospective_output_root": "outputs/evaluation/d1a_corrective_0b05c_v0.5",
     "prospective_outputs": {
-      "case_summary": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_case_summary.csv",
-      "metrics": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_metrics.json",
-      "ranking_trace_top200": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_ranked_codes_top200.jsonl",
-      "strategy_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.4/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
-      "summary": "outputs/evaluation/d1a_corrective_0b05c_v0.4/summary.md"
+      "case_summary": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_case_summary.csv",
+      "metrics": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_metrics.json",
+      "ranking_trace_top200": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_ranked_codes_top200.jsonl",
+      "strategy_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.5/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+      "summary": "outputs/evaluation/d1a_corrective_0b05c_v0.5/summary.md"
     },
     "query_column": "DESCRIPCION DE MERCANCIAS CONCATENADA",
     "query_construction": "clean(row[query_column]) using the frozen evaluator",
@@ -163,15 +164,15 @@
     "embedding_normalization": true,
     "hnsw": false,
     "policy": "FULL_ATOMIC_INDEX_AND_MAPPING_REBUILD",
-    "prospective_output_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
+    "prospective_output_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5",
     "prospective_outputs": {
-      "docstore": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/store/nandina8_docstore.jsonl",
-      "id_map": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/id_map.json",
-      "index_metadata": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/text2trade_mnrl_nandina8_v02_run_metadata.json",
-      "retrieval_config": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/retrieval_config.json",
-      "vector_integrity_gate": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_gate_v0.2.json",
-      "vector_integrity_sample": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_sample_v0.2.csv",
-      "vectors": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/vectors.npy"
+      "docstore": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/store/nandina8_docstore.jsonl",
+      "id_map": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/index/id_map.json",
+      "index_metadata": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/text2trade_mnrl_nandina8_v02_run_metadata.json",
+      "retrieval_config": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/retrieval_config.json",
+      "vector_integrity_gate": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/vector_integrity_gate_v0.2.json",
+      "vector_integrity_sample": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/vector_integrity_sample_v0.2.csv",
+      "vectors": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/index/vectors.npy"
     },
     "ranking_unit": "unique NANDINA-8 code",
     "retrieval_semantics": "exact brute-force dot product over normalized vectors",
@@ -244,9 +245,9 @@
         "index.output_dir",
         "outputs.evaluation_dir"
       ],
-      "corrected_evaluation_root": "outputs/evaluation/d1a_corrective_0b05c_v0.4",
-      "corrected_index_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
-      "corrected_normative_corpus_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
+      "corrected_evaluation_root": "outputs/evaluation/d1a_corrective_0b05c_v0.5",
+      "corrected_index_root": "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5",
+      "corrected_normative_corpus_path": "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl",
       "deterministic_sequence": [
         "Validate frozen original corpus SHA and both original JSONL line SHA values.",
         "Apply exactly two UTF-8 LF JSONL patches in memory.",
@@ -257,33 +258,33 @@
       ],
       "original_config_path": "src/configs/text2trade_mnrl_v0.2.json"
     },
-    "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v04 --execute-authorized",
+    "future_authorized_execution_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v05 --execute-authorized",
     "future_roots": [
-      "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
-      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4",
-      "outputs/evaluation/d1a_corrective_0b05c_v0.4",
-      "outputs/audits/d1a_corrective_0b05c_runtime_v0.4"
+      "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl",
+      "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5",
+      "outputs/evaluation/d1a_corrective_0b05c_v0.5",
+      "outputs/audits/d1a_corrective_0b05c_runtime_v0.5"
     ],
     "hash_ledger_contract": {
-      "excluded_self_path": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_output_hash_ledger_v0.4.csv",
+      "excluded_self_path": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_output_hash_ledger_v0.5.csv",
       "included_paths": [
-        "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.4.jsonl",
-        "outputs/audits/d1a_corrective_0b05c_runtime_v0.4/text2trade_mnrl_v0.2_0b05c_runtime.json",
-        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/vectors.npy",
-        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/index/id_map.json",
-        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/store/nandina8_docstore.jsonl",
-        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/retrieval_config.json",
-        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_sample_v0.2.csv",
-        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/vector_integrity_gate_v0.2.json",
-        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.4/text2trade_mnrl_nandina8_v02_run_metadata.json",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_metrics.json",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_case_summary.csv",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_ranked_codes_top200.jsonl",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/summary.md",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_vs_original_comparison_v0.4.json",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_case_level_comparison_v0.4.jsonl",
-        "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_execution_manifest_v0.4.json"
+        "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl",
+        "outputs/audits/d1a_corrective_0b05c_runtime_v0.5/text2trade_mnrl_v0.2_0b05c_runtime.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/index/vectors.npy",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/index/id_map.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/store/nandina8_docstore.jsonl",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/retrieval_config.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/vector_integrity_sample_v0.2.csv",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/vector_integrity_gate_v0.2.json",
+        "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5/text2trade_mnrl_nandina8_v02_run_metadata.json",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_metrics.json",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_case_summary.csv",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_ranked_codes_top200.jsonl",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/strategy_comparison_a_b_c_d0_d1a_v0.2.csv",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/summary.md",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_vs_original_comparison_v0.5.json",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_case_level_comparison_v0.5.jsonl",
+        "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_execution_manifest_v0.5.json"
       ]
     },
     "original_config": {
@@ -293,21 +294,22 @@
       "identity_authority": "COMMITTED_GIT_BLOB",
       "path": "src/configs/text2trade_mnrl_v0.2.json"
     },
-    "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v04 --preflight",
+    "preflight_command": "python -B -m src.experiments.run_d1a_corrective_0b05c_v05 --preflight",
     "runner": {
-      "canonical_blob_sha256": "d0653d959eb86f99d93c00df1fda7892a424af5371b5180216b9b46213650c52",
-      "git_blob_sha": "a6fc65a27f5dace40cd4651b400e1d6a4ac52bfa",
-      "path": "src/experiments/run_d1a_corrective_0b05c_v04.py",
-      "revision": "COMMITTED_GIT_BLOB"
+      "canonical_git_blob_sha256": "8d20ee6a9b5b2e992d89c8a2518e72b8ee70ebf92872b803e6aff327a4dca3f9",
+      "canonical_size_bytes": 19130,
+      "classification": "CANDIDATE_GIT_CANONICAL_BLOB",
+      "git_blob_sha1": "309cf598ce2ad4413505ffee9ef1a5dfcbc2873f",
+      "path": "src/experiments/run_d1a_corrective_0b05c_v05.py"
     },
     "runner_outputs": {
-      "aggregate_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_vs_original_comparison_v0.4.json",
-      "case_level_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_case_level_comparison_v0.4.jsonl",
-      "execution_manifest": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_execution_manifest_v0.4.json",
-      "hash_ledger": "outputs/evaluation/d1a_corrective_0b05c_v0.4/d1a_corrective_output_hash_ledger_v0.4.csv"
+      "aggregate_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_vs_original_comparison_v0.5.json",
+      "case_level_comparison": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_case_level_comparison_v0.5.jsonl",
+      "execution_manifest": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_execution_manifest_v0.5.json",
+      "hash_ledger": "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_output_hash_ledger_v0.5.csv"
     },
-    "runtime_config_path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.4/text2trade_mnrl_v0.2_0b05c_runtime.json",
-    "runtime_root": "outputs/audits/d1a_corrective_0b05c_runtime_v0.4"
+    "runtime_config_path": "outputs/audits/d1a_corrective_0b05c_runtime_v0.5/text2trade_mnrl_v0.2_0b05c_runtime.json",
+    "runtime_root": "outputs/audits/d1a_corrective_0b05c_runtime_v0.5"
   },
   "original_normative_corpus": {
     "affected_documents": {
@@ -347,8 +349,8 @@
     "identity_authority": "COMMITTED_GIT_BLOB",
     "path": "data/processed/corpus_rag_v1_index.jsonl"
   },
-  "specification_id": "d1a_numerical_execution_spec_v0.4",
-  "specification_status": "PREEXECUTION_SPEC_DEFINED",
+  "specification_id": "d1a_numerical_execution_spec_v0.5",
+  "specification_status": "PREAUTHORIZATION_SPEC_DEFINED / PENDING_EXTERNAL_AUDIT",
   "v01_classification": "HISTORICAL / INTEGRATED / SUPERSEDED_FOR_NEW_EXECUTION",
   "v02_attempt03_provenance": {
     "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
@@ -357,5 +359,6 @@
   "v03_attempt04_provenance": {
     "classification": "HISTORICAL_FAIL_CLOSED_EVIDENCE_ONLY / NEVER_RUNTIME_INPUT",
     "failure_record": "outputs/audits/0b05c_attempt04_failclosed_v0.3/attempt04_failure_record_v0.3.json"
-  }
+  },
+  "v04_partial_roots_policy": "NEVER_INPUT / NEVER_REUSED / NEVER_CLEANED_BY_V05"
 }

@@ -1,0 +1,429 @@
+{
+  "artifact_id": "0b05c_corrective_numerical_gate_manifest_v0.5",
+  "attempt05": "FAIL_CLOSED / AUTHORIZATION_CONSUMED",
+  "attempt06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "authorization_readiness": "NOT_AUTHORIZED",
+  "authorization_record_v05_present": false,
+  "candidate_source_bindings": [
+    {
+      "canonical_git_blob_sha256": "174deacdb404de8501871fd99fc260ba56d99343667f07a6b955937e08b395e1",
+      "canonical_size_bytes": 56,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "fff6295e84eea842c5a2ba0423303f858073b700",
+      "path": "src/__init__.py"
+    },
+    {
+      "canonical_git_blob_sha256": "1be4319cdc2a5d14fdbf95253902b23f355eccfdb24f421942e1a52514f2e6c2",
+      "canonical_size_bytes": 7498,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "718895e0658a55cc1590c84ef807f901b75e7c7f",
+      "path": "src/bm25_index.py"
+    },
+    {
+      "canonical_git_blob_sha256": "f4265be9812a42fcbe10682769c95597946c675929ffc2a3693e9848bf67796c",
+      "canonical_size_bytes": 26,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "b7c66551ca92ba12add200129bc2f11a0c066e80",
+      "path": "src/evaluation/__init__.py"
+    },
+    {
+      "canonical_git_blob_sha256": "9c9c3309a609f4d46d81fafee55f6e7226dda91868b27438016d4bce6725d33f",
+      "canonical_size_bytes": 540,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "f96611b243cb5b5a7ab031bfba4731d7a9c8eaf4",
+      "path": "src/evaluation/metrics.py"
+    },
+    {
+      "canonical_git_blob_sha256": "4c6f87fda4e9015a282aa23796573b6e405bb06e0132bda14c58cef818b5185c",
+      "canonical_size_bytes": 37,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "80319ef7229737b4782454003e3f2897fb9773ca",
+      "path": "src/experiments/__init__.py"
+    },
+    {
+      "canonical_git_blob_sha256": "58618292823154799007bba15ef6bfdad9a8ed4634984b9ececde149d68709d4",
+      "canonical_size_bytes": 4246,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "a5baa9e7365c830b71dd4e4a760c8b9c3b12e778",
+      "path": "src/experiments/build_bm25_corrective_0b05c_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "890447aff06d92805ad593a5ef91289ce0a5f02f1c9d0f7af9d0417e729c4f7f",
+      "canonical_size_bytes": 4218,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "b224e3f8f8252d303b6eb7ca7fb18916a472a612",
+      "path": "src/experiments/build_bm25_corrective_0b05c_v03.py"
+    },
+    {
+      "canonical_git_blob_sha256": "e841f6ecf2b8a5c2e8bcad6124cf988147b826f61807ed59021802f6e0f97866",
+      "canonical_size_bytes": 6777,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "b2ca6d5e4513a4ff36631a71942379f5669100a2",
+      "path": "src/experiments/build_bm25_ev03_historical_recovered_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "be37f33a652239ead835806d8af470db933607308ecbfadfcd6ab8f5d5e78e50",
+      "canonical_size_bytes": 8427,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "0684eae0f951bc9889769b05680fe7b675ca31fd",
+      "path": "src/experiments/build_text2trade_mnrl_index_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "7e34b5f8fabb901aeded1fcb76c8a48d2963a80d4d2fdceb767a8084b1bc1b16",
+      "canonical_size_bytes": 32583,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "c6f4121fe5f5f50e71e27eb4cf1e28eb8986d062",
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v01.py"
+    },
+    {
+      "canonical_git_blob_sha256": "147a347151e945a644e223967449aac6b1008969e69503921b85e4a6983c54a5",
+      "canonical_size_bytes": 13415,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "8b8b93c1a075fce555eabd4dd301533df89e6a1a",
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v04.py"
+    },
+    {
+      "canonical_git_blob_sha256": "83c5c4a1568668a9cc2d0592fd12c5b749bb58aa926f6f09bac8de2303e115b3",
+      "canonical_size_bytes": 15020,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "18c398f5709257326db67790a9ab7ec64a2da8f6",
+      "path": "src/experiments/evaluate_normative_bm25_corrective_0b05c_v05.py"
+    },
+    {
+      "canonical_git_blob_sha256": "d93718cac16f98dda95e7fde4de924d5336c449f4110aaefe3ff8c3ea8823dd9",
+      "canonical_size_bytes": 33176,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "2ce009165108280e5db5640a46055e59c28a1454",
+      "path": "src/experiments/evaluate_normative_bm25_flat_data_aduanas_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "3d97fa1c5afa66dedbe23858be69123e9cee8284f50a66bb0ea4fe9c95582495",
+      "canonical_size_bytes": 51517,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "aadbec6bdc5c152def0a7e925d2cf30f16aa4c7d",
+      "path": "src/experiments/evaluate_normative_bm25_hierarchical_data_aduanas_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "eddd4f1b611519c52c846d61152c96a8c16e13588c5b798b1b8244bd81e7aaf9",
+      "canonical_size_bytes": 11721,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "47b2cf6cfafe681a1e64223cd3f048000942e4d0",
+      "path": "src/experiments/evaluate_text2trade_mnrl_data_aduanas_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "76376062359659af151f0a312dc1eee6f8f8bd60c7681851ab5c217610f0d0c9",
+      "canonical_size_bytes": 77913,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "cfd52b456ad4750e879c34c1ac33757cd014e49a",
+      "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v01.py"
+    },
+    {
+      "canonical_git_blob_sha256": "d13e1ec6e5aee850eddcbccdaae18c0b74fa106a60e3f2b48640efd78ef67cfa",
+      "canonical_size_bytes": 36844,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "ae90c19b9c650caf315439af89f3a33b364a9832",
+      "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "4a7c37f6e7f586efc7d864ef6fd0c2c3481c1a4cdf87a4a6cff81753b5ba2a50",
+      "canonical_size_bytes": 36482,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "6747e3bc7d8663183b72c69bb5194adf6577aa82",
+      "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v03.py"
+    },
+    {
+      "canonical_git_blob_sha256": "730d5ae1133b9bc10fbdb7133872cc28ec9c435d125cd8a5fd16bf0886117c53",
+      "canonical_size_bytes": 37278,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "54b150a4bdde5f105ce89e7335fd7eaf6db999ed",
+      "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v04.py"
+    },
+    {
+      "canonical_git_blob_sha256": "190f25377ed9195f07ad67044ca71351c3445bd532932f0f0d608324ecbb99bf",
+      "canonical_size_bytes": 72003,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "44a3cb39702d2104e527439d3f67b0a457283dff",
+      "path": "src/experiments/prepare_0b05c_corrective_numerical_gate_v05.py"
+    },
+    {
+      "canonical_git_blob_sha256": "9a0cf5a51de93ce1886ff3558a7577de22cb83e0b05e52f32ac34293a9d60bf3",
+      "canonical_size_bytes": 26370,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "7a60fa97da2787d23460e81f5fcfb65957dfbd2c",
+      "path": "src/experiments/run_0b05c_corrective_numerical_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "228a435bf1056e5db7f1165b236700efb465da3976b1e5e3a952b706bcf3a73c",
+      "canonical_size_bytes": 22118,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "73f782abb2cef6479976f3beda8270b284fafde3",
+      "path": "src/experiments/run_0b05c_corrective_numerical_v05.py"
+    },
+    {
+      "canonical_git_blob_sha256": "785c4eafddd9b2e1f5aeb4bdcf13acdf2b36b0d4407d0a65c6850070b4ccece1",
+      "canonical_size_bytes": 26546,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "74697c8f9370f2b098629a79f3829b4bfab80ddc",
+      "path": "src/experiments/run_d1a_corrective_0b05c_v01.py"
+    },
+    {
+      "canonical_git_blob_sha256": "4b35a932d7285c1287477ec01bbfcb6cd21aef9bbcf78043852bbc90ed0f6180",
+      "canonical_size_bytes": 7913,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "c618e171270c01abebfeebf07f3ca72b80940c02",
+      "path": "src/experiments/run_d1a_corrective_0b05c_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "8d20ee6a9b5b2e992d89c8a2518e72b8ee70ebf92872b803e6aff327a4dca3f9",
+      "canonical_size_bytes": 19130,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "309cf598ce2ad4413505ffee9ef1a5dfcbc2873f",
+      "path": "src/experiments/run_d1a_corrective_0b05c_v05.py"
+    },
+    {
+      "canonical_git_blob_sha256": "9b56678abb6eb3c9b07b74538412f3a0e1507242129a611f309558d9d6429d2b",
+      "canonical_size_bytes": 27749,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "243b92f5ee1cf6a6aae7bdc8e51b7c235f52fb0e",
+      "path": "src/experiments/verify_ev03_historical_builder_recovery_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "b28fe99b2633cea0a9377cc0cf0434079f4b97e874c504d6bd1556e1cce97633",
+      "canonical_size_bytes": 25,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "06d130308bb9359c7e3b44574b8efbd027485c3c",
+      "path": "src/retrieval/__init__.py"
+    },
+    {
+      "canonical_git_blob_sha256": "1d19b2ace176ba45dc48e0143386e69a9529e0aea6c5ad537fe5d5f97cea8748",
+      "canonical_size_bytes": 1154,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "b089b02968a5146377fb26718cfaaa48f3ae4897",
+      "path": "src/retrieval/bm25.py"
+    },
+    {
+      "canonical_git_blob_sha256": "47358c8b7242235e1908c219f72509c6822b9cb67be89afb1ce978ccadd00d2b",
+      "canonical_size_bytes": 8652,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "0d4ecc56ed53bb4016fc0b4a4bec158be4e28798",
+      "path": "src/retrieval/text2trade_mnrl_v02.py"
+    },
+    {
+      "canonical_git_blob_sha256": "a90ec62c67d738c199b3b064f68d60af54a2ff7271da1395a4b60e82ee62eda6",
+      "canonical_size_bytes": 44,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "6bce9c1c520240db2d262c4cdb53f5878e74519b",
+      "path": "src/utils/__init__.py"
+    },
+    {
+      "canonical_git_blob_sha256": "3ab3e93a72314080b6bc6b269258fd4e9da55fb341d1301db136da0a92c730ae",
+      "canonical_size_bytes": 1648,
+      "classification": "PROJECT_LOCAL_IMPORT_CLOSURE",
+      "git_blob_sha1": "6fb7053f73e3409e0ca38414b0358734260470d9",
+      "path": "src/utils/paths.py"
+    },
+    {
+      "canonical_git_blob_sha256": "107f200365ac34be02d04e51b7a4ecd5119b1d3f619752243b0d3405d20d0a9d",
+      "canonical_size_bytes": 896,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "09e715ce30b789805644aa87b16df78e04d0352a",
+      "path": "src/configs/experiment_config.json"
+    },
+    {
+      "canonical_git_blob_sha256": "d5bb787f726330285b1a3d85a2b370a7c37ee055c3d8904225a3b26f18c27254",
+      "canonical_size_bytes": 3580,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "e30a1d9d5e5f9416e7fa504c5f7bb7fb685146e7",
+      "path": "src/configs/text2trade_mnrl_v0.2.json"
+    },
+    {
+      "canonical_git_blob_sha256": "c32c094f6c5e6f8aad2ef3195f99d4ca35442f5e628d91c3dd62928eb6772f64",
+      "canonical_size_bytes": 5180,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "76a090b8d72c3a0b01f822607970336e23afa933",
+      "path": "docs/exp04_text2trade_mnrl_d1a_v02_reproducibility_manifest.json"
+    },
+    {
+      "canonical_git_blob_sha256": "83768faae816b9d9b33a8fd36b73068d8b5f0b7a186e1c0f5b1c2c27580290f0",
+      "canonical_size_bytes": 3622401,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "a74d44f27e77d5c652c497a4f20fc786855daf8a",
+      "path": "data/processed/corpus_rag_v1_index.jsonl"
+    },
+    {
+      "canonical_git_blob_sha256": "f389ae6c303279cfea23697cbedb3315a5254254c2efc2450cf28f81243df175",
+      "canonical_size_bytes": 17448384,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "57e0dce322a4311bff5ef13e6dd90020fb1277e7",
+      "path": "data/processed/corpus_nandina_hierarchical_v0.1.jsonl"
+    },
+    {
+      "canonical_git_blob_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "canonical_size_bytes": 1363273,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv"
+    },
+    {
+      "canonical_git_blob_sha256": "89d9e87e8c099ecf1ab7a4bca898ed5cdceef1bead21563527756dfe01a3dce0",
+      "canonical_size_bytes": 1545,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "f456e9f85df0f9a2aa58882bed27211aa1d11a30",
+      "path": "data/processed/indexes/bm25_nandina8_run_metadata.json"
+    },
+    {
+      "canonical_git_blob_sha256": "9f114ecb9bd79f998fcd114218248b746868a3c6ede141fa4f5964becebd40ce",
+      "canonical_size_bytes": 928,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "fc7147cedcf9a8c2fe29fa9843fda07ff03b2599",
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/retrieval_config.json"
+    },
+    {
+      "canonical_git_blob_sha256": "141211f31120ef744d854b45c1d7067aa8e3b9aa27bab88a0d351ca67d46975f",
+      "canonical_size_bytes": 5068,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "785436aa404f6bdde6a1a77529667dcd7704fe4e",
+      "path": "data/processed/indexes/text2trade_mnrl_nandina8_v0.2/text2trade_mnrl_nandina8_v02_run_metadata.json"
+    },
+    {
+      "canonical_git_blob_sha256": "d2edc692d54b015525e193a1c067d2828aaedf48ff40e947d690b8aebd7ca015",
+      "canonical_size_bytes": 13145709,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "fe830e00bfa4803e85bb27b676d95c59c7b73b3a",
+      "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_results.csv"
+    },
+    {
+      "canonical_git_blob_sha256": "f75d7d8ae65dda30990b819e8f662614585563d5adeb7d54344b2ae14c3522e0",
+      "canonical_size_bytes": 497448,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "54846f72884f0363f5054d1953b23955029c5636",
+      "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_case_summary.csv"
+    },
+    {
+      "canonical_git_blob_sha256": "e57d1ebd360790c64b485f5fb4d7aa34be500e48f4ebf48ab7c0437874caba44",
+      "canonical_size_bytes": 11460,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "1e23a522b406245274b33318ba2983d68e5f0c27",
+      "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/run_metadata.json"
+    },
+    {
+      "canonical_git_blob_sha256": "fca13c411c5eff32fa73f72e6afe3527dc76c1b33477c9698e7e4da41e5ed662",
+      "canonical_size_bytes": 85426164,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "9a1543570c18e3cba32f6cf20506d166fd238896",
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_results.csv"
+    },
+    {
+      "canonical_git_blob_sha256": "17af79c3a2166100520cea289060c35a1d4ef1936055fb4291a42295ccc42634",
+      "canonical_size_bytes": 607072,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "5421bf1bf2082e2ba66ce045f804f1d02b77fd58",
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv"
+    },
+    {
+      "canonical_git_blob_sha256": "43218151297fe8130d67772e0a695d86dd1facd01ecd831dfdf6fe8aaf30a5aa",
+      "canonical_size_bytes": 34959,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "3cbbabd9d9446958e5a0b386f13bd32aec817fa1",
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/run_metadata.json"
+    },
+    {
+      "canonical_git_blob_sha256": "620412bc15dbba2edd4e2d195457f0b8b4ce670cd75ff7c6d87835a435b8fb3c",
+      "canonical_size_bytes": 4083,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "ebdf4504614db6c702cdbad56edfbe012e799ba5",
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_metrics.json"
+    },
+    {
+      "canonical_git_blob_sha256": "7755e93c37d629b6dcad0f11f695586f5bc6de396d947fb8ebd49ef91d5e7acd",
+      "canonical_size_bytes": 138163,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "f2e5a4ba83b53ef57991983bc8299083a5bd3001",
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_case_summary.csv"
+    },
+    {
+      "canonical_git_blob_sha256": "96359579c984b736798b943711b58a9503d38ddb62a576248b720caf05c4570c",
+      "canonical_size_bytes": 2619936,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "368fd0448aa9e459a07dabe4f65ca9f2f5e318f6",
+      "path": "outputs/evaluation/text2trade_mnrl_data_aduanas_clase87_v0.2/d1a_ranked_codes_top200.jsonl"
+    },
+    {
+      "canonical_git_blob_sha256": "5334e64ab2b3f812f939b652fe1ee8ad8db24b673ebb48fd4d7b1ddb0dd444fa",
+      "canonical_size_bytes": 28001,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "a43893eca3dd756a1ff11935a9cf55afb728e8f4",
+      "path": "outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json"
+    },
+    {
+      "canonical_git_blob_sha256": "56a702398d3b9d1483ecd1be3ca79587682ad8fd3afd84858917f248b5ae0460",
+      "canonical_size_bytes": 13720,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "8034109ae967ebae2f2e625e842cc20c7e68c8e7",
+      "path": "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json"
+    },
+    {
+      "canonical_git_blob_sha256": "557c46668cfd51fbeabba0ecdb9bf3ca4a2a34a7f2850384252c5d963a26fd9f",
+      "canonical_size_bytes": 25194,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "bc3b34cae7d8832426e6b2b56cb3d2d1541cdd57",
+      "path": "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json"
+    },
+    {
+      "canonical_git_blob_sha256": "5948cc9c7cc029d0b5715719ba2825048f0f5e7735eb9551b3f0af447a620eb4",
+      "canonical_size_bytes": 20364,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "f5a99089bf31c58e4157c211bf6699c70c99119b",
+      "path": "outputs/evaluation/text2trade_dense_data_aduanas_clase87_v0.2/run_metadata.json"
+    },
+    {
+      "canonical_git_blob_sha256": "fd5eb111f95dc4de09f1a47fdb1117f455a5caeed96548a25219664a28857b6b",
+      "canonical_size_bytes": 918503,
+      "classification": "VERSIONED_RUNTIME_DATA_DEPENDENCY",
+      "git_blob_sha1": "5bf6be9c0a5622bb53b8c2d64fb714ccf0020807",
+      "path": "data/processed/indexes/bm25_nandina8.pkl"
+    }
+  ],
+  "future_roots": [
+    "data/processed/indexes/bm25_nandina8_ev03_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_flat_ev03_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev03_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev03_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_flat_corrective_decision906_v0.5",
+    "data/processed/indexes/bm25_nandina8_ev04_decision885_control_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_ev04_decision885_control_v0.5",
+    "data/processed/corpus_rag_v1_index_ev04_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/bm25_nandina8_ev04_corrective_decision906_v0.5",
+    "outputs/evaluation/normative_bm25_hierarchical_corrective_decision906_v0.5",
+    "data/processed/corpus_rag_v1_index_d1a_corrective_decision906_v0.5.jsonl",
+    "data/processed/indexes/text2trade_mnrl_nandina8_d1a_corrective_v0.5",
+    "outputs/evaluation/d1a_corrective_0b05c_v0.5",
+    "outputs/audits/d1a_corrective_0b05c_runtime_v0.5",
+    "outputs/evaluation/0b05c_corrective_numerical_v0.5",
+    "outputs/audits/0b05c_corrective_numerical_runtime_v0.5"
+  ],
+  "gate_status": "CANDIDATE_READY_FOR_EXTERNAL_AUDIT / NOT_AUTHORIZED",
+  "historical_vector_replay_required": true,
+  "pipeline_steps": [
+    "01_unified_preflight",
+    "02_EV03_Decision885_control_reproduction",
+    "03_EV03_control_reproduction_verification",
+    "04_EV03_corrected_corpus_materialization",
+    "05_EV03_corrected_index_build_RECOVERED_HISTORICAL_SEMANTICS",
+    "06_EV03_corrected_evaluation",
+    "07_EV04_Decision885_control_reproduction_ENRICHED_MRR",
+    "08_EV04_control_reproduction_verification_PASS_EXACT",
+    "09_EV04_corrected_corpus_materialization",
+    "10_EV04_corrected_index_build",
+    "11_EV04_corrected_evaluation_ENRICHED_MRR",
+    "12_D1a_corrected_execution_under_future_v05_authorization",
+    "13_integrity_validation",
+    "14_case_level_comparisons",
+    "15_aggregate_comparisons",
+    "16_unified_sensitivity_summary",
+    "17_execution_manifest",
+    "18_exact_hash_ledger",
+    "19_final_completion_state"
+  ],
+  "v04_partial_roots_policy": "NEVER_INPUT / NEVER_REUSED / NEVER_CLEANED_BY_V05"
+}

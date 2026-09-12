@@ -1,0 +1,53 @@
+{
+  "artifact_id": "0b05c_attempt05_failclosed_record_v0.4",
+  "schema_version": 1,
+  "status": "FAIL_CLOSED / SCIENTIFIC_STATE_PRESERVED",
+  "evidence_classification": "CODEX_EXECUTION_RECORD_EVIDENCE / NOT_INDEPENDENT_GIT_OBSERVATION",
+  "evidence": {
+    "branch": "codex/0b05c-attempt05-failclosed-evidence-env-diagnosis",
+    "commit": "5144bbdfc3b36e6172ecdd604a3e71d256ab248b",
+    "execution_record": {
+      "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_execution_record_v0.4.json",
+      "git_blob_sha1": "7e11eee9b30d3d72d3490c2adeb57d7a981b6642"
+    },
+    "stderr": {
+      "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_stderr.txt",
+      "git_blob_sha1": "698015f64e8d8fa4ebccf9483c662be774157b21"
+    },
+    "stdout": {
+      "path": "outputs/audits/0b05c_attempt05_execution_v0.4/attempt05_stdout.txt",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "environment_diagnosis": {
+      "path": "outputs/audits/0b05c_attempt05_environment_diagnosis_v0.4/attempt05_environment_diagnosis_v0.4.json",
+      "git_blob_sha1": "52bf36e57514e728d16d01adc096c44862fb12a4"
+    }
+  },
+  "failure": {
+    "class": "MISSING_RUNTIME_PYTHON_DEPENDENCY",
+    "terminal_error": "ModuleNotFoundError: No module named 'sentence_transformers'",
+    "last_completed_step_reported": 11,
+    "last_started_step_reported": 12
+  },
+  "invocation_provenance": {
+    "source": "CODEX execution-record evidence",
+    "invocation_count_reported": 1,
+    "retry_reported": false,
+    "resume_reported": false
+  },
+  "requirements_txt_provenance_correction": {
+    "git_blob_sha1": "19273fcbb593fcb089c79dfab7acf9d8076e44bc",
+    "canonical_git_bytes": 80,
+    "canonical_git_blob_sha256": "698fcd824a8ff840f5deb53e6a8dcda007014ee5108b89190bf4f8d312512724",
+    "local_checkout_classification": "LOCAL_CHECKOUT_CRLF_BYTES",
+    "local_checkout_crlf_bytes": 89,
+    "local_checkout_crlf_sha256": "5d063a971db0a2d88826f4dd2a6239ae482bdbf1554fe468b0b8b7918d5fb50b"
+  },
+  "ATTEMPT05_AUTHORIZATION": "OPERATIONALLY_CONSUMED",
+  "ATTEMPT05_RETRY": "FORBIDDEN",
+  "ATTEMPT06": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "0B05C_METRIC_IMPACT": "NOT_DETERMINED",
+  "0B05C_CLOSURE": "NOT_AUTHORIZED",
+  "raw_stdout_stderr_copied_to_main": false,
+  "absolute_host_paths_published": false
+}
