@@ -325,15 +325,17 @@ Un reporte Codex es evidencia administrativa; no sustituye esta verificación.
 
 ## 5.8 Reconstruir aplicabilidad RPRE
 
-Antes de identificar el siguiente bloque operativo, determina si ese bloque cae bajo la **Revisión Preventiva de Riesgos de Ejecución (RPRE)**.
+Antes de identificar el siguiente bloque operativo, determina internamente si ese bloque cae bajo la **Revisión Preventiva de Riesgos de Ejecución (RPRE)**.
 
-Debes dejar explícito uno de estos estados:
+Estados internos:
 
 `RPRE_APPLICABILITY = REQUIRED`
 
 `RPRE_APPLICABILITY = NOT_REQUIRED / LOW_RISK_NON_EXECUTION_BLOCK`
 
-Si es `REQUIRED`, no autorices la ejecución científica oficial hasta completar y auditar la RPRE.
+Si es `REQUIRED`, no autorices la ejecución científica oficial hasta completar y auditar internamente la RPRE.
+
+**La RPRE es una regla de IA Experimental. No conviertas este análisis en un prompt separado para Codex ni pidas al usuario que lo reenvíe.**
 
 ---
 
@@ -364,15 +366,19 @@ El usuario no debe tener que copiar manualmente prompts extensos cuando el flujo
 Cuando corresponda un nuevo bloque:
 
 1. IA Experimental diseña metodológicamente el bloque;
-2. el prompt completo se versiona mediante el flujo autorizado del proyecto;
-3. al usuario se le entrega una **invocación corta** con rama + archivo + commit;
-4. Codex ejecuta exclusivamente ese prompt;
-5. Codex persiste su respuesta en `codex/prompts-temporary` como commit administrativo separado;
-6. IA Experimental audita la respuesta y los objetos Git reales antes del siguiente bloque.
+2. aplica internamente la RPRE cuando corresponda;
+3. si hacen falta checks preventivos técnicos, los incorpora de forma transparente dentro del prompt operativo normal del bloque pertinente;
+4. el prompt completo se versiona mediante el flujo autorizado del proyecto;
+5. al usuario se le entrega una **invocación corta** con rama + archivo + commit;
+6. Codex ejecuta exclusivamente ese prompt;
+7. Codex persiste su respuesta en `codex/prompts-temporary` como commit administrativo separado;
+8. IA Experimental audita la respuesta y los objetos Git reales antes del siguiente bloque.
 
 No mezcles un commit administrativo de respuesta con un commit científico.
 
 No reescribas prompts o candidatos históricos rechazados. Conserva trazabilidad.
+
+**No expongas RPRE como una tarea adicional de Codex. Codex recibe únicamente las instrucciones técnicas concretas que IA Experimental haya decidido incluir.**
 
 ---
 
@@ -426,7 +432,7 @@ La RPRE es obligatoria si el bloque:
 - tendría un costo significativo si falla;
 - pertenece a una familia con historial de fallos/correcciones.
 
-Bloques puramente read-only, integraciones fast-forward ya auditadas o reconciliaciones documentales mínimas pueden clasificarse como:
+Bloques puramente read-only, integraciones fast-forward ya auditadas o reconciliaciones documentales mínimas pueden clasificarse internamente como:
 
 `RPRE_APPLICABILITY = NOT_REQUIRED / LOW_RISK_NON_EXECUTION_BLOCK`
 
@@ -460,7 +466,7 @@ No puede usarse `ACCEPTED_RESIDUAL_RISK` para evitar cerrar un fallo razonableme
 
 ## 9.5 Criterio de PASS
 
-Solo puede declararse:
+Solo puede declararse internamente:
 
 ```text
 PRE_EXECUTION_RISK_REVIEW = PASS
@@ -488,15 +494,28 @@ Mantén siempre:
 
 `EXECUTED ≠ APPROVED`
 
-## 9.7 Regla de eficiencia
+## 9.7 Gestión transparente
+
+La RPRE pertenece a IA Experimental.
+
+Por defecto:
+
+- IA Experimental construye internamente el mapa de riesgo;
+- IA Experimental decide si necesita verificaciones técnicas adicionales;
+- si las necesita, las incorpora en el prompt operativo que corresponda;
+- el usuario no tiene que transmitir a Codex una instrucción separada sobre RPRE;
+- Codex no administra estados RPRE ni decide su PASS/FAIL;
+- IA Experimental decide cuándo el riesgo preventivo está suficientemente cerrado.
+
+## 9.8 Regla de eficiencia
 
 La RPRE debe **reducir** idas y venidas con Codex.
 
-Por defecto, IA Experimental debe consolidar todos los riesgos previsibles relevantes en **un único bloque preventivo**, Codex debe ejecutar allí los checks permitidos y la IA Experimental debe auditar el paquete completo una sola vez.
+IA Experimental consolida todos los riesgos previsibles relevantes en un único análisis preventivo y evita fragmentarlo en varios prompts salvo hallazgo bloqueante concreto.
 
-No fragmentes el mismo mapa de riesgo en varios prompts salvo que un hallazgo bloqueante concreto obligue a una corrección.
+Si los checks necesarios ya pueden verificarse por GitHub/evidencia disponible, no se genera ninguna interacción nueva con Codex.
 
-## 9.8 Anti-hardening infinito
+## 9.9 Anti-hardening infinito
 
 La RPRE termina cuando:
 
@@ -506,7 +525,7 @@ La RPRE termina cuando:
 
 No persigas riesgo cero, refactors estéticos ni deudas marginales sin relación causal con la ejecución oficial.
 
-## 9.9 Post-mortem
+## 9.10 Post-mortem
 
 Si una ejecución oficial falla, clasifica la causa como:
 
@@ -518,13 +537,15 @@ Si una ejecución oficial falla, clasifica la causa como:
 
 Toda causa `PREVENTABLE_PRE_EXECUTION` debe incorporarse como nueva verificación obligatoria en futuras RPRE similares.
 
-## 9.10 Aplicación específica conocida
+## 9.11 Aplicación específica conocida
 
-Antes de cualquier autorización oficial de **EXP11B Retrieval H150/H200**, la RPRE es obligatoria.
+Antes de cualquier autorización oficial de **EXP11B Retrieval H150/H200**, la RPRE es obligatoria internamente para IA Experimental.
 
-Hasta que quede auditada como PASS:
+Hasta que quede en PASS:
 
 `EXP11B_RETRIEVAL_H150_H200 = NOT_AUTHORIZED / NOT_EXECUTED`
+
+Esto no implica crear ni enviar a Codex un prompt llamado RPRE.
 
 ---
 
@@ -559,8 +580,9 @@ Después del onboarding, y antes de cualquier nueva ejecución, responde al usua
 - último estado científico integrado;
 - gate/deuda actualmente abiertos;
 - siguiente bloque pendiente de auditoría o autorización;
-- `RPRE_APPLICABILITY` del siguiente bloque;
 - cualquier discrepancia detectada.
+
+La clasificación RPRE puede mantenerse interna salvo que sea materialmente relevante para explicar por qué una ejecución aún no puede autorizarse.
 
 No ejecutes un nuevo bloque solo por haber terminado el onboarding.
 
@@ -574,9 +596,11 @@ Cuando el trabajo sea operativo, termina con estas dos secciones:
 
 ## Prompt siguiente para Codex
 
-- entrega una invocación corta si ya existe un prompt versionado;
+- entrega una invocación corta si ya existe un prompt versionado y realmente corresponde enviarlo;
+- si Codex ya está ejecutando un prompt, escribe `NINGUNO` y no generes instrucciones paralelas;
 - si todavía no corresponde ejecutar nada, escribe `NINGUNO` y la razón;
-- no pegues innecesariamente un prompt largo que ya debe vivir en GitHub.
+- no pegues innecesariamente un prompt largo que ya debe vivir en GitHub;
+- **nunca uses esta sección para enviar a Codex reglas internas de IA Experimental como RPRE.**
 
 ## Resumen de avance
 
@@ -614,7 +638,7 @@ Una nueva IA Experimental solo puede considerarse correctamente contextualizada 
 11. qué no está autorizado todavía;
 12. qué evidencia debe auditar antes de avanzar;
 13. si el siguiente bloque requiere RPRE y por qué;
-14. qué riesgos preventivos deben cerrarse antes de cualquier ejecución oficial de alto costo.
+14. qué riesgos preventivos debe gestionar internamente antes de cualquier ejecución oficial de alto costo.
 
 Si no puede responder esos catorce puntos, el onboarding no está completo.
 
@@ -631,4 +655,5 @@ No confundas reporte con evidencia independiente.
 No confundas integración Git con validez científica.
 No confundas Plan desactualizado con estado real.
 No confundas preflight con ejecución oficial.
-No hagas avanzar el proyecto hasta reconstruir la cadena completa y aplicar RPRE cuando corresponda.
+No conviertas reglas internas de IA Experimental en trabajo adicional para el usuario o para Codex.
+No hagas avanzar el proyecto hasta reconstruir la cadena completa y aplicar internamente RPRE cuando corresponda.
