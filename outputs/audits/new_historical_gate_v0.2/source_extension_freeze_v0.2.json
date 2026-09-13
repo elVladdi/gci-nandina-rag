@@ -1,0 +1,92 @@
+{
+  "version": "v0.2",
+  "artifact": "NEW_HISTORICAL_GATE_EXTENSION_SOURCE_FREEZE",
+  "source_workbook_path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA\\data\\Series - Descripciones.xlsx",
+  "source_sha256": "1d62b74d5931275cf4740e90292805cfc8c63823817371e0c5ca358323bee64d",
+  "source_size_bytes": 18069347,
+  "source_sheet_order": [
+    "Hoja2",
+    "Hoja1",
+    "NUEVA_01",
+    "NUEVA_02"
+  ],
+  "baseline_nueva01_workbook_path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA_source_archive\\Series - Descripciones_EXPANDED_NUEVA_01_SOURCE_087efd97.xlsx",
+  "baseline_nueva01_workbook_sha256": "087efd97cb17fd166c2e7eb5089690577491e99ab5d415f9e3a8614923ee4ba3",
+  "fingerprint_contract": "sha256(canonical JSONL header plus nonempty cells in row-column order; data_only=false)",
+  "preexisting_sheet_fingerprints_baseline": {
+    "Hoja2": {
+      "sheet_name": "Hoja2",
+      "max_row": 126524,
+      "max_column": 9,
+      "nonempty_cell_count": 387742,
+      "content_sha256": "09d1fb1f238c3dab9d15278773bfdaea8601ec6fd07dd08f4ee048ce9ea09346"
+    },
+    "Hoja1": {
+      "sheet_name": "Hoja1",
+      "max_row": 41578,
+      "max_column": 10,
+      "nonempty_cell_count": 133038,
+      "content_sha256": "7317c42350b49b0b80c54de66becfc8f14a0a7b518bcada33bc628966d12e862"
+    },
+    "NUEVA_01": {
+      "sheet_name": "NUEVA_01",
+      "max_row": 169130,
+      "max_column": 9,
+      "nonempty_cell_count": 517142,
+      "content_sha256": "c14e337179e97d7fa8236c690557a4580d00c165e3e3b4b357f29c9d92cb06cd"
+    }
+  },
+  "preexisting_sheet_fingerprints_current": {
+    "Hoja2": {
+      "sheet_name": "Hoja2",
+      "max_row": 126524,
+      "max_column": 9,
+      "nonempty_cell_count": 387742,
+      "content_sha256": "09d1fb1f238c3dab9d15278773bfdaea8601ec6fd07dd08f4ee048ce9ea09346"
+    },
+    "Hoja1": {
+      "sheet_name": "Hoja1",
+      "max_row": 41578,
+      "max_column": 10,
+      "nonempty_cell_count": 133038,
+      "content_sha256": "7317c42350b49b0b80c54de66becfc8f14a0a7b518bcada33bc628966d12e862"
+    },
+    "NUEVA_01": {
+      "sheet_name": "NUEVA_01",
+      "max_row": 169130,
+      "max_column": 9,
+      "nonempty_cell_count": 517142,
+      "content_sha256": "c14e337179e97d7fa8236c690557a4580d00c165e3e3b4b357f29c9d92cb06cd"
+    }
+  },
+  "preexisting_sheet_content_match": true,
+  "preexisting_sheet_content_matches": {
+    "Hoja2": true,
+    "Hoja1": true,
+    "NUEVA_01": true
+  },
+  "nueva02_parsed_rows": 3250,
+  "nueva02_parsed_columns": 112,
+  "validate_new_sheets_return_code": 0,
+  "validate_new_sheets_result": "RESULT: PASS",
+  "archive_path": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA_source_archive\\Series - Descripciones_EXPANDED_NUEVA_01_NUEVA_02_SOURCE_1d62b74d.xlsx",
+  "archive_sha256": "1d62b74d5931275cf4740e90292805cfc8c63823817371e0c5ca358323bee64d",
+  "archive_size_bytes": 18069347,
+  "copy_method": "Python shutil.copy2 binary copy",
+  "source_sha_before": "1d62b74d5931275cf4740e90292805cfc8c63823817371e0c5ca358323bee64d",
+  "source_sha_after": "1d62b74d5931275cf4740e90292805cfc8c63823817371e0c5ca358323bee64d",
+  "source_mutated": false,
+  "ingestion": {
+    "command": "C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA\\.venv\\Scripts\\python.exe src/ingestion/prepare_new_historical_multisheet_v0.1.py --ingest-new-data --future-workbook \"C:\\Users\\Vladimir\\OneDrive\\Documentos\\Maestría UNMSM\\LLM_RGA_NANDINA_source_archive\\Series - Descripciones_EXPANDED_NUEVA_01_NUEVA_02_SOURCE_1d62b74d.xlsx\" --new-sheet NUEVA_01 --new-sheet NUEVA_02 --future-output-dir data/interim/new_historical_gate_v0.2 --future-audit-dir outputs/audits/new_historical_gate_v0.2",
+    "started_at_utc": "2026-09-13T18:06:47.4948553+00:00",
+    "ended_at_utc": "2026-09-13T18:07:30.0228112+00:00",
+    "return_code": 0,
+    "result": "RESULT: PASS",
+    "stdout_sha256_utf8": "4503a3ed3485d5cce724d512586f16460783c44f9b7897c07a5c28083573822b",
+    "stderr_sha256_utf8": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "python_version": "3.10.11",
+    "python_implementation": "CPython",
+    "new_data_ingestion_executed": true,
+    "new_eligible_historical_rows": 7190
+  }
+}
