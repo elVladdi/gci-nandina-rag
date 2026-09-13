@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 09ff184854659110f7711b3eee65fc18927649da; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=CLOSED/APPROVED/INTEGRATED; EXP11B Retrieval Execution=NOT_AUTHORIZED/NOT_EXECUTED; H150/H200 results not observed; EXP12=NOT_AUTHORIZED/NOT_EXECUTED.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = dfd04f0db26383624d54e52bf4fd72f06bbb869c; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=CLOSED/APPROVED/INTEGRATED; EXP11B_RETRIEVAL_AUTHORIZATION=APPROVED/INTEGRATED/CONSUMED; EXP11B_RETRIEVAL_ATTEMPT_001=EXECUTED_ONCE/COMPLETED/APPROVED; EXP11B_RETRIEVAL_RESULTS=APPROVED/INTEGRATED; EXP11B=CLOSED/APPROVED/INTEGRATED; EXP12=NOT_AUTHORIZED/NOT_EXECUTED; Grupo 2B=NOT_STARTED; Grupo 3=NOT_STARTED.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -1100,3 +1100,64 @@ la entrada cronológica posterior.
   permanece `NOT_AUTHORIZED / NOT_EXECUTED`.
 - `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`. Grupo 2B y los bloques posteriores no
   fueron abiertos.
+
+### 2026-09-12 — Integración de resultados y cierre de EXP11B Retrieval H150/H200
+
+**Estado vigente reconciliado:** `main = origin/main =
+dfd04f0db26383624d54e52bf4fd72f06bbb869c`.
+
+- `PROMPT48_EXTERNAL_AUDIT=PASS / APPROVED_WITH_NONBLOCKING_LIMITATIONS`.
+- `EXP11B_RETRIEVAL_AUTHORIZATION=APPROVED / INTEGRATED / CONSUMED`.
+- `EXP11B_RETRIEVAL_ATTEMPT_001=EXECUTED_ONCE / COMPLETED / APPROVED`.
+- `EXP11B_RETRIEVAL_RESULTS=APPROVED / INTEGRATED`.
+- `EXP11B=CLOSED / APPROVED / INTEGRATED`.
+
+Resultados descriptivos oficiales de los diez bancos H150:
+
+- Top-1 `0.512689393939394`; Top-3 `0.6899621212121212`; Top-5
+  `0.7833333333333333`; Top-10 `0.8915719696969697`; Top-50
+  `0.9895833333333334`; MRR `0.6332675214603809`.
+
+Resultados descriptivos oficiales de los diez bancos H200:
+
+- Top-1 `0.5141098484848485`; Top-3 `0.6894886363636363`; Top-5
+  `0.7820075757575757`; Top-10 `0.8952651515151515`; Top-50
+  `0.9852272727272726`; MRR `0.6333104425906166`.
+
+Estas cifras son observaciones descriptivas oficiales; esta entrada no añade
+interpretación causal ni generaliza fuera del alcance experimental congelado.
+
+**Limitación no bloqueante de persistencia.** El artefacto completo
+`exp11b_retrieval_candidates_v0.1.csv` tiene `size_bytes=264935868`, SHA-256
+`1dde84b65d8fb060211120ac73a04f1d5a5f7593e6381ed601fbdfb3f4bc9024`
+y estado
+`LOCAL_OFFICIAL_ARTIFACT_NOT_VERSIONED_DUE_TO_GIT_BLOB_LIMIT_GUARD`. No fue
+byte-verificado independientemente por la auditoría Git externa; su identidad
+quedó fijada por hash y tamaño en el ledger y en el execution record. Los
+outputs primarios versionables —metrics, case-level, summaries, manifest,
+environment, failure ledger y hash ledger— sí quedaron versionados. Esta
+limitación no invalida los resultados ni bloquea EXP12. Grupo 2B deberá
+conservarla en su matriz final de reproducibilidad/trazabilidad y, si
+corresponde, definir el mecanismo final de archivo o distribución sin
+modificar el resultado científico.
+
+**Limitación no bloqueante de evidencia runtime.** La evidencia conserva la
+clasificación `CODEX_LOCAL_OFFICIAL_EXECUTION_EVIDENCE /
+NOT_INDEPENDENTLY_REEXECUTED_BY_EXTERNAL_AUDITOR`. La auditoría externa
+verificó Git, los artefactos versionados, los contratos y la consistencia
+matemática disponible; no reejecutó la corrida oficial ni inspeccionó
+directamente los bytes del CSV local-only.
+
+**Notice de procedencia del config.** El SHA-256 del config canónico en Git es
+`2b91c06762409d10478cbf112bb25486ef3ffa410e5819fb0704f61fe64aa6af`; el
+run manifest registra para los bytes raw del working tree
+`0decc631705ae09078bd122b271f25912659574d86166a19e0a431c94af205b9`.
+La transformación temporal LF→CRLF del blob canónico reproduce exactamente el
+segundo SHA y ambos JSON parsean al mismo objeto. Por tanto,
+`EXP11B_EXECUTION_CONFIG_SHA_NOTICE=VERIFIED_EOL_ONLY_WORKTREE_VARIATION` y
+`CONFIG_SEMANTIC_DRIFT=false`. No se modificaron retrospectivamente el run
+manifest, la autorización ni el config.
+
+- `NEXT_ELIGIBLE_BLOCK=EXP12_PROSPECTIVE_PREPARATION_OR_AUTHORIZATION`.
+- `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`.
+- `Grupo 2B=NOT_STARTED` y `Grupo 3=NOT_STARTED`.
