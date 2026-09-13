@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = dfd04f0db26383624d54e52bf4fd72f06bbb869c; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=CLOSED/APPROVED/INTEGRATED; EXP11B_RETRIEVAL_AUTHORIZATION=APPROVED/INTEGRATED/CONSUMED; EXP11B_RETRIEVAL_ATTEMPT_001=EXECUTED_ONCE/COMPLETED/APPROVED; EXP11B_RETRIEVAL_RESULTS=APPROVED/INTEGRATED; EXP11B=CLOSED/APPROVED/INTEGRATED; EXP12=NOT_AUTHORIZED/NOT_EXECUTED; Grupo 2B=NOT_STARTED; Grupo 3=NOT_STARTED.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 2b9571eee76ecffcaef1abc7fd4a12051f76f906; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=CLOSED/APPROVED/INTEGRATED; EXP11B_RETRIEVAL_AUTHORIZATION=APPROVED/INTEGRATED/CONSUMED; EXP11B_RETRIEVAL_ATTEMPT_001=EXECUTED_ONCE/COMPLETED/APPROVED; EXP11B_RETRIEVAL_RESULTS=APPROVED/INTEGRATED; EXP11B=CLOSED/APPROVED/INTEGRATED; EXP12_F007=SOURCE_SCOPE_CLARIFIED_CURRENT_GATE_INSUFFICIENT; EXP12=NOT_AUTHORIZED/NOT_EXECUTED; NEXT_ELIGIBLE_BLOCK=EXP12_NEW_HISTORICAL_GATE_EXTENSION; Grupo 2B=NOT_STARTED; Grupo 3=NOT_STARTED.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -1160,4 +1160,51 @@ manifest, la autorización ni el config.
 
 - `NEXT_ELIGIBLE_BLOCK=EXP12_PROSPECTIVE_PREPARATION_OR_AUTHORIZATION`.
 - `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`.
+- `Grupo 2B=NOT_STARTED` y `Grupo 3=NOT_STARTED`.
+
+### 2026-09-12 — Corrección F007 y alcance prospectivo de muestreo EXP12
+
+**Estado vigente reconciliado:** `main = origin/main =
+2b9571eee76ecffcaef1abc7fd4a12051f76f906`.
+
+- `PROMPT50_PHASE_A_PLAN_INTEGRATION=PASS / APPROVED`.
+- `PROMPT50_PHASE_B_F007_AUDIT=REJECTED`. El candidato
+  `ccd10565427a2eb0b938428a68f2b78e538ab144` permanece histórico y no fue
+  integrado.
+- `PROMPT50_DOCUMENTARY_BINDING_RESULT=AMBIGUOUS_UNDER_STRICT_UNIQUE_RULE`.
+  El planeamiento local realizado para la interpretación B se conserva como
+  `LOCAL_NONRETRIEVAL_NON_GOVERNING_EVIDENCE_FROM_REJECTED_SOURCE_BINDING` y
+  `PROMPT50_INTERPRETATION_B_PLANNING_GOVERNING=false`.
+- La decisión metodológica prospectiva específica de EXP12 fija
+  `EXP12_SAMPLING_SCOPE=NEW_ELIGIBLE_HISTORICAL_ROWS_ONLY`,
+  `H100_ROLE_IN_EXP12=REFERENCE_LABEL_SET_AND_DISTRIBUTION_ONLY` y
+  `H100_ROWS_ALLOWED_AS_EXP12_CANDIDATE_SAMPLING_ROWS=false`. Esta decisión no
+  modifica ni invalida la construcción H100+incremento ya cerrada de EXP11B.
+- La fuente actual es
+  `data/interim/new_historical_gate_v0.1/new_historical_eligible.csv`, SHA-256
+  `a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4`:
+  6,029 filas, 43 DAM y 56 códigos NANDINA. Contiene 45 de los 66 códigos de
+  referencia H100, con cobertura máxima `0.6818181818181818`, y presenta cero
+  DAM solapadas con EVAL.
+- El contrato conserva `required_label_coverage_fraction=1.0`. Por ello,
+  `EXP12_CURRENT_SOURCE_STRUCTURAL_FEASIBILITY=FAIL_CLOSED_IMPOSSIBLE_LABEL_COVERAGE`
+  y `EXP12_F007=SOURCE_SCOPE_CLARIFIED_CURRENT_GATE_INSUFFICIENT`. La conclusión
+  se limita a la insuficiencia de la fuente histórica nueva elegible actualmente
+  congelada; no declara que EXP12 sea inviable en términos absolutos.
+- Los conteos de composición y cobertura fueron recalculados por Codex sobre
+  los artefactos versionados y preservados en el artefacto F007 v0.2. La
+  auditoría externa verificó Git, bindings, consistencia metodológica y estado;
+  no reivindica haber reejecutado independientemente esa recomputación.
+- Permanecen congelados: objetivo 2,950 filas, desviación máxima 148, rango
+  2,802–3,098, DAM completas, seeds `20262001..20262010`, HHI primario,
+  cobertura H100 1.0, TVD máximo 0.05, 10,000 candidatos por seed, mínimo 30
+  factibles, cuantiles 0.10/0.50/0.90, DAM sets distintos, orden estricto
+  `HHI_DLOW > HHI_DMID > HHI_DHIGH` y selección sin desempeño EVAL.
+- `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`; no se ejecutó planeamiento, retrieval,
+  BM25, Top-k ni MRR en Prompt52.
+- `NEXT_ELIGIBLE_BLOCK=EXP12_NEW_HISTORICAL_GATE_EXTENSION`. El protocolo
+  contempla `NEW_SHEET_SET_2=[NUEVA_01,NUEVA_02]`, pero no se afirma que
+  `NUEVA_02` exista, esté disponible, sea válida ni vaya a resolver la brecha
+  de cobertura. Una ampliación histórica nueva elegible debe auditarse antes
+  de cualquier nuevo planeamiento EXP12.
 - `Grupo 2B=NOT_STARTED` y `Grupo 3=NOT_STARTED`.
