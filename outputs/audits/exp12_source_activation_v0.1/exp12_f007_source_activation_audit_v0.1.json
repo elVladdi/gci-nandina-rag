@@ -1,0 +1,247 @@
+{
+  "artifact": "EXP12_F007_SOURCE_ACTIVATION_AUDIT",
+  "version": "v0.1",
+  "baseline_main": "dfd04f0db26383624d54e52bf4fd72f06bbb869c",
+  "audit_scope": "PROSPECTIVE_READ_ONLY_PRE_RETRIEVAL",
+  "retrieval_executed": false,
+  "bm25_executed": false,
+  "top_k_computed": false,
+  "mrr_computed": false,
+  "eval_performance_read": false,
+  "eval_descriptions_read": false,
+  "eval_labels_read": false,
+  "eval_dam_identifiers_read_for_overlap_only": true,
+  "exp12_authorized": false,
+  "exp12_outputs_created": false,
+  "exp11b_reexecuted": false,
+  "group2b_started": false,
+  "group3_started": false,
+  "frozen_contract_bindings": {
+    "contract": {
+      "path": "docs/g2a_contract_exp11_exp12_v0.1.md",
+      "git_blob": "ce61c2df4d4c470c97a24f408a0e93c4daefaf90",
+      "sha256": "105ed4432f23dbd62b51c99bdfbfc88852382088dc9b8de8756b0cd6bfa6bd6a"
+    },
+    "config": {
+      "path": "src/configs/exp12_historical_diversity_control_v0.3.json",
+      "git_blob": "763221899cc691b30b8dbd5334c472b5d101e87c",
+      "sha256": "a66dffc726cb8512777900549d106257af353873a1a078806a16aa07eadc5a85",
+      "sampling_universe_source": "PENDING_NEW_HISTORICAL_GATE",
+      "sampling_universe_path": null,
+      "sampling_universe_sha256": null,
+      "execution_authorized": false,
+      "target_rows": 2950,
+      "max_abs_row_deviation": 148,
+      "minimum_rows": 2802,
+      "maximum_rows": 3098,
+      "preserve_complete_dams": true,
+      "number_of_replicates_per_condition": 10,
+      "seed_schedule": [20262001, 20262002, 20262003, 20262004, 20262005, 20262006, 20262007, 20262008, 20262009, 20262010],
+      "primary_diversity_variable": "DAM_CONCENTRATION_HHI",
+      "required_label_coverage_fraction": 1.0,
+      "maximum_tvd": 0.05,
+      "candidate_count_per_seed": 10000,
+      "minimum_unique_feasible_candidates": 30,
+      "quantiles": {"D-HIGH": 0.1, "D-MID": 0.5, "D-LOW": 0.9},
+      "requires_distinct_dam_sets": true,
+      "strict_hhi_order": "HHI_DLOW > HHI_DMID > HHI_DHIGH",
+      "must_not_fallback_to_h100": true,
+      "no_eval_performance_selection": true
+    },
+    "planner": {
+      "path": "src/experiments/plan_historical_bank_conditions_v03.py",
+      "git_blob": "0de852726aa5ff7e15104a840c345d68e08dc474",
+      "sha256": "139d31250c62390f7bf159d166fb829f4b0794f95b478e30ed339007de215ea6"
+    },
+    "H100": {
+      "path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+      "git_blob": "b3d71dcfab22fb8792cb0b3f74c9e423bef31c11",
+      "sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+      "rows": 2950,
+      "dam_count": 28,
+      "nandina_count": 66
+    },
+    "EVAL": {
+      "path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+      "git_blob": "83d069fd7c0a5f42099e6d3347bd36e4e8158371",
+      "sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+      "rows": 1056,
+      "fields_read_for_audit": ["DECLARACION"]
+    }
+  },
+  "historical_gate_bindings": {
+    "exp11b_config": {
+      "path": "src/configs/exp11b_historical_size_extension_v0.1.json",
+      "git_blob": "f376a1cc947f842b78cbe3260208634b827319c4",
+      "sha256": "2a1fd4c7b0bfa36042d2e503471fcc9d6ef1ff88c941a4665eb53862b1901100"
+    },
+    "new_historical_eligible": {
+      "path": "data/interim/new_historical_gate_v0.1/new_historical_eligible.csv",
+      "git_blob": "36313239276205ea5dd83566d4ccbfa19b793208",
+      "sha256": "a78e8c517d50f53fa0f8b95a6c94f841dda4c0e3e5cf28cc4c4fccc576c083a4",
+      "rows": 6029,
+      "dam_count": 43,
+      "nandina_count": 56
+    },
+    "artifact_hashes": {
+      "path": "outputs/audits/new_historical_gate_v0.1/new_historical_artifact_hashes.csv",
+      "git_blob": "73d6616d2f1a27ba5ba696b195620c360a64fb5c",
+      "sha256": "f372f76ddfa70948d290ab823c2ef70c21595771a245fa8741650e4a389c8a29"
+    },
+    "ingestion_manifest": {
+      "path": "outputs/audits/new_historical_gate_v0.1/new_historical_ingestion_manifest.json",
+      "git_blob": "f5c7b5d983a97fed17f5c1437bfd1f31ad132d51",
+      "sha256": "3b555bbbadb23d33d574683db7a467d302c12a626a3a0832f46d3ee23be756ac"
+    },
+    "exp11b_feasibility": {
+      "path": "outputs/audits/new_historical_gate_v0.1/exp11b_h150_h200_feasibility_v0.1.json",
+      "git_blob": "8015a13f7b3c2a16138b254ea0c7f01b5b7f017d",
+      "sha256": "fa9eaf906feac264bca9e496557bbc1f17fe1462af412752c2b81a85af78fdf0",
+      "maximum_historical_pool_rows": 8979
+    },
+    "eval_common_clean_masks": {
+      "path": "outputs/audits/new_historical_gate_v0.1/eval_common_clean_masks_v0.1.csv",
+      "git_blob": "00bb6293936e4610bb7057a6e9ed3b8e3538e0f8",
+      "sha256": "3fbcd6e57eee19d230e8bcaeb634307ca6b8f5855734e393b321b1d073552b84"
+    },
+    "expanded_history_protocol": {
+      "path": "docs/protocolo_expansion_historico_multisheet_v0.1.md",
+      "git_blob": "5f96b627f9750f3aa894a3a5b2e130071e353494",
+      "sha256": "6b61178bc95eb5f12ecec0810e23c9701c2225bd47c9e9799f856fb8968662e5",
+      "binding_statement": "Every future bank is H100_FROZEN + NEW_ELIGIBLE_HISTORICAL_ROWS."
+    }
+  },
+  "source_interpretations": [
+    {
+      "interpretation_id": "A",
+      "name": "NEW_ELIGIBLE_ONLY",
+      "documentary_support_paths": [
+        "data/interim/new_historical_gate_v0.1/new_historical_eligible.csv",
+        "outputs/audits/new_historical_gate_v0.1/new_historical_ingestion_manifest.json"
+      ],
+      "explicitly_named_as_exp12_sampling_universe": false,
+      "compatible_with_must_not_fallback_to_h100": true,
+      "requires_new_unversioned_assumption": true,
+      "status": "CONTRADICTED",
+      "reason": "The eligible file is an approved new-row pool, but the versioned expansion protocol requires every future historical bank to combine frozen H100 with eligible new rows; the file is not named as the standalone EXP12 sampling universe."
+    },
+    {
+      "interpretation_id": "B",
+      "name": "H100_PLUS_NEW_ELIGIBLE",
+      "documentary_support_paths": [
+        "docs/protocolo_expansion_historico_multisheet_v0.1.md",
+        "src/configs/exp12_historical_diversity_control_v0.3.json",
+        "outputs/audits/new_historical_gate_v0.1/exp11b_h150_h200_feasibility_v0.1.json",
+        "outputs/audits/new_historical_gate_v0.1/eval_common_clean_masks_v0.1.csv"
+      ],
+      "explicitly_named_as_exp12_sampling_universe": true,
+      "compatible_with_must_not_fallback_to_h100": true,
+      "requires_new_unversioned_assumption": false,
+      "status": "SUPPORTED",
+      "reason": "The EXP12 contract points to the approved maximum historical universe, the approved gate defines that maximum pool as 8,979 rows, and the versioned expansion protocol fixes every future bank as frozen H100 plus eligible new historical rows. This is an expanded source and is not an H100 fallback."
+    },
+    {
+      "interpretation_id": "C",
+      "name": "EXP11B_H200_DERIVED_BANK_FAMILY",
+      "documentary_support_paths": [
+        "src/configs/exp11b_historical_size_extension_v0.1.json",
+        "outputs/audits/new_historical_gate_v0.1/exp11b_h150_h200_feasibility_v0.1.json"
+      ],
+      "explicitly_named_as_exp12_sampling_universe": false,
+      "compatible_with_must_not_fallback_to_h100": true,
+      "requires_new_unversioned_assumption": true,
+      "status": "NOT_APPLICABLE",
+      "reason": "The ten H200 banks are replicate-specific EXP11B outputs, not a single maximum source universe. Reusing or choosing among them for EXP12 would require an unversioned source/member-selection assumption."
+    }
+  ],
+  "EXP12_SOURCE_BINDING_STATUS": "RESOLVED_UNIQUE",
+  "source_binding_reason": "Interpretation B is the only versioned definition consistent with the EXP12 maximum-universe language and the expansion protocol; A conflicts with the required H100-plus-new construction and C is an EXP11B replicate family rather than one source universe.",
+  "structural_feasibility_by_interpretation": {
+    "A_NEW_ELIGIBLE_ONLY": {
+      "rows_total": 6029,
+      "dam_count": 43,
+      "nandina_count": 56,
+      "H100_reference_code_count": 66,
+      "H100_reference_codes_present": 45,
+      "H100_reference_coverage_upper_bound": 0.6818181818181818,
+      "missing_H100_reference_codes": ["87011000", "87024090", "87031000", "87032100", "87032290", "87032310", "87032390", "87032410", "87034090", "87038090", "87042110", "87042220", "87046090", "87099000", "87141090", "87142000", "87149290", "87149300", "87149900", "87168090", "87169000"],
+      "eval_dam_overlap_count": 0,
+      "STRUCTURAL_FEASIBILITY": "IMPOSSIBLE_LABEL_COVERAGE",
+      "candidate_generation_executed": false
+    },
+    "B_H100_PLUS_NEW_ELIGIBLE": {
+      "rows_total": 8979,
+      "dam_count": 71,
+      "nandina_count": 77,
+      "H100_reference_code_count": 66,
+      "H100_reference_codes_present": 66,
+      "H100_reference_coverage_upper_bound": 1.0,
+      "missing_H100_reference_codes": [],
+      "eval_dam_overlap_count": 0,
+      "STRUCTURAL_FEASIBILITY": "PASS_STATIC_UPPER_BOUND"
+    },
+    "C_EXP11B_H200_DERIVED_BANK_FAMILY": {
+      "family_member_count": 10,
+      "rows_total_range": [5832, 6039],
+      "dam_count_range": [47, 59],
+      "nandina_count_range": [70, 75],
+      "H100_reference_code_count": 66,
+      "H100_reference_codes_present_min": 66,
+      "H100_reference_coverage_upper_bound_min": 1.0,
+      "missing_H100_reference_codes": [],
+      "eval_dam_overlap_count_max": 0,
+      "STRUCTURAL_FEASIBILITY": "PASS_STATIC_UPPER_BOUND_BUT_NOT_AN_APPLICABLE_SOURCE_BINDING",
+      "candidate_generation_executed": false
+    }
+  },
+  "planning_executed": true,
+  "planning_scope": "VERSIONED_NON_RETRIEVAL_LOGIC_ON_RESOLVED_INTERPRETATION_B",
+  "planning_results": {
+    "status": "FAIL_CLOSED_NO_FEASIBLE_CANDIDATES",
+    "per_seed": [
+      {"seed": 20262001, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262002, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262003, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262004, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262005, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262006, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262007, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262008, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262009, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false},
+      {"seed": 20262010, "unique_feasible_candidate_count": 0, "selection_status": "FAIL_MINIMUM_30", "strict_hhi_order_pass": false, "distinct_dam_sets_pass": false}
+    ],
+    "minimum_feasible_candidates_across_seeds": 0,
+    "strict_hhi_order_all_seeds": false,
+    "distinct_dam_sets_all_seeds": false,
+    "HHI_q10": null,
+    "HHI_q50": null,
+    "HHI_q90": null,
+    "HHI_span_q90_q10": null,
+    "effective_DAM_q10": null,
+    "effective_DAM_q50": null,
+    "effective_DAM_q90": null,
+    "effective_DAM_ratio_high_low": null,
+    "reason": "Every frozen seed produced zero candidates satisfying the unchanged volume, complete-DAM, full H100-label coverage, TVD<=0.05, and zero-EVAL-DAM-overlap filters."
+  },
+  "EXP12_STRUCTURAL_FEASIBILITY": "FAIL_CLOSED",
+  "EXP12_F007": "SOURCE_RESOLVED_BUT_DESIGN_NOT_EXECUTABLE",
+  "EXP12": "NOT_AUTHORIZED / NOT_EXECUTED",
+  "blocking_findings": [
+    {
+      "finding_id": "EXP12-F007-PLANNING-001",
+      "status": "OPEN",
+      "classification": "FROZEN_DESIGN_HAS_ZERO_FEASIBLE_CANDIDATES_FOR_ALL_TEN_SEEDS",
+      "evidence": "minimum_feasible_candidates_across_seeds=0; required minimum=30"
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "finding_id": "EXP12-F007-SOURCE-001",
+      "status": "RESOLVED_PROSPECTIVELY_PENDING_EXTERNAL_REVIEW",
+      "classification": "UNIQUE_VERSIONED_SOURCE_BINDING",
+      "evidence": "H100_FROZEN + NEW_ELIGIBLE_HISTORICAL_ROWS; 8,979-row maximum historical pool"
+    }
+  ],
+  "next_required_action": "EXTERNAL_METHODOLOGICAL_REVIEW",
+  "external_audit_declared": false
+}
