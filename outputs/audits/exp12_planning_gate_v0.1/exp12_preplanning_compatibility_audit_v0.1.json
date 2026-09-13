@@ -1,0 +1,102 @@
+{
+  "artifact": "EXP12_PREPLANNING_COMPATIBILITY_AUDIT",
+  "version": "v0.1",
+  "main_commit": "5a402dc67c0b79e461bd272258534b731af38c3d",
+  "config_path": "src/configs/exp12_historical_diversity_control_v0.4.json",
+  "sampling_universe_path": "data/interim/new_historical_gate_v0.2/new_historical_eligible.csv",
+  "input_identity": {
+    "config_v04_exists": true,
+    "sampling_universe_expected_sha256": "f039ad25f39dd4bff7c5318bfe49993d57c505ee0340d92ee95d1f9006751457",
+    "sampling_universe_canonical_git_blob_sha256": "f039ad25f39dd4bff7c5318bfe49993d57c505ee0340d92ee95d1f9006751457",
+    "sampling_universe_worktree_sha256": "bf228ad6682e7a68059ac930882134530e6e4bf3a3e1322f2ce95b7f569655ce",
+    "sampling_universe_lf_normalized_sha256": "f039ad25f39dd4bff7c5318bfe49993d57c505ee0340d92ee95d1f9006751457",
+    "sampling_universe_sha_validation": "PASS_CANONICAL_GIT_BLOB_AND_LF_NORMALIZED_WORKTREE",
+    "sampling_universe_worktree_representation_note": "The Windows checkout has CRLF line endings; no data value or canonical blob differs.",
+    "sampling_universe_rows": 7190,
+    "sampling_universe_dam_count": 101,
+    "sampling_universe_nandina_count": 84,
+    "h100_path": "data/processed/data_aduanas_historico_clase87_v0.2.csv",
+    "h100_sha256": "0990cdfe2a62638bff83a1182b0d6b0b727d670f63888044e99fd3ee0d7915ff",
+    "h100_rows": 2950,
+    "h100_reference_code_count": 66,
+    "eval_path": "data/processed/data_aduanas_evalset_clase87_v0.2.csv",
+    "eval_sha256": "3ddb7a0e80d8bfa20b985655f03d6ab65470b40f0738093413909b6584aee941",
+    "eval_rows": 1056,
+    "eval_dam_overlap_count": 0
+  },
+  "legacy_v03_compatibility": {
+    "validate_exp12_contract_return": "FAIL",
+    "validate_exp12_contract_error": "ValueError: EXP-12 must remain a frozen pending candidate",
+    "cli_has_exp12_source_bound_entrypoint": false,
+    "cli_arguments": [
+      "--historical",
+      "--output",
+      "--seed-start",
+      "--seed-count"
+    ],
+    "cli_main_target": "exp11_independent_condition_feasibility_evidence"
+  },
+  "pool_label_inventory": {
+    "pool_total_nandina_codes": 84,
+    "reference_h100_code_count": 66,
+    "pool_reference_codes_present": 66,
+    "pool_nonreference_code_count": 18,
+    "pool_nonreference_codes": [
+      "87019100",
+      "87019300",
+      "87019400",
+      "87032210",
+      "87042290",
+      "87044110",
+      "87045110",
+      "87060092",
+      "87082200",
+      "87085029",
+      "87112000",
+      "87120000",
+      "87131000",
+      "87139000",
+      "87141010",
+      "87149210",
+      "87149600",
+      "87168010"
+    ],
+    "pool_rows_with_nonreference_code": 237,
+    "pool_nonreference_row_fraction": 0.032962447844228096,
+    "pool_dams_with_any_nonreference_code": 29
+  },
+  "distribution_distance_semantics": {
+    "config_distribution_distance_formula": "TVD(p,q) = 0.5 * sum_c(abs(p_c - q_c)) over H100 reference codes",
+    "code_tvd_iteration_support": "for code in reference_label_counts (H100 reference codes only)",
+    "code_tvd_candidate_denominator": "candidate_rows (all rows in the candidate bank)",
+    "code_tvd_reference_denominator": "sum(reference_label_counts.values()) (all H100 reference rows)",
+    "nonreference_codes_explicitly_included_in_distance_sum": false,
+    "full_support_other_bucket_implemented": false
+  },
+  "official_planning_runner": {
+    "available": false,
+    "path": null,
+    "static_observation": "No current main runner or CLI entrypoint performs the complete source-bound EXP12 v0.4 planning contract."
+  },
+  "technical_blockers_observed": [
+    "LEGACY_V03_VALIDATE_EXP12_CONTRACT_REJECTS_V04_SOURCE_BOUND_STATUS",
+    "LEGACY_V03_CLI_HAS_NO_EXP12_SOURCE_BOUND_ENTRYPOINT",
+    "CURRENT_TVD_SUM_DOES_NOT_EXPLICITLY_INCLUDE_NONREFERENCE_SUPPORT_OR_AN_OTHER_BUCKET"
+  ],
+  "execution_state": {
+    "candidate_generation_executed": false,
+    "planning_10000_candidates_per_seed_executed": false,
+    "condition_selection_executed": false,
+    "retrieval_executed": false,
+    "bm25_executed": false,
+    "top_k_computed": false,
+    "mrr_computed": false,
+    "eval_labels_read": false,
+    "eval_descriptions_read": false,
+    "eval_performance_read": false,
+    "exp12_authorized": false,
+    "exp12_executed": false,
+    "group2b_started": false,
+    "group3_started": false
+  }
+}
