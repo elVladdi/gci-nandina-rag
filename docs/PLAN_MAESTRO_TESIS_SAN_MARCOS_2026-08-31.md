@@ -26,7 +26,7 @@
 | Grupo | Estado |
 |---|---|
 | 1. Diseño y ejecución experimental | **CLOSED / APPROVED** |
-| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 428dfecca5cff313f910032a28a8a3c7ae13c2ef; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=CLOSED/APPROVED/INTEGRATED; EXP11B_RETRIEVAL_AUTHORIZATION=APPROVED/INTEGRATED/CONSUMED; EXP11B_RETRIEVAL_ATTEMPT_001=EXECUTED_ONCE/COMPLETED/APPROVED; EXP11B_RETRIEVAL_RESULTS=APPROVED/INTEGRATED; EXP11B=CLOSED/APPROVED/INTEGRATED; EXP12_NEW_HISTORICAL_GATE_EXTENSION_V02=INTEGRATED; EXP12_SAMPLING_UNIVERSE=SOURCE_BOUND/APPROVED; EXP12_SOURCE_BINDING_V04=INTEGRATED; EXP12_PREPLANNING_COMPATIBILITY_AUDIT_V01=INTEGRATED; EXP12_PREPLANNING_CORRECTION_V01=INTEGRATED; EXP12_PLANNING_AUTHORIZATION_V01=INTEGRATED/CONSUMED; EXP12_PLANNING_ATTEMPT_001=FAILED_ONE_SHOT/AUDITED/INTEGRATED; EXP12_PLANNING_ATTEMPT_001_FAILURE=Seed 20262001 produced fewer than 30 unique feasible candidates; EXP12_PLANNING_GATE=FAILED_UNDER_FROZEN_PLANNING_SEARCH; EXP12_PLANNING_OFFICIAL_CONDITIONS=NOT_SELECTED; EXP12_PLANNING_RETRY=PROHIBITED_UNDER_AUTH_001; EXP12_RETRIEVAL=NOT_AUTHORIZED/NOT_EXECUTED; EXP12=NOT_AUTHORIZED/NOT_EXECUTED; NEXT_ELIGIBLE_BLOCK=EXP12_FEASIBILITY_FAILURE_FORENSIC_DESIGN; Grupo 2B=NOT_STARTED; Grupo 3=NOT_STARTED.** |
+| 2. Reproducibilidad y trazabilidad | **EN CURSO — main = origin/main = 5787503329afd5ddd5e94d04cdbbdeb000260cda; 0B-05C v0.5=APPROVED/INTEGRATED; ATTEMPT06=COMPLETED/AUDITED_EXECUTION/INTEGRATED con 19/19 pasos PASS; PROMPT38_RESULT_INTERPRETATION=REJECTED/SUPERSEDED_BY_PROMPT39; EV03_METRIC_IMPACT=ZERO_AGGREGATE_CHANGE; EV04_METRIC_IMPACT=TINY_NONZERO_MRR_DECREASE_ONLY; D1A_METRIC_IMPACT=POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT; 0B05C_METRIC_IMPACT=METHOD_DEPENDENT/NONZERO_EV04_MRR_AND_D1A; DOWNSTREAM_REEXECUTION=NOT_REQUIRED; FUTURE_ANALYSES_MUST_USE=ATTEMPT06_CORRECTED_RESULTS; 0B05C_CLOSURE=CLOSED/APPROVED_AFTER_CORRECTIVE_RECONCILIATION. Los Attempts fail-closed previos conservan su trazabilidad histórica. EXP11B_PORTABILITY_DEBT=CLOSED/APPROVED/INTEGRATED; EXP11B_RETRIEVAL_AUTHORIZATION=APPROVED/INTEGRATED/CONSUMED; EXP11B_RETRIEVAL_ATTEMPT_001=EXECUTED_ONCE/COMPLETED/APPROVED; EXP11B_RETRIEVAL_RESULTS=APPROVED/INTEGRATED; EXP11B=CLOSED/APPROVED/INTEGRATED; EXP12_NEW_HISTORICAL_GATE_EXTENSION_V02=INTEGRATED; EXP12_SAMPLING_UNIVERSE=SOURCE_BOUND/APPROVED; EXP12_SOURCE_BINDING_V04=INTEGRATED; EXP12_PREPLANNING_COMPATIBILITY_AUDIT_V01=INTEGRATED; EXP12_PREPLANNING_CORRECTION_V01=INTEGRATED; EXP12_PLANNING_AUTHORIZATION_V01=INTEGRATED/CONSUMED; EXP12_PLANNING_ATTEMPT_001=FAILED_ONE_SHOT/AUDITED/INTEGRATED; EXP12_PLANNING_OFFICIAL_CONDITIONS=NOT_SELECTED; EXP12_PLANNING_RETRY=PROHIBITED_UNDER_AUTH_001; EXP12_FORENSIC_AUTH_001=REJECTED_PREEXECUTION/NOT_INTEGRATED; EXP12_FORENSIC_AUTH_002=INTEGRATED/CONSUMED; EXP12_FORENSIC_ATTEMPT_001=COMPLETED_ONE_SHOT/AUDITED/INTEGRATED; EXP12_FORENSIC_RESULT=NON_GOVERNING_FORENSIC_RESULT; EXP12_FORENSIC_FINAL_UNIQUE_FEASIBLE=0; EXP12_RETRIEVAL=NOT_AUTHORIZED/NOT_EXECUTED; EXP12=NOT_AUTHORIZED/NOT_EXECUTED; NEXT_ELIGIBLE_BLOCK=EXP12_POST_FAILURE_METHODOLOGICAL_DISPOSITION; Grupo 2B=NOT_STARTED; Grupo 3=NOT_STARTED.** |
 | 3. Métricas e inferencia | Pendiente |
 | 4. Análisis e interpretación | Pendiente |
 | 5. Presentación de resultados | Pendiente |
@@ -243,9 +243,48 @@ EXP12_QUANTILES = 0.1 / 0.5 / 0.9
   la evidencia permite afirmar solo `feasible_count(seed=20262001) < 30`;
   no persiste el conteo exacto ni un breakdown por filtro y no atribuye
   causalidad a TVD, cobertura, volumen o deduplicación.
+- `EXP12_FORENSIC_AUTH_001=REJECTED_PREEXECUTION / NOT_INTEGRATED` por la
+  colisión entre el padre del marcador y el directorio reservado de salida.
+- `EXP12_FORENSIC_AUTH_002=INTEGRATED / CONSUMED` y
+  `EXP12_FORENSIC_ATTEMPT_001=COMPLETED_ONE_SHOT / AUDITED / INTEGRATED`.
+  El resultado es `NON_GOVERNING_FORENSIC_RESULT`; no reemplaza el Attempt001
+  oficial ni autoriza un nuevo planning.
+- La reconstrucción forense se limita al seed `20262001`, los 10,000 índices
+  congelados y las reglas v0.5. Persistió 10,000 candidatos intentados, cero
+  rechazos por duplicación, cero rechazos por overlap EVAL, 10,000 candidatos
+  únicos no solapados, 1,617 bajo volumen, 6,821 dentro del rango y 1,562
+  sobre el rango. Entre los 6,821 dentro del rango, uno pasó cobertura y
+  ninguno pasó TVD; el conteo factible final fue cero frente al mínimo de 30.
+
+```text
+EXP12_FORENSIC_CANDIDATE_INDICES_ATTEMPTED = 10000
+EXP12_FORENSIC_DUPLICATE_REJECTIONS = 0
+EXP12_FORENSIC_EVAL_OVERLAP_REJECTIONS = 0
+EXP12_FORENSIC_UNIQUE_NONOVERLAP = 10000
+EXP12_FORENSIC_VOLUME_BELOW = 1617
+EXP12_FORENSIC_VOLUME_WITHIN = 6821
+EXP12_FORENSIC_VOLUME_ABOVE = 1562
+EXP12_FORENSIC_COVERAGE_PASS = 1
+EXP12_FORENSIC_COVERAGE_FAIL = 6820
+EXP12_FORENSIC_TVD_PASS = 0
+EXP12_FORENSIC_TVD_FAIL = 6821
+EXP12_FORENSIC_FINAL_UNIQUE_FEASIBLE = 0
+EXP12_FORENSIC_MINIMUM_REQUIRED = 30
+EXP12_FORENSIC_HISTORICAL_FAILURE_REPRODUCED = true
+EXP12_FORENSIC_TVD_CHARACTERIZATION = UNIVERSAL_BINDING_CONSTRAINT_AMONG_VOLUME_PASS_FOR_OBSERVED_SEARCH
+EXP12_FORENSIC_COVERAGE_CHARACTERIZATION = NEAR_UNIVERSAL_BINDING_CONSTRAINT_AMONG_VOLUME_PASS_FOR_OBSERVED_SEARCH
+EXP12_FORENSIC_GLOBAL_INFEASIBILITY_PROVEN = false
+EXP12_FORENSIC_OTHER_SEEDS_CHARACTERIZED = false
+```
+
+- `OFFICIAL_FORENSIC_INVOCATION_COUNT=1`. No hubo retry, resume, selección de
+  condiciones, otros seeds ni thresholds alternativos. Volumen por sí solo
+  no explica el fallo; deduplicación y overlap EVAL no fueron observados como
+  cuellos de botella. Esta evidencia no prueba inviabilidad matemática global
+  ni prescribe relajar TVD o cobertura.
 - `EXP12_RETRIEVAL=NOT_AUTHORIZED / NOT_EXECUTED` y
   `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`.
-- `NEXT_ELIGIBLE_BLOCK=EXP12_FEASIBILITY_FAILURE_FORENSIC_DESIGN`.
+- `NEXT_ELIGIBLE_BLOCK=EXP12_POST_FAILURE_METHODOLOGICAL_DISPOSITION`.
 
 ## 11. Grupo 2B
 
@@ -341,8 +380,18 @@ EXP12 Planning Attempt 001 ⚠ FAILED_ONE_SHOT / AUDITED / INTEGRATED
   - summary not created; D-HIGH/D-MID/D-LOW not selected
   - observability gap: exact feasible count and filter breakdown not persisted
   ↓
-EXP12 Feasibility Failure Forensic Design ⏳ NEXT
-  - no recomputation or new authorization has been opened
+EXP12 Feasibility Failure Forensic Design ✅ INTEGRATED
+  - authorization v0.1 rejected pre-execution and never integrated
+  - corrected authorization v0.2 integrated and consumed
+  ↓
+EXP12 Forensic Attempt 001 ✅ COMPLETED_ONE_SHOT / AUDITED / INTEGRATED
+  - 10,000 observed candidates; 6,821 within volume range
+  - coverage pass: 1/6,821; TVD pass: 0/6,821
+  - final unique feasible: 0; historical failure 0<30 reproduced
+  - non-governing result; no global infeasibility claim
+  ↓
+EXP12 Post-failure Methodological Disposition ⏳ NEXT
+  - no new planning or retrieval authorization has been opened
   ↓
 EXP-12 ⛔ NOT_AUTHORIZED / NOT_EXECUTED
   ↓
@@ -1343,3 +1392,43 @@ manifest, la autorización ni el config.
   `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`.
 - `NEXT_ELIGIBLE_BLOCK=EXP12_FEASIBILITY_FAILURE_FORENSIC_DESIGN`.
 - `Grupo 2B=NOT_STARTED` y `Grupo 3=NOT_STARTED`.
+
+### 2026-09-14 — Diagnóstico forense no gobernante de Attempt001 EXP12
+
+**Estado vigente reconciliado:** `main = origin/main =
+5787503329afd5ddd5e94d04cdbbdeb000260cda`.
+
+- Prompts61–63 preservaron e integraron el fallo one-shot del planning, su
+  evidencia y la fecha canónica, sin retry ni selección de condiciones.
+- Prompt64 integró el diseño forense v0.1 sin ejecutar sobre el pool oficial.
+- Prompt65 construyó `EXP12_FORENSIC_AUTH_001`; quedó
+  `REJECTED_PREEXECUTION / NOT_INTEGRATED` porque la
+  auditoría detectó la colisión entre el padre del marcador y el directorio
+  reservado de salida antes de cualquier invocación oficial.
+- Prompt66 corrigió exclusivamente la orquestación en la autorización v0.2;
+  `EXP12_FORENSIC_AUTH_002=INTEGRATED / CONSUMED`.
+- Prompt67 ejecutó una sola invocación autorizada:
+  `EXP12_FORENSIC_ATTEMPT_001=COMPLETED_ONE_SHOT / AUDITED / INTEGRATED`,
+  `OFFICIAL_FORENSIC_INVOCATION_COUNT=1` y
+  `EXP12_FORENSIC_RESULT=NON_GOVERNING_FORENSIC_RESULT`.
+- Los agregados persistidos son: 10,000 intentados, 0 rechazos por DAM set
+  duplicado, 0 rechazos por overlap EVAL, 10,000 únicos no solapados; 1,617
+  bajo volumen, 6,821 dentro de rango y 1,562 sobre rango. Entre los 6,821
+  dentro de rango, cobertura pasó en 1 y falló en 6,820; TVD pasó en 0 y
+  falló en 6,821. El conteo factible final fue `0`, el mínimo requerido `30`
+  y el fallo histórico quedó reproducido como `0<30`.
+- Para esta búsqueda observada, `TVD<=0.05` fue una restricción vinculante
+  universal entre los candidatos que pasaron volumen y cobertura `1.0` fue
+  casi universalmente vinculante. Volumen no fue explicación suficiente por
+  sí mismo; deduplicación y overlap EVAL no se observaron como cuellos de
+  botella.
+- La evidencia no demuestra inviabilidad matemática global, no caracteriza
+  otros seeds, no valida thresholds alternativos, no prescribe cambios de TVD
+  o cobertura y no reemplaza el Attempt001 oficial.
+- Se preservan `EXP12_PLANNING_ATTEMPT_001=FAILED_ONE_SHOT / AUDITED /
+  INTEGRATED`, `EXP12_PLANNING_RETRY=PROHIBITED_UNDER_AUTH_001` y
+  `EXP12_PLANNING_OFFICIAL_CONDITIONS=NOT_SELECTED`.
+- `EXP12_RETRIEVAL=NOT_AUTHORIZED / NOT_EXECUTED`,
+  `EXP12=NOT_AUTHORIZED / NOT_EXECUTED`, `Grupo 2B=NOT_STARTED` y
+  `Grupo 3=NOT_STARTED`.
+- `NEXT_ELIGIBLE_BLOCK=EXP12_POST_FAILURE_METHODOLOGICAL_DISPOSITION`.
