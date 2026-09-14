@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\exp12-planning-attempt001\src\experiments\plan_exp12_historical_diversity_v01.py", line 506, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\exp12-planning-attempt001\src\experiments\plan_exp12_historical_diversity_v01.py", line 501, in main
+    execute_planning(args.config, args.sampling_universe, args.h100, args.eval_path, args.output_dir)
+  File "C:\Users\Vladimir\Documents\LLM-RAG NANDINA\exp12-planning-attempt001\src\experiments\plan_exp12_historical_diversity_v01.py", line 449, in execute_planning
+    raise ContractViolation(f"Seed {seed} produced fewer than 30 unique feasible candidates")
+ContractViolation: Seed 20262001 produced fewer than 30 unique feasible candidates

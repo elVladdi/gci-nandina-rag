@@ -1,0 +1,15 @@
+{
+  "artifact": "EXP12_PLANNING_CONSUMPTION_MARKER",
+  "version": "v0.1",
+  "authorization_id": "EXP12_PLANNING_AUTH_001",
+  "attempt_id": "EXP12_PLANNING_ATTEMPT_001",
+  "status": "CONSUMED_EXECUTION_STARTED",
+  "authorization_commit": "9428cb3dd205069f02c23ce16c7a9bbc874a0df1",
+  "scientific_base_commit": "6437a05325bdb01f3cd4964e1b0fae7d3641cc11",
+  "consumed_at_utc": "2026-09-14T16:56:00.500Z",
+  "logical_command": "python src/experiments/plan_exp12_historical_diversity_v01.py --config src/configs/exp12_historical_diversity_control_v0.5.json --sampling-universe data/interim/new_historical_gate_v0.2/new_historical_eligible.csv --h100 data/processed/data_aduanas_historico_clase87_v0.2.csv --eval data/processed/data_aduanas_evalset_clase87_v0.2.csv --output-dir outputs/experiments/exp12_planning_v0.1/attempt_001 --execute-planning",
+  "retry_allowed": false,
+  "resume_allowed": false,
+  "overwrite_allowed": false,
+  "partial_recomputation_allowed": false
+}
