@@ -1,0 +1,44 @@
+{
+  "artifact": "EXP12_FEASIBILITY_FORENSIC_DESIGN_READINESS",
+  "version": "v0.1",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "scientific_base_commit": "428dfecca5cff313f910032a28a8a3c7ae13c2ef",
+  "historical_attempt": "EXP12_PLANNING_ATTEMPT_001",
+  "historical_authorization_id": "EXP12_PLANNING_AUTH_001",
+  "historical_authorization_consumed": true,
+  "historical_attempt_status": "FAILED_ONE_SHOT / AUTHORIZATION_CONSUMED",
+  "forensic_non_governing": true,
+  "forensic_seed": 20262001,
+  "forensic_candidate_count": 10000,
+  "forensic_pool_execution_performed": false,
+  "planning_retry_performed": false,
+  "other_seeds_tested": false,
+  "alternative_thresholds_tested": false,
+  "condition_selection_performed": false,
+  "retrieval_executed": false,
+  "bm25_executed": false,
+  "top_k_computed": false,
+  "mrr_computed": false,
+  "reserved_output_path": "outputs/audits/exp12_planning_gate_v0.4/attempt_001_forensic/exp12_feasibility_failure_diagnostic_v0.1.json",
+  "reserved_output_created": false,
+  "created_artifacts_sha256": {
+    "docs/exp12_feasibility_failure_forensic_protocol_v0.1.md": "2c5079609acead65621598f05f413282ef15c6e1d94ae51c47363d826fad7891",
+    "src/experiments/diagnose_exp12_feasibility_failure_v01.py": "8d5ab67d79e994c94055ba58bf22d12b1a35e053eb465c5aece9b8f540d0ff4c",
+    "tests/test_exp12_feasibility_failure_diagnostic_v01.py": "5be6fe4f49ebfd6f005cb2286adc3662e8d0c9d03395b57ecd6e22efaa3a9411"
+  },
+  "synthetic_tests": {
+    "command": "python -m unittest tests.test_exp12_feasibility_failure_diagnostic_v01 -v",
+    "tests_run": 14,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "production_cli_without_flag": {
+    "expected_status": "NOT_EXECUTED",
+    "expected_return_code": 2
+  },
+  "exp12_planning_reexecuted": false,
+  "exp12_retrieval_authorized": false,
+  "group2b_started": false,
+  "group3_started": false
+}
