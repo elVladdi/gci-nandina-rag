@@ -3,7 +3,7 @@
 **Proyecto:** Framework RAG explicativo y auditable para recomendación de subpartidas NANDINA  
 **Repositorio principal:** `elVladdi/gci-nandina-rag`  
 **Repositorio público de reproducibilidad:** `elVladdi/gci-nandina-rag-reproducibility`  
-**Fecha de actualización:** 2026-09-13
+**Fecha de actualización:** 2026-09-14
 
 ## 1. Principios congelados
 
