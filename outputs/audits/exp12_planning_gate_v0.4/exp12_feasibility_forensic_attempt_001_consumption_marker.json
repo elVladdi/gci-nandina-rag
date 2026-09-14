@@ -1,0 +1,17 @@
+{
+  "artifact": "EXP12_FEASIBILITY_FORENSIC_CONSUMPTION_MARKER",
+  "version": "v0.2",
+  "authorization_id": "EXP12_FORENSIC_AUTH_002",
+  "diagnostic_attempt_id": "EXP12_FORENSIC_ATTEMPT_001",
+  "status": "CONSUMED_EXECUTION_STARTED",
+  "authorization_commit": "d9431e71c363d9d6d372e8476d4f2c071dc905b7",
+  "diagnostic_design_commit": "79fc10d161c735a5d727e36ed65554a89f937e3b",
+  "scientific_base_commit": "428dfecca5cff313f910032a28a8a3c7ae13c2ef",
+  "consumed_at_utc": "2026-09-14T22:24:38.7345753Z",
+  "logical_command": "python src/experiments/diagnose_exp12_feasibility_failure_v01.py --config src/configs/exp12_historical_diversity_control_v0.5.json --sampling-universe data/interim/new_historical_gate_v0.2/new_historical_eligible.csv --h100 data/processed/data_aduanas_historico_clase87_v0.2.csv --eval data/processed/data_aduanas_evalset_clase87_v0.2.csv --output outputs/audits/exp12_planning_gate_v0.4/attempt_001_forensic/exp12_feasibility_failure_diagnostic_v0.1.json --seed 20262001 --candidate-count 10000 --target-rows 2950 --minimum-rows 2802 --maximum-rows 3098 --required-label-coverage-fraction 1.0 --maximum-tvd 0.05 --execute-forensic-diagnostic",
+  "retry_allowed": false,
+  "resume_allowed": false,
+  "overwrite_allowed": false,
+  "partial_recomputation_allowed": false,
+  "forensic_non_governing": true
+}
