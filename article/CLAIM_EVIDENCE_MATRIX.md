@@ -15,8 +15,8 @@ Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un cl
 | C07 | La evaluación debe considerar dependencia intra-DAM cuando la inferencia requiera independencia | estructura de datos + metodología de agrupamiento; autorizado como requisito metodológico, no como resultado inferencial | AUTHORIZED | Methods/statistics; no inventar resultados inferenciales |
 | C08 | EXP-11A evidencia sensibilidad descriptiva bajo restricciones naturales de composición | EXP-11A congelado | CONDITIONAL | Results/Discussion con formulación descriptiva |
 | C09 | EXP-11A estima el efecto causal aislado del tamaño del banco histórico | no sustentado | PROHIBITED | No usar |
-| C10 | Aumentar el banco histórico a H150/H200 mejora el rendimiento | EXP-11B retrieval pendiente; prohibido hasta disponer de resultados congelados | PROHIBITED | No usar |
-| C11 | Aumentar el banco histórico a H150/H200 empeora, estabiliza o no afecta el rendimiento | EXP-11B retrieval pendiente; prohibido hasta disponer de resultados congelados | PROHIBITED | No usar |
+| C10 | Aumentar el banco histórico a H150/H200 mejora el rendimiento | EXP-11B retrieval pendiente en este registro; requiere reconciliación experimental/editorial separada antes de cualquier cambio de estado | PROHIBITED | No usar desde esta matriz hasta reconciliación específica |
+| C11 | Aumentar el banco histórico a H150/H200 empeora, estabiliza o no afecta el rendimiento | EXP-11B retrieval pendiente en este registro; requiere reconciliación experimental/editorial separada antes de cualquier cambio de estado | PROHIBITED | No usar desde esta matriz hasta reconciliación específica |
 | C12 | La evidencia normativa asociada a un candidato demuestra corrección normativa sustantiva | evidencia insuficiente para equivalencia automática | PROHIBITED | No convertir association/coverage en correctness |
 | C13 | Las explicaciones HE4 demuestran corrección jurídica completa | limitaciones conocidas de auditoría HE4 | PROHIBITED | No usar |
 | C14 | HE4 aporta evidencia sobre estructura, trazabilidad y auditabilidad bajo su protocolo de evaluación | evaluación HE4 existente | CONDITIONAL | Solo con límites explícitos |
@@ -26,10 +26,17 @@ Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un cl
 | C18 | El estudio produce clasificaciones aduaneras jurídicamente vinculantes | fuera de alcance | PROHIBITED | No usar |
 | C19 | En el split v0.1, 995/1006 casos de evaluación pertenecían a DAM también presentes en histórico | artefacto experimental v0.1 auditado/congelado | AUTHORIZED | Methods / validity / explicación del rediseño v0.2; identificar explícitamente como snapshot histórico |
 | C20 | En el split v0.1, 48/59 DAM de evaluación estaban también presentes en histórico | observación derivada/reportada durante 0A-01; aún no localizada en artefacto versionado que la almacene o permita recomputación auditable | REVIEW_REQUIRED | No usar como cifra congelada hasta completar trazabilidad; puede mencionarse solo como observación pendiente en gobernanza |
+| C21 | El snapshot NANDINA ingerido por el experimento conservaba texto derivado de Decisión 885 pese a que Decisión 906 ya estaba vigente; se confirmó drift de versión y solapamiento material en Capítulo 87 para `8704.41.10` y `8704.51.10` | auditoría 0B-05C + fuentes oficiales + reconciliación experimental final | AUTHORIZED | Methods/Validity/Limitations; no inferir legal correctness ni impacto métrico solo desde el drift |
+| C22 | En la sensibilidad correctiva final de 0B-05C, EV03 presentó `ZERO_AGGREGATE_CHANGE` | Attempt06 auditado e integrado; SRC-03 vigente | AUTHORIZED | Results/Discussion solo como sensibilidad correctiva acotada; no inferir causalidad o significancia |
+| C23 | En la sensibilidad correctiva final de 0B-05C, EV04 presentó `TINY_NONZERO_MRR_DECREASE_ONLY` | Attempt06 auditado e integrado; interpretación final corregida | AUTHORIZED | Results/Discussion con alcance restringido a MRR y al diseño ejecutado; no inferir relevancia práctica no evaluada |
+| C24 | En la sensibilidad correctiva final de 0B-05C, D1a presentó `POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT` | Attempt06 auditado e integrado; interpretación final corregida | AUTHORIZED | Results/Discussion como efecto específico del método y de la sensibilidad; no generalizar |
+| C25 | El impacto conjunto de 0B-05C fue `METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A`; `DOWNSTREAM_REEXECUTION = NOT_REQUIRED` | cierre experimental 0B-05C después de reconciliación correctiva | AUTHORIZED | Síntesis metodológica del gate; no resumir como “sin impacto numérico” ni convertir en significancia estadística |
 
 ### Regla de actualización
 
 Todo nuevo resultado experimental deberá agregarse primero aquí con su fuente, alcance y estado antes de aparecer en el manuscrito. Un cambio de estado requiere conservar el fundamento documental o experimental que lo justifica.
+
+La actualización C21–C25 reconcilia exclusivamente el cierre experimental de 0B-05C. No normaliza por inferencia otros residuos de esta matriz; en particular, C10/C11 requieren un gate específico posterior si corresponde actualizar su evidencia o estado.
 
 ---
 
@@ -48,8 +55,8 @@ This matrix controls which claims may be used in the manuscript. A claim cannot 
 | C07 | Evaluation must account for intra-DAM dependence when inference requires independence | data structure + grouping methodology; authorized as a methodological requirement, not as an inferential result | AUTHORIZED | Methods/statistics; do not invent inferential results |
 | C08 | EXP-11A provides descriptive evidence of sensitivity under natural composition constraints | frozen EXP-11A | CONDITIONAL | Results/Discussion with descriptive wording |
 | C09 | EXP-11A estimates the isolated causal effect of historical-bank size | unsupported | PROHIBITED | Do not use |
-| C10 | Increasing the historical bank to H150/H200 improves performance | EXP-11B retrieval pending; prohibited until frozen results exist | PROHIBITED | Do not use |
-| C11 | Increasing the historical bank to H150/H200 worsens, stabilizes, or does not affect performance | EXP-11B retrieval pending; prohibited until frozen results exist | PROHIBITED | Do not use |
+| C10 | Increasing the historical bank to H150/H200 improves performance | EXP-11B retrieval remains pending in this record; a separate experimental/editorial reconciliation is required before any status change | PROHIBITED | Do not use from this matrix until specific reconciliation |
+| C11 | Increasing the historical bank to H150/H200 worsens, stabilizes, or does not affect performance | EXP-11B retrieval remains pending in this record; a separate experimental/editorial reconciliation is required before any status change | PROHIBITED | Do not use from this matrix until specific reconciliation |
 | C12 | Normative evidence associated with a candidate demonstrates substantive normative correctness | insufficient evidence for automatic equivalence | PROHIBITED | Do not convert association/coverage into correctness |
 | C13 | HE4 explanations demonstrate complete legal correctness | known HE4 audit limitations | PROHIBITED | Do not use |
 | C14 | HE4 provides evidence about structure, traceability, and auditability under its evaluation protocol | existing HE4 evaluation | CONDITIONAL | Only with explicit limitations |
@@ -59,7 +66,14 @@ This matrix controls which claims may be used in the manuscript. A claim cannot 
 | C18 | The study produces legally binding customs classifications | outside scope | PROHIBITED | Do not use |
 | C19 | In the v0.1 split, 995/1006 evaluation cases belonged to DAMs also present in historical data | audited/frozen v0.1 experimental artifact | AUTHORIZED | Methods / validity / explanation of the v0.2 redesign; explicitly identify as a historical snapshot |
 | C20 | In the v0.1 split, 48/59 evaluation DAMs were also present in historical data | derived/reported observation during 0A-01; not yet located in a versioned artifact that stores it or permits auditable recomputation | REVIEW_REQUIRED | Do not use as a frozen figure until traceability is completed; may only be mentioned as a pending governance observation |
+| C21 | The NANDINA snapshot ingested by the experiment retained Decision-885-derived text even though Decision 906 was already in force; version drift and material Chapter-87 scope overlap were confirmed for `8704.41.10` and `8704.51.10` | 0B-05C audit + official sources + final experimental reconciliation | AUTHORIZED | Methods/Validity/Limitations; do not infer legal correctness or metric impact from drift alone |
+| C22 | In the final 0B-05C corrective sensitivity, EV03 showed `ZERO_AGGREGATE_CHANGE` | audited and integrated Attempt06; current SRC-03 | AUTHORIZED | Results/Discussion only as bounded corrective sensitivity; do not infer causality or significance |
+| C23 | In the final 0B-05C corrective sensitivity, EV04 showed `TINY_NONZERO_MRR_DECREASE_ONLY` | audited and integrated Attempt06; corrected final interpretation | AUTHORIZED | Results/Discussion restricted to MRR and the executed design; do not infer unevaluated practical relevance |
+| C24 | In the final 0B-05C corrective sensitivity, D1a showed `POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT` | audited and integrated Attempt06; corrected final interpretation | AUTHORIZED | Results/Discussion as a method-specific sensitivity effect; do not generalize |
+| C25 | The joint 0B-05C impact was `METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A`; `DOWNSTREAM_REEXECUTION = NOT_REQUIRED` | experimental 0B-05C closure after corrective reconciliation | AUTHORIZED | Methodological gate summary; do not reduce to “no numerical impact” or convert into statistical significance |
 
 ### Update rule
 
 Every new experimental result must first be added here with its source, scope, and status before appearing in the manuscript. A status change must preserve the documentary or experimental basis that justifies it.
+
+The C21–C25 update exclusively reconciles the experimental closure of 0B-05C. It does not inferentially normalize other residues in this matrix; in particular, C10/C11 require a later dedicated gate if their evidence or status is to be updated.
