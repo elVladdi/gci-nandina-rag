@@ -15,8 +15,8 @@ Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un cl
 | C07 | La evaluación debe considerar dependencia intra-DAM cuando la inferencia requiera independencia | estructura de datos + metodología de agrupamiento; autorizado como requisito metodológico, no como resultado inferencial | AUTHORIZED | Methods/statistics; no inventar resultados inferenciales |
 | C08 | EXP-11A evidencia sensibilidad descriptiva bajo restricciones naturales de composición | EXP-11A congelado | CONDITIONAL | Results/Discussion con formulación descriptiva |
 | C09 | EXP-11A estima el efecto causal aislado del tamaño del banco histórico | no sustentado | PROHIBITED | No usar |
-| C10 | Aumentar el banco histórico a H150/H200 mejora el rendimiento | EXP-11B retrieval pendiente en este registro; requiere reconciliación experimental/editorial separada antes de cualquier cambio de estado | PROHIBITED | No usar desde esta matriz hasta reconciliación específica |
-| C11 | Aumentar el banco histórico a H150/H200 empeora, estabiliza o no afecta el rendimiento | EXP-11B retrieval pendiente en este registro; requiere reconciliación experimental/editorial separada antes de cualquier cambio de estado | PROHIBITED | No usar desde esta matriz hasta reconciliación específica |
+| C10 | Aumentar el banco histórico a H150/H200 mejora el rendimiento | EXP-11B retrieval pendiente; prohibido hasta disponer de resultados congelados | PROHIBITED | No usar |
+| C11 | Aumentar el banco histórico a H150/H200 empeora, estabiliza o no afecta el rendimiento | EXP-11B retrieval pendiente; prohibido hasta disponer de resultados congelados | PROHIBITED | No usar |
 | C12 | La evidencia normativa asociada a un candidato demuestra corrección normativa sustantiva | evidencia insuficiente para equivalencia automática | PROHIBITED | No convertir association/coverage en correctness |
 | C13 | Las explicaciones HE4 demuestran corrección jurídica completa | limitaciones conocidas de auditoría HE4 | PROHIBITED | No usar |
 | C14 | HE4 aporta evidencia sobre estructura, trazabilidad y auditabilidad bajo su protocolo de evaluación | evaluación HE4 existente | CONDITIONAL | Solo con límites explícitos |
@@ -36,7 +36,7 @@ Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un cl
 
 Todo nuevo resultado experimental deberá agregarse primero aquí con su fuente, alcance y estado antes de aparecer en el manuscrito. Un cambio de estado requiere conservar el fundamento documental o experimental que lo justifica.
 
-La actualización C21–C25 reconcilia exclusivamente el cierre experimental de 0B-05C. No normaliza por inferencia otros residuos de esta matriz; en particular, C10/C11 requieren un gate específico posterior si corresponde actualizar su evidencia o estado.
+La actualización C21–C25 reconcilia exclusivamente el cierre experimental de 0B-05C. No modifica ni reconcilia por inferencia otros claims preexistentes.
 
 ---
 
@@ -55,8 +55,8 @@ This matrix controls which claims may be used in the manuscript. A claim cannot 
 | C07 | Evaluation must account for intra-DAM dependence when inference requires independence | data structure + grouping methodology; authorized as a methodological requirement, not as an inferential result | AUTHORIZED | Methods/statistics; do not invent inferential results |
 | C08 | EXP-11A provides descriptive evidence of sensitivity under natural composition constraints | frozen EXP-11A | CONDITIONAL | Results/Discussion with descriptive wording |
 | C09 | EXP-11A estimates the isolated causal effect of historical-bank size | unsupported | PROHIBITED | Do not use |
-| C10 | Increasing the historical bank to H150/H200 improves performance | EXP-11B retrieval remains pending in this record; a separate experimental/editorial reconciliation is required before any status change | PROHIBITED | Do not use from this matrix until specific reconciliation |
-| C11 | Increasing the historical bank to H150/H200 worsens, stabilizes, or does not affect performance | EXP-11B retrieval remains pending in this record; a separate experimental/editorial reconciliation is required before any status change | PROHIBITED | Do not use from this matrix until specific reconciliation |
+| C10 | Increasing the historical bank to H150/H200 improves performance | EXP-11B retrieval pending; prohibited until frozen results exist | PROHIBITED | Do not use |
+| C11 | Increasing the historical bank to H150/H200 worsens, stabilizes, or does not affect performance | EXP-11B retrieval pending; prohibited until frozen results exist | PROHIBITED | Do not use |
 | C12 | Normative evidence associated with a candidate demonstrates substantive normative correctness | insufficient evidence for automatic equivalence | PROHIBITED | Do not convert association/coverage into correctness |
 | C13 | HE4 explanations demonstrate complete legal correctness | known HE4 audit limitations | PROHIBITED | Do not use |
 | C14 | HE4 provides evidence about structure, traceability, and auditability under its evaluation protocol | existing HE4 evaluation | CONDITIONAL | Only with explicit limitations |
@@ -76,4 +76,4 @@ This matrix controls which claims may be used in the manuscript. A claim cannot 
 
 Every new experimental result must first be added here with its source, scope, and status before appearing in the manuscript. A status change must preserve the documentary or experimental basis that justifies it.
 
-The C21–C25 update exclusively reconciles the experimental closure of 0B-05C. It does not inferentially normalize other residues in this matrix; in particular, C10/C11 require a later dedicated gate if their evidence or status is to be updated.
+The C21–C25 update exclusively reconciles the experimental closure of 0B-05C. It does not modify or inferentially reconcile other pre-existing claims.
