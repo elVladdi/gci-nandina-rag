@@ -351,6 +351,99 @@ EXP12.
 
 Grupo 3 realizará análisis cuantitativo/inferencia y decisión HE2/HE5. Grupos 4–8: interpretación, presentación, figuras, redacción y coherencia documental.
 
+### Gobernanza prospectiva de Grupos 3–8
+
+El sistema documental de fichas define prospectivamente la secuencia y los
+contratos de los Grupos 3–8. Su existencia no activa, autoriza ni ejecuta
+ninguna ficha.
+
+```text
+FICHAS_G3_G8_BRANCH = docs/fichas-grupos-3-8
+FICHAS_G3_G8_SNAPSHOT_COMMIT = a42531ad96fc12bea2f2394b0ff8eb49b66a4238
+FICHAS_G3_G8_ROOT = docs/fichas/grupos_3_8/
+FICHAS_G3_G8_COUNT = 19
+FICHAS_G3_G8_STATUS = PROSPECTIVE / NOT_AUTHORIZED
+GROUP3 = NOT_STARTED
+NEXT_ELIGIBLE_FICHA = G3-F01
+```
+
+El snapshot `a42531ad96fc12bea2f2394b0ff8eb49b66a4238` es únicamente
+el snapshot documental del sistema de fichas; no es un SHA científico de
+ejecución. El mapa y la gobernanza se consultan en la rama, raíz y snapshot
+anteriores, sin reproducir el contenido completo de las fichas en este Plan.
+
+La jerarquía de gobierno es:
+
+```text
+PLAN MAESTRO
+  gobierna estado, orden y autorización
+    ↓
+MAPA MAESTRO DE FICHAS
+  gobierna secuencia y dependencias
+    ↓
+FICHA ACTIVA
+  gobierna el contrato detallado del bloque
+    ↓
+PROMPT CODEX
+  ejecuta solamente el bloque autorizado
+    ↓
+EVIDENCIA VERSIONADA
+    ↓
+AUDITORÍA EXTERNA IA EXPERIMENTAL
+```
+
+Los estados no son intercambiables ni implican automáticamente el siguiente:
+
+```text
+FICHA_CREATED_OR_DEFINED
+≠ FICHA_AUTHORIZED
+≠ FICHA_EXECUTED
+≠ FICHA_VERIFIED
+≠ FICHA_APPROVED
+≠ FICHA_INTEGRATED
+≠ FICHA_CLOSED
+```
+
+La ficha siguiente solo puede activarse después del cierre auditado de su
+predecesora. Cada activación debe congelar en ese momento, sin reutilizar
+automáticamente el snapshot de diseño:
+
+- SHA vigente de `main`;
+- SHA vigente del Plan Maestro;
+- SHA de `article/main-manuscript` cuando aplique;
+- fuentes primarias y artefactos de entrada;
+- outputs esperados;
+- prohibiciones;
+- criterios PASS/FAIL;
+- cualquier autorización one-shot o gate requerido.
+
+La secuencia prospectiva oficial es:
+
+```text
+G3-F01 → G3-F02 → G3-F03 → G3-F04
+→ G4-F01 → G4-F02 → G4-F03
+→ G5-F01 → G5-F02 → G5-F03
+→ G6-F01 → G6-F02 → G6-F03
+→ G7-F01 → G7-F02 → G7-F03
+→ G8-F01 → G8-F02 → G8-F03
+→ POST-G8 FREEZE HANDOFF
+```
+
+Permanecen congeladas las restricciones científicas: EVAL v0.2 contiene
+1,056 casos; SERIE es la unidad de análisis; DAM/DECLARACIÓN es la agrupación
+cuando existe dependencia; EXP11A es sensibilidad y no un efecto causal
+aislado del tamaño; todo análisis futuro de 0B-05C usa los resultados
+corregidos de Attempt06; EXP12 está cerrado sin retrieval y su efecto de
+diversidad no es estimable. También permanecen las 11 limitaciones no
+bloqueantes y los 5 elementos historical-only de Grupo 2B, incluidos
+`DECLARED_NOT_RECOVERABLE` y `HASH_BOUND_LOCAL_ONLY`. No se cambian reglas
+analíticas después de observar resultados.
+
+`G3-F01` queda únicamente como siguiente ficha elegible para una activación
+futura, posterior a la auditoría e integración de este registro. Permanece
+`NOT_ACTIVE / NOT_AUTHORIZED / NOT_EXECUTED`; Grupo 3 sigue `NOT_STARTED` y
+`NEXT_ELIGIBLE_BLOCK=GROUP3_METRICS_AND_INFERENCE`.
+
 ## 13. Orden maestro actual
 
 ```text
@@ -1553,3 +1646,14 @@ manifest, la autorización ni el config.
   inició Grupo 3.
 - `GROUP2B=CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS`, `GROUP3=NOT_STARTED`
   y `NEXT_ELIGIBLE_BLOCK=GROUP3_METRICS_AND_INFERENCE`.
+
+### 2026-09-15 — Gobernanza prospectiva de fichas G3–G8
+
+- Grupo 2B quedó cerrado canónicamente como `CLOSED /
+  APPROVED_WITH_NONBLOCKING_LIMITATIONS`.
+- Se registró el sistema prospectivo de 19 fichas para los Grupos 3–8,
+  referenciado por `docs/fichas-grupos-3-8`, raíz
+  `docs/fichas/grupos_3_8/` y snapshot documental
+  `a42531ad96fc12bea2f2394b0ff8eb49b66a4238`.
+- Ninguna ficha fue activada, autorizada ni ejecutada. `G3-F01` es únicamente
+  la siguiente ficha elegible y Grupo 3 permanece `NOT_STARTED`.
