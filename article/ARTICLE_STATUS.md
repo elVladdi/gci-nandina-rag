@@ -17,19 +17,18 @@
 - `0B-05A`: **`APPROVED / FROZEN`**.
 - `0B-05B`: **`APPROVED / FROZEN`**.
 - `0B-05C`: **`APPROVED / FROZEN`**.
-- `0B05C_EXPERIMENTAL_CORRECTIVE_GATE`: **`CLOSED / APPROVED_AFTER_CORRECTIVE_RECONCILIATION`**.
-- `DRAFT_NORMALIZATION`: **`COMPLETED`**.
-- `FINAL_NORMALIZATION_REVIEW`: **`PASS`**.
-- `AUTHOR_APPROVAL`: **`RECEIVED`**.
-- `FREEZE_0B05C`: **`COMPLETED`**.
-- `EXPERIMENTAL_REVIEW`: **`NOT_REQUIRED`** para el cierre editorial final.
-- `0B-06`: **`NOT_STARTED / OPENING_NOT_AUTHORIZED`**; debe evaluarse en un gate separado si existe una necesidad bibliográfica real.
+- Bloque activo: **`0B-06 — Búsqueda dirigida de literatura nueva para falsación de candidatos`**.
+- `0B-06`: **`READY_FOR_DRAFTING`**.
+- `0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT`: **`REQUIRED`**.
+- `0B06_SCOPE`: **`DIRECTED_FALSIFICATION_SEARCH_ONLY`**.
+- `OPEN_ENDED_LITERATURE_EXPANSION`: **`NOT_AUTHORIZED`**.
+- `EXPERIMENTAL_REVIEW`: **`NOT_REQUIRED`** para este gate bibliográfico.
 - `0C — Gap, contribución y Research Questions`: **`BLOCKED`** hasta cerrar formalmente 0B.
 - `0D — Arquitectura editorial y journal fit`: **`BLOCKED`** hasta cerrar 0C.
 - Target journal: `PENDING — se decidirá en Fase 0D`.
 - Manuscrito redactado: no iniciado.
 - `MANUSCRIPT_DRAFTING = NOT_AUTHORIZED`.
-- Corpus académico/documental consolidado: `62` obras/documentos distintos; acceso primario verificable `62/62`.
+- Corpus académico/documental heredado consolidado: `62` obras/documentos distintos; acceso primario verificable `62/62`.
 - Idioma del chat: español.
 - Artefactos GitHub: español + inglés con equivalencia semántica.
 
@@ -40,9 +39,9 @@ Continúan gobernando:
 - `article/ground_truth/0A01_DOCUMENTARY_GROUND_TRUTH_FROZEN.md`;
 - `article/ground_truth/0A02_EXPERIMENTAL_GROUND_TRUTH_FROZEN.md`.
 
-La Fase 0B no modifica el Plan Maestro ni 0A. La IA Experimental conserva autoridad exclusiva sobre el Plan Maestro y sobre decisiones experimentales. La IA Gestora / Editor Científico Principal administra estados, gates, claims y reconciliación editorial. La IA de Redacción ejecuta únicamente prompts cerrados versionados.
+La Fase 0B no modifica el Plan Maestro ni 0A. La IA Experimental conserva autoridad exclusiva sobre el Plan Maestro y sobre decisiones experimentales. La IA Gestora / Editor Científico Principal administra estados, gates, claims, admisión bibliográfica y reconciliación editorial. La IA de Redacción ejecuta únicamente prompts cerrados versionados.
 
-`START_HERE.md` es vinculante para la taxonomía de estados operativos. `0B-05C` ya superó reconciliación experimental, normalización de redacción, auditoría científica/editorial final y aprobación expresa del autor; por ello su estado formal actual es `APPROVED / FROZEN`.
+`START_HERE.md` es vinculante para la taxonomía de estados operativos.
 
 ### Distinciones fundacionales congeladas
 
@@ -79,7 +78,7 @@ La Fase 0B no modifica el Plan Maestro ni 0A. La IA Experimental conserva autori
 - `NORMATIVE_ASSOCIATION ≠ SUBSTANTIVE_NORMATIVE_CORRECTNESS`;
 - `HS-6 ≠ NANDINA-8 ≠ PERU_NATIONAL_10_DIGIT`.
 
-### Candidatos provisionales
+### Candidatos provisionales antes de 0B-06
 
 Ninguno constituye novelty ni gap definitivo.
 
@@ -90,8 +89,6 @@ Ninguno constituye novelty ni gap definitivo.
 - **F5:** `CANDIDATE_GAP_ONLY — FURTHER NARROWED`.
 - **G6:** `ELIMINATED AS GAP CANDIDATE`.
 - **G7:** `MERGED INTO F2 / ELIMINATED AS INDEPENDENT CANDIDATE`.
-
-0B-05C no cambia estos estados; aporta fronteras metodológicas, evidencia documental oficial y el cierre de una sensibilidad correctiva.
 
 ### 0B-05C — cierre formal
 
@@ -107,27 +104,7 @@ Registros gobernantes:
 
 Estado: **`APPROVED / FROZEN`**.
 
-#### Snapshot experimental preservado
-
-Ref de desarrollo congelado por 0A-02:
-
-`95ffec45ae5a734545ae7bb2d8d530f42f8f056c`.
-
-Fuentes de ingesta confirmadas:
-
-- `data/external/Arancel 2022.pdf`;
-- `data/processed/corpus/arancel/arancel2022_run_metadata.json`;
-- `data/external/CAN Desición 885 - Nanadina Gaceta 4359.pdf`;
-- `data/processed/corpus/nandina/run_metadata.json`.
-
-SHA-256 fuente:
-
-- Arancel 2022: `a01a029e1ca29b6debc61d219c17dfc086354e00669246cc24a91ad9f454c7d0`;
-- Decisión 885/Gaceta 4359: `8c4a30fb0328f151089ac4c7857ac447d3dd353de97122a11bde4550d594f0c6`.
-
-El snapshot original no se sustituye retrospectivamente por Decisión 906 ni por los artefactos correctivos.
-
-#### Resultado documental congelado
+Estado documental congelado:
 
 ```text
 SOURCE_VERSION_DRIFT = PRESENT
@@ -135,53 +112,73 @@ SCOPE_OVERLAP = CONFIRMED
 RETRIEVAL_OUTPUT_OVERLAP = CONFIRMED_FOR_87044110_FLAT_BM25
 ```
 
-Hallazgo material: `DA-EVAL-V02-00060 / 87044110 / candidate_rank = 100` en el output BM25 plano bajo descripción derivada del snapshot Decisión 885. No se identificó `87045110` en ese mismo Top-100.
-
-#### Cierre experimental correctivo congelado
+Cierre experimental correctivo congelado:
 
 ```text
 D1A_TRAINING_EXPOSURE = NO_EFFECTIVE_EXPOSURE_IDENTIFIED
 D1A_RETRIEVAL_OUTPUT_OVERLAP = NONE_IDENTIFIED
 D1A_MODEL_POLICY = FREEZE_ORIGINAL_D1A_WEIGHTS
 D1A_EXECUTION_SPECIFICATION = CLOSED_PROSPECTIVELY
-
 EV03_METRIC_IMPACT = ZERO_AGGREGATE_CHANGE
 EV04_METRIC_IMPACT = TINY_NONZERO_MRR_DECREASE_ONLY
 D1A_METRIC_IMPACT = POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT
 0B05C_METRIC_IMPACT = METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A
 DOWNSTREAM_REEXECUTION = NOT_REQUIRED
-
 0B05C_EXPERIMENTAL_CORRECTIVE_GATE = CLOSED / APPROVED_AFTER_CORRECTIVE_RECONCILIATION
 ```
 
-Los estados históricos `NOT_DETERMINED`, gates preejecución e intentos fail-closed permanecen preservados como historia y no representan el estado actual.
-
-No está autorizado resumir este cierre como “sin impacto numérico material”.
-
 Claims relacionados autorizados en `CLAIM_EVIDENCE_MATRIX.md`: C21–C25.
+
+### 0B-06 — gate de necesidad y apertura
+
+Revisión gobernante:
+
+`article/reviews/0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT.md`.
+
+El gate concluyó que sí existe una necesidad bibliográfica **estrecha y concreta**, no una insuficiencia general del corpus. Antes de 0C deben someterse a un último pressure test contemporáneo y falsacionista:
+
+- **F1:** ranking histórico/precedentes fijado antes de evidence retrieval normativo no-reranking;
+- **F2:** LLM/generador exclusivamente explicativo sobre Top-k externo e inmutable;
+- **F3:** secundariamente, grouped split/dependencia/leakage control comparable;
+- **F5:** evaluación formal, separada y per-output/case-level de auditabilidad documental.
+
+F4 no requiere búsqueda dedicada porque queda como frontera metodológica, no como novelty candidata independiente.
+
+Prompt gobernante:
+
+`article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md`.
+
+Artefacto de respuesta esperado:
+
+`article/responses/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH_RESPONSE_V01.md`.
+
+Las nuevas referencias no pueden pasar directamente al manuscrito ni a `APPROVED_NEW`; primero requieren auditoría de la IA Gestora / Editor Científico Principal.
 
 ### Gate vigente
 
 ```text
 0B-05C = APPROVED / FROZEN
-0B-06 = NOT_STARTED / OPENING_NOT_AUTHORIZED
-NEXT_EDITORIAL_ACTION = ASSESS_GENUINE_NEED_FOR_0B-06
+0B-06 = READY_FOR_DRAFTING
+NEXT_ACTOR = IA_DE_REDACCION
+PROMPT = article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md
+EXPECTED_RESPONSE = article/responses/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH_RESPONSE_V01.md
 0C = BLOCKED_UNTIL_PHASE_0B_CLOSED
 MANUSCRIPT_DRAFTING = NOT_AUTHORIZED
+EXPERIMENTAL_REVIEW = NOT_REQUIRED
 ```
-
-El freeze de 0B-05C **no abre automáticamente 0B-06**.
 
 ### Prohibiciones vigentes
 
-Hasta el siguiente gate editorial no está autorizado:
+Durante 0B-06 no está autorizado:
 
 - modificar Plan Maestro o 0A desde el flujo editorial;
 - sustituir retrospectivamente fuentes experimentales;
 - modificar resultados experimentales;
-- inferir legal correctness desde oficialidad/trazabilidad;
 - declarar novelty o gap definitivo;
-- abrir 0B-06 sin decisión expresa del gate correspondiente;
+- hacer una búsqueda abierta/general de literatura;
+- reabrir G6 o G7;
+- tratar F4 como novelty independiente;
+- insertar referencias nuevas directamente en el manuscrito;
 - avanzar a 0C, 0D o manuscrito antes de cerrar formalmente 0B.
 
 ---
@@ -194,83 +191,63 @@ Hasta el siguiente gate editorial no está autorizado:
 - Global state: `IN_ANALYSIS`.
 - Phase 0A: **`CLOSED / APPROVED`**.
 - Active phase: **`0B — Critical literature map and taxonomy`**.
-- 0B-01 through 0B-05C: **`APPROVED / FROZEN`**.
-- `0B05C_EXPERIMENTAL_CORRECTIVE_GATE = CLOSED / APPROVED_AFTER_CORRECTIVE_RECONCILIATION`.
-- `DRAFT_NORMALIZATION = COMPLETED`.
-- `FINAL_NORMALIZATION_REVIEW = PASS`.
-- `AUTHOR_APPROVAL = RECEIVED`.
-- `FREEZE_0B05C = COMPLETED`.
-- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` for final editorial closure.
-- 0B-06: **`NOT_STARTED / OPENING_NOT_AUTHORIZED`**; genuine bibliographic need must be assessed under a separate gate.
-- 0C/0D remain **`BLOCKED`**.
+- `0B-01` through `0B-05C`: **`APPROVED / FROZEN`**.
+- Active block: **`0B-06 — Directed new-literature search to falsify candidates`**.
+- `0B-06 = READY_FOR_DRAFTING`.
+- `0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT = REQUIRED`.
+- `0B06_SCOPE = DIRECTED_FALSIFICATION_SEARCH_ONLY`.
+- `OPEN_ENDED_LITERATURE_EXPANSION = NOT_AUTHORIZED`.
+- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` for this bibliographic gate.
+- 0C and 0D remain **`BLOCKED`**.
 - Target journal remains pending until 0D.
 - `MANUSCRIPT_DRAFTING = NOT_AUTHORIZED`.
+- Inherited academic/documentary corpus: `62` distinct works/documents with verifiable primary access `62/62`.
 
 ### Governance
 
-Frozen 0A artifacts remain authoritative. The Experimental AI retains exclusive authority over the Master Plan and experimental decisions. The Managing AI / Lead Scientific Editor manages editorial states, gates, claims, and reconciliation. The Writing AI executes only closed versioned prompts.
-
-`0B-05C` has completed experimental reconciliation, Writing-AI normalization, final scientific/editorial audit, and express author approval; its formal state is therefore `APPROVED / FROZEN`.
+Frozen 0A artifacts remain authoritative. The Experimental AI retains exclusive authority over the Master Plan and experimental decisions. The Managing AI / Lead Scientific Editor manages editorial states, gates, claims, bibliographic admission, and reconciliation. The Writing AI executes only closed versioned prompts.
 
 ### Frozen foundational distinctions
 
-0B-04A, 0B-04B, 0B-05A, and 0B-05B preserve their previously frozen distinctions. 0B-05C additionally freezes:
+0B-04A, 0B-04B, 0B-05A, 0B-05B, and 0B-05C preserve their frozen methodological/documentary boundaries, including the separation among candidate generation, reranking, explanation, provenance/auditability, substantive/legal correctness, documented knowledge, and current official versus original experimental normative state.
 
-`EXPERIMENTAL_SOURCE_SNAPSHOT ≠ CURRENT_OFFICIAL_SOURCE_STATE`.
+### Provisional candidates before 0B-06
 
-`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
-
-`OFFICIAL_SOURCE ≠ LEGALLY_SUFFICIENT_FOR_CASE ≠ CORRECT_CLASSIFICATION`.
-
-`DOCUMENT_TRACEABILITY ≠ LEGAL_SUFFICIENCY`.
-
-`NORMATIVE_ASSOCIATION ≠ SUBSTANTIVE_NORMATIVE_CORRECTNESS`.
-
-`HS-6 ≠ NANDINA-8 ≠ PERU_NATIONAL_10_DIGIT`.
-
-### Provisional candidates
-
-No candidate constitutes final novelty or gap. F1–F5 preserve their previously frozen provisional states; G6 remains eliminated and G7 remains merged into F2.
+No candidate is final novelty or a definitive gap. F1 survives narrowly; F2 and F5 are further narrowed; F3 remains with an applicability caveat; F4 is retained only as a methodological distinction; G6 is eliminated and G7 is merged into F2.
 
 ### 0B-05C formal closure
 
-Governing records include the historical and final 0B-05C prompts/reviews, the approved Writing-AI response, `article/reviews/0B05C_AUTHOR_APPROVAL.md`, and the canonical frozen artifact `article/literature/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY_FROZEN.md`.
+0B-05C is `APPROVED / FROZEN`. Its documentary and corrective experimental states remain exactly as recorded in its frozen artifact and C21–C25 remain authorized within their limits.
 
-Frozen documentary state:
+### 0B-06 need gate and opening
 
-```text
-SOURCE_VERSION_DRIFT = PRESENT
-SCOPE_OVERLAP = CONFIRMED
-RETRIEVAL_OUTPUT_OVERLAP = CONFIRMED_FOR_87044110_FLAT_BM25
-```
+Governing review:
 
-Frozen corrective experimental closure:
+`article/reviews/0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT.md`.
 
-```text
-D1A_TRAINING_EXPOSURE = NO_EFFECTIVE_EXPOSURE_IDENTIFIED
-D1A_RETRIEVAL_OUTPUT_OVERLAP = NONE_IDENTIFIED
-D1A_MODEL_POLICY = FREEZE_ORIGINAL_D1A_WEIGHTS
-D1A_EXECUTION_SPECIFICATION = CLOSED_PROSPECTIVELY
-EV03_METRIC_IMPACT = ZERO_AGGREGATE_CHANGE
-EV04_METRIC_IMPACT = TINY_NONZERO_MRR_DECREASE_ONLY
-D1A_METRIC_IMPACT = POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT
-0B05C_METRIC_IMPACT = METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A
-DOWNSTREAM_REEXECUTION = NOT_REQUIRED
-0B05C_EXPERIMENTAL_CORRECTIVE_GATE = CLOSED / APPROVED_AFTER_CORRECTIVE_RECONCILIATION
-```
+The gate found a **narrow, concrete** bibliographic need rather than broad inadequacy of the inherited corpus. Before 0C, one final contemporary falsification-oriented pressure test is required for F1, F2, F5 and secondarily F3. F4 requires no dedicated search because it remains a methodological boundary rather than an independent novelty candidate.
 
-Historical `NOT_DETERMINED` states remain process history only. The closure must not be reduced to “no material numerical impact.” C21–C25 remain authorized within their recorded limits.
+Governing prompt:
+
+`article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md`.
+
+Expected response artifact:
+
+`article/responses/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH_RESPONSE_V01.md`.
+
+New references cannot be inserted into the manuscript or promoted directly to `APPROVED_NEW`; Managing-AI review is required first.
 
 ### Current gate
 
 ```text
 0B-05C = APPROVED / FROZEN
-0B-06 = NOT_STARTED / OPENING_NOT_AUTHORIZED
-NEXT_EDITORIAL_ACTION = ASSESS_GENUINE_NEED_FOR_0B-06
+0B-06 = READY_FOR_DRAFTING
+NEXT_ACTOR = WRITING_AI
+PROMPT = article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md
+EXPECTED_RESPONSE = article/responses/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH_RESPONSE_V01.md
 0C = BLOCKED_UNTIL_PHASE_0B_CLOSED
 MANUSCRIPT_DRAFTING = NOT_AUTHORIZED
+EXPERIMENTAL_REVIEW = NOT_REQUIRED
 ```
 
-The 0B-05C freeze does **not** automatically open 0B-06.
-
-Until the next editorial gate, the editorial flow may not modify the Master Plan/0A or experimental results, retrospectively replace experimental sources, infer legal correctness from authority/traceability, declare final novelty/gap, open 0B-06 without an explicit gate decision, or advance to 0C/0D/manuscript drafting before formal Phase-0B closure.
+During 0B-06, the editorial flow may not modify the Master Plan/0A or experimental results, declare final novelty/gap, run an open-ended literature search, reopen G6/G7, treat F4 as independent novelty, insert new references directly into the manuscript, or advance to 0C/0D/manuscript drafting before Phase 0B formally closes.
