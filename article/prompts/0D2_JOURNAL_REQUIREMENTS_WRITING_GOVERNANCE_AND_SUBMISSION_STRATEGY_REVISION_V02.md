@@ -12,6 +12,7 @@ Trabaja sobre:
 
 - `article/responses/0D2_JOURNAL_REQUIREMENTS_WRITING_GOVERNANCE_AND_SUBMISSION_STRATEGY_RESPONSE_V01.md`;
 - `article/reviews/0D2_INTERNAL_REVIEW.md`;
+- `article/reviews/0D2_AUTHOR_DECISION_DOCX_LANGUAGE_LAYOUT.md`;
 - el prompt original `article/prompts/0D2_JOURNAL_REQUIREMENTS_WRITING_GOVERNANCE_AND_SUBMISSION_STRATEGY.md`;
 - artefactos gobernantes citados por el prompt original.
 
@@ -40,21 +41,29 @@ En particular:
 - establece una disciplina de extensión conservadora desde Fase 1 para minimizar riesgo de compresión tardía;
 - no atribuyas a KBS un límite de páginas ni modelo de revisión que no hayas confirmado en fuente primaria accesible.
 
-### 0D2-M02 — Layout lingüístico del Word pendiente del autor
+### 0D2-M02 — Layout lingüístico del Word resuelto por decisión del autor
 
-No declares cerrado un Word bilingüe sin aprobación expresa.
+La decisión del autor ya está formalizada en:
 
-Incluye:
+`article/reviews/0D2_AUTHOR_DECISION_DOCX_LANGUAGE_LAYOUT.md`
+
+Debes aplicar obligatoriamente:
 
 ```text
-OPTION_A = DOCX_BILINGUAL_INTERNAL_MASTER
-OPTION_B = DOCX_ENGLISH_ONLY_MASTER_WITH_BILINGUAL_MD_GOVERNANCE
-DOCX_LANGUAGE_LAYOUT = PENDING_AUTHOR_DECISION
+DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
+AUTHOR_DECISION = APPROVED
 ```
 
-Describe brevemente ventajas/riesgos de A y B, sin escoger unilateralmente.
+Por tanto:
 
-El resto del workflow `.md/.docx` permanece válido.
+- el `.docx` maestro interno será bilingüe;
+- la parte inglesa será el manuscrito científico destinado a publicación;
+- la parte española será el espejo de control semántico para facilitar la revisión del autor;
+- ambas partes deberán conservar equivalencia semántica;
+- los comentarios de auditoría de citas se anclarán a las citas de la parte inglesa;
+- la parte española interna será retirada únicamente mediante un gate editorial explícito al preparar el paquete final de submission, sin alterar el contenido científico aprobado.
+
+No presentes esta cuestión como pendiente ni vuelvas a ofrecer opciones A/B salvo que exista una nueva instrucción expresa del autor.
 
 ### 0D2-M03 — Separar APA 7 del Word respecto de Markdown
 
@@ -127,7 +136,7 @@ Finaliza con:
 ```text
 0D2_ANALYSIS = COMPLETED_PENDING_EDITORIAL_REVIEW
 0D2_M01 = ADDRESSED
-0D2_M02 = ADDRESSED_PENDING_AUTHOR_DECISION
+0D2_M02 = ADDRESSED_BY_AUTHOR_DECISION
 0D2_M03 = ADDRESSED
 0D2_M04 = ADDRESSED
 TARGET_A = Knowledge-Based Systems
@@ -141,7 +150,7 @@ WRITING_POLICY_STATUS = <valor>
 CLAIM_EVIDENCE_PROTOCOL_STATUS = <valor>
 MD_DOCX_WORKFLOW_STATUS = <valor>
 WORD_CITATION_COMMENT_PROTOCOL_STATUS = <valor>
-DOCX_LANGUAGE_LAYOUT = PENDING_AUTHOR_DECISION
+DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
 JOURNAL_CASCADE_STATUS = <valor>
 PRE_DRAFTING_GATE_RECOMMENDATION = PASS | PASS_WITH_CORRECTIONS | BLOCKED
 FINAL_GAP = NOT_DEFINED
@@ -165,11 +174,11 @@ En el chat informa únicamente commit SHA, ruta y estado `COMPLETED_PENDING_EDIT
 
 Act exclusively as the Writing/scientific-editorial analysis AI to correct 0D-2 V01. Do not draft manuscript sections or open Phase 1.
 
-Use V01, `article/reviews/0D2_INTERNAL_REVIEW.md`, the original 0D-2 prompt, and its governing artifacts. Preserve all accepted V01 content and correct only 0D2-M01 through 0D2-M04.
+Use V01, `article/reviews/0D2_INTERNAL_REVIEW.md`, `article/reviews/0D2_AUTHOR_DECISION_DOCX_LANGUAGE_LAYOUT.md`, the original 0D-2 prompt, and its governing artifacts. Preserve all accepted V01 content and correct only 0D2-M01 through 0D2-M04.
 
 For M01, distinguish primary-verified requirements, unverified but potentially rewrite-relevant requirements, and deferable requirements. Reattempt current official-source verification. Any unverified requirement capable of affecting length, initial format, or architecture must either be neutralized by an explicit conservative internal policy or become `UNVERIFIED_BLOCKING` with a `BLOCKED` pre-drafting recommendation. Do not promote third-party reproductions to official authority.
 
-For M02, do not unilaterally close a bilingual Word layout. Present `OPTION_A = DOCX_BILINGUAL_INTERNAL_MASTER` and `OPTION_B = DOCX_ENGLISH_ONLY_MASTER_WITH_BILINGUAL_MD_GOVERNANCE`, with `DOCX_LANGUAGE_LAYOUT = PENDING_AUTHOR_DECISION`.
+For M02, the author has expressly selected `DOCX_BILINGUAL_INTERNAL_MASTER`. Apply this decision as closed: English is the publication manuscript, Spanish is the internal semantic-control mirror, both remain semantically equivalent, citation-audit comments are anchored to the English part, and the Spanish internal mirror is removed only through an explicit final-submission gate without changing approved scientific content.
 
 For M03, establish Word as the provisional APA-7 presentation layer and Markdown as the stable source-traceability layer rather than a second APA-7 formatting authority.
 
