@@ -59,11 +59,19 @@ Impacto metodológico: F1/F2/F4/F5 solo `METHOD_BOUNDARY_RELEVANT`; F3 `NOT_RELE
 
 Estado inicial del sublote: **`READY_FOR_DRAFTING`**.
 
-Estado operativo vigente: **`EXPERIMENTAL_REVIEW`**. `ARTICLE_STATUS.md` es la fuente de verdad para el subestado correctivo, bloqueos y siguiente gate. El estado inicial anterior se conserva solo como registro histórico de apertura del sublote; fue superado operacionalmente por el trigger experimental confirmado durante la auditoría.
+Estado operativo vigente: **`REVISION_REQUIRED`**. La revisión experimental correctiva ya está cerrada; el bloque requiere ahora normalización editorial del entregable previo antes de auditoría final, aprobación del autor y freeze. `ARTICLE_STATUS.md` es la fuente de verdad para el subestado actual, bloqueos y siguiente gate.
 
-Prompt activo:
+Prompt histórico de análisis:
 
 `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
+
+Prompt vigente de normalización posterior al cierre experimental:
+
+`article/prompts/0B05C_FINAL_NORMALIZATION_AFTER_EXPERIMENTAL_CLOSURE.md`.
+
+Revisión editorial que gobierna esta transición:
+
+`article/reviews/0B05C_FINAL_EXPERIMENTAL_RECONCILIATION_EDITORIAL_REVIEW.md`.
 
 ##### 2.1 Naturaleza del bloque
 
@@ -99,15 +107,15 @@ Estos son hashes de los archivos fuente procesados, no blob SHA de GitHub.
 
 ##### 2.3 Conjunto oficial primario controlado
 
-La auditoría debe cubrir, como mínimo:
+La auditoría cubrió, como mínimo:
 
 **WCO/OMA — nivel HS**
 
 - Convenio Internacional del Sistema Armonizado, en lo necesario para definir qué integra el HS y el papel de GIR/notas;
 - HS Nomenclature 2022 edition;
 - General Rules for the Interpretation of the Harmonized System — edición 2022;
-- enmiendas complementarias de HS 2022 cuando sean necesarias para determinar vigencia;
-- estatus de Explanatory Notes solo para claims que lo requieran.
+- enmiendas complementarias de HS 2022 cuando fueron necesarias para determinar vigencia;
+- estatus de Explanatory Notes solo para claims que lo requirieron.
 
 **Comunidad Andina — nivel NANDINA**
 
@@ -119,47 +127,50 @@ La auditoría debe cubrir, como mínimo:
 **Perú — nivel nacional/procedimental**
 
 - Decreto Supremo N.° 404-2021-EF — Arancel de Aduanas 2022;
-- modificaciones posteriores del Arancel de Aduanas 2022 cuando sean materialmente necesarias para determinar afectación de Capítulo 87;
+- modificaciones posteriores del Arancel de Aduanas 2022 materialmente necesarias para determinar afectación de Capítulo 87;
 - SUNAT/gob.pe `Nomenclatura común Nandina` como orientación institucional, no sustituto de la norma comunitaria;
 - `DESPA-PG.01 — Importación para el consumo (versión 8)` solo para claims de procedencia/contexto de DAM;
 - `DESPA-PE.00.03 — Reconocimiento físico - extracción y análisis de muestras (versión 4)` solo para claims de reconocimiento físico/muestras.
 
 Las fuentes estadísticas/anuarios quedan fuera del núcleo salvo necesidad documental explícita.
 
-##### 2.4 Web oficial autorizada
+##### 2.4 Hallazgo documental y cierre experimental posterior
 
-A diferencia de 0B-01–0B-05B, 0B-05C **requiere consulta web actual**. La evidencia final debe proceder de fuentes oficiales:
+La auditoría confirmó que **Decisión 906** modifica la Decisión 885, entró en vigencia el `2023-01-01` e incluye modificaciones de descripción en subpartidas del **Capítulo 87**, entre ellas `8704.41.10` y `8704.51.10`.
 
-- `wcoomd.org` / infraestructura oficial WCO;
-- `comunidadandina.org`;
-- `sunat.gob.pe`;
-- `gob.pe`;
-- `mef.gob.pe`;
-- `elperuano.pe`.
+También se confirmó que las 42 etiquetas de referencia EVAL v0.2 listadas en `historical_support_by_code_v0.2.csv` no incluyen esos dos códigos. Esa ausencia no permitía concluir impacto cero y activó correctamente la revisión experimental.
 
-Buscadores pueden utilizarse solo para descubrimiento. Agregadores, blogs, bases jurídicas de terceros y papers no son autoridad final de este bloque.
+El estado histórico de apertura fue:
 
-##### 2.5 Hallazgo preliminar que debe auditarse, no asumirse como impacto
+`PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`.
 
-Durante la definición del lote se verificó en fuente oficial que **Decisión 906** modifica la Decisión 885, entró en vigencia el `2023-01-01` e incluye modificaciones de descripción en subpartidas del **Capítulo 87**, entre ellas `8704.41.10` y `8704.51.10`.
+Posteriormente se confirmó:
 
-También se verificó que las 42 etiquetas de referencia EVAL v0.2 listadas en `historical_support_by_code_v0.2.csv` no incluyen esos dos códigos. Esto **no permite concluir impacto cero**, porque los códigos podrían aparecer como candidatos, en el banco histórico o en evidencia normativa.
+```text
+SOURCE_VERSION_DRIFT = PRESENT
+SCOPE_OVERLAP = CONFIRMED
+RETRIEVAL_OUTPUT_OVERLAP = CONFIRMED_FOR_87044110_FLAT_BM25
+```
 
-Por tanto, al abrir 0B-05C se registró inicialmente:
+La sensibilidad correctiva final cerró el impacto experimental de forma diferenciada por método:
 
-`PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`
+```text
+EV03_METRIC_IMPACT = ZERO_AGGREGATE_CHANGE
+EV04_METRIC_IMPACT = TINY_NONZERO_MRR_DECREASE_ONLY
+D1A_METRIC_IMPACT = POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT
+0B05C_METRIC_IMPACT = METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A
+DOWNSTREAM_REEXECUTION = NOT_REQUIRED
+```
 
-Ese valor describe el estado histórico de apertura del sublote. El resultado vigente de la auditoría y del trigger experimental se mantiene exclusivamente en `ARTICLE_STATUS.md`; este plan no debe utilizarse como fuente de verdad para inferir que el flag continúa abierto.
+Estos estados no sustituyen retrospectivamente el snapshot experimental original. Describen exclusivamente la sensibilidad correctiva auditada.
 
-No se modifica ningún resultado experimental ni 0A. El entregable debe comprobar el solapamiento concreto y, si corresponde, devolver `EXPERIMENTAL_IMPACT_REVIEW_REQUIRED` para que la IA experimental determine materialidad y acciones.
+La Resolución 2592 de 2026 se identificó como notas complementarias para capítulos 1–22; su presencia en el estado oficial actual no implica por sí misma afectación directa del Capítulo 87.
 
-La Resolución 2592 de 2026 se identificó preliminarmente como notas complementarias para capítulos 1–22; su presencia en el estado oficial actual no implica por sí misma afectación directa del Capítulo 87.
-
-##### 2.6 Distinciones obligatorias
+##### 2.5 Distinciones obligatorias
 
 `OFFICIAL_SOURCE ≠ LEGALLY_SUFFICIENT_FOR_CASE ≠ CORRECT_CLASSIFICATION`
 
-`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`
+`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`
 
 `HS-6 ≠ NANDINA-8 ≠ PERU_NATIONAL_SUBHEADING-10`
 
@@ -167,7 +178,7 @@ La Resolución 2592 de 2026 se identificó preliminarmente como notas complement
 
 `TEXT_AUXILIARY_FOR_INTERPRETATION ≠ BINDING_NORM`, salvo soporte oficial expreso sobre su estatus.
 
-##### 2.7 Relación con F1–F5
+##### 2.6 Relación con F1–F5
 
 0B-05C no es un pressure test de novelty:
 
@@ -181,9 +192,13 @@ G6 permanece eliminado; G7 absorbido en F2.
 
 ### 3. Relación con freezes previos y trigger experimental
 
-0B-05C no reabre 0A ni los resultados experimentales congelados. La auditoría documental puede detectar drift; no puede resolverlo mediante modificación del corpus, rerun, recalculo o reinterpretación de resultados.
+0B-05C no reabre 0A ni los resultados experimentales congelados. La auditoría documental detectó drift y activó un gate experimental que ya fue completado. La rama editorial no modifica el corpus, no reejecuta experimentos, no recalcula resultados y no modifica el Plan Maestro.
 
-La IA experimental se vuelve obligatoria **solo si** el análisis confirma o deja razonablemente abierto un solapamiento material entre drift normativo y componentes experimentales congelados. La IA experimental conserva autoridad exclusiva sobre el Plan Maestro y sobre cualquier decisión experimental correctiva.
+Para la normalización editorial actual:
+
+`EXPERIMENTAL_REVIEW = NOT_REQUIRED`.
+
+Una nueva revisión experimental solo se reabriría si la normalización introdujera una contradicción científica nueva con la fuente experimental canónica.
 
 ### 4. Gate
 
@@ -193,23 +208,22 @@ Completados:
 
 `0B-05B -> APPROVED / FROZEN`
 
-Flujo inicial registrado al abrir 0B-05C:
+Flujo histórico de 0B-05C:
 
-`0B-05C READY_FOR_DRAFTING -> IA de análisis -> auditoría de fuentes oficiales -> revisión científica/editorial interna -> [IA experimental si trigger confirmado] -> corrección/normalización si aplica -> aprobación expresa del autor -> freeze -> evaluar necesidad real de 0B-06`.
+`READY_FOR_DRAFTING -> análisis documental -> revisión interna -> EXPERIMENTAL_REVIEW -> auditoría/pre-registro -> sensibilidad correctiva -> cierre experimental`.
 
 Gate operativo vigente:
 
-`0B-05C STATUS = EXPERIMENTAL_REVIEW -> IA experimental resuelve la exposición efectiva y especificación pre-ejecución D1a -> sensibilidad correctiva acotada cuando quede autorizada -> revisión científica/editorial final -> corrección/normalización si corresponde -> aprobación expresa del autor -> freeze -> evaluar necesidad real de 0B-06`.
+`0B-05C STATUS = REVISION_REQUIRED -> IA de Redacción normaliza el entregable mediante prompt versionado -> auditoría científica/editorial final -> [revisión experimental solo si aparece contradicción nueva] -> aprobación expresa del autor -> freeze 0B-05C -> evaluar necesidad real de 0B-06`.
 
-Los flags y bloqueos concretos deben consultarse en `ARTICLE_STATUS.md`.
-
-Mientras 0B-05C esté abierto:
+Mientras 0B-05C continúe abierto:
 
 - no se redacta el manuscrito;
 - no se declara novelty/gap definitivo;
 - no se modifica 0A ni el Plan Maestro;
 - no se actualiza el corpus ni se rerun experimentos desde la rama editorial;
-- no se abre 0B-06 ni 0C.
+- `0B-06` permanece `NOT_STARTED` y su apertura no está autorizada;
+- 0C permanece bloqueado.
 
 ---
 
@@ -233,11 +247,19 @@ Status: **`APPROVED / FROZEN`**. Frozen boundaries reject universal DIKW sequenc
 
 Initial sub-batch status: **`READY_FOR_DRAFTING`**.
 
-Current operational status: **`EXPERIMENTAL_REVIEW`**. `ARTICLE_STATUS.md` is the source of truth for the corrective substate, blockers, and next gate. The former initial state is preserved only as the historical opening state of the sub-batch; it was operationally superseded by the experimental trigger confirmed during the audit.
+Current operational status: **`REVISION_REQUIRED`**. The corrective experimental review is closed; the block now requires editorial normalization of the prior deliverable before final audit, author approval, and freeze. `ARTICLE_STATUS.md` is the source of truth for the current substate, blockers, and next gate.
 
-Active prompt:
+Historical analysis prompt:
 
 `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
+
+Current post-experimental-closure normalization prompt:
+
+`article/prompts/0B05C_FINAL_NORMALIZATION_AFTER_EXPERIMENTAL_CLOSURE.md`.
+
+Editorial review governing this transition:
+
+`article/reviews/0B05C_FINAL_EXPERIMENTAL_RECONCILIATION_EDITORIAL_REVIEW.md`.
 
 0B-05C is a primary official-source audit, not an academic-literature batch. It separates the exact experimental normative-source snapshot at development ref `95ffec45ae5a734545ae7bb2d8d530f42f8f056c` from the current official-source state.
 
@@ -245,17 +267,31 @@ The frozen experimental source snapshot includes `Arancel 2022.pdf` and the CAN 
 
 The controlled official set covers WCO HS 2022/GIR/necessary amendments; Andean Decision 885, Decision 906, Resolution 2592 and only other Chapter-87-relevant official instruments; Peru DS 404-2021-EF and material tariff modifications; the SUNAT NANDINA orientation page; and DESPA-PG.01 v8 / DESPA-PE.00.03 v4 only for administrative-data provenance claims.
 
-Current web verification is required, but final evidence must come from official WCO, Andean Community, SUNAT, gob.pe, MEF or El Peruano sources.
+The official-source audit confirmed that Decision 906, effective 2023-01-01, modifies Decision 885 and includes Chapter-87 description changes for `8704.41.10` and `8704.51.10`. The two codes are not among the 42 frozen EVAL reference labels, but that negative intersection did not justify zero-impact inference and correctly triggered experimental review.
 
-The definition-stage finding was initially recorded as `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`: Decision 906, effective 2023-01-01, modifies Decision 885 and contains Chapter-87 modifications including 8704.41.10 and 8704.51.10. Those codes are not among the 42 EVAL reference labels in the frozen support-by-code table, but zero experimental impact cannot be inferred because they may occur as candidates, historical labels, or evidence. That flag represents the historical opening state only; the current audit outcome and experimental trigger are governed by `ARTICLE_STATUS.md`.
+The historical opening state was `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`. The subsequent audit and experimental closure established:
 
-Resolution 2592 (2026) was preliminarily identified as complementary explanatory notes for Chapters 1–22, so its current existence does not itself establish direct Chapter-87 impact.
+```text
+SOURCE_VERSION_DRIFT = PRESENT
+SCOPE_OVERLAP = CONFIRMED
+RETRIEVAL_OUTPUT_OVERLAP = CONFIRMED_FOR_87044110_FLAT_BM25
+
+EV03_METRIC_IMPACT = ZERO_AGGREGATE_CHANGE
+EV04_METRIC_IMPACT = TINY_NONZERO_MRR_DECREASE_ONLY
+D1A_METRIC_IMPACT = POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT
+0B05C_METRIC_IMPACT = METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A
+DOWNSTREAM_REEXECUTION = NOT_REQUIRED
+```
+
+These states do not retrospectively replace the original experimental snapshot. They describe only the audited corrective sensitivity.
+
+Resolution 2592 (2026) was identified as complementary explanatory notes for Chapters 1–22, so its current existence does not itself establish direct Chapter-87 impact.
 
 Mandatory boundaries:
 
 `OFFICIAL_SOURCE ≠ LEGALLY_SUFFICIENT_FOR_CASE ≠ CORRECT_CLASSIFICATION`
 
-`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`
+`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`
 
 `HS-6 ≠ NANDINA-8 ≠ PERU_NATIONAL_SUBHEADING-10`
 
@@ -263,20 +299,22 @@ Mandatory boundaries:
 
 ### 3. Prior freezes and experimental trigger
 
-0B-05C does not reopen frozen experimental facts. It may detect source drift but cannot update the corpus, rerun experiments, recalculate results, or modify 0A/Master Plan from the editorial branch.
+0B-05C does not reopen frozen experimental facts. The official-source audit detected drift and triggered an experimental gate that has now been completed. The editorial branch does not modify the corpus, rerun experiments, recalculate results, or modify 0A/Master Plan.
 
-Experimental-AI review becomes required only if the official-source audit confirms or reasonably leaves open a material overlap between normative drift and frozen experimental components. The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions.
+For the current editorial normalization:
+
+`EXPERIMENTAL_REVIEW = NOT_REQUIRED`.
+
+A new experimental review is required only if the normalization introduces a new scientific contradiction with the canonical experimental source.
 
 ### 4. Gate
 
-Initial flow recorded when 0B-05C was opened:
+Historical 0B-05C flow:
 
-`0B-05C READY_FOR_DRAFTING -> official-source analysis AI -> official-source audit -> internal review -> [experimental AI if triggered] -> correction/normalization if needed -> express author approval -> freeze -> assess genuine need for 0B-06`.
+`READY_FOR_DRAFTING -> documentary analysis -> internal review -> EXPERIMENTAL_REVIEW -> audit/preregistration -> corrective sensitivity -> experimental closure`.
 
 Current operational gate:
 
-`0B-05C STATUS = EXPERIMENTAL_REVIEW -> experimental AI resolves effective D1a exposure and pre-execution specification -> bounded corrective sensitivity when authorized -> final scientific/editorial review -> correction/normalization if needed -> express author approval -> freeze -> assess genuine need for 0B-06`.
+`0B-05C STATUS = REVISION_REQUIRED -> Writing AI normalizes the deliverable through the versioned prompt -> final scientific/editorial audit -> [experimental review only if a new contradiction appears] -> express author approval -> freeze 0B-05C -> assess genuine need for 0B-06`.
 
-Concrete flags and blockers must be read from `ARTICLE_STATUS.md`.
-
-No manuscript drafting, final novelty/gap declaration, editorial-branch 0A/Master-Plan modification, editorial-branch corpus update/rerun, 0B-06, or 0C is authorized while 0B-05C remains open.
+While 0B-05C remains open, manuscript drafting and final novelty/gap declaration remain unauthorized; editorial-branch 0A/Master-Plan modification and corpus update/rerun remain prohibited; `0B-06` remains `NOT_STARTED` with opening unauthorized; and 0C remains blocked.
