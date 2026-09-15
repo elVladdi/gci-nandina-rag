@@ -8,13 +8,12 @@ La Fase `0B — Mapa crítico de literatura y taxonomía` se ejecuta mediante lo
 
 Reglas gobernantes:
 
-- corpus académico/documental consolidado: `62` obras/documentos distintos, acceso primario verificable `62/62`;
+- corpus académico/documental heredado consolidado: `62` obras/documentos distintos, acceso primario verificable `62/62`;
 - lectura/auditoría claim-source-scope obligatoria;
 - no inventar metadata, DOI, resultados, vigencia, jerarquía o estado editorial/normativo;
 - una afirmación secundaria no se convierte en hecho independiente sin verificar su fuente primaria;
 - no equiparar classification, candidate retrieval, evidence retrieval, reranking, explanation, provenance, reproducibility, auditability ni correctness;
 - no imponer DIKW universal ni transformar automáticamente data→information→knowledge;
-- `SUPPORTS_CANDIDATE` nunca significa novelty;
 - literatura académica nueva se rige por `article/BIBLIOGRAPHIC_FRAMEWORK.md`;
 - fuentes normativas/institucionales primarias constituyen una capa separada y se auditan por autoridad, identidad, vigencia, alcance y función documental.
 
@@ -28,197 +27,183 @@ Reglas gobernantes:
 - `0B-04B`: **`APPROVED / FROZEN`**.
 - `0B-05A`: **`APPROVED / FROZEN`**.
 - `0B-05B`: **`APPROVED / FROZEN`**.
+- `0B-05C`: **`APPROVED / FROZEN`**.
 
-F1–F5 permanecen provisionales; G6 está eliminado y G7 absorbido en F2. Ninguno constituye novelty ni gap definitivo.
+0B-05C cerró la auditoría de autoridad/vigencia de fuentes oficiales y la sensibilidad correctiva derivada del drift normativo. El estado congelado distingue `EXPERIMENTAL_SOURCE_SNAPSHOT` de `CURRENT_OFFICIAL_SOURCE_STATE` y mantiene `SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
 
-### 3. Fundamentos ya congelados
+### 3. Estado de candidatos después de 0B-05C
 
-0B-04A:
+Ninguno constituye novelty ni gap definitivo.
 
-`QUERY/DOCUMENT REPRESENTATION ≠ CANDIDATE GENERATION ≠ ANN/INDEX SEARCH ≠ RERANKING ≠ FINAL RANKING`.
+- **F1:** `CANDIDATE_GAP_ONLY — SURVIVES IN NARROW FORM`.
+- **F2:** `CANDIDATE_GAP_ONLY — FURTHER NARROWED`.
+- **F3:** `CANDIDATE_GAP_ONLY — RETAINED WITH APPLICABILITY CAVEAT`.
+- **F4:** `CANDIDATE_GAP_ONLY — RETAINED AS METHODOLOGICAL DISTINCTION`.
+- **F5:** `CANDIDATE_GAP_ONLY — FURTHER NARROWED`.
+- **G6:** `ELIMINATED AS GAP CANDIDATE`.
+- **G7:** `MERGED INTO F2 / ELIMINATED AS INDEPENDENT CANDIDATE`.
 
-0B-04B:
+Las formulaciones supervivientes son:
 
-`RAG ≠ RETRIEVAL_AUGMENTED_PRETRAINING ≠ RETRIEVE_THEN_GENERATE ≠ QUERY_EXPANSION ≠ QUERY_REWRITING ≠ PASSAGE_FUSION ≠ EVIDENTIALITY_GUIDED_GENERATION`.
+- **F1:** precedentes históricos recuperados generan/fijan el ranking y la evidencia normativa se recupera solo después para documentar candidatos ya fijados, sin modificar el orden;
+- **F2:** generador/LLM exclusivamente explicativo sobre un ranking/Top-k fijado externamente por un componente independiente, sin introducir, eliminar, sustituir o reordenar códigos y sin feedback clasificatorio;
+- **F3:** control explícito de dependencia por unidad administrativa/grupo cuando observaciones correlacionadas pueden cruzar particiones;
+- **F4:** candidate/predictive performance, evidence grounding o path validity no equivalen a corrección sustantiva/jurídica adjudicada;
+- **F5:** evaluación formal, explícita y separada, por salida/caso, de auditabilidad documental, distinta de accuracy, citations visibles, provenance, faithfulness o rationale.
 
-`RETRIEVED PASSAGE ≠ EVIDENCE ATTRIBUTION ≠ EVIDENTIALITY ≠ GROUNDING GUARANTEE ≠ PROVENANCE VERIFICATION ≠ FORMAL AUDITABILITY ≠ LEGAL CORRECTNESS`.
+### 4. Evaluación de necesidad 0B-06
 
-0B-05A:
+Registra el gate:
 
-`DATASET DOCUMENTATION ≠ DATASET IDENTITY / VERSIONING ≠ DATA PROVENANCE / LINEAGE ≠ WORKFLOW PROVENANCE ≠ REPRODUCIBILITY ≠ REPLICATION ≠ GENERALIZATION`.
+`article/reviews/0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT.md`.
 
-`DOCUMENTATION / PROVENANCE ≠ TRANSPARENCY TRAIL ≠ INTERNAL LIFECYCLE AUDIT ≠ FORMAL OUTPUT-LEVEL AUDITABILITY ≠ SUBSTANTIVE / LEGAL CORRECTNESS`.
+Dictamen:
 
-0B-05B:
+```text
+0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT = REQUIRED
+0B06_SCOPE = DIRECTED_FALSIFICATION_SEARCH_ONLY
+OPEN_ENDED_LITERATURE_EXPANSION = NOT_AUTHORIZED
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+EXPERIMENTAL_REVIEW = NOT_REQUIRED
+```
 
-- data/information/knowledge no son sinónimos universales ni etapas lineales necesarias;
-- `DOCUMENTED / EXPLICIT KNOWLEDGE ≠ TOTAL EXPERT KNOWLEDGE`;
-- `DOCUMENT RETRIEVAL ≠ EXPERT INTERPRETATION ≠ LEGAL CORRECTNESS`;
-- `LLM-GENERATED EXPLANATION ≠ EXPERT KNOWLEDGE ≠ OFFICIAL CLASSIFICATION`;
-- `DOCUMENTED_EXPLICIT_KNOWLEDGE` = `OPERACIONALIZACION_DEL_PROYECTO` únicamente.
+La necesidad no deriva de insuficiencia general del corpus heredado. Antes de 0C, F1/F2/F5 y, secundariamente, F3 requieren un último pressure test reciente diseñado para encontrar prior art que los falsifique o estreche.
 
-### 4. 0B-05C — Autoridad, vigencia y trazabilidad de fuentes normativas/oficiales
-
-Estado: **`READY_FOR_DRAFTING`**.
-
-Alcance formal:
-
-`article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
-
-Prompt activo:
-
-`article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
-
-#### 4.1 Objeto
-
-0B-05C no es literatura académica: audita la capa de fuente primaria oficial y compara:
-
-`EXPERIMENTAL_SOURCE_SNAPSHOT`
-
-con
-
-`CURRENT_OFFICIAL_SOURCE_STATE`.
-
-El bloque debe verificar autoridad emisora, instrumento exacto, fecha, vigencia, alcance, función documental, modificaciones/derogaciones, identificador oficial y relación con el corpus experimental.
-
-#### 4.2 Snapshot experimental gobernante
-
-Ref de desarrollo congelado por 0A-02:
-
-`95ffec45ae5a734545ae7bb2d8d530f42f8f056c`.
-
-Fuentes a rastrear:
-
-- `data/external/Arancel 2022.pdf` + `arancel2022_run_metadata.json`;
-- `data/external/CAN Desición 885 - Nanadina Gaceta 4359.pdf` + `data/processed/corpus/nandina/run_metadata.json`;
-- artefactos procesados derivados cuando sean necesarios para comprobar alcance.
-
-SHA-256 registrados:
-
-- Arancel 2022: `a01a029e1ca29b6debc61d219c17dfc086354e00669246cc24a91ad9f454c7d0`;
-- Decisión 885/Gaceta 4359: `8c4a30fb0328f151089ac4c7857ac447d3dd353de97122a11bde4550d594f0c6`.
-
-#### 4.3 Fuentes oficiales controladas
-
-Mínimo:
-
-- **WCO/OMA:** Convenio HS en lo necesario; HS Nomenclature 2022; GIR 2022; enmiendas complementarias relevantes; estatus de Explanatory Notes solo si el claim lo exige.
-- **Comunidad Andina:** Decisión 885/Gaceta 4359; Decisión 906/Gaceta 5062; Resolución 2592/Gaceta 5761; otros instrumentos solo si son necesarios para determinar vigencia/Capítulo 87.
-- **Perú:** DS 404-2021-EF/Arancel de Aduanas 2022; modificaciones posteriores materialmente pertinentes; página SUNAT/gob.pe NANDINA como orientación institucional; DESPA-PG.01 v8 y DESPA-PE.00.03 v4 únicamente para claims de procedencia/contexto administrativo de DAM/reconocimiento físico.
-
-La auditoría requiere web actual, pero la evidencia final solo puede provenir de dominios oficiales WCO/OMA, Comunidad Andina, SUNAT, gob.pe, MEF o El Peruano.
-
-#### 4.4 Drift preliminar abierto
-
-La definición del lote verificó en fuente oficial que la **Decisión 906**, vigente desde `2023-01-01`, modifica la Decisión 885 e incluye cambios de Capítulo 87, entre ellos `8704.41.10` y `8704.51.10`.
-
-Las 42 etiquetas EVAL v0.2 del artefacto `historical_support_by_code_v0.2.csv` no incluyen esos dos códigos. Esto no demuestra impacto experimental nulo porque podrían aparecer como candidatos, códigos históricos o evidencia.
-
-Estado de apertura:
-
-`PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`.
-
-El bloque debe distinguir estrictamente:
-
-`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
-
-Si se confirma o queda razonablemente abierta afectación material de componentes congelados, el entregable debe marcar `EXPERIMENTAL_IMPACT_REVIEW_REQUIRED`; no debe alterar experimentos, 0A, claims congelados ni Plan Maestro.
-
-La Resolución 2592 de 2026 se identificó preliminarmente como Notas Explicativas Complementarias para capítulos 1–22; no se presume afectación de Capítulo 87.
-
-#### 4.5 Fronteras obligatorias
-
-`OFFICIAL_SOURCE ≠ LEGALLY_SUFFICIENT_FOR_CASE ≠ CORRECT_CLASSIFICATION`
-
-`HS-6 ≠ NANDINA-8 ≠ PERU_NATIONAL_SUBHEADING-10`
-
-`INSTITUTIONAL_ORIENTATION_PAGE ≠ SUPRANATIONAL_LEGAL_INSTRUMENT`
-
-`TEXT_AUXILIARY_FOR_INTERPRETATION ≠ BINDING_NORM`, salvo soporte oficial expreso.
-
-0B-05C no modifica F1–F5: solo puede aportar relevancia metodológica de frontera. G6/G7 permanecen cerrados.
+F4 no requiere búsqueda dedicada porque funciona como frontera metodológica, no como novelty candidata independiente.
 
 ### 5. 0B-06 — Búsqueda dirigida de literatura nueva
 
-Estado: `NOT_STARTED / CLOSED_BY_GATE`.
+Estado: **`READY_FOR_DRAFTING`**.
 
-0B-06 solo se evaluará después del freeze de 0B-05C y únicamente si persiste una necesidad bibliográfica real bajo `article/BIBLIOGRAPHIC_FRAMEWORK.md`. No es obligatorio.
+Prompt gobernante:
 
-### 6. Gate
+`article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md`.
 
-Gate activo:
+Alcance autorizado, exclusivamente literatura académica nueva `2022–2026` conforme a `BIBLIOGRAPHIC_FRAMEWORK.md`:
 
-`0B-05C READY_FOR_DRAFTING -> IA de análisis -> auditoría primaria oficial -> revisión científica/editorial -> [IA experimental si trigger confirmado] -> corrección/normalización si aplica -> aprobación expresa del autor -> freeze -> evaluar necesidad real de 0B-06`.
+1. **S1/F1:** ranking histórico/precedentes fijado antes de evidence retrieval normativo que no puede rerankear ni introducir códigos;
+2. **S2/F2:** LLM/generador exclusivamente explicativo sobre Top-k externo e inmutable, sin modificación ni feedback clasificatorio;
+3. **S3/F3:** grouped split, dependencia por declaración/entidad/familia o leakage control comparable en clasificación aduanera/comercial;
+4. **S4/F5:** evaluación formal per-output/case-level de auditabilidad documental separada de predictive accuracy, provenance visible o faithfulness;
+5. **S5:** trabajos que combinen dos o más de las propiedades anteriores.
 
-La IA experimental conserva autoridad exclusiva sobre el Plan Maestro y decisiones experimentales correctivas.
+Reglas adicionales:
+
+- búsqueda falsacionista, no confirmatoria;
+- no búsqueda general de HS classification;
+- no reabrir G6/G7;
+- no buscar F4 como novelty independiente;
+- no incorporar directamente referencias nuevas al manuscrito;
+- nuevas referencias solo pueden quedar `CANDIDATE_NEW` hasta revisión de la IA Gestora;
+- no declarar novelty ni gap definitivo desde 0B-06.
+
+### 6. Gate activo
+
+```text
+0B-05C = APPROVED / FROZEN
+0B-06 = READY_FOR_DRAFTING
+-> IA de Redacción ejecuta article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md
+-> respuesta en article/responses/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH_RESPONSE_V01.md
+-> IA Gestora / Editor Científico Principal audita candidatos y pressure test
+-> referencias nuevas solo pueden pasar a APPROVED_NEW tras auditoría
+-> aprobación/cierre de 0B-06
+-> cierre formal de Fase 0B
+-> 0C solo después del cierre de 0B
+```
 
 ### 7. Estado actual
 
 - Fase 0A: `CLOSED / APPROVED`.
 - Fase 0B: `OPEN`.
-- 0B-01 a 0B-05B: `APPROVED / FROZEN`.
-- Bloque activo: `0B-05C`.
-- 0B-05C: `READY_FOR_DRAFTING`.
-- `PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`.
-- 0B-06: `NOT_STARTED / CLOSED_BY_GATE`.
+- 0B-01 a 0B-05C: `APPROVED / FROZEN`.
+- Bloque activo: `0B-06`.
+- 0B-06: `READY_FOR_DRAFTING`.
 - 0C: `BLOCKED`.
 - 0D: `BLOCKED`.
+- `MANUSCRIPT_DRAFTING = NOT_AUTHORIZED`.
 - Target journal: `PENDING — se decidirá en Fase 0D`.
 
 ---
 
 ## English
 
-### 1. Purpose and rules
+### 1. Purpose and general rules
 
-Phase 0B uses controlled primary-source batches and does not draft the manuscript or declare final novelty/gap. Academic literature and official normative/institutional sources remain separate evidence layers.
+Phase `0B — Critical literature map and taxonomy` uses controlled thematic batches to audit complete primary sources and construct the literature map needed for 0C. Phase 0B does not draft the manuscript or declare final novelty/gap.
+
+The inherited academic/documentary corpus contains `62` distinct works/documents with verifiable primary access `62/62`. New academic literature is governed by `article/BIBLIOGRAPHIC_FRAMEWORK.md`; official normative/institutional sources remain a separate evidence layer.
 
 ### 2. Closed blocks
 
-0B-01 through 0B-05B are **`APPROVED / FROZEN`**. F1–F5 remain provisional; G6 is eliminated and G7 is merged into F2.
+`0B-01` through `0B-05C` are **`APPROVED / FROZEN`**.
 
-### 3. Frozen foundations
+0B-05C froze the official-source authority/currency audit and the corrective sensitivity arising from normative drift. It preserves `EXPERIMENTAL_SOURCE_SNAPSHOT ≠ CURRENT_OFFICIAL_SOURCE_STATE` and `SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ RETRIEVAL_OUTPUT_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
 
-Prior freezes distinguish retrieval/reranking/generation; RAG/query transformation/evidentiality/provenance/legal correctness; dataset documentation/versioning/provenance/reproducibility/replication/generalization; and documented knowledge vs complete expertise/legal judgment.
+### 3. Candidate state after 0B-05C
 
-### 4. 0B-05C — Authority, currency, and traceability of normative/official sources
+No candidate is final novelty or a definitive gap.
+
+- F1: `CANDIDATE_GAP_ONLY — SURVIVES IN NARROW FORM`.
+- F2: `CANDIDATE_GAP_ONLY — FURTHER NARROWED`.
+- F3: `CANDIDATE_GAP_ONLY — RETAINED WITH APPLICABILITY CAVEAT`.
+- F4: `CANDIDATE_GAP_ONLY — RETAINED AS METHODOLOGICAL DISTINCTION`.
+- F5: `CANDIDATE_GAP_ONLY — FURTHER NARROWED`.
+- G6 is eliminated; G7 is merged into F2.
+
+F1 now concerns fixed historical/precedent ranking followed only by non-reranking normative evidence; F2 concerns an explanation-only generator over an externally fixed immutable Top-k; F3 concerns grouped dependence control when applicable; F4 is the distinction between predictive/evidence/path metrics and substantive/legal correctness; F5 concerns formal separate per-output documentary-auditability evaluation.
+
+### 4. 0B-06 need assessment
+
+Governing review:
+
+`article/reviews/0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT.md`.
+
+Verdict:
+
+```text
+0B06_BIBLIOGRAPHIC_NEED_ASSESSMENT = REQUIRED
+0B06_SCOPE = DIRECTED_FALSIFICATION_SEARCH_ONLY
+OPEN_ENDED_LITERATURE_EXPANSION = NOT_AUTHORIZED
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+EXPERIMENTAL_REVIEW = NOT_REQUIRED
+```
+
+The need does not arise from broad inadequacy of the inherited corpus. Before 0C, F1/F2/F5 and secondarily F3 require one final recent falsification-oriented pressure test. F4 requires no dedicated search because it functions as a methodological boundary rather than stand-alone novelty.
+
+### 5. 0B-06 — Directed new-literature search
 
 Status: **`READY_FOR_DRAFTING`**.
 
-Scope: `article/literature/0B05_SCOPE_AND_BATCH_PLAN.md`.
+Governing prompt:
 
-Active prompt: `article/prompts/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY.md`.
+`article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md`.
 
-This is a primary official-source audit comparing the frozen `EXPERIMENTAL_SOURCE_SNAPSHOT` with `CURRENT_OFFICIAL_SOURCE_STATE`.
+Authorized 2022–2026 search families under `BIBLIOGRAPHIC_FRAMEWORK.md`:
 
-The experimental snapshot at development ref `95ffec45ae5a734545ae7bb2d8d530f42f8f056c` includes Arancel 2022 and CAN Decision 885/Gazette 4359 with their pipeline metadata and processed artifacts.
+1. S1/F1 fixed historical/precedent ranking before post-ranking normative evidence that cannot rerank or introduce codes;
+2. S2/F2 explanation-only LLM/generator over an externally fixed immutable Top-k with no candidate modification or classificatory feedback;
+3. S3/F3 grouped declaration/entity/family dependence or leakage controls in customs/commercial classification;
+4. S4/F5 formal per-output/case-level documentary-auditability evaluation distinct from predictive accuracy, visible provenance, or faithfulness;
+5. S5 papers combining two or more of the above properties.
 
-The controlled current-official set covers WCO HS 2022/GIR/needed amendments; Andean Decision 885, Decision 906 and Resolution 2592 plus only additional Chapter-87-relevant official instruments; Peru DS 404-2021-EF and materially relevant tariff amendments; and SUNAT sources only for the specific institutional/administrative claims they support.
+The search must be falsification-oriented, not open-ended. It may not reopen G6/G7, treat F4 as independent novelty, insert references directly into the manuscript, or declare novelty/final gap. New references remain `CANDIDATE_NEW` until Managing-AI review.
 
-Current web verification is mandatory and final evidence is restricted to official WCO, Andean Community, SUNAT, gob.pe, MEF or El Peruano sources.
+### 6. Active gate
 
-A preliminary definition-stage flag is open: Decision 906, effective 2023-01-01, modifies Decision 885 and includes Chapter-87 changes such as 8704.41.10 and 8704.51.10. Those codes are not among the frozen 42 EVAL reference labels, but zero impact cannot be inferred because candidate/historical/evidence overlap remains to be tested.
-
-`PRELIMINARY_SOURCE_VERSION_DRIFT_FLAG = OPEN_FOR_AUDIT`.
-
-Mandatory distinction:
-
-`SOURCE_VERSION_DRIFT ≠ SCOPE_OVERLAP ≠ EXPERIMENTAL_METRIC_IMPACT`.
-
-If material overlap is confirmed or reasonably remains open, the deliverable must return `EXPERIMENTAL_IMPACT_REVIEW_REQUIRED` without changing experiments, 0A, claims, or Master Plan.
-
-Resolution 2592 was preliminarily identified as complementary explanatory notes for Chapters 1–22 and therefore does not by itself establish Chapter-87 impact.
-
-### 5. 0B-06
-
-Status: `NOT_STARTED / CLOSED_BY_GATE`. It is assessed only after 0B-05C freezes and only if a genuine bibliographic need remains.
-
-### 6. Gate
-
-`0B-05C READY_FOR_DRAFTING -> official-source analysis -> internal scientific/editorial review -> [experimental AI if triggered] -> correction/normalization if needed -> express author approval -> freeze -> assess genuine need for 0B-06`.
-
-The experimental AI retains exclusive authority over the Master Plan and experimental corrective decisions.
+```text
+0B-05C = APPROVED / FROZEN
+0B-06 = READY_FOR_DRAFTING
+-> Writing AI executes article/prompts/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH.md
+-> response staged at article/responses/0B06_DIRECTED_NEW_LITERATURE_FALSIFICATION_SEARCH_RESPONSE_V01.md
+-> Managing AI / Lead Scientific Editor audits candidates and the pressure test
+-> new references may become APPROVED_NEW only after audit
+-> approve/close 0B-06
+-> formally close Phase 0B
+-> 0C only after Phase 0B closes
+```
 
 ### 7. Current state
 
-Phase 0B is open; 0B-01 through 0B-05B are frozen; 0B-05C is the active `READY_FOR_DRAFTING` block; the preliminary drift flag is open for audit; 0B-06 and 0C remain gated; target journal remains pending until 0D.
+Phase 0A is `CLOSED / APPROVED`; Phase 0B remains `OPEN`; 0B-01 through 0B-05C are `APPROVED / FROZEN`; 0B-06 is the active `READY_FOR_DRAFTING` block; 0C and 0D remain blocked; manuscript drafting remains unauthorized; target journal remains pending until 0D.
