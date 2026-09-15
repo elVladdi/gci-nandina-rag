@@ -1,0 +1,66 @@
+{
+  "artifact": "GROUP2B_REPRODUCIBILITY_TRACEABILITY_CLOSURE",
+  "version": "v0.1",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "readiness_version": "v0.2",
+  "readiness_commit": "fbd321d817d22fef78417064e0d5bc8df37165ca",
+  "scientific_main_commit": "fbd321d817d22fef78417064e0d5bc8df37165ca",
+  "canonical_plan_commit_before_closure": "0c77e86359bcd17ddd446429f21b62174c426f37",
+  "article_commit": "254b1e6df736fa9938ac86a515d65b36f4d361c5",
+  "readiness_evidence": {
+    "json_path": "outputs/audits/group2b_reproducibility_readiness_v0.2.json",
+    "json_git_blob": "802f85bf44922ca2dbeb395042908d5bd2efc133",
+    "markdown_path": "docs/group2b_reproducibility_traceability_readiness_v0.2.md",
+    "markdown_git_blob": "8f3c8fbe9ab55c35bf47daec28f1a307640edf97",
+    "external_audit": "PASS / APPROVED_FOR_INTEGRATION"
+  },
+  "group2b_disposition": "CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS",
+  "blocking_gap_count": 0,
+  "nonblocking_limitation_count": 11,
+  "historical_only_count": 5,
+  "environment_reproducibility": "COMPLETE_WITH_DECLARED_LIMITATION",
+  "clean_checkout_reproducibility": "COMPLETE_WITH_DECLARED_LIMITATION",
+  "scientific_reexecution_required": false,
+  "results_recomputation_required": false,
+  "scientific_execution_performed_by_closure": false,
+  "results_recomputed_by_closure": false,
+  "exp12_reopened": false,
+  "group3_started": false,
+  "next_eligible_block": "GROUP3_METRICS_AND_INFERENCE",
+  "referenced_readiness_content": {
+    "artifact_inventory": {
+      "json_pointer": "/artifact_inventory",
+      "count": 47
+    },
+    "identity_checks": {
+      "json_pointer": "/identity_checks",
+      "count": 35,
+      "pass_equivalent_count": 31,
+      "hash_bound_local_only_count": 4,
+      "content_mismatch_count": 0
+    },
+    "end_to_end_matrix": {
+      "json_pointer": "/end_to_end_matrix",
+      "count": 11,
+      "complete_count": 1,
+      "complete_with_declared_limitation_count": 10,
+      "blocking_gap_count": 0
+    },
+    "nonblocking_limitations": {
+      "json_pointer": "/nonblocking_limitations",
+      "count": 11,
+      "reference_policy": "REFERENCE_ONLY_NO_DUPLICATION_NO_REINTERPRETATION"
+    },
+    "historical_only_items": {
+      "json_pointer": "/historical_only_items",
+      "count": 5,
+      "reference_policy": "REFERENCE_ONLY_NO_DUPLICATION_NO_REINTERPRETATION"
+    }
+  },
+  "preserved_limitations": {
+    "local_only_assets_versioned_by_closure": false,
+    "declared_not_recoverable_items_recovered_by_closure": false,
+    "nonblocking_limitations_reclassified": false,
+    "historical_only_items_reclassified": false
+  }
+}
