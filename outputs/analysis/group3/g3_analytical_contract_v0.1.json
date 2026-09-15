@@ -1,0 +1,210 @@
+{
+  "contract_id": "G3-F01_ANALYTICAL_CONTRACT_v0.1",
+  "prompt": "PROMPT76",
+  "prompt_source_commit": "409dd7b7302bce1d41cc69e24b9debe3db05982e",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "scientific_main_commit": "a33fc7e10b5bc25a053e982f0ff24ff60eda042f",
+  "canonical_plan_commit": "f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6",
+  "article_commit": "254b1e6df736fa9938ac86a515d65b36f4d361c5",
+  "fichas_snapshot_commit": "a42531ad96fc12bea2f2394b0ff8eb49b66a4238",
+  "ficha_path": "docs/fichas/grupos_3_8/grupo_3/G3_F01_FREEZE_ANALITICO_HIPOTESIS_Y_FUENTES.md",
+  "ficha_blob": "4208e70a464e2a645644e9f9c5289cd7333afe48",
+  "prompt75_status": "SUPERSEDED / DO_NOT_EXECUTE",
+  "source": {
+    "src01_original": "Proyecto de tesis para maestria MOLLEAPASA GUTIERREZ VLADIMIR.pdf",
+    "access_mode": "AUTHOR_APPROVED_FROZEN_TRANSCRIPTION_IN_GITHUB",
+    "direct_pdf_bytes_read_by_codex": false,
+    "transcription_status": "APPROVED / FROZEN / INDEPENDENTLY_VERIFIED_BY_IA_EXPERIMENTAL",
+    "he2_exact_text": "La recuperación histórica alcanzará un desempeño Top-k y MRR superior al de las estrategias de recuperación normativa, mientras que las variantes normativas jerárquicas y de conjunto candidato ampliarán la cobertura documental en posiciones más profundas.",
+    "he5_exact_text": "Los errores y límites del piloto se concentrarán en descripciones ambiguas o incompletas, subpartidas jerárquicamente próximas, casos con precedentes históricos insuficientes y condiciones que restringirán la validez de los resultados al conjunto interno evaluado.",
+    "he2_exact_match": true,
+    "he5_exact_match": true
+  },
+  "hypotheses": {
+    "HE2": {
+      "status": "UNDECIDED",
+      "components": ["HE2_A", "HE2_B"],
+      "HE2_A": "historical early-ranking superiority",
+      "HE2_B": "deeper documentary coverage from normative hierarchical and expanded-candidate variants"
+    },
+    "HE5": {
+      "status": "UNDECIDED",
+      "components": ["ambiguous_or_incomplete_descriptions", "hierarchical_proximity", "insufficient_historical_precedents", "internal_evaluation_scope", "explanation_and_evidence_limits"]
+    }
+  },
+  "evidence_families": [
+    {
+      "evidence_family_id": "HE2_A_HISTORICAL_VS_NORMATIVE_FLAT",
+      "hypothesis_component": "HE2_A",
+      "block": "Group 1",
+      "classification": "ELIGIBLE",
+      "primary_paths": ["outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json", "outputs/evaluation/normative_bm25_flat_data_aduanas_clase87_v0.2/normative_metrics.json"],
+      "unit": "EVAL case paired within DAM",
+      "estimand": "paired difference in Top-k and MRR on the fixed benchmark v0.2 EVAL",
+      "procedure": "DAM-cluster paired bootstrap, 10000 resamples, seed 20263001, percentile 95% interval",
+      "multiplicity": "Holm within the pre-specified HE2_A metric family"
+    },
+    {
+      "evidence_family_id": "HE2_A_HISTORICAL_VS_NORMATIVE_HIERARCHICAL",
+      "hypothesis_component": "HE2_A",
+      "block": "Group 1",
+      "classification": "ELIGIBLE",
+      "primary_paths": ["outputs/evaluation/historical_retrieval_data_aduanas_clase87_v0.2/historical_metrics.json", "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json"],
+      "unit": "EVAL case paired within DAM",
+      "estimand": "paired difference in aligned early-ranking metrics at the common evaluation depth",
+      "procedure": "DAM-cluster paired bootstrap, 10000 resamples, seed 20263001, percentile 95% interval",
+      "multiplicity": "Holm within the pre-specified HE2_A metric family"
+    },
+    {
+      "evidence_family_id": "HE2_B_HIERARCHICAL_DEEP_COVERAGE",
+      "hypothesis_component": "HE2_B",
+      "block": "Group 1",
+      "classification": "ELIGIBLE",
+      "primary_paths": ["outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_metrics.json", "outputs/evaluation/normative_bm25_hierarchical_data_aduanas_clase87_v0.2/normative_hierarchical_case_summary.csv"],
+      "unit": "EVAL case within DAM",
+      "estimand": "change in pre-specified hierarchical documentary coverage between the declared depths",
+      "procedure": "DAM-cluster paired bootstrap, 10000 resamples, seed 20263001, percentile 95% interval",
+      "multiplicity": "Holm within the pre-specified HE2_B family"
+    },
+    {
+      "evidence_family_id": "HE2_B_CANDIDATE_POOL_COVERAGE",
+      "hypothesis_component": "HE2_B",
+      "block": "candidate-pool diagnostics",
+      "classification": "DESCRIPTIVE_ONLY",
+      "primary_paths": ["outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/exp08_integrated_findings_v0.2.md", "outputs/evaluation/exp08_split_sensitivity_v01_vs_v02/exp08_he5_component_assessment_v0.2.csv"],
+      "unit": "frozen diagnostic records",
+      "estimand": "none; descriptive coverage inventory only",
+      "procedure": "tabulation without inferential extrapolation",
+      "limitation": "candidate-pool and diagnostic-union evidence is not a primary ranking comparison"
+    },
+    {
+      "evidence_family_id": "EXP11A_HISTORICAL_BANK_SENSITIVITY",
+      "hypothesis_component": "sensitivity",
+      "block": "EXP11A",
+      "classification": "DESCRIPTIVE_ONLY",
+      "primary_paths": ["outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_run_manifest.json", "outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_case_level_ranks.csv"],
+      "unit": "run and case records, with DAM grouping retained",
+      "estimand": "descriptive sensitivity over H25/H50/H75/H100",
+      "procedure": "stratified descriptive comparison only",
+      "limitation": "bank size and composition are coupled; no isolated causal bank-size effect"
+    },
+    {
+      "evidence_family_id": "EXP11B_H150_H200_PAIRED_SENSITIVITY",
+      "hypothesis_component": "sensitivity",
+      "block": "EXP11B",
+      "classification": "ELIGIBLE",
+      "primary_paths": ["outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_run_manifest_v0.1.json", "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_metrics_by_bank_v0.1.csv", "outputs/evaluation/exp11b_historical_retrieval_h150_h200_v0.1/exp11b_retrieval_case_level_v0.1.csv"],
+      "unit": "paired H150/H200 run by approved seed; cases nested within run and DAM",
+      "estimand": "paired H150 versus H200 sensitivity difference under the approved seeds",
+      "procedure": "paired run-level comparison with DAM-aware summaries; no isolated causal size claim",
+      "replicates": "10 H150 and 10 H200 runs, paired on the same 10 seeds"
+    },
+    {
+      "evidence_family_id": "0B05C_ATTEMPT06_CORRECTIVE_SENSITIVITY",
+      "hypothesis_component": "sensitivity",
+      "block": "0B-05C",
+      "classification": "DESCRIPTIVE_ONLY",
+      "primary_paths": ["outputs/audits/0b05c_attempt06_execution_v0.5/attempt06_execution_record_v0.5.json", "outputs/evaluation/0b05c_corrective_numerical_v0.5/unified_sensitivity_summary_v0.5.json", "outputs/evaluation/d1a_corrective_0b05c_v0.5/d1a_corrective_vs_original_comparison_v0.5.json"],
+      "unit": "fixed EVAL case comparisons from Attempt06",
+      "estimand": "descriptive corrected-versus-control sensitivity only",
+      "procedure": "report frozen aggregate and case-level differences without a new inferential claim",
+      "limitation": "Attempt06 only; superseded attempts excluded"
+    },
+    {
+      "evidence_family_id": "HE5_AMBIGUOUS_INCOMPLETE_DESCRIPTIONS",
+      "hypothesis_component": "HE5_ambiguous_or_incomplete_descriptions",
+      "block": "HE5",
+      "classification": "DESCRIPTIVE_ONLY",
+      "primary_paths": ["outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_integrated_error_matrix_v0.2.csv", "outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_integrated_error_matrix_dictionary_v0.2.md"],
+      "unit": "frozen case records where descriptive fields are present",
+      "estimand": "none; operational descriptive coverage and limitation",
+      "procedure": "qualitative audit of frozen fields only",
+      "limitation": "no frozen case-level quality rule was available; fields are not promoted to a prevalence estimate"
+    },
+    {
+      "evidence_family_id": "HE5_HIERARCHICAL_PROXIMITY",
+      "hypothesis_component": "HE5_hierarchical_proximity",
+      "block": "HE5",
+      "classification": "ELIGIBLE",
+      "primary_paths": ["outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_historical_hierarchy_errors_v0.2.csv", "outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_integrated_error_matrix_v0.2.csv"],
+      "unit": "EVAL case, clustered by DAM",
+      "estimand": "pre-specified distribution of hierarchical error categories and their association with retrieval misses",
+      "procedure": "DAM-cluster descriptive contrasts with pre-specified category definitions; future interval only if the declared target is estimable",
+      "multiplicity": "Holm within the HE5 hierarchical component if multiple planned contrasts are activated"
+    },
+    {
+      "evidence_family_id": "HE5_INSUFFICIENT_HISTORICAL_PRECEDENTS",
+      "hypothesis_component": "HE5_insufficient_historical_precedents",
+      "block": "HE5",
+      "classification": "ELIGIBLE",
+      "primary_paths": ["outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_historical_errors_by_support_v0.2.csv", "outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_integrated_error_matrix_v0.2.csv"],
+      "unit": "EVAL case, clustered by DAM and support bucket fixed before analysis",
+      "estimand": "retrieval performance conditional on pre-specified historical-support buckets",
+      "procedure": "pre-specified bucket contrasts with DAM-aware summaries; no bucket chosen after observing outcomes",
+      "multiplicity": "Holm within the HE5 support component if multiple planned contrasts are activated"
+    },
+    {
+      "evidence_family_id": "HE5_INTERNAL_EVALUATION_SCOPE",
+      "hypothesis_component": "HE5_internal_evaluation_scope",
+      "block": "HE5",
+      "classification": "DESCRIPTIVE_ONLY",
+      "primary_paths": ["outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_component_coverage_v0.2.csv", "outputs/audits/group2b_reproducibility_closure_v0.1.json"],
+      "unit": "frozen evaluation inventory and coverage records",
+      "estimand": "none; validity boundary of the internal benchmark",
+      "procedure": "scope and coverage audit; no population-generalization claim"
+    },
+    {
+      "evidence_family_id": "HE5_EXPLANATION_EVIDENCE_LIMITS",
+      "hypothesis_component": "HE5_explanation_and_evidence_limits",
+      "block": "HE5",
+      "classification": "DESCRIPTIVE_ONLY",
+      "primary_paths": ["outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_component_coverage_v0.2.csv", "outputs/evaluation/he5_integrated_error_analysis_v0.2/he5_integrated_error_matrix_v0.2.csv"],
+      "unit": "frozen diagnostic and qualitative samples",
+      "estimand": "none; auditability and evidence limitations",
+      "procedure": "report sample scope and traceability fields without extrapolation",
+      "limitation": "reranker and HE4 evidence are partial diagnostic samples"
+    },
+    {
+      "evidence_family_id": "EXP12_DIVERSITY",
+      "hypothesis_component": "EXP12 diversity effect",
+      "block": "EXP12",
+      "classification": "NOT_ESTIMABLE",
+      "primary_paths": ["outputs/audits/exp12_planning_gate_v0.4/attempt_001_forensic/exp12_feasibility_failure_diagnostic_v0.1.json", "outputs/audits/exp12_planning_gate_v0.4/exp12_feasibility_forensic_attempt_001_execution_report_v0.1.json"],
+      "unit": "none",
+      "estimand": "not estimable",
+      "procedure": "no retrieval, candidate generation, selection, or inference",
+      "limitation": "original EXP12 design closed; D-HIGH/D-MID/D-LOW not selected"
+    }
+  ],
+  "classification_counts": {
+    "evidence_family_count": 13,
+    "ELIGIBLE": 6,
+    "DESCRIPTIVE_ONLY": 6,
+    "NOT_ESTIMABLE": 1,
+    "NOT_APPLICABLE": 0
+  },
+  "scope_bindings": {
+    "EXP11A_INFERENCE_SCOPE": "SENSITIVITY_ONLY",
+    "EXP11A_ISOLATED_CAUSAL_BANK_SIZE_EFFECT": "NOT_AUTHORIZED",
+    "EXP11A_DESIGN": "independent complete-DAM conditions",
+    "EXP11A_H50": "paired D1/D2 stratification",
+    "EXP11B_SCOPE": "H150/H200 sensitivity with approved replicates; paired seed identity required before comparison",
+    "ATTEMPT06_ONLY": true,
+    "EXP12_ORIGINAL_FROZEN_DESIGN": "CLOSED",
+    "EXP12_RETRIEVAL": "NOT_AUTHORIZED / NOT_EXECUTED",
+    "EXP12_DIVERSITY_EFFECT_ESTIMABLE": false,
+    "EXP12_ANALYTICAL_CLASSIFICATION": "NOT_ESTIMABLE",
+    "D_HIGH_D_MID_D_LOW": "NOT_SELECTED"
+  },
+  "audit_state": {
+    "INFERENTIAL_CALCULATION_PERFORMED": false,
+    "P_VALUES_CALCULATED": false,
+    "METRICS_RECOMPUTED": false,
+    "SCIENTIFIC_EXPERIMENT_REEXECUTED": false,
+    "EXP12_REOPENED": false,
+    "HE2_DECIDED": false,
+    "HE5_DECIDED": false,
+    "G3_F02_STARTED": false,
+    "EXTERNAL_AUDIT_REQUIRED": true
+  }
+}
