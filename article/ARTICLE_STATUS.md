@@ -5,63 +5,59 @@
 ### Estado general
 
 - Rama de trabajo: `article/main-manuscript`.
-- Estado global: `IN_ANALYSIS`.
-- `Fase 0`: **`CLOSED / APPROVED`**.
+- Estado global: `DRAFTING` a nivel de Fase 1, limitado al bloque autorizado.
 - `0A — Ground truth documental y experimental`: **`CLOSED / APPROVED`**.
 - `0B — Mapa crítico de literatura y taxonomía`: **`CLOSED / APPROVED`**; `0B-01` a `0B-06`: **`APPROVED / FROZEN`**.
 - `0C — Gap, contribución y Research Questions`: **`CLOSED / APPROVED / FROZEN`**.
-- `0D — Arquitectura editorial, journal fit y gobernanza pre-redacción`: **`CLOSED / APPROVED / FROZEN`**.
 - `0D-1 — Arquitectura editorial y journal fit`: **`CLOSED / APPROVED / FROZEN`**.
 - `0D-2 — Requisitos de revista, gobernanza de escritura y estrategia de envío`: **`CLOSED / APPROVED / FROZEN`**.
-- `0D_V02_INTERNAL_REVIEW = PASS`.
-- `0D2_V02_INTERNAL_REVIEW = PASS`.
-- `0D_AUTHOR_APPROVAL = RECEIVED`.
-- `BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS`.
-- `MASTER_WRITING_AND_DELIVERY_PROTOCOL = MWDP_V1.0 / FROZEN`.
-- `TARGET_JOURNAL = Knowledge-Based Systems`.
-- `PLAN_B = Expert Systems with Applications`.
-- `PLAN_C = Information Processing & Management`.
-- `FINAL_GAP = NOT_DEFINED`.
-- `NOVELTY = NOT_DECLARED`.
-- `PHASE_1 = ELIGIBLE_FOR_OPENING / NEXT`.
-- `MANUSCRIPT_DRAFTING = NOT_AUTHORIZED_UNTIL_PHASE_1_BLOCK_PROMPT`.
-- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` para el gate editorial vigente.
+- `PHASE_0 = CLOSED / APPROVED`.
+- `PHASE_1 = OPENED`.
+- `METHODS_B01 = READY_FOR_DRAFTING`.
+- `METHODS_B01_TITLE = Design, scope, and units`.
+- `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY`.
+- `OTHER_METHODS_BLOCKS = NOT_AUTHORIZED_YET`.
+- `NEXT_ACTOR = DRAFTING_AI`.
+- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` para el gate de entrada de B01.
 
-### Artefactos canónicos de cierre de Fase 0
+### Target editorial congelado
 
-- Aprobación del autor de 0D: `article/reviews/0D_AUTHOR_APPROVAL.md`.
-- Freeze canónico de 0D: `article/positioning/0D_EDITORIAL_ARCHITECTURE_AND_WRITING_GOVERNANCE_FROZEN.md`.
-- Protocolo maestro acumulativo: `article/governance/MASTER_WRITING_AND_DELIVERY_PROTOCOL.md` — `MWDP_V1.0 / FROZEN`.
-- Auditoría de acceso bibliográfico: `article/reviews/0D2_BIBLIOGRAPHIC_FULLTEXT_ACCESS_AUDIT.md`.
-- Cierre formal de Fase 0: `article/reviews/0_PHASE_CLOSURE.md`.
+```text
+TARGET_A = Knowledge-Based Systems
+PLAN_B = Expert Systems with Applications
+PLAN_C = Information Processing & Management
+ARTICLE_TYPE_OPERATIVE = Research article
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
 
 ### Gobernanza pre-redacción congelada
 
 ```text
+MWDP_VERSION = MWDP_V1.0
+MWDP_STATE = FROZEN
 KBS_TEMPLATE_STATUS = UNVERIFIED / NEUTRAL_MASTER_POLICY_ACTIVE
 KBS_ARTICLE_TYPE_STATUS = CLOSED_FOR_DRAFTING / RESEARCH_ARTICLE
 KBS_REFERENCE_STYLE_STATUS = UNVERIFIED_FINAL_STYLE / PROVISIONAL_APA7_POLICY_CLOSED
-ARTICLE_ARCHITECTURE_STATUS = FROZEN
-WRITING_POLICY_STATUS = FROZEN
-CLAIM_EVIDENCE_PROTOCOL_STATUS = FROZEN
-MD_DOCX_WORKFLOW_STATUS = FROZEN
-WORD_CITATION_COMMENT_PROTOCOL_STATUS = FROZEN
+ARTICLE_ARCHITECTURE_STATUS = FROZEN_WITH_OPERATIONAL_CONDITION
+WRITING_POLICY_STATUS = FROZEN_FOR_DRAFTING
+CLAIM_EVIDENCE_PROTOCOL_STATUS = FROZEN_FOR_DRAFTING
+MD_DOCX_WORKFLOW_STATUS = FROZEN_FOR_DRAFTING
+WORD_CITATION_COMMENT_PROTOCOL_STATUS = FROZEN_FOR_DRAFTING
 DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
-JOURNAL_CASCADE_STATUS = FROZEN
+JOURNAL_CASCADE_STATUS = FROZEN_FOR_DRAFTING
 ```
 
 Reglas operativas principales:
 
-- La IA de Redacción genera y actualiza el bloque `.md`, el master acumulativo `.md` candidato y el master acumulativo `.docx` candidato.
-- `article/governance/MASTER_WRITING_AND_DELIVERY_PROTOCOL.md` debe leerse y cumplirse íntegramente en cada bloque de Fase 1 en adelante.
+- La IA de Redacción genera/actualiza el bloque `.md`, el master acumulativo `.md` candidato y el master acumulativo `.docx` candidato.
 - El Word interno es bilingüe: `Part I — English manuscript master` + `Part II — Spanish semantic-control mirror`.
 - `WORD = PROVISIONAL_APA7_PRESENTATION_LAYER`.
 - `MARKDOWN = SOURCE_TRACEABILITY_LAYER_NOT_APA7_FORMATTING_AUTHORITY`.
 - La gestión final con Mendeley corresponde al autor.
 - Cada instancia de cita en la parte inglesa del Word lleva comentario anclado con fuente/revista, autor(es), extracto original suficiente, traducción española, justificación de respaldo y límite cuando corresponda.
-- El siguiente bloque parte del último master aprobado; no se reconstruye silenciosamente desde cero.
-- Se distinguen `BLOCK_REVISION`, `MASTER_CANDIDATE_REVISION` y `MASTER_INTEGRATION`; solo una integración aprobada hace avanzar el master canónico.
-- Los requisitos KBS todavía no verificables desde fuente primaria accesible se gestionan mediante master neutral/reversible y deben revalidarse antes del paquete final de submission.
+- Solo una integración aprobada por el autor incrementa `ARTICLE_MASTER_V00N`.
+- El primer candidato se inicializa como candidato, no como master aprobado.
 
 ### Gate bibliográfico previo a Fase 1 — PASSED
 
@@ -78,7 +74,7 @@ BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS
 BIBLIOGRAPHIC_SCIENTIFIC_REASSESSMENT = NOT_PERFORMED
 ```
 
-No se interpreta como existencia de 62 PDF locales. El `PASS` no autoriza citar por memoria: cada uso futuro debe recuperar nuevamente el full text y verificar el pasaje exacto. Si una fuente deja de recuperarse en una sesión futura, se usa `ACCESS_RECHECK_REQUIRED`.
+El acceso previo no autoriza citar por memoria. Cada cita futura exige recuperar nuevamente el full text, comprobar identidad y pasaje exacto y cumplir `MWDP_V1.0`. Una falla de recuperación activa `ACCESS_RECHECK_REQUIRED`.
 
 ### Estado científico preservado
 
@@ -87,9 +83,8 @@ No se interpreta como existencia de 62 PDF locales. El `PASS` no autoriza citar 
 RQ1 = RETAINED
 RQ2 = RETAINED
 RQ3 = RETAINED_WITH_HE4_LIMITATIONS
-RQ4 = RETAINED_CONDITIONAL_ON_GROUP3
+RQ4 = RETAINED_CONDITIONAL_ON_GROUP3_UNTIL_EXPLICIT_ARTICLE_RECONCILIATION
 C10_C11_RECONCILIATION = REQUIRED_BEFORE_EXP11B_ARTICLE_USE
-GROUP3 = REQUIRED_BEFORE_FINAL_RQ4_AND_HE2_HE5_INFERENCE
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
@@ -105,25 +100,28 @@ Se mantienen las fronteras:
 - `AUDITABILITY ≠ LEGAL_CORRECTNESS`;
 - `CONFIGURABILITY ≠ EMPIRICAL_GENERALIZATION`.
 
+### Estado del Plan Maestro experimental vivo
+
+Snapshot de rama verificado al abrir Fase 1:
+
+```text
+SRC03_BRANCH = docs/plan-maestro-temporal-2026-08-31
+SRC03_LIVE_HEAD = f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6
+```
+
+El Plan Maestro vivo registra cierres de Grupo 3A/3B posteriores a algunos artefactos editoriales históricos. Esa diferencia **no se reconcilia silenciosamente** con RQ4 ni con la matriz de claims. Requiere un gate editorial específico antes de usar esos resultados o inferencias en el artículo. No bloquea B01 porque B01 contiene únicamente diseño, alcance y unidades.
+
 ### Gate vigente
 
 ```text
 PHASE_0 = CLOSED / APPROVED
-PHASE_0A = CLOSED / APPROVED
-PHASE_0B = CLOSED / APPROVED
-PHASE_0C = CLOSED / APPROVED / FROZEN
-PHASE_0D = CLOSED / APPROVED / FROZEN
-BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS
-MASTER_WRITING_AND_DELIVERY_PROTOCOL = MWDP_V1.0 / FROZEN
-TARGET_JOURNAL = Knowledge-Based Systems
-PLAN_B = Expert Systems with Applications
-PLAN_C = Information Processing & Management
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-PHASE_1 = ELIGIBLE_FOR_OPENING / NEXT
-NEXT_ACTOR = IA_GESTORA
-NEXT_ACTION = OPEN_PHASE_1_METHODS_ENTRY_GATE
-MANUSCRIPT_DRAFTING = NOT_AUTHORIZED_UNTIL_PHASE_1_BLOCK_PROMPT
+PHASE_1 = OPENED
+PHASE_1_METHODS_ENTRY_GATE = PASS
+METHODS_B01 = READY_FOR_DRAFTING
+METHODS_B01_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS.md
+MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY
+NEXT_ACTOR = DRAFTING_AI
+NEXT_DELIVERY = Methods_B01_V01 + initial cumulative master candidate
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
 ```
 
@@ -134,62 +132,55 @@ EXPERIMENTAL_REVIEW = NOT_REQUIRED
 ### Overall state
 
 - Working branch: `article/main-manuscript`.
-- `Phase 0 = CLOSED / APPROVED`.
 - Phase 0A: `CLOSED / APPROVED`.
-- Phase 0B: `CLOSED / APPROVED`; blocks 0B-01 through 0B-06 remain `APPROVED / FROZEN`.
+- Phase 0B: `CLOSED / APPROVED`; 0B-01 through 0B-06 remain `APPROVED / FROZEN`.
 - Phase 0C: `CLOSED / APPROVED / FROZEN`.
-- Phase 0D: `CLOSED / APPROVED / FROZEN`.
-- `0D1 = CLOSED / APPROVED / FROZEN`.
-- `0D2 = CLOSED / APPROVED / FROZEN`.
-- `0D_V02_INTERNAL_REVIEW = PASS`.
-- `0D2_V02_INTERNAL_REVIEW = PASS`.
-- `0D_AUTHOR_APPROVAL = RECEIVED`.
-- `BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS`.
-- `MASTER_WRITING_AND_DELIVERY_PROTOCOL = MWDP_V1.0 / FROZEN`.
-- `TARGET_JOURNAL = Knowledge-Based Systems`.
-- `PLAN_B = Expert Systems with Applications`.
-- `PLAN_C = Information Processing & Management`.
-- `FINAL_GAP = NOT_DEFINED`; `NOVELTY = NOT_DECLARED`.
-- `PHASE_1 = ELIGIBLE_FOR_OPENING / NEXT`.
-- `MANUSCRIPT_DRAFTING = NOT_AUTHORIZED_UNTIL_PHASE_1_BLOCK_PROMPT`.
+- Phase 0D-1: `CLOSED / APPROVED / FROZEN`.
+- Phase 0D-2: `CLOSED / APPROVED / FROZEN`.
+- `PHASE_0 = CLOSED / APPROVED`.
+- `PHASE_1 = OPENED`.
+- `METHODS_B01 = READY_FOR_DRAFTING`.
+- `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY`.
+- All other Methods blocks remain unauthorized.
+- `NEXT_ACTOR = DRAFTING_AI`.
+- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` for the B01 entry gate.
 
-### Canonical Phase-0 closure artifacts
+### Frozen journal strategy
 
-The author approval, canonical 0D freeze, frozen `MWDP_V1.0`, bibliographic full-text access audit, and formal Phase-0 closure are respectively recorded in `article/reviews/0D_AUTHOR_APPROVAL.md`, `article/positioning/0D_EDITORIAL_ARCHITECTURE_AND_WRITING_GOVERNANCE_FROZEN.md`, `article/governance/MASTER_WRITING_AND_DELIVERY_PROTOCOL.md`, `article/reviews/0D2_BIBLIOGRAPHIC_FULLTEXT_ACCESS_AUDIT.md`, and `article/reviews/0_PHASE_CLOSURE.md`.
+```text
+TARGET_A = Knowledge-Based Systems
+PLAN_B = Expert Systems with Applications
+PLAN_C = Information Processing & Management
+ARTICLE_TYPE_OPERATIVE = Research article
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
 
 ### Frozen pre-drafting governance
 
 ```text
+MWDP_VERSION = MWDP_V1.0
+MWDP_STATE = FROZEN
 KBS_TEMPLATE_STATUS = UNVERIFIED / NEUTRAL_MASTER_POLICY_ACTIVE
-KBS_ARTICLE_TYPE_STATUS = CLOSED_FOR_DRAFTING / RESEARCH_ARTICLE
 KBS_REFERENCE_STYLE_STATUS = UNVERIFIED_FINAL_STYLE / PROVISIONAL_APA7_POLICY_CLOSED
-ARTICLE_ARCHITECTURE_STATUS = FROZEN
-WRITING_POLICY_STATUS = FROZEN
-CLAIM_EVIDENCE_PROTOCOL_STATUS = FROZEN
-MD_DOCX_WORKFLOW_STATUS = FROZEN
-WORD_CITATION_COMMENT_PROTOCOL_STATUS = FROZEN
 DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
-JOURNAL_CASCADE_STATUS = FROZEN
+WORD_CITATION_COMMENT_PROTOCOL_STATUS = FROZEN_FOR_DRAFTING
+JOURNAL_CASCADE_STATUS = FROZEN_FOR_DRAFTING
 ```
 
-The Writing AI owns block Markdown and cumulative candidate Markdown/Word generation and update. `MWDP_V1.0` must be read and fully followed in every Phase-1-or-later block. The internal Word master is bilingual; Word alone carries provisional APA-7 presentation; Markdown remains the source-traceability layer; final Mendeley management belongs to the author; each English Word citation carries the mandatory anchored audit comment; approved-master integrity is preserved; and block/candidate/integration revisions remain distinct.
+The Writing AI owns generation/update of the block and cumulative candidate Markdown/Word masters. The internal Word master is bilingual. Word is the provisional APA-7 presentation layer; Markdown is the source-traceability layer; final Mendeley management belongs to the author. Every English citation requires its exact anchored audit comment. Only author-approved integration increments `ARTICLE_MASTER_V00N`.
 
-### Bibliographic gate — PASSED
+### Pre-Phase-1 bibliographic gate
 
 ```text
 BIBLIOGRAPHIC_CORPUS_SIZE = 62
-CANONICAL_ACCESS_MANIFEST = CREATED
 CURRENT_FULLTEXT_ACCESS_CONFIRMED = 62/62
-FILE_LIBRARY_FULLTEXT = 58
-OFFICIAL_PRIMARY_WEB_FULLTEXT = 4
-PDF_FORMAT_FULLTEXT = 59
-AUTHORITATIVE_HTML_FULLTEXT = 3
 INACCESSIBLE = 0
 BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS
 BIBLIOGRAPHIC_SCIENTIFIC_REASSESSMENT = NOT_PERFORMED
 ```
 
-This does not mean 62 local PDFs exist, nor does `PASS` authorize citation from memory. Every future citation must re-retrieve the relevant full text and verify the exact supporting passage. Future retrieval failure triggers `ACCESS_RECHECK_REQUIRED`.
+Prior access never authorizes citation from memory. Every future citation must re-retrieve and verify the actual full text and exact supporting passage under MWDP_V1.0; retrieval failure triggers `ACCESS_RECHECK_REQUIRED`.
 
 ### Preserved scientific state
 
@@ -198,31 +189,24 @@ This does not mean 62 local PDFs exist, nor does `PASS` authorize citation from 
 RQ1 = RETAINED
 RQ2 = RETAINED
 RQ3 = RETAINED_WITH_HE4_LIMITATIONS
-RQ4 = RETAINED_CONDITIONAL_ON_GROUP3
+RQ4 = RETAINED_CONDITIONAL_ON_GROUP3_UNTIL_EXPLICIT_ARTICLE_RECONCILIATION
 C10_C11_RECONCILIATION = REQUIRED_BEFORE_EXP11B_ARTICLE_USE
-GROUP3 = REQUIRED_BEFORE_FINAL_RQ4_AND_HE2_HE5_INFERENCE
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
+
+The living experimental Master Plan was rechecked at `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6`. It records later Group-3A/3B closures than some historical editorial artifacts. This is not silently reconciled into RQ4 or article claims; a dedicated editorial gate is required before those results/inferences are used. This does not block B01.
 
 ### Current gate
 
 ```text
 PHASE_0 = CLOSED / APPROVED
-PHASE_0A = CLOSED / APPROVED
-PHASE_0B = CLOSED / APPROVED
-PHASE_0C = CLOSED / APPROVED / FROZEN
-PHASE_0D = CLOSED / APPROVED / FROZEN
-BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS
-MASTER_WRITING_AND_DELIVERY_PROTOCOL = MWDP_V1.0 / FROZEN
-TARGET_JOURNAL = Knowledge-Based Systems
-PLAN_B = Expert Systems with Applications
-PLAN_C = Information Processing & Management
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-PHASE_1 = ELIGIBLE_FOR_OPENING / NEXT
-NEXT_ACTOR = MANAGING_AI
-NEXT_ACTION = OPEN_PHASE_1_METHODS_ENTRY_GATE
-MANUSCRIPT_DRAFTING = NOT_AUTHORIZED_UNTIL_PHASE_1_BLOCK_PROMPT
+PHASE_1 = OPENED
+PHASE_1_METHODS_ENTRY_GATE = PASS
+METHODS_B01 = READY_FOR_DRAFTING
+METHODS_B01_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS.md
+MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY
+NEXT_ACTOR = DRAFTING_AI
+NEXT_DELIVERY = Methods_B01_V01 + initial cumulative master candidate
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
 ```
