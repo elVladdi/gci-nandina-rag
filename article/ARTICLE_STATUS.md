@@ -15,12 +15,13 @@
 - `PHASE_1 = OPENED`.
 - `METHODS_B01 = REVISION_REQUIRED`.
 - `METHODS_B01_V01_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS`.
-- `METHODS_B01_REQUIRED_CORRECTIONS = B01-M01, B01-M02, B01-M03`.
+- `METHODS_B01_V01_AUTHOR_APPROVAL = REJECTED`.
+- `METHODS_B01_REQUIRED_CORRECTIONS = B01-M01, B01-M02, B01-M03, B01-M05`.
 - `EDITORIAL_CONTROL_CORRECTION_B01_M04 = CLOSED_BY_IA_GESTORA`.
 - `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_REVISION_ONLY`.
 - `OTHER_METHODS_BLOCKS = NOT_AUTHORIZED_YET`.
 - `NEXT_ACTOR = DRAFTING_AI`.
-- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` para la revisión V01 de B01.
+- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` para la revisión vigente de B01.
 
 ### Target editorial congelado
 
@@ -121,24 +122,30 @@ La afirmación editorial previa de cierres de Grupo 3A/3B era incorrecta y fue c
 
 ### Estado de Methods B01
 
-La entrega V01 está en commit `2a0deee3c4b63ae028bbe909d5f44f90a4282086` y fue revisada en:
+La entrega V01 está en commit `2a0deee3c4b63ae028bbe909d5f44f90a4282086`.
 
-`article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V01.md`
+Revisiones:
 
-Resultado:
+- `article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V01.md`;
+- `article/reviews/1_METHODS_B01_AUTHOR_REVIEW_V01.md`.
+
+Resultado vigente:
 
 ```text
 METHODS_B01_V01_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS
 MATERIAL_SCIENTIFIC_ERRORS = 0
-MINOR_REQUIRED_CORRECTIONS = 3
 B01_M01 = REVISION_REQUIRED
 B01_M02 = REVISION_REQUIRED
 B01_M03 = REVISION_REQUIRED
 B01_M04 = CLOSED_BY_IA_GESTORA
-AUTHOR_APPROVAL = NOT_REQUESTED_YET
+B01_M05 = REVISION_REQUIRED / AUTHOR_POSITIONING
+AUTHOR_APPROVAL_METHODS_B01_V01 = REJECTED
+REJECTION_REASON = EDITORIAL_POSITIONING / CONTRIBUTION_VISIBILITY
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 ```
+
+La corrección B01-M05 exige que V02 presente primero el **objeto científico general** —arquitectura auditable de apoyo a decisión con desacoplamiento funcional de ranking, evidencia normativa y explicación LLM, Top-3 inmutable y sin feedback generativo— y solo después introduzca **NANDINA Capítulo 87 como testbed experimental regulatorio**. Este reencuadre no declara novelty final ni generalización empírica.
 
 ### Gate vigente
 
@@ -149,8 +156,9 @@ PHASE_1_METHODS_ENTRY_GATE = PASS
 METHODS_B01 = REVISION_REQUIRED
 MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_REVISION_ONLY
 NEXT_ACTOR = DRAFTING_AI
+NEXT_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS_REVISION_V02.md
 NEXT_DELIVERY = Methods_B01_V02 + revised ARTICLE_MASTER_CANDIDATE_V02.md/.docx
-AUTHOR_APPROVAL = NOT_REQUESTED_YET
+AUTHOR_APPROVAL_METHODS_B01_V01 = REJECTED
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
@@ -172,9 +180,9 @@ EXPERIMENTAL_REVIEW = NOT_REQUIRED
 - `PHASE_1 = OPENED`.
 - `METHODS_B01 = REVISION_REQUIRED`.
 - `METHODS_B01_V01_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS`.
+- `METHODS_B01_V01_AUTHOR_APPROVAL = REJECTED`.
 - Drafting is authorized only for the B01 revision; all other Methods blocks remain unauthorized.
 - `NEXT_ACTOR = DRAFTING_AI`.
-- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` for the B01 V01 review.
 
 ### Frozen journal strategy and governance
 
@@ -190,11 +198,7 @@ MWDP_STATE = FROZEN
 DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
 ```
 
-The Writing AI owns generation/update of block and cumulative candidate Markdown/Word masters. Word remains the provisional APA-7 presentation layer; Markdown remains the source-traceability layer; final Mendeley management belongs to the author. Every English citation requires its exact anchored audit comment. Only author-approved integration increments `ARTICLE_MASTER_V00N`.
-
 ### Living experimental state
-
-The `SRC-03` snapshot verified during B01 review is:
 
 ```text
 SRC03_BRANCH = docs/plan-maestro-temporal-2026-08-31
@@ -206,23 +210,24 @@ NEXT_ELIGIBLE_BLOCK = GROUP3_METRICS_AND_INFERENCE
 GROUP3 = NOT_STARTED
 ```
 
-The previous editorial statement that Group 3A/3B had closed was incorrect and has been corrected. HE2/HE5 and final Group-3-dependent inference remain pending. This is an editorial-control alignment to `SRC-03`, not an experimental modification.
-
 ### Methods B01 state
 
-V01 at commit `2a0deee3c4b63ae028bbe909d5f44f90a4282086` received `PASS_WITH_CORRECTIONS` in `article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V01.md`.
+V01 at commit `2a0deee3c4b63ae028bbe909d5f44f90a4282086` received internal `PASS_WITH_CORRECTIONS` but was **rejected by the author** because the opening foregrounded NANDINA/Chapter 87 before making the broader scientific offering visible.
 
 ```text
 MATERIAL_SCIENTIFIC_ERRORS = 0
-MINOR_REQUIRED_CORRECTIONS = 3
 B01_M01 = REVISION_REQUIRED
 B01_M02 = REVISION_REQUIRED
 B01_M03 = REVISION_REQUIRED
 B01_M04 = CLOSED_BY_MANAGING_AI
-AUTHOR_APPROVAL = NOT_REQUESTED_YET
+B01_M05 = REVISION_REQUIRED / AUTHOR_POSITIONING
+AUTHOR_APPROVAL_METHODS_B01_V01 = REJECTED
+REJECTION_REASON = EDITORIAL_POSITIONING / CONTRIBUTION_VISIBILITY
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 ```
+
+B01-M05 requires V02 to present the broader scientific object first—an auditable decision-support architecture with functional decoupling of ranking, normative evidence, and downstream LLM explanation, immutable fixed Top-3, and no generative feedback—and only then introduce NANDINA Chapter 87 as the regulatory experimental testbed. This reframing does not declare final novelty or empirical generalization.
 
 ### Current gate
 
@@ -233,8 +238,9 @@ PHASE_1_METHODS_ENTRY_GATE = PASS
 METHODS_B01 = REVISION_REQUIRED
 MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_REVISION_ONLY
 NEXT_ACTOR = DRAFTING_AI
+NEXT_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS_REVISION_V02.md
 NEXT_DELIVERY = Methods_B01_V02 + revised ARTICLE_MASTER_CANDIDATE_V02.md/.docx
-AUTHOR_APPROVAL = NOT_REQUESTED_YET
+AUTHOR_APPROVAL_METHODS_B01_V01 = REJECTED
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
