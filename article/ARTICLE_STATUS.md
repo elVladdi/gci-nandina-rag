@@ -5,7 +5,7 @@
 ### Estado general
 
 - Rama de trabajo: `article/main-manuscript`.
-- Estado global: `DRAFTING` a nivel de Fase 1, limitado al bloque autorizado.
+- Estado global: `REVISION_REQUIRED` a nivel de `Methods B01`.
 - `0A — Ground truth documental y experimental`: **`CLOSED / APPROVED`**.
 - `0B — Mapa crítico de literatura y taxonomía`: **`CLOSED / APPROVED`**; `0B-01` a `0B-06`: **`APPROVED / FROZEN`**.
 - `0C — Gap, contribución y Research Questions`: **`CLOSED / APPROVED / FROZEN`**.
@@ -13,12 +13,14 @@
 - `0D-2 — Requisitos de revista, gobernanza de escritura y estrategia de envío`: **`CLOSED / APPROVED / FROZEN`**.
 - `PHASE_0 = CLOSED / APPROVED`.
 - `PHASE_1 = OPENED`.
-- `METHODS_B01 = READY_FOR_DRAFTING`.
-- `METHODS_B01_TITLE = Design, scope, and units`.
-- `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY`.
+- `METHODS_B01 = REVISION_REQUIRED`.
+- `METHODS_B01_V01_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS`.
+- `METHODS_B01_REQUIRED_CORRECTIONS = B01-M01, B01-M02, B01-M03`.
+- `EDITORIAL_CONTROL_CORRECTION_B01_M04 = CLOSED_BY_IA_GESTORA`.
+- `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_REVISION_ONLY`.
 - `OTHER_METHODS_BLOCKS = NOT_AUTHORIZED_YET`.
 - `NEXT_ACTOR = DRAFTING_AI`.
-- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` para el gate de entrada de B01.
+- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` para la revisión V01 de B01.
 
 ### Target editorial congelado
 
@@ -83,8 +85,9 @@ El acceso previo no autoriza citar por memoria. Cada cita futura exige recuperar
 RQ1 = RETAINED
 RQ2 = RETAINED
 RQ3 = RETAINED_WITH_HE4_LIMITATIONS
-RQ4 = RETAINED_CONDITIONAL_ON_GROUP3_UNTIL_EXPLICIT_ARTICLE_RECONCILIATION
+RQ4 = RETAINED_CONDITIONAL_ON_GROUP3
 C10_C11_RECONCILIATION = REQUIRED_BEFORE_EXP11B_ARTICLE_USE
+GROUP3 = NOT_STARTED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
@@ -102,14 +105,40 @@ Se mantienen las fronteras:
 
 ### Estado del Plan Maestro experimental vivo
 
-Snapshot de rama verificado al abrir Fase 1:
+Snapshot de rama verificado durante la revisión de B01:
 
 ```text
 SRC03_BRANCH = docs/plan-maestro-temporal-2026-08-31
 SRC03_LIVE_HEAD = f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6
+GROUP2B = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+EXP12_DISPOSITION = CLOSED_WITHOUT_RETRIEVAL / PLANNING_PRECONDITION_FAILED_UNDER_FROZEN_SEARCH
+EXP12_DIVERSITY_EFFECT_ESTIMABLE = false
+NEXT_ELIGIBLE_BLOCK = GROUP3_METRICS_AND_INFERENCE
+GROUP3 = NOT_STARTED
 ```
 
-El Plan Maestro vivo registra cierres de Grupo 3A/3B posteriores a algunos artefactos editoriales históricos. Esa diferencia **no se reconcilia silenciosamente** con RQ4 ni con la matriz de claims. Requiere un gate editorial específico antes de usar esos resultados o inferencias en el artículo. No bloquea B01 porque B01 contiene únicamente diseño, alcance y unidades.
+La afirmación editorial previa de cierres de Grupo 3A/3B era incorrecta y fue corregida. HE2/HE5 y la inferencia final dependiente de Grupo 3 permanecen pendientes. Esta corrección no modifica resultados experimentales; alinea el control editorial con `SRC-03`.
+
+### Estado de Methods B01
+
+La entrega V01 está en commit `2a0deee3c4b63ae028bbe909d5f44f90a4282086` y fue revisada en:
+
+`article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V01.md`
+
+Resultado:
+
+```text
+METHODS_B01_V01_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS
+MATERIAL_SCIENTIFIC_ERRORS = 0
+MINOR_REQUIRED_CORRECTIONS = 3
+B01_M01 = REVISION_REQUIRED
+B01_M02 = REVISION_REQUIRED
+B01_M03 = REVISION_REQUIRED
+B01_M04 = CLOSED_BY_IA_GESTORA
+AUTHOR_APPROVAL = NOT_REQUESTED_YET
+MASTER_INTEGRATION = NOT_AUTHORIZED
+B02 = NOT_AUTHORIZED
+```
 
 ### Gate vigente
 
@@ -117,11 +146,13 @@ El Plan Maestro vivo registra cierres de Grupo 3A/3B posteriores a algunos artef
 PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED
 PHASE_1_METHODS_ENTRY_GATE = PASS
-METHODS_B01 = READY_FOR_DRAFTING
-METHODS_B01_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS.md
-MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY
+METHODS_B01 = REVISION_REQUIRED
+MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_REVISION_ONLY
 NEXT_ACTOR = DRAFTING_AI
-NEXT_DELIVERY = Methods_B01_V01 + initial cumulative master candidate
+NEXT_DELIVERY = Methods_B01_V02 + revised ARTICLE_MASTER_CANDIDATE_V02.md/.docx
+AUTHOR_APPROVAL = NOT_REQUESTED_YET
+MASTER_INTEGRATION = NOT_AUTHORIZED
+B02 = NOT_AUTHORIZED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
 ```
 
@@ -139,13 +170,13 @@ EXPERIMENTAL_REVIEW = NOT_REQUIRED
 - Phase 0D-2: `CLOSED / APPROVED / FROZEN`.
 - `PHASE_0 = CLOSED / APPROVED`.
 - `PHASE_1 = OPENED`.
-- `METHODS_B01 = READY_FOR_DRAFTING`.
-- `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY`.
-- All other Methods blocks remain unauthorized.
+- `METHODS_B01 = REVISION_REQUIRED`.
+- `METHODS_B01_V01_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS`.
+- Drafting is authorized only for the B01 revision; all other Methods blocks remain unauthorized.
 - `NEXT_ACTOR = DRAFTING_AI`.
-- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` for the B01 entry gate.
+- `EXPERIMENTAL_REVIEW = NOT_REQUIRED` for the B01 V01 review.
 
-### Frozen journal strategy
+### Frozen journal strategy and governance
 
 ```text
 TARGET_A = Knowledge-Based Systems
@@ -154,48 +185,44 @@ PLAN_C = Information Processing & Management
 ARTICLE_TYPE_OPERATIVE = Research article
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
-```
-
-### Frozen pre-drafting governance
-
-```text
 MWDP_VERSION = MWDP_V1.0
 MWDP_STATE = FROZEN
-KBS_TEMPLATE_STATUS = UNVERIFIED / NEUTRAL_MASTER_POLICY_ACTIVE
-KBS_REFERENCE_STYLE_STATUS = UNVERIFIED_FINAL_STYLE / PROVISIONAL_APA7_POLICY_CLOSED
 DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
-WORD_CITATION_COMMENT_PROTOCOL_STATUS = FROZEN_FOR_DRAFTING
-JOURNAL_CASCADE_STATUS = FROZEN_FOR_DRAFTING
 ```
 
-The Writing AI owns generation/update of the block and cumulative candidate Markdown/Word masters. The internal Word master is bilingual. Word is the provisional APA-7 presentation layer; Markdown is the source-traceability layer; final Mendeley management belongs to the author. Every English citation requires its exact anchored audit comment. Only author-approved integration increments `ARTICLE_MASTER_V00N`.
+The Writing AI owns generation/update of block and cumulative candidate Markdown/Word masters. Word remains the provisional APA-7 presentation layer; Markdown remains the source-traceability layer; final Mendeley management belongs to the author. Every English citation requires its exact anchored audit comment. Only author-approved integration increments `ARTICLE_MASTER_V00N`.
 
-### Pre-Phase-1 bibliographic gate
+### Living experimental state
+
+The `SRC-03` snapshot verified during B01 review is:
 
 ```text
-BIBLIOGRAPHIC_CORPUS_SIZE = 62
-CURRENT_FULLTEXT_ACCESS_CONFIRMED = 62/62
-INACCESSIBLE = 0
-BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS
-BIBLIOGRAPHIC_SCIENTIFIC_REASSESSMENT = NOT_PERFORMED
+SRC03_BRANCH = docs/plan-maestro-temporal-2026-08-31
+SRC03_LIVE_HEAD = f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6
+GROUP2B = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+EXP12_DISPOSITION = CLOSED_WITHOUT_RETRIEVAL / PLANNING_PRECONDITION_FAILED_UNDER_FROZEN_SEARCH
+EXP12_DIVERSITY_EFFECT_ESTIMABLE = false
+NEXT_ELIGIBLE_BLOCK = GROUP3_METRICS_AND_INFERENCE
+GROUP3 = NOT_STARTED
 ```
 
-Prior access never authorizes citation from memory. Every future citation must re-retrieve and verify the actual full text and exact supporting passage under MWDP_V1.0; retrieval failure triggers `ACCESS_RECHECK_REQUIRED`.
+The previous editorial statement that Group 3A/3B had closed was incorrect and has been corrected. HE2/HE5 and final Group-3-dependent inference remain pending. This is an editorial-control alignment to `SRC-03`, not an experimental modification.
 
-### Preserved scientific state
+### Methods B01 state
+
+V01 at commit `2a0deee3c4b63ae028bbe909d5f44f90a4282086` received `PASS_WITH_CORRECTIONS` in `article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V01.md`.
 
 ```text
-0C_PROVISIONAL_CENTRAL_CONTRIBUTION = B_ARCHITECTURAL_METHODOLOGICAL
-RQ1 = RETAINED
-RQ2 = RETAINED
-RQ3 = RETAINED_WITH_HE4_LIMITATIONS
-RQ4 = RETAINED_CONDITIONAL_ON_GROUP3_UNTIL_EXPLICIT_ARTICLE_RECONCILIATION
-C10_C11_RECONCILIATION = REQUIRED_BEFORE_EXP11B_ARTICLE_USE
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
+MATERIAL_SCIENTIFIC_ERRORS = 0
+MINOR_REQUIRED_CORRECTIONS = 3
+B01_M01 = REVISION_REQUIRED
+B01_M02 = REVISION_REQUIRED
+B01_M03 = REVISION_REQUIRED
+B01_M04 = CLOSED_BY_MANAGING_AI
+AUTHOR_APPROVAL = NOT_REQUESTED_YET
+MASTER_INTEGRATION = NOT_AUTHORIZED
+B02 = NOT_AUTHORIZED
 ```
-
-The living experimental Master Plan was rechecked at `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6`. It records later Group-3A/3B closures than some historical editorial artifacts. This is not silently reconciled into RQ4 or article claims; a dedicated editorial gate is required before those results/inferences are used. This does not block B01.
 
 ### Current gate
 
@@ -203,10 +230,12 @@ The living experimental Master Plan was rechecked at `f4d20dfe46181cb2740c4e4cd6
 PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED
 PHASE_1_METHODS_ENTRY_GATE = PASS
-METHODS_B01 = READY_FOR_DRAFTING
-METHODS_B01_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS.md
-MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_ONLY
+METHODS_B01 = REVISION_REQUIRED
+MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_REVISION_ONLY
 NEXT_ACTOR = DRAFTING_AI
-NEXT_DELIVERY = Methods_B01_V01 + initial cumulative master candidate
+NEXT_DELIVERY = Methods_B01_V02 + revised ARTICLE_MASTER_CANDIDATE_V02.md/.docx
+AUTHOR_APPROVAL = NOT_REQUESTED_YET
+MASTER_INTEGRATION = NOT_AUTHORIZED
+B02 = NOT_AUTHORIZED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
 ```
