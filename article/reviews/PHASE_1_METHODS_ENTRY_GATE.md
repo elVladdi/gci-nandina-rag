@@ -23,9 +23,17 @@ NOVELTY = NOT_DECLARED
 
 ### 2. Verificación del estado experimental vivo
 
-El `SRC-03` vivo está más avanzado que algunos snapshots editoriales históricos: el Plan Maestro vigente registra cierres de Grupo 3A y 3B. Esta diferencia **no se reconcilia silenciosamente** con `CLAIM_EVIDENCE_MATRIX.md` ni con la formulación congelada de RQ4. La reconciliación editorial de resultados/inferencias se realizará en un gate específico antes de utilizar esos cierres como claims del artículo.
+El `SRC-03` vivo en el snapshot `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6` establece:
 
-Para `Methods B01`, esta diferencia no constituye bloqueo porque el bloque se limita al diseño, alcance y unidades y no reporta resultados ni cierra inferencias.
+```text
+GROUP2B = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+EXP12_DISPOSITION = CLOSED_WITHOUT_RETRIEVAL / PLANNING_PRECONDITION_FAILED_UNDER_FROZEN_SEARCH
+EXP12_DIVERSITY_EFFECT_ESTIMABLE = false
+NEXT_ELIGIBLE_BLOCK = GROUP3_METRICS_AND_INFERENCE
+GROUP3 = NOT_STARTED
+```
+
+Por tanto, no existen cierres vigentes de Grupo 3A/3B en este corte. HE2/HE5 y la inferencia final asociada a Grupo 3 permanecen pendientes. Esto no bloquea `Methods B01`, porque B01 se limita a diseño, alcance y unidades y no reporta resultados ni inferencias de Grupo 3.
 
 ### 3. Bloque autorizado
 
@@ -92,9 +100,17 @@ NOVELTY = NOT_DECLARED
 
 ### 2. Living experimental-state check
 
-The living `SRC-03` is more advanced than some historical editorial snapshots: the current Master Plan records Group 3A and 3B closures. This difference is **not silently reconciled** with `CLAIM_EVIDENCE_MATRIX.md` or the frozen wording of RQ4. Editorial reconciliation of results/inferences will occur at a dedicated gate before those closures are used as article claims.
+Living `SRC-03` at snapshot `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6` states:
 
-This does not block `Methods B01`, because B01 is limited to design, scope, and units and does not report results or close inferences.
+```text
+GROUP2B = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+EXP12_DISPOSITION = CLOSED_WITHOUT_RETRIEVAL / PLANNING_PRECONDITION_FAILED_UNDER_FROZEN_SEARCH
+EXP12_DIVERSITY_EFFECT_ESTIMABLE = false
+NEXT_ELIGIBLE_BLOCK = GROUP3_METRICS_AND_INFERENCE
+GROUP3 = NOT_STARTED
+```
+
+Therefore, no current Group-3A/3B closures exist at this cutoff. HE2/HE5 and final Group-3 inference remain pending. This does not block `Methods B01`, because B01 is limited to design, scope, and units and does not report Group-3 results or inference.
 
 ### 3. Authorized block
 
