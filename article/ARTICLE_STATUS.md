@@ -18,9 +18,12 @@
 - `METHODS_B01_V01_AUTHOR_APPROVAL = REJECTED`.
 - `METHODS_B01_V02_INTERNAL_REVIEW = PASS`.
 - `METHODS_B01_V02_AUTHOR_APPROVAL = REJECTED`.
-- `METHODS_B01_REQUIRED_CORRECTIONS = B01-M06, B01-M07, B01-M08`.
+- `METHODS_B01_V03_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS`.
+- `METHODS_B01_V03_SCIENTIFIC_CONTENT_REVIEW = PASS`.
+- `METHODS_B01_V03_AUTHOR_APPROVAL = NOT_REQUESTED`.
+- `METHODS_B01_REQUIRED_CORRECTIONS = B01-M09`.
 - `EDITORIAL_CONTROL_CORRECTION_B01_M04 = CLOSED_BY_IA_GESTORA`.
-- `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_V03_REVISION_ONLY`.
+- `MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_V04_DELIVERY_REPAIR_ONLY`.
 - `OTHER_METHODS_BLOCKS = NOT_AUTHORIZED_YET`.
 - `NEXT_ACTOR = DRAFTING_AI`.
 - `EXPERIMENTAL_REVIEW = NOT_REQUIRED` para la revisión vigente de B01.
@@ -131,35 +134,50 @@ Historial de entregas:
 
 - V01: commit `2a0deee3c4b63ae028bbe909d5f44f90a4282086`; revisión interna `PASS_WITH_CORRECTIONS`; aprobación del autor `REJECTED`.
 - V02: commit `c9023096344a8949f3ce5f9b49c8cc29379afe4a`; revisión interna `PASS`; aprobación del autor `REJECTED`.
-- V03: `NOT_STARTED`; autorizada exclusivamente como revisión correctiva de V02.
+- V03: commit `5a3d78c0eedf6d14b79e5a9470c8f8c90a2dc2b1`; contenido científico `PASS`; revisión interna global `PASS_WITH_CORRECTIONS` por defecto de integridad del `.docx`.
+- V04: `NOT_STARTED`; autorizada exclusivamente como reparación de entrega de B01-M09, sin cambio científico sustantivo respecto de V03.
 
 Revisiones:
 
 - `article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V01.md`;
 - `article/reviews/1_METHODS_B01_AUTHOR_REVIEW_V01.md`;
 - `article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V02.md`;
-- `article/reviews/1_METHODS_B01_AUTHOR_REVIEW_V02.md`.
+- `article/reviews/1_METHODS_B01_AUTHOR_REVIEW_V02.md`;
+- `article/reviews/1_METHODS_B01_INTERNAL_REVIEW_V03.md`.
 
 Resultado vigente:
 
 ```text
-METHODS_B01_V02_INTERNAL_REVIEW = PASS
+METHODS_B01_V03_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS
+SCIENTIFIC_CONTENT_REVIEW = PASS
 MATERIAL_SCIENTIFIC_ERRORS = 0
 B01_M01 = CLOSED
 B01_M02 = CLOSED
 B01_M03 = CLOSED
 B01_M04 = CLOSED_BY_IA_GESTORA
 B01_M05 = CLOSED
-B01_M06 = REVISION_REQUIRED
-B01_M07 = REVISION_REQUIRED
-B01_M08 = REVISION_REQUIRED
-AUTHOR_APPROVAL_METHODS_B01_V02 = REJECTED
-REJECTION_REASON = PROSE_ABSTRACTION / CONTRIBUTION_VISIBILITY / CONFIGURABILITY_VISIBILITY
+B01_M06 = CLOSED
+B01_M07 = CLOSED
+B01_M08 = CLOSED
+B01_M09 = REVISION_REQUIRED / DOCX_PACKAGE_INTEGRITY
+V03_POSITIONING_ORDER = GENERAL_METHOD_AND_FUNCTIONAL_CONTRACT_FIRST / CONFIGURABILITY_BOUNDARY_SECOND / NANDINA_CH87_TESTBED_THIRD
+V03_ABSTRACTION_DENSITY = ACCEPTABLE
+V03_AGENT_ACTION_OBJECT_CLARITY = PASS
+V03_NOMINALIZATION_OVERLOAD = ABSENT
+V03_PROCESS_RELATIONSHIPS_EXPLICIT = PASS
+V03_CONFIGURABILITY_GENERALIZATION_BOUNDARY = PASS
+V03_DOCX_BLOB_SHA = 5dec60d1ebeff158c114aaed84c992953d256175
+V03_DOCX_ZIP_INTEGRITY = FAIL
+V03_DOCX_RENDER = FAIL
+AUTHOR_REVIEW_READY = NO
+AUTHOR_APPROVAL_METHODS_B01_V03 = NOT_REQUESTED
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 ```
 
-La V02 corrigió adecuadamente el orden `arquitectura general → NANDINA Capítulo 87 como testbed`, pero el autor exige una V03 por tres razones: reducir abstracciones y nominalizaciones acumuladas; hacer visible el contrato arquitectónico-metodológico completo y su evaluación por función; y explicitar, con `C15` en alcance acotado, que la arquitectura puede configurarse/replicarse con recursos propios —dataset/banco histórico, universo de clases y corpus documental— sin convertir esa propiedad de diseño en generalización empírica.
+La V03 resuelve satisfactoriamente las observaciones científicas del autor: reduce las abstracciones acumuladas, hace visible el contrato funcional completo y explica de forma delimitada que el método puede instanciarse con un dataset/banco histórico, universo de clases y corpus documental propios sin presentar esa configurabilidad como generalización empírica. NANDINA Capítulo 87 queda después como la instancia experimental evaluada.
+
+La única corrección pendiente es B01-M09. El `.docx` V03 versionado no es un paquete OOXML válido: falta una estructura ZIP final válida y no puede abrirse/renderizarse. V04 debe conservar el texto científico V03 y reparar exclusivamente la entrega Word mediante una nueva revisión versionada.
 
 ### Gate vigente
 
@@ -168,11 +186,11 @@ PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED
 PHASE_1_METHODS_ENTRY_GATE = PASS
 METHODS_B01 = REVISION_REQUIRED
-MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_V03_REVISION_ONLY
+MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_V04_DELIVERY_REPAIR_ONLY
 NEXT_ACTOR = DRAFTING_AI
-NEXT_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS_REVISION_V03.md
-NEXT_DELIVERY = Methods_B01_V03 + revised ARTICLE_MASTER_CANDIDATE_V03.md/.docx
-AUTHOR_APPROVAL_METHODS_B01_V02 = REJECTED
+NEXT_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS_REVISION_V04.md
+NEXT_DELIVERY = Methods_B01_V04 + ARTICLE_MASTER_CANDIDATE_V04.md/.docx + response V04
+AUTHOR_APPROVAL_METHODS_B01_V03 = NOT_REQUESTED
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
@@ -197,7 +215,10 @@ EXPERIMENTAL_REVIEW = NOT_REQUIRED
 - `METHODS_B01_V01_AUTHOR_APPROVAL = REJECTED`.
 - `METHODS_B01_V02_INTERNAL_REVIEW = PASS`.
 - `METHODS_B01_V02_AUTHOR_APPROVAL = REJECTED`.
-- Drafting is authorized only for the B01 V03 revision; all other Methods blocks remain unauthorized.
+- `METHODS_B01_V03_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS`.
+- `METHODS_B01_V03_SCIENTIFIC_CONTENT_REVIEW = PASS`.
+- `METHODS_B01_V03_AUTHOR_APPROVAL = NOT_REQUESTED`.
+- Drafting is authorized only for the B01 V04 delivery repair; all other Methods blocks remain unauthorized.
 - `NEXT_ACTOR = DRAFTING_AI`.
 
 ### Frozen journal strategy and governance
@@ -232,26 +253,32 @@ GROUP3 = NOT_STARTED
 
 ### Methods B01 state
 
-V01 was rejected by the author because it foregrounded NANDINA/Chapter 87 before the broader scientific object. V02 corrected that positioning and passed internal review, but the author rejected it because the prose remained too abstract and contractual and did not make the complete contribution or bounded configurability sufficiently visible.
+V01 was rejected because it foregrounded NANDINA/Chapter 87 before the broader scientific object. V02 corrected that positioning but was rejected because the prose remained too abstract and did not make the complete contribution or bounded configurability sufficiently visible. V03 resolves those scientific/editorial issues and its scientific content passes internal review.
 
 ```text
-METHODS_B01_V02_INTERNAL_REVIEW = PASS
+METHODS_B01_V03_INTERNAL_REVIEW = PASS_WITH_CORRECTIONS
+SCIENTIFIC_CONTENT_REVIEW = PASS
 MATERIAL_SCIENTIFIC_ERRORS = 0
 B01_M01 = CLOSED
 B01_M02 = CLOSED
 B01_M03 = CLOSED
 B01_M04 = CLOSED_BY_MANAGING_AI
 B01_M05 = CLOSED
-B01_M06 = REVISION_REQUIRED
-B01_M07 = REVISION_REQUIRED
-B01_M08 = REVISION_REQUIRED
-AUTHOR_APPROVAL_METHODS_B01_V02 = REJECTED
-REJECTION_REASON = PROSE_ABSTRACTION / CONTRIBUTION_VISIBILITY / CONFIGURABILITY_VISIBILITY
+B01_M06 = CLOSED
+B01_M07 = CLOSED
+B01_M08 = CLOSED
+B01_M09 = REVISION_REQUIRED / DOCX_PACKAGE_INTEGRITY
+V03_POSITIONING_ORDER = GENERAL_METHOD_AND_FUNCTIONAL_CONTRACT_FIRST / CONFIGURABILITY_BOUNDARY_SECOND / NANDINA_CH87_TESTBED_THIRD
+V03_DOCX_BLOB_SHA = 5dec60d1ebeff158c114aaed84c992953d256175
+V03_DOCX_ZIP_INTEGRITY = FAIL
+V03_DOCX_RENDER = FAIL
+AUTHOR_REVIEW_READY = NO
+AUTHOR_APPROVAL_METHODS_B01_V03 = NOT_REQUESTED
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 ```
 
-V03 must reduce stacked abstractions, make the complete evaluated functional contract visible, and state bounded design configurability/replicability using `C15`: the architecture may be instantiated with a study-specific labeled historical dataset, target class universe, and documentary/normative corpus, while the empirical evidence remains limited to the evaluated NANDINA Chapter-87 testbed.
+The sole remaining correction is B01-M09. The committed V03 DOCX is not a valid OOXML ZIP package and cannot be opened/rendered. V04 must preserve V03 scientific text without substantive change and repair only the versioned Word delivery.
 
 ### Current gate
 
@@ -260,11 +287,11 @@ PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED
 PHASE_1_METHODS_ENTRY_GATE = PASS
 METHODS_B01 = REVISION_REQUIRED
-MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_V03_REVISION_ONLY
+MANUSCRIPT_DRAFTING = AUTHORIZED_FOR_METHODS_B01_V04_DELIVERY_REPAIR_ONLY
 NEXT_ACTOR = DRAFTING_AI
-NEXT_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS_REVISION_V03.md
-NEXT_DELIVERY = Methods_B01_V03 + revised ARTICLE_MASTER_CANDIDATE_V03.md/.docx
-AUTHOR_APPROVAL_METHODS_B01_V02 = REJECTED
+NEXT_PROMPT = article/prompts/1_METHODS_B01_DESIGN_SCOPE_UNITS_REVISION_V04.md
+NEXT_DELIVERY = Methods_B01_V04 + ARTICLE_MASTER_CANDIDATE_V04.md/.docx + response V04
+AUTHOR_APPROVAL_METHODS_B01_V03 = NOT_REQUESTED
 MASTER_INTEGRATION = NOT_AUTHORIZED
 B02 = NOT_AUTHORIZED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED
