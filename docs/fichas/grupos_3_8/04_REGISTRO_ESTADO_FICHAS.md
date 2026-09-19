@@ -2,10 +2,10 @@
 
 Este registro es documental. Cambiar un estado aquí no sustituye la auditoría externa ni el Plan Maestro.
 
-| Ficha | Estado inicial | Precondición de activación |
+| Ficha | Estado actual | Precondición de activación |
 |---|---|---|
 | G3-F01 | CLOSED / APPROVED | Grupo 2B canónicamente cerrado y Plan reconciliado |
-| G3-F02 | ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED | G3-F01 CLOSED/APPROVED |
+| G3-F02 | ACTIVE / AUTHORIZED / EXECUTION_PENDING | G3-F01 CLOSED/APPROVED |
 | G3-F03 | PROSPECTIVE | G3-F02 CLOSED/APPROVED |
 | G3-F04 | PROSPECTIVE | G3-F03 CLOSED/APPROVED |
 | G4-F01 | PROSPECTIVE | Grupo 3 CLOSED/APPROVED |
@@ -61,4 +61,36 @@ FINAL_G3_F01_STATE = CLOSED / APPROVED
 CLOSURE_DATE = 2026-09-19
 
 G3_F02 = ELIGIBLE_AFTER_G3_F01_CLOSURE / NOT_AUTHORIZED / NOT_EXECUTED
+```
+
+## Activación G3-F02
+
+```text
+FICHA = G3-F02
+PREVIOUS_STATE = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+USER_AUTHORIZATION = PROMPT81_EXPLICIT_EXECUTION
+ACTIVATION_STATE = ACTIVE / AUTHORIZED / EXECUTION_PENDING
+ACTIVATION_DATE = 2026-09-19
+
+MAIN_AT_ACTIVATION = 366bf529c29cb999bfd043db33674a510ba184c7
+PLAN_AT_ACTIVATION = 59e7fc935dd5cde9a22bb2743a4116f35ad60a26
+FICHAS_AT_ACTIVATION = ba9cc595778c4073b3bc20c60ad6a567bf514e9d
+ARTICLE_HEAD_OBSERVED = f02aef2448b7b8c0db2df4895c02860b66786716
+PROMPT81_COMMIT = 2fe464a244b0d75acfde9555d072db9be0142379
+
+INPUT_CONTRACT_MD = docs/analysis/group3/g3_analytical_contract_v0.1.md
+INPUT_CONTRACT_JSON = outputs/analysis/group3/g3_analytical_contract_v0.1.json
+
+EXPECTED_OUTPUTS =
+  outputs/analysis/group3/g3_metric_population_registry_v0.1.csv
+  outputs/analysis/group3/g3_metric_population_registry_v0.1.json
+  outputs/analysis/group3/g3_metric_population_registry_v0.1_hash_ledger.csv
+
+INFERENTIAL_CALCULATION_AUTHORIZED = false
+METRICS_RECOMPUTATION_AUTHORIZED = false
+HE2_DECISION_AUTHORIZED = false
+HE5_DECISION_AUTHORIZED = false
+G3_F03_AUTHORIZED = false
+EXTERNAL_AUDIT = PENDING
+RESULT = PENDING
 ```
