@@ -4,8 +4,8 @@ Este registro es documental. Cambiar un estado aquí no sustituye la auditoría 
 
 | Ficha | Estado inicial | Precondición de activación |
 |---|---|---|
-| G3-F01 | PROSPECTIVE | Grupo 2B canónicamente cerrado y Plan reconciliado |
-| G3-F02 | PROSPECTIVE | G3-F01 CLOSED/APPROVED |
+| G3-F01 | CLOSED / APPROVED | Grupo 2B canónicamente cerrado y Plan reconciliado |
+| G3-F02 | ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED | G3-F01 CLOSED/APPROVED |
 | G3-F03 | PROSPECTIVE | G3-F02 CLOSED/APPROVED |
 | G3-F04 | PROSPECTIVE | G3-F03 CLOSED/APPROVED |
 | G4-F01 | PROSPECTIVE | Grupo 3 CLOSED/APPROVED |
@@ -27,3 +27,38 @@ Este registro es documental. Cambiar un estado aquí no sustituye la auditoría 
 ## Regla de actualización
 
 Al activar una ficha deben añadirse al registro: commit de activación, SHA exactos de `main`/Plan/artículo aplicables, prompt operativo, fecha, auditoría y resultado. Ninguna ficha pasa a `ACTIVE` por anticipación.
+
+## Reconciliación administrativa G3-F01
+
+Este registro se materializa después de la ejecución de Prompt76. No simula
+que el registro de activación existió antes de esa ejecución.
+
+```text
+FICHA = G3-F01
+INITIAL_STATE = PROSPECTIVE
+USER_AUTHORIZATION_TO_START_GROUP3 = YES
+ACTIVATION_AUTHORIZATION = G3-F01 AUTHORIZED FOR EXECUTION
+ACTIVATION_REGISTRY_PREEXECUTION_MATERIALIZED = NO
+ACTIVATION_REGISTRY_RECONCILIATION = POST_HOC_ADMINISTRATIVE_RECONCILIATION
+
+MAIN_AT_ACTIVATION = a33fc7e10b5bc25a053e982f0ff24ff60eda042f
+PLAN_AT_ACTIVATION = f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6
+ARTICLE_AT_PROMPT76 = 254b1e6df736fa9938ac86a515d65b36f4d361c5
+FICHAS_SNAPSHOT = a42531ad96fc12bea2f2394b0ff8eb49b66a4238
+
+PROMPT76_COMMIT = 409dd7b7302bce1d41cc69e24b9debe3db05982e
+INITIAL_CANDIDATE_COMMIT = c727da94f5d38f530a839631c3ac9e427a1eb27e
+INITIAL_EXTERNAL_AUDIT = BLOCKED_FOR_CORRECTION
+PROMPT79_COMMIT = 5dfe480ccbdb2802ced76aff14bbe6befb797742
+CORRECTED_CANDIDATE_COMMIT = 366bf529c29cb999bfd043db33674a510ba184c7
+CORRECTED_EXTERNAL_REAUDIT = PASS
+SCIENTIFIC_RERUN_REQUIRED = false
+INFERENTIAL_CALCULATION_PERFORMED = false
+HE2_DECIDED = false
+HE5_DECIDED = false
+G3_F02_STARTED = false
+FINAL_G3_F01_STATE = CLOSED / APPROVED
+CLOSURE_DATE = 2026-09-19
+
+G3_F02 = ELIGIBLE_AFTER_G3_F01_CLOSURE / NOT_AUTHORIZED / NOT_EXECUTED
+```
