@@ -5,7 +5,7 @@ Este registro es documental. Cambiar un estado aquí no sustituye la auditoría 
 | Ficha | Estado actual | Precondición de activación |
 |---|---|---|
 | G3-F01 | CLOSED / APPROVED | Grupo 2B canónicamente cerrado y Plan reconciliado |
-| G3-F02 | ACTIVE / AUTHORIZED / EXECUTION_PENDING | G3-F01 CLOSED/APPROVED |
+| G3-F02 | CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED | G3-F01 CLOSED/APPROVED |
 | G3-F03 | PROSPECTIVE | G3-F02 CLOSED/APPROVED |
 | G3-F04 | PROSPECTIVE | G3-F03 CLOSED/APPROVED |
 | G4-F01 | PROSPECTIVE | Grupo 3 CLOSED/APPROVED |
@@ -93,4 +93,22 @@ HE5_DECISION_AUTHORIZED = false
 G3_F03_AUTHORIZED = false
 EXTERNAL_AUDIT = PENDING
 RESULT = PENDING
+```
+
+## Candidato G3-F02 pendiente de auditoría externa
+
+```text
+G3_F02_BRANCH = codex/group3-f02-metric-population-registry-v01
+G3_F02_CANDIDATE_COMMIT = adf70d6eb880c567d6efa0f27b5c79259b8db2a6
+G3_F02_CHANGED_PATHS =
+  outputs/analysis/group3/g3_metric_population_registry_v0.1.csv
+  outputs/analysis/group3/g3_metric_population_registry_v0.1.json
+  outputs/analysis/group3/g3_metric_population_registry_v0.1_hash_ledger.csv
+
+EVIDENCE_FAMILY_COUNT = 16
+REGISTRY_ROW_COUNT = 548
+EXTERNAL_AUDIT = PENDING
+RESULT = CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED
+G3_F03_AUTHORIZED = false
+G3_F03_STARTED = false
 ```
