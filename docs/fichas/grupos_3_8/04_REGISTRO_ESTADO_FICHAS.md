@@ -6,7 +6,7 @@ Este registro es documental. Cambiar un estado aquí no sustituye la auditoría 
 |---|---|---|
 | G3-F01 | CLOSED / APPROVED | Grupo 2B canónicamente cerrado y Plan reconciliado |
 | G3-F02 | CLOSED / APPROVED | G3-F01 CLOSED/APPROVED |
-| G3-F03 | ACTIVE / AUTHORIZED / EXECUTION_PENDING | G3-F02 CLOSED/APPROVED |
+| G3-F03 | CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED | G3-F02 CLOSED/APPROVED |
 | G3-F04 | PROSPECTIVE / NOT_AUTHORIZED | G3-F03 CLOSED/APPROVED |
 | G4-F01 | PROSPECTIVE | Grupo 3 CLOSED/APPROVED |
 | G4-F02 | PROSPECTIVE | G4-F01 CLOSED/APPROVED |
@@ -162,4 +162,30 @@ P_VALUES_AUTHORIZED = false
 HE2_DECISION_AUTHORIZED = false
 HE5_DECISION_AUTHORIZED = false
 G3_F04_AUTHORIZED = false
+```
+
+## Candidato G3-F03 pendiente de auditoría externa
+
+```text
+G3_F03_BRANCH = codex/group3-f03-inference-v01
+G3_F03_CANDIDATE_COMMIT = 7d09f692da23367d3aba941db1febdca2baa8917
+G3_F03_CHANGED_PATH_COUNT = 5
+G3_F03_CHANGED_PATHS =
+  src/analysis/run_g3_f03_inference_v01.py
+  outputs/analysis/group3/g3_inferential_results_v0.1.csv
+  outputs/analysis/group3/g3_inferential_results_v0.1.json
+  docs/analysis/group3/g3_inferential_methods_and_checks_v0.1.md
+  outputs/analysis/group3/g3_inferential_results_v0.1_hash_ledger.csv
+
+PRIMARY_INFERENTIAL_RESULT_COUNT = 16
+HE2_A_PRIMARY_RESULT_COUNT = 15
+HE2_B_PRIMARY_RESULT_COUNT = 1
+SUPPLEMENTARY_TOP50_RESULT_COUNT = 3
+P_VALUES_CALCULATED = false
+HE2_DECIDED = false
+HE5_DECIDED = false
+EXTERNAL_AUDIT = PENDING
+RESULT = CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED
+G3_F04_AUTHORIZED = false
+G3_F04_STARTED = false
 ```
