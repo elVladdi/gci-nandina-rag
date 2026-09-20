@@ -11,15 +11,19 @@ ARTICLE_TYPE_OPERATIVE = Research article
 PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED / RESTRUCTURED_BY_D014
 KBS_EMPIRICAL_WRITING_GUIDE = KBS_EWG_34_V01 / AUTHOR_APPROVED / ACTIVE / BINDING
-ARTICLE_WRITING_PLAN = V2.0
-STRUCTURE_DECISION = D-014
-WORKING_STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
-WORKING_STRUCTURE_STATUS = WORKING / AUTHOR_EDITABLE / NOT_YET_FROZEN
+ARTICLE_WRITING_PLAN = V2.1
+STRUCTURE_RESET_DECISION = D-014
+STRUCTURE_APPROVAL_DECISION = D-015
+STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
+STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
+WORD_BASELINE = KBS_ARTICLE_WORKING_STRUCTURE_V01.docx
+WORD_BASELINE_SHA256 = 0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5
 METHODS_B01_V05 = HOLD / NOT_APPROVED
 METHODS_B01_V06 = NOT_AUTHORIZED
-NEW_MANUSCRIPT_SECTION_DRAFTING = NOT_AUTHORIZED_PENDING_STRUCTURE_APPROVAL
-NEXT_ACTOR = AUTHOR
-NEXT_ACTION = REVIEW_AND_EDIT_WORKING_STRUCTURE_V01
+CURRENT_DRAFTING_PHASE = RELATED_WORK
+RELATED_WORK_B01 = AUTHORIZED
+AUTHORIZED_SCOPE = SECTION_2.1_ONLY
+NEXT_ACTOR = DRAFTING_AI
 ```
 
 ### Fases previas
@@ -27,23 +31,13 @@ NEXT_ACTION = REVIEW_AND_EDIT_WORKING_STRUCTURE_V01
 - `0A — Ground truth documental y experimental`: **CLOSED / APPROVED**.
 - `0B — Mapa crítico de literatura y taxonomía`: **CLOSED / APPROVED / FROZEN**.
 - `0C — Posicionamiento científico y Research Questions`: **CLOSED / APPROVED / FROZEN**.
-- `0D-1 / 0D-2`: **CLOSED / APPROVED / FROZEN**; D-014 supersede de forma controlada únicamente la arquitectura de secciones y el orden de redacción heredados de 0D.
+- `0D-1 / 0D-2`: **CLOSED / APPROVED / FROZEN**; su arquitectura de secciones/orden de redacción fue supersedida controladamente por D-014.
+- `KBS_EWG_34_V01`: **AUTHOR_APPROVED / ACTIVE / BINDING**.
+- `KBS_ARTICLE_WORKING_STRUCTURE_V01`: **AUTHOR_APPROVED / FROZEN_FOR_DRAFTING** mediante D-015.
 
-D-014 **no modifica** el alcance científico, las RQ, la Claim–Evidence Matrix, el diseño experimental ni la gobernanza del Plan Maestro experimental.
+D-014/D-015 no modifican alcance científico, RQs, Claim–Evidence Matrix, diseño experimental ni gobernanza del Plan Maestro.
 
-### Decisión del autor sobre Methods B01 V05
-
-El autor **no aprueba V05**. La revisión interna previa (`PASS`) queda como antecedente técnico, pero no tiene efecto de aprobación editorial del autor.
-
-Motivos registrados:
-
-- fluidez insuficiente;
-- persistencia de abstracciones;
-- apertura mediante una formulación que sugiere prematuramente el desarrollo de “the method”;
-- introducción demasiado temprana del alcance experimental específico;
-- NANDINA / Chapter-Class 87 / corpus concreto aparecen antes de que el lector comprenda adecuadamente el problema, el posicionamiento y la arquitectura general.
-
-Por tanto:
+### Methods B01 legado
 
 ```text
 METHODS_B01_V05_INTERNAL_REVIEW = PASS / HISTORICAL
@@ -53,17 +47,9 @@ METHODS_B01_V06 = NOT_AUTHORIZED
 MASTER_INTEGRATION_OF_V05 = PROHIBITED
 ```
 
-No se corregirá V05 todavía. Primero debe cerrarse la estructura completa del artículo.
+La V05 no se corregirá ni reutilizará automáticamente. La nueva arquitectura separa problema/posicionamiento, arquitectura general e instanciación experimental.
 
-### Reset estructural D-014
-
-A partir de D-014, el artículo separa explícitamente:
-
-1. problema y posicionamiento científico;
-2. arquitectura general de apoyo a decisiones;
-3. instanciación experimental específica.
-
-Arquitectura de trabajo:
+### Estructura aprobada
 
 1. `Introduction`
 2. `Related work`
@@ -74,19 +60,33 @@ Arquitectura de trabajo:
 7. `Conclusion`
 8. end matter de KBS.
 
-`Limitations` queda provisionalmente integrada como `6.6 Limitations`.
+`Limitations` permanece integrada como `6.6 Limitations` salvo futura enmienda explícita.
 
-La estructura detallada está en `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`. El Word editable `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx` es la base acumulativa para las versiones posteriores; la estructura aún no está congelada y puede ser editada por el autor.
+### Orden de redacción activo
 
-### Nuevo orden de redacción
+`Related Work → Introduction provisional → Decision-support architecture → Experimental design → Results autorizados → figures/tables → integración de resultados pendientes → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
 
-Tras aprobación explícita de la estructura:
+El antiguo orden `Methods → Related Work → ... → Introduction` permanece `SUPERSEDED`.
 
-`Related Work → Introduction provisional → Decision-support architecture → Experimental design → Results disponibles/autorizados → figuras/tablas → integración de resultados pendientes → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
+### Bloque activo
 
-El antiguo orden `Methods → Related Work → ... → Introduction` queda `SUPERSEDED`.
+```text
+CURRENT_GATE = RELATED_WORK_B01_DRAFTING
+BLOCK = RELATED_WORK_B01
+SECTION = 2.1 Automated tariff classification and candidate retrieval
+BLOCK_REVISION = V01
+DRAFTING = AUTHORIZED
+SECTIONS_2_2_TO_2_6 = NOT_AUTHORIZED
+INTRODUCTION = NOT_AUTHORIZED
+DECISION_SUPPORT_ARCHITECTURE = NOT_AUTHORIZED
+EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
+RESULTS = NOT_AUTHORIZED
+EXPERIMENTAL_REVIEW = NOT_REQUIRED_UNLESS_NEW_TRIGGER_APPEARS
+```
 
-### Gobernanza y estándar editorial
+El bloque debe redactarse dentro de la base acumulativa aprobada. Si la IA de Redacción no puede acceder al Word exacto con SHA-256 registrado, debe detenerse con `BASELINE_DOCX_ACCESS_REQUIRED`; no puede reconstruirlo silenciosamente.
+
+### Gobernanza editorial
 
 ```text
 MWDP_VERSION = MWDP_V1.0
@@ -94,16 +94,13 @@ MWDP_STATE = FROZEN
 SPCCR_VERSION = 1.0
 SPCCR_STATUS = AUTHOR_APPROVED / ACTIVE
 KBS_EMPIRICAL_WRITING_GUIDE = KBS_EWG_34_V01
-KBS_EMPIRICAL_WRITING_GUIDE_STATUS = AUTHOR_APPROVED / ACTIVE / BINDING
-KBS_EMPIRICAL_WRITING_GUIDE_DECISION = D-013
-KBS_EMPIRICAL_CORPUS_SIZE = 34
 DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
 PUBLICATION_ROUTE_TARGET_A = SUBSCRIPTION
 PAID_OPEN_ACCESS = NOT_SELECTED
 APC_PAYMENT_PLANNED = NO
 ```
 
-La guía KBS-34 gobierna prosa, organización retórica, densidad, visibilidad de la contribución y presentación metodológica. No amplía claims ni reemplaza MWDP, Claim–Evidence Matrix o Plan Maestro en asuntos de evidencia, resultados, inferencia, causalidad o generalización.
+La guía KBS-34 gobierna prosa, organización retórica, densidad, visibilidad de contribución y presentación metodológica. Los 34 artículos son evidencia editorial y no fuentes científicas automáticas.
 
 ### Estado científico preservado
 
@@ -129,54 +126,31 @@ Fronteras obligatorias:
 - `AUDITABILITY ≠ LEGAL_CORRECTNESS`;
 - `CONFIGURABILITY ≠ EMPIRICAL_GENERALIZATION`.
 
-### Gate bibliográfico
+### Fuentes y Plan Maestro experimental
 
 ```text
 BIBLIOGRAPHIC_CORPUS_SIZE = 62
 CURRENT_FULLTEXT_ACCESS_CONFIRMED = 62/62
 BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS
 KBS_EDITORIAL_CORPUS_SIZE = 34
-```
-
-Los 34 artículos KBS son evidencia editorial, no fuentes científicas automáticas del manuscrito.
-
-### Estado del Plan Maestro experimental vivo
-
-Último snapshot consultado en este proceso:
-
-```text
 SRC03_BRANCH = docs/plan-maestro-temporal-2026-08-31
-SRC03_LIVE_HEAD = 96cccb9a61f42ab97b1eba607524e33f992740f6
-GROUP2B = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+SRC03_LIVE_HEAD_LAST_CHECKED = 96cccb9a61f42ab97b1eba607524e33f992740f6
 GROUP3 = IN_PROGRESS
 G3_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G3_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G3_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-NEXT_ELIGIBLE_FICHA = G3-F04
 G3_F04 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
-EXP12_DISPOSITION = CLOSED_WITHOUT_RETRIEVAL / PLANNING_PRECONDITION_FAILED_UNDER_FROZEN_SEARCH
-EXP12_DIVERSITY_EFFECT_ESTIMABLE = false
 ```
 
-La reestructuración editorial no modifica estos estados experimentales.
-
-### Historial resumido de Methods B01
-
-- V01: autor `REJECTED`.
-- V02: autor `REJECTED`.
-- V03: contenido científico `PASS`; entrega global requirió corrección y reauditoría editorial posterior.
-- V04: `NOT_EXECUTED / SUPERSEDED_BEFORE_EXECUTION`.
-- V05: revisión interna `PASS`, pero autor `NOT APPROVED`; queda en `HOLD` por problemas de fluidez, abstracción y ubicación narrativa del alcance experimental.
+Related Work B01 no depende de nuevos resultados experimentales; cualquier trigger nuevo debe reportarse antes de usarlo.
 
 ### Gate vigente
 
 ```text
-CURRENT_GATE = ARTICLE_STRUCTURE_REVIEW
-WORKING_STRUCTURE_STATUS = WORKING / AUTHOR_EDITABLE / NOT_YET_FROZEN
-NEXT_ACTOR = AUTHOR
-NEXT_ACTION = REVIEW_AND_EDIT_WORKING_STRUCTURE_V01
-NEW_SECTION_DRAFTING = NOT_AUTHORIZED
-METHODS_B01_V06 = NOT_AUTHORIZED
+CURRENT_GATE = RELATED_WORK_B01_DRAFTING
+STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
+NEXT_ACTOR = DRAFTING_AI
+NEXT_ACTION = EXECUTE_RELATED_WORK_B01_SECTION_2_1_ONLY
 MASTER_INTEGRATION = NOT_AUTHORIZED
 ```
 
@@ -192,55 +166,33 @@ TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
 PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED / RESTRUCTURED_BY_D014
-KBS_EMPIRICAL_WRITING_GUIDE = KBS_EWG_34_V01 / AUTHOR_APPROVED / ACTIVE / BINDING
-ARTICLE_WRITING_PLAN = V2.0
-STRUCTURE_DECISION = D-014
-WORKING_STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
-WORKING_STRUCTURE_STATUS = WORKING / AUTHOR_EDITABLE / NOT_YET_FROZEN
+ARTICLE_WRITING_PLAN = V2.1
+STRUCTURE_APPROVAL_DECISION = D-015
+STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
+STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
+WORD_BASELINE = KBS_ARTICLE_WORKING_STRUCTURE_V01.docx
+WORD_BASELINE_SHA256 = 0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5
 METHODS_B01_V05 = HOLD / NOT_APPROVED
 METHODS_B01_V06 = NOT_AUTHORIZED
-NEW_MANUSCRIPT_SECTION_DRAFTING = NOT_AUTHORIZED_PENDING_STRUCTURE_APPROVAL
-NEXT_ACTOR = AUTHOR
+CURRENT_DRAFTING_PHASE = RELATED_WORK
+RELATED_WORK_B01 = AUTHORIZED
+AUTHORIZED_SCOPE = SECTION_2.1_ONLY
+NEXT_ACTOR = DRAFTING_AI
 ```
 
-### Author decision on Methods B01 V05
+The author has approved and frozen the complete KBS article structure for drafting. D-014/D-015 alter editorial structure and drafting sequence only; scientific scope, RQs, claims, experimental design, and experimental governance remain unchanged.
 
-V05 is not approved. The previous internal PASS remains a technical historical record only. The author identified limited fluency, remaining abstraction, premature framing as “the method,” and premature introduction of the specific experimental scope before the reader has understood the problem, scientific positioning, and general architecture.
+The active sequence is `Related Work → provisional Introduction → Decision-support architecture → Experimental design → authorized Results → figures/tables → pending-result integration → final Results → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → final KBS adaptation`.
 
-No V06 correction is authorized yet. The complete article structure must be reviewed first.
+Only `Related Work B01 — Section 2.1 Automated tariff classification and candidate retrieval` is authorized. All other manuscript sections remain blocked until this gate is reviewed.
 
-### D-014 structural reset
-
-The working article architecture is now:
-
-1. Introduction
-2. Related work
-3. Decision-support architecture
-4. Experimental design
-5. Results
-6. Discussion
-7. Conclusion
-8. KBS end matter.
-
-The detailed structure is versioned in `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`. The editable Word with the same structure is the cumulative working base for future versions and remains author-editable until explicitly frozen.
-
-After structure approval, drafting proceeds as:
-
-`Related Work → provisional Introduction → Decision-support architecture → Experimental design → authorized Results → figures/tables → pending-result integration → final Results → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → final KBS adaptation`.
-
-The former Methods-first sequence is superseded.
-
-### Preserved scientific and experimental boundaries
-
-D-014 changes editorial structure and drafting order only. Scientific scope, RQs, Claim–Evidence rules, experimental design and the experimental Master Plan remain unchanged. Candidate retrieval is not overall system accuracy; documentary association is not legal correctness; auditability is not legal correctness; configurability is not empirical generalization.
+The exact cumulative Word baseline is `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`, SHA-256 `0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5`. Silent reconstruction is prohibited; missing access requires `BASELINE_DOCX_ACCESS_REQUIRED`.
 
 ### Current gate
 
 ```text
-CURRENT_GATE = ARTICLE_STRUCTURE_REVIEW
-WORKING_STRUCTURE_STATUS = WORKING / AUTHOR_EDITABLE / NOT_YET_FROZEN
-NEXT_ACTOR = AUTHOR
-NEW_SECTION_DRAFTING = NOT_AUTHORIZED
-METHODS_B01_V06 = NOT_AUTHORIZED
+CURRENT_GATE = RELATED_WORK_B01_DRAFTING
+NEXT_ACTOR = DRAFTING_AI
+NEXT_ACTION = EXECUTE_RELATED_WORK_B01_SECTION_2_1_ONLY
 MASTER_INTEGRATION = NOT_AUTHORIZED
 ```
