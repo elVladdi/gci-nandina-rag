@@ -130,8 +130,9 @@ APC_PAYMENT_PLANNED = NO
 RQ1 = RETAINED
 RQ2 = RETAINED
 RQ3 = RETAINED_WITH_HE4_LIMITATIONS
-RQ4 = RETAINED_CONDITIONAL_ON_GROUP3
-C10_C11_RECONCILIATION = REQUIRED_BEFORE_EXP11B_ARTICLE_USE
+RQ4 = RETAINED / GROUP3_CONDITION_RESOLVED
+GROUP3_HYPOTHESIS_DISPOSITION = HE2_SUPPORTED / HE5_INCONCLUSIVE
+C10_C11_RECONCILIATION = COMPLETED_BY_GROUP3_AND_G4_F01 / SEE_CLAIM_EVIDENCE_MATRIX
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
@@ -145,11 +146,33 @@ Fronteras obligatorias:
 - `CANDIDATE_RETRIEVAL ≠ OVERALL_CLASSIFICATION_ACCURACY`;
 - `NORMATIVE_ASSOCIATION ≠ SUBSTANTIVE_NORMATIVE_CORRECTNESS`;
 - `AUDITABILITY ≠ LEGAL_CORRECTNESS`;
-- `CONFIGURABILITY ≠ EMPIRICAL_GENERALIZATION`.
+- `CONFIGURABILITY ≠ EMPIRICAL_GENERALIZATION`;
+- `EXP11A_SIZE_COMPOSITION_SENSITIVITY ≠ ISOLATED_CAUSAL_SIZE_EFFECT`;
+- `EXP12_DIVERSITY_EFFECT = NOT_ESTIMABLE`.
 
 ### Estado experimental preservado
 
-La integración de B02 no modifica el Plan Maestro experimental. Related Work B03 no consume resultados experimentales propios; cualquier trigger nuevo deberá declararse antes de usar información experimental no cerrada.
+Corte editorial sincronizado con `SRC-03` después del cierre de Grupo 3 y la integración de G4-F01:
+
+```text
+EXPERIMENTAL_PLAN_BRANCH = docs/plan-maestro-temporal-2026-08-31
+EXPERIMENTAL_PLAN_HEAD = 2237ddc46bc1c7bfac203753bdcf2c7d4592f83e
+EXPERIMENTAL_MAIN_CHECKPOINT = 9f549ebdf940f9d806d5088697394d0c927f9fdc
+GROUP2 = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+GROUP3 = CLOSED / APPROVED
+G3_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F04 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+HE2 = SUPPORTED
+HE5 = INCONCLUSIVE
+GROUP4 = IN_PROGRESS
+G4_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G4_F02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+G4_F03 = NOT_AUTHORIZED
+```
+
+Este cierre no obliga a reabrir Related Work B01 ni B02: esas subsecciones no consumen resultados propios del estudio. Sí gobierna la futura redacción de `Experimental design`, `Results` y `Discussion`. Los resultados de Grupo 3 y la matriz controlada de G4-F01 pueden utilizarse únicamente dentro de su alcance aprobado y cuando el gate editorial de la sección correspondiente esté abierto. G4-F02 y G4-F03 no pueden consumirse como evidencia cerrada mientras el Plan Maestro no registre el estado requerido.
 
 ### Gate vigente
 
@@ -169,4 +192,6 @@ Related Work B01 / Section 2.1 and Related Work B02 / Section 2.2 are `APPROVED 
 
 The active cumulative master is `article/manuscript/ARTICLE_MASTER_V002.md/.docx`; its DOCX SHA-256 is `ffbaf15e59cbee922be5ddc70622e2da2f52110c712142f956479acea44e890e` and it retains fourteen English citation-audit comments.
 
-The current gate is `RELATED_WORK_B03_DRAFTING`. Only Section 2.3, `LLMs for classification, reasoning, and explanation`, is authorized. B03 must preserve approved Sections 2.1–2.2 and all fourteen comments unchanged, start from the canonical V002 DOCX, and stop before Section 2.4. Present-study architecture, experimental testbed/results, final gap, and universal novelty remain unauthorized.
+The article-side experimental snapshot is now reconciled with the canonical Master Plan after Group 3 closure and G4-F01 integration: Group 2 is `CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS`; Group 3 is `CLOSED / APPROVED`, with G3-F01 through G3-F04 `CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `HE2 = SUPPORTED`; `HE5 = INCONCLUSIVE`; Group 4 is `IN_PROGRESS`; G4-F01 is `CLOSED / APPROVED / INTEGRATED_TO_MAIN`; G4-F02 is `ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`; and G4-F03 is `NOT_AUTHORIZED`. EXP11A remains a joint size/composition sensitivity rather than an isolated causal size effect, and the EXP12 diversity effect remains not estimable.
+
+This reconciliation does not reopen Related Work B01 or B02 and does not advance the editorial gate. The current gate remains `RELATED_WORK_B03_DRAFTING`. Only Section 2.3, `LLMs for classification, reasoning, and explanation`, is authorized. B03 must preserve approved Sections 2.1–2.2 and all fourteen comments unchanged, start from the canonical V002 DOCX, and stop before Section 2.4. Present-study architecture, experimental testbed/results, final gap, and universal novelty remain unauthorized.
