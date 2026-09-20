@@ -12,44 +12,27 @@ PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED / RESTRUCTURED_BY_D014
 KBS_EMPIRICAL_WRITING_GUIDE = KBS_EWG_34_V01 / AUTHOR_APPROVED / ACTIVE / BINDING
 ARTICLE_WRITING_PLAN = V2.1
-STRUCTURE_RESET_DECISION = D-014
 STRUCTURE_APPROVAL_DECISION = D-015
-STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-WORD_BASELINE = KBS_ARTICLE_WORKING_STRUCTURE_V01.docx
-WORD_BASELINE_SHA256 = 0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5
+RELATED_WORK_B01 = APPROVED / FROZEN / INTEGRATED
+RELATED_WORK_B01_REVIEW = PASS
+RELATED_WORK_B01_AUTHOR_APPROVAL = RECEIVED / EFFECTIVE
+CANONICAL_MASTER = ARTICLE_MASTER_V001
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V001.md
+CANONICAL_MASTER_DOCX = article/manuscript/ARTICLE_MASTER_V001.docx
+CANONICAL_MASTER_DOCX_SHA256 = 08d8ce916452c71a504aa2a0e23d65d68aafe556d818bbf13fa82422a133bfc5
+CURRENT_DRAFTING_PHASE = RELATED_WORK
+CURRENT_GATE = RELATED_WORK_B02_DRAFTING
+RELATED_WORK_B02 = AUTHORIZED
+AUTHORIZED_SCOPE = SECTION_2.2_ONLY
+NEXT_ACTOR = DRAFTING_AI
 METHODS_B01_V05 = HOLD / NOT_APPROVED
 METHODS_B01_V06 = NOT_AUTHORIZED
-CURRENT_DRAFTING_PHASE = RELATED_WORK
-RELATED_WORK_B01 = AUTHORIZED
-AUTHORIZED_SCOPE = SECTION_2.1_ONLY
-NEXT_ACTOR = DRAFTING_AI
 ```
 
-### Fases previas
+### Estructura aprobada y orden activo
 
-- `0A — Ground truth documental y experimental`: **CLOSED / APPROVED**.
-- `0B — Mapa crítico de literatura y taxonomía`: **CLOSED / APPROVED / FROZEN**.
-- `0C — Posicionamiento científico y Research Questions`: **CLOSED / APPROVED / FROZEN**.
-- `0D-1 / 0D-2`: **CLOSED / APPROVED / FROZEN**; su arquitectura de secciones/orden de redacción fue supersedida controladamente por D-014.
-- `KBS_EWG_34_V01`: **AUTHOR_APPROVED / ACTIVE / BINDING**.
-- `KBS_ARTICLE_WORKING_STRUCTURE_V01`: **AUTHOR_APPROVED / FROZEN_FOR_DRAFTING** mediante D-015.
-
-D-014/D-015 no modifican alcance científico, RQs, Claim–Evidence Matrix, diseño experimental ni gobernanza del Plan Maestro.
-
-### Methods B01 legado
-
-```text
-METHODS_B01_V05_INTERNAL_REVIEW = PASS / HISTORICAL
-METHODS_B01_V05_AUTHOR_APPROVAL = NOT_GRANTED
-METHODS_B01_V05_STATUS = HOLD / NOT_APPROVED
-METHODS_B01_V06 = NOT_AUTHORIZED
-MASTER_INTEGRATION_OF_V05 = PROHIBITED
-```
-
-La V05 no se corregirá ni reutilizará automáticamente. La nueva arquitectura separa problema/posicionamiento, arquitectura general e instanciación experimental.
-
-### Estructura aprobada
+La estructura congelada por D-015 permanece:
 
 1. `Introduction`
 2. `Related work`
@@ -60,23 +43,46 @@ La V05 no se corregirá ni reutilizará automáticamente. La nueva arquitectura 
 7. `Conclusion`
 8. end matter de KBS.
 
-`Limitations` permanece integrada como `6.6 Limitations` salvo futura enmienda explícita.
-
-### Orden de redacción activo
+Orden de redacción activo:
 
 `Related Work → Introduction provisional → Decision-support architecture → Experimental design → Results autorizados → figures/tables → integración de resultados pendientes → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
 
-El antiguo orden `Methods → Related Work → ... → Introduction` permanece `SUPERSEDED`.
+### Cierre de Related Work B01
 
-### Bloque activo
+La entrega `9a3acddeee01bd3c78f1b06306b8619a9ad5ccd6` fue auditada independientemente por la IA Gestora.
 
 ```text
-CURRENT_GATE = RELATED_WORK_B01_DRAFTING
-BLOCK = RELATED_WORK_B01
-SECTION = 2.1 Automated tariff classification and candidate retrieval
+B01_SECTION = 2.1 Automated tariff classification and candidate retrieval
+B01_INTERNAL_REVIEW = PASS
+B01_SCIENTIFIC_CONTENT = PASS
+B01_SOURCE_SUPPORT = PASS
+B01_KBS_EDITORIAL_FIT = PASS
+B01_EN_ES_EQUIVALENCE = PASS
+B01_CITATION_COMMENT_COVERAGE = 8/8 / PASS
+B01_DOCX_INTEGRITY = PASS
+B01_DOCX_RENDER = PASS / 16_OF_16_PAGES
+B01_MATERIAL_CORRECTIONS = 0
+B01_EXPERIMENTAL_REVIEW = NOT_REQUIRED
+B01_AUTHOR_APPROVAL = RECEIVED / EFFECTIVE
+B01_STATUS = APPROVED / FROZEN / INTEGRATED
+```
+
+La primera integración canónica bajo la estructura D-015 es `ARTICLE_MASTER_V001`. El DOCX canónico es binariamente equivalente al candidato B01 aprobado y conserva los ocho comentarios de auditoría de citas.
+
+Dos controles no bloqueantes se mantienen para etapas posteriores: `has most often been framed` es una síntesis cualitativa, no una frecuencia estadística; y las métricas Top-k deberán nombrarse con precisión sin sustituir métricas sensibles al orden como MRR.
+
+El cover interno conserva etiquetas heredadas del bootstrap estructural. Es un asunto de formato no científico y no bloquea la redacción; cualquier normalización futura deberá ser controlada y preservar contenido, comentarios y trazabilidad.
+
+### Bloque activo — Related Work B02
+
+```text
+BLOCK = RELATED_WORK_B02
+SECTION = 2.2 Knowledge-enhanced retrieval and regulatory reasoning
 BLOCK_REVISION = V01
 DRAFTING = AUTHORIZED
-SECTIONS_2_2_TO_2_6 = NOT_AUTHORIZED
+BASELINE_MASTER = ARTICLE_MASTER_V001
+BASELINE_DOCX_SHA256 = 08d8ce916452c71a504aa2a0e23d65d68aafe556d818bbf13fa82422a133bfc5
+SECTIONS_2_3_TO_2_6 = NOT_AUTHORIZED
 INTRODUCTION = NOT_AUTHORIZED
 DECISION_SUPPORT_ARCHITECTURE = NOT_AUTHORIZED
 EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
@@ -84,9 +90,9 @@ RESULTS = NOT_AUTHORIZED
 EXPERIMENTAL_REVIEW = NOT_REQUIRED_UNLESS_NEW_TRIGGER_APPEARS
 ```
 
-El bloque debe redactarse dentro de la base acumulativa aprobada. Si la IA de Redacción no puede acceder al Word exacto con SHA-256 registrado, debe detenerse con `BASELINE_DOCX_ACCESS_REQUIRED`; no puede reconstruirlo silenciosamente.
+B02 deberá preservar 2.1 sin cambios y sintetizar la literatura según la función del conocimiento externo: conocimiento que participa en clasificación/selección, retrieval de documentos o pasajes para contexto, uso de reglas/jerarquías/agentes para razonamiento y evidencia/documentación usada como soporte. No puede describir todavía la arquitectura del presente estudio ni declarar gap final o novelty universal.
 
-### Gobernanza editorial
+### Gobernanza editorial vigente
 
 ```text
 MWDP_VERSION = MWDP_V1.0
@@ -99,8 +105,6 @@ PUBLICATION_ROUTE_TARGET_A = SUBSCRIPTION
 PAID_OPEN_ACCESS = NOT_SELECTED
 APC_PAYMENT_PLANNED = NO
 ```
-
-La guía KBS-34 gobierna prosa, organización retórica, densidad, visibilidad de contribución y presentación metodológica. Los 34 artículos son evidencia editorial y no fuentes científicas automáticas.
 
 ### Estado científico preservado
 
@@ -126,73 +130,26 @@ Fronteras obligatorias:
 - `AUDITABILITY ≠ LEGAL_CORRECTNESS`;
 - `CONFIGURABILITY ≠ EMPIRICAL_GENERALIZATION`.
 
-### Fuentes y Plan Maestro experimental
+### Estado experimental preservado
 
-```text
-BIBLIOGRAPHIC_CORPUS_SIZE = 62
-CURRENT_FULLTEXT_ACCESS_CONFIRMED = 62/62
-BIBLIOGRAPHIC_FULLTEXT_ACCESS_GATE = PASS
-KBS_EDITORIAL_CORPUS_SIZE = 34
-SRC03_BRANCH = docs/plan-maestro-temporal-2026-08-31
-SRC03_LIVE_HEAD_LAST_CHECKED = 96cccb9a61f42ab97b1eba607524e33f992740f6
-GROUP3 = IN_PROGRESS
-G3_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G3_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G3_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G3_F04 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
-```
-
-Related Work B01 no depende de nuevos resultados experimentales; cualquier trigger nuevo debe reportarse antes de usarlo.
+La integración de B01 no modifica el Plan Maestro experimental. El último estado registrado para el proceso editorial permanece con Grupo 3 en curso y RQ4 condicionada a su cierre aplicable. Related Work B02 no requiere resultados experimentales propios.
 
 ### Gate vigente
 
 ```text
-CURRENT_GATE = RELATED_WORK_B01_DRAFTING
-STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
+CURRENT_GATE = RELATED_WORK_B02_DRAFTING
 NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = EXECUTE_RELATED_WORK_B01_SECTION_2_1_ONLY
-MASTER_INTEGRATION = NOT_AUTHORIZED
+NEXT_ACTION = EXECUTE_RELATED_WORK_B02_SECTION_2.2_ONLY
+NEXT_PROMPT = article/prompts/2_RELATED_WORK_B02_KNOWLEDGE_ENHANCED_RETRIEVAL_REGULATORY_REASONING.md
+MASTER_INTEGRATION = ARTICLE_MASTER_V001 / ACTIVE_BASELINE
 ```
 
 ---
 
 ## English
 
-### Overall state
+Related Work B01 / Section 2.1 has passed independent scientific, source, editorial, bilingual, citation-comment, OOXML, and render review. The author had approved V01 subject to that audit; the PASS makes the approval effective. B01 is now `APPROVED / FROZEN / INTEGRATED`.
 
-```text
-WORKING_BRANCH = article/main-manuscript
-TARGET_A = Knowledge-Based Systems
-ARTICLE_TYPE_OPERATIVE = Research article
-PHASE_0 = CLOSED / APPROVED
-PHASE_1 = OPENED / RESTRUCTURED_BY_D014
-ARTICLE_WRITING_PLAN = V2.1
-STRUCTURE_APPROVAL_DECISION = D-015
-STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
-STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-WORD_BASELINE = KBS_ARTICLE_WORKING_STRUCTURE_V01.docx
-WORD_BASELINE_SHA256 = 0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5
-METHODS_B01_V05 = HOLD / NOT_APPROVED
-METHODS_B01_V06 = NOT_AUTHORIZED
-CURRENT_DRAFTING_PHASE = RELATED_WORK
-RELATED_WORK_B01 = AUTHORIZED
-AUTHORIZED_SCOPE = SECTION_2.1_ONLY
-NEXT_ACTOR = DRAFTING_AI
-```
+The canonical cumulative baseline is `article/manuscript/ARTICLE_MASTER_V001.md/.docx`; the canonical DOCX SHA-256 is `08d8ce916452c71a504aa2a0e23d65d68aafe556d818bbf13fa82422a133bfc5` and retains all eight English citation-audit comments.
 
-The author has approved and frozen the complete KBS article structure for drafting. D-014/D-015 alter editorial structure and drafting sequence only; scientific scope, RQs, claims, experimental design, and experimental governance remain unchanged.
-
-The active sequence is `Related Work → provisional Introduction → Decision-support architecture → Experimental design → authorized Results → figures/tables → pending-result integration → final Results → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → final KBS adaptation`.
-
-Only `Related Work B01 — Section 2.1 Automated tariff classification and candidate retrieval` is authorized. All other manuscript sections remain blocked until this gate is reviewed.
-
-The exact cumulative Word baseline is `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`, SHA-256 `0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5`. Silent reconstruction is prohibited; missing access requires `BASELINE_DOCX_ACCESS_REQUIRED`.
-
-### Current gate
-
-```text
-CURRENT_GATE = RELATED_WORK_B01_DRAFTING
-NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = EXECUTE_RELATED_WORK_B01_SECTION_2_1_ONLY
-MASTER_INTEGRATION = NOT_AUTHORIZED
-```
+The current gate is `RELATED_WORK_B02_DRAFTING`. Only Section 2.2, `Knowledge-enhanced retrieval and regulatory reasoning`, is authorized. B02 must preserve approved 2.1 unchanged, start from the canonical V001 DOCX, and stop before Section 2.3. Present-study architecture, experimental testbed/results, final gap, and universal novelty remain unauthorized.
