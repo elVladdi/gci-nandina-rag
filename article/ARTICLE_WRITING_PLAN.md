@@ -10,12 +10,12 @@ STRUCTURE_APPROVAL_DECISION = D-015
 LEGACY_METHODS_FIRST_ORDER = SUPERSEDED
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-CANONICAL_MASTER = ARTICLE_MASTER_V002
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V002.md
-CANONICAL_MASTER_DOCX = article/manuscript/ARTICLE_MASTER_V002.docx
-CANONICAL_MASTER_DOCX_SHA256 = ffbaf15e59cbee922be5ddc70622e2da2f52110c712142f956479acea44e890e
+CANONICAL_MASTER = ARTICLE_MASTER_V003
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V003.md
+CANONICAL_MASTER_DOCX = article/manuscript/ARTICLE_MASTER_V003.docx
+CANONICAL_MASTER_DOCX_SHA256 = f211e294f9da1241d899c4f4d52b3752b494cbf5e5323a09fc86431e4d4b3ec7
 CURRENT_DRAFTING_PHASE = RELATED_WORK
-CURRENT_AUTHORIZED_BLOCK = RELATED_WORK_B03 / SECTION_2.3_ONLY
+CURRENT_AUTHORIZED_BLOCK = RELATED_WORK_B04 / SECTION_2.4_ONLY
 ```
 
 ## Español
@@ -63,7 +63,7 @@ La estructura detallada está en `article/manuscript/KBS_ARTICLE_WORKING_STRUCTU
 
 1. El bootstrap inicial partió del Word estructural aprobado.
 2. Cada bloque posterior parte del último `ARTICLE_MASTER_V00N` aprobado.
-3. El baseline actual es `ARTICLE_MASTER_V002.md/.docx`, SHA-256 DOCX `ffbaf15e59cbee922be5ddc70622e2da2f52110c712142f956479acea44e890e`.
+3. El baseline actual es `ARTICLE_MASTER_V003.md/.docx`, SHA-256 DOCX `f211e294f9da1241d899c4f4d52b3752b494cbf5e5323a09fc86431e4d4b3ec7`.
 4. No se crean Words independientes por sección.
 5. La sección nueva se inserta directamente en su ubicación estructural.
 6. Solo se eliminan las notas editoriales correspondientes a la sección que se completa.
@@ -85,18 +85,19 @@ La estructura detallada está en `article/manuscript/KBS_ARTICLE_WORKING_STRUCTU
 | Estructura KBS V01 | AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
 | Related Work B01 / 2.1 | APPROVED / FROZEN / INTEGRATED |
 | Related Work B02 / 2.2 | APPROVED / FROZEN / INTEGRATED |
-| Related Work B03 / 2.3 | AUTHORIZED |
+| Related Work B03 / 2.3 | APPROVED / FROZEN / INTEGRATED |
+| Related Work B04 / 2.4 | AUTHORIZED / ACTIVE |
 | Methods B01 V05 | HOLD / NOT APPROVED |
 | Methods B01 V06 | NOT AUTHORIZED |
 
-D-014 a D-017 modifican únicamente arquitectura/editorial workflow, aprobaciones de bloques y master acumulativo. No cambian alcance científico, RQs, claims autorizados, diseño experimental ni gobernanza del Plan Maestro.
+D-014 a D-018 modifican únicamente arquitectura/editorial workflow, aprobaciones de bloques y master acumulativo. No cambian alcance científico, RQs, claims autorizados, diseño experimental ni gobernanza del Plan Maestro.
 
 ### 6. Orden operativo de redacción
 
 | Fase | Entregable | Gate |
 |---|---|---|
 | 1 | Estructura completa del artículo | CLOSED / AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
-| 2 | Related Work | EN PROGRESO; 2.1 y 2.2 integradas; 2.3 activa |
+| 2 | Related Work | EN PROGRESO; 2.1–2.3 integradas; 2.4 activa |
 | 3 | Introduction provisional | Related Work suficientemente estable + claims/RQs autorizados |
 | 4 | Decision-support architecture | Introduction/positioning suficientemente estable |
 | 5 | Experimental design | arquitectura suficientemente estable + ground truth experimental vigente |
@@ -120,26 +121,29 @@ Related Work se organiza por familias funcionales:
 
 - 2.1 `Automated tariff classification and candidate retrieval` — **APPROVED / FROZEN / INTEGRATED**;
 - 2.2 `Knowledge-enhanced retrieval and regulatory reasoning` — **APPROVED / FROZEN / INTEGRATED**;
-- 2.3 `LLMs for classification, reasoning, and explanation` — **AUTHORIZED / ACTIVE**;
-- 2.4 `Evidence grounding, explainability, and auditability` — **NOT AUTHORIZED**;
+- 2.3 `LLMs for classification, reasoning, and explanation` — **APPROVED / FROZEN / INTEGRATED**;
+- 2.4 `Evidence grounding, explainability, and auditability` — **AUTHORIZED / ACTIVE**;
 - 2.5 `Reproducibility and evaluation in knowledge-based decision support` — **NOT AUTHORIZED**;
 - 2.6 `Positioning of this study` — **NOT AUTHORIZED**.
 
 Cada subsección debe sintetizar por problema/tarea/función y no por cronología de autores. Debe hacer explícitas semejanzas, diferencias y límites relevantes, sin declarar novelty universal ni convertir diferencias arquitectónicas en novelty por sí mismas.
 
-**Bloque actualmente autorizado:** exclusivamente `Related Work B03 / Section 2.3`.
+**Bloque actualmente autorizado:** exclusivamente `Related Work B04 / Section 2.4`.
 
-### 8. Función específica de B03
+### 8. Función específica de B04
 
-B03 debe explicar que la etiqueta “LLM” cubre papeles operativos diferentes y que la posición del modelo dentro del pipeline es más informativa que su mera presencia. La síntesis deberá distinguir, cuando las fuentes primarias lo soporten:
+B04 debe explicar qué puede realmente verificarse cuando un sistema adjunta documentos, citas, rationales o trazas a una salida. La subsección deberá distinguir, cuando las fuentes primarias lo soporten:
 
-- clasificación generativa directa en la que el modelo produce/elige el código;
-- clasificadores transformer fine-tuned con label space cerrado, sin equipararlos automáticamente a generación libre;
-- LLM/agentes que controlan búsqueda, reranking, next-hop, consenso o aplicación de reglas y por tanto participan en la decisión;
-- lectores/razonadores condicionados por documentos recuperados;
-- componentes que generan rationale o explicación después de una decisión/ruta previa.
+- retrieved context frente a soporte semántico real del claim;
+- explanation/rationale frente a faithfulness;
+- provenance/lineage y traceability frente a substantive correctness;
+- transparency trail o lifecycle audit frente a output-level auditability;
+- source authority y documentary currency frente a correct legal interpretation;
+- auditability frente a legal correctness.
 
-B03 no autoriza todavía describir la arquitectura del presente estudio ni su Top-3 fijo. Tampoco autoriza afirmar que un explainer downstream sea novedoso. Debe cerrar preparando 2.4, donde se separarán grounding, explainability y auditability.
+Estas propiedades no deben presentarse como una escalera causal o de madurez. B04 puede utilizar literatura de provenance/auditing para delimitar conceptos, pero debe reservar para 2.5 la discusión principal sobre dataset documentation, reproducibility/replication/generalization, code/data availability y diseño/reporting de evaluación.
+
+B04 no autoriza describir la arquitectura del presente estudio, Top-3 fijo, HE4, NANDINA/Chapter 87 ni resultados propios. Debe cerrar preparando 2.5.
 
 ### 9. Función de las demás secciones
 
@@ -176,7 +180,7 @@ Una sección solo puede pasar a `APPROVED` cuando:
 - evita abstracción y nominalización innecesarias;
 - mantiene relaciones claras de agente/objeto/acción o entrada–operación–salida;
 - respeta separación histórico/documental/LLM;
-- no confunde reproducibilidad, configurabilidad y generalización;
+- no confunde grounding, provenance, auditability, correctness, reproducibility, configurability y generalization;
 - EN/ES son semánticamente equivalentes;
 - cifras y referencias coinciden entre idiomas;
 - comentarios de cita cumplen MWDP;
@@ -202,7 +206,7 @@ Antes del paquete final se volverán a verificar los requisitos oficiales vigent
 
 ### 1. Purpose and authority
 
-This V2.2 plan governs cumulative drafting under the author-approved KBS article structure. Related Work B01 and B02 are approved, frozen, and integrated. The active canonical master is `ARTICLE_MASTER_V002.md/.docx`, DOCX SHA-256 `ffbaf15e59cbee922be5ddc70622e2da2f52110c712142f956479acea44e890e`.
+This V2.2 plan governs cumulative drafting under the author-approved KBS article structure. Related Work B01, B02, and B03 are approved, frozen, and integrated. The active canonical master is `ARTICLE_MASTER_V003.md/.docx`, DOCX SHA-256 `f211e294f9da1241d899c4f4d52b3752b494cbf5e5323a09fc86431e4d4b3ec7`.
 
 ### 2. Operational drafting order
 
@@ -210,12 +214,12 @@ This V2.2 plan governs cumulative drafting under the author-approved KBS article
 
 ### 3. Active phase
 
-Related Work is active. Sections 2.1 and 2.2 are integrated. Only `Related Work B03 — Section 2.3 LLMs for classification, reasoning, and explanation` is currently authorized. Sections 2.4–2.6 and all later manuscript sections remain blocked.
+Related Work is active. Sections 2.1–2.3 are integrated. Only `Related Work B04 — Section 2.4 Evidence grounding, explainability, and auditability` is currently authorized. Sections 2.5–2.6 and all later manuscript sections remain blocked.
 
-B03 must distinguish operational LLM roles: direct generative classification, fine-tuned transformer classification, search/reranking/decision control, retrieval-conditioned reader/reasoner behavior, and post-decision explanation/rationale generation. It must not describe the present-study architecture or claim novelty.
+B04 must distinguish visible/retrieved evidence from actual claim support, explanation from faithfulness, provenance/traceability from correctness, lifecycle audit from output-level auditability, and documentary authority/currency from substantive or legal correctness. It must not describe the present-study architecture or claim novelty.
 
 ### 4. Cumulative Word policy and audit
 
-B03 must start from the exact canonical V002 DOCX and preserve Sections 2.1–2.2 and all fourteen citation-audit comments unchanged. Every new citation requires primary-full-text re-retrieval and a Word comment with exact supporting passage, Spanish translation, claim-source justification, and scope limitation. Author approval and Managing-AI audit are required before canonical integration.
+B04 must start from the exact canonical V003 DOCX and preserve Sections 2.1–2.3 and all nineteen citation-audit comments unchanged. Every new citation requires primary-full-text re-retrieval and a Word comment with exact supporting passage, Spanish translation, claim-source justification, and scope limitation. Author approval and Managing-AI audit are required before canonical integration.
 
 Scientific scope, RQs, claims, experimental design and experimental governance remain unchanged.
