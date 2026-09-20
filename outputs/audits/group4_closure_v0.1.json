@@ -1,0 +1,241 @@
+{
+  "artifact_id": "GROUP4_CLOSURE_CANDIDATE_V0.1",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "ficha": "G4-F03",
+  "group4_closed": false,
+  "main_base": "203770565e1a68c30ab3f27b912fc0fd971e4e8f",
+  "plan_snapshot": "89fe5a0c13c8cad03e49280dc2a3edec8bc14a0b",
+  "fichas_activation_commit": "16d84dfc3284c684cb6c7ecabc1763d435fa27d3",
+  "prompt91_commit": "a78a6ba29a12dfa505de0f22515ab142e0dffeb6",
+  "article_design_baseline": "80cda7feeb2cc4979fdc6ccdfc04bd3ba05d97ea",
+  "article_head_observed": "4af2fe11c4992fe0fefc6265a397e8b40f48ea1f",
+  "article_head_final_observed": "4af2fe11c4992fe0fefc6265a397e8b40f48ea1f",
+  "required_literature_blobs": {
+    "article/SOURCE_REGISTRY.md": "a93b5c92ca0e4a077c22ae9c30d1590202ad1a8c",
+    "article/BIBLIOGRAPHIC_FRAMEWORK.md": "78a08a0ad794eaa337bbace9bd7c082c50b464c3",
+    "article/CLAIM_EVIDENCE_MATRIX.md": "255daa8cef57d659b426470d82b11db58fe688a5",
+    "article/literature/0B01_HS_CLASSIFICATION_CORE_LITERATURE_FROZEN.md": "644483ac6bed8c3a5df572a2ab53db698568e2fe",
+    "article/literature/0B02_RETRIEVAL_VALIDATION_KNOWLEDGE_AUDITABILITY_FROZEN.md": "55636236193afbd523609f8b0ccee987035d35ef",
+    "article/literature/0B03A_LLM_RAG_MULTIMODAL_CUSTOMS_FROZEN.md": "4c25a91cc9562d72d7734976940ff37819e919c0",
+    "article/literature/0B03B_AGENTS_HIERARCHICAL_REGULATORY_REASONING_FROZEN.md": "1bb70fdc93bafb8c883a0383ec2e67fe652cfab2",
+    "article/literature/0B04A_IR_RANKING_RETRIEVAL_FOUNDATIONS_FROZEN.md": "6c8bbf48fd64aac87b54374a8c9af8ce7b1945f0",
+    "article/literature/0B04B_RAG_QUERY_TRANSFORMATION_GROUNDING_FOUNDATIONS_FROZEN.md": "cde65f51d2959f90c321458cd8fa50073d1ba056",
+    "article/literature/0B05A_DATA_DOCUMENTATION_PROVENANCE_REPRODUCIBILITY_FROZEN.md": "0c342a37feb927f1fa2b384125229f38add382aa",
+    "article/literature/0B05C_OFFICIAL_NORMATIVE_SOURCE_AUTHORITY_CURRENCY_TRACEABILITY_FROZEN.md": "406cc7f91595736fdad98265109858102f238ea1"
+  },
+  "experimental_source_blobs": {
+    "outputs/analysis/group4/g4_result_claim_evidence_matrix_v0.1.csv": "da0351cb523fc7f3b45a83e072765a07f809b7fe",
+    "outputs/analysis/group4/g4_result_claim_evidence_matrix_v0.1.json": "cc5d85bad5d0a2610ffb086f99052fd344b6d8ab",
+    "docs/analysis/group4/g4_interpretation_synthesis_v0.1.md": "129a67b15db429b86af059d61753b1942c8f243f",
+    "outputs/analysis/group4/g4_limitations_registry_v0.1.json": "ae00b93431e912cb78a58344057d9bf7a51fcd47"
+  },
+  "comparison_registry": [
+    {
+      "comparison_id": "CMP-001",
+      "project_finding": "HE2 internal historical retrieval advantage over three corrected normative arms on five primary HE2_A metrics",
+      "literature_sources": ["0B01", "0B02", "0B04A"],
+      "comparison_class": "NOT_DIRECTLY_COMPARABLE",
+      "compatibility_justification": "External tasks, datasets, HS levels, metrics, denominators and protocols are heterogeneous.",
+      "interpretation_boundary": "Internal frozen-benchmark result only; no cross-study numerical superiority."
+    },
+    {
+      "comparison_id": "CMP-002",
+      "project_finding": "Historical ranking followed by normative evidence and controlled explanation of a fixed Top-3",
+      "literature_sources": ["0B03A", "0B03B", "0B04B"],
+      "comparison_class": "QUALITATIVE_ONLY",
+      "compatibility_justification": "Systems share RAG or evidence components but assign different decision roles to rules, evidence and LLMs.",
+      "interpretation_boundary": "Architectural distinction, not performance or novelty evidence."
+    },
+    {
+      "comparison_id": "CMP-003",
+      "project_finding": "The local LLM cannot introduce or reorder codes",
+      "literature_sources": ["0B03A", "0B03B"],
+      "comparison_class": "PARTIALLY_COMPARABLE",
+      "compatibility_justification": "Related systems expose agentic, hierarchical or constraint-aware components, while decision contracts differ.",
+      "interpretation_boundary": "Functional contract only; no automatic superiority."
+    },
+    {
+      "comparison_id": "CMP-004",
+      "project_finding": "Explicit separation of ranking performance, documentary evidence and controlled explanation",
+      "literature_sources": ["0B02", "0B03A", "0B03B"],
+      "comparison_class": "QUALITATIVE_ONLY",
+      "compatibility_justification": "Evidence, rationale, citations and faithfulness appear in related work but do not share a formal output-auditability evaluation contract.",
+      "interpretation_boundary": "No classification validation or legal correctness follows."
+    },
+    {
+      "comparison_id": "CMP-005",
+      "project_finding": "Versioned result-to-claim-to-evidence traceability",
+      "literature_sources": ["0B05A", "0B05C"],
+      "comparison_class": "PARTIALLY_COMPARABLE",
+      "compatibility_justification": "Shared provenance and traceability concepts have different units and assurance targets.",
+      "interpretation_boundary": "Provenance does not certify correctness or legal sufficiency."
+    },
+    {
+      "comparison_id": "CMP-006",
+      "project_finding": "DAM-grouped dependence control",
+      "literature_sources": ["0B01", "0B02"],
+      "comparison_class": "QUALITATIVE_ONLY",
+      "compatibility_justification": "The frozen literature does not establish an equivalent observation-group structure or split protocol.",
+      "interpretation_boundary": "Missing documentation is not evidence of leakage."
+    },
+    {
+      "comparison_id": "CMP-007",
+      "project_finding": "EXP11A joint size-composition sensitivity",
+      "literature_sources": ["0B04A", "0B05A"],
+      "comparison_class": "NOT_DIRECTLY_COMPARABLE",
+      "compatibility_justification": "No frozen source provides an aligned design that isolates the same estimand.",
+      "interpretation_boundary": "Noncausal; no isolated size effect."
+    },
+    {
+      "comparison_id": "CMP-008",
+      "project_finding": "EXP11B descriptive H150/H200 results across ten observed seed pairs",
+      "literature_sources": ["0B04A", "0B05A"],
+      "comparison_class": "NOT_DIRECTLY_COMPARABLE",
+      "compatibility_justification": "No aligned seed-sampling population or inference protocol is available.",
+      "interpretation_boundary": "No seed-superpopulation inference."
+    },
+    {
+      "comparison_id": "CMP-009",
+      "project_finding": "0B05C Attempt06 method-dependent impact",
+      "literature_sources": ["0B05C"],
+      "comparison_class": "PARTIALLY_COMPARABLE",
+      "compatibility_justification": "The frozen source governs the same internal corrective chain but not an external performance benchmark.",
+      "interpretation_boundary": "Not global zero impact; no causality or uncomputed significance."
+    },
+    {
+      "comparison_id": "CMP-010",
+      "project_finding": "EXP12 closed without retrieval and diversity effect not estimable",
+      "literature_sources": ["0B05A"],
+      "comparison_class": "NOT_DIRECTLY_COMPARABLE",
+      "compatibility_justification": "The frozen corpus contains no conceptually aligned feasibility design.",
+      "interpretation_boundary": "No global infeasibility and no evidence for or against HE5."
+    }
+  ],
+  "authorized_discussion_points": [
+    {
+      "discussion_id": "ADP-001",
+      "project_claim_ids": ["HE2", "G4-F01"],
+      "literature_source_ids_or_paths": ["0B01", "0B02", "0B04A"],
+      "comparison_class": "NOT_DIRECTLY_COMPARABLE",
+      "allowed_statement": "Historical retrieval performed better internally than the corrected normative arms.",
+      "mandatory_qualification": "Frozen benchmark only; no external percentage comparison.",
+      "scientific_role": "METHODOLOGICAL"
+    },
+    {
+      "discussion_id": "ADP-002",
+      "project_claim_ids": ["C01", "C02", "C03"],
+      "literature_source_ids_or_paths": ["0B03A", "0B03B", "0B04B"],
+      "comparison_class": "QUALITATIVE_ONLY",
+      "allowed_statement": "The pilot separates ranking, normative evidence and explanation of a fixed Top-3.",
+      "mandatory_qualification": "Functional difference only; no superiority or uniqueness.",
+      "scientific_role": "TECHNICAL"
+    },
+    {
+      "discussion_id": "ADP-003",
+      "project_claim_ids": ["C12", "C13", "C18"],
+      "literature_source_ids_or_paths": ["0B02", "0B03A", "0B03B", "0B05C"],
+      "comparison_class": "QUALITATIVE_ONLY",
+      "allowed_statement": "Visible evidence and explanation are distinct from formal auditability and legal correctness.",
+      "mandatory_qualification": "No classification validation or legal ruling is implied.",
+      "scientific_role": "TRACEABILITY"
+    },
+    {
+      "discussion_id": "ADP-004",
+      "project_claim_ids": ["G4-F02"],
+      "literature_source_ids_or_paths": ["0B05A", "0B05C"],
+      "comparison_class": "PARTIALLY_COMPARABLE",
+      "allowed_statement": "Artifact identity and provenance support inspection of the experimental chain.",
+      "mandatory_qualification": "They do not certify quality, correctness or legal sufficiency.",
+      "scientific_role": "TRACEABILITY"
+    },
+    {
+      "discussion_id": "ADP-005",
+      "project_claim_ids": ["EXP11A", "EXP11B", "EXP12"],
+      "literature_source_ids_or_paths": ["0B04A", "0B05A"],
+      "comparison_class": "NOT_DIRECTLY_COMPARABLE",
+      "allowed_statement": "The sensitivity and feasibility blocks delimit what the frozen evidence can estimate.",
+      "mandatory_qualification": "No causal size effect, seed-superpopulation inference, global infeasibility or HE5 evidence.",
+      "scientific_role": "LIMITATION"
+    },
+    {
+      "discussion_id": "ADP-006",
+      "project_claim_ids": ["C21", "C22", "C23", "C24", "C25"],
+      "literature_source_ids_or_paths": ["0B05C"],
+      "comparison_class": "PARTIALLY_COMPARABLE",
+      "allowed_statement": "The corrective 0B05C impact is method-dependent.",
+      "mandatory_qualification": "Do not reduce it to global zero impact or infer causality or significance.",
+      "scientific_role": "LIMITATION"
+    }
+  ],
+  "forbidden_discussion_points": [
+    {"discussion_id": "FDP-001", "forbidden_statement": "Cross-study numeric superiority across incompatible tasks, datasets, HS levels, metrics or protocols."},
+    {"discussion_id": "FDP-002", "forbidden_statement": "SOTA or best-in-literature performance."},
+    {"discussion_id": "FDP-003", "forbidden_statement": "Ungoverned absolute novelty, first-ever status, uniqueness or final gap."},
+    {"discussion_id": "FDP-004", "forbidden_statement": "A causal size effect from EXP11A."},
+    {"discussion_id": "FDP-005", "forbidden_statement": "Seed-superpopulation inference from EXP11B."},
+    {"discussion_id": "FDP-006", "forbidden_statement": "Global zero impact for 0B05C."},
+    {"discussion_id": "FDP-007", "forbidden_statement": "Global mathematical infeasibility from EXP12."},
+    {"discussion_id": "FDP-008", "forbidden_statement": "Positive or negative HE5 evidence from EXP12."},
+    {"discussion_id": "FDP-009", "forbidden_statement": "Global RAG accuracy derived from historical retrieval."},
+    {"discussion_id": "FDP-010", "forbidden_statement": "Legal correctness derived from normative evidence or source authority."},
+    {"discussion_id": "FDP-011", "forbidden_statement": "Auditable explanation treated as classification validation."},
+    {"discussion_id": "FDP-012", "forbidden_statement": "Leakage attributed to prior work solely because an equivalent group split is not documented."},
+    {"discussion_id": "FDP-013", "forbidden_statement": "Constraint or path validity treated as independent legal correctness."},
+    {"discussion_id": "FDP-014", "forbidden_statement": "Provenance or reproducibility treated as output-level auditability or correctness."}
+  ],
+  "contribution_categories": {
+    "TECHNICAL_CONTRIBUTION": "Functional architecture separating historical ranking, post-ranking normative evidence and controlled explanation of a fixed Top-3.",
+    "METHODOLOGICAL_CONTRIBUTION": "Separated functions, DAM dependence control, bounded metrics and claims, noncausal sensitivity labels and explicit estimability boundaries.",
+    "TRACEABILITY_CONTRIBUTION": "Versioned result-to-claim-to-evidence bridge, limitations registry, artifact identity and documented boundaries among explanation, evidence and correctness."
+  },
+  "rpre": {
+    "RPRE_G4_F03_SOURCE_CONTRACT": "PASS",
+    "RPRE_G4_F03_NO_NEW_SCIENCE": "PASS",
+    "RPRE_G4_F03_LITERATURE_FROZEN_ONLY": "PASS",
+    "RPRE_G4_F03_COMPARABILITY_GUARDRAIL": "PASS",
+    "RPRE_G4_F03_NO_CROSS_STUDY_NUMERIC_SUPERIORITY": "PASS",
+    "RPRE_G4_F03_NO_NEW_NOVELTY_CLAIM": "PASS",
+    "RPRE_G4_F03_G4F01_G4F02_CONSISTENCY": "PASS",
+    "RPRE_G4_F03_HE2_HE5_PRESERVATION": "PASS",
+    "RPRE_G4_F03_EXP11A_EXP11B_GUARDRAILS": "PASS",
+    "RPRE_G4_F03_0B05C_ATTEMPT06_CURRENT_STATE": "PASS",
+    "RPRE_G4_F03_EXP12_FAIL_CLOSED_SEMANTICS": "PASS",
+    "RPRE_G4_F03_ARTICLE_READONLY": "PASS",
+    "RPRE_G4_F03_G5_NOT_STARTED": "PASS"
+  },
+  "validation": {
+    "FROZEN_LITERATURE_SOURCE_COUNT_USED": 8,
+    "UNVERIFIED_NEW_REFERENCE_COUNT": 0,
+    "WEB_SEARCH_PERFORMED": false,
+    "NEW_LITERATURE_SEARCH_PERFORMED": false,
+    "NEW_REFERENCE_ADMITTED": false,
+    "CROSS_STUDY_NUMERIC_SUPERIORITY_CLAIM_COUNT": 0,
+    "SOTA_CLAIM_COUNT": 0,
+    "NEW_NOVELTY_CLAIM_COUNT": 0,
+    "FINAL_GAP_REDECISION_COUNT": 0,
+    "DIRECT_COMPARISON_WITHOUT_COMPATIBILITY_JUSTIFICATION_COUNT": 0,
+    "HE2": "SUPPORTED",
+    "HE5": "INCONCLUSIVE",
+    "HE2_REDECIDED": false,
+    "HE5_REDECIDED": false,
+    "EXP11A_CAUSAL_SIZE_EFFECT_CLAIM_COUNT": 0,
+    "EXP11B_SEED_SUPERPOPULATION_INFERENCE_COUNT": 0,
+    "0B05C_GLOBAL_ZERO_IMPACT_CLAIM_COUNT": 0,
+    "EXP12_GLOBAL_INFEASIBILITY_CLAIM_COUNT": 0,
+    "EXP12_HE5_POSITIVE_EVIDENCE_COUNT": 0,
+    "EXP12_HE5_NEGATIVE_EVIDENCE_COUNT": 0,
+    "GLOBAL_RAG_ACCURACY_FROM_HISTORICAL_RETRIEVAL_COUNT": 0,
+    "LEGAL_CORRECTNESS_FROM_NORMATIVE_EVIDENCE_COUNT": 0,
+    "EXPLANATION_EQUALS_CLASSIFICATION_VALIDATION_COUNT": 0,
+    "LEAKAGE_ASSERTED_FROM_MISSING_GROUP_SPLIT_COUNT": 0,
+    "NEW_INFERENCE_PERFORMED": false,
+    "P_VALUES_CALCULATED": false,
+    "NEW_CI_CALCULATED": false,
+    "METRICS_RECOMPUTED": false,
+    "EXPERIMENTS_RERUN": false,
+    "RETRIEVAL_EXECUTED": false,
+    "EXP12_REOPENED": false,
+    "ARTICLE_MODIFIED": false,
+    "G5_F01_STARTED": false
+  }
+}
