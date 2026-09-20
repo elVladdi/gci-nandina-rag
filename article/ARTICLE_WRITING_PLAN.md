@@ -1,7 +1,7 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V2.1
+PLAN_VERSION = V2.2
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
@@ -10,24 +10,26 @@ STRUCTURE_APPROVAL_DECISION = D-015
 LEGACY_METHODS_FIRST_ORDER = SUPERSEDED
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-WORD_BASELINE = KBS_ARTICLE_WORKING_STRUCTURE_V01.docx
-WORD_BASELINE_SHA256 = 0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5
+CANONICAL_MASTER = ARTICLE_MASTER_V002
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V002.md
+CANONICAL_MASTER_DOCX = article/manuscript/ARTICLE_MASTER_V002.docx
+CANONICAL_MASTER_DOCX_SHA256 = ffbaf15e59cbee922be5ddc70622e2da2f52110c712142f956479acea44e890e
 CURRENT_DRAFTING_PHASE = RELATED_WORK
-CURRENT_AUTHORIZED_BLOCK = RELATED_WORK_B01 / SECTION_2.1_ONLY
+CURRENT_AUTHORIZED_BLOCK = RELATED_WORK_B03 / SECTION_2.3_ONLY
 ```
 
 ## Español
 
 ### 1. Propósito
 
-Administrar la construcción iterativa del artículo científico principal sin anticipar resultados, alterar el diseño experimental aprobado ni trasladar al manuscrito la lógica de un documento de gobernanza. El artículo se construirá sobre una **estructura acumulativa completa ya aprobada por el autor** y cada nueva versión completará esa misma base.
+Administrar la construcción iterativa del artículo científico principal sin anticipar resultados, alterar el diseño experimental aprobado ni trasladar al manuscrito la lógica de un documento de gobernanza. El artículo se construye sobre una estructura acumulativa aprobada y cada bloque autorizado completa esa misma base.
 
-La redacción se rige por `KBS_EWG_34_V01`, el protocolo `MWDP_V1.0`, la Claim–Evidence Matrix, la literatura congelada de 0B y las fuentes experimentales gobernantes cuando correspondan.
+La redacción se rige por `KBS_EWG_34_V01`, `MWDP_V1.0`, SPCCR, la Claim–Evidence Matrix, la literatura congelada de 0B y las fuentes experimentales gobernantes cuando correspondan.
 
 ### 2. Principios rectores
 
 - El artículo no será una versión abreviada de la tesis.
-- El lector debe comprender primero el problema y posicionamiento, después la arquitectura general y solo entonces la instanciación experimental específica.
+- El lector debe comprender primero problema y posicionamiento, después la arquitectura general y solo entonces la instanciación experimental específica.
 - NANDINA/Chapter-Class 87 y el corpus documental concreto no deben definir prematuramente el alcance conceptual de la arquitectura.
 - La recuperación histórica genera y ordena candidatos.
 - El Top-3 queda fijado antes de recuperación documental y generación.
@@ -44,7 +46,7 @@ La redacción se rige por `KBS_EWG_34_V01`, el protocolo `MWDP_V1.0`, la Claim�
 
 ### 3. Arquitectura acumulativa aprobada
 
-La estructura congelada para redacción es:
+La estructura congelada para redacción permanece:
 
 1. `Introduction`
 2. `Related work`
@@ -55,23 +57,21 @@ La estructura congelada para redacción es:
 7. `Conclusion`
 8. end matter de KBS.
 
-La estructura detallada está en `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md` y fue aprobada mediante D-015.
-
-El Word exacto que sirve como baseline de bootstrap es `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`, SHA-256 `0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5`.
-
-`Limitations` permanece integrada como `6.6 Limitations`, salvo futura enmienda aprobada por el autor.
+La estructura detallada está en `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`, aprobada mediante D-015. `Limitations` permanece integrada como `6.6 Limitations` salvo futura enmienda expresa.
 
 ### 4. Política acumulativa del Word
 
-1. El primer bloque parte del Word estructural exacto aprobado.
-2. Después de la primera integración canónica, cada bloque parte del último `ARTICLE_MASTER_V00N` aprobado.
-3. No se crean Words independientes por sección.
-4. La sección nueva se inserta directamente en su ubicación estructural.
-5. Solo se eliminan las notas editoriales correspondientes a la sección que se completa.
-6. Part I y Part II deben conservar equivalencia semántica.
-7. Las versiones de trabajo permanecen como candidatas hasta aprobación expresa del autor.
-8. Ningún texto previamente rechazado se reutiliza automáticamente.
-9. Si el baseline exacto no es accesible, la IA de Redacción debe detenerse con `BASELINE_DOCX_ACCESS_REQUIRED`; no se autoriza reconstrucción silenciosa.
+1. El bootstrap inicial partió del Word estructural aprobado.
+2. Cada bloque posterior parte del último `ARTICLE_MASTER_V00N` aprobado.
+3. El baseline actual es `ARTICLE_MASTER_V002.md/.docx`, SHA-256 DOCX `ffbaf15e59cbee922be5ddc70622e2da2f52110c712142f956479acea44e890e`.
+4. No se crean Words independientes por sección.
+5. La sección nueva se inserta directamente en su ubicación estructural.
+6. Solo se eliminan las notas editoriales correspondientes a la sección que se completa.
+7. Part I y Part II deben conservar equivalencia semántica.
+8. Las versiones de trabajo permanecen como candidatas hasta aprobación expresa del autor.
+9. Ningún texto previamente rechazado se reutiliza automáticamente.
+10. Si el baseline exacto no es accesible, la IA de Redacción debe detenerse con `BASELINE_DOCX_ACCESS_REQUIRED`; no se autoriza reconstrucción silenciosa.
+11. Todo bloque debe preservar exactamente el texto y los comentarios de auditoría de las secciones ya aprobadas.
 
 ### 5. Estado previo y reset
 
@@ -83,17 +83,20 @@ El Word exacto que sirve como baseline de bootstrap es `KBS_ARTICLE_WORKING_STRU
 | 0D original | CLOSED / APPROVED / FROZEN; arquitectura de secciones supersedida por D-014 |
 | KBS-34 guide | AUTHOR_APPROVED / ACTIVE / BINDING |
 | Estructura KBS V01 | AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
+| Related Work B01 / 2.1 | APPROVED / FROZEN / INTEGRATED |
+| Related Work B02 / 2.2 | APPROVED / FROZEN / INTEGRATED |
+| Related Work B03 / 2.3 | AUTHORIZED |
 | Methods B01 V05 | HOLD / NOT APPROVED |
 | Methods B01 V06 | NOT AUTHORIZED |
 
-D-014 y D-015 modifican únicamente arquitectura editorial, orden de redacción y activación del nuevo flujo. No cambian alcance científico, RQs, claims autorizados, diseño experimental ni gobernanza del Plan Maestro.
+D-014 a D-017 modifican únicamente arquitectura/editorial workflow, aprobaciones de bloques y master acumulativo. No cambian alcance científico, RQs, claims autorizados, diseño experimental ni gobernanza del Plan Maestro.
 
 ### 6. Orden operativo de redacción
 
 | Fase | Entregable | Gate |
 |---|---|---|
-| 1 | Estructura completa del artículo | **CLOSED / AUTHOR_APPROVED / FROZEN_FOR_DRAFTING** |
-| 2 | Related Work | estructura aprobada + literatura 0B congelada |
+| 1 | Estructura completa del artículo | CLOSED / AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
+| 2 | Related Work | EN PROGRESO; 2.1 y 2.2 integradas; 2.3 activa |
 | 3 | Introduction provisional | Related Work suficientemente estable + claims/RQs autorizados |
 | 4 | Decision-support architecture | Introduction/positioning suficientemente estable |
 | 5 | Experimental design | arquitectura suficientemente estable + ground truth experimental vigente |
@@ -115,18 +118,30 @@ Orden operativo activado:
 
 Related Work se organiza por familias funcionales:
 
-- 2.1 `Automated tariff classification and candidate retrieval`;
-- 2.2 `Knowledge-enhanced retrieval and regulatory reasoning`;
-- 2.3 `LLMs for classification, reasoning, and explanation`;
-- 2.4 `Evidence grounding, explainability, and auditability`;
-- 2.5 `Reproducibility and evaluation in knowledge-based decision support`;
-- 2.6 `Positioning of this study`.
+- 2.1 `Automated tariff classification and candidate retrieval` — **APPROVED / FROZEN / INTEGRATED**;
+- 2.2 `Knowledge-enhanced retrieval and regulatory reasoning` — **APPROVED / FROZEN / INTEGRATED**;
+- 2.3 `LLMs for classification, reasoning, and explanation` — **AUTHORIZED / ACTIVE**;
+- 2.4 `Evidence grounding, explainability, and auditability` — **NOT AUTHORIZED**;
+- 2.5 `Reproducibility and evaluation in knowledge-based decision support` — **NOT AUTHORIZED**;
+- 2.6 `Positioning of this study` — **NOT AUTHORIZED**.
 
-Cada subsección debe sintetizar por problema/tarea/enfoque, no por cronología de autores. Debe hacer explícitas semejanzas, diferencias y límites relevantes, sin declarar novelty universal ni convertir diferencias arquitectónicas en novelty por sí mismas.
+Cada subsección debe sintetizar por problema/tarea/función y no por cronología de autores. Debe hacer explícitas semejanzas, diferencias y límites relevantes, sin declarar novelty universal ni convertir diferencias arquitectónicas en novelty por sí mismas.
 
-**Bloque actualmente autorizado:** únicamente 2.1.
+**Bloque actualmente autorizado:** exclusivamente `Related Work B03 / Section 2.3`.
 
-### 8. Función de las demás secciones
+### 8. Función específica de B03
+
+B03 debe explicar que la etiqueta “LLM” cubre papeles operativos diferentes y que la posición del modelo dentro del pipeline es más informativa que su mera presencia. La síntesis deberá distinguir, cuando las fuentes primarias lo soporten:
+
+- clasificación generativa directa en la que el modelo produce/elige el código;
+- clasificadores transformer fine-tuned con label space cerrado, sin equipararlos automáticamente a generación libre;
+- LLM/agentes que controlan búsqueda, reranking, next-hop, consenso o aplicación de reglas y por tanto participan en la decisión;
+- lectores/razonadores condicionados por documentos recuperados;
+- componentes que generan rationale o explicación después de una decisión/ruta previa.
+
+B03 no autoriza todavía describir la arquitectura del presente estudio ni su Top-3 fijo. Tampoco autoriza afirmar que un explainer downstream sea novedoso. Debe cerrar preparando 2.4, donde se separarán grounding, explainability y auditability.
+
+### 9. Función de las demás secciones
 
 - **Introduction:** `problema → enfoques existentes → limitación verificable → consecuencia → propuesta de alto nivel → contribuciones → contexto de evaluación → RQs → roadmap`.
 - **Decision-support architecture:** arquitectura general en relaciones entrada–operación–salida, antes de detalles experimentales.
@@ -135,26 +150,27 @@ Cada subsección debe sintetizar por problema/tarea/enfoque, no por cronología 
 - **Discussion:** interpretación, comparación, implicaciones, condiciones de transferencia y limitaciones.
 - **Conclusion:** `aporte → evidencia principal → alcance → implicación`.
 
-### 9. Ciclo obligatorio de cada bloque
+### 10. Ciclo obligatorio de cada bloque
 
 1. verificar baseline/master acumulativo vigente;
 2. leer onboarding, MWDP, KBS-34, SPCCR, estado y decisiones vigentes;
 3. verificar fuentes y dependencias;
-4. re-recuperar full text para cada cita;
+4. re-recuperar full text primario para cada cita;
 5. redactar exclusivamente el bloque autorizado dentro del Word/Markdown acumulativo;
 6. incluir comentarios de auditoría anclados a cada cita inglesa;
 7. auditar contenido científico, prosa KBS-34, fluidez y ubicación narrativa;
 8. activar IA Experimental solo si existe trigger real;
 9. resolver observaciones;
 10. solicitar aprobación expresa del autor;
-11. integrar al master canónico solo después de aprobación.
+11. integrar al master canónico solo después de aprobación y auditoría.
 
-### 10. Criterios de aprobación
+### 11. Criterios de aprobación
 
 Una sección solo puede pasar a `APPROVED` cuando:
 
 - cumple su función narrativa;
-- cada afirmación está respaldada;
+- cada afirmación citada está respaldada por la fuente primaria exacta;
+- los pasajes colocados en comentarios Word existen y soportan el claim anclado;
 - no presenta resultados pendientes como hechos;
 - evita introducción prematura del testbed;
 - evita abstracción y nominalización innecesarias;
@@ -167,7 +183,7 @@ Una sección solo puede pasar a `APPROVED` cuando:
 - no existe objeción experimental crítica cuando aplique;
 - el autor aprueba expresamente.
 
-### 11. Front matter, end matter y journal targeting
+### 12. Front matter, end matter y journal targeting
 
 Title, Abstract y Keywords se redactan al final. El end matter contemplará `Data availability`, `Code and reproducibility resources` si corresponde, CRediT, Funding, Declaration of competing interest, Acknowledgements si aplica, References y Supplementary material cuando sea necesario.
 
@@ -186,36 +202,20 @@ Antes del paquete final se volverán a verificar los requisitos oficiales vigent
 
 ### 1. Purpose and authority
 
-This V2.1 plan activates drafting under the author-approved article structure. The manuscript must be built cumulatively, under `KBS_EWG_34_V01`, `MWDP_V1.0`, the Claim–Evidence Matrix, frozen 0B literature, and governing experimental sources when relevant.
+This V2.2 plan governs cumulative drafting under the author-approved KBS article structure. Related Work B01 and B02 are approved, frozen, and integrated. The active canonical master is `ARTICLE_MASTER_V002.md/.docx`, DOCX SHA-256 `ffbaf15e59cbee922be5ddc70622e2da2f52110c712142f956479acea44e890e`.
 
-### 2. Approved cumulative architecture
-
-The frozen drafting structure is `Introduction → Related work → Decision-support architecture → Experimental design → Results → Discussion → Conclusion → KBS end matter`. The exact structure is `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`, approved by D-015.
-
-The bootstrap Word baseline is `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`, SHA-256 `0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5`.
-
-### 3. Cumulative Word policy
-
-The first drafting block must use the exact approved structural Word. After the first author-approved integration, each subsequent block starts from the latest approved `ARTICLE_MASTER_V00N`. No section-only Word, silent reconstruction, or automatic reuse of rejected prose is allowed. Lack of exact baseline access requires `BASELINE_DOCX_ACCESS_REQUIRED`.
-
-### 4. Operational drafting order
+### 2. Operational drafting order
 
 `Related Work → provisional Introduction → Decision-support architecture → Experimental design → authorized Results → figures/tables → pending-result integration → final Results → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → final KBS adaptation`.
 
-The former Methods-first sequence remains superseded.
+### 3. Active phase
 
-### 5. Active phase
+Related Work is active. Sections 2.1 and 2.2 are integrated. Only `Related Work B03 — Section 2.3 LLMs for classification, reasoning, and explanation` is currently authorized. Sections 2.4–2.6 and all later manuscript sections remain blocked.
 
-Related Work is active. It is organized as 2.1 automated tariff classification and candidate retrieval; 2.2 knowledge-enhanced retrieval and regulatory reasoning; 2.3 LLMs for classification, reasoning, and explanation; 2.4 evidence grounding, explainability, and auditability; 2.5 reproducibility/evaluation in knowledge-based decision support; and 2.6 study positioning.
+B03 must distinguish operational LLM roles: direct generative classification, fine-tuned transformer classification, search/reranking/decision control, retrieval-conditioned reader/reasoner behavior, and post-decision explanation/rationale generation. It must not describe the present-study architecture or claim novelty.
 
-Only `Related Work B01 — Section 2.1` is currently authorized.
+### 4. Cumulative Word policy and audit
 
-### 6. Block discipline
+B03 must start from the exact canonical V002 DOCX and preserve Sections 2.1–2.2 and all fourteen citation-audit comments unchanged. Every new citation requires primary-full-text re-retrieval and a Word comment with exact supporting passage, Spanish translation, claim-source justification, and scope limitation. Author approval and Managing-AI audit are required before canonical integration.
 
-Each block requires exact baseline/master verification, full onboarding, source re-retrieval for every citation, cumulative bilingual drafting, mandatory citation-audit comments in the English Word, KBS-34 prose QA, author approval, and canonical integration only after approval.
-
-Scientific scope, RQs, claims, experimental design and experimental governance remain unchanged by D-014/D-015.
-
-### 7. Journal targeting
-
-Target A remains Knowledge-Based Systems, with Expert Systems with Applications and Information Processing & Management as Plans B/C. KBS publication route remains subscription. Current official submission requirements will be revalidated before final submission.
+Scientific scope, RQs, claims, experimental design and experimental governance remain unchanged.
