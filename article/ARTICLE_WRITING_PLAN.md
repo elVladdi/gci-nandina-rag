@@ -1,45 +1,50 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V2.0
+PLAN_VERSION = V2.1
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
-STRUCTURE_DECISION = D-014
+STRUCTURE_RESET_DECISION = D-014
+STRUCTURE_APPROVAL_DECISION = D-015
 LEGACY_METHODS_FIRST_ORDER = SUPERSEDED
-WORKING_STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
-WORKING_STRUCTURE_STATUS = WORKING / AUTHOR_EDITABLE / NOT_YET_FROZEN
+STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
+STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
+WORD_BASELINE = KBS_ARTICLE_WORKING_STRUCTURE_V01.docx
+WORD_BASELINE_SHA256 = 0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5
+CURRENT_DRAFTING_PHASE = RELATED_WORK
+CURRENT_AUTHORIZED_BLOCK = RELATED_WORK_B01 / SECTION_2.1_ONLY
 ```
 
 ## Español
 
 ### 1. Propósito
 
-Administrar la construcción iterativa del artículo científico principal sin anticipar resultados, alterar el diseño experimental aprobado ni trasladar al manuscrito la lógica de un documento de gobernanza. El artículo se construirá sobre una **estructura acumulativa completa** y cada nueva versión deberá completar o corregir esa misma base, no crear documentos independientes por sección.
+Administrar la construcción iterativa del artículo científico principal sin anticipar resultados, alterar el diseño experimental aprobado ni trasladar al manuscrito la lógica de un documento de gobernanza. El artículo se construirá sobre una **estructura acumulativa completa ya aprobada por el autor** y cada nueva versión completará esa misma base.
 
-La redacción se guía por la evidencia editorial empírica de 34 artículos recientes de *Knowledge-Based Systems* (`KBS_EWG_34_V01`) y por las restricciones científicas ya congeladas del proyecto.
+La redacción se rige por `KBS_EWG_34_V01`, el protocolo `MWDP_V1.0`, la Claim–Evidence Matrix, la literatura congelada de 0B y las fuentes experimentales gobernantes cuando correspondan.
 
 ### 2. Principios rectores
 
 - El artículo no será una versión abreviada de la tesis.
-- El lector debe comprender primero el **problema y el posicionamiento**, después la **arquitectura general**, y solo entonces la **instanciación experimental específica**.
-- El testbed NANDINA/Chapter-Class 87 y el corpus documental concreto no deben definir prematuramente el alcance conceptual de la arquitectura.
+- El lector debe comprender primero el problema y posicionamiento, después la arquitectura general y solo entonces la instanciación experimental específica.
+- NANDINA/Chapter-Class 87 y el corpus documental concreto no deben definir prematuramente el alcance conceptual de la arquitectura.
 - La recuperación histórica genera y ordena candidatos.
-- El conjunto Top-3 queda fijado antes de la recuperación documental y de la generación.
-- La recuperación documental aporta evidencia para candidatos ya fijados y no sustituye ni reordena el ranking histórico.
-- El LLM local opera después de la recuperación y se utiliza para explicación controlada; no clasifica desde cero ni retroalimenta la selección de candidatos.
-- Candidate retrieval ≠ overall classification accuracy.
-- Documentary association ≠ substantive legal correctness.
-- Auditability ≠ legal correctness.
-- Configurability/replicability ≠ empirical generalization.
-- SERIE es la unidad de observación/análisis; DAM es unidad de agrupamiento cuando existe dependencia.
-- Ningún resultado pendiente podrá redactarse como hallazgo.
-- Todo claim debe estar trazado a evidencia autorizada.
-- La parte inglesa es el manuscript master de publicación y la parte española funciona como espejo de control semántico.
+- El Top-3 queda fijado antes de recuperación documental y generación.
+- La recuperación documental aporta evidencia para candidatos ya fijados y no sustituye ni reordena el ranking.
+- El LLM local opera después de recuperación y se usa para explicación controlada; no clasifica desde cero ni retroalimenta selección de candidatos.
+- `candidate retrieval ≠ overall classification accuracy`.
+- `documentary association ≠ substantive legal correctness`.
+- `auditability ≠ legal correctness`.
+- `configurability/replicability ≠ empirical generalization`.
+- SERIE es unidad de observación/análisis; DAM es unidad de agrupamiento cuando existe dependencia.
+- Ningún resultado pendiente se redactará como hallazgo.
+- Toda afirmación científica deberá quedar trazada a evidencia autorizada.
+- Part I es el manuscript master inglés; Part II es el espejo español de control semántico.
 
-### 3. Arquitectura acumulativa del artículo
+### 3. Arquitectura acumulativa aprobada
 
-La estructura de trabajo vigente es:
+La estructura congelada para redacción es:
 
 1. `Introduction`
 2. `Related work`
@@ -50,42 +55,51 @@ La estructura de trabajo vigente es:
 7. `Conclusion`
 8. end matter de KBS.
 
-La estructura detallada y editable está en:
+La estructura detallada está en `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md` y fue aprobada mediante D-015.
 
-`article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`
+El Word exacto que sirve como baseline de bootstrap es `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`, SHA-256 `0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5`.
 
-El Word editable correspondiente es `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`. Las futuras entregas deben preservar esa estructura acumulativa y completar progresivamente sus secciones. No se autoriza reconstruir el manuscrito desde cero ni entregar bloques aislados que no se integren en la base acumulativa.
+`Limitations` permanece integrada como `6.6 Limitations`, salvo futura enmienda aprobada por el autor.
 
-`Limitations` permanece como subsección final de `Discussion` mientras la redacción definitiva no justifique elevarla a sección principal.
+### 4. Política acumulativa del Word
 
-### 4. Estado del trabajo previo
+1. El primer bloque parte del Word estructural exacto aprobado.
+2. Después de la primera integración canónica, cada bloque parte del último `ARTICLE_MASTER_V00N` aprobado.
+3. No se crean Words independientes por sección.
+4. La sección nueva se inserta directamente en su ubicación estructural.
+5. Solo se eliminan las notas editoriales correspondientes a la sección que se completa.
+6. Part I y Part II deben conservar equivalencia semántica.
+7. Las versiones de trabajo permanecen como candidatas hasta aprobación expresa del autor.
+8. Ningún texto previamente rechazado se reutiliza automáticamente.
+9. Si el baseline exacto no es accesible, la IA de Redacción debe detenerse con `BASELINE_DOCX_ACCESS_REQUIRED`; no se autoriza reconstrucción silenciosa.
 
-| Fase histórica | Estado |
+### 5. Estado previo y reset
+
+| Elemento | Estado |
 |---|---|
-| 0A — Ground truth documental y experimental | CLOSED / APPROVED |
-| 0B — Mapa crítico de literatura y taxonomía | CLOSED / APPROVED / FROZEN |
-| 0C — Posicionamiento científico y RQs | CLOSED / APPROVED / FROZEN |
-| 0D — Arquitectura editorial original | CLOSED / APPROVED / FROZEN, con estructura de secciones supersedida por D-014 |
-| KBS-34 empirical writing guide | AUTHOR_APPROVED / ACTIVE / BINDING |
+| 0A | CLOSED / APPROVED |
+| 0B | CLOSED / APPROVED / FROZEN |
+| 0C | CLOSED / APPROVED / FROZEN |
+| 0D original | CLOSED / APPROVED / FROZEN; arquitectura de secciones supersedida por D-014 |
+| KBS-34 guide | AUTHOR_APPROVED / ACTIVE / BINDING |
+| Estructura KBS V01 | AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
 | Methods B01 V05 | HOLD / NOT APPROVED |
 | Methods B01 V06 | NOT AUTHORIZED |
 
-D-014 modifica únicamente la **arquitectura editorial y el orden de redacción**. No modifica el alcance científico, las RQ, la Claim–Evidence Matrix ni la gobernanza experimental.
+D-014 y D-015 modifican únicamente arquitectura editorial, orden de redacción y activación del nuevo flujo. No cambian alcance científico, RQs, claims autorizados, diseño experimental ni gobernanza del Plan Maestro.
 
-### 5. Nuevo orden operativo de redacción
+### 6. Orden operativo de redacción
 
-Una vez que el autor termine de editar y apruebe la estructura `KBS_ARTICLE_WORKING_STRUCTURE_V01`, el orden de trabajo será:
-
-| Fase nueva | Entregable | Gate |
+| Fase | Entregable | Gate |
 |---|---|---|
-| 1 | Estructura completa del artículo | aprobación explícita del autor |
+| 1 | Estructura completa del artículo | **CLOSED / AUTHOR_APPROVED / FROZEN_FOR_DRAFTING** |
 | 2 | Related Work | estructura aprobada + literatura 0B congelada |
 | 3 | Introduction provisional | Related Work suficientemente estable + claims/RQs autorizados |
 | 4 | Decision-support architecture | Introduction/positioning suficientemente estable |
 | 5 | Experimental design | arquitectura suficientemente estable + ground truth experimental vigente |
-| 6 | Results actualmente disponibles y autorizados | claims experimentales autorizados |
+| 6 | Results disponibles y autorizados | claims experimentales autorizados |
 | 7 | Figuras y tablas preliminares | secciones 2–6 suficientemente estables |
-| 8 | Integración de resultados experimentales pendientes | cierres/gates del Plan Maestro experimental |
+| 8 | Integración de resultados experimentales pendientes | cierres/gates del Plan Maestro |
 | 9 | Results definitivos | Fase 8 cerrada |
 | 10 | Discussion + Limitations | Results definitivos |
 | 11 | Conclusion | Discussion cerrada |
@@ -93,153 +107,69 @@ Una vez que el autor termine de editar y apruebe la estructura `KBS_ARTICLE_WORK
 | 13 | Title + Keywords | Abstract y manuscrito completo |
 | 14 | Adaptación final KBS | requisitos vigentes de submission verificados |
 
-Este orden es una decisión de gobernanza para reducir reescritura y evitar que Methods/Experimental Design carguen con funciones retóricas que corresponden a Introduction/Related Work. No se presenta como una inferencia sobre el orden real de escritura seguido por los autores del corpus KBS-34.
+Orden operativo activado:
 
-### 6. Contenido esperado por sección
+`Related Work → Introduction provisional → Decision-support architecture → Experimental design → Results autorizados → figures/tables → integración experimental pendiente → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
 
-#### 1. Introduction
+### 7. Fase activa — Related Work
 
-Debe conducir al lector por:
+Related Work se organiza por familias funcionales:
 
-`problema → enfoques existentes → limitación técnica verificable → consecuencia → propuesta de alto nivel → contribuciones → contexto de evaluación → RQs → roadmap`.
+- 2.1 `Automated tariff classification and candidate retrieval`;
+- 2.2 `Knowledge-enhanced retrieval and regulatory reasoning`;
+- 2.3 `LLMs for classification, reasoning, and explanation`;
+- 2.4 `Evidence grounding, explainability, and auditability`;
+- 2.5 `Reproducibility and evaluation in knowledge-based decision support`;
+- 2.6 `Positioning of this study`.
 
-La propuesta debe ser comprensible antes de introducir en detalle NANDINA/Chapter-Class 87 y el corpus experimental concreto.
+Cada subsección debe sintetizar por problema/tarea/enfoque, no por cronología de autores. Debe hacer explícitas semejanzas, diferencias y límites relevantes, sin declarar novelty universal ni convertir diferencias arquitectónicas en novelty por sí mismas.
 
-#### 2. Related Work
+**Bloque actualmente autorizado:** únicamente 2.1.
 
-Se organiza por familias funcionales, no autor por autor:
+### 8. Función de las demás secciones
 
-- automated tariff classification and candidate retrieval;
-- knowledge-enhanced retrieval and regulatory reasoning;
-- LLMs for classification, reasoning and explanation;
-- evidence grounding, explainability and auditability;
-- reproducibility and evaluation in knowledge-based decision support;
-- positioning synthesis.
+- **Introduction:** `problema → enfoques existentes → limitación verificable → consecuencia → propuesta de alto nivel → contribuciones → contexto de evaluación → RQs → roadmap`.
+- **Decision-support architecture:** arquitectura general en relaciones entrada–operación–salida, antes de detalles experimentales.
+- **Experimental design:** testbed específico, datos históricos, corpus documental, particiones/dependencia, configuración, evaluación, estadística y reproducibilidad.
+- **Results:** organizados por función/RQ, no por códigos internos de experimento.
+- **Discussion:** interpretación, comparación, implicaciones, condiciones de transferencia y limitaciones.
+- **Conclusion:** `aporte → evidencia principal → alcance → implicación`.
 
-Cada subsección debe terminar conectando la literatura con el problema actual. La ausencia dentro del alcance revisado no equivale a novelty universal.
+### 9. Ciclo obligatorio de cada bloque
 
-#### 3. Decision-support architecture
+1. verificar baseline/master acumulativo vigente;
+2. leer onboarding, MWDP, KBS-34, SPCCR, estado y decisiones vigentes;
+3. verificar fuentes y dependencias;
+4. re-recuperar full text para cada cita;
+5. redactar exclusivamente el bloque autorizado dentro del Word/Markdown acumulativo;
+6. incluir comentarios de auditoría anclados a cada cita inglesa;
+7. auditar contenido científico, prosa KBS-34, fluidez y ubicación narrativa;
+8. activar IA Experimental solo si existe trigger real;
+9. resolver observaciones;
+10. solicitar aprobación expresa del autor;
+11. integrar al master canónico solo después de aprobación.
 
-Debe explicar la arquitectura general mediante relaciones concretas de entrada–operación–salida:
-
-`query → historical retrieval → ranked candidates → fixed Top-3 → candidate-specific documentary retrieval → evidence-context construction → local LLM → controlled explanation`.
-
-Aquí se explican también configurabilidad y requisitos de interfaz. No debe abrirse con tamaños de muestra, H100, Chapter 87 ni el corpus peruano.
-
-#### 4. Experimental design
-
-Aquí se introduce la instanciación empírica concreta:
-
-- evaluation setting/testbed;
-- historical data;
-- documentary corpus;
-- partitioning and dependence control;
-- system configuration;
-- RQ-to-metric evaluation framework;
-- candidate-retrieval evaluation;
-- documentary-evidence evaluation;
-- controlled-explanation evaluation;
-- statistical analysis;
-- reproducibility resources.
-
-Esta sección debe identificar expresamente el repositorio público de reproducibilidad y el alcance de los artefactos disponibles.
-
-#### 5. Results
-
-Se organiza por función/RQ, no por códigos internos de experimentos:
-
-- data and partition checks;
-- candidate retrieval performance;
-- documentary evidence retrieval;
-- controlled explanation quality;
-- sensitivity/robustness analyses;
-- inferential results;
-- optional RQ summary.
-
-Cada subsección debe seguir:
-
-`pregunta → métrica → comparación → resultado → interpretación permitida`.
-
-#### 6. Discussion
-
-Debe interpretar, comparar y delimitar:
-
-- separación ranking/evidencia;
-- uso controlado del LLM;
-- comparación con literatura;
-- implicaciones para apoyo a decisiones auditable;
-- configurabilidad y condiciones de transferencia;
-- limitaciones.
-
-#### 7. Conclusion
-
-Debe cerrar:
-
-`aporte → evidencia principal → alcance → implicación`.
-
-No introduce resultados nuevos ni generalización externa no demostrada.
-
-### 7. Front matter y end matter
-
-El `Title`, `Abstract` y `Keywords` se redactan al final.
-
-El end matter debe contemplar, sujeto a requisitos KBS vigentes:
-
-- `Data availability`;
-- `Code and reproducibility resources` si corresponde como declaración separada;
-- `CRediT authorship contribution statement`;
-- `Funding`;
-- `Declaration of competing interest`;
-- `Acknowledgements` si aplica;
-- `References`;
-- `Supplementary material` si es necesario.
-
-### 8. Política del Word acumulativo
-
-El Word `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx` es la base editable sobre la que se completará el artículo.
-
-Reglas:
-
-1. cada nueva versión parte de la última versión acumulativa aprobada para continuar trabajando;
-2. no se crea un Word independiente por sección;
-3. una sección nueva se inserta directamente en su ubicación estructural;
-4. las notas editoriales grises son temporales y se eliminan al completar la sección;
-5. Part I mantiene el manuscript master inglés;
-6. Part II mantiene el espejo español de control semántico;
-7. las versiones de trabajo siguen siendo candidatas hasta la aprobación expresa del autor;
-8. ningún texto previamente rechazado se reutiliza automáticamente.
-
-### 9. Ciclo de cada bloque
-
-1. verificar estructura vigente y última versión acumulativa;
-2. verificar fuentes y estado experimental;
-3. actualizar claims autorizados/prohibidos;
-4. preparar prompt cerrado para IA de Redacción;
-5. redactar la sección dentro del Word/Markdown acumulativo;
-6. auditar contenido científico, prosa KBS-34, fluidez y ubicación narrativa;
-7. activar IA Experimental solo cuando exista trigger real;
-8. resolver observaciones;
-9. solicitar aprobación expresa del autor;
-10. versionar e integrar solo después de la aprobación correspondiente.
-
-### 10. Criterios de aprobación de una sección
+### 10. Criterios de aprobación
 
 Una sección solo puede pasar a `APPROVED` cuando:
 
-- cumple la función narrativa asignada por la estructura;
-- todas sus afirmaciones están respaldadas;
-- no contiene resultados pendientes presentados como hechos;
-- no adelanta el testbed experimental antes de que sea narrativamente pertinente;
+- cumple su función narrativa;
+- cada afirmación está respaldada;
+- no presenta resultados pendientes como hechos;
+- evita introducción prematura del testbed;
 - evita abstracción y nominalización innecesarias;
-- mantiene relaciones claras de agente/entrada–acción–salida;
-- respeta la separación histórico/normativo/LLM;
+- mantiene relaciones claras de agente/objeto/acción o entrada–operación–salida;
+- respeta separación histórico/documental/LLM;
 - no confunde reproducibilidad, configurabilidad y generalización;
-- ES/EN son semánticamente equivalentes;
-- cualquier cifra o referencia coincide entre idiomas;
-- no existe objeción experimental crítica cuando la revisión experimental sea aplicable;
-- el autor la aprueba expresamente.
+- EN/ES son semánticamente equivalentes;
+- cifras y referencias coinciden entre idiomas;
+- comentarios de cita cumplen MWDP;
+- no existe objeción experimental crítica cuando aplique;
+- el autor aprueba expresamente.
 
-### 11. Journal targeting
+### 11. Front matter, end matter y journal targeting
+
+Title, Abstract y Keywords se redactan al final. El end matter contemplará `Data availability`, `Code and reproducibility resources` si corresponde, CRediT, Funding, Declaration of competing interest, Acknowledgements si aplica, References y Supplementary material cuando sea necesario.
 
 ```text
 TARGET_A = Knowledge-Based Systems
@@ -248,95 +178,44 @@ PLAN_C = Information Processing & Management
 PUBLICATION_ROUTE_KBS = SUBSCRIPTION
 ```
 
-La redacción seguirá KBS-34 mientras KBS sea Target A. Antes del paquete final se volverán a verificar los requisitos oficiales vigentes de plantilla, referencias, declaraciones y submission.
+Antes del paquete final se volverán a verificar los requisitos oficiales vigentes de KBS.
 
 ---
 
 ## English
 
-### 1. Purpose
+### 1. Purpose and authority
 
-Manage iterative construction of the main research article without anticipating results, altering the approved experimental design, or transferring governance-document prose into the manuscript. The article will be built on a **complete cumulative structure**, and each new version must progressively complete that same base rather than create isolated section documents.
+This V2.1 plan activates drafting under the author-approved article structure. The manuscript must be built cumulatively, under `KBS_EWG_34_V01`, `MWDP_V1.0`, the Claim–Evidence Matrix, frozen 0B literature, and governing experimental sources when relevant.
 
-The editorial basis is the approved empirical guide derived from 34 recent *Knowledge-Based Systems* articles (`KBS_EWG_34_V01`), subject to the frozen scientific and experimental constraints of the project.
+### 2. Approved cumulative architecture
 
-### 2. Governing principles
+The frozen drafting structure is `Introduction → Related work → Decision-support architecture → Experimental design → Results → Discussion → Conclusion → KBS end matter`. The exact structure is `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`, approved by D-015.
 
-- The article is not an abbreviated thesis.
-- The reader should encounter scientific problem/positioning first, general architecture second, and the specific experimental instantiation third.
-- The specific NANDINA/Chapter-Class 87 testbed and documentary corpus must not prematurely define the conceptual scope of the architecture.
-- Historical retrieval generates and ranks candidates.
-- The Top-3 is fixed before documentary retrieval and generation.
-- Documentary retrieval provides evidence for fixed candidates and does not rerank them.
-- The local LLM is downstream and explanation-only; it does not classify from scratch or feed generated content back into candidate selection.
-- Candidate retrieval is not overall classification accuracy.
-- Documentary association is not substantive legal correctness.
-- Auditability is not legal correctness.
-- Configurability/replicability is not empirical generalization.
-- SERIES is the observation/analysis unit; DAM is the grouping unit when dependence exists.
-- Pending results may not be drafted as findings.
-- Every scientific claim must be traceable to authorized evidence.
-- Part I is the English publication-facing manuscript master; Part II is the Spanish semantic-control mirror.
+The bootstrap Word baseline is `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`, SHA-256 `0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5`.
 
-### 3. Cumulative article architecture
+### 3. Cumulative Word policy
 
-Current working structure:
+The first drafting block must use the exact approved structural Word. After the first author-approved integration, each subsequent block starts from the latest approved `ARTICLE_MASTER_V00N`. No section-only Word, silent reconstruction, or automatic reuse of rejected prose is allowed. Lack of exact baseline access requires `BASELINE_DOCX_ACCESS_REQUIRED`.
 
-1. Introduction
-2. Related work
-3. Decision-support architecture
-4. Experimental design
-5. Results
-6. Discussion
-7. Conclusion
-8. KBS end matter.
+### 4. Operational drafting order
 
-Detailed editable source:
+`Related Work → provisional Introduction → Decision-support architecture → Experimental design → authorized Results → figures/tables → pending-result integration → final Results → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → final KBS adaptation`.
 
-`article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`
+The former Methods-first sequence remains superseded.
 
-The corresponding editable Word is `KBS_ARTICLE_WORKING_STRUCTURE_V01.docx`. Future deliveries must preserve and progressively complete this cumulative structure. Rebuilding the manuscript from scratch or delivering isolated section-only Words is not authorized.
+### 5. Active phase
 
-Limitations remain provisionally integrated as the final subsection of Discussion.
+Related Work is active. It is organized as 2.1 automated tariff classification and candidate retrieval; 2.2 knowledge-enhanced retrieval and regulatory reasoning; 2.3 LLMs for classification, reasoning, and explanation; 2.4 evidence grounding, explainability, and auditability; 2.5 reproducibility/evaluation in knowledge-based decision support; and 2.6 study positioning.
 
-### 4. Prior-work state
+Only `Related Work B01 — Section 2.1` is currently authorized.
 
-0A is closed/approved; 0B and 0C are closed/approved/frozen; the original 0D section architecture is superseded only for structure/drafting order by D-014; the KBS-34 empirical writing guide is author-approved and binding; Methods B01 V05 is on hold and not approved; V06 is not authorized.
+### 6. Block discipline
 
-### 5. New operational drafting order
+Each block requires exact baseline/master verification, full onboarding, source re-retrieval for every citation, cumulative bilingual drafting, mandatory citation-audit comments in the English Word, KBS-34 prose QA, author approval, and canonical integration only after approval.
 
-After the author finishes editing and explicitly approves the working structure, drafting proceeds as:
+Scientific scope, RQs, claims, experimental design and experimental governance remain unchanged by D-014/D-015.
 
-`Related Work → provisional Introduction → Decision-support architecture → Experimental design → currently authorized Results → preliminary figures/tables → pending experimental integration → final Results → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → final KBS adaptation`.
+### 7. Journal targeting
 
-This is a project-governance choice intended to reduce rewriting; it is not presented as evidence about the actual drafting order used by the authors of the KBS-34 corpus.
-
-### 6. Section functions
-
-- **Introduction:** problem → prior approaches → precise limitation → consequence → high-level proposal → contributions → evaluation context → RQs → roadmap.
-- **Related Work:** function-based synthesis ending in explicit positioning.
-- **Decision-support architecture:** general input–operation–output flow before experimental details.
-- **Experimental design:** specific testbed, historical data, documentary corpus, partitions/dependence, configuration, evaluation framework, statistics and reproducibility.
-- **Results:** organized by scientific function/RQ rather than internal experiment IDs.
-- **Discussion:** interpretation, comparison, implications, transfer conditions and limitations.
-- **Conclusion:** contribution → main evidence → scope → implication.
-
-### 7. Front matter and end matter
-
-Title, Abstract and Keywords are drafted late. End matter must cover Data availability, reproducibility/code resources as appropriate, CRediT, Funding, Declaration of competing interest, Acknowledgements if applicable, References, and Supplementary material if needed.
-
-### 8. Cumulative Word policy
-
-`KBS_ARTICLE_WORKING_STRUCTURE_V01.docx` is the editable base. Each new version starts from the latest cumulative version, inserts drafted text in its structural location, retains English Part I and Spanish semantic-control Part II, and removes drafting notes only as the corresponding sections are completed. No previously rejected prose is reused automatically.
-
-### 9. Block cycle
-
-Verify structure → verify sources/experimental state → update authorized/prohibited claims → issue drafting prompt → draft inside cumulative Markdown/Word → audit science/KBS prose/fluency/narrative placement → trigger Experimental AI only when required → resolve observations → obtain explicit author approval → version/integrate only after approval.
-
-### 10. Approval criteria
-
-A section must fulfill its narrative role, be evidence-grounded, avoid premature experimental-scope exposition, avoid unnecessary abstraction/nominalization, preserve clear agent/input–action–output relations, maintain historical/documentary/LLM separation, avoid conflating reproducibility/configurability/generalization, preserve EN/ES equivalence, and obtain explicit author approval.
-
-### 11. Journal targeting
-
-Target A remains Knowledge-Based Systems; Plans B/C remain Expert Systems with Applications and Information Processing & Management. KBS publication route is subscription. Official submission requirements will be rechecked before final submission.
+Target A remains Knowledge-Based Systems, with Expert Systems with Applications and Information Processing & Management as Plans B/C. KBS publication route remains subscription. Current official submission requirements will be revalidated before final submission.
