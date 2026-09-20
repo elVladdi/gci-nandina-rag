@@ -1,0 +1,74 @@
+{
+  "artifact_id": "GROUP3_CLOSURE_CANDIDATE_v0.1",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "group": "GROUP3",
+  "group_state": "CLOSURE_CANDIDATE_PENDING_EXTERNAL_AUDIT / NOT_CLOSED",
+  "ficha_states": {
+    "G3-F01": "CLOSED / APPROVED / INTEGRATED_TO_MAIN",
+    "G3-F02": "CLOSED / APPROVED / INTEGRATED_TO_MAIN",
+    "G3-F03": "CLOSED / APPROVED / INTEGRATED_TO_MAIN",
+    "G3-F04": "CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED"
+  },
+  "input_refs": {
+    "scientific_main": "7d09f692da23367d3aba941db1febdca2baa8917",
+    "canonical_plan": "96cccb9a61f42ab97b1eba607524e33f992740f6",
+    "fichas_pre_activation": "356aebd75c5fb4c9355ae0164bfcd0cadc341814",
+    "fichas_activation": "cac6a8bdbd5c763611836203e33a4a29648fbf4c",
+    "prompt85": "f132ea01d45661656fe606bb83ac76efda24a496",
+    "article_head_observed": "1e729cd4ade1fbee59f1e31762001886eb68aca7"
+  },
+  "source_blobs": {
+    "G3-F01": {
+      "docs/analysis/group3/g3_analytical_contract_v0.1.md": "76862c10fd84fd70588da2d65f96dbe3b40914f6",
+      "outputs/analysis/group3/g3_analytical_contract_v0.1.json": "4c8f9312ef1e9fb4e1c67c07dfd6aeff3ec42628"
+    },
+    "G3-F02": {
+      "outputs/analysis/group3/g3_metric_population_registry_v0.1.csv": "c63619b56a07e6b6d7be78b515d941ec3b205c41",
+      "outputs/analysis/group3/g3_metric_population_registry_v0.1.json": "5ea33ca583b18426374fa15baf1b1759e76cd99e",
+      "outputs/analysis/group3/g3_metric_population_registry_v0.1_hash_ledger.csv": "521bfcdf34d03c4effa8b8ef19f9777b6827d439"
+    },
+    "G3-F03": {
+      "src/analysis/run_g3_f03_inference_v01.py": "2378298c9db401c938ebfb3cd505b30cabad2c62",
+      "outputs/analysis/group3/g3_inferential_results_v0.1.csv": "cf3d8d85e099a300330da0214836e70af7a02253",
+      "outputs/analysis/group3/g3_inferential_results_v0.1.json": "f99b7e46d81b28ca2b7cfce8d24788ad14156dcc",
+      "docs/analysis/group3/g3_inferential_methods_and_checks_v0.1.md": "6cf424c9cf8aa7371dbbf5b8baaf7305cc66a436",
+      "outputs/analysis/group3/g3_inferential_results_v0.1_hash_ledger.csv": "b128966f1295ac8a853341b7f02ce7f9218157b8"
+    }
+  },
+  "hypothesis_dispositions": {
+    "HE2": "SUPPORTED",
+    "HE2_A": "SUPPORTED_BY_PRIMARY_EVIDENCE",
+    "HE2_B_HIERARCHICAL": "SUPPORTED_BY_PRIMARY_EVIDENCE",
+    "HE2_B_PHASE_E_FROZEN_ROLE_POOLS": "DIRECTIONALLY_CONSISTENT_DESCRIPTIVE",
+    "HE5": "INCONCLUSIVE",
+    "HE5_DESCRIPTION_COMPONENT": "NOT_ESTIMABLE",
+    "HE5_HIERARCHY_COMPONENT": "DESCRIPTIVE_ONLY",
+    "HE5_PRECEDENT_COMPONENT": "DESCRIPTIVE_ONLY / NO_FROZEN_INSUFFICIENCY_THRESHOLD",
+    "HE5_INTERNAL_VALIDITY_COMPONENT": "DOCUMENTED_LIMITATION"
+  },
+  "g3_f04_outputs": [
+    "outputs/analysis/group3/g3_hypothesis_disposition_v0.1.json",
+    "docs/analysis/group3/g3_claim_registry_v0.1.md",
+    "outputs/audits/group3_closure_v0.1.json"
+  ],
+  "limitations": [
+    "Inferential evidence is limited to cluster-aware resampling uncertainty in the fixed internal Chapter 87 benchmark.",
+    "HE5 description quality is not estimable and hierarchy/precedent components lack prospective concentration thresholds.",
+    "EXP11A is joint size/composition sensitivity, EXP11B is descriptive, and only corrected Attempt06 is current.",
+    "EXP12 diversity is not estimable and was not reopened.",
+    "Historical retrieval, normative evidence retrieval, and controlled explanation are distinct functions.",
+    "No disposition authorizes claims of binding legal correctness or external validity."
+  ],
+  "flags": {
+    "PENDING_EXTERNAL_AUDIT": true,
+    "GROUP3_CLOSED": false,
+    "NO_PENDING_INFERENTIAL_CALCULATIONS": true,
+    "NEW_INFERENCE_PERFORMED": false,
+    "P_VALUES_CALCULATED": false,
+    "NEW_CI_CALCULATED": false,
+    "METRICS_RECOMPUTED": false,
+    "EXP12_REOPENED": false,
+    "G4_F01_AUTHORIZED": false,
+    "G4_F01_STARTED": false
+  }
+}

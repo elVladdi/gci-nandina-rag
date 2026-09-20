@@ -1,0 +1,210 @@
+{
+  "artifact_id": "G3_F04_HYPOTHESIS_DISPOSITION_v0.1",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "ficha": "G3-F04",
+  "input_refs": {
+    "scientific_main": "7d09f692da23367d3aba941db1febdca2baa8917",
+    "canonical_plan": "96cccb9a61f42ab97b1eba607524e33f992740f6",
+    "fichas_pre_activation": "356aebd75c5fb4c9355ae0164bfcd0cadc341814",
+    "fichas_activation": "cac6a8bdbd5c763611836203e33a4a29648fbf4c",
+    "prompt85": "f132ea01d45661656fe606bb83ac76efda24a496",
+    "article_head_observed": "1e729cd4ade1fbee59f1e31762001886eb68aca7"
+  },
+  "source_blobs": {
+    "docs/analysis/group3/g3_analytical_contract_v0.1.md": "76862c10fd84fd70588da2d65f96dbe3b40914f6",
+    "outputs/analysis/group3/g3_analytical_contract_v0.1.json": "4c8f9312ef1e9fb4e1c67c07dfd6aeff3ec42628",
+    "outputs/analysis/group3/g3_metric_population_registry_v0.1.csv": "c63619b56a07e6b6d7be78b515d941ec3b205c41",
+    "outputs/analysis/group3/g3_metric_population_registry_v0.1.json": "5ea33ca583b18426374fa15baf1b1759e76cd99e",
+    "outputs/analysis/group3/g3_metric_population_registry_v0.1_hash_ledger.csv": "521bfcdf34d03c4effa8b8ef19f9777b6827d439",
+    "src/analysis/run_g3_f03_inference_v01.py": "2378298c9db401c938ebfb3cd505b30cabad2c62",
+    "outputs/analysis/group3/g3_inferential_results_v0.1.csv": "cf3d8d85e099a300330da0214836e70af7a02253",
+    "outputs/analysis/group3/g3_inferential_results_v0.1.json": "f99b7e46d81b28ca2b7cfce8d24788ad14156dcc",
+    "docs/analysis/group3/g3_inferential_methods_and_checks_v0.1.md": "6cf424c9cf8aa7371dbbf5b8baaf7305cc66a436",
+    "outputs/analysis/group3/g3_inferential_results_v0.1_hash_ledger.csv": "b128966f1295ac8a853341b7f02ce7f9218157b8"
+  },
+  "hypotheses": {
+    "HE2": "La recuperación histórica alcanzará un desempeño Top-k y MRR superior al de las estrategias de recuperación normativa, mientras que las variantes normativas jerárquicas y de conjunto candidato ampliarán la cobertura documental en posiciones más profundas.",
+    "HE5": "Los errores y límites del piloto se concentrarán en descripciones ambiguas o incompletas, subpartidas jerárquicamente próximas, casos con precedentes históricos insuficientes y condiciones que restringirán la validez de los resultados al conjunto interno evaluado."
+  },
+  "HE2": {
+    "exact_text": "La recuperación histórica alcanzará un desempeño Top-k y MRR superior al de las estrategias de recuperación normativa, mientras que las variantes normativas jerárquicas y de conjunto candidato ampliarán la cobertura documental en posiciones más profundas.",
+    "overall_disposition": "SUPPORTED",
+    "HE2_A": {
+      "disposition": "SUPPORTED_BY_PRIMARY_EVIDENCE",
+      "family_dispositions": {
+        "HE2_A_HISTORICAL_VS_NORMATIVE_FLAT_ATTEMPT06": "SUPPORTED_BY_PRIMARY_EVIDENCE",
+        "HE2_A_HISTORICAL_VS_NORMATIVE_HIERARCHICAL_ATTEMPT06": "SUPPORTED_BY_PRIMARY_EVIDENCE",
+        "HE2_A_HISTORICAL_VS_D1A_ATTEMPT06": "SUPPORTED_BY_PRIMARY_EVIDENCE"
+      },
+      "primary_result_ids": [
+        "G3F03-0001",
+        "G3F03-0002",
+        "G3F03-0003",
+        "G3F03-0004",
+        "G3F03-0005",
+        "G3F03-0006",
+        "G3F03-0007",
+        "G3F03-0008",
+        "G3F03-0009",
+        "G3F03-0010",
+        "G3F03-0011",
+        "G3F03-0012",
+        "G3F03-0013",
+        "G3F03-0014",
+        "G3F03-0015"
+      ],
+      "rule_applied": "Each family is SUPPORTED_BY_PRIMARY_EVIDENCE because all five frozen 99% marginal CI lower bounds are greater than zero; all three family dispositions are supported.",
+      "source_registry_row_ids": [
+        "G3F02-0001:G3F02-0034"
+      ]
+    },
+    "HE2_B": {
+      "hierarchical_disposition": "SUPPORTED_BY_PRIMARY_EVIDENCE",
+      "primary_result_id": "G3F03-0016",
+      "hierarchical_source_registry_row_ids": [
+        "G3F02-0037",
+        "G3F02-0038"
+      ],
+      "phase_e_descriptive_disposition": "DIRECTIONALLY_CONSISTENT_DESCRIPTIVE",
+      "phase_e_source_registry_rows": [
+        {
+          "variant": "hierarchical_only",
+          "row_ids": ["G3F02-0040", "G3F02-0044", "G3F02-0048"],
+          "Pool@50": 0.09090909090909091,
+          "Pool@100": 0.10132575757575757,
+          "Pool@200": 0.3039772727272727
+        },
+        {
+          "variant": "dual_only",
+          "row_ids": ["G3F02-0052", "G3F02-0056", "G3F02-0060"],
+          "Pool@50": 0.09185606060606061,
+          "Pool@100": 0.10037878787878787,
+          "Pool@200": 0.26609848484848486
+        },
+        {
+          "variant": "hierarchical_first_100",
+          "row_ids": ["G3F02-0064", "G3F02-0068", "G3F02-0072"],
+          "Pool@50": 0.09090909090909091,
+          "Pool@100": 0.10132575757575757,
+          "Pool@200": 0.26515151515151514
+        },
+        {
+          "variant": "hierarchical_80_dual_backfill_20",
+          "row_ids": ["G3F02-0076", "G3F02-0080", "G3F02-0084"],
+          "Pool@50": 0.09090909090909091,
+          "Pool@100": 0.10132575757575757,
+          "Pool@200": 0.3039772727272727
+        }
+      ],
+      "rule_applied": "G3F03-0016 has ci_lower greater than zero. Each A_historical_defined Phase E variant has Pool@50 < Pool@100 < Pool@200, so the descriptive pattern is directionally consistent; no new interval or test was calculated."
+    },
+    "supplementary_context": {
+      "Top-50": {
+        "role": "SUPPLEMENTARY_ONLY_NO_DECISIONAL_ROLE",
+        "result_ids": ["G3F03-0017", "G3F03-0018", "G3F03-0019"]
+      },
+      "phase_e_exclusions": {
+        "hierarchical_70_dual_backfill_30": "DESCRIPTIVE_ONLY_NOT_FORMALLY_FROZEN_FOR_CONFIRMATORY_USE",
+        "diagnostic_union_hierarchical_dual": "DESCRIPTIVE_COVERAGE_CEILING_NOT_A_RANKING"
+      }
+    },
+    "limitations": [
+      "The primary inference is cluster-resampling uncertainty within a fixed internal Chapter 87 benchmark, not external-population inference.",
+      "Phase E evidence is descriptive and does not replace HE2_A or the hierarchical HE2_B primary contrast.",
+      "Historical retrieval superiority does not establish the accuracy of the complete RAG framework."
+    ]
+  },
+  "HE5": {
+    "exact_text": "Los errores y límites del piloto se concentrarán en descripciones ambiguas o incompletas, subpartidas jerárquicamente próximas, casos con precedentes históricos insuficientes y condiciones que restringirán la validez de los resultados al conjunto interno evaluado.",
+    "overall_disposition": "INCONCLUSIVE",
+    "description_component": {
+      "disposition": "NOT_ESTIMABLE",
+      "source_registry_rows": ["G3F02-0528"],
+      "reason": "description_quality_operationalized=0; no post-hoc text heuristic is promoted to prevalence evidence"
+    },
+    "hierarchy_component": {
+      "disposition": "DESCRIPTIVE_ONLY",
+      "source_registry_rows": ["G3F02-0529", "G3F02-0530", "G3F02-0531"],
+      "frozen_categories": ["SAME_CHAPTER", "SAME_HS4", "SAME_HS6"],
+      "reason": "frozen counts exist but no prospective concentration threshold was defined"
+    },
+    "precedent_component": {
+      "disposition": "DESCRIPTIVE_ONLY / NO_FROZEN_INSUFFICIENCY_THRESHOLD",
+      "source_registry_rows": [
+        "G3F02-0532",
+        "G3F02-0533",
+        "G3F02-0534",
+        "G3F02-0535",
+        "G3F02-0536",
+        "G3F02-0537",
+        "G3F02-0538",
+        "G3F02-0539",
+        "G3F02-0540",
+        "G3F02-0541",
+        "G3F02-0542",
+        "G3F02-0543"
+      ],
+      "frozen_buckets": ["1 DAM", "2 DAM", "3-4 DAM", "5+ DAM"],
+      "reason": "no bucket is retrospectively labeled insufficient"
+    },
+    "internal_validity_component": {
+      "disposition": "DOCUMENTED_LIMITATION",
+      "source_registry_rows": ["G3F02-0544", "G3F02-0545"],
+      "empirical_boundary": "CAPITULO_87 / OFFLINE / INTERNAL_EVALUATION"
+    },
+    "source_registry_rows": ["G3F02-0528:G3F02-0545"],
+    "rule_applied": "INCONCLUSIVE because a literal concentration proposition is not estimable and another lacks a prospective concentration threshold; absence of evaluability is not contrary evidence.",
+    "limitations": [
+      "Ambiguous or incomplete descriptions were not operationalized.",
+      "Hierarchy and precedent-support evidence remains descriptive.",
+      "Internal benchmark scope is documented but does not establish external validity."
+    ]
+  },
+  "sensitivity_context": {
+    "EXP11A": {
+      "classification": "SENSITIVITY_ONLY_NONCAUSAL",
+      "source_registry_rows": "G3F02-0112:G3F02-0333",
+      "mandatory_limitation": "bank size and composition vary jointly; no isolated causal size effect"
+    },
+    "EXP11B": {
+      "classification": "DESCRIPTIVE_ONLY_NONINFERENTIAL",
+      "source_registry_rows": "G3F02-0334:G3F02-0465",
+      "mandatory_limitation": "the ten paired H150/H200 banks do not define a seed superpopulation and 10 x 1056 are not independent observations"
+    },
+    "0B-05C": {
+      "classification": "ATTEMPT06_CORRECTED_STATE_ONLY",
+      "source_registry_rows": "G3F02-0466:G3F02-0527",
+      "summary": "EV03 aggregate change zero; EV04 small non-zero MRR decrease; D1a non-zero changes"
+    },
+    "EXP12": {
+      "classification": "NOT_ESTIMABLE",
+      "source_registry_rows": ["G3F02-0548"],
+      "retrieval_performed": false
+    }
+  },
+  "scope": {
+    "empirical_scope": "CAPITULO_87 / OFFLINE / INTERNAL_EVALUATION",
+    "eval_series": 1056,
+    "eval_dam": 67,
+    "eval_nandina": 42,
+    "architecture_guardrails": [
+      "Historical ranking, normative evidence retrieval, and controlled explanation are separate functions.",
+      "Normative evidence retrieval is not binding legal correctness.",
+      "Auditable explanation is not classification or legal correctness.",
+      "The local LLM explains preselected candidates; it does not classify from scratch or replace historical ranking."
+    ]
+  },
+  "flags": {
+    "G3_F04_STATUS": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+    "GROUP3_CLOSURE": "CANDIDATE_PENDING_EXTERNAL_AUDIT / NOT_CLOSED",
+    "NEW_INFERENCE_PERFORMED": false,
+    "P_VALUES_CALCULATED": false,
+    "NEW_CI_CALCULATED": false,
+    "METRICS_RECOMPUTED": false,
+    "HE2_DECISION_PERFORMED": true,
+    "HE5_DECISION_PERFORMED": true,
+    "EXP12_REOPENED": false,
+    "G4_F01_AUTHORIZED": false,
+    "G4_F01_STARTED": false
+  }
+}
