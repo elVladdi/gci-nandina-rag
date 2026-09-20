@@ -41,9 +41,29 @@ Después de una actualización experimental, ambas copias deben volver a cumplir
 Snapshots registrados:
 
 - revisión de 0A-01, 2026-09-02: blob SHA `0a9a82181c6c3840f74f0272e5c225568474058b`;
-- reconciliación editorial final de 0B-05C, 2026-09-15: rama HEAD `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6`, blob SHA leído `adcd9be3aaa9c13929575d6f348fa6f9693bccbf`.
+- reconciliación editorial final de 0B-05C, 2026-09-15: rama HEAD `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6`, blob SHA leído `adcd9be3aaa9c13929575d6f348fa6f9693bccbf`;
+- reconciliación editorial posterior al cierre de Grupo 3 y la integración de G4-F01, 2026-09-20: rama HEAD `2237ddc46bc1c7bfac203753bdcf2c7d4592f83e`, blob SHA leído `fb5caa26fc0abca0506fbc7b75bbf15af24a8875`; checkpoint experimental `main = 9f549ebdf940f9d806d5088697394d0c927f9fdc`.
 
-El segundo snapshot se registra únicamente como corte de lectura de la fuente viva. No reemplaza ni reescribe el snapshot histórico utilizado por los experimentos ni convierte el Plan Maestro en una fuente inmutable.
+El último snapshot registra el siguiente estado canónico consumible por el artículo:
+
+```text
+GROUP2 = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+GROUP3 = CLOSED / APPROVED
+G3_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F04 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+HE2 = SUPPORTED
+HE5 = INCONCLUSIVE
+GROUP4 = IN_PROGRESS
+G4_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G4_F02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+G4_F03 = NOT_AUTHORIZED
+```
+
+Este snapshot no autoriza por sí mismo la redacción de Results ni Discussion: el gate editorial del artículo continúa siendo independiente. Cuando se abran esas secciones, los claims derivados de Grupo 3 deberán respetar el cierre de G3-F04 y el puente claim–evidencia controlado de G4-F01. EXP11A se interpreta únicamente como sensibilidad conjunta tamaño/composición; EXP11B permanece descriptivo; el efecto de diversidad de EXP12 no es estimable porque el experimento cerró sin retrieval. G4-F02 y G4-F03 no pueden consumirse como evidencia cerrada mientras `SRC-03` no registre el estado requerido.
+
+Los snapshots se registran únicamente como cortes de lectura de la fuente viva. No reemplazan ni reescriben los snapshots históricos utilizados por los experimentos ni convierten el Plan Maestro en una fuente inmutable.
 
 Las IAs del artículo deben consultar directamente la copia GitHub para el estado experimental y **no deben exigir que el autor adjunte la copia local**.
 
@@ -110,9 +130,29 @@ After an experimental update, both copies must again satisfy this exact synchron
 Recorded snapshots:
 
 - 0A-01 review, 2026-09-02: blob SHA `0a9a82181c6c3840f74f0272e5c225568474058b`;
-- final 0B-05C editorial reconciliation, 2026-09-15: branch HEAD `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6`, read blob SHA `adcd9be3aaa9c13929575d6f348fa6f9693bccbf`.
+- final 0B-05C editorial reconciliation, 2026-09-15: branch HEAD `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6`, read blob SHA `adcd9be3aaa9c13929575d6f348fa6f9693bccbf`;
+- editorial reconciliation after Group 3 closure and G4-F01 integration, 2026-09-20: branch HEAD `2237ddc46bc1c7bfac203753bdcf2c7d4592f83e`, read blob SHA `fb5caa26fc0abca0506fbc7b75bbf15af24a8875`; experimental checkpoint `main = 9f549ebdf940f9d806d5088697394d0c927f9fdc`.
 
-The second snapshot is recorded only as a reading cutoff for the living source. It does not replace or rewrite the historical snapshot used by the experiments and does not turn the Master Plan into an immutable source.
+The latest snapshot records the following canonical state consumable by the article:
+
+```text
+GROUP2 = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
+GROUP3 = CLOSED / APPROVED
+G3_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G3_F04 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+HE2 = SUPPORTED
+HE5 = INCONCLUSIVE
+GROUP4 = IN_PROGRESS
+G4_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G4_F02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+G4_F03 = NOT_AUTHORIZED
+```
+
+This snapshot does not by itself authorize drafting Results or Discussion: the article editorial gate remains independent. When those sections are opened, Group 3 claims must respect the G3-F04 closure and the controlled G4-F01 claim–evidence bridge. EXP11A is interpreted only as joint size/composition sensitivity; EXP11B remains descriptive; the EXP12 diversity effect is not estimable because that experiment closed without retrieval. G4-F02 and G4-F03 cannot be consumed as closed evidence until `SRC-03` records the required state.
+
+Snapshots are recorded only as reading cutoffs for the living source. They do not replace or rewrite historical snapshots used by the experiments and do not turn the Master Plan into an immutable source.
 
 Article AIs must consult the GitHub copy directly for experimental status and **must not require the author to attach the local copy**.
 
