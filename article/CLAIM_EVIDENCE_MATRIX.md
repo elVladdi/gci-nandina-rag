@@ -2,7 +2,7 @@
 
 ## Español
 
-Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un claim no puede pasar a `AUTHORIZED` sin evidencia verificable. Los únicos estados permitidos son: `AUTHORIZED`, `CONDITIONAL`, `PENDING`, `PROHIBITED`, `REVIEW_REQUIRED`. Los calificadores de método, diseño, protocolo o temporalidad deben expresarse en la evidencia o en el uso permitido y no crear estados adicionales.
+Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un claim no puede pasar a `AUTHORIZED` sin evidencia verificable. Los únicos estados permitidos son: `AUTHORIZED`, `CONDITIONAL`, `PENDING`, `PROHIBITED`, `REVIEW_REQUIRED`. Los calificadores de método, diseño, protocolo o temporalidad deben expresarse en la evidencia o en el uso permitido y no crear estados adicionales. `AUTHORIZED` significa que el claim dispone de evidencia elegible dentro del alcance indicado; no abre por sí mismo una sección del manuscrito cuyo gate editorial permanezca cerrado.
 
 | ID | Claim | Evidencia actual | Estado | Uso permitido |
 |---|---|---|---|---|
@@ -12,11 +12,11 @@ Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un cl
 | C04 | En H100, el código de referencia aparece en el Top-3 histórico en 709/1056 casos (67.14%) | benchmark congelado H100 | AUTHORIZED | Results; denominar candidate retrieval, no accuracy global |
 | C05 | En H100, Top-1=50.95%, Top-5=76.33%, Top-10=89.11%, Top-50=99.15% y MRR=0.6297077493524843 | benchmark congelado H100 | AUTHORIZED | Results con definición métrica explícita |
 | C06 | El split v0.2 evita solapamiento de DAM entre histórico, desarrollo y evaluación | protocolo/split v0.2 auditado | AUTHORIZED | Methods / validity |
-| C07 | La evaluación debe considerar dependencia intra-DAM cuando la inferencia requiera independencia | estructura de datos + metodología de agrupamiento; autorizado como requisito metodológico, no como resultado inferencial | AUTHORIZED | Methods/statistics; no inventar resultados inferenciales |
-| C08 | EXP-11A evidencia sensibilidad descriptiva bajo restricciones naturales de composición | EXP-11A congelado | CONDITIONAL | Results/Discussion con formulación descriptiva |
-| C09 | EXP-11A estima el efecto causal aislado del tamaño del banco histórico | no sustentado | PROHIBITED | No usar |
-| C10 | Aumentar el banco histórico a H150/H200 mejora el rendimiento | EXP-11B retrieval pendiente; prohibido hasta disponer de resultados congelados | PROHIBITED | No usar |
-| C11 | Aumentar el banco histórico a H150/H200 empeora, estabiliza o no afecta el rendimiento | EXP-11B retrieval pendiente; prohibido hasta disponer de resultados congelados | PROHIBITED | No usar |
+| C07 | La evaluación debe considerar dependencia intra-DAM cuando la inferencia requiera independencia | estructura de datos + metodología de agrupamiento; autorizado como requisito metodológico, no como resultado inferencial | AUTHORIZED | Methods/statistics; los resultados inferenciales deben trazarse a Grupo 3 |
+| C08 | EXP-11A evidencia sensibilidad descriptiva bajo restricciones naturales de composición | G3-F02 + G4-F01 `G4F01-0007`; EXP11A congelado | AUTHORIZED | Results/Discussion únicamente como sensibilidad conjunta tamaño/composición; no aislar efecto causal del tamaño |
+| C09 | EXP-11A estima el efecto causal aislado del tamaño del banco histórico | no sustentado; G4-F01 exige tratar tamaño y composición como acoplados | PROHIBITED | No usar |
+| C10 | Aumentar el banco histórico a H150/H200 mejora el rendimiento | EXP-11B está cerrado como sensibilidad descriptiva pareada; G4-F01 `G4F01-0008` no autoriza inferencia generalizada ni efecto causal | PROHIBITED | No usar como conclusión general o causal; usar C26 para el resultado descriptivo autorizado |
+| C11 | Aumentar el banco histórico a H150/H200 empeora, estabiliza o no afecta el rendimiento como conclusión general | EXP-11B está cerrado como sensibilidad descriptiva pareada; no existe superpoblación congelada de seeds ni inferencia autorizada a partir de 10×1056 observaciones | PROHIBITED | No usar como conclusión general; usar C26 para el resultado descriptivo autorizado |
 | C12 | La evidencia normativa asociada a un candidato demuestra corrección normativa sustantiva | evidencia insuficiente para equivalencia automática | PROHIBITED | No convertir association/coverage en correctness |
 | C13 | Las explicaciones HE4 demuestran corrección jurídica completa | limitaciones conocidas de auditoría HE4 | PROHIBITED | No usar |
 | C14 | HE4 aporta evidencia sobre estructura, trazabilidad y auditabilidad bajo su protocolo de evaluación | evaluación HE4 existente | CONDITIONAL | Solo con límites explícitos |
@@ -31,18 +31,22 @@ Esta matriz controla qué afirmaciones pueden utilizarse en el manuscrito. Un cl
 | C23 | En la sensibilidad correctiva final de 0B-05C, EV04 presentó `TINY_NONZERO_MRR_DECREASE_ONLY` | Attempt06 auditado e integrado; interpretación final corregida | AUTHORIZED | Results/Discussion con alcance restringido a MRR y al diseño ejecutado; no inferir relevancia práctica no evaluada |
 | C24 | En la sensibilidad correctiva final de 0B-05C, D1a presentó `POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT` | Attempt06 auditado e integrado; interpretación final corregida | AUTHORIZED | Results/Discussion como efecto específico del método y de la sensibilidad; no generalizar |
 | C25 | El impacto conjunto de 0B-05C fue `METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A`; `DOWNSTREAM_REEXECUTION = NOT_REQUIRED` | cierre experimental 0B-05C después de reconciliación correctiva | AUTHORIZED | Síntesis metodológica del gate; no resumir como “sin impacto numérico” ni convertir en significancia estadística |
+| C26 | EXP-11B aporta una sensibilidad descriptiva pareada H150/H200 sobre diez seeds pareados en el mismo EVAL de 1056 series | G3-F02 `G3F02-0334:G3F02-0465` + G4-F01 `G4F01-0008` | AUTHORIZED | Results/Discussion descriptivos; sin CI inferencial ni generalización sobre seeds/casos; 10×1056 no son observaciones independientes |
+| C27 | El efecto de diversidad histórica previsto por EXP-12 no es estimable a partir del experimento cerrado porque no se produjeron retrievals D-HIGH/D-MID/D-LOW | G3-F02 `G3F02-0548` + G4-F01 `G4F01-0010`; EXP12 cerrado sin retrieval | AUTHORIZED | Results/Discussion/Limitations como no-estimabilidad del diseño ejecutado; no afirmar inviabilidad global ni inventar/reabrir estimaciones |
+| C28 | HE2 queda `SUPPORTED` dentro del alcance inferencial congelado: HE2_A y el contraste primario HE2_B están apoyados por evidencia primaria; Phase E es solo direccionalmente consistente en plano descriptivo | cierre G3-F04 + G4-F01 `G4F01-0001:G4F01-0006` | AUTHORIZED | Results/Discussion cuando el gate editorial lo permita; no convertir superioridad del retrieval histórico en accuracy global del RAG ni en causalidad externa |
+| C29 | HE5 queda `INCONCLUSIVE` | cierre G3-F04 + G4-F01 `G4F01-0010:G4F01-0014`: descripción no estimable, categorías jerárquicas descriptivas, ausencia de umbral congelado de insuficiencia y límite de validez interna | AUTHORIZED | Results/Discussion/Limitations; no etiquetar HE5 como supported o rejected ni fortalecer evidencia descriptiva/no estimable |
 
 ### Regla de actualización
 
 Todo nuevo resultado experimental deberá agregarse primero aquí con su fuente, alcance y estado antes de aparecer en el manuscrito. Un cambio de estado requiere conservar el fundamento documental o experimental que lo justifica.
 
-La actualización C21–C25 reconcilia exclusivamente el cierre experimental de 0B-05C. No modifica ni reconcilia por inferencia otros claims preexistentes.
+C21–C25 conservan la reconciliación del cierre experimental de 0B-05C. La actualización de C08, C10–C11 y la incorporación de C26–C29 reconcilian el cierre de Grupo 3 y G4-F01 sin recalcular métricas ni inferencia. `HE2 = SUPPORTED` y `HE5 = INCONCLUSIVE` se consumen exactamente con las limitaciones fijadas por G3-F04/G4-F01. El gate editorial vigente sigue siendo independiente de la elegibilidad de evidencia registrada aquí.
 
 ---
 
 ## English
 
-This matrix controls which claims may be used in the manuscript. A claim cannot move to `AUTHORIZED` without verifiable evidence. The only permitted statuses are: `AUTHORIZED`, `CONDITIONAL`, `PENDING`, `PROHIBITED`, `REVIEW_REQUIRED`. Method, design, protocol, or temporal qualifiers must be expressed in the evidence or permitted-use fields and must not create additional statuses.
+This matrix controls which claims may be used in the manuscript. A claim cannot move to `AUTHORIZED` without verifiable evidence. The only permitted statuses are: `AUTHORIZED`, `CONDITIONAL`, `PENDING`, `PROHIBITED`, `REVIEW_REQUIRED`. Method, design, protocol, or temporal qualifiers must be expressed in the evidence or permitted-use fields and must not create additional statuses. `AUTHORIZED` means that a claim has eligible evidence within the stated scope; it does not by itself open a manuscript section whose editorial gate remains closed.
 
 | ID | Claim | Current evidence | Status | Permitted use |
 |---|---|---|---|---|
@@ -52,11 +56,11 @@ This matrix controls which claims may be used in the manuscript. A claim cannot 
 | C04 | In H100, the reference code appears within historical Top-3 in 709/1056 cases (67.14%) | frozen H100 benchmark | AUTHORIZED | Results; describe as candidate retrieval, not overall accuracy |
 | C05 | In H100, Top-1=50.95%, Top-5=76.33%, Top-10=89.11%, Top-50=99.15%, and MRR=0.6297077493524843 | frozen H100 benchmark | AUTHORIZED | Results with explicit metric definition |
 | C06 | The v0.2 split prevents DAM overlap across historical, development, and evaluation partitions | audited v0.2 protocol/split | AUTHORIZED | Methods / validity |
-| C07 | Evaluation must account for intra-DAM dependence when inference requires independence | data structure + grouping methodology; authorized as a methodological requirement, not as an inferential result | AUTHORIZED | Methods/statistics; do not invent inferential results |
-| C08 | EXP-11A provides descriptive evidence of sensitivity under natural composition constraints | frozen EXP-11A | CONDITIONAL | Results/Discussion with descriptive wording |
-| C09 | EXP-11A estimates the isolated causal effect of historical-bank size | unsupported | PROHIBITED | Do not use |
-| C10 | Increasing the historical bank to H150/H200 improves performance | EXP-11B retrieval pending; prohibited until frozen results exist | PROHIBITED | Do not use |
-| C11 | Increasing the historical bank to H150/H200 worsens, stabilizes, or does not affect performance | EXP-11B retrieval pending; prohibited until frozen results exist | PROHIBITED | Do not use |
+| C07 | Evaluation must account for intra-DAM dependence when inference requires independence | data structure + grouping methodology; authorized as a methodological requirement, not as an inferential result | AUTHORIZED | Methods/statistics; inferential results must be traced to Group 3 |
+| C08 | EXP-11A provides descriptive evidence of sensitivity under natural composition constraints | G3-F02 + G4-F01 `G4F01-0007`; frozen EXP11A | AUTHORIZED | Results/Discussion only as joint size/composition sensitivity; do not isolate a causal size effect |
+| C09 | EXP-11A estimates the isolated causal effect of historical-bank size | unsupported; G4-F01 requires treating size and composition as coupled | PROHIBITED | Do not use |
+| C10 | Increasing the historical bank to H150/H200 improves performance | EXP-11B is closed as paired descriptive sensitivity; G4-F01 `G4F01-0008` does not authorize generalized inference or a causal effect | PROHIBITED | Do not use as a general or causal conclusion; use C26 for the authorized descriptive result |
+| C11 | Increasing the historical bank to H150/H200 worsens, stabilizes, or has no effect as a general conclusion | EXP-11B is closed as paired descriptive sensitivity; there is no frozen seed superpopulation and no authorized inference from 10×1056 observations | PROHIBITED | Do not use as a general conclusion; use C26 for the authorized descriptive result |
 | C12 | Normative evidence associated with a candidate demonstrates substantive normative correctness | insufficient evidence for automatic equivalence | PROHIBITED | Do not convert association/coverage into correctness |
 | C13 | HE4 explanations demonstrate complete legal correctness | known HE4 audit limitations | PROHIBITED | Do not use |
 | C14 | HE4 provides evidence about structure, traceability, and auditability under its evaluation protocol | existing HE4 evaluation | CONDITIONAL | Only with explicit limitations |
@@ -71,9 +75,13 @@ This matrix controls which claims may be used in the manuscript. A claim cannot 
 | C23 | In the final 0B-05C corrective sensitivity, EV04 showed `TINY_NONZERO_MRR_DECREASE_ONLY` | audited and integrated Attempt06; corrected final interpretation | AUTHORIZED | Results/Discussion restricted to MRR and the executed design; do not infer unevaluated practical relevance |
 | C24 | In the final 0B-05C corrective sensitivity, D1a showed `POSITIVE_NONZERO_EXACT_RANKING_CHANGE_WITH_MINOR_HS4_MIXED_EFFECT` | audited and integrated Attempt06; corrected final interpretation | AUTHORIZED | Results/Discussion as a method-specific sensitivity effect; do not generalize |
 | C25 | The joint 0B-05C impact was `METHOD_DEPENDENT / NONZERO_EV04_MRR_AND_D1A`; `DOWNSTREAM_REEXECUTION = NOT_REQUIRED` | experimental 0B-05C closure after corrective reconciliation | AUTHORIZED | Methodological gate summary; do not reduce to “no numerical impact” or convert into statistical significance |
+| C26 | EXP-11B provides paired descriptive H150/H200 sensitivity across ten paired seeds on the same 1,056-series EVAL | G3-F02 `G3F02-0334:G3F02-0465` + G4-F01 `G4F01-0008` | AUTHORIZED | Descriptive Results/Discussion; no inferential CI or generalization over seeds/cases; 10×1056 are not independent observations |
+| C27 | The historical-diversity effect planned for EXP-12 is not estimable from the closed experiment because no D-HIGH/D-MID/D-LOW retrievals were produced | G3-F02 `G3F02-0548` + G4-F01 `G4F01-0010`; EXP12 closed without retrieval | AUTHORIZED | Results/Discussion/Limitations as non-estimability of the executed design; do not claim global infeasibility or invent/reopen estimates |
+| C28 | HE2 is `SUPPORTED` within the frozen inferential scope: HE2_A and the primary HE2_B contrast are supported by primary evidence; Phase E is only directionally consistent descriptively | G3-F04 closure + G4-F01 `G4F01-0001:G4F01-0006` | AUTHORIZED | Results/Discussion when the editorial gate permits; do not convert historical-retrieval superiority into global RAG accuracy or external causality |
+| C29 | HE5 is `INCONCLUSIVE` | G3-F04 closure + G4-F01 `G4F01-0010:G4F01-0014`: description not estimable, hierarchical categories descriptive, no frozen insufficiency threshold, and internal-validity boundary | AUTHORIZED | Results/Discussion/Limitations; do not label HE5 supported or rejected or strengthen descriptive/non-estimable evidence |
 
 ### Update rule
 
 Every new experimental result must first be added here with its source, scope, and status before appearing in the manuscript. A status change must preserve the documentary or experimental basis that justifies it.
 
-The C21–C25 update exclusively reconciles the experimental closure of 0B-05C. It does not modify or inferentially reconcile other pre-existing claims.
+C21–C25 preserve the reconciliation of the 0B-05C experimental closure. The C08 and C10–C11 updates and the addition of C26–C29 reconcile Group 3 closure and G4-F01 without recalculating metrics or inference. `HE2 = SUPPORTED` and `HE5 = INCONCLUSIVE` are consumed exactly with the limitations fixed by G3-F04/G4-F01. The current editorial gate remains independent of the evidence eligibility recorded here.
