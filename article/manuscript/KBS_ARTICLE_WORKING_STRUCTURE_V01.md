@@ -5,13 +5,14 @@ STRUCTURE_ID = KBS_ARTICLE_WORKING_STRUCTURE_V01
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
-STATUS = WORKING / AUTHOR_EDITABLE / NOT_YET_FROZEN
+STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
+APPROVAL_DECISION = D-015
 PURPOSE = CUMULATIVE_BASE_FOR_SUBSEQUENT_MANUSCRIPT_VERSIONS
 WORD_FILENAME = KBS_ARTICLE_WORKING_STRUCTURE_V01.docx
 WORD_SHA256 = 0336e2a433e843c48702ef818b7e59ab0d3545022fc95874e85d26694af526b5
 ```
 
-This file defines the complete working structure of the article. It contains headings and drafting-purpose notes only; it does not approve manuscript prose. Future manuscript deliveries must preserve this cumulative structure unless the author explicitly approves an amendment.
+This file defines the complete approved structure of the article. It contains headings and drafting-purpose notes only; it does not approve manuscript prose. Future manuscript deliveries must preserve this cumulative structure unless the author explicitly approves a controlled amendment.
 
 Structural principle: **problem and positioning → general decision-support architecture → specific experimental instantiation → evidence → interpretation**. The specific experimental testbed must not define the conceptual scope of the architecture.
 
