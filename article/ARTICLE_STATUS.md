@@ -11,24 +11,27 @@ ARTICLE_TYPE_OPERATIVE = Research article
 PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED / RESTRUCTURED_BY_D014
 KBS_EMPIRICAL_WRITING_GUIDE = KBS_EWG_34_V01 / AUTHOR_APPROVED / ACTIVE / BINDING
-ARTICLE_WRITING_PLAN = V2.3
+ARTICLE_WRITING_PLAN = V2.4
 STRUCTURE_APPROVAL_DECISION = D-015
 EXPERIMENTAL_RECONCILIATION_DECISION = D-019
+LATEST_EDITORIAL_DECISION = D-020
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK_B01 = APPROVED / FROZEN / INTEGRATED
 RELATED_WORK_B02 = APPROVED / FROZEN / INTEGRATED
 RELATED_WORK_B03 = APPROVED / FROZEN / INTEGRATED
-CANONICAL_MASTER = ARTICLE_MASTER_V003
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V003.md
-CANONICAL_MASTER_DOCX = article/manuscript/ARTICLE_MASTER_V003.docx
-CANONICAL_MASTER_DOCX_SHA256 = f211e294f9da1241d899c4f4d52b3752b494cbf5e5323a09fc86431e4d4b3ec7
-CANONICAL_CITATION_COMMENTS = 19
+RELATED_WORK_B04 = APPROVED / FROZEN / INTEGRATED
+RELATED_WORK_B04_V02 = APPROVED / FROZEN / INTEGRATED
+CANONICAL_MASTER = ARTICLE_MASTER_V004
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V004.md
+CANONICAL_MASTER_DOCX = article/manuscript/ARTICLE_MASTER_V004.docx
+CANONICAL_MASTER_DOCX_SHA256 = e26f4cbe2ae88e0424805e5fa1e1385e5d2fe19e5c00bebb948763cc28179162
+CANONICAL_MASTER_DOCX_GIT_BLOB = 64519f62da55bd92acbc7c62c30f97a23b529efc
+CANONICAL_CITATION_COMMENTS = 25
 CURRENT_DRAFTING_PHASE = RELATED_WORK
-CURRENT_GATE = RELATED_WORK_B04_V02_CORRECTION
-RELATED_WORK_B04_V01 = REVIEWED / MINOR_CORRECTIONS_REQUIRED / NOT_APPROVED
-RELATED_WORK_B04_V02 = AUTHORIZED / ACTIVE
-AUTHORIZED_SCOPE = SECTION_2.4_CORRECTION_ONLY
-RELATED_WORK_B05 = NOT_AUTHORIZED
+CURRENT_GATE = RELATED_WORK_B05
+AUTHORIZED_SCOPE = SECTION_2.5_ONLY
+RELATED_WORK_B05 = AUTHORIZED / ACTIVE
+RELATED_WORK_B06 = NOT_AUTHORIZED
 NEXT_ACTOR = DRAFTING_AI
 METHODS_B01_V05 = HOLD / NOT_APPROVED
 METHODS_B01_V06 = NOT_AUTHORIZED
@@ -56,6 +59,7 @@ Orden de redacción activo:
 - `2.1 Automated tariff classification and candidate retrieval` — `APPROVED / FROZEN / INTEGRATED` mediante D-016; 8 comentarios de auditoría.
 - `2.2 Knowledge-enhanced retrieval and regulatory reasoning` — `APPROVED / FROZEN / INTEGRATED` mediante D-017; total acumulado 14 comentarios.
 - `2.3 LLMs for classification, reasoning, and explanation` — `APPROVED / FROZEN / INTEGRATED` mediante D-018; total acumulado 19 comentarios.
+- `2.4 Evidence grounding, explainability, and auditability` — `APPROVED / FROZEN / INTEGRATED` mediante D-020; total acumulado 25 comentarios.
 
 Controles heredados:
 
@@ -63,27 +67,54 @@ Controles heredados:
 - `RAG_CLASSIFICATION ≠ RAG_EVIDENCE_SUPPORT ≠ DOCUMENT_QA_RAG`;
 - `SEARCH_CONTROL / RERANKING / NEXT_HOP_DECISION ≠ EXPLANATION_ONLY_GENERATION`;
 - `RATIONALE / REASONING_TRACE ≠ FAITHFULNESS GUARANTEE`;
-- `VISIBLE_CITATION / PROVENANCE ≠ FORMAL_AUDITABILITY ≠ LEGAL_CORRECTNESS`.
+- `VISIBLE_CITATION / PROVENANCE ≠ FORMAL_AUDITABILITY ≠ LEGAL_CORRECTNESS`;
+- `PROVENANCE / LINEAGE ≠ SUBSTANTIVE_CORRECTNESS`;
+- `LIFECYCLE_AUDIT ≠ REVIEW_OF_AN_INDIVIDUAL_OUTPUT`;
+- `OFFICIAL_SOURCE / DOCUMENT_AUTHORITY ≠ CORRECT_LEGAL_INTERPRETATION`.
 
-### Bloque activo — Related Work B04 V02
-
-B04 V01 fue auditado internamente. No presentó error científico material, pero requiere tres correcciones menores y reconciliación de identidad binaria del DOCX. Por ello no fue aprobado ni integrado.
+### Cierre B04 V02
 
 ```text
 BLOCK = RELATED_WORK_B04
-SECTION = 2.4 Evidence grounding, explainability, and auditability
 BLOCK_REVISION = V02
-CORRECTIVE_PROMPT = article/prompts/2_RELATED_WORK_B04_V02_CORRECTIONS.md
-CORRECTIVE_PROMPT_COMMIT = 6c1e785dc71613e3b6d3425852d7314b21d4c165
+SECTION = 2.4 Evidence grounding, explainability, and auditability
+DELIVERY_COMMIT = 119d6f9b46320d4970c7c46e421d66649269885f
+AUTHOR_APPROVAL = RECEIVED
+INTERNAL_REVIEW = PASS
+SOURCE_SUPPORT = PASS / 6_OF_6
+C1_LEWIS_CORRECTION = PASS
+C2_RAJI_CORRECTION = PASS
+C3_GRAINGER_CORRECTION = PASS
+PRIOR_CITATION_COMMENTS_PRESERVED = 19/19
+B04_CITATION_COMMENT_COVERAGE = 6/6
+TOTAL_CITATION_COMMENT_COUNT = 25
+DOCX_OOXML_INTEGRITY = PASS
+DOCX_TRACKED_CHANGES = 0
+DOCX_RENDER = PASS / 23_OF_23_PAGES
+DOCX_BINARY_IDENTITY = PASS
+APPROVED_DOCX_SHA256 = e26f4cbe2ae88e0424805e5fa1e1385e5d2fe19e5c00bebb948763cc28179162
+APPROVED_DOCX_GIT_BLOB = 64519f62da55bd92acbc7c62c30f97a23b529efc
+NET_B04_V02_FILE_SCOPE = PASS / EXACTLY_4_AUTHORIZED_FILES
+SINGLE_COMMIT_DISCIPLINE = FAIL / NONBLOCKING_PROCESS_DEVIATION
+HISTORY_REWRITE = NOT_PERFORMED
+```
+
+La desviación de historial queda documentada en D-020. Los commits accidentales no alteran el árbol final ni el contenido científico. No se realizó force-push ni reescritura destructiva. El candidato B04 V02 aprobado fue promovido byte-for-byte a `ARTICLE_MASTER_V004`.
+
+### Bloque activo — Related Work B05
+
+```text
+BLOCK = RELATED_WORK_B05
+SECTION = 2.5 Reproducibility and evaluation in knowledge-based decision support
+PROMPT = article/prompts/2_RELATED_WORK_B05_REPRODUCIBILITY_EVALUATION.md
 DRAFTING = AUTHORIZED
-BASELINE_MASTER = ARTICLE_MASTER_V003
-BASELINE_MD = article/manuscript/ARTICLE_MASTER_V003.md
-BASELINE_DOCX = article/manuscript/ARTICLE_MASTER_V003.docx
-BASELINE_DOCX_SHA256 = f211e294f9da1241d899c4f4d52b3752b494cbf5e5323a09fc86431e4d4b3ec7
-PRIOR_SECTIONS_2_1_TO_2_3 = APPROVED / FROZEN / PRESERVE_EXACTLY
-PRIOR_CITATION_COMMENTS = 19 / PRESERVE_EXACTLY
-EXPECTED_TOTAL_COMMENTS_AFTER_B04 = 25
-SECTIONS_2_5_TO_2_6 = NOT_AUTHORIZED
+BASELINE_MASTER = ARTICLE_MASTER_V004
+BASELINE_MD = article/manuscript/ARTICLE_MASTER_V004.md
+BASELINE_DOCX = article/manuscript/ARTICLE_MASTER_V004.docx
+BASELINE_DOCX_SHA256 = e26f4cbe2ae88e0424805e5fa1e1385e5d2fe19e5c00bebb948763cc28179162
+PRIOR_SECTIONS_2_1_TO_2_4 = APPROVED / FROZEN / PRESERVE_EXACTLY
+PRIOR_CITATION_COMMENTS = 25 / PRESERVE_EXACTLY
+SECTION_2_6 = NOT_AUTHORIZED
 INTRODUCTION = NOT_AUTHORIZED
 DECISION_SUPPORT_ARCHITECTURE = NOT_AUTHORIZED
 EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
@@ -91,7 +122,7 @@ RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 ```
 
-Las correcciones obligatorias V02 son: estrechar la atribución a Lewis et al. (2020) para no presentar provenance support; no atribuir `output-level auditability` a Raji et al. (2020) como constructo establecido; y sustituir el carácter `necessary` por `relevant` en la interpretación de Grainger (2024). El DOCX entregado y el comprometido deben ser binariamente idénticos.
+B05 sintetizará literatura sobre documentación de datos, identidad/versionado, provenance/lineage, reproducibilidad y evaluación alineada con función/salida. No describirá todavía la arquitectura, testbed, resultados, FINAL_GAP ni novelty del presente estudio.
 
 ### Gobernanza editorial vigente
 
@@ -164,29 +195,27 @@ GROUP5 = NOT_STARTED
 G5_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
 ```
 
-Grupo 4 cerró el contraste controlado con la literatura y deja elegibles para una futura Discussion únicamente los contrastes expresamente autorizados por G4-F03. No autoriza superioridad numérica entre estudios, SOTA, novelty absoluta, unicidad, generalización empírica, causalidad no identificada ni corrección jurídica. El cierre experimental no abre por sí mismo `Results` ni `Discussion`.
-
-El cierre de Grupo 4 no obliga a reabrir Related Work 2.1–2.3 y tampoco cancela la corrección editorial B04 V02. Grupo 5 permanece no iniciado.
+Grupo 4 deja elegibles para futura Discussion únicamente los contrastes autorizados por G4-F03. No autoriza superioridad numérica entre estudios, SOTA, novelty absoluta, unicidad, generalización empírica, causalidad no identificada ni corrección jurídica. El cierre experimental no abre por sí mismo Results ni Discussion. Grupo 5 permanece no iniciado.
 
 ### Gate vigente
 
 ```text
-CURRENT_GATE = RELATED_WORK_B04_V02_CORRECTION
+CURRENT_GATE = RELATED_WORK_B05
 NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = EXECUTE_RELATED_WORK_B04_V02_CORRECTIONS_ONLY
-NEXT_PROMPT = article/prompts/2_RELATED_WORK_B04_V02_CORRECTIONS.md
-MASTER_INTEGRATION = ARTICLE_MASTER_V003 / ACTIVE_BASELINE
-B05 = NOT_AUTHORIZED
+NEXT_ACTION = EXECUTE_RELATED_WORK_B05_ONLY
+NEXT_PROMPT = article/prompts/2_RELATED_WORK_B05_REPRODUCIBILITY_EVALUATION.md
+MASTER_INTEGRATION = ARTICLE_MASTER_V004 / ACTIVE_BASELINE
+B06 = NOT_AUTHORIZED
 ```
 
 ---
 
 ## English
 
-Related Work Sections 2.1–2.3 remain `APPROVED / FROZEN / INTEGRATED`; the active cumulative master remains `ARTICLE_MASTER_V003.md/.docx`, SHA-256 `f211e294f9da1241d899c4f4d52b3752b494cbf5e5323a09fc86431e4d4b3ec7`, with nineteen inherited citation-audit comments.
+Related Work Sections 2.1–2.4 are `APPROVED / FROZEN / INTEGRATED`. The canonical cumulative master is now `ARTICLE_MASTER_V004.md/.docx`, SHA-256 `e26f4cbe2ae88e0424805e5fa1e1385e5d2fe19e5c00bebb948763cc28179162`, with twenty-five citation-audit comments.
 
-The active editorial gate is now `RELATED_WORK_B04_V02_CORRECTION`. B04 V01 was internally reviewed and requires three minor source-scope corrections plus DOCX binary-identity reconciliation. B04 is not yet approved or integrated, and Section 2.5 remains unauthorized.
+B04 V02 passed independent source audit and author approval. Its approved DOCX is byte-identical to Git blob `64519f62da55bd92acbc7c62c30f97a23b529efc`. The accidental connector/probe commits are retained transparently as nonblocking process deviations; the final tree is normalized and no history rewrite was performed.
 
-The article-side experimental snapshot is reconciled with the canonical Master Plan at `3ba3557eb10e741b8f49c420850940dee1df08ef`, blob `5ab0af7af5a2c92a1107e820bee1a6bb65026432`, experimental `main` checkpoint `38e22c19a0eb0d344e7675761a88d7968091eead`. Group 2 is closed with nonblocking limitations; Group 3 is `CLOSED / APPROVED`; `HE2 = SUPPORTED`; `HE5 = INCONCLUSIVE`; Group 4 is `CLOSED / APPROVED`; G4-F01, G4-F02, and G4-F03 are all `CLOSED / APPROVED / INTEGRATED_TO_MAIN`; G4-F03 passed external re-audit. Its literature-contrast registry contains 11 comparison records, 8 authorized discussion points, and 14 forbidden discussion points.
+The active editorial gate is `RELATED_WORK_B05`, Section 2.5 only. It must use V004 as the exact cumulative baseline and preserve Sections 2.1–2.4 plus all twenty-five inherited comments. Section 2.6 and all later manuscript sections remain unauthorized.
 
-These Group 4 materials become eligible evidence for future Results/Discussion only when the corresponding article gates open. They do not establish cross-study numerical superiority, SOTA, absolute novelty, empirical generalization, unsupported causality, or legal correctness. Group 5 remains `NOT_STARTED`, with G5-F01 `ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`.
+The experimental snapshot remains the D-019 reconciliation after complete Group 4 closure: Group 3 is closed, `HE2 = SUPPORTED`, `HE5 = INCONCLUSIVE`, Group 4 is closed/approved, and G4-F01–F03 are integrated. Group 5 remains not started. Those experimental facts do not authorize Results/Discussion at the present gate.
