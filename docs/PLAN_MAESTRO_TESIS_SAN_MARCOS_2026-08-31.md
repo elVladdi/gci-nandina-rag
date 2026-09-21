@@ -2038,3 +2038,31 @@ manifest, la autorización ni el config.
 - `G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `GROUP5 = IN_PROGRESS`;
   `G5_F02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`.
 - Grupo 5 permanece abierto y no se modifico el articulo.
+
+### 2026-09-21 — Cierre de G5-F02 tras reauditoria externa
+
+- El candidato corregido G5-F02 v02 recibio reauditoria externa `PASS` y fue
+  integrado por fast-forward puro en `main = origin/main =
+  e471d4336ab965cd55b7f0e2ca7926445b1f0391`.
+- Las nueve tablas canonicas, el Markdown agregado, el ledger de control
+  numerico y el generador determinista se preservaron sin regeneracion ni
+  edicion durante la integracion.
+- `G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN` y
+  `G5_F02_INTEGRATION_COMMIT = e471d4336ab965cd55b7f0e2ca7926445b1f0391`;
+  `G5_F02_EXTERNAL_REAUDIT = PASS`.
+- `G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`;
+  `GROUP5 = IN_PROGRESS`; `NEXT_ELIGIBLE_FICHA = G5-F03` y
+  `G5_F03 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`.
+- `G5_F03_AUTHORIZED = false`, `G5_F03_STARTED = false`; Grupo 5 permanece
+  abierto.
+- `HE2 = SUPPORTED` y `HE5 = INCONCLUSIVE` permanecen sin redecision.
+- `EXP11A = JOINT_SIZE_COMPOSITION_SENSITIVITY / NONCAUSAL`.
+- `EXP11B = DESCRIPTIVE_H150_H200 / NO_SEED_SUPERPOPULATION_INFERENCE`.
+- `0B05C = ATTEMPT06_CORRECTED_CURRENT_STATE`.
+- `EXP12 = CLOSED_WITHOUT_RETRIEVAL / DIVERSITY_EFFECT_NOT_ESTIMABLE`.
+- `GROUP2B_NONBLOCKING_LIMITATION_COUNT = 11`.
+- `HISTORICAL_RETRIEVAL_SUPERIORITY_EQUALS_GLOBAL_RAG_ACCURACY = false`.
+- `NORMATIVE_EVIDENCE_EQUALS_BINDING_LEGAL_CORRECTNESS = false`.
+- `AUDITABLE_EXPLANATION_EQUALS_CLASSIFICATION_OR_LEGAL_CORRECTNESS = false`.
+- No se recalcularon metricas, inferencia, intervalos ni p-values; no se
+  reabrio EXP12 y no se modificaron el articulo ni la tesis.
