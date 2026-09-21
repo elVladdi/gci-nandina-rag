@@ -1,0 +1,4 @@
+row_key,pool role,variant,depth,cases,nominal_size,effective_size_mean,exact_numerator,denominator,exact-NANDINA coverage,source version
+diagnostic_union_hierarchical_dual@50,diagnostic_union,diagnostic_union_hierarchical_dual,50,1056,50,56.26231060606061,99,1056,0.09375,ee42014a77ab8e318ff967b4db9d06fdafc8dfc7
+diagnostic_union_hierarchical_dual@100,diagnostic_union,diagnostic_union_hierarchical_dual,100,1056,100,112.7215909090909,113,1056,0.10700757575757576,ee42014a77ab8e318ff967b4db9d06fdafc8dfc7
+diagnostic_union_hierarchical_dual@200,diagnostic_union,diagnostic_union_hierarchical_dual,200,1056,200,217.76988636363637,322,1056,0.30492424242424243,ee42014a77ab8e318ff967b4db9d06fdafc8dfc7
