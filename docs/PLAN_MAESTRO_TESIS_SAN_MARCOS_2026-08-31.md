@@ -2066,3 +2066,34 @@ manifest, la autorización ni el config.
 - `AUDITABLE_EXPLANATION_EQUALS_CLASSIFICATION_OR_LEGAL_CORRECTNESS = false`.
 - No se recalcularon metricas, inferencia, intervalos ni p-values; no se
   reabrio EXP12 y no se modificaron el articulo ni la tesis.
+
+### 2026-09-21 — Cierre de G5-F03 y Grupo 5 tras auditoria externa
+
+- El candidato G5-F03 de anexos y cierre recibio auditoria externa `PASS` y
+  fue integrado por fast-forward puro en `main = origin/main =
+  ca065618d5df0019f76ef5a971e858d91c263e1f`.
+- Sus dos artefactos documentales/auditables se preservaron byte-identicos;
+  ninguna de las nueve tablas canonicas G5-F02 fue editada o regenerada.
+- `G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`;
+  `G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`;
+  `G5_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`.
+- `G5_F03_INTEGRATION_COMMIT = ca065618d5df0019f76ef5a971e858d91c263e1f`;
+  `G5_F03_EXTERNAL_AUDIT = PASS`; `GROUP5 = CLOSED / APPROVED`.
+- `NEXT_ELIGIBLE_FICHA = G6-F01`;
+  `G6_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`;
+  `G6_F01_AUTHORIZED = false`; `G6_F01_STARTED = false`;
+  `GROUP6 = NOT_STARTED`. Elegibilidad no constituye activacion.
+- `HE2 = SUPPORTED` y `HE5 = INCONCLUSIVE` permanecen sin redecision.
+- `EXP11A = JOINT_SIZE_COMPOSITION_SENSITIVITY / NONCAUSAL`.
+- `EXP11B = DESCRIPTIVE_H150_H200 / TEN_OBSERVED_SEED_PAIRS / NO_SEED_SUPERPOPULATION_INFERENCE`.
+- `0B05C = ATTEMPT06_CORRECTED_CURRENT_STATE`: EV03 sin cambio agregado,
+  EV04 con descenso MRR pequeno no nulo y D1a con cambio positivo no nulo
+  en ranking exacto y efecto HS4 menor mixto; el efecto conjunto depende
+  del metodo.
+- `EXP12 = CLOSED_WITHOUT_RETRIEVAL / DIVERSITY_EFFECT_NOT_ESTIMABLE`.
+- `GROUP2B_NONBLOCKING_LIMITATION_COUNT = 11`.
+- `HISTORICAL_RETRIEVAL_SUPERIORITY_EQUALS_GLOBAL_RAG_ACCURACY = false`.
+- `NORMATIVE_EVIDENCE_EQUALS_BINDING_LEGAL_CORRECTNESS = false`.
+- `AUDITABLE_EXPLANATION_EQUALS_CLASSIFICATION_OR_LEGAL_CORRECTNESS = false`.
+- No se calcularon nuevas metricas, inferencia, intervalos ni p-values; no se
+  ejecutaron experimentos ni retrieval y no se modificaron articulo o tesis.
