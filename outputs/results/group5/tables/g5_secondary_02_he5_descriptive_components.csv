@@ -1,0 +1,16 @@
+row_key,component,literal category,denominator,frozen descriptive metric,metric name,source version
+HE5-HIER-01,historical_hierarchy_errors,SAME_CHAPTER,,147,error_count,b5bd099114e7262f316dfc846b867bec9e7f176d
+HE5-HIER-02,historical_hierarchy_errors,SAME_HS4,,284,error_count,b5bd099114e7262f316dfc846b867bec9e7f176d
+HE5-HIER-03,historical_hierarchy_errors,SAME_HS6,,87,error_count,b5bd099114e7262f316dfc846b867bec9e7f176d
+HE5-SUPPORT-01-top1_rate,historical_errors_by_support,1 DAM,27,0.37037,top1_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-01-top3_rate,historical_errors_by_support,1 DAM,27,0.703704,top3_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-01-mean_reciprocal_rank,historical_errors_by_support,1 DAM,27,0.564447,mean_reciprocal_rank,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-02-top1_rate,historical_errors_by_support,2 DAM,21,0.047619,top1_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-02-top3_rate,historical_errors_by_support,2 DAM,21,0.190476,top3_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-02-mean_reciprocal_rank,historical_errors_by_support,2 DAM,21,0.239384,mean_reciprocal_rank,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-03-top1_rate,historical_errors_by_support,3-4 DAM,425,0.691765,top1_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-03-top3_rate,historical_errors_by_support,3-4 DAM,425,0.767059,top3_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-03-mean_reciprocal_rank,historical_errors_by_support,3-4 DAM,425,0.760152,mean_reciprocal_rank,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-04-top1_rate,historical_errors_by_support,5+ DAM,583,0.399657,top1_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-04-top3_rate,historical_errors_by_support,5+ DAM,583,0.617496,top3_rate,0f70928ba83eec87c116e62cf104f505293bc092
+HE5-SUPPORT-04-mean_reciprocal_rank,historical_errors_by_support,5+ DAM,583,0.551697,mean_reciprocal_rank,0f70928ba83eec87c116e62cf104f505293bc092
