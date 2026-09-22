@@ -1,63 +1,75 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V2.7
+PLAN_VERSION = V2.8
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE_RESET_DECISION = D-014
 STRUCTURE_APPROVAL_DECISION = D-015
-EXPERIMENTAL_RECONCILIATION_DECISION = D-030
+RELATED_WORK_CLOSURE_DECISION = D-025
 DOCX_CUSTODY_DECISION = D-021 / D-027 / D-029
 GITHUB_ONLY_RESPONSE_DECISION = D-022
 TECHNICAL_CLOSURE_MODE_DECISION = D-023
-RELATED_WORK_CLOSURE_DECISION = D-025
-LATEST_EDITORIAL_DECISION = D-030
+EXPERIMENTAL_RECONCILIATION_DECISION = D-030
+INTRODUCTION_APPROVAL_DECISION = D-031
+INTRODUCTION_INTEGRATION_DECISION = D-033
+G6_G7_RECONCILIATION_DECISION = D-034
+LATEST_EDITORIAL_DECISION = D-034
 LEGACY_METHODS_FIRST_ORDER = SUPERSEDED
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-CANONICAL_MASTER = ARTICLE_MASTER_V006
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V006.md
-CANONICAL_MASTER_MD_GIT_BLOB = 7d3c7a71cd6578ffc0b93df80ea12e4172833a1a
-CANONICAL_MASTER_DOCX = LOCAL_AUTHOR_CUSTODY / D029
-CANONICAL_MASTER_DOCX_SOURCE_FILENAME = ARTICLE_MASTER_B06_REGENERATED_V01.docx
-CANONICAL_MASTER_DOCX_SHA256 = 7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b
-CANONICAL_CITATION_COMMENTS = 36
-CURRENT_DRAFTING_PHASE = INTRODUCTION
-CURRENT_AUTHORIZED_BLOCK = INTRODUCTION_B01 / SECTION_1_PROVISIONAL_ONLY
+CANONICAL_MASTER = ARTICLE_MASTER_V007
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V007.md
+CANONICAL_MASTER_MD_GIT_BLOB = 436e0522db0ac348efaed86f4e53a7e6db372471
+CANONICAL_MASTER_DOCX = LOCAL_AUTHOR_CUSTODY / D033
+CANONICAL_MASTER_DOCX_SOURCE_FILENAME = ARTICLE_MASTER_CANDIDATE_INTRO_B01_V02.docx
+CANONICAL_MASTER_DOCX_SHA256 = d2b68366b706502202ab67860a1df0eccc7747c15df7a58de76607b5f8a69b9c
+CANONICAL_CITATION_COMMENTS = 40
+CURRENT_DRAFTING_PHASE = DECISION_SUPPORT ARCHITECTURE
+CURRENT_AUTHORIZED_BLOCK = ARCHITECTURE_B01 / SECTIONS_3_1_TO_3_4_ONLY
+INTRODUCTION_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
+DECISION_SUPPORT_ARCHITECTURE = AUTHORIZED / ACTIVE
+EXPERIMENTAL_DESIGN = NOT_YET_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-## Español
+---
 
-### 1. Propósito
+# Español
 
-Administrar la construcción iterativa del artículo científico principal sin anticipar resultados, alterar el diseño experimental aprobado ni trasladar al manuscrito la lógica de un documento de gobernanza. El artículo se construye sobre una estructura acumulativa aprobada y cada bloque autorizado completa esa misma base.
+## 1. Propósito
 
-La redacción se rige por `KBS_EWG_34_V01`, `MWDP_V1.0`, SPCCR, la Claim–Evidence Matrix, la literatura congelada de 0B, el posicionamiento 0C y las fuentes experimentales gobernantes cuando correspondan.
+Administrar la construcción iterativa del artículo científico principal sin anticipar resultados, alterar el diseño experimental aprobado ni trasladar al manuscrito la lógica interna de gobernanza. El artículo se construye sobre un master acumulativo; cada bloque autorizado completa esa misma base y solo se vuelve canónico después de auditoría y aprobación expresa del autor.
 
-### 2. Principios rectores
+La redacción se rige por `KBS_EWG_34_V01`, `MWDP_V1.0`, SPCCR, `CLAIM_EVIDENCE_MATRIX.md`, `SOURCE_REGISTRY.md`, las decisiones congeladas, la literatura primaria verificada y las fuentes experimentales gobernantes cuando corresponda.
 
-- El artículo no será una versión abreviada de la tesis.
-- El lector debe comprender primero problema y posicionamiento, después la arquitectura general y solo entonces la instanciación experimental específica.
-- NANDINA/Chapter-Class 87 y el corpus concreto no deben definir prematuramente el alcance conceptual de la arquitectura.
+## 2. Principios científicos y editoriales vinculantes
+
+- El artículo no es una versión abreviada de la tesis.
+- El lector debe encontrar primero problema y posicionamiento, después la arquitectura general y solo luego la instanciación experimental específica.
+- NANDINA, Clase/Capítulo 87, H100 y el corpus concreto no deben definir prematuramente el alcance conceptual de la arquitectura.
 - La recuperación histórica genera y ordena candidatos.
-- El Top-3 queda fijado antes de recuperación documental y generación.
-- La recuperación documental aporta evidencia para candidatos ya fijados y no sustituye ni reordena el ranking.
-- El LLM local opera después de recuperación y se usa para explicación controlada; no clasifica desde cero ni retroalimenta la selección de candidatos.
+- El Top-3 queda fijado antes de la recuperación documental y de la generación.
+- La recuperación documental/normativa aporta evidencia para candidatos ya fijados y no sustituye ni reordena el ranking histórico.
+- El LLM local opera downstream para explicación controlada; no clasifica desde cero, no altera candidatos y no retroalimenta la clasificación.
+- El reranker LLM permanece diagnóstico salvo decisión posterior expresa.
 - `candidate retrieval ≠ overall classification accuracy`.
-- `documentary association ≠ substantive legal correctness`.
+- `documentary/normative association ≠ substantive legal correctness`.
 - `auditability ≠ legal correctness`.
 - `configurability/replicability ≠ empirical generalization`.
 - SERIE es unidad de observación/análisis; DAM es unidad de agrupamiento cuando existe dependencia.
+- EXP11A expresa sensibilidad conjunta tamaño/composición, no efecto causal aislado del tamaño.
+- EXP11B es descriptivo y no autoriza inferencia a una superpoblación de seeds.
+- EXP12 no permite estimar el efecto de diversidad histórica bajo el diseño congelado.
 - Ningún resultado pendiente se redactará como hallazgo.
 - Toda afirmación científica debe trazarse a evidencia autorizada.
 - Part I es el manuscript master inglés; Part II es el espejo español de control semántico.
-- El posicionamiento compara funciones y autoridad de los componentes; no convierte diferencias arquitectónicas en novelty.
-- En Introduction y secciones posteriores, las abstracciones deben traducirse a componentes, acciones, entradas, salidas y restricciones observables.
+- Las abstracciones deben traducirse a componentes, acciones, entradas, salidas y restricciones observables.
+- `FINAL_GAP = NOT_DEFINED` y `NOVELTY = NOT_DECLARED` permanecen vigentes hasta decisión expresa posterior.
 
-### 3. Arquitectura acumulativa aprobada
+## 3. Arquitectura acumulativa aprobada
 
 1. `Introduction`
 2. `Related work`
@@ -70,79 +82,97 @@ La redacción se rige por `KBS_EWG_34_V01`, `MWDP_V1.0`, SPCCR, la Claim–Evide
 
 La estructura detallada permanece en `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md`, aprobada mediante D-015. `Limitations` permanece integrada como `6.6 Limitations` salvo futura enmienda expresa.
 
-### 4. Política acumulativa del Word y del master
+## 4. Política del master acumulativo y DOCX
 
 1. Cada bloque parte del último master acumulativo aprobado.
-2. El baseline Markdown actual es `ARTICLE_MASTER_V006.md`, blob Git `7d3c7a71cd6578ffc0b93df80ea12e4172833a1a`.
-3. Conforme a D-029, el baseline DOCX operativo actual es `ARTICLE_MASTER_B06_REGENERATED_V01.docx`, bajo custodia local verificada del autor, con SHA-256 `7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b` y 36 comentarios.
-4. El SHA-256 histórico `3a07568b8f6ac80ed2df39ee60c0aab65c06df5bb3e1988d3e4f8c752d84bf0` identifica únicamente el binario B06 original perdido y no puede utilizarse como baseline activo.
-5. No se crean Words independientes por sección.
-6. La sección nueva se inserta en su ubicación estructural.
-7. Solo se eliminan las notas editoriales correspondientes a la sección completada.
-8. Part I y Part II conservan equivalencia semántica.
-9. Candidatos no se vuelven canónicos hasta aprobación expresa del autor y auditoría de la IA Gestora.
-10. Si el baseline DOCX exacto no está disponible, la IA de Redacción se detiene con `BASELINE_DOCX_ACCESS_REQUIRED`; no reconstruye silenciosamente el Word desde Markdown.
-11. Todo bloque preserva exactamente texto y comentarios de las secciones aprobadas.
-12. El SHA-256 del DOCX candidato se registra obligatoriamente en la respuesta versionada en GitHub; la carga del binario queda diferida conforme a D-021 salvo hito explícito.
-13. Desviaciones de proceso se registran explícitamente y no se corrigen mediante reescritura destructiva del historial salvo autorización expresa del autor y justificación de gobernanza.
-14. D-022 exige prompts y respuestas sustantivas en GitHub; el chat de la IA de Redacción solo puede contener el puntero mínimo autorizado, salvo la entrega efectiva del DOCX exigida por D-027.
-15. D-023 aplica a cierres puramente técnicos: sin Base64 para Markdown, sin fragmentación, sin verificaciones redundantes y sin reauditoría científica innecesaria.
-16. D-026 registra la recuperación del master V006 tras una desviación técnica; el blob canónico de V006 es el indicado en este plan.
-17. D-027, D-028 y D-029 documentan la pérdida, regeneración controlada, auditoría y aceptación del DOCX B06 regenerado; D-029 prevalece respecto de filename, SHA-256 y custodia del baseline DOCX activo.
+2. El master Markdown canónico actual es `ARTICLE_MASTER_V007.md`, blob `436e0522db0ac348efaed86f4e53a7e6db372471`.
+3. El DOCX acumulativo actual es `ARTICLE_MASTER_CANDIDATE_INTRO_B01_V02.docx`, bajo custodia local del autor, SHA-256 `d2b68366b706502202ab67860a1df0eccc7747c15df7a58de76607b5f8a69b9c`, con 40 comentarios de auditoría de citas.
+4. D-021 mantiene diferida la carga ordinaria del DOCX al repositorio; D-027 exige entrega efectiva del binario al autor; D-029 y D-033 gobiernan la identidad vigente del baseline.
+5. No se crean Words independientes por sección: la nueva sección se inserta en el master acumulativo.
+6. Part I y Part II deben conservar equivalencia semántica.
+7. Todo bloque preserva exactamente las secciones y comentarios ya aprobados.
+8. El SHA-256 del DOCX candidato debe registrarse en la respuesta versionada.
+9. Si el baseline DOCX exacto no está disponible, la IA de Redacción se detiene; no reconstruye silenciosamente desde Markdown.
+10. D-022 exige prompts y respuestas operativas sustantivas en GitHub; D-023 mantiene los cierres técnicos mínimos; D-027 gobierna el handoff efectivo de binarios.
+11. Un candidato no se vuelve master canónico hasta auditoría de IA Gestora y aprobación expresa del autor.
 
-### 5. Estado de fases y bloques
+## 5. Estado de fases y bloques
 
 | Elemento | Estado |
 |---|---|
 | 0A | CLOSED / APPROVED |
 | 0B | CLOSED / APPROVED / FROZEN |
 | 0C | CLOSED / APPROVED / FROZEN |
-| 0D original | CLOSED / APPROVED / FROZEN; arquitectura supersedida por D-014 |
 | KBS-34 guide | AUTHOR_APPROVED / ACTIVE / BINDING |
 | Estructura KBS V01 | AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
-| Related Work B01 / 2.1 | APPROVED / FROZEN / INTEGRATED |
-| Related Work B02 / 2.2 | APPROVED / FROZEN / INTEGRATED |
-| Related Work B03 / 2.3 | APPROVED / FROZEN / INTEGRATED |
-| Related Work B04 V01 / 2.4 | SUPERSEDED_BY_V02 |
-| Related Work B04 V02 / 2.4 | APPROVED / FROZEN / INTEGRATED |
-| Related Work B05 V01 / 2.5 | APPROVED / FROZEN / INTEGRATED |
-| Related Work B06 V01 / 2.6 | APPROVED / FROZEN / INTEGRATED |
-| Related Work | CLOSED / APPROVED / FROZEN |
-| Introduction B01 | AUTHORIZED / ACTIVE / PROVISIONAL / UNBLOCKED_BY_D029 |
-| Experimental Group 5 | CLOSED / APPROVED; G5-F01, G5-F02 y G5-F03 integrados a `main` |
+| Related Work 2.1–2.6 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| Introduction B01 V02 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| Canonical master | `ARTICLE_MASTER_V007.md` |
+| Decision-support architecture | AUTHORIZED / ACTIVE |
+| Architecture B01 | AUTHORIZED / SECTIONS 3.1–3.4 ONLY |
+| Architecture B02 | NOT_AUTHORIZED |
+| Experimental design | NOT_AUTHORIZED |
+| Experimental Group 5 | CLOSED / APPROVED |
 | Experimental Group 6 | NOT_STARTED; G6-F01 ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED |
-| Methods B01 V05 | HOLD / NOT APPROVED |
-| Methods B01 V06 | NOT_AUTHORIZED |
+| Experimental Group 7 | PROSPECTIVE / NOT_ACTIVATED; formal activation requires Group 6 CLOSED/APPROVED |
+| Experimental Group 8 | PROSPECTIVE / NOT_ACTIVATED; requires Group 7 CLOSED/APPROVED |
+| Results | NOT_AUTHORIZED |
+| Discussion | NOT_AUTHORIZED |
 
-B06 V01 fue integrado mediante D-025 después de revisión científica independiente y aprobación expresa del autor. Su revisión V02 corrige únicamente el conteo de páginas renderizadas a `28/28`; no cambia el `PASS` científico. D-026 conserva transparentemente la desviación técnica del placeholder V006. D-029 sustituye únicamente la identidad del DOCX B06 perdido por el binario regenerado y auditado, sin reabrir Related Work.
+## 6. Concurrencia editorial con Grupos 6–8 — D-034
 
-D-030 reconcilia el cierre experimental completo de Grupo 5. Este cierre hace consumibles para futura Results las presentaciones canónicas y sus roles, pero no abre automáticamente ninguna sección del manuscrito.
+La secuencia experimental de fichas y la redacción progresiva del artículo son procesos relacionados pero no idénticos.
 
-### 6. Orden operativo de redacción
+D-034 fija:
+
+```text
+GROUP6_CLOSE_REQUIRED_FOR_FORMAL_G7_ACTIVATION = YES
+GROUP6_CLOSE_REQUIRED_FOR_ARCHITECTURE_DRAFTING = NO
+GROUP6_CLOSE_REQUIRED_FOR_EXPERIMENTAL_DESIGN_DRAFTING = NO
+FORMAL_G7_ACTIVATION_BEFORE_GROUP6_CLOSE = NOT_PERMITTED
+G7_F03_ROLE = SYNCHRONIZATION_AND_TRANSVERSAL_CLOSURE
+G7_F03_ROLE_IS_ARTICLE_INCEPTION = false
+GROUP7_CLOSE_REQUIRED_BEFORE_GROUP8 = YES
+SCIENTIFIC_FINAL_FREEZE_REQUIRES_GROUP8 = true
+```
+
+La frase de G7-F01 “antes de escribir” se interpreta como antes de la redacción/actualización formal gobernada por Grupo 7, no como prohibición de la redacción editorial previa bajo `article/main-manuscript`.
+
+Hasta el cierre de Grupo 6 permanecen provisionales la selección/numeración final de figuras, captions, referencias cruzadas, ubicación visual y cualquier pasaje de Results/Discussion cuya forma final dependa de esas figuras. Esto no bloquea Architecture ni Experimental design.
+
+G7 debe sincronizar el manuscrito con el estado científico final G3–G6. G8 debe auditar claim→evidencia→cifra, coherencia Métodos–Resultados–Discusión, texto–tablas–figuras y readiness para el freeze. El cierre de G7 no equivale al freeze final.
+
+D-034 no autoriza G6, G7 ni G8.
+
+## 7. Orden operativo de redacción
 
 | Fase | Entregable | Gate |
 |---|---|---|
-| 1 | Estructura completa | CLOSED / AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
+| 1 | Estructura completa | CLOSED / AUTHOR_APPROVED |
 | 2 | Related Work | CLOSED / APPROVED / FROZEN |
-| 3 | Introduction provisional | EN PROGRESO / B01 AUTHORIZED |
-| 4 | Decision-support architecture | Introduction/positioning suficientemente estable + autorización editorial expresa |
-| 5 | Experimental design | arquitectura suficientemente estable + ground truth experimental vigente |
-| 6 | Results | Experimental design suficientemente estable + gate editorial; consumir evidencia y roles G5 cerrados |
-| 7 | Figuras y visualizaciones | autorización editorial específica; G6-F01 continúa no autorizado hasta decisión separada |
-| 8 | Integración final de Results | evidencia y visualizaciones requeridas cerradas; sin promover material diagnóstico a confirmatorio |
-| 9 | Discussion + Limitations | Results definitivos + contraste G4-F03 autorizado |
+| 3 | Introduction | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| 4 | Decision-support architecture | **ACTIVE — Architecture B01 authorized** |
+| 5 | Experimental design | arquitectura suficientemente estable + autorización editorial expresa |
+| 6 | Results provisional | Experimental design estable + gate editorial; consumir evidencia G5 cerrada |
+| 7 | Figuras y visualizaciones | autorización experimental/editorial específica; cierre mediante Grupo 6 |
+| 8 | Results definitivos | evidencia + visualizaciones requeridas cerradas |
+| 9 | Discussion + Limitations | Results definitivos + contraste G4-F03 autorizado; sincronización final sujeta a G6/G7 |
 | 10 | Conclusion | Discussion cerrada |
 | 11 | Abstract | manuscrito completo |
 | 12 | Title + Keywords | Abstract/manuscrito completos |
-| 13 | Adaptación final KBS | requisitos vigentes verificados |
+| 13 | Sincronización transversal G7 | Grupo 6 CLOSED/APPROVED y secuencia G7 formalmente activada |
+| 14 | Auditoría/freeze G8 | Grupo 7 CLOSED/APPROVED |
+| 15 | Adaptación final KBS | freeze científico + requisitos vigentes verificados |
 
-Orden activo:
+Orden activo inmediato:
 
-`Introduction provisional → Decision-support architecture → Experimental design → Results con evidencia G5 cerrada → figuras/visualizaciones cuando sean autorizadas → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
+`Architecture B01 → auditoría → aprobación autoral → siguiente bloque de Architecture → Experimental design`.
 
-### 7. Estado experimental disponible para fases futuras
+No se autoriza avanzar automáticamente de B01 a B02 ni de Architecture a Experimental design.
 
-D-030 sincroniza el artículo con `SRC-03` después del cierre completo de Grupo 5:
+## 8. Estado experimental consumible
+
+Corte editorial vigente, reconciliado por D-030:
 
 ```text
 EXPERIMENTAL_PLAN_BRANCH = docs/plan-maestro-temporal-2026-08-31
@@ -154,107 +184,82 @@ GROUP3 = CLOSED / APPROVED
 HE2 = SUPPORTED
 HE5 = INCONCLUSIVE
 GROUP4 = CLOSED / APPROVED
-G4_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G4_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G4_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F03_EXTERNAL_REAUDIT = PASS
+G4_F03_COMPARISON_REGISTRY_COUNT = 11
+G4_F03_AUTHORIZED_DISCUSSION_POINT_COUNT = 8
+G4_F03_FORBIDDEN_DISCUSSION_POINT_COUNT = 14
 GROUP5 = CLOSED / APPROVED
 G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G5_F01_INTEGRATION_COMMIT = d5729887f47c36d8cf42d87090c40f9668e5ae84
 G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G5_F02_INTEGRATION_COMMIT = e471d4336ab965cd55b7f0e2ca7926445b1f0391
-G5_F02_EXTERNAL_REAUDIT = PASS
 G5_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G5_F03_INTEGRATION_COMMIT = ca065618d5df0019f76ef5a971e858d91c263e1f
-G5_F03_EXTERNAL_AUDIT = PASS
 GROUP5_CANONICAL_TABLE_COUNT = 9
 GROUP6 = NOT_STARTED
 G6_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
-G6_F01_AUTHORIZED = false
-G6_F01_STARTED = false
 ```
 
-Grupo 5 fija una presentación de nueve tablas: dos principales inferenciales, dos secundarias/descriptivas y cinco de apéndice/suplemento. También conserva resultados no estimables y guardrails mediante destinos textuales/no-result. La fase futura de Results debe respetar esos roles: Phase E y HE5 descriptivo no adquieren función confirmatoria; EXP11A sigue siendo sensibilidad conjunta tamaño/composición no causal; EXP11B permanece descriptivo sin inferencia a superpoblación de seeds; EXP12 permanece no estimable.
+Grupo 5 fija nueve tablas: dos principales inferenciales, dos secundarias/descriptivas y cinco de apéndice/suplemento. Sus roles son vinculantes para futura Results. No introdujo nuevas métricas o inferencia ni abrió Results/Discussion/Figures.
 
-El cierre de Grupo 5 no altera `HE2 = SUPPORTED` ni `HE5 = INCONCLUSIVE`, no recalcula métricas y no abre Results, Discussion ni Figuras. G6-F01 es solamente elegible.
+## 9. Fase activa — Architecture B01
 
-G4-F03 continúa gobernando el futuro contraste con literatura mediante `docs/analysis/group4/g4_literature_contrast_v0.1.md`: 11 registros, 8 puntos autorizados y 14 prohibidos. Cuando se abra Discussion, ese registro será vinculante. `FINAL_GAP = NOT_DEFINED` y `NOVELTY = NOT_DECLARED` permanecen sin cambios.
+Architecture B01 comprende exclusivamente:
 
-### 8. Fase activa — Introduction B01
+- `3.1 Overview and information flow` / `Vista general y flujo de información`;
+- `3.2 Query representation and normalization` / `Representación y normalización de la consulta`;
+- `3.3 Historical candidate retrieval and ranking` / `Recuperación histórica y ranking de candidatos`;
+- `3.4 Fixed candidate set` / `Conjunto fijo de candidatos`.
 
-Prompt activo:
+### Función narrativa
 
-`article/prompts/3_INTRODUCTION_B01_RESUME_WITH_REGENERATED_B06_DOCX.md`
+La sección debe describir la **arquitectura general antes de la instanciación experimental**. No debe abrir con NANDINA, Clase/Capítulo 87, H100, tamaños de datasets ni métricas observadas.
 
-La Introduction debe seguir la secuencia narrativa:
+Debe explicar en términos concretos:
 
-`problema concreto → enfoques existentes → limitación verificable → consecuencia → propuesta de alto nivel → contribuciones acotadas → contexto de evaluación → RQs → roadmap`.
+1. qué entra al sistema;
+2. cómo se representa/normaliza la consulta;
+3. cómo un banco histórico etiquetado produce un ranking de candidatos mediante una función de recuperación;
+4. cómo se conserva el precedente histórico asociado a cada candidato;
+5. cómo se obtiene el Top-3 fijo que delimita todo procesamiento downstream;
+6. qué permanece fijo al salir de 3.4.
 
-La limitación no puede formularse como ausencia universal de trabajos previos. Related Work ya estableció prior art de clasificación directa, candidate prediction + evidence retrieval, sistemas regulatorios donde evidencia/LLM intervienen en búsqueda o decisión, y regulatory AI con evaluación explícita de explicación/source support.
+La implementación experimental vigente puede utilizarse para verificar acciones concretas, pero los parámetros, datasets, hashes, tamaños y resultados pertenecen a `Experimental design` o `Results`, no a Architecture.
 
-La propuesta debe describir acciones concretas:
+### Fuentes mínimas
 
-1. la recuperación histórica genera y ordena candidatos;
-2. el Top-3 queda fijado antes de recuperar normativa;
-3. la evidencia normativa se asocia a candidatos ya fijados sin alterar el ranking;
-4. el LLM local downstream explica sin insertar, eliminar, sustituir, reordenar ni retroalimentar clasificación;
-5. ranking, evidencia y explicación se evalúan con métricas alineadas a su función;
-6. DAM se usa como agrupamiento cuando existe dependencia.
+- `ARTICLE_MASTER_V007.md` e Introduction aprobada como restricción de consistencia;
+- `START_HERE.md`, `ARTICLE_STATUS.md`, este Plan, decisiones, `SOURCE_REGISTRY.md`, `CLAIM_EVIDENCE_MATRIX.md`, `STYLE_GUIDE.md`;
+- `SRC-02` cuando esté disponible para arquitectura/metodología operativa;
+- Plan Maestro experimental y `main@ca065618d5df0019f76ef5a971e858d91c263e1f` para verificar implementación;
+- código/protocolos primarios de recuperación histórica cuando se describan acciones implementadas.
 
-Las contribuciones autorizadas son acotadas:
+Si una afirmación arquitectónica depende de `SRC-02` y esa fuente no está accesible, no debe completarse por inferencia.
 
-- formalización arquitectónica-metodológica de esa separación funcional;
-- evaluación por función con control de dependencia;
-- reproducibilidad/reinstanciación del procedimiento con banco histórico, espacio de clases y corpus documental alternativos.
+### Límites de B01
 
-La tercera contribución expresa configurabilidad/replicabilidad del procedimiento, no generalización empírica de los resultados.
+B01 no debe:
 
-La Introduction debe introducir el testbed solo después de la propuesta/contribuciones y presentar RQ1–RQ4 sin códigos internos de gobernanza o experimento.
+- redactar 3.5–3.7;
+- describir el corpus normativo concreto en detalle;
+- detallar prompts/modelo local/configuración experimental;
+- introducir resultados o cifras de desempeño;
+- presentar reranking diagnóstico como parte del flujo principal;
+- convertir BM25 en requisito universal de la arquitectura si la afirmación pretende ser de interfaz/configurabilidad;
+- declarar novelty, SOTA, superioridad global, generalización o corrección jurídica;
+- modificar Introduction o Related Work;
+- abrir Experimental design.
 
-### 9. Función de las secciones posteriores
+## 10. Ciclo obligatorio de cada bloque
 
-- **Decision-support architecture:** arquitectura general en relaciones entrada–operación–salida, antes de detalles experimentales.
-- **Experimental design:** testbed específico, datos históricos, corpus documental, particiones/dependencia, configuración, evaluación, estadística y reproducibilidad.
-- **Results:** organizados por función/RQ, no por códigos internos de experimento. Cuando se abra el gate, G5-F01/F02/F03 gobiernan la selección, rol y destino de las nueve tablas canónicas; las salidas descriptivas, diagnósticas y suplementarias no pueden presentarse como confirmatorias.
-- **Discussion:** interpretación y comparación limitadas por G4-F03; implicaciones, condiciones de transferencia y limitaciones sin SOTA, novelty absoluta, causalidad no identificada ni generalización no evaluada.
-- **Conclusion:** `aporte → evidencia principal → alcance → implicación`.
+`verificar baseline → reconstruir estado → verificar fuentes → ejecutar solo bloque autorizado → generar EN + espejo ES → preservar contenido previo → QA científica/SPCCR → versionar respuesta y artefactos → auditoría IA Gestora → correcciones si aplican → aprobación expresa del autor → integración canónica → siguiente gate`.
 
-Ninguna de esas secciones se abre automáticamente con el cierre de Grupo 5 ni con la autorización de Introduction B01.
+Toda cita científica nueva debe reabrirse en fuente primaria y quedar acompañada por comentario Word anclado a la cita inglesa. Si Architecture B01 no requiere citas bibliográficas nuevas, los 40 comentarios heredados se preservan exactamente y no se crean comentarios artificiales.
 
-### 10. Ciclo obligatorio de cada bloque
+## 11. Criterios generales de aprobación
 
-1. verificar baseline/master acumulativo vigente;
-2. leer onboarding y controles gobernantes una vez por sesión/tarea;
-3. verificar fuentes/dependencias necesarias para el bloque;
-4. re-recuperar full text primario para cada cita nueva o reusada cuando sea necesario para verificar el claim exacto;
-5. redactar exclusivamente el bloque autorizado;
-6. incluir comentarios de auditoría anclados a cada cita inglesa;
-7. auditar contenido científico, prosa, fluidez y ubicación narrativa;
-8. activar IA Experimental solo si existe trigger real;
-9. resolver observaciones;
-10. versionar en GitHub la respuesta oficial conforme a D-022;
-11. solicitar aprobación expresa del autor;
-12. integrar al master canónico solo después de aprobación y auditoría.
+Una sección pasa a `APPROVED` solo si cumple su función narrativa; cada claim está respaldado por la fuente gobernante adecuada; no anticipa resultados ni detalles de testbed fuera de lugar; respeta los límites claim–evidencia; mantiene equivalencia EN/ES; preserva artefactos aprobados; pasa QA técnica del DOCX; y recibe aprobación expresa del autor después de auditoría de IA Gestora.
 
-### 11. Criterios de aprobación
+## 12. Front matter, end matter y targeting
 
-Una sección solo pasa a `APPROVED` cuando cumple su función narrativa, cada claim citado está respaldado por fuente primaria exacta, los comentarios Word contienen pasajes reales y pertinentes, no anticipa resultados ni testbed indebidamente, respeta límites claim–evidencia, mantiene equivalencia EN/ES, preserva artefactos aprobados y recibe aprobación expresa del autor tras auditoría interna.
-
-Para Introduction B01, además, se exige:
-
-- problema concreto y no retórica genérica sobre IA;
-- limitación técnica soportada por Related Work y fuentes primarias;
-- propuesta de alto nivel expresada con componentes y acciones observables;
-- contribuciones separadas de features y de novelty;
-- testbed presentado después de la propuesta;
-- RQ1–RQ4 semánticamente alineadas con 0C y sin códigos internos;
-- mención acotada de reproducibilidad/configurabilidad sin generalización;
-- ausencia de resultados, SOTA, universal-absence claims y legal-correctness claims;
-- `FINAL_GAP = NOT_DEFINED` y `NOVELTY = NOT_DECLARED` preservados.
-
-### 12. Front matter, end matter y journal targeting
-
-Title, Abstract y Keywords se redactan al final. El end matter contemplará `Data availability`, `Code and reproducibility resources` si corresponde, CRediT, Funding, Declaration of competing interest, Acknowledgements si aplica, References y Supplementary material cuando sea necesario.
+Title, Abstract y Keywords se redactan al final. El end matter contemplará `Data availability`, `Code and reproducibility resources` si corresponde, CRediT, Funding, Declaration of competing interest, Acknowledgements si aplica, References y Supplementary material.
 
 ```text
 TARGET_A = Knowledge-Based Systems
@@ -267,14 +272,113 @@ Antes del paquete final se verificarán nuevamente los requisitos oficiales vige
 
 ---
 
-## English
+# English
 
-Writing Plan V2.7 preserves Related Work as closed, approved, and frozen and keeps `ARTICLE_MASTER_V006.md` as the canonical Markdown baseline. D-029 governs the active cumulative DOCX baseline: `ARTICLE_MASTER_B06_REGENERATED_V01.docx`, SHA-256 `7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b`, with thirty-six citation-audit comments. The lost original B06 DOCX hash is historical only and must not be used as an active baseline.
+## 1. Purpose
 
-D-030 reconciles the article with the canonical experimental Master Plan after full Group 5 closure. G5-F01, G5-F02, and G5-F03 are `CLOSED / APPROVED / INTEGRATED_TO_MAIN`; the final experimental `main` checkpoint is `ca065618d5df0019f76ef5a971e858d91c263e1f`. The closed Group 5 presentation system contains nine canonical tables with frozen primary, descriptive, supplementary, diagnostic, and text-only roles. It does not change `HE2 = SUPPORTED` or `HE5 = INCONCLUSIVE`, and it does not introduce new metrics or inference.
+Manage iterative construction of the main scientific article without anticipating results, changing the approved experimental design, or importing internal governance prose into the manuscript. The article uses one cumulative master; each authorized block extends that master and becomes canonical only after audit and explicit author approval.
 
-Group 6 remains `NOT_STARTED`; G6-F01 is only `ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`. Group 5 closure makes its presentation artifacts eligible for future Results when the editorial gate is opened, but it does not itself authorize Results, figures, Discussion, or any later section.
+Drafting is governed by `KBS_EWG_34_V01`, `MWDP_V1.0`, SPCCR, the Claim–Evidence Matrix, Source Registry, frozen decisions, verified primary literature, and governing experimental sources where applicable.
 
-Introduction B01 remains the only active drafting authorization. It must establish the concrete problem, verified limitation, high-level proposal, bounded contributions, evaluation context, retained RQs, and roadmap. The proposal must concretely state that historical retrieval fixes the Top-3, normative retrieval documents those fixed candidates without reranking, and the downstream local LLM explains without classification authority.
+## 2. Binding scientific and editorial principles
 
-The Introduction may state that the documented procedure can be re-instantiated with alternative historical data, label spaces, and documentary corpora, but this must not be converted into empirical generalization. It must not claim absolute novelty, universal absence, SOTA, study results, or legal correctness. `FINAL_GAP = NOT_DEFINED` and `NOVELTY = NOT_DECLARED` remain unchanged.
+- The article is not a shortened thesis.
+- Readers encounter problem/positioning first, then general architecture, then the specific empirical instantiation.
+- NANDINA, Class/Chapter 87, H100, and the concrete corpus must not define the architecture's conceptual scope prematurely.
+- Historical retrieval generates and ranks candidates; the Top-3 is fixed before documentary retrieval and generation.
+- Normative/documentary retrieval attaches evidence to already fixed candidates and does not replace or reorder the historical ranking.
+- The downstream local LLM produces controlled explanation only; it does not classify from scratch, alter candidates, or feed back into classification.
+- The LLM reranker remains diagnostic unless expressly changed later.
+- Candidate retrieval is not overall system accuracy; documentary association is not substantive legal correctness; auditability is not legal correctness; configurability is not empirical generalization.
+- SERIE is the analysis unit and DAM is the grouping unit when dependence exists.
+- EXP11A is joint size/composition sensitivity; EXP11B is descriptive without seed-superpopulation inference; EXP12 diversity effect is not estimable under the frozen design.
+- No pending result may be written as a finding.
+- Part I is the English manuscript master and Part II is the Spanish semantic-control mirror.
+- `FINAL_GAP = NOT_DEFINED` and `NOVELTY = NOT_DECLARED` remain binding.
+
+## 3. Approved cumulative structure
+
+1. Introduction
+2. Related work
+3. Decision-support architecture
+4. Experimental design
+5. Results
+6. Discussion
+7. Conclusion
+8. KBS end matter
+
+`6.6 Limitations` remains integrated within Discussion unless expressly amended.
+
+## 4. Cumulative master and DOCX policy
+
+The current canonical Markdown is `ARTICLE_MASTER_V007.md`, blob `436e0522db0ac348efaed86f4e53a7e6db372471`. The current cumulative DOCX is `ARTICLE_MASTER_CANDIDATE_INTRO_B01_V02.docx`, SHA-256 `d2b68366b706502202ab67860a1df0eccc7747c15df7a58de76607b5f8a69b9c`, with 40 citation-audit comments in verified author custody.
+
+D-021, D-022, D-023, D-027, D-029, and D-033 continue to govern DOCX custody, GitHub-only operational responses, minimal technical closure, effective binary handoff, and baseline identity. Each block must preserve approved text/comments exactly, maintain EN/ES semantic equivalence, record candidate DOCX SHA-256, and stop rather than silently reconstruct a missing baseline.
+
+## 5. Current state
+
+Related Work 2.1–2.6 and Introduction B01 V02 are closed, approved, frozen, and integrated. `ARTICLE_MASTER_V007` is canonical. Decision-support architecture is now authorized and active; only Architecture B01 (Sections 3.1–3.4) is authorized. Architecture B02, Experimental design, Results, and Discussion are not yet authorized.
+
+Experimental Group 5 is closed/approved. Group 6 remains not started, with G6-F01 eligible but unauthorized/unexecuted. Group 7 is prospective and may not be formally activated before Group 6 closes. Group 8 is prospective and follows Group 7.
+
+## 6. Editorial concurrency with Groups 6–8 — D-034
+
+The experimental ficha sequence and progressive article drafting are related but distinct workflows.
+
+```text
+GROUP6_CLOSE_REQUIRED_FOR_FORMAL_G7_ACTIVATION = YES
+GROUP6_CLOSE_REQUIRED_FOR_ARCHITECTURE_DRAFTING = NO
+GROUP6_CLOSE_REQUIRED_FOR_EXPERIMENTAL_DESIGN_DRAFTING = NO
+FORMAL_G7_ACTIVATION_BEFORE_GROUP6_CLOSE = NOT_PERMITTED
+G7_F03_ROLE = SYNCHRONIZATION_AND_TRANSVERSAL_CLOSURE
+G7_F03_ROLE_IS_ARTICLE_INCEPTION = false
+GROUP7_CLOSE_REQUIRED_BEFORE_GROUP8 = YES
+SCIENTIFIC_FINAL_FREEZE_REQUIRES_GROUP8 = true
+```
+
+G7-F01's “before writing” requirement means before formal Group-7 drafting/update, not a ban on prior article drafting under `article/main-manuscript`.
+
+Until Group 6 closes, final figure selection/numbering, captions, figure cross-references, visual placement, and Results/Discussion passages whose final form depends on those figures remain provisional. This does not block Architecture or Experimental design.
+
+G7 synchronizes the manuscript with final G3–G6 science; G8 performs the final claim/evidence/number and cross-section audit and determines scientific-freeze readiness. D-034 does not authorize G6, G7, or G8.
+
+## 7. Drafting order
+
+The immediate active order is:
+
+`Architecture B01 → Managing-AI audit → author approval → next Architecture block → Experimental design`.
+
+Later phases are provisional Results using closed G5 evidence, Group-6 figures, final Results, Discussion/Limitations, Conclusion, Abstract, Title/Keywords, formal G7 synchronization, G8 audit/freeze, and final KBS adaptation. No block opens automatically.
+
+## 8. Consumable experimental state
+
+The article continues to consume D-030's cutoff: Master Plan HEAD `98b1a8c54d7a7ccfd86e70078acf77b4cdce9f6e`, blob `9b388fe8cc19fce86ec3c15853e73899cb3e5666`, and experimental `main@ca065618d5df0019f76ef5a971e858d91c263e1f`. Groups 3–5 are closed/approved, `HE2 = SUPPORTED`, `HE5 = INCONCLUSIVE`, Group 5 has nine canonical tables, and Group 6 remains not started.
+
+## 9. Active phase — Architecture B01
+
+Architecture B01 covers only Sections 3.1–3.4: overview/information flow, query representation/normalization, historical candidate retrieval/ranking, and fixed candidate set.
+
+It must describe the general architecture before the empirical instantiation. It must not open with NANDINA, Chapter/Class 87, H100, dataset sizes, or observed metrics. It should concretely explain the input, normalized query representation, retrieval/ranking from a labeled historical bank, retention of the historical precedent supporting each candidate, construction of the fixed Top-3, and what becomes immutable downstream.
+
+The experimental implementation may verify concrete actions, but parameters, datasets, hashes, sample sizes, and performance belong to Experimental design or Results. Minimum sources are `ARTICLE_MASTER_V007`, governing article controls, SRC-02 when available, the experimental Master Plan/current main checkpoint, and primary historical-retrieval code/protocols for implementation claims. If an architecture claim depends on inaccessible SRC-02, it must not be inferred.
+
+B01 must not draft Sections 3.5–3.7; detail the concrete normative corpus or local-LLM configuration; introduce results; promote diagnostic reranking into the main flow; make BM25 a universal architectural requirement when discussing configurable interfaces; claim novelty/SOTA/global superiority/generalization/legal correctness; modify Introduction/Related Work; or open Experimental design.
+
+## 10. Mandatory block cycle and approval
+
+`verify baseline → reconstruct state → verify sources → execute authorized block only → produce EN + ES mirror → preserve prior content → scientific/SPCCR QA → version artifacts/response → Managing-AI audit → corrections if required → explicit author approval → canonical integration → next gate`.
+
+Any new scientific citation requires reopening the primary source and an anchored Word comment on the English citation. If B01 requires no new bibliographic citations, all 40 inherited comments are preserved exactly and no artificial comments are added.
+
+A section becomes approved only after narrative, source/claim, scope, EN/ES, DOCX QA, preservation, Managing-AI audit, and explicit author-approval gates all pass.
+
+## 11. Targeting
+
+```text
+TARGET_A = Knowledge-Based Systems
+PLAN_B = Expert Systems with Applications
+PLAN_C = Information Processing & Management
+PUBLICATION_ROUTE_KBS = SUBSCRIPTION
+```
+
+Final KBS requirements will be rechecked before submission packaging.
