@@ -1,0 +1,41 @@
+# Introduction B01 — Exact Markdown Materialization Review V01
+
+```text
+BLOCK = INTRODUCTION_B01
+REVIEW_SCOPE = EXACT_MARKDOWN_HANDOFF + GITHUB_MATERIALIZATION
+HANDOFF_RESPONSE = article/responses/3_INTRODUCTION_B01_EXACT_MARKDOWN_HANDOFF_RESPONSE_V01.md@af4c0b96436e5b3a310499266b82bf5b377154a6
+AUTHOR_APPROVAL = PRESERVED
+SCIENTIFIC_CONTENT = APPROVED / FROZEN / UNCHANGED
+SECTION_MD_SHA256 = 6dd7c5c27246a229f1c40cd5a49e73d13775c8f65c5d18b3d96a534a395942b4
+SECTION_MD_GIT_BLOB_EXPECTED = 506884a94b3e268913f3821c99bba0a6257344b8
+SECTION_MD_GIT_BLOB_ACTUAL = 506884a94b3e268913f3821c99bba0a6257344b8
+SECTION_MD_IDENTITY = PASS
+MASTER_CANDIDATE_MD_SHA256 = 3137efd44373adb6411d3bdb917cc78a575aa27fe858385509bb42c168061cdf
+MASTER_CANDIDATE_MD_GIT_BLOB_EXPECTED = 436e0522db0ac348efaed86f4e53a7e6db372471
+MASTER_CANDIDATE_MD_GIT_BLOB_ACTUAL = 436e0522db0ac348efaed86f4e53a7e6db372471
+MASTER_CANDIDATE_MD_IDENTITY = PASS
+MATERIALIZATION_COMMIT = de2c1f2b766a626552616ea55be29d66a75203b1
+GITHUB_MARKDOWN_TRANSFER = COMPLETE
+RECONSTRUCTION_ATTEMPTED = NO
+SCIENTIFIC_REAUDIT_REQUIRED = NO
+TECHNICAL_CLOSURE = PASS
+```
+
+## Dictamen
+
+Los dos Markdown entregados por el autor fueron verificados byte a byte mediante SHA-256 antes de su materialización. Ambos hashes coinciden exactamente con las identidades aprobadas y registradas por D-031/D-032 y por la respuesta V04.
+
+La materialización GitHub utilizó blobs UTF-8 cuya identidad Git coincide con la calculada a partir de los bytes recibidos. Los paths materializados son:
+
+- `article/sections/introduction/Introduction_B01_V02.md`;
+- `article/manuscript/ARTICLE_MASTER_CANDIDATE_INTRO_B01_V02.md`.
+
+No se reconstruyó, normalizó, reformateó ni reescribió contenido. El cierre es exclusivamente técnico y no reabre la revisión científica previamente aprobada.
+
+```text
+INTRODUCTION_B01_V02 = PASS / APPROVED / FROZEN / READY_FOR_CANONICAL_INTEGRATION
+ARTICLE_MASTER_V007_PROMOTION = ELIGIBLE
+DECISION_SUPPORT_ARCHITECTURE = NOT_AUTHORIZED_BY_THIS_REVIEW
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
