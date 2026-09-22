@@ -52,11 +52,32 @@ FORMAL_G7_F02_STATUS = NOT_EXECUTED
 
 It does not mean that the content has already passed G7 or G8.
 
+### 3.1. Correction-baseline semantics
+
+On 2026-09-22 the author clarified that this exact thesis was drafted **before the execution and closure of the later methodological/experimental groups and their fichas**, and therefore it is the thesis that must be corrected and synchronized against the scientific state produced by those groups.
+
+```text
+THESIS_CORRECTION_BASELINE = true
+THESIS_DRAFTED_BEFORE_GROUP_EXECUTION = true
+THESIS_CONTENT_EXPECTED_TO_CONTAIN_PRE_GROUP_SCIENTIFIC_STATE = true
+THESIS_TO_BE_CORRECTED_IN_FUTURE_G7_F02 = true
+THESIS_IS_CURRENT_SCIENTIFIC_GROUND_TRUTH = false
+THESIS_CORRECTION_MUST_USE_CLOSED_GROUP_OUTPUTS = true
+```
+
+Interpretation:
+
+- this binary is the **baseline document to correct**, not a scientifically frozen thesis;
+- discrepancies against later closed groups are expected and must not be treated as evidence that those groups are wrong;
+- during future G7-F02, corrections must flow from the frozen/canonical outputs, claims, tables, figures and limitations established by the governed experimental sequence;
+- no correction should be applied silently before the corresponding G7 authorization and source-freeze;
+- the corrected thesis must be versioned as a new candidate and must preserve traceability back to this baseline SHA-256.
+
 ## 4. Supersession rule
 
 ```text
 Molleapasa_gv(4).docx = HISTORICAL_PREVIOUS_COPY / NOT_CURRENT_WORKING_MASTER
-Molleapasa_gv(5).docx = CURRENT_WORKING_MASTER_SOURCE_UPLOAD
+Molleapasa_gv(5).docx = CURRENT_WORKING_MASTER_SOURCE_UPLOAD / CORRECTION_BASELINE
 ```
 
 Do not delete or rewrite the historical copy. Do not use it as the current thesis in new preflight or G7 work.
