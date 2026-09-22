@@ -11,43 +11,42 @@ ARTICLE_TYPE_OPERATIVE = Research article
 PHASE_0 = CLOSED / APPROVED
 PHASE_1 = OPENED / RESTRUCTURED_BY_D014
 KBS_EMPIRICAL_WRITING_GUIDE = KBS_EWG_34_V01 / AUTHOR_APPROVED / ACTIVE / BINDING
-ARTICLE_WRITING_PLAN = V2.7
+ARTICLE_WRITING_PLAN = V2.8
 STRUCTURE_APPROVAL_DECISION = D-015
+RELATED_WORK_CLOSURE_DECISION = D-025
 EXPERIMENTAL_RECONCILIATION_DECISION = D-030
-DOCX_CUSTODY_DECISION = D-021 / D-027 / D-029
+INTRODUCTION_APPROVAL_DECISION = D-031
+INTRODUCTION_INTEGRATION_DECISION = D-033
+G6_G7_RECONCILIATION_DECISION = D-034
+DOCX_CUSTODY_DECISION = D-021 / D-027 / D-029 / D-033
 GITHUB_ONLY_RESPONSE_DECISION = D-022
 TECHNICAL_CLOSURE_MODE_DECISION = D-023
-LATEST_EDITORIAL_DECISION = D-030
+LATEST_EDITORIAL_DECISION = D-034
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-RELATED_WORK = CLOSED / APPROVED / FROZEN
-RELATED_WORK_B01 = APPROVED / FROZEN / INTEGRATED
-RELATED_WORK_B02 = APPROVED / FROZEN / INTEGRATED
-RELATED_WORK_B03 = APPROVED / FROZEN / INTEGRATED
-RELATED_WORK_B04_V02 = APPROVED / FROZEN / INTEGRATED
-RELATED_WORK_B05_V01 = APPROVED / FROZEN / INTEGRATED
-RELATED_WORK_B06_V01 = APPROVED / FROZEN / INTEGRATED
-CANONICAL_MASTER = ARTICLE_MASTER_V006
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V006.md
-CANONICAL_MASTER_MD_GIT_BLOB = 7d3c7a71cd6578ffc0b93df80ea12e4172833a1a
-CANONICAL_MASTER_DOCX = LOCAL_AUTHOR_CUSTODY / D029
-CANONICAL_MASTER_DOCX_SOURCE_FILENAME = ARTICLE_MASTER_B06_REGENERATED_V01.docx
+RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
+INTRODUCTION_B01_V02 = CLOSED / APPROVED / FROZEN / INTEGRATED
+CANONICAL_MASTER = ARTICLE_MASTER_V007
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V007.md
+CANONICAL_MASTER_MD_GIT_BLOB = 436e0522db0ac348efaed86f4e53a7e6db372471
+CANONICAL_MASTER_DOCX = LOCAL_AUTHOR_CUSTODY / D033
+CANONICAL_MASTER_DOCX_SOURCE_FILENAME = ARTICLE_MASTER_CANDIDATE_INTRO_B01_V02.docx
 CANONICAL_MASTER_DOCX_REPOSITORY_UPLOAD = DEFERRED_BY_D021
-CANONICAL_MASTER_DOCX_SHA256 = 7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b
-CANONICAL_CITATION_COMMENTS = 36
-CURRENT_DRAFTING_PHASE = INTRODUCTION
-CURRENT_GATE = INTRODUCTION_B01
-AUTHORIZED_SCOPE = SECTION_1_PROVISIONAL_ONLY
-INTRODUCTION_B01 = AUTHORIZED / ACTIVE / UNBLOCKED
-NEXT_ACTOR = DRAFTING_AI
-METHODS_B01_V05 = HOLD / NOT_APPROVED
-METHODS_B01_V06 = NOT_AUTHORIZED
+CANONICAL_MASTER_DOCX_SHA256 = d2b68366b706502202ab67860a1df0eccc7747c15df7a58de76607b5f8a69b9c
+CANONICAL_CITATION_COMMENTS = 40
+CURRENT_DRAFTING_PHASE = DECISION_SUPPORT ARCHITECTURE
+CURRENT_GATE = ARCHITECTURE_B01
+AUTHORIZED_SCOPE = SECTIONS_3_1_TO_3_4_ONLY
+DECISION_SUPPORT_ARCHITECTURE = AUTHORIZED / ACTIVE
+ARCHITECTURE_B01 = AUTHORIZED / DRAFTING_PENDING
+ARCHITECTURE_B02 = NOT_AUTHORIZED
+EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
+RESULTS = NOT_AUTHORIZED
+DISCUSSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-### Estructura aprobada y orden activo
-
-La estructura congelada por D-015 permanece:
+### Estructura aprobada
 
 1. `Introduction`
 2. `Related work`
@@ -58,136 +57,28 @@ La estructura congelada por D-015 permanece:
 7. `Conclusion`
 8. end matter de KBS.
 
-Orden de redacción activo:
+### Secciones cerradas
 
-`Related Work → Introduction provisional → Decision-support architecture → Experimental design → Results con evidencia G5 cerrada → figuras/visualizaciones cuando sean autorizadas → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
+- Related Work 2.1–2.6: `APPROVED / FROZEN / INTEGRATED`.
+- Introduction B01 V02: `APPROVED / FROZEN / INTEGRATED` mediante D-033.
+- Master canónico actual: `ARTICLE_MASTER_V007.md`.
 
-### Related Work cerrado
+La Introduction aprobada fija el problema, la limitación operacional/evaluativa, la arquitectura de alto nivel, las tres contribuciones acotadas, el testbed como instanciación y RQ1–RQ4. No declara novelty absoluta, ausencia universal, SOTA, generalización empírica ni corrección jurídica.
 
-- `2.1 Automated tariff classification and candidate retrieval` — `APPROVED / FROZEN / INTEGRATED` mediante D-016.
-- `2.2 Knowledge-enhanced retrieval and regulatory reasoning` — `APPROVED / FROZEN / INTEGRATED` mediante D-017.
-- `2.3 LLMs for classification, reasoning, and explanation` — `APPROVED / FROZEN / INTEGRATED` mediante D-018.
-- `2.4 Evidence grounding, explainability, and auditability` — `APPROVED / FROZEN / INTEGRATED` mediante D-020.
-- `2.5 Reproducibility and evaluation in knowledge-based decision support` — `APPROVED / FROZEN / INTEGRATED` mediante D-024.
-- `2.6 Positioning of this study` — `APPROVED / FROZEN / INTEGRATED` mediante D-025.
+### Fronteras científicas obligatorias
 
-Controles heredados y vinculantes:
-
-- `DIRECT_GENERATIVE_LLM_CLASSIFICATION ≠ FINE_TUNED_TRANSFORMER_CLASSIFIER`;
-- `RAG_CLASSIFICATION ≠ RAG_EVIDENCE_SUPPORT ≠ DOCUMENT_QA_RAG`;
-- `SEARCH_CONTROL / RERANKING / NEXT_HOP_DECISION ≠ EXPLANATION_ONLY_GENERATION`;
-- `RATIONALE / REASONING_TRACE ≠ FAITHFULNESS GUARANTEE`;
-- `VISIBLE_CITATION / PROVENANCE ≠ FORMAL_AUDITABILITY ≠ LEGAL_CORRECTNESS`;
-- `PROVENANCE / LINEAGE ≠ SUBSTANTIVE_CORRECTNESS`;
-- `LIFECYCLE_AUDIT ≠ REVIEW_OF_AN_INDIVIDUAL_OUTPUT`;
-- `OFFICIAL_SOURCE / DOCUMENT_AUTHORITY ≠ CORRECT_LEGAL_INTERPRETATION`;
-- `DATASET_DOCUMENTATION ≠ QUALITY_CERTIFICATION`;
-- `REPRODUCIBILITY ≠ GENERALIZATION`;
-- `METRIC_ALIGNMENT ≠ TASK_EQUIVALENCE`.
-
-### Cierre B06 V01 y baseline DOCX operativo
-
-```text
-BLOCK = RELATED_WORK_B06
-BLOCK_REVISION = V01
-SECTION = 2.6 Positioning of this study
-DELIVERY_COMMIT = f8756f5ed6ebed98a567186035082db96b618032
-SCIENTIFIC_REVIEW = PASS
-SOURCE_SUPPORT = PASS / 4_OF_4_CITATIONS
-AUTHOR_APPROVAL = RECEIVED
-MATERIAL_SCIENTIFIC_ERRORS = 0
-TOTAL_CITATION_COMMENT_COUNT = 36
-SECTION_MD_GIT_BLOB = 4ac588bdefbf44fdebad7e1a6d9732d67afecfe2
-MASTER_CANDIDATE_MD_GIT_BLOB = 7d3c7a71cd6578ffc0b93df80ea12e4172833a1a
-ORIGINAL_B06_DOCX_SHA256 = 3a07568b8f6ac80ed2df39ee60c0aab65c06df5bb3e1988d3e4f8c752d84bf0 / LOST / HISTORICAL_IDENTITY_ONLY
-ACTIVE_B06_DOCX = ARTICLE_MASTER_B06_REGENERATED_V01.docx
-ACTIVE_B06_DOCX_SHA256 = 7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b
-ACTIVE_B06_DOCX_REVIEW = PASS / D029
-ACTIVE_B06_DOCX_COMMENTS = 36
-ACTIVE_B06_DOCX_TRACKED_CHANGES = 0
-ACTIVE_B06_DOCX_RENDER = PASS / 28_OF_28_PAGES
-ACTIVE_B06_DOCX_CUSTODY = LOCAL / AUTHOR / VERIFIED_BY_HANDOFF
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-```
-
-D-025 congela e integra B06 y promueve el candidato acumulativo Markdown sin cambios científicos a `ARTICLE_MASTER_V006.md`. D-026 conserva transparentemente la desviación técnica del placeholder V006. D-027–D-029 documentan la pérdida del DOCX original, su regeneración controlada y la aceptación independiente del nuevo binario operativo sin reabrir Related Work.
-
-### Bloque activo — Introduction B01
-
-```text
-BLOCK = INTRODUCTION_B01
-SECTION = 1. Introduction
-DRAFTING = AUTHORIZED / PROVISIONAL / UNBLOCKED
-PROMPT = article/prompts/3_INTRODUCTION_B01_RESUME_WITH_REGENERATED_B06_DOCX.md
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V006.md
-BASELINE_MASTER_MD_GIT_BLOB = 7d3c7a71cd6578ffc0b93df80ea12e4172833a1a
-BASELINE_DOCX_CUSTODY = LOCAL / AUTHOR / VERIFIED_BY_HANDOFF
-BASELINE_DOCX_ACCEPTED_FILENAME = ARTICLE_MASTER_B06_REGENERATED_V01.docx
-BASELINE_DOCX_SHA256 = 7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b
-PRIOR_RELATED_WORK_2_1_TO_2_6 = APPROVED / FROZEN / PRESERVE_EXACTLY
-PRIOR_CITATION_COMMENTS = 36 / PRESERVE_EXACTLY
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-DECISION_SUPPORT_ARCHITECTURE = NOT_AUTHORIZED
-EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
-RESULTS = NOT_AUTHORIZED
-DISCUSSION = NOT_AUTHORIZED
-```
-
-La Introduction debe seguir `problema concreto → enfoques existentes → limitación verificable → consecuencia → propuesta de alto nivel → contribuciones acotadas → contexto de evaluación → RQs → roadmap`.
-
-Debe hacer comprensible, con lenguaje concreto, que el ranking histórico fija el Top-3; la recuperación normativa documenta candidatos ya fijados sin reordenarlos; y el LLM local downstream explica sin autoridad de clasificación. Debe presentar configurabilidad/replicabilidad con otros datos, clases y corpus como propiedad del procedimiento, no como generalización empírica.
-
-### Gobernanza editorial vigente
-
-```text
-MWDP_VERSION = MWDP_V1.0
-MWDP_STATE = FROZEN
-SPCCR_VERSION = 1.0
-SPCCR_STATUS = AUTHOR_APPROVED / ACTIVE
-KBS_EMPIRICAL_WRITING_GUIDE = KBS_EWG_34_V01
-DOCX_LANGUAGE_LAYOUT = DOCX_BILINGUAL_INTERNAL_MASTER
-DOCX_CUSTODY_POLICY = D021 + D027 + D029
-OPERATIONAL_RESPONSE_POLICY = D022 / GITHUB_ONLY
-TECHNICAL_CLOSURE_POLICY = D023 / MINIMAL_EXECUTION
-EXPERIMENTAL_RECONCILIATION_POLICY = D030
-PUBLICATION_ROUTE_TARGET_A = SUBSCRIPTION
-PAID_OPEN_ACCESS = NOT_SELECTED
-APC_PAYMENT_PLANNED = NO
-```
-
-### Estado científico preservado
-
-```text
-0C_PROVISIONAL_CENTRAL_CONTRIBUTION = B_ARCHITECTURAL_METHODOLOGICAL
-RQ1 = RETAINED
-RQ2 = RETAINED
-RQ3 = RETAINED_WITH_HE4_LIMITATIONS
-RQ4 = RETAINED / GROUP3_CONDITION_RESOLVED
-GROUP3_HYPOTHESIS_DISPOSITION = HE2_SUPPORTED / HE5_INCONCLUSIVE
-C10_C11_RECONCILIATION = COMPLETED_BY_GROUP3_AND_GROUP4 / SEE_CLAIM_EVIDENCE_MATRIX
-FINAL_GAP = NOT_DEFINED
-NOVELTY = NOT_DECLARED
-```
-
-Fronteras obligatorias:
-
-- `LITERATURE_GAP ≠ PROJECT_FEATURE ≠ SCIENTIFIC_CONTRIBUTION ≠ EXPERIMENTAL_RESULT ≠ NOVELTY_CLAIM`;
-- `ABSENCE_WITHIN_SEARCH_SCOPE ≠ UNIVERSAL_ABSENCE`;
-- `ARCHITECTURAL_DIFFERENCE ≠ NOVELTY_BY_ITSELF`;
-- `JOURNAL_FIT ≠ NOVELTY_PROOF`;
-- `CANDIDATE_RETRIEVAL ≠ OVERALL_CLASSIFICATION_ACCURACY`;
-- `NORMATIVE_ASSOCIATION ≠ SUBSTANTIVE_NORMATIVE_CORRECTNESS`;
-- `AUDITABILITY ≠ LEGAL_CORRECTNESS`;
-- `CONFIGURABILITY ≠ EMPIRICAL_GENERALIZATION`;
-- `EXP11A_SIZE_COMPOSITION_SENSITIVITY ≠ ISOLATED_CAUSAL_SIZE_EFFECT`;
-- `EXP11B_DESCRIPTIVE ≠ SEED_SUPERPOPULATION_INFERENCE`;
+- `LITERATURE_GAP ≠ PROJECT_FEATURE ≠ SCIENTIFIC_CONTRIBUTION ≠ EXPERIMENTAL_RESULT ≠ NOVELTY_CLAIM`.
+- `ABSENCE_WITHIN_SEARCH_SCOPE ≠ UNIVERSAL_ABSENCE`.
+- `ARCHITECTURAL_DIFFERENCE ≠ NOVELTY_BY_ITSELF`.
+- `CANDIDATE_RETRIEVAL ≠ OVERALL_CLASSIFICATION_ACCURACY`.
+- `NORMATIVE_ASSOCIATION ≠ SUBSTANTIVE_NORMATIVE_CORRECTNESS`.
+- `AUDITABILITY ≠ LEGAL_CORRECTNESS`.
+- `CONFIGURABILITY ≠ EMPIRICAL_GENERALIZATION`.
+- `EXP11A_SIZE_COMPOSITION_SENSITIVITY ≠ ISOLATED_CAUSAL_SIZE_EFFECT`.
+- `EXP11B_DESCRIPTIVE ≠ SEED_SUPERPOPULATION_INFERENCE`.
 - `EXP12_DIVERSITY_EFFECT = NOT_ESTIMABLE`.
 
-### Estado experimental vigente
-
-Corte editorial reconciliado por D-030 con el Plan Maestro canónico después del cierre completo de Grupo 5:
+### Estado experimental consumible
 
 ```text
 EXPERIMENTAL_PLAN_BRANCH = docs/plan-maestro-temporal-2026-08-31
@@ -199,59 +90,126 @@ GROUP3 = CLOSED / APPROVED
 HE2 = SUPPORTED
 HE5 = INCONCLUSIVE
 GROUP4 = CLOSED / APPROVED
-G4_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G4_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G4_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F03_EXTERNAL_REAUDIT = PASS
 G4_F03_COMPARISON_REGISTRY_COUNT = 11
 G4_F03_AUTHORIZED_DISCUSSION_POINT_COUNT = 8
 G4_F03_FORBIDDEN_DISCUSSION_POINT_COUNT = 14
 GROUP5 = CLOSED / APPROVED
 G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G5_F01_INTEGRATION_COMMIT = d5729887f47c36d8cf42d87090c40f9668e5ae84
 G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G5_F02_INTEGRATION_COMMIT = e471d4336ab965cd55b7f0e2ca7926445b1f0391
-G5_F02_EXTERNAL_REAUDIT = PASS
 G5_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G5_F03_INTEGRATION_COMMIT = ca065618d5df0019f76ef5a971e858d91c263e1f
-G5_F03_EXTERNAL_AUDIT = PASS
 GROUP5_CANONICAL_TABLE_COUNT = 9
 GROUP6 = NOT_STARTED
 G6_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
-G6_F01_AUTHORIZED = false
-G6_F01_STARTED = false
+GROUP7 = PROSPECTIVE / NOT_ACTIVATED
+GROUP8 = PROSPECTIVE / NOT_ACTIVATED
 ```
 
-Grupo 5 deja disponible para futura Results un sistema canónico de nueve tablas con roles congelados: dos principales inferenciales, dos secundarias/descriptivas y cinco de apéndice/suplemento, además de destinos textuales/no-result para evidencia no estimable y guardrails. No se generaron nuevas métricas o inferencia y no cambian `HE2 = SUPPORTED` ni `HE5 = INCONCLUSIVE`.
+### Reconciliación G6/G7 — D-034
 
-Grupo 4 continúa gobernando la futura Discussion mediante G4-F03. Grupo 5 no autoriza por sí mismo Results, Discussion ni Figuras. G6-F01 es solamente elegible; Grupo 6 continúa no iniciado.
+La revisión directa de las fichas G6/G7 y el dictamen metodológico de la IA Experimental son concordantes: el cierre de Grupo 6 es precondición para **activar formalmente Grupo 7**, no para redactar progresivamente Architecture o Experimental design bajo la gobernanza del artículo.
+
+```text
+GROUP6_CLOSE_REQUIRED_FOR_FORMAL_G7_ACTIVATION = YES
+GROUP6_CLOSE_REQUIRED_FOR_ARCHITECTURE_DRAFTING = NO
+GROUP6_CLOSE_REQUIRED_FOR_EXPERIMENTAL_DESIGN_DRAFTING = NO
+FORMAL_G7_ACTIVATION_BEFORE_GROUP6_CLOSE = NOT_PERMITTED
+G7_F03_ROLE = SYNCHRONIZATION_AND_TRANSVERSAL_CLOSURE
+G7_F03_ROLE_IS_ARTICLE_INCEPTION = false
+GROUP7_CLOSE_REQUIRED_BEFORE_GROUP8 = YES
+SCIENTIFIC_FINAL_FREEZE_REQUIRES_GROUP8 = true
+```
+
+La selección/numeración final de figuras, captions, referencias cruzadas y pasajes finales de Results/Discussion dependientes de esas figuras permanecen provisionales hasta Grupo 6. D-034 no autoriza G6, G7 ni G8.
+
+### Bloque activo — Architecture B01
+
+```text
+BLOCK = ARCHITECTURE_B01
+SECTION = 3.1–3.4
+DRAFTING = AUTHORIZED
+BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V007.md
+BASELINE_MASTER_MD_GIT_BLOB = 436e0522db0ac348efaed86f4e53a7e6db372471
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_INTRO_B01_V02.docx
+BASELINE_DOCX_SHA256 = d2b68366b706502202ab67860a1df0eccc7747c15df7a58de76607b5f8a69b9c
+PRIOR_CITATION_COMMENTS = 40 / PRESERVE_EXACTLY
+PRIOR_INTRODUCTION_AND_RELATED_WORK = APPROVED / FROZEN / PRESERVE_EXACTLY
+ARCHITECTURE_B02 = NOT_AUTHORIZED
+EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
+RESULTS = NOT_AUTHORIZED
+DISCUSSION = NOT_AUTHORIZED
+```
+
+B01 debe redactar exclusivamente:
+
+- 3.1 vista general y flujo de información;
+- 3.2 representación y normalización de consulta;
+- 3.3 recuperación histórica y ranking de candidatos;
+- 3.4 conjunto fijo de candidatos.
+
+Debe describir la arquitectura general antes del testbed. No debe abrir con NANDINA, Clase/Capítulo 87, H100, tamaños de datasets o resultados. Debe preservar la separación `historical ranking → fixed Top-3 → downstream stages` y dejar la recuperación normativa, construcción de contexto, LLM y configurabilidad detallada para el bloque posterior.
 
 ### Gate vigente
 
 ```text
-CURRENT_GATE = INTRODUCTION_B01
+CURRENT_GATE = ARCHITECTURE_B01
 NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = EXECUTE_INTRODUCTION_B01_ONLY
-NEXT_PROMPT = article/prompts/3_INTRODUCTION_B01_RESUME_WITH_REGENERATED_B06_DOCX.md
-MASTER_INTEGRATION = ARTICLE_MASTER_V006 / ACTIVE_BASELINE
-INTRODUCTION_B01 = AUTHORIZED / ACTIVE / UNBLOCKED
-DECISION_SUPPORT_ARCHITECTURE = NOT_AUTHORIZED
+NEXT_ACTION = EXECUTE_ARCHITECTURE_B01_ONLY
+MASTER_INTEGRATION = ARTICLE_MASTER_V007 / ACTIVE_BASELINE
+ARCHITECTURE_B01 = AUTHORIZED
+ARCHITECTURE_B02 = NOT_AUTHORIZED
 EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 FIGURES = NOT_AUTHORIZED
+GROUP6 = NOT_STARTED / NOT_AUTHORIZED_BY_ARTICLE
+GROUP7 = NOT_ACTIVATED
+GROUP8 = NOT_ACTIVATED
 ```
 
 ---
 
 ## English
 
-Related Work Sections 2.1–2.6 remain `APPROVED / FROZEN / INTEGRATED`; Related Work is closed. `ARTICLE_MASTER_V006.md` remains the canonical Markdown baseline with blob `7d3c7a71cd6578ffc0b93df80ea12e4172833a1a`.
+### General state
 
-D-029 governs the active cumulative DOCX baseline: `ARTICLE_MASTER_B06_REGENERATED_V01.docx`, SHA-256 `7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b`, with thirty-six citation-audit comments, zero tracked changes, and verified author custody. The hash of the lost original B06 binary is historical only.
+```text
+WORKING_BRANCH = article/main-manuscript
+TARGET_A = Knowledge-Based Systems
+ARTICLE_WRITING_PLAN = V2.8
+LATEST_EDITORIAL_DECISION = D-034
+RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
+INTRODUCTION_B01_V02 = CLOSED / APPROVED / FROZEN / INTEGRATED
+CANONICAL_MASTER = ARTICLE_MASTER_V007
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V007.md
+CANONICAL_MASTER_MD_GIT_BLOB = 436e0522db0ac348efaed86f4e53a7e6db372471
+CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_INTRO_B01_V02.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_MASTER_DOCX_SHA256 = d2b68366b706502202ab67860a1df0eccc7747c15df7a58de76607b5f8a69b9c
+CANONICAL_CITATION_COMMENTS = 40
+CURRENT_DRAFTING_PHASE = DECISION SUPPORT ARCHITECTURE
+CURRENT_GATE = ARCHITECTURE_B01
+AUTHORIZED_SCOPE = SECTIONS_3_1_TO_3_4_ONLY
+DECISION_SUPPORT_ARCHITECTURE = AUTHORIZED / ACTIVE
+ARCHITECTURE_B01 = AUTHORIZED / DRAFTING_PENDING
+ARCHITECTURE_B02 = NOT_AUTHORIZED
+EXPERIMENTAL_DESIGN = NOT_AUTHORIZED
+RESULTS = NOT_AUTHORIZED
+DISCUSSION = NOT_AUTHORIZED
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
 
-D-030 reconciles the article-side experimental snapshot after full Group 5 closure. G5-F01, G5-F02, and G5-F03 are `CLOSED / APPROVED / INTEGRATED_TO_MAIN`; the final experimental checkpoint is `main@ca065618d5df0019f76ef5a971e858d91c263e1f`. Group 5 provides nine canonical presentation tables with frozen scientific roles but introduces no new metrics or inference. `HE2 = SUPPORTED` and `HE5 = INCONCLUSIVE` remain unchanged.
+Related Work 2.1–2.6 and Introduction B01 V02 are closed, approved, frozen, and integrated. `ARTICLE_MASTER_V007` is the canonical cumulative master. The approved Introduction preserves the bounded functional separation and does not declare absolute novelty, universal prior-art absence, SOTA, empirical generalization, or legal correctness.
 
-Group 6 remains `NOT_STARTED`; G6-F01 is only `ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`. Group 5 closure does not open Results, figures, Discussion, or any later manuscript section.
+The consumable experimental cutoff remains Master Plan HEAD `98b1a8c54d7a7ccfd86e70078acf77b4cdce9f6e`, blob `9b388fe8cc19fce86ec3c15853e73899cb3e5666`, and experimental `main@ca065618d5df0019f76ef5a971e858d91c263e1f`. Groups 3–5 are closed/approved; `HE2 = SUPPORTED`, `HE5 = INCONCLUSIVE`; Group 6 remains not started and G6-F01 is only eligible/unauthorized/unexecuted.
 
-The active editorial gate remains `INTRODUCTION_B01`. The Introduction is provisional and must establish the concrete problem, verified limitation, high-level architecture, bounded contributions, evaluation context, retained RQs, and roadmap without declaring absolute novelty, universal prior-art absence, SOTA, empirical generalization, legal correctness, or study results. `FINAL_GAP = NOT_DEFINED` and `NOVELTY = NOT_DECLARED` remain unchanged.
+D-034 reconciles G6/G7 with the article workflow. Group 6 closure is required for formal Group 7 activation, but not for Architecture or later Experimental-design drafting under their own editorial gates. G7-F03 is synchronization/transversal closure rather than article inception; Group 8 is required for final scientific-freeze readiness. Final figures/captions/cross-references and figure-dependent final Results/Discussion prose remain provisional until Group 6 closes. D-034 does not authorize G6, G7, or G8.
+
+Architecture B01 is the only active drafting block. It covers Sections 3.1–3.4: overview/information flow, query representation/normalization, historical candidate retrieval/ranking, and fixed candidate set. It must describe the general architecture before the empirical testbed and must preserve all approved Introduction/Related Work text and all 40 inherited citation comments. Architecture B02, Experimental design, Results, Discussion, and figures remain unauthorized.
+
+```text
+CURRENT_GATE = ARCHITECTURE_B01
+NEXT_ACTOR = DRAFTING_AI
+NEXT_ACTION = EXECUTE_ARCHITECTURE_B01_ONLY
+MASTER_INTEGRATION = ARTICLE_MASTER_V007 / ACTIVE_BASELINE
+```
