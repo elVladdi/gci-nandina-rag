@@ -70,14 +70,22 @@ def main() -> None:
         scaled=[(a*S,b*S) for a,b in pts]; draw.polygon(scaled,fill=fill); draw.line(scaled+[scaled[0]],fill=color,width=round(1.8*S),joint="curve")
         svg.append(f'<polygon points="{" ".join(f"{a:.2f},{b:.2f}" for a,b in pts)}" fill="{fill}" stroke="{color}" stroke-width="1.8"/>')
 
-    text(45,32,"G6-FIG-02 | Phase E exact-NANDINA coverage",18,"start",True)
+    text(45,32,"Phase E exact-NANDINA coverage",18,"start",True)
     text(45,57,"Descriptive only; no CI, p-values, fitted trends, or connecting lines",10,"start",False,"#555555")
     left,right,top,bottom=100,815,95,565
     def ymap(v): return bottom-v/.35*(bottom-top)
     for tick in [0,.05,.10,.15,.20,.25,.30,.35]:
         y=ymap(tick); line(left,y,right,y,"#E1E1E1",1); text(left-12,y,f"{tick:.2f}",9,"end")
     line(left,top,left,bottom,"#444444",1.2); line(left,bottom,right,bottom,"#444444",1.2)
-    text(25,(top+bottom)/2,"Exact-NANDINA coverage",11,"start",True)
+    # Match the external vertical label in both formats; 17 units = 10.2 pt in PNG.
+    label = "Exact-NANDINA coverage"
+    label_font = font(17, True, S)
+    bbox = label_font.getbbox(label)
+    label_image = Image.new("RGBA", (bbox[2]-bbox[0]+8, bbox[3]-bbox[1]+8))
+    ImageDraw.Draw(label_image).text((4-bbox[0],4-bbox[1]),label,font=label_font,fill="#222222")
+    label_image = label_image.transpose(Image.Transpose.ROTATE_90)
+    image.paste(label_image,(round(30*S-label_image.width/2),round((top+bottom)/2*S-label_image.height/2)),label_image)
+    svg.append(f'<text x="30" y="{(top+bottom)/2}" transform="rotate(-90 30 {(top+bottom)/2})" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#222222">{label}</text>')
     anchors={50:200,100:455,200:710}; dodge=[-28,-14,0,14,28]
     lookup={(r["variant"],int(r["depth"])):float(r["exact-NANDINA coverage"]) for r in rows}
     for depth in DEPTHS:

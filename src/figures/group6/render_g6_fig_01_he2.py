@@ -126,7 +126,7 @@ def main() -> None:
 
     lookup = {(r["metric"], r["comparison"]): r for r in rows}
     c = Canvas(1000, 1250)
-    c.text(40, 28, "G6-FIG-01 | Primary HE2 evidence", 18, "start", True)
+    c.text(40, 28, "Primary HE2 evidence", 18, "start", True)
     c.text(40, 51, "Offline internal benchmark: 1,056 series / 67 DAM / 42 NANDINA", 10, "start", False, "#555555")
 
     c.text(40, 82, "A", 16, "start", True)
@@ -175,7 +175,7 @@ def main() -> None:
     r = deep[0]
     lo, est, hi = map(float, (r["frozen CI lower"], r["paired difference"], r["frozen CI upper"]))
     y = 1096
-    c.text(195, y, "Hierarchical", 9, "end", True)
+    c.text(195, y, "Hierarchical (Attempt06)", 9, "end", True)
     c.line(xmap(lo, -.1, 1), y, xmap(hi, -.1, 1), y, "#555555", 2)
     c.line(xmap(lo, -.1, 1), y-5, xmap(lo, -.1, 1), y+5, "#555555", 1)
     c.line(xmap(hi, -.1, 1), y-5, xmap(hi, -.1, 1), y+5, "#555555", 1)

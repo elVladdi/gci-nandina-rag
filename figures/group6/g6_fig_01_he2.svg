@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1250" viewBox="0 0 1000 1250">
 <rect width="100%" height="100%" fill="white"/>
-<text x="40.00" y="28.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#222222">G6-FIG-01 | Primary HE2 evidence</text>
+<text x="40.00" y="28.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#222222">Primary HE2 evidence</text>
 <text x="40.00" y="51.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="10" font-weight="400" fill="#555555">Offline internal benchmark: 1,056 series / 67 DAM / 42 NANDINA</text>
 <text x="40.00" y="82.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#222222">A</text>
 <text x="70.00" y="82.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#222222">Observed values (no arm-level CI)</text>
@@ -179,7 +179,7 @@
 <line x1="205.00" y1="1150.00" x2="950.00" y2="1150.00" stroke="#444444" stroke-width="1.2"/>
 <text x="577.50" y="1190.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#222222">Paired recall difference</text>
 <line x1="272.73" y1="1065.00" x2="272.73" y2="1150.00" stroke="#333333" stroke-width="1.4"/>
-<text x="195.00" y="1096.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#222222">Hierarchical</text>
+<text x="195.00" y="1096.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#222222">Hierarchical (Attempt06)</text>
 <line x1="317.94" y1="1096.00" x2="504.08" y2="1096.00" stroke="#555555" stroke-width="2"/>
 <line x1="317.94" y1="1091.00" x2="317.94" y2="1101.00" stroke="#555555" stroke-width="1"/>
 <line x1="504.08" y1="1091.00" x2="504.08" y2="1101.00" stroke="#555555" stroke-width="1"/>

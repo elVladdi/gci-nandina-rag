@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
 <rect width="100%" height="100%" fill="white"/>
-<text x="45.00" y="32.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#222222">G6-FIG-02 | Phase E exact-NANDINA coverage</text>
+<text x="45.00" y="32.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#222222">Phase E exact-NANDINA coverage</text>
 <text x="45.00" y="57.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="10" font-weight="400" fill="#555555">Descriptive only; no CI, p-values, fitted trends, or connecting lines</text>
 <line x1="100.00" y1="565.00" x2="815.00" y2="565.00" stroke="#E1E1E1" stroke-width="1"/>
 <text x="88.00" y="565.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.00</text>
@@ -20,7 +20,7 @@
 <text x="88.00" y="95.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.35</text>
 <line x1="100.00" y1="95.00" x2="100.00" y2="565.00" stroke="#444444" stroke-width="1.2"/>
 <line x1="100.00" y1="565.00" x2="815.00" y2="565.00" stroke="#444444" stroke-width="1.2"/>
-<text x="25.00" y="330.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#222222">Exact-NANDINA coverage</text>
+<text x="30" y="330.0" transform="rotate(-90 30 330.0)" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#222222">Exact-NANDINA coverage</text>
 <text x="200.00" y="588.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#222222">50</text>
 <circle cx="172" cy="442.92" r="7" fill="#222222" stroke="#222222" stroke-width="1.8"/>
 <polygon points="179.00,434.65 193.00,434.65 193.00,448.65 179.00,448.65" fill="#4C78A8" stroke="#4C78A8" stroke-width="1.8"/>
