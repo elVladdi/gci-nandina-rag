@@ -1,0 +1,471 @@
+{
+  "artifact_id": "G6_F01_FIGURE_SPEC_REGISTRY_v0.1",
+  "version": "v0.1",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "ficha": "G6-F01",
+  "created_from_main": "ca065618d5df0019f76ef5a971e858d91c263e1f",
+  "scientific_scope": {
+    "unit_of_analysis": "SERIE",
+    "dependency_group": "DAM / DECLARACION cuando corresponda",
+    "empirical_scope": "CAPITULO_87 / OFFLINE / INTERNAL_EVALUATION",
+    "eval_n": 1056,
+    "eval_dam": 67,
+    "eval_nandina": 42,
+    "HE2": "SUPPORTED",
+    "HE5": "INCONCLUSIVE",
+    "EXP11A": "JOINT_SIZE_COMPOSITION_SENSITIVITY / NONCAUSAL",
+    "EXP11B": "DESCRIPTIVE_H150_H200 / TEN_OBSERVED_SEED_PAIRS / NO_SEED_SUPERPOPULATION_INFERENCE",
+    "EXP12": "CLOSED_WITHOUT_RETRIEVAL / DIVERSITY_EFFECT_NOT_ESTIMABLE",
+    "global_guardrails": [
+      "HISTORICAL_RETRIEVAL_SUPERIORITY_EQUALS_GLOBAL_RAG_ACCURACY = false",
+      "NORMATIVE_EVIDENCE_EQUALS_BINDING_LEGAL_CORRECTNESS = false",
+      "AUDITABLE_EXPLANATION_EQUALS_CLASSIFICATION_OR_LEGAL_CORRECTNESS = false"
+    ]
+  },
+  "approved_design_sources": [
+    {
+      "id": "FIG001",
+      "path": "figure_prompts_tmp/FIG001_RESPUESTA_REVISION_CRITICA_CATALOGO_INICIAL.md",
+      "commit": "2c31d0c7112abedab224023b33d8173f116b3712",
+      "blob": "8f6019bcf94e99ab729b0ac91d3bae10e6115a68",
+      "role": "approved critical catalog review"
+    },
+    {
+      "id": "FIG002",
+      "path": "figure_prompts_tmp/FIG002_RESPUESTA_ESPECIFICACION_CIENTIFICO_VISUAL_G6_FIG_01.md",
+      "commit": "d2f9e07923789709a52622bea922be84aefc526d",
+      "blob": "9e98e0df40fe0f8525384e1790a49348d8c459fb",
+      "role": "approved specification for G6-FIG-01"
+    },
+    {
+      "id": "FIG003",
+      "path": "figure_prompts_tmp/FIG003_RESPUESTA_ESPECIFICACION_CIENTIFICO_VISUAL_G6_FIG_02_PHASE_E.md",
+      "commit": "a9059e9a22a33e7a088ac832d00fcb941a49e4b7",
+      "blob": "0f331faa6282efa67416f379a2c7ded0ec1a358b",
+      "role": "approved specification for G6-FIG-02"
+    },
+    {
+      "id": "FIG004",
+      "path": "figure_prompts_tmp/FIG004_RESPUESTA_ESPECIFICACION_CIENTIFICO_VISUAL_G6_FIG_03_EXP11A.md",
+      "commit": "89d95744b2ab446245a5522eefc8279f673a8a7c",
+      "blob": "b30c4c98d735207d028224fc7965aedeef2d88c9",
+      "role": "approved specification for G6-FIG-03"
+    }
+  ],
+  "figure_spec_count": 3,
+  "figures": [
+    {
+      "figure_id": "G6-FIG-01",
+      "working_title": "Evidencia primaria de HE2: ranking temprano y cobertura profunda",
+      "scientific_question": "¿Cómo se comparan los valores observados y los contrastes pareados del retrieval histórico frente a los comparadores corregidos de HE2_A, y cuál es el contraste primario de cobertura profunda HE2_B en el benchmark interno?",
+      "scientific_role": "PRIMARY_INFERENTIAL",
+      "destination": "MAIN",
+      "claim_ids": ["G3C-001", "G3C-002", "G3C-003", "G3C-004"],
+      "source_artifacts": [
+        "outputs/results/group5/tables/g5_main_01_he2a_primary_early_ranking.csv",
+        "outputs/results/group5/tables/g5_main_02_he2b_deep_coverage.csv"
+      ],
+      "source_hashes": [
+        "cb68583ee2260e4455796bac99ad90995ca7ef92",
+        "359e4e19b5ef1d44983c03039162209293b2a44c"
+      ],
+      "columns_used": [
+        "g5_main_01:comparison",
+        "g5_main_01:metric",
+        "g5_main_01:historical_observed_value",
+        "g5_main_01:comparator_observed_value",
+        "g5_main_01:paired_difference_historical_minus_comparator",
+        "g5_main_01:frozen_99pct_ci_lower_for_paired_difference",
+        "g5_main_01:frozen_99pct_ci_upper_for_paired_difference",
+        "g5_main_01:EVAL_N",
+        "g5_main_01:DAM_N",
+        "g5_main_01:source_version",
+        "g5_main_02:comparison",
+        "g5_main_02:Recall@100",
+        "g5_main_02:Recall@200",
+        "g5_main_02:paired difference",
+        "g5_main_02:frozen CI lower",
+        "g5_main_02:frozen CI upper",
+        "g5_main_02:Pool@200 context",
+        "g5_main_02:EVAL_N",
+        "g5_main_02:DAM_N",
+        "g5_main_02:source version"
+      ],
+      "row_filter_or_inventory": {
+        "panel_A": "All 15 G5-MAIN-01 rows; Historical is shown once per metric only after exact-identity verification across its three structural repetitions.",
+        "panel_B": "All 15 G5-MAIN-01 paired Historical-minus-comparator contrasts.",
+        "panel_C": "The single G5-MAIN-02 row G3F03-0016; Pool@200 context is not plotted as a second estimand."
+      },
+      "transformations_allowed": [
+        "Panel split according to the approved three-panel specification.",
+        "Exact visual deduplication of repeated Historical arm values only after identity verification; no averaging.",
+        "Frozen categorical ordering of Top-1, Top-3, Top-5, Top-10, MRR@100.",
+        "Display-only rounding to three decimals for Panel C textual context while preserving full source precision.",
+        "Marker-shape and qualitative-color encoding with no scientific transformation."
+      ],
+      "transformations_forbidden": [
+        "New arm-level CI or error bars.",
+        "Averaging repeated Historical values.",
+        "Omission of any of the 15 HE2_A primary contrasts.",
+        "Changing the HE2_A frozen CI level from 99%.",
+        "Changing the HE2_B frozen CI level from 95%.",
+        "New CI, p-value, significance test, standardized effect, relative improvement or global effect.",
+        "Treating Top-k and MRR@100 as a continuous trajectory.",
+        "Favorability-based metric or comparator ordering.",
+        "Axis breaks or truncation that magnifies differences.",
+        "Plotting Pool@200 context as independent confirmatory evidence.",
+        "Interpreting the contrasts causally or as global RAG accuracy."
+      ],
+      "panel_count": 3,
+      "layout": {
+        "orientation": "VERTICAL / PORTRAIT",
+        "aspect_ratio": "approximately 4:5",
+        "arrangement": "3 stacked full-width panels",
+        "reading_order": ["A", "B", "C"],
+        "relative_height_guidance": {"A": "approximately 32%", "B": "approximately 48%", "C": "approximately 20%"}
+      },
+      "chart_type": {
+        "A": "GROUPED_DOT_PLOT",
+        "B": "GROUPED_DOT_WHISKER_PLOT",
+        "C": "SINGLE_ESTIMATE_DOT_WHISKER_WITH_CONTEXT_ANNOTATION"
+      },
+      "axes": {
+        "A": {"x": "Observed metric value", "y": "Primary metric", "y_order": ["Top-1", "Top-3", "Top-5", "Top-10", "MRR@100"], "reference_lines": []},
+        "B": {"x": "Paired difference (Historical − comparator)", "y": "Primary metric", "y_order": ["Top-1", "Top-3", "Top-5", "Top-10", "MRR@100"], "reference_lines": ["x=0"]},
+        "C": {"x": "Paired difference (Recall@200 − Recall@100)", "y": "Hierarchical (Attempt06)", "reference_lines": ["x=0"]}
+      },
+      "units": {
+        "A": "proportion-scale metric value",
+        "B": "absolute difference in proportion-scale metric value",
+        "C": "absolute difference in recall"
+      },
+      "scales": {"A_x": "linear", "B_x": "linear", "C_x": "linear", "metric_axis": "categorical"},
+      "ranges": {"A_x": [0.0, 1.0], "B_x": [-0.1, 1.0], "C_x": [-0.1, 1.0]},
+      "N_and_denominator": {
+        "benchmark": "1,056 series / 67 DAM / 42 NANDINA",
+        "panel_A": "EVAL_N=1056 and DAM_N=67 from G5-MAIN-01; 42 NANDINA is benchmark scope.",
+        "panel_B": "Same frozen EVAL cases and DAM-cluster dependency for paired contrasts.",
+        "panel_C": "EVAL_N=1056 and DAM_N=67 from G5-MAIN-02."
+      },
+      "uncertainty_policy": {
+        "A": "NO_ARM_LEVEL_CI_AUTHORIZED",
+        "B": "Frozen 99% CI bound only to paired_difference_historical_minus_comparator",
+        "C": "Single frozen 95% CI bound only to Recall@200 − Recall@100",
+        "p_values": "none"
+      },
+      "marks_and_encoding": {
+        "A": {"Historical": "filled circle", "Flat (Attempt06)": "open square", "Hierarchical (Attempt06)": "open triangle", "D1a (Attempt06)": "open diamond", "connections": "none"},
+        "B": {"point": "paired difference", "whisker": "frozen 99% CI", "Flat": "square", "Hierarchical": "triangle", "D1a": "diamond"},
+        "C": {"point": "single paired difference", "whisker": "frozen 95% CI", "marker": "triangle", "context_text": "Recall@100, Recall@200 and delta/CI only; Pool@200 not duplicated"},
+        "color_role": "secondary qualitative identity; never sole encoding"
+      },
+      "accessibility_requirements": [
+        "Grayscale-readable with redundant marker shapes.",
+        "Minimum effective font size 8 pt; preferred axis/tick 8.5–9 pt.",
+        "Major x-gridlines only and visually subordinate to data.",
+        "Visible zero reference in contrast panels.",
+        "Explicit in-figure labels distinguishing 99% CI in Panel B and 95% CI in Panel C.",
+        "No shadows, gradients, 3D or decorative pictograms."
+      ],
+      "caption_working": "G6-FIG-01. Evidencia primaria de HE2 en el benchmark interno offline del Capítulo 87 (1,056 series, 67 DAM, 42 NANDINA). (A) Valores observados de Historical y de los tres comparadores corregidos Attempt06 en Top-1, Top-3, Top-5, Top-10 y MRR@100; los valores por brazo son descriptivos y no tienen CI autorizado. (B) Diferencias pareadas Historical − comparator para las cinco métricas primarias, con CI congelados de 99%. (C) Contraste HE2_B del retrieval jerárquico corregido, Recall@200 − Recall@100, con CI congelado de 95%; Recall@100 y Recall@200 se muestran solo como contexto y Pool@200 no se duplica como evidencia confirmatoria. Los contrastes son no causales y se limitan al benchmark interno; la figura no representa exactitud global del framework RAG.",
+      "implementation_validation_checks": [
+        "Verify both canonical source blobs exactly before rendering.",
+        "Verify exact identity of the repeated Historical value within each metric before visual deduplication.",
+        "Render exactly five primary metrics and all three HE2_A comparators.",
+        "Bind every Panel B whisker to the frozen 99% paired-difference CI only.",
+        "Render no arm-level CI in Panel A.",
+        "Render exactly one HE2_B estimate and its frozen 95% CI in Panel C.",
+        "Do not render Pool@200 as an additional estimate.",
+        "Keep Panel A x-range [0,1] and Panels B/C x-range [-0.10,1.00].",
+        "Preserve zero reference lines in Panels B/C.",
+        "Verify no new metric, inference, CI or p-value is produced."
+      ],
+      "source_design_response": "figure_prompts_tmp/FIG002_RESPUESTA_ESPECIFICACION_CIENTIFICO_VISUAL_G6_FIG_01.md@d2f9e07923789709a52622bea922be84aefc526d"
+    },
+    {
+      "figure_id": "G6-FIG-02",
+      "working_title": "Cobertura exacta NANDINA de Phase E según profundidad y variante",
+      "scientific_question": "¿Cómo varía descriptivamente la cobertura exacta NANDINA de los pools Phase E entre las profundidades de recuperación 50, 100 y 200, distinguiendo las cuatro variantes formales de G3C-005 de la variante 70/30 incluida solo como contexto descriptivo?",
+      "scientific_role": "DESCRIPTIVE_SUPPLEMENTARY",
+      "destination": "SECONDARY",
+      "claim_ids": ["G3C-005"],
+      "source_artifacts": ["outputs/results/group5/tables/g5_secondary_01_phase_e_descriptive.csv"],
+      "source_hashes": ["fa961cf3d6198ddba6a6b5eeadcc9a23c8801f61"],
+      "columns_used": [
+        "variant",
+        "depth",
+        "exact-NANDINA coverage",
+        "cases",
+        "denominator",
+        "source version"
+      ],
+      "row_filter_or_inventory": {
+        "rows_used": "All 15 canonical rows = 5 variants × 3 depths.",
+        "formal_claim_variants": ["hierarchical_only", "dual_only", "hierarchical_first_100", "hierarchical_80_dual_backfill_20"],
+        "context_only_variants": ["hierarchical_70_dual_backfill_30"],
+        "diagnostic_union": "excluded from ordinary performance; retained only in its canonical diagnostic table"
+      },
+      "transformations_allowed": [
+        "Ordered categorical representation of depths 50, 100 and 200.",
+        "Small fixed symmetric within-depth horizontal dodge for the five variants to prevent occlusion.",
+        "Display-only marker-shape and qualitative-color encoding.",
+        "Line breaks in long literal variant labels without changing identifiers."
+      ],
+      "transformations_forbidden": [
+        "CI, error bars, p-values or significance stars.",
+        "Inferential contrasts between Phase E variants.",
+        "Regression, trend fit, smoothing or interpolation.",
+        "Connecting lines between depths.",
+        "New aggregates or difference metrics.",
+        "Favorability-based sorting or ranking.",
+        "Axis baseline truncation above zero.",
+        "Including diagnostic_union_hierarchical_dual as an ordinary performance variant.",
+        "Promoting Phase E to confirmatory HE2 evidence."
+      ],
+      "panel_count": 1,
+      "layout": {"orientation": "HORIZONTAL", "aspect_ratio": "approximately 16:9", "arrangement": "single panel", "reading_order": "50 → 100 → 200"},
+      "chart_type": "GROUPED_DOT_PLOT_NO_LINES",
+      "axes": {
+        "x": "Profundidad de recuperación",
+        "x_order": [50, 100, 200],
+        "x_positions": "three equally spaced ordered categorical anchors with fixed symmetric visual dodge by variant",
+        "y": "Cobertura exacta NANDINA",
+        "reference_lines": "baseline/grid ticks only"
+      },
+      "units": {"y": "proportion", "x": "ordered recovery-depth category"},
+      "scales": {"x": "ordered categorical", "y": "linear"},
+      "ranges": {"y": [0.0, 0.35], "axis_breaks": false},
+      "N_and_denominator": {
+        "benchmark": "1,056 series / 67 DAM / 42 NANDINA",
+        "canonical_rows": "denominator=1056 in all 15 rows",
+        "panel_policy": "N and denominator are declared once in the caption, not repeated at each point"
+      },
+      "uncertainty_policy": "DESCRIPTIVE_NO_CI_AUTHORIZED; no CI, p-value or inferential comparison",
+      "marks_and_encoding": {
+        "hierarchical_only": "filled circle",
+        "dual_only": "filled square",
+        "hierarchical_first_100": "filled triangle",
+        "hierarchical_80_dual_backfill_20": "filled diamond",
+        "hierarchical_70_dual_backfill_30": "open hexagon explicitly labeled context-only",
+        "color_role": "secondary only",
+        "equal_visual_weight": true,
+        "numeric_point_labels": false
+      },
+      "accessibility_requirements": [
+        "Unique marker shape for every variant; no color-only identity.",
+        "Context-only 70/30 variant must not use lower opacity, smaller size or lower contrast.",
+        "Grayscale-readable legend with formal-claim and contextual subgroups.",
+        "Minimum recommended 9 pt for ticks/legend and at least 10 pt for axis labels.",
+        "Fine horizontal major gridlines; no dominant vertical grid.",
+        "No shadows, gradients or 3D."
+      ],
+      "caption_working": "G6-FIG-02. Cobertura exacta NANDINA de Phase E según profundidad y variante. Se muestran las proporciones descriptivas congeladas de cobertura exacta NANDINA a profundidades de recuperación 50, 100 y 200 en el benchmark interno offline del Capítulo 87 (1,056 series, 67 DAM y 42 NANDINA). hierarchical_only, dual_only, hierarchical_first_100 y hierarchical_80_dual_backfill_20 son las cuatro variantes A_historical_defined que sustentan el claim descriptivo G3C-005; hierarchical_70_dual_backfill_30 se incluye únicamente como contexto descriptivo adicional. No se presentan intervalos de confianza, p-values ni contrastes inferenciales entre variantes. La unión diagnóstica diagnostic_union_hierarchical_dual se excluye porque constituye un techo diagnóstico y no una variante de rendimiento ordinario. La figura no modifica la evidencia confirmatoria ni la disposición de HE2.",
+      "implementation_validation_checks": [
+        "Verify canonical source blob fa961cf3d6198ddba6a6b5eeadcc9a23c8801f61.",
+        "Render exactly 15 marks = 5 variants × 3 depths.",
+        "Account for exactly 12 formal-claim rows plus 3 context-only rows.",
+        "Use exactly the depth categories 50, 100 and 200.",
+        "Copy y positions only from exact-NANDINA coverage in the canonical CSV.",
+        "Keep y-range [0,0.35] with baseline zero.",
+        "Draw no connecting lines, CI, error bars, p-values or significance annotations.",
+        "Exclude diagnostic_union_hierarchical_dual from performance marks.",
+        "Do not alter variant order based on performance.",
+        "Verify no new metric or inference is generated."
+      ],
+      "source_design_response": "figure_prompts_tmp/FIG003_RESPUESTA_ESPECIFICACION_CIENTIFICO_VISUAL_G6_FIG_02_PHASE_E.md@a9059e9a22a33e7a088ac832d00fcb941a49e4b7"
+    },
+    {
+      "figure_id": "G6-FIG-03",
+      "working_title": "Sensibilidad conjunta del banco histórico a tamaño y composición (EXP11A)",
+      "scientific_question": "¿Cómo varían descriptivamente Top1, Top3, Top5, Top10, Top50 y MRR entre las condiciones de banco observadas en EXP11A, cuando tamaño y composición cambian conjuntamente?",
+      "scientific_role": "DESCRIPTIVE_SENSITIVITY / NONCAUSAL",
+      "destination": "APPENDIX",
+      "claim_ids": ["G3C-007"],
+      "source_artifacts": [
+        "outputs/results/group5/tables/g5_appendix_02_exp11a_size_composition_sensitivity.csv",
+        "outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_metrics_by_run.csv",
+        "outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_metrics_by_condition.csv"
+      ],
+      "source_hashes": [
+        "cf3aedab5935d6af9b3ac7be7b51b954fcb9c403",
+        "9b434d7e09e6db7e9de061953b59c53aac2337ad",
+        "535dd377d107ddcbf09ecaa13cd66ca723ee738d"
+      ],
+      "columns_used": [
+        "canonical:row type",
+        "canonical:condition",
+        "canonical:run/seed",
+        "canonical:bank composition",
+        "canonical:denominator",
+        "canonical:Top1",
+        "canonical:Top3",
+        "canonical:Top5",
+        "canonical:Top10",
+        "canonical:Top50",
+        "canonical:MRR",
+        "canonical:source version",
+        "run_source:dominant_stratum",
+        "condition_source:aggregation_scope",
+        "condition_source:replicate_count"
+      ],
+      "row_filter_or_inventory": {
+        "plotted_rows": "31 canonical OBSERVED_RUN rows only",
+        "condition_counts": {"H25": 10, "H50-D1": 5, "H50-D2": 5, "H75": 10, "H100 ref.": 1},
+        "frozen_summary_inventory": "6 FROZEN_CONDITION_SUMMARY rows retained for traceability/table only and not plotted",
+        "H50_D1_D2_resolution": "D1/D2 is resolved from the frozen dominant_stratum field; not inferred from row order.",
+        "H100_role": "single H100_REEXECUTED_CHECK / FROZEN_REFERENCE observed run"
+      },
+      "transformations_allowed": [
+        "Six-panel small-multiple split by the six frozen metrics.",
+        "Fixed categorical condition order H25, H50-D1, H50-D2, H75, H100 ref.",
+        "Deterministic horizontal visual jitter assigned by alphanumeric run/seed order and held identical across all six panels.",
+        "Marker-shape and optional qualitative-color encoding with no scientific transformation.",
+        "Visual separator before H100 ref. to indicate its single-reference role."
+      ],
+      "transformations_forbidden": [
+        "New mean, median, delta, CI, p-value or other aggregate.",
+        "Plotting frozen summaries as summary markers.",
+        "Boxplot, violin, density or other newly derived distribution summaries.",
+        "Regression, trend fit, smoothing, interpolation or connecting lines across conditions.",
+        "Axis truncation or panel-specific y-ranges that magnify differences.",
+        "Favorability-based ordering.",
+        "Post-hoc composition bins or categories derived from rows, DAM, HHI or coverage.",
+        "Correlation or causal relationship between compositional metadata and performance.",
+        "Isolated or monotonic causal bank-size interpretation.",
+        "Treating H100 n=1 as a distribution equivalent to replicated conditions."
+      ],
+      "panel_count": 6,
+      "layout": {"orientation": "LANDSCAPE", "aspect_ratio": "3:2", "arrangement": "2 rows × 3 columns", "reading_order": ["Top1", "Top3", "Top5", "Top10", "Top50", "MRR"]},
+      "chart_type": "2x3 SMALL-MULTIPLE CATEGORICAL STRIP/DOT PLOTS",
+      "axes": {
+        "x": "Condición observada de banco (tamaño nominal + composición)",
+        "condition_order": ["H25", "H50-D1", "H50-D2", "H75", "H100 ref."],
+        "x_semantics": "categorical observed bank conditions; not a continuous dose axis",
+        "y": "frozen absolute metric value",
+        "reference_marks": [0.0, 0.25, 0.5, 0.75, 1.0]
+      },
+      "units": {"Top1": "proportion", "Top3": "proportion", "Top5": "proportion", "Top10": "proportion", "Top50": "proportion", "MRR": "unitless score"},
+      "scales": {"x": "categorical", "y": "linear shared scientific range"},
+      "ranges": {"y_all_panels": [0.0, 1.0], "axis_breaks": false},
+      "N_and_denominator": {
+        "benchmark": "1,056 series / 67 DAM / 42 NANDINA",
+        "per_run_denominator": 1056,
+        "observed_run_counts": [10, 5, 5, 10, 1],
+        "H100": "one frozen-reference observed run only"
+      },
+      "uncertainty_policy": "NONE; no CI, error bars, p-values or seed-superpopulation inference",
+      "marks_and_encoding": {
+        "observed_run": "open circle",
+        "H100_frozen_reference": "diamond; one mark per panel; no jitter",
+        "H50_D1_D2": "separate adjacent x categories resolved from documented dominant_stratum",
+        "jitter": {
+          "H25_H75_n10": [-0.18, -0.14, -0.1, -0.06, -0.02, 0.02, 0.06, 0.1, 0.14, 0.18],
+          "H50_D1_D2_n5": [-0.12, -0.06, 0.0, 0.06, 0.12],
+          "H100_n1": [0.0],
+          "assignment": "by alphanumeric run/seed order; identical across the six panels; purely visual"
+        },
+        "color_role": "secondary categorical aid only; no better/worse encoding",
+        "summary_markers": false
+      },
+      "accessibility_requirements": [
+        "Position and marker shape carry semantics; no color-only interpretation.",
+        "Grayscale-readable categories and marks.",
+        "Minimum effective font size 8.5 pt; panel titles 9.5–10 pt.",
+        "Fine horizontal gridlines only; no vertical gridlines.",
+        "Light/white background; no shadows, gradients or 3D.",
+        "Category labels remain horizontal and in frozen non-favorability order."
+      ],
+      "caption_working": "Figura G6-FIG-03. Sensibilidad conjunta del banco histórico a tamaño y composición (EXP11A). Los seis paneles muestran Top1, Top3, Top5, Top10, Top50 y MRR para las corridas observadas en el benchmark interno offline del Capítulo 87 (1,056 series, 67 DAM y 42 NANDINA): H25 (n=10), H50-D1 (n=5), H50-D2 (n=5), H75 (n=10) y la referencia congelada H100 (n=1). D1/D2 son subestratos de composición documentados dentro de H50; H25, H75 y H100 también conservan sus composiciones observadas. Los puntos representan corridas individuales y H100 se muestra como una única referencia, no como una distribución de réplicas. EXP11A es una sensibilidad descriptiva y no causal en la que tamaño y composición varían conjuntamente; por ello, el eje de condiciones no identifica un efecto causal aislado ni monotónico del tamaño. No se muestran ni calculan CI, p-values, regresiones, suavizados ni agregados nuevos; los summaries congelados permanecen en la tabla canónica y no se duplican en la figura.",
+      "implementation_validation_checks": [
+        "Verify the canonical and both supporting source blobs exactly.",
+        "Verify 31 OBSERVED_RUN and 6 FROZEN_CONDITION_SUMMARY rows.",
+        "Verify condition counts 10 / 5 / 5 / 10 / 1 for H25 / H50-D1 / H50-D2 / H75 / H100 ref.",
+        "Resolve D1/D2 from dominant_stratum and verify diagnostic aggregation scopes; never infer from row order.",
+        "Render exactly six panels for Top1, Top3, Top5, Top10, Top50 and MRR.",
+        "Keep y-range [0,1] in every panel.",
+        "Use the same deterministic jitter assignment across all panels.",
+        "Render exactly one H100 reference mark per panel and no summary mark.",
+        "Render no CI, error bar, p-value, significance marker, regression, smoothing or line between conditions.",
+        "Preserve the coupled size-composition, noncausal interpretation in the caption."
+      ],
+      "source_design_response": "figure_prompts_tmp/FIG004_RESPUESTA_ESPECIFICACION_CIENTIFICO_VISUAL_G6_FIG_03_EXP11A.md@89d95744b2ab446245a5522eefc8279f673a8a7c"
+    }
+  ],
+  "non_figure_dispositions": [
+    {
+      "id": "EXP11B_H150_H200",
+      "disposition": "TABLE_ONLY_DESCRIPTIVE_SENSITIVITY",
+      "reason": "EXP11B remains descriptive sensitivity over ten observed H150/H200 seed pairs; no seed-superpopulation inference is authorized, and a separate figure is not required.",
+      "canonical_artifact": "outputs/results/group5/tables/g5_appendix_03_exp11b_h150_h200_sensitivity.csv",
+      "canonical_blob": "76c8c6c588c7e809c6be64f7192f497c491fb692"
+    },
+    {
+      "id": "HE5_COMPONENTS",
+      "disposition": "TABLE_ONLY_HE5_DESCRIPTIVE",
+      "reason": "HE5 remains INCONCLUSIVE; hierarchy and support components are descriptive only and must not be promoted to a figure implying inferential concentration or insufficiency.",
+      "canonical_artifact": "outputs/results/group5/tables/g5_secondary_02_he5_descriptive_components.csv",
+      "canonical_blob": "727076a0d09735a87f45f6522d2a0ecead2cee17"
+    },
+    {
+      "id": "TOP50_SUPPLEMENTARY",
+      "disposition": "TABLE_ONLY_SUPPLEMENTARY",
+      "reason": "Top-50 is frozen supplementary evidence outside the primary HE2_A five-metric family and has no HE2 decision role.",
+      "canonical_artifact": "outputs/results/group5/tables/g5_appendix_01_top50_supplementary.csv",
+      "canonical_blob": "c2ded734af9ea340d715483b6e8cc00a7536dfea"
+    },
+    {
+      "id": "0B05C_ATTEMPT06_CORRECTIVE",
+      "disposition": "TABLE_ONLY_CORRECTIVE_SENSITIVITY",
+      "reason": "Only corrected Attempt06 is current; its method-dependent corrective sensitivity remains table-only rather than being elevated to a standalone performance figure.",
+      "canonical_artifact": "outputs/results/group5/tables/g5_appendix_04_0b05c_attempt06_corrective_sensitivity.csv",
+      "canonical_blob": "490ef570fa1674e2eecad7f0a3cdf34ba96204db"
+    },
+    {
+      "id": "PHASE_E_DIAGNOSTIC_UNION",
+      "disposition": "TABLE_ONLY_DIAGNOSTIC",
+      "reason": "The Phase E diagnostic union is a diagnostic ceiling, not ordinary or confirmatory performance, and must remain isolated from the Phase E performance figure.",
+      "canonical_artifact": "outputs/results/group5/tables/g5_appendix_05_phase_e_diagnostic_union.csv",
+      "canonical_blob": "f43cce08d1d7bc3cef64698dbebf14eae4b26ed5"
+    },
+    {
+      "id": "EXP12",
+      "disposition": "TEXT_ONLY_NOT_ESTIMABLE_NO_PERFORMANCE_FIGURE",
+      "reason": "EXP12 closed without selected conditions or retrieval; the diversity effect is not estimable and there is no measured performance artifact to visualize.",
+      "canonical_artifact": null,
+      "canonical_blob": null,
+      "governing_source": "outputs/audits/exp12_planning_gate_v0.4/attempt_001_forensic/exp12_feasibility_failure_diagnostic_v0.1.json",
+      "governing_source_blob": "95bbbe549cac517639a2f004660488c902aafbe4"
+    }
+  ],
+  "validation": {
+    "FIGURE_SPEC_COUNT": 3,
+    "NON_FIGURE_DISPOSITION_COUNT": 6,
+    "G6_FIG_01_SOURCE_BLOBS_MATCH": true,
+    "G6_FIG_02_SOURCE_BLOB_MATCH": true,
+    "G6_FIG_03_SOURCE_BLOBS_MATCH": true,
+    "G6_FIG_01_HE2A_CI_LEVEL": "99%",
+    "G6_FIG_01_HE2B_CI_LEVEL": "95%",
+    "G6_FIG_01_ARM_LEVEL_CI_AUTHORIZED": false,
+    "G6_FIG_02_FORMAL_VARIANT_COUNT": 4,
+    "G6_FIG_02_CONTEXT_VARIANT_COUNT": 1,
+    "G6_FIG_02_CI_AUTHORIZED": false,
+    "G6_FIG_02_DIAGNOSTIC_UNION_INCLUDED_AS_PERFORMANCE": false,
+    "G6_FIG_03_OBSERVED_RUN_COUNT": 31,
+    "G6_FIG_03_CONDITION_COUNTS": [10, 5, 5, 10, 1],
+    "G6_FIG_03_FROZEN_SUMMARY_COUNT": 6,
+    "G6_FIG_03_SUMMARIES_PLOTTED": false,
+    "G6_FIG_03_CI_AUTHORIZED": false,
+    "G6_FIG_03_CAUSAL_SIZE_INTERPRETATION": false,
+    "NEW_SCIENTIFIC_METRIC_COUNT": 0,
+    "NEW_INFERENCE_COUNT": 0,
+    "NEW_CI_COUNT": 0,
+    "NEW_P_VALUE_COUNT": 0,
+    "FIGURE_BINARY_COUNT": 0,
+    "FIGURE_SCRIPT_COUNT": 0,
+    "ARTICLE_MODIFIED": false,
+    "THESIS_MODIFIED": false,
+    "EXP12_REOPENED": false,
+    "G6_F02_AUTHORIZED": false,
+    "G6_F02_STARTED": false
+  }
+}
