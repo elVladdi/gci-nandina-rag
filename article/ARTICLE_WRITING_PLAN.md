@@ -112,7 +112,7 @@ La estructura detallada permanece en `article/manuscript/KBS_ARTICLE_WORKING_STR
 | Experimental Group 5 | CLOSED / APPROVED; G5-F01, G5-F02 y G5-F03 integrados a `main` |
 | Experimental Group 6 | NOT_STARTED; G6-F01 ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED |
 | Methods B01 V05 | HOLD / NOT APPROVED |
-| Methods B01 V06 | NOT AUTHORIZED |
+| Methods B01 V06 | NOT_AUTHORIZED |
 
 B06 V01 fue integrado mediante D-025 después de revisión científica independiente y aprobación expresa del autor. Su revisión V02 corrige únicamente el conteo de páginas renderizadas a `28/28`; no cambia el `PASS` científico. D-026 conserva transparentemente la desviación técnica del placeholder V006. D-029 sustituye únicamente la identidad del DOCX B06 perdido por el binario regenerado y auditado, sin reabrir Related Work.
 
@@ -160,7 +160,7 @@ G4_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F03_EXTERNAL_REAUDIT = PASS
 GROUP5 = CLOSED / APPROVED
 G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-g5_f01_integration_commit = d5729887f47c36d8cf42d87090c40f9668e5ae84
+G5_F01_INTEGRATION_COMMIT = d5729887f47c36d8cf42d87090c40f9668e5ae84
 G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G5_F02_INTEGRATION_COMMIT = e471d4336ab965cd55b7f0e2ca7926445b1f0391
 G5_F02_EXTERNAL_REAUDIT = PASS
