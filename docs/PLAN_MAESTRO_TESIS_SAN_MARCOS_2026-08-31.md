@@ -30,8 +30,8 @@
 | 3. Métricas e inferencia | **CLOSED / APPROVED — G3-F01, G3-F02, G3-F03 y G3-F04=CLOSED/APPROVED/INTEGRATED_TO_MAIN; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 4. Análisis e interpretación | **CLOSED / APPROVED — G4-F01, G4-F02 y G4-F03=CLOSED/APPROVED/INTEGRATED_TO_MAIN; G4-F03_INTEGRATION_COMMIT=38e22c19a0eb0d344e7675761a88d7968091eead; G4-F03_EXTERNAL_REAUDIT=PASS; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
-| 6. Figuras y visualizaciones | **NOT_STARTED — G6-F01=ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED; G6_F01_AUTHORIZED=false; G6_F01_STARTED=false** |
-| 7. Redacción científica | Pendiente |
+| 6. Figuras y visualizaciones | **IN_PROGRESS — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F01_INTEGRATION_COMMIT=b6404ca85c8cd0b18a6b318bae1236d2ef021f4a; G6-F02=ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED; G6_F02_AUTHORIZED=false; G6_F02_STARTED=false** |
+| 7. Redacción científica | Pendiente / no autorizado |
 | 8. Coherencia metodológica/documental | Pendiente |
 
 ## 3. Benchmark v0.2 congelado
@@ -2097,3 +2097,13 @@ manifest, la autorización ni el config.
 - `AUDITABLE_EXPLANATION_EQUALS_CLASSIFICATION_OR_LEGAL_CORRECTNESS = false`.
 - No se calcularon nuevas metricas, inferencia, intervalos ni p-values; no se
   ejecutaron experimentos ni retrieval y no se modificaron articulo o tesis.
+
+### 2026-09-22 — Cierre de G6-F01 tras auditoria externa
+
+- El registro canónico de especificaciones de figuras de G6-F01 recibió auditoría externa `PASS` con una única corrección administrativa de scope, completada en la rama de fichas sin cambio científico.
+- El candidato `b6404ca85c8cd0b18a6b318bae1236d2ef021f4a`, padre directo `ca065618d5df0019f76ef5a971e858d91c263e1f`, fue integrado por fast-forward puro en `main = origin/main = b6404ca85c8cd0b18a6b318bae1236d2ef021f4a`.
+- El artefacto integrado es `outputs/figures/group6/g6_figure_spec_registry_v0.1.json`, blob `44cc30fc3c38639c6aa4370cb6f317458041f1b1`, con 3 especificaciones y 6 disposiciones de no-figura.
+- `G6_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `G6_F01_INTEGRATION_COMMIT = b6404ca85c8cd0b18a6b318bae1236d2ef021f4a`; `GROUP6 = IN_PROGRESS`.
+- `G6_F02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`; `G6_F02_AUTHORIZED = false`; `G6_F02_STARTED = false`.
+- Grupo 7 permanece `PENDIENTE / NOT_AUTHORIZED`. G6-F02 no fue ejecutada ni iniciada.
+- No se generaron figuras ni scripts y no se calcularon nuevas métricas, inferencia, intervalos o p-values; artículo y tesis no fueron modificados y EXP12 no fue reabierto.
