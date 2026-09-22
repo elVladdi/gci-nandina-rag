@@ -365,7 +365,6 @@ G4_F03_AUTHORIZED = false
 ## Candidato G4-F02 pendiente de auditoria externa
 
 ```text
-FICHA = G4-F02
 G4_F02_BRANCH = codex/group4-f02-interpretation-limitations-v01
 G4_F02_CANDIDATE_COMMIT = 203770565e1a68c30ab3f27b912fc0fd971e4e8f
 G4_F02_CANDIDATE_PARENT = 9f549ebdf940f9d806d5088697394d0c927f9fdc
