@@ -1,27 +1,27 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V2.6
+PLAN_VERSION = V2.7
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE_RESET_DECISION = D-014
 STRUCTURE_APPROVAL_DECISION = D-015
-EXPERIMENTAL_RECONCILIATION_DECISION = D-019
-DOCX_CUSTODY_DECISION = D-021
+EXPERIMENTAL_RECONCILIATION_DECISION = D-030
+DOCX_CUSTODY_DECISION = D-021 / D-027 / D-029
 GITHUB_ONLY_RESPONSE_DECISION = D-022
 TECHNICAL_CLOSURE_MODE_DECISION = D-023
 RELATED_WORK_CLOSURE_DECISION = D-025
-LATEST_EDITORIAL_DECISION = D-026
+LATEST_EDITORIAL_DECISION = D-030
 LEGACY_METHODS_FIRST_ORDER = SUPERSEDED
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V01.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 CANONICAL_MASTER = ARTICLE_MASTER_V006
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V006.md
 CANONICAL_MASTER_MD_GIT_BLOB = 7d3c7a71cd6578ffc0b93df80ea12e4172833a1a
-CANONICAL_MASTER_DOCX = LOCAL_AUTHOR_CUSTODY / D021
-CANONICAL_MASTER_DOCX_SOURCE_FILENAME = ARTICLE_MASTER_CANDIDATE_RW_B06_V01.docx
-CANONICAL_MASTER_DOCX_SHA256 = 3a07568b8f6ac80ed2df39ee60c0aab65c06df5bb3e1988d3e4f8c752d84bf0
+CANONICAL_MASTER_DOCX = LOCAL_AUTHOR_CUSTODY / D029
+CANONICAL_MASTER_DOCX_SOURCE_FILENAME = ARTICLE_MASTER_B06_REGENERATED_V01.docx
+CANONICAL_MASTER_DOCX_SHA256 = 7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b
 CANONICAL_CITATION_COMMENTS = 36
 CURRENT_DRAFTING_PHASE = INTRODUCTION
 CURRENT_AUTHORIZED_BLOCK = INTRODUCTION_B01 / SECTION_1_PROVISIONAL_ONLY
@@ -74,8 +74,8 @@ La estructura detallada permanece en `article/manuscript/KBS_ARTICLE_WORKING_STR
 
 1. Cada bloque parte del último master acumulativo aprobado.
 2. El baseline Markdown actual es `ARTICLE_MASTER_V006.md`, blob Git `7d3c7a71cd6578ffc0b93df80ea12e4172833a1a`.
-3. Conforme a D-021, el baseline DOCX actual permanece bajo custodia local del autor. El binario aprobado procede de `ARTICLE_MASTER_CANDIDATE_RW_B06_V01.docx`, SHA-256 `3a07568b8f6ac80ed2df39ee60c0aab65c06df5bb3e1988d3e4f8c752d84bf0`.
-4. Un renombrado local a `ARTICLE_MASTER_V006.docx` es aceptable solo si no modifica bytes y conserva exactamente el SHA-256 gobernante.
+3. Conforme a D-029, el baseline DOCX operativo actual es `ARTICLE_MASTER_B06_REGENERATED_V01.docx`, bajo custodia local verificada del autor, con SHA-256 `7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b` y 36 comentarios.
+4. El SHA-256 histórico `3a07568b8f6ac80ed2df39ee60c0aab65c06df5bb3e1988d3e4f8c752d84bf0` identifica únicamente el binario B06 original perdido y no puede utilizarse como baseline activo.
 5. No se crean Words independientes por sección.
 6. La sección nueva se inserta en su ubicación estructural.
 7. Solo se eliminan las notas editoriales correspondientes a la sección completada.
@@ -85,9 +85,10 @@ La estructura detallada permanece en `article/manuscript/KBS_ARTICLE_WORKING_STR
 11. Todo bloque preserva exactamente texto y comentarios de las secciones aprobadas.
 12. El SHA-256 del DOCX candidato se registra obligatoriamente en la respuesta versionada en GitHub; la carga del binario queda diferida conforme a D-021 salvo hito explícito.
 13. Desviaciones de proceso se registran explícitamente y no se corrigen mediante reescritura destructiva del historial salvo autorización expresa del autor y justificación de gobernanza.
-14. D-022 exige prompts y respuestas sustantivas en GitHub; el chat de la IA de Redacción solo puede contener el puntero mínimo autorizado.
+14. D-022 exige prompts y respuestas sustantivas en GitHub; el chat de la IA de Redacción solo puede contener el puntero mínimo autorizado, salvo la entrega efectiva del DOCX exigida por D-027.
 15. D-023 aplica a cierres puramente técnicos: sin Base64 para Markdown, sin fragmentación, sin verificaciones redundantes y sin reauditoría científica innecesaria.
 16. D-026 registra la recuperación del master V006 tras una desviación técnica; el blob canónico de V006 es el indicado en este plan.
+17. D-027, D-028 y D-029 documentan la pérdida, regeneración controlada, auditoría y aceptación del DOCX B06 regenerado; D-029 prevalece respecto de filename, SHA-256 y custodia del baseline DOCX activo.
 
 ### 5. Estado de fases y bloques
 
@@ -107,11 +108,15 @@ La estructura detallada permanece en `article/manuscript/KBS_ARTICLE_WORKING_STR
 | Related Work B05 V01 / 2.5 | APPROVED / FROZEN / INTEGRATED |
 | Related Work B06 V01 / 2.6 | APPROVED / FROZEN / INTEGRATED |
 | Related Work | CLOSED / APPROVED / FROZEN |
-| Introduction B01 | AUTHORIZED / ACTIVE / PROVISIONAL |
+| Introduction B01 | AUTHORIZED / ACTIVE / PROVISIONAL / UNBLOCKED_BY_D029 |
+| Experimental Group 5 | CLOSED / APPROVED; G5-F01, G5-F02 y G5-F03 integrados a `main` |
+| Experimental Group 6 | NOT_STARTED; G6-F01 ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED |
 | Methods B01 V05 | HOLD / NOT APPROVED |
 | Methods B01 V06 | NOT AUTHORIZED |
 
-B06 V01 fue integrado mediante D-025 después de revisión científica independiente y aprobación expresa del autor. Su revisión V02 corrige únicamente el conteo de páginas renderizadas a `28/28`; no cambia el `PASS` científico. D-026 conserva transparentemente la desviación técnica del placeholder V006 y su recuperación posterior sin reescritura del historial.
+B06 V01 fue integrado mediante D-025 después de revisión científica independiente y aprobación expresa del autor. Su revisión V02 corrige únicamente el conteo de páginas renderizadas a `28/28`; no cambia el `PASS` científico. D-026 conserva transparentemente la desviación técnica del placeholder V006. D-029 sustituye únicamente la identidad del DOCX B06 perdido por el binario regenerado y auditado, sin reabrir Related Work.
+
+D-030 reconcilia el cierre experimental completo de Grupo 5. Este cierre hace consumibles para futura Results las presentaciones canónicas y sus roles, pero no abre automáticamente ninguna sección del manuscrito.
 
 ### 6. Orden operativo de redacción
 
@@ -120,29 +125,30 @@ B06 V01 fue integrado mediante D-025 después de revisión científica independi
 | 1 | Estructura completa | CLOSED / AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
 | 2 | Related Work | CLOSED / APPROVED / FROZEN |
 | 3 | Introduction provisional | EN PROGRESO / B01 AUTHORIZED |
-| 4 | Decision-support architecture | Introduction/positioning suficientemente estable |
+| 4 | Decision-support architecture | Introduction/positioning suficientemente estable + autorización editorial expresa |
 | 5 | Experimental design | arquitectura suficientemente estable + ground truth experimental vigente |
-| 6 | Results disponibles y autorizados | claims experimentales autorizados + gate editorial |
-| 7 | Figuras/tablas preliminares | secciones relevantes suficientemente estables |
-| 8 | Integración experimental pendiente | cierres/gates restantes del Plan Maestro si fueran necesarios |
-| 9 | Results definitivos | evidencia requerida cerrada |
-| 10 | Discussion + Limitations | Results definitivos + contraste autorizado |
-| 11 | Conclusion | Discussion cerrada |
-| 12 | Abstract | manuscrito completo |
-| 13 | Title + Keywords | Abstract/manuscrito completos |
-| 14 | Adaptación final KBS | requisitos vigentes verificados |
+| 6 | Results | Experimental design suficientemente estable + gate editorial; consumir evidencia y roles G5 cerrados |
+| 7 | Figuras y visualizaciones | autorización editorial específica; G6-F01 continúa no autorizado hasta decisión separada |
+| 8 | Integración final de Results | evidencia y visualizaciones requeridas cerradas; sin promover material diagnóstico a confirmatorio |
+| 9 | Discussion + Limitations | Results definitivos + contraste G4-F03 autorizado |
+| 10 | Conclusion | Discussion cerrada |
+| 11 | Abstract | manuscrito completo |
+| 12 | Title + Keywords | Abstract/manuscrito completos |
+| 13 | Adaptación final KBS | requisitos vigentes verificados |
 
 Orden activo:
 
-`Introduction provisional → Decision-support architecture → Experimental design → Results autorizados → figures/tables → integración experimental pendiente cuando aplique → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
+`Introduction provisional → Decision-support architecture → Experimental design → Results con evidencia G5 cerrada → figuras/visualizaciones cuando sean autorizadas → Results definitivos → Discussion + Limitations → Conclusion → Abstract → Title + Keywords → adaptación final KBS`.
 
 ### 7. Estado experimental disponible para fases futuras
 
-D-019 sincroniza el artículo con `SRC-03` después del cierre completo de Grupo 4:
+D-030 sincroniza el artículo con `SRC-03` después del cierre completo de Grupo 5:
 
 ```text
-EXPERIMENTAL_PLAN_HEAD = 3ba3557eb10e741b8f49c420850940dee1df08ef
-EXPERIMENTAL_MAIN_CHECKPOINT = 38e22c19a0eb0d344e7675761a88d7968091eead
+EXPERIMENTAL_PLAN_BRANCH = docs/plan-maestro-temporal-2026-08-31
+EXPERIMENTAL_PLAN_HEAD = 98b1a8c54d7a7ccfd86e70078acf77b4cdce9f6e
+EXPERIMENTAL_PLAN_BLOB = 9b388fe8cc19fce86ec3c15853e73899cb3e5666
+EXPERIMENTAL_MAIN_CHECKPOINT = ca065618d5df0019f76ef5a971e858d91c263e1f
 GROUP2 = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
 GROUP3 = CLOSED / APPROVED
 HE2 = SUPPORTED
@@ -151,19 +157,34 @@ GROUP4 = CLOSED / APPROVED
 G4_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-GROUP5 = NOT_STARTED
-G5_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+G4_F03_EXTERNAL_REAUDIT = PASS
+GROUP5 = CLOSED / APPROVED
+G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+g5_f01_integration_commit = d5729887f47c36d8cf42d87090c40f9668e5ae84
+G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F02_INTEGRATION_COMMIT = e471d4336ab965cd55b7f0e2ca7926445b1f0391
+G5_F02_EXTERNAL_REAUDIT = PASS
+G5_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F03_INTEGRATION_COMMIT = ca065618d5df0019f76ef5a971e858d91c263e1f
+G5_F03_EXTERNAL_AUDIT = PASS
+GROUP5_CANONICAL_TABLE_COUNT = 9
+GROUP6 = NOT_STARTED
+G6_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+G6_F01_AUTHORIZED = false
+G6_F01_STARTED = false
 ```
 
-El cierre de Grupo 4 elimina la antigua dependencia editorial de esperar ese cierre para futuros contrastes con literatura, pero no abre automáticamente Experimental design, Results o Discussion y no autoriza Grupo 5.
+Grupo 5 fija una presentación de nueve tablas: dos principales inferenciales, dos secundarias/descriptivas y cinco de apéndice/suplemento. También conserva resultados no estimables y guardrails mediante destinos textuales/no-result. La fase futura de Results debe respetar esos roles: Phase E y HE5 descriptivo no adquieren función confirmatoria; EXP11A sigue siendo sensibilidad conjunta tamaño/composición no causal; EXP11B permanece descriptivo sin inferencia a superpoblación de seeds; EXP12 permanece no estimable.
 
-G4-F03 gobierna el futuro contraste con literatura mediante `docs/analysis/group4/g4_literature_contrast_v0.1.md`: 11 registros, 8 puntos autorizados y 14 prohibidos. Cuando se abra Discussion, ese registro será vinculante. `FINAL_GAP = NOT_DEFINED` y `NOVELTY = NOT_DECLARED` permanecen sin cambios.
+El cierre de Grupo 5 no altera `HE2 = SUPPORTED` ni `HE5 = INCONCLUSIVE`, no recalcula métricas y no abre Results, Discussion ni Figuras. G6-F01 es solamente elegible.
+
+G4-F03 continúa gobernando el futuro contraste con literatura mediante `docs/analysis/group4/g4_literature_contrast_v0.1.md`: 11 registros, 8 puntos autorizados y 14 prohibidos. Cuando se abra Discussion, ese registro será vinculante. `FINAL_GAP = NOT_DEFINED` y `NOVELTY = NOT_DECLARED` permanecen sin cambios.
 
 ### 8. Fase activa — Introduction B01
 
 Prompt activo:
 
-`article/prompts/3_INTRODUCTION_B01_PROVISIONAL.md`
+`article/prompts/3_INTRODUCTION_B01_RESUME_WITH_REGENERATED_B06_DOCX.md`
 
 La Introduction debe seguir la secuencia narrativa:
 
@@ -194,11 +215,11 @@ La Introduction debe introducir el testbed solo después de la propuesta/contrib
 
 - **Decision-support architecture:** arquitectura general en relaciones entrada–operación–salida, antes de detalles experimentales.
 - **Experimental design:** testbed específico, datos históricos, corpus documental, particiones/dependencia, configuración, evaluación, estadística y reproducibilidad.
-- **Results:** organizados por función/RQ, no por códigos internos de experimento.
+- **Results:** organizados por función/RQ, no por códigos internos de experimento. Cuando se abra el gate, G5-F01/F02/F03 gobiernan la selección, rol y destino de las nueve tablas canónicas; las salidas descriptivas, diagnósticas y suplementarias no pueden presentarse como confirmatorias.
 - **Discussion:** interpretación y comparación limitadas por G4-F03; implicaciones, condiciones de transferencia y limitaciones sin SOTA, novelty absoluta, causalidad no identificada ni generalización no evaluada.
 - **Conclusion:** `aporte → evidencia principal → alcance → implicación`.
 
-Ninguna de esas secciones se abre automáticamente con la autorización de Introduction B01.
+Ninguna de esas secciones se abre automáticamente con el cierre de Grupo 5 ni con la autorización de Introduction B01.
 
 ### 10. Ciclo obligatorio de cada bloque
 
@@ -248,12 +269,12 @@ Antes del paquete final se verificarán nuevamente los requisitos oficiales vige
 
 ## English
 
-Writing Plan V2.6 closes Related Work after B06 V01 passed independent review and explicit author approval. D-025 promotes the approved B06 cumulative Markdown unchanged to `ARTICLE_MASTER_V006.md`, using Git blob `7d3c7a71cd6578ffc0b93df80ea12e4172833a1a`.
+Writing Plan V2.7 preserves Related Work as closed, approved, and frozen and keeps `ARTICLE_MASTER_V006.md` as the canonical Markdown baseline. D-029 governs the active cumulative DOCX baseline: `ARTICLE_MASTER_B06_REGENERATED_V01.docx`, SHA-256 `7050cf9fee27687c7b9ed66d0ee110ef38b7aca1671868aaf3065fe50432377b`, with thirty-six citation-audit comments. The lost original B06 DOCX hash is historical only and must not be used as an active baseline.
 
-Under D-021, the cumulative DOCX remains in author-local custody with SHA-256 `3a07568b8f6ac80ed2df39ee60c0aab65c06df5bb3e1988d3e4f8c752d84bf0` and thirty-six citation-audit comments. The corrected render record is `28/28 PASS`. D-026 records and transparently preserves the technical placeholder-recovery deviation; the canonical V006 blob is unchanged from the approved B06 candidate.
+D-030 reconciles the article with the canonical experimental Master Plan after full Group 5 closure. G5-F01, G5-F02, and G5-F03 are `CLOSED / APPROVED / INTEGRATED_TO_MAIN`; the final experimental `main` checkpoint is `ca065618d5df0019f76ef5a971e858d91c263e1f`. The closed Group 5 presentation system contains nine canonical tables with frozen primary, descriptive, supplementary, diagnostic, and text-only roles. It does not change `HE2 = SUPPORTED` or `HE5 = INCONCLUSIVE`, and it does not introduce new metrics or inference.
 
-Introduction B01 is the only active drafting authorization. It must establish the concrete problem, verified limitation, high-level proposal, bounded contributions, evaluation context, retained RQs, and roadmap. The proposal must concretely state that historical retrieval fixes the Top-3, normative retrieval documents those fixed candidates without reranking, and the downstream local LLM explains without classification authority.
+Group 6 remains `NOT_STARTED`; G6-F01 is only `ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`. Group 5 closure makes its presentation artifacts eligible for future Results when the editorial gate is opened, but it does not itself authorize Results, figures, Discussion, or any later section.
+
+Introduction B01 remains the only active drafting authorization. It must establish the concrete problem, verified limitation, high-level proposal, bounded contributions, evaluation context, retained RQs, and roadmap. The proposal must concretely state that historical retrieval fixes the Top-3, normative retrieval documents those fixed candidates without reranking, and the downstream local LLM explains without classification authority.
 
 The Introduction may state that the documented procedure can be re-instantiated with alternative historical data, label spaces, and documentary corpora, but this must not be converted into empirical generalization. It must not claim absolute novelty, universal absence, SOTA, study results, or legal correctness. `FINAL_GAP = NOT_DEFINED` and `NOVELTY = NOT_DECLARED` remain unchanged.
-
-D-019 remains the governing experimental reconciliation after full Group 4 closure. Future Discussion remains constrained by the G4-F03 contrast registry. Group 5 remains not started.
