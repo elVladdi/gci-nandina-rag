@@ -34,7 +34,8 @@ No se admiten copias divergentes como simultáneamente válidas. Solo la IA Expe
 - revisión de 0A-01, 2026-09-02: blob SHA `0a9a82181c6c3840f74f0272e5c225568474058b`;
 - reconciliación editorial final de 0B-05C, 2026-09-15: rama HEAD `f4d20dfe46181cb2740c4e4cd6604b0bff7a48f6`, blob SHA `adcd9be3aaa9c13929575d6f348fa6f9693bccbf`;
 - reconciliación posterior al cierre de Grupo 3 y G4-F01, 2026-09-20: rama HEAD `2237ddc46bc1c7bfac203753bdcf2c7d4592f83e`, blob SHA `fb5caa26fc0abca0506fbc7b75bbf15af24a8875`, checkpoint `main = 9f549ebdf940f9d806d5088697394d0c927f9fdc`;
-- **reconciliación posterior al cierre completo de Grupo 4, 2026-09-20**: rama HEAD `3ba3557eb10e741b8f49c420850940dee1df08ef`, blob SHA `5ab0af7af5a2c92a1107e820bee1a6bb65026432`, checkpoint experimental `main = 38e22c19a0eb0d344e7675761a88d7968091eead`.
+- reconciliación posterior al cierre completo de Grupo 4, 2026-09-20: rama HEAD `3ba3557eb10e741b8f49c420850940dee1df08ef`, blob SHA `5ab0af7af5a2c92a1107e820bee1a6bb65026432`, checkpoint experimental `main = 38e22c19a0eb0d344e7675761a88d7968091eead`;
+- **reconciliación posterior al cierre completo de Grupo 5, 2026-09-21**: rama HEAD `98b1a8c54d7a7ccfd86e70078acf77b4cdce9f6e`, blob SHA `9b388fe8cc19fce86ec3c15853e73899cb3e5666`, checkpoint experimental `main = ca065618d5df0019f76ef5a971e858d91c263e1f`.
 
 ### Último snapshot canónico consumible por el artículo
 
@@ -55,8 +56,20 @@ G4_F03_EXTERNAL_REAUDIT = PASS
 G4_F03_COMPARISON_REGISTRY_COUNT = 11
 G4_F03_AUTHORIZED_DISCUSSION_POINT_COUNT = 8
 G4_F03_FORBIDDEN_DISCUSSION_POINT_COUNT = 14
-GROUP5 = NOT_STARTED
-G5_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+GROUP5 = CLOSED / APPROVED
+G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F01_INTEGRATION_COMMIT = d5729887f47c36d8cf42d87090c40f9668e5ae84
+G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F02_INTEGRATION_COMMIT = e471d4336ab965cd55b7f0e2ca7926445b1f0391
+G5_F02_EXTERNAL_REAUDIT = PASS
+G5_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F03_INTEGRATION_COMMIT = ca065618d5df0019f76ef5a971e858d91c263e1f
+G5_F03_EXTERNAL_AUDIT = PASS
+GROUP5_CANONICAL_TABLE_COUNT = 9
+GROUP6 = NOT_STARTED
+G6_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+G6_F01_AUTHORIZED = false
+G6_F01_STARTED = false
 ```
 
 ### Material de Grupo 4 para uso editorial posterior
@@ -77,7 +90,19 @@ Este artefacto contiene 11 registros de contraste, 8 puntos de discusión autori
 - no convierte rendimiento del retrieval histórico en exactitud global del RAG;
 - no convierte evidencia normativa, oficialidad documental, rationale, path validity, provenance o reproducibilidad en corrección jurídica, clasificación correcta o auditabilidad formal por salida.
 
-El cierre de Grupo 4 no abre automáticamente Results ni Discussion y no modifica por sí mismo `FINAL_GAP` ni `NOVELTY`. El gate editorial del artículo continúa siendo independiente de la elegibilidad de evidencia experimental.
+### Material de Grupo 5 para futura Results
+
+Grupo 5 quedó `CLOSED / APPROVED` después del cierre auditado de G5-F01, G5-F02 y G5-F03. El checkpoint final es `main@ca065618d5df0019f76ef5a971e858d91c263e1f`.
+
+Los artefactos G5 organizan evidencia ya congelada; no introducen nuevas métricas o inferencia. El sistema de presentación contiene nueve tablas canónicas:
+
+- 2 principales con rol inferencial (`G5-MAIN-01`, `G5-MAIN-02`);
+- 2 secundarias/descriptivas (`G5-SECONDARY-01`, `G5-SECONDARY-02`);
+- 5 de apéndice/suplemento (`G5-APPENDIX-01..05`).
+
+Además, G5-F03 conserva destinos `TEXT_ONLY` y `NOT_PRESENTED_AS_RESULT_WITH_REASON` para evidencia no estimable y guardrails. Estos roles son vinculantes para la futura redacción de Results: Phase E y HE5 descriptivo no pueden promoverse a evidencia confirmatoria; EXP11A sigue siendo sensibilidad conjunta tamaño/composición no causal; EXP11B sigue siendo descriptivo sin inferencia a superpoblación de seeds; EXP12 sigue siendo no estimable.
+
+El cierre de Grupo 5 no abre automáticamente Results, Discussion ni Figuras y no modifica `FINAL_GAP` ni `NOVELTY`. G6-F01 es únicamente elegible y permanece no autorizado/no ejecutado.
 
 ### Regla sobre nombres de archivos adjuntos
 
@@ -120,13 +145,13 @@ Governing GitHub location:
 - branch: `docs/plan-maestro-temporal-2026-08-31`;
 - path: `docs/PLAN_MAESTRO_TESIS_SAN_MARCOS_2026-08-31.md`.
 
-Recorded snapshots include the 0A-01 cutoff, the 0B-05C reconciliation, the Group-3/G4-F01 reconciliation, and the latest cutoff after full Group 4 closure.
+Recorded snapshots include the 0A-01 cutoff, the 0B-05C reconciliation, the Group-3/G4-F01 reconciliation, full Group 4 closure, and the latest cutoff after full Group 5 closure.
 
-Latest canonical snapshot, 2026-09-20:
+Latest canonical snapshot, 2026-09-21:
 
-- Master Plan HEAD: `3ba3557eb10e741b8f49c420850940dee1df08ef`;
-- read blob SHA: `5ab0af7af5a2c92a1107e820bee1a6bb65026432`;
-- experimental `main` checkpoint: `38e22c19a0eb0d344e7675761a88d7968091eead`.
+- Master Plan HEAD: `98b1a8c54d7a7ccfd86e70078acf77b4cdce9f6e`;
+- read blob SHA: `9b388fe8cc19fce86ec3c15853e73899cb3e5666`;
+- experimental `main` checkpoint: `ca065618d5df0019f76ef5a971e858d91c263e1f`.
 
 ```text
 GROUP2 = CLOSED / APPROVED_WITH_NONBLOCKING_LIMITATIONS
@@ -138,14 +163,19 @@ G4_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
 G4_F03_EXTERNAL_REAUDIT = PASS
-G4_F03_COMPARISON_REGISTRY_COUNT = 11
-G4_F03_AUTHORIZED_DISCUSSION_POINT_COUNT = 8
-G4_F03_FORBIDDEN_DISCUSSION_POINT_COUNT = 14
-GROUP5 = NOT_STARTED
-G5_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+GROUP5 = CLOSED / APPROVED
+G5_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G5_F03_EXTERNAL_AUDIT = PASS
+GROUP5_CANONICAL_TABLE_COUNT = 9
+GROUP6 = NOT_STARTED
+G6_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
 ```
 
-The Group 4 closure artifact `docs/analysis/group4/g4_literature_contrast_v0.1.md` controls future literature contrast. It contains 11 comparison records, 8 authorized discussion points, and 14 forbidden discussion points. It does not authorize cross-study numerical superiority, SOTA, absolute novelty, empirical generalization, unsupported causality, or legal correctness. Its evidence is eligible only when the corresponding article editorial gate opens.
+The Group 4 closure artifact `docs/analysis/group4/g4_literature_contrast_v0.1.md` continues to control future literature contrast: 11 comparison records, 8 authorized discussion points, and 14 forbidden discussion points. These controls do not authorize cross-study numerical superiority, SOTA, absolute novelty, empirical generalization, unsupported causality, or legal correctness.
+
+Group 5 closes result presentation without introducing new metrics or inference. Its nine-table system comprises two primary inferential tables, two secondary/descriptive tables, and five appendix/supplementary tables, together with text-only and not-presented-as-result destinations for non-estimable evidence and guardrails. These roles are binding for future Results once its editorial gate opens. Group 5 closure does not itself open Results, Discussion, or figures. Group 6 remains not started; G6-F01 is only eligible and remains unauthorized/unexecuted.
 
 ### Precedence by dimension
 
