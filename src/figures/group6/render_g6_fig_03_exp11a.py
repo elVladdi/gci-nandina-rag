@@ -80,7 +80,7 @@ def main():
     colors={"H25":"#4C78A8","H50-D1":"#F58518","H50-D2":"#54A24B","H75":"#B279A2","H100 ref.":"#222222"}
     for idx,metric in enumerate(METRICS):
         col,row=idx%3,idx//3; left=xstarts[col]; top=ystarts[row]; right=left+315; bottom=top+235
-        text(left,top-18,metric,12,"start",True)
+        text(left,top-18,metric,16,"start",True)
         for tick in [0,.25,.5,.75,1]:
             y=bottom-tick*(bottom-top); line(left,y,right,y,"#E4E4E4",1); text(left-8,y,f"{tick:.2f}",8,"end")
         line(left,top,left,bottom,"#444444",1); line(left,bottom,right,bottom,"#444444",1)

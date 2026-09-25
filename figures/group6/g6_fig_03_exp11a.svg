@@ -2,7 +2,7 @@
 <rect width="100%" height="100%" fill="white"/>
 <text x="35.00" y="26.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#222222">EXP11A joint size-composition sensitivity</text>
 <text x="35.00" y="48.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="400" fill="#555555">Observed runs only; descriptive and noncausal; no summaries, CI, p-values, or fitted trends</text>
-<text x="65.00" y="64.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">Top1</text>
+<text x="65.00" y="64.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#222222">Top1</text>
 <line x1="65.00" y1="317.00" x2="380.00" y2="317.00" stroke="#E4E4E4" stroke-width="1"/>
 <text x="57.00" y="317.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="400" fill="#222222">0.00</text>
 <line x1="65.00" y1="258.25" x2="380.00" y2="258.25" stroke="#E4E4E4" stroke-width="1"/>
@@ -52,7 +52,7 @@
 <circle cx="323.80" cy="201.28" r="2.2" fill="white" stroke="#B279A2" stroke-width="1.5"/>
 <text x="361.00" y="334.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">H100 ref.</text>
 <polygon points="361.00,191.47 366.80,197.27 361.00,203.07 355.20,197.27" fill="#222222"/>
-<text x="430.00" y="64.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">Top3</text>
+<text x="430.00" y="64.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#222222">Top3</text>
 <line x1="430.00" y1="317.00" x2="745.00" y2="317.00" stroke="#E4E4E4" stroke-width="1"/>
 <text x="422.00" y="317.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="400" fill="#222222">0.00</text>
 <line x1="430.00" y1="258.25" x2="745.00" y2="258.25" stroke="#E4E4E4" stroke-width="1"/>
@@ -102,7 +102,7 @@
 <circle cx="688.80" cy="157.44" r="2.2" fill="white" stroke="#B279A2" stroke-width="1.5"/>
 <text x="726.00" y="334.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">H100 ref.</text>
 <polygon points="726.00,153.42 731.80,159.22 726.00,165.02 720.20,159.22" fill="#222222"/>
-<text x="795.00" y="64.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">Top5</text>
+<text x="795.00" y="64.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#222222">Top5</text>
 <line x1="795.00" y1="317.00" x2="1110.00" y2="317.00" stroke="#E4E4E4" stroke-width="1"/>
 <text x="787.00" y="317.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="400" fill="#222222">0.00</text>
 <line x1="795.00" y1="258.25" x2="1110.00" y2="258.25" stroke="#E4E4E4" stroke-width="1"/>
@@ -152,7 +152,7 @@
 <circle cx="1053.80" cy="139.64" r="2.2" fill="white" stroke="#B279A2" stroke-width="1.5"/>
 <text x="1091.00" y="334.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">H100 ref.</text>
 <polygon points="1091.00,131.83 1096.80,137.63 1091.00,143.43 1085.20,137.63" fill="#222222"/>
-<text x="65.00" y="410.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">Top10</text>
+<text x="65.00" y="410.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#222222">Top10</text>
 <line x1="65.00" y1="663.00" x2="380.00" y2="663.00" stroke="#E4E4E4" stroke-width="1"/>
 <text x="57.00" y="663.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="400" fill="#222222">0.00</text>
 <line x1="65.00" y1="604.25" x2="380.00" y2="604.25" stroke="#E4E4E4" stroke-width="1"/>
@@ -202,7 +202,7 @@
 <circle cx="323.80" cy="468.28" r="2.2" fill="white" stroke="#B279A2" stroke-width="1.5"/>
 <text x="361.00" y="680.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">H100 ref.</text>
 <polygon points="361.00,447.79 366.80,453.59 361.00,459.39 355.20,453.59" fill="#222222"/>
-<text x="430.00" y="410.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">Top50</text>
+<text x="430.00" y="410.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#222222">Top50</text>
 <line x1="430.00" y1="663.00" x2="745.00" y2="663.00" stroke="#E4E4E4" stroke-width="1"/>
 <text x="422.00" y="663.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="400" fill="#222222">0.00</text>
 <line x1="430.00" y1="604.25" x2="745.00" y2="604.25" stroke="#E4E4E4" stroke-width="1"/>
@@ -252,7 +252,7 @@
 <circle cx="688.80" cy="435.79" r="2.2" fill="white" stroke="#B279A2" stroke-width="1.5"/>
 <text x="726.00" y="680.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">H100 ref.</text>
 <polygon points="726.00,424.20 731.80,430.00 726.00,435.80 720.20,430.00" fill="#222222"/>
-<text x="795.00" y="410.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="700" fill="#222222">MRR</text>
+<text x="795.00" y="410.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#222222">MRR</text>
 <line x1="795.00" y1="663.00" x2="1110.00" y2="663.00" stroke="#E4E4E4" stroke-width="1"/>
 <text x="787.00" y="663.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14.5" font-weight="400" fill="#222222">0.00</text>
 <line x1="795.00" y1="604.25" x2="1110.00" y2="604.25" stroke="#E4E4E4" stroke-width="1"/>

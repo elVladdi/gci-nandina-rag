@@ -1,60 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<svg xmlns="http://www.w3.org/2000/svg" width="10.0in" height="5.625in" viewBox="0 0 1200 675">
 <rect width="100%" height="100%" fill="white"/>
 <text x="45.00" y="32.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#222222">Phase E exact-NANDINA coverage</text>
-<text x="45.00" y="57.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="10" font-weight="400" fill="#555555">Descriptive only; no CI, p-values, fitted trends, or connecting lines</text>
+<text x="45.00" y="57.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="400" fill="#555555">Descriptive only; no CI, p-values, fitted trends, or connecting lines</text>
 <line x1="100.00" y1="565.00" x2="815.00" y2="565.00" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="565.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.00</text>
+<text x="88.00" y="565.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.00</text>
 <line x1="100.00" y1="497.86" x2="815.00" y2="497.86" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="497.86" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.05</text>
+<text x="88.00" y="497.86" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.05</text>
 <line x1="100.00" y1="430.71" x2="815.00" y2="430.71" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="430.71" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.10</text>
+<text x="88.00" y="430.71" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.10</text>
 <line x1="100.00" y1="363.57" x2="815.00" y2="363.57" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="363.57" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.15</text>
+<text x="88.00" y="363.57" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.15</text>
 <line x1="100.00" y1="296.43" x2="815.00" y2="296.43" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="296.43" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.20</text>
+<text x="88.00" y="296.43" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.20</text>
 <line x1="100.00" y1="229.29" x2="815.00" y2="229.29" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="229.29" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.25</text>
+<text x="88.00" y="229.29" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.25</text>
 <line x1="100.00" y1="162.14" x2="815.00" y2="162.14" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="162.14" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.30</text>
+<text x="88.00" y="162.14" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.30</text>
 <line x1="100.00" y1="95.00" x2="815.00" y2="95.00" stroke="#E1E1E1" stroke-width="1"/>
-<text x="88.00" y="95.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">0.35</text>
+<text x="88.00" y="95.00" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">0.35</text>
 <line x1="100.00" y1="95.00" x2="100.00" y2="565.00" stroke="#444444" stroke-width="1.2"/>
 <line x1="100.00" y1="565.00" x2="815.00" y2="565.00" stroke="#444444" stroke-width="1.2"/>
 <text x="30" y="330.0" transform="rotate(-90 30 330.0)" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#222222">Exact-NANDINA coverage</text>
-<text x="200.00" y="588.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#222222">50</text>
+<text x="200.00" y="588.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#222222">50</text>
 <circle cx="172" cy="442.92" r="7" fill="#222222" stroke="#222222" stroke-width="1.8"/>
 <polygon points="179.00,434.65 193.00,434.65 193.00,448.65 179.00,448.65" fill="#4C78A8" stroke="#4C78A8" stroke-width="1.8"/>
 <polygon points="200.00,434.92 208.00,449.92 192.00,449.92" fill="#F58518" stroke="#F58518" stroke-width="1.8"/>
 <polygon points="214.00,434.92 222.00,442.92 214.00,450.92 206.00,442.92" fill="#54A24B" stroke="#54A24B" stroke-width="1.8"/>
 <polygon points="221.00,442.92 224.50,435.92 231.50,435.92 235.00,442.92 231.50,449.92 224.50,449.92" fill="white" stroke="#B279A2" stroke-width="1.8"/>
-<text x="455.00" y="588.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#222222">100</text>
+<text x="455.00" y="588.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#222222">100</text>
 <circle cx="427" cy="428.93" r="7" fill="#222222" stroke="#222222" stroke-width="1.8"/>
 <polygon points="434.00,423.21 448.00,423.21 448.00,437.21 434.00,437.21" fill="#4C78A8" stroke="#4C78A8" stroke-width="1.8"/>
 <polygon points="455.00,420.93 463.00,435.93 447.00,435.93" fill="#F58518" stroke="#F58518" stroke-width="1.8"/>
 <polygon points="469.00,420.93 477.00,428.93 469.00,436.93 461.00,428.93" fill="#54A24B" stroke="#54A24B" stroke-width="1.8"/>
 <polygon points="476.00,427.66 479.50,420.66 486.50,420.66 490.00,427.66 486.50,434.66 479.50,434.66" fill="white" stroke="#B279A2" stroke-width="1.8"/>
-<text x="710.00" y="588.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#222222">200</text>
+<text x="710.00" y="588.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#222222">200</text>
 <circle cx="682" cy="156.80" r="7" fill="#222222" stroke="#222222" stroke-width="1.8"/>
 <polygon points="689.00,200.67 703.00,200.67 703.00,214.67 689.00,214.67" fill="#4C78A8" stroke="#4C78A8" stroke-width="1.8"/>
 <polygon points="710.00,200.94 718.00,215.94 702.00,215.94" fill="#F58518" stroke="#F58518" stroke-width="1.8"/>
 <polygon points="724.00,148.80 732.00,156.80 724.00,164.80 716.00,156.80" fill="#54A24B" stroke="#54A24B" stroke-width="1.8"/>
 <polygon points="731.00,156.80 734.50,149.80 741.50,149.80 745.00,156.80 741.50,163.80 734.50,163.80" fill="white" stroke="#B279A2" stroke-width="1.8"/>
-<text x="457.50" y="615.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400" fill="#222222">Recovery depth (ordered categories)</text>
-<text x="865.00" y="105.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#222222">Formal claim variants</text>
+<text x="457.50" y="615.00" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#222222">Recovery depth (ordered categories)</text>
+<text x="865.00" y="105.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="700" fill="#222222">Formal claim variants</text>
 <circle cx="878" cy="137.00" r="6" fill="#222222" stroke="#222222" stroke-width="1.8"/>
-<text x="896.00" y="137.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">hierarchical_only</text>
+<text x="896.00" y="137.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">hierarchical_only</text>
 <polygon points="872.00,180.00 884.00,180.00 884.00,192.00 872.00,192.00" fill="#4C78A8" stroke="#4C78A8" stroke-width="1.8"/>
-<text x="896.00" y="186.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">dual_only</text>
+<text x="896.00" y="186.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">dual_only</text>
 <polygon points="878.00,228.00 885.00,241.00 871.00,241.00" fill="#F58518" stroke="#F58518" stroke-width="1.8"/>
-<text x="896.00" y="235.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">hierarchical_first_100</text>
+<text x="896.00" y="235.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">hierarchical_first_100</text>
 <polygon points="878.00,277.00 885.00,284.00 878.00,291.00 871.00,284.00" fill="#54A24B" stroke="#54A24B" stroke-width="1.8"/>
-<text x="896.00" y="284.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">hierarchical_80_dual_backfill_20</text>
-<text x="865.00" y="350.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#222222">Context only</text>
+<text x="896.00" y="284.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">hierarchical_80_dual_backfill_20</text>
+<text x="865.00" y="350.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="700" fill="#222222">Context only</text>
 <polygon points="872.00,383.00 875.00,377.00 881.00,377.00 884.00,383.00 881.00,389.00 875.00,389.00" fill="white" stroke="#B279A2" stroke-width="1.8"/>
-<text x="896.00" y="383.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">hierarchical_70_</text>
-<text x="896.00" y="400.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#222222">dual_backfill_30</text>
-<text x="865.00" y="458.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#555555">15 marks = 5 variants x 3 depths</text>
-<text x="865.00" y="480.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#555555">N = 1,056 series</text>
-<text x="865.00" y="500.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#555555">67 DAM / 42 NANDINA</text>
-<text x="45.00" y="636.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="9" font-weight="400" fill="#555555">The diagnostic union is excluded from ordinary performance. Context and formal variants retain equal visual weight.</text>
+<text x="896.00" y="383.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">hierarchical_70_</text>
+<text x="896.00" y="403.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#222222">dual_backfill_30</text>
+<text x="865.00" y="458.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="400" fill="#555555">15 marks = 5 variants x 3 depths</text>
+<text x="865.00" y="480.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="400" fill="#555555">N = 1,056 series</text>
+<text x="865.00" y="500.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="400" fill="#555555">67 DAM / 42 NANDINA</text>
+<text x="45.00" y="648.00" text-anchor="start" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="13.5" font-weight="400" fill="#555555">The diagnostic union is excluded from ordinary performance. Context and formal variants retain equal visual weight.</text>
 </svg>

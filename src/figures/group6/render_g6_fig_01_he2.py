@@ -49,7 +49,7 @@ class Canvas:
         self.image = Image.new("RGB", (round(width * scale), round(height * scale)), "white")
         self.draw = ImageDraw.Draw(self.image)
         self.svg = [
-            f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{width/120}in" height="{height/120}in" viewBox="0 0 {width} {height}">',
             '<rect width="100%" height="100%" fill="white"/>',
         ]
 
@@ -59,6 +59,7 @@ class Canvas:
         return ImageFont.truetype(str(path), round(size * self.s)) if path.exists() else ImageFont.load_default()
 
     def text(self, x, y, value, size=12, anchor="middle", bold=False, fill="#222222"):
+        size = max(size, 13.5)
         pil_anchor = {"start": "lm", "middle": "mm", "end": "rm"}[anchor]
         self.draw.text((x * self.s, y * self.s), value, font=self.font(size, bold), fill=fill, anchor=pil_anchor)
         self.svg.append(
@@ -99,13 +100,13 @@ def xmap(value: float, lo: float, hi: float, left=205, right=950) -> float:
     return left + (value - lo) * (right - left) / (hi - lo)
 
 
-def axes(c: Canvas, top: float, bottom: float, lo: float, hi: float, ticks: list[float], label: str):
+def axes(c: Canvas, top: float, bottom: float, lo: float, hi: float, ticks: list[float], label: str, label_offset=40):
     for tick in ticks:
         x = xmap(tick, lo, hi)
         c.line(x, top, x, bottom, "#E2E2E2", 1)
-        c.text(x, bottom + 18, f"{tick:.1f}", 10)
+        c.text(x, bottom + 18, f"{tick:.1f}", 15)
     c.line(205, bottom, 950, bottom, "#444444", 1.2)
-    c.text((205 + 950) / 2, bottom + 40, label, 11)
+    c.text((205 + 950) / 2, bottom + label_offset, label, 15)
 
 
 def main() -> None:
@@ -130,24 +131,24 @@ def main() -> None:
     c.text(40, 51, "Offline internal benchmark: 1,056 series / 67 DAM / 42 NANDINA", 10, "start", False, "#555555")
 
     c.text(40, 82, "A", 16, "start", True)
-    c.text(70, 82, "Observed values (no arm-level CI)", 13, "start", True)
+    c.text(70, 82, "Observed values (no arm-level CI)", 16, "start", True)
     axes(c, 105, 390, 0, 1, [0, .2, .4, .6, .8, 1], "Observed metric value")
     y_positions = {m: 135 + i * 53 for i, m in enumerate(METRICS)}
     offsets = [-12, -4, 4, 12]
     for metric, y in y_positions.items():
-        c.text(190, y, metric, 10, "end", True)
+        c.text(190, y, metric, 15, "end", True)
         hist = float(next(r["historical_observed_value"] for r in rows if r["metric"] == metric))
         values = [hist] + [float(lookup[(metric, key)]["comparator_observed_value"]) for key in COMPARATORS]
         for (name, shape, color), value, dy in zip(SERIES, values, offsets):
             c.marker(xmap(value, 0, 1), y + dy, shape, color, 5.2, name == "Historical")
     for i, (name, shape, color) in enumerate(SERIES):
-        x = 145 + i * 215
+        x = 90 + i * 245
         c.marker(x, 452, shape, color, 5, name == "Historical")
         c.text(x + 12, 452, name, 9, "start")
 
     c.text(40, 495, "B", 16, "start", True)
-    c.text(70, 495, "Historical - comparator (frozen 99% CI)", 13, "start", True)
-    axes(c, 525, 985, -.1, 1, [-.1, 0, .2, .4, .6, .8, 1], "Paired difference")
+    c.text(70, 495, "Historical - comparator (frozen 99% CI)", 16, "start", True)
+    axes(c, 525, 985, -.1, 1, [-.1, 0, .2, .4, .6, .8, 1], "Paired difference", 34)
     c.line(xmap(0, -.1, 1), 525, xmap(0, -.1, 1), 985, "#333333", 1.4)
     shapes = {"Flat": ("square", "#4C78A8"), "Hierarchical": ("triangle", "#F58518"), "D1a": ("diamond", "#54A24B")}
     row_y = 545
@@ -156,8 +157,8 @@ def main() -> None:
             r = lookup[(metric, key)]
             y = row_y
             row_y += 27
-            c.text(120, y, metric if short == "Flat" else "", 9, "end", short == "Flat")
-            c.text(195, y, short, 8.5, "end")
+            c.text(120, y, metric if short == "Flat" else "", 15, "end", short == "Flat")
+            c.text(195, y, short, 13.5, "end")
             lo = float(r["frozen_99pct_ci_lower_for_paired_difference"])
             hi = float(r["frozen_99pct_ci_upper_for_paired_difference"])
             est = float(r["paired_difference_historical_minus_comparator"])
@@ -168,8 +169,8 @@ def main() -> None:
             c.marker(xmap(est, -.1, 1), y, shape, color, 4.7)
         row_y += 8
 
-    c.text(40, 1040, "C", 16, "start", True)
-    c.text(70, 1040, "Recall@200 - Recall@100 (frozen 95% CI)", 13, "start", True)
+    c.text(40, 1045, "C", 16, "start", True)
+    c.text(70, 1045, "Recall@200 - Recall@100 (frozen 95% CI)", 16, "start", True)
     axes(c, 1065, 1150, -.1, 1, [-.1, 0, .2, .4, .6, .8, 1], "Paired recall difference")
     c.line(xmap(0, -.1, 1), 1065, xmap(0, -.1, 1), 1150, "#333333", 1.4)
     r = deep[0]

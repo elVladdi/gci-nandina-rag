@@ -48,9 +48,10 @@ def main() -> None:
     W, H, S = 1200, 675, 2.5
     image = Image.new("RGB", (round(W*S), round(H*S)), "white")
     draw = ImageDraw.Draw(image)
-    svg = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">', '<rect width="100%" height="100%" fill="white"/>']
+    svg = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W/120}in" height="{H/120}in" viewBox="0 0 {W} {H}">', '<rect width="100%" height="100%" fill="white"/>']
 
     def text(x, y, value, size=12, anchor="middle", bold=False, fill="#222222"):
+        size = max(size, 13.5)
         a = {"start":"lm","middle":"mm","end":"rm"}[anchor]
         draw.text((x*S,y*S), value, font=font(size,bold,S), fill=fill, anchor=a)
         svg.append(f'<text x="{x:.2f}" y="{y:.2f}" text-anchor="{anchor}" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="{size}" font-weight="{"700" if bold else "400"}" fill="{fill}">{html.escape(value)}</text>')
@@ -75,7 +76,7 @@ def main() -> None:
     left,right,top,bottom=100,815,95,565
     def ymap(v): return bottom-v/.35*(bottom-top)
     for tick in [0,.05,.10,.15,.20,.25,.30,.35]:
-        y=ymap(tick); line(left,y,right,y,"#E1E1E1",1); text(left-12,y,f"{tick:.2f}",9,"end")
+        y=ymap(tick); line(left,y,right,y,"#E1E1E1",1); text(left-12,y,f"{tick:.2f}",15,"end")
     line(left,top,left,bottom,"#444444",1.2); line(left,bottom,right,bottom,"#444444",1.2)
     # Match the external vertical label in both formats; 17 units = 10.2 pt in PNG.
     label = "Exact-NANDINA coverage"
@@ -89,19 +90,19 @@ def main() -> None:
     anchors={50:200,100:455,200:710}; dodge=[-28,-14,0,14,28]
     lookup={(r["variant"],int(r["depth"])):float(r["exact-NANDINA coverage"]) for r in rows}
     for depth in DEPTHS:
-        text(anchors[depth],bottom+23,str(depth),11,"middle",True)
+        text(anchors[depth],bottom+23,str(depth),15,"middle",True)
         for i,(variant,shape,color,formal) in enumerate(VARIANTS):
             marker(anchors[depth]+dodge[i],ymap(lookup[(variant,depth)]),shape,color,formal)
-    text((left+right)/2,bottom+50,"Recovery depth (ordered categories)",11,"middle")
+    text((left+right)/2,bottom+50,"Recovery depth (ordered categories)",17,"middle")
     text(865,105,"Formal claim variants",11,"start",True)
     for i,(variant,shape,color,formal) in enumerate(VARIANTS[:4]):
-        y=137+i*49; marker(878,y,shape,color,formal,6); text(896,y,variant,9,"start")
+        y=137+i*49; marker(878,y,shape,color,formal,6); text(896,y,variant,15,"start")
     text(865,350,"Context only",11,"start",True)
-    variant,shape,color,formal=VARIANTS[4]; marker(878,383,shape,color,formal,6); text(896,383,"hierarchical_70_",9,"start"); text(896,400,"dual_backfill_30",9,"start")
+    variant,shape,color,formal=VARIANTS[4]; marker(878,383,shape,color,formal,6); text(896,383,"hierarchical_70_",15,"start"); text(896,403,"dual_backfill_30",15,"start")
     text(865,458,"15 marks = 5 variants x 3 depths",9,"start",False,"#555555")
     text(865,480,"N = 1,056 series",9,"start",False,"#555555")
     text(865,500,"67 DAM / 42 NANDINA",9,"start",False,"#555555")
-    text(45,636,"The diagnostic union is excluded from ordinary performance. Context and formal variants retain equal visual weight.",9,"start",False,"#555555")
+    text(45,648,"The diagnostic union is excluded from ordinary performance. Context and formal variants retain equal visual weight.",13.5,"start",False,"#555555")
     OUT.mkdir(parents=True,exist_ok=True)
     (OUT/"g6_fig_02_phase_e.svg").write_text("\n".join(svg+["</svg>"])+"\n",encoding="utf-8",newline="\r\n")
     image.save(OUT/"g6_fig_02_phase_e.png",format="PNG",dpi=(300,300),optimize=False,compress_level=9)
