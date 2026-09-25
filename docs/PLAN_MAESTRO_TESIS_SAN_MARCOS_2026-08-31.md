@@ -30,8 +30,8 @@
 | 3. Métricas e inferencia | **CLOSED / APPROVED — G3-F01, G3-F02, G3-F03 y G3-F04=CLOSED/APPROVED/INTEGRATED_TO_MAIN; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 4. Análisis e interpretación | **CLOSED / APPROVED — G4-F01, G4-F02 y G4-F03=CLOSED/APPROVED/INTEGRATED_TO_MAIN; G4-F03_INTEGRATION_COMMIT=38e22c19a0eb0d344e7675761a88d7968091eead; G4-F03_EXTERNAL_REAUDIT=PASS; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
-| 6. Figuras y visualizaciones | **IN_PROGRESS — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F01_INTEGRATION_COMMIT=b6404ca85c8cd0b18a6b318bae1236d2ef021f4a; G6-F02=ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED; G6_F02_AUTHORIZED=false; G6_F02_STARTED=false** |
-| 7. Redacción científica | Pendiente / no autorizado |
+| 6. Figuras y visualizaciones | **CLOSED / APPROVED — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; GROUP6_CLOSURE_COMMIT=e93b44164a9619dad1f527a3b2d4479265858e39** |
+| 7. Redacción científica | **ELIGIBLE / NOT_AUTHORIZED — G7-F01=ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED** |
 | 8. Coherencia metodológica/documental | Pendiente |
 
 ## 3. Benchmark v0.2 congelado
@@ -2107,3 +2107,11 @@ manifest, la autorización ni el config.
 - `G6_F02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`; `G6_F02_AUTHORIZED = false`; `G6_F02_STARTED = false`.
 - Grupo 7 permanece `PENDIENTE / NOT_AUTHORIZED`. G6-F02 no fue ejecutada ni iniciada.
 - No se generaron figuras ni scripts y no se calcularon nuevas métricas, inferencia, intervalos o p-values; artículo y tesis no fueron modificados y EXP12 no fue reabierto.
+
+### 2026-09-24 — Cierre de G6-F03 y Grupo 6 tras auditoria externa
+
+- El candidato G6-F03 aprobado `b5eb500ee3215fd4fcdb5a8bde20a00b2f1c17b6` fue integrado por fast-forward exacto en `main`; el commit administrativo posterior `GROUP6_CLOSURE_COMMIT = e93b44164a9619dad1f527a3b2d4479265858e39` cambio exclusivamente los estados autorizados del caption registry y del closure JSON.
+- Se aprobaron exactamente 3 figuras y 3 captions: `G6_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `G6_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `G6_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `GROUP6 = CLOSED / APPROVED`.
+- `G7_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`; la elegibilidad no constituye autorizacion ni inicio de Grupo 7. Grupo 8 permanece pendiente y no autorizado.
+- `SCIENTIFIC_DATA_CHANGE_COUNT = 0`; `NEW_INFERENCE_COUNT = 0`; `NEW_CI_COUNT = 0`; `NEW_P_VALUE_COUNT = 0`. No se cambiaron captions cientificos, figuras, metricas, denominadores ni claims.
+- Tesis y articulo no fueron modificados; EXP12 no fue reabierto.
