@@ -1,7 +1,7 @@
 # G7-F01 — Writing source freeze v0.1
 
 ```text
-status = CANDIDATE_PENDING_EXTERNAL_AUDIT
+status = APPROVED
 ficha = G7-F01
 group = 7
 main_source_commit = e93b44164a9619dad1f527a3b2d4479265858e39
@@ -9,9 +9,9 @@ fichas_base = bed229d81b2ce3258e1ac3c9efc171458e2891aa
 plan_base = cc9a47986dfbae138738ad9945f0c0b1859b9f4f
 group6 = CLOSED / APPROVED
 group7 = IN_PROGRESS / NOT_CLOSED
-g7_f02 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+g7_f02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
 g7_f03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
-external_audit = PENDING
+external_audit = PASS
 ```
 
 This is a source and writing-action contract, not thesis or article prose. The companion JSON is the machine-readable registry: it lists each scientific source with its exact `main` blob and role, all eight article-control blobs, each hypothesis binding, and the full per-topic writing matrices. No result or hypothesis is recalculated here.
@@ -103,4 +103,4 @@ ATTEMPT06 != GLOBAL_ZERO_IMPACT
 EXP12 = CLOSED_WITHOUT_RETRIEVAL / NOT_ESTIMABLE / DO_NOT_REOPEN
 ```
 
-Open source gaps are explicit in JSON: HG and HE1 formal dispositions, thesis binary recheck before G7-F02, exact approved-project/Annex bytes for literal/method edits, explicit UNMSM format rule, and article drift check before G7-F03. None is silently filled. G7-F01 awaits independent external audit; no thesis/article modification or downstream activation is authorized by this candidate.
+Open source gaps are explicit in JSON: HG and HE1 formal dispositions, thesis binary recheck before G7-F02, exact approved-project/Annex bytes for literal/method edits, explicit UNMSM format rule, and article drift check before G7-F03. None is silently filled. G7-F01 passed independent external audit; no thesis/article modification or downstream activation is authorized by this closure.

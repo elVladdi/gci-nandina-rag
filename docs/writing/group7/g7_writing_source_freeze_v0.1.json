@@ -1,6 +1,6 @@
 {
   "artifact_id": "G7_F01_WRITING_SOURCE_FREEZE_v0.1",
-  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "status": "APPROVED",
   "ficha": "G7-F01",
   "group": 7,
   "main_source_commit": "e93b44164a9619dad1f527a3b2d4479265858e39",
@@ -9,7 +9,7 @@
     "plan_base": "cc9a47986dfbae138738ad9945f0c0b1859b9f4f",
     "group6": "CLOSED / APPROVED",
     "g7_f01_activation_basis": "STANDING_CONTINUATION_INSTRUCTION_AFTER_PROMPT111_EXTERNAL_PASS",
-    "g7_f02": "PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED",
+    "g7_f02": "ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED",
     "g7_f03": "PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED",
     "group8": "NOT_STARTED / NOT_AUTHORIZED"
   },
@@ -200,9 +200,9 @@
   "thesis_modified": false,
   "article_modified": false,
   "exp12_reopened": false,
-  "g7_f01_candidate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "g7_f01_candidate_status": "CLOSED / APPROVED / INTEGRATED_TO_MAIN",
   "g7_f02_authorized": false,
   "g7_f03_authorized": false,
   "group7_closed": false,
-  "external_audit": "PENDING"
+  "external_audit": "PASS"
 }
