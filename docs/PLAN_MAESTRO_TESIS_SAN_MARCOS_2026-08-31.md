@@ -31,8 +31,8 @@
 | 4. Análisis e interpretación | **CLOSED / APPROVED — G4-F01, G4-F02 y G4-F03=CLOSED/APPROVED/INTEGRATED_TO_MAIN; G4-F03_INTEGRATION_COMMIT=38e22c19a0eb0d344e7675761a88d7968091eead; G4-F03_EXTERNAL_REAUDIT=PASS; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 6. Figuras y visualizaciones | **CLOSED / APPROVED — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; GROUP6_CLOSURE_COMMIT=e93b44164a9619dad1f527a3b2d4479265858e39** |
-| 7. Redacción científica | **ELIGIBLE / NOT_AUTHORIZED — G7-F01=ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED** |
-| 8. Coherencia metodológica/documental | Pendiente |
+| 7. Redacción científica | **IN_PROGRESS — G7-F01=CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED; G7-F02=PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED; G7-F03=PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED** |
+| 8. Coherencia metodológica/documental | PENDING / NOT_AUTHORIZED |
 
 ## 3. Benchmark v0.2 congelado
 
@@ -2115,3 +2115,10 @@ manifest, la autorización ni el config.
 - `G7_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`; la elegibilidad no constituye autorizacion ni inicio de Grupo 7. Grupo 8 permanece pendiente y no autorizado.
 - `SCIENTIFIC_DATA_CHANGE_COUNT = 0`; `NEW_INFERENCE_COUNT = 0`; `NEW_CI_COUNT = 0`; `NEW_P_VALUE_COUNT = 0`. No se cambiaron captions cientificos, figuras, metricas, denominadores ni claims.
 - Tesis y articulo no fueron modificados; EXP12 no fue reabierto.
+
+### 2026-09-25 — Activacion y ejecucion candidata de G7-F01
+
+- Con Prompt111 aprobado externamente y `GROUP6 = CLOSED / APPROVED`, la instruccion permanente de continuacion activo exclusivamente G7-F01. Su estado previo era `ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`; elegibilidad no equivalia a autorizacion.
+- El writing source freeze se materializo desde `main = e93b44164a9619dad1f527a3b2d4479265858e39` en `writing/g7-f01-source-freeze-v01`, commit `d91298758dba674003bf650e7a303c36bd0b74d9`, mediante dos artefactos nuevos bajo `docs/writing/group7/`. Congela identidad de tesis, onboarding del articulo, fuentes cientificas, bindings de hipotesis y contratos de escritura; queda `CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED`.
+- `GROUP7 = IN_PROGRESS / NOT_CLOSED`; `G7_F02 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED`; `G7_F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED`; `GROUP8 = NOT_STARTED / NOT_AUTHORIZED`.
+- No se modificaron tesis, articulo ni resultados cientificos; no hubo nueva metrica, inferencia, CI o p-value. HG/HE1 carecen de disposicion formal localizada y no se invento una. EXP12 permanece cerrado sin retrieval y no estimable.
