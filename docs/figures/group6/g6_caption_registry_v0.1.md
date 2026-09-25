@@ -1,6 +1,6 @@
 # G6-F03 — Caption Registry v0.1
 
-status: CANDIDATE_PENDING_EXTERNAL_AUDIT
+status: APPROVED
 main_source_commit: 3390878a62ce32ba0e6f4fce69a394c903f5ff11
 figure_count: 3
 caption_count: 3
@@ -31,7 +31,7 @@ accessibility_checks:
   - visible zero references in contrast panels
   - no material clipping or label overlap detected
   - no internal workflow ID displayed as publication title
-status: CANDIDATE_PENDING_EXTERNAL_AUDIT
+status: APPROVED
 
 ## G6-FIG-02
 
@@ -59,7 +59,7 @@ accessibility_checks:
   - y-axis baseline at zero and range [0,0.35]
   - no material clipping or label overlap detected
   - no internal workflow ID displayed as publication title
-status: CANDIDATE_PENDING_EXTERNAL_AUDIT
+status: APPROVED
 
 ## G6-FIG-03
 
@@ -90,4 +90,4 @@ accessibility_checks:
   - H100 additionally encoded by solid diamond
   - no material clipping or label overlap detected
   - no internal workflow ID displayed as publication title
-status: CANDIDATE_PENDING_EXTERNAL_AUDIT
+status: APPROVED
