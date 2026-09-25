@@ -1011,3 +1011,32 @@ G7_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
 G7_F01_AUTHORIZED = false
 GROUP7 = NOT_STARTED
 ```
+
+## Activacion y ejecucion candidata G7-F01 — Prompt112
+
+La instruccion permanente de continuacion aplica a G7-F01 despues del PASS externo de Prompt111 y el cierre auditado de Grupo 6. Elegibilidad y autorizacion se registran como estados sucesivos, no como sinonimos.
+
+```text
+FICHA = G7-F01
+PREVIOUS_STATE = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+AUTHORIZATION_BASIS = STANDING_CONTINUATION_INSTRUCTION_AFTER_PROMPT111_EXTERNAL_PASS
+ACTIVATION_STATE = ACTIVE / AUTHORIZED / EXECUTION_PENDING
+MAIN_AT_ACTIVATION = e93b44164a9619dad1f527a3b2d4479265858e39
+GROUP6 = CLOSED / APPROVED
+GROUP7 = IN_PROGRESS
+G7_F02_AUTHORIZED = false
+G7_F03_AUTHORIZED = false
+```
+
+La ejecucion documental materializo exclusivamente el writing source freeze en dos archivos nuevos; no modifico tesis, articulo ni datos cientificos. El candidato no se considera aprobado antes de auditoria externa independiente.
+
+```text
+G7_F01_CANDIDATE_BRANCH = writing/g7-f01-source-freeze-v01
+G7_F01_CANDIDATE_COMMIT = d91298758dba674003bf650e7a303c36bd0b74d9
+G7_F01 = CANDIDATE_PENDING_EXTERNAL_AUDIT / EXECUTED / NOT_APPROVED
+GROUP7 = IN_PROGRESS / NOT_CLOSED
+G7_F02 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+G7_F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+GROUP8 = NOT_STARTED / NOT_AUTHORIZED
+PENDING_EXTERNAL_AUDIT = true
+```
