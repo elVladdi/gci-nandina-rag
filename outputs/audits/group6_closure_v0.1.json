@@ -1,0 +1,67 @@
+{
+  "artifact_id": "GROUP6_CLOSURE_CANDIDATE_V0.1",
+  "version": "v0.1",
+  "group": 6,
+  "ficha": "G6-F03",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "main_source_commit": "3390878a62ce32ba0e6f4fce69a394c903f5ff11",
+  "g6_f01_registry_path": "outputs/figures/group6/g6_figure_spec_registry_v0.1.json",
+  "g6_f01_registry_blob": "44cc30fc3c38639c6aa4370cb6f317458041f1b1",
+  "g6_f02_ledger_path": "outputs/figures/group6/g6_figure_hash_ledger_v0.1.csv",
+  "g6_f02_ledger_blob": "bfcbfe8a2232246476979506377ff3005166253f",
+  "figure_count": 3,
+  "figure_ids": [
+    "G6-FIG-01",
+    "G6-FIG-02",
+    "G6-FIG-03"
+  ],
+  "caption_count": 3,
+  "per_figure_source_bindings": {
+    "G6-FIG-01": [
+      "outputs/results/group5/tables/g5_main_01_he2a_primary_early_ranking.csv@cb68583ee2260e4455796bac99ad90995ca7ef92",
+      "outputs/results/group5/tables/g5_main_02_he2b_deep_coverage.csv@359e4e19b5ef1d44983c03039162209293b2a44c"
+    ],
+    "G6-FIG-02": [
+      "outputs/results/group5/tables/g5_secondary_01_phase_e_descriptive.csv@fa961cf3d6198ddba6a6b5eeadcc9a23c8801f61"
+    ],
+    "G6-FIG-03": [
+      "outputs/results/group5/tables/g5_appendix_02_exp11a_size_composition_sensitivity.csv@cf3aedab5935d6af9b3ac7be7b51b954fcb9c403",
+      "outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_metrics_by_run.csv@9b434d7e09e6db7e9de061953b59c53aac2337ad",
+      "outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_metrics_by_condition.csv@535dd377d107ddcbf09ecaa13cd66ca723ee738d"
+    ]
+  },
+  "per_figure_caption_checks": {
+    "G6-FIG-01": "PASS / population, arm-vs-paired distinction, 99% and 95% CI, no arm-level CI, internal scope and forbidden global-RAG interpretation explicit",
+    "G6-FIG-02": "PASS / descriptive role, four formal variants, 70/30 context only, diagnostic-union ceiling and no-confirmatory-role explicit",
+    "G6-FIG-03": "PASS / 31 observed runs, condition counts, H100 single reference, joint size-composition sensitivity and noncausal/nonmonotonic limitation explicit"
+  },
+  "per_figure_accessibility_checks": {
+    "G6-FIG-01": "PASS / min text 8.10 pt SVG and 8.16 pt PNG; axis/ticks 9.00/9.12 pt; redundant shapes; no material clipping",
+    "G6-FIG-02": "PASS / axis titles 10.20/10.08 pt; ticks and nominal legend 9.00/9.12 pt; distinct shapes; no material clipping",
+    "G6-FIG-03": "PASS / min text 8.70/8.64 pt; panel titles 9.60 pt; observations discernible; no vertical jitter; no material clipping"
+  },
+  "scientific_consistency": "PASS",
+  "accessibility": "PASS",
+  "caption_self_containment": "PASS",
+  "canonical_table_consistency": "PASS",
+  "numeric_consistency_with_group5": "PASS",
+  "claim_consistency_with_group4": "PASS",
+  "claim_scope_consistency": "PASS",
+  "uncertainty_consistency_with_group3": "PASS",
+  "forbidden_claim_count": 0,
+  "scientific_data_change_count": 0,
+  "new_scientific_metric_count": 0,
+  "new_inference_count": 0,
+  "new_ci_count": 0,
+  "new_p_value_count": 0,
+  "exp12_reopened": false,
+  "article_modified": false,
+  "thesis_modified": false,
+  "g6_f03_candidate_status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "group6_closure_candidate": true,
+  "group6_closed": false,
+  "external_audit": "PENDING",
+  "g7_f01_authorized": false,
+  "recommended_group6_state_after_external_pass": "CLOSED / APPROVED",
+  "recommended_next_ficha_after_external_pass": "G7-F01"
+}
