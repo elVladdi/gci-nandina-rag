@@ -7,23 +7,18 @@ ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-062
+LATEST_EDITORIAL_DECISION = D-065
 CANONICAL_MASTER = ARTICLE_MASTER_V012
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V012.md
-CANONICAL_MASTER_MD_SHA256 = d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78
-CANONICAL_MASTER_MD_GIT_BLOB = dfea73f5f462fc65cf98347f796deadc6da58455
-CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B03_V01.docx / LOCAL_AUTHOR_CUSTODY
-CANONICAL_MASTER_DOCX_SHA256 = 9616634f687410eec877678050a7a5176fd48c685fff457b0b9b39006abd775b
-CANONICAL_CITATION_COMMENTS = 40
+TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V013
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B04_SECTION_4_5_DRAFTING_V03
-CURRENT_AUTHORIZED_BLOCK = EXPERIMENTAL_DESIGN_B04_SECTION_4_5
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B04_SECTION4_5_V03.md@36f0093f0cdfbd78560f7af6a9e25be6e1f67035
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B04_V013_CANONICAL_INTEGRATION
 EXPERIMENTAL_DESIGN_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B02 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
-SECTION_4_5 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_V03_ONLY
-SECTION_4_6_TO_4_8 = NOT_AUTHORIZED
+EXPERIMENTAL_DESIGN_B04 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
+SECTION_4_5 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
+SECTION_4_6 = ELIGIBLE_AFTER_V013_INTEGRATION_AND_GROUND_TRUTH_SYNC / NOT_AUTHORIZED
+SECTION_4_7_TO_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -35,53 +30,31 @@ NOVELTY = NOT_DECLARED
 
 # Español
 
-## 1. Propósito
+## 1. Política científica y editorial acumulativa
 
-Administrar la construcción iterativa del artículo científico principal sin anticipar resultados, alterar el diseño experimental aprobado ni trasladar al manuscrito la lógica interna de gobernanza. Cada bloque parte del último master integrado y solo se vuelve canónico después de los gates de auditoría, corrección, aprobación e integración aplicables.
+El artículo se construye mediante masters acumulativos. Cada bloque parte del último master canónico y solo puede convertirse en estado de referencia después de auditoría independiente, correcciones aplicables, aprobación autoral cuando corresponda e integración técnica exacta.
 
-La redacción se rige por `KBS_EWG_34_V01`, MWDP v1.0, SPCCR, `CLAIM_EVIDENCE_MATRIX.md`, `SOURCE_REGISTRY.md`, decisiones activas y fuentes experimentales gobernantes para todo hecho empírico.
+Permanecen vinculantes MWDP v1.0, SPCCR, las decisiones activas, `SOURCE_REGISTRY.md`, `CLAIM_EVIDENCE_MATRIX.md`, la guía empírica KBS y las fuentes experimentales gobernantes.
 
-## 2. Principios científicos y editoriales vinculantes
+Fronteras obligatorias:
 
-- El artículo no es una versión abreviada de la tesis.
-- Secuencia narrativa: problema/posicionamiento → arquitectura general → instanciación experimental → resultados → interpretación.
-- El objeto general es un **framework configurable para apoyo auditable a la clasificación arancelaria**.
-- Section 3 es el núcleo técnico del framework.
-- La recuperación histórica genera y ordena candidatos.
-- El Top-3 queda fijado antes de la etapa documental y generativa.
-- La evidencia documental/normativa se asocia a candidatos ya fijados y no cambia composición ni orden.
-- El LLM local opera downstream para explicación controlada; no clasifica desde cero ni retroalimenta el ranking.
-- `candidate retrieval ≠ overall classification accuracy`.
-- `documentary/normative association ≠ substantive normative correctness`.
-- `auditability ≠ legal correctness`.
-- `configurability/replicability ≠ empirical generalization`.
-- SERIE es unidad de análisis; DAM/declaración es unidad de agrupamiento cuando la dependencia sea metodológicamente relevante.
-- EXP11A expresa sensibilidad conjunta tamaño/composición, no efecto causal aislado del tamaño.
-- EXP11B es descriptivo y no autoriza inferencia a una superpoblación de seeds.
-- EXP12 no permite estimar el efecto de diversidad histórica bajo el diseño congelado.
-- Toda afirmación científica debe ser autorizada y trazable.
-- Part I es el manuscript principal en inglés; Part II es el espejo español de control semántico.
-- Las abstracciones deben traducirse a componentes, entradas, acciones, salidas y restricciones observables.
-- `FINAL_GAP = NOT_DEFINED` y `NOVELTY = NOT_DECLARED` permanecen vinculantes.
+- el objeto general es un framework configurable para apoyo auditable a la clasificación arancelaria;
+- Section 3 es su núcleo técnico;
+- recuperación histórica = generación/ranking de candidatos;
+- Top-3 fijado antes de evidencia documental y generación;
+- evidencia normativa/documental = asociación de evidencia, no reranking;
+- LLM local = explicación controlada downstream, no clasificador autónomo;
+- `candidate retrieval ≠ overall classification accuracy`;
+- `normative association ≠ substantive normative correctness`;
+- `auditability ≠ legal correctness`;
+- `configurability ≠ empirical generalization`;
+- SERIE = unidad de análisis; DAM/declaración = unidad de agrupamiento cuando la dependencia es relevante;
+- `EXP11A_SIZE_COMPOSITION_SENSITIVITY ≠ ISOLATED_CAUSAL_SIZE_EFFECT`;
+- `EXP11B_DESCRIPTIVE ≠ SEED_SUPERPOPULATION_INFERENCE`;
+- `EXP12_DIVERSITY_EFFECT = NOT_ESTIMABLE`;
+- `FINAL_GAP = NOT_DEFINED` y `NOVELTY = NOT_DECLARED`.
 
-### 2.1 Regla específica de Methods
-
-Methods describe objetos científicos, procedencia, procedimientos, decisiones de diseño, ejecución, protocolos de evaluación y controles de validez. La identidad técnica exhaustiva de artefactos pertenece a manifiestos y recursos de reproducibilidad salvo necesidad metodológica concreta. La prosa principal no se organiza alrededor de hashes, rutas internas o inventarios de archivos.
-
-## 3. Estructura acumulativa
-
-1. Introduction
-2. Related work
-3. Decision-support architecture
-4. Experimental design
-5. Results
-6. Discussion + Limitations
-7. Conclusion
-8. KBS end matter
-
-La estructura detallada gobernante es `article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md`, aprobada mediante D-045.
-
-### 3.1 Section 4 aprobada
+## 2. Estructura congelada de Experimental Design
 
 ```text
 4.1 Experimental setting and scope
@@ -100,161 +73,70 @@ La estructura detallada gobernante es `article/manuscript/KBS_ARTICLE_WORKING_ST
 4.8 Reproducibility resources
 ```
 
-## 4. Política del master acumulativo y DOCX
+## 3. Política de continuidad Markdown/DOCX
 
-1. Cada bloque parte del último master aprobado e integrado.
-2. Master Markdown canónico vigente: `ARTICLE_MASTER_V012.md`, SHA-256 `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78`, Git blob `dfea73f5f462fc65cf98347f796deadc6da58455`.
-3. DOCX acumulativo vigente: `ARTICLE_MASTER_CANDIDATE_EXPDES_B03_V01.docx`, custodia local del autor, SHA-256 `9616634f687410eec877678050a7a5176fd48c685fff457b0b9b39006abd775b`, 40 comentarios heredados y 0 tracked changes.
-4. D-021/D-027 gobiernan custodia y entrega efectiva del binario; D-035 gobierna handoff timeout-safe.
-5. No se reconstruye DOCX desde Markdown ni desde un Word anterior.
-6. No se usa Base64 manual, chunking, recomposición ni workarounds prohibidos.
-7. Los bloques nuevos preservan secciones, comentarios, estilos semánticos, tablas y captions aprobados salvo reapertura explícita.
-8. MWDP v1.0 es acumulativo; ausencia de una regla en un prompt no la deroga.
+Master Markdown canónico actual, hasta cierre técnico de V013:
 
-## 5. Estado de fases y bloques
+`article/manuscript/ARTICLE_MASTER_V012.md`
 
-| Elemento | Estado |
+SHA-256 `d4b0e1941791e901e20c476b99206a92ef78ea18cb2dbd4f74ae84c2c7696de06dfe9207475cde68214f284f` is NOT applicable; the correct V012 SHA is `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78` and Git blob `dfea73f5f462fc65cf98347f796deadc6da58455`.
+
+Approved B04 V02 cumulative candidate:
+
+- Markdown: `ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.md`;
+- SHA-256: `2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43`;
+- expected Git blob: `06beaa052e2f1bcc630647040762fe78d3838a62`;
+- DOCX: `ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.docx`;
+- DOCX SHA-256: `cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f`;
+- citation comments: 40 preserved;
+- tracked changes: 0.
+
+D-021/D-027/D-035 remain binding. The DOCX remains under local author custody and must not be reconstructed from Markdown or from an earlier Word file.
+
+## 4. Estado de bloques
+
+| Bloque | Estado |
 |---|---|
-| 0A | CLOSED / APPROVED |
-| 0B | CLOSED / APPROVED / FROZEN |
-| 0C | CLOSED / APPROVED / FROZEN |
-| KBS-34 guide | AUTHOR_APPROVED / ACTIVE / BINDING |
-| Structure V02 | AUTHOR_APPROVED / FROZEN_FOR_DRAFTING |
-| Related Work 2.1–2.6 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| Introduction B01 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| Related Work | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| Introduction | CLOSED / APPROVED / FROZEN / INTEGRATED |
 | Architecture 3.1–3.7 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| Experimental Design B01 / 4.1–4.2.3 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| Experimental Design B02 / 4.3 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| Experimental Design B03 / 4.4 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| Canonical master | `ARTICLE_MASTER_V012.md` |
-| Experimental Design B04 / 4.5 | **OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_V03_ONLY** |
-| Sections 4.6–4.8 | NOT_AUTHORIZED |
-| Experimental figures/captions from Group 6 | CLOSED / APPROVED externally; EDITORIAL_INTEGRATION_DEFERRED |
-| Results | NOT_AUTHORIZED |
-| Discussion | NOT_AUTHORIZED |
-| Conclusion | NOT_AUTHORIZED |
+| B01 / 4.1–4.2.3 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| B02 / 4.3 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| B03 / 4.4 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| B04 / 4.5 | CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION |
+| ARTICLE_MASTER_V013 | AUTHORIZED / NOT_YET_VERIFIED_AS_MATERIALIZED |
+| B05 / 4.6 | ELIGIBLE AFTER V013 + LIVE GROUND-TRUTH SYNC / NOT AUTHORIZED |
+| 4.7–4.8 | NOT AUTHORIZED |
+| Results | NOT AUTHORIZED |
+| Discussion | NOT AUTHORIZED |
+| Conclusion | NOT AUTHORIZED |
 
-## 6. Orden operativo de redacción
+## 5. Cierre de B04
 
-| Fase | Entregable | Gate |
-|---|---|---|
-| 1 | Estructura completa | CLOSED / AUTHOR_APPROVED; Section 4 amended by D-045 |
-| 2 | Related Work | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| 3 | Introduction | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| 4 | Decision-support architecture | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| 5A | 4.1 + 4.2.1–4.2.3 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| 5B | 4.3 Documentary corpus and evidence resource | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| 5C | 4.4 Partition validity and dependence controls | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| 5D | 4.5 Experimental system configuration and execution | **ACTIVE / AUTHORIZED UNDER PROMPT V03** |
-| 5E | 4.6 Evaluation framework and protocols | NOT_AUTHORIZED |
-| 5F | 4.7 Statistical and robustness analysis | NOT_AUTHORIZED |
-| 5G | 4.8 Reproducibility resources | NOT_AUTHORIZED |
-| 6 | Results provisional | Experimental Design sufficiently stable + editorial gate + consumable evidence |
-| 7 | Integración editorial de figuras experimentales aprobadas | solo cuando Results/material secundario correspondiente esté abierto |
-| 8 | Final Results | Results provisional + recursos autorizados + auditoría editorial |
-| 9 | Discussion + Limitations | final Results + authorized literature contrast |
-| 10 | Conclusion | Discussion closed |
-| 11 | Abstract | complete manuscript |
-| 12 | Title + Keywords | Abstract/manuscript complete |
-| 13 | Transversal synchronization | according to live external dependencies |
-| 14 | Scientific audit/freeze | after synchronization and required audits |
-| 15 | Final KBS adaptation | scientific freeze + current submission requirements |
+B04 V01 fue ejecutado bajo el contrato V03. La auditoría de Gestora detectó únicamente dos problemas estrechos de precisión, B04-C01 y B04-C02. D-063 autorizó su corrección literal y B04 V02 la ejecutó sin otras mutaciones. La revisión diferencial V01 emitió PASS. D-064 abrió el gate de aprobación autoral y el autor aprobó expresamente B04 V02. D-065 congela Section 4.5 y autoriza la promoción byte-exacta del candidato a `ARTICLE_MASTER_V013.md`.
 
-## 7. Concurrencia con el proceso experimental
+No se reabre contenido B01–B04 durante la promoción.
 
-Solo la IA Experimental administra `SRC-03` y el Plan Maestro experimental. La IA Gestora y la IA de Redacción los consultan en solo lectura.
+## 6. Siguiente bloque: B05 / Section 4.6
 
-Antes de cada bloque que dependa de hechos experimentales se consulta la rama viva `docs/plan-maestro-temporal-2026-08-31` y se determina si cualquier drift altera materialmente los hechos consumidos.
+B05 no se abre todavía. Antes deben cumplirse tres condiciones:
 
-Último corte sincronizado registrado por el artículo:
+1. materializar y verificar `ARTICLE_MASTER_V013.md` con el blob exacto `06beaa052e2f1bcc630647040762fe78d3838a62`;
+2. reconstruir el estado vivo de SRC-03 y `main` relevante a los protocolos de evaluación;
+3. emitir y auditar un prompt atómico específico para Section 4.6 que cubra 4.6, 4.6.1, 4.6.2 y 4.6.3 sin anticipar Results ni invadir 4.7.
+
+El futuro contrato B05 deberá mapear explícitamente `RQ → función del sistema → salida → unidad de evaluación → métrica/protocolo → interpretación permitida` y mantener separadas la evaluación de candidate retrieval, documentary evidence y controlled explanation.
+
+## 7. Gate inmediato
 
 ```text
-SRC03_HEAD = 87422102290a4f9a89c51e936cf7274d8e4687d8
-SRC03_PLAN_BLOB = cf587b61b7bfbc66dca310a7bb3b4d3f64671eea
-DEVELOPMENT_MAIN = db0d0ad0d8435921a7838db6720eaea86a263763
-GROUP6 = CLOSED / APPROVED
-GROUP7 = IN_PROGRESS / NOT_CLOSED
-G7_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
-G7_F02 = ACTIVE / AUTHORIZED / EXECUTION_PENDING
-G7_F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
-GROUP8 = NOT_STARTED / NOT_AUTHORIZED
-```
-
-El avance externo no modifica automáticamente el gate editorial local.
-
-## 8. Fase activa — B04 / Section 4.5
-
-### 8.1 Contrato vigente
-
-Solo es ejecutable:
-
-`article/prompts/5_EXPERIMENTAL_DESIGN_B04_SECTION4_5_V03.md@36f0093f0cdfbd78560f7af6a9e25be6e1f67035`
-
-Git blob:
-
-`6f7d7c76abbdc8c25e8bb2e51e072952b0feaf36`
-
-La revisión interna del prompt emitió `PASS` en `article/reviews/5_EXPERIMENTAL_DESIGN_B04_SECTION4_5_PROMPT_V03_INTERNAL_REVIEW_V01.md@f19f2005d6de7b83b649677a7d29ca384765b54b` y D-062 autorizó la ejecución.
-
-V01 y V02 permanecen históricos y no ejecutables.
-
-### 8.2 Función narrativa
-
-4.5 debe instanciar Section 3 y describir elecciones de ejecución materialmente relevantes:
-
-1. representación/normalización de consulta;
-2. configuración de recuperación histórica;
-3. Top-k y fixed Top-3;
-4. asociación documental específica por candidato;
-5. construcción del contexto;
-6. modelo local, prompt/configuración y restricciones de generación;
-7. software/hardware/runtime solo cuando estén verificados y sean relevantes.
-
-No debe anticipar métricas observadas de desempeño ni convertirse en inventario técnico del repositorio.
-
-### 8.3 Entregables obligatorios
-
-B04 debe producir exactamente:
-
-- `article/sections/experimental_design/Experimental_Design_B04_V01.md`;
-- `ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V01.md`;
-- `ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V01.docx`;
-- `article/responses/5_EXPERIMENTAL_DESIGN_B04_SECTION4_5_RESPONSE_V01.md`.
-
-El DOCX es obligatorio, parte exclusivamente del B03 exacto y debe ser entregado efectivamente al autor.
-
-## 9. Ciclo obligatorio
-
-```text
-IA Gestora reconstruye estado/evidencia
-→ abre/versiona bloque y prompt cerrado
-→ IA de Redacción ejecuta solo el bloque
-→ entrega artefactos y response versionada
-→ IA Gestora audita independientemente claim por claim
-→ IA Experimental revisa solo si existe trigger material
-→ corrección si corresponde
-→ PASS
-→ aprobación expresa del autor cuando aplique
-→ IA Gestora integra/promueve técnicamente
-→ abre el siguiente gate solo si queda habilitado
-```
-
-## 10. Estado inmediato
-
-```text
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B04_SECTION_4_5_DRAFTING_V03
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_B04_SECTION_4_5_PROMPT_V03
-PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B04_SECTION4_5_V03.md
-PROMPT_COMMIT = 36f0093f0cdfbd78560f7af6a9e25be6e1f67035
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V012.md
-BASELINE_MASTER_MD_GIT_BLOB = dfea73f5f462fc65cf98347f796deadc6da58455
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B03_V01.docx
-BASELINE_DOCX_SHA256 = 9616634f687410eec877678050a7a5176fd48c685fff457b0b9b39006abd775b
-PRIOR_CITATION_COMMENTS = 40 / PRESERVE
-EXPECTED_EXIT = EXECUTION_COMPLETED_PENDING_GESTORA_AUDIT
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-SECTION_4_6_TO_4_8 = NOT_AUTHORIZED
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B04_V013_CANONICAL_INTEGRATION
+NEXT_ACTION = MATERIALIZE_AND_VERIFY_ARTICLE_MASTER_V013
+TARGET_PATH = article/manuscript/ARTICLE_MASTER_V013.md
+EXPECTED_SHA256 = 2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43
+EXPECTED_GIT_BLOB = 06beaa052e2f1bcc630647040762fe78d3838a62
+CURRENT_CANONICAL_MASTER = ARTICLE_MASTER_V012
+B05 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
 
@@ -262,75 +144,35 @@ RESULTS = NOT_AUTHORIZED
 
 # English
 
-## 1. Purpose
+## 1. Cumulative scientific/editorial policy
 
-Manage iterative construction of the main scientific article without anticipating Results, altering the approved experimental design, or transferring internal governance logic into publication prose. Each block starts from the latest integrated master and becomes canonical only after all applicable audit, correction, approval, and integration gates.
+The article uses cumulative masters. Each block starts from the latest canonical master and becomes the reference state only after independent audit, applicable corrections, author approval where required, and exact technical integration.
 
-Drafting is governed by `KBS_EWG_34_V01`, MWDP v1.0, SPCCR, `CLAIM_EVIDENCE_MATRIX.md`, `SOURCE_REGISTRY.md`, active decisions, and governing experimental sources for every empirical fact.
+MWDP v1.0, SPCCR, active decisions, `SOURCE_REGISTRY.md`, `CLAIM_EVIDENCE_MATRIX.md`, the KBS empirical guide, and governing experimental sources remain binding. The functional separation among historical candidate ranking, fixed Top-3, documentary evidence, and downstream controlled explanation remains mandatory, as do all frozen interpretation boundaries and the `FINAL_GAP = NOT_DEFINED` / `NOVELTY = NOT_DECLARED` constraints.
 
-## 2. Binding scientific and editorial principles
+## 2. Experimental Design structure
 
-The article remains a configurable-framework paper whose Section-3 architecture is the technical core. Historical retrieval generates and orders candidates; the Top-3 is frozen before documentary/generative stages; documentary evidence does not rerank; the local LLM is downstream explanation only. Candidate retrieval is not global accuracy; normative association is not substantive correctness; auditability is not legal correctness; configurability is not empirical generalization. SERIE remains the analysis unit and DAM/declaration the grouping unit where dependence matters. EXP11A/EXP11B/EXP12 retain their frozen interpretations. `FINAL_GAP = NOT_DEFINED` and `NOVELTY = NOT_DECLARED`.
+Section 4 remains frozen as 4.1 setting/scope, 4.2 historical data/dataset construction, 4.3 documentary corpus, 4.4 partition validity, 4.5 experimental system configuration/execution, 4.6 evaluation framework/protocols with three functional subsections, 4.7 statistical/robustness analysis, and 4.8 reproducibility resources.
 
-## 3. Governing structure
+## 3. Markdown/DOCX continuity
 
-The detailed governing structure remains `KBS_ARTICLE_WORKING_STRUCTURE_V02.md` with Section 4 organized as 4.1 setting/scope, 4.2 historical data/dataset construction, 4.3 documentary corpus, 4.4 partition validity, 4.5 experimental system configuration and execution, 4.6 evaluation framework/protocols, 4.7 statistical/robustness analysis, and 4.8 reproducibility resources.
+Until V013 promotion closes, `ARTICLE_MASTER_V012.md` remains canonical at SHA-256 `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78`, blob `dfea73f5f462fc65cf98347f796deadc6da58455`.
 
-## 4. Cumulative master policy
+The author-approved B04 V02 cumulative candidates are Markdown SHA-256 `2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43`, expected Git blob `06beaa052e2f1bcc630647040762fe78d3838a62`, and DOCX SHA-256 `cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f`. The Word file remains in local author custody with 40 inherited citation comments and zero tracked changes.
 
-Canonical Markdown is `ARTICLE_MASTER_V012.md` at SHA-256 `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78`, blob `dfea73f5f462fc65cf98347f796deadc6da58455`. The current cumulative Word baseline is `ARTICLE_MASTER_CANDIDATE_EXPDES_B03_V01.docx` at SHA-256 `9616634f687410eec877678050a7a5176fd48c685fff457b0b9b39006abd775b`, in author custody, with 40 inherited comments and zero tracked changes. DOCX reconstruction is prohibited; D-021/D-027/D-035 and MWDP remain binding.
+## 4. Block state
 
-## 5. Phase state
+B01–B03 are closed, approved, frozen, and integrated. B04/4.5 is closed, approved, frozen, and ready for integration. V013 is authorized but not yet verified as materialized. B05/4.6 is eligible only after V013 integration and live ground-truth synchronization; 4.7–4.8 and Results remain unauthorized.
 
-B01, B02/4.3, and B03/4.4 are closed, approved, frozen, and integrated. B04/4.5 is **OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_V03_ONLY**. Sections 4.6–4.8, Results, Discussion, and Conclusion remain unauthorized.
-
-## 6. Drafting order
-
-The active step is Phase 5D / Section 4.5. Phase 5E/4.6 and later phases remain closed. Group-6 figures remain externally approved resources whose editorial insertion is deferred until the corresponding Results/secondary-material gate opens.
-
-## 7. Experimental concurrency
-
-Only the Experimental AI manages SRC-03 and the experimental Master Plan. The Managing and Drafting AIs read them only. The Drafting AI must re-read live SRC-03/main for B04 and assess whether any drift materially changes the consumed facts; external progress does not automatically alter the editorial gate.
-
-## 8. Active phase — B04 / Section 4.5
-
-The only executable contract is `article/prompts/5_EXPERIMENTAL_DESIGN_B04_SECTION4_5_V03.md@36f0093f0cdfbd78560f7af6a9e25be6e1f67035`, blob `6f7d7c76abbdc8c25e8bb2e51e072952b0feaf36`. Its internal review at `f19f2005d6de7b83b649677a7d29ca384765b54b` returned `PASS`, and D-062 authorized execution. V01/V02 remain historical and non-executable.
-
-Section 4.5 instantiates Section 3 and reports materially relevant execution choices: query representation/normalization, historical retrieval, Top-k/fixed Top-3 construction, candidate-specific documentary association, context construction, local model/prompt/generation restrictions, and verified material software/hardware/runtime conditions. Observed performance values remain outside 4.5.
-
-Mandatory deliverables are the versioned B04 block, cumulative candidate Markdown master, cumulative candidate DOCX master, and bilingual versioned response. The DOCX must derive only from the exact B03 binary and must actually be handed to the author.
-
-## 9. Mandatory cycle
+## 5. Immediate gate
 
 ```text
-Managing AI reconstructs state/evidence
-→ versions a closed block prompt
-→ Drafting AI executes only that block
-→ delivers artifacts and versioned response
-→ Managing AI independently audits claims, scope, bilingual equivalence, Word, comments, and versioning
-→ Experimental AI reviews only when a material trigger exists
-→ corrections if required
-→ PASS
-→ explicit author approval when applicable
-→ Managing AI integrates/promotes
-→ next gate opens only if authorized
-```
-
-## 10. Immediate state
-
-```text
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B04_SECTION_4_5_DRAFTING_V03
-NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = EXECUTE_ONLY_B04_SECTION_4_5_PROMPT_V03
-PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B04_SECTION4_5_V03.md
-PROMPT_COMMIT = 36f0093f0cdfbd78560f7af6a9e25be6e1f67035
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V012.md
-BASELINE_MASTER_MD_GIT_BLOB = dfea73f5f462fc65cf98347f796deadc6da58455
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B03_V01.docx
-BASELINE_DOCX_SHA256 = 9616634f687410eec877678050a7a5176fd48c685fff457b0b9b39006abd775b
-PRIOR_CITATION_COMMENTS = 40 / PRESERVE
-EXPECTED_EXIT = EXECUTION_COMPLETED_PENDING_GESTORA_AUDIT
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-SECTION_4_6_TO_4_8 = NOT_AUTHORIZED
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B04_V013_CANONICAL_INTEGRATION
+NEXT_ACTION = MATERIALIZE_AND_VERIFY_ARTICLE_MASTER_V013
+TARGET_PATH = article/manuscript/ARTICLE_MASTER_V013.md
+EXPECTED_SHA256 = 2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43
+EXPECTED_GIT_BLOB = 06beaa052e2f1bcc630647040762fe78d3838a62
+CURRENT_CANONICAL_MASTER = ARTICLE_MASTER_V012
+B05 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
