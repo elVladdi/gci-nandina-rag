@@ -7,25 +7,22 @@ ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-070
-CANONICAL_MASTER = ARTICLE_MASTER_V013
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V013.md
-CANONICAL_MASTER_MD_GIT_BLOB = 06beaa052e2f1bcc630647040762fe78d3838a62
-CURRENT_CANONICAL_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.docx / LOCAL_AUTHOR_CUSTODY
-CURRENT_CANONICAL_DOCX_SHA256 = cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f
-B05_APPROVED_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUTHOR_CUSTODY
-B05_APPROVED_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
+LATEST_EDITORIAL_DECISION = D-073
+CANONICAL_MASTER = ARTICLE_MASTER_V014
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
+CANONICAL_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
+CANONICAL_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
+CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = B05_V014_PROMOTION
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_SECTION_4_7_DRAFTING_V01
 EXPERIMENTAL_DESIGN_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B02 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B04 = CLOSED / APPROVED / FROZEN / INTEGRATED
-EXPERIMENTAL_DESIGN_B05 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
-SECTION_4_6 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
-TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V014
-B06 / SECTION_4_7 = NOT_AUTHORIZED_UNTIL_V014_INTEGRATION_CLOSE
+EXPERIMENTAL_DESIGN_B05 = CLOSED / APPROVED / FROZEN / INTEGRATED
+B06 / SECTION_4_7 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B06_V01_ONLY
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
@@ -40,9 +37,9 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Política acumulativa
 
-El artículo se construye sobre masters acumulativos. `ARTICLE_MASTER_V013.md` permanece canónico hasta completar la promoción técnica autorizada por D-070. B05/Section 4.6 ya cuenta con aprobación autoral expresa y está congelado para integración.
+El artículo se construye sobre masters acumulativos. `ARTICLE_MASTER_V014.md` es el master Markdown canónico verificado. El Word acumulativo canónico vigente es `ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx`, bajo custodia local del autor.
 
-MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGISTRY.md` y `CLAIM_EVIDENCE_MATRIX.md` permanecen vinculantes. No se reconstruyen masters acumulativos ni se alteran bloques aprobados durante una promoción.
+MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGISTRY.md` y `CLAIM_EVIDENCE_MATRIX.md` permanecen vinculantes. No se reconstruyen masters acumulativos ni se alteran bloques aprobados.
 
 ## 2. Estructura congelada de Experimental Design
 
@@ -74,61 +71,99 @@ MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGIS
 | B02 / 4.3 | CLOSED / APPROVED / FROZEN / INTEGRATED |
 | B03 / 4.4 | CLOSED / APPROVED / FROZEN / INTEGRATED |
 | B04 / 4.5 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| ARTICLE_MASTER_V013 | CANONICAL / VERIFIED |
-| B05 / 4.6 | CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION |
-| ARTICLE_MASTER_V014 | AUTHORIZED / PENDING_MATERIALIZATION_AND_VERIFICATION |
-| B06 / 4.7 | NOT AUTHORIZED UNTIL V014 INTEGRATION CLOSE |
+| B05 / 4.6 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| ARTICLE_MASTER_V014 | CANONICAL / VERIFIED |
+| B06 / 4.7 | OPEN / AUTHORIZED UNDER B06 V01 ONLY |
 | 4.8 | NOT AUTHORIZED |
 | Results | NOT AUTHORIZED |
 | Discussion | NOT AUTHORIZED |
 | Conclusion | NOT AUTHORIZED |
 
-## 4. B05 / Section 4.6 — cierre autoral
+## 4. Cierre B05 y promoción V014
 
-La ejecución B05 se realizó bajo:
+D-071 verificó que `ARTICLE_MASTER_V014.md` posee Git blob `20105abb745e382b923e4eb43d9a771a722df9e3`, exactamente igual al candidato B05 V01 aprobado. Por identidad byte-exacta se conserva también el SHA-256 auditado `e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97`.
 
-`article/prompts/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6.md@89a5e122c7ed6ab0ffe90a53e2a68e65830d6d99`.
-
-La response final es:
-
-`article/responses/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6_RESPONSE_V02.md@9e9546a9d052c1fc1145bf42d37f53e7bcd0ba84`.
-
-La auditoría científica/técnica y el microgate correctivo de metadata recibieron `PASS`. D-070 registra la aprobación autoral explícita y congela 4.6/4.6.1–4.6.3 para integración.
-
-Se mantienen:
-
-- candidate retrieval ≠ overall classification accuracy;
-- documentary association ≠ substantive normative/legal correctness;
-- auditability ≠ legal correctness;
-- automatic HE4 checks ≠ qualitative rubric;
-- evaluación cualitativa efectiva `AI_EXPERT_ROLE / LLM-as-judge`, `HUMAN_SCORING = FALSE`;
-- C14 como único claim condicional de 4.6, bajo límites explícitos;
-- ausencia de resultados observados en Methods.
-
-## 5. Promoción autorizada a V014
-
-El candidato aprobado es:
+B05 / Section 4.6 queda cerrado, aprobado, congelado e integrado. El baseline Word acumulativo es:
 
 ```text
-B05_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.md
-B05_CANDIDATE_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
-B05_CANDIDATE_MD_GIT_BLOB_EXPECTED = 20105abb745e382b923e4eb43d9a771a722df9e3
-B05_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx
-B05_CANDIDATE_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
-TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V014
+ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx
+SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
+COMMENTS = 40 / PRESERVE
 ```
 
-La promoción Markdown debe ser byte-exacta. El DOCX permanece bajo custodia local del autor y será la base acumulativa de B06 una vez se cierre técnicamente la integración V014.
+## 5. Fase activa — B06 / Section 4.7
 
-## 6. Orden operativo inmediato
+Ground truth: D-072.
+
+Contrato único ejecutable:
+
+`article/prompts/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7.md@f29d10e10c5b94e3c36947cc42031f6dbac4e7bf`
+
+Git blob:
+
+`23159f8e85210c78ccfbb2acec4f5b560e83b984`
+
+Revisión interna:
+
+`article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_PROMPT_INTERNAL_REVIEW_V01.md@1ca287f50580c4c023abf959bb47546bf22e3057` — `PASS`.
+
+Autorización: D-073.
+
+### 5.1 Función científica
+
+B06 describe la construcción de la inferencia y los análisis de sensibilidad/robustez sin reportar los valores observados. Debe conservar:
+
+- SERIE como unidad primaria de análisis;
+- DAM/declaración como cluster de dependencia;
+- estimando pareado ponderado por series;
+- remuestreo de DAM completas con todas sus series;
+- 10.000 réplicas bootstrap y seed 20263001;
+- la misma matriz de DAM remuestreadas para comparaciones pareadas;
+- Top-1/3/5/10 + MRR@100 como familia primaria por comparador;
+- IC percentil bilateral del 99% con regla Bonferroni FWER 95% dentro de cada familia de cinco métricas;
+- Top-50 suplementario con IC 95%;
+- un único contraste inferencial deep-coverage `Recall@200 - Recall@100` con IC 95%;
+- ausencia de p-values;
+- diferencia absoluta pareada como medida de efecto congelada, sin medida estandarizada post hoc.
+
+### 5.2 Sensibilidad y robustez
+
+- H25/H50/H75 vs H100: sensibilidad descriptiva conjunta tamaño/composición; no causalidad aislada del tamaño.
+- H150/H200: sensibilidad descriptiva con diez seeds pareados sobre el mismo EVAL; sin inferencia a superpoblación de seeds.
+- 0B-05C Attempt06: sensibilidad descriptiva bajo el estado correctivo gobernado.
+- Phase-E pools: inventarios descriptivos de cobertura, no rankings alternativos ni inferencia primaria.
+- EXP12: diversidad no estimable.
+- Descripción ambigua/incompleta: prevalencia no estimable.
+- Proximidad jerárquica: categorías descriptivas.
+- Soporte histórico: buckets literales `1 DAM`, `2 DAM`, `3-4 DAM`, `5+ DAM`, sin umbral post hoc de insuficiencia.
+
+### 5.3 Fronteras
+
+No introducir Results en 4.7: no point estimates, intervalos observados, p-values, disposiciones HE2/HE5, resultados de sensibilidad ni conclusiones de superioridad. El bootstrap describe incertidumbre dentro del benchmark interno Chapter 87 y no autoriza inferencia a población externa.
+
+## 6. Sincronización experimental
 
 ```text
-CURRENT_GATE = B05_V014_PROMOTION
-NEXT_ACTION = MATERIALIZE_AND_VERIFY_ARTICLE_MASTER_V014
-CURRENT_CANONICAL_MASTER = ARTICLE_MASTER_V013
-TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V014
-AFTER_VERIFIED_PROMOTION = CLOSE_B05_INTEGRATION_AND_PREPARE_B06
-B06 / SECTION_4_7 = NOT_AUTHORIZED_UNTIL_THEN
+SRC03_HEAD = 87422102290a4f9a89c51e936cf7274d8e4687d8
+SRC03_PLAN_BLOB = cf587b61b7bfbc66dca310a7bb3b4d3f64671eea
+DEVELOPMENT_MAIN = db0d0ad0d8435921a7838db6720eaea86a263763
+G3_ANALYTICAL_CONTRACT_BLOB = 76862c10fd84fd70588da2d65f96dbe3b40914f6
+G3_INFERENTIAL_METHODS_BLOB = 6cf424c9cf8aa7371dbbf5b8baaf7305cc66a436
+```
+
+La IA de Redacción debe re-verificar fuentes vivas antes de ejecutar y detenerse ante drift material.
+
+## 7. Gate inmediato
+
+```text
+NEXT_ACTOR = IA_REDACCION
+NEXT_ACTION = EXECUTE_ONLY_B06_SECTION_4_7_PROMPT_V01
+BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
+BASELINE_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
+BASELINE_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx
+BASELINE_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
+EXPECTED_EXIT = EXECUTION_COMPLETED_PENDING_GESTORA_AUDIT
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
@@ -137,21 +172,29 @@ RESULTS = NOT_AUTHORIZED
 
 # English
 
-## Current state
+## 1. Current cumulative state
 
-B05/Section 4.6 has passed scientific/technical review, the response-metadata corrective microgate, and explicit author approval. D-070 freezes Sections 4.6 and 4.6.1–4.6.3 for integration.
+`ARTICLE_MASTER_V014.md` is the verified canonical Markdown master. `ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx` is the cumulative Word baseline in local author custody. B01–B05 are closed, approved, frozen, and integrated.
 
-`ARTICLE_MASTER_V013.md` remains canonical until the approved B05 Markdown candidate is materialized and verified byte-exactly as `ARTICLE_MASTER_V014.md`.
+B06 / Section 4.7 is open only under `article/prompts/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7.md@f29d10e10c5b94e3c36947cc42031f6dbac4e7bf`, which passed independent prompt review and was authorized by D-073.
+
+## 2. Scientific function and boundaries
+
+Section 4.7 describes inferential, sensitivity, and robustness procedures without observed Results. It preserves the series-weighted estimand, DAM-cluster dependence handling, the frozen 10,000-replicate paired bootstrap with seed 20263001, the comparator-family interval/multiplicity rules, the single deep-coverage contrast, and the frozen descriptive/not-estimable sensitivity statuses.
+
+No observed point estimates, observed intervals, p-values, final HE2/HE5 dispositions, superiority conclusions, external-population inference, causal historical-bank-size claims, seed-superpopulation inference, or standardized post-hoc effect measures belong in this Methods block.
+
+## 3. Exact baselines and gate
 
 ```text
-B05_CANDIDATE_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
-B05_CANDIDATE_MD_GIT_BLOB_EXPECTED = 20105abb745e382b923e4eb43d9a771a722df9e3
-B05_CANDIDATE_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
-CURRENT_GATE = B05_V014_PROMOTION
-TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V014
-B06 / SECTION_4_7 = NOT_AUTHORIZED_UNTIL_V014_INTEGRATION_CLOSE
+CANONICAL_MASTER = ARTICLE_MASTER_V014
+CANONICAL_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
+CANONICAL_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx
+BASELINE_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_SECTION_4_7_DRAFTING_V01
+NEXT_ACTOR = DRAFTING_AI
+EXPECTED_EXIT = EXECUTION_COMPLETED_PENDING_GESTORA_AUDIT
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
-
-After verified V014 promotion, the Managing AI may close B05 integration and prepare the Section 4.7 gate. No later section is opened by D-070 itself.
