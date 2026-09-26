@@ -1064,3 +1064,36 @@ GROUP8 = NOT_STARTED / NOT_AUTHORIZED
 ```
 
 Los gaps de fuentes del freeze siguen abiertos y la elegibilidad de G7-F02 no autoriza editar la tesis.
+
+## Activacion administrativa G7-F02 tras PREF005 — Prompt115
+
+PREF005 fue completado con los binarios autoritativos suministrados por el autor y aprobado por la IA Experimental. La activacion no constituye ejecucion de la ficha ni autoriza a CODEX a redactar la tesis. Los gates obligatorios de identidad son tesis y proyecto aprobado; v13 queda como fuente metodologica auxiliar confirmada.
+
+```text
+FICHA = G7-F02
+PREVIOUS_STATE = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+PREF005_RESPONSE_COMMIT = 514924a83d6476279eaf40d126a42b6a81b037f4
+PREF005_RESPONSE_BLOB = b3c8a3836dcf3bea401ea27e85c5a04568c15d89
+PREF005_EXTERNAL_AUDIT = PASS
+SOURCE_IDENTITY_GATE = SATISFIED
+THESIS_SHA256 = 08b48ec1687ae0a0d943724bf2d682aca02d2a9f5a124b3dc35270e041bc3aed
+THESIS_SIZE_BYTES = 4360620
+APPROVED_PROJECT_SHA256 = 25506900d3110902455458b2291b15d78a7a1bf26e88fa76a2283755b2753421
+APPROVED_PROJECT_SIZE_BYTES = 1323188
+V13_SHA256 = 8f5a1ec96eec91cee6970f4ec6e1bea3970322160b8d0a759aed5a02fef25067
+V13_ROLE = AUTHOR_CONFIRMED_AUXILIARY_SOURCE / NOT_GENERAL_GATE
+MAIN_AT_ACTIVATION = db0d0ad0d8435921a7838db6720eaea86a263763
+PLAN_AT_ACTIVATION = 60b7add68e2bb14101a6fa47c512f619516d0545
+ARTICLE_HEAD_OBSERVED = 94a3cee2804ddd51e0f947f04ea2cceed0d8c7b1
+ACTIVATION_AUTHORIZATION = IA_EXPERIMENTAL
+ACTIVATION_STATE = ACTIVE / AUTHORIZED / EXECUTION_PENDING
+NEXT_SUBSTANTIVE_ACTOR = IA_DE_REDACCION_CIENTIFICA
+CODEX_REDACTION_AUTHORIZED = false
+G7_F02_EXECUTED = false
+G7_F02_CANDIDATE_CREATED = false
+G7_F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+GROUP7 = IN_PROGRESS / NOT_CLOSED
+GROUP8 = NOT_STARTED / NOT_AUTHORIZED
+```
+
+La ejecucion sustantiva futura debera producir un candidato de tesis versionado y `g7_thesis_claim_traceability_v0.1.csv`, con claims y cifras aprobadas de G3–G6. Permanecen las restricciones: EXP12 cerrado sin retrieval y no estimable; EXP11A no identifica efecto causal del tamano; EXP11B no habilita inferencia sobre una superpoblacion de seeds; superioridad de retrieval historico no equivale a precision global RAG; evidencia normativa no acredita correccion juridica vinculante; explicacion auditable no acredita clasificacion ni correccion juridica. HG/HE1 no reciben una disposicion inventada.
