@@ -8,8 +8,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.2
-LATEST_EDITORIAL_DECISION = D-051
+ARTICLE_WRITING_PLAN = V3.3
+LATEST_EDITORIAL_DECISION = D-052
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -27,6 +27,7 @@ CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
 CURRENT_GATE = EXPERIMENTAL_DESIGN_B02_SECTION_4_3_DRAFTING
 SECTION_4_3 = OPEN / AUTHORIZED_FOR_DRAFTING
 SECTION_4_4_TO_4_8 = NOT_AUTHORIZED
+EXPERIMENTAL_FIGURES_GROUP6 = CLOSED / APPROVED / EDITORIAL_INTEGRATION_DEFERRED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -62,6 +63,48 @@ D-050 verificó la materialización exacta de `ARTICLE_MASTER_V010.md` y cerró 
 - 4.1 `Experimental setting and scope`;
 - 4.2 y 4.2.1–4.2.3;
 - el posicionamiento transversal framework vs. instanciación experimental.
+
+### Sincronización externa D-052
+
+La IA Gestora volvió a consultar el `SRC-03` vivo y registró el siguiente corte:
+
+```text
+SRC03_HEAD = 87422102290a4f9a89c51e936cf7274d8e4687d8
+SRC03_PLAN_BLOB = cf587b61b7bfbc66dca310a7bb3b4d3f64671eea
+DEVELOPMENT_MAIN = db0d0ad0d8435921a7838db6720eaea86a263763
+GROUP6 = CLOSED / APPROVED
+G6_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G6_F02 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G6_F03 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+GROUP6_CLOSURE_COMMIT = e93b44164a9619dad1f527a3b2d4479265858e39
+GROUP7 = IN_PROGRESS / NOT_CLOSED
+G7_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G7_F01_CLOSURE_COMMIT = db0d0ad0d8435921a7838db6720eaea86a263763
+G7_F02 = ACTIVE / AUTHORIZED / EXECUTION_PENDING
+G7_F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+GROUP8 = NOT_STARTED / NOT_AUTHORIZED
+```
+
+Consecuencias editoriales:
+
+- Grupo 6 ya produjo y aprobó tres figuras experimentales y tres captions; quedan pendientes solo de integración editorial cuando se abra Results o el material secundario correspondiente.
+- Estas figuras no sustituyen `Figure 1` de Section 3.1, que corresponde a la arquitectura general.
+- El cierre de Grupo 6 no abre Results.
+- G7-F01 y G7-F02 son dependencias externas administradas por la IA Experimental y no modifican automáticamente el artículo.
+- No se reabre contenido científico previamente aprobado.
+- El gate B02 y su prompt permanecen válidos.
+
+### Metadato residual del master
+
+D-052 registró que el encabezado de `ARTICLE_MASTER_V010.md` conserva el rótulo histórico `KBS_ARTICLE_WORKING_STRUCTURE_V01`, aunque la estructura gobernante es V02.
+
+```text
+V010_RETROACTIVE_EDIT = NOT_AUTHORIZED
+NEXT_CUMULATIVE_CANDIDATE_STRUCTURE_LABEL = KBS_ARTICLE_WORKING_STRUCTURE_V02
+SCIENTIFIC_REOPENING = NO
+```
+
+La corrección se hará en el próximo master acumulativo candidato y deberá verificarse diferencialmente.
 
 ### Gate B02 / Section 4.3
 
@@ -110,11 +153,13 @@ La fuente del recurso verificado es la NANDINA aprobada por la Comisión de la C
 CURRENT_GATE = EXPERIMENTAL_DESIGN_B02_SECTION_4_3_DRAFTING
 NEXT_ACTOR = DRAFTING_AI
 PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B02_DOCUMENTARY_CORPUS_EVIDENCE_RESOURCE.md
+PROMPT_STATUS = VALID / UNCHANGED_BY_D052
 BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V010.md
 BASELINE_MASTER_MD_GIT_BLOB = 8dc09fb841162005b2155491735336b0e70187c6
 BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V05.docx
 BASELINE_DOCX_SHA256 = 4839cbbf8ded9ab10da5b7e29b3482abd4858db2a0881753b6c5250ec60ea2ae
 AUTHORIZED_SCOPE = SECTION_4_3_ONLY_ENGLISH_PLUS_SPANISH_MIRROR
+NEXT_CANDIDATE_STRUCTURE_LABEL_CORRECTION = V01_TO_V02_METADATA_ONLY
 SECTION_4_4_TO_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
@@ -126,8 +171,8 @@ RESULTS = NOT_AUTHORIZED
 ```text
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
-ARTICLE_WRITING_PLAN = V3.2
-LATEST_EDITORIAL_DECISION = D-051
+ARTICLE_WRITING_PLAN = V3.3
+LATEST_EDITORIAL_DECISION = D-052
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 CANONICAL_MASTER = ARTICLE_MASTER_V010
 CANONICAL_MASTER_MD_GIT_BLOB = 8dc09fb841162005b2155491735336b0e70187c6
@@ -135,11 +180,16 @@ EXPERIMENTAL_DESIGN_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
 CURRENT_GATE = EXPERIMENTAL_DESIGN_B02_SECTION_4_3_DRAFTING
 SECTION_4_3 = OPEN / AUTHORIZED_FOR_DRAFTING
 SECTION_4_4_TO_4_8 = NOT_AUTHORIZED
+EXPERIMENTAL_FIGURES_GROUP6 = CLOSED / APPROVED / EDITORIAL_INTEGRATION_DEFERRED
 RESULTS = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-B02 is limited to Section 4.3 in English and its Spanish semantic-control mirror. The verified primary evidence resource is the hierarchical NANDINA corpus derived from Andean Community Decision 885. In the primary integrated path, documentary evidence is associated through exact NANDINA-8 code lookup for each already fixed Top-3 candidate; the documentary stage does not rerank, insert, or substitute candidates.
+D-052 synchronized the live external state without reopening manuscript science. Group 6 is closed/approved and supplies three approved experimental figures/captions for future Results/secondary-material integration. Group 7 is in progress: G7-F01 is closed/integrated and G7-F02 is active. These states do not open Results and do not replace the architecture Figure 1 planned in Section 3.1.
 
-Decision 906 modified Decision 885 and became effective before the 2026 administrative scenario. The primary Phase-F/HE4 path nevertheless consumed the frozen Decision-885-derived resource. This version boundary must be disclosed as a methodological limitation without converting it into a blanket claim that all Chapter-87 evidence was incorrect and without anticipating corrective robustness results.
+B02 remains limited to Section 4.3 in English and its Spanish semantic-control mirror. The verified primary evidence resource is the hierarchical NANDINA corpus derived from Andean Community Decision 885. In the primary integrated path, documentary evidence is associated through exact NANDINA-8 code lookup for each already fixed Top-3 candidate; the documentary stage does not rerank, insert, or substitute candidates.
+
+Decision 906 modified Decision 885 and became effective before the 2026 administrative scenario. The primary path nevertheless consumed the frozen Decision-885-derived resource. This version boundary must be disclosed as a methodological limitation without converting it into a blanket claim that all Chapter-87 evidence was incorrect and without anticipating corrective robustness results.
+
+The residual `KBS_ARTICLE_WORKING_STRUCTURE_V01` label in the V010 header is an administrative metadata issue. V010 remains immutable; the next cumulative candidate must update that label to V02 within the authorized drafting operation.
