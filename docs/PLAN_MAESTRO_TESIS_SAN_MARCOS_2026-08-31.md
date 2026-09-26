@@ -31,7 +31,7 @@
 | 4. Análisis e interpretación | **CLOSED / APPROVED — G4-F01, G4-F02 y G4-F03=CLOSED/APPROVED/INTEGRATED_TO_MAIN; G4-F03_INTEGRATION_COMMIT=38e22c19a0eb0d344e7675761a88d7968091eead; G4-F03_EXTERNAL_REAUDIT=PASS; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 6. Figuras y visualizaciones | **CLOSED / APPROVED — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; GROUP6_CLOSURE_COMMIT=e93b44164a9619dad1f527a3b2d4479265858e39** |
-| 7. Redacción científica | **IN_PROGRESS — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED; G7-F03=PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED** |
+| 7. Redacción científica | **IN_PROGRESS / NOT_CLOSED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=ACTIVE / AUTHORIZED / EXECUTION_PENDING; G7-F03=PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED** |
 | 8. Coherencia metodológica/documental | PENDING / NOT_AUTHORIZED |
 
 ## 3. Benchmark v0.2 congelado
@@ -2128,3 +2128,9 @@ manifest, la autorización ni el config.
 - La IA Experimental aprobo sin correcciones el candidato `d91298758dba674003bf650e7a303c36bd0b74d9`, integrado por fast-forward exacto en `main`. El commit administrativo posterior `G7_F01_CLOSURE_COMMIT = db0d0ad0d8435921a7838db6720eaea86a263763` normalizo solo los estados del writing source freeze; no altero fuentes, bindings, contratos ni gaps.
 - `G7_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `GROUP7 = IN_PROGRESS / NOT_CLOSED`; `G7_F02 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`; `G7_F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED`; `GROUP8 = NOT_STARTED / NOT_AUTHORIZED`.
 - La elegibilidad de G7-F02 no autoriza editar la tesis. El recheck binario de la tesis y los demas gaps congelados siguen pendientes; articulo y tesis no fueron modificados.
+
+### 2026-09-25 — Activacion administrativa G7-F02 tras PREF005
+
+- PREF005 fue completado con binarios autoritativos suministrados por el autor y aprobado por auditoria externa `PASS`: tesis SHA-256 `08b48ec1687ae0a0d943724bf2d682aca02d2a9f5a124b3dc35270e041bc3aed` y proyecto aprobado SHA-256 `25506900d3110902455458b2291b15d78a7a1bf26e88fa76a2283755b2753421` satisfacen los gates obligatorios de identidad. El Word v13 SHA-256 `8f5a1ec96eec91cee6970f4ec6e1bea3970322160b8d0a759aed5a02fef25067` queda como fuente metodologica auxiliar confirmada, no como gate general.
+- `G7-F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `G7-F02 = ACTIVE / AUTHORIZED / EXECUTION_PENDING`; `G7-F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED`; `GROUP7 = IN_PROGRESS / NOT_CLOSED`; `GROUP8 = NOT_STARTED / NOT_AUTHORIZED`.
+- El siguiente actor sustantivo es la IA de Redaccion Cientifica. CODEX no esta autorizado a redactar, no se genero candidato de tesis ni trazabilidad G7-F02 y no se modificaron tesis, proyecto, v13, articulo ni resultados cientificos. EXP12 permanece cerrado sin retrieval y no estimable.
