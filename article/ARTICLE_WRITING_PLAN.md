@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.2
+PLAN_VERSION = V3.3
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-051
+LATEST_EDITORIAL_DECISION = D-052
 CANONICAL_MASTER = ARTICLE_MASTER_V010
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V010.md
 CANONICAL_MASTER_MD_SHA256 = 82f148046b604dc26fa87ac1852c846798928e3a4af68bf18fcddb2d150e8ab8
@@ -20,6 +20,7 @@ CURRENT_AUTHORIZED_BLOCK = EXPERIMENTAL_DESIGN_B02_SECTION_4_3
 EXPERIMENTAL_DESIGN_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
 SECTION_4_3 = OPEN / AUTHORIZED_FOR_DRAFTING
 SECTION_4_4_TO_4_8 = NOT_AUTHORIZED
+EXPERIMENTAL_FIGURES_GROUP6 = CLOSED / APPROVED / EDITORIAL_INTEGRATION_DEFERRED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -64,7 +65,7 @@ La redacción se rige por `KBS_EWG_34_V01`, SPCCR, `CLAIM_EVIDENCE_MATRIX.md`, `
 
 Methods describe objetos científicos, procedencia, procedimientos, decisiones de diseño, ejecución, protocolos de evaluación y controles de validez. La identidad técnica exhaustiva de artefactos pertenece al repositorio/manifiestos de reproducibilidad salvo que un identificador concreto sea metodológicamente indispensable.
 
-Por tanto, la prosa principal no se organiza alrededor de SHA-256, rutas internas, nombres físicos de archivos/scripts, nombres de hojas o labels internos de configuración.
+La prosa principal no se organiza alrededor de SHA-256, rutas internas, nombres físicos de archivos/scripts, nombres de hojas o labels internos de configuración.
 
 ## 3. Estructura acumulativa
 
@@ -108,6 +109,7 @@ La estructura detallada gobernante es `article/manuscript/KBS_ARTICLE_WORKING_ST
 6. No Base64 manual, chunking, recomposición ni workarounds de transferencia.
 7. Los bloques nuevos preservan exactamente las secciones/comentarios ya aprobados salvo alcance explícitamente reabierto.
 8. Un master candidato no se vuelve canónico hasta superar auditoría, aprobación e integración aplicables.
+9. D-052 identificó un metadato residual en el encabezado de V010: aún figura `KBS_ARTICLE_WORKING_STRUCTURE_V01`. V010 no se edita retroactivamente; el siguiente master acumulativo candidato debe actualizar ese rótulo a V02 sin alterar contenido científico fuera del alcance autorizado.
 
 ## 5. Estado de fases y bloques
 
@@ -125,6 +127,7 @@ La estructura detallada gobernante es `article/manuscript/KBS_ARTICLE_WORKING_ST
 | Canonical master | `ARTICLE_MASTER_V010.md` |
 | Experimental Design B02 / 4.3 | **OPEN / AUTHORIZED_FOR_DRAFTING** |
 | Sections 4.4–4.8 | NOT_AUTHORIZED |
+| Experimental figures/captions from Group 6 | CLOSED / APPROVED externally; EDITORIAL_INTEGRATION_DEFERRED |
 | Results | NOT_AUTHORIZED |
 | Discussion | NOT_AUTHORIZED |
 | Conclusion | NOT_AUTHORIZED |
@@ -147,8 +150,8 @@ Los grupos experimentales no se administran aquí. `SRC-03` se consulta en modo 
 | 5F | 4.7 Statistical and robustness analysis | later atomic gate |
 | 5G | 4.8 Reproducibility resources | later atomic gate |
 | 6 | Results provisional | Experimental Design sufficiently stable + editorial gate + consumable evidence |
-| 7 | Figures/visualizations | specific experimental/editorial control |
-| 8 | Final Results | required evidence/visualizations closed |
+| 7 | Integración editorial de figuras experimentales ya aprobadas | Group 6 CLOSED / APPROVED; insertar solo cuando Results/material secundario correspondiente esté abierto |
+| 8 | Final Results | Results provisional + recursos visuales/tabulares autorizados + auditoría editorial |
 | 9 | Discussion + Limitations | final Results + authorized literature contrast |
 | 10 | Conclusion | Discussion closed |
 | 11 | Abstract | complete manuscript |
@@ -157,13 +160,31 @@ Los grupos experimentales no se administran aquí. `SRC-03` se consulta en modo 
 | 14 | Scientific audit/freeze | after synchronization and required audits |
 | 15 | Final KBS adaptation | scientific freeze + current submission requirements |
 
+**Fase 7 ya no es una fase de producción científica de figuras.** Grupo 6 produjo y aprobó tres figuras/captions experimentales. El trabajo editorial futuro consiste en seleccionar su destino final autorizado e insertarlas sin alterar métricas, claims, escalas, captions científicos o incertidumbre congelada.
+
+`Figure 1` de Section 3.1 sigue siendo una figura arquitectónica distinta y no queda cubierta por Grupo 6.
+
 ## 7. Concurrencia con el proceso experimental
 
 Solo la IA Experimental administra `SRC-03` y el Plan Maestro experimental. La IA Gestora y la IA de Redacción lo consultan en solo lectura.
 
 No se congela aquí un snapshot permanente del estado experimental: antes de cada bloque que dependa de hechos experimentales se consulta la rama viva `docs/plan-maestro-temporal-2026-08-31` y se determina si un cambio posterior altera materialmente los hechos que pretende consumir el artículo.
 
-D-034 sigue gobernando la separación de autoridades y los gates transversales. Ningún avance editorial local autoriza por sí mismo Results, Discussion o el freeze científico final.
+Último corte sincronizado por D-052:
+
+```text
+SRC03_HEAD = 87422102290a4f9a89c51e936cf7274d8e4687d8
+SRC03_PLAN_BLOB = cf587b61b7bfbc66dca310a7bb3b4d3f64671eea
+DEVELOPMENT_MAIN = db0d0ad0d8435921a7838db6720eaea86a263763
+GROUP6 = CLOSED / APPROVED
+GROUP7 = IN_PROGRESS / NOT_CLOSED
+G7_F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G7_F02 = ACTIVE / AUTHORIZED / EXECUTION_PENDING
+G7_F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+GROUP8 = NOT_STARTED / NOT_AUTHORIZED
+```
+
+Este avance externo no modifica el gate editorial local. Ningún avance experimental autoriza por sí mismo Results, Discussion o el freeze científico final.
 
 ## 8. Fase activa — Experimental Design B02 / Section 4.3
 
@@ -205,7 +226,7 @@ TEMPORAL_VERSION_MISMATCH_RELATIVE_TO_2026_CASES = DISCLOSE
 
 La evidencia documental de la ruta primaria se asocia mediante lookup exacto del código NANDINA-8 de cada candidato del Top-3 ya fijado. La formulación genérica `documentary/normative evidence retrieval` de Architecture no debe convertirse en una afirmación falsa de BM25/query search sobre el corpus para la instanciación primaria.
 
-La fuente documental es supranacional andina; no debe llamarse “Peruvian normative corpus” si ello atribuye autoridad nacional peruana al recurso Decision-885-derived. El contexto administrativo de los casos sí es peruano.
+La fuente documental es supranacional andina; no debe llamarse “Peruvian normative corpus” si ello atribuye autoridad nacional peruana al recurso derivado de Decision 885. El contexto administrativo de los casos sí es peruano.
 
 ### 8.4 Frontera temporal
 
@@ -236,7 +257,7 @@ Patrón D-035:
 - DOCX acumulativo candidato: adjunto exacto al autor + SHA-256;
 - no Base64 manual, chunking, recomposición o reconstrucción del DOCX.
 
-El DOCX candidato debe partir del baseline canónico exacto y preservar 40 comentarios, 0 tracked changes y superar render/inspección visual integral antes de la entrega.
+El próximo master acumulativo candidato debe además corregir el rótulo estructural residual V01→V02 identificado en D-052 y preservar 40 comentarios, 0 tracked changes y render integral aprobado.
 
 ## 9. Ciclo obligatorio
 
@@ -260,11 +281,13 @@ CURRENT_GATE = EXPERIMENTAL_DESIGN_B02_SECTION_4_3_DRAFTING
 NEXT_ACTOR = DRAFTING_AI
 NEXT_ACTION = EXECUTE_ONLY_B02_SECTION_4_3_PROMPT
 PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B02_DOCUMENTARY_CORPUS_EVIDENCE_RESOURCE.md
+PROMPT_STATUS = VALID / UNCHANGED_BY_D052
 BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V010.md
 BASELINE_MASTER_MD_GIT_BLOB = 8dc09fb841162005b2155491735336b0e70187c6
 BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V05.docx
 BASELINE_DOCX_SHA256 = 4839cbbf8ded9ab10da5b7e29b3482abd4858db2a0881753b6c5250ec60ea2ae
 PRIOR_CITATION_COMMENTS = 40 / PRESERVE_EXACTLY
+NEXT_CANDIDATE_STRUCTURE_LABEL_CORRECTION = V01_TO_V02_METADATA_ONLY
 SECTION_4_4_TO_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
@@ -275,19 +298,19 @@ RESULTS = NOT_AUTHORIZED
 
 ## 1. Governing frame
 
-The article remains a cumulative KBS Research Article under author-approved Structure V02. Related Work, Introduction, Architecture, and Experimental Design B01 are closed and integrated. `ARTICLE_MASTER_V010.md` is the canonical manuscript master.
+The article remains a cumulative KBS Research Article under author-approved Structure V02. Related Work, Introduction, Architecture, and Experimental Design B01 are closed and integrated. `ARTICLE_MASTER_V010.md` remains the canonical manuscript master.
 
 Methods describe scientific objects, provenance, procedures, design choices, execution, evaluation protocols, and validity controls. Exhaustive artifact identity belongs in reproducibility resources rather than the main narrative unless scientifically indispensable.
 
+D-052 synchronized the live external state without reopening scientific prose. Group 6 is now closed/approved and supplies three approved experimental figures/captions for future editorial integration. Group 7 is in progress, with G7-F01 closed and G7-F02 active. Neither change opens Results or alters the current B02 gate.
+
 ## 2. Active block
 
-Experimental Design B02 is limited to Section 4.3 and its Spanish semantic-control mirror. The verified primary evidence resource is the hierarchical NANDINA corpus derived from Andean Community Decision 885.
+Experimental Design B02 remains limited to Section 4.3 and its Spanish semantic-control mirror. The verified primary evidence resource is the hierarchical NANDINA corpus derived from Andean Community Decision 885.
 
 The primary integrated path associates evidence through **exact NANDINA-8 code lookup** for each already fixed Top-3 candidate. It does not perform query-based normative retrieval, reranking, score fusion, candidate insertion, or candidate substitution.
 
-The corpus representation may provide hierarchical parent context, but parent context must not be reported as exact eight-digit evidence when no exact record exists.
-
-Decision 906 modified Decision 885 and became effective before the 2026 administrative scenario. The primary Phase-F/HE4 path nevertheless consumed the frozen Decision-885-derived resource. This version boundary must be disclosed without implying that every Chapter-87 record was necessarily changed or invalid and without anticipating corrective robustness results.
+Decision 906 modified Decision 885 and became effective before the 2026 administrative scenario. The primary path nevertheless consumed the frozen Decision-885-derived resource. This version boundary must be disclosed without implying that every Chapter-87 record was necessarily changed or invalid and without anticipating corrective robustness results.
 
 ## 3. Immediate gate
 
@@ -295,7 +318,9 @@ Decision 906 modified Decision 885 and became effective before the 2026 administ
 CURRENT_GATE = EXPERIMENTAL_DESIGN_B02_SECTION_4_3_DRAFTING
 NEXT_ACTOR = DRAFTING_AI
 PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B02_DOCUMENTARY_CORPUS_EVIDENCE_RESOURCE.md
+PROMPT_STATUS = VALID / UNCHANGED_BY_D052
 BASELINE_MASTER = ARTICLE_MASTER_V010
+NEXT_CANDIDATE_STRUCTURE_LABEL_CORRECTION = V01_TO_V02_METADATA_ONLY
 SECTION_4_4_TO_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
