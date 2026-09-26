@@ -79,19 +79,20 @@ Master Markdown canónico actual, hasta cierre técnico de V013:
 
 `article/manuscript/ARTICLE_MASTER_V012.md`
 
-SHA-256 `d4b0e1941791e901e20c476b99206a92ef78ea18cb2dbd4f74ae84c2c7696de06dfe9207475cde68214f284f` is NOT applicable; the correct V012 SHA is `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78` and Git blob `dfea73f5f462fc65cf98347f796deadc6da58455`.
+- SHA-256: `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78`;
+- Git blob: `dfea73f5f462fc65cf98347f796deadc6da58455`.
 
-Approved B04 V02 cumulative candidate:
+Candidato acumulativo B04 V02 aprobado por el autor:
 
 - Markdown: `ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.md`;
 - SHA-256: `2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43`;
-- expected Git blob: `06beaa052e2f1bcc630647040762fe78d3838a62`;
+- Git blob esperado: `06beaa052e2f1bcc630647040762fe78d3838a62`;
 - DOCX: `ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.docx`;
 - DOCX SHA-256: `cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f`;
-- citation comments: 40 preserved;
+- comentarios de citas: 40 preservados;
 - tracked changes: 0.
 
-D-021/D-027/D-035 remain binding. The DOCX remains under local author custody and must not be reconstructed from Markdown or from an earlier Word file.
+D-021/D-027/D-035 permanecen vinculantes. El DOCX sigue bajo custodia local del autor y no puede reconstruirse desde Markdown ni desde un Word anterior.
 
 ## 4. Estado de bloques
 
@@ -156,7 +157,7 @@ Section 4 remains frozen as 4.1 setting/scope, 4.2 historical data/dataset const
 
 ## 3. Markdown/DOCX continuity
 
-Until V013 promotion closes, `ARTICLE_MASTER_V012.md` remains canonical at SHA-256 `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78`, blob `dfea73f5f462fc65cf98347f796deadc6da58455`.
+Until V013 promotion closes, `ARTICLE_MASTER_V012.md` remains canonical at SHA-256 `d4b0e1941791e901e20c476b99206a92ef78ea18cb2c614d9721963bb8b9ae78`, Git blob `dfea73f5f462fc65cf98347f796deadc6da58455`.
 
 The author-approved B04 V02 cumulative candidates are Markdown SHA-256 `2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43`, expected Git blob `06beaa052e2f1bcc630647040762fe78d3838a62`, and DOCX SHA-256 `cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f`. The Word file remains in local author custody with 40 inherited citation comments and zero tracked changes.
 
