@@ -23,16 +23,16 @@ CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_ARCH_B02_V01.docx / LOCAL_AUTHO
 CANONICAL_MASTER_DOCX_SHA256 = 09a319b8e658d3888c75087d1f7db354ef686c449ad6ffd205ea86fbc9352657
 CANONICAL_CITATION_COMMENTS = 40
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_V03_STRUCTURE_SKELETON_ALIGNMENT
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_AUTHOR_APPROVAL
 EXPERIMENTAL_DESIGN_B01_SCIENTIFIC_CONTENT = VERIFIED / PASS
-EXPERIMENTAL_DESIGN_B01 = ACTIVE / TECHNICAL_EDITORIAL_CORRECTION_ONLY
-B01_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V03.md
-B01_CANDIDATE_MD_SHA256 = b7dc67489715465e9bfbd881efb8cac9a22f1cc43627c71bcb12e4d04da2c346
-B01_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V03.docx
-B01_CANDIDATE_DOCX_SHA256 = 315607ab902454a199e63a5fc42dfd9858c262e3932482199b7e1f0bbb9cb7b7
-CUMULATIVE_MASTER_STRUCTURE_V02_ALIGNMENT = CORRECTION_REQUIRED
-STALE_SPANISH_SECTION4_PLACEHOLDER = CORRECTION_REQUIRED
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+EXPERIMENTAL_DESIGN_B01 = VERIFIED / PASS / READY_FOR_AUTHOR_APPROVAL
+B01_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.md
+B01_CANDIDATE_MD_SHA256 = 0a689a47b4b17fe32aa9252a5ffeed3db955d58b917b6a04114248d14b99e6f8
+B01_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.docx
+B01_CANDIDATE_DOCX_SHA256 = bfd41dcb873289b993ccdc45d1e09c835e4efa3dd1aa39fbe4de7d257c914a6d
+CUMULATIVE_MASTER_STRUCTURE_V02_ALIGNMENT = PASS
+STALE_SPANISH_SECTION4_PLACEHOLDER = RESOLVED
+AUTHOR_APPROVAL_GATE = OPEN
 SECTION_4_3_AND_LATER_SCIENTIFIC_DRAFTING = NOT_AUTHORIZED
 ARTICLE_MASTER_V010 = SUSPENDED / NOT_MATERIALIZED
 RESULTS = NOT_AUTHORIZED
@@ -53,7 +53,7 @@ NOVELTY = NOT_DECLARED
 - D-043/D-044: V010 suspendido y Section 4 reabierta después de detectar un enfoque excesivamente orientado a artefactos/repositorio.
 - D-045: Structure V02 aprobada por el autor y congelada para redacción.
 - D-046: B01 reabierto desde V009 bajo Structure V02.
-- D-047: la nueva prosa B01 V03 pasa la auditoría científica/editorial; queda únicamente una alineación estructural mecánica del esqueleto 4.3+ y la eliminación de un placeholder residual en el espejo español.
+- D-047: autoriza únicamente la alineación mecánica del esqueleto 4.3+ con Structure V02 y la eliminación del placeholder residual español.
 
 ### Arquitectura científica congelada
 
@@ -94,22 +94,22 @@ Methods debe describir procedencia, adquisición, procesamiento, decisiones expe
 
 La procedencia histórica comienza en la fuente administrativa y el proceso real de recolección/acopio. El Excel intermedio no gobierna la narrativa. `evaluate/evaluar` es preferible a `validate/validar`. Configurabilidad/reinstanciación no equivale a generalización empírica.
 
-### Auditoría de B01 V03
+### Auditoría de B01 V04
 
-La auditoría independiente `article/reviews/5_EXPERIMENTAL_DESIGN_B01_V03_STRUCTURE_V02_INTERNAL_REVIEW_V01.md` concluye:
+La auditoría independiente `article/reviews/5_EXPERIMENTAL_DESIGN_B01_V04_STRUCTURE_ALIGNMENT_INTERNAL_REVIEW_V01.md` concluye:
 
 ```text
-B01_SCIENTIFIC_PROSE = PASS
-B01_FACTUAL_TRACEABILITY = PASS
-B01_EDITORIAL_FOCUS = PASS
-SECTION_3_FORWARD_REFERENCE_AMENDMENTS = PASS
-DOCX_BINARY_AND_LAYOUT_QA = PASS
-MASTER_STRUCTURE_ALIGNMENT = FAIL
-STALE_SPANISH_PLACEHOLDER = FAIL
-OVERALL = CONTENT_PASS / STRUCTURAL_CORRECTION_REQUIRED
+B01_V04_DIFFERENTIAL_REVIEW = PASS
+B01_SCIENTIFIC_CONTENT = VERIFIED / PASS
+B01_EDITORIAL_FOCUS = VERIFIED / PASS
+CUMULATIVE_MASTER_STRUCTURE_V02_ALIGNMENT = PASS
+STALE_SPANISH_SECTION4_PLACEHOLDER = RESOLVED
+DOCX_QA = PASS
+EXPERIMENTAL_DESIGN_B01 = VERIFIED / PASS / READY_FOR_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
 ```
 
-El master candidato conserva desde 4.3 el esqueleto V01 porque D-046 prohibía modificar 4.3+ aunque Structure V02 ya era gobernante. D-047 corrige esa contradicción de alcance y permite únicamente el reemplazo mecánico del esqueleto no redactado por 4.3–4.8 de Structure V02, sin abrir redacción científica posterior. También debe eliminarse el placeholder español residual entre `4. Diseño experimental` y `4.1`.
+La V04 preserva la prosa científica ya auditada de 4.1–4.2.3 y las enmiendas editoriales de 3.5/3.7. El esqueleto no redactado de 4.3–4.8 quedó alineado a Structure V02 en ambos idiomas, sin introducir prosa científica nueva. Section 5 y posteriores permanecen inalterados. El DOCX conserva 40 comentarios, cero tracked changes y supera el render completo de 39 páginas.
 
 ### Fronteras científicas obligatorias
 
@@ -127,14 +127,13 @@ El master candidato conserva desde 4.3 el esqueleto V01 porque D-046 prohibía m
 ### Gate vigente
 
 ```text
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_V03_STRUCTURE_SKELETON_ALIGNMENT
-NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = STRUCTURAL_ALIGNMENT_ONLY
-BASELINE_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V03.md
-BASELINE_CANDIDATE_MD_SHA256 = b7dc67489715465e9bfbd881efb8cac9a22f1cc43627c71bcb12e4d04da2c346
-BASELINE_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V03.docx
-BASELINE_CANDIDATE_DOCX_SHA256 = 315607ab902454a199e63a5fc42dfd9858c262e3932482199b7e1f0bbb9cb7b7
-B01_PROSE_REWRITE = NOT_AUTHORIZED
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REJECT_B01_V04
+B01_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.md
+B01_CANDIDATE_MD_SHA256 = 0a689a47b4b17fe32aa9252a5ffeed3db955d58b917b6a04114248d14b99e6f8
+B01_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.docx
+B01_CANDIDATE_DOCX_SHA256 = bfd41dcb873289b993ccdc45d1e09c835e4efa3dd1aa39fbe4de7d257c914a6d
 SECTION_4_3_AND_LATER_SCIENTIFIC_DRAFTING = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
@@ -151,10 +150,12 @@ LATEST_EDITORIAL_DECISION = D-047
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 CANONICAL_MASTER = ARTICLE_MASTER_V009
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_V03_STRUCTURE_SKELETON_ALIGNMENT
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_AUTHOR_APPROVAL
 EXPERIMENTAL_DESIGN_B01_SCIENTIFIC_CONTENT = VERIFIED / PASS
-EXPERIMENTAL_DESIGN_B01 = ACTIVE / TECHNICAL_EDITORIAL_CORRECTION_ONLY
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+EXPERIMENTAL_DESIGN_B01 = VERIFIED / PASS / READY_FOR_AUTHOR_APPROVAL
+B01_CANDIDATE_MD_SHA256 = 0a689a47b4b17fe32aa9252a5ffeed3db955d58b917b6a04114248d14b99e6f8
+B01_CANDIDATE_DOCX_SHA256 = bfd41dcb873289b993ccdc45d1e09c835e4efa3dd1aa39fbe4de7d257c914a6d
+AUTHOR_APPROVAL_GATE = OPEN
 SECTION_4_3_AND_LATER_SCIENTIFIC_DRAFTING = NOT_AUTHORIZED
 ARTICLE_MASTER_V010 = SUSPENDED / NOT_MATERIALIZED
 RESULTS = NOT_AUTHORIZED
@@ -162,6 +163,4 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-The B01 V03 scientific prose, factual traceability, publication-facing focus, and two controlled Section-3 amendments independently pass. The cumulative candidate is not yet ready for author approval because its still-unwritten Section-4.3+ skeleton remains the superseded V01 layout and the Spanish mirror retains one stale placeholder before 4.1.
-
-D-047 permits only mechanical alignment of the unfilled Section-4 skeleton to the already approved V02 headings and removal of that placeholder. It does not authorize scientific drafting of 4.3–4.8 or any later section. The canonical master remains V009 until the corrected candidate passes the remaining gates.
+The V04 differential correction independently passes. The already audited B01 scientific prose and Section-3 amendments remain unchanged; the cumulative Section-4 skeleton is now aligned to the author-approved Structure V02, and the stale Spanish placeholder has been removed. The candidate is ready for explicit author approval. The canonical master remains V009 until the author approves B01 and a subsequent integration gate is completed.
