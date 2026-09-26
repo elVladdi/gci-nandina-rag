@@ -29,14 +29,12 @@ Los tres artefactos visuales gobernantes se leyeron íntegramente y sus blobs co
 outputs/figures/group6/g6_figure_spec_registry_v0.1.json
 BLOB = 44cc30fc3c38639c6aa4370cb6f317458041f1b1
 
-aoutputs/figures/group6/g6_figure_hash_ledger_v0.1.csv
+outputs/figures/group6/g6_figure_hash_ledger_v0.1.csv
 BLOB = bfcbfe8a2232246476979506377ff3005166253f
 
 docs/figures/group6/g6_caption_registry_v0.1.md
 BLOB = 0dcb43cfa56dfce2e6955f960184069beb36ba76
 ```
-
-Nota: la cadena `aoutputs/` de la línea anterior es solo un error tipográfico de este reporte y no identifica una ruta distinta. La ruta gobernante efectivamente auditada fue `outputs/figures/group6/g6_figure_hash_ledger_v0.1.csv`.
 
 El ledger confirma los PNG aprobados:
 
@@ -192,11 +190,11 @@ FIGURE_5_TABLE_13_ALIGNMENT = PASS
 La figura debe conservar exactamente los quince valores descriptivos de Tabla 13:
 
 ```text
-Solo jerárquico:                 0,0909 | 0,1013 | 0,3040
-Solo dual:                       0,0919 | 0,1004 | 0,2661
-Jerárquico prioridad primeros 100: 0,0909 | 0,1013 | 0,2652
-Jerárquico 80 + backfill dual 20: 0,0909 | 0,1013 | 0,3040
-Jerárquico 70 + backfill dual 30: 0,0909 | 0,1023 | 0,3040
+Solo jerárquico:                    0,0909 | 0,1013 | 0,3040
+Solo dual:                          0,0919 | 0,1004 | 0,2661
+Jerárquico prioridad primeros 100:  0,0909 | 0,1013 | 0,2652
+Jerárquico 80 + backfill dual 20:   0,0909 | 0,1013 | 0,3040
+Jerárquico 70 + backfill dual 30:   0,0909 | 0,1023 | 0,3040
 ```
 
 Las cuatro primeras variantes conservan el mismo estatus descriptivo predefinido; la quinta es únicamente contexto descriptivo adicional. No se autoriza inferencia entre variantes, ranking de favorabilidad, tendencia ajustada ni uso de la unión diagnóstica como rendimiento ordinario.
