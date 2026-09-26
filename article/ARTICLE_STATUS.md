@@ -18,6 +18,9 @@ EXPERIMENTAL_DESIGN_B02 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B04 = CLOSED / APPROVED / FROZEN / INTEGRATED
 SECTION_4_5 = CLOSED / APPROVED / FROZEN / INTEGRATED
+EXPERIMENTAL_DESIGN_B05 = REVISION_REQUIRED / RESPONSE_METADATA_ONLY
+SECTION_4_6_SCIENTIFIC_CONTENT = PASS
+SECTION_4_6_MD_DOCX = PASS
 CANONICAL_MASTER = ARTICLE_MASTER_V013
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V013.md
 CANONICAL_MASTER_MD_SHA256 = 2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43
@@ -25,14 +28,18 @@ CANONICAL_MASTER_MD_GIT_BLOB = 06beaa052e2f1bcc630647040762fe78d3838a62
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.docx / LOCAL_AUTHOR_CUSTODY
 CANONICAL_MASTER_DOCX_SHA256 = cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f
 CANONICAL_CITATION_COMMENTS = 40
+B05_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.md / LOCAL_AUTHOR_CUSTODY
+B05_CANDIDATE_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
+B05_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUTHOR_CUSTODY
+B05_CANDIDATE_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B05_SECTION_4_6_DRAFTING_V01
-CURRENT_AUTHORIZED_BLOCK = EXPERIMENTAL_DESIGN_B05_SECTION_4_6
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6.md@89a5e122c7ed6ab0ffe90a53e2a68e65830d6d99
-AUTHORIZED_PROMPT_GIT_BLOB = 55108c6628da436c601b8a69a8397c32b2c0589d
-PROMPT_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6_PROMPT_INTERNAL_REVIEW_V01.md@03d70a8f891b98956fd69f39a972497e6eec8886
-PROMPT_REVIEW_RESULT = PASS
-SECTION_4_6 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B05_V01_ONLY
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B05_RESPONSE_METADATA_CORRECTION_V01
+CURRENT_AUTHORIZED_BLOCK = B05_RESPONSE_METADATA_CORRECTION_ONLY
+AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B05_RESPONSE_METADATA_CORRECTION_V01.md@75fe99e79eccd5d4e839b9e46ba09c6ae635c3de
+AUTHORIZED_PROMPT_GIT_BLOB = f00f8b529edb9370a2bee56a95fe7ed500e67873
+B05_INTERNAL_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6_INTERNAL_REVIEW_V01.md@bad6a978ef0a6e70c6db675cf77ff8bf7f2942cf
+B05_INTERNAL_REVIEW_RESULT = PASS_WITH_BLOCKING_RESPONSE_METADATA_CORRECTION
+SECTION_4_6 = SCIENTIFIC_AND_TECHNICAL_PASS / NOT_AUTHOR_APPROVED
 SECTION_4_7_TO_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
@@ -44,45 +51,24 @@ NOVELTY = NOT_DECLARED
 
 ### Estado vigente
 
-D-066 verificó la promoción byte-exacta de B04 V02 y estableció `ARTICLE_MASTER_V013.md` como master canónico. Su Git blob observado `06beaa052e2f1bcc630647040762fe78d3838a62` coincide con el candidato autoralmente aprobado.
+D-066 verificó la promoción byte-exacta de B04 V02 y estableció `ARTICLE_MASTER_V013.md` como master canónico. D-067 sincronizó el ground truth requerido por B05 y D-068 autorizó la ejecución B05 V01.
 
-D-067 sincronizó el ground truth requerido por B05. D-068 autoriza exclusivamente el prompt B05 V01, cuya revisión interna emitió `PASS`.
+La IA de Redacción entregó B05 V01 y la IA Gestora completó la auditoría independiente en `5_EXPERIMENTAL_DESIGN_B05_SECTION4_6_INTERNAL_REVIEW_V01.md`. El contenido científico de 4.6 y los candidatos acumulativos Markdown/DOCX recibieron `PASS`. No se requiere reescritura científica ni regeneración de los binarios.
 
-### Función de B05 / Section 4.6
-
-Section 4.6 debe mapear:
-
-`RQ → función del sistema → salida → unidad de evaluación → métrica/protocolo → interpretación permitida`.
-
-Se mantienen separados:
-
-- 4.6.1 candidate-retrieval evaluation;
-- 4.6.2 documentary-evidence evaluation;
-- 4.6.3 controlled-explanation evaluation.
-
-Candidate retrieval no es accuracy global; documentary association no es substantive normative/legal correctness; auditability no es legal correctness. La modalidad cualitativa HE4 efectiva fue AI-expert/LLM-as-judge y no evaluación humana.
-
-### Fuentes experimentales sincronizadas para B05
-
-```text
-SRC03_HEAD = 87422102290a4f9a89c51e936cf7274d8e4687d8
-SRC03_PLAN_BLOB = cf587b61b7bfbc66dca310a7bb3b4d3f64671eea
-DEVELOPMENT_MAIN = db0d0ad0d8435921a7838db6720eaea86a263763
-```
-
-El prompt obliga a re-verificar estas identidades al ejecutar y a evaluar cualquier drift por impacto material.
+La única incidencia es documental: la response V01 declaró `CONDITIONAL_CLAIMS_USED = NONE`, aunque 4.6.3 utiliza C14, que la matriz claim–evidencia mantiene como `CONDITIONAL`. El uso manuscrito de C14 es correcto porque incorpora los límites explícitos requeridos; debe corregirse únicamente la metadata de autocontrol de la response.
 
 ### Gate vigente
 
 ```text
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_B05_SECTION_4_6_PROMPT_V01
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V013.md
-BASELINE_MASTER_MD_GIT_BLOB = 06beaa052e2f1bcc630647040762fe78d3838a62
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.docx
-BASELINE_DOCX_SHA256 = cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f
-PRIOR_CITATION_COMMENTS = 40 / PRESERVE
-EXPECTED_EXIT = EXECUTION_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTION = EXECUTE_ONLY_B05_RESPONSE_METADATA_CORRECTION_V01
+EXPECTED_OUTPUT = article/responses/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6_RESPONSE_V02.md
+SCIENTIFIC_CONTENT_CHANGE = PROHIBITED
+SECTION_ARTIFACT_CHANGE = PROHIBITED
+MASTER_CANDIDATE_MD_CHANGE = PROHIBITED
+MASTER_CANDIDATE_DOCX_CHANGE = PROHIBITED
+EXPECTED_EXIT = RESPONSE_METADATA_CORRECTION_COMPLETED_PENDING_GESTORA_AUDIT
+AUTHOR_APPROVAL_GATE = NOT_OPEN
 B06 / SECTION_4_7 = NOT_AUTHORIZED
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
@@ -98,17 +84,23 @@ TARGET_A = Knowledge-Based Systems
 LATEST_EDITORIAL_DECISION = D-068
 EXPERIMENTAL_DESIGN_B04 = CLOSED / APPROVED / FROZEN / INTEGRATED
 SECTION_4_5 = CLOSED / APPROVED / FROZEN / INTEGRATED
+EXPERIMENTAL_DESIGN_B05 = REVISION_REQUIRED / RESPONSE_METADATA_ONLY
+SECTION_4_6_SCIENTIFIC_CONTENT = PASS
+SECTION_4_6_MD_DOCX = PASS
 CANONICAL_MASTER = ARTICLE_MASTER_V013
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V013.md
 CANONICAL_MASTER_MD_SHA256 = 2e6b4446ffddb18940625a72a871a84a36405930b21db3dbba352c1535972f43
 CANONICAL_MASTER_MD_GIT_BLOB = 06beaa052e2f1bcc630647040762fe78d3838a62
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B04_V02.docx / LOCAL_AUTHOR_CUSTODY
 CANONICAL_MASTER_DOCX_SHA256 = cff5520d5bc31af929abaf796048ef3b452627f8fef8e5f727c4f8cc661d222f
-CANONICAL_CITATION_COMMENTS = 40
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B05_SECTION_4_6_DRAFTING_V01
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6.md@89a5e122c7ed6ab0ffe90a53e2a68e65830d6d99
-PROMPT_REVIEW_RESULT = PASS
-SECTION_4_6 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B05_V01_ONLY
+B05_CANDIDATE_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
+B05_CANDIDATE_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B05_RESPONSE_METADATA_CORRECTION_V01
+AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B05_RESPONSE_METADATA_CORRECTION_V01.md@75fe99e79eccd5d4e839b9e46ba09c6ae635c3de
+AUTHORIZED_PROMPT_GIT_BLOB = f00f8b529edb9370a2bee56a95fe7ed500e67873
+B05_INTERNAL_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B05_SECTION4_6_INTERNAL_REVIEW_V01.md@bad6a978ef0a6e70c6db675cf77ff8bf7f2942cf
+B05_INTERNAL_REVIEW_RESULT = PASS_WITH_BLOCKING_RESPONSE_METADATA_CORRECTION
+SECTION_4_6 = SCIENTIFIC_AND_TECHNICAL_PASS / NOT_AUTHOR_APPROVED
 SECTION_4_7_TO_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 AUTHOR_APPROVAL_GATE = NOT_OPEN
@@ -116,8 +108,8 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-D-066 verified byte-exact V013 promotion. D-067 synchronized the B05 ground truth, and D-068 authorizes only the independently reviewed B05 V01 prompt.
+The B05 V01 scientific manuscript content and cumulative Markdown/DOCX candidates passed independent Managing-AI review. No scientific rewrite or binary regeneration is required.
 
-Section 4.6 separately defines candidate-retrieval, documentary-evidence, and controlled-explanation evaluation protocols. The actual HE4 qualitative evaluator modality was AI-expert/LLM-as-judge rather than human scoring and must remain explicit.
+The sole remaining defect is response metadata: V01 says `CONDITIONAL_CLAIMS_USED = NONE`, whereas Section 4.6.3 uses C14 under the explicit limitations required by the active claim–evidence matrix. The manuscript use is valid; only the response self-check must be corrected.
 
-The Drafting AI must use exact V013 and the exact B04 V02 cumulative DOCX baseline. Section 4.7, Section 4.8, and Results remain closed.
+The next authorized action is therefore the atomic response-metadata correction prompt. Author approval remains closed, and Sections 4.7–4.8 and Results remain unauthorized.
