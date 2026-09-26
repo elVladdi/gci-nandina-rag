@@ -13,8 +13,8 @@ LATEST_EDITORIAL_DECISION = D-048
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
-INTRODUCTION_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED_WITH_CONTROLLED_TRANSVERSAL_POSITIONING_CORRECTION_AUTHORIZED_BY_D048
-ARCHITECTURE_SECTIONS_3_1_TO_3_7 = CLOSED / APPROVED / FROZEN / INTEGRATED_WITH_MINIMAL_FRAMEWORK_TERMINOLOGY_REINFORCEMENT_AUTHORIZED_BY_D048_IF_NEEDED
+INTRODUCTION_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED_WITH_D048_TRANSVERSAL_POSITIONING_CORRECTION_VERIFIED_IN_V05
+ARCHITECTURE_SECTIONS_3_1_TO_3_7 = CLOSED / APPROVED / FROZEN / INTEGRATED_WITH_D048_MINIMAL_FRAMEWORK_TERMINOLOGY_REINFORCEMENT_VERIFIED_IN_V05
 CANONICAL_MASTER = ARTICLE_MASTER_V009
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V009.md
 CANONICAL_MASTER_MD_SHA256 = ddbab5614856caf428aad0a7ee3f753288d600a6367908894184d3f72c98ab28
@@ -22,16 +22,17 @@ CANONICAL_MASTER_MD_GIT_BLOB = 40f20437458715c615fc1762f025ebcdbb3b6fc2
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_ARCH_B02_V01.docx / LOCAL_AUTHOR_CUSTODY
 CANONICAL_MASTER_DOCX_SHA256 = 09a319b8e658d3888c75087d1f7db354ef686c449ad6ffd205ea86fbc9352657
 CANONICAL_CITATION_COMMENTS = 40
-CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN / TRANSVERSAL POSITIONING CORRECTION
-CURRENT_GATE = B01_V04_TRANSVERSAL_FRAMEWORK_POSITIONING_CORRECTION
+CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_V05_AUTHOR_APPROVAL
 EXPERIMENTAL_DESIGN_B01_SCIENTIFIC_CONTENT = VERIFIED / PASS / PRESERVED
 EXPERIMENTAL_DESIGN_B01_STRUCTURE = VERIFIED / PASS / PRESERVED
-WORKING_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.md
-WORKING_CANDIDATE_MD_SHA256 = 0a689a47b4b17fe32aa9252a5ffeed3db955d58b917b6a04114248d14b99e6f8
-WORKING_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.docx
-WORKING_CANDIDATE_DOCX_SHA256 = bfd41dcb873289b993ccdc45d1e09c835e4efa3dd1aa39fbe4de7d257c914a6d
-TRANSVERSAL_POSITIONING = REVISION_REQUIRED
-AUTHOR_APPROVAL_GATE = SUSPENDED_PENDING_CONTROLLED_POSITIONING_CORRECTION
+TRANSVERSAL_FRAMEWORK_POSITIONING = VERIFIED / PASS
+EXPERIMENTAL_DESIGN_B01 = VERIFIED / PASS / READY_FOR_AUTHOR_APPROVAL
+B01_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V05.md
+B01_CANDIDATE_MD_SHA256 = 82f148046b604dc26fa87ac1852c846798928e3a4af68bf18fcddb2d150e8ab8
+B01_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V05.docx
+B01_CANDIDATE_DOCX_SHA256 = 4839cbbf8ded9ab10da5b7e29b3482abd4858db2a0881753b6c5250ec60ea2ae
+AUTHOR_APPROVAL_GATE = OPEN
 SECTION_4_3_AND_LATER_SCIENTIFIC_DRAFTING = NOT_AUTHORIZED
 ARTICLE_MASTER_V010 = SUSPENDED / NOT_MATERIALIZED
 RESULTS = NOT_AUTHORIZED
@@ -41,9 +42,9 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-### Jerarquía científica obligatoria
+### Jerarquía científica gobernante
 
-El artículo debe comunicar como objeto general un **framework configurable para apoyo auditable a la clasificación arancelaria**. La arquitectura de Section 3 es su núcleo técnico y conserva el flujo congelado:
+El artículo comunica como objeto general un **framework configurable para apoyo auditable a la clasificación arancelaria**. La arquitectura de Section 3 es su núcleo técnico:
 
 ```text
 commercial description
@@ -57,39 +58,37 @@ commercial description
 → controlled explanation of the fixed Top-3
 ```
 
-El framework apoya la clasificación mediante generación/ranking de candidatos, evidencia documental y explicación controlada/trazable. No adjudica autónomamente una clasificación jurídica final.
+El framework apoya la clasificación mediante recomendación/ranking de candidatos, evidencia documental específica por candidato y explicación controlada/trazable. No adjudica autónomamente una clasificación jurídica final.
 
-La evaluación en NANDINA de ocho dígitos, Capítulo 87 y contexto peruano es una **instanciación experimental** del framework y no define su alcance conceptual. Puede reinstanciarse con otros bancos históricos, espacios de clases, profundidades arancelarias o corpus documentales compatibles si se preservan las interfaces y controles declarados. Esa configurabilidad no constituye evidencia de transferencia de desempeño.
+NANDINA de ocho dígitos, Capítulo 87 y el contexto administrativo/documental peruano constituyen la **instanciación experimental utilizada para evaluar el framework** y no su alcance conceptual. La reinstanciación con otros bancos históricos, espacios de clases, profundidades arancelarias o corpus compatibles es una propiedad de configurabilidad, no evidencia de transferencia de desempeño.
 
-### Auditorías vigentes
+### Auditoría V05
 
-La auditoría diferencial de V04 mantiene:
+La auditoría independiente `article/reviews/5_EXPERIMENTAL_DESIGN_B01_V05_TRANSVERSAL_FRAMEWORK_POSITIONING_INTERNAL_REVIEW_V01.md` concluye:
 
 ```text
-B01_SCIENTIFIC_CONTENT = VERIFIED / PASS
-B01_STRUCTURE_V02_ALIGNMENT = PASS
+AUTHORIZED_SCOPE_ONLY = PASS
+FRAMEWORK_GENERAL_OBJECT = PASS
+ARCHITECTURE_AS_TECHNICAL_CORE = PASS
+AUDITABLE_CLASSIFICATION_SUPPORT_MESSAGE = PASS
+EMPIRICAL_TESTBED_SUBORDINATION = PASS
+CONFIGURABILITY_WITHOUT_GENERALIZATION = PASS
+B01_SCIENTIFIC_CONTENT = VERIFIED / PASS / PRESERVED
+B01_STRUCTURE_V02_ALIGNMENT = PASS / PRESERVED
 DOCX_QA = PASS
+OVERALL = PASS
+EXPERIMENTAL_DESIGN_B01 = VERIFIED / PASS / READY_FOR_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
 ```
 
-La auditoría transversal `article/reviews/5_EXPERIMENTAL_DESIGN_B01_V04_TRANSVERSAL_POSITIONING_REVIEW_V01.md` determina:
-
-```text
-CORE_SCIENTIFIC_IDEA = PRESENT
-FRAMEWORK_GENERALITY = PRESENT_BUT_NOT_DOMINANT_ENOUGH
-EXPERIMENTAL_TESTBED_BOUNDARY = PASS
-CONFIGURABILITY_BOUNDARY = PASS
-AUDITABILITY_PURPOSE = PRESENT_BUT_UNDEREMPHASIZED_IN_CONTRIBUTION
-CLASSIFICATION_SEMANTICS = REQUIRE_PRECISION
-TRANSVERSAL_POSITIONING = REVISION_REQUIRED
-```
-
-La corrección autorizada por D-048 es estrecha: reforzar en Introduction —y, si resulta estrictamente necesario, mediante una mínima precisión terminológica en 3.7— la jerarquía `framework general → arquitectura núcleo → instanciación experimental`. No se reabre 4.1–4.2.3.
+Los cambios V04→V05 se limitaron a los tres párrafos autorizados de Introduction en ambos idiomas y a la primera oración de 3.7 en ambos idiomas. Related Work, RQ, 4.1–4.2.3, el esqueleto 4.3–4.8, Section 5 y posteriores permanecen textualmente idénticos. El DOCX conserva 40 comentarios, cero tracked changes y supera el render independiente de 40 páginas.
 
 ### Fronteras científicas obligatorias
 
 - `LITERATURE_GAP ≠ PROJECT_FEATURE ≠ SCIENTIFIC_CONTRIBUTION ≠ EXPERIMENTAL_RESULT ≠ NOVELTY_CLAIM`.
 - `FRAMEWORK_GENERAL_SCOPE ≠ NANDINA_CHAPTER87_TESTBED`.
 - `ARCHITECTURE = TECHNICAL_CORE_OF_FRAMEWORK`.
+- `TARIFF_CLASSIFICATION_SUPPORT = RANKED_CANDIDATE_RECOMMENDATION + DOCUMENTARY_EVIDENCE + CONTROLLED_EXPLANATION`.
 - `CANDIDATE_RETRIEVAL ≠ OVERALL_CLASSIFICATION_ACCURACY`.
 - `AUTONOMOUS_FINAL_LEGAL_CLASSIFICATION = NOT_CLAIMED`.
 - `NORMATIVE_ASSOCIATION ≠ SUBSTANTIVE_NORMATIVE_CORRECTNESS`.
@@ -104,14 +103,13 @@ La corrección autorizada por D-048 es estrecha: reforzar en Introduction —y, 
 ### Gate vigente
 
 ```text
-CURRENT_GATE = B01_V04_TRANSVERSAL_FRAMEWORK_POSITIONING_CORRECTION
-NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = EXECUTE_ONLY_D048_CONTROLLED_POSITIONING_CORRECTION
-BASELINE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.md
-BASELINE_MD_SHA256 = 0a689a47b4b17fe32aa9252a5ffeed3db955d58b917b6a04114248d14b99e6f8
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V04.docx
-BASELINE_DOCX_SHA256 = bfd41dcb873289b993ccdc45d1e09c835e4efa3dd1aa39fbe4de7d257c914a6d
-SECTION_4_1_TO_4_2_3_REWRITE = NOT_AUTHORIZED
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_V05_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REJECT_B01_V05
+B01_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V05.md
+B01_CANDIDATE_MD_SHA256 = 82f148046b604dc26fa87ac1852c846798928e3a4af68bf18fcddb2d150e8ab8
+B01_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B01_V05.docx
+B01_CANDIDATE_DOCX_SHA256 = 4839cbbf8ded9ab10da5b7e29b3482abd4858db2a0881753b6c5250ec60ea2ae
 SECTION_4_3_AND_LATER_SCIENTIFIC_DRAFTING = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
@@ -128,11 +126,14 @@ LATEST_EDITORIAL_DECISION = D-048
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 CANONICAL_MASTER = ARTICLE_MASTER_V009
-CURRENT_GATE = B01_V04_TRANSVERSAL_FRAMEWORK_POSITIONING_CORRECTION
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B01_V05_AUTHOR_APPROVAL
 B01_SCIENTIFIC_CONTENT = VERIFIED / PASS / PRESERVED
 B01_STRUCTURE = VERIFIED / PASS / PRESERVED
-TRANSVERSAL_POSITIONING = REVISION_REQUIRED
-AUTHOR_APPROVAL_GATE = SUSPENDED_PENDING_CONTROLLED_POSITIONING_CORRECTION
+TRANSVERSAL_FRAMEWORK_POSITIONING = VERIFIED / PASS
+EXPERIMENTAL_DESIGN_B01 = VERIFIED / PASS / READY_FOR_AUTHOR_APPROVAL
+B01_CANDIDATE_MD_SHA256 = 82f148046b604dc26fa87ac1852c846798928e3a4af68bf18fcddb2d150e8ab8
+B01_CANDIDATE_DOCX_SHA256 = 4839cbbf8ded9ab10da5b7e29b3482abd4858db2a0881753b6c5250ec60ea2ae
+AUTHOR_APPROVAL_GATE = OPEN
 SECTION_4_3_AND_LATER_SCIENTIFIC_DRAFTING = NOT_AUTHORIZED
 ARTICLE_MASTER_V010 = SUSPENDED / NOT_MATERIALIZED
 RESULTS = NOT_AUTHORIZED
@@ -140,4 +141,4 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-The article-level object must be communicated as a configurable framework for auditable tariff-classification decision support, with the frozen Section-3 architecture as its technical core. Eight-digit NANDINA, Chapter 87, and the Peruvian context are the empirical instantiation used to evaluate the framework, not its conceptual scope. Re-instantiation does not imply empirical performance transfer.
+The article-level object is now communicated as a configurable framework for auditable tariff-classification decision support, with the frozen Section-3 architecture as its technical core. Eight-digit NANDINA, Chapter 87, and the Peruvian context are the empirical instantiation used to evaluate the framework, not its conceptual scope. Re-instantiation does not imply empirical performance transfer.
