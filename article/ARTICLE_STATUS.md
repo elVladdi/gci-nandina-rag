@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.4
-LATEST_EDITORIAL_DECISION = D-073
+ARTICLE_WRITING_PLAN = V3.5
+LATEST_EDITORIAL_DECISION = D-075
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -27,65 +27,64 @@ CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUT
 CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_SECTION_4_7_DRAFTING_V01
-CURRENT_AUTHORIZED_BLOCK = EXPERIMENTAL_DESIGN_B06_SECTION_4_7
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7.md@f29d10e10c5b94e3c36947cc42031f6dbac4e7bf
-AUTHORIZED_PROMPT_GIT_BLOB = 23159f8e85210c78ccfbb2acec4f5b560e83b984
-PROMPT_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_PROMPT_INTERNAL_REVIEW_V01.md@1ca287f50580c4c023abf959bb47546bf22e3057
-PROMPT_REVIEW_RESULT = PASS
-B06 / SECTION_4_7 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B06_V01_ONLY
+EXPERIMENTAL_DESIGN_B06 = REVISION_REQUIRED / NARROW_METHODS_AND_RESPONSE_METADATA_CORRECTION
+SECTION_4_7_SCIENTIFIC_CORE = PASS
+SECTION_4_7_MD_DOCX_CONTINUITY = PASS
+B06_V01_INTERNAL_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V01.md@3d19fbb47fd48abe15520264eea3b29969084295
+B06_V01_INTERNAL_REVIEW_RESULT = PASS WITH CORRECTIONS
+B06_V01_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V01.md / LOCAL_AUTHOR_CUSTODY
+B06_V01_CANDIDATE_MD_SHA256 = 1ba6d1ea0b0b0c748bf2b4c74e92a53b5ad98852d724157b682c689848bcbc76
+B06_V01_CANDIDATE_MD_GIT_BLOB = bda3bb6f9603039c48239deab779eec106588719
+B06_V01_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V01.docx / LOCAL_AUTHOR_CUSTODY
+B06_V01_CANDIDATE_DOCX_SHA256 = c58044f2b591eadf9dac0f2cb6bf30624e1c1124d43578bd17bf8c86c0e4dc5e
+B06_V01_CANDIDATE_COMMENTS = 40 / PRESERVED
+B06_V01_CANDIDATE_TRACKED_CHANGES = 0
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_NARROW_CORRECTION_V01
+CURRENT_AUTHORIZED_BLOCK = B06-C01 / B06-C02 / B06-C03 / B06-C04 ONLY
+AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B06_V01_NARROW_METHODS_CORRECTION.md@c14ab0d5aec458870b05307e5bed521d3a104547
+AUTHORIZED_PROMPT_GIT_BLOB = 90592518a2197ee6a7889797bf43da60b8b06fcf
+CORRECTION_PROMPT_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B06_NARROW_METHODS_CORRECTION_PROMPT_REVIEW_V01.md@024fa0eb8a47425c49241ac0db4bd929bcfbf202
+CORRECTION_PROMPT_REVIEW_RESULT = PASS
+CORRECTION_AUTHORIZATION = D-075
+AUTHOR_APPROVAL_GATE = NOT_OPEN
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
-AUTHOR_APPROVAL_GATE = NOT_OPEN
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
 ### Estado vigente
 
-D-071 verificó la promoción byte-exacta de B05 V01 a `ARTICLE_MASTER_V014.md`. El Git blob observado `20105abb745e382b923e4eb43d9a771a722df9e3` coincide exactamente con el candidato aprobado, por lo que B05/Section 4.6 queda cerrado, aprobado, congelado e integrado.
+D-071 verificó la promoción byte-exacta de B05 V01 a `ARTICLE_MASTER_V014.md`; B05/Section 4.6 permanece cerrado, aprobado, congelado e integrado. D-072 sincronizó el ground truth estadístico de B06 y D-073 autorizó la redacción inicial de Section 4.7.
 
-D-072 sincronizó el ground truth estadístico y de robustez de B06 contra las fuentes experimentales congeladas. D-073 autoriza exclusivamente el prompt B06 V01 después de revisión interna `PASS`.
+La IA de Redacción entregó B06 V01. La auditoría independiente de IA Gestora emitió `PASS WITH CORRECTIONS`: el núcleo científico, el control de alcance, la equivalencia EN/ES y la continuidad acumulativa Markdown/DOCX pasan, pero antes del gate autoral deben corregirse cuatro incidencias estrechas.
 
-### Función de B06 / Section 4.7
+### Correcciones B06 obligatorias
 
-Section 4.7 debe describir procedimientos inferenciales y de sensibilidad sin trasladar Results. Las reglas principales son:
+- **B06-C01:** explicitar 67 clusters DAM, la matriz común `10000 × 67` de remuestreo y la regla de multiplicidad cuando una DAM se selecciona más de una vez.
+- **B06-C02:** explicitar el IC percentil bilateral del 95% de Top-50 y la diferencia pareada no estandarizada de contribuciones como medida de efecto congelada, sin medida estandarizada post hoc.
+- **B06-C03:** restituir los estados metodológicos HE5 omitidos: calidad ambigua/incompleta no estimable por falta de operacionalización; proximidad jerárquica descriptiva `SAME_CHAPTER`/`SAME_HS4`/`SAME_HS6`; buckets literales `1 DAM`, `2 DAM`, `3-4 DAM`, `5+ DAM` sin threshold post hoc de insuficiencia.
+- **B06-C04:** corregir en la response las identidades de `g3_inferential_methods_and_checks_v0.1.md` a blob `6cf424c9cf8aa7371dbbf5b8baaf7305cc66a436` y `g3_inferential_results_v0.1.json` a blob `f99b7e46d81b28ca2b7cfce8d24788ad14156dcc`.
 
-- SERIE como unidad primaria y DAM como cluster de dependencia;
-- estimando pareado ponderado por series;
-- bootstrap pareado por DAM con 10.000 réplicas y seed 20263001;
-- cinco métricas early-ranking con IC percentil bilateral 99% y control Bonferroni FWER 95% por familia de comparador;
-- Top-50 suplementario con IC 95%;
-- un único contraste deep-coverage `Recall@200 - Recall@100` con IC 95%;
-- no p-values ni medidas de efecto estandarizadas post hoc;
-- EXP11A como sensibilidad conjunta tamaño/composición;
-- EXP11B descriptivo sin inferencia a superpoblación de seeds;
-- EXP12 no estimable;
-- no valores observados ni disposiciones HE2/HE5 en Methods.
-
-### Fuentes sincronizadas para B06
-
-```text
-SRC03_HEAD = 87422102290a4f9a89c51e936cf7274d8e4687d8
-SRC03_PLAN_BLOB = cf587b61b7bfbc66dca310a7bb3b4d3f64671eea
-DEVELOPMENT_MAIN = db0d0ad0d8435921a7838db6720eaea86a263763
-G3_ANALYTICAL_CONTRACT_BLOB = 76862c10fd84fd70588da2d65f96dbe3b40914f6
-G3_INFERENTIAL_METHODS_BLOB = 6cf424c9cf8aa7371dbbf5b8baaf7305cc66a436
-```
+D-074 limitó formalmente la revisión a esas cuatro correcciones. El prompt correctivo pasó revisión independiente y D-075 lo autoriza como único contrato ejecutable.
 
 ### Gate vigente
 
 ```text
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_B06_SECTION_4_7_PROMPT_V01
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
-BASELINE_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx
-BASELINE_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
-PRIOR_CITATION_COMMENTS = 40 / PRESERVE
-EXPECTED_EXIT = EXECUTION_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTION = EXECUTE_ONLY_B06_V01_NARROW_METHODS_CORRECTION
+EDITING_BASELINE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V01.md
+EDITING_BASELINE_MD_SHA256 = 1ba6d1ea0b0b0c748bf2b4c74e92a53b5ad98852d724157b682c689848bcbc76
+EDITING_BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V01.docx
+EDITING_BASELINE_DOCX_SHA256 = c58044f2b591eadf9dac0f2cb6bf30624e1c1124d43578bd17bf8c86c0e4dc5e
+EXPECTED_SECTION_ARTIFACT = article/sections/experimental_design/Experimental_Design_B06_V02.md
+EXPECTED_MASTER_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
+EXPECTED_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx
+EXPECTED_RESPONSE = article/responses/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_RESPONSE_V02.md
+EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
+AUTHOR_APPROVAL_GATE = NOT_OPEN
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
@@ -97,26 +96,32 @@ RESULTS = NOT_AUTHORIZED
 ```text
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
-LATEST_EDITORIAL_DECISION = D-073
+LATEST_EDITORIAL_DECISION = D-075
+ARTICLE_WRITING_PLAN = V3.5
 EXPERIMENTAL_DESIGN_B05 = CLOSED / APPROVED / FROZEN / INTEGRATED
 SECTION_4_6 = CLOSED / APPROVED / FROZEN / INTEGRATED
 CANONICAL_MASTER = ARTICLE_MASTER_V014
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
 CANONICAL_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
 CANONICAL_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
-CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUTHOR_CUSTODY
-CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_SECTION_4_7_DRAFTING_V01
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7.md@f29d10e10c5b94e3c36947cc42031f6dbac4e7bf
-PROMPT_REVIEW_RESULT = PASS
-B06 / SECTION_4_7 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B06_V01_ONLY
+EXPERIMENTAL_DESIGN_B06 = REVISION_REQUIRED / NARROW_METHODS_AND_RESPONSE_METADATA_CORRECTION
+SECTION_4_7_SCIENTIFIC_CORE = PASS
+SECTION_4_7_MD_DOCX_CONTINUITY = PASS
+B06_V01_INTERNAL_REVIEW_RESULT = PASS WITH CORRECTIONS
+B06_V01_CANDIDATE_MD_SHA256 = 1ba6d1ea0b0b0c748bf2b4c74e92a53b5ad98852d724157b682c689848bcbc76
+B06_V01_CANDIDATE_MD_GIT_BLOB = bda3bb6f9603039c48239deab779eec106588719
+B06_V01_CANDIDATE_DOCX_SHA256 = c58044f2b591eadf9dac0f2cb6bf30624e1c1124d43578bd17bf8c86c0e4dc5e
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_NARROW_CORRECTION_V01
+AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B06_V01_NARROW_METHODS_CORRECTION.md@c14ab0d5aec458870b05307e5bed521d3a104547
+AUTHORIZED_PROMPT_GIT_BLOB = 90592518a2197ee6a7889797bf43da60b8b06fcf
+CORRECTION_PROMPT_REVIEW_RESULT = PASS
+CORRECTION_AUTHORIZATION = D-075
+AUTHOR_APPROVAL_GATE = NOT_OPEN
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
-AUTHOR_APPROVAL_GATE = NOT_OPEN
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-D-071 verified byte-exact V014 promotion and closed B05 integration. D-072 synchronized the statistical/robustness ground truth, and D-073 authorizes only the independently reviewed B06 V01 prompt.
+The B06 V01 scientific core, scope boundary, bilingual equivalence and cumulative Markdown/DOCX continuity passed independent review. Four narrow corrections remain mandatory: the common 67-DAM resampling matrix and multiplicity rule; supplementary Top-50 95% uncertainty plus the frozen unstandardized paired-difference effect measure; the omitted HE5 methodological statuses; and two incorrect Group-3 source blobs in the execution response.
 
-Section 4.7 must report procedures rather than observed Results: series-weighted paired estimands, DAM-cluster bootstrap dependence handling, frozen interval/multiplicity rules, and descriptive/not-estimable sensitivity boundaries. Section 4.8 and Results remain closed.
+D-074 restricts the revision to those four items. The corrective prompt passed independent review, and D-075 makes it the sole authorized B06 correction contract. The exact B06 V01 candidates—not V014/B05—are the required editing baselines. Author approval, Section 4.8 and Results remain closed until the corrected B06 V02 returns to the Managing AI and passes audit.
