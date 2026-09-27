@@ -1,0 +1,105 @@
+{
+  "figure_id": "G7_THESIS_FIG_04_HE2",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "frozen_main_commit": "db0d0ad0d8435921a7838db6720eaea86a263763",
+  "g6_source": {
+    "script": {
+      "path": "src/figures/group6/render_g6_fig_01_he2.py",
+      "git_blob": "678d5fd49b3bd090c7d7729702741e6dcfe293fa",
+      "sha256": "646fe4eacbedcbb7661ceb231c7678aa06957eb634b71f978756ffb9a928cbeb",
+      "size_bytes": 9256
+    },
+    "svg": {
+      "path": "figures/group6/g6_fig_01_he2.svg",
+      "git_blob": "f57511c1ddbed5d2177e7cf7b5c9a4a180a3c7e3",
+      "sha256": "534aade80e669db62d86764d2b1695d26654c1d042144ef141f462983d422ca8",
+      "size_bytes": 23792
+    },
+    "png": {
+      "path": "figures/group6/g6_fig_01_he2.png",
+      "git_blob": "1860898f13cdefb311489dd1ec3d8fb28bf24538",
+      "sha256": "3136a814647384eaa1f85c2ce90033a78dde48b661d0b1c078e5b272c6e85d6f",
+      "size_bytes": 192986
+    }
+  },
+  "scientific_sources": [
+    {
+      "path": "outputs/results/group5/tables/g5_main_01_he2a_primary_early_ranking.csv",
+      "git_blob": "cb68583ee2260e4455796bac99ad90995ca7ef92",
+      "sha256": "d2bfba2a52907818bfc8e9f4d783d24d7ddc80da2f464321b4ce37319ab8e755"
+    },
+    {
+      "path": "outputs/results/group5/tables/g5_main_02_he2b_deep_coverage.csv",
+      "git_blob": "359e4e19b5ef1d44983c03039162209293b2a44c",
+      "sha256": "50a18ec31a819ce9c96f3de9c66f3e91920b6f80ee84d7e69393baa3b33187a6"
+    }
+  ],
+  "candidate": {
+    "script": {
+      "path": "src/figures/group7/render_g7_thesis_fig_04_he2.py",
+      "git_blob": "b22d25d41fa9014180fd63a36715942414e779a0",
+      "sha256": "2af80603d59ef6690fa3e63f7e6e5daea21cb1326e186a56470f35f562a84442",
+      "size_bytes": 5189
+    },
+    "svg": {
+      "path": "figures/group7/g7_thesis_fig_04_he2.svg",
+      "git_blob": "e84fa3ee6aaedb2d3d24b59ce7255214621aae3f",
+      "sha256": "053b12ea192175071c4274aa1ee4154ec3769f6c02f057e9fdd93bc159ef0e99",
+      "size_bytes": 25395
+    },
+    "png": {
+      "path": "figures/group7/g7_thesis_fig_04_he2.png",
+      "git_blob": "eb77a4f2289a8701d22ba399d9432defd2092e2a",
+      "sha256": "5cde004fc5b3b76578de02bd9d4751c52d26f921821c96a0bafc1cac65c1eb1e",
+      "size_bytes": 300119
+    }
+  },
+  "text_substitutions": {
+    "Primary HE2 evidence": "Evidencia primaria de HE2",
+    "Offline internal benchmark: 1,056 series / 67 DAM / 42 NANDINA": "Evaluación interna fuera de línea: 1 056 series / 67 DAM / 42 NANDINA",
+    "Observed values (no arm-level CI)": "Valores observados (sin IC por brazo)",
+    "Observed metric value": "Valor observado de la métrica",
+    "Historical": "Recuperación histórica",
+    "Flat (Attempt06)": "BM25 normativo plano",
+    "Hierarchical (Attempt06)": "BM25 normativo jerárquico",
+    "D1a (Attempt06)": "Recuperador denso entrenado con MNRL",
+    "Historical - comparator (frozen 99% CI)": "Recuperación histórica − comparador (IC del 99 %)",
+    "Flat": "BM25 normativo plano",
+    "Hierarchical": "BM25 normativo jerárquico",
+    "D1a": "Recuperador denso entrenado con MNRL",
+    "Paired difference": "Diferencia pareada",
+    "Recall@200 - Recall@100 (frozen 95% CI)": "Recall@200 − Recall@100 (IC del 95 %)",
+    "Paired recall difference": "Diferencia pareada de recall",
+    "Context: Recall@100=0.101; Recall@200=0.304; delta=0.203 [0.067, 0.342]": "Contexto: Recall@100 = 0,101; Recall@200 = 0,304; diferencia = 0,203; IC 95 % [0,067; 0,342]"
+  },
+  "typographic_reflow": "Dense-retriever legend and panel-B row labels use text-only line breaks; panel-B metric headings move to free text space. All non-text SVG geometry is unchanged.",
+  "validation": {
+    "scientific_data_change": false,
+    "non_text_svg_geometry_match": true,
+    "non_text_svg_element_count": 115,
+    "deterministic_rerun_match": true,
+    "thesis_visible_internal_ids": "none",
+    "text_outside_canvas": false,
+    "material_text_overlap": false,
+    "minimum_effective_font_pt": 8.1,
+    "docx_modified": false,
+    "g6_protected_artifacts_unchanged": true
+  },
+  "invariants": {
+    "svg_canvas_units": [1000, 1250],
+    "png_pixels": [2500, 3125],
+    "png_nominal_dpi": 300,
+    "panel_count": 3,
+    "metric_order": ["Top-1", "Top-3", "Top-5", "Top-10", "MRR@100"],
+    "comparator_order": ["flat", "hierarchical", "dense-MNRL"],
+    "panel_a_arm_level_ci": "none",
+    "panel_b_contrast_count": 15,
+    "panel_b_ci": "frozen 99% paired-difference CI",
+    "panel_c_contrast_count": 1,
+    "panel_c_ci": "frozen 95% CI",
+    "p_values": "none",
+    "eval_n": 1056,
+    "dam_n": 67,
+    "nandina_n": 42
+  }
+}
