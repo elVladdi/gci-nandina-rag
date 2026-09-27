@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.10
+PLAN_VERSION = V3.11
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-083
+LATEST_EDITORIAL_DECISION = D-084
 CANONICAL_MASTER = ARTICLE_MASTER_V015
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V015.md
 CANONICAL_MASTER_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
@@ -16,12 +16,14 @@ CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx / LOCAL_AUT
 CANONICAL_MASTER_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = B07_V01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION
+CURRENT_GATE = B07_V02_AUTHOR_APPROVAL
 EXPERIMENTAL_DESIGN_B01_TO_B06 = CLOSED / APPROVED / FROZEN / INTEGRATED
-EXPERIMENTAL_DESIGN_B07 = REVISION_REQUIRED / AUTHORIZED_FOR_NARROW_CORRECTION
-SECTION_4_8 = REVISION_REQUIRED / B07-C01 ONLY
-AUTHOR_APPROVAL_GATE = CLOSED
-B07_INTEGRATION = BLOCKED
+EXPERIMENTAL_DESIGN_B07 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+SECTION_4_8 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+AUTHOR_CORRECTION_B07_C01 = CLOSED / PASS
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B07_V02_ONLY
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -35,84 +37,78 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V015.md` permanece como master Markdown canónico verificado. El Word acumulativo canónico continúa siendo `ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx`.
+`ARTICLE_MASTER_V015.md` permanece como master Markdown canónico verificado y `ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx` como Word canónico bajo custodia local del autor.
 
-B07 V01 fue científicamente consistente y superó la auditoría Gestora, pero el autor no lo aprobó porque Section 4.8 introducía el repositorio interno de desarrollo experimental como contraparte del repositorio público de reproducibilidad. Esa presentación no debe formar parte de la prosa del manuscrito.
+B07 V01 fue rechazado por el autor únicamente porque Section 4.8 presentaba narrativamente el repositorio interno de desarrollo experimental. D-082 convirtió esa observación en B07-C01; D-083 autorizó la corrección estrecha y B07 V02 la ejecutó.
 
-## 2. Corrección autoral congelada — B07-C01
+## 2. B07 V02 auditado
 
-D-082 establece la nueva frontera:
+Response:
+
+`article/responses/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_RESPONSE_V02.md@b28723a1c1b8d66d8791f23a88a7ff77a2b61161`
+
+Artefacto de sección:
+
+`article/sections/experimental_design/Experimental_Design_B07_V02.md@112669ae8998311d17b4510a2fc8afd7c1fdda49`
+
+Auditoría Gestora:
+
+`article/reviews/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_INTERNAL_REVIEW_V02.md@1a59ae7d81549f0c42c8d72d5f7fb1891258f7c6` — `PASS`.
+
+Decisión vigente:
+
+`article/governance/D084_EXPERIMENTAL_DESIGN_B07_V02_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@d60fa9c4d781f653ac1b09b48940be63fcd2827d`.
+
+### 2.1 Candidatos exactos ante el autor
+
+```text
+ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.md
+SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
+GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
+
+ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx
+SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
+COMMENTS = 40 / PRESERVED
+TRACKED_CHANGES = 0
+FULL_RENDER = PASS / 51 OF 51 PAGES
+VISUAL_QA = PASS
+```
+
+## 3. Resultado de B07-C01
+
+La corrección queda cerrada:
 
 ```text
 PUBLIC_REPRO_REPOSITORY = gci-nandina-rag-reproducibility
-INTERNAL_DEVELOPMENT_REPOSITORY_MENTION_IN_SECTION_4_8 = REMOVE
-PUBLIC_RESOURCE_FOCUS = REQUIRED
-MATERIALIZED_VS_PLANNED_VS_RESTRICTED = PRESERVE
-REFERENCE_REPRODUCTION_VS_EXTERNAL_REPLICATION = PRESERVE
-CONFIGURABILITY_IS_NOT_GENERALIZATION = PRESERVE
+INTERNAL_DEVELOPMENT_REPOSITORY_MENTION_IN_SECTION_4_8 = NONE
+PUBLIC_RESOURCE_FOCUS = PASS
+MATERIALIZED_VS_PLANNED_VS_RESTRICTED = PASS
+REFERENCE_REPRODUCTION_VS_EXTERNAL_REPLICATION = PASS
+CONFIGURABILITY_IS_NOT_GENERALIZATION = PASS
 ```
 
-El repositorio interno puede seguir siendo fuente de trabajo y trazabilidad del proceso experimental/editorial, pero no debe aparecer en Section 4.8 como recurso de reproducibilidad para el lector.
+Section 4.8 V02 abre directamente con el repositorio público. No presenta ni describe el repositorio interno de desarrollo como recurso de reproducibilidad. Las entradas no públicas se describen únicamente por su condición de restringidas/no redistribuidas.
 
-## 3. Baselines de revisión
+El snapshot público permanece en HEAD `254831cd955103faa2517065a7eed7fb340bbccc`, tree `078a85255fa1f3234b4f7ed51ef2660b903d486e`.
 
-La corrección se realiza sobre los candidatos B07 V01 exactos, no sobre V015/B06:
+## 4. Continuidad y D-035
 
-```text
-ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V01.md
-SHA256 = a2a7e5527bf69cebab1e6ab3d36a95dd16b5ceac34862038f7fff4ef38d3db12
-GIT_BLOB = 0d8a4ad3dd03c5b69feeec6a5710d296a5a76662
+El cambio acumulativo está confinado a Section 4.8 EN/ES. Se preservan Sections 1–4.7 y Results+. El DOCX conserva 14/14 entradas OOXML, 40 comentarios y anchors y 0 tracked changes; solo `word/document.xml` cambió. El render independiente produce 51 páginas y pasa QA visual.
 
-ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V01.docx
-SHA256 = dc51307ed3ca6918dd1c43de67d366e82121a5f5ed047ccf542d4f400b0abf6c
-COMMENTS = 40 / PRESERVE
-TRACKED_CHANGES = 0
-```
+D-035 continúa satisfecho: los candidatos acumulativos fueron entregados como archivos reales y no se observó Base64 manual, chunking, fragmentación o reensamblado.
 
-## 4. Contrato correctivo vigente
-
-Prompt autorizado:
-
-`article/prompts/5_EXPERIMENTAL_DESIGN_B07_V01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION.md@e7ee988c42c2095a0e0b60dd7a216bf148949419`
-
-Git blob:
-
-`a492b8f53b463aba3295fd71b12dc9f637e74fea`
-
-Revisión interna:
-
-`article/reviews/5_EXPERIMENTAL_DESIGN_B07_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION_PROMPT_REVIEW_V01.md@60d25426aa0e092617f9df866ee9a4d06101d77f` — `PASS`.
-
-Autorización: D-083.
-
-La revisión debe ser mínima: eliminar la mención/comparación con el repositorio interno en EN/ES y conservar el resto de Section 4.8 salvo ajustes estrictamente necesarios para fluidez.
-
-## 5. D-035 obligatorio
-
-El timeout previo de B07 mantiene D-035 activado:
+## 5. Gate autoral
 
 ```text
-BASE64_MANUAL = PROHIBITED
-CHUNKING = PROHIBITED
-FRAGMENTATION = PROHIBITED
-REASSEMBLY = PROHIBITED
-DIRECT_GITHUB_MATERIALIZATION_OF_LARGE_MASTER = DO_NOT_ATTEMPT
-REAL_FILE_HANDOFF_MD_DOCX = REQUIRED
-```
-
-## 6. Gate
-
-```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_B07_C01_ONLY
-EXPECTED_SECTION_ARTIFACT = article/sections/experimental_design/Experimental_Design_B07_V02.md
-EXPECTED_MASTER_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.md
-EXPECTED_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx
-EXPECTED_RESPONSE = article/responses/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_RESPONSE_V02.md
-EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
-AUTHOR_APPROVAL_GATE = CLOSED
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_B07_V02_OR_REQUEST_CHANGES
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B07_V02_ONLY
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
 RESULTS = NOT_AUTHORIZED
 ```
+
+Si B07 V02 es aprobado, la siguiente operación será congelar los candidatos exactos, autorizar V016, materializarla y verificarla byte-exactamente. El cierre de Experimental Design no autoriza Results automáticamente.
 
 ---
 
@@ -120,19 +116,26 @@ RESULTS = NOT_AUTHORIZED
 
 ## 1. Current state
 
-`ARTICLE_MASTER_V015.md` remains canonical. B07 V01 passed technical review but was not approved by the author. The author requested one narrow editorial correction: remove the internal experimental-development repository from Section 4.8 manuscript prose and focus directly on the public `gci-nandina-rag-reproducibility` package.
-
-## 2. Authorized correction
-
-D-082 freezes B07-C01 and D-083 authorizes its execution. Use the exact B07 V01 MD/DOCX candidates as baselines. Preserve all other correct B07 boundaries and all content outside Section 4.8.
-
-D-035 remains mandatory because of the prior timeout. The corrected cumulative MD/DOCX must be handed off as real files; manual Base64, chunking, fragmentation, reassembly, and direct GitHub materialization of the large master are prohibited.
+`ARTICLE_MASTER_V015.md` remains canonical. B07 V02 passed independent review after the narrow author-requested correction that removed the internal experimental-development repository from Section 4.8 manuscript prose.
 
 ```text
-CURRENT_GATE = B07_V01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION
-NEXT_ACTOR = DRAFTING_AI
-EXPECTED_REVISION = B07_V02
-AUTHOR_APPROVAL_GATE = CLOSED
+B07_V02_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
+B07_V02_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
+B07_V02_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
+COMMENTS = 40 / PRESERVED
+TRACKED_CHANGES = 0
+FULL_RENDER = PASS / 51 OF 51 PAGES
+```
+
+Section 4.8 now focuses directly on the public reproducibility repository, preserves the materialized/planned/restricted boundaries, distinguishes reference reproduction from external replication, and does not infer empirical generalization from configurability.
+
+## 2. Gate
+
+```text
+CURRENT_GATE = B07_V02_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
 RESULTS = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
