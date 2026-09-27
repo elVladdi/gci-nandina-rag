@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.5
+PLAN_VERSION = V3.6
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-075
+LATEST_EDITORIAL_DECISION = D-076
 CANONICAL_MASTER = ARTICLE_MASTER_V014
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
 CANONICAL_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
@@ -16,16 +16,16 @@ CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUT
 CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_NARROW_CORRECTION_V01
+CURRENT_GATE = AUTHOR_APPROVAL_B06_V02
 EXPERIMENTAL_DESIGN_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B02 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B04 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B05 = CLOSED / APPROVED / FROZEN / INTEGRATED
-EXPERIMENTAL_DESIGN_B06 = REVISION_REQUIRED / NARROW_CORRECTION_AUTHORIZED
-SECTION_4_7_SCIENTIFIC_CORE = PASS
-SECTION_4_7_MD_DOCX_CONTINUITY = PASS
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+EXPERIMENTAL_DESIGN_B06 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+SECTION_4_7 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B06_V02_ONLY
+B06_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
@@ -40,9 +40,9 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Política acumulativa
 
-`ARTICLE_MASTER_V014.md` permanece como master Markdown canónico verificado. El Word canónico vigente sigue siendo `ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx` bajo custodia local del autor hasta que B06 supere corrección, auditoría y aprobación autoral.
+`ARTICLE_MASTER_V014.md` permanece como master Markdown canónico verificado. El Word acumulativo canónico sigue siendo `ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx` bajo custodia local del autor.
 
-MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGISTRY.md` y `CLAIM_EVIDENCE_MATRIX.md` siguen siendo vinculantes. No se reconstruyen masters acumulativos, no se sustituyen baselines exactos y ningún PASS científico abre por sí mismo integración ni el siguiente bloque.
+MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGISTRY.md` y `CLAIM_EVIDENCE_MATRIX.md` permanecen vinculantes. No se reconstruyen masters acumulativos, no se sustituyen baselines exactos y un `PASS` de IA Gestora no equivale a aprobación autoral ni integración.
 
 ## 2. Estructura congelada de Experimental Design
 
@@ -76,94 +76,94 @@ MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGIS
 | B04 / 4.5 | CLOSED / APPROVED / FROZEN / INTEGRATED |
 | B05 / 4.6 | CLOSED / APPROVED / FROZEN / INTEGRATED |
 | ARTICLE_MASTER_V014 | CANONICAL / VERIFIED |
-| B06 / 4.7 | REVISION_REQUIRED / NARROW_CORRECTION_AUTHORIZED |
+| B06 / 4.7 | DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL |
 | 4.8 | NOT AUTHORIZED |
 | Results | NOT AUTHORIZED |
 | Discussion | NOT AUTHORIZED |
 | Conclusion | NOT AUTHORIZED |
 
-## 4. B06 V01 — auditoría independiente
+## 4. B06 V01 y microgate correctivo
 
-Contrato inicial ejecutado:
-
-`article/prompts/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7.md@f29d10e10c5b94e3c36947cc42031f6dbac4e7bf`
-
-Response recibida:
-
-`article/responses/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_RESPONSE_V01.md@fc08bee93556809171262b6ab56b4124c30d0867`
-
-Auditoría Gestora:
+La ejecución inicial B06 V01 fue auditada en:
 
 `article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V01.md@3d19fbb47fd48abe15520264eea3b29969084295` — `PASS WITH CORRECTIONS`.
 
-El núcleo científico, el alcance, la equivalencia EN/ES y la continuidad MD/DOCX pasan. La revisión no requiere rehacer B06 desde cero.
+D-074 restringió la corrección a B06-C01–B06-C04 y D-075 autorizó únicamente:
 
-## 5. Corrección estrecha autorizada
+`article/prompts/5_EXPERIMENTAL_DESIGN_B06_V01_NARROW_METHODS_CORRECTION.md@c14ab0d5aec458870b05307e5bed521d3a104547`.
 
-D-074 define cuatro incidencias y prohíbe cualquier expansión del alcance:
+## 5. B06 V02 — auditoría diferencial cerrada
 
-- **B06-C01:** 67 clusters DAM, matriz común `10000 × 67` y multiplicidad `m` de todas las series de una DAM remuestreada;
-- **B06-C02:** Top-50 con IC percentil bilateral 95% y efecto congelado como diferencia pareada no estandarizada, sin efecto estandarizado post hoc;
-- **B06-C03:** reglas HE5 omitidas sobre no estimabilidad de calidad de descripción, proximidad jerárquica descriptiva y buckets literales de soporte histórico sin threshold de insuficiencia;
-- **B06-C04:** corrección de dos blobs de procedencia en la response.
+Response recibida:
 
-Contrato correctivo único:
+`article/responses/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_RESPONSE_V02.md@8469a6aa83b85dc64486877106cc6f05115b1751`.
 
-`article/prompts/5_EXPERIMENTAL_DESIGN_B06_V01_NARROW_METHODS_CORRECTION.md@c14ab0d5aec458870b05307e5bed521d3a104547`
+Section artifact:
 
-Git blob:
+`article/sections/experimental_design/Experimental_Design_B06_V02.md@b8d19af968cc9b3e0cc205a908a05a5c1549b4c4`.
 
-`90592518a2197ee6a7889797bf43da60b8b06fcf`
+Auditoría IA Gestora:
 
-Revisión del prompt:
+`article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V02.md@5f154e54faf5b59f301bbb07787616468304a04b` — `PASS`.
 
-`article/reviews/5_EXPERIMENTAL_DESIGN_B06_NARROW_METHODS_CORRECTION_PROMPT_REVIEW_V01.md@024fa0eb8a47425c49241ac0db4bd929bcfbf202` — `PASS`.
+D-076 abre exclusivamente el gate de aprobación autoral de B06 V02.
 
-Autorización: D-075.
-
-## 6. Baselines exactos del microgate
-
-La corrección debe editar exclusivamente los candidatos B06 V01 ya auditados:
+### 5.1 Cierre científico
 
 ```text
-BASELINE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V01.md
-BASELINE_MD_SHA256 = 1ba6d1ea0b0b0c748bf2b4c74e92a53b5ad98852d724157b682c689848bcbc76
-BASELINE_MD_GIT_BLOB = bda3bb6f9603039c48239deab779eec106588719
-
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V01.docx
-BASELINE_DOCX_SHA256 = c58044f2b591eadf9dac0f2cb6bf30624e1c1124d43578bd17bf8c86c0e4dc5e
-COMMENTS = 40 / PRESERVE
-TRACKED_CHANGES = 0 / PRESERVE
+B06-C01 = CLOSED / PASS
+B06-C02 = CLOSED / PASS
+B06-C03 = CLOSED / PASS
+B06-C04 = CLOSED / PASS
+RESULTS_LEAKAGE = NONE
+HYPOTHESIS_DISPOSITION_LEAKAGE = NONE
+SCIENTIFIC_SCOPE_EXPANDED = NO
+EN_ES_EQUIVALENCE = PASS
 ```
 
-Está prohibido volver a V014/B05 como baseline de edición o reconstruir el Word desde Markdown.
+La versión conserva SERIE como unidad de análisis, DAM como cluster inferencial, estimando ponderado por series, bootstrap pareado por DAM con 10.000 réplicas y seed 20263001, reglas de multiplicidad y Bonferroni congeladas, Top-50 suplementaria, contraste HE2_B separado, y estados descriptivos/no-estimables de sensibilidad/HE5. No hay p-values, resultados observados ni disposiciones HE2/HE5 en Methods.
 
-## 7. Fuentes verificadas para la corrección
+### 5.2 Candidatos exactos sometidos al autor
 
 ```text
-DEVELOPMENT_MAIN = db0d0ad0d8435921a7838db6720eaea86a263763
-G3_ANALYTICAL_CONTRACT_BLOB = 76862c10fd84fd70588da2d65f96dbe3b40914f6
-G3_INFERENTIAL_METHODS_BLOB = 6cf424c9cf8aa7371dbbf5b8baaf7305cc66a436
-G3_INFERENTIAL_RESULTS_JSON_BLOB = f99b7e46d81b28ca2b7cfce8d24788ad14156dcc
+ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
+SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+
+ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx
+SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
+COMMENTS = 40 / PRESERVED
+TRACKED_CHANGES = 0
+FULL_DOCX_RENDER = PASS / 49 OF 49 PAGES
+VISUAL_QA = PASS
 ```
 
-La matriz claim–evidencia vigente mantiene C08, C26 y C27 como `AUTHORIZED` dentro de sus límites descriptivos. C14 continúa `CONDITIONAL`, pero no es el claim que gobierna las correcciones B06-C01–C03.
+El candidato DOCX deriva del B06 V01 exacto y conserva el paquete OOXML; únicamente `word/document.xml` cambió para incorporar los seis párrafos autorizados de Section 4.7 EN/ES.
 
-## 8. Gate inmediato
+## 6. Canonicalidad
+
+B06 V02 todavía no está integrado. Hasta aprobación autoral explícita y posterior promoción gobernada:
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_B06_V01_NARROW_METHODS_CORRECTION
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B06_V01_NARROW_METHODS_CORRECTION.md@c14ab0d5aec458870b05307e5bed521d3a104547
-EXPECTED_SECTION_ARTIFACT = article/sections/experimental_design/Experimental_Design_B06_V02.md
-EXPECTED_MASTER_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
-EXPECTED_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx
-EXPECTED_RESPONSE = article/responses/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_RESPONSE_V02.md
-EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+CANONICAL_MASTER = ARTICLE_MASTER_V014
+CANONICAL_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
+CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx
+CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
+```
+
+## 7. Gate inmediato
+
+```text
+CURRENT_GATE = AUTHOR_APPROVAL_B06_V02
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REQUEST_CHANGES_B06_V02
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B06_V02_ONLY
+B06_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
+
+Si el autor aprueba B06 V02 sin cambios, corresponde un gate separado de integración/promoción. Solo después de verificar esa integración podrá evaluarse la apertura de Section 4.8 mediante su propio ground truth, prompt, revisión y autorización.
 
 ---
 
@@ -171,42 +171,50 @@ RESULTS = NOT_AUTHORIZED
 
 ## 1. Current cumulative state
 
-`ARTICLE_MASTER_V014.md` remains the verified canonical Markdown master, and the approved B05 V01 DOCX remains the canonical cumulative Word baseline in local author custody. B01–B05 are closed, approved, frozen, and integrated.
+`ARTICLE_MASTER_V014.md` remains the verified canonical Markdown master, and `ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx` remains the canonical cumulative Word baseline in local author custody. B01–B05 are closed, approved, frozen, and integrated.
 
-B06 V01 passed scientific-core, scope, bilingual-equivalence, Markdown-continuity, and DOCX/OOXML checks, but independent review returned `PASS WITH CORRECTIONS`. No full rewrite is required.
+B06 V02 has completed the Managing-AI differential audit with `PASS`; it is not yet author-approved or integrated.
 
-## 2. Authorized narrow correction
+## 2. B06 V02 audit closure
 
-D-074 restricts the revision to B06-C01 through B06-C04. The sole executable corrective contract is:
+The corrected response is:
 
-`article/prompts/5_EXPERIMENTAL_DESIGN_B06_V01_NARROW_METHODS_CORRECTION.md@c14ab0d5aec458870b05307e5bed521d3a104547`
+`article/responses/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_RESPONSE_V02.md@8469a6aa83b85dc64486877106cc6f05115b1751`.
 
-with Git blob `90592518a2197ee6a7889797bf43da60b8b06fcf`. Its independent prompt review passed, and D-075 authorizes execution.
+The independent review is:
 
-The correction must use the exact B06 V01 candidates as editing baselines:
+`article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V02.md@5f154e54faf5b59f301bbb07787616468304a04b` — `PASS`.
+
+D-076 opens only the author-approval gate for B06 V02.
+
+All four narrow corrections are closed. The corrected Methods prose preserves the frozen inferential design and the descriptive/not-estimable sensitivity boundaries without importing observed Results or final HE2/HE5 dispositions.
+
+## 3. Exact candidates under author review
 
 ```text
-BASELINE_MD_SHA256 = 1ba6d1ea0b0b0c748bf2b4c74e92a53b5ad98852d724157b682c689848bcbc76
-BASELINE_MD_GIT_BLOB = bda3bb6f9603039c48239deab779eec106588719
-BASELINE_DOCX_SHA256 = c58044f2b591eadf9dac0f2cb6bf30624e1c1124d43578bd17bf8c86c0e4dc5e
-COMMENTS = 40 / PRESERVE
-TRACKED_CHANGES = 0 / PRESERVE
+CANDIDATE_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+CANDIDATE_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+CANDIDATE_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
+COMMENTS = 40 / PRESERVED
+TRACKED_CHANGES = 0
+FULL_DOCX_RENDER = PASS / 49 OF 49 PAGES
+VISUAL_QA = PASS
 ```
 
-Returning to V014/B05 as an editing baseline or reconstructing the DOCX from Markdown is prohibited.
+## 4. Canonicality and gate
 
-## 3. Gate
+The B06 V02 candidates do not become canonical until explicit author approval and a governed integration/promotion step. The current canonical master remains V014/B05.
 
 ```text
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B06_NARROW_CORRECTION_V01
-NEXT_ACTOR = DRAFTING_AI
-NEXT_ACTION = EXECUTE_ONLY_B06_V01_NARROW_METHODS_CORRECTION
-EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+CURRENT_GATE = AUTHOR_APPROVAL_B06_V02
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REQUEST_CHANGES_B06_V02
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B06_V02_ONLY
+B06_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
+DISCUSSION = NOT_AUTHORIZED
+CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
-
-A corrected B06 V02 must return to the Managing AI for differential audit before any author-approval gate can open.
