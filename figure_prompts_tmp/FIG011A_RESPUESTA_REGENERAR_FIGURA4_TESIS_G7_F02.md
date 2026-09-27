@@ -36,6 +36,8 @@ The candidate was generated in a clean temporary worktree at `d0ebffcca3abb54ce0
 
 The remaining artifact is `outputs/figures/group7/g7_thesis_fig_04_he2_manifest_v0.1.json`, which binds these sources, outputs, label substitutions, reflow and invariants. Manifest JSON parsing and all candidate SHA-256/size/blob bindings passed.
 
+SHA-256 and size in the tables bind the committed Git blob bytes, not platform-dependent working-tree line endings. For the Python script, the LF blob is 5,189 bytes with SHA-256 `2af80603d59ef6690fa3e63f7e6e5daea21cb1326e186a56470f35f562a84442`; the clean canonical Windows checkout materializes CRLF, 5,308 bytes with SHA-256 `2289a9320264403ed7f5450c0eee5213d0f68ddd2326c7cc59e544f8919e535d`. Both correspond to the same Git blob `b22d25d41fa9014180fd63a36715942414e779a0`. SVG and PNG raw checkout hashes equal the reported hashes.
+
 ## Validation
 
 - Two final consecutive script invocations returned identical SVG and PNG SHA-256 values above. No candidate output was present before the first render in the clean worktree.

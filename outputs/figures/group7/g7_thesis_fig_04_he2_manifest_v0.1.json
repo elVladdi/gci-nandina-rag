@@ -1,6 +1,7 @@
 {
   "figure_id": "G7_THESIS_FIG_04_HE2",
   "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "hash_scope": "SHA-256 and size bind committed Git blob bytes; Git may convert LF to CRLF in a Windows checkout.",
   "frozen_main_commit": "db0d0ad0d8435921a7838db6720eaea86a263763",
   "g6_source": {
     "script": {
@@ -39,7 +40,9 @@
       "path": "src/figures/group7/render_g7_thesis_fig_04_he2.py",
       "git_blob": "b22d25d41fa9014180fd63a36715942414e779a0",
       "sha256": "2af80603d59ef6690fa3e63f7e6e5daea21cb1326e186a56470f35f562a84442",
-      "size_bytes": 5189
+      "size_bytes": 5189,
+      "windows_crlf_checkout_sha256": "2289a9320264403ed7f5450c0eee5213d0f68ddd2326c7cc59e544f8919e535d",
+      "windows_crlf_checkout_size_bytes": 5308
     },
     "svg": {
       "path": "figures/group7/g7_thesis_fig_04_he2.svg",
