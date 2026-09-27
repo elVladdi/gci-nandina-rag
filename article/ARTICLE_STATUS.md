@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.6
-LATEST_EDITORIAL_DECISION = D-076
+ARTICLE_WRITING_PLAN = V3.7
+LATEST_EDITORIAL_DECISION = D-077
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -19,32 +19,26 @@ EXPERIMENTAL_DESIGN_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B04 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B05 = CLOSED / APPROVED / FROZEN / INTEGRATED
 SECTION_4_6 = CLOSED / APPROVED / FROZEN / INTEGRATED
+EXPERIMENTAL_DESIGN_B06 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
+SECTION_4_7 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
 CANONICAL_MASTER = ARTICLE_MASTER_V014
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
 CANONICAL_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
 CANONICAL_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUTHOR_CUSTODY
 CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
-CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
+TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V015
+APPROVED_B06_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
+APPROVED_B06_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+APPROVED_B06_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+APPROVED_B06_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx / LOCAL_AUTHOR_CUSTODY
+APPROVED_B06_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
+APPROVED_B06_COMMENTS = 40 / PRESERVED
+APPROVED_B06_TRACKED_CHANGES = 0
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-EXPERIMENTAL_DESIGN_B06 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
-SECTION_4_7 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
-B06_V02_INTERNAL_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V02.md@5f154e54faf5b59f301bbb07787616468304a04b
-B06_V02_INTERNAL_REVIEW_RESULT = PASS
-B06_V02_RESPONSE = article/responses/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_RESPONSE_V02.md@8469a6aa83b85dc64486877106cc6f05115b1751
-B06_V02_RESPONSE_GIT_BLOB = 50f12ae688c0459cc396c6337c14e75d119a6128
-B06_V02_SECTION_ARTIFACT = article/sections/experimental_design/Experimental_Design_B06_V02.md@b8d19af968cc9b3e0cc205a908a05a5c1549b4c4
-B06_V02_SECTION_ARTIFACT_GIT_BLOB = 76d833b0f3c693ddafe997f0202e3893513a35a2
-B06_V02_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md / LOCAL_AUTHOR_CUSTODY
-B06_V02_CANDIDATE_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-B06_V02_CANDIDATE_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
-B06_V02_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx / LOCAL_AUTHOR_CUSTODY
-B06_V02_CANDIDATE_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
-B06_V02_CANDIDATE_COMMENTS = 40 / PRESERVED
-B06_V02_CANDIDATE_TRACKED_CHANGES = 0
-CURRENT_GATE = AUTHOR_APPROVAL_B06_V02
-AUTHOR_APPROVAL_GATE = OPEN_FOR_B06_V02_ONLY
-B06_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+CURRENT_GATE = B06_V015_PROMOTION_PENDING
+AUTHOR_APPROVAL_GATE = SATISFIED
+B06_INTEGRATION = AUTHORIZED / PENDING_BYTE_EXACT_MATERIALIZATION_AND_VERIFICATION
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
@@ -55,13 +49,15 @@ NOVELTY = NOT_DECLARED
 
 ### Estado vigente
 
-D-071 verificó la promoción byte-exacta de B05 V01 a `ARTICLE_MASTER_V014.md`; por ello, B05/Section 4.6 permanece cerrado, aprobado, congelado e integrado. D-072 sincronizó el ground truth estadístico de B06 y D-073 autorizó la redacción inicial de Section 4.7.
+B01–B05 permanecen cerrados, aprobados, congelados e integrados. `ARTICLE_MASTER_V014.md` continúa siendo el master Markdown canónico verificado hasta que la promoción de B06 sea materializada y verificada.
 
-La primera entrega B06 V01 recibió `PASS WITH CORRECTIONS` en la revisión interna `5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V01.md@3d19fbb47fd48abe15520264eea3b29969084295`. D-074 limitó la revisión a B06-C01–B06-C04 y D-075 autorizó exclusivamente el prompt correctivo.
+B06 V01 recibió `PASS WITH CORRECTIONS`. D-074 restringió el microgate a B06-C01–B06-C04 y D-075 autorizó su ejecución. La entrega corregida B06 V02 fue auditada en:
 
-La IA de Redacción entregó B06 V02. La auditoría diferencial independiente `5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V02.md@5f154e54faf5b59f301bbb07787616468304a04b` emitió `PASS`: las cuatro incidencias quedaron cerradas, no existe filtración de Results, la equivalencia EN/ES pasa, y la continuidad Markdown/DOCX/OOXML fue verificada. D-076 abre únicamente el gate de aprobación autoral de B06 V02.
+`article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V02.md@5f154e54faf5b59f301bbb07787616468304a04b` — `PASS`.
 
-### Identidad del candidato B06 V02 sometido al autor
+D-076 abrió el gate autoral para los candidatos B06 V02 exactos. El autor aprobó B06 V02 sin cambios adicionales y D-077 registra esa aprobación, congela las identidades aprobadas y autoriza la promoción a `ARTICLE_MASTER_V015.md`.
+
+### Candidato B06 aprobado y congelado
 
 ```text
 ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
@@ -76,22 +72,39 @@ FULL_DOCX_RENDER = PASS / 49 OF 49 PAGES
 VISUAL_QA = PASS
 ```
 
-### Correcciones B06 cerradas
-
-- **B06-C01 — CLOSED/PASS:** 67 clusters DAM, matriz común `10000 × 67` y multiplicidad de series cuando una DAM se remuestrea más de una vez.
-- **B06-C02 — CLOSED/PASS:** Top-50 suplementaria con IC bilateral percentil 95%, fuera de la familia primaria y sin función de disposición; diferencia pareada no estandarizada como medida de efecto congelada.
-- **B06-C03 — CLOSED/PASS:** calidad ambigua/incompleta no estimable por falta de operacionalización; proximidad jerárquica descriptiva; buckets literales de soporte histórico sin umbral post hoc de insuficiencia.
-- **B06-C04 — CLOSED/PASS:** blobs correctos para `g3_inferential_methods_and_checks_v0.1.md` y `g3_inferential_results_v0.1.json`.
-
-### Canonicalidad y gate
-
-El candidato B06 V02 **todavía no es canónico**. Hasta aprobación autoral explícita e integración gobernada, permanecen canónicos `ARTICLE_MASTER_V014.md` y `ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx`.
+### Estado científico de B06
 
 ```text
-NEXT_ACTOR = AUTHOR
-NEXT_ACTION = APPROVE_OR_REQUEST_CHANGES_B06_V02
-AUTHOR_APPROVAL_GATE = OPEN_FOR_B06_V02_ONLY
-B06_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+B06-C01 = CLOSED / PASS
+B06-C02 = CLOSED / PASS
+B06-C03 = CLOSED / PASS
+B06-C04 = CLOSED / PASS
+RESULTS_LEAKAGE = NONE
+HYPOTHESIS_DISPOSITION_LEAKAGE = NONE
+SCIENTIFIC_SCOPE_EXPANDED = NO
+EN_ES_EQUIVALENCE = PASS
+MD_DOCX_CONTINUITY = PASS
+OOXML_INTEGRITY = PASS
+```
+
+Section 4.7 conserva SERIE como unidad de análisis; DAM como cluster inferencial cuando existe dependencia; estimando ponderado por series; bootstrap pareado por DAM con 10.000 réplicas y seed 20263001; una matriz común `10000 × 67`; multiplicidad de todas las series de una DAM cuando se remuestrea varias veces; control Bonferroni de la familia HE2_A mediante IC marginales bilaterales del 99%; Top-50 suplementaria con IC bilateral del 95%; un único contraste HE2_B de cobertura profunda con IC bilateral del 95%; ausencia de p-values; diferencia pareada no estandarizada como medida de efecto; EXP11A conjunta tamaño/composición; EXP11B descriptiva sin superpoblación de seeds; EXP12 no estimable; y HE5 descriptivo dentro de sus límites congelados.
+
+### Promoción pendiente
+
+La única promoción autorizada es:
+
+```text
+SOURCE = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
+TARGET = article/manuscript/ARTICLE_MASTER_V015.md
+EXPECTED_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+EXPECTED_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+```
+
+Hasta que V015 exista en GitHub y esas identidades sean verificadas, V014 sigue siendo canónico y Section 4.8 permanece cerrada.
+
+```text
+NEXT_ACTOR = AUTHOR / REPOSITORY_MATERIALIZATION
+NEXT_ACTION = MATERIALIZE_APPROVED_B06_V02_MD_AS_ARTICLE_MASTER_V015_AND_RETURN_FOR_VERIFICATION
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 ```
@@ -103,28 +116,27 @@ RESULTS = NOT_AUTHORIZED
 ```text
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
-ARTICLE_WRITING_PLAN = V3.6
-LATEST_EDITORIAL_DECISION = D-076
+ARTICLE_WRITING_PLAN = V3.7
+LATEST_EDITORIAL_DECISION = D-077
 EXPERIMENTAL_DESIGN_B05 = CLOSED / APPROVED / FROZEN / INTEGRATED
 SECTION_4_6 = CLOSED / APPROVED / FROZEN / INTEGRATED
+EXPERIMENTAL_DESIGN_B06 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
+SECTION_4_7 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
 CANONICAL_MASTER = ARTICLE_MASTER_V014
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
 CANONICAL_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
 CANONICAL_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUTHOR_CUSTODY
 CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
-EXPERIMENTAL_DESIGN_B06 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
-SECTION_4_7 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
-B06_V02_INTERNAL_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V02.md@5f154e54faf5b59f301bbb07787616468304a04b
-B06_V02_INTERNAL_REVIEW_RESULT = PASS
-B06_V02_CANDIDATE_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-B06_V02_CANDIDATE_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
-B06_V02_CANDIDATE_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
-B06_V02_CANDIDATE_COMMENTS = 40 / PRESERVED
-B06_V02_CANDIDATE_TRACKED_CHANGES = 0
-CURRENT_GATE = AUTHOR_APPROVAL_B06_V02
-AUTHOR_APPROVAL_GATE = OPEN_FOR_B06_V02_ONLY
-B06_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V015
+APPROVED_B06_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+APPROVED_B06_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+APPROVED_B06_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
+APPROVED_B06_COMMENTS = 40 / PRESERVED
+APPROVED_B06_TRACKED_CHANGES = 0
+CURRENT_GATE = B06_V015_PROMOTION_PENDING
+AUTHOR_APPROVAL_GATE = SATISFIED
+B06_INTEGRATION = AUTHORIZED / PENDING_BYTE_EXACT_MATERIALIZATION_AND_VERIFICATION
 SECTION_4_8 = NOT_AUTHORIZED
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
@@ -133,15 +145,15 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-B06 V02 passed the Managing AI differential audit. B06-C01 through B06-C04 are closed, with no Results leakage, no hypothesis-disposition leakage, no scientific-scope expansion, and verified Markdown/DOCX/OOXML continuity. The complete 49-page DOCX render passed visual QA.
+B06 V02 passed the independent Managing-AI differential audit and was explicitly approved by the author without changes. D-077 freezes the approved candidate identities and authorizes promotion to `ARTICLE_MASTER_V015.md`.
 
-D-076 opens only the author-review/approval gate for the exact B06 V02 candidates. `ARTICLE_MASTER_V014.md` and the approved B05 V01 DOCX remain canonical until explicit author approval and a governed integration step.
+The promotion must be byte-exact:
 
 ```text
-NEXT_ACTOR = AUTHOR
-NEXT_ACTION = APPROVE_OR_REQUEST_CHANGES_B06_V02
-AUTHOR_APPROVAL_GATE = OPEN_FOR_B06_V02_ONLY
-B06_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
-SECTION_4_8 = NOT_AUTHORIZED
-RESULTS = NOT_AUTHORIZED
+EXPECTED_V015_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+EXPECTED_V015_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
 ```
+
+Until V015 is materialized and verified, V014 remains canonical. The approved B06 V02 DOCX stays in local author custody and does not become the canonical cumulative Word baseline until the Markdown promotion has been verified.
+
+Section 4.8, Results, Discussion, and Conclusion remain unauthorized. Section 4.8 requires its own ground-truth synchronization, prompt, independent review, and authorization after V015 verification.
