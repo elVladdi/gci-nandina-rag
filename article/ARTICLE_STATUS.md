@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.8
-LATEST_EDITORIAL_DECISION = D-080
+ARTICLE_WRITING_PLAN = V3.9
+LATEST_EDITORIAL_DECISION = D-081
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -29,16 +29,23 @@ CANONICAL_MASTER_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e66
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CANONICAL_TRACKED_CHANGES = 0
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B07_SECTION_4_8_DRAFTING_V01
-CURRENT_AUTHORIZED_BLOCK = EXPERIMENTAL_DESIGN_B07_SECTION_4_8
-B07_GROUND_TRUTH = article/governance/D079_EXPERIMENTAL_DESIGN_B07_SECTION4_8_GROUND_TRUTH_SYNC.md@448bcb179cc2be0e211af26fadf77912c3d04056
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8.md@bb3b6792f2eb79e6461ea3b4b4c55369e6dbf577
-AUTHORIZED_PROMPT_GIT_BLOB = 9955ea1617b0b13ceeadc83f357dc982eba313ef
-PROMPT_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_PROMPT_INTERNAL_REVIEW_V01.md@3b142e106ac167fd1f43edeecc5d9340025bed48
-PROMPT_REVIEW_RESULT = PASS
-EXPERIMENTAL_DESIGN_B07 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B07_V01_ONLY
-SECTION_4_8 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B07_V01_ONLY
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+CURRENT_GATE = B07_V01_AUTHOR_APPROVAL
+EXPERIMENTAL_DESIGN_B07 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+SECTION_4_8 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+B07_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_INTERNAL_REVIEW_V01.md@2cb6473345077ed66f453e5963d2d08146ce59cc
+B07_REVIEW_RESULT = PASS
+B07_DECISION = article/governance/D081_EXPERIMENTAL_DESIGN_B07_V01_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@6bdff70a4371ff0556eb1c492ffb43670ae22a30
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B07_V01_ONLY
+APPROVAL_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V01.md
+APPROVAL_MD_SHA256 = a2a7e5527bf69cebab1e6ab3d36a95dd16b5ceac34862038f7fff4ef38d3db12
+APPROVAL_MD_GIT_BLOB = 0d8a4ad3dd03c5b69feeec6a5710d296a5a76662
+APPROVAL_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V01.docx / LOCAL_AUTHOR_CUSTODY
+APPROVAL_DOCX_SHA256 = dc51307ed3ca6918dd1c43de67d366e82121a5f5ed047ccf542d4f400b0abf6c
+APPROVAL_DOCX_COMMENTS = 40 / PRESERVED
+APPROVAL_DOCX_TRACKED_CHANGES = 0
+D035_TIMEOUT_SAFE_HANDOFF = PASS
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -48,9 +55,11 @@ NOVELTY = NOT_DECLARED
 
 ### Estado vigente
 
-D-078 verificó directamente `ARTICLE_MASTER_V015.md`: el Git blob observado `e9a17899ccbcb9971e6dfb5002f908e17a0441d9` coincide exactamente con el candidato B06 V02 aprobado. B06 / Section 4.7 queda cerrado, aprobado, congelado e integrado. El Word acumulativo canónico pasa a ser `ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx`, SHA-256 `86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2`, con 40 comentarios preservados y 0 tracked changes.
+D-078 verificó e integró B06 / Section 4.7 en `ARTICLE_MASTER_V015.md`. D-079 sincronizó el ground truth de reproducibilidad y D-080 autorizó únicamente B07 / Section 4.8.
 
-D-079 sincronizó el ground truth de B07 / Section 4.8 contra el repositorio público `elVladdi/gci-nandina-rag-reproducibility` en:
+La IA de Redacción entregó B07 V01 bajo `article/responses/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_RESPONSE_V01.md@c897204c1df5b591ff2c7742c53caa24baaf3b92`. La auditoría independiente de IA Gestora en `article/reviews/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_INTERNAL_REVIEW_V01.md@2cb6473345077ed66f453e5963d2d08146ce59cc` concluyó `PASS`.
+
+El snapshot público re-verificado permanece en:
 
 ```text
 REPRO_MAIN_HEAD = 254831cd955103faa2517065a7eed7fb340bbccc
@@ -58,22 +67,22 @@ REPRO_TREE = 078a85255fa1f3234b4f7ed51ef2660b903d486e
 REPRO_PACKAGE_STATUS = DOCUMENTED_SCAFFOLD / NOT_FULL_REFERENCE_RELEASE
 ```
 
-El snapshot público contiene documentación de protocolo/datos/procedencia/taxonomía, un ejemplo de configuración para datos propios y la estructura prevista del paquete, pero todavía no materializa una release computacional completa de referencia: no están presentes el runner canónico, preset Clase-87 congelado, dependency lock, resultados canónicos, datos administrativos redistribuidos ni una validación clean-environment de release final.
+La Section 4.8 distingue correctamente recursos materializados, recursos planificados/no materializados y entradas restringidas/no redistribuidas; conserva la separación entre reproducción de referencia y replicación externa; y no afirma generalización empírica, corrección jurídica ni reproducción fresh-clone con un único comando.
 
-El prompt B07 V01 incorpora esa frontera, pasó revisión independiente `PASS` y D-080 autoriza su ejecución como único contrato B07 vigente.
+### Entrega timeout-safe y candidatos auditados
+
+El autor informó un timeout en una primera ejecución de B07. La segunda ejecución aplicó D-035: el master Markdown acumulativo grande no fue materializado directamente en GitHub, el DOCX no fue subido allí y no se observaron archivos de fragmentación, chunking, Base64 o reensamblado. Los candidatos exactos fueron entregados como archivos reales al autor y auditados con los hashes indicados arriba.
+
+El DOCX B07 conserva 14/14 entradas OOXML, 40 comentarios y anchors, 0 tracked changes; solo `word/document.xml` cambió. El render completo de 51 páginas pasó QA visual.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_B07_SECTION_4_8_PROMPT_V01
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V015.md
-BASELINE_MASTER_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-BASELINE_MASTER_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx
-BASELINE_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
-PRIOR_CITATION_COMMENTS = 40 / PRESERVE
-EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_B07_V01_OR_REQUEST_CHANGES
+CURRENT_CANONICAL_MASTER = ARTICLE_MASTER_V015
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
 RESULTS = NOT_AUTHORIZED
 ```
 
@@ -84,25 +93,25 @@ RESULTS = NOT_AUTHORIZED
 ```text
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
-ARTICLE_WRITING_PLAN = V3.8
-LATEST_EDITORIAL_DECISION = D-080
+ARTICLE_WRITING_PLAN = V3.9
+LATEST_EDITORIAL_DECISION = D-081
 EXPERIMENTAL_DESIGN_B01_TO_B06 = CLOSED / APPROVED / FROZEN / INTEGRATED
 SECTION_4_7 = CLOSED / APPROVED / FROZEN / INTEGRATED
 CANONICAL_MASTER = ARTICLE_MASTER_V015
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V015.md
 CANONICAL_MASTER_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
 CANONICAL_MASTER_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx / LOCAL_AUTHOR_CUSTODY
 CANONICAL_MASTER_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
-CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
-CANONICAL_TRACKED_CHANGES = 0
-CURRENT_GATE = EXPERIMENTAL_DESIGN_B07_SECTION_4_8_DRAFTING_V01
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8.md@bb3b6792f2eb79e6461ea3b4b4c55369e6dbf577
-AUTHORIZED_PROMPT_GIT_BLOB = 9955ea1617b0b13ceeadc83f357dc982eba313ef
-PROMPT_REVIEW_RESULT = PASS
-EXPERIMENTAL_DESIGN_B07 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B07_V01_ONLY
-SECTION_4_8 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B07_V01_ONLY
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+CURRENT_GATE = B07_V01_AUTHOR_APPROVAL
+EXPERIMENTAL_DESIGN_B07 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+SECTION_4_8 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B07_V01_ONLY
+APPROVAL_MD_SHA256 = a2a7e5527bf69cebab1e6ab3d36a95dd16b5ceac34862038f7fff4ef38d3db12
+APPROVAL_MD_GIT_BLOB = 0d8a4ad3dd03c5b69feeec6a5710d296a5a76662
+APPROVAL_DOCX_SHA256 = dc51307ed3ca6918dd1c43de67d366e82121a5f5ed047ccf542d4f400b0abf6c
+D035_TIMEOUT_SAFE_HANDOFF = PASS
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -110,8 +119,4 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-D-078 verified byte-exact promotion of the author-approved B06 V02 candidate to `ARTICLE_MASTER_V015.md`. B06 is now integrated and the exact B06 V02 DOCX is the canonical cumulative Word baseline.
-
-D-079 synchronized B07 against the public reproducibility repository at main HEAD `254831cd955103faa2517065a7eed7fb340bbccc`, tree `078a85255fa1f3234b4f7ed51ef2660b903d486e`. The public snapshot provides protocol/data/provenance/taxonomy documentation and an example custom-data configuration, but it is not yet a complete runnable reference release. B07 must preserve that boundary.
-
-The B07 V01 prompt passed independent review and D-080 authorizes drafting only Section 4.8. Results and later sections remain closed.
+B07 V01 passed the independent Managing-AI audit with no corrections. The exact candidates are now before the author for approval. The prior timeout activated D-035; the second execution used the timeout-safe handoff path and the exact MD/DOCX files were received and verified. V015 remains canonical until explicit author approval and a later verified promotion. Results and later sections remain closed.
