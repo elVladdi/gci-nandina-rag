@@ -47,8 +47,10 @@
     "svg": {
       "path": "figures/group7/g7_thesis_fig_04_he2.svg",
       "git_blob": "e84fa3ee6aaedb2d3d24b59ce7255214621aae3f",
-      "sha256": "053b12ea192175071c4274aa1ee4154ec3769f6c02f057e9fdd93bc159ef0e99",
-      "size_bytes": 25395
+      "sha256": "6946594f2543f4dced0e2f19ee73b8adc5e7fa3a2fdb92f7c68cb55f0e1e93b9",
+      "size_bytes": 25201,
+      "windows_crlf_checkout_sha256": "053b12ea192175071c4274aa1ee4154ec3769f6c02f057e9fdd93bc159ef0e99",
+      "windows_crlf_checkout_size_bytes": 25395
     },
     "png": {
       "path": "figures/group7/g7_thesis_fig_04_he2.png",
