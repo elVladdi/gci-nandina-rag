@@ -1,0 +1,107 @@
+{
+  "figure_id": "G7_thesis_figure_05_coverage",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "scientific_baseline_commit": "db0d0ad0d8435921a7838db6720eaea86a263763",
+  "source_g6": {
+    "renderer": {
+      "path": "src/figures/group6/render_g6_fig_02_phase_e.py",
+      "git_blob": "e9dafe41e3b22cb1c8d09da08a723925cd300b7d",
+      "sha256": "a6951cbaace0852936a6e4d2a562d208b15a95983b32d1a98e5cdaaa1fb5c384",
+      "size_bytes": 6676
+    },
+    "svg": {
+      "path": "figures/group6/g6_fig_02_phase_e.svg",
+      "git_blob": "ec164ea41ab8605edf198c03785db63c442c1b64",
+      "sha256": "02de449d911dfbca9863997671751ac2480880646c45e31c8b7549584b0fabc6",
+      "size_bytes": 8425
+    },
+    "png": {
+      "path": "figures/group6/g6_fig_02_phase_e.png",
+      "git_blob": "7917314c8fc54dd96dd9ddfb28c9927c9a577c76",
+      "sha256": "867ca35d0c454a38bd122c6ecdf5bb693f98f86206828bd68c051aa263c7791f",
+      "size_bytes": 145570
+    }
+  },
+  "scientific_source": {
+    "path": "outputs/results/group5/tables/g5_secondary_01_phase_e_descriptive.csv",
+    "git_blob": "fa961cf3d6198ddba6a6b5eeadcc9a23c8801f61",
+    "sha256": "77a9b3cf27881396162fa25464d9fcaa1c8c557b6140e1e48bdbe93858aa523e",
+    "size_bytes": 2620
+  },
+  "candidate": {
+    "renderer": {
+      "path": "src/figures/group7/render_g7_thesis_fig_05_coverage.py",
+      "git_blob": "cd7bdc2c189635ecbe499a01e0e96c9a961fff9c",
+      "sha256": "aa0ef8d3ecbc065bf06ba28cfc2518c4ab3fad682d31e45f25c6881bde1ead4e",
+      "size_bytes": 5172
+    },
+    "svg": {
+      "path": "figures/group7/g7_thesis_fig_05_coverage.svg",
+      "git_blob": "6cba4d776046e052ca4f76297ab627f2a3762046",
+      "sha256": "f91302a0e1179fc52d1f647260b10bba7b1fbb75e302f241f6dbf158cba64051",
+      "size_bytes": 9070,
+      "checkout_crlf_sha256": "78e95ab905f2e886e47156d28d741cf6366393fa627e010050ad9b93a9df42e7",
+      "checkout_crlf_size_bytes": 9133
+    },
+    "png": {
+      "path": "figures/group7/g7_thesis_fig_05_coverage.png",
+      "git_blob": "d63559e4da4b391d47968a60a41649c715d5408b",
+      "sha256": "aecc77e8fd6272766eaf9f7a72d6bc531ef45d448264cac1b95a2ac30edd59c0",
+      "size_bytes": 164051
+    }
+  },
+  "visible_text_substitutions": {
+    "Phase E exact-NANDINA coverage": "Cobertura exacta NANDINA según profundidad y variante",
+    "Descriptive only; no CI, p-values, fitted trends, or connecting lines": "Resultados descriptivos; sin IC, valores p, tendencias ajustadas ni líneas de conexión",
+    "Exact-NANDINA coverage": "Cobertura exacta NANDINA",
+    "Recovery depth (ordered categories)": "Profundidad de recuperación",
+    "Formal claim variants": "Variantes descriptivas predefinidas",
+    "hierarchical_only": "Solo jerárquico",
+    "dual_only": "Solo dual",
+    "hierarchical_first_100": "Jerárquico con prioridad para los primeros 100 candidatos",
+    "hierarchical_80_dual_backfill_20": "Jerárquico 80 + backfill dual 20",
+    "Context only": "Contexto descriptivo adicional",
+    "hierarchical_70_dual_backfill_30": "Jerárquico 70 + backfill dual 30",
+    "15 marks = 5 variants x 3 depths": "15 puntos = 5 variantes × 3 profundidades",
+    "N = 1,056 series": "N = 1 056 series",
+    "The diagnostic union is excluded from ordinary performance. Context and formal variants retain equal visual weight.": "La unión diagnóstica se excluye del rendimiento ordinario. Las variantes predefinidas y la variante contextual conservan igual peso visual."
+  },
+  "scientific_invariants": {
+    "svg_canvas_units": [1200, 675],
+    "png_pixels": [3000, 1688],
+    "png_nominal_dpi": 300,
+    "panel_count": 1,
+    "depth_order": [50, 100, 200],
+    "variant_count": 5,
+    "plotted_mark_count": 15,
+    "y_range": [0, 0.35],
+    "y_baseline": 0,
+    "connecting_lines": "NONE",
+    "ci": "NONE",
+    "p_values": "NONE",
+    "fitted_trends": "NONE",
+    "diagnostic_union_as_ordinary_performance": false,
+    "eval_n": 1056,
+    "dam_n": 67,
+    "nandina_n": 42,
+    "coverage_rounded_4dp_by_variant_and_depth": {
+      "hierarchical_only": [0.0909, 0.1013, 0.3040],
+      "dual_only": [0.0919, 0.1004, 0.2661],
+      "hierarchical_first_100": [0.0909, 0.1013, 0.2652],
+      "hierarchical_80_dual_backfill_20": [0.0909, 0.1013, 0.3040],
+      "hierarchical_70_dual_backfill_30": [0.0909, 0.1023, 0.3040]
+    }
+  },
+  "validation": {
+    "scientific_data_change": false,
+    "non_text_svg_geometry_match": true,
+    "deterministic_rerun_match": true,
+    "thesis_visible_internal_ids": "none",
+    "text_clipping_or_material_overlap": false,
+    "minimum_effective_text_pt": 8.1,
+    "g6_protected_artifacts_unchanged": true,
+    "figure4_candidate_unchanged": true,
+    "docx_modified": false,
+    "121f_executed": false
+  }
+}
