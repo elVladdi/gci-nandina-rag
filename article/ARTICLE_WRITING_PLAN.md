@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.14
+PLAN_VERSION = V3.15
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-088
+LATEST_EDITORIAL_DECISION = D-089
 CANONICAL_MASTER = ARTICLE_MASTER_V016
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V016.md
 CANONICAL_MASTER_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
@@ -16,11 +16,15 @@ CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx / LOCAL_AUT
 CANONICAL_MASTER_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = RESULTS
-CURRENT_GATE = RESULTS_B01_SECTION_5_1_DRAFTING_V01
+CURRENT_GATE = RESULTS_B01_V01_AUTHOR_APPROVAL
 EXPERIMENTAL_DESIGN = CLOSED / APPROVED / FROZEN / INTEGRATED
-RESULTS_B01_SECTION_5_1 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B01_V01_ONLY
+RESULTS_B01_SECTION_5_1 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+RESULTS_B01_CANDIDATE_MD_SHA256 = 6027785ac8f5018920b1bd714f01e57050447cb705d0e9f516a325a4416a6318
+RESULTS_B01_CANDIDATE_MD_GIT_BLOB = 35edb134f3d060bad4257d314cf415d9ecf17b6c
+RESULTS_B01_CANDIDATE_DOCX_SHA256 = f872a6ed145c5f7759dbfabf03e19d0d87aae2f0838c4b02969139c08585841f
 RESULTS_B02_PLUS = NOT_AUTHORIZED
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+AUTHOR_APPROVAL_GATE = OPEN_FOR_RESULTS_B01_V01_ONLY
+TARGET_IF_APPROVED = ARTICLE_MASTER_V017
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
@@ -33,101 +37,77 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V016.md` es el master Markdown canónico verificado. El Word acumulativo canónico es `ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx`, bajo custodia local del autor, con 40 comentarios y 0 tracked changes.
+`ARTICLE_MASTER_V016.md` continúa como master Markdown canónico verificado. El Word acumulativo canónico sigue siendo `ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx`, SHA-256 `c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de`, bajo custodia local del autor, con 40 comentarios y 0 tracked changes.
 
-Experimental Design está cerrado, aprobado, congelado e integrado. La fase activa pasa a Results, pero exclusivamente mediante bloques independientes y gates explícitos.
+Experimental Design está cerrado, aprobado, congelado e integrado. La fase activa es Results y avanza mediante bloques independientes sometidos a ground-truth sync, contrato, auditoría Gestora, aprobación autoral e integración byte-exacta.
 
-## 2. Estructura congelada de Results
+## 2. Results B01 / Section 5.1
+
+La IA de Redacción ejecutó B01 conforme a D-087/D-088 y produjo:
 
 ```text
-5.1 Data and partition checks
-5.2 Candidate retrieval performance
-5.3 Documentary evidence retrieval
-5.4 Controlled explanation quality
-5.5 Sensitivity and robustness analyses
-5.6 Inferential results
-5.7 Summary by research question
+RESPONSE = article/responses/6_RESULTS_B01_SECTION5_1_RESPONSE_V01.md@6796dd29f3c530e91c463a207aea9e9dd8e9d187
+SECTION = article/sections/results/Results_B01_V01.md@28948cad188b7ad79ab44b6b9e19b90e659e5f1d
+
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.md
+SHA256 = 6027785ac8f5018920b1bd714f01e57050447cb705d0e9f516a325a4416a6318
+GIT_BLOB_EXPECTED_FROM_BYTES = 35edb134f3d060bad4257d314cf415d9ecf17b6c
+
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.docx
+SHA256 = f872a6ed145c5f7759dbfabf03e19d0d87aae2f0838c4b02969139c08585841f
+COMMENTS = 40 / PRESERVED
+TRACKED_CHANGES = 0
 ```
 
-Solo §5.1 está abierta. La existencia de evidencia elegible para secciones posteriores no las autoriza por anticipado.
+## 3. Auditoría Gestora
 
-## 3. Ground truth de Results B01
+Revisión independiente:
 
-D-087:
+`article/reviews/6_RESULTS_B01_SECTION5_1_INTERNAL_REVIEW_V01.md@76990c16e3bd1c0aea23bbe8311f86d98d05df56`
 
-`article/governance/D087_RESULTS_GROUND_TRUTH_SYNC_AND_B01_BOUNDARY.md@22a63fa715ae2c7bddb92af06d65c417f257932b`
-
-Snapshot experimental congelado:
-
-`db0d0ad0d8435921a7838db6720eaea86a263763`
-
-Fuentes B01:
+Dictamen:
 
 ```text
-data/processed/data_aduanas_splits_clase87_v0.2_metadata.json
-GIT_BLOB = bcb02c9c3493235a6f80991158c5b24fa7c04510
-
-outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json
-GIT_BLOB = fb21eb0d8ef77cdedaa32698b854595629ed526d
+OVERALL_VERDICT = PASS
+GROUND_TRUTH_FIDELITY = PASS
+SECTION_5_1_ONLY_DIFF = PASS
+EN_ES_EQUIVALENCE = PASS
+DOCX_OOXML_QA = PASS
+FULL_DOCX_RENDER = PASS / 52 OF 52
+D035_TIMEOUT_SAFE_HANDOFF = PASS
 ```
 
-B01 está limitado a:
+La auditoría confirmó que §5.1 contiene exclusivamente los resultados congelados de composición y controles de partición autorizados por D-087. No se filtraron resultados de candidate retrieval, evidencia documental, explicación, sensibilidades, inferencia, HE2/HE5 ni Discussion.
 
-- composición v0.2: H100 2,950 SERIE / 28 DAM / 66 códigos; DEV 100 / 6 / 9; EVAL 1,056 / 67 / 42;
-- asignación completa de 4,106 SERIE;
-- cero solapamiento cross-partition de DAM e `id_unico`;
-- soporte histórico nominal de 1,056/1,056 casos y 42/42 códigos EVAL;
-- duplicados exactos H100–EVAL: 35/1,056 (3.31%), con DAM distintas;
-- near-duplicates H100–EVAL: 55 (5.21%) a Jaccard ≥0.90, 44 (4.17%) a ≥0.95 y 37 (3.50%) a ≥0.98.
+D-089 abrió el gate autoral exclusivamente para B01 V01:
 
-No pertenecen a B01 retrieval performance, evidence coverage, explanation quality, sensibilidades, inferencia, HE2/HE5 ni Discussion.
+`article/governance/D089_RESULTS_B01_V01_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@cfba21a2ed00e3bb589a57e8f11184049fe87084`.
 
-## 4. Contrato de redacción activo
-
-Prompt:
-
-`article/prompts/6_RESULTS_B01_SECTION5_1.md@cc75fb9b732de6b9162cf90b8eacb8462372405e`
-
-Git blob:
-
-`a0f4005e8c406574d39b5540dfbf676f3d4acc0d`
-
-Revisión:
-
-`article/reviews/6_RESULTS_B01_SECTION5_1_PROMPT_INTERNAL_REVIEW_V01.md@275c6e14d7d3eab0ada488e829dcd07f8b1254df` — `PASS`.
-
-Autorización:
-
-`article/governance/D088_RESULTS_B01_SECTION5_1_EXECUTION_AUTHORIZATION.md@da7fa50368439304fd9cd43042ed1c3dfd1b5b08`.
-
-## 5. Baselines y entrega
+## 4. Gate vigente
 
 ```text
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V016.md
-BASELINE_MASTER_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
-BASELINE_MASTER_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
-
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx
-BASELINE_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
-COMMENTS = 40 / PRESERVE
-TRACKED_CHANGES = 0 / PRESERVE
-```
-
-D-035 continúa activado para la cadena acumulativa: Base64 manual, chunking, fragmentación y reensamblado están prohibidos; el MD/DOCX acumulativo debe entregarse como archivo real al autor. El DOCX no se reconstruye desde Markdown.
-
-## 6. Gate inmediato
-
-```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_RESULTS_B01_SECTION_5_1
-EXPECTED_SECTION_ARTIFACT = article/sections/results/Results_B01_V01.md
-EXPECTED_MASTER_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.md
-EXPECTED_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.docx
-EXPECTED_RESPONSE = article/responses/6_RESULTS_B01_SECTION5_1_RESPONSE_V01.md
-EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_REJECT_OR_REQUEST_CORRECTION_FOR_RESULTS_B01_V01
+CURRENT_CANONICAL_MASTER = ARTICLE_MASTER_V016
+CANDIDATE_IF_APPROVED = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V017
 RESULTS_B02_PLUS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
+```
+
+La aprobación autoral de B01, si ocurre, autorizará únicamente la promoción byte-exacta del candidato aprobado a V017. Hasta esa verificación, V016 permanece canónico.
+
+## 5. Estructura congelada de Results
+
+```text
+5.1 Data and partition checks             = PENDING_AUTHOR_APPROVAL
+5.2 Candidate retrieval performance       = NOT_AUTHORIZED
+5.3 Documentary evidence retrieval        = NOT_AUTHORIZED
+5.4 Controlled explanation quality        = NOT_AUTHORIZED
+5.5 Sensitivity and robustness analyses   = NOT_AUTHORIZED
+5.6 Inferential results                    = NOT_AUTHORIZED
+5.7 Summary by research question           = NOT_AUTHORIZED
 ```
 
 ---
@@ -136,19 +116,18 @@ CONCLUSION = NOT_AUTHORIZED
 
 ## 1. Current state
 
-V016 is the canonical verified Markdown master and the B07 V02 DOCX is the canonical cumulative Word baseline. Experimental Design is fully integrated. Results B01 / Section 5.1 is now the only open drafting block.
-
-## 2. B01 contract
-
-Ground truth is frozen by D-087 from the v0.2 metadata and audit summary at development snapshot `db0d0ad0d8435921a7838db6720eaea86a263763`. The active drafting contract is `article/prompts/6_RESULTS_B01_SECTION5_1.md@cc75fb9b732de6b9162cf90b8eacb8462372405e`, reviewed PASS and authorized by D-088.
+V016 remains the canonical verified Markdown master. Results B01 / Section 5.1 has been drafted and independently audited by the Managing AI with a PASS verdict but is not yet integrated.
 
 ```text
-CURRENT_GATE = RESULTS_B01_SECTION_5_1_DRAFTING_V01
-NEXT_ACTOR = DRAFTING_AI
-RESULTS_B01 = AUTHORIZED
+CURRENT_GATE = RESULTS_B01_V01_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+RESULTS_B01 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+TARGET_IF_APPROVED = ARTICLE_MASTER_V017
 RESULTS_B02_PLUS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
+
+The exact candidate identities are frozen above. Author approval is required before any V017 promotion or Results B02 ground-truth gate may begin.
