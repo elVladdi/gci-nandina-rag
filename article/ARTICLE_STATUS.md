@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.10
-LATEST_EDITORIAL_DECISION = D-083
+ARTICLE_WRITING_PLAN = V3.11
+LATEST_EDITORIAL_DECISION = D-084
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -29,19 +29,27 @@ CANONICAL_MASTER_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e66
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CANONICAL_TRACKED_CHANGES = 0
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = B07_V01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION
-EXPERIMENTAL_DESIGN_B07 = REVISION_REQUIRED / AUTHORIZED_FOR_NARROW_CORRECTION
-SECTION_4_8 = REVISION_REQUIRED / B07-C01 ONLY
-AUTHOR_APPROVAL_GATE = CLOSED
-AUTHOR_DECISION_B07_V01 = NOT_APPROVED
-AUTHOR_OBSERVATION = INTERNAL_DEVELOPMENT_REPOSITORY_SHOULD_NOT_BE_PRESENTED_AS_REPRODUCIBILITY_RESOURCE
-B07_V01_MD_SHA256 = a2a7e5527bf69cebab1e6ab3d36a95dd16b5ceac34862038f7fff4ef38d3db12
-B07_V01_DOCX_SHA256 = dc51307ed3ca6918dd1c43de67d366e82121a5f5ed047ccf542d4f400b0abf6c
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B07_V01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION.md@e7ee988c42c2095a0e0b60dd7a216bf148949419
-AUTHORIZED_PROMPT_GIT_BLOB = a492b8f53b463aba3295fd71b12dc9f637e74fea
-PROMPT_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B07_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION_PROMPT_REVIEW_V01.md@60d25426aa0e092617f9df866ee9a4d06101d77f
-PROMPT_REVIEW_RESULT = PASS
-D035_TIMEOUT_SAFE_HANDOFF = MANDATORY
+CURRENT_GATE = B07_V02_AUTHOR_APPROVAL
+EXPERIMENTAL_DESIGN_B07 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+SECTION_4_8 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+AUTHOR_DECISION_B07_V01 = NOT_APPROVED / SUPERSEDED_BY_B07_V02
+AUTHOR_CORRECTION_B07_C01 = CLOSED / PASS
+B07_V02_RESPONSE = article/responses/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_RESPONSE_V02.md@b28723a1c1b8d66d8791f23a88a7ff77a2b61161
+B07_V02_SECTION = article/sections/experimental_design/Experimental_Design_B07_V02.md@112669ae8998311d17b4510a2fc8afd7c1fdda49
+B07_V02_REVIEW = article/reviews/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_INTERNAL_REVIEW_V02.md@1a59ae7d81549f0c42c8d72d5f7fb1891258f7c6
+B07_V02_REVIEW_RESULT = PASS
+B07_DECISION = article/governance/D084_EXPERIMENTAL_DESIGN_B07_V02_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@d60fa9c4d781f653ac1b09b48940be63fcd2827d
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B07_V02_ONLY
+APPROVAL_MD = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.md
+APPROVAL_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
+APPROVAL_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
+APPROVAL_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx / LOCAL_AUTHOR_CUSTODY
+APPROVAL_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
+APPROVAL_DOCX_COMMENTS = 40 / PRESERVED
+APPROVAL_DOCX_TRACKED_CHANGES = 0
+D035_TIMEOUT_SAFE_HANDOFF = PASS
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -53,22 +61,22 @@ NOVELTY = NOT_DECLARED
 
 B01–B06 permanecen cerrados, aprobados, congelados e integrados. `ARTICLE_MASTER_V015.md` continúa como master Markdown canónico y `ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx` como baseline Word canónico.
 
-B07 V01 recibió `PASS` técnico de IA Gestora, pero el autor **no lo aprobó**. La observación autoral quedó registrada en D-082: Section 4.8 no debe presentar el repositorio interno de desarrollo experimental como recurso de reproducibilidad ni compararlo narrativamente con el paquete público.
+El autor rechazó B07 V01 por presentar narrativamente el repositorio interno de desarrollo experimental en Section 4.8. D-082 congeló B07-C01 y D-083 autorizó exclusivamente esa corrección.
 
-D-082 corrige parcialmente D-079 en ese único punto. El ground truth del snapshot público permanece vigente: `gci-nandina-rag-reproducibility` continúa siendo el recurso público que Section 4.8 debe describir, preservando las fronteras entre recursos materializados, planificados/no materializados y entradas restringidas/no redistribuidas.
+La IA de Redacción entregó B07 V02 mediante `article/responses/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_RESPONSE_V02.md@b28723a1c1b8d66d8791f23a88a7ff77a2b61161`. La auditoría independiente Gestora confirmó que la corrección quedó limitada a Section 4.8 EN/ES, eliminó toda mención narrativa al repositorio interno de desarrollo y conservó las fronteras de reproducibilidad previamente aprobadas.
 
-D-083 autoriza únicamente B07-C01 sobre los candidatos B07 V01 exactos. La nueva versión debe abrir directamente sobre el repositorio público y eliminar toda mención narrativa al repositorio interno de desarrollo dentro de Section 4.8.
+El repositorio público continúa en HEAD `254831cd955103faa2517065a7eed7fb340bbccc`, tree `078a85255fa1f3234b4f7ed51ef2660b903d486e`, sin drift material.
 
-Debido al timeout previo de B07, D-035 sigue activado: Base64 manual, chunking, fragmentación y reensamblado están prohibidos; los candidatos acumulativos corregidos deben entregarse como archivos reales al autor.
+Los candidatos exactos B07 V02 pasaron identidad, continuidad acumulativa, OOXML, comentarios, tracked changes, equivalencia MD/DOCX, render y QA visual. D-035 permanece satisfecho mediante entrega real de archivos y sin Base64 manual/chunking/fragmentación/reensamblado observados.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_B07_C01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION
-EXPECTED_REVISION = B07_V02
-AUTHOR_APPROVAL_GATE = CLOSED
-B07_INTEGRATION = BLOCKED
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_B07_V02_OR_REQUEST_CHANGES
+CURRENT_CANONICAL_MASTER = ARTICLE_MASTER_V015
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
 RESULTS = NOT_AUTHORIZED
 ```
 
@@ -79,20 +87,22 @@ RESULTS = NOT_AUTHORIZED
 ```text
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
-ARTICLE_WRITING_PLAN = V3.10
-LATEST_EDITORIAL_DECISION = D-083
+ARTICLE_WRITING_PLAN = V3.11
+LATEST_EDITORIAL_DECISION = D-084
 CANONICAL_MASTER = ARTICLE_MASTER_V015
 CANONICAL_MASTER_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
 CANONICAL_MASTER_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
 CANONICAL_MASTER_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
-CURRENT_GATE = B07_V01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION
-EXPERIMENTAL_DESIGN_B07 = REVISION_REQUIRED / AUTHORIZED_FOR_NARROW_CORRECTION
-SECTION_4_8 = REVISION_REQUIRED / B07-C01 ONLY
-AUTHOR_APPROVAL_GATE = CLOSED
-AUTHORIZED_PROMPT = article/prompts/5_EXPERIMENTAL_DESIGN_B07_V01_NARROW_PUBLIC_REPRO_SCOPE_CORRECTION.md@e7ee988c42c2095a0e0b60dd7a216bf148949419
-AUTHORIZED_PROMPT_GIT_BLOB = a492b8f53b463aba3295fd71b12dc9f637e74fea
-PROMPT_REVIEW_RESULT = PASS
-D035_TIMEOUT_SAFE_HANDOFF = MANDATORY
+CURRENT_GATE = B07_V02_AUTHOR_APPROVAL
+EXPERIMENTAL_DESIGN_B07 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+SECTION_4_8 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B07_V02_ONLY
+APPROVAL_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
+APPROVAL_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
+APPROVAL_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
+D035_TIMEOUT_SAFE_HANDOFF = PASS
+B07_INTEGRATION = BLOCKED_UNTIL_EXPLICIT_AUTHOR_APPROVAL
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V016
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -100,4 +110,4 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-B07 V01 was technically sound but was not approved by the author. D-082 records the author-requested correction: Section 4.8 must not present the internal experimental-development repository as a reproducibility resource. The manuscript must focus directly on the public `gci-nandina-rag-reproducibility` package. D-083 authorizes only this narrow correction. Results and later sections remain closed.
+B07 V02 passed the independent Managing-AI audit. The author-requested correction is closed: Section 4.8 now focuses directly on the public reproducibility package and no longer narratively presents the internal experimental-development repository. V015 remains canonical until explicit author approval and a later verified V016 promotion. Results and later sections remain closed.
