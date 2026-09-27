@@ -1,35 +1,32 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.7
+PLAN_VERSION = V3.8
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-077
-CANONICAL_MASTER = ARTICLE_MASTER_V014
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V014.md
-CANONICAL_MASTER_MD_SHA256 = e7aa7e6706923520a5403ab4dec6713d5a1f7fe6b55edccbde43f2d54b755b97
-CANONICAL_MASTER_MD_GIT_BLOB = 20105abb745e382b923e4eb43d9a771a722df9e3
-CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx / LOCAL_AUTHOR_CUSTODY
-CANONICAL_MASTER_DOCX_SHA256 = b1ab0ba79fe8d4dffad57208b2765f18e2c84b80ef4c1dbcfd3ac93eba8f78e2
-TARGET_CANONICAL_MASTER = ARTICLE_MASTER_V015
-APPROVED_B06_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-APPROVED_B06_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
-APPROVED_B06_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
+LATEST_EDITORIAL_DECISION = D-080
+CANONICAL_MASTER = ARTICLE_MASTER_V015
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V015.md
+CANONICAL_MASTER_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+CANONICAL_MASTER_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_MASTER_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = EXPERIMENTAL DESIGN
-CURRENT_GATE = B06_V015_PROMOTION_PENDING
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B07_SECTION_4_8_DRAFTING_V01
 EXPERIMENTAL_DESIGN_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B02 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B04 = CLOSED / APPROVED / FROZEN / INTEGRATED
 EXPERIMENTAL_DESIGN_B05 = CLOSED / APPROVED / FROZEN / INTEGRATED
-EXPERIMENTAL_DESIGN_B06 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
-SECTION_4_7 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
-AUTHOR_APPROVAL_GATE = SATISFIED
-SECTION_4_8 = NOT_AUTHORIZED
+EXPERIMENTAL_DESIGN_B06 = CLOSED / APPROVED / FROZEN / INTEGRATED
+SECTION_4_7 = CLOSED / APPROVED / FROZEN / INTEGRATED
+EXPERIMENTAL_DESIGN_B07 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B07_V01_ONLY
+SECTION_4_8 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B07_V01_ONLY
+AUTHOR_APPROVAL_GATE = NOT_OPEN
 RESULTS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -43,9 +40,9 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Política acumulativa
 
-El artículo continúa construyéndose mediante masters acumulativos verificados. Mientras la promoción B06 no esté materializada y auditada, `ARTICLE_MASTER_V014.md` permanece como master Markdown canónico y `ARTICLE_MASTER_CANDIDATE_EXPDES_B05_V01.docx` como Word acumulativo canónico bajo custodia local del autor.
+`ARTICLE_MASTER_V015.md` es el master Markdown canónico verificado. El Word acumulativo canónico vigente es `ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx`, bajo custodia local del autor.
 
-MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGISTRY.md` y `CLAIM_EVIDENCE_MATRIX.md` siguen siendo vinculantes. Ningún bloque se integra por aprobación implícita y ninguna sección posterior se abre antes de cerrar el gate técnico precedente.
+MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGISTRY.md`, `CLAIM_EVIDENCE_MATRIX.md` y la estructura congelada permanecen vinculantes. Ningún bloque posterior se abre por inferencia ni por mera existencia de artefactos.
 
 ## 2. Estructura congelada de Experimental Design
 
@@ -78,71 +75,88 @@ MWDP v1.0, SPCCR, D-021/D-022/D-027/D-035, las decisiones activas, `SOURCE_REGIS
 | B03 / 4.4 | CLOSED / APPROVED / FROZEN / INTEGRATED |
 | B04 / 4.5 | CLOSED / APPROVED / FROZEN / INTEGRATED |
 | B05 / 4.6 | CLOSED / APPROVED / FROZEN / INTEGRATED |
-| ARTICLE_MASTER_V014 | CANONICAL / VERIFIED |
-| B06 / 4.7 | CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION |
-| ARTICLE_MASTER_V015 | AUTHORIZED / PENDING MATERIALIZATION AND VERIFICATION |
-| 4.8 | NOT AUTHORIZED |
+| B06 / 4.7 | CLOSED / APPROVED / FROZEN / INTEGRATED |
+| ARTICLE_MASTER_V015 | CANONICAL / VERIFIED |
+| B07 / 4.8 | OPEN / AUTHORIZED UNDER B07 V01 ONLY |
 | Results | NOT AUTHORIZED |
 | Discussion | NOT AUTHORIZED |
 | Conclusion | NOT AUTHORIZED |
 
-## 4. Cierre B06
+## 4. Cierre técnico de B06
 
-B06 V01 fue auditado con `PASS WITH CORRECTIONS`. D-074 definió un microgate estrecho B06-C01–B06-C04 y D-075 autorizó su ejecución. B06 V02 fue auditado en:
+D-078 verificó que el archivo materializado `ARTICLE_MASTER_V015.md` posee Git blob `e9a17899ccbcb9971e6dfb5002f908e17a0441d9`, exactamente igual al candidato B06 V02 aprobado. Por identidad byte-exacta se conserva el SHA-256 auditado `b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c`.
 
-`article/reviews/5_EXPERIMENTAL_DESIGN_B06_SECTION4_7_INTERNAL_REVIEW_V02.md@5f154e54faf5b59f301bbb07787616468304a04b` — `PASS`.
-
-D-076 abrió exclusivamente el gate de aprobación autoral. El autor aprobó B06 V02 sin cambios y D-077 registra la aprobación y autoriza la promoción a V015.
-
-### 4.1 Identidades aprobadas
+El baseline Word acumulativo vigente es:
 
 ```text
-ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
-SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
-
 ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx
 SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
-COMMENTS = 40 / PRESERVED
+COMMENTS = 40 / PRESERVE
 TRACKED_CHANGES = 0
-FULL_DOCX_RENDER = PASS / 49 OF 49 PAGES
-VISUAL_QA = PASS
 ```
 
-### 4.2 Estado científico congelado
+## 5. Fase activa — B07 / Section 4.8
 
-Section 4.7 conserva el estimando ponderado por series y la dependencia por DAM, bootstrap pareado por cluster con 10.000 réplicas y seed 20263001, matriz común `10000 × 67`, reglas de multiplicidad, control Bonferroni para HE2_A, Top-50 suplementaria con IC 95%, un único contraste HE2_B, ausencia de p-values y medida de efecto pareada no estandarizada. EXP11A, EXP11B, EXP12 y HE5 mantienen exactamente sus fronteras descriptivas/no estimables congeladas. No se introducen Results ni disposiciones HE2/HE5 en Methods.
+Ground truth: D-079.
 
-## 5. Gate de promoción V015
+Contrato único ejecutable:
 
-La única acción de integración autorizada es promover byte-exactamente:
+`article/prompts/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8.md@bb3b6792f2eb79e6461ea3b4b4c55369e6dbf577`
+
+Git blob:
+
+`9955ea1617b0b13ceeadc83f357dc982eba313ef`
+
+Revisión interna:
+
+`article/reviews/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8_PROMPT_INTERNAL_REVIEW_V01.md@3b142e106ac167fd1f43edeecc5d9340025bed48` — `PASS`.
+
+Autorización: D-080.
+
+### 5.1 Función científica
+
+Section 4.8 debe explicar los recursos de reproducibilidad verificables sin equiparar documentación con reproducción computacional ya demostrada. Debe distinguir de forma explícita:
+
+1. recursos públicos actualmente materializados;
+2. componentes planificados/no materializados de la futura release de referencia;
+3. entradas restringidas o no redistribuidas.
+
+La prosa debe explicar capacidades y fronteras, no inventariar hashes/rutas internas.
+
+### 5.2 Snapshot público de reproducibilidad
 
 ```text
-SOURCE = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.md
-TARGET = article/manuscript/ARTICLE_MASTER_V015.md
-EXPECTED_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-EXPECTED_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+REPRO_REPOSITORY = elVladdi/gci-nandina-rag-reproducibility
+REPRO_MAIN_HEAD = 254831cd955103faa2517065a7eed7fb340bbccc
+REPRO_TREE = 078a85255fa1f3234b4f7ed51ef2660b903d486e
+REPRO_PACKAGE_STATUS = DOCUMENTED_SCAFFOLD / NOT_FULL_REFERENCE_RELEASE
 ```
 
-Después de materializar V015, IA Gestora debe verificar su identidad antes de declarar B06 integrado. El DOCX B06 V02 permanece bajo custodia local del autor y solo se convierte en baseline Word canónico después de la promoción verificada.
+El snapshot sí contiene documentación de protocolo, contratos de datos/procedencia/taxonomía, reglas de reproducibilidad y una configuración de ejemplo para datos propios. No contiene todavía runner canónico de reproducción, runners ejecutables mostrados como interfaz objetivo, preset Clase-87 congelado, dependency lock, resultados canónicos, datos administrativos de referencia redistribuidos ni validación clean-environment de la release final.
 
-## 6. Próxima fase
+### 5.3 Claims
 
-Section 4.8 no está autorizada todavía. Una vez verificada V015, el siguiente trabajo posible será preparar B07 / Section 4.8 — Reproducibility resources, pero solo después de:
+- C15: configurabilidad para otros capítulos/niveles/jurisdicciones — autorizada solo como propiedad de diseño.
+- C17: separación entre reproducción de referencia y replicación externa — autorizada.
+- C16: generalización empírica fuera de Chapter 87 — prohibida.
 
-- sincronizar su ground truth con el repositorio de reproducibilidad y las fuentes vigentes;
-- distinguir recursos públicos, restringidos y no redistribuibles;
-- verificar qué permite reconstruir/reproducir el paquete y qué requiere datos externos del replicador;
-- preparar un prompt específico bajo MWDP/SPCCR;
-- auditar ese prompt independientemente;
-- emitir una autorización editorial específica.
+La reproducibilidad/documentación no autoriza claims de corrección jurídica, generalización empírica ni disponibilidad pública de datos no verificada.
 
-No debe redactarse Section 4.8 antes de ese gate.
+### 5.4 Recheck obligatorio
+
+Debido al carácter progresivo del repositorio de reproducibilidad, el estado público deberá re-verificarse antes del freeze final/submission. Cualquier recurso nuevo se incorporará mediante un nuevo gate; B07 V01 no debe anticiparlo.
+
+## 6. Gate inmediato
 
 ```text
-NEXT_ACTOR = AUTHOR / REPOSITORY_MATERIALIZATION
-NEXT_ACTION = MATERIALIZE_APPROVED_B06_V02_MD_AS_ARTICLE_MASTER_V015_AND_RETURN_FOR_VERIFICATION
-SECTION_4_8 = NOT_AUTHORIZED
+NEXT_ACTOR = IA_REDACCION
+NEXT_ACTION = EXECUTE_ONLY_B07_SECTION_4_8_PROMPT_V01
+BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V015.md
+BASELINE_MASTER_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
+BASELINE_MASTER_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx
+BASELINE_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
+EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
 RESULTS = NOT_AUTHORIZED
 ```
 
@@ -152,41 +166,28 @@ RESULTS = NOT_AUTHORIZED
 
 ## 1. Current cumulative state
 
-B01–B05 are closed, approved, frozen, and integrated. B06 V02 passed the independent Managing-AI audit and has now been explicitly approved by the author without changes.
+`ARTICLE_MASTER_V015.md` is the verified canonical Markdown master. `ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx` is the cumulative Word baseline in local author custody. B01–B06 are closed, approved, frozen, and integrated.
 
-D-077 freezes the approved B06 V02 identities and authorizes promotion to `ARTICLE_MASTER_V015.md`. Until that promotion is materialized and verified, V014 remains the canonical Markdown master and the approved B05 V01 DOCX remains the canonical cumulative Word baseline.
+B07 / Section 4.8 is open only under `article/prompts/5_EXPERIMENTAL_DESIGN_B07_SECTION4_8.md@bb3b6792f2eb79e6461ea3b4b4c55369e6dbf577`, which passed independent prompt review and was authorized by D-080.
 
-## 2. Approved B06 identities
+## 2. B07 scientific function and source boundary
 
-```text
-APPROVED_B06_MD_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-APPROVED_B06_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
-APPROVED_B06_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
-COMMENTS = 40 / PRESERVED
-TRACKED_CHANGES = 0
-```
+Section 4.8 must describe verified reproducibility resources while distinguishing materialized public resources, planned/not-yet-materialized reference-release components, and restricted/non-redistributed inputs.
 
-## 3. Promotion gate
+The audited public snapshot is `gci-nandina-rag-reproducibility@254831cd955103faa2517065a7eed7fb340bbccc`, tree `078a85255fa1f3234b4f7ed51ef2660b903d486e`. It provides protocol/data/provenance/taxonomy documentation and an example custom-data configuration, but it is not yet a complete runnable reference release.
 
-The only authorized integration action is byte-exact promotion of the approved B06 V02 Markdown candidate to:
+Reference reproduction and external replication must remain distinct. Configurability is a design property, not evidence of empirical generalization. The public-resource state must be rechecked before final freeze/submission.
+
+## 3. Gate
 
 ```text
-article/manuscript/ARTICLE_MASTER_V015.md
-EXPECTED_SHA256 = b04de5aa482561adc970f1c7e06e38f8c932fa110cc86605d2d7a0adb9c6983c
-EXPECTED_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
-```
-
-Managing-AI verification is required after materialization before B06 can be marked integrated and before the B06 V02 DOCX becomes the canonical cumulative Word baseline.
-
-## 4. Next block boundary
-
-Section 4.8 remains closed. After V015 verification, B07 / Section 4.8 may be prepared only through its own ground-truth synchronization, MWDP/SPCCR drafting contract, independent prompt review, and explicit authorization. Results, Discussion, and Conclusion remain unauthorized.
-
-```text
-CURRENT_GATE = B06_V015_PROMOTION_PENDING
-NEXT_ACTOR = AUTHOR / REPOSITORY_MATERIALIZATION
-NEXT_ACTION = MATERIALIZE_APPROVED_B06_V02_MD_AS_ARTICLE_MASTER_V015_AND_RETURN_FOR_VERIFICATION
-SECTION_4_8 = NOT_AUTHORIZED
+CANONICAL_MASTER = ARTICLE_MASTER_V015
+CANONICAL_MASTER_MD_GIT_BLOB = e9a17899ccbcb9971e6dfb5002f908e17a0441d9
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B06_V02.docx
+BASELINE_DOCX_SHA256 = 86a0b9517ced0f8c411c04c990bc159d3b4b3f814ad592e669a8f1993cf0f3c2
+CURRENT_GATE = EXPERIMENTAL_DESIGN_B07_SECTION_4_8_DRAFTING_V01
+NEXT_ACTOR = DRAFTING_AI
+EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
 RESULTS = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
