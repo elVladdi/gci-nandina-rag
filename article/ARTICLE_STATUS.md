@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.14
-LATEST_EDITORIAL_DECISION = D-088
+ARTICLE_WRITING_PLAN = V3.15
+LATEST_EDITORIAL_DECISION = D-089
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -24,20 +24,20 @@ CANONICAL_MASTER_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab83
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CANONICAL_TRACKED_CHANGES = 0
 CURRENT_DRAFTING_PHASE = RESULTS
-CURRENT_GATE = RESULTS_B01_SECTION_5_1_DRAFTING_V01
-RESULTS_B01_SECTION_5_1 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_PROMPT_ONLY
+CURRENT_GATE = RESULTS_B01_V01_AUTHOR_APPROVAL
+RESULTS_B01_SECTION_5_1 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+RESULTS_B01_RESPONSE = article/responses/6_RESULTS_B01_SECTION5_1_RESPONSE_V01.md@6796dd29f3c530e91c463a207aea9e9dd8e9d187
+RESULTS_B01_SECTION = article/sections/results/Results_B01_V01.md@28948cad188b7ad79ab44b6b9e19b90e659e5f1d
+RESULTS_B01_REVIEW = article/reviews/6_RESULTS_B01_SECTION5_1_INTERNAL_REVIEW_V01.md@76990c16e3bd1c0aea23bbe8311f86d98d05df56
+RESULTS_B01_AUTHOR_GATE = article/governance/D089_RESULTS_B01_V01_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@cfba21a2ed00e3bb589a57e8f11184049fe87084
+RESULTS_B01_CANDIDATE_MD_SHA256 = 6027785ac8f5018920b1bd714f01e57050447cb705d0e9f516a325a4416a6318
+RESULTS_B01_CANDIDATE_MD_GIT_BLOB = 35edb134f3d060bad4257d314cf415d9ecf17b6c
+RESULTS_B01_CANDIDATE_DOCX_SHA256 = f872a6ed145c5f7759dbfabf03e19d0d87aae2f0838c4b02969139c08585841f
+RESULTS_B01_CANDIDATE_COMMENTS = 40 / PRESERVED
+RESULTS_B01_CANDIDATE_TRACKED_CHANGES = 0
+TARGET_IF_APPROVED = ARTICLE_MASTER_V017
 RESULTS_B02_PLUS = NOT_AUTHORIZED
-RESULTS_GROUND_TRUTH = article/governance/D087_RESULTS_GROUND_TRUTH_SYNC_AND_B01_BOUNDARY.md@22a63fa715ae2c7bddb92af06d65c417f257932b
-RESULTS_B01_PROMPT = article/prompts/6_RESULTS_B01_SECTION5_1.md@cc75fb9b732de6b9162cf90b8eacb8462372405e
-RESULTS_B01_PROMPT_GIT_BLOB = a0f4005e8c406574d39b5540dfbf676f3d4acc0d
-RESULTS_B01_PROMPT_REVIEW = article/reviews/6_RESULTS_B01_SECTION5_1_PROMPT_INTERNAL_REVIEW_V01.md@275c6e14d7d3eab0ada488e829dcd07f8b1254df
-RESULTS_B01_PROMPT_REVIEW_RESULT = PASS
-RESULTS_B01_AUTHORIZATION = article/governance/D088_RESULTS_B01_SECTION5_1_EXECUTION_AUTHORIZATION.md@da7fa50368439304fd9cd43042ed1c3dfd1b5b08
-RESULTS_SOURCE_SNAPSHOT = db0d0ad0d8435921a7838db6720eaea86a263763
-RESULTS_B01_SOURCE_A_BLOB = bcb02c9c3493235a6f80991158c5b24fa7c04510
-RESULTS_B01_SOURCE_B_BLOB = fb21eb0d8ef77cdedaa32698b854595629ed526d
-D035_TIMEOUT_SAFE_HANDOFF = MANDATORY
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+AUTHOR_APPROVAL_GATE = OPEN_FOR_RESULTS_B01_V01_ONLY
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
@@ -46,24 +46,22 @@ NOVELTY = NOT_DECLARED
 
 ### Estado vigente
 
-`ARTICLE_MASTER_V016.md` continúa como master Markdown canónico verificado y `ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx` como Word acumulativo canónico bajo custodia local del autor.
+`ARTICLE_MASTER_V016.md` continúa siendo el master Markdown canónico hasta que exista aprobación autoral de Results B01 y una posterior promoción byte-exacta verificada.
 
-Tras D-086, IA Gestora ejecutó el gate que había quedado pendiente. D-087 sincronizó independientemente el ground truth de Results B01 / §5.1 contra el snapshot experimental congelado `db0d0ad0d8435921a7838db6720eaea86a263763`. Las fuentes agregadas congeladas son `data_aduanas_splits_clase87_v0.2_metadata.json` (blob `bcb02c9c3493235a6f80991158c5b24fa7c04510`) y `audit_summary_v0.2.json` (blob `fb21eb0d8ef77cdedaa32698b854595629ed526d`).
+Results B01 / Section 5.1 fue ejecutado por IA de Redacción bajo D-088. IA Gestora auditó independientemente el candidato contra D-087 y las dos fuentes agregadas congeladas del snapshot experimental `db0d0ad0d8435921a7838db6720eaea86a263763`. El dictamen fue `PASS`.
 
-El ground truth autorizado para §5.1 comprende únicamente composición del benchmark v0.2, cero solapamiento cross-partition de DAM e `id_unico`, soporte histórico nominal completo de las clases de EVAL y diagnósticos congelados de duplicados exactos/near-duplicates. Retrieval performance, evidencia documental, explicación, sensibilidades, inferencia y disposiciones HE2/HE5 permanecen fuera de B01.
+La auditoría confirmó que §5.1 reporta únicamente composición/asignación del benchmark v0.2, separación cross-partition por DAM e `id_unico`, soporte histórico nominal de las clases EVAL y diagnósticos de duplicados exactos/near-duplicates. No introduce retrieval performance, inferencia, HE2/HE5, Discussion, legal correctness ni generalización empírica.
 
-El prompt `article/prompts/6_RESULTS_B01_SECTION5_1.md@cc75fb9b732de6b9162cf90b8eacb8462372405e` pasó revisión interna y D-088 autoriza exclusivamente su ejecución. D-035 continúa vinculante: no Base64 manual, chunking, fragmentación ni reensamblado; el MD/DOCX acumulativo debe entregarse como archivo real.
+El DOCX candidato preserva 14/14 entradas OOXML, 40 comentarios, 0 tracked changes y modifica únicamente `word/document.xml`. El render completo de 52 páginas pasó QA visual.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_RESULTS_B01_SECTION_5_1_PROMPT
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V016.md
-BASELINE_MASTER_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx
-BASELINE_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
-EXPECTED_EXIT = RESULTS_B01_V01_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_REJECT_OR_REQUEST_CORRECTION_FOR_RESULTS_B01_V01
+CURRENT_CANONICAL_MASTER = ARTICLE_MASTER_V016
+CANDIDATE_IF_APPROVED = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01
+TARGET_MASTER_IF_APPROVED = ARTICLE_MASTER_V017
 RESULTS_B02_PLUS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -76,24 +74,20 @@ CONCLUSION = NOT_AUTHORIZED
 ```text
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
-ARTICLE_WRITING_PLAN = V3.14
-LATEST_EDITORIAL_DECISION = D-088
+ARTICLE_WRITING_PLAN = V3.15
+LATEST_EDITORIAL_DECISION = D-089
 CANONICAL_MASTER = ARTICLE_MASTER_V016
 CANONICAL_MASTER_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
-CANONICAL_MASTER_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
-CANONICAL_MASTER_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
 CURRENT_DRAFTING_PHASE = RESULTS
-CURRENT_GATE = RESULTS_B01_SECTION_5_1_DRAFTING_V01
-RESULTS_B01_SECTION_5_1 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_PROMPT_ONLY
+CURRENT_GATE = RESULTS_B01_V01_AUTHOR_APPROVAL
+RESULTS_B01_SECTION_5_1 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
+TARGET_IF_APPROVED = ARTICLE_MASTER_V017
 RESULTS_B02_PLUS = NOT_AUTHORIZED
-RESULTS_B01_PROMPT = article/prompts/6_RESULTS_B01_SECTION5_1.md@cc75fb9b732de6b9162cf90b8eacb8462372405e
-RESULTS_B01_PROMPT_REVIEW_RESULT = PASS
-RESULTS_B01_AUTHORIZATION = D-088
-D035_TIMEOUT_SAFE_HANDOFF = MANDATORY
+AUTHOR_APPROVAL_GATE = OPEN_FOR_RESULTS_B01_V01_ONLY
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-Results B01 / Section 5.1 is the only open Results block. All later Results subsections and later manuscript sections remain closed.
+Results B01 V01 passed independent Managing-AI audit and is now before the author. V016 remains canonical until explicit author approval and byte-exact promotion of the approved candidate.
