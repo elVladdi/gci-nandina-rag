@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.13
+PLAN_VERSION = V3.14
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-086
+LATEST_EDITORIAL_DECISION = D-088
 CANONICAL_MASTER = ARTICLE_MASTER_V016
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V016.md
 CANONICAL_MASTER_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
@@ -15,11 +15,12 @@ CANONICAL_MASTER_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx / LOCAL_AUTHOR_CUSTODY
 CANONICAL_MASTER_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
-CURRENT_DRAFTING_PHASE = POST_EXPERIMENTAL_DESIGN
-CURRENT_GATE = EXPERIMENTAL_DESIGN_COMPLETE / RESULTS_GATE_PENDING
-EXPERIMENTAL_DESIGN_B01_TO_B07 = CLOSED / APPROVED / FROZEN / INTEGRATED
-SECTION_4_8 = CLOSED / APPROVED / FROZEN / INTEGRATED
-RESULTS = NOT_AUTHORIZED
+CURRENT_DRAFTING_PHASE = RESULTS
+CURRENT_GATE = RESULTS_B01_SECTION_5_1_DRAFTING_V01
+EXPERIMENTAL_DESIGN = CLOSED / APPROVED / FROZEN / INTEGRATED
+RESULTS_B01_SECTION_5_1 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B01_V01_ONLY
+RESULTS_B02_PLUS = NOT_AUTHORIZED
+AUTHOR_APPROVAL_GATE = NOT_OPEN
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
@@ -32,95 +33,120 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V016.md` es el master Markdown canónico verificado. La promoción desde el candidato B07 V02 aprobado fue byte-exacta: Git blob observado y esperado `e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc`, SHA-256 aprobado `3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5`.
+`ARTICLE_MASTER_V016.md` es el master Markdown canónico verificado. El Word acumulativo canónico es `ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx`, bajo custodia local del autor, con 40 comentarios y 0 tracked changes.
 
-El Word acumulativo canónico es `ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx`, SHA-256 `c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de`, bajo custodia local del autor, con 40 comentarios preservados y 0 tracked changes.
+Experimental Design está cerrado, aprobado, congelado e integrado. La fase activa pasa a Results, pero exclusivamente mediante bloques independientes y gates explícitos.
 
-## 2. Cierre de Experimental Design
-
-B01–B07 y toda Section 4 — Experimental design están cerrados, aprobados, congelados e integrados.
-
-La estructura congelada completada es:
+## 2. Estructura congelada de Results
 
 ```text
-4.1 Experimental setting and scope
-4.2 Historical data and experimental dataset construction
-  4.2.1 Source and data collection
-  4.2.2 Processing and curation
-  4.2.3 Partition construction and dataset composition
-4.3 Documentary corpus and evidence resource
-4.4 Partition validity and dependence controls
-4.5 Experimental system configuration and execution
-4.6 Evaluation framework and protocols
-  4.6.1 Candidate-retrieval evaluation
-  4.6.2 Documentary-evidence evaluation
-  4.6.3 Controlled-explanation evaluation
-4.7 Statistical and robustness analysis
-4.8 Reproducibility resources
+5.1 Data and partition checks
+5.2 Candidate retrieval performance
+5.3 Documentary evidence retrieval
+5.4 Controlled explanation quality
+5.5 Sensitivity and robustness analyses
+5.6 Inferential results
+5.7 Summary by research question
 ```
 
-B07 / §4.8 queda integrado con foco directo en el repositorio público `gci-nandina-rag-reproducibility`; no presenta narrativamente el repositorio interno de desarrollo y mantiene las fronteras entre recursos materializados, planificados y restringidos, reproducción de referencia y replicación externa, y configurabilidad frente a generalización empírica.
+Solo §5.1 está abierta. La existencia de evidencia elegible para secciones posteriores no las autoriza por anticipado.
 
-## 3. Identidades de cierre
+## 3. Ground truth de Results B01
+
+D-087:
+
+`article/governance/D087_RESULTS_GROUND_TRUTH_SYNC_AND_B01_BOUNDARY.md@22a63fa715ae2c7bddb92af06d65c417f257932b`
+
+Snapshot experimental congelado:
+
+`db0d0ad0d8435921a7838db6720eaea86a263763`
+
+Fuentes B01:
 
 ```text
-ARTICLE_MASTER_V016.md
-SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
-GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
+data/processed/data_aduanas_splits_clase87_v0.2_metadata.json
+GIT_BLOB = bcb02c9c3493235a6f80991158c5b24fa7c04510
 
-ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx
-SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
-COMMENTS = 40 / PRESERVED
-TRACKED_CHANGES = 0
+outputs/audits/data_aduanas_splits_clase87_v0.2/audit_summary_v0.2.json
+GIT_BLOB = fb21eb0d8ef77cdedaa32698b854595629ed526d
 ```
 
-Decisión de integración:
+B01 está limitado a:
 
-`article/governance/D086_EXPERIMENTAL_DESIGN_B07_INTEGRATION_AND_V016_PROMOTION.md@58febd57d6384241c2253f9101a869792f23e139`.
+- composición v0.2: H100 2,950 SERIE / 28 DAM / 66 códigos; DEV 100 / 6 / 9; EVAL 1,056 / 67 / 42;
+- asignación completa de 4,106 SERIE;
+- cero solapamiento cross-partition de DAM e `id_unico`;
+- soporte histórico nominal de 1,056/1,056 casos y 42/42 códigos EVAL;
+- duplicados exactos H100–EVAL: 35/1,056 (3.31%), con DAM distintas;
+- near-duplicates H100–EVAL: 55 (5.21%) a Jaccard ≥0.90, 44 (4.17%) a ≥0.95 y 37 (3.50%) a ≥0.98.
 
-## 4. Fase siguiente
+No pertenecen a B01 retrieval performance, evidence coverage, explanation quality, sensibilidades, inferencia, HE2/HE5 ni Discussion.
 
-El cierre de Experimental Design no abre Results por inferencia.
+## 4. Contrato de redacción activo
 
-Antes de cualquier redacción de Section 5, IA Gestora debe sincronizar de manera independiente el ground truth de resultados y definir qué resultados, comparaciones, inferencias, sensibilidades y límites están autorizados para el manuscrito. Ese trabajo deberá producir su propio contrato/prompt, revisión y autorización.
+Prompt:
+
+`article/prompts/6_RESULTS_B01_SECTION5_1.md@cc75fb9b732de6b9162cf90b8eacb8462372405e`
+
+Git blob:
+
+`a0f4005e8c406574d39b5540dfbf676f3d4acc0d`
+
+Revisión:
+
+`article/reviews/6_RESULTS_B01_SECTION5_1_PROMPT_INTERNAL_REVIEW_V01.md@275c6e14d7d3eab0ada488e829dcd07f8b1254df` — `PASS`.
+
+Autorización:
+
+`article/governance/D088_RESULTS_B01_SECTION5_1_EXECUTION_AUTHORIZATION.md@da7fa50368439304fd9cd43042ed1c3dfd1b5b08`.
+
+## 5. Baselines y entrega
 
 ```text
-NEXT_ACTOR = IA_GESTORA
-NEXT_ACTION = PREPARE_SEPARATE_RESULTS_GROUND_TRUTH_AND_AUTHORIZATION_GATE
 BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V016.md
 BASELINE_MASTER_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
 BASELINE_MASTER_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
+
 BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx
 BASELINE_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
-RESULTS = NOT_AUTHORIZED
+COMMENTS = 40 / PRESERVE
+TRACKED_CHANGES = 0 / PRESERVE
 ```
 
-No se autoriza todavía Section 5, Discussion, Conclusion, definición del final gap ni declaración de novelty.
+D-035 continúa activado para la cadena acumulativa: Base64 manual, chunking, fragmentación y reensamblado están prohibidos; el MD/DOCX acumulativo debe entregarse como archivo real al autor. El DOCX no se reconstruye desde Markdown.
+
+## 6. Gate inmediato
+
+```text
+NEXT_ACTOR = IA_REDACCION
+NEXT_ACTION = EXECUTE_ONLY_RESULTS_B01_SECTION_5_1
+EXPECTED_SECTION_ARTIFACT = article/sections/results/Results_B01_V01.md
+EXPECTED_MASTER_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.md
+EXPECTED_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.docx
+EXPECTED_RESPONSE = article/responses/6_RESULTS_B01_SECTION5_1_RESPONSE_V01.md
+EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
+RESULTS_B02_PLUS = NOT_AUTHORIZED
+DISCUSSION = NOT_AUTHORIZED
+CONCLUSION = NOT_AUTHORIZED
+```
 
 ---
 
 # English
 
-## 1. Current cumulative state
+## 1. Current state
 
-`ARTICLE_MASTER_V016.md` is the verified canonical Markdown master. `ARTICLE_MASTER_CANDIDATE_EXPDES_B07_V02.docx` is the canonical cumulative Word master in local author custody. Experimental Design B01–B07 and all of Section 4 are closed, approved, frozen, and integrated.
+V016 is the canonical verified Markdown master and the B07 V02 DOCX is the canonical cumulative Word baseline. Experimental Design is fully integrated. Results B01 / Section 5.1 is now the only open drafting block.
 
-```text
-CANONICAL_MASTER_MD_SHA256 = 3c8b64104b11f2e07f85d0275e5ac6c4a96cb0c5cd5b183704949705c8e120a5
-CANONICAL_MASTER_MD_GIT_BLOB = e8f9ffddb616b4a7d036f1b57fbe9f18d73613cc
-CANONICAL_DOCX_SHA256 = c9c12609e7aefc5c2b260a967df88d87641252e2be28eab838f984952f48b4de
-COMMENTS = 40 / PRESERVED
-TRACKED_CHANGES = 0
-```
+## 2. B01 contract
 
-## 2. Next gate
-
-Results is not opened automatically by completion of Experimental Design. A separate Managing-AI ground-truth synchronization, drafting contract, review, and explicit authorization are required before Section 5 drafting begins.
+Ground truth is frozen by D-087 from the v0.2 metadata and audit summary at development snapshot `db0d0ad0d8435921a7838db6720eaea86a263763`. The active drafting contract is `article/prompts/6_RESULTS_B01_SECTION5_1.md@cc75fb9b732de6b9162cf90b8eacb8462372405e`, reviewed PASS and authorized by D-088.
 
 ```text
-CURRENT_GATE = EXPERIMENTAL_DESIGN_COMPLETE / RESULTS_GATE_PENDING
-NEXT_ACTOR = IA_GESTORA
-RESULTS = NOT_AUTHORIZED
+CURRENT_GATE = RESULTS_B01_SECTION_5_1_DRAFTING_V01
+NEXT_ACTOR = DRAFTING_AI
+RESULTS_B01 = AUTHORIZED
+RESULTS_B02_PLUS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
