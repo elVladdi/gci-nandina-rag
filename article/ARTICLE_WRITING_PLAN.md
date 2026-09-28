@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.39
+PLAN_VERSION = V3.40
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-134
+LATEST_EDITORIAL_DECISION = D-135
 CANONICAL_MASTER = ARTICLE_MASTER_V026
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V026.md
 CANONICAL_MASTER_MD_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
@@ -20,7 +20,7 @@ RESULTS_SECTIONS_5_1_TO_5_7 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B01_SECTION_6_1 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B02_SECTION_6_2 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B03_SECTION_6_3 = CLOSED / APPROVED / FROZEN / INTEGRATED
-DISCUSSION_B04_SECTION_6_4 = AUTHORIZED_FOR_EXECUTION
+DISCUSSION_B04_SECTION_6_4 = AUTHORIZED_FOR_EXECUTION_USING_PROMPT_V02
 CURRENT_GATE = DISCUSSION_B04_V01_DRAFTING
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 NEXT_ACTOR = IA_REDACCION
@@ -54,14 +54,13 @@ PAGE_COUNT = 64
 6.1 Separating candidate ranking from documentary evidence = INTEGRATED
 6.2 Controlled use of the LLM for explanation              = INTEGRATED
 6.3 Comparison with prior work                             = INTEGRATED
-6.4 Implications for auditable decision support            = AUTHORIZED FOR EXECUTION
+6.4 Implications for auditable decision support            = AUTHORIZED FOR EXECUTION / PROMPT V02
 6.5 Configurability and transfer conditions                = NOT AUTHORIZED
 6.6 Limitations                                            = NOT AUTHORIZED
 ```
 
 ## 3. Cierre e integración B03
 
-Author approval + V026 verification + integration:
 `article/governance/D132_DISCUSSION_B03_AUTHOR_APPROVAL_V026_VERIFICATION_AND_INTEGRATION.md@3d56571e267f0f58673f32391b9f8cf7420e8c39`
 
 ```text
@@ -71,22 +70,27 @@ V026_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
 DISCUSSION_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
 ```
 
-## 4. Trazabilidad B04
+## 4. Trazabilidad B04 vigente
 
-Boundary:
+Boundary científico:
 `article/governance/D133_DISCUSSION_B04_SECTION6_4_INTERPRETIVE_BOUNDARY_AND_AUDITABILITY_TRACE.md@be5a3df880d6fea49e18e64d6080d3485a5850de`
 
-Prompt:
-`article/prompts/7_DISCUSSION_B04_SECTION6_4.md@982375ae4b6660bd05d962b7ed681d59354e39c0`
+Prompt V01:
+`article/prompts/7_DISCUSSION_B04_SECTION6_4.md@982375ae4b6660bd05d962b7ed681d59354e39c0` — `SUPERSEDED FOR EXECUTION`.
 
-Prompt Git blob:
-`f75fde7e666cbcc527de3f29c5dd787c14318836`
+Prompt activo V02:
+`article/prompts/7_DISCUSSION_B04_SECTION6_4_V02.md@9d84059e8620219cd83c3b3dad91c4af900d447e`
 
-Prompt review:
-`article/reviews/7_DISCUSSION_B04_SECTION6_4_PROMPT_INTERNAL_REVIEW_V01.md@1c8414169bacd6b6082d11e318308416d70f0fe3` — `PASS`.
+Prompt V02 Git blob:
+`dcc3b40d29e1f6913cce96bee43403f3ab03e1d0`
 
-Execution authorization:
-`article/governance/D134_DISCUSSION_B04_SECTION6_4_EXECUTION_AUTHORIZATION.md@88e620c4587fdf49ade4da89d48903a2d6eef64b`.
+Prompt review V02:
+`article/reviews/7_DISCUSSION_B04_SECTION6_4_PROMPT_INTERNAL_REVIEW_V02.md@7716a4916662e8116ac84c7626e38caa7e7d66d9` — `PASS`.
+
+Execution reauthorization:
+`article/governance/D135_DISCUSSION_B04_PROMPT_V02_PROTOCOL_COMPLIANCE_AND_EXECUTION_REAUTHORIZATION.md@b5ef45237d7909b948edd3442d5da2ca14a335e2`.
+
+D-135 no modifica el scope científico de B04. Corrige la cobertura operacional del prompt para que haga explícitos `START_HERE`, `MWDP_V1.0`, `SPCCR_V1.0`, D-022, D-027 y D-035, junto con el preflight y checklist obligatorio de entrega.
 
 ## 5. Contrato científico B04
 
@@ -109,11 +113,12 @@ No se autoriza nueva literatura, nuevas citas, novelty, first-ever, state-of-the
 
 ```text
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_DISCUSSION_B04_V01_ONLY
-PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4.md
+NEXT_ACTION = EXECUTE_DISCUSSION_B04_V01_ONLY_USING_PROMPT_V02
+PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4_V02.md
+PROMPT_GIT_BLOB = dcc3b40d29e1f6913cce96bee43403f3ab03e1d0
+AUTHORIZATION = D-135
 BASELINE_MD = article/manuscript/ARTICLE_MASTER_V026.md
 BASELINE_MD_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
-BASELINE_MD_GIT_BLOB = f6a63be554317e62103aa96c1091f4039249e5ee
 BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx
 BASELINE_DOCX_SHA256 = bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57
 BASELINE_COMMENTS = 48
@@ -127,14 +132,15 @@ CONCLUSION = NOT_AUTHORIZED
 
 # English
 
-V026 is the verified canonical Markdown master. Results Sections 5.1–5.7 and Discussion Sections 6.1–6.3 are integrated. Discussion B04 / Section 6.4 has a frozen interpretive boundary, an internally reviewed prompt with `PASS`, and execution authorization under D-134.
+V026 is the verified canonical Markdown master. Results Sections 5.1–5.7 and Discussion Sections 6.1–6.3 are integrated. Discussion B04 / Section 6.4 remains scientifically bounded by D-133 and is authorized for execution only through the protocol-complete V02 prompt reauthorized by D-135.
 
-B04 is restricted to implications for auditable decision support from the already evaluated authority contract and RQ2/RQ3 evidence. Structural traceability must remain distinct from verification, human validation, legal correctness, safety, deployment validation, and overall classification accuracy. No new citations are authorized; the cumulative Word must preserve exactly 48 comments and zero tracked changes.
+V02 explicitly restores the cumulative operational requirements: repository onboarding, MWDP delivery checklist, SPCCR prose QA, repository-first execution response, exact DOCX author handoff, and timeout-safe cumulative-artifact transfer. The scientific scope is unchanged.
 
 ```text
-PLAN_VERSION = V3.39
+PLAN_VERSION = V3.40
 CURRENT_GATE = DISCUSSION_B04_V01_DRAFTING
 NEXT_ACTOR = IA_REDACCION
+ACTIVE_PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4_V02.md
 DISCUSSION_B04 = AUTHORIZED_FOR_EXECUTION
 DISCUSSION_B05_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
