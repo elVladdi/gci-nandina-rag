@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.47
+PLAN_VERSION = V3.48
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-148
+LATEST_EDITORIAL_DECISION = D-149
 CANONICAL_MASTER = ARTICLE_MASTER_V028
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V028.md
 CANONICAL_MASTER_MD_SHA256 = c154257a2c203e580372dd404df875ef808c325947ce580171e2e306961e568e
@@ -25,7 +25,7 @@ DISCUSSION_B03_SECTION_6_3 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B04_SECTION_6_4 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B05_SECTION_6_5 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B05_INTEGRATION = D-144
-DISCUSSION_B06_SECTION_6_6 = V01_AUDITED / PASS_WITH_CORRECTIONS / V02_AUTHORIZED_FOR_EXECUTION
+DISCUSSION_B06_SECTION_6_6 = V02_AUDITED / PASS / AUTHOR_APPROVAL_GATE_OPEN
 DISCUSSION_B06_BOUNDARY = D-145
 DISCUSSION_B06_V01_AUTHORIZATION = D-146
 DISCUSSION_B06_V01_RESPONSE = article/responses/7_DISCUSSION_B06_SECTION6_6_RESPONSE_V01.md@ecaa765075d0d287885700fa6818fd158306c6fd
@@ -36,16 +36,23 @@ DISCUSSION_B06_V02_PROMPT = article/prompts/7_DISCUSSION_B06_V01_NARROW_EDITORIA
 DISCUSSION_B06_V02_PROMPT_GIT_BLOB = bc0d79d1827d8950acb2562bc1e12238b031804a
 DISCUSSION_B06_V02_PROMPT_REVIEW_RESULT = PASS
 DISCUSSION_B06_V02_AUTHORIZATION = D-148
-B06_V01_CANDIDATE_MD_SHA256 = c73518750ac9faff5e69eca3f5e363ef386efd0ac78969315b9dedf4ce7ec2e1
-B06_V01_CANDIDATE_MD_GIT_BLOB = 20028e1c0e9fc8fe9c98b1b1bf3f00b3cf95fef7
-B06_V01_CANDIDATE_DOCX_SHA256 = 3859c8686679777d64910839842b4a771befb84dca715e1054a524fa52c75d27
-B06_V01_CANDIDATE_DOCX_COMMENTS = 48
-B06_V01_CANDIDATE_DOCX_TRACKED_CHANGES = 0
-B06_V01_CANDIDATE_DOCX_PAGE_COUNT = 69
-CURRENT_GATE = DISCUSSION_B06_V02_NARROW_CORRECTION
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-NEXT_ACTOR = IA_REDACCION
+DISCUSSION_B06_V02_RESPONSE = article/responses/7_DISCUSSION_B06_SECTION6_6_RESPONSE_V02.md@8d942976d6be58200e6fcfd67e6378de38defbe3
+DISCUSSION_B06_V02_SECTION = article/sections/discussion/Discussion_B06_V02.md@4811894806402db3e4a18418d72b9159ed38200d
+DISCUSSION_B06_V02_INTERNAL_REVIEW = article/reviews/7_DISCUSSION_B06_SECTION6_6_INTERNAL_REVIEW_V02.md@d32f9eb5bc9d6b556a8287d57a0102fab8917a6e
+DISCUSSION_B06_V02_REVIEW_RESULT = PASS
+DISCUSSION_B06_AUTHOR_APPROVAL_GATE = D-149
+B06_V02_CANDIDATE_MD_SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
+B06_V02_CANDIDATE_MD_GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
+B06_V02_CANDIDATE_DOCX_SHA256 = baeb1653040da74a193d2b79650873b0d24564895347bb3c22d30cdfd96f0ea3
+B06_V02_CANDIDATE_DOCX_COMMENTS = 48
+B06_V02_CANDIDATE_DOCX_TRACKED_CHANGES = 0
+B06_V02_CANDIDATE_DOCX_PAGE_COUNT = 69
+CURRENT_GATE = DISCUSSION_B06_V02_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REQUEST_CORRECTIONS_DISCUSSION_B06_V02
 LEGACY_EDITORIAL_DEBT = DISCUSSION_B02_INTERNAL_TERMINOLOGY_HYGIENE
+DISCUSSION_B06_INTEGRATION = NOT_YET_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
@@ -77,64 +84,70 @@ PAGE_COUNT = 67
 6.3 Comparison with prior work                             = INTEGRATED
 6.4 Implications for auditable decision support            = INTEGRATED
 6.5 Configurability and transfer conditions                = INTEGRATED
-6.6 Limitations                                            = V01 PASS WITH CORRECTIONS / V02 AUTHORIZED
+6.6 Limitations                                            = V02 AUDITED / PASS / AUTHOR APPROVAL GATE OPEN
 ```
 
-## 3. Auditoría B06 V01
+## 3. Reauditoría B06 V02
 
-La auditoría sustantiva y técnica de B06 V01 confirmó que el núcleo científico cumple D-145 y que el diferencial se limita a §6.6 EN/ES. Los candidatos entregados son:
+B06 V02 partió de los candidatos B06 V01 exactos y aplicó exclusivamente las cuatro correcciones estrechas definidas por D-147 y autorizadas por D-148. La reauditoría confirmó:
 
 ```text
-ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V01.md
-SHA256 = c73518750ac9faff5e69eca3f5e363ef386efd0ac78969315b9dedf4ce7ec2e1
-GIT_BLOB = 20028e1c0e9fc8fe9c98b1b1bf3f00b3cf95fef7
+ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.md
+SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
+GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
 
-ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V01.docx
-SHA256 = 3859c8686679777d64910839842b4a771befb84dca715e1054a524fa52c75d27
+ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.docx
+SHA256 = baeb1653040da74a193d2b79650873b0d24564895347bb3c22d30cdfd96f0ea3
 COMMENTS = 48
 TRACKED_CHANGES = 0
 PAGE_COUNT = 69
 ```
 
-El Word conserva 14 partes OOXML, solo cambia `word/document.xml`, mantiene `comments.xml` byte-identical al baseline, preserva 48 anclajes de comentario y 0 tracked changes. El render completo de 69 páginas pasa sin defectos visuales.
+El diferencial V01→V02 contiene solo dos hunks en §6.6 EN/ES. Los cuatro ajustes requeridos quedaron resueltos: formulación no causal de la sensibilidad documental, preespecificación en lugar de voz `frozen`, terminología reader-facing de reproducción y formulación natural de validación para despliegue operativo.
 
-D-136 impide emitir `PASS` completo porque permanecen cuatro defectos estrechos: formulación causal `effect of the updated resource`; voz interna `frozen case-level operationalization`; terminología `canonical runner/frozen Chapter-87 reference configuration`; y una frase poco natural sobre validación como despliegue operativo.
+No cambiaron resultados, denominadores, claims, referencias, comentarios, §§1–6.5 ni Conclusion. §6.6 conserva siete párrafos por idioma y 682 palabras en inglés.
 
-D-147 ordena corregir solo esos puntos sin alterar scope científico. El prompt correctivo pasó revisión interna y D-148 autoriza V02 exclusivamente sobre los candidatos B06 V01 exactos.
+La auditoría técnica independiente confirmó 14 partes OOXML, únicamente `word/document.xml` modificado respecto de V01, `word/comments.xml` byte-identical, 48 anclajes completos, 0 tracked changes y equivalencia textual exacta de §6.6 entre Markdown y DOCX. El render completo contiene 69 páginas; 65 son pixel-identical respecto de V01 y las cuatro páginas modificadas —33, 34, 67 y 68— pasan inspección visual a tamaño completo.
+
+La auditoría sustantiva bajo D-136/MWDP/SPCCR/KBS_EWG_34_V01 da `PASS`: no se detectan invención, overclaiming, causalidad nueva, extensión de evidencia, leakage terminológico en el alcance corregido ni diferencias de fuerza epistémica EN/ES.
+
+D-149 abre el gate de aprobación autoral. El master V028 no cambia hasta aprobación explícita e integración formal.
 
 ## 4. Gate inmediato
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_DISCUSSION_B06_V02_NARROW_CORRECTION_ONLY
-PROMPT = article/prompts/7_DISCUSSION_B06_V01_NARROW_EDITORIAL_EPISTEMIC_CORRECTION.md
-PROMPT_GIT_BLOB = bc0d79d1827d8950acb2562bc1e12238b031804a
-AUTHORIZATION = D-148
-INPUT_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V01.md
-INPUT_CANDIDATE_MD_SHA256 = c73518750ac9faff5e69eca3f5e363ef386efd0ac78969315b9dedf4ce7ec2e1
-INPUT_CANDIDATE_MD_GIT_BLOB = 20028e1c0e9fc8fe9c98b1b1bf3f00b3cf95fef7
-INPUT_CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V01.docx
-INPUT_CANDIDATE_DOCX_SHA256 = 3859c8686679777d64910839842b4a771befb84dca715e1054a524fa52c75d27
-EXPECTED_COMMENTS = 48
-EXPECTED_TRACKED_CHANGES = 0
-EXPECTED_EXIT = DISCUSSION_B06_V02_COMPLETED_PENDING_GESTORA_REAUDIT
+CURRENT_GATE = DISCUSSION_B06_V02_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REQUEST_CORRECTIONS_DISCUSSION_B06_V02
+AUTHOR_APPROVAL_GATE = OPEN
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.md
+CANDIDATE_MD_SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
+CANDIDATE_MD_GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.docx
+CANDIDATE_DOCX_SHA256 = baeb1653040da74a193d2b79650873b0d24564895347bb3c22d30cdfd96f0ea3
+CANDIDATE_DOCX_COMMENTS = 48
+CANDIDATE_DOCX_TRACKED_CHANGES = 0
+CANDIDATE_DOCX_PAGE_COUNT = 69
+IF_AUTHOR_APPROVES = IA_GESTORA_VERIFY_PROMOTE_AND_INTEGRATE_B06
+CANONICAL_MASTER = ARTICLE_MASTER_V028
 CONCLUSION = NOT_AUTHORIZED
 ```
 
-La deuda editorial heredada de §6.2 permanece fuera de B06 y sigue pendiente de un gate transversal específico antes del freeze final.
+La deuda editorial heredada de §6.2 permanece fuera de B06 y continúa pendiente de un gate transversal específico antes del freeze final.
 
 ---
 
 # English
 
-V028 remains canonical. B06 V01 passed its scientific-core and technical checks but requires a narrow D-136 correction before author approval. D-147 defines that correction and D-148 authorizes B06 V02 only.
+B06 V02 passes re-audit. The four authorized corrections are complete; no scientific content outside Section 6.6 changed. The author-approval gate is open while canonical V028 remains unchanged.
 
 ```text
-PLAN_VERSION = V3.47
-DISCUSSION_B06 = V01_AUDITED / PASS_WITH_CORRECTIONS / V02_AUTHORIZED_FOR_EXECUTION
-CURRENT_GATE = DISCUSSION_B06_V02_NARROW_CORRECTION
-NEXT_ACTOR = IA_REDACCION
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+PLAN_VERSION = V3.48
+DISCUSSION_B06 = V02_AUDITED / PASS / AUTHOR_APPROVAL_GATE_OPEN
+CURRENT_GATE = DISCUSSION_B06_V02_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+AUTHOR_APPROVAL_GATE = OPEN
+DISCUSSION_B06_INTEGRATION = NOT_YET_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
