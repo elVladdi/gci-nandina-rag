@@ -1,27 +1,27 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.20
+PLAN_VERSION = V3.21
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-097
-CANONICAL_MASTER = ARTICLE_MASTER_V017
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V017.md
-CANONICAL_MASTER_MD_SHA256 = 6027785ac8f5018920b1bd714f01e57050447cb705d0e9f516a325a4416a6318
-CANONICAL_MASTER_MD_GIT_BLOB = 35edb134f3d060bad4257d314cf415d9ecf17b6c
-CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.docx / LOCAL_AUTHOR_CUSTODY
-CANONICAL_MASTER_DOCX_SHA256 = f872a6ed145c5f7759dbfabf03e19d0d87aae2f0838c4b02969139c08585841f
+LATEST_EDITORIAL_DECISION = D-100
+CANONICAL_MASTER = ARTICLE_MASTER_V018
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V018.md
+CANONICAL_MASTER_MD_SHA256 = 6b36a1260fadadce350d222fdbe580982eb3e3be39a117d18143eaa43f72fc54
+CANONICAL_MASTER_MD_GIT_BLOB = d392bdc2ae139ab692637c8c3a42ff6804f4d41a
+CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_MASTER_DOCX_SHA256 = 3e27fd12997f581ab55c1b5ac16a28d45b28fa3896989b75da50792e3763e9e9
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = RESULTS
-CURRENT_GATE = RESULTS_B02_V02_PROMOTION_TO_V018_PENDING_MATERIALIZATION
+CURRENT_GATE = RESULTS_B03_SECTION_5_3_DRAFTING_V01
 RESULTS_B01_SECTION_5_1 = CLOSED / APPROVED / FROZEN / INTEGRATED
-RESULTS_B02_SECTION_5_2 = CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION
-RESULTS_B03_PLUS = NOT_AUTHORIZED
-AUTHOR_APPROVAL_GATE = CLOSED / APPROVED
-TARGET_PROMOTION = ARTICLE_MASTER_V018
+RESULTS_B02_SECTION_5_2 = CLOSED / APPROVED / FROZEN / INTEGRATED
+RESULTS_B03_SECTION_5_3 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_B03_V01_ONLY
+RESULTS_B04_PLUS = NOT_AUTHORIZED
+AUTHOR_APPROVAL_GATE = NOT_OPEN
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
@@ -34,76 +34,114 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V017.md` continúa como master Markdown canónico verificado hasta completar la promoción B02. Experimental Design y Results B01 / §5.1 están cerrados, aprobados, congelados e integrados.
+`ARTICLE_MASTER_V018.md` es el master Markdown canónico verificado. La promoción B02 V02 fue byte-exacta y está registrada en D-098.
 
-Results B02 V02 / §5.2 fue auditado con `PASS` por IA Gestora y aprobado explícitamente por el autor. D-097 registra la aprobación y autoriza la promoción byte-exacta a `ARTICLE_MASTER_V018.md`.
+El Word acumulativo canónico es `ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.docx`, SHA-256 `3e27fd12997f581ab55c1b5ac16a28d45b28fa3896989b75da50792e3763e9e9`, bajo custodia local del autor, con 40 comentarios preservados y 0 tracked changes.
 
-Candidato Markdown aprobado:
+Experimental Design, Results B01 / §5.1 y Results B02 / §5.2 están cerrados, aprobados, congelados e integrados.
 
-```text
-ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.md
-SHA256 = 6b36a1260fadadce350d222fdbe580982eb3e3be39a117d18143eaa43f72fc54
-GIT_BLOB_EXPECTED = d392bdc2ae139ab692637c8c3a42ff6804f4d41a
-```
-
-Word aprobado bajo custodia local del autor:
-
-```text
-ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.docx
-SHA256 = 3e27fd12997f581ab55c1b5ac16a28d45b28fa3896989b75da50792e3763e9e9
-COMMENTS = 40 / PRESERVED
-TRACKED_CHANGES = 0
-PAGE_COUNT = 52
-```
-
-## 2. Estructura vigente de Results
+## 2. Estructura congelada de Results
 
 ```text
 5.1 Data and partition checks             = INTEGRATED
-5.2 Candidate retrieval performance       = APPROVED / PROMOTION TO V018 PENDING
-5.3 Documentary evidence retrieval        = NOT AUTHORIZED
+5.2 Candidate retrieval performance       = INTEGRATED
+5.3 Documentary evidence retrieval        = OPEN / AUTHORIZED B03 V01
 5.4 Controlled explanation quality        = NOT AUTHORIZED
 5.5 Sensitivity and robustness analyses   = NOT AUTHORIZED
 5.6 Inferential results                    = NOT AUTHORIZED
 5.7 Summary by research question           = NOT AUTHORIZED
 ```
 
-## 3. Gobernanza de B02
+## 3. Results B03 / Section 5.3
+
+Ground truth:
+
+`article/governance/D099_RESULTS_B03_GROUND_TRUTH_SYNC_AND_SECTION5_3_BOUNDARY.md@dfb21f5ba6c1d8b8b7cc7f30945ead8ae284ce76`
+
+Snapshot experimental congelado:
+
+`db0d0ad0d8435921a7838db6720eaea86a263763`
+
+Fuentes primarias:
 
 ```text
-B02_V02_RESPONSE = article/responses/6_RESULTS_B02_SECTION5_2_RESPONSE_V02.md@95036a4be7f9c1597d9c9ef6ec28b8e7d6bd1114
-B02_V02_SECTION = article/sections/results/Results_B02_V02.md@778c816302fd486c50e4d681b4a68d0847f03291
-B02_V02_REVIEW = article/reviews/6_RESULTS_B02_SECTION5_2_INTERNAL_REVIEW_V02.md@95dac70c547bfd3da9f99041c41263b8ef26fe71
-B02_V02_REVIEW_RESULT = PASS
-B02_AUTHOR_GATE = article/governance/D096_RESULTS_B02_V02_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@6ca323128fc75051844494fdb49664ec8b578bac
-B02_AUTHOR_APPROVAL = article/governance/D097_RESULTS_B02_V02_AUTHOR_APPROVAL_AND_V018_AUTHORIZATION.md@fec59be3651ce14581d288d48844a808fa2f0d33
+integration_metrics.json
+GIT_BLOB = 3fddeba15d080468001b1a855749ab23b1f0f0fb
+
+integration_evidence_coverage.json
+GIT_BLOB = f8a746933655864cda005f14b41938ae750ec9e5
+
+integration_ranking_invariance.json
+GIT_BLOB = b295b399d80eee5fb21d1fd582cccae9afef4bdd
+
+integration_label_leakage_audit.json
+GIT_BLOB = cad4b3c5daee8988ecd56a38d6150d98cdd96d94
+
+integration_compatibility.json
+GIT_BLOB = 1d9070daea5875f47d9a10cbe714880fc9a06bf2
 ```
 
-B02 queda `CLOSED / APPROVED / FROZEN / READY_FOR_INTEGRATION`. V01 queda superseded por V02.
-
-## 4. Promoción V018
-
-La única promoción autorizada es:
+Ground truth principal:
 
 ```text
-SOURCE = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.md
-TARGET = article/manuscript/ARTICLE_MASTER_V018.md
-EXPECTED_SHA256 = 6b36a1260fadadce350d222fdbe580982eb3e3be39a117d18143eaa43f72fc54
-EXPECTED_GIT_BLOB = d392bdc2ae139ab692637c8c3a42ff6804f4d41a
+EVAL_CASES = 1056
+CANDIDATE_SLOTS = 3168
+EXACT_NANDINA8_EVIDENCE = 3168/3168 = 100%
+CASE_ALL_TOP3_EXACT_EVIDENCE = 1056/1056 = 100%
+HS6_CONTEXT = 2168/3168 = 68.43%
+HS4_CONTEXT = 3168/3168 = 100%
+CHAPTER_CONTEXT = 3168/3168 = 100%
+HISTORICAL_PRECEDENT_COVERAGE = 3168/3168 = 100%
+TRACEABILITY_COMPLETE = 3168/3168 = 100%
+RANKING_INVARIANCE = 1056/1056 = 100%
 ```
 
-D-035 continúa activo: IA Gestora no debe materializar el master grande mediante Base64 manual, chunking, fragmentación, reensamblado ni workarounds equivalentes. El autor debe subir el archivo exacto y la Gestora deberá auditar su identidad antes de cambiar el master canónico.
+Los claims C30-C34 fueron registrados en `article/CLAIM_EVIDENCE_MATRIX.md@55476e0d618d979cd1eaf1637aaaff23fe128371` antes de abrir drafting. C12 permanece prohibido: association/coverage no demuestra substantive normative correctness. C21 mantiene el límite de drift del corpus congelado.
 
-## 5. Gate inmediato
+## 4. Contrato activo
+
+Prompt:
+
+`article/prompts/6_RESULTS_B03_SECTION5_3.md@10ab3bc7609eda2bbd68cd2e3d3ce27c2d54dbcb`
+
+Git blob:
+
+`f60bd17046ab981bd71f104486e9d7a3acc2be67`
+
+Revisión:
+
+`article/reviews/6_RESULTS_B03_SECTION5_3_PROMPT_INTERNAL_REVIEW_V01.md@ac22162132cdd5e26b341385edd14db50129b0f4` — `PASS`.
+
+Autorización:
+
+`article/governance/D100_RESULTS_B03_SECTION5_3_EXECUTION_AUTHORIZATION.md@20fc83f09cd0eefe90a988274d740d00969a7b05`.
+
+## 5. Baselines y entrega
 
 ```text
-NEXT_ACTOR = AUTHOR
-NEXT_ACTION = UPLOAD_EXACT_B02_V02_MD_AS_ARTICLE_MASTER_V018
-TARGET_PATH = article/manuscript/ARTICLE_MASTER_V018.md
-EXPECTED_SHA256 = 6b36a1260fadadce350d222fdbe580982eb3e3be39a117d18143eaa43f72fc54
-EXPECTED_GIT_BLOB = d392bdc2ae139ab692637c8c3a42ff6804f4d41a
-AFTER_UPLOAD = IA_GESTORA_VERIFY_V018_AND_CONTINUE_TO_B03_GROUND_TRUTH_GATE
-RESULTS_B03_PLUS = NOT_AUTHORIZED_UNTIL_VERIFIED_V018
+BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V018.md
+BASELINE_MASTER_MD_SHA256 = 6b36a1260fadadce350d222fdbe580982eb3e3be39a117d18143eaa43f72fc54
+BASELINE_MASTER_MD_GIT_BLOB = d392bdc2ae139ab692637c8c3a42ff6804f4d41a
+
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.docx
+BASELINE_DOCX_SHA256 = 3e27fd12997f581ab55c1b5ac16a28d45b28fa3896989b75da50792e3763e9e9
+COMMENTS = 40 / PRESERVE
+TRACKED_CHANGES = 0 / PRESERVE
+```
+
+D-035 continúa activo: Base64 manual, chunking, fragmentación y reensamblado están prohibidos. El DOCX no se reconstruye desde Markdown y los candidatos acumulativos deben entregarse como archivos reales.
+
+## 6. Gate inmediato
+
+```text
+NEXT_ACTOR = IA_REDACCION
+NEXT_ACTION = EXECUTE_ONLY_RESULTS_B03_SECTION_5_3
+EXPECTED_SECTION_ARTIFACT = article/sections/results/Results_B03_V01.md
+EXPECTED_MASTER_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B03_V01.md
+EXPECTED_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B03_V01.docx
+EXPECTED_RESPONSE = article/responses/6_RESULTS_B03_SECTION5_3_RESPONSE_V01.md
+EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
+RESULTS_B04_PLUS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 ```
@@ -112,13 +150,13 @@ CONCLUSION = NOT_AUTHORIZED
 
 # English
 
-V017 remains canonical until the approved B02 V02 Markdown candidate is materialized byte-exactly as V018 and independently verified. B02 / Section 5.2 is closed, approved, frozen, and ready for integration. Results B03+ remains unauthorized until verified V018 integration is complete.
+V018 is the canonical verified Markdown master; the approved B02 V02 DOCX is the canonical cumulative Word baseline. Results B01 and B02 are integrated. Results B03 / §5.3 is the only open drafting block under D-099/D-100 and the exact prompt `article/prompts/6_RESULTS_B03_SECTION5_3.md@10ab3bc7609eda2bbd68cd2e3d3ce27c2d54dbcb`.
 
 ```text
-CURRENT_GATE = RESULTS_B02_V02_PROMOTION_TO_V018_PENDING_MATERIALIZATION
-NEXT_ACTOR = AUTHOR
-TARGET_PROMOTION = ARTICLE_MASTER_V018
-RESULTS_B03_PLUS = NOT_AUTHORIZED
+CURRENT_GATE = RESULTS_B03_SECTION_5_3_DRAFTING_V01
+NEXT_ACTOR = DRAFTING_AI
+RESULTS_B03 = AUTHORIZED
+RESULTS_B04_PLUS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
