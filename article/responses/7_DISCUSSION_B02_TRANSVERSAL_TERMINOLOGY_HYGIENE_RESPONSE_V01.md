@@ -17,7 +17,7 @@ FUENTES_EXTERNAS_QUE_DEBEN_VERIFICARSE = NONE
 BLOQUEOS_O_CONTRADICCIONES = NONE
 ```
 
-### Identidad de baselines
+### Identidades
 
 ```text
 INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V029.md
@@ -36,9 +36,9 @@ BASELINE_TRACKED_CHANGES = 0
 BASELINE_PAGE_COUNT = 69
 ```
 
-### Corrección y alcance
+### Ejecución
 
-Se corrigió exclusivamente §6.2 EN/ES. Se retiraron las etiquetas internas `frozen`, `advertencias_globales`, `micro-audit`/`microauditoría`, `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`, `independent_ai_reviewer_01`, `AI_EXPERT_ROLE` y la jerga local `upstream`, sustituyéndolas por formulación científica reader-facing. Se preservaron sin cambio científico el contrato de autoridad del LLM, las cifras 50/50, 150/150, 28/50 (56.0% / 56,0%), 0.54/2, 1.04/2 y 0/50, el carácter LLM-as-judge/no human customs expert validation y las fronteras de auditabilidad, corrección jurídica y fidelidad causal. Las citas existentes de Marra de Artiñano et al. (2023) y Kim et al. (2025) no se añadieron, eliminaron ni movieron.
+Se corrigió exclusivamente §6.2 EN/ES. Se retiraron las etiquetas internas `frozen`, `advertencias_globales`, `micro-audit`/`microauditoría`, `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`, `independent_ai_reviewer_01`, `AI_EXPERT_ROLE` y la jerga local `upstream`, sustituyéndolas por lenguaje científico reader-facing. No se alteraron resultados, cifras, denominadores, inferencias, citas, comentarios, claims, otras secciones ni Conclusion. Se preservaron 50/50, 150/150, 28/50 (56.0% / 56,0%), 0.54/2, 1.04/2, 0/50, LLM-as-judge != human customs expert validation, auditability != legal correctness y LLM control != causal-faithfulness guarantee.
 
 ```text
 SECTION_6_2_MODIFIED = YES / NARROW_TERMINOLOGY_HYGIENE_ONLY
@@ -51,13 +51,15 @@ NEW_CITATION_COMMENTS = 0
 INTERNAL_TERMINOLOGY_LEAKAGE_IN_6_2 = NONE
 ```
 
-### Artefactos y QA
+Las citas existentes de Marra de Artiñano et al. (2023) y Kim et al. (2025) permanecen en sus pasajes de §6.2 y no fueron movidas.
+
+### Artefactos
 
 ```text
 BLOCK_ARTIFACT = article/sections/discussion/Discussion_B02_TRANSVERSAL_V01.md
 BLOCK_ARTIFACT_SHA256 = 32899760e0dac3c00d0a80133a8dad313b27a88b2139952d310b51a1875d03da
 BLOCK_ARTIFACT_GIT_BLOB = b24eedaa5adb6c49c0a60b49682747dab97a19b3
-BLOCK_ARTIFACT_GITHUB_COMMIT = PENDING_POST_RESPONSE_FIRST_COMMIT
+BLOCK_ARTIFACT_GITHUB_COMMIT = d10fdaddaabc9809b127e9c4edaa58ea5494910f
 
 MASTER_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_TRANSVERSAL_V01.md
 MASTER_CANDIDATE_MD_SHA256 = ba4d3d5021a6be5fc43a435c3618c65e0778b900609b708014cb04d7866b9b7d
@@ -69,29 +71,9 @@ MASTER_CANDIDATE_DOCX_SHA256 = 340e283924a9364447344469cf4eb077bbf93f7d32509f8f1
 MASTER_CANDIDATE_DOCX_GITHUB_UPLOAD = DEFERRED
 ```
 
-El Markdown presenta únicamente seis párrafos modificados, tres EN y tres ES, todos dentro de §6.2. El DOCX fue editado directamente desde el baseline exacto, no reconstruido desde Markdown. Conserva 14 partes OOXML; solo cambia `word/document.xml`; `word/comments.xml` permanece byte-identical. Se preservan 48 comentarios, 48 anclajes completos y 0 tracked changes. El render completo contiene 69 páginas: 66 son pixel-identical al baseline; solo 29, 30 y 64 cambian y pasaron inspección visual a tamaño completo sin clipping, solapamientos, glifos faltantes ni rupturas.
+### QA y salida
 
-```text
-SCIENTIFIC_FIDELITY = PASS
-EPISTEMIC_STRENGTH = UNCHANGED / BOUNDED
-READER_FACING_PROSE = PASS
-ABSTRACTION_DENSITY = ACCEPTABLE
-AGENT_ACTION_OBJECT_CLARITY = PASS
-NOMINALIZATION_OVERLOAD = ABSENT
-PROCESS_RELATIONSHIPS_EXPLICIT = PASS
-SPANISH_NATURALNESS = PASS
-EN_ES_SEMANTIC_EQUIVALENCE = PASS
-KBS_CONCRETE_PROSE = PASS
-COMMENTS = 48
-TRACKED_CHANGES = 0
-CITATION_COMMENT_COVERAGE = 48/48 / CUMULATIVE_INHERITED
-OOXML_CHANGED_PARTS = word/document.xml ONLY
-FULL_DOCX_PAGE_COUNT = 69
-PIXEL_IDENTICAL_UNCHANGED_PAGES = 66
-FULL_DOCX_RENDER = PASS
-```
-
-### Checklist MWDP y salida
+El Markdown presenta seis párrafos modificados, todos dentro de §6.2: tres EN y sus tres espejos ES. El DOCX fue editado directamente desde B06 V02, no reconstruido desde Markdown. Conserva 14 partes OOXML; solo cambió `word/document.xml`; `word/comments.xml` es byte-identical. Se preservan 48 comentarios, 48 anclajes completos y 0 tracked changes. El render completo produce 69 páginas: 66 son pixel-identical al baseline y las páginas 29, 30 y 64, únicas modificadas visualmente, pasaron inspección a tamaño completo.
 
 ```text
 PROTOCOL_READ = MWDP_V1.0
@@ -105,6 +87,23 @@ AUTHORIZED_CLAIMS_USED = EXISTING_SECTION_6_2_CLAIMS_ONLY / SCIENTIFIC_CONTENT_U
 CONDITIONAL_CLAIMS_USED = C14 / EXISTING_BOUNDED_USE_ONLY
 PROHIBITED_CLAIMS_USED = NONE
 ACCESS_RECHECK_REQUIRED = NONE
+SCIENTIFIC_FIDELITY = PASS
+EPISTEMIC_STRENGTH = UNCHANGED / BOUNDED
+READER_FACING_PROSE = PASS
+ABSTRACTION_DENSITY = ACCEPTABLE
+AGENT_ACTION_OBJECT_CLARITY = PASS
+NOMINALIZATION_OVERLOAD = ABSENT
+PROCESS_RELATIONSHIPS_EXPLICIT = PASS
+SPANISH_NATURALNESS = PASS
+EN_ES_SEMANTIC_EQUIVALENCE = PASS
+KBS_CONCRETE_PROSE = PASS
+CITATION_COMMENT_COVERAGE = 48/48 / CUMULATIVE_INHERITED
+COMMENTS = 48
+TRACKED_CHANGES = 0
+OOXML_CHANGED_PARTS = word/document.xml ONLY
+FULL_DOCX_PAGE_COUNT = 69
+PIXEL_IDENTICAL_UNCHANGED_PAGES = 66
+FULL_DOCX_RENDER = PASS
 ENGLISH_SECTION_6_2_BODY_WORD_COUNT = 438
 ENGLISH_MAIN_TEXT_WORD_COUNT = 17226 / CONTINUITY_COUNT_FROM_V029_17219_PLUS_NET_DELTA_7
 EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
@@ -128,7 +127,7 @@ La ejecución se detiene exactamente en `DISCUSSION_B02_TRANSVERSAL_V01_COMPLETE
 
 ## English
 
-Discussion B02 transversal V01 applies only the authorized reader-facing terminology cleanup to Section 6.2 in the exact V029 Markdown and B06 V02 Word baselines. Scientific content, quantitative results, citations/comments, LLM authority, every other manuscript section, and Conclusion remain unchanged. The DOCX was edited directly, retains 48 comments and zero tracked changes, changes only `word/document.xml`, and passes the full 69-page render review.
+Discussion B02 transversal V01 applies only the authorized Section 6.2 terminology cleanup. Scientific content, figures, citations/comments, all other sections, and Conclusion remain unchanged. The exact V029 Markdown and B06 V02 Word inputs passed identity checks. The DOCX was edited directly, retains 48 comments and zero tracked changes, changes only `word/document.xml`, and passes the complete 69-page render review.
 
 ```text
 PROTOCOL_READ = MWDP_V1.0
@@ -136,8 +135,6 @@ SPCCR_READ = SPCCR_V1.0
 KBS_EWG_34_V01_READ = YES
 D136_READ = YES
 ONBOARDING = PASS
-INPUT_MASTER_MD_IDENTITY = PASS
-INPUT_MASTER_DOCX_IDENTITY = PASS
 SECTION_6_2_MODIFIED = YES / NARROW_TERMINOLOGY_HYGIENE_ONLY
 OTHER_SECTIONS_MODIFIED = NO
 CONCLUSION_MODIFIED = NO
