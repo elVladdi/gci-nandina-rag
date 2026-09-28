@@ -1,0 +1,1699 @@
+**Knowledge-Based Systems target manuscript**
+
+**KBS_ARTICLE_WORKING_STRUCTURE_V02**
+
+*Cumulative editable base for subsequent manuscript versions*
+
+| **Target journal**          | Knowledge-Based Systems                                                              |
+|-----------------------------|--------------------------------------------------------------------------------------|
+| **Article type**            | Research article                                                                     |
+| **Editorial basis**         | KBS empirical writing guide based on 34 recent Open Access articles                  |
+| **Current purpose**         | Freeze and edit the complete article structure before further section drafting       |
+| **Scientific prose status** | No manuscript prose is approved by this structure file                               |
+| **Version policy**          | Future deliveries must preserve and progressively complete this cumulative structure |
+
+Editorial control: this file is a structural working base, not a
+completed manuscript. Gray italic notes are drafting instructions and
+must be removed from the submission version.
+
+Key structural principle: the reader first encounters the scientific
+problem and positioning, then the general decision-support architecture,
+and only afterwards the specific experimental instantiation. The
+experimental testbed must not define the conceptual scope of the
+architecture.
+
+# Structure at a glance
+
+| **Section**                       | **Primary function**                                                                                                                               |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Front matter                      | Title; Abstract; Keywords                                                                                                                          |
+| 1\. Introduction                  | Problem → limitation → proposal → contribution → evaluation context → RQs → roadmap                                                                |
+| 2\. Related work                  | Prior approaches organized by function, ending in explicit positioning                                                                             |
+| 3\. Decision-support architecture | General architecture and information flow, without opening from the experimental testbed                                                           |
+| 4\. Experimental design           | Specific empirical instantiation, datasets, corpus, partitioning, configuration, evaluation and reproducibility                                    |
+| 5\. Results                       | Results organized by function and research question                                                                                                |
+| 6\. Discussion                    | Interpretation, comparison, implications, transfer conditions and limitations                                                                      |
+| 7\. Conclusion                    | Contribution, evidence, scope and implication                                                                                                      |
+| End matter                        | Data availability; reproducibility resources; CRediT; funding; competing interests; acknowledgements; references; supplementary material if needed |
+
+# PART I — English manuscript master
+
+The English part is the publication-facing master. Drafting notes below
+define the intended function of each section; they are not manuscript
+prose.
+
+## Title
+
+Define at the end. It should foreground the scientific/architectural
+contribution; the customs domain may appear as an application or testbed
+only if it improves precision.
+
+\[Final title to be written after the manuscript is complete.\]
+
+## Abstract
+
+Recommended rhetorical order: concrete problem → limitation → proposed
+architecture → evaluation → main findings → bounded implication. Target
+approximately 200–250 words unless final content requires otherwise.
+
+\[Section text to be drafted in a later approved version.\]
+
+## Keywords
+
+Select after the final title and abstract. Keywords should represent
+both the contribution and the application domain without reducing the
+work to the testbed.
+
+\[5–7 final keywords.\]
+
+# 1. Introduction
+
+Tariff classification decision support starts from a concrete information problem: a commercial description must be mapped to a code within a hierarchical nomenclature while the reviewer may also need documentary material that explains why a candidate is relevant. Automated systems address different parts of this problem. Some models select a code directly, some produce ranked candidates, some retrieve regulatory or manual text, and others generate a rationale or trace. These functions are related, but they do not have the same output or the same authority over the final recommendation. For an auditable decision-support workflow, it therefore matters not only which techniques are used, but also which stage is allowed to determine the candidate set, which stage only documents it, and which stage only explains an already fixed result.
+
+Prior work shows several ways in which these functions can be coupled. Lee et al. (2021) predict a heading, retrieve key sentences from the HS manual, and then use the product description together with those sentences to predict the subheading; the retrieved material therefore participates in the later classification decision. Lee et al. (2023) separate the sequence differently: their system predicts classification candidates before retrieving evidence about each candidate from the HS manual, demonstrating that candidate prediction followed by documentary support is already established in customs decision support. Regulation-driven search can give retrieved evidence still greater influence: Wang et al. (2026) build evidence-enriched candidate packages and use a decision model to select each next hop in a regulatory hierarchy before aggregating evidence for the final rationale. In legal AI, Chen and Tanaka-Ishii (2026) retrieve legal sources and examples, compile them into an executable representation, and refine that representation as part of the process that produces the label. These studies provide close and partial precedents for combining retrieval, evidence, and explanation; the limitation addressed here is therefore not an absence of such components.
+
+The remaining methodological problem concerns operational and evaluative separation. When several downstream stages can alter the same candidate set, a reviewer cannot easily determine whether a candidate was selected by the historical evidence, by the regulatory material, or by the language model. The same coupling also complicates evaluation: a candidate-ranking metric measures a different object from documentary association, and neither one measures the structure or traceability of a generated explanation. If these outputs are reported as if they described one undifferentiated system decision, it becomes difficult to attribute an observed outcome to the component that actually produced it. In a regulated setting, this distinction is also important for human review: attaching an official or relevant passage to a candidate does not establish substantive legal correctness, and producing a structured explanation does not turn the language model into the classifier that selected the code.
+
+This study examines a configurable framework for auditable tariff-classification decision support whose technical core is the decision-support architecture defined in Section 3. A historical retrieval stage receives the normalized commercial description, generates candidate codes from a labeled historical bank, and fixes their ranking. The top three candidates become a fixed Top-3 before normative retrieval begins. A separate normative-retrieval stage then associates documentary evidence with each of those candidates without inserting, deleting, substituting, or reordering codes. Finally, a downstream local LLM receives the fixed candidates and their retrieved documentary context to produce a controlled explanation; it has no authority to modify the candidates or feed information back into classification. By preserving component authority and provenance across this flow, the framework makes the ranked candidate recommendation, associated documentary evidence, and generated explanation inspectable at case level for review or audit, without treating auditability as legal correctness.
+
+The article makes three bounded contributions. First, it specifies a framework whose technical core assigns a concrete role to each component: historical retrieval generates and ranks candidates and fixes the Top-3; normative retrieval then associates evidence with those fixed candidates without changing their membership or order; and the local LLM generates only the explanation of that fixed Top-3. This controlled separation preserves a traceable relation among the normalized query, historical precedent, fixed candidates, documentary evidence, and generated explanation so that a recommendation can be inspected at case level for review or audit. Second, it evaluates candidate retrieval, documentary association, and controlled explanation as distinct outputs, while preserving DAM-level grouping when shared declaration structure creates dependence. Third, it documents the interfaces and reproducibility resources needed to re-instantiate the framework with a different labeled historical bank, target class space, or compatible documentary corpus. This third contribution concerns reproducibility and re-instantiation of the framework; it does not imply that performance observed in one empirical setting will transfer to another.
+
+To evaluate the framework, we instantiate it in an offline customs-classification testbed for eight-digit NANDINA subheading recommendation within Chapter 87, using the Peruvian administrative context and the Andean documentary resource defined in Methods. The commercial description of a SERIE is used as the query representation after normalization; SERIE is the analysis unit, and DAM/customs declaration is the grouping unit where dependence must be controlled. The implementation combines a labeled historical bank, a normative/documentary corpus, historical candidate retrieval, candidate-specific normative retrieval, and a local LLM restricted to explanation of the fixed Top-3. This evaluation setting is not an operational customs deployment and does not adjudicate a legally final classification; it is used to evaluate the framework under controlled conditions rather than to define its conceptual scope. The framework can be re-instantiated with other data, class spaces, tariff depths, and compatible documentary corpora when the required interfaces and provenance controls are satisfied, but such configurability is not evidence of empirical generalization beyond the evaluated setting.
+
+The evaluation is guided by four research questions:
+
+- **RQ1.** What candidate-retrieval performance does historical retrieval achieve under partitions that are disjoint by DAM/customs declaration?
+- **RQ2.** To what extent can identifiable normative evidence be associated with each candidate in a fixed historical Top-3 without altering candidate order?
+- **RQ3.** To what extent can a local LLM restricted to the fixed Top-3 preserve the candidates and their order while producing structured explanations linked to identifiable evidence?
+- **RQ4.** What validity limits do intra-DAM dependence, residual near-duplicates, historical-bank composition, and normative drift introduce when interpreting the results of the offline pilot?
+
+The remainder of the article is organized as follows. Section 2 reviews automated tariff classification, knowledge-enhanced retrieval, LLM roles, evidence grounding, auditability, reproducibility, and the positioning of this study. Section 3 describes the decision-support architecture and its information flow. Section 4 presents the experimental design, data and documentary resources, partitioning, system configuration, evaluation protocols, and reproducibility resources. Section 5 reports results by system function and research question, Section 6 discusses their implications and limitations, and Section 7 concludes the article within the evaluated scope.
+
+# 2. Related work
+
+Organize by technical function/problem family rather than
+author-by-author chronology. Each subsection should end with a synthesis
+relevant to the positioning of this study.
+
+## 2.1. Automated tariff classification and candidate retrieval
+
+Automated tariff coding has most often been framed as a text-to-code
+prediction problem: a model receives a product or declaration
+description and returns one or more HS labels. Early work treated this
+as supervised text categorization, with models trained on historical
+declarations and evaluated at a defined level of the tariff hierarchy.
+Ding et al. used a Background Net classifier to map goods-declaration
+text to HS categories, illustrating a conventional direct-classification
+formulation (Ding et al., 2015). CNN-based work later showed that short
+descriptions could be classified separately at HS2 and HS4, while also
+exposing the increased class cardinality at finer levels (Luppes, 2019).
+At larger scale, Ruder compared conventional machine-learning and neural
+classifiers on more than one million cargo descriptions spanning
+thousands of HS6 classes (Ruder, 2020). These studies share a supervised
+prediction objective, but their target levels, label spaces, datasets,
+and evaluation measures differ; reported percentages therefore should
+not be read as directly comparable measures of tariff-classification
+performance.
+
+Subsequent work has changed the representation of trade text without
+necessarily changing that prediction objective. Anggoro et al., for
+example, fine-tuned Sentence-BERT with Multiple Negative Ranking loss to
+obtain transaction embeddings and then used those fixed-length
+representations as inputs to SVM and Random Forest classifiers for
+HS-code prediction (Anggoro et al., 2025). Other approaches exploit the
+hierarchy more explicitly. Lee et al. first predict a four-digit
+heading, retrieve relevant sentences from the HS manual, and then
+predict the six-digit subheading from the product description together
+with the retrieved sentences (Lee et al., 2021). This staged design
+differs from treating HS2, HS4, or HS6 as independent flat
+classification targets because information produced between levels can
+participate in the later decision.
+
+A second family formulates the problem as retrieval or ranking rather
+than as a single-label decision. Stassin et al. compared supervised
+neural models with semantic-similarity methods over HS6, HS8, and HS10
+and evaluated whether relevant codes appeared near the top of a ranked
+output (Stassin et al., 2023). Pain likewise used semantic textual
+similarity to generate ranked commodity recommendations and evaluated
+whether the expected commodity code appeared among the top-k suggestions
+(Pain, 2021). In this formulation, the model's immediate output is a
+candidate list that can support a subsequent human or automated
+decision. This distinction is operationally important: Top-k retrieval
+measures the presence and ordering of candidates, whereas classification
+accuracy evaluates a selected label. The two objectives can coexist in
+tariff-assistance systems, but their metrics and denominators should not
+be treated as interchangeable.
+
+A third task begins from a code that has already been assigned and asks
+whether that assignment is coherent or plausible. Spichakova and Haav
+combine textual similarity with similarity derived from the HS taxonomy
+to assess assigned-code correctness and to provide alternative
+predictions or recommendations (Spichakova & Haav, 2020). Such
+validation or correction is not equivalent to generating candidates from
+an uncoded description, because the existing code is part of the object
+being assessed and the evaluation depends on assumptions about the
+historical labels used as reference.
+
+Taken together, this literature spans direct classification, staged
+hierarchical prediction, candidate retrieval/ranking, and
+post-assignment validation. The boundaries between these tasks matter
+because the same technologies—embeddings, neural encoders, similarity
+functions, or historical records—can support different outputs and
+evaluation criteria. They also clarify the point at which external
+documentary knowledge enters a system: in some designs it participates
+in the classification decision itself, while in others retrieval is used
+to expose supporting material around candidate codes. That functional
+distinction motivates the next subsection on knowledge-enhanced
+retrieval and regulatory reasoning.
+
+## 2.2. Knowledge-enhanced retrieval and regulatory reasoning
+
+External knowledge enters tariff and regulatory systems in materially
+different ways. In some models, domain structure is part of the
+predictor itself rather than a document retrieved after a candidate has
+been produced. Qi et al. transform declaration elements into semantic
+and attribute associations, construct a knowledge graph, and train a
+graph-attention model so that HS-code prediction is formulated as link
+completion on that graph (Qi et al., 2025). Here, structured knowledge
+affects the representation and inference that produce the code. This
+role differs from documentary retrieval whose output is shown as
+supporting material, and it also differs from validating an already
+assigned code. The distinction is important because a knowledge graph, a
+taxonomy, and a retrieved passage may all be described as “external
+knowledge” while intervening at different points in the decision
+process.
+
+Document retrieval can also participate directly in classification. Lee
+et al. first predict a four-digit heading, retrieve key sentences from
+the corresponding HS manual, and then use the product description
+together with those sentences to predict the six-digit subheading (Lee
+et al., 2021). The retrieved sentences therefore become inputs to the
+later prediction rather than merely an explanation displayed after
+classification. A related customs decision-support design separates
+these roles differently: it first predicts candidate classifications and
+then retrieves evidence about each candidate from the HS manual,
+returning candidate codes together with relevant supporting sentences
+for officers to inspect (Lee et al., 2023). These examples show why code
+retrieval, sentence retrieval, precedent retrieval, and evidence
+retrieval should not be collapsed into a single function. The object
+retrieved and the point at which retrieval occurs determine whether it
+generates candidates, changes a prediction, or supports review of an
+existing suggestion.
+
+Regulation-driven search makes this coupling even more explicit. In
+constraint-aware hierarchical search, regulatory documents are organized
+as a searchable tree; at each level, the system retrieves plausible
+child nodes and supporting evidence, constructs a candidate package, and
+uses a decision model to select the next hop or stop (Wang et al.,
+2026). Once the path is fixed, evidence from visited nodes is aggregated
+for verification and rationale generation. Regulatory material in this
+setting is thus part of the traversal that determines the classification
+path, not simply a citation layer attached to an independently selected
+label. The same functional reading is necessary for other agentic or
+rule-constrained systems: hierarchy, exclusions, redirects, and
+retrieved rules may restrict or alter the search trajectory. A
+hierarchy-consistent path or a rationale supported by retrieved material
+can make the decision process inspectable, but neither property by
+itself establishes independently adjudicated legal correctness or a
+formal auditability score.
+
+General retrieval-augmented generation provides a broader pattern for
+coupling external text with generation. Lewis et al. combine a neural
+retriever over a non-parametric document index with a
+sequence-to-sequence generator; retrieved documents are supplied as
+additional context when the target sequence is generated (Lewis et al.,
+2020). In that formulation, retrieval and generation are components of
+one probabilistic model, and the generated output remains conditioned on
+both the input and retrieved passages. RAG should therefore not be used
+as a synonym for every system that happens to retrieve documents:
+retrieve-then-generate, retrieval used inside classification, and
+evidence retrieval for human inspection assign different functions to
+the retrieved material. Likewise, an inspectable passage is not
+automatically a complete attribution of every generated claim, nor does
+retrieval alone guarantee that the output is grounded in the governing
+source.
+
+Query transformation illustrates another boundary. Ma et al. place a
+rewriter before retrieval: the system rewrites the input into a search
+query, retrieves documents, and then passes those documents to a
+black-box reader; their trainable variant optimizes the rewriter using
+reader feedback (Ma et al., 2023). Because rewriting changes what the
+retriever searches for, it can change the downstream context and answer.
+The rewritten query is therefore a control input to retrieval, not
+evidence for the final claim. More generally, query rewriting, document
+retrieval, passage selection, and generation are separable operations
+even when an implementation trains or executes them jointly.
+
+Across these approaches, the scientifically useful question is not
+simply whether a system “uses knowledge,” but what that knowledge does.
+It may be encoded as structure that participates in prediction,
+retrieved as context that changes a later decision, used as rules or
+constraints during hierarchical search, or presented as supporting
+material for human review. These roles imply different outputs and
+different evaluation targets, and visible citations or reasoning traces
+should not be treated as substitutes for source-to-claim verification or
+substantive correctness. This functional separation also clarifies the
+next issue: once retrieval and regulatory context are available, an LLM
+may still serve very different roles—as classifier, search controller,
+reader/reasoner, or explanation generator. Those roles are examined in
+the next subsection.
+
+## 2.3. LLMs for classification, reasoning, and explanation
+
+The label “LLM” covers systems that assign very different authority to
+the language model. Some models directly choose a tariff code from a
+product description, others are fine-tuned encoders that output a class
+from a fixed label space, and retrieval-augmented or agentic systems may
+let the model control search, compare candidates, or produce a rationale
+after earlier decisions have already constrained the outcome. The
+relevant distinction is therefore not model size or branding, but which
+decision the model is allowed to make and which upstream outputs it can
+change.
+
+Direct generative classification gives the model broad authority over
+the predicted code. Marra de Artiñano et al. query GPT-3.5 through
+direct API prompts so that products are categorized individually,
+without training GPT-3.5 on the customs datasets used to fit the
+conventional machine-learning baselines (Marra de Artiñano et al.,
+2023). Here the model itself maps the description to the tariff label.
+That setup should be distinguished from studies that use the term “large
+language model” for supervised transformer encoders. Koch and Power
+fine-tune transformer models on labeled shipping-manifest descriptions
+for HS-code classification; their experimental comparison includes BERT-
+and RoBERTa-family models trained for the same classification task (Koch
+& Power, 2025). In such a system, the transformer supplies contextual
+representations inside a supervised classifier rather than freely
+generating a code through prompting. Direct generative classification
+and fine-tuned transformer classification therefore place different
+constraints on the model even when both are described as LLM-based.
+
+Retrieval augmentation changes the role again when retrieved material
+becomes context for the model that determines the code. Kim et al.
+propose THE-RAG, a two-stage framework that combines dense retrieval,
+BM25, and reranking and evaluates how retrieval preprocessing and the
+language model’s sentence-comprehension capability affect HS-code
+classification quality (Kim et al., 2025). In this configuration, the
+LLM acts as a retrieval-conditioned reader and decision maker: the
+retrieved context informs the final classification rather than merely
+documenting a code selected elsewhere. This differs from documentary QA
+RAG, where the generated object is an answer to a question, and from
+evidence-support retrieval, where retrieved passages can be exposed
+around candidates without giving the generator authority to alter
+candidate selection.
+
+Agentic designs can expand the model’s authority beyond reading
+retrieved passages. In a 2026 preprint, Nguyen et al. combine
+multi-agent information retrieval, semantic search over official tariff
+documents, evidence-grounded reasoning, consensus validation,
+element-wise voting, confidence estimation, and human-in-the-loop
+escalation for Canadian 10-digit classification (Nguyen et al., 2026).
+In such a workflow, model outputs and retrieved evidence participate in
+the classification procedure itself. Consensus or self-consistency can
+stabilize that procedure or express agreement among
+repeated/model-specific outputs, but agreement is not independent ground
+truth. Likewise, confidence-based escalation changes how uncertain cases
+are handled; it does not by itself establish that the selected code is
+substantively or legally correct.
+
+A different separation appears when the model participates in search
+first and generates a rationale only after the decision path has been
+fixed. In another 2026 preprint, Wang et al. propose constraint-aware
+hierarchical search in which an LLM helps choose each next hop from
+locally retrieved child nodes and supporting regulatory evidence. After
+the hierarchy path is fixed, evidence from visited nodes is aggregated
+for final verification and rationale generation (Wang et al., 2026). The
+downstream rationale stage therefore follows a fixed path, but the same
+overall system used an LLM and regulatory evidence to construct that
+path. This is functionally different from treating search control,
+reranking, or next-hop selection as explanation-only generation. It also
+illustrates why a rationale or reasoning trace should not be assumed to
+faithfully expose the causal basis of the preceding decision merely
+because it is produced after that decision.
+
+Across these configurations, LLM authority ranges from selecting the
+code directly, to operating inside a supervised classifier, to reading
+retrieved context while retaining decision authority, to steering search
+or consensus, and finally to generating explanatory text after upstream
+decisions have constrained the available output. These roles lead to
+different failure modes and different evaluation needs. Classification
+performance cannot establish whether a rationale is faithful; a visible
+reasoning trace does not by itself demonstrate source-to-claim support;
+and citations or provenance metadata do not establish formal
+auditability or legal correctness. These distinctions motivate the next
+subsection, which examines how grounding, explainability, and
+auditability should be evaluated once an LLM-generated output is
+attached to retrieved evidence or an explicit decision trace.
+
+## 2.4. Evidence grounding, explainability, and auditability
+
+Grounding should be assessed as a relationship between an output and
+evidence, not as the mere presence of retrieved text.
+Retrieval-augmented generation allows the generator to condition on
+non-parametric memory and can improve access to updatable external
+knowledge and make retrieved passages inspectable for verification
+(Lewis et al., 2020). Yet the generator still combines the input,
+retrieved passages, and its parametric model; retrieval alone does not
+show that each statement in the output is supported by a source.
+
+Asai et al. make this distinction explicit: passages can contain an
+answer string and still lack evidence, so their evidentiality model
+predicts whether a passage supports the gold output rather than treating
+retrieval or lexical overlap as support (Asai et al., 2022). Grounding
+therefore requires an evaluated support relation between a claim and the
+material offered as evidence.
+
+Explainability addresses a different question: what information is
+exposed to help a person understand or review a recommendation. In
+customs decision support, Lee et al. first predict candidate
+classifications and then retrieve relevant sentences from the HS manual,
+presenting candidate codes together with those sentences as explainable
+evidence (Lee et al., 2023). This design makes documentary support
+visible to the reviewer, but visibility and interpretability do not by
+themselves establish that every explanatory statement is entailed by the
+cited passage. The same boundary applies to rationales and reasoning
+traces more broadly. A rationale can organize information around a
+decision and still require a separate faithfulness test if it is
+intended to represent the basis on which that decision was actually
+reached.
+
+Provenance and traceability answer another question: where an output
+came from and which objects or operations contributed to it. The FAIR
+Data Pipeline, for example, records data and metadata as analyses
+consume and produce research objects and can trace scientific outputs
+back through modelling or analysis code to primary data (Mitchell et
+al., 2022). Such lineage can make dependencies, versions, and
+transformations inspectable. It does not, however, establish that the
+source data, transformation, interpretation, or final output is
+substantively correct. Traceability is therefore evidence about the
+production path of an artifact, not a correctness verdict on the
+artifact itself.
+
+Auditability can also refer to different scopes. Raji et al. propose an
+internal algorithmic-audit framework applied throughout the
+organizational development lifecycle, with each audit stage producing
+documents that collectively form an audit report (Raji et al., 2020).
+This kind of lifecycle audit reconstructs design decisions, risks,
+testing activities, and organizational accountability over time. At the
+level of an individual output, a distinct review question is whether
+that output can be examined against explicit criteria using its
+associated evidence and trace. A lifecycle record may support such
+review, but it is not equivalent to a case-level review, just as a
+case-level evidence package does not reconstruct the full development
+lifecycle.
+
+Regulatory systems add source authority and currency as further
+dimensions. Grainger's illustrative criteria for electronic tariff tools
+include the ability to incorporate tariff updates, cross-reference
+authoritative guidance, apply classification rules, and provide a
+statement explaining the recommendation (Grainger, 2024). These
+capabilities matter because an explanation built from an obsolete or
+non-authoritative document may be traceable while still being unsuitable
+for the current decision context. Conversely, citing an official and
+current source establishes neither that the relevant provision was
+selected nor that it was interpreted correctly for a particular case.
+Documentary authority and currency are therefore relevant dimensions to
+examine in regulated decision support, but they remain distinct from
+substantive or legal correctness.
+
+Taken together, grounding, explanation, provenance, lifecycle auditing,
+review at the level of individual outputs, and source authority answer
+different verification questions. They should not be arranged as a
+maturity ladder in which one property guarantees the next. A system may
+expose sources without demonstrating claim support, preserve lineage
+without proving correctness, or maintain an audit trail without
+validating each output. Conversely, a well-supported individual output
+does not establish reproducibility of the wider system or dataset. Once
+these constructs are separated, evaluation can assign each one an
+appropriate protocol and metric; the next subsection therefore turns to
+reproducibility and evaluation in knowledge-based decision support.
+
+## 2.5. Reproducibility and evaluation in knowledge-based decision support
+
+Once grounding, explanation, provenance, and audit scope are separated, reproducible assessment requires the experimental objects behind a reported result to be inspectable as well. Dataset documentation is one part of that requirement. Bender and Friedman define a data statement as a characterization that supplies context for judging how experimental results may generalize, how software may be deployed, and which biases may be reflected in systems built from the data (Bender & Friedman, 2018). Gebru et al. broaden this documentation across the dataset lifecycle by organizing datasheets around motivation, composition, collection, preprocessing and labeling, uses, distribution, and maintenance (Gebru et al., 2021). Such records make assumptions and dataset context visible, but documentation is not a certificate of dataset quality, representativeness, independence, or freedom from leakage. Those properties require separate evidence and, where relevant, explicit controls.
+
+Dataset documentation also needs to distinguish descriptive metadata from technical identity. A datasheet can record relationships between instances and recommended data splits, which helps a reader reconstruct how a dataset was intended to be used, but recording a split does not itself enforce dependence control or prove that partitions are independent (Gebru et al., 2021). Reproducible computation additionally benefits from identifying the concrete versions of data, processing code, parameters, and other research objects used in a run. The FAIR Data Pipeline illustrates this stronger lineage relation: it annotates data as analyses consume them and can trace scientific outputs back through analytical or modelling code to primary data (Mitchell et al., 2022). Provenance therefore answers which objects and transformations contributed to an output. It does not establish that those inputs, transformations, or outputs are substantively correct, and a provenance chain alone is not equivalent to full reproducibility.
+
+Reproducibility itself also needs a declared convention. Pineau et al. explicitly distinguish several related concepts: under the terminology adopted in their study, reproducible work repeats an experiment with the same data and analytical tools; replicable work changes the data while retaining the tools; robust work keeps the data but changes the analysis; and generalisable work changes both data and analytical tools while reaching the same conclusions (Pineau et al., 2021). These labels should not be treated as universal nomenclature, but the separation is methodologically useful. Reproducing a reported result under closely matched conditions does not by itself show robustness to another implementation, replication on different data, or generalization beyond the evaluated setting. Likewise, making code and data available may facilitate reproduction without guaranteeing that another researcher will reproduce the result successfully.
+
+Traceability across a development process serves yet another function. Raji et al. describe an internal algorithmic-audit framework applied throughout the organizational development lifecycle, in which each audit stage produces documents that collectively form an audit report (Raji et al., 2020). Such artifacts can preserve design decisions, tests, risks, and accountability information that a final performance number cannot recover. Their scope, however, is lifecycle-oriented. A documented internal audit trail does not automatically constitute a formal review of every individual output, and it does not establish substantive or legal correctness.
+
+These distinctions have a direct consequence for evaluation design: the metric must correspond to the function and output being assessed. Pineau et al. identify under-specification of reported metrics, improper statistical analysis, and over-claiming beyond the presented evidence among recurring obstacles to reproducible machine-learning research (Pineau et al., 2021). In multi-stage knowledge-based systems, this problem is amplified because retrieval, ranking, evidence selection, classification, and explanation can produce different objects. A retrieval metric describes a ranked set under a particular relevance definition; a classification metric describes selected labels; an evidence measure concerns retrieved support; and an explanation measure concerns properties of generated or presented rationales. Correctly specifying a metric is therefore necessary but not sufficient for comparison: aligned metrics do not make different tasks, datasets, relevance judgments, or output semantics equivalent.
+
+Reproducible evaluation consequently depends on a chain of explicit relationships rather than on a single headline score: the dataset and its intended use are documented; the concrete experimental objects and versions are identifiable; the production path of outputs is traceable; the reproducibility claim states which conditions are being held fixed or changed; and each metric is interpreted only for the function it actually measures. These controls improve the inspectability of evidence without converting documentation into quality certification, lineage into correctness, reproducibility into generalization, or metric alignment into task equivalence. With those evaluation boundaries established, the remaining literature can be compared in terms of how these functions are combined or kept separate, which is the purpose of the following subsection.
+
+## 2.6. Positioning of this study
+
+The reviewed literature assigns materially different decision authority to classification, retrieval, regulatory evidence, and generation. In one staged customs-classification design, a model first predicts a four-digit heading, retrieves key sentences from the corresponding HS manual, and then predicts the six-digit subheading from the product description together with those retrieved sentences (Lee et al., 2021). Retrieval in that pipeline is therefore not merely an explanatory layer after the decision: the retrieved material becomes an input to the later prediction. This distinction matters for positioning because systems that use similar components can still implement different decision processes depending on when evidence enters and whether it can affect the selected label.
+
+A closer customs precedent separates candidate prediction from documentary support more explicitly. Lee et al. (2023) describe a model that predicts subheading candidates and then retrieves relevant HS-manual sentences as supporting evidence for those candidates. Their output consequently combines candidate codes with inspectable documentary material, showing that candidate prediction plus evidence retrieval is already established prior art and cannot, by itself, distinguish the present study. The remaining distinction concerns authority and sequencing: whether the candidate ranking is fixed independently before documentary retrieval, whether later components are allowed to modify that ranking, and whether generation is part of classification or is restricted to explaining an upstream result.
+
+Regulation-driven and legal-AI systems illustrate stronger coupling between evidence, search, and decision making. Wang et al. (2026) retrieve plausible child nodes and supporting evidence at each level of a regulatory hierarchy, then use a decision model to select the next hop; only after the path is fixed is evidence aggregated for final verification and rationale generation. Chen and Tanaka-Ishii (2026) provide a different audit-oriented example: retrieved legal sources and examples are compiled into an executable representation whose refinement remains part of the process that produces the final label, and the model may revise the program or issue an additional retrieval query. These approaches make decision paths and source support more inspectable, but they also show that explanation-oriented artifacts can remain coupled to the mechanism that constructs the decision itself.
+
+Against this prior art, the present study is positioned through the complete separation of component authority rather than through the isolated presence of historical retrieval, documentary evidence, or an LLM. An external historical-retrieval stage fixes the candidate ranking and a fixed Top-3 before normative documents are retrieved. Normative retrieval is then restricted to attaching evidence to those already fixed candidates; it does not insert, delete, substitute, or reorder them. A downstream local LLM receives the fixed candidates and their documentary context only to produce an explanation, without authority to change the candidate set, alter its order, or feed information back into classification. This functional contract describes the design being studied; it is not, by itself, a claim that the individual components or their combination are novel.
+
+The evaluation logic follows the same separation. Candidate ranking, documentary association, and explanation are treated as different outputs and are evaluated with measures appropriate to their respective functions, while grouping is preserved where shared declaration-level structure creates dependence. This prevents a retrieval metric from being read as overall classification accuracy, documentary association from being treated as substantive normative correctness, or explanation traceability from being treated as legal correctness. It also separates reproducibility of the evaluated procedure from empirical generalization beyond the studied setting. The resulting position is therefore deliberately bounded: the study examines a decision-support architecture in which ranking, evidence, and explanation have explicit non-overlapping authority, and the empirical sections that follow will evaluate those functions without using Related Work to pre-empt their results.
+
+# 3. Decision-support architecture
+
+Describe the general architecture before the empirical instantiation. Do
+not open this section by defining NANDINA, Chapter 87, the documentary resource used in the experiment, H100, or the experimental sample.
+
+## 3.1. Overview and information flow
+
+The architecture separates candidate formation from the stages that document and explain those candidates. A commercial description enters the pipeline and is transformed into a normalized textual query. Historical retrieval uses that query to search a labeled collection of prior records and produces an ordered set of candidate codes. The candidate ranking is therefore determined before any normative document is retrieved and before any generative model is invoked. Once the first three unique codes have been selected, they become the fixed Top-3 that is passed to all downstream processing.
+
+[Figure 1 placeholder — overall architecture and information flow.]
+
+The downstream stages operate on this fixed candidate set rather than on an open class space. Candidate-specific normative retrieval attaches documentary material to each candidate, and context construction combines the query, candidate identities, historical support, and retrieved documentary evidence for subsequent explanation. The local LLM receives that assembled context only after the Top-3 has been fixed. Its output is explanatory text; it does not select a different code, alter candidate membership, or change candidate order. A separate diagnostic reranking path may be evaluated outside the primary flow, but it does not feed back into the ranking used by the architecture.
+
+This sequencing yields three functionally distinct outputs. Historical retrieval produces the candidate ranking and its links to historical precedents. The documentary stage produces candidate–evidence associations. The generative stage produces an explanation of the already fixed candidates using the supplied context. Keeping these outputs separate preserves attribution: a code appears in the Top-3 because of historical retrieval, not because a normative passage or the language model promoted it later. It also allows each output to be evaluated according to the function that produced it rather than treating the pipeline as one undifferentiated classifier.
+
+## 3.2. Query representation and normalization
+
+The retrieval interface receives a textual representation derived from the commercial description. Normalization converts the source description into a deterministic query representation so that the same input, under the same configured preprocessing procedure, yields the same text presented to historical retrieval. This transformation prepares text for matching; it does not consult normative documents, introduce candidate codes, or use a language model to reinterpret the merchandise before candidate retrieval.
+
+At the architecture level, the requirement is reproducibility of this query interface rather than a particular cleaning recipe. The system must preserve the relationship between the source description and the normalized query and must apply the configured transformation consistently to the historical collection and to incoming queries where the retrieval method requires comparable representations. Exact operations such as character normalization, tokenization, field concatenation, or other implementation choices belong to the experimental instantiation and are specified with the retrieval configuration rather than treated as universal properties of the architecture.
+
+The normalized query is therefore the handoff between input preparation and candidate generation. From this point onward, historical retrieval is responsible for determining which labeled precedents are most similar under the configured scoring function. No downstream evidence or explanation stage can modify the query retrospectively in order to change the primary candidate ranking.
+
+## 3.3. Historical candidate retrieval and ranking
+
+Historical candidate retrieval operates over a collection of prior records that pair commercial descriptions with assigned codes. For each normalized query, the retriever computes a score between the query and historical records and orders the records from highest to lowest score. The experimental instantiation uses BM25 for this operation, but the architecture requires only a retrieval function that returns an ordered record-level result with reproducible scores and traceable source records; it does not require BM25 for every possible re-instantiation.
+
+The record-level ranking retains the historical precedent behind each hit. Candidate construction then traverses that ordered list and maps records to their associated codes. If several retrieved records share the same code, only the first occurrence contributes a new code candidate. Because that first occurrence is the highest-ranked record for that code, it is retained as the primary historical precedent associated with the candidate. Subsequent records with the same code do not occupy additional candidate positions. The code-level ranking thus contains unique candidates while preserving a direct link from each candidate to the historical record that caused it to enter the ranking.
+
+This procedure produces a Top-k ranking of unique code candidates whose order is inherited from the ranked historical records. Retrieval scores express match strength under the configured retrieval function; they are not probabilities of legal correctness and do not interpret the governing nomenclature. Normative documents do not participate in this ranking stage. Their later role is to provide identifiable documentary evidence for candidates that have already been produced by historical retrieval. The separation ensures that candidate generation remains attributable to the historical collection and its retrieval function.
+
+## 3.4. Fixed candidate set
+
+The fixed candidate set is obtained by taking the first three unique codes in the historical code-level ranking. These three codes, together with their rank positions and links to the supporting historical precedents, form the fixed Top-3 passed downstream. The boundary is procedural: after the Top-3 is formed, its membership and order remain unchanged in the primary flow.
+
+Subsequent stages enrich rather than revise that set. Documentary retrieval can associate evidence with each of the three candidates, context construction can organize those materials, and the local LLM can generate a structured explanation of the alternatives. None of those operations changes which codes occupy ranks one through three. Any diagnostic reranking experiment is kept outside this primary path and cannot replace the fixed Top-3 used for downstream explanation.
+
+Fixing the candidates at this point also defines the scope of evaluation. Candidate-retrieval measures assess the historical stage that produced the ranking, whereas documentary-association and explanation measures assess outputs created after the ranking has been fixed. A downstream stage therefore cannot improve or degrade the primary ranking by changing candidate membership or order. This boundary makes the origin of each output explicit without implying that a retrieved candidate is substantively or legally correct.
+
+## 3.5. Candidate-specific documentary retrieval
+
+The fixed Top-3 produced in Section 3.4 is the only candidate input to the documentary stage. The class space is not reopened at this point. Documentary retrieval is performed for each fixed candidate, or through an equivalent procedure that preserves the identity of the candidate associated with every retrieved item. Its output is therefore not a new ranking, but a set of candidate–evidence associations that can be inspected independently for ranks one, two, and three.
+
+The retriever searches a documentary or normative corpus that is compatible with the instantiated code space and identified by version for that instantiation. Each retrieved item must remain linked to the candidate that triggered or received it and to an identifiable source, such as a document or fragment identifier together with the provenance needed to locate that source again. The architecture requires those links, but it does not prescribe a particular corpus, segmentation scheme, index, query strategy, or documentary top-N. Those implementation choices belong to the empirical instantiation.
+
+This stage enriches the fixed candidates without changing them. It does not insert, remove, substitute, or reorder codes, and it does not recalculate the historical ranking. If documentary support is unavailable for a candidate, that absence does not authorize the stage to replace the candidate with another code. Conversely, retrieving an identifiable or formally authoritative passage does not by itself establish that the passage is pertinent, sufficient, or that the candidate is substantively or legally correct. The concrete source documents, temporal version, corpus preparation, retrieval index, and retrieval conditions used in the evaluation are specified in Section 4, while exhaustive technical identities are retained in the reproducibility resources.
+
+## 3.6. Evidence-context construction and controlled explanation
+
+Context construction receives the normalized description or query, the fixed Top-3 with its unchanged rank positions, the available historical precedent associated with each candidate, and the documentary evidence retrieved for that candidate. It organizes these elements so that the evidence supplied for one alternative remains distinguishable from the evidence supplied for the other alternatives. The resulting context is the input package for explanation; it is not another candidate-selection stage.
+
+The context records identifiers and provenance sufficient to reconstruct which evidence was supplied to the generator. At the architectural level, this means preserving the relation among the query, candidate code, fixed rank, historical support, documentary source or fragment, and the versioned resource from which that evidence was obtained. The exact serialization of those fields is implementation-specific, but the links must remain recoverable so that a reviewer can trace an explanatory statement back to the material supplied to the model.
+
+The local LLM receives this assembled context only after the historical ranking and fixed Top-3 have been established. In the primary flow, it produces a controlled explanation of the three received alternatives. It must preserve candidate membership and order, must not introduce external codes or substitute candidates, and cannot feed information back into candidate generation or ranking. Any experiment in which an LLM reorders candidates is a separate diagnostic path and does not replace the fixed Top-3 used by the explanatory flow.
+
+A structured and traceable explanation makes the relation between the generated text and its supplied evidence inspectable, but it does not establish substantive or legal correctness and does not demonstrate that the generated rationale is a faithful causal account of how the upstream ranking was produced. The exact model, version, prompt text, generation parameters, output schema, validators, and execution environment are properties of the experimental instantiation and are reported in Section 4.
+
+## 3.7. Configurability and interface requirements
+
+The framework, whose technical core is the Section 3 architecture, can be re-instantiated with a different labeled historical bank, a different target code space, and a different compatible documentary corpus. Replacing those resources is possible only when the interfaces required by the workflow are preserved. The commercial input must be representable as a reproducible normalized query; historical records must remain linkable to assigned codes and their provenance; and the historical retriever must return an ordered, traceable record-level result from which unique code candidates can be constructed and the Top-3 fixed before any downstream evidence or generation stage is invoked.
+
+The documentary retriever must provide evidence that can be linked to individual fixed candidates through recoverable identifiers. Context construction must then preserve, for each candidate, its code and fixed position together with the available historical support, documentary evidence, and provenance. The generator must receive that fixed candidate set and its context while remaining restricted to explanation. A replacement model or prompting strategy is compatible with the architecture only if it cannot alter the upstream candidate set or order in the primary flow.
+
+To reconstruct an execution, the resources that materially affect it must be identifiable and versioned when applicable. These include the historical data, documentary corpus, processing and retrieval code, configurations, model and prompt definitions, and other resources required to repeat or compare the run. The reproducibility repository supports this task by preserving and, where redistribution is permitted, distributing versioned configurations, scripts, manifests, hashes, instructions, and redistributable data or documentary resources. Section 4.8 describes the reproducibility resources and the access or redistribution conditions needed to reconstruct the evaluated instantiation, while Section 4.3 documents the documentary corpus that feeds the explanation context, including its preparation, temporal validity, and retrieval representation.
+
+Under this separation, reproduction of the reference study concerns reconstructing the identified evaluated instantiation as closely as the available artifacts permit, whereas an external replication may supply independent data or replacement resources while retaining the same functional interfaces. Neither technical re-instantiation nor interface compatibility implies that the performance observed in one setting will transfer to another. Configurability is therefore a property of the procedure, not evidence of empirical generalization.
+
+# 4. Experimental design
+
+Only here should the manuscript move from the general architecture to
+the specific empirical instantiation used to evaluate it.
+
+## 4.1. Experimental setting and scope
+
+The experiment evaluated, offline, a concrete instantiation of the Section 3 architecture using commercial descriptions and administrative reference labels at the eight-digit NANDINA level within Chapter 87. Each SERIE record was the analysis unit. Because multiple series can belong to the same DAM/customs declaration and may share declaration-level structure, DAM was retained as the grouping unit whenever that dependence was methodologically relevant to partitioning or inference. The evaluation used fixed datasets and controlled computational procedures; it did not constitute an operational customs deployment or an adjudication of legal classification.
+
+Chapter 87 and the eight-digit NANDINA level delimit this empirical instantiation only. The interfaces defined in Section 3 can be re-instantiated with other historical banks, target class spaces, tariff depths, or compatible documentary corpora when their stated requirements are satisfied. Such configurability is a design property and does not imply that performance observed in the present setting transfers to another setting.
+
+## 4.2. Historical data and experimental dataset construction
+
+The historical data were constructed through four distinct operations: collection from the administrative source, automated transformation into series-level records, curation, and DAM-grouped partition construction. Keeping these operations separate distinguishes the provenance of the administrative records from the processed representation used in the experiment.
+
+### 4.2.1. Source and data collection
+
+Commercial cases were collected through the SUNAT Aduanet portal for the import-for-consumption regime at the Maritime Customs Office of Callao (code 118). Eligible DAMs were declarations numbered between 2 January and 30 March 2026, collected between 11 and 20 April 2026, assigned to orange or red control channels, with a recorded cancellation date and authorized release, and containing at least one tariff item in Chapter 87. The collection was purposive rather than probability-based and applied these administrative, temporal, topical, and data-availability criteria.
+
+After an eligible DAM was identified, the declaration was opened in Aduanet and its series entries were manually copied into an intermediate collection register. For each series, the study retained the information needed to link the analysis unit to its source declaration and administrative reference label: the declaration identifier, series number, commercial description, and recorded eight-digit NANDINA code. Consultation screenshots were retained as evidence of the collection procedure and were not used as an additional label source. The processed content required for the experiment could later be functionally reconstructed from the available collection material; however, no claim is made that the currently available complete workbook is byte-identical to the historical original.
+
+### 4.2.2. Processing and curation
+
+The collected records were transformed in Python into a tabular representation with one row per SERIE. Processing identified declaration and series blocks, extracted the fields associated with each series, preserved the available merchandise-description lines, concatenated them into the commercial-description representation, and generated a reproducible series identifier from declaration and series information. Text preparation standardized spacing, while the tariff-code field was converted into its eight-digit NANDINA representation and corresponding hierarchy fields for consistency checks.
+
+Quality controls required the fields needed to identify the series and its reference code, a non-empty commercial description, a valid eight-digit NANDINA code, hierarchy consistency, Chapter 87 membership, and absence of critical parsing warnings affecting the declaration, series, or tariff code. Repeated records sharing a series identifier were handled according to their content: identical non-technical duplicates were collapsed to one stable record, whereas conflicting records for the same identifier were excluded as a group. The reconstructed intermediate contained 11,320 series from 107 DAMs. Chapter 87 filtering yielded 4,232 records before curation and 4,106 curated records for construction of the version 0.2 benchmark.
+
+### 4.2.3. Partition construction and dataset composition
+
+The 4,106 curated records were assigned to a historical bank, a development set, and an evaluation set. Version 0.2 was materialized through explicit assignments of complete DAMs to the three partitions; the recorded random seed is provenance metadata and was not the mechanism used to allocate version 0.2 records. DAM therefore served as the grouping unit for partition construction. The final partitions had no DAM overlap and no overlap in the reproducible series identifiers across partitions.
+
+The historical bank contains 2,950 series from 28 DAMs and 66 represented codes. The development set contains 100 series from 6 DAMs and 9 represented codes. The evaluation set contains 1,056 series from 67 DAMs and 42 represented reference codes. These counts characterize the labels present in each partition; in particular, the 66 codes represented in the historical bank are not asserted to exhaust Chapter 87. Detailed diagnostics of residual exact or near-duplicate descriptions and other partition-validity conditions are reserved for Section 4.4.
+
+## 4.3. Documentary corpus and evidence resource
+
+The documentary resource used in the primary experimental instantiation was a hierarchical NANDINA corpus derived from Decision 885 of the Commission of the Andean Community, which approved the nomenclature that entered into force on 1 January 2022. The official nomenclature was processed into source-anchored records covering the hierarchy represented in the frozen source rather than only Chapter 87. Chapter 87 bounded the empirical candidate set because the codes queried in this resource came from the fixed Top-3 produced upstream for that evaluation setting.
+
+Each valid eight-digit NANDINA entry was represented together with the available section and chapter context, four-digit heading, six-digit HS subheading, eight-digit NANDINA description, physical unit, and source-page or source-line provenance. Parent levels were retained as contextual information; their text was not treated as an exact eight-digit match when a candidate-level record was absent. This representation provided identifiable documentary context without changing candidate generation or ranking.
+
+For each candidate in the fixed Top-3, documentary evidence was associated by exact lookup of that candidate's NANDINA-8 code in the hierarchical corpus. This instantiation did not perform query-based normative retrieval over the commercial description, fuse historical and documentary scores, rerank candidates, or replace a candidate when an exact record was unavailable. Missing exact evidence therefore remained an explicit absence rather than triggering fallback to another code. The matched documentary record and its hierarchical context were passed downstream for controlled explanation while Top-3 membership and order remained unchanged.
+
+This configuration has a temporal and version boundary. Decision 906, published in Official Gazette of the Cartagena Agreement No. 5062 on 25 October 2022 and effective from 1 January 2023, modified the NANDINA approved by Decision 885. The primary experiment nevertheless retained the frozen Decision-885-derived corpus for the 2026 administrative cases. Accordingly, the documentary resource used in the primary path was not retroactively updated to Decision 906; this limitation concerns the version of the documentary evidence and does not by itself imply that every Chapter-87 candidate or associated record was incorrect.
+
+## 4.4. Partition validity and dependence controls
+
+The current benchmark uses declaration-level separation because the historical v0.1 split did not constrain records from the same DAM/customs declaration to a single partition. That historical snapshot selected individual series records by proportional stratification on NANDINA code with seed 2026; consequently, series belonging to one declaration could be distributed across historical, development, and evaluation data. Because a DAM may contain multiple series that share declaration-level context and may also contain similar merchandise descriptions or tariff codes, such cross-partition sharing left a potential dependence and leakage path. This limitation motivated the declaration-grouped redesign; v0.1 is retained only as a historical snapshot and does not govern the current benchmark.
+
+In v0.2, the curated union was repartitioned through explicit DAM assignments. Each DAM was assigned in full to exactly one of the historical, development, or evaluation partitions, yielding H100 with 2,950 series from 28 DAMs and 66 represented codes, DEV with 100 series from 6 DAMs and 9 represented codes, and EVAL with 1,056 series from 67 DAMs and 42 represented codes. The resulting pairwise DAM overlap is zero. The split configuration also requires zero cross-partition overlap of `id_unico` and full assignment of the curated Chapter-87 records. These are distinct controls: the `seed=2026` field is retained as configuration provenance, whereas v0.2 membership is materialized from explicit DAM lists rather than randomized by that seed.
+
+A separate historical-support condition requires each evaluation series to have its reference eight-digit NANDINA code represented in the historical partition. The frozen v0.2 audit records this condition for all 1,056 evaluation series and all 42 represented evaluation codes. This establishes that the reference class of each evaluated series is present in the historical bank; it does not imply that historical retrieval places that reference code at any particular rank and is not a candidate-retrieval performance result.
+
+Textual duplication was assessed separately from declaration grouping. Exact cross-partition matches were defined on normalized merchandise descriptions, while near-duplicate diagnostics compared historical and evaluation descriptions with token-set Jaccard similarity at thresholds 0.90, 0.95, and 0.98. These thresholds were diagnostic checks: they did not determine v0.2 partition membership and were not automatic exclusion filters. Likewise, the earlier treatment of repeated or conflicting records keyed by `id_unico` addresses record identity rather than declaration-level dependence. Zero DAM overlap, zero `id_unico` overlap, exact-description checks, and near-duplicate diagnostics therefore represent different validity controls and should not be treated as interchangeable guarantees.
+
+SERIE remains the analysis unit, while DAM is the grouping unit whenever dependence among series is methodologically relevant. Assigning whole declarations to one partition prevents the same DAM from contributing records to both the historical bank and the evaluation set, but it does not make series within a DAM statistically independent. The 1,056 evaluation series must therefore not be interpreted automatically as 1,056 independent inferential observations. The partition controls make cross-partition declaration sharing and residual textual similarity observable within the evaluated Chapter-87 setting, but they do not establish i.i.d. sampling or eliminate every possible source of dependence or lexical similarity across different declarations. Statistical units, assumptions, and inferential procedures are reserved for Section 4.7.
+
+## 4.5. Experimental system configuration and execution
+
+The experimental query was the commercial-description field `DESCRIPCION DE MERCANCIAS CONCATENADA` from each evaluation SERIE. Historical retrieval tokenized this text deterministically by lowercasing it, applying Unicode NFKD decomposition, removing combining marks, and extracting alphanumeric tokens with the `[a-z0-9]+` pattern. The same procedure was applied to the 2,950 records in the H100 historical bank. No query rewriting, normative text, or language-model output was introduced before historical retrieval.
+
+Historical candidates were produced with BM25 over H100 using k1 = 1.5 and b = 0.75. For each evaluation query, the implementation scored the historical matches using the 2,950-record H100 bank, set the historical ranking depth to 2,950, and retained up to 100 unique code candidates. Record-level results were ordered by decreasing BM25 score, with `case_id` as the deterministic tie-breaker. The ordered records were then traversed by NANDINA code: the first occurrence of a code created that code candidate, and the corresponding highest-ranked historical record was retained as its precedent. The first three unique codes formed the fixed Top-3 used by all downstream stages.
+
+Documentary association followed the primary Phase-F contract after the Top-3 had been fixed. The historical Top-3 was the sole ranking source, and each candidate's eight-digit NANDINA code was used for direct lookup in the frozen hierarchical NANDINA corpus. When an exact eight-digit match was available, that record supplied candidate-level evidence, while section, chapter, heading, and six-digit parent information remained explicit hierarchical context. This path did not perform commercial-description retrieval over the normative corpus, score fusion, candidate-pool integration, fallback to another code, candidate insertion or substitution, reranking, or LLM-based selection. The historical precedent retained for each candidate was the record selected by the BM25 ranking before code deduplication.
+
+For controlled explanation, the generation context was constructed only after the fixed Top-3 and candidate-specific evidence were available. Each context record contained the case identifier and commercial description together with the original candidate rank, NANDINA code, historical score, historical-precedent identifier and text, hierarchical code path, and candidate-linked normative evidence and provenance. The frozen generation inputs excluded the expected label and evaluation-only fields, did not load later reranking artifacts, and triggered no retrieval during generation. Context construction therefore packaged already selected candidates and evidence; it did not reopen candidate search.
+
+The explanation stage used a local Ollama backend with `qwen2.5:7b-instruct` (7.6B parameters, Q4_K_M quantization, GGUF format). The frozen execution used Ollama 0.32.15, `num_ctx=8192`, `temperature=0`, JSON output, `stream=false`, and a 300-s request timeout; `top_p`, `top_k`, `seed`, and `num_predict` were left at backend-default or otherwise unspecified values. The prompt bound to the execution required exactly the received Top-3, prohibited adding, deleting, or reordering candidates, restricted the explanation to supplied historical and normative evidence, prohibited external knowledge and official-classification claims, and required strict JSON output. The LLM therefore generated an explanation of an upstream fixed ranking and had no authority to change or feed back into classification.
+
+The frozen runtime records identify the historical-retrieval execution as Python 3.10.11 on Windows 10 and the Phase-F integration and local generation environment as Python 3.12.13 on Windows 11; the generation backend was local rather than a remote API. No CPU, GPU, or RAM minimum was frozen as an experimental requirement, so no hardware threshold is asserted here. These settings define the reported instantiation and its reproducible execution conditions; candidate-retrieval performance, documentary-association outcomes, and explanation quality are evaluated separately in the protocols that follow.
+
+## 4.6. Evaluation framework and protocols
+
+Section 4.6 evaluates the three outputs that correspond to RQ1–RQ3 as separate objects rather than collapsing them into a single system score. RQ1 concerns the historical candidate ranking, RQ2 concerns documentary evidence associated with the already fixed Top-3, and RQ3 concerns the structure and traceability of the controlled explanation produced from those fixed candidates and their evidence. For each function, the protocol specifies its output, evaluation unit, criterion, and permitted interpretation. RQ4 remains a validity and robustness boundary: partition/dependence controls are described in Section 4.4 and the inferential and robustness procedures are reserved for Section 4.7. The protocols below define how each function was evaluated; observed values are reported only in Results.
+
+### 4.6.1. Candidate-retrieval evaluation
+
+The primary unit for candidate-retrieval evaluation was the SERIE. For each evaluation series, the reference eight-digit NANDINA code was compared with the ordered candidate codes returned by a retrieval method. Early-ranking performance was defined by Top-1, Top-3, Top-5, and Top-10 indicators and by MRR@100; Top-50 was retained as a supplementary metric. A Top-k indicator records whether the reference code occurs within the first k positions. MRR@100 assigns the reciprocal of the reference-code rank when it occurs within the first 100 positions and zero otherwise. These quantities measure the presence and position of the reference code in a candidate ranking, not overall system or legal-classification accuracy.
+
+RQ1 compared the historical ranking with the corrected comparable retrieval families frozen by the analytical contract: flat normative BM25, hierarchical normative BM25, and the Text2Trade-inspired MNRL family (D1a). The same evaluation cases and reference labels define the scoring object across these families, but the normative and D1a families are comparators only; they do not become candidate sources in the primary framework path described in Sections 3 and 4.5. Inferential treatment of paired differences and DAM-level dependence is specified separately in Section 4.7.
+
+Deep coverage was evaluated separately from early ranking. Under the frozen HE2_B protocol, the corrected hierarchical family was characterized with exact-code Recall@100 and Recall@200/Pool@200. The Phase-E candidate-pool variants were treated as descriptive coverage inventories at Pool@50, Pool@100, and Pool@200 rather than as alternative rankings. This separation prevents a deeper candidate inventory from being interpreted as evidence about the quality of the framework's fixed historical ranking.
+
+### 4.6.2. Documentary-evidence evaluation
+
+RQ2 was evaluated after the historical Top-3 had been fixed. The primary unit was the candidate slot, with case-level summaries used when the three slots of a case had to be considered jointly. Exact documentary evidence was defined by availability of a direct eight-digit NANDINA association for that candidate. Hierarchical HS6, HS4, and chapter information was tracked separately as parent context and was not promoted to exact candidate evidence.
+
+The protocol also checked whether each candidate retained its historical precedent, whether the candidate, precedent, and documentary record remained traceable to one another, and whether documentary association preserved the composition and order of the upstream Top-3. The evaluation label was excluded from candidate, precedent, evidence, ordering, and fallback decisions and was used only after construction when a metric required a reference label. Accordingly, this protocol measures documentary coverage, association, traceability, and ranking invariance; it does not establish substantive normative correctness or legal correctness. Observed coverage and invariance rates are reserved for Results.
+
+### 4.6.3. Controlled-explanation evaluation
+
+RQ3 used two complementary evaluation layers. The automatic layer checked structural and traceability constraints in the generated artifact: preservation of the three candidate codes and their order, absence of missing, duplicated, or external codes, rank consistency, validity of cited historical and normative references, candidate-to-evidence traceability, presence of the required comparison and warning structure, JSON parsing/structure, and absence of explicit reference-label leakage. The frozen schema did not define a pre-generation per-case `automatic_validation_pass` rule, so no retrospective binary pass label was introduced for this layer.
+
+The qualitative layer applied a frozen eight-dimension rubric, with each dimension scored from 0 to 2: traceability, verifiability, separation of historical and normative evidence, prudence of the conclusion, consistency with the fixed Top-3, detection of generic normative evidence, comparison among candidates, and utility for human audit. A case met the protocol's auditable-case criterion when the total was at least 12/16 and no hard violation was present. Hard violations covered changing the Top-3 or its order, introducing a code outside `top3_original`, issuing an official or categorical claim of a definitely correct code, failing to frame the conclusion as documentary support for expert review, or violating the strict-JSON requirement of the technical artifact. The `advertencias_globales` field was excluded from scoring because the frozen prompt and schema did not align on that field.
+
+Qualitative scoring used a deterministic 50-case sample stratified by support bucket, support count, exact reference rank, and `case_id`, with seed 2026. The fixed composition was 10 difficult/low-support cases, 15 rank-1 cases, 15 rank-2–3 cases, and 10 rank-4–10 cases. Ground truth, reference rank, and sample bucket were hidden from the evaluator, and neither external evidence nor web information was used.
+
+The pre-scoring protocol originally specified human/manual review, but the executed qualitative assessment used an independent AI evaluator in an expert role (LLM-as-judge); human scoring was not performed. This evaluator-modality deviation is therefore part of the protocol's interpretation boundary. The qualitative scores characterize conformity with the frozen rubric under that AI-evaluator setting and support analysis of structure, traceability, verifiability, and auditability. They do not constitute human expert validation, legal correctness, an official classification decision, or a faithful causal reconstruction of why the upstream ranking was produced.
+
+## 4.7. Statistical and robustness analysis
+
+The statistical analysis treated DAM/customs declaration as the primary inferential cluster whenever dependence among series records was relevant. Although SERIE remained the unit of analysis and the unit on which retrieval contributions were defined, multiple series can belong to the same declaration and therefore were not treated as fully independent observations for resampling. The target estimand remained series-weighted: inferential procedures aggregated contributions over the resampled series records rather than replacing them with an unweighted average of declaration-level means.
+
+For the eligible HE2 comparisons, uncertainty was estimated with a paired DAM-cluster bootstrap over the 67 DAM clusters in EVAL. A single frozen random stream generated one common `10000 × 67` matrix of DAM indices sampled with replacement, and the same matrix was used for every eligible inferential result. In each replicate, every SERIE belonging to each selected declaration was carried into the resample; if a DAM was selected `m` times, all of its series contributed with multiplicity `m`. The same sampled declarations and series records were used for both members of each paired comparison, after which the series-weighted estimand was recomputed. This multiplicity-weighted resampling preserves the series-weighted estimand rather than substituting an unweighted mean of DAM-level means. The procedure used 10,000 bootstrap replicates with the frozen seed 20263001 and two-sided percentile confidence intervals. No p-values were used.
+
+For HE2_A, early-ranking performance was analyzed separately for the corrected flat normative, hierarchical normative, and D1a comparator families. The primary metrics were Top-1, Top-3, Top-5, Top-10, and MRR@100. For each metric, the paired per-series contribution was defined as historical retrieval minus the comparator: a difference in binary hit contributions for Top-k metrics and a difference in reciprocal-rank contributions truncated at rank 100 for MRR@100. The unstandardized paired contribution difference (`historical - comparator`) was the frozen effect measure; no standardized effect measure was introduced post hoc. Each comparator therefore formed a five-metric family. Within each family, 99% marginal percentile confidence intervals implemented a Bonferroni familywise 95% error-control rule. Top-50 was supplementary; its uncertainty was summarized with a two-sided 95% percentile confidence interval outside the primary five-metric family, and it had no role in hypothesis disposition.
+
+HE2_B addressed deep coverage as a distinct object from early-ranking performance. The corrected hierarchical retrieval family was compared at depths 100 and 200 using the paired per-series contribution `hit_recall_200 - hit_recall_100`. This single contrast used the same paired DAM-cluster bootstrap design, 10,000 replicates, seed 20263001, and one two-sided 95% percentile confidence interval. Because HE2_B contained one inferential contrast, no multiplicity adjustment was applied to that comparison.
+
+Sensitivity and robustness families that were not eligible for inferential claims were retained as descriptive analyses. EXP11A compared H25, H50, and H75 conditions against the frozen H100 reference as a joint sensitivity to historical-bank size and composition; because those two properties changed together, the analysis does not isolate a causal effect of bank size. EXP11B compared paired H150 and H200 banks across the ten frozen paired seeds on the same evaluation set; those repeated case-level rows were not treated as independent observations, and the design does not support inference to a superpopulation of seeds. The final 0B-05C Attempt06 family was treated only as a descriptive corrective sensitivity under its fixed controls, without adding causal or significance claims. Phase-E candidate pools were likewise used only as descriptive coverage inventories and did not replace the primary historical ranking or its inferential comparisons. EXP12 remained not estimable because the frozen diversity conditions did not produce retrieval outputs. Within HE5, the prevalence of ambiguous or incomplete descriptions was not estimable because description quality was not operationalized. Hierarchical proximity was retained descriptively under `SAME_CHAPTER`, `SAME_HS4`, and `SAME_HS6`. Historical support retained the literal buckets `1 DAM`, `2 DAM`, `3-4 DAM`, and `5+ DAM`; none was redefined post hoc as `insufficient`, and no new insufficiency threshold was created. These HE5 families remained descriptive, with no new inferential test.
+
+These procedures quantify uncertainty and sensitivity within the fixed offline Chapter-87 benchmark. They do not establish empirical generalization beyond the evaluated setting, legal validity, or performance in operational customs deployment. Candidate-retrieval analysis remains distinct from overall classification accuracy, documentary association remains distinct from substantive normative or legal correctness, and explanation auditability remains distinct from legal correctness. Numerical effects, confidence-interval bounds, hypothesis dispositions, and other observed outcomes are reported only in Results.
+## 4.8. Reproducibility resources
+
+The public gci-nandina-rag-reproducibility repository is intended as the clean scientific package for reference reproduction and external replication.
+
+In the audited public snapshot, the materialized resources are primarily protocol and contract documentation. They define the experimental workflow, the logical data contract, tariff-hierarchy and nomenclature requirements, normative-corpus compatibility, provenance and redistribution rules, and the documented reference, custom, and synthetic usage modes. The repository also contains an example configuration for compatible user-provided data. Its documentation specifies the metadata that a reproducible run or release should record, including seeds, input and configuration hashes, software and framework versions, parameters, environment information, model and prompt identifiers when applicable, execution metadata, and output identities. These resources support preparation and traceable specification of a compatible run, but they do not by themselves constitute a complete computational reference release.
+
+At this snapshot, the public package does not yet materialize the canonical reference-reproduction runner, the executable validation and experiment runners shown as target interfaces, a frozen Chapter-87 reference preset, a dependency lock, canonical reference outputs, redistributed administrative reference data, or a documented clean-environment validation of the final release. Consequently, the command examples in the repository describe intended interfaces rather than a current guarantee of one-command reproduction from a fresh clone. This limitation concerns the present state of the public package and does not alter the experimental procedures already executed and audited for this study.
+
+The repository distinguishes reference reproduction from external replication. Reference reproduction is defined as rerunning a frozen study preset with the same inputs, configuration, and expected outputs once those release artifacts are materialized. External replication applies the protocol to compatible independent data and produces its own manifest and result set; numerical agreement with the reference experiment is not required. The dataset, chapter scope, tariff depth, jurisdiction, and compatible normative corpus can therefore be reconfigured under the documented contracts. This configurability is a property of the design and does not demonstrate empirical generalization beyond the evaluated Chapter-87 setting.
+
+Public redistribution is limited to artifacts whose status permits publication. Administrative reference CSVs are not assumed to be publicly redistributable; restricted or non-redistributed reference inputs remain outside the public package, with expected hashes, schemas, and reconstruction or placement instructions documented when appropriate. An external replication must instead record the provenance, versions and hashes of its own inputs, the grouping unit, target classification level, and applicable disclosure restrictions. Because this description is bound to a versioned public-repository snapshot, the availability of scripts, presets, redistributable inputs, manifests, and clean-environment validation will be rechecked against the public repository immediately before submission.
+# 5. Results
+
+Organize results by function/RQ, not by internal experiment codes or
+execution chronology.
+
+## 5.1. Data and partition checks
+
+Report the controls that establish the validity of the benchmark and
+partitions used for analysis.
+
+The final v0.2 benchmark contained 4,106 curated SERIE records, all assigned to one of the three frozen partitions. H100 contained 2,950 series from 28 DAMs and 66 represented NANDINA codes; DEV contained 100 series from 6 DAMs and 9 codes; and EVAL contained 1,056 series from 67 DAMs and 42 represented reference codes. The source and output each contained 4,106 unique `id_unico` values, confirming complete assignment of the curated records.
+
+No cross-partition DAM overlap or `id_unico` overlap was observed for H100–DEV, H100–EVAL, or DEV–EVAL. These checks establish separation of the frozen partitions by customs declaration and series identifier; they do not imply statistical independence among series belonging to the same DAM.
+
+All 1,056 EVAL series had their reference eight-digit NANDINA code represented in H100, covering all 42 reference codes represented in EVAL. This was nominal historical class support only; it does not indicate whether historical retrieval placed the reference code within any Top-k position.
+
+Residual textual similarity remained despite the group and identifier separation. Under `exact_normalized_description`, 35 of 1,056 EVAL rows (3.31%) matched a normalized description in H100; 34 shared the same NANDINA code and one had a different code, and all 35 matches came from different DAMs. No exact cross-partition description matches were observed for H100–DEV or DEV–EVAL. Under `token_jaccard_rare_block`, 55 EVAL rows (5.21%; 82 pairs), 44 (4.17%; 46 pairs), and 37 (3.50%; 38 pairs) had at least one H100 near-duplicate at Jaccard thresholds of 0.90, 0.95, and 0.98, respectively.
+
+Thus, the frozen v0.2 benchmark satisfied the specified cross-partition DAM and identifier separation and complete nominal class support, while the exact- and near-duplicate diagnostics documented residual lexical similarity across distinct declarations. These diagnostics characterize the benchmark; they do not establish i.i.d. observations or quantify the effect of residual similarity on later performance measures.
+
+## 5.2. Candidate retrieval performance
+
+Primary RQ1 evidence: report authorized retrieval metrics and
+comparisons. Do not label this as overall system accuracy.
+
+On the common 1,056-series EVAL set, historical BM25 H100 retrieved the reference eight-digit NANDINA code at Top-1 in 538 cases (50.95%), Top-3 in 709 (67.14%), Top-5 in 806 (76.33%), and Top-10 in 941 (89.11%). MRR@100 was 0.6297, and the supplementary Top-50 hit rate was 1,047/1,056 (99.15%).
+
+On the same EVAL set, flat normative BM25 yielded Top-1/3/5/10 hit rates of 2.75%, 5.11%, 6.16%, and 6.53%, with Top-50 of 7.01% and MRR@100 of 0.0423. Hierarchical normative BM25 yielded 2.65%, 5.21%, 6.25%, and 6.53%, with Top-50 of 9.09% and MRR@100 of 0.0420. D1a Text2Trade-inspired MNRL yielded 0.09%, 1.04%, 5.11%, and 17.80%, with Top-50 of 31.34% and MRR@100 of 0.0381.
+
+For the corrected hierarchical normative comparator, exact Recall@100 was 107/1,056 (10.13%), while exact Recall@200 was 321/1,056 (30.40%); Pool@200 was likewise 321/1,056 (30.40%). These deeper-coverage values are reported descriptively and separately from the early-ranking metrics.
+
+Across the listed early-ranking metrics and supplementary Top-50, historical BM25 H100 had the highest observed values among the four evaluated families on this fixed EVAL set. The three non-historical methods were evaluation comparators and did not replace the historical ranking as the candidate source in the primary framework; inferential contrasts are reserved for Section 5.6.
+
+## 5.3. Documentary evidence retrieval
+
+Primary RQ2 evidence: report coverage, association, traceability and
+preservation of candidate ranking as supported by the final evidence.
+
+Across the fixed historical Top-3, exact NANDINA-8 documentary association was available for all 3,168 candidate slots (100.00%). All 1,056 evaluation cases had an exact association for each of their three candidates, with 1,056/1,056 coverage at ranks 1, 2, and 3. The candidates had already been fixed by the historical ranking before this documentary-association stage.
+
+Hierarchical parent context was available at HS6 for 2,168/3,168 slots (68.43%) and at HS4 and chapter levels for 3,168/3,168 slots (100.00%). Historical-precedent coverage and complete candidate-level traceability were also 3,168/3,168 (100.00%). HS6, HS4, and chapter fields are parent context; they are distinct from the exact eight-digit NANDINA association reported above.
+
+Documentary association preserved the historical Top-3 membership and order in all 1,056 evaluation cases. No candidate was inserted or removed, candidate positions and historical scores were unchanged, and the normative score did not affect ordering. The reference label was not used to select candidates, precedents, evidence, ordering, or fallback; labels were used only after construction when required to compute metrics.
+
+These results describe documentary association, coverage, provenance/traceability, and ranking invariance within the frozen Decision-885-derived corpus used by the primary experiment. They do not establish substantive normative correctness, legal correctness, or classification accuracy; the documented corpus drift relative to Decision 906 is treated separately under the governed validity and sensitivity scope.
+
+## 5.4. Controlled explanation quality
+
+Primary RQ3 evidence: report the approved explanation/auditability
+evaluation and its limits.
+
+Across the 50 evaluated cases, the generated artifacts preserved the fixed Top-3 and its order in 50/50 cases (100%), with candidate-set closure, rank consistency, complete traceability, valid historical and normative references, required candidate comparison, explicit-label-leakage-free checks, and raw-JSON parsing each satisfied in 50/50 cases. At slot level, candidate codes, historical references, normative references, and rank consistency were valid in all 150/150 candidate slots. These are individual structural controls; the frozen schema did not define a pre-generation per-case automatic-validation PASS/FAIL rule, so no retrospective `automatic_validation_pass` rate was computed.
+
+Schema compliance and required-fields completeness were 0/50 because the frozen v0.2 schema required `advertencias_globales`, whereas the v0.2 prompt did not include that field in its exact output structure. The frozen micro-audit classified this as `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`: all 50 cases failed schema compliance only because of that field, with no other schema errors. Accordingly, the 0/50 value is a specification-compatibility result and not a measure of explanation quality or structural validity.
+
+Under the frozen qualitative rubric, a case was auditable when its total score was at least 12/16 and no hard violation was present. A total of 28/50 cases (56.0%) met this criterion and 22/50 (44.0%) did not; the mean total score was 11.72/16, the median was 12/16, the range was 6–15, and 0/50 hard violations were recorded. The eight mean dimension scores on the 0–2 scale were 2.00 for traceability, 0.54 for verifiability, 1.04 for historical–normative evidence separation, 1.78 for conclusion prudence, 1.96 for fixed-Top-3 consistency, 1.68 for detection of generic normative evidence, 1.46 for candidate comparison, and 1.26 for utility for human audit. The profile therefore combined complete traceability and near-complete fixed-Top-3 consistency with lower scores for verifiability and separation of historical from normative evidence.
+
+The generic-normative-warning control was satisfied in 41/50 cases and missing in 9/50. Within the nine missing-warning cases, 1/9 (11.1%) met the auditable-case criterion and the mean total score was 9.67; among the other 41 cases, 27/41 (65.9%) were auditable and the mean total score was 12.17. This comparison is descriptive only and does not estimate a causal or statistically significant effect of the warning control.
+
+Qualitative scoring was performed by `independent_ai_reviewer_01` in `AI_EXPERT_ROLE` as an LLM-as-judge, not by human scorers. Ground truth, reference rank, and sample bucket were not exposed to that evaluator, and no external evidence, web information, or retrieval was used during scoring. Thus, the evaluated artifacts preserved the fixed candidate set and traceability constraints across all 50 cases while 56.0% met the frozen qualitative auditability criterion; this interpretation remains bounded by the prompt–schema specification mismatch and the evaluator-modality deviation. It does not constitute human expert validation, legal or substantive normative correctness, overall classification accuracy, or a faithful causal account of the upstream ranking.
+
+## 5.5. Sensitivity and robustness analyses
+
+Include only sensitivity analyses that survive final experimental
+reconciliation. Internal experiment IDs should be translated into
+scientific headings.
+
+In the joint historical-bank size/composition sensitivity, the H25, H50, and H75 conditions were constructed from complete DAMs, so nominal bank size and bank composition changed together. Across ten runs, H25 yielded mean Top-1/Top-3/Top-5/Top-10/Top-50 values of 0.493371/0.645170/0.737405/0.843277/0.973106 and mean MRR@100 of 0.603787; H50 yielded 0.428598/0.597917/0.680303/0.776042/0.930492 and 0.542492; and H75 yielded 0.298295/0.463352/0.548769/0.653883/0.837121 and 0.414030. The frozen H100 reference was 0.509470/0.671402/0.763258/0.891098/0.991477 with MRR@100 of 0.629708. Across the ten runs, Top-3 ranged from 0.540720 to 0.689394 for H25, 0.491477 to 0.689394 for H50, and 0.283144 to 0.678977 for H75; the corresponding MRR@100 ranges were 0.510735-0.641314, 0.431954-0.623899, and 0.248757-0.608612. Because size and composition varied jointly, these observations characterize sensitivity to the realized historical-bank conditions and do not identify an isolated causal or monotonic effect of bank size.
+
+For the enlarged historical banks, ten H150 and ten H200 conditions were paired by seed and evaluated on the same EVAL set of 1,056 series from 67 DAMs. H150 produced mean Top-1/Top-3/Top-5/Top-10/Top-50 values of 0.512689/0.689962/0.783333/0.891572/0.989583 and mean MRR@100 of 0.633268, whereas H200 produced 0.514110/0.689489/0.782008/0.895265/0.985227 and 0.633310. The observed differences were small and had mixed signs across metrics: H200 was slightly higher for Top-1, Top-10, and MRR@100 and slightly lower for Top-3, Top-5, and Top-50. These are paired descriptive summaries of repeated bank constructions on the same evaluation set; they do not support a general conclusion that increasing the bank improves, degrades, stabilizes, or leaves performance unchanged, nor inference to a superpopulation of seeds.
+
+The final corrective sensitivity to the normative resource was method-dependent. For the flat normative retrieval family, the registered aggregate metrics showed zero change. For the hierarchical normative family, Top-1/Top-3/Top-5/Top-10/Top-50 and Recall@50/@100/@200 were unchanged, while MRR@100 changed from 0.0419812944 to 0.0419717832 and MRR@200 from 0.0433416116 to 0.0433321004, a delta of -0.00000951116 in each case. For the Text2Trade-inspired D1a family, the corrected run changed Top-1 from 0.000000 to 0.000947, Top-3 from 0.003788 to 0.010417, Top-5 from 0.034091 to 0.051136, Top-10 from 0.156250 to 0.178030, Top-50 from 0.305871 to 0.313447, and MRR@100 from 0.032424 to 0.038087. Recall@100 remained 0.345644, Recall@200 changed from 0.362689 to 0.363636, HS4@100 from 0.873106 to 0.879735, and HS4@200 from 0.964015 to 0.963068. The reconciled sensitivity therefore contained non-zero changes for hierarchical MRR and for D1a rather than a global zero effect; under the governed corrective closure, downstream re-execution was not required. These comparisons are descriptive and do not establish causality.
+
+The descriptive error analysis identified 518 historical Top-1 errors. Under the frozen literal hierarchy categories, 147 were classified as SAME_CHAPTER, 284 as SAME_HS4, and 87 as SAME_HS6. These categories were retained as defined and were not combined or redefined after observing the results; the counts describe error proximity and do not establish a causal concentration mechanism.
+
+Stratification by historical support also remained descriptive. For the literal support buckets, the 1-DAM group contained 27 cases with Top-1 = 0.370370, Top-3 = 0.703704, and MRR@100 = 0.564447; the 2-DAM group contained 21 cases with 0.047619, 0.190476, and 0.239384; the 3-4-DAM group contained 425 cases with 0.691765, 0.767059, and 0.760152; and the 5+-DAM group contained 583 cases with 0.399657, 0.617496, and 0.551697. No frozen threshold defined any bucket as insufficient support, and the observed differences do not identify a causal effect of support. Two planned robustness objects remained not estimable: the historical-diversity effect because no D-HIGH/D-MID/D-LOW retrieval outputs were produced, and the prevalence of ambiguous or incomplete descriptions because no frozen case-level description-quality operationalization existed. Accordingly, the available descriptive evidence did not support a single global conclusion across all planned robustness dimensions; the corresponding disposition remained inconclusive.
+
+## 5.6. Inferential results
+
+Using the paired DAM-cluster bootstrap defined in Section 4.7, the inferential analysis retained 1,056 series nested within 67 DAMs. For HE2_A, each historical-minus-comparator family comprised Top-1, Top-3, Top-5, Top-10, and MRR@100, with two-sided 99% marginal percentile confidence intervals under the frozen Bonferroni familywise-95% control. All 15 primary intervals lay entirely above zero; no p-values were calculated.
+
+Against flat normative BM25, the historical-minus-comparator differences were Top-1 = 0.482007576, 99% CI [0.329446843, 0.631331820]; Top-3 = 0.620265152 [0.489773908, 0.757505941]; Top-5 = 0.701704545 [0.582607584, 0.817963384]; Top-10 = 0.825757576 [0.737159943, 0.896051128]; and MRR@100 = 0.587410432 [0.463626313, 0.712041394]. Against hierarchical normative BM25, the corresponding differences were 0.482954545 [0.330419446, 0.630822238], 0.619318182 [0.485491905, 0.757028357], 0.700757576 [0.582403679, 0.817063388], 0.825757576 [0.736613432, 0.894902163], and 0.587735966 [0.465199608, 0.712038535]. Against corrected D1a, they were 0.508522727 [0.364702301, 0.653466144], 0.660984848 [0.541305493, 0.781609818], 0.712121212 [0.590534359, 0.832721912], 0.713068182 [0.549548133, 0.860733443], and 0.591620610 [0.487310779, 0.706089907], respectively.
+
+The separate HE2_B contrast for corrected hierarchical normative retrieval was Recall@200 - Recall@100 = 0.202651515, with a 95% CI of [0.066763106, 0.341601308]. This interval also lay entirely above zero. Because this contrast measures additional exact coverage between depths 100 and 200 rather than early-ranking performance, it was treated separately from HE2_A.
+
+Within the frozen internal Chapter 87 inferential scope, the three HE2_A families and the primary HE2_B contrast support HE2. This disposition is limited to cluster-resampling uncertainty within the fixed benchmark and does not imply causal effects, external-population generalization, overall framework accuracy, or legal correctness. HE5 remained inconclusive, and no new inferential test was introduced for it.
+
+## 5.7. Summary by research question
+
+Optional compact synthesis if it improves readability. Use evidence,
+main finding and permitted interpretation; omit if redundant with the
+preceding subsections.
+
+RQ1. On the common 1,056-series EVAL set, historical BM25 H100 retrieved the reference eight-digit NANDINA code at Top-1 in 50.95% of cases and at Top-3 in 67.14%, with MRR@100 of 0.6297. Across the listed early-ranking metrics and supplementary Top-50, it had the highest observed values among the four evaluated families. In Section 5.6, all 15 primary HE2_A 99% confidence intervals for the paired historical-minus-comparator contrasts lay entirely above zero under the frozen inferential design. These results support HE2 only within the frozen internal inferential scope and concern candidate retrieval; they do not establish overall classification accuracy or superiority of the complete framework.
+
+RQ2. For the fixed historical Top-3, exact NANDINA-8 documentary association was available for 3,168/3,168 candidate slots, and all 1,056/1,056 evaluation cases had an exact association for each of their three candidates. The documentary stage preserved Top-3 membership and order in 1,056/1,056 cases, with no candidate insertion or removal and no change to candidate positions or historical scores. These findings establish documentary coverage, association, provenance/traceability, and ranking invariance within the frozen corpus; they do not establish substantive normative or legal correctness.
+
+RQ3. Across the 50 evaluated explanation cases, the fixed Top-3, its order, and the structural traceability controls were preserved in 50/50 cases, while 28/50 cases (56.0%) met the frozen qualitative auditability criterion. Qualitative scoring was performed by `independent_ai_reviewer_01` in `AI_EXPERT_ROLE` as an LLM-as-judge, not by human scorers. Schema compliance was 0/50 because of `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`: the frozen schema required `advertencias_globales`, whereas the prompt did not, and all 50 schema failures were attributable only to that field rather than to 50 substantively invalid explanations. The evaluation therefore shows complete structural preservation with partial qualitative auditability under the specified AI-review modality; it does not constitute human validation, legal correctness, or a faithful causal explanation of the upstream ranking.
+
+RQ4. The v0.2 benchmark had zero cross-partition overlap of DAM and `id_unico`, while exact- and near-duplicate diagnostics documented residual lexical similarity across different declarations. Historical-bank sensitivity varied size and composition jointly and therefore did not isolate a causal bank-size effect; the paired H150/H200 comparisons were descriptive and showed small, mixed differences across metrics; and sensitivity to correction of the normative resource was method-dependent. The planned historical-diversity effect and the prevalence of ambiguous or incomplete descriptions were not estimable, and HE5 remained `INCONCLUSIVE`. These findings bound interpretation to the offline internal Chapter 87 pilot and do not establish external generalization, causal effects, or legal validity.
+
+# 6. Discussion
+
+Interpret results rather than repeat them. Keep limitations close to the
+claims they qualify and consolidate them in the final subsection.
+
+## 6.1. Separating candidate ranking from documentary evidence
+
+Fixing the historical Top-3 before documentary association establishes an explicit boundary of authority between stages. Historical retrieval determines candidate membership and order; the documentary stage can only attach evidence to those fixed candidates. In the pilot, exact NANDINA-8 association was available for all 3,168 candidate slots, and the documentary stage preserved Top-3 membership and order in all 1,056 evaluation cases. These observations confirm that the implemented documentary stage respected the fixed-ranking contract.
+
+That authority structure differs functionally from the staged design of Lee et al. (2021), in which the model first predicts a four-digit heading, retrieves key sentences from the HS manual, and then predicts the six-digit subheading from the product description together with the retrieved sentences. In that pipeline, documentary retrieval contributes input to a later classification decision. The difference relevant here is therefore the role assigned to retrieved evidence, not a claim that one design is generally better than the other.
+
+A closer precedent is Lee et al. (2023), whose model first predicts item classification candidates and then retrieves evidence about each candidate from the HS manual. The present study adopts a similar high-level ordering but makes the downstream authority restriction explicit: once historical retrieval fixes the Top-3, later stages cannot insert, delete, substitute, or reorder candidates. It also evaluates candidate ranking and documentary association separately. This distinction is methodological and operational.
+
+The separation also defines what can be attributed to each evaluation object. Top-k and MRR values characterize the historical candidate-retrieval stage that produced the ranking, whereas documentary coverage, association, provenance, and traceability characterize a downstream stage that cannot alter that ranking. Reporting these outputs separately therefore supports component-level attribution without implying that the separation itself caused the observed retrieval performance.
+
+The same boundary makes the normative and legal limit explicit. Complete documentary association and ranking invariance show that identifiable material can be attached to fixed candidates without changing them; they do not show that the retrieved material is the controlling or legally sufficient authority, that a candidate is substantively correct under the nomenclature, or that the final recommendation is legally valid. Those questions require a different form of adjudication and remain outside the evidential scope of this offline pilot.
+
+## 6.2. Controlled use of the LLM for explanation
+
+In this framework, the local LLM operates only after historical retrieval has fixed the Top-3 and documentary evidence has been associated with those candidates. Its input is therefore a constrained context rather than an open class space: the model may compare and explain the three alternatives, but it cannot insert, delete, substitute, or reorder codes, and its output does not feed back into classification. This restriction makes the generated explanation attributable to a downstream stage without assigning the model authority over the candidate ranking.
+
+This role is narrower than configurations in which the language model participates directly in label selection. Marra de Artiñano et al. use GPT-3.5 through direct prompts to categorize products, so the generative model itself produces the tariff-category output (Marra de Artiñano et al., 2023). In THE-RAG, dense and sparse retrieval plus reranking are coupled to an LLM-based HS-classification pipeline, so retrieved context contributes to the classification process (Kim et al., 2025). The comparison here concerns model authority and sequencing only: the present LLM receives an upstream result that it is not allowed to revise.
+
+The structural evaluation indicates that this authority contract was respected in the evaluated sample. The fixed Top-3 and its order were preserved in 50/50 explanation cases, and the candidate code, historical reference, normative reference, and rank-consistency checks were valid in all 150/150 candidate slots. These controls show that the generated artifacts remained within the prescribed candidate set and retained the required evidence links; they do not, by themselves, establish the quality of the explanatory content.
+
+The qualitative results make that distinction material. Only 28/50 cases (56.0%) met the frozen auditability criterion. Traceability was complete under the rubric, but mean verifiability was 0.54/2 and mean separation of historical from normative evidence was 1.04/2. A traceable explanation can therefore still be difficult to verify or can blur the role of different evidence types. Restricting model authority is consequently a control over what the LLM may change, not a guarantee that every explanation will be sufficiently clear or useful for expert review.
+
+A separate specification issue also limits interpretation. Schema compliance was 0/50 solely because the frozen schema required `advertencias_globales` while the prompt did not; the micro-audit classified this as `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`, not as fifty substantively invalid explanations. In addition, qualitative scoring was performed by `independent_ai_reviewer_01` in `AI_EXPERT_ROLE` as an LLM-as-judge rather than by human experts. The results therefore characterize structural compliance and rubric-based explanation quality under the evaluated protocol, not human validation, legal correctness, or a causally faithful account of how the upstream ranking was produced.
+
+## 6.3. Comparison with prior work
+
+Prior work is most informative here when compared by function, decision authority, and sequencing rather than by headline performance. Tariff-classification systems may use similar components—candidate prediction, document retrieval, reranking, or language models—while assigning them different roles in the decision process. Because the cited studies use different datasets, class spaces, HS levels, and evaluation protocols, the comparison below is architectural and methodological rather than numerical.
+
+The role of documentary retrieval illustrates this distinction. Lee et al. first predict a four-digit heading, retrieve key sentences from the HS manual, and then use the product description together with those sentences to predict the six-digit subheading, so retrieved text participates in a later classification decision (Lee et al., 2021). A closer precedent separates prediction from support: candidate classifications are predicted first and evidence about each candidate is then retrieved from the HS manual (Lee et al., 2023). Candidate prediction followed by evidence retrieval is therefore established prior art; the present study is not positioned on the mere presence of that sequence.
+
+Language-model authority also varies across prior systems. Marra de Artiñano et al. use GPT-3.5 through direct prompts to classify products, placing the generative model in the label-selection function (Marra de Artiñano et al., 2023). THE-RAG instead combines dense and sparse retrieval with reranking in an LLM-based HS-classification framework, so retrieved context is part of the pipeline that produces the classification output (Kim et al., 2025). In both cases, the model participates in classification rather than being limited to explaining a candidate set that was fixed independently upstream.
+
+The distinction evaluated in this study is the complete authority contract across stages. Historical retrieval alone produces the ranking and fixes the Top-3 before documentary association. The documentary stage then attaches candidate-linked evidence without changing membership or order, and the local LLM receives those fixed candidates and their evidence only for controlled explanation. The observed ranking invariance and structural preservation show that this contract was respected in the evaluated pilot. Candidate retrieval, documentary association, and controlled explanation are consequently reported as separate evaluation objects rather than as one undifferentiated system outcome.
+
+This positioning does not depend on claiming new individual components. Its methodological contribution is the explicit allocation of non-overlapping authority to ranking, evidence association, and explanation, together with evaluation that follows those same boundaries. The functional contrasts with prior work do not establish that the present framework is more accurate, safer, or generally superior; nor do they establish legal correctness or performance beyond the evaluated setting. They identify which component is permitted to make or modify which decision and therefore delimit what the reported evidence can support.
+
+## 6.4. Implications for auditable decision support
+
+Separating decision authority across stages makes the workflow inspectable because each stage has a bounded output and cannot assume another stage's role. Historical retrieval generates and orders candidates; the Top-3 is fixed before documentary association; and the local LLM receives that fixed set only to generate the subsequent explanation. A reviewer can therefore inspect a candidate's recorded rank and associated historical provenance separately from its documentary evidence and from the explanation built from the supplied context. This supports stage-specific review, not a causal account of why the retriever produced that rank or substantive correctness.
+
+The RQ2 and RQ3 results show how this provenance was preserved in the evaluated pilot. Exact documentary association was available for 3,168/3,168 candidate slots, while Top-3 membership and order were preserved in 1,056/1,056 evaluation cases. In the explanation sample, the Top-3 and its order were preserved in 50/50 cases, and the candidate code, historical reference, normative reference, and rank-consistency checks were valid in all 150/150 slots. These controls keep the links among candidate, historical precedent, documentary evidence, and explanation inspectable at candidate level. They do not establish overall classification accuracy, substantive normative correctness, or legal correctness.
+
+Structural traceability was nevertheless insufficient for stronger qualitative auditability under the predefined evaluation rubric. Although mean traceability was 2.00/2, only 28/50 cases (56.0%) met the qualitative auditability criterion; mean verifiability was 0.54/2 and mean separation of historical from normative evidence was 1.04/2. An explanation can preserve its provenance links while remaining difficult to verify or leaving the roles of historical and normative evidence insufficiently distinct. Provenance is therefore necessary for inspection but does not by itself establish explanation quality. The qualitative assessment used an LLM-as-judge rather than human evaluators.
+
+The results also indicate concrete design and implementation implications. Component roles should remain non-overlapping, provenance should be retained for each candidate, and historical support should be presented distinctly from normative evidence so reviewers can identify what each source contributes. The generation instruction and validation schema should also define the same required output fields. In this evaluation, all 50 cases failed the automatic schema check solely because the validation schema required a field for global warnings that the generation instruction did not request. Inconsistent interface specifications can therefore make automatic validation fail even when other structural controls are preserved; this does not imply that all 50 explanations were substantively invalid.
+
+These implications remain bounded to decision support under human review. The evaluated results do not validate replacement of experts, operational deployment readiness, causal safety effects, hallucination reduction, human-validated auditability, legal correctness, or generalization beyond the evaluated setting. The evidence supports a workflow in which ranking, documentary association, and explanation can be inspected as separate outputs because each stage's decision role and provenance are explicitly constrained. Substantive adjudication and expert acceptance remain separate questions.
+
+## 6.5. Configurability and transfer conditions
+
+Configurability in this framework concerns which resources and implementation components can be replaced while preserving the functions and authority boundaries of the workflow. A new instance may use a different labeled historical bank, target code space or tariff depth, a compatible documentary corpus, and different retrieval or generation implementations. Re-instantiation remains conditional, however: historical retrieval must still generate and order candidates, the Top-3 must be fixed before documentary association, documentary evidence must remain linked to those fixed candidates, and the generator must remain restricted to explanation.
+
+Those functional roles require concrete interfaces. The commercial input must be converted into a reproducible query representation. Historical records must remain linked to assigned codes and recoverable provenance, and the historical retriever must return an ordered, traceable result from which unique candidates can be formed. For each fixed candidate, context construction must retain the code, fixed rank, historical support, documentary evidence, and provenance. A replacement model or prompting strategy is compatible only if it receives that fixed context without authority to insert, delete, substitute, or reorder candidates in the primary flow. Resources that materially affect an execution should also be identifiable and versioned when applicable.
+
+Changing the documentary resource imposes additional conditions. The alternative corpus must be compatible with the target code space and must expose identifiers that keep evidence linked to each candidate and to an identifiable source. Its version and provenance must be recorded, and its authority, currency, and suitability for the new jurisdiction or tariff setting must be validated separately. Technical compatibility therefore establishes an interface condition; it does not establish substantive normative or legal correctness.
+
+The same distinction applies to reproducibility. Reference reproduction seeks to reconstruct the identified evaluated instance with the same inputs and configuration as closely as the available artifacts permit. External replication instead applies the protocol to independent data or compatible replacement resources and produces its own manifest and results; numerical agreement with the reference experiment is not required. The audited public package currently provides mainly protocol and contract documentation plus an example configuration, rather than a guaranteed one-command reference reproduction from a clean clone. That package state limits current reproducibility convenience, not the conceptual possibility of re-instantiating the architecture.
+
+These transfer conditions do not transfer empirical performance. The Chapter-87 results cannot be assumed to hold for another chapter, tariff depth, jurisdiction, historical bank, documentary corpus, model, or population. Re-instantiation therefore requires its own data and corpus validation and its own function-specific evaluation. Configurability and interface compatibility describe how a new instance can preserve the workflow's functional meaning; they do not establish robustness, external validity, deployment readiness, legal validity, or human acceptance in that new setting.
+
+## 6.6. Limitations
+
+Consolidate benchmark/data limits, documentary-corpus and
+normative-drift limits, explanation-evaluation limits, legal-validity
+boundaries, external validity and reproducibility constraints.
+
+\[Section text to be drafted in a later approved version.\]
+
+# 7. Conclusion
+
+Close on contribution → main evidence → scope → implication. Do not
+introduce new results or new claims of external generalization.
+
+\[Section text to be drafted in a later approved version.\]
+
+# Data availability
+
+Formal availability statement; should point to the public
+reproducibility resources and clearly distinguish public, restricted and
+non-redistributable materials.
+
+\[Section text to be drafted in a later approved version.\]
+
+# Code and reproducibility resources
+
+Use as a separate statement only if retained in the final KBS submission
+format; otherwise integrate with Data availability.
+
+\[Section text to be drafted in a later approved version.\]
+
+# CRediT authorship contribution statement
+
+\[Section text to be drafted in a later approved version.\]
+
+# Funding
+
+\[Section text to be drafted in a later approved version.\]
+
+# Declaration of competing interest
+
+\[Section text to be drafted in a later approved version.\]
+
+# Acknowledgements
+
+\[Include only if applicable.\]
+
+# References
+
+\[Final reference list managed at submission stage according to the
+current KBS requirements.\]
+
+# Supplementary material
+
+Include only if needed for extensive rubrics, configurations, tables or
+supporting artifacts that should not remain in the main text.
+
+\[Optional.\]
+
+# PART II — Spanish semantic-control mirror
+
+Esta parte replica la estructura de la Parte I para control semántico
+interno. No sustituye al manuscrito inglés de publicación.
+
+## Título
+
+Se definirá al final. Debe priorizar la contribución
+científica/arquitectónica; el dominio aduanero puede aparecer como
+aplicación o testbed solo si mejora la precisión.
+
+\[Título final por redactar cuando el manuscrito esté completo.\]
+
+## Resumen
+
+Secuencia recomendada: problema concreto → limitación → arquitectura
+propuesta → evaluación → hallazgos principales → implicación delimitada.
+
+\[Section text to be drafted in a later approved version.\]
+
+## Palabras clave
+
+\[5–7 palabras clave finales.\]
+
+# 1. Introducción
+
+El apoyo a la decisión en clasificación arancelaria parte de un problema concreto de información: una descripción comercial debe vincularse con un código dentro de una nomenclatura jerárquica y, al mismo tiempo, quien revisa la recomendación puede necesitar material documental que explique por qué un candidato es pertinente. Los sistemas automáticos atienden partes distintas de este problema. Algunos modelos seleccionan un código directamente, otros producen candidatos ordenados, otros recuperan texto regulatorio o del manual y otros generan una justificación o una traza. Estas funciones están relacionadas, pero no producen la misma salida ni tienen la misma autoridad sobre la recomendación final. En un flujo de apoyo a decisiones auditable, por tanto, importa no solo qué técnicas se utilizan, sino también qué etapa puede determinar el conjunto de candidatos, qué etapa únicamente lo documenta y qué etapa solo explica un resultado ya fijado.
+
+Los antecedentes muestran distintas formas de acoplar estas funciones. Lee et al. (2021) predicen un heading, recuperan oraciones clave del manual HS y luego utilizan la descripción del producto junto con esas oraciones para predecir la subpartida; por ello, el material recuperado participa en la decisión de clasificación posterior. Lee et al. (2023) separan la secuencia de otra manera: su sistema predice candidatos de clasificación antes de recuperar del manual HS evidencia sobre cada candidato, lo que demuestra que la predicción de candidatos seguida de soporte documental ya existe en el apoyo a decisiones aduaneras. La búsqueda guiada por regulación puede otorgar todavía mayor influencia a la evidencia recuperada: Wang et al. (2026) construyen paquetes de candidatos enriquecidos con evidencia y utilizan un modelo de decisión para seleccionar cada siguiente salto dentro de una jerarquía regulatoria antes de agregar la evidencia para la justificación final. En IA jurídica, Chen y Tanaka-Ishii (2026) recuperan fuentes legales y ejemplos, los compilan en una representación ejecutable y refinan esa representación como parte del proceso que produce la etiqueta. Estos trabajos constituyen antecedentes cercanos y parciales de la combinación entre recuperación, evidencia y explicación; la limitación abordada aquí no consiste, por tanto, en afirmar la ausencia de esos componentes.
+
+El problema metodológico restante se refiere a la separación operacional y evaluativa. Cuando varias etapas posteriores pueden modificar el mismo conjunto de candidatos, quien revisa la salida no puede determinar con facilidad si un candidato fue seleccionado por la evidencia histórica, por el material regulatorio o por el modelo de lenguaje. Ese acoplamiento también dificulta la evaluación: una métrica de ranking de candidatos mide un objeto distinto de la asociación documental, y ninguna de las dos mide la estructura o trazabilidad de una explicación generada. Si estas salidas se reportan como si describieran una única decisión indiferenciada del sistema, resulta difícil atribuir un resultado observado al componente que realmente lo produjo. En un contexto regulado, esta distinción también es relevante para la revisión humana: asociar a un candidato un pasaje oficial o pertinente no establece corrección jurídica sustantiva, y producir una explicación estructurada no convierte al modelo de lenguaje en el clasificador que seleccionó el código.
+
+Este estudio examina un framework configurable de apoyo auditable a la clasificación arancelaria, cuyo núcleo técnico es la arquitectura de apoyo a decisiones definida en la Sección 3. Una etapa de recuperación histórica recibe la descripción comercial normalizada, genera códigos candidatos desde un banco histórico etiquetado y fija su ranking. Los tres candidatos mejor posicionados forman un Top-3 fijo antes de que comience la recuperación normativa. Una etapa separada de recuperación normativa asocia después evidencia documental con cada uno de esos candidatos sin insertar, eliminar, sustituir ni reordenar códigos. Finalmente, un LLM local downstream recibe los candidatos fijados y su contexto documental recuperado para producir una explicación controlada; no tiene autoridad para modificar los candidatos ni retroalimentar la clasificación. Al preservar la autoridad de cada componente y la procedencia a lo largo de este flujo, el framework hace que la recomendación ordenada de candidatos, la evidencia documental asociada y la explicación generada puedan inspeccionarse a nivel de caso para revisión o auditoría, sin equiparar auditabilidad con corrección jurídica.
+
+El artículo plantea tres contribuciones acotadas. Primero, especifica un framework cuyo núcleo técnico asigna una función concreta a cada componente: la recuperación histórica genera y ordena candidatos y fija el Top-3; la recuperación normativa asocia después evidencia con esos candidatos ya fijados sin cambiar su composición ni su orden; y el LLM local genera únicamente la explicación de ese Top-3 fijo. Esta separación controlada preserva una relación trazable entre la consulta normalizada, el precedente histórico, los candidatos fijos, la evidencia documental y la explicación generada, de modo que una recomendación pueda inspeccionarse a nivel de caso para revisión o auditoría. Segundo, evalúa la recuperación de candidatos, la asociación documental y la explicación controlada como salidas distintas, preservando el agrupamiento a nivel de DAM cuando la estructura compartida de una declaración introduce dependencia. Tercero, documenta las interfaces y los recursos de reproducibilidad necesarios para reinstanciar el framework con otro banco histórico etiquetado, otro espacio de clases objetivo o un corpus documental compatible. Esta tercera contribución se refiere a la reproducibilidad y reinstanciación del framework; no implica que el desempeño observado en un escenario empírico se transfiera a otro.
+
+Para evaluar el framework, este se instancia en un testbed aduanero offline para la recomendación de subpartidas NANDINA de ocho dígitos dentro del Capítulo 87, utilizando el contexto administrativo peruano y el recurso documental andino definidos en Métodos. La descripción comercial de una SERIE se utiliza como consulta después de la normalización; la SERIE es la unidad de análisis y la DAM/declaración aduanera es la unidad de agrupamiento cuando debe controlarse dependencia. La implementación combina un banco histórico etiquetado, un corpus normativo/documental, recuperación histórica de candidatos, recuperación normativa específica por candidato y un LLM local restringido a explicar el Top-3 fijo. Este escenario de evaluación no constituye un despliegue aduanero operativo ni adjudica una clasificación jurídica final; se utiliza para evaluar el framework bajo condiciones controladas y no para definir su alcance conceptual. El framework puede reinstanciarse con otros datos, espacios de clases, profundidades arancelarias y corpus documentales compatibles cuando se satisfacen las interfaces y controles de procedencia requeridos, pero esa configurabilidad no constituye evidencia de generalización empírica fuera del escenario evaluado.
+
+La evaluación se guía por cuatro preguntas de investigación:
+
+- **RQ1.** ¿Qué desempeño de recuperación de candidatos alcanza la recuperación histórica bajo particiones disjuntas por DAM/declaración aduanera?
+- **RQ2.** ¿En qué medida puede asociarse evidencia normativa identificable a cada candidato de un Top-3 histórico fijo sin alterar el orden de los candidatos?
+- **RQ3.** ¿En qué medida un LLM local restringido al Top-3 fijo puede preservar los candidatos y su orden y, al mismo tiempo, producir explicaciones estructuradas vinculadas con evidencia identificable?
+- **RQ4.** ¿Qué límites de validez introducen la dependencia intra-DAM, los near-duplicates residuales, la composición del banco histórico y el drift normativo al interpretar los resultados del piloto offline?
+
+El resto del artículo se organiza del siguiente modo. La Sección 2 revisa clasificación arancelaria automatizada, recuperación enriquecida con conocimiento, funciones de los LLM, fundamentación en evidencia, auditabilidad, reproducibilidad y el posicionamiento del estudio. La Sección 3 describe la arquitectura de apoyo a decisiones y su flujo de información. La Sección 4 presenta el diseño experimental, los recursos de datos y documentos, el particionamiento, la configuración del sistema, los protocolos de evaluación y los recursos de reproducibilidad. La Sección 5 reporta los resultados por función del sistema y pregunta de investigación, la Sección 6 discute sus implicaciones y limitaciones y la Sección 7 cierra el artículo dentro del alcance evaluado.
+
+# 2. Trabajos relacionados
+
+Organizar por función técnica y cerrar cada subsección con una síntesis
+útil para el posicionamiento.
+
+\[Section text to be drafted in a later approved version.\]
+
+## 2.1. Clasificación arancelaria automatizada y recuperación de candidatos
+
+La clasificación arancelaria automatizada se ha formulado con frecuencia
+como un problema de predicción de texto a código: un modelo recibe la
+descripción de un producto o una declaración y devuelve una o más
+etiquetas HS. Los primeros trabajos abordaron esta tarea como
+categorización supervisada de texto, con modelos entrenados sobre
+declaraciones históricas y evaluados en un nivel definido de la
+jerarquía arancelaria. Ding et al. emplearon un clasificador Background
+Net para asignar el texto de declaraciones de mercancías a categorías
+HS, lo que ejemplifica una formulación convencional de clasificación
+directa (Ding et al., 2015). Trabajos posteriores con CNN mostraron que
+las descripciones cortas podían clasificarse por separado en HS2 y HS4,
+y también hicieron visible el aumento de cardinalidad de clases en
+niveles más finos (Luppes, 2019). A mayor escala, Ruder comparó
+clasificadores de aprendizaje automático convencional y redes neuronales
+sobre más de un millón de descripciones de carga distribuidas entre
+miles de clases HS6 (Ruder, 2020). Estos estudios comparten un objetivo
+de predicción supervisada, pero difieren en nivel objetivo, espacio de
+etiquetas, datasets y medidas de evaluación; por ello, sus porcentajes
+reportados no deben interpretarse como medidas directamente comparables
+del desempeño de clasificación arancelaria.
+
+Trabajos posteriores han modificado la representación del texto
+comercial sin cambiar necesariamente ese objetivo de predicción. Anggoro
+et al., por ejemplo, ajustaron Sentence-BERT con Multiple Negative
+Ranking loss para obtener embeddings de transacciones y utilizaron
+después esas representaciones de longitud fija como entradas de
+clasificadores SVM y Random Forest para predecir códigos HS (Anggoro et
+al., 2025). Otros enfoques explotan de manera más explícita la
+jerarquía. Lee et al. predicen primero un heading de cuatro dígitos,
+recuperan oraciones pertinentes del manual HS y posteriormente predicen
+la subpartida de seis dígitos a partir de la descripción del producto
+junto con las oraciones recuperadas (Lee et al., 2021). Este diseño por
+etapas difiere de tratar HS2, HS4 o HS6 como objetivos planos
+independientes, porque la información producida entre niveles puede
+participar en la decisión posterior.
+
+Una segunda familia formula el problema como recuperación o ranking, en
+lugar de una decisión de etiqueta única. Stassin et al. compararon
+modelos neuronales supervisados con métodos de similitud semántica en
+HS6, HS8 y HS10 y evaluaron si los códigos pertinentes aparecían en las
+primeras posiciones de una salida ordenada (Stassin et al., 2023). Pain
+también empleó similitud textual semántica para generar recomendaciones
+ordenadas de mercancías y evaluó si el código esperado aparecía entre
+las sugerencias Top-k (Pain, 2021). En esta formulación, la salida
+inmediata del modelo es una lista de candidatos que puede apoyar una
+decisión humana o automatizada posterior. Esta distinción es importante
+en términos operativos: las métricas Top-k de recuperación evalúan la
+presencia y el orden de candidatos, mientras que la accuracy de
+clasificación evalúa una etiqueta seleccionada. Ambos objetivos pueden
+coexistir en sistemas de asistencia arancelaria, pero sus métricas y
+denominadores no deben tratarse como intercambiables.
+
+Una tercera tarea parte de un código ya asignado y pregunta si esa
+asignación es coherente o plausible. Spichakova y Haav combinan
+similitud textual con similitud derivada de la taxonomía HS para evaluar
+la corrección del código asignado y proporcionar predicciones o
+recomendaciones alternativas (Spichakova & Haav, 2020). Esta validación
+o corrección no equivale a generar candidatos desde una descripción sin
+código, porque el código existente forma parte del objeto evaluado y la
+evaluación depende de supuestos sobre las etiquetas históricas
+utilizadas como referencia.
+
+En conjunto, esta literatura abarca clasificación directa, predicción
+jerárquica por etapas, recuperación/ranking de candidatos y validación
+posterior a la asignación. Las fronteras entre estas tareas son
+relevantes porque las mismas tecnologías —embeddings, codificadores
+neuronales, funciones de similitud o registros históricos— pueden
+sostener salidas y criterios de evaluación diferentes. También permiten
+precisar el punto en que el conocimiento documental externo entra al
+sistema: en algunos diseños participa en la propia decisión de
+clasificación, mientras que en otros la recuperación se utiliza para
+exponer material de respaldo alrededor de códigos candidatos. Esta
+diferencia funcional prepara la siguiente subsección sobre recuperación
+enriquecida con conocimiento y razonamiento regulatorio.
+
+## 2.2. Recuperación enriquecida con conocimiento y razonamiento regulatorio
+
+El conocimiento externo interviene en los sistemas arancelarios y
+regulatorios de formas materialmente distintas. En algunos modelos, la
+estructura del dominio forma parte del propio predictor, en lugar de ser
+un documento recuperado después de producir un candidato. Qi et al.
+transforman los elementos de la declaración en asociaciones semánticas y
+de atributos, construyen un grafo de conocimiento y entrenan un modelo
+de atención sobre grafos para formular la predicción del código HS como
+una tarea de completado de enlaces en ese grafo (Qi et al., 2025). En
+este caso, el conocimiento estructurado influye en la representación y
+en la inferencia que producen el código. Esta función difiere de la
+recuperación documental cuyo resultado se muestra como material de
+respaldo, y también de la validación de un código ya asignado. La
+distinción es importante porque un grafo de conocimiento, una taxonomía
+y un pasaje recuperado pueden describirse como «conocimiento externo»
+aunque intervengan en puntos diferentes del proceso de decisión.
+
+La recuperación documental también puede participar directamente en la
+clasificación. Lee et al. predicen primero un heading de cuatro dígitos,
+recuperan oraciones clave del manual HS correspondiente y luego utilizan
+la descripción del producto junto con esas oraciones para predecir la
+subpartida de seis dígitos (Lee et al., 2021). Por tanto, las oraciones
+recuperadas se convierten en entradas de la predicción posterior y no
+únicamente en una explicación mostrada después de clasificar. Un diseño
+relacionado de apoyo a decisiones aduaneras separa esas funciones de
+otra manera: primero predice clasificaciones candidatas y después
+recupera del manual HS evidencia sobre cada candidato, devolviendo
+códigos candidatos junto con oraciones de respaldo pertinentes para que
+los funcionarios las inspeccionen (Lee et al., 2023). Estos ejemplos
+muestran por qué la recuperación de códigos, de oraciones, de
+precedentes y de evidencia no debe reducirse a una única función. El
+objeto recuperado y el momento en que ocurre la recuperación determinan
+si esta genera candidatos, modifica una predicción o respalda la
+revisión de una sugerencia existente.
+
+La búsqueda guiada por regulación hace aún más explícito este
+acoplamiento. En la búsqueda jerárquica consciente de restricciones, los
+documentos regulatorios se organizan como un árbol consultable; en cada
+nivel, el sistema recupera nodos hijos plausibles y evidencia de
+respaldo, construye un paquete de candidatos y utiliza un modelo de
+decisión para seleccionar el siguiente salto o detenerse (Wang et al.,
+2026). Una vez fijada la ruta, la evidencia de los nodos visitados se
+agrega para la verificación y la generación de la justificación. En este
+contexto, el material regulatorio forma parte del recorrido que
+determina la ruta de clasificación y no es simplemente una capa de citas
+añadida a una etiqueta seleccionada de manera independiente. La misma
+lectura funcional es necesaria en otros sistemas agénticos o
+restringidos por reglas: la jerarquía, las exclusiones, las
+redirecciones y las reglas recuperadas pueden restringir o modificar la
+trayectoria de búsqueda. Una ruta consistente con la jerarquía o una
+justificación respaldada por material recuperado puede hacer
+inspeccionable el proceso de decisión, pero ninguna de esas propiedades
+establece por sí sola una corrección jurídica adjudicada de manera
+independiente ni una puntuación formal de auditabilidad.
+
+La generación aumentada por recuperación ofrece un patrón más general
+para acoplar texto externo con generación. Lewis et al. combinan un
+recuperador neuronal sobre un índice documental no paramétrico con un
+generador sequence-to-sequence; los documentos recuperados se
+proporcionan como contexto adicional cuando se genera la secuencia
+objetivo (Lewis et al., 2020). En esa formulación, recuperación y
+generación son componentes de un único modelo probabilístico, y la
+salida generada permanece condicionada tanto por la entrada como por los
+pasajes recuperados. Por ello, RAG no debe utilizarse como sinónimo de
+todo sistema que recupere documentos: retrieve-then-generate, la
+recuperación usada dentro de una clasificación y la recuperación de
+evidencia para inspección humana asignan funciones diferentes al
+material recuperado. Del mismo modo, un pasaje inspeccionable no
+constituye automáticamente una atribución completa de cada afirmación
+generada, ni la recuperación por sí sola garantiza que la salida esté
+fundamentada en la fuente gobernante.
+
+La transformación de la consulta ilustra otra frontera. Ma et al. sitúan
+un reescritor antes de la recuperación: el sistema reescribe la entrada
+como una consulta de búsqueda, recupera documentos y posteriormente
+entrega esos documentos a un lector de caja negra; en su variante
+entrenable, el reescritor se optimiza mediante retroalimentación del
+lector (Ma et al., 2023). Dado que la reescritura cambia aquello que el
+recuperador busca, puede cambiar el contexto posterior y la respuesta.
+La consulta reescrita es, por tanto, una entrada de control para la
+recuperación y no evidencia de la afirmación final. En términos más
+generales, la reescritura de consultas, la recuperación documental, la
+selección de pasajes y la generación son operaciones separables incluso
+cuando una implementación las entrena o ejecuta conjuntamente.
+
+En conjunto, la pregunta científicamente útil no es simplemente si un
+sistema «usa conocimiento», sino qué hace ese conocimiento. Puede estar
+codificado como estructura que participa en la predicción, recuperarse
+como contexto que modifica una decisión posterior, utilizarse como
+reglas o restricciones durante una búsqueda jerárquica o presentarse
+como material de respaldo para revisión humana. Estas funciones implican
+salidas y objetivos de evaluación distintos, y las citas visibles o las
+trazas de razonamiento no deben tratarse como sustitutos de la
+verificación fuente-afirmación ni de la corrección sustantiva. Esta
+separación funcional también aclara el siguiente problema: una vez
+disponibles la recuperación y el contexto regulatorio, un LLM todavía
+puede desempeñar funciones muy diferentes, como clasificador,
+controlador de búsqueda, lector/razonador o generador de explicaciones.
+Esas funciones se examinan en la siguiente subsección.
+
+## 2.3. LLM para clasificación, razonamiento y explicación
+
+La etiqueta «LLM» abarca sistemas que otorgan al modelo de lenguaje
+grados de autoridad muy distintos. Algunos modelos seleccionan
+directamente un código arancelario a partir de la descripción de un
+producto; otros son codificadores ajustados que devuelven una clase
+dentro de un espacio fijo de etiquetas; y los sistemas aumentados por
+recuperación o agénticos pueden permitir que el modelo controle la
+búsqueda, compare candidatos o produzca una justificación después de que
+decisiones anteriores ya hayan restringido el resultado. Por ello, la
+distinción relevante no es el tamaño ni la denominación del modelo, sino
+qué decisión se le permite tomar y qué salidas previas puede modificar.
+
+La clasificación generativa directa concede al modelo una amplia
+autoridad sobre el código predicho. Marra de Artiñano et al. consultan
+GPT-3.5 mediante prompts directos a través de la API para categorizar
+los productos individualmente, sin entrenar GPT-3.5 con los datasets
+aduaneros utilizados para ajustar los baselines de aprendizaje
+automático convencional (Marra de Artiñano et al., 2023). En este caso,
+el propio modelo transforma la descripción en la etiqueta arancelaria.
+Esta configuración debe distinguirse de los estudios que utilizan la
+expresión «large language model» para referirse a codificadores
+transformer supervisados. Koch y Power ajustan modelos transformer con
+descripciones etiquetadas de manifiestos de carga para clasificar
+códigos HS; su comparación experimental incluye modelos de las familias
+BERT y RoBERTa entrenados para la misma tarea de clasificación (Koch &
+Power, 2025). En estos sistemas, el transformer aporta representaciones
+contextuales dentro de un clasificador supervisado, en lugar de generar
+libremente un código mediante prompting. Por tanto, la clasificación
+generativa directa y la clasificación con transformers ajustados imponen
+restricciones diferentes al modelo, aunque ambas se describan como
+basadas en LLM.
+
+La recuperación cambia nuevamente la función del modelo cuando el
+material recuperado se convierte en contexto para el LLM que determina
+el código. Kim et al. proponen THE-RAG, un framework de dos etapas que
+combina recuperación densa, BM25 y reranking, y evalúa cómo el
+preprocesamiento para recuperación y la capacidad de comprensión de
+oraciones del modelo de lenguaje afectan la calidad de la clasificación
+HS (Kim et al., 2025). En esta configuración, el LLM funciona como
+lector condicionado por recuperación y como decisor: el contexto
+recuperado interviene en la clasificación final, en lugar de limitarse a
+documentar un código seleccionado en otra etapa. Esta función difiere
+del RAG para QA documental, donde el objeto generado es la respuesta a
+una pregunta, y de la recuperación de evidencia de apoyo, en la que los
+pasajes pueden mostrarse alrededor de candidatos sin otorgar al
+generador autoridad para alterar su selección.
+
+Los diseños agénticos pueden ampliar la autoridad del modelo más allá de
+la lectura de pasajes recuperados. En un preprint de 2026, Nguyen et al.
+combinan recuperación multiagente de información, búsqueda semántica
+sobre documentos arancelarios oficiales, razonamiento respaldado por
+evidencia, validación por consenso, votación elemento por elemento,
+estimación de confianza y escalamiento human-in-the-loop para
+clasificación canadiense a diez dígitos (Nguyen et al., 2026). En un
+flujo de este tipo, las salidas de los modelos y la evidencia recuperada
+participan en el propio procedimiento de clasificación. El consenso o la
+autoconsistencia pueden estabilizar ese procedimiento o expresar acuerdo
+entre ejecuciones o modelos, pero el acuerdo no constituye ground truth
+independiente. Del mismo modo, el escalamiento basado en confianza
+modifica el tratamiento de los casos inciertos, pero no establece por sí
+mismo que el código seleccionado sea sustantiva o jurídicamente
+correcto.
+
+Otra separación aparece cuando el modelo participa primero en la
+búsqueda y genera una justificación solo después de que la ruta de
+decisión ha quedado fijada. En otro preprint de 2026, Wang et al.
+proponen una búsqueda jerárquica consciente de restricciones en la que
+un LLM ayuda a elegir cada siguiente salto entre nodos hijos recuperados
+localmente y evidencia regulatoria de respaldo. Una vez fijada la ruta
+jerárquica, la evidencia de los nodos visitados se agrega para la
+verificación final y la generación de la justificación (Wang et al.,
+2026). Por tanto, la etapa posterior de justificación ocurre después de
+una ruta fija, pero el mismo sistema general utilizó un LLM y evidencia
+regulatoria para construir esa ruta. Esto es funcionalmente distinto de
+tratar el control de búsqueda, el reranking o la selección del siguiente
+salto como generación exclusivamente explicativa. También muestra por
+qué una justificación o una traza de razonamiento no debe asumirse como
+una representación fiel de la base causal de la decisión precedente
+únicamente porque se produzca después de ella.
+
+En estas configuraciones, la autoridad del LLM abarca desde seleccionar
+directamente el código, operar dentro de un clasificador supervisado,
+leer contexto recuperado conservando autoridad decisoria y dirigir
+búsqueda o consenso, hasta generar texto explicativo después de que
+decisiones previas hayan restringido la salida disponible. Estas
+funciones implican modos de fallo y necesidades de evaluación
+diferentes. El desempeño de clasificación no permite establecer la
+fidelidad de una justificación; una traza de razonamiento visible no
+demuestra por sí sola respaldo fuente-afirmación; y las citas o los
+metadatos de procedencia no establecen auditabilidad formal ni
+corrección jurídica. Estas distinciones preparan la siguiente
+subsección, que examina cómo deben evaluarse la fundamentación en
+evidencia, la explicabilidad y la auditabilidad cuando una salida
+generada por un LLM se vincula con evidencia recuperada o con una traza
+explícita de decisión.
+
+## 2.4. Fundamentación en evidencia, explicabilidad y auditabilidad
+
+La fundamentación en evidencia debe evaluarse como una relación entre
+una salida y la evidencia, y no como la mera presencia de texto
+recuperado. La generación aumentada por recuperación permite que el
+generador se condicione por memoria no paramétrica y puede mejorar el
+acceso a conocimiento externo actualizable y hacer inspeccionables los
+pasajes recuperados para su verificación (Lewis et al., 2020). Sin
+embargo, el generador sigue combinando la entrada, los pasajes
+recuperados y su modelo paramétrico; la recuperación por sí sola no
+demuestra que cada afirmación de la salida esté respaldada por una
+fuente.
+
+Asai et al. hacen explícita esta distinción: un pasaje puede contener la
+cadena de una respuesta y aun así carecer de evidencia, por lo que su
+modelo de evidencialidad predice si el pasaje respalda la salida de
+referencia en lugar de tratar la recuperación o el solapamiento léxico
+como respaldo (Asai et al., 2022). Por tanto, el grounding exige evaluar
+la relación de soporte entre una afirmación y el material presentado
+como evidencia.
+
+La explicabilidad responde a otra pregunta: qué información se expone
+para ayudar a una persona a comprender o revisar una recomendación. En
+apoyo a decisiones aduaneras, Lee et al. primero predicen
+clasificaciones candidatas y después recuperan oraciones pertinentes del
+manual HS, presentando los códigos candidatos junto con esas oraciones
+como evidencia explicativa (Lee et al., 2023). Este diseño hace visible
+el respaldo documental para quien revisa la recomendación, pero la
+visibilidad y la interpretabilidad no establecen por sí solas que cada
+afirmación explicativa esté implicada por el pasaje citado. La misma
+frontera se aplica de forma más general a las justificaciones y trazas
+de razonamiento. Una justificación puede organizar información alrededor
+de una decisión y, aun así, requerir una prueba separada de fidelidad si
+se pretende que represente la base sobre la cual se llegó realmente a
+esa decisión.
+
+La procedencia y la trazabilidad responden a otra pregunta: de dónde
+provino una salida y qué objetos u operaciones contribuyeron a
+producirla. FAIR Data Pipeline, por ejemplo, registra datos y metadatos
+a medida que los análisis consumen y producen objetos de investigación y
+puede rastrear salidas científicas a través del código de modelado o
+análisis hasta los datos primarios (Mitchell et al., 2022). Ese lineage
+puede hacer inspeccionables las dependencias, versiones y
+transformaciones. Sin embargo, no establece que los datos fuente, la
+transformación, la interpretación o la salida final sean sustantivamente
+correctos. La trazabilidad constituye, por tanto, evidencia sobre la
+ruta de producción de un artefacto y no un dictamen de corrección sobre
+el propio artefacto.
+
+La auditabilidad también puede referirse a alcances distintos. Raji et
+al. proponen un framework de auditoría algorítmica interna aplicado
+durante todo el ciclo de desarrollo organizacional, donde cada etapa de
+la auditoría produce documentos que, en conjunto, forman un informe de
+auditoría (Raji et al., 2020). Este tipo de auditoría del ciclo de vida
+reconstruye decisiones de diseño, riesgos, actividades de prueba y
+responsabilidad organizacional a lo largo del tiempo. A nivel de una
+salida individual, una cuestión de revisión distinta es si esa salida
+puede examinarse contra criterios explícitos utilizando la evidencia y
+la traza asociadas. Un registro del ciclo de vida puede apoyar esa
+revisión, pero no equivale a una revisión caso por caso, del mismo modo
+que un paquete de evidencia por caso no reconstruye todo el ciclo de
+desarrollo.
+
+Los sistemas regulatorios añaden la autoridad y vigencia de las fuentes
+como dimensiones adicionales. Los criterios ilustrativos de Grainger
+para herramientas arancelarias electrónicas incluyen la capacidad de
+incorporar actualizaciones arancelarias, remitir a guías autoritativas,
+aplicar reglas de clasificación y proporcionar una declaración que
+explique la recomendación (Grainger, 2024). Estas capacidades son
+relevantes porque una explicación construida con un documento obsoleto o
+no autoritativo puede ser trazable y, aun así, resultar inadecuada para
+el contexto decisorio vigente. A la inversa, citar una fuente oficial y
+actual no establece que se haya seleccionado la disposición pertinente
+ni que esta se haya interpretado correctamente para un caso concreto. La
+autoridad y vigencia documental son, por tanto, dimensiones relevantes
+que deben examinarse en apoyo a decisiones reguladas, pero permanecen
+separadas de la corrección sustantiva o jurídica.
+
+En conjunto, grounding, explicación, procedencia, auditoría del ciclo de
+vida, revisión a nivel de salidas individuales y autoridad de las
+fuentes responden a preguntas de verificación diferentes. No deben
+ordenarse como una escalera de madurez en la que una propiedad garantice
+la siguiente. Un sistema puede mostrar fuentes sin demostrar respaldo de
+afirmaciones, conservar lineage sin probar corrección o mantener un
+audit trail sin validar cada salida. A la inversa, una salida individual
+bien respaldada no establece la reproducibilidad del sistema o del
+dataset en su conjunto. Una vez separados estos constructos, la
+evaluación puede asignar a cada uno un protocolo y una métrica
+apropiados; la siguiente subsección aborda, por ello, la
+reproducibilidad y la evaluación en sistemas de apoyo a decisiones
+basados en conocimiento.
+
+## 2.5. Reproducibilidad y evaluación en apoyo a decisiones basado en conocimiento
+
+Una vez separadas la fundamentación, la explicación, la procedencia y el alcance de la auditoría, una evaluación reproducible exige también que sean inspeccionables los objetos experimentales que sustentan un resultado reportado. La documentación del dataset constituye una parte de ese requisito. Bender y Friedman definen un data statement como una caracterización que aporta contexto para juzgar cómo podrían generalizarse los resultados experimentales, cómo podría desplegarse el software y qué sesgos podrían reflejarse en los sistemas construidos a partir de los datos (Bender & Friedman, 2018). Gebru et al. amplían esta documentación a lo largo del ciclo de vida del dataset al organizar los datasheets en torno a motivación, composición, recopilación, preprocesamiento y etiquetado, usos, distribución y mantenimiento (Gebru et al., 2021). Estos registros hacen visibles los supuestos y el contexto del dataset, pero la documentación no constituye una certificación de calidad, representatividad, independencia ni ausencia de leakage. Esas propiedades requieren evidencia separada y, cuando corresponda, controles explícitos.
+
+La documentación del dataset también debe distinguir los metadatos descriptivos de la identidad técnica. Un datasheet puede registrar relaciones entre instancias y particiones de datos recomendadas, lo que ayuda a reconstruir cómo se pretendía utilizar un dataset, pero registrar una partición no ejecuta por sí mismo control de dependencia ni demuestra que las particiones sean independientes (Gebru et al., 2021). La computación reproducible se beneficia además de identificar las versiones concretas de los datos, el código de procesamiento, los parámetros y otros objetos de investigación utilizados en una ejecución. FAIR Data Pipeline ilustra esta relación de lineage más fuerte: anota los datos a medida que los análisis los consumen y puede rastrear las salidas científicas, a través del código analítico o de modelado, hasta los datos primarios (Mitchell et al., 2022). La procedencia responde, por tanto, qué objetos y transformaciones contribuyeron a una salida. No establece que esas entradas, transformaciones o salidas sean sustantivamente correctas, y una cadena de procedencia por sí sola no equivale a reproducibilidad completa.
+
+La reproducibilidad también requiere declarar una convención terminológica. Pineau et al. distinguen explícitamente varios conceptos relacionados: bajo la terminología adoptada en su estudio, el trabajo reproducible repite un experimento con los mismos datos y herramientas analíticas; el trabajo replicable cambia los datos y mantiene las herramientas; el trabajo robusto conserva los datos pero cambia el análisis; y el trabajo generalizable cambia tanto los datos como las herramientas analíticas y alcanza las mismas conclusiones (Pineau et al., 2021). Estas etiquetas no deben tratarse como nomenclatura universal, pero la separación resulta metodológicamente útil. Reproducir un resultado reportado bajo condiciones estrechamente equivalentes no demuestra por sí mismo robustez frente a otra implementación, replicación con datos distintos ni generalización fuera del escenario evaluado. Del mismo modo, hacer disponibles el código y los datos puede facilitar la reproducción sin garantizar que otro investigador consiga reproducir el resultado.
+
+La trazabilidad a lo largo del proceso de desarrollo cumple otra función. Raji et al. describen un framework de auditoría algorítmica interna aplicado durante el ciclo de desarrollo organizacional, en el que cada etapa de la auditoría produce documentos que, en conjunto, forman un informe de auditoría (Raji et al., 2020). Estos artefactos pueden conservar decisiones de diseño, pruebas, riesgos e información de responsabilidad que una cifra final de desempeño no permite reconstruir. Sin embargo, su alcance está orientado al ciclo de vida. Un audit trail interno documentado no constituye automáticamente una revisión formal de cada salida individual ni establece corrección sustantiva o jurídica.
+
+Estas distinciones tienen una consecuencia directa para el diseño de evaluación: la métrica debe corresponder a la función y a la salida que se evalúan. Pineau et al. identifican la especificación insuficiente de las métricas reportadas, el uso inadecuado del análisis estadístico y el overclaiming más allá de la evidencia presentada entre los obstáculos recurrentes para la investigación reproducible en aprendizaje automático (Pineau et al., 2021). En sistemas basados en conocimiento con varias etapas, este problema se amplifica porque la recuperación, el ranking, la selección de evidencia, la clasificación y la explicación pueden producir objetos diferentes. Una métrica de recuperación describe un conjunto ordenado bajo una definición concreta de relevancia; una métrica de clasificación describe etiquetas seleccionadas; una medida de evidencia se refiere al respaldo recuperado; y una medida de explicación se refiere a propiedades de las justificaciones generadas o presentadas. Especificar correctamente una métrica es, por tanto, necesario pero no suficiente para comparar: métricas alineadas no vuelven equivalentes tareas, datasets, juicios de relevancia ni semánticas de salida diferentes.
+
+En consecuencia, la evaluación reproducible depende de una cadena de relaciones explícitas y no de un único indicador principal: se documentan el dataset y su uso previsto; se identifican los objetos y versiones concretos del experimento; se puede rastrear la ruta de producción de las salidas; el claim de reproducibilidad declara qué condiciones se mantienen o cambian; y cada métrica se interpreta únicamente para la función que realmente mide. Estos controles mejoran la inspeccionabilidad de la evidencia sin convertir documentación en certificación de calidad, lineage en corrección, reproducibilidad en generalización ni alineación de métricas en equivalencia de tareas. Establecidos estos límites de evaluación, la literatura restante puede compararse en función de cómo combina o mantiene separadas estas funciones, que es el propósito de la subsección siguiente.
+
+## 2.6. Posicionamiento del estudio
+
+La literatura revisada asigna niveles de autoridad materialmente distintos a la clasificación, la recuperación, la evidencia regulatoria y la generación. En un diseño aduanero por etapas, un modelo predice primero un heading de cuatro dígitos, recupera oraciones clave del manual HS correspondiente y luego predice la subpartida de seis dígitos a partir de la descripción del producto junto con esas oraciones recuperadas (Lee et al., 2021). Por tanto, la recuperación en ese pipeline no funciona únicamente como una capa explicativa posterior a la decisión: el material recuperado se convierte en una entrada de la predicción posterior. Esta distinción es relevante para el posicionamiento porque sistemas que emplean componentes similares pueden implementar procesos de decisión diferentes según el momento en que entra la evidencia y si esta puede afectar la etiqueta seleccionada.
+
+Un antecedente aduanero más cercano separa de forma más explícita la predicción de candidatos del soporte documental. Lee et al. (2023) describen un modelo que predice candidatos de subpartida y posteriormente recupera del manual HS oraciones pertinentes como evidencia de respaldo para esos candidatos. Su salida combina, en consecuencia, códigos candidatos con material documental inspeccionable, lo que muestra que la predicción de candidatos acompañada de recuperación de evidencia ya constituye prior art y no puede, por sí sola, diferenciar el presente estudio. La distinción restante se refiere a la autoridad y a la secuencia: si el ranking de candidatos queda fijado de manera independiente antes de la recuperación documental, si los componentes posteriores pueden modificar ese ranking y si la generación forma parte de la clasificación o se restringe a explicar un resultado producido upstream.
+
+Los sistemas regulatorios y de IA jurídica muestran un acoplamiento mayor entre evidencia, búsqueda y toma de decisiones. Wang et al. (2026) recuperan nodos hijos plausibles y evidencia de respaldo en cada nivel de una jerarquía regulatoria, y luego emplean un modelo de decisión para seleccionar el siguiente salto; solo después de fijar la ruta se agrega la evidencia para la verificación final y la generación de la justificación. Chen y Tanaka-Ishii (2026) ofrecen otro ejemplo orientado a auditoría: las fuentes jurídicas y los ejemplos recuperados se compilan en una representación ejecutable cuyo refinamiento continúa formando parte del proceso que produce la etiqueta final, y el modelo puede revisar el programa o emitir una consulta de recuperación adicional. Estos enfoques hacen más inspeccionables las rutas de decisión y el respaldo de fuentes, pero también muestran que los artefactos orientados a explicación pueden seguir acoplados al mecanismo que construye la decisión.
+
+Frente a este prior art, el presente estudio se posiciona por la separación completa de la autoridad de sus componentes, no por la presencia aislada de recuperación histórica, evidencia documental o un LLM. Una etapa externa de recuperación histórica fija el ranking de candidatos y un Top-3 fijo antes de recuperar documentos normativos. La recuperación normativa queda entonces restringida a asociar evidencia con esos candidatos ya fijados; no puede insertar, eliminar, sustituir ni reordenarlos. Un LLM local downstream recibe únicamente los candidatos fijados y su contexto documental para producir una explicación, sin autoridad para modificar el conjunto de candidatos, alterar su orden ni retroalimentar la clasificación. Este contrato funcional describe el diseño objeto de estudio; no constituye, por sí mismo, una afirmación de que los componentes individuales o su combinación sean novedosos.
+
+La lógica de evaluación mantiene la misma separación. El ranking de candidatos, la asociación documental y la explicación se tratan como salidas diferentes y se evalúan mediante medidas apropiadas para sus respectivas funciones, mientras se conserva el agrupamiento cuando una estructura compartida a nivel de declaración genera dependencia. Esto evita interpretar una métrica de recuperación como accuracy global de clasificación, tratar la asociación documental como corrección normativa sustantiva o equiparar la trazabilidad de una explicación con corrección jurídica. También separa la reproducibilidad del procedimiento evaluado de la generalización empírica más allá del escenario estudiado. El posicionamiento resultante es, por ello, deliberadamente acotado: el estudio examina una arquitectura de apoyo a decisiones en la que ranking, evidencia y explicación tienen autoridades explícitas y no superpuestas, y las secciones empíricas posteriores evaluarán esas funciones sin utilizar Related Work para anticipar sus resultados.
+
+# 3. Arquitectura de apoyo a decisiones
+
+Describir primero la arquitectura general. No abrir esta sección con
+NANDINA, Capítulo 87, recurso documental utilizado en el experimento, H100 ni tamaños del experimento.
+
+## 3.1. Vista general y flujo de información
+
+La arquitectura separa la formación de candidatos de las etapas que documentan y explican esos candidatos. Una descripción comercial ingresa al flujo y se transforma en una consulta textual normalizada. La recuperación histórica utiliza esa consulta para buscar en una colección etiquetada de registros previos y produce un conjunto ordenado de códigos candidatos. Por tanto, el ranking de candidatos queda determinado antes de recuperar cualquier documento normativo y antes de invocar cualquier modelo generativo. Una vez seleccionados los tres primeros códigos únicos, estos forman el Top-3 fijo que se entrega a todo el procesamiento posterior.
+
+[Figure 1 placeholder — overall architecture and information flow.]
+
+Las etapas posteriores operan sobre ese conjunto fijo de candidatos y no sobre un espacio abierto de clases. La recuperación normativa específica por candidato asocia material documental con cada alternativa, y la construcción de contexto combina la consulta, la identidad de los candidatos, el respaldo histórico y la evidencia documental recuperada para la explicación posterior. El LLM local recibe ese contexto ensamblado únicamente después de que el Top-3 ha quedado fijado. Su salida es texto explicativo; no selecciona otro código, no modifica la composición del conjunto ni cambia el orden de los candidatos. Puede evaluarse una ruta separada de reordenamiento diagnóstico fuera del flujo principal, pero esta no retroalimenta el ranking utilizado por la arquitectura.
+
+Esta secuencia produce tres salidas funcionalmente distintas. La recuperación histórica produce el ranking de candidatos y sus vínculos con precedentes históricos. La etapa documental produce asociaciones candidato–evidencia. La etapa generativa produce una explicación de los candidatos ya fijados utilizando el contexto suministrado. Mantener separadas estas salidas preserva la atribución: un código aparece en el Top-3 por la recuperación histórica, no porque un pasaje normativo o el modelo de lenguaje lo haya promovido posteriormente. También permite evaluar cada salida según la función que la produjo, en lugar de tratar el flujo como un único clasificador indiferenciado.
+
+## 3.2. Representación y normalización de la consulta
+
+La interfaz de recuperación recibe una representación textual derivada de la descripción comercial. La normalización convierte la descripción de origen en una representación determinista de consulta, de modo que una misma entrada, bajo el mismo procedimiento de preprocesamiento configurado, produce el mismo texto que se entrega a la recuperación histórica. Esta transformación prepara el texto para la comparación; no consulta documentos normativos, no introduce códigos candidatos ni utiliza un modelo de lenguaje para reinterpretar la mercancía antes de recuperar candidatos.
+
+A nivel arquitectónico, el requisito es la reproducibilidad de esta interfaz de consulta y no una receta particular de limpieza. El sistema debe conservar la relación entre la descripción de origen y la consulta normalizada y aplicar de manera consistente la transformación configurada a la colección histórica y a las consultas entrantes cuando el método de recuperación requiera representaciones comparables. Las operaciones exactas de normalización de caracteres, tokenización, concatenación de campos u otras decisiones de implementación pertenecen a la instanciación experimental y se especifican junto con la configuración de recuperación, en lugar de tratarse como propiedades universales de la arquitectura.
+
+La consulta normalizada constituye, por tanto, el punto de transferencia entre la preparación de la entrada y la generación de candidatos. A partir de este punto, la recuperación histórica es responsable de determinar qué precedentes etiquetados presentan mayor correspondencia según la función de puntuación configurada. Ninguna etapa posterior de evidencia o explicación puede modificar retrospectivamente la consulta para cambiar el ranking principal de candidatos.
+
+## 3.3. Recuperación histórica y ranking de candidatos
+
+La recuperación histórica de candidatos opera sobre una colección de registros previos que vinculan descripciones comerciales con códigos asignados. Para cada consulta normalizada, el recuperador calcula una puntuación entre la consulta y los registros históricos y ordena los registros de mayor a menor puntuación. La instanciación experimental utiliza BM25 para esta operación, pero la arquitectura solo exige una función de recuperación que devuelva un resultado ordenado a nivel de registro, con puntuaciones reproducibles y registros fuente trazables; no exige BM25 para toda posible reinstanciación.
+
+El ranking a nivel de registro conserva el precedente histórico que sustenta cada resultado. La construcción de candidatos recorre después esa lista ordenada y vincula los registros con sus códigos asociados. Cuando varios registros recuperados comparten el mismo código, solo la primera aparición incorpora un nuevo candidato. Como esa primera aparición corresponde al registro mejor posicionado para ese código, se conserva como precedente histórico principal asociado al candidato. Los registros posteriores con el mismo código no ocupan posiciones adicionales de candidato. De este modo, el ranking a nivel de código contiene candidatos únicos y mantiene un vínculo directo entre cada candidato y el registro histórico que hizo que ingresara al ranking.
+
+El procedimiento produce un ranking Top-k de códigos candidatos únicos cuyo orden se hereda de los registros históricos ordenados. Las puntuaciones de recuperación expresan la fuerza de correspondencia bajo la función configurada; no son probabilidades de corrección jurídica ni interpretan la nomenclatura aplicable. Los documentos normativos no participan en esta etapa de ranking. Su función posterior consiste en aportar evidencia documental identificable para candidatos que ya fueron producidos por la recuperación histórica. Esta separación permite atribuir la generación de candidatos a la colección histórica y a su función de recuperación.
+
+## 3.4. Conjunto fijo de candidatos
+
+El conjunto fijo de candidatos se obtiene tomando los tres primeros códigos únicos del ranking histórico a nivel de código. Esos tres códigos, junto con sus posiciones y sus vínculos con los precedentes históricos de respaldo, forman el Top-3 fijo que se entrega a las etapas posteriores. La frontera es procedimental: después de formar el Top-3, su composición y su orden permanecen sin cambios en el flujo principal.
+
+Las etapas posteriores enriquecen ese conjunto, pero no lo revisan. La recuperación documental puede asociar evidencia con cada uno de los tres candidatos, la construcción de contexto puede organizar esos materiales y el LLM local puede generar una explicación estructurada de las alternativas. Ninguna de esas operaciones cambia qué códigos ocupan las posiciones uno, dos y tres. Cualquier experimento diagnóstico de reordenamiento se mantiene fuera de esta ruta principal y no puede sustituir el Top-3 fijo utilizado para la explicación posterior.
+
+Fijar los candidatos en este punto también delimita el alcance de la evaluación. Las medidas de recuperación de candidatos evalúan la etapa histórica que produjo el ranking, mientras que las medidas de asociación documental y de explicación evalúan salidas creadas después de fijar el ranking. Por ello, una etapa posterior no puede mejorar ni degradar el ranking principal modificando la composición o el orden de los candidatos. Esta frontera hace explícito el origen de cada salida sin implicar que un candidato recuperado sea sustantiva o jurídicamente correcto.
+
+## 3.5. Recuperación documental específica por candidato
+
+El Top-3 fijo producido en la Sección 3.4 es la única entrada de candidatos a la etapa documental. En este punto no se reabre el espacio de clases. La recuperación documental se ejecuta para cada candidato fijo, o mediante un procedimiento equivalente que conserve la identidad del candidato asociado con cada elemento recuperado. Su salida no es, por tanto, un nuevo ranking, sino un conjunto de asociaciones candidato–evidencia que pueden inspeccionarse por separado para las posiciones uno, dos y tres.
+
+El recuperador consulta un corpus documental o normativo compatible con el espacio de códigos de la instanciación y cuya versión queda identificada para esa instanciación. Cada elemento recuperado debe permanecer vinculado con el candidato que originó o recibió la evidencia y con una fuente identificable, como un documento o fragmento, junto con la procedencia necesaria para localizar nuevamente esa fuente. La arquitectura exige conservar esos vínculos, pero no prescribe un corpus, una estrategia de segmentación, un índice, una estrategia de consulta ni un Top-N documental específicos. Esas decisiones pertenecen a la instanciación empírica.
+
+Esta etapa enriquece a los candidatos fijos sin modificarlos. No inserta, elimina, sustituye ni reordena códigos y no recalcula el ranking histórico. Si un candidato no dispone de respaldo documental, esa ausencia no autoriza a sustituirlo por otro código. Del mismo modo, recuperar un pasaje identificable o formalmente autoritativo no demuestra por sí solo que ese pasaje sea pertinente o suficiente ni que el candidato sea sustantiva o jurídicamente correcto. Los documentos fuente concretos, su versión temporal, la preparación del corpus, el índice de recuperación y las condiciones de recuperación utilizadas en la evaluación se especifican en la Sección 4, mientras que las identidades técnicas exhaustivas se conservan en los recursos de reproducibilidad.
+
+## 3.6. Construcción de contexto y explicación controlada
+
+La construcción de contexto recibe la descripción o consulta normalizada, el Top-3 fijo con sus posiciones sin cambios, el precedente histórico disponible para cada candidato y la evidencia documental recuperada para ese candidato. Estos elementos se organizan de modo que la evidencia suministrada para una alternativa permanezca diferenciada de la evidencia suministrada para las demás. El contexto resultante constituye el paquete de entrada para la explicación; no es una nueva etapa de selección de candidatos.
+
+El contexto registra los identificadores y la procedencia necesarios para reconstruir qué evidencia fue suministrada al generador. A nivel arquitectónico, esto exige mantener la relación entre consulta, código candidato, posición fija, respaldo histórico, documento o fragmento documental y recurso versionado del que se obtuvo la evidencia. La serialización exacta de estos campos depende de la implementación, pero los vínculos deben poder recuperarse para que quien revise la salida pueda rastrear una afirmación explicativa hasta el material suministrado al modelo.
+
+El LLM local recibe este contexto ensamblado únicamente después de que se han establecido el ranking histórico y el Top-3 fijo. En el flujo principal, produce una explicación controlada de las tres alternativas recibidas. Debe conservar los candidatos y su orden, no puede incorporar códigos externos ni sustituir candidatos y no puede retroalimentar la generación o el ranking de candidatos. Cualquier experimento en el que un LLM reordene candidatos constituye una ruta diagnóstica separada y no reemplaza el Top-3 fijo utilizado por el flujo explicativo.
+
+Una explicación estructurada y trazable permite inspeccionar la relación entre el texto generado y la evidencia suministrada, pero no establece corrección sustantiva o jurídica ni demuestra que la justificación generada sea una representación causalmente fiel de cómo se produjo el ranking previo. El modelo exacto, su versión, el texto del prompt, los parámetros de generación, el esquema de salida, los validadores y el entorno de ejecución son propiedades de la instanciación experimental y se reportan en la Sección 4.
+
+## 3.7. Configurabilidad y requisitos de interfaz
+
+El framework, cuyo núcleo técnico es la arquitectura de la Sección 3, puede reinstanciarse con otro banco histórico etiquetado, otro espacio de códigos objetivo y otro corpus documental compatible. La sustitución de estos recursos solo es posible si se conservan las interfaces que requiere el flujo. La entrada comercial debe poder representarse mediante una consulta normalizada reproducible; los registros históricos deben permanecer vinculados con los códigos asignados y su procedencia; y el recuperador histórico debe devolver un resultado ordenado y trazable a nivel de registro, a partir del cual puedan construirse candidatos únicos y fijarse el Top-3 antes de invocar cualquier etapa posterior de evidencia o generación.
+
+El recuperador documental debe producir evidencia que pueda vincularse con candidatos fijos individuales mediante identificadores recuperables. La construcción de contexto debe conservar después, para cada candidato, su código y posición fija junto con el respaldo histórico disponible, la evidencia documental y su procedencia. El generador debe recibir ese conjunto fijo de candidatos y su contexto y permanecer restringido a la explicación. Un modelo o una estrategia de prompting alternativos son compatibles con la arquitectura únicamente si no pueden modificar el conjunto ni el orden de candidatos definidos previamente en el flujo principal.
+
+Para reconstruir una ejecución, los recursos que la afectan materialmente deben poder identificarse y versionarse cuando corresponda. Entre ellos se encuentran los datos históricos, el corpus documental, el código de procesamiento y recuperación, las configuraciones, las definiciones del modelo y del prompt y los demás recursos necesarios para repetir o comparar la corrida. El repositorio de reproducibilidad apoya esta tarea al conservar y, cuando la redistribución está permitida, distribuir configuraciones, scripts, manifiestos, hashes, instrucciones y datos o recursos documentales redistribuibles. La Sección 4.8 describe los recursos de reproducibilidad y las condiciones de acceso o redistribución necesarias para reconstruir la instanciación evaluada, mientras que la Sección 4.3 documenta el corpus documental que alimenta el contexto de explicación, incluida su preparación, vigencia temporal y representación para recuperación.
+
+Bajo esta separación, la reproducción del estudio de referencia busca reconstruir la instanciación evaluada identificada en la medida en que lo permitan los artefactos disponibles, mientras que una replicación externa puede utilizar datos independientes o recursos sustitutos conservando las mismas interfaces funcionales. Ni la reinstanciación técnica ni la compatibilidad de interfaces implican que el desempeño observado en un escenario se transfiera a otro. La configurabilidad es, por tanto, una propiedad del procedimiento y no evidencia de generalización empírica.
+
+# 4. Diseño experimental
+
+A partir de aquí se introduce la instanciación empírica concreta.
+
+## 4.1. Entorno y alcance experimental
+
+El experimento evaluó, de manera offline, una instanciación concreta de la arquitectura de la Sección 3 utilizando descripciones comerciales y etiquetas administrativas de referencia en el nivel NANDINA de ocho dígitos dentro del Capítulo 87. Cada registro de SERIE constituyó la unidad de análisis. Como varias series pueden pertenecer a una misma DAM/declaración aduanera y compartir estructura a nivel de declaración, la DAM se conservó como unidad de agrupamiento cuando esa dependencia resultaba metodológicamente relevante para el particionamiento o la inferencia. La evaluación utilizó datasets fijos y procedimientos computacionales controlados; no constituyó un despliegue operativo aduanero ni una adjudicación de la clasificación jurídica.
+
+El Capítulo 87 y el nivel NANDINA de ocho dígitos delimitan únicamente esta instanciación empírica. Las interfaces definidas en la Sección 3 pueden reinstanciarse con otros bancos históricos, espacios de clases objetivo, profundidades arancelarias o corpus documentales compatibles cuando se satisfacen sus requisitos declarados. Esa configurabilidad es una propiedad de diseño y no implica que el desempeño observado en el escenario actual se transfiera a otro escenario.
+
+## 4.2. Datos históricos y construcción de los datasets experimentales
+
+Los datos históricos se construyeron mediante cuatro operaciones diferenciadas: recolección desde la fuente administrativa, transformación automatizada en registros a nivel de serie, curación y construcción de particiones agrupadas por DAM. Mantener separadas estas operaciones permite distinguir la procedencia de los registros administrativos de la representación procesada utilizada en el experimento.
+
+### 4.2.1. Fuente y recolección
+
+Los casos comerciales se recolectaron mediante el portal Aduanet de SUNAT para el régimen de importación para el consumo en la Aduana Marítima del Callao (código 118). Las DAM elegibles fueron declaraciones numeradas entre el 2 de enero y el 30 de marzo de 2026, recolectadas entre el 11 y el 20 de abril de 2026, asignadas a canal naranja o rojo, con fecha de cancelación registrada y levante autorizado, y con al menos una partida del Capítulo 87. La recolección fue intencional y no probabilística, y aplicó estos criterios administrativos, temporales, temáticos y de disponibilidad de datos.
+
+Una vez identificada una DAM elegible, se ingresó a la declaración en Aduanet y sus series se copiaron manualmente en un registro intermedio de recolección. Para cada serie se conservaron los datos necesarios para vincular la unidad de análisis con su declaración de origen y su etiqueta administrativa de referencia: identificador de la declaración, número de serie, descripción comercial y código NANDINA de ocho dígitos registrado. Las capturas de consulta se conservaron como evidencia del procedimiento de recolección y no se utilizaron como una fuente adicional de etiquetas. El contenido procesado necesario para el experimento pudo reconstruirse funcionalmente a partir del material de recolección disponible; sin embargo, no se afirma que el workbook completo disponible actualmente sea byte a byte idéntico al original histórico.
+
+### 4.2.2. Procesamiento y curación
+
+Los registros recolectados se transformaron en Python en una representación tabular con una fila por SERIE. El procesamiento identificó bloques de declaración y serie, extrajo los campos asociados con cada serie, conservó las líneas disponibles de descripción de mercancías, las concatenó en la representación de la descripción comercial y generó un identificador reproducible de serie a partir de la información de declaración y serie. La preparación textual estandarizó el espaciado, mientras que el campo de código arancelario se transformó en su representación NANDINA de ocho dígitos y en los campos jerárquicos correspondientes para efectuar controles de consistencia.
+
+Los controles de calidad exigieron los campos necesarios para identificar la serie y su código de referencia, una descripción comercial no vacía, un código NANDINA válido de ocho dígitos, coherencia jerárquica, pertenencia al Capítulo 87 y ausencia de advertencias críticas de parseo que afectaran la declaración, la serie o el código arancelario. Los registros repetidos que compartían un identificador de serie se trataron según su contenido: los duplicados con contenido no técnico idéntico se redujeron a un único registro estable, mientras que los registros conflictivos de un mismo identificador se excluyeron como grupo. El intermedio reconstruido contenía 11,320 series procedentes de 107 DAM. El filtrado al Capítulo 87 produjo 4,232 registros antes de la curación y 4,106 registros curados para construir el benchmark versión 0.2.
+
+### 4.2.3. Construcción de particiones y composición
+
+Los 4,106 registros curados se asignaron a un banco histórico, un conjunto de desarrollo y un conjunto de evaluación. La versión 0.2 se materializó mediante asignaciones explícitas de DAM completas a las tres particiones; la semilla aleatoria registrada constituye metadato de procedencia y no fue el mecanismo utilizado para asignar los registros de la versión 0.2. Por ello, la DAM funcionó como unidad de agrupamiento para construir las particiones. Las particiones finales no presentan solapamiento de DAM ni solapamiento de los identificadores reproducibles de serie entre conjuntos.
+
+El banco histórico contiene 2,950 series de 28 DAM y 66 códigos representados. El conjunto de desarrollo contiene 100 series de 6 DAM y 9 códigos representados. El conjunto de evaluación contiene 1,056 series de 67 DAM y 42 códigos de referencia representados. Estos conteos caracterizan las etiquetas presentes en cada partición; en particular, no se afirma que los 66 códigos representados en el banco histórico agoten el Capítulo 87. Los diagnósticos detallados de descripciones duplicadas exactas o cercanas y otras condiciones de validez de las particiones se reservan para la Sección 4.4.
+
+## 4.3. Corpus documental y recurso de evidencia
+
+El recurso documental utilizado en la instanciación experimental primaria fue un corpus NANDINA jerárquico derivado de la Decisión 885 de la Comisión de la Comunidad Andina, que aprobó la nomenclatura que entró en vigencia el 1 de enero de 2022. La nomenclatura oficial se procesó en registros vinculados con su texto fuente y con cobertura de la jerarquía representada en la fuente congelada, no únicamente del Capítulo 87. El Capítulo 87 delimitó el conjunto empírico de candidatos porque los códigos consultados en este recurso provenían del Top-3 fijo generado previamente para ese escenario de evaluación.
+
+Cada registro NANDINA válido de ocho dígitos se representó junto con el contexto disponible de sección y capítulo, la partida de cuatro dígitos, la subpartida HS de seis dígitos, la descripción NANDINA de ocho dígitos, la unidad física y la procedencia por página o línea de la fuente. Los niveles parentales se conservaron como contexto; su texto no se trató como una coincidencia exacta de ocho dígitos cuando faltaba el registro correspondiente al candidato. Esta representación aportó contexto documental identificable sin modificar la generación ni el ranking de candidatos.
+
+Para cada candidato del Top-3 fijo, la evidencia documental se asoció mediante un lookup exacto del código NANDINA-8 del candidato en el corpus jerárquico. Esta instanciación no realizó recuperación normativa basada en la consulta sobre la descripción comercial, no fusionó scores históricos y documentales, no reordenó candidatos ni sustituyó un candidato cuando faltaba un registro exacto. Por tanto, la ausencia de evidencia exacta permaneció explícita en lugar de activar un fallback hacia otro código. El registro documental coincidente y su contexto jerárquico se entregaron downstream para la explicación controlada, mientras la composición y el orden del Top-3 permanecieron inalterados.
+
+Esta configuración presenta una frontera temporal y de versión. La Decisión 906, publicada en la Gaceta Oficial del Acuerdo de Cartagena N.º 5062 el 25 de octubre de 2022 y vigente desde el 1 de enero de 2023, modificó la NANDINA aprobada mediante la Decisión 885. Sin embargo, el experimento primario conservó el corpus congelado derivado de la Decisión 885 para los casos administrativos de 2026. En consecuencia, el recurso documental utilizado en la ruta primaria no fue actualizado retroactivamente con la Decisión 906; esta limitación corresponde a la versión de la evidencia documental y no implica por sí sola que todos los candidatos del Capítulo 87 o sus registros asociados fueran incorrectos.
+
+## 4.4. Validez de particiones y control de dependencia
+
+El benchmark vigente utiliza separación a nivel de declaración porque el split histórico v0.1 no restringía los registros de una misma DAM/declaración aduanera a una sola partición. Ese snapshot histórico seleccionaba series individuales mediante estratificación proporcional por código NANDINA con seed 2026; en consecuencia, series pertenecientes a una misma declaración podían distribuirse entre los conjuntos histórico, desarrollo y evaluación. Debido a que una DAM puede contener varias series que comparten contexto a nivel de declaración y también puede contener descripciones de mercancías o códigos arancelarios similares, ese reparto entre particiones dejaba una vía potencial de dependencia y leakage. Esta limitación motivó el rediseño agrupado por declaración; v0.1 se conserva únicamente como snapshot histórico y no gobierna el benchmark vigente.
+
+En v0.2, la unión curada se volvió a particionar mediante asignaciones explícitas de DAM. Cada DAM se asignó íntegramente a una sola de las particiones histórica, desarrollo o evaluación, obteniéndose H100 con 2.950 series de 28 DAM y 66 códigos representados, DEV con 100 series de 6 DAM y 9 códigos representados, y EVAL con 1.056 series de 67 DAM y 42 códigos representados. El solapamiento de DAM resultante es cero para cada par de particiones. La configuración del split también exige ausencia de solapamiento de `id_unico` entre particiones y asignación completa de los registros curados del Capítulo 87. Estos son controles distintos: el campo `seed=2026` se conserva como procedencia de configuración, mientras que la pertenencia a v0.2 se materializa a partir de listas explícitas de DAM y no se aleatoriza mediante ese seed.
+
+Una condición separada de soporte histórico exige que cada serie de evaluación tenga su código NANDINA de referencia de ocho dígitos representado en la partición histórica. La auditoría congelada v0.2 registra esta condición para las 1.056 series de evaluación y los 42 códigos representados en evaluación. Esto establece que la clase de referencia de cada serie evaluada está presente en el banco histórico; no implica que la recuperación histórica sitúe ese código de referencia en una posición determinada y no constituye un resultado de desempeño de recuperación de candidatos.
+
+La duplicación textual se evaluó por separado del agrupamiento por declaración. Las coincidencias exactas entre particiones se definieron sobre descripciones de mercancías normalizadas, mientras que los diagnósticos de near-duplicates compararon descripciones históricas y de evaluación mediante similitud Jaccard sobre conjuntos de tokens con umbrales 0,90, 0,95 y 0,98. Estos umbrales fueron controles diagnósticos: no determinaron la pertenencia a las particiones v0.2 ni funcionaron como filtros automáticos de exclusión. Del mismo modo, el tratamiento previo de registros repetidos o conflictivos basado en `id_unico` aborda identidad de registros y no dependencia a nivel de declaración. Por tanto, ausencia de solapamiento de DAM, ausencia de solapamiento de `id_unico`, controles de descripciones exactas y diagnósticos de near-duplicates representan controles de validez distintos y no deben tratarse como garantías intercambiables.
+
+SERIE se mantiene como unidad de análisis, mientras que DAM es la unidad de agrupamiento cuando la dependencia entre series es metodológicamente relevante. Asignar declaraciones completas a una sola partición evita que una misma DAM aporte registros tanto al banco histórico como al conjunto de evaluación, pero no convierte a las series de una DAM en observaciones estadísticamente independientes. Por ello, las 1.056 series de evaluación no deben interpretarse automáticamente como 1.056 observaciones inferenciales independientes. Los controles de partición hacen observable el reparto de declaraciones entre particiones y la similitud textual residual dentro del escenario evaluado del Capítulo 87, pero no establecen un muestreo i.i.d. ni eliminan toda posible fuente de dependencia o similitud léxica entre declaraciones diferentes. Las unidades estadísticas, los supuestos y los procedimientos inferenciales se reservan para la Sección 4.7.
+
+## 4.5. Configuración y ejecución experimental
+
+La consulta experimental fue el campo de descripción comercial `DESCRIPCION DE MERCANCIAS CONCATENADA` de cada SERIE de evaluación. La recuperación histórica tokenizó este texto de manera determinista mediante conversión a minúsculas, descomposición Unicode NFKD, eliminación de marcas combinantes y extracción de tokens alfanuméricos con el patrón `[a-z0-9]+`. El mismo procedimiento se aplicó a los 2.950 registros del banco histórico H100. Antes de la recuperación histórica no se introdujeron reescritura de consulta, texto normativo ni salidas del modelo de lenguaje.
+
+Los candidatos históricos se generaron con BM25 sobre H100 utilizando k1 = 1,5 y b = 0,75. Para cada consulta de evaluación, la implementación puntuó las coincidencias históricas usando el banco H100 de 2.950 registros, fijó la profundidad del ranking histórico en 2.950 y retuvo hasta 100 candidatos de código únicos. Los resultados a nivel de registro se ordenaron por puntuación BM25 decreciente, usando `case_id` como criterio determinista de desempate. Después se recorrieron los registros ordenados por código NANDINA: la primera aparición de un código creaba ese candidato y el registro histórico mejor posicionado correspondiente se conservaba como su precedente. Los tres primeros códigos únicos formaron el Top-3 fijo utilizado por todas las etapas posteriores.
+
+La asociación documental siguió el contrato primario de la Fase F después de fijar el Top-3. El Top-3 histórico fue la única fuente de ranking y el código NANDINA de ocho dígitos de cada candidato se utilizó para una consulta directa en el corpus NANDINA jerárquico congelado. Cuando existía una coincidencia exacta de ocho dígitos, ese registro aportaba evidencia a nivel de candidato, mientras que la información de sección, capítulo, partida y subpartida de seis dígitos permanecía como contexto jerárquico explícito. Esta ruta no realizó recuperación sobre el corpus normativo a partir de la descripción comercial, fusión de puntuaciones, integración de pools de candidatos, fallback a otro código, inserción o sustitución de candidatos, reranking ni selección mediante LLM. El precedente histórico conservado para cada candidato fue el registro seleccionado por el ranking BM25 antes de la deduplicación por código.
+
+Para la explicación controlada, el contexto de generación se construyó únicamente después de disponer del Top-3 fijo y de la evidencia específica por candidato. Cada registro de contexto incluyó el identificador del caso y la descripción comercial, junto con el rank original del candidato, código NANDINA, puntuación histórica, identificador y texto del precedente histórico, ruta jerárquica del código y evidencia normativa vinculada al candidato con su procedencia. Las entradas de generación congeladas excluyeron la etiqueta esperada y los campos de uso exclusivo de evaluación, no cargaron artefactos posteriores de reranking y no activaron recuperación durante la generación. Por tanto, la construcción del contexto empaquetó candidatos y evidencia ya seleccionados; no reabrió la búsqueda de candidatos.
+
+La etapa de explicación utilizó un backend Ollama local con `qwen2.5:7b-instruct` (7,6B parámetros, cuantización Q4_K_M y formato GGUF). La ejecución congelada utilizó Ollama 0.32.15, `num_ctx=8192`, `temperature=0`, salida JSON, `stream=false` y timeout de 300 s por solicitud; `top_p`, `top_k`, `seed` y `num_predict` quedaron con valores predeterminados del backend o sin especificación explícita. El prompt vinculado a la ejecución exigía conservar exactamente el Top-3 recibido, prohibía agregar, eliminar o reordenar candidatos, restringía la explicación a la evidencia histórica y normativa suministrada, prohibía conocimiento externo y afirmaciones de clasificación oficial y exigía salida JSON estricta. En consecuencia, el LLM generó una explicación de un ranking fijado aguas arriba y no tuvo autoridad para modificarlo ni retroalimentar la clasificación.
+
+Los registros de runtime congelados identifican la ejecución de recuperación histórica con Python 3.10.11 sobre Windows 10 y la integración de Fase F y el entorno de generación local con Python 3.12.13 sobre Windows 11; el backend de generación fue local y no una API remota. No se congeló un mínimo de CPU, GPU o RAM como requisito experimental, por lo que aquí no se establece ningún umbral de hardware. Estas configuraciones definen la instanciación reportada y sus condiciones reproducibles de ejecución; el desempeño de recuperación de candidatos, los resultados de asociación documental y la calidad de las explicaciones se evalúan por separado en los protocolos posteriores.
+
+## 4.6. Marco y protocolos de evaluación
+
+La Sección 4.6 evalúa como objetos separados las tres salidas correspondientes a RQ1–RQ3, en lugar de condensarlas en una única puntuación del sistema. RQ1 se refiere al ranking histórico de candidatos, RQ2 a la evidencia documental asociada con el Top-3 ya fijado y RQ3 a la estructura y trazabilidad de la explicación controlada producida a partir de esos candidatos fijos y su evidencia. Para cada función, el protocolo especifica su salida, unidad de evaluación, criterio e interpretación permitida. RQ4 permanece como una frontera de validez y robustez: los controles de partición/dependencia se describen en la Sección 4.4 y los procedimientos inferenciales y de robustez se reservan para la Sección 4.7. Los protocolos siguientes definen cómo se evaluó cada función; los valores observados se reportan únicamente en Resultados.
+
+### 4.6.1. Evaluación de recuperación de candidatos
+
+La unidad primaria para evaluar la recuperación de candidatos fue la SERIE. Para cada serie de evaluación, el código NANDINA de ocho dígitos de referencia se comparó con los códigos candidatos ordenados devueltos por un método de recuperación. El desempeño en posiciones tempranas se definió mediante indicadores Top-1, Top-3, Top-5 y Top-10 y mediante MRR@100; Top-50 se conservó como métrica suplementaria. Un indicador Top-k registra si el código de referencia aparece dentro de las primeras k posiciones. MRR@100 asigna el recíproco del rank del código de referencia cuando este aparece dentro de las primeras 100 posiciones y cero en caso contrario. Estas cantidades miden la presencia y posición del código de referencia en un ranking de candidatos, no la accuracy global del sistema ni la corrección jurídica de la clasificación.
+
+RQ1 comparó el ranking histórico con las familias de recuperación comparables corregidas y congeladas por el contrato analítico: BM25 normativo plano, BM25 normativo jerárquico y la familia MNRL inspirada en Text2Trade (D1a). Los mismos casos de evaluación y etiquetas de referencia definen el objeto de puntuación entre estas familias, pero las familias normativa y D1a son únicamente comparadores; no pasan a ser fuentes de candidatos en la ruta primaria del framework descrita en las Secciones 3 y 4.5. El tratamiento inferencial de las diferencias pareadas y de la dependencia a nivel de DAM se especifica por separado en la Sección 4.7.
+
+La cobertura profunda se evaluó por separado del ranking temprano. Bajo el protocolo HE2_B congelado, la familia jerárquica corregida se caracterizó mediante Recall@100 de código exacto y Recall@200/Pool@200. Las variantes de pools de candidatos de la Fase E se trataron como inventarios descriptivos de cobertura en Pool@50, Pool@100 y Pool@200, y no como rankings alternativos. Esta separación evita interpretar un inventario de candidatos más profundo como evidencia sobre la calidad del ranking histórico fijo del framework.
+
+### 4.6.2. Evaluación de evidencia documental
+
+RQ2 se evaluó después de fijar el Top-3 histórico. La unidad primaria fue el slot de candidato, con resúmenes a nivel de caso cuando era necesario considerar conjuntamente los tres slots de un caso. La evidencia documental exacta se definió por la disponibilidad de una asociación directa NANDINA de ocho dígitos para ese candidato. La información jerárquica HS6, HS4 y de capítulo se registró por separado como contexto parental y no se promovió a evidencia exacta del candidato.
+
+El protocolo también comprobó si cada candidato conservaba su precedente histórico, si candidato, precedente y registro documental permanecían trazables entre sí y si la asociación documental preservaba la composición y el orden del Top-3 upstream. La etiqueta de evaluación se excluyó de las decisiones de candidatos, precedentes, evidencia, orden y fallback y se utilizó solo después de la construcción cuando una métrica requería una etiqueta de referencia. En consecuencia, este protocolo mide cobertura, asociación y trazabilidad documental, además de invariancia del ranking; no establece corrección normativa sustantiva ni corrección jurídica. Las tasas observadas de cobertura e invariancia se reservan para Resultados.
+
+### 4.6.3. Evaluación de explicación controlada
+
+RQ3 utilizó dos capas de evaluación complementarias. La capa automática verificó restricciones estructurales y de trazabilidad del artefacto generado: preservación de los tres códigos candidatos y su orden, ausencia de códigos faltantes, duplicados o externos, consistencia de rank, validez de las referencias históricas y normativas citadas, trazabilidad candidato–evidencia, presencia de la estructura requerida de comparación y advertencias, parseo/estructura JSON y ausencia de leakage explícito de la etiqueta de referencia. El esquema congelado no definió una regla pre-generación de `automatic_validation_pass` por caso, por lo que no se introdujo retrospectivamente una etiqueta binaria de aprobación para esta capa.
+
+La capa cualitativa aplicó una rúbrica congelada de ocho dimensiones, cada una puntuada de 0 a 2: trazabilidad, verificabilidad, separación de evidencia histórica y normativa, prudencia de la conclusión, consistencia con el Top-3 fijo, detección de evidencia normativa genérica, comparación entre candidatos y utilidad para auditoría humana. Un caso cumplía el criterio protocolario de ficha auditable cuando el total era al menos 12/16 y no existía hard violation. Las hard violations comprendían cambiar el Top-3 o su orden, introducir un código fuera de `top3_original`, emitir una clasificación oficial o una afirmación categórica de código definitivamente correcto, no formular la conclusión como apoyo documental para revisión experta o incumplir el requisito de JSON estricto del artefacto técnico. El campo `advertencias_globales` se excluyó del scoring porque el prompt y el esquema congelados no estaban alineados respecto de ese campo.
+
+La puntuación cualitativa utilizó una muestra determinista de 50 casos estratificada por bucket de soporte, conteo de soporte, rank exacto de referencia y `case_id`, con seed 2026. La composición fijada fue de 10 casos difíciles/de bajo soporte, 15 casos de rank 1, 15 casos de rank 2–3 y 10 casos de rank 4–10. El ground truth, el rank de referencia y el bucket de la muestra se ocultaron al evaluador, y no se utilizaron evidencia externa ni información web.
+
+El protocolo previo al scoring había especificado originalmente revisión humana/manual, pero la evaluación cualitativa ejecutada utilizó un evaluador de IA independiente en rol experto (LLM-as-judge); no se realizó puntuación humana. Esta desviación de modalidad del evaluador forma parte, por tanto, del límite de interpretación del protocolo. Las puntuaciones cualitativas caracterizan la conformidad con la rúbrica congelada bajo ese esquema de evaluación por IA y sustentan el análisis de estructura, trazabilidad, verificabilidad y auditabilidad. No constituyen validación por expertos humanos, corrección jurídica, una decisión oficial de clasificación ni una reconstrucción causal fiel de por qué se produjo el ranking upstream.
+
+## 4.7. Análisis estadístico y de robustez
+
+El análisis estadístico trató a la DAM/declaración aduanera como el cluster inferencial primario cuando la dependencia entre series era relevante. Aunque la SERIE se mantuvo como unidad de análisis y como unidad sobre la que se definieron las contribuciones de recuperación, varias series pueden pertenecer a una misma declaración y, por tanto, no se trataron como observaciones plenamente independientes para el remuestreo. El estimando objetivo se mantuvo ponderado por SERIE: los procedimientos inferenciales agregaron contribuciones sobre las series remuestreadas en lugar de sustituirlas por un promedio no ponderado de medias a nivel de declaración.
+
+Para las comparaciones HE2 elegibles, la incertidumbre se estimó mediante un bootstrap pareado por clusters de DAM sobre los 67 clusters de DAM de EVAL. Un único flujo aleatorio congelado generó una matriz común `10000 × 67` de índices DAM muestreados con reemplazo, y la misma matriz se utilizó para todos los resultados inferenciales elegibles. En cada réplica se incorporaron al remuestreo todas las SERIE pertenecientes a cada declaración seleccionada; si una DAM se seleccionaba `m` veces, todas sus series contribuían con multiplicidad `m`. Las mismas declaraciones y series remuestreadas se utilizaron para ambos miembros de cada comparación pareada, tras lo cual se recalculó el estimando ponderado por SERIE. Este remuestreo ponderado por multiplicidad preserva el estimando ponderado por SERIE en lugar de sustituirlo por una media no ponderada de medias por DAM. El procedimiento utilizó 10.000 réplicas bootstrap con la semilla congelada 20263001 e intervalos de confianza percentiles bilaterales. No se utilizaron p-values.
+
+Para HE2_A, el desempeño en posiciones tempranas se analizó por separado para las familias comparadoras corregidas normativa plana, normativa jerárquica y D1a. Las métricas primarias fueron Top-1, Top-3, Top-5, Top-10 y MRR@100. Para cada métrica, la contribución pareada por SERIE se definió como recuperación histórica menos el comparador: una diferencia de contribuciones binarias de acierto para las métricas Top-k y una diferencia de contribuciones de rango recíproco truncadas en el rank 100 para MRR@100. La diferencia pareada no estandarizada de contribuciones (`historical - comparator`) fue la medida de efecto congelada; no se introdujo post hoc ninguna medida de efecto estandarizada. Cada comparador constituyó, por tanto, una familia de cinco métricas. Dentro de cada familia, intervalos de confianza percentiles marginales de 99% implementaron una regla de control Bonferroni del error familiar al 95%. Top-50 fue suplementaria; su incertidumbre se resumió mediante un intervalo de confianza percentil bilateral de 95% fuera de la familia primaria de cinco métricas y no tuvo función en la disposición de hipótesis.
+
+HE2_B abordó la cobertura profunda como un objeto distinto del desempeño en posiciones tempranas. La familia de recuperación jerárquica corregida se comparó en profundidades 100 y 200 mediante la contribución pareada por SERIE `hit_recall_200 - hit_recall_100`. Este contraste único utilizó el mismo diseño de bootstrap pareado por clusters de DAM, 10.000 réplicas, semilla 20263001 y un intervalo de confianza percentil bilateral de 95%. Debido a que HE2_B contenía un único contraste inferencial, no se aplicó ajuste por multiplicidad a esa comparación.
+
+Las familias de sensibilidad y robustez que no eran elegibles para claims inferenciales se conservaron como análisis descriptivos. EXP11A comparó las condiciones H25, H50 y H75 con la referencia H100 congelada como sensibilidad conjunta al tamaño y la composición del banco histórico; dado que ambas propiedades cambiaban conjuntamente, el análisis no aísla un efecto causal del tamaño del banco. EXP11B comparó bancos H150 y H200 pareados sobre los diez seeds pareados congelados y el mismo conjunto de evaluación; esas filas repetidas a nivel de caso no se trataron como observaciones independientes y el diseño no sustenta inferencia hacia una superpoblación de seeds. La familia final 0B-05C Attempt06 se trató únicamente como sensibilidad correctiva descriptiva bajo sus controles fijados, sin añadir claims causales ni de significancia. Los pools de candidatos de la Fase E se utilizaron igualmente solo como inventarios descriptivos de cobertura y no sustituyeron el ranking histórico primario ni sus comparaciones inferenciales. EXP12 permaneció no estimable porque las condiciones de diversidad congeladas no produjeron salidas de recuperación. Dentro de HE5, la prevalencia de descripciones ambiguas o incompletas no fue estimable porque la calidad de la descripción no se operacionalizó. La proximidad jerárquica se conservó descriptivamente con `SAME_CHAPTER`, `SAME_HS4` y `SAME_HS6`. El soporte histórico conservó literalmente los buckets `1 DAM`, `2 DAM`, `3-4 DAM` y `5+ DAM`; ningún bucket se redefinió post hoc como `insufficient` y no se creó un nuevo umbral de insuficiencia. Estas familias HE5 permanecieron descriptivas, sin introducir una nueva prueba inferencial.
+
+Estos procedimientos cuantifican incertidumbre y sensibilidad dentro del benchmark offline fijo del Capítulo 87. No establecen generalización empírica fuera del escenario evaluado, validez jurídica ni desempeño en un despliegue aduanero operativo. El análisis de recuperación de candidatos permanece separado de la accuracy global de clasificación, la asociación documental permanece separada de la corrección normativa o jurídica sustantiva y la auditabilidad de la explicación permanece separada de la corrección jurídica. Los efectos numéricos, los límites de los intervalos de confianza, las decisiones de hipótesis y los demás resultados observados se reportan únicamente en Resultados.
+## 4.8. Recursos de reproducibilidad
+
+El repositorio público gci-nandina-rag-reproducibility está destinado al paquete científico limpio para la reproducción del estudio de referencia y la replicación externa.
+
+En el snapshot público auditado, los recursos materializados son principalmente documentación de protocolos y contratos. Estos documentos definen el flujo experimental, el contrato lógico de datos, los requisitos de jerarquía y nomenclatura arancelaria, la compatibilidad del corpus normativo, las reglas de procedencia y redistribución y los modos de uso documentados reference, custom y synthetic. El repositorio también contiene una configuración de ejemplo para datos propios compatibles. Su documentación especifica los metadatos que una corrida o release reproducible debería registrar, incluidas las semillas, los hashes de entradas y configuraciones, las versiones de software y del framework, los parámetros, la información del entorno, los identificadores de modelo y prompt cuando correspondan, los metadatos de ejecución y las identidades de las salidas. Estos recursos permiten preparar y especificar de forma trazable una corrida compatible, pero no constituyen por sí solos una release computacional completa de referencia.
+
+En este snapshot, el paquete público todavía no materializa el runner canónico de reproducción del estudio de referencia, los runners ejecutables de validación y experimentación mostrados como interfaces objetivo, un preset de referencia congelado para el Capítulo 87, un lock de dependencias, resultados canónicos de referencia, datos administrativos de referencia redistribuidos ni una validación documentada en un entorno limpio de la release final. En consecuencia, los ejemplos de comandos del repositorio describen interfaces previstas y no una garantía actual de reproducción con un único comando desde un fresh clone. Esta limitación corresponde al estado presente del paquete público y no modifica los procedimientos experimentales ya ejecutados y auditados para este estudio.
+
+El repositorio distingue la reproducción del estudio de referencia de la replicación externa. La reproducción de referencia se define como volver a ejecutar un preset congelado del estudio con las mismas entradas, configuración y salidas esperadas una vez que esos artefactos de release estén materializados. La replicación externa aplica el protocolo a datos independientes compatibles y produce su propio manifest y conjunto de resultados; no requiere concordancia numérica con el experimento de referencia. Por tanto, el dataset, el alcance por capítulos, la profundidad arancelaria, la jurisdicción y un corpus normativo compatible pueden reconfigurarse bajo los contratos documentados. Esta configurabilidad es una propiedad de diseño y no demuestra generalización empírica fuera del escenario evaluado del Capítulo 87.
+
+La redistribución pública se limita a los artefactos cuyo estatus permite su publicación. No se presupone que los CSV administrativos de referencia sean públicamente redistribuibles; las entradas de referencia restringidas o no redistribuidas permanecen fuera del paquete público y, cuando corresponde, se documentan sus hashes esperados, esquemas e instrucciones de reconstrucción o colocación. Una replicación externa debe registrar, en cambio, la procedencia, las versiones y los hashes de sus propias entradas, la unidad de agrupamiento, el nivel objetivo de clasificación y las restricciones de divulgación aplicables. Dado que esta descripción queda vinculada a un snapshot versionado del repositorio público, la disponibilidad de scripts, presets, entradas redistribuibles, manifests y validación en entorno limpio se volverá a verificar directamente en el repositorio público inmediatamente antes del envío del manuscrito.
+# 5. Resultados
+
+Organizar por función/RQ, no por códigos internos de experimentos.
+
+\[Section text to be drafted in a later approved version.\]
+
+## 5.1. Controles de datos y particiones
+
+El benchmark final v0.2 contenía 4.106 registros de SERIE curados, todos asignados a una de las tres particiones congeladas. H100 contenía 2.950 series de 28 DAM y 66 códigos NANDINA representados; DEV contenía 100 series de 6 DAM y 9 códigos; y EVAL contenía 1.056 series de 67 DAM y 42 códigos de referencia representados. Tanto la fuente como la salida contenían 4.106 valores únicos de `id_unico`, lo que confirma la asignación completa de los registros curados.
+
+No se observó solapamiento de DAM ni de `id_unico` entre H100–DEV, H100–EVAL o DEV–EVAL. Estos controles establecen la separación de las particiones congeladas por declaración aduanera e identificador de serie; no implican independencia estadística entre series pertenecientes a una misma DAM.
+
+Las 1.056 series de EVAL tenían su código NANDINA de referencia de ocho dígitos representado en H100, con cobertura de los 42 códigos de referencia representados en EVAL. Este resultado corresponde únicamente a soporte histórico nominal de las clases; no indica si la recuperación histórica situó el código de referencia en alguna posición Top-k.
+
+Persistió similitud textual residual a pesar de la separación por grupos e identificadores. Bajo `exact_normalized_description`, 35 de las 1.056 filas de EVAL (3,31%) coincidían con una descripción normalizada en H100; 34 compartían el mismo código NANDINA y una tenía un código diferente, y las 35 coincidencias correspondían a DAM distintas. No se observaron coincidencias exactas de descripción entre H100–DEV ni DEV–EVAL. Bajo `token_jaccard_rare_block`, 55 filas de EVAL (5,21%; 82 pares), 44 (4,17%; 46 pares) y 37 (3,50%; 38 pares) tenían al menos un near-duplicate en H100 con umbrales Jaccard de 0,90, 0,95 y 0,98, respectivamente.
+
+Por tanto, el benchmark v0.2 congelado cumplió la separación especificada entre particiones por DAM e identificador y el soporte nominal completo de clases, mientras que los diagnósticos de duplicados exactos y near-duplicates documentaron similitud léxica residual entre declaraciones distintas. Estos diagnósticos caracterizan el benchmark; no establecen observaciones i.i.d. ni cuantifican el efecto de la similitud residual sobre medidas de desempeño posteriores.
+
+## 5.2. Desempeño de recuperación de candidatos
+
+No denominarlo accuracy global del sistema.
+
+En el conjunto EVAL común de 1.056 series, BM25 histórico H100 recuperó el código NANDINA de referencia de ocho dígitos en Top-1 para 538 casos (50,95%), Top-3 para 709 (67,14%), Top-5 para 806 (76,33%) y Top-10 para 941 (89,11%). El MRR@100 fue 0,6297 y la tasa suplementaria Top-50 fue 1.047/1.056 (99,15%).
+
+En el mismo conjunto EVAL, BM25 normativo flat obtuvo tasas Top-1/3/5/10 de 2,75%, 5,11%, 6,16% y 6,53%, con Top-50 de 7,01% y MRR@100 de 0,0423. BM25 normativo jerárquico obtuvo 2,65%, 5,21%, 6,25% y 6,53%, con Top-50 de 9,09% y MRR@100 de 0,0420. D1a Text2Trade-inspired MNRL obtuvo 0,09%, 1,04%, 5,11% y 17,80%, con Top-50 de 31,34% y MRR@100 de 0,0381.
+
+Para el comparador normativo jerárquico corregido, Exact Recall@100 fue 107/1.056 (10,13%), mientras que Exact Recall@200 fue 321/1.056 (30,40%); Pool@200 fue igualmente 321/1.056 (30,40%). Estos valores de cobertura a mayor profundidad se reportan de forma descriptiva y separada de las métricas de desempeño en las primeras posiciones del ranking.
+
+En las métricas de desempeño en las primeras posiciones del ranking listadas y el Top-50 suplementario, BM25 histórico H100 presentó los mayores valores observados entre las cuatro familias evaluadas en este conjunto EVAL fijo. Los tres métodos no históricos fueron comparadores de evaluación y no sustituyeron al ranking histórico como fuente de candidatos del flujo primario del framework; los contrastes inferenciales se reservan para la Sección 5.6.
+
+## 5.3. Recuperación de evidencia documental
+
+En el Top-3 histórico fijo, se obtuvo una asociación documental exacta a nivel NANDINA-8 para las 3.168 posiciones de candidatos (100,00%). Los 1.056 casos de evaluación contaron con una asociación exacta para cada uno de sus tres candidatos, con cobertura de 1.056/1.056 en las posiciones 1, 2 y 3. Los candidatos ya habían quedado fijados por el ranking histórico antes de esta etapa de asociación documental.
+
+El contexto jerárquico de nivel superior estuvo disponible en HS6 para 2.168/3.168 posiciones (68,43%) y en HS4 y capítulo para 3.168/3.168 (100,00%). La cobertura de precedentes históricos y la trazabilidad completa a nivel de candidato también fueron 3.168/3.168 (100,00%). Los campos HS6, HS4 y capítulo corresponden a contexto jerárquico superior y son distintos de la asociación exacta NANDINA de ocho dígitos indicada anteriormente.
+
+La asociación documental preservó la composición y el orden del Top-3 histórico en los 1.056 casos de evaluación. No se insertó ni eliminó ningún candidato; las posiciones y los puntajes históricos permanecieron sin cambios, y el puntaje normativo no afectó el orden. La etiqueta de referencia no se utilizó para seleccionar candidatos, precedentes o evidencia, ni para definir el orden o aplicar mecanismos de respaldo; las etiquetas se usaron únicamente después de construir el resultado cuando fueron necesarias para calcular métricas.
+
+Estos resultados describen asociación documental, cobertura, procedencia y trazabilidad, e invariancia del ranking dentro del corpus congelado derivado de la Decisión 885 utilizado por el experimento primario. No demuestran corrección normativa sustantiva, corrección jurídica ni exactitud de clasificación; la divergencia ya documentada del corpus respecto de la Decisión 906 se trata por separado dentro del alcance gobernado de validez y sensibilidad.
+
+## 5.4. Calidad de la explicación controlada
+
+En los 50 casos evaluados, los artefactos generados preservaron el Top-3 fijo y su orden en 50/50 casos (100%), y los controles de cierre del conjunto de candidatos, consistencia de rango, trazabilidad completa, validez de las referencias históricas y normativas, presencia de comparación entre candidatos, ausencia explícita de leakage de la etiqueta y parseo del JSON bruto se cumplieron en 50/50 casos. A nivel de posición de candidato, el código, la referencia histórica, la referencia normativa y la consistencia del rango fueron válidos en las 150/150 posiciones. Estos son controles estructurales individuales; el esquema congelado no definió antes de la generación una regla PASS/FAIL automática por caso, por lo que no se calculó retrospectivamente una tasa `automatic_validation_pass`.
+
+El cumplimiento del esquema y la completitud de campos obligatorios fueron 0/50 porque el esquema v0.2 congelado exigía `advertencias_globales`, mientras que el prompt v0.2 no incluía ese campo en su estructura exacta de salida. La microauditoría congelada clasificó esta situación como `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`: los 50 casos incumplieron el esquema únicamente por ese campo y no se registraron otros errores de esquema. Por tanto, el 0/50 corresponde a una incompatibilidad de especificación y no constituye una medida de calidad de la explicación ni de validez estructural.
+
+Bajo la rúbrica cualitativa congelada, un caso se consideró auditable cuando alcanzó al menos 12/16 puntos y no presentó ninguna hard violation. Cumplieron este criterio 28/50 casos (56,0%) y 22/50 (44,0%) no lo cumplieron; la media total fue 11,72/16, la mediana 12/16, el rango 6–15 y se registraron 0/50 hard violations. Las ocho medias por dimensión en la escala 0–2 fueron 2,00 en trazabilidad, 0,54 en verificabilidad, 1,04 en separación de evidencia histórica y normativa, 1,78 en prudencia de la conclusión, 1,96 en consistencia con el Top-3 fijo, 1,68 en detección de evidencia normativa genérica, 1,46 en comparación entre candidatos y 1,26 en utilidad para auditoría humana. El perfil combinó, por tanto, trazabilidad completa y consistencia casi completa con el Top-3 fijo con puntuaciones menores en verificabilidad y separación entre evidencia histórica y normativa.
+
+El control de advertencia sobre evidencia normativa genérica se cumplió en 41/50 casos y estuvo ausente en 9/50. Entre los nueve casos sin esa advertencia, 1/9 (11,1%) cumplió el criterio de caso auditable y la media total fue 9,67; entre los otros 41 casos, 27/41 (65,9%) fueron auditables y la media total fue 12,17. Esta comparación es únicamente descriptiva y no estima un efecto causal ni estadísticamente significativo del control de advertencia.
+
+La puntuación cualitativa fue realizada por `independent_ai_reviewer_01` en modalidad `AI_EXPERT_ROLE`, como LLM-as-judge, y no por evaluadores humanos. Durante esa puntuación no se expusieron el ground truth, el rango de referencia ni el bucket de muestreo, y no se utilizó evidencia externa, información web ni retrieval. En conjunto, los artefactos evaluados preservaron el conjunto fijo de candidatos y las restricciones de trazabilidad en los 50 casos, mientras que el 56,0% alcanzó el criterio cualitativo congelado de auditabilidad; esta lectura permanece delimitada por la incompatibilidad de especificación entre prompt y esquema y por la desviación en la modalidad del evaluador. Los resultados no constituyen validación experta humana, corrección jurídica o normativa sustantiva, accuracy global de clasificación ni una reconstrucción causal fiel del ranking upstream.
+
+## 5.5. Análisis de sensibilidad y robustez
+
+En la sensibilidad conjunta al tamaño y la composición del banco histórico, las condiciones H25, H50 y H75 se construyeron a partir de DAM completas, por lo que el tamaño nominal del banco y su composición cambiaron simultáneamente. En diez ejecuciones, H25 obtuvo medias Top-1/Top-3/Top-5/Top-10/Top-50 de 0,493371/0,645170/0,737405/0,843277/0,973106 y una media MRR@100 de 0,603787; H50 obtuvo 0,428598/0,597917/0,680303/0,776042/0,930492 y 0,542492; y H75 obtuvo 0,298295/0,463352/0,548769/0,653883/0,837121 y 0,414030. La referencia congelada H100 fue 0,509470/0,671402/0,763258/0,891098/0,991477, con MRR@100 de 0,629708. Entre las diez ejecuciones, Top-3 varió de 0,540720 a 0,689394 para H25, de 0,491477 a 0,689394 para H50 y de 0,283144 a 0,678977 para H75; los rangos correspondientes de MRR@100 fueron 0,510735-0,641314, 0,431954-0,623899 y 0,248757-0,608612. Dado que tamaño y composición variaron conjuntamente, estas observaciones caracterizan sensibilidad a las condiciones realizadas del banco histórico y no identifican un efecto causal aislado ni monotónico del tamaño del banco.
+
+Para los bancos históricos ampliados, diez condiciones H150 y diez H200 se emparejaron por seed y se evaluaron sobre el mismo conjunto EVAL de 1.056 series pertenecientes a 67 DAM. H150 produjo medias Top-1/Top-3/Top-5/Top-10/Top-50 de 0,512689/0,689962/0,783333/0,891572/0,989583 y una media MRR@100 de 0,633268, mientras que H200 produjo 0,514110/0,689489/0,782008/0,895265/0,985227 y 0,633310. Las diferencias observadas fueron pequeñas y de signo mixto según la métrica: H200 fue ligeramente mayor en Top-1, Top-10 y MRR@100 y ligeramente menor en Top-3, Top-5 y Top-50. Estos son resúmenes descriptivos pareados de construcciones repetidas del banco sobre el mismo conjunto de evaluación; no sustentan una conclusión general de que aumentar el banco mejore, empeore, estabilice o deje inalterado el desempeño, ni una inferencia hacia una superpoblación de seeds.
+
+La sensibilidad correctiva final al recurso normativo dependió del método. Para la familia de recuperación normativa plana, las métricas agregadas registradas no cambiaron. Para la familia normativa jerárquica, Top-1/Top-3/Top-5/Top-10/Top-50 y Recall@50/@100/@200 permanecieron sin cambios, mientras que MRR@100 pasó de 0,0419812944 a 0,0419717832 y MRR@200 de 0,0433416116 a 0,0433321004, con un delta de -0,00000951116 en ambos casos. Para la familia D1a inspirada en Text2Trade, la ejecución corregida cambió Top-1 de 0,000000 a 0,000947, Top-3 de 0,003788 a 0,010417, Top-5 de 0,034091 a 0,051136, Top-10 de 0,156250 a 0,178030, Top-50 de 0,305871 a 0,313447 y MRR@100 de 0,032424 a 0,038087. Recall@100 permaneció en 0,345644; Recall@200 pasó de 0,362689 a 0,363636; HS4@100 de 0,873106 a 0,879735; y HS4@200 de 0,964015 a 0,963068. Por tanto, la sensibilidad reconciliada incluyó cambios distintos de cero en el MRR jerárquico y en D1a, en lugar de un efecto global nulo; bajo el cierre correctivo gobernado no se requirió reejecutar las etapas downstream. Estas comparaciones son descriptivas y no establecen causalidad.
+
+El análisis descriptivo de errores identificó 518 errores Top-1 de la recuperación histórica. Bajo las categorías jerárquicas literales congeladas, 147 se clasificaron como SAME_CHAPTER, 284 como SAME_HS4 y 87 como SAME_HS6. Las categorías se conservaron según su definición y no se combinaron ni redefinieron después de observar los resultados; los conteos describen proximidad jerárquica del error y no establecen un mecanismo causal de concentración.
+
+La estratificación por soporte histórico también se mantuvo descriptiva. En los buckets literales de soporte, el grupo de 1 DAM incluyó 27 casos con Top-1 = 0,370370, Top-3 = 0,703704 y MRR@100 = 0,564447; el grupo de 2 DAM incluyó 21 casos con 0,047619, 0,190476 y 0,239384; el grupo de 3-4 DAM incluyó 425 casos con 0,691765, 0,767059 y 0,760152; y el grupo de 5+ DAM incluyó 583 casos con 0,399657, 0,617496 y 0,551697. Ningún umbral congelado definió un bucket como soporte insuficiente, y las diferencias observadas no identifican un efecto causal del soporte. Dos objetos de robustez previstos permanecieron no estimables: el efecto de diversidad histórica, porque no se produjeron retrievals D-HIGH/D-MID/D-LOW, y la prevalencia de descripciones ambiguas o incompletas, porque no existió una operacionalización congelada de calidad de descripción a nivel de caso. En consecuencia, la evidencia descriptiva disponible no sustentó una única conclusión global para todas las dimensiones de robustez previstas; la disposición correspondiente permaneció inconclusa.
+
+## 5.6. Resultados inferenciales
+
+Con el bootstrap pareado por clúster DAM definido en la Sección 4.7, el análisis inferencial mantuvo 1.056 series agrupadas en 67 DAM. Para HE2_A, cada familia de contraste histórico menos comparador incluyó Top-1, Top-3, Top-5, Top-10 y MRR@100, con intervalos de confianza percentiles marginales bilaterales de 99% bajo el control Bonferroni familywise-95% congelado. Los 15 intervalos primarios quedaron completamente por encima de cero; no se calcularon p-values.
+
+Frente a BM25 normativo flat, las diferencias histórico menos comparador fueron Top-1 = 0,482007576, IC 99% [0,329446843; 0,631331820]; Top-3 = 0,620265152 [0,489773908; 0,757505941]; Top-5 = 0,701704545 [0,582607584; 0,817963384]; Top-10 = 0,825757576 [0,737159943; 0,896051128]; y MRR@100 = 0,587410432 [0,463626313; 0,712041394]. Frente a BM25 normativo jerárquico, las diferencias correspondientes fueron 0,482954545 [0,330419446; 0,630822238], 0,619318182 [0,485491905; 0,757028357], 0,700757576 [0,582403679; 0,817063388], 0,825757576 [0,736613432; 0,894902163] y 0,587735966 [0,465199608; 0,712038535]. Frente a D1a corregido, fueron 0,508522727 [0,364702301; 0,653466144], 0,660984848 [0,541305493; 0,781609818], 0,712121212 [0,590534359; 0,832721912], 0,713068182 [0,549548133; 0,860733443] y 0,591620610 [0,487310779; 0,706089907], respectivamente.
+
+El contraste separado HE2_B para la recuperación normativa jerárquica corregida fue Recall@200 - Recall@100 = 0,202651515, con IC 95% [0,066763106; 0,341601308]. Este intervalo también quedó completamente por encima de cero. Como el contraste mide la cobertura exacta adicional al profundizar de 100 a 200 posiciones, y no el desempeño en las primeras posiciones del ranking, se trató por separado de HE2_A.
+
+Dentro del alcance inferencial congelado del benchmark interno de Capítulo 87, las tres familias HE2_A y el contraste primario HE2_B sustentan HE2. Esta disposición se limita a la incertidumbre por remuestreo de clústeres dentro del benchmark fijo y no implica efectos causales, generalización a una población externa, accuracy global del framework ni corrección jurídica. HE5 permaneció inconclusa y no se introdujo para ella un nuevo test inferencial.
+
+## 5.7. Síntesis por pregunta de investigación
+
+Opcional; conservar solo si mejora la lectura.
+
+RQ1. En el conjunto EVAL común de 1.056 series, BM25 histórico H100 recuperó el código NANDINA de referencia de ocho dígitos en Top-1 en el 50,95% de los casos y en Top-3 en el 67,14%, con MRR@100 de 0,6297. En las métricas de primeras posiciones del ranking listadas y el Top-50 suplementario, presentó los mayores valores observados entre las cuatro familias evaluadas. En la Sección 5.6, los 15 intervalos de confianza primarios de 99% de los contrastes pareados histórico menos comparador de HE2_A quedaron completamente por encima de cero bajo el diseño inferencial congelado. Estos resultados sustentan HE2 únicamente dentro del alcance inferencial interno congelado y se refieren a recuperación de candidatos; no establecen accuracy global de clasificación ni superioridad del framework completo.
+
+RQ2. Para el Top-3 histórico fijo, la asociación documental exacta NANDINA-8 estuvo disponible en 3.168/3.168 posiciones de candidato, y los 1.056/1.056 casos de evaluación tuvieron una asociación exacta para cada uno de sus tres candidatos. La etapa documental preservó la composición y el orden del Top-3 en 1.056/1.056 casos, sin inserciones ni eliminaciones de candidatos y sin cambios en sus posiciones ni en los scores históricos. Estos resultados establecen cobertura documental, asociación, procedencia/trazabilidad e invariancia del ranking dentro del corpus congelado; no establecen corrección normativa sustantiva ni corrección jurídica.
+
+RQ3. En los 50 casos de explicación evaluados, el Top-3 fijo, su orden y los controles estructurales de trazabilidad se preservaron en 50/50 casos, mientras que 28/50 casos (56,0%) cumplieron el criterio cualitativo congelado de auditabilidad. La puntuación cualitativa fue realizada por `independent_ai_reviewer_01` en modalidad `AI_EXPERT_ROLE`, como LLM-as-judge, y no por evaluadores humanos. El cumplimiento del esquema fue 0/50 debido a `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`: el esquema congelado exigía `advertencias_globales`, mientras que el prompt no, y los 50 incumplimientos del esquema se debieron únicamente a ese campo, no a 50 explicaciones sustantivamente inválidas. La evaluación muestra, por tanto, preservación estructural completa con auditabilidad cualitativa parcial bajo la modalidad de revisión por IA especificada; no constituye validación humana, corrección jurídica ni una explicación causal fiel del ranking upstream.
+
+RQ4. El benchmark v0.2 presentó cero solapamiento entre particiones de DAM y `id_unico`, mientras que los diagnósticos de duplicados exactos y near-duplicates documentaron similitud léxica residual entre declaraciones distintas. La sensibilidad del banco histórico varió conjuntamente tamaño y composición y, por ello, no aisló un efecto causal del tamaño del banco; las comparaciones pareadas H150/H200 fueron descriptivas y mostraron diferencias pequeñas y de signo mixto según la métrica; y la sensibilidad a la corrección del recurso normativo dependió del método. El efecto previsto de diversidad histórica y la prevalencia de descripciones ambiguas o incompletas no fueron estimables, y HE5 permaneció `INCONCLUSIVE`. Estos resultados delimitan la interpretación al piloto offline interno de Capítulo 87 y no establecen generalización externa, efectos causales ni validez jurídica.
+
+# 6. Discusión
+
+Interpretar, comparar y delimitar; no repetir Resultados.
+
+\[Section text to be drafted in a later approved version.\]
+
+## 6.1. Separación entre ranking de candidatos y evidencia documental
+
+Fijar el Top-3 histórico antes de la asociación documental establece una frontera explícita de autoridad entre etapas. La recuperación histórica determina la composición y el orden de los candidatos; la etapa documental solo puede asociar evidencia con esos candidatos ya fijados. En el piloto, la asociación exacta NANDINA-8 estuvo disponible para las 3.168 posiciones de candidato, y la etapa documental preservó la composición y el orden del Top-3 en los 1.056 casos de evaluación. Estas observaciones confirman que la etapa documental implementada respetó el contrato de ranking fijo.
+
+Esa estructura de autoridad difiere funcionalmente del diseño por etapas de Lee et al. (2021), en el que el modelo primero predice una partida de cuatro dígitos, recupera oraciones clave del manual HS y después predice la subpartida de seis dígitos a partir de la descripción del producto junto con las oraciones recuperadas. En ese flujo, la recuperación documental aporta entradas a una decisión posterior de clasificación. La diferencia relevante aquí es, por tanto, la función asignada a la evidencia recuperada, no una afirmación de que un diseño sea en general mejor que el otro.
+
+Un antecedente más cercano es Lee et al. (2023), cuyo modelo primero predice candidatos de clasificación y luego recupera del manual HS evidencia sobre cada candidato. El presente estudio adopta un orden general similar, pero hace explícita la restricción de autoridad de las etapas posteriores: una vez que la recuperación histórica fija el Top-3, esas etapas no pueden insertar, eliminar, sustituir ni reordenar candidatos. Además, evalúa por separado el ranking de candidatos y la asociación documental. Esta distinción es metodológica y operativa.
+
+La separación también delimita qué puede atribuirse a cada objeto de evaluación. Los valores Top-k y MRR caracterizan la etapa de recuperación histórica de candidatos que produjo el ranking, mientras que la cobertura documental, la asociación, la procedencia y la trazabilidad caracterizan una etapa posterior que no puede modificar ese ranking. Reportar estas salidas por separado permite, por tanto, una atribución a nivel de componente sin implicar que la separación haya causado el desempeño de recuperación observado.
+
+La misma frontera hace explícito el límite normativo y jurídico. La asociación documental completa y la invariancia del ranking muestran que puede vincularse material identificable con candidatos fijos sin modificarlos; no demuestran que el material recuperado sea la fuente normativa determinante o jurídicamente suficiente, que un candidato sea sustantivamente correcto bajo la nomenclatura ni que la recomendación final sea jurídicamente válida. Esas cuestiones requieren otra forma de adjudicación y permanecen fuera del alcance evidencial de este piloto offline.
+
+## 6.2. Uso controlado del LLM para explicación
+
+En este framework, el LLM local interviene únicamente después de que la recuperación histórica fija el Top-3 y la evidencia documental se asocia con esos candidatos. Por tanto, su entrada es un contexto restringido y no un espacio de clases abierto: el modelo puede comparar y explicar las tres alternativas, pero no puede insertar, eliminar, sustituir ni reordenar códigos, y su salida no retroalimenta la clasificación. Esta restricción permite atribuir la explicación generada a una etapa posterior sin otorgar al modelo autoridad sobre el ranking de candidatos.
+
+Esta función es más acotada que en configuraciones donde el modelo de lenguaje participa directamente en la selección de la etiqueta. Marra de Artiñano et al. utilizan GPT-3.5 mediante prompts directos para categorizar productos, de modo que el modelo generativo produce la salida de categoría arancelaria (Marra de Artiñano et al., 2023). En THE-RAG, la recuperación densa y dispersa junto con el reranking se acoplan a un pipeline de clasificación HS basado en un LLM, por lo que el contexto recuperado participa en el proceso de clasificación (Kim et al., 2025). La comparación se limita aquí a la autoridad del modelo y a la secuencia: el LLM del presente estudio recibe un resultado upstream que no está autorizado a revisar.
+
+La evaluación estructural indica que este contrato de autoridad se respetó en la muestra evaluada. El Top-3 fijo y su orden se preservaron en 50/50 casos de explicación, y las verificaciones del código candidato, la referencia histórica, la referencia normativa y la consistencia de rango fueron válidas en las 150/150 posiciones de candidato. Estos controles muestran que los artefactos generados permanecieron dentro del conjunto prescrito de candidatos y conservaron los vínculos de evidencia requeridos; por sí solos, no establecen la calidad del contenido explicativo.
+
+Los resultados cualitativos hacen relevante esa distinción. Solo 28/50 casos (56,0%) cumplieron el criterio congelado de auditabilidad. La trazabilidad fue completa bajo la rúbrica, pero la verificabilidad media fue 0,54/2 y la separación media entre evidencia histórica y normativa fue 1,04/2. Por ello, una explicación trazable todavía puede ser difícil de verificar o puede difuminar la función de los distintos tipos de evidencia. Restringir la autoridad del modelo es, en consecuencia, un control sobre lo que el LLM puede modificar, no una garantía de que toda explicación sea suficientemente clara o útil para revisión experta.
+
+Un problema separado de especificación también limita la interpretación. El cumplimiento del esquema fue 0/50 únicamente porque el esquema congelado exigía `advertencias_globales` y el prompt no; la microauditoría clasificó esta situación como `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`, no como cincuenta explicaciones sustantivamente inválidas. Además, la puntuación cualitativa fue realizada por `independent_ai_reviewer_01` en modalidad `AI_EXPERT_ROLE`, como LLM-as-judge, y no por expertos humanos. Por tanto, los resultados caracterizan el cumplimiento estructural y la calidad de explicación basada en la rúbrica bajo el protocolo evaluado, no validación humana, corrección jurídica ni una explicación causalmente fiel de cómo se produjo el ranking upstream.
+
+## 6.3. Comparación con trabajos previos
+
+Los trabajos previos resultan más informativos aquí cuando se comparan por función, autoridad de decisión y secuencia, en lugar de hacerlo por cifras generales de desempeño. Los sistemas de clasificación arancelaria pueden utilizar componentes similares —predicción de candidatos, recuperación documental, reranking o modelos de lenguaje— y, aun así, asignarles funciones distintas dentro del proceso de decisión. Dado que los estudios citados emplean datasets, espacios de clases, niveles HS y protocolos de evaluación diferentes, la comparación que sigue es arquitectónica y metodológica, no numérica.
+
+La función de la recuperación documental ilustra esta distinción. Lee et al. primero predicen una partida de cuatro dígitos, recuperan oraciones clave del manual HS y después utilizan la descripción del producto junto con esas oraciones para predecir la subpartida de seis dígitos; por tanto, el texto recuperado participa en una decisión posterior de clasificación (Lee et al., 2021). Un antecedente más cercano separa la predicción del soporte: primero se predicen clasificaciones candidatas y luego se recupera del manual HS evidencia sobre cada candidato (Lee et al., 2023). La predicción de candidatos seguida de recuperación de evidencia constituye, por ello, prior art ya establecido; el presente estudio no se posiciona por la mera presencia de esa secuencia.
+
+La autoridad del modelo de lenguaje también varía entre sistemas previos. Marra de Artiñano et al. utilizan GPT-3.5 mediante prompts directos para clasificar productos, situando al modelo generativo en la función de selección de la etiqueta (Marra de Artiñano et al., 2023). THE-RAG, en cambio, combina recuperación densa y dispersa con reranking dentro de un framework de clasificación HS basado en un LLM, de modo que el contexto recuperado forma parte del pipeline que produce la salida de clasificación (Kim et al., 2025). En ambos casos, el modelo participa en la clasificación en lugar de limitarse a explicar un conjunto de candidatos fijado de forma independiente upstream.
+
+La distinción evaluada en este estudio es el contrato completo de autoridad entre etapas. Solo la recuperación histórica produce el ranking y fija el Top-3 antes de la asociación documental. La etapa documental asocia después evidencia vinculada con cada candidato sin cambiar la composición ni el orden, y el LLM local recibe esos candidatos fijos y su evidencia únicamente para generar una explicación controlada. La invariancia del ranking y la preservación estructural observadas muestran que este contrato se respetó en el piloto evaluado. En consecuencia, la recuperación de candidatos, la asociación documental y la explicación controlada se reportan como objetos de evaluación separados y no como un único resultado indiferenciado del sistema.
+
+Este posicionamiento no depende de afirmar que los componentes individuales sean nuevos. Su contribución metodológica consiste en asignar de forma explícita autoridad no solapada al ranking, la asociación de evidencia y la explicación, junto con una evaluación que respeta esas mismas fronteras. Los contrastes funcionales con trabajos previos no establecen que el presente framework sea más preciso, más seguro o globalmente superior; tampoco establecen corrección jurídica ni desempeño fuera del escenario evaluado. Identifican qué componente está autorizado a tomar o modificar cada decisión y, por tanto, delimitan qué puede sostener la evidencia reportada.
+
+## 6.4. Implicaciones para apoyo a decisiones auditable
+
+Separar la autoridad decisoria entre etapas hace inspeccionable el flujo porque cada una tiene una salida delimitada y no puede asumir la función de otra. La recuperación histórica genera y ordena los candidatos; el Top-3 se fija antes de la asociación documental; y el LLM local recibe ese conjunto fijo únicamente para generar la explicación posterior. Por ello, un revisor puede inspeccionar la posición registrada de un candidato y su procedencia histórica asociada por separado de su evidencia documental y de la explicación construida a partir del contexto suministrado. Esto permite revisar cada etapa por separado, pero no ofrece una explicación causal de por qué el recuperador produjo esa posición ni demuestra corrección sustantiva.
+
+Los resultados de RQ2 y RQ3 muestran cómo se preservó esta procedencia en el piloto evaluado. La asociación documental exacta estuvo disponible en 3.168/3.168 posiciones de candidato, mientras que la composición y el orden del Top-3 se preservaron en 1.056/1.056 casos de evaluación. En la muestra de explicaciones, el Top-3 y su orden se preservaron en 50/50 casos, y las verificaciones del código candidato, la referencia histórica, la referencia normativa y la consistencia de rango fueron válidas en las 150/150 posiciones. Estos controles mantienen inspeccionables, a nivel de candidato, los vínculos entre candidato, precedente histórico, evidencia documental y explicación. No establecen exactitud global de clasificación, corrección normativa sustantiva ni corrección jurídica.
+
+Sin embargo, la trazabilidad estructural fue insuficiente para una auditabilidad cualitativa más alta bajo la rúbrica de evaluación predefinida. Aunque la trazabilidad media fue 2,00/2, solo 28/50 casos (56,0%) cumplieron el criterio cualitativo de auditabilidad; la verificabilidad media fue 0,54/2 y la separación media entre evidencia histórica y normativa fue 1,04/2. Una explicación puede conservar sus vínculos de procedencia y aun así resultar difícil de verificar o dejar insuficientemente diferenciadas las funciones de la evidencia histórica y normativa. Por tanto, la procedencia es necesaria para inspeccionar el caso, pero por sí sola no establece la calidad de la explicación. La evaluación cualitativa utilizó un LLM como juez, no evaluadores humanos.
+
+Los resultados también indican implicaciones concretas de diseño e implementación. Las funciones de los componentes deben mantenerse sin solapamiento, la procedencia debe conservarse para cada candidato y el soporte histórico debe presentarse de forma diferenciada de la evidencia normativa para que el revisor pueda identificar qué aporta cada fuente. La instrucción de generación y el esquema de validación también deben definir de forma coherente los mismos campos obligatorios de salida. En esta evaluación, los 50 casos fallaron el control automático del esquema únicamente porque el esquema de validación exigía un campo para advertencias globales que la instrucción de generación no solicitaba. Las especificaciones de interfaz inconsistentes pueden, por tanto, hacer fallar la validación automática aun cuando se preserven los demás controles estructurales; esto no implica que las 50 explicaciones fueran sustantivamente inválidas.
+
+Estas implicaciones permanecen delimitadas al apoyo a decisiones bajo revisión humana. Los resultados evaluados no validan la sustitución de expertos, la preparación para un despliegue operativo, efectos causales sobre la seguridad, la reducción de alucinaciones, una auditabilidad validada por humanos, la corrección jurídica ni la generalización más allá del escenario evaluado. La evidencia sustenta un flujo en el que el ranking, la asociación documental y la explicación pueden inspeccionarse como salidas separadas porque la función decisoria y la procedencia de cada etapa están explícitamente restringidas. La adjudicación sustantiva y la aceptación por expertos siguen siendo cuestiones separadas.
+
+## 6.5. Configurabilidad y condiciones de transferencia
+
+La configurabilidad de este framework se refiere a qué recursos y componentes de implementación pueden sustituirse sin alterar las funciones ni las fronteras de autoridad del flujo. Una nueva instancia puede utilizar otro banco histórico etiquetado, otro espacio de códigos objetivo o profundidad arancelaria, un corpus documental compatible y otras implementaciones de recuperación o generación. Sin embargo, la reinstanciación sigue siendo condicional: la recuperación histórica debe continuar generando y ordenando candidatos, el Top-3 debe fijarse antes de la asociación documental, la evidencia documental debe permanecer vinculada a esos candidatos fijos y el generador debe mantenerse restringido a la explicación.
+
+Esas funciones requieren interfaces concretas. La entrada comercial debe transformarse en una representación de consulta reproducible. Los registros históricos deben permanecer vinculados con los códigos asignados y con una procedencia recuperable, y el recuperador histórico debe devolver un resultado ordenado y trazable del que puedan formarse candidatos únicos. Para cada candidato fijo, la construcción del contexto debe conservar el código, la posición fija, el soporte histórico, la evidencia documental y la procedencia. Un modelo o estrategia de instrucciones alternativos solo son compatibles si reciben ese contexto fijo sin autoridad para insertar, eliminar, sustituir o reordenar candidatos en el flujo principal. Los recursos que afecten materialmente una ejecución también deben ser identificables y versionables cuando corresponda.
+
+Cambiar el recurso documental impone condiciones adicionales. El corpus alternativo debe ser compatible con el espacio de códigos objetivo y exponer identificadores que mantengan la evidencia vinculada con cada candidato y con una fuente identificable. Deben registrarse su versión y procedencia, y su autoridad, vigencia y adecuación para la nueva jurisdicción o configuración arancelaria deben validarse por separado. La compatibilidad técnica establece, por tanto, una condición de interfaz; no establece corrección normativa sustantiva ni corrección jurídica.
+
+La misma distinción se aplica a la reproducibilidad. La reproducción de referencia busca reconstruir la instancia evaluada identificada con los mismos insumos y configuración tan estrechamente como lo permitan los artefactos disponibles. La replicación externa, en cambio, aplica el protocolo a datos independientes o a recursos sustitutos compatibles y produce su propio manifiesto y sus propios resultados; no se exige concordancia numérica con el experimento de referencia. El paquete público auditado proporciona actualmente, sobre todo, documentación de protocolos y contratos junto con una configuración de ejemplo, y no una reproducción de referencia garantizada mediante un único comando desde un clon limpio. Ese estado del paquete limita la facilidad actual de reproducción, no la posibilidad conceptual de reinstanciar la arquitectura.
+
+Estas condiciones de transferencia no trasladan el desempeño empírico. Los resultados del Capítulo 87 no pueden suponerse válidos para otro capítulo, profundidad arancelaria, jurisdicción, banco histórico, corpus documental, modelo o población. Por ello, cada reinstanciación requiere su propia validación de datos y corpus y su propia evaluación por función. La configurabilidad y la compatibilidad de interfaces describen cómo una nueva instancia puede preservar el significado funcional del flujo; no establecen robustez, validez externa, preparación para despliegue, validez jurídica ni aceptación humana en ese nuevo escenario.
+
+## 6.6. Limitaciones
+
+Consolidar límites de datos, corpus, drift normativo, evaluación de
+explicaciones, validez jurídica, validez externa y reproducibilidad.
+
+\[Section text to be drafted in a later approved version.\]
+
+# 7. Conclusión
+
+Cerrar con aporte → evidencia principal → alcance → implicación.
+
+\[Section text to be drafted in a later approved version.\]
+
+# Disponibilidad de datos
+
+\[Section text to be drafted in a later approved version.\]
+
+# Código y recursos de reproducibilidad
+
+\[Section text to be drafted in a later approved version.\]
+
+# Declaración CRediT de contribución de autoría
+
+\[Section text to be drafted in a later approved version.\]
+
+# Financiamiento
+
+\[Section text to be drafted in a later approved version.\]
+
+# Declaración de conflictos de interés
+
+\[Section text to be drafted in a later approved version.\]
+
+# Agradecimientos
+
+\[Section text to be drafted in a later approved version.\]
+
+# Referencias
+
+\[Section text to be drafted in a later approved version.\]
+
+# Material suplementario
+
+Opcional.
+
+\[Section text to be drafted in a later approved version.\]
