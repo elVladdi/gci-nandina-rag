@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.51
+PLAN_VERSION = V3.52
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-153
+LATEST_EDITORIAL_DECISION = D-154
 CANONICAL_MASTER = ARTICLE_MASTER_V029
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V029.md
 CANONICAL_MASTER_MD_SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
@@ -20,12 +20,12 @@ CANONICAL_DOCX_PAGE_COUNT = 69
 CURRENT_DRAFTING_PHASE = DISCUSSION / TRANSVERSAL_EDITORIAL_CLEANUP
 RESULTS_SECTIONS_5_1_TO_5_7 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B01_SECTION_6_1 = CLOSED / APPROVED / FROZEN / INTEGRATED
-DISCUSSION_B02_SECTION_6_2 = INTEGRATED / TRANSVERSAL_EDITORIAL_CLEANUP_AUTHORIZED
+DISCUSSION_B02_SECTION_6_2 = INTEGRATED / TRANSVERSAL_V01_AUDITED_PASS_PENDING_AUTHOR_APPROVAL
 DISCUSSION_B03_SECTION_6_3 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B04_SECTION_6_4 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B05_SECTION_6_5 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B06_SECTION_6_6 = CLOSED / APPROVED / FROZEN / INTEGRATED
-DISCUSSION_SECTIONS_6_1_TO_6_6 = SCIENTIFICALLY_COMPLETE / INTEGRATED / FINAL_EDITORIAL_FREEZE_PENDING_6_2_HYGIENE
+DISCUSSION_SECTIONS_6_1_TO_6_6 = SCIENTIFICALLY_COMPLETE / INTEGRATED / FINAL_EDITORIAL_FREEZE_PENDING_6_2_AUTHOR_APPROVAL_AND_PROMOTION
 DISCUSSION_B05_INTEGRATION = D-144
 DISCUSSION_B06_BOUNDARY = D-145
 DISCUSSION_B06_V01_AUTHORIZATION = D-146
@@ -49,11 +49,25 @@ TRANSVERSAL_6_2_PROMPT = article/prompts/7_DISCUSSION_B02_TRANSVERSAL_TERMINOLOG
 TRANSVERSAL_6_2_PROMPT_GIT_BLOB = 5f400230bec46bb737f92db00a50ba2ec7f3d80c
 TRANSVERSAL_6_2_PROMPT_REVIEW_RESULT = PASS
 TRANSVERSAL_6_2_AUTHORIZATION = D-153
-CURRENT_GATE = DISCUSSION_B02_TRANSVERSAL_TERMINOLOGY_HYGIENE_V01_EXECUTION
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_SECTION_6_2_TRANSVERSAL_TERMINOLOGY_HYGIENE_V01_ONLY
-EXPECTED_EXIT = DISCUSSION_B02_TRANSVERSAL_V01_COMPLETED_PENDING_GESTORA_REAUDIT
+TRANSVERSAL_6_2_RESPONSE = article/responses/7_DISCUSSION_B02_TRANSVERSAL_TERMINOLOGY_HYGIENE_RESPONSE_V01.md@5e153f75b8701a671b425e2bf3a0a4442e3bfc7b
+TRANSVERSAL_6_2_SECTION = article/sections/discussion/Discussion_B02_TRANSVERSAL_V01.md@d10fdaddaabc9809b127e9c4edaa58ea5494910f
+TRANSVERSAL_6_2_CANDIDATE_MD_SHA256 = ba4d3d5021a6be5fc43a435c3618c65e0778b900609b708014cb04d7866b9b7d
+TRANSVERSAL_6_2_CANDIDATE_MD_GIT_BLOB = 2683f5933205219ed62e16418d3f9a0ace7460bd
+TRANSVERSAL_6_2_CANDIDATE_DOCX_SHA256 = 340e283924a9364447344469cf4eb077bbf93f7d32509f8f173d0a01fb3bbc0f
+TRANSVERSAL_6_2_CANDIDATE_DOCX_COMMENTS = 48
+TRANSVERSAL_6_2_CANDIDATE_DOCX_TRACKED_CHANGES = 0
+TRANSVERSAL_6_2_CANDIDATE_DOCX_PAGE_COUNT = 69
+TRANSVERSAL_6_2_INTERNAL_REVIEW = article/reviews/7_DISCUSSION_B02_TRANSVERSAL_TERMINOLOGY_HYGIENE_INTERNAL_REVIEW_V01.md@86bdde52bf32890d59898fd8cf2ac12e09d422fd
+TRANSVERSAL_6_2_REVIEW_RESULT = PASS
+TRANSVERSAL_6_2_AUTHOR_APPROVAL_GATE = D-154
+CURRENT_GATE = DISCUSSION_B02_TRANSVERSAL_V01_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = REVIEW_AND_APPROVE_OR_REQUEST_CORRECTIONS_SECTION_6_2_TRANSVERSAL_V01
+IF_APPROVED_TARGET = article/manuscript/ARTICLE_MASTER_V030.md
+IF_APPROVED_EXPECTED_SHA256 = ba4d3d5021a6be5fc43a435c3618c65e0778b900609b708014cb04d7866b9b7d
+IF_APPROVED_EXPECTED_GIT_BLOB = 2683f5933205219ed62e16418d3f9a0ace7460bd
+LEGACY_EDITORIAL_DEBT = RESOLVED_IN_CANDIDATE_PENDING_AUTHOR_APPROVAL_AND_PROMOTION
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
@@ -65,9 +79,9 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V029.md` es el master Markdown canónico. La promoción V029 fue verificada por identidad exacta de Git blob y D-151 cerró e integró Discussion §6.6. Results §5.1–§5.7 y Discussion §§6.1–§6.6 están científicamente completos e integrados.
+`ARTICLE_MASTER_V029.md` permanece como master Markdown canónico. Results §5.1–§5.7 y Discussion §§6.1–§6.6 están científicamente completos e integrados.
 
-El Word canónico acumulativo es:
+El Word canónico acumulativo sigue siendo:
 
 ```text
 ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.docx
@@ -77,35 +91,45 @@ TRACKED_CHANGES = 0
 PAGE_COUNT = 69
 ```
 
-## 2. Deuda editorial transversal de §6.2
+## 2. Corrección transversal §6.2
 
-D-151 confirma que queda una única deuda editorial conocida antes del freeze final de Discussion. §6.2 conserva etiquetas internas de QA/gobernanza que deben retirarse sin reabrir su contenido científico.
+La ejecución autorizada por D-152/D-153 produjo:
 
-D-152 fija una intervención estrictamente limitada a higiene terminológica EN/ES. Deben preservarse el contrato de autoridad del LLM, las cifras `50/50`, `150/150`, `28/50 (56.0%)`, `0.54/2`, `1.04/2` y `0/50`, las citas existentes, los 48 comentarios y la fuerza epistémica ya aprobada. No se autorizan resultados, inferencias, literatura, citas ni claims nuevos.
+```text
+ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_TRANSVERSAL_V01.md
+SHA256 = ba4d3d5021a6be5fc43a435c3618c65e0778b900609b708014cb04d7866b9b7d
+GIT_BLOB = 2683f5933205219ed62e16418d3f9a0ace7460bd
 
-El prompt `7_DISCUSSION_B02_TRANSVERSAL_TERMINOLOGY_HYGIENE_V01.md` pasó revisión interna y D-153 autoriza exclusivamente su ejecución desde V029 y el Word B06 V02 exacto.
+ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_TRANSVERSAL_V01.docx
+SHA256 = 340e283924a9364447344469cf4eb077bbf93f7d32509f8f173d0a01fb3bbc0f
+COMMENTS = 48
+TRACKED_CHANGES = 0
+PAGE_COUNT = 69
+```
+
+La reauditoría de IA Gestora obtiene `PASS` sin correcciones obligatorias. Solo seis párrafos de §6.2 EN/ES cambiaron respecto del baseline Word; la corrección elimina las etiquetas internas definidas por D-152 y mantiene las cifras, inferencias, citas, límites epistémicos y estructura argumental aprobados. El DOCX cambia exclusivamente `word/document.xml`, conserva comentarios/anclajes y no contiene tracked changes. El render mantiene 69 páginas y no presenta defectos.
+
+D-154 abre el gate autoral. La deuda terminológica está resuelta en el candidato, pero no se declarará integrada hasta aprobación explícita y promoción byte-exacta.
 
 ## 3. Gate inmediato
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-PROMPT = article/prompts/7_DISCUSSION_B02_TRANSVERSAL_TERMINOLOGY_HYGIENE_V01.md
-PROMPT_GIT_BLOB = 5f400230bec46bb737f92db00a50ba2ec7f3d80c
-AUTHORIZATION = D-153
-INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V029.md
-INPUT_MASTER_MD_GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
-INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.docx
-INPUT_MASTER_DOCX_SHA256 = baeb1653040da74a193d2b79650873b0d24564895347bb3c22d30cdfd96f0ea3
-EXPECTED_COMMENTS = 48
-EXPECTED_TRACKED_CHANGES = 0
-EXPECTED_EXIT = DISCUSSION_B02_TRANSVERSAL_V01_COMPLETED_PENDING_GESTORA_REAUDIT
+CURRENT_GATE = DISCUSSION_B02_TRANSVERSAL_V01_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+AUTHOR_APPROVAL_GATE = OPEN
+REVIEW_RESULT = PASS
+MANDATORY_CORRECTIONS = NONE
+CANONICAL_MASTER = ARTICLE_MASTER_V029
+IF_APPROVED_TARGET = article/manuscript/ARTICLE_MASTER_V030.md
+IF_APPROVED_EXPECTED_SHA256 = ba4d3d5021a6be5fc43a435c3618c65e0778b900609b708014cb04d7866b9b7d
+IF_APPROVED_EXPECTED_GIT_BLOB = 2683f5933205219ed62e16418d3f9a0ace7460bd
 CONCLUSION = NOT_AUTHORIZED
 ```
 
-No se abre Conclusion hasta completar la reauditoría e integración de esta corrección transversal.
+Después de la aprobación y promoción verificada de V030, IA Gestora podrá declarar Discussion editorialmente congelada y abrir la preparación gobernada de Conclusion. No debe abrirse Conclusion antes de ese cierre.
 
 ---
 
 # English
 
-V029 is canonical. Discussion §§6.1–§6.6 is scientifically complete and integrated. One controlled Section 6.2 terminology-hygiene correction remains before final Discussion editorial freeze. D-152 defines the boundary and D-153 authorizes execution under the reviewed prompt. Conclusion remains unauthorized.
+The Section 6.2 transversal terminology-hygiene candidate has passed independent re-audit with no mandatory corrections. V029 remains canonical until explicit author approval and byte-exact promotion. If approved, the target is `article/manuscript/ARTICLE_MASTER_V030.md` with expected Git blob `2683f5933205219ed62e16418d3f9a0ace7460bd`. Conclusion remains unauthorized until that promotion is verified.
