@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.39
-LATEST_EDITORIAL_DECISION = D-134
+ARTICLE_WRITING_PLAN = V3.40
+LATEST_EDITORIAL_DECISION = D-135
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -33,15 +33,21 @@ DISCUSSION_B03_INTEGRATION = article/governance/D132_DISCUSSION_B03_AUTHOR_APPRO
 V026_PROMOTION = PASS / BYTE_EXACT
 CURRENT_DRAFTING_PHASE = DISCUSSION
 DISCUSSION_B04_BOUNDARY = article/governance/D133_DISCUSSION_B04_SECTION6_4_INTERPRETIVE_BOUNDARY_AND_AUDITABILITY_TRACE.md@be5a3df880d6fea49e18e64d6080d3485a5850de
-DISCUSSION_B04_PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4.md@982375ae4b6660bd05d962b7ed681d59354e39c0
-DISCUSSION_B04_PROMPT_GIT_BLOB = f75fde7e666cbcc527de3f29c5dd787c14318836
-DISCUSSION_B04_PROMPT_REVIEW = article/reviews/7_DISCUSSION_B04_SECTION6_4_PROMPT_INTERNAL_REVIEW_V01.md@1c8414169bacd6b6082d11e318308416d70f0fe3
-DISCUSSION_B04_AUTHORIZATION = article/governance/D134_DISCUSSION_B04_SECTION6_4_EXECUTION_AUTHORIZATION.md@88e620c4587fdf49ade4da89d48903a2d6eef64b
+DISCUSSION_B04_PROMPT_V01 = SUPERSEDED_FOR_EXECUTION
+DISCUSSION_B04_ACTIVE_PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4_V02.md@9d84059e8620219cd83c3b3dad91c4af900d447e
+DISCUSSION_B04_ACTIVE_PROMPT_GIT_BLOB = dcc3b40d29e1f6913cce96bee43403f3ab03e1d0
+DISCUSSION_B04_PROMPT_REVIEW = article/reviews/7_DISCUSSION_B04_SECTION6_4_PROMPT_INTERNAL_REVIEW_V02.md@7716a4916662e8116ac84c7626e38caa7e7d66d9
+DISCUSSION_B04_PROMPT_REVIEW_RESULT = PASS
+DISCUSSION_B04_AUTHORIZATION = article/governance/D135_DISCUSSION_B04_PROMPT_V02_PROTOCOL_COMPLIANCE_AND_EXECUTION_REAUTHORIZATION.md@b5ef45237d7909b948edd3442d5da2ca14a335e2
 CURRENT_GATE = DISCUSSION_B04_V01_DRAFTING
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 NEXT_ACTOR = IA_REDACCION
-DISCUSSION_B05_PLUS = NOT_AUTHORIZED
+MWDP_V1_0 = BINDING
+SPCCR_V1_0 = BINDING
+D022_REPOSITORY_FIRST_RESPONSE = BINDING
+D027_DOCX_AUTHOR_HANDOFF = BINDING
 D035_TIMEOUT_SAFE_HANDOFF = MANDATORY
+DISCUSSION_B05_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
@@ -49,11 +55,11 @@ NOVELTY = NOT_DECLARED
 
 ### Estado vigente
 
-El autor aprobó Discussion B03 V01 y materializó `ARTICLE_MASTER_V026.md`. IA Gestora verificó el Git blob observado `f6a63be554317e62103aa96c1091f4039249e5ee` contra el blob congelado del candidato B03 y confirmó promoción `PASS / BYTE_EXACT`. D-132 integra y congela §6.3; V026 es el master Markdown canónico.
+El autor aprobó Discussion B03 V01 y materializó `ARTICLE_MASTER_V026.md`. IA Gestora verificó el Git blob `f6a63be554317e62103aa96c1091f4039249e5ee` contra el candidato aprobado y confirmó promoción `PASS / BYTE_EXACT`. D-132 integra y congela §6.3; V026 es el master Markdown canónico.
 
-El Word acumulativo canónico es `ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx` bajo custodia local del autor, SHA-256 `bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57`, con 48 comentarios, 0 tracked changes y 64 páginas ya auditadas.
+El Word acumulativo canónico es `ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx` bajo custodia local del autor, SHA-256 `bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57`, con 48 comentarios, 0 tracked changes y 64 páginas auditadas.
 
-IA Gestora preparó Discussion B04 / §6.4. D-133 congela el boundary interpretativo: la sección tratará implicaciones para apoyo a decisiones auditable a partir del contrato de autoridad y de RQ2/RQ3, manteniendo `AUDITABILITY ≠ LEGAL_CORRECTNESS`, sin nueva literatura ni nuevos resultados. El prompt B04 fue revisado internamente con `PASS` y D-134 autoriza exclusivamente su ejecución.
+D-133 mantiene congelado el boundary científico de Discussion B04 / §6.4. Una revisión transversal posterior detectó que el prompt B04 V01, aunque científicamente correcto, no hacía explícitos todos los controles acumulativos exigidos por `MWDP_V1.0`, `START_HERE.md`, `SPCCR_V1.0`, D-022, D-027 y D-035. Por ello, D-135 sustituye V01 para ejecución por `7_DISCUSSION_B04_SECTION6_4_V02.md`, cuya revisión interna V02 es `PASS` sin correcciones obligatorias. El scope científico no cambió.
 
 El ground truth crítico de B04 conserva: asociación documental exacta 3,168/3,168 slots; invariancia del Top-3 1,056/1,056 casos; preservación estructural RQ3 50/50 casos y 150/150 slots; auditabilidad cualitativa 28/50 = 56.0%; trazabilidad 2.00/2; verificabilidad 0.54/2; separación historical–normative 1.04/2; y schema compliance 0/50 únicamente como `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`. La evaluación cualitativa fue LLM-as-judge, no validación humana.
 
@@ -61,14 +67,17 @@ El ground truth crítico de B04 conserva: asociación documental exacta 3,168/3,
 
 ```text
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_DISCUSSION_B04_V01_ONLY
-PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4.md
+NEXT_ACTION = EXECUTE_DISCUSSION_B04_V01_ONLY_USING_PROMPT_V02
+PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4_V02.md
+PROMPT_GIT_BLOB = dcc3b40d29e1f6913cce96bee43403f3ab03e1d0
+AUTHORIZATION = D-135
 BASELINE_MD = article/manuscript/ARTICLE_MASTER_V026.md
 BASELINE_MD_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
 BASELINE_MD_GIT_BLOB = f6a63be554317e62103aa96c1091f4039249e5ee
 BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx
 BASELINE_DOCX_SHA256 = bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57
 BASELINE_COMMENTS = 48
+EXPECTED_COMMENTS_AFTER_B04 = 48
 EXPECTED_EXIT = DISCUSSION_B04_V01_COMPLETED_PENDING_GESTORA_AUDIT
 DISCUSSION_B05_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
@@ -79,13 +88,13 @@ CONCLUSION = NOT_AUTHORIZED
 ## English
 
 ```text
-ARTICLE_WRITING_PLAN = V3.39
-LATEST_EDITORIAL_DECISION = D-134
+ARTICLE_WRITING_PLAN = V3.40
+LATEST_EDITORIAL_DECISION = D-135
 CANONICAL_MASTER = ARTICLE_MASTER_V026
 DISCUSSION_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B02 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
-DISCUSSION_B04 = AUTHORIZED_FOR_EXECUTION
+DISCUSSION_B04 = AUTHORIZED_FOR_EXECUTION_USING_PROMPT_V02
 CURRENT_GATE = DISCUSSION_B04_V01_DRAFTING
 NEXT_ACTOR = IA_REDACCION
 DISCUSSION_B05_PLUS = NOT_AUTHORIZED
@@ -94,4 +103,4 @@ FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-V026 is canonical and byte-exact verified after author approval of Discussion B03. Discussion B04 / Section 6.4 has a frozen interpretive boundary, a reviewed drafting prompt, and execution authorization under D-134. The next legitimate actor is IA_REDACCION. Section 6.5+, Conclusion, novelty, legal-correctness, human-validation, safety, overall-classification-accuracy, and external-generalization claims remain unauthorized.
+V026 remains canonical. D-135 supersedes the B04 V01 prompt for execution with the protocol-complete V02 prompt after an internal PASS review. The scientific boundary is unchanged. The active prompt now explicitly carries START_HERE onboarding, MWDP, SPCCR, repository-first response discipline, exact DOCX author handoff, timeout-safe artifact handoff, and the mandatory delivery checklist.
