@@ -1,0 +1,29 @@
+# D-128 — Discussion B02 author approval, V025 verification, and integration
+
+```text
+DECISION = D-128
+PHASE = DISCUSSION
+BLOCK = DISCUSSION_B02_SECTION_6_2
+AUTHOR_DECISION = APPROVED
+GESTORA_AUDIT = PASS
+PROMOTION_TARGET = article/manuscript/ARTICLE_MASTER_V025.md
+EXPECTED_SHA256 = a805cd220904fb4972d0db59764425aff87a49c8ec1cd34936e85913778feee5
+EXPECTED_GIT_BLOB = 829a6f5df87cf91dcafe89c48c1afd48ddbd2faf
+OBSERVED_GIT_BLOB = 829a6f5df87cf91dcafe89c48c1afd48ddbd2faf
+PROMOTION = PASS / BYTE_EXACT
+ARTICLE_MASTER_V025 = CANONICAL / VERIFIED
+DISCUSSION_B02_SECTION_6_2 = CLOSED / APPROVED / FROZEN / INTEGRATED
+CANONICAL_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_V01.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_DOCX_SHA256 = cc8f765bc197acbb210ebcb01da104ebd282481013d549ca51c8cf80268786c7
+CANONICAL_CITATION_COMMENTS = 44
+CANONICAL_TRACKED_CHANGES = 0
+CANONICAL_DOCX_PAGE_COUNT = 62
+DISCUSSION_B03_PLUS = NOT_YET_AUTHORIZED_BY_THIS_DECISION
+CONCLUSION = NOT_AUTHORIZED
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
+
+El autor aprobó Discussion B02 V01 y materializó `ARTICLE_MASTER_V025.md`. IA Gestora observó Git blob `829a6f5df87cf91dcafe89c48c1afd48ddbd2faf`, idéntico al candidato aprobado; la promoción es byte-exacta. El SHA-256 indicado corresponde al candidato local previamente verificado. V025 pasa a ser canónico y §6.2 queda cerrado, aprobado, congelado e integrado.
+
+Esta decisión no autoriza por sí sola §6.3 ni bloques posteriores.
