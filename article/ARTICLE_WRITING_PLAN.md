@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.18
+PLAN_VERSION = V3.19
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-095
+LATEST_EDITORIAL_DECISION = D-096
 CANONICAL_MASTER = ARTICLE_MASTER_V017
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V017.md
 CANONICAL_MASTER_MD_SHA256 = 6027785ac8f5018920b1bd714f01e57050447cb705d0e9f516a325a4416a6318
@@ -16,12 +16,12 @@ CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B01_V01.docx / LOCAL_AU
 CANONICAL_MASTER_DOCX_SHA256 = f872a6ed145c5f7759dbfabf03e19d0d87aae2f0838c4b02969139c08585841f
 CANONICAL_CITATION_COMMENTS = 40 / PRESERVED
 CURRENT_DRAFTING_PHASE = RESULTS
-CURRENT_GATE = RESULTS_B02_V02_NARROW_CORRECTION_EXECUTION
+CURRENT_GATE = RESULTS_B02_V02_AUTHOR_APPROVAL
 RESULTS_B01_SECTION_5_1 = CLOSED / APPROVED / FROZEN / INTEGRATED
-RESULTS_B02_V01 = SCIENTIFIC_PASS / NARROW_SPANISH_CORRECTION_REQUIRED
-RESULTS_B02_V02 = AUTHORIZED_FOR_NARROW_CORRECTION_ONLY
+RESULTS_B02_SECTION_5_2 = DRAFT_COMPLETE / GESTORA_PASS / PENDING_AUTHOR_APPROVAL
 RESULTS_B03_PLUS = NOT_AUTHORIZED
-AUTHOR_APPROVAL_GATE = CLOSED
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B02_V02_ONLY
+TARGET_PROMOTION_IF_APPROVED = ARTICLE_MASTER_V018
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
@@ -42,7 +42,7 @@ Experimental Design y Results B01 / §5.1 están cerrados, aprobados, congelados
 
 ```text
 5.1 Data and partition checks             = INTEGRATED
-5.2 Candidate retrieval performance       = V01 SCIENTIFIC PASS / NARROW CORRECTION ACTIVE
+5.2 Candidate retrieval performance       = GESTORA PASS / AUTHOR APPROVAL GATE OPEN
 5.3 Documentary evidence retrieval        = NOT AUTHORIZED
 5.4 Controlled explanation quality        = NOT AUTHORIZED
 5.5 Sensitivity and robustness analyses   = NOT AUTHORIZED
@@ -50,107 +50,61 @@ Experimental Design y Results B01 / §5.1 están cerrados, aprobados, congelados
 5.7 Summary by research question           = NOT AUTHORIZED
 ```
 
-## 3. Results B02 V01 — auditoría Gestora
-
-Entrega auditada:
+## 3. Results B02 V02 — candidato auditado
 
 ```text
-RESPONSE = article/responses/6_RESULTS_B02_SECTION5_2_RESPONSE_V01.md@19806a4d25b08c9897476861ee85c0bfbe360b91
-SECTION = article/sections/results/Results_B02_V01.md@a71be71ae4ff43231e424dbef445966ddf1d81a6
+RESPONSE = article/responses/6_RESULTS_B02_SECTION5_2_RESPONSE_V02.md@95036a4be7f9c1597d9c9ef6ec28b8e7d6bd1114
+SECTION = article/sections/results/Results_B02_V02.md@778c816302fd486c50e4d681b4a68d0847f03291
 
-CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V01.md
-SHA256 = 87b85f095e0cef6d6f9b12e70223596b563014a38bcacfa37c4e0448a66dad6c
-GIT_BLOB_EXPECTED = 804ae5709f08e878202f48465d4671bf70dc15c7
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.md
+SHA256 = 6b36a1260fadadce350d222fdbe580982eb3e3be39a117d18143eaa43f72fc54
+GIT_BLOB_EXPECTED = d392bdc2ae139ab692637c8c3a42ff6804f4d41a
 
-CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V01.docx
-SHA256 = c267f7da5415161b812aed10cef66929b6b6cd2be51ecb2196d43c2e1180ce6f
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.docx
+SHA256 = 3e27fd12997f581ab55c1b5ac16a28d45b28fa3896989b75da50792e3763e9e9
 COMMENTS = 40 / PRESERVED
 TRACKED_CHANGES = 0
+PAGE_COUNT = 52
 ```
 
 Revisión Gestora:
 
-`article/reviews/6_RESULTS_B02_SECTION5_2_INTERNAL_REVIEW_V01.md@9ab632e8a1f19a3b43a067467c401f76a4b3cd57`
+`article/reviews/6_RESULTS_B02_SECTION5_2_INTERNAL_REVIEW_V02.md@95dac70c547bfd3da9f99041c41263b8ef26fe71` — `PASS`.
 
-Dictamen:
+D-096:
 
-```text
-OVERALL_VERDICT = PASS_WITH_CORRECTIONS
-SCIENTIFIC_CONTENT = PASS
-NUMERICAL_FIDELITY = PASS
-SECTION_5_2_ONLY_DIFF = PASS
-ENGLISH_PROSE = PASS
-DOCX_OOXML_QA = PASS
-FULL_DOCX_RENDER = PASS / 52
-SPANISH_NATURALNESS = NARROW_CORRECTION_REQUIRED
-```
+`article/governance/D096_RESULTS_B02_V02_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@6ca323128fc75051844494fdb49664ec8b578bac`.
 
-## 4. Corrección estrecha activa
+La auditoría confirmó que la V02 aplica únicamente las correcciones españolas estrechas autorizadas por D-094, preserva íntegramente la Parte I inglesa y todo el contenido científico/numérico de B02 V01, mantiene la continuidad OOXML y supera el render completo de 52 páginas.
 
-D-094:
-
-`article/governance/D094_RESULTS_B02_V01_PASS_WITH_CORRECTIONS_AND_NARROW_REVISION_REQUIRED.md@f451f292928551c0545b7fc99fc312ca87a50b49`
-
-Correcciones congeladas en el espejo español de §5.2:
+## 4. Gate inmediato
 
 ```text
-métricas de early ranking
-→ métricas de desempeño en las primeras posiciones del ranking
-
-framework primario
-→ flujo primario del framework
-
-Section 5.6
-→ Sección 5.6
-```
-
-Prompt correctivo:
-
-`article/prompts/6_RESULTS_B02_V01_NARROW_SPANISH_NATURALNESS_CORRECTION.md@f8286d6b9ccd797057f47f6b200f7b20adec3359`
-
-Git blob:
-
-`e2477447f6eb6eb46a3a82270158109d7e5c87f1`
-
-Revisión del prompt:
-
-`article/reviews/6_RESULTS_B02_NARROW_SPANISH_CORRECTION_PROMPT_REVIEW_V01.md@36b6787d06af7afbcc0615bdf6ccc624a1760009` — `PASS`.
-
-Autorización:
-
-`article/governance/D095_RESULTS_B02_NARROW_SPANISH_CORRECTION_EXECUTION_AUTHORIZATION.md@20dfa9991239b5820087fddec390e59a1a0c272e`.
-
-## 5. Gate inmediato
-
-```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_B02_V02_NARROW_SPANISH_CORRECTION
-BASELINE_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V01.md
-BASELINE_MD_SHA256 = 87b85f095e0cef6d6f9b12e70223596b563014a38bcacfa37c4e0448a66dad6c
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V01.docx
-BASELINE_DOCX_SHA256 = c267f7da5415161b812aed10cef66929b6b6cd2be51ecb2196d43c2e1180ce6f
-EXPECTED_RESPONSE = article/responses/6_RESULTS_B02_SECTION5_2_RESPONSE_V02.md
-EXPECTED_SECTION = article/sections/results/Results_B02_V02.md
-EXPECTED_MASTER_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.md
-EXPECTED_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B02_V02.docx
-EXPECTED_EXIT = COMPLETED_PENDING_GESTORA_AUDIT
-AUTHOR_APPROVAL_GATE = CLOSED
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REQUEST_CHANGES_FOR_RESULTS_B02_V02
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B02_V02_ONLY
+CANONICAL_MASTER = ARTICLE_MASTER_V017
+TARGET_PROMOTION_IF_APPROVED = ARTICLE_MASTER_V018
 RESULTS_B03_PLUS = NOT_AUTHORIZED
+DISCUSSION = NOT_AUTHORIZED
+CONCLUSION = NOT_AUTHORIZED
 ```
 
-D-035 continúa activo. Los candidatos acumulativos V02 deben entregarse como archivos reales; no Base64 manual, chunking, fragmentación o reensamblado.
+La aprobación autoral debe referirse al candidato exacto V02 identificado por los hashes anteriores. Una aprobación no autoriza por sí misma B03: primero deberá materializarse y verificarse la promoción byte-exacta a V018 y cerrarse B02.
+
+D-035 continúa activo. Los masters acumulativos grandes no deben materializarse mediante workarounds de Base64/chunking/fragmentación/reensamblado.
 
 ---
 
 # English
 
-V017 remains canonical. Results B02 V01 passed scientific, numerical, differential, OOXML, and visual review but requires a frozen narrow Spanish-mirror naturalness correction before author approval. D-095 authorizes only that correction.
+V017 remains canonical. Results B02 V02 passed Gestora audit and is pending explicit author approval. The author-approval gate is open for the exact V02 MD/DOCX candidates only. If approved, the next promotion target is V018; Results B03+ remains unauthorized until B02 integration is completed and verified.
 
 ```text
-CURRENT_GATE = RESULTS_B02_V02_NARROW_CORRECTION_EXECUTION
-NEXT_ACTOR = DRAFTING_AI
-RESULTS_B02_V02 = NARROW_CORRECTION_ONLY
-AUTHOR_APPROVAL_GATE = CLOSED
+CURRENT_GATE = RESULTS_B02_V02_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+AUTHOR_APPROVAL_GATE = OPEN_FOR_B02_V02_ONLY
+TARGET_PROMOTION_IF_APPROVED = ARTICLE_MASTER_V018
 RESULTS_B03_PLUS = NOT_AUTHORIZED
 DISCUSSION = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
