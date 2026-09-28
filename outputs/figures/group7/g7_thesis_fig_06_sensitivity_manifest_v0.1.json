@@ -1,0 +1,260 @@
+{
+  "figure": "G7_THESIS_FIGURE_06_SENSITIVITY",
+  "status": "CANDIDATE_PENDING_EXTERNAL_AUDIT",
+  "prompt_commit": "c028b0a8ad1a7e7e3005ab635d60475d64a6a3a5",
+  "fig014_external_audit_commit": "a20f51496579446b86644022a64e2d68f1aab677",
+  "ref_g6": "e93b44164a9619dad1f527a3b2d4479265858e39",
+  "sources": [
+    {
+      "path": "src/figures/group6/render_g6_fig_03_exp11a.py",
+      "git_blob": "1723f139afd308c4966846247ffe4d2f330a0d4e",
+      "sha256": "bb73e2ce324500a36053afa52bc25a03af44def36ea2a7c2fd5c2c14a3cf844f",
+      "size_bytes": 6523
+    },
+    {
+      "path": "figures/group6/g6_fig_03_exp11a.svg",
+      "git_blob": "1b2aca9aa9c2582cf0b7e16850cd5b22387cc771",
+      "sha256": "a4a81b565ed2ceb22f23f9a52888e802b1e749186fb43d3bd71faf1b31d5f7c3",
+      "size_bytes": 33417
+    },
+    {
+      "path": "figures/group6/g6_fig_03_exp11a.png",
+      "git_blob": "eaf59497ee49ab36d34d23e42cf002111bc9fe3e",
+      "sha256": "3c4bcf736b56fbc9ffd054562db0eea31be195792f2bade611a9e5205dfa97de",
+      "size_bytes": 108923
+    },
+    {
+      "path": "outputs/results/group5/tables/g5_appendix_02_exp11a_size_composition_sensitivity.csv",
+      "git_blob": "cf3aedab5935d6af9b3ac7be7b51b954fcb9c403",
+      "sha256": "a88ec28a63143ac87a92b709997915857bb77e464ab8cbbb38576de650c27f7f",
+      "size_bytes": 12782
+    },
+    {
+      "path": "outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_metrics_by_run.csv",
+      "git_blob": "9b434d7e09e6db7e9de061953b59c53aac2337ad",
+      "sha256": "9e08376efb592221627c2c7227ef828c911d92b4ea5333718b76255dba78e0bd",
+      "size_bytes": 16523,
+      "checkout_sha256": "17ea82be306b81a44760716a0a6f5e55c0b7b5a97e30bc8e12ca59d58ad79958",
+      "checkout_size_bytes": 16555
+    },
+    {
+      "path": "outputs/experiments/exp11a_historical_size_sensitivity_v0.3/exp11_metrics_by_condition.csv",
+      "git_blob": "535dd377d107ddcbf09ecaa13cd66ca723ee738d",
+      "sha256": "25dca69c742746a6a1ab3b918a07d09c17a6522447b762ff4f8ad45d3233ad6b",
+      "size_bytes": 4273,
+      "checkout_sha256": "abf02173b6d72342444de21a3dcbbfbc448cabddec5c6a5175c9c0a0a603c1e7",
+      "checkout_size_bytes": 4280
+    }
+  ],
+  "protected_figures_4_5": [
+    {
+      "path": "src/figures/group7/render_g7_thesis_fig_04_he2.py",
+      "git_blob": "b22d25d41fa9014180fd63a36715942414e779a0",
+      "sha256": "2af80603d59ef6690fa3e63f7e6e5daea21cb1326e186a56470f35f562a84442",
+      "size_bytes": 5189,
+      "checkout_sha256": "2289a9320264403ed7f5450c0eee5213d0f68ddd2326c7cc59e544f8919e535d",
+      "checkout_size_bytes": 5308
+    },
+    {
+      "path": "figures/group7/g7_thesis_fig_04_he2.svg",
+      "git_blob": "e84fa3ee6aaedb2d3d24b59ce7255214621aae3f",
+      "sha256": "6946594f2543f4dced0e2f19ee73b8adc5e7fa3a2fdb92f7c68cb55f0e1e93b9",
+      "size_bytes": 25201,
+      "checkout_sha256": "053b12ea192175071c4274aa1ee4154ec3769f6c02f057e9fdd93bc159ef0e99",
+      "checkout_size_bytes": 25395
+    },
+    {
+      "path": "figures/group7/g7_thesis_fig_04_he2.png",
+      "git_blob": "eb77a4f2289a8701d22ba399d9432defd2092e2a",
+      "sha256": "5cde004fc5b3b76578de02bd9d4751c52d26f921821c96a0bafc1cac65c1eb1e",
+      "size_bytes": 300119,
+      "checkout_sha256": "5cde004fc5b3b76578de02bd9d4751c52d26f921821c96a0bafc1cac65c1eb1e",
+      "checkout_size_bytes": 300119
+    },
+    {
+      "path": "outputs/figures/group7/g7_thesis_fig_04_he2_manifest_v0.1.json",
+      "git_blob": "d6d69a65614348f2fbeab192faacc435b134c99f",
+      "sha256": "4c0623c49f4cebf7983fa6923fd182a55a8cacc1a8da735c1e175c8d6f5cf23b",
+      "size_bytes": 4995,
+      "checkout_sha256": "9dbabdeed0e58f6191bf657edce8ff3ec890358c700e4b7b0b7486a4507aeda3",
+      "checkout_size_bytes": 5105
+    },
+    {
+      "path": "src/figures/group7/render_g7_thesis_fig_05_coverage.py",
+      "git_blob": "cd7bdc2c189635ecbe499a01e0e96c9a961fff9c",
+      "sha256": "aa0ef8d3ecbc065bf06ba28cfc2518c4ab3fad682d31e45f25c6881bde1ead4e",
+      "size_bytes": 5172,
+      "checkout_sha256": "f6c4fea7746b771993840609b9bf3858dcb1f24fc811d64ffae131e235a57f51",
+      "checkout_size_bytes": 5272
+    },
+    {
+      "path": "figures/group7/g7_thesis_fig_05_coverage.svg",
+      "git_blob": "6cba4d776046e052ca4f76297ab627f2a3762046",
+      "sha256": "f91302a0e1179fc52d1f647260b10bba7b1fbb75e302f241f6dbf158cba64051",
+      "size_bytes": 9070,
+      "checkout_sha256": "78e95ab905f2e886e47156d28d741cf6366393fa627e010050ad9b93a9df42e7",
+      "checkout_size_bytes": 9133
+    },
+    {
+      "path": "figures/group7/g7_thesis_fig_05_coverage.png",
+      "git_blob": "d63559e4da4b391d47968a60a41649c715d5408b",
+      "sha256": "aecc77e8fd6272766eaf9f7a72d6bc531ef45d448264cac1b95a2ac30edd59c0",
+      "size_bytes": 164051,
+      "checkout_sha256": "aecc77e8fd6272766eaf9f7a72d6bc531ef45d448264cac1b95a2ac30edd59c0",
+      "checkout_size_bytes": 164051
+    },
+    {
+      "path": "outputs/figures/group7/g7_thesis_fig_05_coverage_manifest_v0.1.json",
+      "git_blob": "a4bed4c6583926588fc71fc47dde5931e5756162",
+      "sha256": "2a6f8b13936e074971c7d8395936595dc369f0495188c09c85b0b27320ddceb3",
+      "size_bytes": 4703,
+      "checkout_sha256": "b7f8837052f405eec62506e9e3a2d14968ad555ced24495d09c38961ea87f1bf",
+      "checkout_size_bytes": 4810
+    }
+  ],
+  "candidate_outputs": [
+    {
+      "path": "src/figures/group7/render_g7_thesis_fig_06_sensitivity.py",
+      "git_blob": "b433fa5d45246ee22bae324835cdc9ff15c744cf",
+      "sha256": "76d93530e802629985a85619bac9932598b465674f66a8d1bd3ee37169142c0b",
+      "size_bytes": 4615,
+      "checkout_sha256": "76d93530e802629985a85619bac9932598b465674f66a8d1bd3ee37169142c0b",
+      "checkout_size_bytes": 4615
+    },
+    {
+      "path": "figures/group7/g7_thesis_fig_06_sensitivity.svg",
+      "git_blob": "f6b4a1459b70daa5e2106dc6cd999a12668131a8",
+      "sha256": "780cbf167cb597ebd7e644638a5a3b5c648b47299dfdf8b66b357014a4549584",
+      "size_bytes": 33540,
+      "checkout_sha256": "6c0aa9502070b1fb9b04bfdf01e40df1e7a45d7d02db86f851cf7fd15e194c9b",
+      "checkout_size_bytes": 33846
+    },
+    {
+      "path": "figures/group7/g7_thesis_fig_06_sensitivity.png",
+      "git_blob": "667765204adbdb7ab7567e9546f6ed8c71051d91",
+      "sha256": "4eeb3a63d4bb8a22c5b00f6d3efe4d2733c2caeec52373fa7e1c05ac27a24ae3",
+      "size_bytes": 112767,
+      "checkout_sha256": "4eeb3a63d4bb8a22c5b00f6d3efe4d2733c2caeec52373fa7e1c05ac27a24ae3",
+      "checkout_size_bytes": 112767
+    }
+  ],
+  "visible_text_substitutions": {
+    "EXP11A joint size-composition sensitivity": "Sensibilidad conjunta del banco histórico a tamaño y composición",
+    "Observed runs only; descriptive and noncausal; no summaries, CI, p-values, or fitted trends": "Solo corridas observadas; análisis descriptivo y no causal; sin resúmenes como marcas, IC, valores p ni tendencias ajustadas",
+    "Top1": "Top-1",
+    "Top3": "Top-3",
+    "Top5": "Top-5",
+    "Top10": "Top-10",
+    "Top50": "Top-50",
+    "MRR": "MRR",
+    "H100 ref.": "H100 (ref.)",
+    "Conditions are categorical observed banks; H100 is one frozen reference. Size and composition vary jointly.": "Las condiciones representan bancos observados categóricos; H100 es una única referencia congelada. El tamaño y la composición varían conjuntamente."
+  },
+  "local_typographic_adjustments": [],
+  "scientific_invariants": {
+    "canvas_svg_units": [
+      1200,
+      800
+    ],
+    "png_pixels": [
+      3000,
+      2000
+    ],
+    "png_nominal_dpi": 300,
+    "panel_count": 6,
+    "scientific_metric_order": [
+      "Top1",
+      "Top3",
+      "Top5",
+      "Top10",
+      "Top50",
+      "MRR"
+    ],
+    "visible_metric_labels": [
+      "Top-1",
+      "Top-3",
+      "Top-5",
+      "Top-10",
+      "Top-50",
+      "MRR"
+    ],
+    "condition_order": [
+      "H25",
+      "H50-D1",
+      "H50-D2",
+      "H75",
+      "H100"
+    ],
+    "counts_by_condition": [
+      10,
+      5,
+      5,
+      10,
+      1
+    ],
+    "observed_run_count": 31,
+    "rendered_point_count": 186,
+    "y_range_all_panels": [
+      0,
+      1
+    ],
+    "jitter": "IDENTICAL_TO_G6",
+    "point_coordinates": "IDENTICAL_TO_G6",
+    "h100_marker": "SINGLE_SOLID_DIAMOND_PER_PANEL",
+    "other_run_markers": "OPEN_CIRCLES",
+    "separator_before_h100": "IDENTICAL_TO_G6",
+    "connecting_lines": "NONE",
+    "ci": "NONE",
+    "p_values": "NONE",
+    "regression": "NONE",
+    "smoothing": "NONE",
+    "summary_marks": "NONE",
+    "eval_n": 1056,
+    "dam_n": 67,
+    "nandina_n": 42,
+    "scientific_role": "DESCRIPTIVE_SENSITIVITY / NONCAUSAL",
+    "he5": "INCONCLUSIVE"
+  },
+  "scientific_data_change": false,
+  "scientific_geometry_change": false,
+  "non_text_svg_geometry_match": true,
+  "observed_run_count": 31,
+  "deterministic_rerun_match": true,
+  "deterministic_renders": [
+    {
+      "path": "figures/group7/g7_thesis_fig_06_sensitivity.svg",
+      "first_sha256": "6c0aa9502070b1fb9b04bfdf01e40df1e7a45d7d02db86f851cf7fd15e194c9b",
+      "second_sha256": "6c0aa9502070b1fb9b04bfdf01e40df1e7a45d7d02db86f851cf7fd15e194c9b"
+    },
+    {
+      "path": "figures/group7/g7_thesis_fig_06_sensitivity.png",
+      "first_sha256": "4eeb3a63d4bb8a22c5b00f6d3efe4d2733c2caeec52373fa7e1c05ac27a24ae3",
+      "second_sha256": "4eeb3a63d4bb8a22c5b00f6d3efe4d2733c2caeec52373fa7e1c05ac27a24ae3"
+    }
+  ],
+  "h100_visible_label": "H100 (ref.)",
+  "h100_font_size_svg_units": 14.5,
+  "h100_text_anchor": "middle",
+  "h100_position_adjustment": "none",
+  "h100_line_break": "none",
+  "h100_overlap_with_h75": false,
+  "h100_h75_horizontal_gap_svg_units": [
+    17.6,
+    17.6,
+    17.6,
+    17.6,
+    17.6,
+    17.6
+  ],
+  "minimum_effective_svg_pt": 8.7,
+  "minimum_effective_raster_pt": 8.64,
+  "text_clipping": false,
+  "material_text_overlap": false,
+  "thesis_visible_internal_ids": "none",
+  "g6_protected_artifacts_unchanged": true,
+  "figure4_candidate_unchanged": true,
+  "figure5_candidate_unchanged": true,
+  "docx_modified": false,
+  "a043_executed": false,
+  "121g_executed": false
+}
