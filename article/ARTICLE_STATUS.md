@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.35
-LATEST_EDITORIAL_DECISION = D-126
+ARTICLE_WRITING_PLAN = V3.36
+LATEST_EDITORIAL_DECISION = D-127
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 RELATED_WORK = CLOSED / APPROVED / FROZEN / INTEGRATED
@@ -29,15 +29,25 @@ CANONICAL_DOCX_PAGE_COUNT = 60
 DISCUSSION_B01_INTEGRATION = article/governance/D124_DISCUSSION_B01_AUTHOR_APPROVAL_V024_VERIFICATION_AND_INTEGRATION.md@e59007e8d235c63ab67c5a5d34a7ca6c1addb918
 V024_PROMOTION = PASS / BYTE_EXACT
 CURRENT_DRAFTING_PHASE = DISCUSSION
-DISCUSSION_B02_SECTION_6_2 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_PROMPT_ONLY
+DISCUSSION_B02_SECTION_6_2 = GESTORA_AUDITED / PASS / PENDING_AUTHOR_APPROVAL
 DISCUSSION_B02_BOUNDARY = article/governance/D125_DISCUSSION_B02_SECTION6_2_INTERPRETIVE_BOUNDARY_AND_LITERATURE_TRACE.md@ecc20192dd87d168dc49bac2935cc73b2de4dc1a
 DISCUSSION_B02_PROMPT = article/prompts/7_DISCUSSION_B02_SECTION6_2.md@4c54ca73d4886e7b5885727f9bd46b77d64580d8
-DISCUSSION_B02_PROMPT_GIT_BLOB = 2f4ac3dbb8175116b31127b03c402ca8bd147822
-DISCUSSION_B02_PROMPT_REVIEW = article/reviews/7_DISCUSSION_B02_SECTION6_2_PROMPT_INTERNAL_REVIEW_V01.md@4025791c3fce6d0e3fabea38b94bcda9cc2a11e3
-DISCUSSION_B02_PROMPT_REVIEW_RESULT = PASS
 DISCUSSION_B02_AUTHORIZATION = article/governance/D126_DISCUSSION_B02_SECTION6_2_EXECUTION_AUTHORIZATION.md@73b736ff9e95e244bbbde56b48853f1350cf5714
-CURRENT_GATE = DISCUSSION_B02_SECTION_6_2_DRAFTING_V01
-AUTHOR_APPROVAL_GATE = NOT_OPEN
+DISCUSSION_B02_RESPONSE = article/responses/7_DISCUSSION_B02_SECTION6_2_RESPONSE_V01.md@77a4e87fe7293c26d2af2e1160e2000117fb21a1
+DISCUSSION_B02_SECTION = article/sections/discussion/Discussion_B02_V01.md@9f95e5d0367f305e73a71913b6e37e1bc0e09069
+DISCUSSION_B02_SECTION_GIT_BLOB = e9f8abaf6d023e7fe3c46460cab8fd345bec1caf
+DISCUSSION_B02_CANDIDATE_MD_SHA256 = a805cd220904fb4972d0db59764425aff87a49c8ec1cd34936e85913778feee5
+DISCUSSION_B02_CANDIDATE_MD_GIT_BLOB = 829a6f5df87cf91dcafe89c48c1afd48ddbd2faf
+DISCUSSION_B02_CANDIDATE_DOCX_SHA256 = cc8f765bc197acbb210ebcb01da104ebd282481013d549ca51c8cf80268786c7
+DISCUSSION_B02_CANDIDATE_DOCX_COMMENTS = 44
+DISCUSSION_B02_CANDIDATE_DOCX_TRACKED_CHANGES = 0
+DISCUSSION_B02_CANDIDATE_DOCX_PAGE_COUNT = 62
+DISCUSSION_B02_GESTORA_REVIEW = article/reviews/7_DISCUSSION_B02_SECTION6_2_INTERNAL_REVIEW_V01.md@60a50d8191ec443f001cb6480295c9e18c30e9ac
+DISCUSSION_B02_GESTORA_REVIEW_RESULT = PASS
+DISCUSSION_B02_AUTHOR_GATE = article/governance/D127_DISCUSSION_B02_V01_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@a705f2dc7a43e32797a2dbe43d335ffedeb0ee90
+CURRENT_GATE = DISCUSSION_B02_V01_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+TARGET_IF_APPROVED = ARTICLE_MASTER_V025
 DISCUSSION_B03_PLUS = NOT_AUTHORIZED
 D035_TIMEOUT_SAFE_HANDOFF = MANDATORY
 CONCLUSION = NOT_AUTHORIZED
@@ -47,27 +57,30 @@ NOVELTY = NOT_DECLARED
 
 ### Estado vigente
 
-El autor aprobó Discussion B01 V01 y materializó `ARTICLE_MASTER_V024.md`. IA Gestora verificó Git blob `d0ecf9f4a44b8900dd1b65f289fb0b2abf6d29c0`, idéntico al candidato aprobado. D-124 registra la promoción byte-exacta e integración de §6.1.
+`ARTICLE_MASTER_V024.md` continúa siendo el master Markdown canónico verificado. Results §5.1–§5.7 y Discussion §6.1 están cerrados, aprobados, congelados e integrados.
 
-El Word acumulativo canónico es `ARTICLE_MASTER_CANDIDATE_DISCUSSION_B01_V01.docx`, SHA-256 `cc0bb87adacbfbca7403335f6a1070acf27f04b05c2d6a8772b0608c3923f0e0`, bajo custodia local del autor, con 42 comentarios, 0 tracked changes y 60 páginas auditadas.
+Discussion B02 / §6.2 V01 fue completado bajo D-125/D-126 y auditado independientemente por IA Gestora. La revisión `article/reviews/7_DISCUSSION_B02_SECTION6_2_INTERNAL_REVIEW_V01.md` registró `PASS` sin correcciones obligatorias.
 
-IA Gestora abrió Discussion B02 / §6.2 mediante D-125. El bloque interpretará el uso controlado del LLM exclusivamente como componente downstream de explicación, utilizando Sections 3.6, 4.5, 4.6.3, 5.4 y 5.7-RQ3. La lectura debe mantener simultáneamente preservación estructural 50/50 y auditabilidad cualitativa 28/50, tratar el 0/50 de schema como `PROMPT_SCHEMA_SPECIFICATION_MISMATCH`, y mantener explícita la modalidad LLM-as-judge.
+La auditoría verificó que el candidato Markdown modifica exclusivamente los placeholders inglés y español de §6.2. Al revertir esos dos bloques se reconstruye exactamente el SHA-256 de V024. El contenido mantiene la función explanation-only del LLM, reproduce fielmente los resultados RQ3 autorizados y no introduce claims de seguridad, reducción de alucinaciones, validación humana, causalidad, superioridad global, corrección jurídica, novelty ni `FINAL_GAP`.
 
-El contraste bibliográfico se limita a Marra de Artiñano et al. (2023) y Kim et al. (2025), para comparar únicamente autoridad y posición funcional del LLM. El prompt pasó revisión interna `PASS`. D-126 autoriza exclusivamente Discussion B02 V01, con exactamente dos nuevas citas/comentarios ingleses; el candidato Word esperado debe terminar con 44 comentarios y 0 tracked changes.
+El candidato Markdown auditado es `ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_V01.md`, SHA-256 `a805cd220904fb4972d0db59764425aff87a49c8ec1cd34936e85913778feee5`, Git blob esperado `829a6f5df87cf91dcafe89c48c1afd48ddbd2faf`. El DOCX auditado es `ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_V01.docx`, SHA-256 `cc8f765bc197acbb210ebcb01da104ebd282481013d549ca51c8cf80268786c7`, con 44 comentarios, 0 tracked changes y 62 páginas.
+
+Los 42 comentarios heredados fueron preservados canónicamente; se añadieron exactamente dos comentarios nuevos correctamente anclados a Marra de Artiñano et al. (2023) y Kim et al. (2025). El paquete OOXML mantiene 14 partes y solo modifica `word/document.xml` y `word/comments.xml`. El render independiente y la inspección visual resultaron `PASS`.
+
+D-127 abre exclusivamente el gate de aprobación del autor. El `PASS` Gestora no autoriza integración. Si el autor aprueba, la única promoción permitida será byte-exacta a `article/manuscript/ARTICLE_MASTER_V025.md`, seguida de verificación independiente. Discussion B03+ y Conclusion permanecen cerradas.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ONLY_DISCUSSION_B02_SECTION_6_2_PROMPT
-BASELINE_MASTER_MD = article/manuscript/ARTICLE_MASTER_V024.md
-BASELINE_MASTER_MD_SHA256 = 0b6ea338cf325c1c59e23f91633791f97868c91eeaea44cca89f8d65c6ee7864
-BASELINE_MASTER_MD_GIT_BLOB = d0ecf9f4a44b8900dd1b65f289fb0b2abf6d29c0
-BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B01_V01.docx
-BASELINE_DOCX_SHA256 = cc0bb87adacbfbca7403335f6a1070acf27f04b05c2d6a8772b0608c3923f0e0
-BASELINE_COMMENTS = 42
-EXPECTED_COMMENTS = 44
-EXPECTED_EXIT = DISCUSSION_B02_V01_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REJECT_DISCUSSION_B02_V01
+APPROVAL_OBJECT_MD = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_V01.md
+APPROVAL_OBJECT_MD_SHA256 = a805cd220904fb4972d0db59764425aff87a49c8ec1cd34936e85913778feee5
+APPROVAL_OBJECT_MD_GIT_BLOB = 829a6f5df87cf91dcafe89c48c1afd48ddbd2faf
+APPROVAL_OBJECT_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_V01.docx
+APPROVAL_OBJECT_DOCX_SHA256 = cc8f765bc197acbb210ebcb01da104ebd282481013d549ca51c8cf80268786c7
+CANONICAL_MASTER_UNTIL_APPROVAL_AND_PROMOTION = ARTICLE_MASTER_V024
+TARGET_IF_APPROVED = ARTICLE_MASTER_V025
 DISCUSSION_B03_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 ```
@@ -78,18 +91,20 @@ CONCLUSION = NOT_AUTHORIZED
 
 ```text
 WORKING_BRANCH = article/main-manuscript
-ARTICLE_WRITING_PLAN = V3.35
-LATEST_EDITORIAL_DECISION = D-126
+ARTICLE_WRITING_PLAN = V3.36
+LATEST_EDITORIAL_DECISION = D-127
 CANONICAL_MASTER = ARTICLE_MASTER_V024
 RESULTS = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B01 = CLOSED / APPROVED / FROZEN / INTEGRATED
-DISCUSSION_B02 = OPEN / AUTHORIZED_FOR_DRAFTING_UNDER_PROMPT_ONLY
-CURRENT_GATE = DISCUSSION_B02_SECTION_6_2_DRAFTING_V01
-NEXT_ACTOR = IA_REDACCION
+DISCUSSION_B02 = GESTORA_AUDITED / PASS / PENDING_AUTHOR_APPROVAL
+CURRENT_GATE = DISCUSSION_B02_V01_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+AUTHOR_APPROVAL_GATE = OPEN
+TARGET_IF_APPROVED = ARTICLE_MASTER_V025
 DISCUSSION_B03_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
 ```
 
-V024 is canonical and verified. Discussion B01 is integrated. Discussion B02 / Section 6.2 is the only open drafting block under D-125/D-126.
+V024 remains canonical. Discussion B02 / Section 6.2 V01 passed independent Managing-AI audit and awaits explicit author approval. If approved, only byte-exact promotion to V025 is permitted before integration and any Discussion B03 authorization.
