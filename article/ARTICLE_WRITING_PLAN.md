@@ -1,29 +1,30 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.38
+PLAN_VERSION = V3.39
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-131
-CANONICAL_MASTER = ARTICLE_MASTER_V025
-CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V025.md
-CANONICAL_MASTER_MD_SHA256 = a805cd220904fb4972d0db59764425aff87a49c8ec1cd34936e85913778feee5
-CANONICAL_MASTER_MD_GIT_BLOB = 829a6f5df87cf91dcafe89c48c1afd48ddbd2faf
-CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_V01.docx / LOCAL_AUTHOR_CUSTODY
-CANONICAL_MASTER_DOCX_SHA256 = cc8f765bc197acbb210ebcb01da104ebd282481013d549ca51c8cf80268786c7
-CANONICAL_CITATION_COMMENTS = 44
+LATEST_EDITORIAL_DECISION = D-134
+CANONICAL_MASTER = ARTICLE_MASTER_V026
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V026.md
+CANONICAL_MASTER_MD_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
+CANONICAL_MASTER_MD_GIT_BLOB = f6a63be554317e62103aa96c1091f4039249e5ee
+CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_MASTER_DOCX_SHA256 = bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57
+CANONICAL_CITATION_COMMENTS = 48
 CURRENT_DRAFTING_PHASE = DISCUSSION
 RESULTS_SECTIONS_5_1_TO_5_7 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B01_SECTION_6_1 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B02_SECTION_6_2 = CLOSED / APPROVED / FROZEN / INTEGRATED
-DISCUSSION_B03_SECTION_6_3 = AUDITED / PASS / PENDING_AUTHOR_APPROVAL
-CURRENT_GATE = DISCUSSION_B03_V01_AUTHOR_APPROVAL
-AUTHOR_APPROVAL_GATE = OPEN
-NEXT_ACTOR = AUTHOR
-DISCUSSION_B04_PLUS = NOT_AUTHORIZED
+DISCUSSION_B03_SECTION_6_3 = CLOSED / APPROVED / FROZEN / INTEGRATED
+DISCUSSION_B04_SECTION_6_4 = AUTHORIZED_FOR_EXECUTION
+CURRENT_GATE = DISCUSSION_B04_V01_DRAFTING
+AUTHOR_APPROVAL_GATE = NOT_OPEN
+NEXT_ACTOR = IA_REDACCION
+DISCUSSION_B05_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
@@ -35,26 +36,11 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V025.md` permanece como master Markdown canónico verificado. Results §5.1–§5.7 y Discussion §6.1–§6.2 están cerrados, aprobados, congelados e integrados.
+`ARTICLE_MASTER_V026.md` es el master Markdown canónico verificado tras promoción byte-exacta del candidato Discussion B03 V01 aprobado por el autor. Results §5.1–§5.7 y Discussion §6.1–§6.3 están cerrados, aprobados, congelados e integrados.
 
-Discussion B03 / §6.3 V01 fue ejecutado, auditado por IA Gestora y recibió veredicto `PASS` sin correcciones obligatorias. Aún no está integrado: se encuentra en gate de aprobación del autor bajo D-131.
-
-El Word acumulativo canónico anterior continúa siendo:
+El Word acumulativo canónico es:
 
 ```text
-ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_V01.docx
-SHA256 = cc8f765bc197acbb210ebcb01da104ebd282481013d549ca51c8cf80268786c7
-COMMENTS = 44
-TRACKED_CHANGES = 0
-PAGE_COUNT = 62
-```
-
-El candidato B03 auditado es:
-
-```text
-ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.md
-SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
-GIT_BLOB = f6a63be554317e62103aa96c1091f4039249e5ee
 ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx
 SHA256 = bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57
 COMMENTS = 48
@@ -67,63 +53,73 @@ PAGE_COUNT = 64
 ```text
 6.1 Separating candidate ranking from documentary evidence = INTEGRATED
 6.2 Controlled use of the LLM for explanation              = INTEGRATED
-6.3 Comparison with prior work                             = AUDITED PASS / PENDING AUTHOR APPROVAL
-6.4 Implications for auditable decision support            = NOT AUTHORIZED
+6.3 Comparison with prior work                             = INTEGRATED
+6.4 Implications for auditable decision support            = AUTHORIZED FOR EXECUTION
 6.5 Configurability and transfer conditions                = NOT AUTHORIZED
 6.6 Limitations                                            = NOT AUTHORIZED
 ```
 
-## 3. Trazabilidad B03
+## 3. Cierre e integración B03
+
+Author approval + V026 verification + integration:
+`article/governance/D132_DISCUSSION_B03_AUTHOR_APPROVAL_V026_VERIFICATION_AND_INTEGRATION.md@3d56571e267f0f58673f32391b9f8cf7420e8c39`
+
+```text
+V026_PROMOTION = PASS / BYTE_EXACT
+V026_GIT_BLOB = f6a63be554317e62103aa96c1091f4039249e5ee
+V026_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
+DISCUSSION_B03 = CLOSED / APPROVED / FROZEN / INTEGRATED
+```
+
+## 4. Trazabilidad B04
 
 Boundary:
-`article/governance/D129_DISCUSSION_B03_SECTION6_3_INTERPRETIVE_BOUNDARY_AND_LITERATURE_TRACE.md@03222ca5666de2a408bd3131e22c1bd56e85dd36`
+`article/governance/D133_DISCUSSION_B04_SECTION6_4_INTERPRETIVE_BOUNDARY_AND_AUDITABILITY_TRACE.md@be5a3df880d6fea49e18e64d6080d3485a5850de`
 
 Prompt:
-`article/prompts/7_DISCUSSION_B03_SECTION6_3.md@2203f81bfb3020219aac9c32e4605b357fa8cf81`
+`article/prompts/7_DISCUSSION_B04_SECTION6_4.md@982375ae4b6660bd05d962b7ed681d59354e39c0`
+
+Prompt Git blob:
+`f75fde7e666cbcc527de3f29c5dd787c14318836`
 
 Prompt review:
-`article/reviews/7_DISCUSSION_B03_SECTION6_3_PROMPT_INTERNAL_REVIEW_V01.md@03fac8bded59a495c5c1d72d126aded0fab15bff` — `PASS`.
+`article/reviews/7_DISCUSSION_B04_SECTION6_4_PROMPT_INTERNAL_REVIEW_V01.md@1c8414169bacd6b6082d11e318308416d70f0fe3` — `PASS`.
 
 Execution authorization:
-`article/governance/D130_DISCUSSION_B03_SECTION6_3_EXECUTION_AUTHORIZATION.md@156521548817b30dec11171926876f16477db358`.
+`article/governance/D134_DISCUSSION_B04_SECTION6_4_EXECUTION_AUTHORIZATION.md@88e620c4587fdf49ade4da89d48903a2d6eef64b`.
 
-Drafting response:
-`article/responses/7_DISCUSSION_B03_SECTION6_3_RESPONSE_V01.md@ffc6b710906163c0f22da135a87cb4eb54e72906`.
+## 5. Contrato científico B04
 
-Section artifact:
-`article/sections/discussion/Discussion_B03_V01.md@e7c5747786bb22e92145a7adf397cdb1af7a3656`.
+§6.4 interpretará las implicaciones del contrato explícito de autoridad para apoyo a decisiones auditable. Historical retrieval genera y ordena candidatos; el Top-3 se fija antes de documentary association; documentary evidence no puede modificar membership u orden; el LLM es downstream explanation-only.
 
-Gestora internal review:
-`article/reviews/7_DISCUSSION_B03_SECTION6_3_INTERNAL_REVIEW_V01.md@91f7eb3485b869025b41e0766d6eeb272bcaaf7b` — `PASS`.
+Ground truth congelado para la sección:
 
-Author approval gate:
-`article/governance/D131_DISCUSSION_B03_V01_AUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md@dfd89e4288a601f13f0b3d3aaeb3a34c4e07a9d0`.
+- RQ2: 3,168/3,168 candidate slots con asociación documental exacta NANDINA-8; 1,056/1,056 casos con preservación del Top-3 y su orden.
+- RQ3 structural: 50/50 casos preservaron fixed Top-3/order y controles estructurales; 150/150 slots preservaron código, referencia histórica, referencia normativa y rank consistency.
+- RQ3 qualitative: 28/50 = 56.0% cumplieron el criterio congelado de auditabilidad.
+- Traceability = 2.00/2; mean verifiability = 0.54/2; mean historical–normative separation = 1.04/2.
+- Schema compliance = 0/50 únicamente por `PROMPT_SCHEMA_SPECIFICATION_MISMATCH` relativo a `advertencias_globales`.
+- Qualitative evaluator = LLM-as-judge (`AI_EXPERT_ROLE`), no human validation.
 
-## 4. Contrato científico B03 auditado
+La interpretación autorizada es que autoridad no solapada y provenance por candidato permiten inspeccionar outputs y fallos por etapa, pero trazabilidad estructural no es suficiente para demostrar verificabilidad, calidad de explicación, validación humana ni corrección jurídica. La coherencia versionada entre prompt y schema puede discutirse como requisito técnico de validación de interfaces.
 
-§6.3 compara prior work por función, autoridad y secuenciación de componentes y no por porcentajes de desempeño. Reconoce a Lee et al. (2023) como prior art cercano de candidate prediction seguida de evidence retrieval. Marra de Artiñano et al. (2023) y Kim et al. (2025) se usan para contrastar configuraciones en las que el LLM participa en clasificación con el rol explanation-only downstream del presente estudio.
-
-El posicionamiento permitido se limita al contrato operativo explícito: historical retrieval fija el Top-3 antes de documentary evidence; las etapas downstream no pueden modificar membership ni orden; y candidate retrieval, documentary association y controlled explanation se evalúan como objetos separados.
-
-Ese posicionamiento no autoriza novelty, first-ever, state-of-the-art, superioridad global, causalidad, cross-study numerical superiority, legal correctness ni external generalization.
-
-## 5. Auditoría Word y citas
-
-La ejecución añadió exactamente cuatro nuevas citas/comentarios ingleses —Lee et al. (2021), Lee et al. (2023), Marra de Artiñano et al. (2023) y Kim et al. (2025)— y preservó los 44 comentarios heredados. El candidato Word contiene 48 comentarios, 0 tracked changes y 64 páginas. Solo `word/document.xml` y `word/comments.xml` cambiaron respecto del baseline B02. El render completo y la equivalencia EN/ES pasaron auditoría.
+No se autoriza nueva literatura, nuevas citas, novelty, first-ever, state-of-the-art, superioridad global, safety, reducción de alucinaciones, causalidad, overall classification accuracy, substantive normative correctness, legal correctness, deployment readiness ni external generalization.
 
 ## 6. Gate inmediato
 
 ```text
-NEXT_ACTOR = AUTHOR
-NEXT_ACTION = APPROVE_OR_REJECT_DISCUSSION_B03_V01
-AUTHOR_APPROVAL_GATE = OPEN
-CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.md
-CANDIDATE_MD_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
-CANDIDATE_MD_GIT_BLOB = f6a63be554317e62103aa96c1091f4039249e5ee
-CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx
-CANDIDATE_DOCX_SHA256 = bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57
-IF_APPROVED = AUTHOR_MATERIALIZES_ARTICLE_MASTER_V026_MD / IA_GESTORA_VERIFIES_AND_INTEGRATES
-DISCUSSION_B04_PLUS = NOT_AUTHORIZED_UNTIL_B03_INTEGRATION
+NEXT_ACTOR = IA_REDACCION
+NEXT_ACTION = EXECUTE_DISCUSSION_B04_V01_ONLY
+PROMPT = article/prompts/7_DISCUSSION_B04_SECTION6_4.md
+BASELINE_MD = article/manuscript/ARTICLE_MASTER_V026.md
+BASELINE_MD_SHA256 = 76107b20419329ef7a5c6643fec892fbdc0e0779c1ab58f6de41bc36711f4156
+BASELINE_MD_GIT_BLOB = f6a63be554317e62103aa96c1091f4039249e5ee
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B03_V01.docx
+BASELINE_DOCX_SHA256 = bd57ee1242222fbb25e41c47cc6dd7417ea245af87e3034a5a34a6ea78656b57
+BASELINE_COMMENTS = 48
+EXPECTED_COMMENTS_AFTER_B04 = 48
+EXPECTED_EXIT = DISCUSSION_B04_V01_COMPLETED_PENDING_GESTORA_AUDIT
+DISCUSSION_B05_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 ```
 
@@ -131,14 +127,16 @@ CONCLUSION = NOT_AUTHORIZED
 
 # English
 
-V025 remains the canonical master. Results Sections 5.1–5.7 and Discussion Sections 6.1–6.2 are integrated. Discussion B03 / Section 6.3 has passed Managing-AI audit with no mandatory corrections and is pending explicit author approval under D-131. The candidate contains exactly four new English citation comments, 48 total comments, zero tracked changes, and passed full-render visual QA. Section 6.4+, Conclusion, novelty, first-ever, state-of-the-art, cross-study numerical superiority, legal-correctness, and external-generalization claims remain unauthorized.
+V026 is the verified canonical Markdown master. Results Sections 5.1–5.7 and Discussion Sections 6.1–6.3 are integrated. Discussion B04 / Section 6.4 has a frozen interpretive boundary, an internally reviewed prompt with `PASS`, and execution authorization under D-134.
+
+B04 is restricted to implications for auditable decision support from the already evaluated authority contract and RQ2/RQ3 evidence. Structural traceability must remain distinct from verification, human validation, legal correctness, safety, deployment validation, and overall classification accuracy. No new citations are authorized; the cumulative Word must preserve exactly 48 comments and zero tracked changes.
 
 ```text
-PLAN_VERSION = V3.38
-CURRENT_GATE = DISCUSSION_B03_V01_AUTHOR_APPROVAL
-NEXT_ACTOR = AUTHOR
-DISCUSSION_B03 = AUDITED / PASS / PENDING_AUTHOR_APPROVAL
-DISCUSSION_B04_PLUS = NOT_AUTHORIZED
+PLAN_VERSION = V3.39
+CURRENT_GATE = DISCUSSION_B04_V01_DRAFTING
+NEXT_ACTOR = IA_REDACCION
+DISCUSSION_B04 = AUTHORIZED_FOR_EXECUTION
+DISCUSSION_B05_PLUS = NOT_AUTHORIZED
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
