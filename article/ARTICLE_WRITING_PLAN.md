@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.48
+PLAN_VERSION = V3.49
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-149
+LATEST_EDITORIAL_DECISION = D-150
 CANONICAL_MASTER = ARTICLE_MASTER_V028
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V028.md
 CANONICAL_MASTER_MD_SHA256 = c154257a2c203e580372dd404df875ef808c325947ce580171e2e306961e568e
@@ -25,7 +25,7 @@ DISCUSSION_B03_SECTION_6_3 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B04_SECTION_6_4 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B05_SECTION_6_5 = CLOSED / APPROVED / FROZEN / INTEGRATED
 DISCUSSION_B05_INTEGRATION = D-144
-DISCUSSION_B06_SECTION_6_6 = V02_AUDITED / PASS / AUTHOR_APPROVAL_GATE_OPEN
+DISCUSSION_B06_SECTION_6_6 = AUTHOR_APPROVED / V029_PROMOTION_PENDING_VERIFICATION
 DISCUSSION_B06_BOUNDARY = D-145
 DISCUSSION_B06_V01_AUTHORIZATION = D-146
 DISCUSSION_B06_V01_RESPONSE = article/responses/7_DISCUSSION_B06_SECTION6_6_RESPONSE_V01.md@ecaa765075d0d287885700fa6818fd158306c6fd
@@ -41,18 +41,23 @@ DISCUSSION_B06_V02_SECTION = article/sections/discussion/Discussion_B06_V02.md@4
 DISCUSSION_B06_V02_INTERNAL_REVIEW = article/reviews/7_DISCUSSION_B06_SECTION6_6_INTERNAL_REVIEW_V02.md@d32f9eb5bc9d6b556a8287d57a0102fab8917a6e
 DISCUSSION_B06_V02_REVIEW_RESULT = PASS
 DISCUSSION_B06_AUTHOR_APPROVAL_GATE = D-149
+DISCUSSION_B06_AUTHOR_APPROVAL = APPROVED
+DISCUSSION_B06_PROMOTION_GATE = D-150
 B06_V02_CANDIDATE_MD_SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
 B06_V02_CANDIDATE_MD_GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
 B06_V02_CANDIDATE_DOCX_SHA256 = baeb1653040da74a193d2b79650873b0d24564895347bb3c22d30cdfd96f0ea3
 B06_V02_CANDIDATE_DOCX_COMMENTS = 48
 B06_V02_CANDIDATE_DOCX_TRACKED_CHANGES = 0
 B06_V02_CANDIDATE_DOCX_PAGE_COUNT = 69
-CURRENT_GATE = DISCUSSION_B06_V02_AUTHOR_APPROVAL
-AUTHOR_APPROVAL_GATE = OPEN
+TARGET_CANONICAL_MASTER = article/manuscript/ARTICLE_MASTER_V029.md
+TARGET_CANONICAL_MASTER_EXPECTED_SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
+TARGET_CANONICAL_MASTER_EXPECTED_GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
+CURRENT_GATE = DISCUSSION_B06_V029_PROMOTION_VERIFICATION
+AUTHOR_APPROVAL_GATE = CLOSED / APPROVED
 NEXT_ACTOR = AUTHOR
-NEXT_ACTION = APPROVE_OR_REQUEST_CORRECTIONS_DISCUSSION_B06_V02
+NEXT_ACTION = MATERIALIZE_EXACT_APPROVED_B06_V02_AS_ARTICLE_MASTER_V029
 LEGACY_EDITORIAL_DEBT = DISCUSSION_B02_INTERNAL_TERMINOLOGY_HYGIENE
-DISCUSSION_B06_INTEGRATION = NOT_YET_AUTHORIZED
+DISCUSSION_B06_INTEGRATION = PENDING_V029_VERIFICATION
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
@@ -64,32 +69,9 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V028.md` continúa como master Markdown canónico. Results §5.1–§5.7 y Discussion §6.1–§6.5 están cerrados, aprobados, congelados e integrados.
+`ARTICLE_MASTER_V028.md` continúa como master Markdown canónico mientras se completa la promoción técnica de B06. Results §5.1–§5.7 y Discussion §6.1–§6.5 están cerrados, aprobados, congelados e integrados.
 
-El Word acumulativo canónico continúa siendo:
-
-```text
-ARTICLE_MASTER_CANDIDATE_DISCUSSION_B05_V01.docx
-SHA256 = 109d5b28bbedeccd36ecc7f7f87e28fe6795c3d91498c483ea6bce818eb97291
-COMMENTS = 48
-TRACKED_CHANGES = 0
-PAGE_COUNT = 67
-```
-
-## 2. Secuencia vigente de Discussion
-
-```text
-6.1 Separating candidate ranking from documentary evidence = INTEGRATED
-6.2 Controlled use of the LLM for explanation              = INTEGRATED / LEGACY EDITORIAL DEBT LOGGED
-6.3 Comparison with prior work                             = INTEGRATED
-6.4 Implications for auditable decision support            = INTEGRATED
-6.5 Configurability and transfer conditions                = INTEGRATED
-6.6 Limitations                                            = V02 AUDITED / PASS / AUTHOR APPROVAL GATE OPEN
-```
-
-## 3. Reauditoría B06 V02
-
-B06 V02 partió de los candidatos B06 V01 exactos y aplicó exclusivamente las cuatro correcciones estrechas definidas por D-147 y autorizadas por D-148. La reauditoría confirmó:
+Discussion §6.6 B06 V02 fue auditado con `PASS` y aprobado explícitamente por el autor. El candidato autorizado para promoción es:
 
 ```text
 ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.md
@@ -103,51 +85,56 @@ TRACKED_CHANGES = 0
 PAGE_COUNT = 69
 ```
 
-El diferencial V01→V02 contiene solo dos hunks en §6.6 EN/ES. Los cuatro ajustes requeridos quedaron resueltos: formulación no causal de la sensibilidad documental, preespecificación en lugar de voz `frozen`, terminología reader-facing de reproducción y formulación natural de validación para despliegue operativo.
+## 2. Secuencia vigente de Discussion
 
-No cambiaron resultados, denominadores, claims, referencias, comentarios, §§1–6.5 ni Conclusion. §6.6 conserva siete párrafos por idioma y 682 palabras en inglés.
+```text
+6.1 Separating candidate ranking from documentary evidence = INTEGRATED
+6.2 Controlled use of the LLM for explanation              = INTEGRATED / LEGACY EDITORIAL DEBT LOGGED
+6.3 Comparison with prior work                             = INTEGRATED
+6.4 Implications for auditable decision support            = INTEGRATED
+6.5 Configurability and transfer conditions                = INTEGRATED
+6.6 Limitations                                            = AUTHOR APPROVED / V029 PROMOTION PENDING VERIFICATION
+```
 
-La auditoría técnica independiente confirmó 14 partes OOXML, únicamente `word/document.xml` modificado respecto de V01, `word/comments.xml` byte-identical, 48 anclajes completos, 0 tracked changes y equivalencia textual exacta de §6.6 entre Markdown y DOCX. El render completo contiene 69 páginas; 65 son pixel-identical respecto de V01 y las cuatro páginas modificadas —33, 34, 67 y 68— pasan inspección visual a tamaño completo.
+## 3. Promoción V029
 
-La auditoría sustantiva bajo D-136/MWDP/SPCCR/KBS_EWG_34_V01 da `PASS`: no se detectan invención, overclaiming, causalidad nueva, extensión de evidencia, leakage terminológico en el alcance corregido ni diferencias de fuerza epistémica EN/ES.
+D-150 registra la aprobación autoral y autoriza únicamente la materialización byte-exacta del candidato B06 V02 en:
 
-D-149 abre el gate de aprobación autoral. El master V028 no cambia hasta aprobación explícita e integración formal.
+```text
+article/manuscript/ARTICLE_MASTER_V029.md
+```
+
+La promoción deberá conservar exactamente SHA-256 `f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80` y Git blob `9d72dc684ec16cb7baef4f813b979de7127e4bc4`. Hasta esa verificación, V028 sigue canónico y §6.6 aún no se declara integrado.
+
+La deuda editorial heredada de §6.2 continúa pendiente de un gate transversal controlado antes del freeze final. Conclusion permanece cerrada.
 
 ## 4. Gate inmediato
 
 ```text
-CURRENT_GATE = DISCUSSION_B06_V02_AUTHOR_APPROVAL
+CURRENT_GATE = DISCUSSION_B06_V029_PROMOTION_VERIFICATION
 NEXT_ACTOR = AUTHOR
-NEXT_ACTION = APPROVE_OR_REQUEST_CORRECTIONS_DISCUSSION_B06_V02
-AUTHOR_APPROVAL_GATE = OPEN
-CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.md
-CANDIDATE_MD_SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
-CANDIDATE_MD_GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
-CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B06_V02.docx
-CANDIDATE_DOCX_SHA256 = baeb1653040da74a193d2b79650873b0d24564895347bb3c22d30cdfd96f0ea3
-CANDIDATE_DOCX_COMMENTS = 48
-CANDIDATE_DOCX_TRACKED_CHANGES = 0
-CANDIDATE_DOCX_PAGE_COUNT = 69
-IF_AUTHOR_APPROVES = IA_GESTORA_VERIFY_PROMOTE_AND_INTEGRATE_B06
+NEXT_ACTION = MATERIALIZE_EXACT_APPROVED_B06_V02_AS_ARTICLE_MASTER_V029
+TARGET = article/manuscript/ARTICLE_MASTER_V029.md
+EXPECTED_SHA256 = f10f8c74396c570f4e65ec3ff9fe176a4b8df9aea31c1349eb6472bd552c5b80
+EXPECTED_GIT_BLOB = 9d72dc684ec16cb7baef4f813b979de7127e4bc4
 CANONICAL_MASTER = ARTICLE_MASTER_V028
+DISCUSSION_B06_INTEGRATION = PENDING_V029_VERIFICATION
 CONCLUSION = NOT_AUTHORIZED
 ```
-
-La deuda editorial heredada de §6.2 permanece fuera de B06 y continúa pendiente de un gate transversal específico antes del freeze final.
 
 ---
 
 # English
 
-B06 V02 passes re-audit. The four authorized corrections are complete; no scientific content outside Section 6.6 changed. The author-approval gate is open while canonical V028 remains unchanged.
+B06 V02 has passed re-audit and is author-approved. D-150 authorizes byte-exact promotion to `article/manuscript/ARTICLE_MASTER_V029.md`. V028 remains canonical until that path and identity are independently verified.
 
 ```text
-PLAN_VERSION = V3.48
-DISCUSSION_B06 = V02_AUDITED / PASS / AUTHOR_APPROVAL_GATE_OPEN
-CURRENT_GATE = DISCUSSION_B06_V02_AUTHOR_APPROVAL
+PLAN_VERSION = V3.49
+DISCUSSION_B06 = AUTHOR_APPROVED / V029_PROMOTION_PENDING_VERIFICATION
+CURRENT_GATE = DISCUSSION_B06_V029_PROMOTION_VERIFICATION
 NEXT_ACTOR = AUTHOR
-AUTHOR_APPROVAL_GATE = OPEN
-DISCUSSION_B06_INTEGRATION = NOT_YET_AUTHORIZED
+AUTHOR_APPROVAL_GATE = CLOSED / APPROVED
+DISCUSSION_B06_INTEGRATION = PENDING_V029_VERIFICATION
 CONCLUSION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
