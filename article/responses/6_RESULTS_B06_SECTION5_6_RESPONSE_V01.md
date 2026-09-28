@@ -1,0 +1,93 @@
+# Response — Results B06 / Section 5.6 — V01
+
+## Español
+
+### Resultado de ejecución
+
+```text
+PROTOCOL_READ = PASS
+BLOCK = RESULTS_B06_SECTION_5_6
+PROMPT = article/prompts/6_RESULTS_B06_SECTION5_6.md@8fead6a8fca5361e7632faf566d5d86f909ed740
+PROMPT_GIT_BLOB = 263c07e34066ef052062563b7cc4257856acbef7
+GROUND_TRUTH = D-113 / SYNCHRONIZED
+EXECUTION_AUTHORIZATION = D-114 / B06_V01_ONLY
+ARTICLE_BRANCH_HEAD_OBSERVED = e5b0bf90d6dd1d3facfe4f96f1f71b16d2ce4abb
+SOURCE_SNAPSHOT = db0d0ad0d8435921a7838db6720eaea86a263763
+SOURCE_RECHECK = PASS
+
+BASELINE_MD = article/manuscript/ARTICLE_MASTER_V021.md
+BASELINE_MD_SHA256 = a40e403ff89bce022c2b8adc894a6d92083a40ee31d7c9b20360ef36761fbd06
+BASELINE_MD_GIT_BLOB = e76b5b1789de1f82c9623dd6543c38ae639715b0
+BASELINE_MD_IDENTITY = PASS
+
+BASELINE_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B05_V01.docx
+BASELINE_DOCX_SHA256 = 3cf78e027953d8c311be2c99e16c9f2909b93b106e323eec7aee2281eaaa2b70
+BASELINE_DOCX_IDENTITY = PASS
+BASELINE_DOCX_PAGE_COUNT = 57
+
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_RESULTS_B06_V01.md
+CANDIDATE_MD_SHA256 = 56ab09837fedeb8206908f6966cb606d61b42ad443296eb82b4ea32c1f747795
+CANDIDATE_MD_EXPECTED_GIT_BLOB = 088eecd537997a3438517f7d206f6d890b0aa064
+
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_RESULTS_B06_V01.docx
+CANDIDATE_DOCX_SHA256 = 46ec068687465215ecc32632b29b265f4376e3d481a3a0e8b06cf0f90cfe8c79
+CANDIDATE_DOCX_PAGE_COUNT = 58
+
+SECTION_ARTIFACT = article/sections/results/Results_B06_V01.md
+SECTION_ARTIFACT_SHA256 = 6875a20e4d6694fcb15fe30877c40c0891b22b396b39bec9b2ac063132d032f1
+SECTION_ARTIFACT_EXPECTED_GIT_BLOB = 092e8f9af2cd96ac7d6ad41f193bd7486ec40938
+
+AUTHORIZED_CLAIMS_USED = C28 / C29
+PROHIBITED_CLAIMS_USED = NONE
+HE2_DISPOSITION = SUPPORTED_WITHIN_FROZEN_INFERENTIAL_SCOPE_ONLY
+HE5_DISPOSITION = INCONCLUSIVE / NO_NEW_INFERENTIAL_TEST
+P_VALUES_CALCULATED = NO
+NEW_CI_CALCULATED = NO
+NEW_TESTS_CALCULATED = NO
+CAUSAL_CLAIM = NO
+EXTERNAL_GENERALIZATION_CLAIM = NO
+OVERALL_CLASSIFICATION_ACCURACY_CLAIM = NO
+LEGAL_CORRECTNESS_CLAIM = NO
+
+SECTION_5_6_ONLY_DIFF = PASS
+SECTIONS_1_TO_5_5_PRESERVED = PASS
+SECTIONS_5_7_PLUS_PRESERVED = PASS
+DISCUSSION_PRESERVED = PASS
+CONCLUSION_PRESERVED = PASS
+NUMERICAL_CONTENT = PASS
+EN_ES_EQUIVALENCE = PASS
+MD_DOCX_SEMANTIC_EQUIVALENCE = PASS
+
+COMMENTS = 40 / PRESERVED
+TRACKED_CHANGES = 0 / PRESERVED
+OOXML_PACKAGE_PARTS_CHANGED = word/document.xml ONLY
+OOXML_INTEGRITY = PASS
+FULL_DOCX_RENDER = PASS
+FULL_DOCX_PAGE_COUNT = 58
+VISUAL_QA = PASS / 52 pages pixel-identical to audited baseline; modified/new pages 27-29 and 56-58 inspected without clipping, overlap, broken layout, or missing glyphs
+
+D035_TIMEOUT_SAFE_HANDOFF = PASS
+BASE64_MANUAL = NO
+CHUNKING = NO
+FRAGMENTATION = NO
+REASSEMBLY = NO
+WORD_REBUILT_FROM_MARKDOWN = NO
+
+RESULTS_B06_V01_EXECUTION = COMPLETED_PENDING_GESTORA_AUDIT
+AUTHOR_APPROVAL_GATE = NOT_OPEN
+RESULTS_B07_PLUS = NOT_AUTHORIZED
+DISCUSSION = NOT_AUTHORIZED
+CONCLUSION = NOT_AUTHORIZED
+FINAL_GAP = NOT_DEFINED
+NOVELTY = NOT_DECLARED
+```
+
+La ejecución sustituyó exclusivamente los placeholders de la Sección 5.6 en las Partes I y II. Los 15 contrastes primarios HE2_A y el contraste HE2_B se transcribieron desde los artefactos inferenciales congelados, sin recalcular intervalos ni introducir pruebas nuevas. El DOCX se editó directamente sobre el baseline B05 V01; los 40 comentarios, 0 tracked changes y todos los componentes OOXML ajenos a `word/document.xml` se conservaron sin cambios.
+
+---
+
+## English
+
+### Execution result
+
+Results B06 / Section 5.6 V01 was executed only against canonical V021 and the exact approved B05 cumulative Word baseline. The frozen HE2_A and HE2_B results were transcribed without recomputing confidence intervals, p-values, tests, or standardized effects. HE2 is reported as supported only within the frozen internal inferential scope; HE5 remains inconclusive and received no new inferential test. Sections 1–5.5 and 5.7 onward were preserved. The DOCX was edited natively, preserving 40 comments, zero tracked changes, and every OOXML package part other than `word/document.xml`; full rendering and visual QA passed. D-035 controls were respected.
