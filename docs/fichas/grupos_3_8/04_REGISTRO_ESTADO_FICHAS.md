@@ -1221,3 +1221,53 @@ OPEN_NARROW_ARTICLE_NATIVE_CORRECTION_FOR_A09_A10_THEN_RETURN_FOR_EXPERIMENTAL_R
 ```
 
 La ejecución encontró una omisión científica material pero reparable, no una contradicción experimental ni falta de fuente. G7-F03 no puede cerrarse hasta que el artículo incorpore bajo su gobernanza nativa el método y los resultados congelados del reranker diagnóstico y la IA Experimental reaudite el alcance corregido con PASS.
+
+
+## Cierre G7-F03 tras reauditoría focalizada A09+A10 — D-198
+
+```text
+FICHA = G7-F03
+DATE = 2026-09-29
+PREVIOUS_STATE = REVISION_REQUIRED / EXECUTED / NOT_APPROVED
+
+AUTHORIZATION = D-198
+REQUEST =
+article/prompts/15_G7_F03_A09_A10_FOCUSED_EXPERIMENTAL_REAUDIT_V01.md
+REQUEST_GIT_BLOB =
+249c632058d6773741e2ade3254bca1ef42ae8ef
+
+GESTORA_HANDOFF =
+article/reviews/14_PRE_FAST_A09_A10_DIAGNOSTIC_RERANKER_INTERNAL_REVIEW_V01.md
+GESTORA_HANDOFF_GIT_BLOB =
+e08df7d8d1e00c56da6acc48907679af5e3b1682
+GESTORA_HANDOFF_RESULT = PASS
+
+CORRECTION_SECTION =
+article/sections/pre_fast/Diagnostic_Reranker_A09_A10_V01.md
+CORRECTION_SECTION_GIT_BLOB =
+8a4578a992d20dc8f96ab88f08e95e666d4247c5
+
+FOCUSED_REAUDIT_RESULT = PASS
+G7F03_A09 = PASS / SATISFIED
+G7F03_A10 = PASS / SATISFIED
+DIRECT_CONTRADICTION_CHECK = PASS / NONE
+
+RESULT = CLOSED / APPROVED
+GROUP7 = CLOSED / APPROVED
+
+G8_F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED
+G8_F01_STARTED = false
+
+ARTICLE_MODIFIED = false
+NEW_EXPERIMENT_EXECUTED = false
+METRICS_RECOMPUTED = false
+NEW_INFERENCE = false
+NEW_CI = false
+NEW_P_VALUE = false
+EXP12_REOPENED = false
+
+NEXT_ACTOR = IA_GESTORA_DEL_ARTICULO
+STOP_CONDITION = SATISFIED / STOP_AFTER_FOCUSED_G7_F03_REAUDIT
+```
+
+A09 y A10 quedaron satisfechos contra los artefactos Phase-G congelados. No apareció una nueva contradicción científica. La ficha G7-F03 y Grupo 7 quedan cerrados/aprobados. G8-F01 pasa únicamente a estado elegible; no queda autorizado ni ejecutado por esta reauditoría.
