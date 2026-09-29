@@ -1097,3 +1097,80 @@ GROUP8 = NOT_STARTED / NOT_AUTHORIZED
 ```
 
 La ejecucion sustantiva futura debera producir un candidato de tesis versionado y `g7_thesis_claim_traceability_v0.1.csv`, con claims y cifras aprobadas de G3–G6. Permanecen las restricciones: EXP12 cerrado sin retrieval y no estimable; EXP11A no identifica efecto causal del tamano; EXP11B no habilita inferencia sobre una superpoblacion de seeds; superioridad de retrieval historico no equivale a precision global RAG; evidencia normativa no acredita correccion juridica vinculante; explicacion auditable no acredita clasificacion ni correccion juridica. HG/HE1 no reciben una disposicion inventada.
+
+## Activación G7-F03 para auditoría científica del artículo — D-194 / solicitud del Autor
+
+La evidencia posterior al último estado materializado en este registro demuestra que G7-F02 fue completada mediante la cadena 121M → aprobación autoral → 121N y auditoría externa PASS. Para esta activación se reconcilia esa deuda documental sin reinterpretar resultados científicos.
+
+```text
+FICHA = G7-F03
+DATE = 2026-09-29
+PREVIOUS_REGISTERED_STATE = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+RECONCILED_G7_F02_STATE = CLOSED / APPROVED / INTEGRATED
+GROUP7 = IN_PROGRESS / NOT_CLOSED
+
+AUTHORIZATION_BASIS =
+AUTHOR_EXPLICIT_REQUEST_2026-09-29 +
+D-194_CROSS_ROLE_REVIEW_REQUEST +
+IA_EXPERIMENTAL_PLAN_ADMINISTRATION
+
+ACTIVATION_STATE = ACTIVE / AUTHORIZED / EXECUTION_PENDING
+
+MAIN_HEAD_AT_ACTIVATION =
+db0d0ad0d8435921a7838db6720eaea86a263763
+
+PLAN_HEAD_BEFORE_ACTIVATION =
+87422102290a4f9a89c51e936cf7274d8e4687d8
+
+FICHAS_HEAD_BEFORE_ACTIVATION =
+d8859b799237212faafc1a5b4bbb376fbdb39f5f
+
+ARTICLE_REQUEST_HEAD =
+952a56bb09c95bc7a93baec9b0a560889d253195
+
+ARTICLE_LIVE_HEAD_AT_ACTIVATION =
+23c3e35d2a36320049c19a8630377d9fc8b98b4d
+
+ARTICLE_REVIEW_BASELINE =
+article/manuscript/ARTICLE_MASTER_V036.md
+
+ARTICLE_REVIEW_BASELINE_GIT_BLOB =
+c9dcbcc376cdb121d30dc2408756a6c95b569a90
+
+INTER_ROLE_REQUEST =
+article/prompts/13_G7_F03_EXPERIMENTAL_ARTICLE_REVIEW_REQUEST_V01.md
+
+INTER_ROLE_REQUEST_GIT_BLOB =
+5eabd0bc2ba114008d56028b6beb24c8fdd5ef1e
+
+G7_F01_SOURCE_FREEZE_MD_GIT_BLOB =
+feea31e2a45ee5f3d9b8fa1f9a1e1bdc073d6430
+
+G7_F01_SOURCE_FREEZE_JSON_GIT_BLOB =
+776fcb52e8ada9967504001b897c75b4108bfb63
+
+EXPECTED_OUTPUT_MD =
+docs/writing/group7/g7_f03_article_scientific_review_v0.1.md
+
+EXPECTED_OUTPUT_JSON =
+outputs/audits/group7_closure_v0.1.json
+
+ARTICLE_MODIFICATION_AUTHORIZED = false
+NEW_EXPERIMENT_AUTHORIZED = false
+NEW_METRIC_AUTHORIZED = false
+NEW_CI_AUTHORIZED = false
+NEW_P_VALUE_AUTHORIZED = false
+EXP12_REOPEN_AUTHORIZED = false
+GROUP8_AUTHORIZED = false
+
+PASS_CRITERION =
+V036 scientifically consistent with frozen evidence and no blocking scientific correction remains before terminal Group7 closure.
+
+REVISION_REQUIRED_CRITERION =
+material but repairable scientific discrepancy exists in V036; correction must occur under article-native governance and be reaudited by IA Experimental before terminal closure.
+
+BLOCKED_CRITERION =
+required governing source is unavailable or an unresolved precondition prevents a defensible scientific audit.
+```
+
+Esta activación no modifica el artículo ni autoriza a IA Experimental a editarlo. La ficha se ejecuta exclusivamente como auditoría científica transversal y disposición de los artefactos G5/G6 solicitada por D-194.
