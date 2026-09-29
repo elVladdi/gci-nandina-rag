@@ -53,7 +53,7 @@ REDACCIÓN_AUTORIZADA: SÍ / NO
 DECISIONES_CONGELADAS_RELEVANTES:
 CLAIMS_AUTORIZADOS_RELEVANTES:
 CLAIMS_PROHIBIDOS_O_PENDIENTES_RELEVANTES:
-FUENTES_EXTERNAS_QUE_DEBEN_VERIFICARSE:
+FUENTES_EXTERNAS_QUE_DEBEN_VERIFICARSE: NONE
 BLOQUEOS_O_CONTRADICCIONES_DETECTADOS:
 PROMPT_IDENTITY: PASS / BLOCKED
 EXECUTION_AUTHORIZATION_IDENTITY: PASS / BLOCKED
@@ -95,6 +95,21 @@ SPANISH_KEYWORDS = PRESERVE_PLACEHOLDER
 ```
 
 Solo sustituye las instrucciones/placeholder de Abstract/Resumen por texto final. No edites Title/Título, Keywords/Palabras clave ni ningún otro contenido.
+
+### Diferencial autorizado
+
+La modificación acumulativa debe quedar limitada exactamente a dos zonas editoriales: el placeholder/instrucciones de `## Abstract` en la Parte I inglesa y el placeholder/instrucciones de `## Resumen` en el espejo español.
+
+```text
+AUTHORIZED_CHANGED_BLOCKS = ABSTRACT_EN + RESUMEN_ES ONLY
+TITLE_AND_SPANISH_TITLE = BYTE/TEXT_PRESERVE
+KEYWORDS_AND_SPANISH_KEYWORDS = BYTE/TEXT_PRESERVE
+SECTIONS_1_TO_7 = BYTE/TEXT_PRESERVE
+END_MATTER_EN_ES = BYTE/TEXT_PRESERVE
+TABLES_CAPTIONS_REFERENCES = PRESERVE
+```
+
+La response debe incluir auditoría diferencial del Markdown y del DOCX que demuestre que no hubo mutaciones fuera de esas dos zonas. Si aparece cualquier cambio fuera de scope, detente y registra `BLOCKED_OUT_OF_SCOPE_MUTATION`.
 
 ### Función científica del Abstract
 
@@ -217,7 +232,11 @@ EXPECTED_COMMENTS = 48
 EXPECTED_TRACKED_CHANGES = 0
 ```
 
-Preserva los 48 comentarios heredados y sus anclajes. Realiza auditoría diferencial OOXML y render completo. No reconstruyas Word desde Markdown.
+Preserva los 48 comentarios heredados, sus `commentRangeStart`, `commentRangeEnd`, `commentReference` y el texto anclado. Como el Abstract no introduce citas, `word/comments.xml` debe permanecer byte-identical salvo impedimento técnico verificable; cualquier diferencia debe tratarse como bloqueo y no normalizarse silenciosamente.
+
+Realiza auditoría diferencial OOXML y render completo. Espera que el cambio sustantivo se concentre en `word/document.xml`; cualquier otra parte OOXML modificada debe identificarse y justificarse técnicamente en la response. Verifica el render completo, el page count real y realiza inspección visual de todas las páginas nuevas o desplazadas por el Abstract, comprobando ausencia de clipping, solapamiento, glifos faltantes, desbordes y alteraciones de header/footer.
+
+No reconstruyas Word desde Markdown.
 
 D-035: no usar Base64 manual, chunking, fragmentación, reensamblado ni workarounds equivalentes. D-027: entregar el DOCX exacto al autor. D-022: versionar primero la response en GitHub.
 
@@ -272,8 +291,29 @@ TRACKED_CHANGES = 0
 OOXML_CHANGED_PARTS = ...
 FULL_DOCX_PAGE_COUNT = ...
 FULL_DOCX_RENDER = PASS / BLOCKED
-EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
+EXPERIMENTAL_REVIEW_TRIGGER = ABSENT / PRESENT
+PROMPT_IDENTITY = PASS / BLOCKED
+EXECUTION_AUTHORIZATION_IDENTITY = PASS / BLOCKED
+SECTION_ARTIFACT_SHA256 = ...
+SECTION_ARTIFACT_GIT_BLOB = ...
+MASTER_CANDIDATE_MD_SHA256 = ...
+MASTER_CANDIDATE_MD_EXPECTED_GIT_BLOB = ...
+CANDIDATE_DOCX_SHA256 = ...
+MD_DOCX_VISIBLE_TEXT_EQUIVALENCE = PASS / BLOCKED
+COMMENTS_AND_ANCHORS_PRESERVED = PASS / BLOCKED
+COMMENTS_XML_BYTE_IDENTICAL = PASS / BLOCKED
+ZIP_OOXML_INTEGRITY = PASS / BLOCKED
+OOXML_CHANGED_PARTS = ...
+FULL_DOCX_PAGE_COUNT = ...
+FULL_DOCX_RENDER = PASS / BLOCKED
+FULL_DOCX_VISUAL_QA = PASS / BLOCKED
+ENGLISH_ABSTRACT_WORD_COUNT = ...
+D035_TIMEOUT_SAFE_HANDOFF = PASS / BLOCKED
+EXACT_CUMULATIVE_MD_HANDOFF_TO_AUTHOR = COMPLETED / BLOCKED
+EXACT_CUMULATIVE_DOCX_HANDOFF_TO_AUTHOR = COMPLETED / BLOCKED
 ```
+
+Si durante la ejecución aparece drift experimental, una contradicción con Results/Discussion/Conclusion, una cifra no reconciliable o la necesidad de un claim/evidencia no gobernado, registra `EXPERIMENTAL_REVIEW_TRIGGER = PRESENT`, no resuelvas la discrepancia por inferencia propia y detente para auditoría de IA Gestora.
 
 ### Gate de salida
 
