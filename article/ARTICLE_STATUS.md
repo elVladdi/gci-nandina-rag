@@ -406,20 +406,21 @@ El master canónico vigente es `article/manuscript/ARTICLE_MASTER_V038.md`, Git 
 
 El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.docx`, SHA-256 `7506189f32af5c9e99cb3bc87530b9ffd2ca09e3348f886c2b6c194080a21fe8`, con 48 comentarios, 0 tracked changes y 79 páginas.
 
-FAST-F01 queda `CLOSED / APPROVED / INTEGRATED`. La siguiente fase editorial es FAST-F02; todavía no existe autorización de ejecución para IA de Redacción.
+FAST-F01 está `CLOSED / APPROVED / INTEGRATED`. D-206 abrió FAST-F02 en preparación paralela: el Autor aporta únicamente los hechos declarativos que no pueden inferirse y IA Gestora audita en paralelo referencias, disponibilidad/reproducibilidad y el paquete suplementario. No existe todavía autorización de ejecución para IA de Redacción.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_GESTORA_DEL_ARTICULO
-CURRENT_GATE = FAST_F02_BOUNDARY_PREPARATION
-AUTHORIZATION = D-205 / FAST_F01_INTEGRATION_COMPLETE
+NEXT_ACTOR = AUTHOR + IA_GESTORA_DEL_ARTICULO
+CURRENT_GATE = FAST_F02_AUTHOR_INPUT_AND_GESTORA_AUDIT_PARALLEL
+AUTHORIZATION = D-206 / BOUNDARY_ONLY
 CANONICAL_MASTER = article/manuscript/ARTICLE_MASTER_V038.md
 CANONICAL_MASTER_MD_GIT_BLOB = b508aeccb7dab93a8b4cf25b185aa429dbe5577f
 CANONICAL_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.docx
 CANONICAL_MASTER_DOCX_SHA256 = 7506189f32af5c9e99cb3bc87530b9ffd2ca09e3348f886c2b6c194080a21fe8
-NEXT_ACTION = FORMALIZE_FAST_F02
-EXPECTED_EXIT = FAST_F02_BOUNDARY_READY
+AUTHOR_INPUT_FORM = article/forms/FAST_F02_AUTHOR_INPUT_PACKET_V01.md
+NEXT_ACTION = AUTHOR_INPUT_PACKET + GESTORA_REFERENCE_DATA_SUPPLEMENTARY_AUDIT
+EXPECTED_EXIT = FAST_F02_PROMPT_READY
 FAST_F02_WRITING_EXECUTION = NOT_AUTHORIZED
 FAST_F03 = NOT_AUTHORIZED
 EXPERIMENTAL_G8_F01 = NOT_AUTHORIZED
@@ -429,4 +430,4 @@ EXPERIMENTAL_G8_F01 = NOT_AUTHORIZED
 
 ## English
 
-V038 is canonical. D-190 reopens only the AI-use disclosure because Codex coding support was omitted from V01. D-191 authorizes the Writing AI to materialize exactly four disclosure insertions and return cumulative Markdown and DOCX candidates for Managing-AI audit and subsequent author approval. All other End Matter remains author-owned.
+V038 is canonical after the Author-approved FAST-F01 V02 integration. FAST-F01 is closed/approved/integrated. D-206 opens FAST-F02 preparation in two parallel lanes: Author-supplied factual declarations and Managing-AI audit of references, data/reproducibility wording, and supplementary materials. No FAST-F02 Writing-AI execution is authorized yet.
