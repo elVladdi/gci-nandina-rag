@@ -385,30 +385,25 @@ NOVELTY = NOT_DECLARED
 
 ### Estado vigente
 
-El master canónico vigente es `article/manuscript/ARTICLE_MASTER_V036.md`, Git blob `c9dcbcc376cdb121d30dc2408756a6c95b569a90`. Title, Abstract y Keywords están cerrados, aprobados, congelados e integrados. G7-F03 fue ejecutada por IA Experimental y devolvió `REVISION_REQUIRED` exclusivamente por las omisiones A09+A10 del reranker LLM diagnóstico; el resto del núcleo científico auditado pasó.
+El master canónico continúa siendo `article/manuscript/ARTICLE_MASTER_V037.md`, Git blob `338344b1bc520378337a6760377aa3400cf6d5d1`, mientras FAST-F01 V02 permanece como candidato acumulativo no promovido.
 
-El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_AI_DISCLOSURE_B02_V02_CORRECTED.docx`, SHA-256 `d7f59b60ec6a261d94d2c81b146b99fae36de0bca886392340ac42daf1392e3d`, con 48 comentarios, 0 tracked changes y 72 páginas.
-
-D-195 abre exclusivamente la corrección científica A09+A10 exigida por G7-F03 y D-196 autoriza su ejecución mediante Prompt 14 V01. No se autoriza todavía FINAL-F01 ni ninguna otra edición.
+La ejecución correctiva de FAST-F01 V02 fue auditada por IA Gestora con `PASS`. D-204 abre el gate de aprobación autoral sobre los candidatos exactos MD/DOCX V02. No se autoriza edición adicional durante este gate.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_DE_REDACCION_CIENTIFICA
-CURRENT_GATE = G7F03_A09_A10_V01_WRITING_EXECUTION_AUTHORIZED
-PROMPT = article/prompts/14_PRE_FAST_A09_A10_DIAGNOSTIC_RERANKER_V01.md@7b0fa6283a6997785367f16f9d3508e36c07474a
-PROMPT_GIT_BLOB = 8e1f046a541aecf066ecafcc12b7648db09905bc
-AUTHORIZATION = D-197
-INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V036.md
-INPUT_MASTER_MD_GIT_BLOB = c9dcbcc376cdb121d30dc2408756a6c95b569a90
-INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_AI_DISCLOSURE_B02_V02_CORRECTED.docx
-INPUT_MASTER_DOCX_SHA256 = d7f59b60ec6a261d94d2c81b146b99fae36de0bca886392340ac42daf1392e3d
-EXPECTED_COMMENTS = 48
-EXPECTED_TRACKED_CHANGES = 0
-EXPECTED_EXIT = G7F03_A09_A10_V01_COMPLETED_PENDING_GESTORA_AUDIT
-TITLE = CLOSED / APPROVED / FROZEN / INTEGRATED
-KEYWORDS = CLOSED / APPROVED / FROZEN / INTEGRATED
-END_MATTER_FINALIZATION = AI_DISCLOSURE_COMPLETED / OTHER_COMPONENTS_AUTHOR_OWNED
+NEXT_ACTOR = AUTHOR
+CURRENT_GATE = FAST_F01_V02_AUTHOR_APPROVAL_GATE
+AUTHORIZATION = D-204
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.md
+CANDIDATE_MD_SHA256 = 6201a9a47f86630f5f275ca7a6d9a01c2c642140a7f803cb390d26848721572e
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.docx
+CANDIDATE_DOCX_SHA256 = 7506189f32af5c9e99cb3bc87530b9ffd2ca09e3348f886c2b6c194080a21fe8
+NEXT_ACTION = APPROVE_OR_REJECT_FAST_F01_V02
+EXPECTED_EXIT = AUTHOR_DECISION_FAST_F01_V02
+FAST_F02 = NOT_AUTHORIZED
+FAST_F03 = NOT_AUTHORIZED
+EXPERIMENTAL_G8_F01 = NOT_AUTHORIZED
 ```
 
 ---
