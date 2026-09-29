@@ -31,7 +31,7 @@
 | 4. Análisis e interpretación | **CLOSED / APPROVED — G4-F01, G4-F02 y G4-F03=CLOSED/APPROVED/INTEGRATED_TO_MAIN; G4-F03_INTEGRATION_COMMIT=38e22c19a0eb0d344e7675761a88d7968091eead; G4-F03_EXTERNAL_REAUDIT=PASS; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 6. Figuras y visualizaciones | **CLOSED / APPROVED — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; GROUP6_CLOSURE_COMMIT=e93b44164a9619dad1f527a3b2d4479265858e39** |
-| 7. Redacción científica | **IN_PROGRESS / NOT_CLOSED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=CLOSED / APPROVED / INTEGRATED; G7-F03=REVISION_REQUIRED / EXECUTED / NOT_APPROVED; reauditoría experimental obligatoria tras corrección A09+A10** |
+| 7. Redacción científica | **CLOSED / APPROVED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=CLOSED / APPROVED / INTEGRATED; G7-F03=CLOSED / APPROVED tras reauditoría focalizada D-198 PASS** |
 | 8. Coherencia metodológica/documental | PENDING / NOT_AUTHORIZED |
 
 ## 3. Benchmark v0.2 congelado
@@ -2156,3 +2156,18 @@ manifest, la autorización ni el config.
 - No se requiere nuevo experimento. IA Gestora debe abrir una corrección estrecha bajo gobernanza nativa del artículo; después, IA Experimental debe reauditar el bloque corregido.
 - `GROUP7 = IN_PROGRESS / NOT_CLOSED`; `G8-F01 = NOT_ELIGIBLE / NOT_AUTHORIZED` hasta PASS y cierre terminal de G7-F03.
 
+
+
+### 2026-09-29 — Cierre terminal G7-F03 y Grupo 7 tras reauditoría focalizada D-198
+
+- IA Experimental ejecutó exclusivamente `article/prompts/15_G7_F03_A09_A10_FOCUSED_EXPERIMENTAL_REAUDIT_V01.md`, Git blob `249c632058d6773741e2ade3254bca1ef42ae8ef`, bajo D-198.
+- Handoff Gestora auditado: `article/reviews/14_PRE_FAST_A09_A10_DIAGNOSTIC_RERANKER_INTERNAL_REVIEW_V01.md`, Git blob `e08df7d8d1e00c56da6acc48907679af5e3b1682`, resultado PASS.
+- Corrección versionada reauditable: `article/sections/pre_fast/Diagnostic_Reranker_A09_A10_V01.md`, Git blob `8a4578a992d20dc8f96ab88f08e95e666d4247c5`.
+- A09 = PASS / SATISFIED: el método del reranker diagnóstico coincide con los artefactos Phase-G congelados y mantiene separación absoluta del flujo primario.
+- A10 = PASS / SATISFIED: 20 casos; 19 referencia-en-pool / 1 fuera; Top-1 0.50→0.50; Top-3 0.65→0.65; Top-5 0.80→0.80; MRR 0.6326→0.6326; 0/19/0 wins/ties/losses; sin inferencia pareada preespecificada.
+- Direct-contradiction check = PASS: no contradicción nueva con autoridad del flujo primario, Top-3 fijo, rol documental, HE3=SUPPORTED, cierre EXP12, límites inferenciales ni scope del benchmark.
+- `G7-F03 = CLOSED / APPROVED`.
+- `GROUP7 = CLOSED / APPROVED`.
+- `G8-F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`. La elegibilidad no constituye autorización ni inicio de Grupo 8.
+- La disposición G5/G6 permanece sin cambios; la Figura 1 arquitectónica sigue científicamente permisible bajo el requisito de mostrar cualquier reranker diagnóstico como ruta lateral sin feedback al flujo primario.
+- No se modificó `article/main-manuscript`, no se ejecutó nuevo experimento, no se recalcularon métricas, no se creó inferencia/CI/p-value y EXP12 no fue reabierto.
