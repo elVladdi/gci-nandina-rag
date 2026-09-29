@@ -1,0 +1,175 @@
+# D-205 — Aprobación autoral e integración canónica de FAST-F01 V02 como V038
+
+## Español
+
+```text
+DECISION = D-205
+PHASE = FAST_FINALIZATION / FAST_F01_CANONICAL_INTEGRATION
+PREVIOUS_DECISION = D-204
+
+AUTHOR_DECISION = APPROVED / EXPLICIT
+AUTHOR_APPROVAL_TEXT = Apruebo FAST-F01 V02.
+AUTHOR_APPROVAL_GATE = CLOSED / APPROVED
+
+SOURCE_RESPONSE =
+article/responses/17_FAST_F01_CORRECTIVE_PRESENTATION_RESPONSE_V01.md@6ddf5c063efeb84ba3afd75960139371d8abeaa2
+SOURCE_RESPONSE_GIT_BLOB =
+da15118e2807e003e3cc67612404089fbd9d6d10
+
+GESTORA_REVIEW =
+article/reviews/17_FAST_F01_CORRECTIVE_PRESENTATION_INTERNAL_REVIEW_V01.md@dcd6a35d388a5b4608e2b99eb2ab443c4f82a98b
+GESTORA_REVIEW_GIT_BLOB =
+5e5e5f2954a532b843e19cb701df2ffc7fa1dcf2
+GESTORA_REVIEW_RESULT = PASS
+
+APPROVED_CANDIDATE_MD =
+ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.md
+APPROVED_CANDIDATE_MD_SHA256 =
+6201a9a47f86630f5f275ca7a6d9a01c2c642140a7f803cb390d26848721572e
+APPROVED_CANDIDATE_MD_GIT_BLOB =
+b508aeccb7dab93a8b4cf25b185aa429dbe5577f
+
+APPROVED_CANDIDATE_DOCX =
+ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.docx
+APPROVED_CANDIDATE_DOCX_SHA256 =
+7506189f32af5c9e99cb3bc87530b9ffd2ca09e3348f886c2b6c194080a21fe8
+APPROVED_CANDIDATE_DOCX_SIZE_BYTES = 351420
+APPROVED_CANDIDATE_DOCX_PAGE_COUNT = 79
+APPROVED_CANDIDATE_DOCX_COMMENTS = 48
+APPROVED_CANDIDATE_DOCX_TRACKED_CHANGES = 0
+
+APPROVED_FIGURE1_PNG =
+FAST_F01_Figure1_Architecture_V02.png
+APPROVED_FIGURE1_PNG_SHA256 =
+d43b3695af795b14174ccaddfb29bff3e6f976f5234fef16fdda5eafc4a880f7
+
+PROMOTED_MASTER =
+article/manuscript/ARTICLE_MASTER_V038.md
+PROMOTION_COMMIT =
+de6baf23d0af19965aad9da5c7d17f600361152b
+PROMOTED_MASTER_GIT_BLOB =
+b508aeccb7dab93a8b4cf25b185aa429dbe5577f
+EXPECTED_PROMOTED_MASTER_GIT_BLOB =
+b508aeccb7dab93a8b4cf25b185aa429dbe5577f
+PROMOTION_VERIFICATION =
+PASS / BYTE_EXACT_BY_GIT_BLOB_IDENTITY
+
+CANONICAL_MASTER = ARTICLE_MASTER_V038
+CANONICAL_MASTER_MD_SHA256 =
+6201a9a47f86630f5f275ca7a6d9a01c2c642140a7f803cb390d26848721572e
+CANONICAL_MASTER_MD_GIT_BLOB =
+b508aeccb7dab93a8b4cf25b185aa429dbe5577f
+
+CANONICAL_MASTER_DOCX =
+ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_MASTER_DOCX_SHA256 =
+7506189f32af5c9e99cb3bc87530b9ffd2ca09e3348f886c2b6c194080a21fe8
+CANONICAL_MASTER_DOCX_PAGE_COUNT = 79
+CANONICAL_CITATION_COMMENTS = 48
+CANONICAL_TRACKED_CHANGES = 0
+
+FAST_F01 = CLOSED / APPROVED / INTEGRATED
+FAST_F02 = ELIGIBLE_FOR_BOUNDARY / NOT_AUTHORIZED_FOR_WRITING_EXECUTION
+FAST_F03 = NOT_AUTHORIZED
+EXPERIMENTAL_G8_F01 = NOT_AUTHORIZED_BY_THIS_DECISION
+```
+
+## 1. Verificación de identidad
+
+IA Gestora verificó nuevamente los archivos reales aprobados por el Autor:
+
+```text
+MD_SIZE_BYTES = 293668
+MD_SHA256 =
+6201a9a47f86630f5f275ca7a6d9a01c2c642140a7f803cb390d26848721572e
+
+DOCX_SIZE_BYTES = 351420
+DOCX_SHA256 =
+7506189f32af5c9e99cb3bc87530b9ffd2ca09e3348f886c2b6c194080a21fe8
+
+FIGURE1_PNG_SIZE_BYTES = 84070
+FIGURE1_PNG_SHA256 =
+d43b3695af795b14174ccaddfb29bff3e6f976f5234fef16fdda5eafc4a880f7
+```
+
+Las identidades coinciden exactamente con D-204.
+
+## 2. Promoción canónica
+
+Antes de la promoción, `ARTICLE_MASTER_V038.md` no existía.
+
+El Markdown aprobado fue promovido byte-exacto como:
+
+`article/manuscript/ARTICLE_MASTER_V038.md`
+
+Commit:
+
+`de6baf23d0af19965aad9da5c7d17f600361152b`
+
+Git blob observado:
+
+`b508aeccb7dab93a8b4cf25b185aa429dbe5577f`
+
+El blob coincide exactamente con el candidato aprobado.
+
+## 3. Estado científico/editorial de FAST-F01
+
+FAST-F01 queda cerrado:
+
+```text
+SCIENTIFIC_CONTENT_AUDIT = PASS
+EDITORIAL_PRESENTATION_AUDIT = PASS
+OOXML_STRUCTURAL_AUDIT = PASS
+EXPERIMENTAL_REAUDIT_REQUIRED = NO
+FAST_F01 = CLOSED / APPROVED / INTEGRATED
+```
+
+El cuerpo principal conserva exactamente tres tablas y dos figuras bajo el scope aprobado.
+
+## 4. Word canónico acumulativo
+
+El nuevo Word acumulativo canónico bajo custodia del Autor es:
+
+`ARTICLE_MASTER_CANDIDATE_FAST_F01_V02.docx`
+
+con 48 comentarios, cero tracked changes y 79 páginas.
+
+## 5. Siguiente fase
+
+FAST-F02 queda elegible para preparación de boundary, pero D-205 no autoriza todavía una ejecución de IA de Redacción.
+
+Su scope previsto continúa siendo:
+
+- Author metadata;
+- CRediT;
+- funding;
+- competing interests;
+- acknowledgements;
+- Data availability;
+- reproducibility wording;
+- reference integrity;
+- supplementary material G5/G6 previamente dispuesto.
+
+## 6. Gate vigente
+
+```text
+CURRENT_DRAFTING_PHASE = FAST_FINALIZATION
+CURRENT_GATE = FAST_F02_BOUNDARY_PREPARATION
+NEXT_ACTOR = IA_GESTORA_DEL_ARTICULO
+NEXT_ACTION = FORMALIZE_FAST_F02
+
+AUTHOR_APPROVAL_GATE = CLOSED / APPROVED
+CANONICAL_MASTER = ARTICLE_MASTER_V038
+FAST_F01 = CLOSED / APPROVED / INTEGRATED
+FAST_F02_WRITING_EXECUTION = NOT_AUTHORIZED
+FAST_F03 = NOT_AUTHORIZED
+EXPERIMENTAL_G8_F01 = NOT_AUTHORIZED
+```
+
+---
+
+## English
+
+D-205 records the Author's explicit approval of FAST-F01 V02 and promotes the exact approved Markdown as ARTICLE_MASTER_V038.
+
+The approved cumulative DOCX becomes the new canonical Word baseline under local Author custody. FAST-F01 is closed/approved/integrated. FAST-F02 is eligible for boundary preparation but no Writing-AI execution is authorized by this decision. Experimental G8-F01 remains unaffected and unauthorized.
