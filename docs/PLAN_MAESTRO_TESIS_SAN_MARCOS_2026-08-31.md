@@ -31,7 +31,7 @@
 | 4. Análisis e interpretación | **CLOSED / APPROVED — G4-F01, G4-F02 y G4-F03=CLOSED/APPROVED/INTEGRATED_TO_MAIN; G4-F03_INTEGRATION_COMMIT=38e22c19a0eb0d344e7675761a88d7968091eead; G4-F03_EXTERNAL_REAUDIT=PASS; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 6. Figuras y visualizaciones | **CLOSED / APPROVED — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; GROUP6_CLOSURE_COMMIT=e93b44164a9619dad1f527a3b2d4479265858e39** |
-| 7. Redacción científica | **IN_PROGRESS / NOT_CLOSED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=ACTIVE / AUTHORIZED / EXECUTION_PENDING; G7-F03=PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED** |
+| 7. Redacción científica | **IN_PROGRESS / NOT_CLOSED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=CLOSED / APPROVED / INTEGRATED; G7-F03=ACTIVE / AUTHORIZED / EXECUTION_PENDING** |
 | 8. Coherencia metodológica/documental | PENDING / NOT_AUTHORIZED |
 
 ## 3. Benchmark v0.2 congelado
@@ -2134,3 +2134,13 @@ manifest, la autorización ni el config.
 - PREF005 fue completado con binarios autoritativos suministrados por el autor y aprobado por auditoria externa `PASS`: tesis SHA-256 `08b48ec1687ae0a0d943724bf2d682aca02d2a9f5a124b3dc35270e041bc3aed` y proyecto aprobado SHA-256 `25506900d3110902455458b2291b15d78a7a1bf26e88fa76a2283755b2753421` satisfacen los gates obligatorios de identidad. El Word v13 SHA-256 `8f5a1ec96eec91cee6970f4ec6e1bea3970322160b8d0a759aed5a02fef25067` queda como fuente metodologica auxiliar confirmada, no como gate general.
 - `G7-F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN`; `G7-F02 = ACTIVE / AUTHORIZED / EXECUTION_PENDING`; `G7-F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED`; `GROUP7 = IN_PROGRESS / NOT_CLOSED`; `GROUP8 = NOT_STARTED / NOT_AUTHORIZED`.
 - El siguiente actor sustantivo es la IA de Redaccion Cientifica. CODEX no esta autorizado a redactar, no se genero candidato de tesis ni trazabilidad G7-F02 y no se modificaron tesis, proyecto, v13, articulo ni resultados cientificos. EXP12 permanece cerrado sin retrieval y no estimable.
+
+### 2026-09-29 — Reconciliación de G7-F02 y activación formal de G7-F03 por D-194
+
+- La cadena G7-F02 posterior al último estado de este Plan culminó en REVIEW V03, aprobación autoral y copia limpia 121N con auditoría externa `PASS`; por tanto, `G7-F02 = CLOSED / APPROVED / INTEGRATED`. Este cambio reconcilia deuda documental y no reinterpreta resultados científicos.
+- El Autor solicitó explícitamente ejecutar/resolver G7-F03 y la IA Gestora del Artículo abrió D-194 con la solicitud versionada `article/prompts/13_G7_F03_EXPERIMENTAL_ARTICLE_REVIEW_REQUEST_V01.md`, Git blob `5eabd0bc2ba114008d56028b6beb24c8fdd5ef1e`.
+- Baseline científico/editorial congelado para la revisión: `article/manuscript/ARTICLE_MASTER_V036.md`, Git blob `c9dcbcc376cdb121d30dc2408756a6c95b569a90`; head editorial de solicitud `952a56bb09c95bc7a93baec9b0a560889d253195`. El head vivo posterior contiene únicamente gobernanza D-194 adicional y no altera el blob V036.
+- `G7-F03 = ACTIVE / AUTHORIZED / EXECUTION_PENDING`.
+- La ejecución se limita a auditoría científica transversal, drift check G7-F01→V036, disposición científica de tablas G5/figuras G6 y evaluación de constraints pre-FAST. `ARTICLE_MODIFICATION_AUTHORIZED=false`, `NEW_EXPERIMENT_AUTHORIZED=false`, `NEW_METRIC_AUTHORIZED=false`, `NEW_CI_AUTHORIZED=false`, `NEW_P_VALUE_AUTHORIZED=false`, `EXP12_REOPEN_AUTHORIZED=false`.
+- Grupo 8 permanece bloqueado hasta el cierre `CLOSED / APPROVED` de Grupo 7.
+
