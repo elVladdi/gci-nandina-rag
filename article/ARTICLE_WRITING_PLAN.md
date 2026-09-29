@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.57
+PLAN_VERSION = V3.58
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-163
+LATEST_EDITORIAL_DECISION = D-164
 
 CANONICAL_MASTER = ARTICLE_MASTER_V031
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V031.md
@@ -39,15 +39,24 @@ ABSTRACT_B01_INITIAL_EXECUTION_RESULT = BLOCKED_PRE_EXECUTION / COMPLIANT
 ABSTRACT_B01_BLOCKER_AUDIT = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02_BLOCKER_AUDIT_V01.md@9dfd4206ed42b28bc81e9b94a11f02bf0a762d16
 ABSTRACT_B01_BLOCKER_AUDIT_RESULT = PASS_BLOCKED_PREEXECUTION_COMPLIANT
 ABSTRACT_B01_AUTHORIZATION = D-163
+ABSTRACT_B01_COMPLETED_RESPONSE = article/responses/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02.md@0ad357f5bcaca2c0d3863e39661888b97b9722fd
+ABSTRACT_B01_COMPLETED_RESPONSE_RESULT = COMPLETED_PENDING_GESTORA_AUDIT
+ABSTRACT_B01_INTERNAL_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_INTERNAL_REVIEW_V01.md@0624d9fd4fb7cee995930f52fd701b2bff3748bf
+ABSTRACT_B01_INTERNAL_REVIEW_GIT_BLOB = 355fc32f9701e76a71e2472cc3e93c93420bf7ac
+ABSTRACT_B01_INTERNAL_REVIEW_RESULT = PASS
+ABSTRACT_B01_AUTHOR_APPROVAL_DECISION = D-164
+ABSTRACT_B01_CANDIDATE_MD_SHA256 = 0fcf9c2676add5128f86efc50788335bc435077bedbd7a8aedbf73f8f1549f64
+ABSTRACT_B01_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
+ABSTRACT_B01_CANDIDATE_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
 ABSTRACT_B01_V01_AUTHORIZATION = D-161 / SUPERSEDED_BEFORE_EXECUTION
 ABSTRACT_HISTORICAL_PROMPT_AUDIT = COMPLETE / 89 PRIOR FILES = 88 OPERATIONAL PROMPTS + 1 DRAFTING TEMPLATE
 
 CURRENT_DRAFTING_PHASE = FRONT_MATTER / ABSTRACT
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_REEXECUTION
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = REEXECUTE_SAME_ABSTRACT_B01_V02_AFTER_EXACT_DOCX_REATTACHMENT
-EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REJECT_EXACT_ABSTRACT_B01_V02_CANDIDATE
+EXPECTED_EXIT = AUTHOR_DECISION_ON_ABSTRACT_B01_V02
 
 TITLE = NOT_AUTHORIZED
 ABSTRACT = AUTHORIZED_FOR_EXECUTION
@@ -80,13 +89,13 @@ PAGE_COUNT = 71
 
 D-160 establece el boundary del Abstract final: problema/limitación → propuesta y separación de autoridad → evaluación/evidencia principal → interpretación acotada. Debe ser autosuficiente, aproximadamente 200–250 palabras en inglés, sin citas, sin nueva evidencia y con espejo semántico natural en español.
 
-El prompt `article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md`, Git blob `5e416bdb078f1728a9c98cdf0666821628fd722f`, pasó revisión interna con `PASS`. La primera ejecución autorizada por D-162 se detuvo correctamente en preflight por drift residual D-161/D-162 y falta de acceso binario efectivo al Word baseline en el chat de IA Redacción. IA Gestora auditó el STOP como compliant, verificó el Word exacto y D-163 reautoriza el mismo V02 después de reconciliar Status/Plan y re-adjuntar el DOCX exacto.
+El prompt `article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md`, Git blob `5e416bdb078f1728a9c98cdf0666821628fd722f`, completó su reejecución bajo D-163. IA Gestora auditó independientemente los candidatos Markdown y DOCX: diferencial exacto limitado a Abstract/Resumen, OOXML con solo `word/document.xml` modificado, comentarios/anclajes preservados, 0 tracked changes, equivalencia MD↔DOCX, 71 páginas sin defectos y contenido científico-editorial `PASS`. D-164 abre exclusivamente la aprobación autoral del candidato exacto.
 
 ## 3. Gate inmediato
 
 ```text
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_REEXECUTION
-NEXT_ACTOR = IA_REDACCION
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
 PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md
 PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
 AUTHORIZATION = D-163
@@ -94,7 +103,7 @@ INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V031.md
 INPUT_MASTER_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
 INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
 INPUT_MASTER_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
-EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
+EXPECTED_EXIT = AUTHOR_DECISION_ON_ABSTRACT_B01_V02
 TITLE = NOT_AUTHORIZED
 KEYWORDS = NOT_AUTHORIZED
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
@@ -104,4 +113,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 # English
 
-V031 is canonical and the manuscript body through Conclusion is fully integrated and frozen. The first Abstract V02 execution stopped compliantly during preflight. D-163 reconciles the residual authorization drift and reauthorizes the same V02 prompt after exact DOCX reattachment. Title, Keywords, and end matter remain closed.
+V031 remains canonical and the manuscript body through Conclusion is fully integrated and frozen. Abstract B01 V02 completed under D-163 and passed independent scientific/editorial and Markdown/DOCX/OOXML/render audit. D-164 opens only the author-approval gate for the exact candidate. Title, Keywords, and end matter remain closed.
