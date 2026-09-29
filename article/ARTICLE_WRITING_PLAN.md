@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.53
+PLAN_VERSION = V3.54
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-157
+LATEST_EDITORIAL_DECISION = D-158
 
 CANONICAL_MASTER = ARTICLE_MASTER_V030
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V030.md
@@ -30,13 +30,23 @@ CONCLUSION_B01_PROMPT_GIT_BLOB = 622e287cb702d1ebf58243436e85158e6fc51b36
 CONCLUSION_B01_PROMPT_REVIEW = article/reviews/8_CONCLUSION_B01_SECTION7_PROMPT_INTERNAL_REVIEW_V01.md@4473d6ee24d5ce4108596aafecc8763efe4408eb
 CONCLUSION_B01_PROMPT_REVIEW_RESULT = PASS
 CONCLUSION_B01_AUTHORIZATION = D-157
+CONCLUSION_B01_RESPONSE = article/responses/8_CONCLUSION_B01_SECTION7_RESPONSE_V01.md@e731e650101d8ad7e4e337ad3ad54390e396f195
+CONCLUSION_B01_SECTION = article/sections/conclusion/Conclusion_B01_V01.md@94aba7516564ba7e1e02a7e1ed6938aba1730eaa
+CONCLUSION_B01_INTERNAL_REVIEW = article/reviews/8_CONCLUSION_B01_SECTION7_INTERNAL_REVIEW_V01.md@ec9b0399a3c5cecdf29c3caaa52b3e07575f8236
+CONCLUSION_B01_REVIEW_RESULT = PASS
+CONCLUSION_B01_REAUDIT_GATE = D-158
+CONCLUSION_B01_CANDIDATE_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+CONCLUSION_B01_CANDIDATE_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
+CONCLUSION_B01_CANDIDATE_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
 
 CURRENT_DRAFTING_PHASE = CONCLUSION
-CURRENT_GATE = CONCLUSION_B01_V01_EXECUTION
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_CONCLUSION_B01_SECTION7_V01_ONLY
-EXPECTED_EXIT = CONCLUSION_B01_V01_COMPLETED_PENDING_GESTORA_AUDIT
+CURRENT_GATE = CONCLUSION_B01_V01_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = REVIEW_AND_APPROVE_OR_REQUEST_CORRECTIONS_CONCLUSION_B01_V01
+IF_APPROVED_TARGET = article/manuscript/ARTICLE_MASTER_V031.md
+IF_APPROVED_EXPECTED_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+IF_APPROVED_EXPECTED_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
 
 FRONT_MATTER_FINALIZATION = NOT_AUTHORIZED
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
@@ -64,23 +74,24 @@ PAGE_COUNT = 69
 
 ## 2. Conclusion §7
 
-D-156 establece que Conclusion debe cerrar el artículo mediante `contribution -> main evidence -> scope -> bounded implication`. Debe sintetizar únicamente evidencia ya integrada y mantener las fronteras epistemológicas del artículo. No se autorizan literatura, citas, resultados, cálculos, inferencias, novelty, SOTA/superioridad, legal correctness, human validation, deployment readiness ni external generalization nuevos.
-
-El prompt `article/prompts/8_CONCLUSION_B01_SECTION7_V01.md`, Git blob `622e287cb702d1ebf58243436e85158e6fc51b36`, pasó revisión interna con `PASS`. D-157 autoriza exclusivamente la redacción de Conclusion §7 EN/ES desde V030 y el Word acumulativo exacto.
+D-156 establece que Conclusion debe cerrar el artículo mediante `contribution -> main evidence -> scope -> bounded implication`. La ejecución autorizada por D-157 produjo Conclusion B01 V01. D-158 registra reauditoría independiente `PASS` sin correcciones obligatorias, con fidelidad científica, equivalencia EN/ES, preservación de §§1–6.6 y front/end matter, y controles Markdown/DOCX/OOXML/render aprobados.
 
 ## 3. Gate inmediato
 
 ```text
-CURRENT_GATE = CONCLUSION_B01_V01_EXECUTION
-NEXT_ACTOR = IA_REDACCION
-PROMPT = article/prompts/8_CONCLUSION_B01_SECTION7_V01.md
-PROMPT_GIT_BLOB = 622e287cb702d1ebf58243436e85158e6fc51b36
-AUTHORIZATION = D-157
-INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V030.md
-INPUT_MASTER_MD_GIT_BLOB = 2683f5933205219ed62e16418d3f9a0ace7460bd
-INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_TRANSVERSAL_V01.docx
-INPUT_MASTER_DOCX_SHA256 = 340e283924a9364447344469cf4eb077bbf93f7d32509f8f173d0a01fb3bbc0f
-EXPECTED_EXIT = CONCLUSION_B01_V01_COMPLETED_PENDING_GESTORA_AUDIT
+CURRENT_GATE = CONCLUSION_B01_V01_AUTHOR_APPROVAL
+NEXT_ACTOR = AUTHOR
+AUTHOR_APPROVAL_GATE = OPEN
+REVIEW_RESULT = PASS
+MANDATORY_CORRECTIONS = NONE
+CANONICAL_MASTER = ARTICLE_MASTER_V030
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.md
+CANDIDATE_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+CANDIDATE_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
+CANDIDATE_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
+IF_APPROVED_TARGET = article/manuscript/ARTICLE_MASTER_V031.md
+IF_APPROVED_EXPECTED_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
 FRONT_MATTER_FINALIZATION = NOT_AUTHORIZED
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
 ```
@@ -89,4 +100,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 # English
 
-V030 is canonical and Discussion is fully frozen. D-156 bounds Section 7 to synthesis of approved contribution, evidence, scope, and implication; the Conclusion B01 prompt passed internal review; and D-157 authorizes only the Conclusion V01 drafting block. Front/end matter remains closed until Conclusion is separately audited, approved, and integrated. Historical governance remains traceable in the versioned decision, prompt, review, and response files.
+V030 remains canonical and Discussion is fully frozen. Conclusion B01 V01 has passed independent re-audit under D-158 with no mandatory corrections. The author-approval gate is open; if approved, the exact candidate will be promoted as ARTICLE_MASTER_V031.md. Front/end matter remains closed until that promotion is verified and Conclusion is integrated.
