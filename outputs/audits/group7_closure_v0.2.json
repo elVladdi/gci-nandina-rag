@@ -1,0 +1,129 @@
+{
+  "artifact_id": "G7_F03_A09_A10_FOCUSED_EXPERIMENTAL_REAUDIT_v0.1",
+  "version": "v0.1",
+  "date": "2026-09-29",
+  "ficha": "G7-F03",
+  "role": "IA_EXPERIMENTAL",
+  "authorization": "D-198",
+  "status": "CLOSED / APPROVED",
+  "focused_reaudit_result": "PASS",
+  "scientific_question": {
+    "question": "HAVE_G7F03_A09_AND_A10_BEEN_SATISFIED_WITHOUT_NEW_SCIENTIFIC_CONTRADICTION?",
+    "answer": true
+  },
+  "group7_status": "CLOSED / APPROVED",
+  "g8_f01": {
+    "eligible": true,
+    "authorized": false,
+    "executed": false,
+    "started": false
+  },
+  "inputs": {
+    "request_path": "article/prompts/15_G7_F03_A09_A10_FOCUSED_EXPERIMENTAL_REAUDIT_V01.md",
+    "request_blob": "249c632058d6773741e2ade3254bca1ef42ae8ef",
+    "article_request_head": "143cf2d9ce0012354a61a1b8a0a6afa6d0ab1466",
+    "gestora_review_path": "article/reviews/14_PRE_FAST_A09_A10_DIAGNOSTIC_RERANKER_INTERNAL_REVIEW_V01.md",
+    "gestora_review_blob": "e08df7d8d1e00c56da6acc48907679af5e3b1682",
+    "correction_section_path": "article/sections/pre_fast/Diagnostic_Reranker_A09_A10_V01.md",
+    "correction_section_blob": "8a4578a992d20dc8f96ab88f08e95e666d4247c5",
+    "prior_report_blob": "bc4ad51a8b219adb8cd9a9beab69cdfb5f7f1875",
+    "prior_audit_blob": "ed4f74610ed73ea76427bef2eef2f4319c698441"
+  },
+  "execution_flags": {
+    "article_modified": false,
+    "new_experiment": false,
+    "metrics_recomputed": false,
+    "new_inference": false,
+    "new_ci": false,
+    "new_p_value": false,
+    "exp12_reopened": false
+  },
+  "a09": {
+    "verdict": "PASS / SATISFIED",
+    "frozen_sources": {
+      "config": "21c7f4840d7ca7cc10a1da14569ad8843d75f3bd",
+      "pre_llm_freeze": "c553e8e8cafcb03b0a6360bfa430a28501653209",
+      "run_metadata": "5daba1ed3f44b2d8906d40588dbe2fcec4bf0e4b",
+      "label_leakage_audit": "8e94a01cdae1e2c1d873de296ec9dabb66f7f3bd",
+      "candidate_closure_audit": "1a1bc80f08724c6e9e7a732b512607e5eb318b11"
+    },
+    "nominal_pool_depth": 100,
+    "effective_pool_min": 63,
+    "effective_pool_max": 100,
+    "sample_cases": 20,
+    "sample_seed": 0,
+    "candidates_per_input": 10,
+    "candidate_closure": "20/20",
+    "reference_in_pool": 19,
+    "reference_not_in_pool": 1,
+    "feedback_to_primary_flow": false,
+    "prespecified_inferential_test": false
+  },
+  "a10": {
+    "verdict": "PASS / SATISFIED",
+    "frozen_sources": {
+      "metrics": "15800df93cf77f4f2c6e83ac6cb692be013bbeb3",
+      "win_tie_loss": "a4d508070d1ef61abbd09a34a7f0ba76f5013a2a",
+      "summary": "2e356497695551c9df61fb36e70d0cd6d2003daa"
+    },
+    "sample_cases": 20,
+    "reference_in_pool": 19,
+    "reference_not_in_pool": 1,
+    "top1_before": 0.5,
+    "top1_after": 0.5,
+    "top3_before": 0.65,
+    "top3_after": 0.65,
+    "top5_before": 0.8,
+    "top5_after": 0.8,
+    "mrr_before": 0.632638888888889,
+    "mrr_after": 0.632638888888889,
+    "wins": 0,
+    "ties": 19,
+    "losses": 0,
+    "candidate_closure": "20/20",
+    "paired_inference": "NOT RUN / NO PRE-SPECIFIED TEST",
+    "prohibited_claims_present": false
+  },
+  "direct_contradiction_check": {
+    "result": "PASS / NO DIRECT SCIENTIFIC CONTRADICTION",
+    "primary_flow_authority": "PASS",
+    "fixed_top3": "PASS",
+    "documentary_evidence_role": "PASS",
+    "he3_disposition": "PASS / SUPPORTED PRESERVED",
+    "exp12_closure": "PASS / NOT REOPENED",
+    "inferential_boundaries": "PASS",
+    "benchmark_scope": "PASS / DIAGNOSTIC SAMPLE ONLY"
+  },
+  "g5_disposition": {
+    "body_main": [
+      "G5-MAIN-01",
+      "G5-MAIN-02"
+    ],
+    "supplementary_appendix": [
+      "G5-SECONDARY-01",
+      "G5-SECONDARY-02",
+      "G5-APPENDIX-01",
+      "G5-APPENDIX-02",
+      "G5-APPENDIX-03",
+      "G5-APPENDIX-04",
+      "G5-APPENDIX-05"
+    ]
+  },
+  "g6_disposition": {
+    "body_main": [
+      "G6-FIG-01"
+    ],
+    "supplementary_appendix": [
+      "G6-FIG-02",
+      "G6-FIG-03"
+    ]
+  },
+  "architecture_figure": {
+    "scientifically_permissible": true,
+    "classification": "EDITORIAL_ARCHITECTURE_SCHEMATIC",
+    "diagnostic_reranker_if_shown": "SEPARATE_LATERAL_ROUTE / NO_FEEDBACK_TO_PRIMARY_FLOW"
+  },
+  "remaining_condition": null,
+  "next_actor": "IA_GESTORA_DEL_ARTICULO",
+  "stop_condition": "SATISFIED / STOP AFTER FOCUSED G7-F03 REAUDIT"
+}
