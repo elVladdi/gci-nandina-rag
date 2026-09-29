@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.55
-LATEST_EDITORIAL_DECISION = D-161
+ARTICLE_WRITING_PLAN = V3.56
+LATEST_EDITORIAL_DECISION = D-162
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 
@@ -42,18 +42,21 @@ CONCLUSION_B01_SECTION = article/sections/conclusion/Conclusion_B01_V01.md@94aba
 CONCLUSION_B01_INTERNAL_REVIEW = article/reviews/8_CONCLUSION_B01_SECTION7_INTERNAL_REVIEW_V01.md@ec9b0399a3c5cecdf29c3caaa52b3e07575f8236
 
 ABSTRACT_BOUNDARY = D-160
-ABSTRACT_B01_PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V01.md@e26a35a7caf26c6118c3efc6c0239c2a8a1f9905
-ABSTRACT_B01_PROMPT_GIT_BLOB = 508c2d06dd94f18470b1835771d3201b3e9c4e83
-ABSTRACT_B01_PROMPT_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_PROMPT_INTERNAL_REVIEW_V01.md@addeb9b89aa61120e70d8d4c1d37556166b7882a
+ABSTRACT_B01_PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md@35ee7924857512ea3285b31fd0b84053cff3928a
+ABSTRACT_B01_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
+ABSTRACT_B01_PROMPT_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_PROMPT_INTERNAL_REVIEW_V02.md@4b9336cc850d4b6117f63bd05dfa755970889b2e
 ABSTRACT_B01_PROMPT_REVIEW_RESULT = PASS
-ABSTRACT_B01_AUTHORIZATION = D-161
+ABSTRACT_B01_PROMPT_REVIEW_GIT_BLOB = a668282dae078914f2d446817d1c47a0158d3ed8
+ABSTRACT_B01_AUTHORIZATION = D-162
+ABSTRACT_B01_PREVIOUS_AUTHORIZATION = D-161 / SUPERSEDED_BEFORE_EXECUTION
+ABSTRACT_HISTORICAL_PROMPT_AUDIT = COMPLETE / 89 PRIOR PROMPTS + DRAFTING TEMPLATE
 
 CURRENT_DRAFTING_PHASE = FRONT_MATTER / ABSTRACT
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V01_EXECUTION
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_EXECUTION
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ABSTRACT_B01_V01_ONLY
-EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V01_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTION = EXECUTE_ABSTRACT_B01_V02_ONLY
+EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
 
 MWDP_V1_0 = BINDING
 SPCCR_V1_0 = BINDING
@@ -78,15 +81,15 @@ El autor aprobó Conclusion B01 V01 y subió `article/manuscript/ARTICLE_MASTER_
 
 El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx`, SHA-256 `d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d`, con 48 comentarios, 0 tracked changes y 71 páginas.
 
-D-160 delimita el Abstract final a una síntesis autosuficiente KBS de problema/limitación → propuesta con separación de autoridad → evaluación/evidencia principal → interpretación acotada. El prompt `9_FRONT_MATTER_B01_ABSTRACT_V01.md` pasó revisión interna con `PASS` y D-161 autoriza exclusivamente su ejecución. Title, Keywords y end matter permanecen cerrados.
+D-160 delimita el Abstract final a una síntesis autosuficiente KBS de problema/limitación → propuesta con separación de autoridad → evaluación/evidencia principal → interpretación acotada. Tras auditar los 89 prompts históricos y el template de drafting, el prompt V02 incorporó los controles maduros de identidad, diferencial, Word/OOXML/render y handoff D-022/D-027/D-035. V02 pasó revisión interna con `PASS`; D-162 lo autoriza y deja D-161/V01 superseded antes de ejecución. Title, Keywords y end matter permanecen cerrados.
 
 ### Gate vigente
 
 ```text
 NEXT_ACTOR = IA_REDACCION
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V01_EXECUTION
-PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V01.md
-PROMPT_GIT_BLOB = 508c2d06dd94f18470b1835771d3201b3e9c4e83
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_EXECUTION
+PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md
+PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
 AUTHORIZATION = D-161
 INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V031.md
 INPUT_MASTER_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
@@ -94,7 +97,7 @@ INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
 INPUT_MASTER_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
 EXPECTED_COMMENTS = 48
 EXPECTED_TRACKED_CHANGES = 0
-EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V01_COMPLETED_PENDING_GESTORA_AUDIT
+EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
 TITLE = NOT_AUTHORIZED
 KEYWORDS = NOT_AUTHORIZED
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
@@ -104,4 +107,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 ## English
 
-V031 is canonical after byte-exact verification of the author-approved Conclusion candidate. Conclusion Section 7 is closed, approved, frozen, and integrated. D-160 bounds the final Abstract, its prompt passed internal review, and D-161 authorizes only Abstract B01 V01 execution from exact V031 and the cumulative Conclusion Word baseline. Title, Keywords, and end matter remain unauthorized.
+V031 is canonical after byte-exact verification of the author-approved Conclusion candidate. Conclusion Section 7 is closed, approved, frozen, and integrated. D-160 bounds the final Abstract. After complete historical-prompt continuity audit, Abstract V02 passed internal review and D-162 authorizes only V02 execution from exact V031 and the cumulative Conclusion Word baseline; D-161/V01 is superseded before execution. Title, Keywords, and end matter remain unauthorized.
