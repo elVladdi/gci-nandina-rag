@@ -31,7 +31,7 @@
 | 4. Análisis e interpretación | **CLOSED / APPROVED — G4-F01, G4-F02 y G4-F03=CLOSED/APPROVED/INTEGRATED_TO_MAIN; G4-F03_INTEGRATION_COMMIT=38e22c19a0eb0d344e7675761a88d7968091eead; G4-F03_EXTERNAL_REAUDIT=PASS; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 6. Figuras y visualizaciones | **CLOSED / APPROVED — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; GROUP6_CLOSURE_COMMIT=e93b44164a9619dad1f527a3b2d4479265858e39** |
-| 7. Redacción científica | **IN_PROGRESS / NOT_CLOSED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=CLOSED / APPROVED / INTEGRATED; G7-F03=ACTIVE / AUTHORIZED / EXECUTION_PENDING** |
+| 7. Redacción científica | **IN_PROGRESS / NOT_CLOSED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=CLOSED / APPROVED / INTEGRATED; G7-F03=REVISION_REQUIRED / EXECUTED / NOT_APPROVED; reauditoría experimental obligatoria tras corrección A09+A10** |
 | 8. Coherencia metodológica/documental | PENDING / NOT_AUTHORIZED |
 
 ## 3. Benchmark v0.2 congelado
@@ -2143,4 +2143,16 @@ manifest, la autorización ni el config.
 - `G7-F03 = ACTIVE / AUTHORIZED / EXECUTION_PENDING`.
 - La ejecución se limita a auditoría científica transversal, drift check G7-F01→V036, disposición científica de tablas G5/figuras G6 y evaluación de constraints pre-FAST. `ARTICLE_MODIFICATION_AUTHORIZED=false`, `NEW_EXPERIMENT_AUTHORIZED=false`, `NEW_METRIC_AUTHORIZED=false`, `NEW_CI_AUTHORIZED=false`, `NEW_P_VALUE_AUTHORIZED=false`, `EXP12_REOPEN_AUTHORIZED=false`.
 - Grupo 8 permanece bloqueado hasta el cierre `CLOSED / APPROVED` de Grupo 7.
+
+### 2026-09-29 — Ejecución G7-F03 sobre ARTICLE_MASTER_V036
+
+- IA Experimental ejecutó la solicitud D-194 sin modificar el artículo, recalcular métricas, generar inferencia nueva ni reabrir EXP12.
+- Informe versionado: `docs/writing/group7/g7_f03_article_scientific_review_v0.1.md` en `writing/g7-f03-article-scientific-review-v01`.
+- Companion de auditoría: `outputs/audits/group7_closure_v0.1.json`.
+- Dictamen: `G7-F03 = REVISION_REQUIRED / EXECUTED / NOT_APPROVED`.
+- V036 está ampliamente alineado con el estado científico congelado, pero omite dos elementos materiales del reranker diagnóstico ya ejecutado:
+  - `G7F03-A09`: protocolo/método del diagnóstico de 20 casos;
+  - `G7F03-A10`: resultados congelados del diagnóstico (Top-1/3/5 y MRR sin cambio; 0/19/0 win/tie/loss entre casos con referencia en pool).
+- No se requiere nuevo experimento. IA Gestora debe abrir una corrección estrecha bajo gobernanza nativa del artículo; después, IA Experimental debe reauditar el bloque corregido.
+- `GROUP7 = IN_PROGRESS / NOT_CLOSED`; `G8-F01 = NOT_ELIGIBLE / NOT_AUTHORIZED` hasta PASS y cierre terminal de G7-F03.
 
