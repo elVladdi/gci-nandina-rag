@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.53
-LATEST_EDITORIAL_DECISION = D-157
+ARTICLE_WRITING_PLAN = V3.54
+LATEST_EDITORIAL_DECISION = D-158
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 
@@ -39,13 +39,26 @@ CONCLUSION_B01_PROMPT_GIT_BLOB = 622e287cb702d1ebf58243436e85158e6fc51b36
 CONCLUSION_B01_PROMPT_REVIEW = article/reviews/8_CONCLUSION_B01_SECTION7_PROMPT_INTERNAL_REVIEW_V01.md@4473d6ee24d5ce4108596aafecc8763efe4408eb
 CONCLUSION_B01_PROMPT_REVIEW_RESULT = PASS
 CONCLUSION_B01_AUTHORIZATION = D-157
+CONCLUSION_B01_RESPONSE = article/responses/8_CONCLUSION_B01_SECTION7_RESPONSE_V01.md@e731e650101d8ad7e4e337ad3ad54390e396f195
+CONCLUSION_B01_SECTION = article/sections/conclusion/Conclusion_B01_V01.md@94aba7516564ba7e1e02a7e1ed6938aba1730eaa
+CONCLUSION_B01_INTERNAL_REVIEW = article/reviews/8_CONCLUSION_B01_SECTION7_INTERNAL_REVIEW_V01.md@ec9b0399a3c5cecdf29c3caaa52b3e07575f8236
+CONCLUSION_B01_REVIEW_RESULT = PASS
+CONCLUSION_B01_REAUDIT_GATE = D-158
+CONCLUSION_B01_CANDIDATE_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+CONCLUSION_B01_CANDIDATE_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
+CONCLUSION_B01_CANDIDATE_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
+CONCLUSION_B01_CANDIDATE_DOCX_COMMENTS = 48
+CONCLUSION_B01_CANDIDATE_DOCX_TRACKED_CHANGES = 0
+CONCLUSION_B01_CANDIDATE_DOCX_PAGE_COUNT = 71
 
 CURRENT_DRAFTING_PHASE = CONCLUSION
-CURRENT_GATE = CONCLUSION_B01_V01_EXECUTION
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_CONCLUSION_B01_SECTION7_V01_ONLY
-EXPECTED_EXIT = CONCLUSION_B01_V01_COMPLETED_PENDING_GESTORA_AUDIT
+CURRENT_GATE = CONCLUSION_B01_V01_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = REVIEW_AND_APPROVE_OR_REQUEST_CORRECTIONS_CONCLUSION_B01_V01
+IF_APPROVED_TARGET = article/manuscript/ARTICLE_MASTER_V031.md
+IF_APPROVED_EXPECTED_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+IF_APPROVED_EXPECTED_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
 
 MWDP_V1_0 = BINDING
 SPCCR_V1_0 = BINDING
@@ -67,22 +80,24 @@ El autor aprobó la corrección transversal de §6.2 y subió `article/manuscrip
 
 El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_TRANSVERSAL_V01.docx`, SHA-256 `340e283924a9364447344469cf4eb077bbf93f7d32509f8f173d0a01fb3bbc0f`, con 48 comentarios, 0 tracked changes y 69 páginas.
 
-D-156 delimita Conclusion §7 a una síntesis `contribution -> main evidence -> scope -> bounded implication`, sin literatura, citas, resultados, cálculos, inferencia, novelty, superioridad, generalización externa, legal correctness, deployment readiness ni human validation nuevos. El prompt `8_CONCLUSION_B01_SECTION7_V01.md` pasó revisión interna con `PASS`, y D-157 autoriza exclusivamente su ejecución.
+D-156 delimita Conclusion §7 a una síntesis `contribution -> main evidence -> scope -> bounded implication`. La ejecución autorizada por D-157 produjo Conclusion B01 V01 y la reauditoría independiente registrada en D-158 obtiene `PASS` sin correcciones obligatorias. El candidato preserva §§1–6.6 y front/end matter, mantiene las fronteras epistemológicas aprobadas y conserva 48 comentarios, 0 tracked changes y 71 páginas en el Word acumulativo.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-PROMPT = article/prompts/8_CONCLUSION_B01_SECTION7_V01.md
-PROMPT_GIT_BLOB = 622e287cb702d1ebf58243436e85158e6fc51b36
-AUTHORIZATION = D-157
-INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V030.md
-INPUT_MASTER_MD_GIT_BLOB = 2683f5933205219ed62e16418d3f9a0ace7460bd
-INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_DISCUSSION_B02_TRANSVERSAL_V01.docx
-INPUT_MASTER_DOCX_SHA256 = 340e283924a9364447344469cf4eb077bbf93f7d32509f8f173d0a01fb3bbc0f
-EXPECTED_COMMENTS = 48
-EXPECTED_TRACKED_CHANGES = 0
-EXPECTED_EXIT = CONCLUSION_B01_V01_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTOR = AUTHOR
+CURRENT_GATE = CONCLUSION_B01_V01_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+REVIEW_RESULT = PASS
+MANDATORY_CORRECTIONS = NONE
+CANONICAL_MASTER = ARTICLE_MASTER_V030
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.md
+CANDIDATE_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+CANDIDATE_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
+CANDIDATE_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
+IF_APPROVED_TARGET = article/manuscript/ARTICLE_MASTER_V031.md
+IF_APPROVED_EXPECTED_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
 FRONT_MATTER_FINALIZATION = NOT_AUTHORIZED
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
 ```
@@ -91,4 +106,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 ## English
 
-V030 is canonical after byte-exact verification of the author-approved Section 6.2 transversal cleanup. Discussion Sections 6.1–6.6 are scientifically and editorially closed, approved, frozen, and integrated. D-156 defines the bounded Conclusion scope; the Conclusion B01 prompt passed internal review; and D-157 authorizes only Section 7 V01 execution. Front/end matter finalization remains unauthorized. Historical governance trace remains preserved in the D-001–D-157 decision files and versioned prompt/review/response artifacts.
+V030 remains canonical. Conclusion B01 V01 has passed independent substantive/editorial and technical re-audit under D-158 with no mandatory corrections. The author-approval gate is open; if approved, the exact candidate is to be promoted as ARTICLE_MASTER_V031.md with Git blob a8bfdcd30d1ec205c486102d991c37085f307b8c. Front/end matter finalization remains unauthorized until that promotion is verified.
