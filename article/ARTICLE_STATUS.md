@@ -241,7 +241,7 @@ AI_DISCLOSURE_V02_AUTHORIZATION = D-191
 END_MATTER_GENERATIVE_AI_DECLARATION_STATUS = V01_SUPERSEDED_INCOMPLETE / V02_REQUIRED
 GESTORA_TASK_CLOSURE_DECISION = D-189 / SUPERSEDED_FOR_AI_DISCLOSURE_CORRECTION
 GESTORA_TASK_STATUS = REOPENED_FOR_AI_DISCLOSURE_CORRECTION
-FINAL_GAP = AUTHOR_OWNED_SUBMISSION_ASSEMBLY_AFTER_AI_DISCLOSURE_APPROVAL
+FINAL_GAP = AUTHOR_OWNED_SUBMISSION_ASSEMBLY_AFTER_AI_DISCLOSURE_APPROVAL_AFTER_AI_DISCLOSURE_APPROVAL
 ABSTRACT_B01_CANDIDATE_MD_SHA256 = 0fcf9c2676add5128f86efc50788335bc435077bedbd7a8aedbf73f8f1549f64
 ABSTRACT_B01_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
 ABSTRACT_B01_CANDIDATE_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
@@ -268,26 +268,26 @@ ABSTRACT = CLOSED / APPROVED / FROZEN / INTEGRATED
 KEYWORDS = CLOSED / APPROVED / FROZEN / INTEGRATED
 FRONT_MATTER_FINALIZATION = CLOSED / APPROVED / FROZEN / INTEGRATED
 END_MATTER_FINALIZATION = AI_DISCLOSURE_V02_IN_EXECUTION / OTHER_COMPONENTS_AUTHOR_OWNED
-FINAL_GAP = AUTHOR_OWNED_SUBMISSION_ASSEMBLY
+FINAL_GAP = AUTHOR_OWNED_SUBMISSION_ASSEMBLY_AFTER_AI_DISCLOSURE_APPROVAL
 NOVELTY = NOT_DECLARED
 ```
 
 ### Estado vigente
 
-El autor aprobó Abstract B01 V02 y subió `article/manuscript/ARTICLE_MASTER_V032.md`. IA Gestora verificó byte-exactamente el Git blob `0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f`; D-165 declara V032 canónico e integra y congela Abstract/Resumen.
+El master canónico vigente es `article/manuscript/ARTICLE_MASTER_V035.md`, Git blob `ddf3abb1826f93d5d82c0a135c0c2ae6b389e7fd`, después de la aprobación e integración verificadas de Keywords B03 V02. Title, Abstract y Keywords están cerrados, aprobados, congelados e integrados.
 
-El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_ABSTRACT_B01_V02.docx`, SHA-256 `4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156`, con 48 comentarios, 0 tracked changes y 71 páginas.
+El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_KEYWORDS_B03_V02.docx`, SHA-256 `de3c60c59bd71e5c5b101c7281a675b68faaf8275af64d7403f1ff51fa60905b`, con 48 comentarios, 0 tracked changes y 71 páginas.
 
-D-166 delimita el Title final. V01 fue superado editorialmente bajo D-170 después de la auditoría del corpus KBS. V02 fue ejecutado y auditado con PASS bajo D-171/D-172, pero antes de aprobación autoral la auditoría adicional de identidad editorial KBS determinó que el título debía hacer visible desde la primera lectura el tipo de contribución y su naturaleza knowledge-based. D-173 supera D-172 antes de aprobación y fija Title V03; D-174 autoriza su ejecución exacta. V032 permanece canónico. Keywords y end matter permanecen cerrados.
+D-190 reabre únicamente la declaración de uso de IA porque la V01 omitió Codex como apoyo en codificación. D-191 autoriza a IA de Redacción a materializar cuatro inserciones exactas: dos declaraciones metodológicas sobre Codex y dos declaraciones finales EN/ES que identifican ChatGPT y Codex. El resto del End Matter permanece bajo control directo del autor.
 
 ### Gate vigente
 
 ```text
 NEXT_ACTOR = IA_REDACCION
 CURRENT_GATE = END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02_EXECUTION
-PROMPT = NONE / GESTORA_TASK_FINALIZED
-PROMPT_GIT_BLOB = N/A
-AUTHORIZATION = NONE
+PROMPT = article/prompts/12_END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02.md
+PROMPT_GIT_BLOB = 01b12e52b52e49150fb7f6bf8aef897c21962d1b
+AUTHORIZATION = D-191
 INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V035.md
 INPUT_MASTER_MD_GIT_BLOB = ddf3abb1826f93d5d82c0a135c0c2ae6b389e7fd
 INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_KEYWORDS_B03_V02.docx
@@ -304,4 +304,4 @@ END_MATTER_FINALIZATION = AI_DISCLOSURE_V02_IN_EXECUTION / OTHER_COMPONENTS_AUTH
 
 ## English
 
-V032 remains canonical. Final Title B02 V01 completed under D-168 and passed independent Managing-AI scientific/editorial and Markdown/DOCX/OOXML/render audit. D-169 opens only the explicit author-approval gate for the exact candidate; canonical promotion has not occurred. Keywords and end matter remain unauthorized.
+V035 is canonical. D-190 reopens only the AI-use disclosure because Codex coding support was omitted from V01. D-191 authorizes the Writing AI to materialize exactly four disclosure insertions and return cumulative Markdown and DOCX candidates for Managing-AI audit and subsequent author approval. All other End Matter remains author-owned.
