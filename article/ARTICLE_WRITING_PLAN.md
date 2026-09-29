@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.65
+PLAN_VERSION = V3.66
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-172
+LATEST_EDITORIAL_DECISION = D-174
 
 CANONICAL_MASTER = ARTICLE_MASTER_V032
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V032.md
@@ -103,6 +103,19 @@ TITLE_B02_V02_AUTHOR_APPROVAL_GATE_DECISION = D-172
 TITLE_B02_V02_CANDIDATE_MD_SHA256 = ad604203c72d5cdb520c59879ade0cfcb7fd60f05c18f778f9546ec5843e364a
 TITLE_B02_V02_CANDIDATE_MD_EXPECTED_GIT_BLOB = b4e25a990e659b87a4f48f35b2dce343bef91b5e
 TITLE_B02_V02_CANDIDATE_DOCX_SHA256 = 6690f5e39b3c7a907b075be3a4367ffe858fb6d1dbe4c74632b647463252deeb
+TITLE_B02_V02_D172_DISPOSITION = SUPERSEDED_BEFORE_AUTHOR_APPROVAL
+TITLE_B02_V03_KBS_IDENTITY_EDITORIAL_REVIEW = article/reviews/10_FRONT_MATTER_B02_TITLE_KBS_IDENTITY_EDITORIAL_REVIEW_V01.md@8bbc263e0a17972d9a04e73c0ac091e416594511
+TITLE_B02_V03_KBS_IDENTITY_EDITORIAL_REVIEW_GIT_BLOB = ba9aed182dc806c6f3407e448202909a44d32cb8
+TITLE_B02_V03_REQUIREMENT_DECISION = D-173
+TITLE_B02_V03_TARGET_EN = Knowledge-Based Decision-Support Architecture for Tariff Classification: Separating Candidate Ranking, Documentary Evidence, and Explanation
+TITLE_B02_V03_TARGET_ES = Arquitectura basada en conocimiento para el apoyo a la decisión en clasificación arancelaria: separación del ranking de candidatos, la evidencia documental y la explicación
+TITLE_B02_V03_PROMPT = article/prompts/10_FRONT_MATTER_B02_TITLE_V03.md
+TITLE_B02_V03_PROMPT_COMMIT = b7e1eabf34bee4bea81e3e0cd0e34680bfcb0ee1
+TITLE_B02_V03_PROMPT_GIT_BLOB = f9c1231f9487bd660b9e01355dce0e343261f3e9
+TITLE_B02_V03_PROMPT_REVIEW = article/reviews/10_FRONT_MATTER_B02_TITLE_PROMPT_INTERNAL_REVIEW_V03.md@9ad4a0b51c099e879262d52e2159642aec6df754
+TITLE_B02_V03_PROMPT_REVIEW_GIT_BLOB = b011674bb4bfd599851f9a529bf1b176c6977d72
+TITLE_B02_V03_PROMPT_REVIEW_RESULT = PASS
+TITLE_B02_V03_AUTHORIZATION = D-174
 ABSTRACT_B01_CANDIDATE_MD_SHA256 = 0fcf9c2676add5128f86efc50788335bc435077bedbd7a8aedbf73f8f1549f64
 ABSTRACT_B01_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
 ABSTRACT_B01_CANDIDATE_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
@@ -110,16 +123,16 @@ ABSTRACT_B01_V01_AUTHORIZATION = D-161 / SUPERSEDED_BEFORE_EXECUTION
 ABSTRACT_HISTORICAL_PROMPT_AUDIT = COMPLETE / 89 PRIOR FILES = 88 OPERATIONAL PROMPTS + 1 DRAFTING TEMPLATE
 
 CURRENT_DRAFTING_PHASE = FRONT_MATTER / TITLE
-CURRENT_GATE = FRONT_MATTER_B02_TITLE_V02_AUTHOR_APPROVAL
-AUTHOR_APPROVAL_GATE = OPEN
-NEXT_ACTOR = AUTHOR
-NEXT_ACTION = APPROVE_OR_REJECT_EXACT_TITLE_B02_V02_CANDIDATE
-EXPECTED_EXIT = AUTHOR_DECISION_ON_TITLE_B02_V02
+CURRENT_GATE = FRONT_MATTER_B02_TITLE_V03_EXECUTION
+AUTHOR_APPROVAL_GATE = NOT_OPEN
+NEXT_ACTOR = IA_REDACCION
+NEXT_ACTION = EXECUTE_TITLE_B02_V03_ONLY
+EXPECTED_EXIT = FRONT_MATTER_B02_TITLE_V03_COMPLETED_PENDING_GESTORA_AUDIT
 
-TITLE = V02_COMPLETED / AUDITED_PASS / PENDING_AUTHOR_APPROVAL
+TITLE = V03_AUTHORIZED_FOR_EXECUTION
 ABSTRACT = CLOSED / APPROVED / FROZEN / INTEGRATED
 KEYWORDS = NOT_AUTHORIZED
-FRONT_MATTER_FINALIZATION = IN_PROGRESS / TITLE_V02_PENDING_AUTHOR_APPROVAL
+FRONT_MATTER_FINALIZATION = IN_PROGRESS / TITLE_V03_EXECUTION
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
 NOVELTY = NOT_DECLARED
@@ -147,22 +160,22 @@ PAGE_COUNT = 71
 
 D-160 establece el boundary del Abstract final: problema/limitación → propuesta y separación de autoridad → evaluación/evidencia principal → interpretación acotada. Debe ser autosuficiente, aproximadamente 200–250 palabras en inglés, sin citas, sin nueva evidencia y con espejo semántico natural en español.
 
-Abstract B01 V02 quedó aprobado e integrado en V032 bajo D-165. D-166 delimita el Title final. La primera ejecución D-167 se detuvo correctamente por drift residual; D-168 reautorizó el mismo Title V01 tras reconciliar Status/Plan. La reejecución terminó en `COMPLETED_PENDING_GESTORA_AUDIT` y el candidato Title/Título pasó auditoría independiente científica/editorial y Markdown/DOCX/OOXML/render. D-169 abre exclusivamente la aprobación autoral del candidato exacto.
+Abstract B01 V02 quedó aprobado e integrado en V032 bajo D-165. D-166 delimita el Title final. V01 fue superado editorialmente tras la auditoría del corpus KBS. V02 fue ejecutado y auditado con PASS, pero antes de aprobación autoral la auditoría de identidad editorial KBS determinó que el título debía explicitar el tipo de contribución y su naturaleza knowledge-based. D-173 supera D-172 antes de aprobación, fija Title V03 y D-174 autoriza su ejecución exacta.
 
 ## 3. Gate inmediato
 
 ```text
-CURRENT_GATE = FRONT_MATTER_B02_TITLE_V02_AUTHOR_APPROVAL
-NEXT_ACTOR = AUTHOR
-PROMPT = article/prompts/10_FRONT_MATTER_B02_TITLE_V02.md
-PROMPT_GIT_BLOB = 8a86f760bf7353222e5610312b11525ec5793385
-AUTHORIZATION = D-171
+CURRENT_GATE = FRONT_MATTER_B02_TITLE_V03_EXECUTION
+NEXT_ACTOR = IA_REDACCION
+PROMPT = article/prompts/10_FRONT_MATTER_B02_TITLE_V03.md
+PROMPT_GIT_BLOB = f9c1231f9487bd660b9e01355dce0e343261f3e9
+AUTHORIZATION = D-174
 INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V032.md
 INPUT_MASTER_MD_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
 INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_ABSTRACT_B01_V02.docx
 INPUT_MASTER_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
-EXPECTED_EXIT = AUTHOR_DECISION_ON_TITLE_B02_V02
-TITLE = V02_COMPLETED / AUDITED_PASS / PENDING_AUTHOR_APPROVAL
+EXPECTED_EXIT = FRONT_MATTER_B02_TITLE_V03_COMPLETED_PENDING_GESTORA_AUDIT
+TITLE = V03_AUTHORIZED_FOR_EXECUTION
 KEYWORDS = NOT_AUTHORIZED
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
 ```
@@ -171,4 +184,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 # English
 
-V032 remains canonical. Final Title B02 V01 completed under D-168 and passed independent Managing-AI scientific/editorial and Markdown/DOCX/OOXML/render audit. D-169 opens only the author-approval gate for the exact candidate. Keywords and end matter remain closed.
+V032 remains canonical. Title V01 and V02 were superseded before author approval through successive KBS editorial audits. D-173 fixes Title B02 V03 to make the contribution type, knowledge-based system identity, tariff-classification domain, and concrete separation mechanism visible at first read. D-174 authorizes exact V03 execution. Keywords and end matter remain closed.
