@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.60
+PLAN_VERSION = V3.61
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-167
+LATEST_EDITORIAL_DECISION = D-168
 
 CANONICAL_MASTER = ARTICLE_MASTER_V032
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V032.md
@@ -27,9 +27,9 @@ CONCLUSION_SECTION_7 = CLOSED / APPROVED / FROZEN / INTEGRATED
 CONCLUSION_FINAL_INTEGRATION = D-159
 
 ABSTRACT_BOUNDARY = D-160
-ABSTRACT_B01_PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md
+ABSTRACT_B01_PROMPT = article/prompts/10_FRONT_MATTER_B02_TITLE_V01.md
 ABSTRACT_B01_PROMPT_COMMIT = 35ee7924857512ea3285b31fd0b84053cff3928a
-ABSTRACT_B01_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
+ABSTRACT_B01_PROMPT_GIT_BLOB = cce38e813bd9dfd6c3ce55a6c378206ff3975675
 ABSTRACT_B01_PROMPT_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_PROMPT_INTERNAL_REVIEW_V02.md@a6f54bb9ddbd17ce368f5fd749234e0977d2d56f
 ABSTRACT_B01_PROMPT_REVIEW_RESULT = PASS
 ABSTRACT_B01_PROMPT_REVIEW_GIT_BLOB = dc9c7505a189827ede762c982d120a7bf4b6bd78
@@ -38,7 +38,7 @@ ABSTRACT_B01_INITIAL_EXECUTION_RESPONSE = article/responses/9_FRONT_MATTER_B01_A
 ABSTRACT_B01_INITIAL_EXECUTION_RESULT = BLOCKED_PRE_EXECUTION / COMPLIANT
 ABSTRACT_B01_BLOCKER_AUDIT = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02_BLOCKER_AUDIT_V01.md@9dfd4206ed42b28bc81e9b94a11f02bf0a762d16
 ABSTRACT_B01_BLOCKER_AUDIT_RESULT = PASS_BLOCKED_PREEXECUTION_COMPLIANT
-ABSTRACT_B01_AUTHORIZATION = D-163
+ABSTRACT_B01_AUTHORIZATION = D-168
 ABSTRACT_B01_COMPLETED_RESPONSE = article/responses/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02.md@0ad357f5bcaca2c0d3863e39661888b97b9722fd
 ABSTRACT_B01_COMPLETED_RESPONSE_RESULT = COMPLETED_PENDING_GESTORA_AUDIT
 ABSTRACT_B01_INTERNAL_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_INTERNAL_REVIEW_V01.md@0624d9fd4fb7cee995930f52fd701b2bff3748bf
@@ -62,7 +62,13 @@ TITLE_B02_PROMPT_GIT_BLOB = cce38e813bd9dfd6c3ce55a6c378206ff3975675
 TITLE_B02_PROMPT_REVIEW = article/reviews/10_FRONT_MATTER_B02_TITLE_PROMPT_INTERNAL_REVIEW_V01.md@7c2a61f6ad82f41867d74fce7924cd261d69b4f6
 TITLE_B02_PROMPT_REVIEW_GIT_BLOB = 50336457ac61640a867c1fdb146a9e35b551e197
 TITLE_B02_PROMPT_REVIEW_RESULT = PASS
-TITLE_B02_AUTHORIZATION = D-167
+TITLE_B02_INITIAL_AUTHORIZATION = D-167
+TITLE_B02_INITIAL_EXECUTION_RESPONSE = article/responses/10_FRONT_MATTER_B02_TITLE_RESPONSE_V01.md@6da31ec391fce20fb42a97c6796018315f280ed2
+TITLE_B02_INITIAL_EXECUTION_RESULT = BLOCKED_PRE_EXECUTION / COMPLIANT
+TITLE_B02_BLOCKER_AUDIT = article/reviews/10_FRONT_MATTER_B02_TITLE_RESPONSE_V01_BLOCKER_AUDIT_V01.md@3e8e5bb2581e8be912a6248372a5ab43dadceaf9
+TITLE_B02_BLOCKER_AUDIT_GIT_BLOB = 27467b221c66e455e935e7fc83fa9b7e7a3d4026
+TITLE_B02_BLOCKER_AUDIT_RESULT = PASS_BLOCKED_PREEXECUTION_COMPLIANT
+TITLE_B02_AUTHORIZATION = D-168
 ABSTRACT_B01_CANDIDATE_MD_SHA256 = 0fcf9c2676add5128f86efc50788335bc435077bedbd7a8aedbf73f8f1549f64
 ABSTRACT_B01_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
 ABSTRACT_B01_CANDIDATE_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
@@ -70,14 +76,14 @@ ABSTRACT_B01_V01_AUTHORIZATION = D-161 / SUPERSEDED_BEFORE_EXECUTION
 ABSTRACT_HISTORICAL_PROMPT_AUDIT = COMPLETE / 89 PRIOR FILES = 88 OPERATIONAL PROMPTS + 1 DRAFTING TEMPLATE
 
 CURRENT_DRAFTING_PHASE = FRONT_MATTER / TITLE
-CURRENT_GATE = FRONT_MATTER_B02_TITLE_V01_EXECUTION
+CURRENT_GATE = FRONT_MATTER_B02_TITLE_V01_REEXECUTION
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_TITLE_B02_V01_ONLY
+NEXT_ACTION = REEXECUTE_SAME_TITLE_B02_V01
 EXPECTED_EXIT = FRONT_MATTER_B02_TITLE_V01_COMPLETED_PENDING_GESTORA_AUDIT
 
 TITLE = AUTHORIZED_FOR_EXECUTION
-ABSTRACT = AUTHORIZED_FOR_EXECUTION
+ABSTRACT = CLOSED / APPROVED / FROZEN / INTEGRATED
 KEYWORDS = NOT_AUTHORIZED
 FRONT_MATTER_FINALIZATION = IN_PROGRESS / TITLE_EXECUTION
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
@@ -91,13 +97,13 @@ NOVELTY = NOT_DECLARED
 
 ## 1. Estado acumulativo
 
-`ARTICLE_MASTER_V031.md` es el master Markdown canónico después de la aprobación autoral y verificación byte-exacta de Conclusion §7. Results §5.1–§5.7, Discussion §6.1–§6.6 y Conclusion §7 están cerrados, aprobados, congelados e integrados.
+`ARTICLE_MASTER_V032.md` es el master Markdown canónico después de la aprobación autoral y verificación byte-exacta de Abstract B01 V02. Results §5.1–§5.7, Discussion §6.1–§6.6, Conclusion §7 y Abstract/Resumen están cerrados, aprobados, congelados e integrados.
 
 El Word canónico acumulativo es:
 
 ```text
-ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
-SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
+ARTICLE_MASTER_CANDIDATE_ABSTRACT_B01_V02.docx
+SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
 COMMENTS = 48
 TRACKED_CHANGES = 0
 PAGE_COUNT = 71
@@ -107,20 +113,20 @@ PAGE_COUNT = 71
 
 D-160 establece el boundary del Abstract final: problema/limitación → propuesta y separación de autoridad → evaluación/evidencia principal → interpretación acotada. Debe ser autosuficiente, aproximadamente 200–250 palabras en inglés, sin citas, sin nueva evidencia y con espejo semántico natural en español.
 
-El prompt `article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md`, Git blob `5e416bdb078f1728a9c98cdf0666821628fd722f`, completó su reejecución bajo D-163. IA Gestora auditó independientemente los candidatos Markdown y DOCX: diferencial exacto limitado a Abstract/Resumen, OOXML con solo `word/document.xml` modificado, comentarios/anclajes preservados, 0 tracked changes, equivalencia MD↔DOCX, 71 páginas sin defectos y contenido científico-editorial `PASS`. D-164 abre exclusivamente la aprobación autoral del candidato exacto.
+Abstract B01 V02 quedó aprobado e integrado en V032 bajo D-165. D-166 delimita el Title final. El prompt `article/prompts/10_FRONT_MATTER_B02_TITLE_V01.md`, Git blob `cce38e813bd9dfd6c3ce55a6c378206ff3975675`, pasó revisión interna. La primera ejecución autorizada por D-167 se detuvo correctamente en preflight por drift residual en los bloques inferiores de gate; IA Gestora auditó ese STOP como compliant y D-168 reautoriza el mismo Title V01 tras reconciliar Status/Plan.
 
 ## 3. Gate inmediato
 
 ```text
-CURRENT_GATE = FRONT_MATTER_B02_TITLE_V01_EXECUTION
+CURRENT_GATE = FRONT_MATTER_B02_TITLE_V01_REEXECUTION
 NEXT_ACTOR = IA_REDACCION
 PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md
 PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
 AUTHORIZATION = D-163
-INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V031.md
-INPUT_MASTER_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
-INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
-INPUT_MASTER_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
+INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V032.md
+INPUT_MASTER_MD_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
+INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_ABSTRACT_B01_V02.docx
+INPUT_MASTER_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
 EXPECTED_EXIT = FRONT_MATTER_B02_TITLE_V01_COMPLETED_PENDING_GESTORA_AUDIT
 TITLE = AUTHORIZED_FOR_EXECUTION
 KEYWORDS = NOT_AUTHORIZED
@@ -131,4 +137,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 # English
 
-V032 is canonical after byte-exact verification of the author-approved Abstract B01 V02 candidate. Abstract/Resumen are closed, approved, frozen, and integrated under D-165. D-166 defines the final Title boundary, the Title V01 prompt passed internal review, and D-167 authorizes only Title/Título execution from exact V032 and the approved cumulative Word baseline. Keywords and end matter remain closed.
+V032 is canonical after byte-exact verification of the author-approved Abstract B01 V02 candidate. Abstract/Resumen are closed, approved, frozen, and integrated under D-165. D-166 defines the final Title boundary. The first D-167 Title V01 execution stopped compliantly because lower gate metadata still pointed to the prior Abstract state. D-168 reconciles that drift and reauthorizes the same Title V01 prompt. Keywords and end matter remain closed.
