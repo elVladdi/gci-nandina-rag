@@ -17,12 +17,12 @@ Este registro es documental. Cambiar un estado aquí no sustituye la auditoría 
 | G6-F01 | CLOSED / APPROVED / INTEGRATED_TO_MAIN | Grupo 5 CLOSED/APPROVED |
 | G6-F02 | CLOSED / APPROVED / INTEGRATED_TO_MAIN | G6-F01 CLOSED/APPROVED |
 | G6-F03 | CLOSED / APPROVED / INTEGRATED_TO_MAIN | G6-F02 CLOSED/APPROVED |
-| G7-F01 | ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED | Grupo 6 CLOSED/APPROVED |
-| G7-F02 | PROSPECTIVE | G7-F01 CLOSED/APPROVED y tesis vigente identificada |
-| G7-F03 | PROSPECTIVE | G7-F02 CLOSED/APPROVED y onboarding editorial vigente |
-| G8-F01 | PROSPECTIVE | Grupo 7 CLOSED/APPROVED |
-| G8-F02 | PROSPECTIVE | G8-F01 CLOSED/APPROVED |
-| G8-F03 | PROSPECTIVE | G8-F02 CLOSED/APPROVED |
+| G7-F01 | CLOSED / APPROVED / INTEGRATED_TO_MAIN | Grupo 6 CLOSED/APPROVED |
+| G7-F02 | CLOSED / APPROVED / INTEGRATED | G7-F01 CLOSED/APPROVED y tesis vigente identificada |
+| G7-F03 | CLOSED / APPROVED | G7-F02 CLOSED/APPROVED y onboarding editorial vigente |
+| G8-F01 | ACTIVE / AUTHORIZED / EXTERNAL_EXECUTION_PENDING | Grupo 7 CLOSED/APPROVED |
+| G8-F02 | PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED | G8-F01 CLOSED/APPROVED |
+| G8-F03 | PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED | G8-F02 CLOSED/APPROVED |
 
 ## Regla de actualización
 
@@ -1353,3 +1353,28 @@ PASS / REVISION_REQUIRED / BLOCKED
 ```
 
 La ejecución externa no cierra por sí misma G8-F01. El cierre permanece bajo IA Experimental después de reauditar la respuesta y sus bindings de evidencia.
+
+
+## Reconciliación administrativa de tabla-resumen antes de ejecución externa G8-F01
+
+```text
+DATE = 2026-09-29
+SCOPE = TOP_SUMMARY_TABLE_ONLY
+SCIENTIFIC_STATE_CHANGE = false
+REASON =
+The append-only detailed registry already recorded the terminal closure of G7-F01/G7-F02/G7-F03,
+Group7 CLOSED/APPROVED, and G8-F01 ACTIVE/AUTHORIZED/EXTERNAL_EXECUTION_PENDING.
+The top summary table had not yet been reconciled and still displayed earlier prospective states.
+
+G7-F01 = CLOSED / APPROVED / INTEGRATED_TO_MAIN
+G7-F02 = CLOSED / APPROVED / INTEGRATED
+G7-F03 = CLOSED / APPROVED
+G8-F01 = ACTIVE / AUTHORIZED / EXTERNAL_EXECUTION_PENDING
+G8-F02 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+G8-F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED
+
+NEW_EXPERIMENT = false
+NEW_INFERENCE = false
+ARTICLE_MODIFIED = false
+THESIS_MODIFIED = false
+```
