@@ -1,0 +1,139 @@
+{
+  "artifact_id": "G7_F03_ARTICLE_SCIENTIFIC_REVIEW_v0.1",
+  "version": "v0.1",
+  "date": "2026-09-29",
+  "ficha": "G7-F03",
+  "role": "IA_EXPERIMENTAL",
+  "status": "REVISION_REQUIRED / EXECUTED / NOT_APPROVED",
+  "group7_status": "IN_PROGRESS / NOT_CLOSED",
+  "group8_f01_eligible": false,
+  "inputs": {
+    "request_path": "article/prompts/13_G7_F03_EXPERIMENTAL_ARTICLE_REVIEW_REQUEST_V01.md",
+    "request_blob": "5eabd0bc2ba114008d56028b6beb24c8fdd5ef1e",
+    "d194_blob": "e0dfd21e24c99c0f85c1b011293857a46b87aa9f",
+    "experimental_main_head": "db0d0ad0d8435921a7838db6720eaea86a263763",
+    "g7_f01_frozen_article_head": "2aad97aaceec0af6be0edb9ba0dd29170ad35baf",
+    "article_request_head": "952a56bb09c95bc7a93baec9b0a560889d253195",
+    "article_master_path": "article/manuscript/ARTICLE_MASTER_V036.md",
+    "article_master_blob": "c9dcbcc376cdb121d30dc2408756a6c95b569a90",
+    "g7_f01_source_freeze_blob": "feea31e2a45ee5f3d9b8fa1f9a1e1bdc073d6430"
+  },
+  "execution_flags": {
+    "article_modified": false,
+    "new_experiment": false,
+    "metrics_recomputed": false,
+    "new_inference": false,
+    "new_ci": false,
+    "new_p_value": false,
+    "exp12_reopened": false
+  },
+  "drift_check": {
+    "frozen_to_request_commit_distance": 583,
+    "material_scientific_contradiction": false,
+    "material_scientific_omission": true,
+    "omission_ids": [
+      "G7F03-A09",
+      "G7F03-A10"
+    ]
+  },
+  "required_corrections": [
+    {
+      "id": "G7F03-A09",
+      "severity": "MAJOR",
+      "location": "Methods / Experimental Design",
+      "issue": "Executed 20-case diagnostic LLM reranker protocol is not documented; V036 only mentions a possible separate diagnostic path.",
+      "governing_sources": [
+        "outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2/reranker_run_metadata_v0.2.json@5daba1ed3f44b2d8906d40588dbe2fcec4bf0e4b"
+      ],
+      "required_action": "Add a narrowly scoped diagnostic-reranker method description; preserve diagnostic-only status and separation from the primary flow."
+    },
+    {
+      "id": "G7F03-A10",
+      "severity": "MAJOR",
+      "location": "Results",
+      "issue": "Executed diagnostic reranker results are omitted.",
+      "governing_sources": [
+        "outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2/reranker_metrics_v0.2.json@15800df93cf77f4f2c6e83ac6cb692be013bbeb3",
+        "outputs/evaluation/diagnostic_llm_reranker_data_aduanas_clase87_v0.2/reranker_win_tie_loss_v0.2.json@a4d508070d1ef61abbd09a34a7f0ba76f5013a2a"
+      ],
+      "frozen_values": {
+        "sample_cases": 20,
+        "reference_in_pool": 19,
+        "reference_not_in_pool": 1,
+        "top1_before": 0.5,
+        "top1_after": 0.5,
+        "top3_before": 0.65,
+        "top3_after": 0.65,
+        "top5_before": 0.8,
+        "top5_after": 0.8,
+        "mrr_before": 0.632638888888889,
+        "mrr_after": 0.632638888888889,
+        "wins": 0,
+        "ties": 19,
+        "losses": 0,
+        "paired_inference": "not run"
+      },
+      "required_action": "Report as a separate diagnostic result with no improvement/degradation/significance/generalization claim."
+    }
+  ],
+  "verified_pass_controls": [
+    "SERIE unit and DAM dependence",
+    "Chapter-87 offline internal scope",
+    "historical ranking -> fixed Top-3 -> documentary association -> context -> local LLM explanation",
+    "normative evidence does not rerank",
+    "HE2 SUPPORTED within frozen internal inferential scope",
+    "HE4 PARTIALLY_SUPPORTED evidence represented without human-validation overclaim",
+    "HE5 INCONCLUSIVE",
+    "no invented HG/HE1 terminal disposition",
+    "EXP11A noncausal",
+    "EXP11B descriptive/no seed-superpopulation inference",
+    "EXP12 closed without retrieval/not estimable",
+    "auditability distinct from classification/legal correctness",
+    "configurability distinct from empirical generalization",
+    "public reproducibility package limitations accurately stated"
+  ],
+  "g5_disposition": {
+    "body_main": [
+      "G5-MAIN-01",
+      "G5-MAIN-02"
+    ],
+    "supplementary_appendix": [
+      "G5-SECONDARY-01",
+      "G5-SECONDARY-02",
+      "G5-APPENDIX-01",
+      "G5-APPENDIX-02",
+      "G5-APPENDIX-03",
+      "G5-APPENDIX-04",
+      "G5-APPENDIX-05"
+    ],
+    "internal_only": []
+  },
+  "g6_disposition": {
+    "body_main": [
+      "G6-FIG-01"
+    ],
+    "supplementary_appendix": [
+      "G6-FIG-02",
+      "G6-FIG-03"
+    ],
+    "do_not_include": []
+  },
+  "architecture_figure": {
+    "may_be_materialized_without_new_experiment": true,
+    "classification": "EDITORIAL_ARCHITECTURE_SCHEMATIC",
+    "requires_scientific_fidelity_review_before_integration": true,
+    "diagnostic_reranker_if_shown": "SEPARATE_DIAGNOSTIC_PATH / NO_FEEDBACK_TO_MAIN_FLOW"
+  },
+  "fast_finalization": {
+    "scientific_assessment": "SAFE_AFTER_PRE_FAST_CORRECTION_GATE",
+    "required_order": [
+      "PRE_FAST_SCIENTIFIC_CORRECTION_A09_A10",
+      "FINAL-F01",
+      "FINAL-F02",
+      "FINAL-F03"
+    ],
+    "requires_post_correction_experimental_reaudit": true
+  },
+  "closure_condition": "Narrow article-native correction of A09+A10 followed by Experimental-AI re-audit PASS.",
+  "next_actor_after_this_report": "IA_GESTORA_DEL_ARTICULO"
+}
