@@ -2171,3 +2171,22 @@ manifest, la autorización ni el config.
 - `G8-F01 = ELIGIBLE / NOT_AUTHORIZED / NOT_EXECUTED`. La elegibilidad no constituye autorización ni inicio de Grupo 8.
 - La disposición G5/G6 permanece sin cambios; la Figura 1 arquitectónica sigue científicamente permisible bajo el requisito de mostrar cualquier reranker diagnóstico como ruta lateral sin feedback al flujo primario.
 - No se modificó `article/main-manuscript`, no se ejecutó nuevo experimento, no se recalcularon métricas, no se creó inferencia/CI/p-value y EXP12 no fue reabierto.
+
+
+### 2026-09-29 — Activación G8-F01 con auditor externo independiente
+
+- Tras `G7-F03 = CLOSED / APPROVED` y `GROUP7 = CLOSED / APPROVED`, G8-F01 cumple su precondición de activación.
+- El Autor autoriza explícitamente el modelo de auditoría externa independiente para G8-F01.
+- Ejecutor sustantivo: `INDEPENDENT_EXTERNAL_AI_AUDITOR`.
+- Autoridad gobernante y de cierre: `IA_EXPERIMENTAL`.
+- IA Gestora del Artículo no emite el dictamen científico terminal de G8-F01; conserva autoridad sobre fuentes/editorial del artículo y correcciones posteriores si fueran necesarias.
+- IA de Redacción Científica no audita su propio trabajo y solo interviene si existe una corrección posteriormente autorizada.
+- Prompt operativo versionado: `docs/fichas/grupos_3_8/grupo_8/G8_F01_EXTERNAL_INDEPENDENT_AUDIT_PROMPT_V01.md`, Git blob `92dbd0f29e0e3b33faecc123ada298f23fae7530`.
+- Snapshot experimental: `main=db0d0ad0d8435921a7838db6720eaea86a263763`.
+- Plan preactivación: `ad7c8fde6007db7a93599646480c2ee960668a8e`.
+- Fichas preactivación: `0c070a5a9a41103ca0170bf7644bcd3c01c47a96`.
+- Article branch observado durante preparación: `article/main-manuscript=cfc952d97079b2262b9056355b0932eb7bb5fce9`; este HEAD no sustituye a los dos archivos finales que el Autor adjuntará al auditor.
+- Los objetos auditados son exactamente la tesis final y el artículo final suministrados por el Autor como adjuntos. El auditor debe congelar filename/tamaño/SHA-256/páginas cuando su entorno lo permita y detenerse si alguno falta o es ilegible.
+- `G8-F01 = ACTIVE / AUTHORIZED / EXTERNAL_EXECUTION_PENDING`.
+- `G8-F02 = PROSPECTIVE / NOT_AUTHORIZED`; `G8-F03 = PROSPECTIVE / NOT_AUTHORIZED`.
+- No se modifica tesis, artículo ni evidencia experimental durante esta activación.
