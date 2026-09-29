@@ -1,13 +1,13 @@
 # Plan maestro de redacción / Master Writing Plan
 
 ```text
-PLAN_VERSION = V3.56
+PLAN_VERSION = V3.57
 TARGET_JOURNAL = Knowledge-Based Systems
 ARTICLE_TYPE = Research article
 EDITORIAL_BASIS = KBS_EWG_34_V01
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
-LATEST_EDITORIAL_DECISION = D-162
+LATEST_EDITORIAL_DECISION = D-163
 
 CANONICAL_MASTER = ARTICLE_MASTER_V031
 CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V031.md
@@ -33,15 +33,20 @@ ABSTRACT_B01_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
 ABSTRACT_B01_PROMPT_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_PROMPT_INTERNAL_REVIEW_V02.md@a6f54bb9ddbd17ce368f5fd749234e0977d2d56f
 ABSTRACT_B01_PROMPT_REVIEW_RESULT = PASS
 ABSTRACT_B01_PROMPT_REVIEW_GIT_BLOB = dc9c7505a189827ede762c982d120a7bf4b6bd78
-ABSTRACT_B01_AUTHORIZATION = D-162
-ABSTRACT_B01_PREVIOUS_AUTHORIZATION = D-161 / SUPERSEDED_BEFORE_EXECUTION
+ABSTRACT_B01_INITIAL_AUTHORIZATION = D-162
+ABSTRACT_B01_INITIAL_EXECUTION_RESPONSE = article/responses/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02.md@9021b17b6911e5e41358755574dc441438d8cd14
+ABSTRACT_B01_INITIAL_EXECUTION_RESULT = BLOCKED_PRE_EXECUTION / COMPLIANT
+ABSTRACT_B01_BLOCKER_AUDIT = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02_BLOCKER_AUDIT_V01.md@9dfd4206ed42b28bc81e9b94a11f02bf0a762d16
+ABSTRACT_B01_BLOCKER_AUDIT_RESULT = PASS_BLOCKED_PREEXECUTION_COMPLIANT
+ABSTRACT_B01_AUTHORIZATION = D-163
+ABSTRACT_B01_PREVIOUS_AUTHORIZATION = D-163 / SUPERSEDED_BEFORE_EXECUTION
 ABSTRACT_HISTORICAL_PROMPT_AUDIT = COMPLETE / 89 PRIOR FILES = 88 OPERATIONAL PROMPTS + 1 DRAFTING TEMPLATE
 
 CURRENT_DRAFTING_PHASE = FRONT_MATTER / ABSTRACT
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_EXECUTION
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_REEXECUTION
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ABSTRACT_B01_V02_ONLY
+NEXT_ACTION = REEXECUTE_SAME_ABSTRACT_B01_V02_AFTER_EXACT_DOCX_REATTACHMENT
 EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
 
 TITLE = NOT_AUTHORIZED
@@ -75,7 +80,7 @@ PAGE_COUNT = 71
 
 D-160 establece el boundary del Abstract final: problema/limitación → propuesta y separación de autoridad → evaluación/evidencia principal → interpretación acotada. Debe ser autosuficiente, aproximadamente 200–250 palabras en inglés, sin citas, sin nueva evidencia y con espejo semántico natural en español.
 
-El prompt `article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md`, Git blob `5e416bdb078f1728a9c98cdf0666821628fd722f`, pasó revisión interna con `PASS`. D-162 autoriza exclusivamente Abstract B01 V02 desde V031 y el Word acumulativo exacto; D-161/V01 queda superseded antes de ejecución.
+El prompt `article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md`, Git blob `5e416bdb078f1728a9c98cdf0666821628fd722f`, pasó revisión interna con `PASS`. La primera ejecución autorizada por D-162 se detuvo correctamente en preflight por drift residual D-161/D-162 y falta de acceso binario efectivo al Word baseline en el chat de IA Redacción. IA Gestora auditó el STOP como compliant, verificó el Word exacto y D-163 reautoriza el mismo V02 después de reconciliar Status/Plan y re-adjuntar el DOCX exacto.
 
 ## 3. Gate inmediato
 
@@ -99,4 +104,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 # English
 
-V031 is canonical and the manuscript body through Conclusion is fully integrated and frozen. D-160 bounds the final Abstract to a concise self-contained synthesis using only integrated evidence; its prompt passed internal review, and D-162 authorizes only Abstract B01 V02 execution; D-161/V01 is superseded before execution. Title, Keywords, and end matter remain closed.
+V031 is canonical and the manuscript body through Conclusion is fully integrated and frozen. The first Abstract V02 execution stopped compliantly during preflight. D-163 reconciles the residual authorization drift and reauthorizes the same V02 prompt after exact DOCX reattachment. Title, Keywords, and end matter remain closed.
