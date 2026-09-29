@@ -1,9 +1,9 @@
-# Response — Front matter B03 / Final Keywords V01 — BLOCKED PRE-EXECUTION
+# Response — Front matter B03 / Final Keywords V01 — COMPLETED PENDING GESTORA AUDIT
 
 ## Español
 
 ```text
-SOURCE_COMMIT = e6e76592aa45345c02d654a360876b96f3f3616c
+SOURCE_COMMIT = 644085873f38e78fed3b0d4cd4c18d143454e687
 SOURCE_BRANCH = article/main-manuscript
 PHASE = FRONT_MATTER / KEYWORDS
 
@@ -11,49 +11,30 @@ PROMPT_IDENTITY = PASS
 EXECUTION_AUTHORIZATION_IDENTITY = PASS
 CANONICAL_MASTER_IDENTITY = PASS
 WORD_BASELINE_IDENTITY = PASS
-LIVE_GATE_CONSISTENCY = BLOCKED
+LIVE_GATE_CONSISTENCY = PASS
 EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
+BLOCKERS = NONE
 
-BLOCKERS =
-LIVE_STATE_CURRENT_DRAFTING_PHASE_DRIFT:
-article/ARTICLE_STATUS.md y article/ARTICLE_WRITING_PLAN.md declaran
-CURRENT_DRAFTING_PHASE = FRONT_MATTER / TITLE,
-mientras que el prompt V01, D-179, CURRENT_GATE, NEXT_ACTION y el gate inmediato
-declaran FRONT_MATTER_B03_KEYWORDS_V01_EXECUTION / EXECUTE_KEYWORDS_B03_V01_ONLY.
-El prompt V01 ordena detenerse si la gobernanza viva contradice estas identidades
-y prohíbe reconciliar drift por inferencia propia.
+KEYWORDS_EN = Knowledge-based decision support; Tariff classification; Harmonized System; Information retrieval; Documentary evidence; Large language models; Provenance and traceability
+KEYWORDS_ES = Apoyo a la decisión basado en conocimiento; Clasificación arancelaria; Sistema Armonizado; Recuperación de información; Evidencia documental; Modelos de lenguaje grandes; Procedencia y trazabilidad
+KEYWORD_COUNT_EN = 7
+KEYWORD_COUNT_ES = 7
 ```
 
-### Onboarding y estado
+### Onboarding y estado previo
 
-Se verificó el onboarding obligatorio del prompt V01 sobre el commit fuente exacto, incluyendo:
-
-- `article/START_HERE.md`
-- `article/ARTICLE_STATUS.md`
-- `article/ARTICLE_WRITING_PLAN.md`
-- `article/STYLE_GUIDE.md`
-- `article/governance/MASTER_WRITING_AND_DELIVERY_PROTOCOL.md`
-- `article/governance/D022_GITHUB_ONLY_OPERATIONAL_PROMPTS_AND_RESPONSES.md`
-- `article/governance/D027_DOCX_AUTHOR_HANDOFF_REQUIREMENT.md`
-- `article/governance/D035_TIMEOUT_SAFE_ARTIFACT_HANDOFF.md`
-- `article/governance/D177_TITLE_B02_V03_AUTHOR_APPROVAL_VERIFICATION_AND_V033_INTEGRATION.md`
-- `article/governance/D178_FRONT_MATTER_KEYWORDS_INTERPRETIVE_BOUNDARY.md`
-- `article/reviews/11_FRONT_MATTER_B03_KEYWORDS_PROMPT_INTERNAL_REVIEW_V01.md`
-- `article/governance/D179_FRONT_MATTER_KEYWORDS_B03_V01_EXECUTION_AUTHORIZATION.md`
-- `article/prompts/11_FRONT_MATTER_B03_KEYWORDS_V01.md`
-- `article/manuscript/ARTICLE_MASTER_V033.md`
-
-Además se revalidaron los archivos nucleares requeridos por `START_HERE.md` para claims/estado editorial.
+Se ejecutó el onboarding obligatorio del prompt V01 sobre el commit fuente exacto. Se leyó y aplicó el estado vivo reconciliado, D-177, D-178, la revisión interna vigente, D-180, el prompt completo, V033 y las reglas acumulativas aplicables de START_HERE/MWDP/D-022/D-027/D-035.
 
 ```text
-FASE_ACTIVA = FRONT_MATTER / KEYWORDS PER PROMPT_D179_GATE
-ESTADO_DEL_BLOQUE_ASIGNADO = BLOCKED_PRE_EXECUTION
-REDACCIÓN_AUTORIZADA = NO / LIVE_STATE_DRIFT
-DECISIONES_CONGELADAS_RELEVANTES = D-177; D-178; D-179
+ARCHIVOS_LEÍDOS = ONBOARDING_KEYWORDS_V01_COMPLETO
+FASE_ACTIVA = FRONT_MATTER / KEYWORDS
+ESTADO_DEL_BLOQUE_ASIGNADO = COMPLETED_PENDING_GESTORA_AUDIT
+REDACCIÓN_AUTORIZADA = SÍ / D-180
+DECISIONES_CONGELADAS_RELEVANTES = D-177; D-178; D-180
 CLAIMS_AUTORIZADOS_RELEVANTES =
 - Knowledge-based decision support = system-level characterization
 - Harmonized System = general domain vocabulary
-- Information retrieval = broad technical family
+- Information retrieval = broad technical family, not BM25 lock-in
 - Documentary evidence = downstream evidence association
 - Large language models = explanation-stage family only
 - Provenance and traceability != legal correctness / human validation / formal auditability
@@ -62,7 +43,21 @@ Auditability keyword; RAG; BM25; NANDINA; Chapter 87; Peru; Explainable AI;
 novelty/first/SOTA/superiority; legal correctness; human validation;
 generalization; deployment readiness
 FUENTES_EXTERNAS_QUE_DEBEN_VERIFICARSE = NONE
-BLOQUEOS_O_CONTRADICCIONES_DETECTADOS = CURRENT_DRAFTING_PHASE_DRIFT
+BLOQUEOS_O_CONTRADICCIONES_DETECTADOS = NONE
+
+PROTOCOL_READ = MWDP_V1.0
+BLOCK = FRONT_MATTER_B03_KEYWORDS
+BLOCK_REVISION = V01
+SOURCE_SNAPSHOT(S) = article/main-manuscript@644085873f38e78fed3b0d4cd4c18d143454e687
+AUTHORIZED_CLAIMS_USED = D178_EXACT_KEYWORDS_AND_BOUNDARIES_ONLY
+CONDITIONAL_CLAIMS_USED = NONE
+PROHIBITED_CLAIMS_USED = NONE
+ACCESS_RECHECK_REQUIRED = NONE
+CITATION_COMMENT_COVERAGE = 48/48 PRESERVED
+EN_ES_SEMANTIC_EQUIVALENCE = PASS
+MASTER_CANDIDATE = ARTICLE_MASTER_CANDIDATE_KEYWORDS_B03_V01
+ENGLISH_MAIN_TEXT_WORD_COUNT = BODY_UNCHANGED / KEYWORDS_ONLY_BLOCK
+EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
 ```
 
 ### Preflight de identidad
@@ -71,11 +66,12 @@ BLOQUEOS_O_CONTRADICCIONES_DETECTADOS = CURRENT_DRAFTING_PHASE_DRIFT
 PROMPT = article/prompts/11_FRONT_MATTER_B03_KEYWORDS_V01.md
 OBSERVED_PROMPT_GIT_BLOB = 704960f4f73f8592fb887414e8009cfad1b7e537
 EXPECTED_PROMPT_GIT_BLOB = 704960f4f73f8592fb887414e8009cfad1b7e537
-PROMPT_IDENTITY = PASS
 
-ACTIVE_AUTHORIZATION = D-179
-D179_PROMPT_PATH_MATCH = PASS
-D179_PROMPT_BLOB_MATCH = PASS
+ACTIVE_AUTHORIZATION = D-180
+D180_PROMPT_PATH_MATCH = PASS
+D180_PROMPT_BLOB_MATCH = PASS
+D179_INITIAL_EXECUTION = BLOCKED_PRE_EXECUTION / COMPLIANT
+D180_PHASE_RECONCILIATION = PASS
 EXECUTION_AUTHORIZATION_IDENTITY = PASS
 
 INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V033.md
@@ -90,59 +86,107 @@ OBSERVED_DOCX_SHA256 = 1451c7c2d9a013603c749a7ad0730ea450f76700ff853b6d96d9d1f86
 EXPECTED_DOCX_SHA256 = 1451c7c2d9a013603c749a7ad0730ea450f76700ff853b6d96d9d1f865882ed1
 OBSERVED_DOCX_SIZE_BYTES = 110921
 EXPECTED_DOCX_SIZE_BYTES = 110921
-OBSERVED_OOXML_PART_COUNT = 14
-OBSERVED_COMMENTS = 48
-OBSERVED_COMMENT_RANGE_START = 48
-OBSERVED_COMMENT_RANGE_END = 48
-OBSERVED_COMMENT_REFERENCE = 48
-OBSERVED_TRACKED_CHANGES = 0
-OBSERVED_PAGE_COUNT = 71
-ZIP_OOXML_INTEGRITY = PASS
+BASELINE_OOXML_PART_COUNT = 14
+BASELINE_COMMENTS = 48
+BASELINE_COMMENT_RANGE_START = 48
+BASELINE_COMMENT_RANGE_END = 48
+BASELINE_COMMENT_REFERENCE = 48
+BASELINE_TRACKED_CHANGES = 0
+BASELINE_PAGE_COUNT = 71
+BASELINE_ZIP_OOXML_INTEGRITY = PASS
 WORD_BASELINE_IDENTITY = PASS
+
+CURRENT_DRAFTING_PHASE = FRONT_MATTER / KEYWORDS
+CURRENT_GATE = FRONT_MATTER_B03_KEYWORDS_V01_REEXECUTION
+NEXT_ACTION = REEXECUTE_KEYWORDS_B03_V01_ONLY
+LIVE_GATE_CONSISTENCY = PASS
 ```
 
-### No-mutación por blocker
+### Materialización exacta
 
-No se materializaron Keywords ni Palabras clave. No se modificó V033 ni el DOCX baseline. No se generaron los masters candidatos ni el artefacto de sección porque el preflight quedó bloqueado antes de cualquier edición.
+Se materializaron exactamente las siete Keywords y siete Palabras clave fijadas por D-178, en el orden prescrito y en una sola línea por idioma. No se añadieron, eliminaron, sustituyeron ni reordenaron términos.
+
+Title/Título y Abstract/Resumen permanecen congelados e idénticos a V033/baseline. Sections 1–7 y end matter permanecen fuera de scope y sin modificación textual.
+
+### Artefactos y diferencial
 
 ```text
-KEYWORDS_EN = NOT_MATERIALIZED
-KEYWORDS_ES = NOT_MATERIALIZED
-KEYWORD_COUNT_EN = 0 / NOT_MATERIALIZED
-KEYWORD_COUNT_ES = 0 / NOT_MATERIALIZED
+SECTION_ARTIFACT = article/sections/front_matter/Keywords_B03_V01.md
+SECTION_ARTIFACT_COMMIT = cdd23a2296ab6b1435d660f7340bcf73a9c340cb
+SECTION_ARTIFACT_SHA256 = 82ae0680f1bd67992b45922591213bc88917437929654526e5ed6e8d7c1a22ba
+SECTION_ARTIFACT_GIT_BLOB = fc4a2b98b27e3bf38d962b6fb7da76887d717e47
 
-SECTION_ARTIFACT = NOT_CREATED
-SECTION_ARTIFACT_SHA256 = NOT_CREATED
-SECTION_ARTIFACT_GIT_BLOB = NOT_CREATED
+MASTER_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_KEYWORDS_B03_V01.md
+MASTER_CANDIDATE_MD_SHA256 = 37994390a1be96d6c37bceb6536ea367b0918872b63180e2f5531ba32856f6ca
+MASTER_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0d24b1e46ed3d6a189c5ffdcfaac97e9670fa684
 
-MASTER_CANDIDATE_MD = NOT_CREATED
-MASTER_CANDIDATE_MD_SHA256 = NOT_CREATED
-MASTER_CANDIDATE_MD_EXPECTED_GIT_BLOB = NOT_CREATED
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_KEYWORDS_B03_V01.docx
+CANDIDATE_DOCX_SHA256 = 8e31acd688e0e7b52a8f132ed12f342178c75daf9bfe1dbb4d8c44137f317b84
+CANDIDATE_DOCX_SIZE_BYTES = 110943
 
-CANDIDATE_DOCX = NOT_CREATED
-CANDIDATE_DOCX_SHA256 = NOT_CREATED
-CANDIDATE_DOCX_SIZE_BYTES = NOT_CREATED
+AUTHORIZED_CHANGED_BLOCKS = KEYWORDS_EN + KEYWORDS_ES ONLY
+MARKDOWN_OUTSIDE_AUTHORIZED_BLOCKS_BYTE_EQUIVALENT_TO_V033 = PASS
+DOCX_VISIBLE_TEXT_OUTSIDE_AUTHORIZED_BLOCKS_EQUIVALENT_TO_BASELINE = PASS
 
-MARKDOWN_OUTSIDE_AUTHORIZED_BLOCKS_BYTE_EQUIVALENT_TO_V033 = NOT_APPLICABLE / NO_CANDIDATE
-MD_DOCX_VISIBLE_TEXT_EQUIVALENCE = NOT_APPLICABLE / NO_CANDIDATE
-COMMENTS_AND_ANCHORS_PRESERVED = BASELINE_UNMODIFIED
-COMMENTS_XML_BYTE_IDENTICAL = BASELINE_UNMODIFIED
-TRACKED_CHANGES = 0 / BASELINE
-ZIP_OOXML_INTEGRITY = PASS / BASELINE
-OOXML_CHANGED_PARTS = NONE
-FULL_DOCX_PAGE_COUNT = 71 / BASELINE
-FULL_DOCX_RENDER = PASS / BASELINE_IDENTITY_CHECK
-FULL_DOCX_VISUAL_QA = NOT_APPLICABLE / NO_CANDIDATE
+TITLE_EN_ES = PRESERVED_FROZEN
+ABSTRACT_EN_ES = PRESERVED_FROZEN
+SECTIONS_1_TO_7 = PRESERVED
+END_MATTER = PRESERVED
+TITLE_AND_ABSTRACT_FROZEN = PASS
+```
 
+### DOCX / OOXML / render
+
+```text
+MD_DOCX_VISIBLE_TEXT_EQUIVALENCE = PASS
+COMMENTS_AND_ANCHORS_PRESERVED = PASS
+COMMENTS_XML_BYTE_IDENTICAL = PASS
+COMMENTS = 48
+COMMENT_RANGE_START = 48
+COMMENT_RANGE_END = 48
+COMMENT_REFERENCE = 48
+TRACKED_CHANGES = 0
+ZIP_OOXML_INTEGRITY = PASS
+OOXML_PART_COUNT = 14
+OOXML_CHANGED_PARTS = word/document.xml ONLY
+
+FULL_DOCX_PAGE_COUNT = 71
+FULL_DOCX_RENDER = PASS
+FULL_DOCX_VISUAL_QA = PASS / ALL 71 PAGES REVIEWED
+VISUAL_QA_DEFECTS = NONE
+```
+
+La eliminación del drafting note inglés y sustitución de los placeholders por una sola línea final de Keywords/Palabras clave produce reflow de paginación interna sin cambiar el page count. La inspección visual completa de las 71 páginas no mostró clipping, solapamientos, glifos faltantes ni defectos de header/footer.
+
+### Controles científico-editoriales
+
+```text
 NO_NEW_RESULTS_OR_INFERENCE = PASS
 NO_NEW_LITERATURE_OR_CITATIONS = PASS
-D178_EXACT_KEYWORDS_MATERIALIZATION = BLOCKED / NOT_STARTED
-TITLE_AND_ABSTRACT_FROZEN = PASS / UNMODIFIED
+D178_EXACT_KEYWORDS_MATERIALIZATION = PASS
+TITLE_AND_ABSTRACT_FROZEN = PASS
 
-EXACT_CUMULATIVE_MD_HANDOFF_TO_AUTHOR = BLOCKED / NOT_CREATED
-EXACT_CUMULATIVE_DOCX_HANDOFF_TO_AUTHOR = BLOCKED / NOT_CREATED
+AUDITABILITY_KEYWORD = NOT_INTRODUCED
+RAG_KEYWORD = NOT_INTRODUCED
+BM25_KEYWORD = NOT_INTRODUCED
+NANDINA_CHAPTER87_PERU_KEYWORDS = NOT_INTRODUCED
+EXPLAINABLE_AI_KEYWORD = NOT_INTRODUCED
+NOVELTY_FIRST_SOTA_SUPERIORITY = NOT_INTRODUCED
+LEGAL_CORRECTNESS = NOT_INTRODUCED
+HUMAN_VALIDATION = NOT_INTRODUCED
+GENERALIZATION = NOT_INTRODUCED
+DEPLOYMENT_READINESS = NOT_INTRODUCED
+```
 
-EXPECTED_EXIT = NOT_REACHED / BLOCKED_PRE_EXECUTION
+### Handoff y salida
+
+```text
+DIRECT_GITHUB_MATERIALIZATION_OF_LARGE_MASTER = NOT_ATTEMPTED
+D035_TIMEOUT_SAFE_HANDOFF = PASS / EXACT_REAL_FILES_MATERIALIZED; NO_BASE64_CHUNKING_FRAGMENTATION_OR_REASSEMBLY
+EXACT_CUMULATIVE_MD_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT_OF_THIS_EXECUTION
+EXACT_CUMULATIVE_DOCX_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT_OF_THIS_EXECUTION
+
+EXPECTED_EXIT = FRONT_MATTER_B03_KEYWORDS_V01_COMPLETED_PENDING_GESTORA_AUDIT
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
 FINAL_GAP = NOT_DEFINED
@@ -151,16 +195,20 @@ NOVELTY = NOT_DECLARED
 
 ### Disposición
 
-La IA de Redacción no corrige `ARTICLE_STATUS.md` ni `ARTICLE_WRITING_PLAN.md` y no decide por inferencia que el campo `CURRENT_DRAFTING_PHASE` deba ignorarse. Se requiere reconciliación versionada por IA Gestora y, si corresponde, un nuevo handoff exacto sobre el mismo bloque.
+Keywords B03 V01 queda completado como candidato pendiente de auditoría independiente de IA Gestora. No se abre aprobación autoral y no se ejecuta end matter.
 
 ---
 
 ## English
 
-Keywords B03 V01 stopped before manuscript editing because the live versioned governance is internally inconsistent.
+Keywords B03 V01 was re-executed from source commit `644085873f38e78fed3b0d4cd4c18d143454e687` under D-180 after the previous validated pre-execution phase-metadata blocker was reconciled.
 
-The exact prompt blob, D-179 authorization, canonical V033 Markdown SHA-256/Git blob, and exact Title B02 V03 cumulative Word baseline all pass independent identity verification. The Word package also matches the governed size, 14 OOXML parts, 48 comments and anchors, zero tracked changes, ZIP integrity, and 71-page render.
+The prompt blob, D-180 authorization, live Keywords gate, canonical V033 Markdown, and exact approved Title B02 V03 cumulative Word baseline all passed independent preflight identity checks.
 
-However, both `ARTICLE_STATUS.md` and `ARTICLE_WRITING_PLAN.md` still state `CURRENT_DRAFTING_PHASE = FRONT_MATTER / TITLE`, while the active prompt, D-179, current gate, next action, and immediate gate all identify Keywords B03 V01 execution. The active prompt expressly requires a stop when live governance contradicts the governed identities and forbids the Writing AI from reconciling drift by inference.
+The exact seven English and seven Spanish keywords fixed by D-178 were materialized in the prescribed order, with no additions, removals, substitutions, or reordering. Only the Keywords/Palabras clave blocks changed. Title/Título, Abstract/Resumen, Sections 1–7, and end matter remain textually preserved.
 
-No Keywords/Palabras clave text was materialized, no manuscript content was modified, no section artifact or cumulative candidate was created, and end matter remains unauthorized.
+The cumulative Markdown is byte-equivalent to V033 outside the authorized blocks. Native OOXML editing preserved the 14-part package, all 48 comments and anchors, zero tracked changes, and byte-identical `word/comments.xml`; only `word/document.xml` changed. Markdown and DOCX contain the exact same fixed keyword lines.
+
+The candidate renders to 71 pages and all pages were visually reviewed without clipping, overlap, missing glyphs, or header/footer defects. No new results, inference, literature, or citations were introduced.
+
+The cumulative Markdown and DOCX are handed off as exact real files under D-027/D-035 and are not materialized in GitHub. Execution stops at `FRONT_MATTER_B03_KEYWORDS_V01_COMPLETED_PENDING_GESTORA_AUDIT`. End matter remains unauthorized.
