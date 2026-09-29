@@ -1174,3 +1174,50 @@ required governing source is unavailable or an unresolved precondition prevents 
 ```
 
 Esta activación no modifica el artículo ni autoriza a IA Experimental a editarlo. La ficha se ejecuta exclusivamente como auditoría científica transversal y disposición de los artefactos G5/G6 solicitada por D-194.
+
+## Resultado de ejecución G7-F03 — auditoría científica V036 bajo D-194
+
+```text
+FICHA = G7-F03
+EXECUTION_DATE = 2026-09-29
+PREVIOUS_STATE = ACTIVE / AUTHORIZED / EXECUTION_PENDING
+
+EXECUTION_BRANCH =
+writing/g7-f03-article-scientific-review-v01
+
+REPORT_PATH =
+docs/writing/group7/g7_f03_article_scientific_review_v0.1.md
+
+REPORT_BRANCH_COMMIT =
+be28d13965c261ddff6943f25b23c798e29da0be
+
+AUDIT_RECORD_PATH =
+outputs/audits/group7_closure_v0.1.json
+
+AUDIT_RECORD_BRANCH_COMMIT =
+67612eec83f7b900bca69b60c0a672561c790238
+
+RESULT =
+REVISION_REQUIRED / EXECUTED / NOT_APPROVED
+
+BLOCKING_SOURCE_GAP = false
+MATERIAL_CORRECTION_REQUIRED = true
+
+REQUIRED_CORRECTIONS =
+G7F03-A09 / DIAGNOSTIC_RERANKER_METHOD
+G7F03-A10 / DIAGNOSTIC_RERANKER_RESULTS
+
+ARTICLE_MODIFIED = false
+NEW_EXPERIMENT_EXECUTED = false
+METRICS_RECOMPUTED = false
+EXP12_REOPENED = false
+
+GROUP7 = IN_PROGRESS / NOT_CLOSED
+G8_F01 = NOT_ELIGIBLE / NOT_AUTHORIZED
+
+NEXT_ACTOR = IA_GESTORA_DEL_ARTICULO
+NEXT_ACTION =
+OPEN_NARROW_ARTICLE_NATIVE_CORRECTION_FOR_A09_A10_THEN_RETURN_FOR_EXPERIMENTAL_REAUDIT
+```
+
+La ejecución encontró una omisión científica material pero reparable, no una contradicción experimental ni falta de fuente. G7-F03 no puede cerrarse hasta que el artículo incorpore bajo su gobernanza nativa el método y los resultados congelados del reranker diagnóstico y la IA Experimental reaudite el alcance corregido con PASS.
