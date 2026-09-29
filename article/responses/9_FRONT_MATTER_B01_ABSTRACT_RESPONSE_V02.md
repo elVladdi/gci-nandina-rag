@@ -1,48 +1,25 @@
-# Response — Front matter B01 / Abstract V02 — BLOCKED PRE-EXECUTION
+# Response — Front matter B01 / Abstract V02 — COMPLETED PENDING GESTORA AUDIT
 
 ## Español
 
 ```text
-SOURCE_COMMIT = 03d31db62f6a1ff64c87b340a6064b81f0025ddf
+SOURCE_COMMIT = 66a1d8ea6f493ae7cbaef8f3fd38254e1c0e618b
 SOURCE_BRANCH = article/main-manuscript
-PHASE = FRONT_MATTER
-BLOCK = FRONT_MATTER_B01_ABSTRACT_V02
-ESTADO_DEL_BLOQUE_ASIGNADO = BLOCKED_PRE_EXECUTION
-REDACCIÓN_AUTORIZADA = NO / PREFLIGHT_BLOCKED
+FASE_ACTIVA = FRONT_MATTER / ABSTRACT
+ESTADO_DEL_BLOQUE_ASIGNADO = COMPLETED_PENDING_GESTORA_AUDIT
+REDACCIÓN_AUTORIZADA = SÍ / D-163
+DECISIONES_CONGELADAS_RELEVANTES = D-159; D-160; D-163; D-162 = PREVIOUS_BLOCKED_PRE_EXECUTION_COMPLIANT; D-161/V01 = SUPERSEDED_BEFORE_EXECUTION
+CLAIMS_AUTORIZADOS_RELEVANTES = separación de autoridad entre historical retrieval, documentary association y controlled explanation; Top-3 67.14%; asociación documental exacta 3,168/3,168; invariancia 1,056/1,056; auditabilidad cualitativa 28/50 = 56.0% bajo LLM-as-judge, con los límites de D-160
+CLAIMS_PROHIBIDOS_O_PENDIENTES_RELEVANTES = overall classification accuracy; substantive normative/legal correctness; human expert validation; external performance transfer/generalization; deployment readiness; novelty/first/SOTA/superiority; FINAL_GAP = NOT_DEFINED; NOVELTY = NOT_DECLARED
 FUENTES_EXTERNAS_QUE_DEBEN_VERIFICARSE = NONE
-
+BLOQUEOS_O_CONTRADICCIONES_DETECTADOS = NONE
 PROMPT_IDENTITY = PASS
-OBSERVED_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
-EXPECTED_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
-
 EXECUTION_AUTHORIZATION_IDENTITY = PASS
-ACTIVE_AUTHORIZATION = D-162
-D162_PROMPT_PATH_MATCH = PASS
-D162_PROMPT_BLOB_MATCH = PASS
-D161_V01_STATUS = SUPERSEDED_BEFORE_EXECUTION / NOT_EXECUTED
-
-INPUT_MASTER_MD_IDENTITY = PASS
-INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V031.md
-OBSERVED_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
-EXPECTED_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
-OBSERVED_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
-EXPECTED_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
-
-INPUT_MASTER_DOCX_IDENTITY = BLOCKED
-INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
-EXPECTED_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
-EXPECTED_COMMENTS = 48
-EXPECTED_TRACKED_CHANGES = 0
-EXPECTED_PAGE_COUNT = 71
-
-BLOQUEOS_O_CONTRADICCIONES_DETECTADOS =
-1. BLOCKED_LIVE_STATE_AUTHORIZATION_DRIFT: ARTICLE_STATUS.md y ARTICLE_WRITING_PLAN.md declaran D-162/V02 como autorización vigente en sus campos de estado, pero sus bloques "Gate vigente"/"Gate inmediato" todavía consignan AUTHORIZATION = D-161. D-162 declara D-161/V01 SUPERSEDED_BEFORE_EXECUTION. El prompt V02 prohíbe resolver silenciosamente esta contradicción por inferencia.
-2. BLOCKED_INPUT_MASTER_DOCX_RAW_BYTES_UNAVAILABLE: el archivo Word esperado fue localizado por nombre exacto en el almacenamiento del proyecto, pero sus bytes binarios no quedaron disponibles para materialización/autorización en el entorno de edición. Por tanto no fue posible recomputar su SHA-256, abrir el OOXML, verificar 48 comentarios/0 tracked changes/71 páginas, editar nativamente el Word exacto ni realizar render/QA. D-027/D-035 y el prompt V02 prohíben reconstruirlo desde Markdown o usar workarounds.
-
-EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
 ```
 
-### Archivos leídos — onboarding obligatorio completo
+### Archivos leídos
+
+Onboarding obligatorio ejecutado en el orden definido por V02:
 
 1. `article/START_HERE.md`
 2. `article/README.md`
@@ -52,8 +29,8 @@ EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
 6. `article/SOURCE_REGISTRY.md`
 7. `article/CLAIM_EVIDENCE_MATRIX.md`
 8. `article/STYLE_GUIDE.md`
-9. `article/governance/MASTER_WRITING_AND_DELIVERY_PROTOCOL.md` — MWDP v1.0
-10. `article/governance/SCIENTIFIC_PROSE_CLARITY_AND_CONCRETENESS_RULE.md` — SPCCR v1.0
+9. `article/governance/MASTER_WRITING_AND_DELIVERY_PROTOCOL.md`
+10. `article/governance/SCIENTIFIC_PROSE_CLARITY_AND_CONCRETENESS_RULE.md`
 11. `article/governance/D013_KBS_EMPIRICAL_WRITING_GUIDE_APPROVAL.md`
 12. `article/governance/KBS_EMPIRICAL_WRITING_GUIDE_34_ARTICLES_DRAFT.md`
 13. `article/governance/D022_GITHUB_ONLY_OPERATIONAL_PROMPTS_AND_RESPONSES.md`
@@ -62,47 +39,104 @@ EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
 16. `article/governance/D136_SUBSTANTIVE_EDITORIAL_AUDIT_AND_INTERNAL_TERMINOLOGY_CONTROL.md`
 17. `article/governance/D155_DISCUSSION_B02_TRANSVERSAL_AUTHOR_APPROVAL_V030_VERIFICATION_AND_EDITORIAL_FREEZE.md`
 18. `article/governance/D156_CONCLUSION_SECTION7_INTERPRETIVE_BOUNDARY.md`
-19. `article/governance/D157_CONCLUSION_B01_V01_EXECUTION_AUTHORIZATION.md`
+19. `article/governance/D157_CONCLUSION_B01_SECTION7_EXECUTION_AUTHORIZATION.md`
 20. `article/governance/D158_CONCLUSION_B01_V01_REAUDIT_PASS_AND_AUTHOR_APPROVAL_GATE.md`
 21. `article/governance/D159_CONCLUSION_B01_AUTHOR_APPROVAL_V031_VERIFICATION_AND_INTEGRATION.md`
 22. `article/governance/D160_FRONT_MATTER_ABSTRACT_INTERPRETIVE_BOUNDARY.md`
 23. `article/reviews/9_FRONT_MATTER_B01_ABSTRACT_PROMPT_INTERNAL_REVIEW_V02.md`
-24. `article/governance/D162_FRONT_MATTER_ABSTRACT_B01_V02_EXECUTION_AUTHORIZATION.md`
+24. `article/governance/D163_ABSTRACT_B01_V02_BLOCKER_RECONCILIATION_AND_REEXECUTION_AUTHORIZATION.md`
 25. `article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md`
 26. `article/manuscript/ARTICLE_MASTER_V031.md`
 
-### Decisiones y fronteras relevantes
+### Preflight e identidades
 
 ```text
-DECISIONES_CONGELADAS_RELEVANTES =
-- D-159: V031 y Word Conclusion B01 V01 constituyen los baselines acumulativos gobernados.
-- D-160: Abstract limitado a problem/limitation -> proposal/authority boundaries -> evaluation/main evidence -> bounded interpretation.
-- D-162: autoriza exclusivamente Abstract/Resumen V02 y supersede D-161/V01.
-- Title, Keywords, Sections 1-7 y end matter permanecen fuera de scope.
-- FINAL_GAP = NOT_DEFINED.
-- NOVELTY = NOT_DECLARED.
+PROMPT_PATH = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md
+OBSERVED_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
+EXPECTED_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
+PROMPT_IDENTITY = PASS
 
-CLAIMS_AUTORIZADOS_RELEVANTES =
-- historical retrieval es la única autoridad primaria de ranking y fija el Top-3 antes de las etapas documental y generativa;
-- documentary association añade evidencia a candidatos ya fijados sin reordenarlos;
-- local LLM se restringe a explicación controlada del conjunto recibido;
-- candidate retrieval, documentary association y controlled explanation son objetos de evaluación distintos;
-- evidencia central autorizada incluye Top-3 67.14%, asociación exacta 3168/3168, invariancia 1056/1056 y auditabilidad cualitativa 28/50 = 56.0% bajo LLM-as-judge, siempre con los límites de D-160.
+ACTIVE_AUTHORIZATION = D-163
+D163_PROMPT_PATH_MATCH = PASS
+D163_PROMPT_BLOB_MATCH = PASS
+D161_V01 = SUPERSEDED_BEFORE_EXECUTION / NOT_EXECUTED
+D162 = PREVIOUS_EXECUTION_ONLY / BLOCKED_PRE_EXECUTION_COMPLIANT
+EXECUTION_AUTHORIZATION_IDENTITY = PASS
 
-CLAIMS_PROHIBIDOS_O_PENDIENTES_RELEVANTES =
-- candidate retrieval != overall classification accuracy;
-- documentary association != substantive normative/legal correctness;
-- auditability != legal correctness;
-- LLM-as-judge != human expert validation;
-- configurability != empirical generalization;
-- re-instantiation != deployment readiness;
-- Chapter-87 evidence no demuestra transferencia a otros dominios;
-- novelty, first/SOTA/superiority, deployment readiness, legal correctness y human validation permanecen prohibidos;
-- FINAL_GAP = NOT_DEFINED;
-- NOVELTY = NOT_DECLARED.
+INPUT_MASTER_MD = article/manuscript/ARTICLE_MASTER_V031.md
+OBSERVED_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+EXPECTED_MD_SHA256 = 6f05e9e3b8a480fb24c46f5984214900cb8d77bfb203589b179da15aff059300
+OBSERVED_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
+EXPECTED_MD_GIT_BLOB = a8bfdcd30d1ec205c486102d991c37085f307b8c
+INPUT_MASTER_MD_IDENTITY = PASS
+
+INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
+OBSERVED_DOCX_SIZE_BYTES = 110255
+EXPECTED_DOCX_SIZE_BYTES = 110255
+OBSERVED_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
+EXPECTED_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
+OBSERVED_COMMENTS = 48
+OBSERVED_COMMENT_RANGE_START = 48
+OBSERVED_COMMENT_RANGE_END = 48
+OBSERVED_COMMENT_REFERENCE = 48
+OBSERVED_TRACKED_CHANGES = 0
+BASELINE_DOCX_PAGE_COUNT = 71
+BASELINE_ZIP_OOXML_INTEGRITY = PASS
+INPUT_MASTER_DOCX_IDENTITY = PASS
 ```
 
-### Estado MWDP / checklist de ejecución
+### Resultado científico/editorial
+
+Se redactaron exclusivamente el Abstract EN y el Resumen ES. El Abstract inglés tiene 236 palabras y sigue la secuencia gobernada problema/limitación → propuesta y separación de autoridad → evaluación/evidencia principal → interpretación delimitada. No introduce literatura, citas, resultados, cálculos, inferencia, novelty, superioridad, validación jurídica/humana, generalización externa ni readiness de despliegue.
+
+El espejo español conserva las mismas cifras, denominadores, alcance, fuerza epistémica y limitaciones con formulación natural. Title/Título, Keywords/Palabras clave, Sections 1–7 y end matter permanecen sin edición.
+
+### Diferencial autorizado
+
+```text
+AUTHORIZED_CHANGED_BLOCKS = ABSTRACT_EN + RESUMEN_ES ONLY
+MARKDOWN_OUTSIDE_AUTHORIZED_BLOCKS_BYTE_EQUIVALENT_TO_V031 = PASS
+TITLE_AND_SPANISH_TITLE = PRESERVED
+KEYWORDS_AND_SPANISH_KEYWORDS = PRESERVED
+SECTIONS_1_TO_7 = PRESERVED
+END_MATTER_EN_ES = PRESERVED
+TABLES_CAPTIONS_REFERENCES = PRESERVED
+
+DOCX_ZIP_PART_LIST_IDENTICAL = PASS / 14 PARTS
+OOXML_CHANGED_PARTS = word/document.xml ONLY
+COMMENTS_XML_BYTE_IDENTICAL = PASS
+COMMENTS_AND_ANCHORS_PRESERVED = PASS / 48 START + 48 END + 48 REFERENCE
+COMMENT_ANCHOR_PARAGRAPHS_PRESERVED = PASS
+TRACKED_CHANGES = 0
+ZIP_OOXML_INTEGRITY = PASS
+
+MD_DOCX_VISIBLE_TEXT_EQUIVALENCE = PASS / ABSTRACT_EN_AND_RESUMEN_ES_EXACT_TEXT_MATCH; OUTSIDE_SCOPE_EACH_FORMAT_PRESERVES_ITS_GOVERNED_BASELINE
+```
+
+### Artefactos y QA
+
+```text
+SECTION_ARTIFACT = article/sections/front_matter/Abstract_B01_V02.md
+SECTION_ARTIFACT_COMMIT = 5d02dda9b059dc6783d9614ac1d7f89b6d215570
+SECTION_ARTIFACT_SHA256 = a64aafc6c28305278c2a2227a6eb52781dd5f8203d74c280bea5a971f64753a4
+SECTION_ARTIFACT_GIT_BLOB = 68464da3218d111817a7238580dcb47d7e79117b
+
+MASTER_CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_ABSTRACT_B01_V02.md
+MASTER_CANDIDATE_MD_SHA256 = 0fcf9c2676add5128f86efc50788335bc435077bedbd7a8aedbf73f8f1549f64
+MASTER_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
+
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_ABSTRACT_B01_V02.docx
+CANDIDATE_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
+CANDIDATE_DOCX_SIZE_BYTES = 111028
+
+FULL_DOCX_PAGE_COUNT = 71
+FULL_DOCX_RENDER = PASS
+FULL_DOCX_VISUAL_QA = PASS / ALL 71 PAGES REVIEWED FOR PAGE-LEVEL LAYOUT; ABSTRACT_EN, RESUMEN_ES AND FINAL PAGE ALSO INSPECTED AT FULL-PAGE DETAIL
+VISUAL_QA_DEFECTS = NONE
+ENGLISH_ABSTRACT_WORD_COUNT = 236
+```
+
+### Checklist MWDP
 
 ```text
 PROTOCOL_READ = MWDP_V1.0
@@ -110,46 +144,53 @@ SPCCR_READ = SPCCR_V1.0
 KBS_EWG_34_V01_READ = YES
 D136_READ = YES
 ONBOARDING = PASS
-PREFLIGHT = BLOCKED
 BLOCK = FRONT_MATTER_B01_ABSTRACT_V02
-
+INPUT_MASTER_MD_IDENTITY = PASS
+INPUT_MASTER_DOCX_IDENTITY = PASS
 TITLE_MODIFIED = NO
-ABSTRACT_MODIFIED = NO
+ABSTRACT_MODIFIED = YES
 KEYWORDS_MODIFIED = NO
 SECTIONS_1_TO_7_MODIFIED = NO
 END_MATTER_MODIFIED = NO
-
 NEW_RESULTS_OR_INFERENCE = NONE
 NEW_LITERATURE = NONE
 NEW_ENGLISH_CITATION_OCCURRENCES = 0
-INTERNAL_TERMINOLOGY_LEAKAGE = NOT_APPLICABLE / NO_MANUSCRIPT_PROSE_PRODUCED
-SPANISH_NATURALNESS = NOT_APPLICABLE / NO_ABSTRACT_DRAFTED
-EN_ES_SEMANTIC_EQUIVALENCE = NOT_APPLICABLE / NO_ABSTRACT_DRAFTED
-ABSTRACT_SELF_CONTAINED = NOT_APPLICABLE / NO_ABSTRACT_DRAFTED
-
-COMMENTS = NOT_VERIFIED / DOCX_BYTES_UNAVAILABLE
-TRACKED_CHANGES = NOT_VERIFIED / DOCX_BYTES_UNAVAILABLE
-OOXML_CHANGED_PARTS = NONE / DOCX_NOT_EDITED
-FULL_DOCX_PAGE_COUNT = NOT_VERIFIED / DOCX_BYTES_UNAVAILABLE
-FULL_DOCX_RENDER = BLOCKED
-FULL_DOCX_VISUAL_QA = BLOCKED
-ZIP_OOXML_INTEGRITY = BLOCKED
-COMMENTS_AND_ANCHORS_PRESERVED = BLOCKED / NOT_VERIFIED
-COMMENTS_XML_BYTE_IDENTICAL = BLOCKED / NOT_VERIFIED
-MD_DOCX_VISIBLE_TEXT_EQUIVALENCE = BLOCKED / NO_CANDIDATES_CREATED
-
-SECTION_ARTIFACT_SHA256 = NOT_CREATED
-SECTION_ARTIFACT_GIT_BLOB = NOT_CREATED
-MASTER_CANDIDATE_MD_SHA256 = NOT_CREATED
-MASTER_CANDIDATE_MD_EXPECTED_GIT_BLOB = NOT_CREATED
-CANDIDATE_DOCX_SHA256 = NOT_CREATED
-ENGLISH_ABSTRACT_WORD_COUNT = 0 / NOT_DRAFTED
-
-D035_TIMEOUT_SAFE_HANDOFF = BLOCKED / NO_CUMULATIVE_CANDIDATES_CREATED
-EXACT_CUMULATIVE_MD_HANDOFF_TO_AUTHOR = BLOCKED / NOT_CREATED
-EXACT_CUMULATIVE_DOCX_HANDOFF_TO_AUTHOR = BLOCKED / NOT_CREATED
-
-EXPECTED_EXIT = NOT_REACHED / PREFLIGHT_BLOCKED
+NEW_CITATION_COMMENTS = 0
+INTERNAL_TERMINOLOGY_LEAKAGE = NONE
+SCIENTIFIC_FIDELITY = PASS
+EPISTEMIC_STRENGTH = BOUNDED
+READER_FACING_PROSE = PASS
+ABSTRACTION_DENSITY = ACCEPTABLE
+AGENT_ACTION_OBJECT_CLARITY = PASS
+NOMINALIZATION_OVERLOAD = ABSENT
+PROCESS_RELATIONSHIPS_EXPLICIT = PASS
+SPANISH_NATURALNESS = PASS
+EN_ES_SEMANTIC_EQUIVALENCE = PASS
+KBS_CONCRETE_PROSE = PASS
+ABSTRACT_SELF_CONTAINED = PASS
+COMMENTS = 48
+TRACKED_CHANGES = 0
+OOXML_CHANGED_PARTS = word/document.xml ONLY
+FULL_DOCX_PAGE_COUNT = 71
+FULL_DOCX_RENDER = PASS
+FULL_DOCX_VISUAL_QA = PASS
+EXPERIMENTAL_REVIEW_TRIGGER = ABSENT
+PROMPT_IDENTITY = PASS
+EXECUTION_AUTHORIZATION_IDENTITY = PASS
+SECTION_ARTIFACT_SHA256 = a64aafc6c28305278c2a2227a6eb52781dd5f8203d74c280bea5a971f64753a4
+SECTION_ARTIFACT_GIT_BLOB = 68464da3218d111817a7238580dcb47d7e79117b
+MASTER_CANDIDATE_MD_SHA256 = 0fcf9c2676add5128f86efc50788335bc435077bedbd7a8aedbf73f8f1549f64
+MASTER_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
+CANDIDATE_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
+MD_DOCX_VISIBLE_TEXT_EQUIVALENCE = PASS
+COMMENTS_AND_ANCHORS_PRESERVED = PASS
+COMMENTS_XML_BYTE_IDENTICAL = PASS
+ZIP_OOXML_INTEGRITY = PASS
+ENGLISH_ABSTRACT_WORD_COUNT = 236
+D035_TIMEOUT_SAFE_HANDOFF = PASS / EXACT_REAL_FILES_MATERIALIZED; NO_BASE64_CHUNKING_FRAGMENTATION_OR_REASSEMBLY
+EXACT_CUMULATIVE_MD_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT_OF_THIS_EXECUTION
+EXACT_CUMULATIVE_DOCX_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT_OF_THIS_EXECUTION
+EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 TITLE = NOT_AUTHORIZED
 KEYWORDS = NOT_AUTHORIZED
@@ -160,18 +201,14 @@ NOVELTY = NOT_DECLARED
 
 ### Disposición
 
-No se redactó Abstract ni Resumen, no se creó el artefacto de sección, no se modificó el Markdown canónico y no se abrió/editó/reconstruyó el Word. No se ejecutó V01 ni D-161. No se creó ningún master candidato ni se abrió ningún gate posterior.
-
-La ejecución sustantiva debe permanecer detenida. La IA de Redacción no corrige `ARTICLE_STATUS.md`/`ARTICLE_WRITING_PLAN.md`, no decide precedencia entre sus campos contradictorios y no sustituye el Word exacto por una reconstrucción. Se requiere reconciliación versionada por IA Gestora y un handoff en el que el Word baseline exacto sea accesible como archivo binario real para verificación y edición nativa.
+Abstract B01 V02 queda completado como candidato pendiente de auditoría independiente de IA Gestora. No se abre aprobación autoral y no se ejecuta Title, Keywords ni end matter.
 
 ---
 
 ## English
 
-Execution remains blocked before manuscript editing for two independent reasons.
+Abstract B01 V02 was re-executed from the exact D-163-authorized source commit, exact V031 Markdown, and independently reverified cumulative Word baseline. Only the English Abstract and Spanish semantic mirror were edited. The English abstract contains 236 words, no citations, and uses only authorized integrated evidence and bounded claims.
 
-First, the live versioned state is internally inconsistent: `ARTICLE_STATUS.md` and `ARTICLE_WRITING_PLAN.md` identify D-162/V02 as the current authorization in their state metadata, while their current/immediate gate blocks still state `AUTHORIZATION = D-161`. D-162 itself passes identity verification, points to the exact V02 prompt/blob, and marks D-161/V01 as `SUPERSEDED_BEFORE_EXECUTION`; however, the V02 prompt expressly forbids the Writing AI from silently reconciling contradictory live state.
+The cumulative Markdown differs from V031 only inside the two authorized front-matter blocks. Native OOXML editing preserved the original package and changed only `word/document.xml`; `word/comments.xml` is byte-identical, all 48 comment anchors are preserved, tracked changes remain zero, ZIP integrity passes, and the full candidate renders to 71 pages without visual defects. The Abstract and Resumen text match exactly between the cumulative Markdown and DOCX; all out-of-scope content in each format remains inherited byte/text-equivalent to its governed baseline.
 
-Second, the exact cumulative Word baseline could be located by its expected filename but its binary bytes were not available for authorized materialization in the editing environment. Its governed SHA-256, comment count, tracked-change count, and page count therefore could not be independently recomputed, and native OOXML editing/render QA could not begin. Reconstructing the Word file from Markdown or using transfer workarounds is prohibited by the active prompt and D-027/D-035.
-
-The full mandatory onboarding was completed. The exact V02 prompt blob passed, D-162 prompt/path identity passed, and the canonical V031 Markdown passed both Git-blob and SHA-256 verification. No Abstract or Spanish mirror was drafted; no manuscript content was modified; no candidate files were created; and V01/D-161 was not executed. The expected successful exit was not reached because mandatory preflight blockers require Managing-AI reconciliation before a new exact handoff.
+The small bilingual section artifact was versioned in GitHub. The cumulative Markdown and DOCX are handed off as exact real files under D-027/D-035 and are not materialized in GitHub. Execution stops at `FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT`; no author-approval, Title, Keywords, or end-matter gate is opened.
