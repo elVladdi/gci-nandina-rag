@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.57
-LATEST_EDITORIAL_DECISION = D-163
+ARTICLE_WRITING_PLAN = V3.58
+LATEST_EDITORIAL_DECISION = D-164
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 
@@ -53,15 +53,24 @@ ABSTRACT_B01_INITIAL_EXECUTION_RESULT = BLOCKED_PRE_EXECUTION / COMPLIANT
 ABSTRACT_B01_BLOCKER_AUDIT = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02_BLOCKER_AUDIT_V01.md@9dfd4206ed42b28bc81e9b94a11f02bf0a762d16
 ABSTRACT_B01_BLOCKER_AUDIT_RESULT = PASS_BLOCKED_PREEXECUTION_COMPLIANT
 ABSTRACT_B01_AUTHORIZATION = D-163
+ABSTRACT_B01_COMPLETED_RESPONSE = article/responses/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02.md@0ad357f5bcaca2c0d3863e39661888b97b9722fd
+ABSTRACT_B01_COMPLETED_RESPONSE_RESULT = COMPLETED_PENDING_GESTORA_AUDIT
+ABSTRACT_B01_INTERNAL_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_INTERNAL_REVIEW_V01.md@0624d9fd4fb7cee995930f52fd701b2bff3748bf
+ABSTRACT_B01_INTERNAL_REVIEW_GIT_BLOB = 355fc32f9701e76a71e2472cc3e93c93420bf7ac
+ABSTRACT_B01_INTERNAL_REVIEW_RESULT = PASS
+ABSTRACT_B01_AUTHOR_APPROVAL_DECISION = D-164
+ABSTRACT_B01_CANDIDATE_MD_SHA256 = 0fcf9c2676add5128f86efc50788335bc435077bedbd7a8aedbf73f8f1549f64
+ABSTRACT_B01_CANDIDATE_MD_EXPECTED_GIT_BLOB = 0bfddcfc1c4a2fbb6a9f03d1141cd33f5b21334f
+ABSTRACT_B01_CANDIDATE_DOCX_SHA256 = 4709944a4653dac813b5ebe68b1b14a13c9b87ceddadd315308e975289335156
 ABSTRACT_B01_V01_AUTHORIZATION = D-161 / SUPERSEDED_BEFORE_EXECUTION
 ABSTRACT_HISTORICAL_PROMPT_AUDIT = COMPLETE / 89 PRIOR FILES = 88 OPERATIONAL PROMPTS + 1 DRAFTING TEMPLATE
 
 CURRENT_DRAFTING_PHASE = FRONT_MATTER / ABSTRACT
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_REEXECUTION
-AUTHOR_APPROVAL_GATE = NOT_OPEN
-NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = REEXECUTE_SAME_ABSTRACT_B01_V02_AFTER_EXACT_DOCX_REATTACHMENT
-EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_AUTHOR_APPROVAL
+AUTHOR_APPROVAL_GATE = OPEN
+NEXT_ACTOR = AUTHOR
+NEXT_ACTION = APPROVE_OR_REJECT_EXACT_ABSTRACT_B01_V02_CANDIDATE
+EXPECTED_EXIT = AUTHOR_DECISION_ON_ABSTRACT_B01_V02
 
 MWDP_V1_0 = BINDING
 SPCCR_V1_0 = BINDING
@@ -86,13 +95,13 @@ El autor aprobó Conclusion B01 V01 y subió `article/manuscript/ARTICLE_MASTER_
 
 El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx`, SHA-256 `d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d`, con 48 comentarios, 0 tracked changes y 71 páginas.
 
-D-160 delimita el Abstract final a una síntesis autosuficiente KBS de problema/limitación → propuesta con separación de autoridad → evaluación/evidencia principal → interpretación acotada. V02 pasó revisión interna con `PASS`. La primera ejecución autorizada por D-162 se detuvo correctamente en preflight al detectar dos blockers: dos líneas residuales D-161 en los bloques de gate y falta de acceso binario efectivo al Word baseline en el chat de IA Redacción. IA Gestora confirmó el STOP como compliant, verificó el Word exacto (SHA-256, 48 comentarios/anclajes, 0 tracked changes, 71 páginas), corrigió la gobernanza y D-163 reautoriza el mismo V02 tras re-adjuntar el DOCX exacto. Title, Keywords y end matter permanecen cerrados.
+D-160 delimita el Abstract final a una síntesis autosuficiente KBS de problema/limitación → propuesta con separación de autoridad → evaluación/evidencia principal → interpretación acotada. La primera ejecución V02 se detuvo correctamente en preflight y D-163 reautorizó la reejecución. La reejecución terminó en `COMPLETED_PENDING_GESTORA_AUDIT`; IA Gestora auditó independientemente los candidatos Markdown y DOCX, confirmó diferencial exacto Abstract/Resumen, OOXML/comment anchors/render y contenido científico-editorial con `PASS`. D-164 abre exclusivamente la aprobación autoral del candidato exacto. Title, Keywords y end matter permanecen cerrados.
 
 ### Gate vigente
 
 ```text
-NEXT_ACTOR = IA_REDACCION
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_REEXECUTION
+NEXT_ACTOR = AUTHOR
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_AUTHOR_APPROVAL
 PROMPT = article/prompts/9_FRONT_MATTER_B01_ABSTRACT_V02.md
 PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
 AUTHORIZATION = D-163
@@ -102,7 +111,7 @@ INPUT_MASTER_DOCX = ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx
 INPUT_MASTER_DOCX_SHA256 = d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d
 EXPECTED_COMMENTS = 48
 EXPECTED_TRACKED_CHANGES = 0
-EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
+EXPECTED_EXIT = AUTHOR_DECISION_ON_ABSTRACT_B01_V02
 TITLE = NOT_AUTHORIZED
 KEYWORDS = NOT_AUTHORIZED
 END_MATTER_FINALIZATION = NOT_AUTHORIZED
@@ -112,4 +121,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 ## English
 
-V031 remains canonical. The first Abstract V02 execution stopped compliantly during preflight because of residual D-161 gate lines and unavailable Word bytes in the Writing-AI environment. Managing-AI review verified the exact Word baseline and reconciled the governance drift. D-163 reauthorizes the same V02 prompt after exact DOCX reattachment. Title, Keywords, and end matter remain unauthorized.
+V031 remains canonical. Abstract B01 V02 completed after the D-163 re-execution and passed independent Managing-AI scientific/editorial and Markdown/DOCX/OOXML/render audit. D-164 opens only the explicit author-approval gate for the exact candidate; canonical promotion has not occurred. Title, Keywords, and end matter remain unauthorized.
