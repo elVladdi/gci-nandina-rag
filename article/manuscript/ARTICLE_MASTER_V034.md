@@ -52,7 +52,7 @@ Tariff-classification decision support can combine candidate ranking, documentar
 
 ## Keywords
 
-Knowledge-based decision support; Tariff classification; Harmonized System; Information retrieval; Large language model; Provenance
+Knowledge-based decision support; Tariff classification; Harmonized System; Information retrieval; Documentary evidence; Large language models; Provenance and traceability
 
 # 1. Introduction
 
@@ -879,7 +879,7 @@ El apoyo a la decisión en clasificación arancelaria puede combinar ranking de 
 
 ## Palabras clave
 
-Apoyo a la decisión basado en conocimiento; Clasificación arancelaria; Sistema Armonizado; Recuperación de información; Modelo de lenguaje grande; Procedencia
+Apoyo a la decisión basado en conocimiento; Clasificación arancelaria; Sistema Armonizado; Recuperación de información; Evidencia documental; Modelos de lenguaje grandes; Procedencia y trazabilidad
 
 # 1. Introducción
 
