@@ -6,8 +6,8 @@
 WORKING_BRANCH = article/main-manuscript
 TARGET_A = Knowledge-Based Systems
 ARTICLE_TYPE_OPERATIVE = Research article
-ARTICLE_WRITING_PLAN = V3.56
-LATEST_EDITORIAL_DECISION = D-162
+ARTICLE_WRITING_PLAN = V3.57
+LATEST_EDITORIAL_DECISION = D-163
 STRUCTURE = article/manuscript/KBS_ARTICLE_WORKING_STRUCTURE_V02.md
 STRUCTURE_STATUS = AUTHOR_APPROVED / FROZEN_FOR_DRAFTING
 
@@ -47,15 +47,20 @@ ABSTRACT_B01_PROMPT_GIT_BLOB = 5e416bdb078f1728a9c98cdf0666821628fd722f
 ABSTRACT_B01_PROMPT_REVIEW = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_PROMPT_INTERNAL_REVIEW_V02.md@a6f54bb9ddbd17ce368f5fd749234e0977d2d56f
 ABSTRACT_B01_PROMPT_REVIEW_RESULT = PASS
 ABSTRACT_B01_PROMPT_REVIEW_GIT_BLOB = dc9c7505a189827ede762c982d120a7bf4b6bd78
-ABSTRACT_B01_AUTHORIZATION = D-162
-ABSTRACT_B01_PREVIOUS_AUTHORIZATION = D-161 / SUPERSEDED_BEFORE_EXECUTION
+ABSTRACT_B01_INITIAL_AUTHORIZATION = D-162
+ABSTRACT_B01_INITIAL_EXECUTION_RESPONSE = article/responses/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02.md@9021b17b6911e5e41358755574dc441438d8cd14
+ABSTRACT_B01_INITIAL_EXECUTION_RESULT = BLOCKED_PRE_EXECUTION / COMPLIANT
+ABSTRACT_B01_BLOCKER_AUDIT = article/reviews/9_FRONT_MATTER_B01_ABSTRACT_RESPONSE_V02_BLOCKER_AUDIT_V01.md@9dfd4206ed42b28bc81e9b94a11f02bf0a762d16
+ABSTRACT_B01_BLOCKER_AUDIT_RESULT = PASS_BLOCKED_PREEXECUTION_COMPLIANT
+ABSTRACT_B01_AUTHORIZATION = D-163
+ABSTRACT_B01_PREVIOUS_AUTHORIZATION = D-163 / SUPERSEDED_BEFORE_EXECUTION
 ABSTRACT_HISTORICAL_PROMPT_AUDIT = COMPLETE / 89 PRIOR FILES = 88 OPERATIONAL PROMPTS + 1 DRAFTING TEMPLATE
 
 CURRENT_DRAFTING_PHASE = FRONT_MATTER / ABSTRACT
-CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_EXECUTION
+CURRENT_GATE = FRONT_MATTER_B01_ABSTRACT_V02_REEXECUTION
 AUTHOR_APPROVAL_GATE = NOT_OPEN
 NEXT_ACTOR = IA_REDACCION
-NEXT_ACTION = EXECUTE_ABSTRACT_B01_V02_ONLY
+NEXT_ACTION = REEXECUTE_SAME_ABSTRACT_B01_V02_AFTER_EXACT_DOCX_REATTACHMENT
 EXPECTED_EXIT = FRONT_MATTER_B01_ABSTRACT_V02_COMPLETED_PENDING_GESTORA_AUDIT
 
 MWDP_V1_0 = BINDING
@@ -81,7 +86,7 @@ El autor aprobó Conclusion B01 V01 y subió `article/manuscript/ARTICLE_MASTER_
 
 El Word canónico acumulativo es `ARTICLE_MASTER_CANDIDATE_CONCLUSION_B01_V01.docx`, SHA-256 `d561a0f25eca77ea234f9a0684786b57f8969436c8db1481cabbcc6db0f0792d`, con 48 comentarios, 0 tracked changes y 71 páginas.
 
-D-160 delimita el Abstract final a una síntesis autosuficiente KBS de problema/limitación → propuesta con separación de autoridad → evaluación/evidencia principal → interpretación acotada. Tras auditar los 89 prompts históricos y el template de drafting, el prompt V02 incorporó los controles maduros de identidad, diferencial, Word/OOXML/render y handoff D-022/D-027/D-035. V02 pasó revisión interna con `PASS`; D-162 lo autoriza y deja D-161/V01 superseded antes de ejecución. Title, Keywords y end matter permanecen cerrados.
+D-160 delimita el Abstract final a una síntesis autosuficiente KBS de problema/limitación → propuesta con separación de autoridad → evaluación/evidencia principal → interpretación acotada. V02 pasó revisión interna con `PASS`. La primera ejecución autorizada por D-162 se detuvo correctamente en preflight al detectar dos blockers: dos líneas residuales D-161 en los bloques de gate y falta de acceso binario efectivo al Word baseline en el chat de IA Redacción. IA Gestora confirmó el STOP como compliant, verificó el Word exacto (SHA-256, 48 comentarios/anclajes, 0 tracked changes, 71 páginas), corrigió la gobernanza y D-163 reautoriza el mismo V02 tras re-adjuntar el DOCX exacto. Title, Keywords y end matter permanecen cerrados.
 
 ### Gate vigente
 
@@ -107,4 +112,4 @@ END_MATTER_FINALIZATION = NOT_AUTHORIZED
 
 ## English
 
-V031 is canonical after byte-exact verification of the author-approved Conclusion candidate. Conclusion Section 7 is closed, approved, frozen, and integrated. D-160 bounds the final Abstract. After complete historical-prompt continuity audit, Abstract V02 passed internal review and D-162 authorizes only V02 execution from exact V031 and the cumulative Conclusion Word baseline; D-161/V01 is superseded before execution. Title, Keywords, and end matter remain unauthorized.
+V031 remains canonical. The first Abstract V02 execution stopped compliantly during preflight because of residual D-161 gate lines and unavailable Word bytes in the Writing-AI environment. Managing-AI review verified the exact Word baseline and reconciled the governance drift. D-163 reauthorizes the same V02 prompt after exact DOCX reattachment. Title, Keywords, and end matter remain unauthorized.
