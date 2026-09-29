@@ -1,0 +1,109 @@
+# D-191 — End Matter B02 / Codex-inclusive generative-AI disclosure V02 execution authorization
+
+## Español
+
+```text
+DECISION = D-191
+PHASE = END_MATTER / METHODS_TRANSPARENCY
+BLOCK = END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02
+
+BOUNDARY = D-190
+
+PROMPT =
+article/prompts/12_END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02.md
+PROMPT_COMMIT =
+7d15e1ac8237173aa093785d7a16051d5ae97ec6
+PROMPT_GIT_BLOB =
+01b12e52b52e49150fb7f6bf8aef897c21962d1b
+
+PROMPT_REVIEW =
+article/reviews/12_END_MATTER_B02_GENERATIVE_AI_DECLARATION_PROMPT_INTERNAL_REVIEW_V02.md@9d725362afd31d35b86b7589f02d472ac39d18fa
+PROMPT_REVIEW_GIT_BLOB =
+3d07675115d06b85ef29707d01d1085640e83bcf
+PROMPT_REVIEW_RESULT = PASS
+
+CANONICAL_MASTER = ARTICLE_MASTER_V035
+CANONICAL_MASTER_MD = article/manuscript/ARTICLE_MASTER_V035.md
+CANONICAL_MASTER_MD_SHA256 =
+23a92e46f1fe3d7edfcf9210e1d90a133c17abf6b85e62ad3906171dc48589ac
+CANONICAL_MASTER_MD_GIT_BLOB =
+ddf3abb1826f93d5d82c0a135c0c2ae6b389e7fd
+
+CANONICAL_MASTER_DOCX =
+ARTICLE_MASTER_CANDIDATE_KEYWORDS_B03_V02.docx / LOCAL_AUTHOR_CUSTODY
+CANONICAL_MASTER_DOCX_SHA256 =
+de3c60c59bd71e5c5b101c7281a675b68faaf8275af64d7403f1ff51fa60905b
+CANONICAL_MASTER_DOCX_SIZE_BYTES = 110919
+CANONICAL_MASTER_DOCX_COMMENTS = 48
+CANONICAL_MASTER_DOCX_TRACKED_CHANGES = 0
+CANONICAL_MASTER_DOCX_PAGE_COUNT = 71
+
+AI_DISCLOSURE_V02_EXECUTION = AUTHORIZED
+AUTHOR_APPROVAL_GATE = NOT_OPEN
+OTHER_END_MATTER = AUTHOR_OWNED / DO_NOT_EDIT
+
+EXPECTED_EXIT =
+END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02_COMPLETED_PENDING_GESTORA_AUDIT
+```
+
+### Autorización
+
+Se autoriza exclusivamente la ejecución de:
+
+`article/prompts/12_END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02.md`
+
+La IA de Redacción debe materializar exactamente:
+
+1. la oración EN de transparencia metodológica sobre Codex;
+2. la oración ES de transparencia metodológica sobre Codex;
+3. la declaración final EN que identifica ChatGPT y Codex;
+4. la declaración final ES que identifica ChatGPT y Codex.
+
+La IA de Redacción debe devolver los masters acumulativos exactos en Markdown y Word como archivos reales.
+
+No se autoriza completar ni modificar ningún otro componente del End Matter.
+
+### Gate
+
+```text
+CURRENT_DRAFTING_PHASE =
+END_MATTER / AI_DISCLOSURE_CORRECTION
+
+CURRENT_GATE =
+END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02_EXECUTION
+
+NEXT_ACTOR = IA_REDACCION
+NEXT_ACTION = EXECUTE_AI_DISCLOSURE_V02_ONLY
+ACTIVE_AUTHORIZATION = D-191
+
+PROMPT =
+article/prompts/12_END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02.md
+PROMPT_GIT_BLOB =
+01b12e52b52e49150fb7f6bf8aef897c21962d1b
+
+INPUT_MASTER_MD =
+article/manuscript/ARTICLE_MASTER_V035.md
+INPUT_MASTER_MD_GIT_BLOB =
+ddf3abb1826f93d5d82c0a135c0c2ae6b389e7fd
+
+INPUT_MASTER_DOCX =
+ARTICLE_MASTER_CANDIDATE_KEYWORDS_B03_V02.docx
+INPUT_MASTER_DOCX_SHA256 =
+de3c60c59bd71e5c5b101c7281a675b68faaf8275af64d7403f1ff51fa60905b
+
+AUTHOR_APPROVAL_GATE = NOT_OPEN
+OTHER_END_MATTER = AUTHOR_OWNED / DO_NOT_EDIT
+
+EXPECTED_EXIT =
+END_MATTER_B02_GENERATIVE_AI_DECLARATION_V02_COMPLETED_PENDING_GESTORA_AUDIT
+```
+
+---
+
+## English
+
+D-191 authorizes only the Codex-inclusive AI disclosure V02 correction.
+
+The Writing AI must materialize exactly four insertions: two Methods transparency statements for Codex-assisted coding and two final AI-declaration blocks naming ChatGPT and Codex. It must return exact cumulative Markdown and DOCX candidates for Managing-AI audit and subsequent author approval.
+
+All other End Matter remains author-owned and must not be edited.
