@@ -32,7 +32,7 @@
 | 5. Presentación de resultados | **CLOSED / APPROVED — G5-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G5-F03_INTEGRATION_COMMIT=ca065618d5df0019f76ef5a971e858d91c263e1f; HE2=SUPPORTED; HE5=INCONCLUSIVE** |
 | 6. Figuras y visualizaciones | **CLOSED / APPROVED — G6-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F02=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G6-F03=CLOSED / APPROVED / INTEGRATED_TO_MAIN; GROUP6_CLOSURE_COMMIT=e93b44164a9619dad1f527a3b2d4479265858e39** |
 | 7. Redacción científica | **CLOSED / APPROVED — G7-F01=CLOSED / APPROVED / INTEGRATED_TO_MAIN; G7-F02=CLOSED / APPROVED / INTEGRATED; G7-F03=CLOSED / APPROVED tras reauditoría focalizada D-198 PASS** |
-| 8. Coherencia metodológica/documental | PENDING / NOT_AUTHORIZED |
+| 8. Coherencia metodológica/documental | **IN_PROGRESS — G8-F01=ACTIVE / AUTHORIZED / EXTERNAL_EXECUTION_PENDING; G8-F02=PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED; G8-F03=PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED** |
 
 ## 3. Benchmark v0.2 congelado
 
@@ -2190,3 +2190,14 @@ manifest, la autorización ni el config.
 - `G8-F01 = ACTIVE / AUTHORIZED / EXTERNAL_EXECUTION_PENDING`.
 - `G8-F02 = PROSPECTIVE / NOT_AUTHORIZED`; `G8-F03 = PROSPECTIVE / NOT_AUTHORIZED`.
 - No se modifica tesis, artículo ni evidencia experimental durante esta activación.
+
+
+### 2026-09-29 — Reconciliación administrativa del estado de Grupo 8 antes de G8-F01 externo
+
+- La tabla-resumen de §2 todavía mostraba `Grupo 8 = PENDING / NOT_AUTHORIZED`, mientras las entradas posteriores del propio Plan ya registraban la activación formal de `G8-F01 = ACTIVE / AUTHORIZED / EXTERNAL_EXECUTION_PENDING`.
+- Se reconcilia únicamente esa fila-resumen para reflejar el estado ya gobernado; no existe cambio científico ni nueva autorización adicional.
+- `GROUP8 = IN_PROGRESS`.
+- `G8-F01 = ACTIVE / AUTHORIZED / EXTERNAL_EXECUTION_PENDING`.
+- `G8-F02 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED`.
+- `G8-F03 = PROSPECTIVE / NOT_AUTHORIZED / NOT_EXECUTED`.
+- `SCIENTIFIC_STATE_CHANGE=false`; `NEW_EXPERIMENT=false`; `NEW_INFERENCE=false`; `ARTICLE_MODIFIED=false`; `THESIS_MODIFIED=false`.
