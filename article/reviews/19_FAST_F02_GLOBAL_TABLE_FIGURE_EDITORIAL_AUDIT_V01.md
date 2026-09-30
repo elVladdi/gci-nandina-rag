@@ -278,16 +278,7 @@ ACTION = RETAIN
 FIGURE_AFTER_CORRECTION = Figure 1
 ```
 
-### F2 — Existing primary HE2 figure: retain
-
-The current Figure 2 remains the primary inferential visualization and complements exact-value Tables 2–4.
-
-```text
-ACTION = RETAIN
-FIGURE_AFTER_CORRECTION = Figure 2
-```
-
-### F3 — Add qualitative explanation-dimension profile
+### F2 — Add qualitative explanation-dimension profile
 
 The eight frozen qualitative dimensions are a pattern, not merely a list of values. Their profile is materially easier to inspect visually.
 
@@ -318,11 +309,11 @@ The caption must state:
 
 ```text
 ACTION = CREATE
-FIGURE_AFTER_CORRECTION = Figure 3
+FIGURE_AFTER_CORRECTION = Figure 2
 SCIENTIFIC_ROLE = RQ3_DESCRIPTIVE_QUALITATIVE_PROFILE
 ```
 
-### F4 — Promote the approved EXP11A sensitivity figure to the main body
+### F3 — Promote the approved EXP11A sensitivity figure to the main body
 
 The run-level variation across H25/H50-D1/H50-D2/H75/H100 is a genuinely graphical pattern and is central to the interpretation of the joint size/composition sensitivity.
 
@@ -351,10 +342,21 @@ Its role remains descriptive/noncausal. Promotion is editorial placement only.
 
 To avoid duplication, remove this same figure from the Supplementary package. G6-FIG-02 remains Supplementary Figure S1.
 
+### F4 — Existing primary HE2 figure: retain and renumber
+
+The current Figure 2 remains the primary inferential visualization and complements exact-value Tables 2–4. Because the new RQ3 and sensitivity figures occur earlier in the Results sequence, renumber the current primary HE2 figure mechanically.
+
+```text
+ACTION = RETAIN_AND_RENUMBER
+CURRENT_FIGURE = Figure 2
+FIGURE_AFTER_CORRECTION = Figure 4
+SCIENTIFIC_CONTENT_CHANGE = NO
+```
+
 ```text
 ACTION = PROMOTE_EXISTING_APPROVED_FIGURE
 CURRENT_LOCATION = SUPPLEMENTARY_FIGURE_S2
-FIGURE_AFTER_CORRECTION = Figure 4
+FIGURE_AFTER_CORRECTION = Figure 3
 SCIENTIFIC_CONTENT_CHANGE = NO
 ```
 
@@ -404,11 +406,11 @@ DETAIL = SUPPLEMENTARY_TABLE_S2
 
 ### 5.5 Full HE2_A interval vector
 
-Do not create another table beyond the restructured Table 3. Remove the prose duplication and refer to Table 3/Figure 2.
+Do not create another table beyond the restructured Table 3. Remove the prose duplication and refer to Table 3/Figure 4.
 
 ```text
 MAIN_PROSE = INTERPRETATION_ONLY
-DETAIL = TABLE_3 + FIGURE_2
+DETAIL = TABLE_3 + FIGURE_4
 ```
 
 ### 5.6 Methods/configuration numerics
@@ -459,9 +461,9 @@ Table 7 = Historical-bank sensitivity summary
 
 MAIN_FIGURES = 4
 Figure 1 = Architecture and authority boundaries
-Figure 2 = Primary HE2 evidence
-Figure 3 = Qualitative explanation-dimension profile
-Figure 4 = EXP11A joint size-composition sensitivity
+Figure 2 = Qualitative explanation-dimension profile
+Figure 3 = EXP11A joint size-composition sensitivity
+Figure 4 = Primary HE2 evidence
 ```
 
 This is a recommendation derived from the full-body audit, not a preset quota.
