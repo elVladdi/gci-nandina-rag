@@ -342,6 +342,13 @@ Its role remains descriptive/noncausal. Promotion is editorial placement only.
 
 To avoid duplication, remove this same figure from the Supplementary package. G6-FIG-02 remains Supplementary Figure S1.
 
+```text
+ACTION = PROMOTE_EXISTING_APPROVED_FIGURE
+CURRENT_LOCATION = SUPPLEMENTARY_FIGURE_S2
+FIGURE_AFTER_CORRECTION = Figure 3
+SCIENTIFIC_CONTENT_CHANGE = NO
+```
+
 ### F4 — Existing primary HE2 figure: retain and renumber
 
 The current Figure 2 remains the primary inferential visualization and complements exact-value Tables 2–4. Because the new RQ3 and sensitivity figures occur earlier in the Results sequence, renumber the current primary HE2 figure mechanically.
@@ -350,13 +357,6 @@ The current Figure 2 remains the primary inferential visualization and complemen
 ACTION = RETAIN_AND_RENUMBER
 CURRENT_FIGURE = Figure 2
 FIGURE_AFTER_CORRECTION = Figure 4
-SCIENTIFIC_CONTENT_CHANGE = NO
-```
-
-```text
-ACTION = PROMOTE_EXISTING_APPROVED_FIGURE
-CURRENT_LOCATION = SUPPLEMENTARY_FIGURE_S2
-FIGURE_AFTER_CORRECTION = Figure 3
 SCIENTIFIC_CONTENT_CHANGE = NO
 ```
 
