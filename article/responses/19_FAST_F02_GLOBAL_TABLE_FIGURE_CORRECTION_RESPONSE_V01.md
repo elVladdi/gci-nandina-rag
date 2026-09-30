@@ -1,0 +1,350 @@
+# Response — FAST-F02 Global Table/Figure Correction V01 — COMPLETED PENDING GESTORA AUDIT
+
+## Español
+
+```text
+SOURCE_COMMIT = 584cf533ff8a01c26794e5811b2b20e23438c192
+SOURCE_BRANCH = article/main-manuscript
+PHASE = FAST_FINALIZATION / FAST_F02_CORRECTIVE_PRESENTATION
+
+PROMPT =
+article/prompts/19_FAST_F02_GLOBAL_TABLE_FIGURE_CORRECTION_V01.md
+OBSERVED_PROMPT_GIT_BLOB =
+19f205ed87f7ce67ba6fe22e3d93c6fea3907ef7
+EXPECTED_PROMPT_GIT_BLOB =
+19f205ed87f7ce67ba6fe22e3d93c6fea3907ef7
+PROMPT_IDENTITY = PASS
+
+AUTHORIZATION = D-212
+AUTHORIZATION_FILE =
+article/governance/D212_FAST_F02_V02_GLOBAL_TABLE_FIGURE_CORRECTION_AUTHORIZATION.md
+AUTHORIZATION_GIT_BLOB =
+cca09f0d2bae2080597e6f8f970e146697a80b88
+AUTHORIZATION_IDENTITY = PASS
+
+BASELINE_MAIN_MD_IDENTITY = PASS
+BASELINE_MAIN_MD_SHA256 =
+c6909699b9b7272d12cbe57f02d5897b78c8a489c9105bdf69e23e4462e90dd4
+BASELINE_MAIN_MD_GIT_BLOB =
+4c891641a86d0622cdc9fb7b2afee6f4691ee320
+BASELINE_MAIN_MD_SIZE_BYTES = 305240
+
+BASELINE_MAIN_DOCX_IDENTITY = PASS
+BASELINE_MAIN_DOCX_SHA256 =
+bd584ce9817ce8d251cbe43a6e737612039a5ba82c932f1637839d66466e9e31
+BASELINE_MAIN_DOCX_SIZE_BYTES = 356835
+BASELINE_MAIN_DOCX_PAGE_COUNT = 81
+
+BASELINE_SUPPLEMENTARY_MD_IDENTITY = PASS
+BASELINE_SUPPLEMENTARY_MD_SHA256 =
+fd2ff32090f2262787a0f661bf67300bca158733b24edae0a37ac90dffd0a89f
+BASELINE_SUPPLEMENTARY_MD_GIT_BLOB =
+d10207e99ca76c1b501f57c9cf2b620e54c03a3f
+
+BASELINE_SUPPLEMENTARY_DOCX_IDENTITY = PASS
+BASELINE_SUPPLEMENTARY_DOCX_SHA256 =
+ad6b7f5cbfa695ab61eb4f9b5469f061eb804074c5bfb8c735bdef81d700cc9e
+BASELINE_SUPPLEMENTARY_DOCX_SIZE_BYTES = 222424
+BASELINE_SUPPLEMENTARY_DOCX_PAGE_COUNT = 21
+```
+
+### Presentation inventory
+
+```text
+MAIN_TABLE_COUNT = 7
+MAIN_FIGURE_COUNT = 4
+SUPPLEMENTARY_TABLE_COUNT = 7
+SUPPLEMENTARY_FIGURE_COUNT = 1
+
+TABLE_1 = RETAINED
+TABLE_2 = OBSERVED_RETRIEVAL_PERFORMANCE
+TABLE_3 = HE2_A_PAIRED_CONTRASTS
+TABLE_4 = HE2_B_DEEP_COVERAGE
+TABLE_5 = DOCUMENTARY_ASSOCIATION_AND_INVARIANCE
+TABLE_6 = CONTROLLED_EXPLANATION_SUMMARY
+TABLE_7 = HISTORICAL_BANK_SENSITIVITY
+
+FIGURE_1 = ARCHITECTURE / RETAINED
+FIGURE_2 = EXPLANATION_DIMENSION_PROFILE / CREATED_FROM_FROZEN_MEANS
+FIGURE_3 = EXP11A / PROMOTED_FROM_SUPPLEMENTARY
+FIGURE_4 = PRIMARY_HE2_EVIDENCE / RETAINED_AND_RENUMBERED
+```
+
+Versioned inventory:
+
+```text
+CORRECTION_SECTION =
+article/sections/fast/FAST_F02_GLOBAL_TABLE_FIGURE_CORRECTION_V01.md
+CORRECTION_SECTION_GIT_BLOB =
+e189efd6a51bd652c10ffeea078f8a15ef615f5f
+
+TABLE_FIGURE_INVENTORY =
+article/manifests/FAST_F02_TABLE_FIGURE_INVENTORY_V02.md
+TABLE_FIGURE_INVENTORY_GIT_BLOB =
+1d0970838e3f20c82e7de29d098983059d0c800c
+```
+
+### Source identity
+
+```text
+TABLE_2_SOURCE_IDENTITY = PASS / EXACT D-212 PROMPT-FIXED FROZEN VALUES
+
+TABLE_3_SOURCE_IDENTITY = PASS
+TABLE_3_SOURCE_BLOB =
+cb68583ee2260e4455796bac99ad90995ca7ef92
+
+TABLE_4_SOURCE_IDENTITY = PASS
+TABLE_4_SOURCE_BLOB =
+359e4e19b5ef1d44983c03039162209293b2a44c
+
+TABLE_5_SOURCE_IDENTITY = PASS
+TABLE_5_SOURCE_BLOB =
+01a4573d34c029efb0b055c7b90202842e914549
+
+TABLE_6_SOURCE_IDENTITY = PASS
+TABLE_6_METRICS_BLOB =
+843e1edd17a023f6c3d6f0b5235dd3fba86369c1
+TABLE_6_WARNING_COMPARISON_BLOB =
+1cab0e8e7398a7299086fec7ad1ec28b2f706f2d
+
+TABLE_7_SOURCE_IDENTITY = PASS
+TABLE_7_EXP11A_BLOB =
+cf3aedab5935d6af9b3ac7be7b51b954fcb9c403
+TABLE_7_EXP11B_BLOB =
+76c8c6c588c7e809c6be64f7192f497c491fb692
+
+FIGURE_2_SOURCE_IDENTITY = PASS
+FIGURE_2_DIMENSION_SOURCE_BLOB =
+c119cc8d05148ad893d7c7687b9f4495c24fc49b
+
+FIGURE_3_PROMOTION_IDENTITY = PASS
+FIGURE_3_GOVERNED_SOURCE_SVG_BLOB =
+1b2aca9aa9c2582cf0b7e16850cd5b22387cc771
+FIGURE_3_EMBEDDED_PRESENTATION_RENDER_SHA256 =
+d664e26c36e107cbf64c846ba2b6244f4e40df3048db99fa30ca46c4cba4def0
+FIGURE_3_PROMOTION_NOTE =
+EXACT FAST_F02_V01 SUPPLEMENTARY S2 PRESENTATION RENDER REUSED /
+SCIENTIFIC CONTENT UNCHANGED
+
+FIGURE_4_CONTENT_PRESERVED = PASS
+FIGURE_4_MEDIA_SHA256_V01_AND_V02 =
+9b7efbbdb4c2bb5e0829739717f544e752c0d4a188edcab399cd1da12f7f4e11
+```
+
+Figure 2 contains exactly the eight frozen means:
+
+```text
+Traceability = 2.00
+Verifiability = 0.54
+Historical-normative evidence separation = 1.04
+Conclusion prudence = 1.78
+Fixed-Top-3 consistency = 1.96
+Detection of generic normative evidence = 1.68
+Candidate comparison = 1.46
+Utility for human audit = 1.26
+```
+
+The x-axis is fixed at 0–2, the design is grayscale/print-safe, and no CI, p-value, significance marker, threshold or additional statistic was introduced.
+
+### Prose and scientific-scope audit
+
+```text
+PROSE_NUMERIC_DEDUPLICATION = PASS
+FULL_NUMERIC_VECTOR_DUPLICATION_IN_PROSE = NONE
+SCIENTIFIC_SCOPE_PRESERVED = PASS
+NEW_SCIENTIFIC_CONTENT = NO
+NEW_EXPERIMENT = NO
+NEW_METRIC = NO
+NEW_CI = NO
+NEW_P_VALUE = NO
+NEW_INFERENTIAL_TEST = NO
+NEW_HYPOTHESIS_DISPOSITION = NO
+NEW_LITERATURE = NO
+NEW_REFERENCE = NO
+NEW_CLAIM = NO
+
+MARKDOWN_OUTSIDE_AUTHORIZED_PRESENTATION_BLOCKS = PASS / BYTE-EQUIVALENT AFTER AUTHORIZED REVERSAL
+```
+
+The complete V02 Markdown becomes byte-identical to FAST-F02 V01 when only the authorized English/Spanish Results 5.2–5.6 replacements and the two Supplementary-material statement changes are reverted.
+
+The corrected prose preserves interpretation and limitations while moving exact comparison vectors into Tables 2–7. The diagnostic 20-case reranker remains prose and noninferential. Corrective normative-resource sensitivity points to Supplementary Table S6; error hierarchy and historical-support strata point to Supplementary Table S2. Section 5.6 now synthesizes HE2_A without reproducing all 15 CI triplets.
+
+### Frozen End Matter and references
+
+```text
+AUTHOR_ADMINISTRATIVE_FIELDS = BLANK / PASS
+AI_DISCLOSURE_PRESERVED = PASS / BYTE-IDENTICAL IN MARKDOWN
+DATA_AVAILABILITY_PRESERVED = PASS / BYTE-IDENTICAL IN MARKDOWN
+CODE_REPRODUCIBILITY_PRESERVED = PASS / BYTE-IDENTICAL IN MARKDOWN
+REFERENCE_BLOCKS_PRESERVED = PASS / BYTE-IDENTICAL IN MARKDOWN
+REFERENCE_BIJECTION = PASS_25_OF_25
+```
+
+CRediT, Funding, Declaration of competing interest and Acknowledgements remain empty, with equivalent Spanish headings. No author facts were inserted.
+
+### Supplementary V02
+
+```text
+SUPPLEMENTARY_TABLES_S1_S7 = UNCHANGED
+SUPPLEMENTARY_TABLE_XML_IDENTITY_V01_TO_V02 = PASS / ALL 7 TABLES BYTE-IDENTICAL
+SUPPLEMENTARY_FIGURE_S1 = RETAINED
+FORMER_SUPPLEMENTARY_FIGURE_S2 = REMOVED / PROMOTED_TO_MAIN_FIGURE_3
+HIDDEN_UNUSED_S2_MEDIA_OR_RELATIONSHIP = NONE
+```
+
+Versioned Supplementary:
+
+```text
+SUPPLEMENTARY_V02_MD =
+article/supplementary/SUPPLEMENTARY_MATERIAL_FAST_F02_V02.md
+SUPPLEMENTARY_V02_MD_GIT_BLOB =
+da7125d1ca7f89b7009ed05f8a8d088a6a0235af
+```
+
+### DOCX / OOXML audit
+
+The main V02 Word was edited directly from the exact FAST-F02 V01 Word baseline and was not reconstructed from Markdown.
+
+```text
+ZIP_OOXML_INTEGRITY = PASS
+
+COMMENTS = 48
+COMMENT_RANGE_START = 48
+COMMENT_RANGE_END = 48
+COMMENT_REFERENCE = 48
+COMMENT_ANCHOR_ID_SEQUENCE = PASS / IDENTICAL TO V01
+
+COMMENTS_XML_SHA256 =
+57bee5d04cc9ed51628a4e10baef0730c0a07b58b9d8c3b436c64657f32821ea
+COMMENTS_XML_BYTE_IDENTICAL = PASS
+
+TRACKED_CHANGES = 0
+
+MAIN_DOCX_OOXML_PART_COUNT = 18
+MAIN_DOCX_ADDED_MEDIA_VS_V01 =
+word/media/image3.png / FIGURE_2 +
+word/media/image4.png / PROMOTED_FIGURE_3
+MAIN_DOCX_REMOVED_PARTS_VS_V01 = NONE
+
+MAIN_DOCX_TABLE_COUNT = 16 RAW OOXML TABLE ELEMENTS
+MAIN_DOCX_PUBLICATION_TABLE_IDENTITIES = 7
+MAIN_DOCX_PUBLICATION_TABLE_INSTANCES_EN_ES = 14
+MAIN_DOCX_INHERITED_INTERNAL_TABLE_ELEMENTS = 2
+MAIN_DOCX_DRAWING_COUNT = 6
+
+SUPPLEMENTARY_DOCX_OOXML_PART_COUNT = 18
+SUPPLEMENTARY_DOCX_TABLE_COUNT = 7
+SUPPLEMENTARY_DOCX_DRAWING_COUNT = 1
+SUPPLEMENTARY_TRACKED_CHANGES = 0
+SUPPLEMENTARY_UNUSED_G6_FIG_03_MEDIA = REMOVED
+```
+
+The raw main DOCX table count reflects the bilingual internal master: seven publication table identities are instantiated in English and Spanish, while two pre-existing internal/front-matter table elements remain inherited. This does not create additional publication-facing table identities.
+
+Media preservation/promotion audit:
+
+```text
+FIGURE_1_MEDIA_SHA256 =
+d43b3695af795b14174ccaddfb29bff3e6f976f5234fef16fdda5eafc4a880f7
+FIGURE_1_MEDIA_PRESERVED = PASS
+
+FIGURE_4_MEDIA_SHA256 =
+9b7efbbdb4c2bb5e0829739717f544e752c0d4a188edcab399cd1da12f7f4e11
+FIGURE_4_MEDIA_PRESERVED = PASS
+
+FIGURE_2_EMBEDDED_PNG_SHA256 =
+a47669390563206cb20ac2adac3622271008fba4fb06ded9be703da53c6b4b77
+
+FIGURE_3_EMBEDDED_PNG_SHA256 =
+d664e26c36e107cbf64c846ba2b6244f4e40df3048db99fa30ca46c4cba4def0
+```
+
+### Render and visual QA
+
+```text
+FULL_MAIN_DOCX_PAGE_COUNT = 82
+FULL_MAIN_DOCX_RENDER = PASS
+FULL_MAIN_DOCX_VISUAL_QA = PASS / ALL 82 PAGES REVIEWED
+DETAILED_MAIN_TABLE_FIGURE_QA = PASS
+DETAILED_END_MATTER_QA = PASS
+MAIN_VISUAL_QA_DEFECTS = NONE
+
+FULL_SUPPLEMENTARY_DOCX_PAGE_COUNT = 20
+FULL_SUPPLEMENTARY_DOCX_RENDER = PASS
+FULL_SUPPLEMENTARY_DOCX_VISUAL_QA = PASS / ALL 20 PAGES REVIEWED
+DETAILED_SUPPLEMENTARY_QA = PASS / TABLES S1-S7 + FIGURE S1
+SUPPLEMENTARY_VISUAL_QA_DEFECTS = NONE
+```
+
+Detailed inspection included all pages containing Tables 1–7 and Figures 1–4, both English and Spanish presentation blocks, both End Matter regions, all 25-reference lists, all Supplementary tables, and the remaining Supplementary Figure S1.
+
+### Output identities
+
+```text
+CANDIDATE_MD =
+ARTICLE_MASTER_CANDIDATE_FAST_F02_V02.md
+CANDIDATE_MD_SHA256 =
+351fbd5a981f3c430b8debfa5fa360c4e079301e7591c653908a8061cffb28ef
+CANDIDATE_MD_SIZE_BYTES = 298483
+CANDIDATE_MD_EXPECTED_GIT_BLOB =
+7ac057a2d0b92322757c3da2b9fc36fa8b66db4c
+
+CANDIDATE_DOCX =
+ARTICLE_MASTER_CANDIDATE_FAST_F02_V02.docx
+CANDIDATE_DOCX_SHA256 =
+489f0f1df62fa0d661efd601b8155a4416db7a95a6cb45636552c3bb7b6d8524
+CANDIDATE_DOCX_SIZE_BYTES = 605152
+
+SUPPLEMENTARY_MD =
+SUPPLEMENTARY_MATERIAL_FAST_F02_V02.md
+SUPPLEMENTARY_MD_SHA256 =
+f9e5eaedf7a0e6ee797681612118e8bda8fb42c5d613ad50644b204bebbd023b
+SUPPLEMENTARY_MD_EXPECTED_GIT_BLOB =
+da7125d1ca7f89b7009ed05f8a8d088a6a0235af
+
+SUPPLEMENTARY_DOCX =
+SUPPLEMENTARY_MATERIAL_FAST_F02_V02.docx
+SUPPLEMENTARY_DOCX_SHA256 =
+0a84da58dd1b55e2824dd28b9105a17ae050dfcc8245c26a5e0c71c8255a909c
+SUPPLEMENTARY_DOCX_SIZE_BYTES = 122133
+
+FIGURE_2_PNG =
+FAST_F02_Figure2_Explanation_Quality_V01.png
+FIGURE_2_PNG_SHA256 =
+a47669390563206cb20ac2adac3622271008fba4fb06ded9be703da53c6b4b77
+
+FIGURE_2_SVG =
+article/figures/FAST_F02_Figure2_Explanation_Quality_V01.svg
+FIGURE_2_SVG_SHA256 =
+79d4ed3ed3234ba5452fee1bf18f3ff1e75085c8f69ebd6ccb195f9f8e785940
+FIGURE_2_SVG_GIT_BLOB =
+293298c3f1b9f987ef5f7c07c90bbfebdca5eb50
+```
+
+### Exit
+
+```text
+POST_EXECUTION_EXPERIMENTAL_REAUDIT_REQUIRED = NO
+
+EXPECTED_EXIT = FAST_F02_V02_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTOR = IA_GESTORA_DEL_ARTICULO
+AUTHOR_APPROVAL_GATE = CLOSED
+CANONICAL_PROMOTION = NOT_AUTHORIZED
+FAST_F03 = NOT_AUTHORIZED
+EXPERIMENTAL_G8_F01 = NOT_AUTHORIZED
+```
+
+## English
+
+FAST-F02 V02 corrective presentation was executed exclusively under D-212 from the exact four FAST-F02 V01 baselines.
+
+The manuscript now has seven publication-table identities and four main-figure identities. Exact comparison vectors were moved from dense prose into the audited tables, the eight frozen explanation-dimension means were represented in the new descriptive Figure 2, the approved EXP11A figure was promoted from Supplementary to main Figure 3 without scientific alteration, and the primary HE2 image was preserved and mechanically renumbered Figure 4.
+
+Supplementary V02 retains Tables S1-S7 byte-identically at the Word table-object level and retains Figure S1 only. Former Figure S2 was removed from both visible document content and the unused OOXML media/relationship inventory after promotion.
+
+No new experiment, metric, CI, p-value, inferential test, hypothesis disposition, literature, reference, or scientific claim was introduced. Author-administrative fields remain blank. Data availability, code/reproducibility text, the generative-AI disclosure, and the 25-reference corpus remain unchanged.
+
+The main DOCX preserves 48 comments and anchors, byte-identical comments.xml, zero tracked changes, and renders to 82 pages. The Supplementary DOCX contains seven tables, one drawing, zero tracked changes, and renders to 20 pages. All 102 pages were visually reviewed without blocking defects.
+
+Execution stops at `FAST_F02_V02_COMPLETED_PENDING_GESTORA_AUDIT`.
