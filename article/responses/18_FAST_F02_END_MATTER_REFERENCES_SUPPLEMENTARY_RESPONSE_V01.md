@@ -1,0 +1,201 @@
+# Response — FAST-F02 End Matter, References & Supplementary V01 — COMPLETED PENDING GESTORA AUDIT
+
+## Español
+
+```text
+SOURCE_COMMIT = e41c08d77ffb4d578077f21e0bfd20eeade8c6c6
+SOURCE_BRANCH = article/main-manuscript
+PHASE = FAST_FINALIZATION / FAST_F02
+
+PROMPT = article/prompts/18_FAST_F02_END_MATTER_REFERENCES_SUPPLEMENTARY_V01.md
+OBSERVED_PROMPT_GIT_BLOB = 5a38905b03e0d44d1b3125f866996fc03b92aa79
+EXPECTED_PROMPT_GIT_BLOB = 5a38905b03e0d44d1b3125f866996fc03b92aa79
+PROMPT_IDENTITY = PASS
+
+ACTIVE_AUTHORIZATION = D-209
+D209_GIT_BLOB = cd7e66ca2e7b65fac7b05c6a5d7b0ba8ebb67683
+AUTHORIZATION_IDENTITY = PASS
+
+INPUT_MD = ARTICLE_MASTER_V038.md
+INPUT_MD_SHA256 = 6201a9a47f86630f5f275ca7a6d9a01c2c642140a7f803cb390d26848721572e
+INPUT_MD_GIT_BLOB = b508aeccb7dab93a8b4cf25b185aa429dbe5577f
+INPUT_MD_IDENTITY = PASS
+
+INPUT_DOCX = ARTICLE_MASTER_V038_BASELINE.docx
+INPUT_DOCX_SHA256 = 7506189f32af5c9e99cb3bc87530b9ffd2ca09e3348f886c2b6c194080a21fe8
+INPUT_DOCX_SIZE_BYTES = 351420
+INPUT_DOCX_IDENTITY = PASS
+
+CURRENT_GATE = FAST_F02_WRITING_EXECUTION_AUTHORIZED
+LIVE_GATE_CONSISTENCY = PASS
+BLOCKERS = NONE
+```
+
+### End Matter
+
+```text
+DATA_AVAILABILITY = MATERIALIZED
+CODE_REPRODUCIBILITY = MATERIALIZED
+CREDIT = CLOSED / INTENTIONALLY_BLANK / NONBLOCKING
+FUNDING = CLOSED / INTENTIONALLY_BLANK / NONBLOCKING
+COMPETING_INTEREST = CLOSED / INTENTIONALLY_BLANK / NONBLOCKING
+ACKNOWLEDGEMENTS = CLOSED / INTENTIONALLY_BLANK / NONBLOCKING
+GENERATIVE_AI_DECLARATION = PRESERVED / UNCHANGED
+SUPPLEMENTARY_IN_MAIN = STATEMENT_ONLY
+```
+
+La disponibilidad de datos y la reproducibilidad se redactaron dentro del límite aprobado: los insumos administrativos/de referencia no se presentan como públicamente redistribuibles; el repositorio público de reproducibilidad se identifica en el commit auditado `254831cd955103faa2517065a7eed7fb340bbccc`; no se afirma reproducción completa de un clon limpio mediante un único comando ni preparación para despliegue.
+
+Los campos administrativos cerrados bajo D-208 permanecen vacíos. No se insertó ningún nombre, afiliación, CRediT, financiamiento, conflicto de interés ni agradecimiento.
+
+### Referencias
+
+```text
+UNIQUE_ENGLISH_BODY_CITATIONS = 25
+REFERENCE_ENTRIES_EN = 25
+REFERENCE_ENTRIES_ES = 25
+UNRESOLVED_CITED_WORKS = 0
+ORPHAN_REFERENCE_ENTRIES = 0
+DUPLICATE_REFERENCE_ENTRIES = 0
+LEE_EXPLAINABLE_CUSTOMS_REFERENCE = PRESERVE_2023_PREPRINT_IDENTITY
+REFERENCE_BIJECTION = PASS_25_OF_25
+
+REFERENCE_BIJECTION_MANIFEST =
+article/manifests/FAST_F02_REFERENCE_BIJECTION_V01.md
+REFERENCE_BIJECTION_MANIFEST_GIT_BLOB =
+be93e05dfa29c87f4ec53daf6c49a5b838c9aca8
+```
+
+La lista final contiene exactamente los 25 trabajos citados en el cuerpo inglés auditado. El espejo español usa la misma bibliografía. No se añadió literatura nueva.
+
+### Supplementary Material
+
+```text
+SUPPLEMENTARY_PACKAGE = TABLES S1-S7 + FIGURES S1-S2
+SUPPLEMENTARY_TABLE_COUNT = 7
+SUPPLEMENTARY_FIGURE_COUNT = 2
+NEW_SUPPLEMENTARY_STATISTIC = NO
+
+S1_BLOB = fa961cf3d6198ddba6a6b5eeadcc9a23c8801f61
+S2_BLOB = 727076a0d09735a87f45f6522d2a0ecead2cee17
+S3_BLOB = c2ded734af9ea340d715483b6e8cc00a7536dfea
+S4_BLOB = cf3aedab5935d6af9b3ac7be7b51b954fcb9c403
+S5_BLOB = 76c8c6c588c7e809c6be64f7192f497c491fb692
+S6_BLOB = 490ef570fa1674e2eecad7f0a3cdf34ba96204db
+S7_BLOB = f43cce08d1d7bc3cef64698dbebf14eae4b26ed5
+
+FIGURE_S1_SOURCE_SVG_BLOB = ec164ea41ab8605edf198c03785db63c442c1b64
+FIGURE_S2_SOURCE_SVG_BLOB = 1b2aca9aa9c2582cf0b7e16850cd5b22387cc771
+G6_CAPTION_REGISTRY_BLOB = 0dcb43cfa56dfce2e6955f960184069beb36ba76
+
+SUPPLEMENTARY_SOURCE_IDENTITY = PASS
+FIGURE_S1_S2_SCIENTIFIC_CONTENT_IDENTITY = PASS
+FIGURE_S1_S2_BYTE_IDENTITY_TO_CANONICAL_PNG = NOT_CLAIMED / DOCX PRESENTATION RENDERS
+```
+
+Tables S1-S7 conservan todas las filas de los CSV canónicos y sus límites descriptivos/inferenciales. Figures S1-S2 se materializaron como visualizaciones de presentación desde los valores congelados y contratos de caption aprobados, sin estadística, inferencia ni contenido científico nuevo.
+
+Artefacto versionado:
+
+```text
+SUPPLEMENTARY_MD =
+article/supplementary/SUPPLEMENTARY_MATERIAL_FAST_F02_V01.md
+SUPPLEMENTARY_MD_COMMIT =
+e1f538a561bd68029efad00633b77041b484949e
+SUPPLEMENTARY_MD_GIT_BLOB =
+d10207e99ca76c1b501f57c9cf2b620e54c03a3f
+```
+
+### Candidatos y QA
+
+```text
+CANDIDATE_MD = ARTICLE_MASTER_CANDIDATE_FAST_F02_V01.md
+CANDIDATE_MD_SHA256 = c6909699b9b7272d12cbe57f02d5897b78c8a489c9105bdf69e23e4462e90dd4
+CANDIDATE_MD_SIZE_BYTES = 305240
+CANDIDATE_MD_EXPECTED_GIT_BLOB = 4c891641a86d0622cdc9fb7b2afee6f4691ee320
+MARKDOWN_OUTSIDE_AUTHORIZED_BLOCKS_BYTE_EQUIVALENT_TO_V038 = PASS
+
+CANDIDATE_DOCX = ARTICLE_MASTER_CANDIDATE_FAST_F02_V01.docx
+CANDIDATE_DOCX_SHA256 = bd584ce9817ce8d251cbe43a6e737612039a5ba82c932f1637839d66466e9e31
+CANDIDATE_DOCX_SIZE_BYTES = 356835
+
+SUPPLEMENTARY_MD_REAL_FILE = SUPPLEMENTARY_MATERIAL_FAST_F02_V01.md
+SUPPLEMENTARY_MD_SHA256 = fd2ff32090f2262787a0f661bf67300bca158733b24edae0a37ac90dffd0a89f
+SUPPLEMENTARY_MD_SIZE_BYTES = 43533
+SUPPLEMENTARY_MD_GIT_BLOB = d10207e99ca76c1b501f57c9cf2b620e54c03a3f
+
+SUPPLEMENTARY_DOCX = SUPPLEMENTARY_MATERIAL_FAST_F02_V01.docx
+SUPPLEMENTARY_DOCX_SHA256 = ad6b7f5cbfa695ab61eb4f9b5469f061eb804074c5bfb8c735bdef81d700cc9e
+SUPPLEMENTARY_DOCX_SIZE_BYTES = 222424
+```
+
+El Word acumulativo fue editado directamente desde el DOCX V038 exacto, no reconstruido desde Markdown.
+
+```text
+ZIP_OOXML_INTEGRITY = PASS
+MAIN_DOCX_OOXML_PART_COUNT = 16
+MAIN_DOCX_OOXML_PART_NAMES_PRESERVED = PASS
+MAIN_DOCX_CHANGED_PARTS_VS_V038 = word/document.xml ONLY
+
+COMMENTS = 48
+COMMENT_RANGE_START = 48
+COMMENT_RANGE_END = 48
+COMMENT_REFERENCE = 48
+COMMENTS_XML_SHA256 = 57bee5d04cc9ed51628a4e10baef0730c0a07b58b9d8c3b436c64657f32821ea
+COMMENTS_XML_BYTE_IDENTICAL = PASS
+COMMENT_ANCHOR_ID_SEQUENCE = PASS / IDENTICAL
+TRACKED_CHANGES = 0
+
+MAIN_MD_DOCX_CHANGED_BLOCK_EQUIVALENCE = PASS
+SUPPLEMENTARY_MD_DOCX_EQUIVALENCE = PASS / SAME S1-S7 SOURCE ROWS AND S1-S2 SCIENTIFIC CONTENT
+
+FULL_MAIN_DOCX_PAGE_COUNT = 81
+FULL_MAIN_DOCX_RENDER = PASS
+FULL_MAIN_DOCX_VISUAL_QA = PASS / ALL 81 PAGES REVIEWED
+DETAILED_MAIN_END_MATTER_QA = PASS / EN pp.38-40; ES pp.79-81
+
+FULL_SUPPLEMENTARY_DOCX_PAGE_COUNT = 21
+FULL_SUPPLEMENTARY_DOCX_RENDER = PASS
+FULL_SUPPLEMENTARY_DOCX_VISUAL_QA = PASS / ALL 21 PAGES REVIEWED
+DETAILED_SUPPLEMENTARY_QA = PASS / TABLES S1-S7 AND FIGURES S1-S2
+VISUAL_QA_DEFECTS = NONE
+```
+
+### Scientific and governance controls
+
+```text
+NEW_SCIENTIFIC_CONTENT = NO
+NEW_EXPERIMENT = NO
+NEW_METRIC = NO
+NEW_CI = NO
+NEW_P_VALUE = NO
+NEW_LITERATURE = NO
+NEW_HYPOTHESIS_DISPOSITION = NO
+POST_EXECUTION_EXPERIMENTAL_REAUDIT_REQUIRED = NO
+
+DIRECT_GITHUB_MATERIALIZATION_OF_LARGE_MASTER = NOT_ATTEMPTED
+EXACT_CUMULATIVE_MD_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT
+EXACT_CUMULATIVE_DOCX_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT
+EXACT_SUPPLEMENTARY_MD_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT
+EXACT_SUPPLEMENTARY_DOCX_HANDOFF_TO_AUTHOR = COMPLETED_IN_TERMINAL_CHAT
+
+EXPECTED_EXIT = FAST_F02_COMPLETED_PENDING_GESTORA_AUDIT
+NEXT_ACTOR = IA_GESTORA_DEL_ARTICULO
+AUTHOR_APPROVAL_GATE = NOT_OPEN
+FAST_F03 = NOT_AUTHORIZED
+EXPERIMENTAL_G8_F01 = NOT_AUTHORIZED
+```
+
+## English
+
+FAST-F02 V01 was executed exclusively under D-209 from the exact V038 Markdown and 351420-byte DOCX baselines.
+
+The authorized End Matter blocks were finalized without inserting any author-administrative facts. CRediT, Funding, competing interests and Acknowledgements remain intentionally blank under D-208. The approved generative-AI declaration was preserved unchanged.
+
+The reference list contains exactly the 25 works cited in the audited English body, with a 25/25 citation-to-reference bijection and no unresolved, orphan or duplicate entries. Lee et al. Explainable Product Classification for Customs remains bound to its governed 2023 preprint identity.
+
+The Supplementary Material contains exactly Tables S1-S7 and Figures S1-S2 from the frozen G5/G6 inventory. No new statistic, experiment, confidence interval, p-value, hypothesis disposition or scientific inference was introduced.
+
+The cumulative DOCX was edited directly from the exact V038 Word baseline. It preserves the OOXML package inventory, all 48 comments and anchors, byte-identical comments.xml and zero tracked changes. The main candidate renders to 81 pages and the Supplementary DOCX to 21 pages; all 102 pages were visually reviewed.
+
+Execution stops at `FAST_F02_COMPLETED_PENDING_GESTORA_AUDIT`. FAST-F03 and Experimental G8-F01 remain unauthorized.
